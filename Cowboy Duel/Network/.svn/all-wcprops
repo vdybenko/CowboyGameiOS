@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/cowboyduel/!svn/ver/425/branches/v1.4_ARC/Cowboy%20Duel/Network
+END
+ConnectionDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/cowboyduel/!svn/ver/425/branches/v1.4_ARC/Cowboy%20Duel/Network/ConnectionDelegate.h
+END
+ServerBrowser.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/cowboyduel/!svn/ver/379/branches/v1.4_ARC/Cowboy%20Duel/Network/ServerBrowser.h
+END
+Server.m
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/cowboyduel/!svn/ver/401/branches/v1.4_ARC/Cowboy%20Duel/Network/Server.m
+END
+Connection.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/cowboyduel/!svn/ver/379/branches/v1.4_ARC/Cowboy%20Duel/Network/Connection.h
+END
+ServerBrowser.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/cowboyduel/!svn/ver/401/branches/v1.4_ARC/Cowboy%20Duel/Network/ServerBrowser.m
+END
+ServerDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/cowboyduel/!svn/ver/379/branches/v1.4_ARC/Cowboy%20Duel/Network/ServerDelegate.h
+END
+Connection.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/cowboyduel/!svn/ver/425/branches/v1.4_ARC/Cowboy%20Duel/Network/Connection.m
+END
+ServerBrowserDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/cowboyduel/!svn/ver/379/branches/v1.4_ARC/Cowboy%20Duel/Network/ServerBrowserDelegate.h
+END
+Server.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/cowboyduel/!svn/ver/413/branches/v1.4_ARC/Cowboy%20Duel/Network/Server.h
+END

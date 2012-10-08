@@ -1,0 +1,114 @@
+//
+//  Class.h
+//  Test
+//
+//  Created by Taras on 26.05.11.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "DuelViewController.h"
+#import "GCHelper.h"
+//#import "BluetoothViewController.h"
+
+#import "MultiplayerClientViewController.h"
+#import "MultiplayerServerViewController.h"
+
+
+#define MAX_LENGTH 50
+#define IMG_LENGTH 8
+typedef struct {
+    int accountLevel;
+    int oponentMoney;
+    char accountName[MAX_LENGTH];
+    int oponentWins;
+    char oponentAuth[MAX_LENGTH];
+    int oponentLevel;
+    int randomTime;
+    int oponentShotTime;
+    
+} gameInfo;
+@class StartViewController;
+@class FinalViewController;
+@class DuelStartViewController;
+
+@interface GameCenterViewController : UIViewController< UIAlertViewDelegate, DuelViewControllerDelegate, DuelStartViewControllerDelegate, GCHelperDelegate>
+{
+    DuelViewController *duelViewController;
+    DuelStartViewController *duelStartViewController;
+    FinalViewController *finalViewController;
+    AccountDataSource *playerAccount;
+    AccountDataSource *oponentAccount;
+
+    MultiplayerClientViewController *multiplayerClientViewController;
+    MultiplayerServerViewController *multiplayerServerViewController;
+    StartViewController *startViewController;
+
+    UIAlertView *baseAlert;
+    
+    id multiplayerViewController;
+    
+    GCHelper *gameCenter;
+    UIViewController *__unsafe_unretained parentVC;
+
+    int randomTime;
+    int myTime;
+    UIAlertView *startAv;
+    
+    BOOL start;
+    BOOL btnStartClick;
+    BOOL runAway;
+    
+    BOOL typeGameWithMessage;   
+    NSString *_messageToOpponent;
+    
+    gameInfo gameStat;
+    
+    BOOL accelState;
+    int carShotTime;
+    int opShotTime;
+    
+    int moneyExchenge;
+    
+    int mutchNumber;
+    int mutchNumberWin;
+    int mutchNumberLose;
+    
+    BOOL server;
+    
+    BOOL endDuel;
+    BOOL opponentEndMatch;
+    BOOL userEndMatch;
+    BOOL isTryAgain;
+}
+@property(strong)id<DuelViewControllerDelegate> delegate;
+@property(strong)id<DuelStartViewControllerDelegate> delegate2;
+@property(strong,nonatomic)DuelStartViewController *duelStartViewController;
+@property(strong, readwrite) MultiplayerClientViewController *multiplayerClientViewController;
+@property(strong, readwrite) MultiplayerServerViewController *multiplayerServerViewController;
+@property( unsafe_unretained, readwrite) UIViewController *parentVC;
+@property(nonatomic) BOOL opponentEndMatch;
+@property(nonatomic) BOOL userEndMatch;
+@property(nonatomic) BOOL typeGameWithMessage;
+@property(strong, readwrite) id multiplayerViewController;
+
+
++(id)sharedInstance:(AccountDataSource *)userAccount andParentVC:(id)view;
+
+-(id)initWithAccount:(AccountDataSource *)userAccount andParentVC:(id)view;
+-(void)startDuel;
+- (void)clientConnected;
+-(void)receiveData:(NSData *)data;
+-(void)startServerWithName:(NSString *)serverName;
+-(void)stopServer;
+-(void)startClientWithName:(char *)serverName;
+-(void)startClientWithName:(char *)serverName AndMessage:(NSString*)pMes;
+-(void)matchStartedSinxron;
+-(void)matchStarted;
+-(void)lostConnection;
+-(void)matchCanseled;
+-(void)startClientWithHost:(NSString *)host;
+
+
+@end

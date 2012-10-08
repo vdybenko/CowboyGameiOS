@@ -1,0 +1,382 @@
+///* Localized versions of Info.plist keys */
+
+"COMPUTER" = "COMPUTER";
+
+"You won" = "You won";
+
+"win" = "You win";
+
+"You lost" = "You lost";
+
+"lose" = "You lose";
+
+"False" = "FALSE START";
+
+"Falses" = "Opponent Fouled";
+
+"time" = "time";
+
+//Uncommented "Oponent shot Time =":
+"Oponent shot Time =" = "Opponent shot Time =";
+
+// Message
+
+"Awesome cowboy duel" = "Awesome cowboy duel";
+
+"Mes text" = "I recommend that you check out 'Cowboy duel' http://cowboyduel.mobi/";
+
+"INVITE_FRIENDS" = "Let's duel in the best cowboy duel game on iPhone";
+
+// Start View
+
+"DUEL"="DUEL";
+
+"PRAC"="PRACTICE";
+
+"HELP"="HELP";
+
+"LEAD"="LEADERBOARD";
+
+"ACH"="ACHIEVEMENTS";
+
+"START"="START";
+
+"CAN"="CANCEL";
+
+"SALYN"="SALOON";
+
+"REFRESH"="REFRESH";
+
+"INVITE" = "INVITE FRIENDS";
+
+"AUTHORIZATION" = "Connecting to Game Center";
+
+//FinalView
+
+"BACK"="BACK TO MENU";
+
+"CANCEL_DUEL"="RUN AWAY";
+
+"FOLL"="FOUL!";
+
+"TRY"="TRY AGAIN";
+
+"TB_RUN_AWAY"="You ran away";
+
+"TB_RUN_AWAY_GOOD"="Opponent ran away";
+
+"Round" = "Round";
+
+//FEEDBACK 
+
+"OK"="OK";
+
+"NEXTR"="NEXT ROUND";
+
+//help
+"ContactUs" = "CONTACT US";
+
+"manual"="VIDEO MANUAL";
+
+"VOLUME_ALERT" = "Please, set volume";
+
+"HTML_HEAD"="
+<html>
+<head>
+<style>
+body{font-family: Neue Helvetica, 'HelveticaNeue', serif; background-color:transparent; padding-top:0px;}
+ul{ list-style-type: filledcircle;  margin:0; padding-left:1em;}
+p,li{font-family: “Myriad Pro”, arial,sans-serif;color:4A3E25;font-size:10pt;font-weight: 700; letter-spacing: -0.01em;word-spacing: 0.0em;text-align: left;font-stretch: wider;
+    line-height: 15px;}
+
+h3{font-family: “Myriad Pro”, arial,sans-serif;color:4A3E25;font-size:12pt;font-weight: 700; letter-spacing: -0.01em;word-spacing: 0.0em;text-align: center;font-stretch: wider;
+    line-height: 0px;}
+
+</style>
+</head>
+<body>
+<p>";
+
+"HTML_ASS"="
+</p>
+</body>
+</html>";
+
+
+"HV_PTP"="
+
+<p>&nbsp;&nbsp;&nbsp;You can quickly find a worthy rival due to the new search system. As before the game is accessible in three ways:</p>
+<ul>
+<li>If you have the Internet connection, tap \"DUEL\" and play with strangers and friends.</li>
+<li>If you don&#039;t have an access to the Internet now, but you have a friend with iOS and the installed game on it, play with him through Bluetooth having pressed \"DUEL P2P\"</li>
+<li>If you <b>don&#039;t have the Internet</b>, or you don&#039;t want to compete - simply choose <b>\"PRACTICE\"</b></li>
+</ul>";
+
+"HV_DUEL"="<p> </p><p><h3>Duel rules</h3></p><p>&nbsp;&nbsp;&nbsp;Tap \"START\" when the screen with two opponents appeared. Take an iPhone/iPod into your hand as a revolver (\"Home\" button has to be on the bottom and you have to see the screen). Place a forefinger opposite the drawn trigger. <br />&nbsp;&nbsp;&nbsp;Lower your gun to the arm-distance, and be ready to make a shot fast.
+Wait till the music ends, then raise your arm and shoot three times in a row.
+The one who shoots first becomes a winner in the first round. <br />&nbsp;&nbsp;&nbsp;Duel consists of three rounds, therefore each of the opponents has a chance to prove the case. To become a winner, you have to be faster at least in two rounds out of three. The winner takes away 10 % of the opponent's money.</p>  
+";
+
+"HV_ALL"="<h3>Attention</h3><p>&nbsp;&nbsp;&nbsp;At “PRACTICE” mode, money which you have won isn&#039;t set off.<br />&nbsp;&nbsp;&nbsp;If you drop out iPhone/iPod at a shot, fix it by adhesive tape. It&#039;s a joke, but be careful anyway.<br />&nbsp;&nbsp;&nbsp;The expanded descriptions of rules watch at our Youtube chanell, click \"VIDEO MANUAL\".</p><br />
+";
+
+"HV_TEXT_NEW" = "<p>&nbsp;&nbsp;&nbsp;You can quickly find a worthy rival due to the new search system.</p><ul><li>If you have the Internet connection, tap \"SALOON\" and play with strangers and friends.</li><li>If you <b>don&#039;t have the Internet</b> simply choose <b>\"PRACTICE\"</b></li></ul><p> </p><h3>Duel rules</h3><p>&nbsp;&nbsp;&nbsp;Tap \"START\" when the screen with two opponents appeared. Take an iPhone/iPod into your hand as a revolver (\"Home\" button has to be on the bottom and you have to see the screen). Place a forefinger opposite the drawn trigger.</p><p>&nbsp;&nbsp;&nbsp;Lower your gun to the arm-distance, and be ready to make a shot fast. Wait for the command \"FIRE!\", then raise your arm and shoot two-six times in a row. Number of shoots differs depending on the level of the opponent. For example:</p><ul><li>Junior  and Citizen - two times in a row</li><li>Street fighter and Mercenary - three times in a row</li><li>Duelist and Killer - four times in a row</li><li>Head Hunter and Hero of Duels - five times in a row</li><li>Grave-digger and Angel of Death - six times in a row</li></ul><p>The one who shoots first becomes a winner in the first round. <br />&nbsp;&nbsp;&nbsp;Duel consists of three rounds, therefore each of the opponents has a chance to prove the case. To become a winner, you have to be faster at least in two rounds out of three. The winner takes away 10 % of the opponent's money.</p><p> </p><h3>Attention</h3><p>&nbsp;&nbsp;&nbsp;At “PRACTICE” mode, money which you have won isn&#039;t set off.</p><p>&nbsp;&nbsp;&nbsp;If you drop out iPhone/iPod at a shot, fix it by adhesive tape. It&#039;s a joke, but be careful anyway.</p><p>&nbsp;&nbsp;&nbsp;The expanded descriptions of rules watch at our Youtube channel, click \"VIDEO MANUAL\".</p>";
+
+//Bottom messge
+
+"HTML_MES_HEAD" = "
+<html>
+<head>
+<style>
+body{font-family: Neue Helvetica, 'HelveticaNeue', serif; background-color:transparent; padding-top:20px;}
+p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font-weight: 50;word-spacing: -0.1em;text-align: center;
+    line-height:1em;}
+</style>
+</head>
+<body align=\"justify\">
+<p>";
+
+"daily10NoHTML" = "You've got daily $10";
+
+"NoServersHTML" = "
+<html>
+<head>
+<style>
+body{font-family: Neue Helvetica, 'HelveticaNeue', serif; background-color:transparent; padding-top:20px;}
+p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font-weight: 50;word-spacing: -0.1em;text-align: center;
+    line-height:1em;}
+</style>
+</head>
+<body align=\"justify\">
+<p>Enemies hid, try again.</p>
+
+
+</body>
+</html>";
+
+//Bot Duel message
+
+"BotMTitle"="Invitation from ";
+"BotMTitle2"=" to play \"Cowboy Duel\"";
+
+"BotMText"="\"Want to play Cowboy Duel?\"";
+
+"BotMBtn"="Accept";
+
+"BotMCANS"="Close";
+
+
+//invite message
+
+"acceptInv"="Do you want to accept?";
+
+"Incoming"="Incoming Invite from ";
+
+"Decline"="Decline";
+
+"Accept"="Accept";
+
+//Duel
+"LOWER" = "Hold your phone down to start";
+
+//Moremoney
+
+"MOREMONEY" = "More money";
+
+"MOREMONEY_TEXT" = "Invest in the development of the Wild West";
+
+"MOREMONEY1" = "Invest $0.99 - get in-game 300 dollars";
+
+"MOREMONEY5" = "Invest $4.99 - get in-game 2 000 dollars";
+
+"MOREMONEY100" ="Invest $99.99 - get in-game 50 000 dollars";
+
+//Time format
+
+"years" = "years";
+
+"year" = "year";
+
+"ago" = "ago";
+
+"months" = "months";
+
+"months234" = "months";
+
+"month" = "month";
+
+"hours" = "hours";
+
+"hours234" = "hours";
+
+"hour" = "hour";
+
+"minutes" = "minutes";
+
+"minutes234" = "minutes";
+
+"minute" = "minute";
+
+"moment" = "a moment ago";
+
+"days" = "days";
+
+"days234" = "days";
+
+"day" = "day";
+
+//MainView of App
+"Saloon" = "SALOON";
+"Practice" = "PRACTICE";
+"Profile" = "PROFILE";
+"Feedback" = "FEEDBACK";
+"HelpTitle" = "HELP";
+"MoreGames" = "MORE GAMES";
+
+//LoginViewController
+//First Start View
+"LoginTitleAtStart" = "WELLCOME!";
+
+"LoginText" = "<head><meta charset=\"utf-8\" name=\"viewport\" initial-scale=1\"><link rel=\"stylesheet\" href=\"css/jquery.mobile.css\" /></head>
+<body style='background-color:transparent; text-align:center; color:rgb(97,68,34); padding-top:20px;'><div style='font-size: 20px;padding-top:20px;'>Log in via Facebook and get 100 gold more to your bag at Start.
+<br>
+<a style='color: rgb(0,0,255); style='font-size: 20px;padding-top:20px; font-family: Helvetica;' href='http://www.cowboyduel.info'>www.cowboyduel.info</a>
+</div></body></html>";
+
+"LoginBtnLogInAtStart" = "LOGIN";
+"LoginBtnNextTimeAtStart" = "NEXT TIME";
+
+//Achievments main
+"AchievTitle" = "CONGRATULATIONS!";
+"AchievBtnTellFriends" = "TELL FRIENDS";
+
+//Level achievment View
+"LvlAchievText1" = "You became a '";
+"LvlAchievText2" = "'. Your opponent has to shoot ";
+"LvlAchievText3" = " times in a row to kill you";
+
+
+//Gold achievment View
+"GoldAchievText1" = "";
+"GoldAchievText2" = "Your new high score is ";
+"GoldAchievText3" = " gold!";
+"GoldAchievText4" = " Tell your friends about it!";
+
+//AdColony advert View
+"AdColonyText1" = "Watch the video for 20 sec., while we are looking for your best suited opponents";
+"AdColonyText2" = "You can click Cancel and come back to play with real players tomorrow.";
+"AdColonyBtn" = "WATCH VIDEO";
+
+//Internet required
+
+"InternetAlertTextListOnline" = "
+<head> 
+<meta charset=\"utf-8\" name=\"viewport\" initial-scale=1\"><link rel=\"stylesheet\" href=\"css/jquery.mobile.css\" />
+</head>
+<body style='background-color:transparent; text-align:center; color:rgb(97,68,34);'>
+<div style='font-size: 20px;padding-top:0px;'>
+You don't have internet connection.<br> Try to connect to Wi-Fi or use practice mode
+</div>
+</body>
+</html>";
+
+"AlertTextListOnlineIsEmpty" = "
+<head> 
+<meta charset=\"utf-8\" name=\"viewport\" initial-scale=1\"><link rel=\"stylesheet\" href=\"css/jquery.mobile.css\" />
+</head>
+<body style='background-color:transparent; text-align:center; color:rgb(97,68,34);'>
+<div style='font-size: 20px;padding-top:0px;'>
+There's no one in the Saloon. <br> Try again later or  click invite friends
+</div>
+</body>
+</html>";
+
+//New version View
+//"NewVersionMainText1" = "There are a lot of new interesting things in a new version of Cowboy Duel."; 
+//"NewVersionMainText2" = "You can upgrade Cowboy Duel right now through iTunes Store";
+"NewVersionBtn" = "Upgrade";
+"NewVersionMainText" = "
+<head> 
+<meta charset=\"utf-8\" name=\"viewport\" initial-scale=1\"><link rel=\"stylesheet\" href=\"css/jquery.mobile.css\" />
+</head>
+<body style='background-color:transparent; text-align:center; color:rgb(97,68,34);'>
+<div style='font-size: 20px;'>
+There are a lot of new interesting things in 
+a new version of Cowboy Duel.
+You can upgrade this game right now through <b>iTunes Store</b>
+</div>
+</body>
+</html>";
+
+//ProfileViewController
+"ProfileTitle" = "PROFILE";
+"PointsTitle" = "Points to next rank:";
+"GoldTitle" = "Gold:";
+"LogOutFBBtn" = "Log out of Facebook";
+"LogInToFBBtn" = "Log in to Facebook";
+"PlayerStatsTitle" = "Player statistic:";
+"DuelsWonTitle" = "Duels won:";
+"DuelsLostTitle" = "Duels lost:";
+"TheBiggestWinGold" = "The biggest win:";
+"TitleTitle" = "Rank:";
+"LeaderboardTitle" = "LEADERBOARD";
+"SoundButton" = "Turn on/off sound effects";
+
+
+//Titles for Users
+"0Rank" = "Guest";
+"1Rank" = "Junior"; 
+"2Rank" = "Citizen"; 
+"3Rank" = "Street fighter"; 
+"4Rank" = "Mercenary"; 
+"5Rank" = "Duelist"; 
+"6Rank" = "Killer"; 
+"7Rank" = "Head Hunter"; 
+"8Rank" = "Hero of Duels"; 
+"9Rank" = "Grave-digger"; 
+"10Rank" = "Angel of Death"; 
+
+//Win/Lose View
+"YouEarned" = "You earned:";
+"YouLost" = "You lost:";
+"Gold" = " gold";
+"Point" = "point";
+"Points" = " points";
+
+//Feedback View
+"SocialNetworksTitle" = "If you like this game tell your friends via social networks:";
+"EmailInviteTitle" = "Invite your friends to this game via e-mail";
+"RateTitle" = "Rate this game in iTunes App Store";
+"CancelButtonTitle" = "CANCEL";
+
+//StartDuel View
+"StartDuelTitle" = "START DUEL";
+"MotivationText1" = "For the murder of opponent";
+"MotivationText2" = "Reward:";
+"DuelsWonsTitle" = "Duel wons:";
+"MotivationGold" = "gold";
+"MotivationPoints" = "points";
+
+//Duel Gun
+
+"WAIT" = "Wait for command";
+"SHOTS1" = "and shoot";
+"SHOTS2" = "times in a row";
+"SHOTS_DES" = "Number of shoots differs depending on the level of the opponent.";
+"ENABLED_HELP" = "Don't show this message next time";
+"SOUND_WARNING" = "Turn the sound on in your device for more realistic feeling";
+
+//added for PlayerOnlineCell.m:
+"Gold:" = "Gold:";
+"Rank:" = "Rank:";
+
+//added for PlayersOnlineDataSource.m:
+"OnLine" = "OnLine";
+"OffLine" = "OffLine";
+
+//Pull to refresh
+"PULL" = "Pull down to refresh";
+"RELEASE" = "Release to refresh";
+"LOADING" = "Loading...";
+"LOADED" = "Loaded";
+

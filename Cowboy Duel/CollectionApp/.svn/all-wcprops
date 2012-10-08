@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/cowboyduel/!svn/ver/404/branches/v1.4_ARC/Cowboy%20Duel/CollectionApp
+END
+CollectionAppViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/cowboyduel/!svn/ver/395/branches/v1.4_ARC/Cowboy%20Duel/CollectionApp/CollectionAppViewController.h
+END
+ItemsDataSource.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/cowboyduel/!svn/ver/279/branches/v1.4_ARC/Cowboy%20Duel/CollectionApp/ItemsDataSource.h
+END
+CollectionAppWrapper.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/cowboyduel/!svn/ver/313/branches/v1.4_ARC/Cowboy%20Duel/CollectionApp/CollectionAppWrapper.h
+END
+CollectionAppViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/cowboyduel/!svn/ver/395/branches/v1.4_ARC/Cowboy%20Duel/CollectionApp/CollectionAppViewController.m
+END
+ItemsDataSource.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/cowboyduel/!svn/ver/313/branches/v1.4_ARC/Cowboy%20Duel/CollectionApp/ItemsDataSource.m
+END
+CollectionAppWrapper.m
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/cowboyduel/!svn/ver/404/branches/v1.4_ARC/Cowboy%20Duel/CollectionApp/CollectionAppWrapper.m
+END
+CDCollectionApp.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/cowboyduel/!svn/ver/312/branches/v1.4_ARC/Cowboy%20Duel/CollectionApp/CDCollectionApp.h
+END
+CDCollectionApp.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/cowboyduel/!svn/ver/318/branches/v1.4_ARC/Cowboy%20Duel/CollectionApp/CDCollectionApp.m
+END

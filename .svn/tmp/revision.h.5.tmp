@@ -1,0 +1,5 @@
+<<<<<<< .mine
+#define kRevisionNumber @"584M"
+=======
+#define kRevisionNumber @"570:584M"
+>>>>>>> .r585

@@ -1,0 +1,161 @@
+//
+//  MoneyCongratViewController.m
+//  Cowboy Duel 1
+//
+//  Created by AlexandrBezpalchuk on 02.08.12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import "MoneyCongratViewController.h"
+#import "OGHelper.h"
+#import "UIButton+Image+Title.h"
+#import "FinalViewController.h"
+
+@interface MoneyCongratViewController ()
+
+@end
+
+@implementation MoneyCongratViewController
+@synthesize delegate;
+//
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+- (id) initForAchivmentPlayerAccount:(AccountDataSource *)pPlayerAccount withLabel:(NSString*)pLabel andController:(id)delegateController;
+{
+    self = [super initWithNibName:nil bundle:nil];
+    if (self){
+        moneyLabel=pLabel;
+        playerAccount=pPlayerAccount;
+        
+        [super loadView];
+        [self initMainControls];
+        
+        self.delegate = delegateController;
+        
+        if ([[OGHelper sharedInstance]isAuthorized]){
+            [lbPostOnFB setHidden:YES];
+            [btnPost setHidden:YES];
+            [MoneyCongratViewController achivmentMoney:playerAccount.money];
+        }
+        
+    }
+    return self;
+}
+
+-(void)initMainControls;
+{
+    UIColor *mainColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
+    UIColor *btnColor = [UIColor colorWithRed:244.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
+    
+    lbTitleCongratulation.text = NSLocalizedString(@"AchievTitle", nil);
+    lbTitleCongratulation.textColor = mainColor;
+    lbTitleCongratulation.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
+    lbTitleCongratulation.hidden=NO;
+    
+    lbPlusMoney.text = moneyLabel;
+    [lbPlusMoney setAdjustsFontSizeToFitWidth:YES];
+    [lbPlusMoney setBaselineAdjustment:UIBaselineAdjustmentAlignCenters];
+    lbPlusMoney.textColor = mainColor;
+    lbPlusMoney.font = [UIFont fontWithName: @"DecreeNarrow" size:45];
+    
+    [lbCongMainText setTextColor:btnColor];
+    [lbCongMainText setFont: [UIFont systemFontOfSize:18.0f]];
+    lbCongMainText.text = [NSString stringWithFormat:@"%@%@%d%@", NSLocalizedString(@"GoldAchievText1", nil), NSLocalizedString(@"GoldAchievText2", nil), playerAccount.money, NSLocalizedString(@"GoldAchievText3", nil), NSLocalizedString(@"GoldAchievText4", nil)];
+
+    [btnTryAgain setTitleByLabel:@"TRY"];
+    [btnTryAgain changeColorOfTitleByLabel:btnColor];
+    
+    [btnBack setTitleByLabel:@"BACK"];
+    [btnBack changeColorOfTitleByLabel:btnColor];
+    
+    lbPostOnFB.font = [UIFont systemFontOfSize:9.0f];
+    lbPostOnFB.textColor = [UIColor whiteColor];
+    lbPostOnFB.numberOfLines = 2;
+    lbPostOnFB.lineBreakMode = UILineBreakModeCharacterWrap;
+    lbPostOnFB.text = NSLocalizedString(@"AchievBtnTellFriends", nil);
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+    [self initMainControls];
+}
+
+- (void)viewDidUnload
+{
+    lbTitleCongratulation = nil;
+    lbPlusMoney = nil;
+    lbCongMainText = nil;
+    
+    lbPostOnFB = nil;
+    ivAchieveRing = nil;
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+#pragma mark -
+#pragma mark IBActions
+
+- (IBAction)btnMenuClicked:(id)sender
+{
+    [self dismissModalViewControllerAnimated:YES];
+    if ([delegate respondsToSelector:@selector(backButtonClick:)])
+    {
+        [(FinalViewController *)delegate backButtonClick:sender];
+    }
+    
+}
+
+- (IBAction)btnAgainClicked:(id)sender
+{
+    NSLog(@"tryButtonClick");
+    [self dismissModalViewControllerAnimated:YES];
+    [activityIndicatorView showView];
+    
+    if ([(FinalViewController *)delegate respondsToSelector:@selector(tryButtonClick:)])
+    {
+        [(FinalViewController *)delegate tryButtonClick:sender];
+    }
+}
+
+- (IBAction) btnPostOnFBClicked:(id)sender
+{  
+    if ([[OGHelper sharedInstance]isAuthorized]) { 
+        [MoneyCongratViewController achivmentMoney:playerAccount.money];
+    }else {
+        [[LoginViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusMoney];
+        [[LoginViewController sharedInstance] fbLoginBtnClick:self];
+    }
+<<<<<<< .mine
+=======
+    [self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
+    
+>>>>>>> .r569
+}
+#pragma mark  - Facebook methods 
+
++(void)achivmentMoney:(NSUInteger)money;
+{
+    [[OGHelper sharedInstance] apiGraphScorePost:money];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
+														object:self
+													  userInfo:[NSDictionary dictionaryWithObject:@"congratulation_achivment" forKey:@"event"]];
+    
+}
+
+
+@end

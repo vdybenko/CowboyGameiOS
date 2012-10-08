@@ -1,0 +1,552 @@
+/* Localized versions of Info.plist keys */
+"COMPUTER" = "جهاز الحاسب (الكمبيوتر)";
+
+"You won" = "لقد ربحت";
+
+"win" = "قد ربحت";
+
+"You lost" = "لقد خسرت";
+
+"lose" = "قد خسرت";
+
+"False" = "لقد غششت";
+
+"Falses" = "قام الخصم بالغش";
+
+"time" = "الوقت";
+
+//"Oponent shot Time =" = "وقت الخصم =";
+
+// Message
+
+"Awesome cowboy duel" = "راعي بقر مبارز  رائع";
+
+"Mes text" = "أنصحك بتجربة 'Cowboy duel' http://itunes.apple.com/us/app/cowboy-multiplayer-western/id444692073?mt=8&ls=1 200$ في إنتظارك هناك";
+
+// Start View
+
+"DUEL"="مبارزة";
+
+"BEER"="مبارزة P2P";
+
+"PRAC"="تدرب";
+
+"HELP"="مساعدة";
+
+"LEAD"="اللوحة الأساسية";
+
+"ACH"="الإنجازات";
+
+"START"="إبدأ";
+
+"CAN"="إلغاء";
+
+"FB"="ملاحظات";
+
+"MAP"="المزيد من الألعاب";
+
+"SALYN"="SALOON";
+
+"REFRESH"="REFRESH";
+
+
+"ONLINE"="onLine";
+
+"AUTHORIZATION" = "إذن العملية";
+
+"ALERT"="لا يوجد إتصال بالإنترنت";
+
+"ALERT2"="لا يوجد إتصال بالإنترنت .. الرجاء المحاولة لاحقا";
+
+"CAN'T CONNECT" = "
+<html>
+<head>
+<style>
+body{font-family: Neue Helvetica, 'HelveticaNeue', serif; background-color:transparent; padding-top:20px;}
+p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font-weight: 50;word-spacing: -0.1em;text-align: center;
+    line-height:1em;}
+</style>
+</head>
+<body align=\"justify\">
+<p>لا يمكن الإتصال بمركز الخدمات لهذه اللعبة الرحاء المحاولة لاحقا </p>
+
+
+
+</body>
+</html>";
+
+//FinalView
+
+"BACK"="الرجوع للقائمة الرئسية";
+
+"CANCEL_DUEL"="الهروب";
+
+"FOLL"="غش!";
+
+"TRY"="حاول مرة أخرى";
+
+"TB_RUN_AWAY"="لقد هربت";
+
+"TB_RUN_AWAY_GOOD"="هرب الخصم";
+
+
+//Profile
+
+"PV_UP_TEXT"="اختر شخصيتك المفضلة";
+
+"PV_UP_TEXT1"="إختر الإسم الذي سيظهر للاعبين الأخرين";
+
+//FEEDBACK 
+
+"RATE"="قيم";
+
+"SEND"="إرسال ";
+
+"FB_TAITEL"="ارد الفعل لشئ ما";
+"FB_TEXT"="إذا أعجبتك الرجاء التقيم في  App Store وشكرا";
+"FB_CAN"="ربما لاحقا ";
+"FB_OK"="قيم الأن";
+
+"INVITE"="إدعو";
+
+"OK"="نعم";
+
+"NEXTR"="الجولة التالية";
+
+//help
+
+
+"manual"="افيديو";
+
+
+"HTML_HEAD"="
+<html>
+<head>
+<style>
+body{font-family: Neue Helvetica, 'HelveticaNeue', serif; background-color:transparent; padding-top:0px;}
+p, li{font-family: вАЬMyriad ProвАЭ, arial,sans-serif;color:4A3E25;font-size:10pt;font-weight: 700; letter-spacing: -0.01em;word-spacing: -0.15em;text-align: left;font-stretch: wider;
+    line-height: 15px;}
+
+h3{font-family: вАЬMyriad ProвАЭ, arial,sans-serif;color:4A3E25;font-size:12pt;font-weight: 700; letter-spacing: -0.01em;word-spacing: -0.1em;text-align: center;font-stretch: wider;
+    line-height: 0px;}
+
+</style>
+</head>
+<body>
+<p>";
+
+"HTML_ASS"="
+</p>
+</body>
+</html>";
+
+
+"HV_PTP"="
+<p>&nbsp;&nbsp;&nbsp;Cowboys duels are accessible now in three ways:</p>
+<ul>
+<li>If you have an Internet connection, tap \"DUEL\" and play with strangers and friends through Game Center.</li>
+<li>If you don&#039;t have access to the Internet now, but you have a friend with iOS and established game on it, play with him through Bluetooth having pressed \"DUEL P2P\"</li>
+<li>If you <b>don&#039;t have Internet</b>, or you don&#039;t want to compete - simply choose <b>\"PRACTICE\"</b></li>
+</ul>";
+
+"HV_DUEL"="<p> </p><p><h3>قواعد مبارزة</h3></p><p>&nbsp;&nbsp;&nbsp;إضغط على \"إبدأ\" عند ظهور الخصمين على الشاشة 
+إحمل الـ iPhone  أو الـ iPod  بيدك كالمسدس \"الصفحة الرئسية\" يجب أن تكون واضحة على الشاشة
+ضع السبابة على رسمة الزناد <br />
+&nbsp;&nbsp;&nbsp;إخفض المسدس على طول الذراع, و كن مستعدا لتطلق النار بسرعة 
+إنتظر حتى تتوقف الموسيقى, ثم إرفع ذراعك للأعلى و قم بإطلاق النار ثلاث مرات متتالية 
+من يطلق أولا يكون الفائز في الجولة الأولى <br />
+&nbsp;&nbsp;&nbsp;المبارزة مكونة من ثلاث جولات, لذلك كل من الخصمين لديه الفرصة لإثبات نفسه
+لتكون الفائز, عليك أن تكون الأسرع في جولتين من أصل ثلاثة 
+الفائز سيأخذ 10 % من مال الخص</p>  
+";
+
+"HV_ALL"="<h3>Attention</h3><p>&nbsp;&nbsp;&nbsp;At \"PRACTICE\" mode, money which you have won isn&#039;t set off.<br />&nbsp;&nbsp;&nbsp;If you drop out iPhone/iPod at a shot, fix it by adhesive tape. It&#039;s a joke, but be careful anyway.<br />&nbsp;&nbsp;&nbsp;The expanded descriptions of rules look at our Youtube chanel, click \"VIDEO\".</p><br />
+";
+
+
+//Boftom messge
+
+"MVTextFB" = "
+<html>
+<head>
+<style>
+body{font-family: Neue Helvetica, 'HelveticaNeue', serif; background-color:transparent; padding-top:20px;}
+p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font-weight: 50;word-spacing: -0.1em;text-align: center;
+    line-height:1em;}
+</style>
+</head>
+<body align=\"justify\">
+<p>الفديو بالتحكم اليدوي</p>
+
+
+</body>
+</html>";
+
+"MVTextCheckBT" = "
+<html>
+<head>
+<style>
+body{font-family: Neue Helvetica, 'HelveticaNeue', serif; background-color:transparent; padding-top:20px;}
+p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font-weight: 50;word-spacing: -0.1em;text-align: center;
+    line-height:1em;}
+</style>
+</head>
+<body align=\"justify\">
+<p>تأكد من إتصال البلوتوث لديك و لدى الخصم ثم حاول مرة أخرى</p>
+
+
+</body>
+</html>";
+
+"MVTextSearchBT" = "
+<html>
+<head>
+<style>
+body{font-family: Neue Helvetica, 'HelveticaNeue', serif; background-color:transparent; padding-top:20px;}
+p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font-weight: 50;word-spacing: -0.1em;text-align: center;
+    line-height:1em;}
+
+@font-face {
+    font-family: 'DecreeNarrow';
+    src: local('DecreeNarrow'), 
+    local('DecreeNarrow'), 
+    url('DecreeNarrow.ttf') format('truetype');
+}
+p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font-weight: 50;word-spacing: -0.1em;text-align: center;
+    line-height:-1em;text-transform:uppercase;}
+</style>
+</head>
+<body align=\"justify\">
+<p>البحث عن إتصال بلوتوث لدى الخصم .. الرجال تشغيل البلوتوث في الجهازين</p>
+</body>
+</html>";
+
+"MVTextCheck" = "
+<html>
+<head>
+<style>
+body{font-family: Neue Helvetica, 'HelveticaNeue', serif; background-color:transparent; padding-top:20px;}
+p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font-weight: 50;word-spacing: -0.1em;text-align: center;
+    line-height:1em;}
+</style>
+</head>
+<body align=\"justify\">
+<p>تابع في الإصدار القادم</p>
+
+
+</body>
+</html>";
+
+"GCfalse" = "
+<html>
+<head>
+<style>
+body{font-family: Neue Helvetica, 'HelveticaNeue', serif; background-color:transparent; padding-top:20px;}
+p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font-weight: 50;word-spacing: -0.1em;text-align: center;
+    line-height:1em;}
+</style>
+</head>
+<body align=\"justify\">
+<p>قم بتسجيل الدخول في مركز الخدمة أو تأكد من الإتصال</p>
+
+
+
+</body>
+</html>";
+
+"RanAway" = "
+<html>
+<head>
+<style>
+body{font-family: Neue Helvetica, 'HelveticaNeue', serif; background-color:transparent; padding-top:20px;}
+p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font-weight: 50;word-spacing: -0.1em;text-align: center;
+    line-height:1em;}
+</style>
+</head>
+<body align=\"justify\">
+<p>الخصم قام بإلغاء المباراة</p>
+
+</body>
+</html>";
+
+"HTML_MES_HEAD" = "
+<html>
+<head>
+<style>
+body{font-family: Neue Helvetica, 'HelveticaNeue', serif; background-color:transparent; padding-top:20px;}
+p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font-weight: 50;word-spacing: -0.1em;text-align: center;
+    line-height:1em;}
+</style>
+</head>
+<body align=\"justify\">
+<p>";
+
+
+"TRYAGAIN1" = "
+<html>
+<head>
+<style>
+body{font-family: Neue Helvetica, 'HelveticaNeue', serif; background-color:transparent; padding-top:20px;}
+p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font-weight: 50;word-spacing: -0.1em;text-align: center;
+    line-height:1em;}
+</style>
+</head>
+<body align=\"justify\">
+<p>";
+
+"TRYAGAIN2" = " أتريد اللعب مرة أخرى؟</p>
+
+</body>
+</html>";
+
+"MVTextFound" = "
+<html>
+<head>
+<style>
+body{font-family: Neue Helvetica, 'HelveticaNeue', serif; background-color:transparent; padding-top:20px;}
+p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font-weight: 50;word-spacing: -0.1em;text-align: center;
+    line-height:1em;}
+</style>
+</head>
+<body align=\"justify\">
+<p>تم العثور على جهاز الخصم الرجاء الإنتظار</p>
+
+
+</body>
+</html>";
+
+"Message send" = "
+<html>
+<head>
+<style>
+body{font-family: Neue Helvetica, 'HelveticaNeue', serif; background-color:transparent; padding-top:20px;}
+p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font-weight: 50;word-spacing: -0.1em;text-align: center;
+    line-height:1em;}
+</style>
+</head>
+<body align=\"justify\">
+<p>تم الإرسال</p>
+
+
+</body>
+</html>";
+
+"Sending..." = "
+<html>
+<head>
+<style>
+body{font-family: Neue Helvetica, 'HelveticaNeue', serif; background-color:transparent; padding-top:20px;}
+p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font-weight: 50;word-spacing: -0.1em;text-align: center;
+    line-height:1em;}
+</style>
+</head>
+<body align=\"justify\">
+<p>جاري الإرسال</p>
+
+
+</body>
+</html>";
+
+"NoMoney" = "
+<html>
+<head>
+<style>
+body{font-family: Neue Helvetica, 'HelveticaNeue', serif; background-color:transparent; padding-top:20px;}
+p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font-weight: 50;word-spacing: -0.1em;text-align: center;
+    line-height:1em;}
+</style>
+</head>
+<body align=\"justify\">
+<p>ليس لديك مال</p>
+
+
+</body>
+</html>";
+
+"daily10" = "
+<html>
+<head>
+<style>
+body{font-family: Neue Helvetica, 'HelveticaNeue', serif; background-color:transparent; padding-top:20px;}
+p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font-weight: 50;word-spacing: -0.1em;text-align: center;
+    line-height:1em;}
+</style>
+</head>
+<body align=\"justify\">
+<p>لديك 10$ يوميا</p>
+</body>
+</html>";
+
+"update100" = "
+<html>
+<head>
+<style>
+body{font-family: Neue Helvetica, 'HelveticaNeue', serif; background-color:transparent; padding-top:20px;}
+p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font-weight: 50;word-spacing: -0.1em;text-align: center;
+    line-height:1em;}
+</style>
+</head>
+<body align=\"justify\">
+<p>لديك 100$ للتحديث</p>
+</body>
+</html>";
+
+"NoConection" = "
+<html>
+<head>
+<style>
+body{font-family: Neue Helvetica, 'HelveticaNeue', serif; background-color:transparent; padding-top:20px;}
+p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font-weight: 50;word-spacing: -0.1em;text-align: center;
+    line-height:1em;}
+</style>
+</head>
+<body align=\"justify\">
+<p>للم يكن لديك شبكة الانترنت</p>
+
+
+</body>
+</html>";
+
+"NoServersHTML" = "
+<html>
+<head>
+<style>
+body{font-family: Neue Helvetica, 'HelveticaNeue', serif; background-color:transparent; padding-top:20px;}
+p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font-weight: 50;word-spacing: -0.1em;text-align: center;
+    line-height:1em;}
+</style>
+</head>
+<body align=\"justify\">
+<p>Enemies hid, try again.</p>
+
+
+</body>
+</html>";
+
+"FoundServer" = "
+<html>
+<head>
+<style>
+body{font-family: Neue Helvetica, 'HelveticaNeue', serif; background-color:transparent; padding-top:20px;}
+p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font-weight: 50;word-spacing: -0.1em;text-align: center;
+    line-height:1em;}
+</style>
+</head>
+<body align=\"justify\">
+<p>An enemy appeared on the horizon, get ready!</p>
+
+
+</body>
+</html>";
+
+
+//Push message
+
+"PushNTitle"="كنت مطلق النار باردة؟";
+
+"PushNText"="اختبار قوتك -- معركة مع منافس. تأتي إلى مركز اللعبة وفوق \"تشغيل \"";
+
+"PushNBtn"="في المعركة";
+
+"CANS"="لاحق";
+
+"PushNTournTitle"="Tournament";
+
+"PushNTournText"="Oll players are ready to play";
+
+
+//Bot Duel message
+
+"BotMTitle"="بدعوة من ";
+"BotMTitle2"=" للعب \" Cowboy Duel \"";
+
+"BotMText"="\"Cowboy Duel تريد أن تلعب\"";
+
+"BotMBtn"="قبول";
+
+"BotMCANS"="أغلق";
+
+//invite message
+
+"acceptInv"="أتريد الموافقة؟";
+
+"Incoming"="الدعوة قادمة من ..";
+
+"Decline"="الرفض";
+
+"Accept"="القبول";
+
+//Duel
+"LOWER" = "إحمل الجهاز للإسفل للبدأ";
+"WHEN" = "عندما قام الخصم بقبول دعوتك";
+
+//Donation
+
+"DONATE" = "تبرع";
+
+"DONATION_TEXT" = "يمكنك مساعدتنا لتحسين هذه اللعبة بالتبرع ";
+
+"DONATION1" ="تبرع بـ 1$";
+
+"DONATION5" ="تبرع بـ 5$";
+
+"DONATION100" ="تبرع بـ 100$";
+//Moremoney
+
+"MOREMONEY" = "امزيد من المال";
+
+"MOREMONEY_TEXT" = "االاستثمار في التنمية من الغرب المتوحش";
+
+"MOREMONEY1" = "استثمار مبلغ 0.99 للحصول على 300 دولارا في لعبة";
+
+"MOREMONEY5" = "استثمار مبلغ 4.99 للحصول على 2000 دولارا في لعبة";
+
+"MOREMONEY100" ="استثمار مبلغ 99.99 للحصول على 50000 دولارا في لعبة";
+
+//Chat
+
+"PRIVAT"="PRIVAT";
+
+"ALLWALL"="ALLWALL";
+
+"PRIVATE_TO"="Private to";
+
+//Time format
+
+"years" = "years";
+
+"year" = "year";
+
+"ago" = "ago";
+
+"months" = "months";
+
+"months234" = "months";
+
+"month" = "month";
+
+"hours" = "hours";
+
+"hours234" = "hours";
+
+"hour" = "hour";
+
+"minutes" = "minutes";
+
+"minutes234" = "minutes";
+
+"minute" = "minute";
+
+"moment" = "a moment ago";
+
+"days" = "days";
+
+"days234" = "days";
+
+"day" = "day";
+
+//Login
+
+"LoginTitle" = "مبروك!";
+"LoginText1" = "ربحت المعركة!";
+"LoginText2" = "الآن يمكنك أن تخبر أصدقائك عن فاتنة من خلال إحدى الشبكات";

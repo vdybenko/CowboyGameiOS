@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/common/macosx
+END
+macAutoreleasePool.m
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/common/macosx/macAutoreleasePool.m
+END
+gsUtilMacOSX.c
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/common/macosx/gsUtilMacOSX.c
+END
+MacOSXCommon.c
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/common/macosx/MacOSXCommon.c
+END
+Makefile.common
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/common/macosx/Makefile.common
+END
+changelog.txt
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/common/macosx/changelog.txt
+END
+macAutoreleasePool.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/common/macosx/macAutoreleasePool.h
+END
+MakeCommon.mk
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/common/macosx/MakeCommon.mk
+END
+gsThreadMacOSX.c
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/common/macosx/gsThreadMacOSX.c
+END

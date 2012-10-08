@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>products</key>
+	<dict>
+		<key>donate1</key>
+		<string>com.cowboyduel.coins300</string>
+		<key>donate2</key>
+		<string>com.cowboyduel.coins2000</string>
+		<key>donate3</key>
+		<string>com.cowboyduel.coins50000</string>
+		<key>test1</key>
+		<string>com.webkate.cowboyduels.third</string>
+		<key>test2</key>
+		<string>com.webkate.cowboyduels.testPurchase</string>
+		<key>New item</key>
+		<string>removeAdColony</string>
+		<key>New item - 2</key>
+		<string>third</string>
+	</dict>
+</dict>
+</plist>

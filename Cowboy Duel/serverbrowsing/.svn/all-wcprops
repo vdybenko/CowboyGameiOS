@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/cowboyduel/!svn/ver/440/branches/v1.4_ARC/Cowboy%20Duel/serverbrowsing
+END
+sb_queryengine.c
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/serverbrowsing/sb_queryengine.c
+END
+sb_ascii.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/serverbrowsing/sb_ascii.h
+END
+sb_crypt.c
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/serverbrowsing/sb_crypt.c
+END
+sb_internal.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/serverbrowsing/sb_internal.h
+END
+sb_serverbrowsing.c
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/cowboyduel/!svn/ver/440/branches/v1.4_ARC/Cowboy%20Duel/serverbrowsing/sb_serverbrowsing.c
+END
+sb_serverlist.c
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/serverbrowsing/sb_serverlist.c
+END
+sb_crypt.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/serverbrowsing/sb_crypt.h
+END
+sb_server.c
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/serverbrowsing/sb_server.c
+END
+sb_serverbrowsing.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/serverbrowsing/sb_serverbrowsing.h
+END

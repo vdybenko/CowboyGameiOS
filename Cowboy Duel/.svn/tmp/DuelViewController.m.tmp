@@ -1,0 +1,290 @@
+//
+//  TestViewController.m
+//  Test
+//
+//  Created by Sobol on 11.05.11.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//
+
+#import "DuelViewController.h"
+#import "StartViewController.h"
+
+#define FOLL_TIME 999999
+
+static NSString *ShotSound = @"%@/shot.mp3";
+
+
+@implementation DuelViewController
+
+@synthesize delegate, time;
+
+-(id)initWithTime:(int)randomTime Account:(AccountDataSource *)userAccount oponentAccount:(AccountDataSource *)pOponentAccount;
+{
+    if (self == [super initWithNib]) {
+        playerAccount = userAccount;
+        oponentAccount = pOponentAccount;
+        time = randomTime;
+    }
+    return self;
+}
+
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return [super shouldAutorotateToInterfaceOrientation:interfaceOrientation];    
+}
+
+-(void)viewDidLoad
+{    
+    [super viewDidLoad];
+    [helpViewShots removeFromSuperview];
+    CGRect frame=helpViewSound.frame;
+    frame.origin.y=72;
+    helpViewSound.frame=frame;
+
+   // self.view=_vBackground;
+    }
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    NSLog(@"DuelViewController: viewWillAppear");
+    [super viewWillAppear:animated];
+    [_infoButton setHidden:YES];
+    [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / 60.0)];
+    [[UIAccelerometer sharedAccelerometer] setDelegate:self];
+
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    NSLog(@"DuelViewController: viewDidDisappear");
+    [super viewDidDisappear:animated];
+    [[UIAccelerometer sharedAccelerometer] setDelegate:nil];
+}
+
+
+-(void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
+{
+    [super accelerometer:accelerometer didAccelerate:acceleration];
+    
+    if (start && acelStayt) {
+        fintType = [accelerometrDataSource setPositionWithX:acceleration.x andY:acceleration.y andZ:acceleration.z];
+        switch (fintType) {
+            case FirstFint:
+                NSLog(@"first fint");
+                maxShotCount = 1;
+                [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
+                                                                    object:self
+                                                                  userInfo:[NSDictionary dictionaryWithObject:@"Trick" forKey:@"event"]];
+                break;
+            case SecondFint:
+                NSLog(@"second fint");
+                break;    
+            default:
+                break;
+        }
+        
+    }
+    
+    if(accelerometerState){
+        if ((!accelerometerStateSend) && (!soundStart)) {
+            if ([delegate respondsToSelector:@selector(setAccelStateTrue)]) 
+                [delegate setAccelStateTrue];
+            accelerometerStateSend = YES;
+        }
+    }
+    else {
+        if ([delegate respondsToSelector:@selector(setAccelStateFalse)]) 
+            [delegate setAccelStateFalse];
+        accelerometerStateSend = NO;
+        
+    }
+    
+    
+    if ((!accelerometerState) && (soundStart) && (!start)) {
+        if(!follAccelCheck){
+            //            btnChangeGun.enabled=NO;
+            _infoButton.enabled=NO;
+            // UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Allert" message:@"Foll" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            //[av show];
+            follAccelCheck = YES;
+            NSLog(@"Foll start");
+            [timer invalidate];
+            [player stop];
+
+            [follPlayer setCurrentTime:0.0];
+            [follPlayer play];
+            foll = YES;
+            if ([delegate respondsToSelector:@selector(sendShotTime:)]) {
+                [delegate sendShotTime:-shotTime];
+            }
+            [activityIndicatorView setText:NSLocalizedString(@"FOLL", @"")];
+            [activityIndicatorView showView];
+        }
+        
+    }
+    
+}
+
+-(void)setTime:(int)randomTime{
+    time = randomTime;
+    label.text = [NSString stringWithFormat:@"%d",time];
+}
+
+-(void)shotTimer
+{   
+    nowInterval = [NSDate timeIntervalSinceReferenceDate];
+    activityInterval = (nowInterval-startInterval)*1000;
+    
+    shotTime = (int)activityInterval;
+    if ((shotTime * 0.001 >= time) && (!start) && (!foll)) {
+        NSLog(@"Timer");
+        start = YES;
+        NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Fire.mp3", [[NSBundle mainBundle] resourcePath]]];
+        NSError *error;
+        [player stop];
+        player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+        [player play];
+        [self vibrationStart];
+    }
+    if ((shotTime * 0.001 >= 15.0) && (!duelTimerEnd) && (soundStart)) {
+        if ([delegate respondsToSelector:@selector(duelTimerEnd)]) 
+            [delegate duelTimerEnd];
+        duelTimerEnd = YES;
+    }
+
+
+}
+
+-(void)duelTimerEndFeedBack
+{
+    duelTimerEnd = YES;
+}
+
+-(void)follSend
+{
+    NSLog(@"Foll send");
+    if ([delegate respondsToSelector:@selector(sendShotTime:)]) 
+        [delegate sendShotTime:-shotTime];
+    
+}
+
+-(IBAction)buttonClick
+{   
+    [super buttonClick];
+    if (shotCountBullet!=0) {
+        
+        if (start) 
+        {
+            if ((shotCount >= maxShotCount) && (start)) 
+            {
+                NSLog(@"Kill!!!");
+                
+                [follPlayer stop];
+
+//                NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/cry.mp3", [[NSBundle mainBundle] resourcePath]]];
+//                follPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+//                [follPlayer setVolume:0.2];
+//                [follPlayer play];
+           
+                NSLog(@"Shot Time = %d.%d", (shotTime - time * 1000) / 1000, (shotTime - time * 1000) % 1000);
+                if ([delegate respondsToSelector:@selector(sendShotTime:)]) 
+                    [delegate sendShotTime:(shotTime - time * 1000)];
+                [activityIndicatorView showView];
+                _btnNab.enabled = NO;
+                acelStayt = NO;
+                //[timer invalidate];
+            } 
+        }
+        else
+        {
+            if (soundStart) {
+                foll = YES;
+                //            if ([delegate respondsToSelector:@selector(sendShotTime:)]) 
+                //                [delegate sendShotTime:999999];
+//                if ([delegate respondsToSelector:@selector(sendShotTime:)]) {
+//                    [delegate sendShotTime:-shotTime];
+//                }
+                [self performSelector:@selector(follSend) withObject:self afterDelay:2.0];
+
+                [activityIndicatorView setText:NSLocalizedString(@"FOLL", @"")];
+                [activityIndicatorView showView];
+                [player stop];
+                [timer invalidate];
+                soundStart = NO;
+                
+                NSLog(@"Foll!!!");
+            }
+            shotCount--;
+        }
+    }else{
+        NSLog(@"Empty shop");
+    }
+    
+    
+    //            [self performSelector:@selector(LisForShotYes) withObject:self afterDelay:0.15];
+    
+    
+}
+
+
+#pragma mark DuelViewControllerDelegate Methods
+-(BOOL)accelerometerSendPositionSecond
+{
+    NSLog(@"Send position second");
+    return accelerometerState;
+}
+
+-(void)startDuel
+{   
+    NSLog(@"Duel started");
+    
+    if (!follViewShow) {
+        [super startDuel];
+        soundStart = YES;
+        [player stop];
+        [player setCurrentTime:0.0];
+        startInterval = [NSDate timeIntervalSinceReferenceDate];
+        NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Duel.mp3", [[NSBundle mainBundle] resourcePath]]];
+        player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+        [player prepareToPlay];
+        [player play];
+        timer = [NSTimer scheduledTimerWithTimeInterval:0.111 target:self selector:@selector(shotTimer) userInfo:nil repeats:YES];
+        start = NO;
+        acelStayt = YES;
+        shotTime = 0;
+        
+    }
+}   
+
+-(IBAction)backButtonClick:(id)sender;
+{
+    [super backButtonClick:sender];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/Duel_back" forKey:@"event"]];
+    
+}
+#pragma mark - IBAction
+
+- (IBAction)cancelShotsClick:(id)sender {
+    [super cancelShotsClick:sender];
+    
+    [UIView animateWithDuration:0.1f
+                     animations:^{
+                         CGRect frame=helpViewSound.frame;
+                         frame.origin.y=72;
+                         helpViewSound.frame=frame;
+                         
+                     }];
+    
+    
+}
+
+
+@end

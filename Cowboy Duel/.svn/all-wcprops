@@ -1,0 +1,797 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/cowboyduel/!svn/ver/628/branches/v1.4_ARC/Cowboy%20Duel
+END
+CurrencyManager.m
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/cowboyduel/!svn/ver/262/branches/v1.4_ARC/Cowboy%20Duel/CurrencyManager.m
+END
+Cowboy Duel-Prefix.pch
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/cowboyduel/!svn/ver/597/branches/v1.4_ARC/Cowboy%20Duel/Cowboy%20Duel-Prefix.pch
+END
+ListOfItemsViewController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/cowboyduel/!svn/ver/267/branches/v1.4_ARC/Cowboy%20Duel/ListOfItemsViewController.xib
+END
+HelpPracticeView.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/cowboyduel/!svn/ver/411/branches/v1.4_ARC/Cowboy%20Duel/HelpPracticeView.h
+END
+ListOfItemsViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/cowboyduel/!svn/ver/624/branches/v1.4_ARC/Cowboy%20Duel/ListOfItemsViewController.h
+END
+AdColonyViewController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/cowboyduel/!svn/ver/513/branches/v1.4_ARC/Cowboy%20Duel/AdColonyViewController.xib
+END
+HelpPracticeView.m
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/cowboyduel/!svn/ver/411/branches/v1.4_ARC/Cowboy%20Duel/HelpPracticeView.m
+END
+ListOfItemsViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/cowboyduel/!svn/ver/627/branches/v1.4_ARC/Cowboy%20Duel/ListOfItemsViewController.m
+END
+AdvertisingAppearController.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/cowboyduel/!svn/ver/439/branches/v1.4_ARC/Cowboy%20Duel/AdvertisingAppearController.h
+END
+LoadViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/cowboyduel/!svn/ver/576/branches/v1.4_ARC/Cowboy%20Duel/LoadViewController.h
+END
+AdvertisingAppearController.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/cowboyduel/!svn/ver/586/branches/v1.4_ARC/Cowboy%20Duel/AdvertisingAppearController.m
+END
+LoadViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/cowboyduel/!svn/ver/625/branches/v1.4_ARC/Cowboy%20Duel/LoadViewController.m
+END
+DuelViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/cowboyduel/!svn/ver/573/branches/v1.4_ARC/Cowboy%20Duel/DuelViewController.h
+END
+FinalViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/cowboyduel/!svn/ver/579/branches/v1.4_ARC/Cowboy%20Duel/FinalViewController.h
+END
+CDTransaction.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/cowboyduel/!svn/ver/264/branches/v1.4_ARC/Cowboy%20Duel/CDTransaction.h
+END
+FinalViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/cowboyduel/!svn/ver/628/branches/v1.4_ARC/Cowboy%20Duel/FinalViewController.m
+END
+DuelViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/cowboyduel/!svn/ver/626/branches/v1.4_ARC/Cowboy%20Duel/DuelViewController.m
+END
+LeaderBoardViewController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/cowboyduel/!svn/ver/422/branches/v1.4_ARC/Cowboy%20Duel/LeaderBoardViewController.xib
+END
+OCPromptView.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/cowboyduel/!svn/ver/332/branches/v1.4_ARC/Cowboy%20Duel/OCPromptView.h
+END
+CDTransaction.m
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/cowboyduel/!svn/ver/319/branches/v1.4_ARC/Cowboy%20Duel/CDTransaction.m
+END
+HelpViewControllerPractice.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/cowboyduel/!svn/ver/307/branches/v1.4_ARC/Cowboy%20Duel/HelpViewControllerPractice.h
+END
+OCPromptView.m
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/cowboyduel/!svn/ver/262/branches/v1.4_ARC/Cowboy%20Duel/OCPromptView.m
+END
+BluetoothViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/cowboyduel/!svn/ver/440/branches/v1.4_ARC/Cowboy%20Duel/BluetoothViewController.h
+END
+MoneyCongratViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/cowboyduel/!svn/ver/588/branches/v1.4_ARC/Cowboy%20Duel/MoneyCongratViewController.h
+END
+HelpViewControllerPractice.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/cowboyduel/!svn/ver/307/branches/v1.4_ARC/Cowboy%20Duel/HelpViewControllerPractice.m
+END
+BluetoothViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/cowboyduel/!svn/ver/439/branches/v1.4_ARC/Cowboy%20Duel/BluetoothViewController.m
+END
+MoneyCongratViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/cowboyduel/!svn/ver/618/branches/v1.4_ARC/Cowboy%20Duel/MoneyCongratViewController.m
+END
+TestAppDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/cowboyduel/!svn/ver/381/branches/v1.4_ARC/Cowboy%20Duel/TestAppDelegate.h
+END
+FintDataSource.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/FintDataSource.h
+END
+CustomNSURLConnection.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/cowboyduel/!svn/ver/426/branches/v1.4_ARC/Cowboy%20Duel/CustomNSURLConnection.h
+END
+FintDataSource.m
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/FintDataSource.m
+END
+TestAppDelegate.m
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/cowboyduel/!svn/ver/537/branches/v1.4_ARC/Cowboy%20Duel/TestAppDelegate.m
+END
+AdvertisingOtherAppViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/cowboyduel/!svn/ver/312/branches/v1.4_ARC/Cowboy%20Duel/AdvertisingOtherAppViewController.h
+END
+CustomNSURLConnection.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/cowboyduel/!svn/ver/436/branches/v1.4_ARC/Cowboy%20Duel/CustomNSURLConnection.m
+END
+AdvertisingOtherAppViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/cowboyduel/!svn/ver/402/branches/v1.4_ARC/Cowboy%20Duel/AdvertisingOtherAppViewController.m
+END
+AdvertisingNewVersionViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/cowboyduel/!svn/ver/312/branches/v1.4_ARC/Cowboy%20Duel/AdvertisingNewVersionViewController.h
+END
+CustomAlert.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/CustomAlert.h
+END
+AdvertisingNewVersionViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/cowboyduel/!svn/ver/426/branches/v1.4_ARC/Cowboy%20Duel/AdvertisingNewVersionViewController.m
+END
+IconDownloader.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/cowboyduel/!svn/ver/516/branches/v1.4_ARC/Cowboy%20Duel/IconDownloader.h
+END
+CustomAlert.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/cowboyduel/!svn/ver/262/branches/v1.4_ARC/Cowboy%20Duel/CustomAlert.m
+END
+ResoultDataSource.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/ResoultDataSource.h
+END
+GameCenterViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/cowboyduel/!svn/ver/540/branches/v1.4_ARC/Cowboy%20Duel/GameCenterViewController.h
+END
+IconDownloader.m
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/cowboyduel/!svn/ver/516/branches/v1.4_ARC/Cowboy%20Duel/IconDownloader.m
+END
+ResoultDataSource.m
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/cowboyduel/!svn/ver/562/branches/v1.4_ARC/Cowboy%20Duel/ResoultDataSource.m
+END
+FXLabel.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/cowboyduel/!svn/ver/542/branches/v1.4_ARC/Cowboy%20Duel/FXLabel.h
+END
+GameCenterViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/cowboyduel/!svn/ver/627/branches/v1.4_ARC/Cowboy%20Duel/GameCenterViewController.m
+END
+TournamentServerViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/TournamentServerViewController.h
+END
+FXLabel.m
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/cowboyduel/!svn/ver/542/branches/v1.4_ARC/Cowboy%20Duel/FXLabel.m
+END
+CDAchivment.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/cowboyduel/!svn/ver/262/branches/v1.4_ARC/Cowboy%20Duel/CDAchivment.h
+END
+TournamentServerViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/TournamentServerViewController.m
+END
+CDAchivment.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/cowboyduel/!svn/ver/262/branches/v1.4_ARC/Cowboy%20Duel/CDAchivment.m
+END
+ProfileImageView.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/cowboyduel/!svn/ver/262/branches/v1.4_ARC/Cowboy%20Duel/ProfileImageView.h
+END
+ProfileImageView.m
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/ProfileImageView.m
+END
+TextFieldMultiLine.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/TextFieldMultiLine.h
+END
+TextFieldMultiLine.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/TextFieldMultiLine.m
+END
+ShopDataSource.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/cowboyduel/!svn/ver/272/branches/v1.4_ARC/Cowboy%20Duel/ShopDataSource.h
+END
+TableViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/cowboyduel/!svn/ver/262/branches/v1.4_ARC/Cowboy%20Duel/TableViewController.h
+END
+HelpViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/cowboyduel/!svn/ver/515/branches/v1.4_ARC/Cowboy%20Duel/HelpViewController.h
+END
+DuelViewControllerWithXib.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/cowboyduel/!svn/ver/626/branches/v1.4_ARC/Cowboy%20Duel/DuelViewControllerWithXib.h
+END
+main.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/cowboyduel/!svn/ver/262/branches/v1.4_ARC/Cowboy%20Duel/main.m
+END
+ShopDataSource.m
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/cowboyduel/!svn/ver/272/branches/v1.4_ARC/Cowboy%20Duel/ShopDataSource.m
+END
+MoneyCongratulationViewController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/cowboyduel/!svn/ver/520/branches/v1.4_ARC/Cowboy%20Duel/MoneyCongratulationViewController.xib
+END
+FlurryAnalytics.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/FlurryAnalytics.h
+END
+TableViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/cowboyduel/!svn/ver/290/branches/v1.4_ARC/Cowboy%20Duel/TableViewController.m
+END
+HelpViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/cowboyduel/!svn/ver/583/branches/v1.4_ARC/Cowboy%20Duel/HelpViewController.m
+END
+DuelViewControllerWithXib.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/cowboyduel/!svn/ver/614/branches/v1.4_ARC/Cowboy%20Duel/DuelViewControllerWithXib.m
+END
+AdColonyViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/cowboyduel/!svn/ver/485/branches/v1.4_ARC/Cowboy%20Duel/AdColonyViewController.h
+END
+AdColonyViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/cowboyduel/!svn/ver/610/branches/v1.4_ARC/Cowboy%20Duel/AdColonyViewController.m
+END
+Test-Info.plist
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/cowboyduel/!svn/ver/475/branches/v1.4_ARC/Cowboy%20Duel/Test-Info.plist
+END
+UIImageView+AttachedView.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/cowboyduel/!svn/ver/503/branches/v1.4_ARC/Cowboy%20Duel/UIImageView+AttachedView.h
+END
+LevelCongratViewController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/cowboyduel/!svn/ver/591/branches/v1.4_ARC/Cowboy%20Duel/LevelCongratViewController.xib
+END
+UIImageView+AttachedView.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/cowboyduel/!svn/ver/609/branches/v1.4_ARC/Cowboy%20Duel/UIImageView+AttachedView.m
+END
+ActivityIndicatorView.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/ActivityIndicatorView.h
+END
+ActivityIndicatorView.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/cowboyduel/!svn/ver/294/branches/v1.4_ARC/Cowboy%20Duel/ActivityIndicatorView.m
+END
+ViewProjectHelper.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/ViewProjectHelper.h
+END
+TopPlayersViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/cowboyduel/!svn/ver/512/branches/v1.4_ARC/Cowboy%20Duel/TopPlayersViewController.h
+END
+LeaderBoardViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/cowboyduel/!svn/ver/422/branches/v1.4_ARC/Cowboy%20Duel/LeaderBoardViewController.h
+END
+ViewProjectHelper.m
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/ViewProjectHelper.m
+END
+TopPlayersViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/cowboyduel/!svn/ver/624/branches/v1.4_ARC/Cowboy%20Duel/TopPlayersViewController.m
+END
+products.plist
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/cowboyduel/!svn/ver/480/branches/v1.4_ARC/Cowboy%20Duel/products.plist
+END
+UIView+Dinamic_BackGround.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/cowboyduel/!svn/ver/404/branches/v1.4_ARC/Cowboy%20Duel/UIView+Dinamic_BackGround.h
+END
+LoginViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/cowboyduel/!svn/ver/624/branches/v1.4_ARC/Cowboy%20Duel/LoginViewController.h
+END
+LeaderBoardViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/cowboyduel/!svn/ver/426/branches/v1.4_ARC/Cowboy%20Duel/LeaderBoardViewController.m
+END
+libFlurryAnalytics.a
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/libFlurryAnalytics.a
+END
+UIView+Dinamic_BackGround.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/cowboyduel/!svn/ver/577/branches/v1.4_ARC/Cowboy%20Duel/UIView+Dinamic_BackGround.m
+END
+LoginViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/cowboyduel/!svn/ver/627/branches/v1.4_ARC/Cowboy%20Duel/LoginViewController.m
+END
+TeachingViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/cowboyduel/!svn/ver/627/branches/v1.4_ARC/Cowboy%20Duel/TeachingViewController.h
+END
+TeachingViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/cowboyduel/!svn/ver/600/branches/v1.4_ARC/Cowboy%20Duel/TeachingViewController.m
+END
+GCHelper.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/cowboyduel/!svn/ver/512/branches/v1.4_ARC/Cowboy%20Duel/GCHelper.h
+END
+StartViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/cowboyduel/!svn/ver/570/branches/v1.4_ARC/Cowboy%20Duel/StartViewController.h
+END
+GCHelper.m
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/cowboyduel/!svn/ver/605/branches/v1.4_ARC/Cowboy%20Duel/GCHelper.m
+END
+ProfileViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/cowboyduel/!svn/ver/604/branches/v1.4_ARC/Cowboy%20Duel/ProfileViewController.h
+END
+MoneyCongratulationViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/cowboyduel/!svn/ver/520/branches/v1.4_ARC/Cowboy%20Duel/MoneyCongratulationViewController.h
+END
+StartViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/cowboyduel/!svn/ver/627/branches/v1.4_ARC/Cowboy%20Duel/StartViewController.m
+END
+DuelDataSource.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/cowboyduel/!svn/ver/272/branches/v1.4_ARC/Cowboy%20Duel/DuelDataSource.h
+END
+ProfileViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/cowboyduel/!svn/ver/628/branches/v1.4_ARC/Cowboy%20Duel/ProfileViewController.m
+END
+MultiplayerClientViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/cowboyduel/!svn/ver/461/branches/v1.4_ARC/Cowboy%20Duel/MultiplayerClientViewController.h
+END
+OGHelper.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/cowboyduel/!svn/ver/627/branches/v1.4_ARC/Cowboy%20Duel/OGHelper.h
+END
+MoneyCongratulationViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/cowboyduel/!svn/ver/520/branches/v1.4_ARC/Cowboy%20Duel/MoneyCongratulationViewController.m
+END
+ShopViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/ShopViewController.h
+END
+DuelDataSource.m
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/cowboyduel/!svn/ver/475/branches/v1.4_ARC/Cowboy%20Duel/DuelDataSource.m
+END
+MultiplayerClientViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/cowboyduel/!svn/ver/619/branches/v1.4_ARC/Cowboy%20Duel/MultiplayerClientViewController.m
+END
+OGHelper.m
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/cowboyduel/!svn/ver/628/branches/v1.4_ARC/Cowboy%20Duel/OGHelper.m
+END
+ShopViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/cowboyduel/!svn/ver/290/branches/v1.4_ARC/Cowboy%20Duel/ShopViewController.m
+END
+AccelerometrDataSource.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/AccelerometrDataSource.h
+END
+LevelCongratViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/cowboyduel/!svn/ver/583/branches/v1.4_ARC/Cowboy%20Duel/LevelCongratViewController.h
+END
+AccelerometrDataSource.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/AccelerometrDataSource.m
+END
+NSDate-Utilities.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/NSDate-Utilities.h
+END
+PurchasesManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/cowboyduel/!svn/ver/475/branches/v1.4_ARC/Cowboy%20Duel/PurchasesManager.h
+END
+LevelCongratViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/cowboyduel/!svn/ver/618/branches/v1.4_ARC/Cowboy%20Duel/LevelCongratViewController.m
+END
+ScrollView.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/cowboyduel/!svn/ver/262/branches/v1.4_ARC/Cowboy%20Duel/ScrollView.h
+END
+UIImage+Tint.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/cowboyduel/!svn/ver/447/branches/v1.4_ARC/Cowboy%20Duel/UIImage+Tint.h
+END
+NSDate-Utilities.m
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/NSDate-Utilities.m
+END
+PurchasesManager.m
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/cowboyduel/!svn/ver/475/branches/v1.4_ARC/Cowboy%20Duel/PurchasesManager.m
+END
+MultiplayerServerViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/cowboyduel/!svn/ver/534/branches/v1.4_ARC/Cowboy%20Duel/MultiplayerServerViewController.h
+END
+ScrollView.m
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/ScrollView.m
+END
+MoneyCongratViewController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/cowboyduel/!svn/ver/591/branches/v1.4_ARC/Cowboy%20Duel/MoneyCongratViewController.xib
+END
+UIImage+Tint.m
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/cowboyduel/!svn/ver/447/branches/v1.4_ARC/Cowboy%20Duel/UIImage+Tint.m
+END
+CDDuel.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/cowboyduel/!svn/ver/264/branches/v1.4_ARC/Cowboy%20Duel/CDDuel.h
+END
+MultiplayerServerViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/cowboyduel/!svn/ver/619/branches/v1.4_ARC/Cowboy%20Duel/MultiplayerServerViewController.m
+END
+GameContentViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/cowboyduel/!svn/ver/262/branches/v1.4_ARC/Cowboy%20Duel/GameContentViewController.h
+END
+CDDuel.m
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/cowboyduel/!svn/ver/262/branches/v1.4_ARC/Cowboy%20Duel/CDDuel.m
+END
+DuelStartViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/cowboyduel/!svn/ver/564/branches/v1.4_ARC/Cowboy%20Duel/DuelStartViewController.h
+END
+AccountDataSource.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/cowboyduel/!svn/ver/528/branches/v1.4_ARC/Cowboy%20Duel/AccountDataSource.h
+END
+GameContentViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/cowboyduel/!svn/ver/262/branches/v1.4_ARC/Cowboy%20Duel/GameContentViewController.m
+END
+DuelStartViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/cowboyduel/!svn/ver/614/branches/v1.4_ARC/Cowboy%20Duel/DuelStartViewController.m
+END
+AccountDataSource.m
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/cowboyduel/!svn/ver/612/branches/v1.4_ARC/Cowboy%20Duel/AccountDataSource.m
+END
+UIScrollView+AH3DPullRefresh.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/cowboyduel/!svn/ver/623/branches/v1.4_ARC/Cowboy%20Duel/UIScrollView+AH3DPullRefresh.h
+END
+DuelRewardLogicController.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/cowboyduel/!svn/ver/586/branches/v1.4_ARC/Cowboy%20Duel/DuelRewardLogicController.h
+END
+UIScrollView+AH3DPullRefresh.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/cowboyduel/!svn/ver/623/branches/v1.4_ARC/Cowboy%20Duel/UIScrollView+AH3DPullRefresh.m
+END
+DuelRewardLogicController.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/cowboyduel/!svn/ver/619/branches/v1.4_ARC/Cowboy%20Duel/DuelRewardLogicController.m
+END
+CurrencyManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/cowboyduel/!svn/ver/256/branches/v1.4_ARC/Cowboy%20Duel/CurrencyManager.h
+END
