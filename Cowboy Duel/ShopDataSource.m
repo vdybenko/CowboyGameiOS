@@ -92,7 +92,7 @@ static const char *GET_SUBSCRIPTIONS_URL = BASE_URL "/api/get_subscriptions";
 
 
 - (void)buyItemAtRow:(NSInteger)row {
-    NSLog(@"Reason least = %d",[self.resultsList count]);
+    DLog(@"Reason least = %d",[self.resultsList count]);
     
     NSString *lastUserMail = [[NSUserDefaults standardUserDefaults] stringForKey:@"LastUserMail"];
     [[NSUserDefaults standardUserDefaults] setObject:lastUserMail forKey:@"LastBuyerMail"];
@@ -128,7 +128,7 @@ static const char *GET_SUBSCRIPTIONS_URL = BASE_URL "/api/get_subscriptions";
 //	NSDictionary *responseObject = ValidateObject([response JSONValue], [NSDictionary class]);
 //	NSArray *identifiers = ValidateObject([responseObject objectForKey:@"subscriptions"], [NSArray class]);
 //	
-//    NSLog(@"ShopDataSource: %@", response);
+//    DLog(@"ShopDataSource: %@", response);
 //    
 //    if ([delegate respondsToSelector:@selector(shopDataSource:requestCompleted:)])
 //        [delegate performSelector:@selector(shopDataSource:requestCompleted:) withObject:self withObject:request];
@@ -148,7 +148,7 @@ static const char *GET_SUBSCRIPTIONS_URL = BASE_URL "/api/get_subscriptions";
 //
 //- (void)requestFailed:(ASIHTTPRequest *)request { 
 //    
-//	NSLog(@"ShopDataSource: Connection failed: %@", [[request error] description]);
+//	DLog(@"ShopDataSource: Connection failed: %@", [[request error] description]);
 //	
 //	lastRequest.delegate = nil;
 //	lastRequest = nil;
@@ -167,7 +167,7 @@ static const char *GET_SUBSCRIPTIONS_URL = BASE_URL "/api/get_subscriptions";
     
     self.resultsList = response.products;
     
-    NSLog(@"Reason least = %d",[self.resultsList count]);
+    DLog(@"Reason least = %d",[self.resultsList count]);
     
     if ([delegate respondsToSelector:@selector(shopDataSource:productsRequestCompleted:)])
         [delegate performSelector:@selector(shopDataSource:productsRequestCompleted:) withObject:self withObject:request];

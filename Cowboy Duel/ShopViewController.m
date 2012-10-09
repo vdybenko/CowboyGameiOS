@@ -51,28 +51,28 @@
 (SKProductsResponse *)response
 {
     NSArray *myProduct = response.products;
-    NSLog(@"count %d",[myProduct count]);
+    DLog(@"count %d",[myProduct count]);
     // populate UI
 //    [request autorelease];
 }
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
 {
-    //NSLog(@"count %d",[transactions count]);
+    //DLog(@"count %d",[transactions count]);
     for (SKPaymentTransaction *transaction in transactions)
     {
         switch (transaction.transactionState)
         {
             case SKPaymentTransactionStatePurchased:
-                NSLog(@"Purchared");
+                DLog(@"Purchared");
                 //[self completeTransaction:transaction];
                 break;
             case SKPaymentTransactionStateFailed:
-                NSLog(@"Failed %@", transaction.error);
+                DLog(@"Failed %@", transaction.error);
                // [self failedTransaction:transaction];
                 break;
             case SKPaymentTransactionStateRestored:
-                NSLog(@"Restored");
+                DLog(@"Restored");
               //  [self restoreTransaction:transaction];
             default:
                 break;

@@ -26,18 +26,18 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     startPoint = [[touches anyObject] locationInView:self];
-    NSLog(@"Point %f", startPoint.x);
+    DLog(@"Point %f", startPoint.x);
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     CGPoint endPoint = [[touches anyObject] locationInView:self];
     
-    NSLog(@"Point %f %f", endPoint.x, startPoint.x);
+    DLog(@"Point %f %f", endPoint.x, startPoint.x);
     
     
     if (abs(endPoint.x - startPoint.x) < 10){ 
-        NSLog(@"Touch");
+        DLog(@"Touch");
         if (startPoint.x < 148) 
             if([delegate respondsToSelector:@selector(clickLeftBtn)]) 
                 [delegate clickLeftBtn];
@@ -47,7 +47,7 @@
     }
     else
     {
-        NSLog(@"Move");
+        DLog(@"Move");
         if (endPoint.x > startPoint.x)
             if([delegate respondsToSelector:@selector(clickLeftBtn)]) 
                 [delegate clickLeftBtn];
@@ -57,7 +57,7 @@
     }
     
     if (abs(endPoint.y - startPoint.y) < 5){ 
-        NSLog(@"Touch");
+        DLog(@"Touch");
         //        if (startPoint.x < 148) [delegate clickLeftBtn];
         //        if (startPoint.x > 333) [delegate clickRightBtn];
     }

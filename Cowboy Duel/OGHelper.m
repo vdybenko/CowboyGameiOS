@@ -842,7 +842,7 @@ static OGHelper *sharedHelper = nil;
 
 - (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response;
 {
-    NSLog(@"didReceiveResponse %@ %@",request,response);
+    DLog(@"didReceiveResponse %@ %@",request,response);
 }
 
 /**
@@ -856,7 +856,7 @@ static OGHelper *sharedHelper = nil;
  */
 
 - (void)request:(FBRequest *)request didLoad:(id)result {
-    NSLog(@"OGHelper Facebook request: %@ \n response: %@  \n currentAPICall %d", [request url], result, currentAPICall);
+    DLog(@"OGHelper Facebook request: %@ \n response: %@  \n currentAPICall %d", [request url], result, currentAPICall);
     //    [delegate hideActivityIndicator];
 
     if ([result isKindOfClass:[NSArray class]] && ([result count] > 0)&&(currentAPICall != kAPIFriendsHowDontUseApp)) {
@@ -1248,8 +1248,8 @@ static OGHelper *sharedHelper = nil;
     }
     currentAPICall=kNone;
 
-    NSLog(@"Error message: %@", [[error userInfo] objectForKey:@"error_msg"]);
-    NSLog(@"Facebook didFailWithError: %@  error %@"  , request,[error description]);
+    DLog(@"Error message: %@", [[error userInfo] objectForKey:@"error_msg"]);
+    DLog(@"Facebook didFailWithError: %@  error %@"  , request,[error description]);
 //        [self showMessage:[error debugDescription]];
 }
 
@@ -1260,7 +1260,7 @@ static OGHelper *sharedHelper = nil;
  */
 - (void)dialogDidComplete:(FBDialog *)dialog;
 {
-    NSLog(@"dialog dialogDidComplete");
+    DLog(@"dialog dialogDidComplete");
 }
 
 /**
@@ -1268,7 +1268,7 @@ static OGHelper *sharedHelper = nil;
  */
 - (void)dialogCompleteWithUrl:(NSURL *)url;
 {
-    NSLog(@"dialog dialogCompleteWithUrl %@",url);
+    DLog(@"dialog dialogCompleteWithUrl %@",url);
 }
 
 /**
@@ -1276,7 +1276,7 @@ static OGHelper *sharedHelper = nil;
  */
 - (void)dialogDidNotCompleteWithUrl:(NSURL *)url;
 {
-    NSLog(@"dialog dialogDidNotCompleteWithUrl %@",url);
+    DLog(@"dialog dialogDidNotCompleteWithUrl %@",url);
 }
 
 /**
@@ -1284,7 +1284,7 @@ static OGHelper *sharedHelper = nil;
  */
 - (void)dialogDidNotComplete:(FBDialog *)dialog;
 {
-    NSLog(@"dialog dialogDidNotComplete");
+    DLog(@"dialog dialogDidNotComplete");
 }
 
 /**
@@ -1292,7 +1292,7 @@ static OGHelper *sharedHelper = nil;
  */
 - (void)dialog:(FBDialog*)dialog didFailWithError:(NSError *)error;
 {
-    NSLog(@"dialog didFailWithError");
+    DLog(@"dialog didFailWithError");
 }
 
 

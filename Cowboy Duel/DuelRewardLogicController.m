@@ -12,7 +12,7 @@
 
 +(NSInteger)getPointsForWinWithOponentLevel:(NSInteger)oponentlevel;
 {
-    NSLog(@"getPointsForWinWithOponentLevel %d", oponentlevel);
+    DLog(@"getPointsForWinWithOponentLevel %d", oponentlevel);
    NSArray *_pontsForWin=[[NSArray alloc] initWithObjects:
                   [NSNumber numberWithInt:1],
                   [NSNumber numberWithInt:4],
@@ -36,7 +36,7 @@
 
 +(NSInteger)getPointsForLoseWithOponentLevel:(NSInteger)oponentlevel;
 {
-    NSLog(@"getPointsForLoseWithOponentLevel %d", oponentlevel);
+    DLog(@"getPointsForLoseWithOponentLevel %d", oponentlevel);
     NSArray *_pontsForLose=[[NSArray alloc] initWithObjects:
                    [NSNumber numberWithInt:1],
                    [NSNumber numberWithInt:1],
@@ -77,7 +77,7 @@
 
 +(NSInteger)countUpBuletsWithPlayerLevel:(int)playerLevel;
 {
-    NSLog(@"countUpBuletsWithPlayerLevel %d", playerLevel);
+    DLog(@"countUpBuletsWithPlayerLevel %d", playerLevel);
     NSArray *array=[[NSArray alloc] initWithObjects:
                     [NSNumber numberWithInt:2],//0
                     [NSNumber numberWithInt:2],//1

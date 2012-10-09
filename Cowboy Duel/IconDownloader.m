@@ -60,7 +60,7 @@
  */
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
     //    [delegate hideActivityIndicator];
-    NSLog(@"IconDownloader didFailWithError: %@ /n error %@ /n namePlayer %@"  , request,[error description],namePlayer);
+    DLog(@"IconDownloader didFailWithError: %@ /n error %@ /n namePlayer %@"  , request,[error description],namePlayer);
 }
 #pragma mark -
 
@@ -84,7 +84,7 @@
 - (void)connection:(NSURLConnection *)connection
   didFailWithError:(NSError *)error
 {
-    NSLog(@"Connection failed! Error - %@ %@",
+    DLog(@"Connection failed! Error - %@ %@",
           [error localizedDescription],
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
 }

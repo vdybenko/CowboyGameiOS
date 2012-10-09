@@ -71,7 +71,7 @@
         NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"AdvertisingAppsForShow"];
         _AppsForShow=[[NSMutableArray alloc] initWithArray:[NSKeyedUnarchiver unarchiveObjectWithData:data1]];
         
-        NSLog(@"_AppsForShow %@",_AppsForShow);
+        DLog(@"_AppsForShow %@",_AppsForShow);
         
         CollectionAppWrapper *collectionAppWrapper=[[CollectionAppWrapper alloc]init];
 

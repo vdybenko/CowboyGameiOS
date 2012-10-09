@@ -88,7 +88,7 @@
                     if ([type rangeOfString:@"mp4"].length > 0) {
                         NSString *url = [[[videoComponents objectForKey:@"url"] objectAtIndex:0] stringByDecodingURLFormat];
                         NSString *quality = [[[videoComponents objectForKey:@"quality"] objectAtIndex:0] stringByDecodingURLFormat];
-                        NSLog(@"Found video for quality: %@", quality);
+                        DLog(@"Found video for quality: %@", quality);
                         [videoDictionary setObject:url forKey:quality];
                     }
                 }

@@ -184,7 +184,7 @@ static const char *RANK_TOP =  "http://cd.webkate.com/users/top_rank";
 - (void)connectionDidFinishLoading:(CustomNSURLConnection *)connection1 {
     
     NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-    NSLog(@"TopPlayersViewController jsonString %@",jsonString);
+    DLog(@"TopPlayersViewController jsonString %@",jsonString);
     NSArray *responseObject = ValidateObject([jsonString JSONValue], [NSArray class]);   
     for (NSDictionary *dic in responseObject) {
         CDTopPlayer *player=[[CDTopPlayer alloc] init];
@@ -240,7 +240,7 @@ static const char *RANK_TOP =  "http://cd.webkate.com/users/top_rank";
   didFailWithError:(NSError *)error
 {
     // inform the user
-    NSLog(@"Connection failed! Error - %@ %@",
+    DLog(@"Connection failed! Error - %@ %@",
           [error localizedDescription],
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
 }

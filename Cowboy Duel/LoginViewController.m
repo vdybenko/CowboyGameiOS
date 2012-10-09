@@ -106,7 +106,7 @@ static LoginViewController *sharedHelper = nil;
 
     [testAppDelegate setLoginViewController:self];
     
-    NSLog(@"fbLogIn");
+    DLog(@"fbLogIn");
 	[facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"publish_actions" ,@"offline_access",@"user_games_activity",@"user_birthday",@" user_location",nil]];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
@@ -215,7 +215,7 @@ static LoginViewController *sharedHelper = nil;
 
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
 	
-    NSLog(@"Facebook request failed: %@", [error description]);
+    DLog(@"Facebook request failed: %@", [error description]);
     //	[delegate hideHudWithAns:NO];
     //    [[NetworkActivityIndicatorManager sharedInstance] hide];
 	
@@ -223,7 +223,7 @@ static LoginViewController *sharedHelper = nil;
 }
 
 -(void)fbDidExtendToken:(NSString *)accessToken expiresAt:(NSDate *)expiresAt {
-    NSLog(@"token extended");
+    DLog(@"token extended");
     
     facebook.accessToken = accessToken;
     facebook.expirationDate = expiresAt;
@@ -236,7 +236,7 @@ static LoginViewController *sharedHelper = nil;
 
 - (void)fbSessionInvalidated;
 {
-    NSLog(@"OGHelper fbSessionInvalidated");
+    DLog(@"OGHelper fbSessionInvalidated");
 }
 #pragma mark -
 
@@ -278,7 +278,7 @@ static LoginViewController *sharedHelper = nil;
 }
 
 -(void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
-    NSLog(@"login Error %@",[error description]);
+    DLog(@"login Error %@",[error description]);
 }
 #pragma mark -
 

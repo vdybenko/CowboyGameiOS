@@ -23,7 +23,7 @@
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"Move1"); 
+    DLog(@"Move1"); 
 }
 
 @end

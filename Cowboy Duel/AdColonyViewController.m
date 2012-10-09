@@ -128,7 +128,7 @@ NSString * const productForRemoveAds=@"com.webkate.cowboyduels.four";
 //app interrupted: called when video is played
 -(void)adColonyTakeoverBeganForZone:(NSString *)zone{
     //    [player pause];    
-    NSLog(@"Video ad or fullscreen banner launched for zone %@", zone);
+    DLog(@"Video ad or fullscreen banner launched for zone %@", zone);
 }
 
 //app interruption over: called when video ad is dismissed
@@ -145,7 +145,7 @@ NSString * const productForRemoveAds=@"com.webkate.cowboyduels.four";
     NSInteger adColonyCanceled = 0;
     [defaults setInteger:adColonyCanceled forKey:@"adColonyCanceled"];
     [defaults synchronize];
-    NSLog(@"adColonyCanceled for adcolony %@", [defaults objectForKey:@"adColonyCanceled"]);
+    DLog(@"adColonyCanceled for adcolony %@", [defaults objectForKey:@"adColonyCanceled"]);
     
 	// If the play came from the Navigation Button, continue with execution.
     [self dismissModalViewControllerAnimated:YES];   
@@ -160,7 +160,7 @@ NSString * const productForRemoveAds=@"com.webkate.cowboyduels.four";
     NSInteger adColonyCanceled = 1;
     [defaults setInteger:adColonyCanceled forKey:@"adColonyCanceled"];
     [defaults synchronize];
-    NSLog(@"adColonyCanceled for cancel %@", [defaults objectForKey:@"adColonyCanceled"]);
+    DLog(@"adColonyCanceled for cancel %@", [defaults objectForKey:@"adColonyCanceled"]);
     [self dismissModalViewControllerAnimated:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
@@ -201,7 +201,7 @@ NSString * const productForRemoveAds=@"com.webkate.cowboyduels.four";
 
 -(void)completedPurchaseTransaction:(SKPaymentTransaction *)transaction
 {
-    NSLog(@"completedPurchaseTransaction");
+    DLog(@"completedPurchaseTransaction");
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
     
     [[AccountDataSource sharedInstance] setRemoveAds:AdColonyAdsStatusRemoved];
@@ -225,7 +225,7 @@ NSString * const productForRemoveAds=@"com.webkate.cowboyduels.four";
 }
 
 - (void) handleFailedTransaction: (SKPaymentTransaction *) transaction {
-    NSLog(@"handleFailedTransaction");
+    DLog(@"handleFailedTransaction");
 
     if (transaction.error.code != SKErrorPaymentCancelled){
         baseAlert = [[UIAlertView alloc] initWithTitle:@"Transaction Error. Please try again later." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: nil];
@@ -260,19 +260,19 @@ NSString * const productForRemoveAds=@"com.webkate.cowboyduels.four";
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
 {
-     NSLog(@"paymentQueue: %i", queue.transactions.count);
+     DLog(@"paymentQueue: %i", queue.transactions.count);
     
     for (SKPaymentTransaction *transaction in transactions)
     {
-        NSLog(@"tran for product: %@ of state: %i", [[transaction payment] productIdentifier], [transaction transactionState]);
+        DLog(@"tran for product: %@ of state: %i", [[transaction payment] productIdentifier], [transaction transactionState]);
 
         switch (transaction.transactionState)
         {
             case SKPaymentTransactionStatePurchasing:
-                NSLog(@"SKPaymentTransactionStatePurchasing");
+                DLog(@"SKPaymentTransactionStatePurchasing");
                 break;
             case SKPaymentTransactionStatePurchased:
-                NSLog(@"SKPaymentTransactionStatePurchased");
+                DLog(@"SKPaymentTransactionStatePurchased");
                 [[AccountDataSource sharedInstance] setRemoveAds:AdColonyAdsStatusRemoved];
                 [[NSUserDefaults standardUserDefaults] setInteger:[[AccountDataSource sharedInstance] removeAds] forKey:@"RemoveAds"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
@@ -287,12 +287,12 @@ NSString * const productForRemoveAds=@"com.webkate.cowboyduels.four";
                 
                 break;
             case SKPaymentTransactionStateRestored:
-                NSLog(@"SKPaymentTransactionStateRestored");
+                DLog(@"SKPaymentTransactionStateRestored");
                 [self completedPurchaseTransaction:transaction];
                 break;  
                 
             case SKPaymentTransactionStateFailed:
-                NSLog(@"Failed %@", transaction.error);
+                DLog(@"Failed %@", transaction.error);
                 [self handleFailedTransaction:transaction];
                 break;
                 
@@ -304,7 +304,7 @@ NSString * const productForRemoveAds=@"com.webkate.cowboyduels.four";
 }
 
 -(void) paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error {    
-    NSLog(@"restoreCompletedTransactionsFailedWithError %@",[error userInfo]);
+    DLog(@"restoreCompletedTransactionsFailedWithError %@",[error userInfo]);
     loadingView.hidden=YES;
     [activityIndicator stopAnimating];
     [self dismissModalViewControllerAnimated:YES];

@@ -60,7 +60,7 @@
         
         NSError *error= nil;
         if ([fileMgr removeItemAtPath:FilePath error:&error] != YES)
-            NSLog(@"CollectionAppWrapper: Unable to delete file: %@", [error localizedDescription]);
+            DLog(@"CollectionAppWrapper: Unable to delete file: %@", [error localizedDescription]);
     }
 }
 

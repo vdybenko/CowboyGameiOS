@@ -51,7 +51,7 @@
 //    [self provideContentForPaymentTransaction:productIdentifier];
 //    return;
     if (![SKPaymentQueue canMakePayments]) {
-        NSLog(@"can not MakePayments");
+        DLog(@"can not MakePayments");
         
         return;
     }

@@ -354,9 +354,9 @@ static CGFloat const kAHPullView_ViewHeight = 60.0;
         // If it's loading adjust the content inset
         if (_state == AHPullViewStateLoading) {
 //            CGFloat offset = MAX(_scrollView.contentOffset.y * -1, -5);
-//             NSLog(@"offset 1 %f",offset);
+//             DLog(@"offset 1 %f",offset);
 //            offset = MIN(offset, _originalScrollViewContentInset.top + kAHPullView_ViewHeight);
-//            NSLog(@"offset %f",offset);
+//            DLog(@"offset %f",offset);
             CGFloat offset = -5;
             UIEdgeInsets edgeInsets = UIEdgeInsetsMake(offset, 0.0f, 0.0f, 0.0f);
             [_scrollView setContentInset:edgeInsets];

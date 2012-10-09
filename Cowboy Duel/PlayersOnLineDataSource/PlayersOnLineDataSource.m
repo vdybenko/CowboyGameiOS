@@ -188,7 +188,7 @@ static const char *LIST_ONLINE_URL =  BASE_URL"users/listview";
 - (void)connectionDidFinishLoading:(CustomNSURLConnection *)connection1 {
    
     NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-    NSLog(@"PlayersOnLineDataSource jsonString %@", jsonString);
+    DLog(@"PlayersOnLineDataSource jsonString %@", jsonString);
     NSArray *responseObject = ValidateObject([jsonString JSONValue], [NSArray class]);
     [arrItemsList removeAllObjects];
     for (NSDictionary *dic in responseObject) {
@@ -229,7 +229,7 @@ static const char *LIST_ONLINE_URL =  BASE_URL"users/listview";
   didFailWithError:(NSError *)error
 {
     // inform the user
-    NSLog(@"Connection failed! Error - %@ %@",
+    DLog(@"Connection failed! Error - %@ %@",
           [error localizedDescription],
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
     ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;

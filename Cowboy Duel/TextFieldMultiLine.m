@@ -23,7 +23,7 @@
 }
 
 -(void)scrollRectToVisible:(CGRect)rect animated:(BOOL)animated {  
-//    NSLog(@"scrollRectToVisible %f %f %f",[self contentSize].height,[self contentOffset].y,rect.origin.y );
+//    DLog(@"scrollRectToVisible %f %f %f",[self contentSize].height,[self contentOffset].y,rect.origin.y );
     if (self.acceptScrolls && ![self.text isEqualToString:@""]){
         rect.origin.y=self.contentSize.height-57;
         [super scrollRectToVisible: rect animated: animated];

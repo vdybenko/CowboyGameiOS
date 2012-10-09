@@ -46,12 +46,12 @@
 
 -(FintType)firstFint
 {
-//    NSLog(@"First %f %f %f",x,y,z);
+//    DLog(@"First %f %f %f",x,y,z);
 
-    if ((y < -1) && (x > 0.05)) {firstFintData.firstLevel = YES;/*NSLog(@"first level yes ");*/}
-    if (x < 0.00) {firstFintData.firstLevel = NO;/*NSLog(@"first level No");*/}
-    if ((z > 0.7) && (firstFintData.firstLevel)){ firstFintData.secondLevel = YES;/* NSLog(@"secondLevel = YES");*/}
-    if ((z < 0.7) && (firstFintData.secondLevel)) {firstFintData.thirdLevel = YES;/*NSLog(@"thirdLevel = YES");*/}
+    if ((y < -1) && (x > 0.05)) {firstFintData.firstLevel = YES;/*DLog(@"first level yes ");*/}
+    if (x < 0.00) {firstFintData.firstLevel = NO;/*DLog(@"first level No");*/}
+    if ((z > 0.7) && (firstFintData.firstLevel)){ firstFintData.secondLevel = YES;/* DLog(@"secondLevel = YES");*/}
+    if ((z < 0.7) && (firstFintData.secondLevel)) {firstFintData.thirdLevel = YES;/*DLog(@"thirdLevel = YES");*/}
     
     if ([firstFintData doneFint]) 
     {
