@@ -43,7 +43,7 @@
 @class GameCenterViewController;
 //#define btnFBId @"http://m.facebook.com/profile.php?id=217230251641433"
 
-@interface StartViewController : UIViewController <MFMailComposeViewControllerDelegate,GCAuthenticateDelegate, UIAccelerometerDelegate, UIActionSheetDelegate, UIAlertViewDelegate, FBRequestDelegate, AccountDataSourceDelegate> {
+@interface StartViewController : UIViewController <MFMailComposeViewControllerDelegate,GCAuthenticateDelegate, UIAccelerometerDelegate, UIActionSheetDelegate, UIAlertViewDelegate, FBRequestDelegate> {
     AccountDataSource *playerAccount;
     AccountDataSource *oponentAccount;
 //    BluetoothViewController *bluetoothViewController;
@@ -204,6 +204,8 @@
 - (IBAction)feedbackItuneskBtnClick:(id)sender;
 
 -(void) advertButtonClick;
+
+-(NSString *)deviceType;
 
 -(void)didBecomeActive;
 -(void)didEnterBackground;

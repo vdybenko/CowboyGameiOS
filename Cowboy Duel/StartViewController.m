@@ -87,7 +87,6 @@ static StartViewController *sharedHelper = nil;
     if (self == [super initWithNibName:nil bundle:nil]) {
         
         playerAccount = [AccountDataSource sharedInstance];
-        [playerAccount setDelegate:self];
         oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
         oponentAccount.money = 1000;        
           
@@ -122,65 +121,35 @@ static StartViewController *sharedHelper = nil;
             
             [uDef setBool:TRUE forKey:@"FirstRunForGun"];
             [uDef setBool:TRUE forKey:@"FirstRunForDuel"];
-            [uDef setInteger:200 forKey:@"money"];
-            [uDef setObject:ValidateObject(playerAccount.accountName, [NSString class]) forKey:@"name"];
+            [playerAccount saveMoney];
+            [playerAccount saveAccountName];
             NSString *accID=[[NSString alloc]init];
             if(playerAccount.accountID==NULL){
                 accID=@"NoGC";
             }else{
                 accID=playerAccount.accountID;
             }
-            
-            [uDef setObject:ValidateObject(accID, [NSString class]) forKey:@"id"];
-            [uDef setObject:ValidateObject(playerAccount.typeImage, [NSString class]) forKey:@"typeImage"];
-            [uDef setObject:ValidateObject([self deviceType], [NSString class]) forKey:@"deviceType"];
+            [playerAccount saveID];
+            [playerAccount saveDeviceType];
             playerAccount.glNumber = [NSNumber numberWithInt:0];
-            [uDef setInteger:playerAccount.accountLevel forKey:@"accountLevel"];
-            [uDef setInteger:playerAccount.accountPoints forKey:@"lvlPoints"];
-            [uDef setInteger:playerAccount.accountWins forKey:@"WinCount"];
-            [uDef setInteger:playerAccount.accountDraws forKey:@"DrawCount"];
-            [uDef setInteger:playerAccount.accountBigestWin forKey:@"MaxWin"];
-            [uDef setInteger:playerAccount.removeAds forKey:@"RemoveAds"];
-            
-            [uDef setObject:ValidateObject(playerAccount.avatar, [NSString class]) forKey:@"avatar"];
-            [uDef setObject:ValidateObject(playerAccount.age, [NSString class]) forKey:@"age"];
-            [uDef setObject:ValidateObject(playerAccount.homeTown, [NSString class]) forKey:@"homeTown"];
-            [uDef setInteger:playerAccount.friends forKey:@"friends"];
-            [uDef setObject:ValidateObject(playerAccount.facebookName, [NSString class]) forKey:@"facebook_name"];
-            
+            [playerAccount saveAccountLevel];
+            [playerAccount saveAccountPoints];
+            [playerAccount saveAccountWins];
+            [playerAccount saveAccountDraws];
+            [playerAccount saveAccountBigestWin];
+            [playerAccount saveRemoveAds];
+            [playerAccount saveAvatar];
+            [playerAccount saveAge];
+            [playerAccount saveHomeTown];
+            [playerAccount saveFriends];
+            [playerAccount saveFacebookName];
+                        
             [uDef synchronize];
         }else{
             
             [uDef setBool:FALSE forKey:@"FirstRunForGun"];
             [uDef setBool:FALSE forKey:@"FirstRunForDuel"];
-            playerAccount.accountID = [uDef stringForKey:@"id"];
-            if ([playerAccount.accountID isEqualToString:@""]) [playerAccount makeLocalAccountID];
-            
-            playerAccount.accountName = [uDef stringForKey:@"name"];
-            playerAccount.typeImage=[uDef stringForKey:@"typeImage"];
-            playerAccount.typeGun=[uDef integerForKey:@"typeGun"];
-            playerAccount.money = [uDef integerForKey:@"money"]; 
-            playerAccount.accountLevel = [uDef integerForKey:@"accountLevel"]; 
-            playerAccount.accountPoints = [uDef integerForKey:@"lvlPoints"]; 
-            playerAccount.accountWins= [uDef integerForKey:@"WinCount"];
-            playerAccount.accountDraws = [uDef integerForKey:@"DrawCount"]; 
-            playerAccount.accountBigestWin = [uDef integerForKey:@"MaxWin"]; 
-            playerAccount.removeAds = [uDef integerForKey:@"RemoveAds"];
-            
-            playerAccount.avatar = [uDef stringForKey:@"avatar"];
-            playerAccount.age = [uDef stringForKey:@"age"];
-            playerAccount.homeTown = [uDef stringForKey:@"homeTown"];
-            playerAccount.friends = [uDef integerForKey:@"friends"];
-            playerAccount.facebookName = [uDef stringForKey:@"facebook_name"];
-            
-            if(![uDef stringForKey:@"deviceType"])
-                [uDef setObject:ValidateObject([self deviceType], [NSString class]) forKey:@"deviceType"];
-            
-            if(playerAccount.money<0){
-                playerAccount.money=0;
-                NSLog(@"-10000");
-            }
-            [uDef setObject:ValidateObject(playerAccount.accountID, [NSString class]) forKey:@"id"];
+            [playerAccount loadAllParametrs];
             
             if (!([playerAccount.accountID rangeOfString:@"F"].location == NSNotFound)){ 
                 facebook = [[Facebook alloc] initWithAppId:kFacebookAppId andDelegate:[LoginViewController sharedInstance]];
@@ -194,59 +163,6 @@ static StartViewController *sharedHelper = nil;
                 [[OGHelper sharedInstance ] initWithAccount:playerAccount facebook:facebook];
                 [[OGHelper sharedInstance ] setStartViewController:self];
             }
-            
-            NSLog(@"Transactions count = %d", [playerAccount.transactions count]);
-            
-            //NSMutableArray *locations = [NSMutableArray array];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"transactions"];
-
-            NSArray *oldLocations = [uDef arrayForKey:@"transactions"];
-            if( [oldLocations count]!=0)
-            {
-                //NSLog(@"locations is not nil");
-                for( NSData *data in oldLocations )
-                {
-                    CDTransaction * loc = (CDTransaction*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
-                    //                    NSLog(@"money %d", [loc.trMoneyCh intValue]);
-                    //                    NSLog(@"type %d", [loc.trType intValue]);
-                    //                    NSLog(@"localID %d", [loc.trLocalID intValue]);
-                    //                    NSLog(@"globalID %d", [loc.trGlobalID intValue]);
-                    [playerAccount.transactions addObject:loc];
-                }
-            }
-            CDTransaction *localTransaction = [playerAccount.transactions lastObject];
-            playerAccount.glNumber = localTransaction.trLocalID;
-            NSLog(@"Transactions count = %d", [playerAccount.transactions count]);
-            
-            
-            NSArray *oldLocations2 = [uDef arrayForKey:@"duels"];
-            if( playerAccount.duels )
-            {
-                //NSLog(@"locations is not nil");
-                for( NSData *data in oldLocations2 )
-                {
-                    CDDuel * loc = (CDDuel*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
-                    NSLog(@"gps %d", [loc.dGps intValue]);
-                    NSLog(@"id %@", loc.dOpponentId);
-                    NSLog(@"fire %d", [loc.dRateFire intValue]);
-                    NSLog(@"date %@", loc.dDate);
-                    [playerAccount.duels addObject:loc];
-                }
-            }
-            NSLog(@"Duels count = %d", [playerAccount.duels count]);
-            
-            NSArray *oldLocations3 = [uDef arrayForKey:@"achivments"];
-            if( playerAccount.duels )
-            {
-                //NSLog(@"locations is not nil");
-                for( NSData *data in oldLocations3 )
-                {
-                    CDAchivment * loc = (CDAchivment*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
-                    NSLog(@"achivments %@", loc.aAchivmentId);
-                    [playerAccount.achivments addObject:loc];
-                }
-            }
-            //            NSLog(@"Achivments count = %d", [playerAccount.achivments count]);
         }
                
 //        [self.view addSubview:_vBackground];
@@ -1027,72 +943,72 @@ static StartViewController *sharedHelper = nil;
         
         if ([[responseObject objectForKey:@"level"] intValue]!=playerAccount.accountLevel) {
             playerAccount.accountLevel=[[responseObject objectForKey:@"level"] intValue];
-            [uDef setInteger:playerAccount.accountLevel forKey:@"accountLevel"];
+            [playerAccount saveAccountLevel];
             [[GCHelper sharedInstance] reportAchievementIdentifier:[[GCHelper sharedInstance].GC_ACH objectAtIndex:playerAccount.accountLevel-1] percentComplete:100.0f];
         }
         
         NSString *nameFromServer=[responseObject objectForKey:@"name"];
         if (nameFromServer) {
             playerAccount.accountName=nameFromServer;
-            [uDef setObject:ValidateObject(playerAccount.accountName, [NSString class]) forKey:@"name"];
+            [playerAccount saveAccountName];
         }
         
         if ([[responseObject objectForKey:@"points"] intValue]!=playerAccount.accountPoints) {
             playerAccount.accountPoints=[[responseObject objectForKey:@"points"] intValue];
-            [uDef setInteger:playerAccount.accountPoints forKey:@"lvlPoints"];
+            [playerAccount accountPoints];
         }
         int duelsWin=[[responseObject objectForKey:@"duels_win"] intValue];
         if (duelsWin!=playerAccount.accountWins) {
             playerAccount.accountWins=duelsWin;
-            [uDef setInteger:playerAccount.accountWins forKey:@"WinCount"];
+            [playerAccount saveAccountWins];
         }
         
         int duelsLost=[[responseObject objectForKey:@"duels_lost"] intValue];
         if (duelsLost!=playerAccount.accountDraws) {
             playerAccount.accountDraws=duelsLost;
-            [uDef setInteger:playerAccount.accountDraws forKey:@"DrawCount"];
+            [playerAccount saveAccountDraws];
         }
         
         int bigestWin=[[responseObject objectForKey:@"bigest_win"] intValue];
         if (bigestWin!=playerAccount.accountBigestWin) {
             playerAccount.accountBigestWin=bigestWin;
-            [uDef setInteger:playerAccount.accountBigestWin forKey:@"MaxWin"];
+            [playerAccount saveAccountBigestWin];
         }
         
         if (playerAccount.removeAds!=AdColonyAdsStatusRemoved) {
             int removeAds=[[responseObject objectForKey:@"remove_ads"] intValue];
             playerAccount.removeAds=removeAds;
-            [uDef setInteger:playerAccount.removeAds forKey:@"RemoveAds"];
+            [playerAccount saveRemoveAds];
         }
 
         NSString *urlAvatar=[responseObject objectForKey:@"avatar"];
         if (urlAvatar) {
             playerAccount.avatar=urlAvatar;
-            [uDef setObject:ValidateObject(playerAccount.accountName, [NSString class]) forKey:@"avatar"];
+            [playerAccount saveAvatar];
         }
 //        
         NSString *playerAge=[responseObject objectForKey:@"age"];
         if (playerAge) {
             playerAccount.age=playerAge;
-            [uDef setObject:playerAccount.age forKey:@"age"];
+            [playerAccount saveAge];
         }
         
         NSString *playerHomeTown=[responseObject objectForKey:@"home_town"];
         if (playerHomeTown) {
             playerAccount.homeTown=playerHomeTown;
-            [uDef setObject:ValidateObject(playerAccount.homeTown, [NSString class]) forKey:@"homeTown"];
+            [playerAccount saveHomeTown];
         }
         
         int countFriends=[[responseObject objectForKey:@"friends"] intValue];
         if (countFriends!=playerAccount.friends) {
             playerAccount.friends=countFriends;
-            [uDef setInteger:playerAccount.friends forKey:@"friends"];
+            [playerAccount saveFriends];
         }
         
         NSString *facebookName=[responseObject objectForKey:@"facebook_name"];
         if (facebookName) {
             playerAccount.facebookName=facebookName;
-            [uDef setObject:ValidateObject(playerAccount.facebookName, [NSString class]) forKey:@"facebook_name"];
+            [playerAccount saveFacebookName];
         }
         
         BOOL moneyForIPad=[[NSUserDefaults standardUserDefaults] boolForKey:@"moneyForIPad"];
@@ -1149,14 +1065,6 @@ static StartViewController *sharedHelper = nil;
     if([response objectForKey:@"nickname"]!=NULL){
         oponentAccount.accountName=[response objectForKey:@"nickname"];
         oponentAccount.money = [[response objectForKey:@"money"] intValue];
-        NSString *typeImage=[response objectForKey:@"type"];        
-        NSDecimal decimalValue;
-        NSScanner *sc = [NSScanner scannerWithString:typeImage];
-        [sc scanDecimal:&decimalValue];
-        BOOL isDecimal = [sc isAtEnd];
-        if(!isDecimal){
-            oponentAccount.typeImage=typeImage; 
-        }
         NSString *st=[[NSString alloc] initWithFormat:@"%@%@%@",NSLocalizedString(@"BotMTitle", nil),oponentAccount.accountName,NSLocalizedString(@"BotMTitle2", nil)];
         UIAlertView *av = [[UIAlertView alloc] initWithTitle:st message:NSLocalizedString(@"BotMText", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"BotMCANS", nil) otherButtonTitles:NSLocalizedString(@"BotMBtn", nil),nil];
         av.tag = BOT_DUEL_TAG;
@@ -1603,8 +1511,6 @@ static StartViewController *sharedHelper = nil;
     else return d;
 }
 
-#pragma mark - protocol  AccountDataSourceDelegate
-
 - (void)retrieveMessageFromDevice  
 {      
     NSString *savePath = getGameCenterSavePath();
@@ -1811,11 +1717,9 @@ static StartViewController *sharedHelper = nil;
         NSDictionary *town=ValidateObject([result objectForKey:@"location"], [NSDictionary class]);
         playerAccount.homeTown=[NSString stringWithFormat:@"%@", ValidateObject([town objectForKey:@"name"], [NSString class])];
         
-
-        
-        [uDef setObject:ValidateObject(playerAccount.age, [NSString class]) forKey:@"age"];
-        [uDef setObject:ValidateObject(playerAccount.homeTown, [NSString class]) forKey:@"homeTown"];
-        [uDef setObject:ValidateObject(playerAccount.facebookName, [NSString class]) forKey:@"facebook_name"];
+        [playerAccount saveAge];
+        [playerAccount saveHomeTown];
+        [playerAccount saveFacebookName];
         
         [uDef setObject:ValidateObject(playerAccount.accountID, [NSString class]) forKey:@"id"];
         

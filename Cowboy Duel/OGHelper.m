@@ -418,7 +418,7 @@ static OGHelper *sharedHelper = nil;
 {
     int countOfFriends = [[result objectForKey:@"friend_count"] integerValue];
     [[AccountDataSource sharedInstance] setFriends:countOfFriends];
-    [[NSUserDefaults standardUserDefaults] setInteger:playerAccount.friends forKey:@"friends"];
+    [[AccountDataSource sharedInstance] saveFriends];
 }
 - (void)getFriendsHowDontUseAppDelegate:(id<FBRequestDelegate>)pDelegate;
 {

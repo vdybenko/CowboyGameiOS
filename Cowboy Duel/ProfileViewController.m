@@ -312,7 +312,7 @@
     }
     if (playerAccount.accountPoints>moneyForNextLevel) {
         playerAccount.accountPoints=moneyForPrewLevel;
-        [[NSUserDefaults standardUserDefaults] setInteger:playerAccount.accountPoints forKey:@"lvlPoints"];
+        [playerAccount saveAccountPoints];
     }
     
     NSString *nameOfRank=[NSString stringWithFormat:@"%dRank",playerAccount.accountLevel];
@@ -320,7 +320,7 @@
     
     if (playerAccount.accountPoints <= moneyForPrewLevel) {
         playerAccount.accountPoints = moneyForPrewLevel;
-        [[NSUserDefaults standardUserDefaults] setInteger:playerAccount.accountPoints forKey:@"lvlPoints"];    
+        [playerAccount saveAccountPoints];
     }
     int curentPoints=(playerAccount.accountPoints-moneyForPrewLevel);
     int maxPoints=(moneyForNextLevel-moneyForPrewLevel);
@@ -411,12 +411,11 @@
 
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"moneyForIPad"];
     
-    [[NSUserDefaults standardUserDefaults] setObject:ValidateObject(playerAccount.typeImage, [NSString class]) forKey:@"typeImage"];
     CATransition* transition = [CATransition animation];
     transition.duration = 0.5;
     transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    transition.type = kCATransitionPush; //, kCATransitionPush, kCATransitionReveal, kCATransitionFade
-    transition.subtype = kCATransitionFromRight; //kCATransitionFromLeft, kCATransitionFromTop, kCATransitionFromTop,
+    transition.type = kCATransitionPush; 
+    transition.subtype = kCATransitionFromRight;
     [self.navigationController.view.layer addAnimation:transition forKey:nil];
     [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:1] animated:YES];
 }

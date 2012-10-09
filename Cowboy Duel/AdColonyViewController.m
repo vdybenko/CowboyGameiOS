@@ -205,7 +205,7 @@ NSString * const productForRemoveAds=@"com.webkate.cowboyduels.four";
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
     
     [[AccountDataSource sharedInstance] setRemoveAds:AdColonyAdsStatusRemoved];
-    [[NSUserDefaults standardUserDefaults] setInteger:[[AccountDataSource sharedInstance] removeAds] forKey:@"RemoveAds"];
+    [[AccountDataSource sharedInstance] saveRemoveAds];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [startViewController authorizationModifier:YES];
     [[StartViewController sharedInstance] duelButtonClick];
@@ -274,7 +274,7 @@ NSString * const productForRemoveAds=@"com.webkate.cowboyduels.four";
             case SKPaymentTransactionStatePurchased:
                 NSLog(@"SKPaymentTransactionStatePurchased");
                 [[AccountDataSource sharedInstance] setRemoveAds:AdColonyAdsStatusRemoved];
-                [[NSUserDefaults standardUserDefaults] setInteger:[[AccountDataSource sharedInstance] removeAds] forKey:@"RemoveAds"];
+                [[AccountDataSource sharedInstance] saveRemoveAds];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 [startViewController authorizationModifier:YES];
                 [[StartViewController sharedInstance] duelButtonClick];
