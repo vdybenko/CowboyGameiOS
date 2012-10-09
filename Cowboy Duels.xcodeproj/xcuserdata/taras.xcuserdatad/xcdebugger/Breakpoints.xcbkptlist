@@ -480,22 +480,22 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/FinalViewController.m"
-         timestampString = "368018521.722639"
+         timestampString = "371473688.988412"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1328"
-         endingLineNumber = "1328">
+         startingLineNumber = "1324"
+         endingLineNumber = "1324">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/FinalViewController.m"
-         timestampString = "368018521.722639"
+         timestampString = "371473688.988412"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1333"
-         endingLineNumber = "1333">
+         startingLineNumber = "1329"
+         endingLineNumber = "1329">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -619,12 +619,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1535"
-         endingLineNumber = "1535"
-         landmarkName = "-authorizationModifier:"
+         startingLineNumber = "1443"
+         endingLineNumber = "1443"
+         landmarkName = "-deviceType"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -970,12 +970,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1567"
-         endingLineNumber = "1567"
-         landmarkName = "-modifierUser"
+         startingLineNumber = "1475"
+         endingLineNumber = "1475"
+         landmarkName = "-deviceType"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -983,12 +983,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1570"
-         endingLineNumber = "1570"
-         landmarkName = "-modifierUser"
+         startingLineNumber = "1478"
+         endingLineNumber = "1478"
+         landmarkName = "-authorizationModifier:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -996,11 +996,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "367932871.399148"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "332"
-         endingLineNumber = "332"
+         startingLineNumber = "248"
+         endingLineNumber = "248"
          landmarkName = "-init"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1009,12 +1009,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "850"
-         endingLineNumber = "850"
-         landmarkName = "-feedbackMailBtnClick:"
+         startingLineNumber = "766"
+         endingLineNumber = "766"
+         landmarkName = "-showHelp:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1022,12 +1022,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "844"
-         endingLineNumber = "844"
-         landmarkName = "-feedbackMailBtnClick:"
+         startingLineNumber = "760"
+         endingLineNumber = "760"
+         landmarkName = "-showHelp:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1035,12 +1035,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1339"
-         endingLineNumber = "1339"
-         landmarkName = "-soundOff"
+         startingLineNumber = "1247"
+         endingLineNumber = "1247"
+         landmarkName = "-checkFor10Dolars"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1139,11 +1139,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "367932871.399148"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "336"
-         endingLineNumber = "336"
+         startingLineNumber = "252"
+         endingLineNumber = "252"
          landmarkName = "-init"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1282,11 +1282,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "367932871.399148"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "344"
-         endingLineNumber = "344"
+         startingLineNumber = "260"
+         endingLineNumber = "260"
          landmarkName = "-init"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1308,12 +1308,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "960"
-         endingLineNumber = "960"
-         landmarkName = "-login"
+         startingLineNumber = "876"
+         endingLineNumber = "876"
+         landmarkName = "-hideActivitiIndicatorViewFeedback"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1321,12 +1321,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "955"
-         endingLineNumber = "955"
-         landmarkName = "-login"
+         startingLineNumber = "871"
+         endingLineNumber = "871"
+         landmarkName = "-feedbackItuneskBtnClick:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1353,45 +1353,6 @@
          startingLineNumber = "106"
          endingLineNumber = "106"
          landmarkName = "-fbLoginBtnClick:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "367503791.425542"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "180"
-         endingLineNumber = "180"
-         landmarkName = "-init"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "367503791.425542"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "182"
-         endingLineNumber = "182"
-         landmarkName = "-init"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "367503791.425542"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "177"
-         endingLineNumber = "177"
-         landmarkName = "-init"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1451,12 +1412,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "920"
-         endingLineNumber = "920"
-         landmarkName = "-sendRequestWithDonateSum:"
+         startingLineNumber = "836"
+         endingLineNumber = "836"
+         landmarkName = "-feedbackTweeterBtnClick:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1464,12 +1425,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1172"
-         endingLineNumber = "1172"
-         landmarkName = "-connection:didReceiveData:"
+         startingLineNumber = "1080"
+         endingLineNumber = "1080"
+         landmarkName = "-connectionDidFinishLoading:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1503,12 +1464,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1692"
-         endingLineNumber = "1692"
-         landmarkName = "-alertView:clickedButtonAtIndex:"
+         startingLineNumber = "1598"
+         endingLineNumber = "1598"
+         landmarkName = "-avtorizationFailed"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1620,12 +1581,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1432"
-         endingLineNumber = "1432"
-         landmarkName = "-deviceType"
+         startingLineNumber = "1340"
+         endingLineNumber = "1340"
+         landmarkName = "-soundOff"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1633,12 +1594,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "961"
-         endingLineNumber = "961"
-         landmarkName = "-login"
+         startingLineNumber = "877"
+         endingLineNumber = "877"
+         landmarkName = "-hideActivitiIndicatorViewFeedback"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1646,12 +1607,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1175"
-         endingLineNumber = "1175"
-         landmarkName = "-connection:didFailWithError:"
+         startingLineNumber = "1083"
+         endingLineNumber = "1083"
+         landmarkName = "-connectionDidFinishLoading:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1659,12 +1620,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "975"
-         endingLineNumber = "975"
-         landmarkName = "-logout"
+         startingLineNumber = "891"
+         endingLineNumber = "891"
+         landmarkName = "-mailComposeController:didFinishWithResult:error:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1672,12 +1633,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "989"
-         endingLineNumber = "989"
-         landmarkName = "-logout"
+         startingLineNumber = "905"
+         endingLineNumber = "905"
+         landmarkName = "-mailComposeController:didFinishWithResult:error:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1776,12 +1737,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1456"
-         endingLineNumber = "1456"
-         landmarkName = "-deviceType"
+         startingLineNumber = "1364"
+         endingLineNumber = "1364"
+         landmarkName = "-playerHalf"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1789,12 +1750,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1716"
-         endingLineNumber = "1716"
-         landmarkName = "-checkNetworkStatus:"
+         startingLineNumber = "1622"
+         endingLineNumber = "1622"
+         landmarkName = "-retrieveMessageFromDevice"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1802,12 +1763,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1714"
-         endingLineNumber = "1714"
-         landmarkName = "-checkNetworkStatus:"
+         startingLineNumber = "1620"
+         endingLineNumber = "1620"
+         landmarkName = "-retrieveMessageFromDevice"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1997,11 +1958,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "367503791.425542"
+         timestampString = "371464309.809868"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "112"
-         endingLineNumber = "112"
+         startingLineNumber = "111"
+         endingLineNumber = "111"
          landmarkName = "-init"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2010,12 +1971,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1496"
-         endingLineNumber = "1496"
-         landmarkName = "-authorizationModifier:"
+         startingLineNumber = "1404"
+         endingLineNumber = "1404"
+         landmarkName = "-deviceTypeCode"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2062,12 +2023,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1706"
-         endingLineNumber = "1706"
-         landmarkName = "-checkNetworkStatus:"
+         startingLineNumber = "1612"
+         endingLineNumber = "1612"
+         landmarkName = "-retrieveMessageFromDevice"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2075,12 +2036,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1719"
-         endingLineNumber = "1719"
-         landmarkName = "-checkNetworkStatus:"
+         startingLineNumber = "1625"
+         endingLineNumber = "1625"
+         landmarkName = "-retrieveMessageFromDevice"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2088,12 +2049,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1010"
-         endingLineNumber = "1010"
-         landmarkName = "-connectionDidFinishLoading:"
+         startingLineNumber = "926"
+         endingLineNumber = "926"
+         landmarkName = "-sendRequestWithDonateSum:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2166,11 +2127,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "367503791.425542"
+         timestampString = "371464309.809868"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "110"
-         endingLineNumber = "110"
+         startingLineNumber = "109"
+         endingLineNumber = "109"
          landmarkName = "-init"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2179,12 +2140,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1516"
-         endingLineNumber = "1516"
-         landmarkName = "-authorizationModifier:"
+         startingLineNumber = "1424"
+         endingLineNumber = "1424"
+         landmarkName = "-deviceType"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2348,13 +2309,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "969"
-         endingLineNumber = "969"
-         landmarkName = "-login"
-         landmarkType = "5">
+         startingLineNumber = "885"
+         endingLineNumber = "885"
+         landmarkName = "@implementation StartViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -2374,24 +2335,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "758"
-         endingLineNumber = "758"
-         landmarkName = "-showHelp:"
-         landmarkType = "5">
+         startingLineNumber = "674"
+         endingLineNumber = "674"
+         landmarkName = "@implementation StartViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1140"
-         endingLineNumber = "1140"
+         startingLineNumber = "1056"
+         endingLineNumber = "1056"
          landmarkName = "-connectionDidFinishLoading:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2400,25 +2361,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "731"
-         endingLineNumber = "731"
-         landmarkName = "-showFeedbackView"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1159"
-         endingLineNumber = "1159"
-         landmarkName = "-connectionDidFinishLoading:"
+         startingLineNumber = "647"
+         endingLineNumber = "647"
+         landmarkName = "-duelButtonClick"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2452,12 +2400,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1499"
-         endingLineNumber = "1499"
-         landmarkName = "-authorizationModifier:"
+         startingLineNumber = "1407"
+         endingLineNumber = "1407"
+         landmarkName = "-deviceTypeCode"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2517,12 +2465,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "659"
-         endingLineNumber = "659"
-         landmarkName = "-teachingButtonClick"
+         startingLineNumber = "575"
+         endingLineNumber = "575"
+         landmarkName = "-didBecomeActive"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2530,11 +2478,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1124"
-         endingLineNumber = "1124"
+         startingLineNumber = "1040"
+         endingLineNumber = "1040"
          landmarkName = "-connectionDidFinishLoading:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2829,12 +2777,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1219"
-         endingLineNumber = "1219"
-         landmarkName = "-estimateApp"
+         startingLineNumber = "1127"
+         endingLineNumber = "1127"
+         landmarkName = "-connectionDidFinishLoading:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2842,11 +2790,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "367503791.425542"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "152"
-         endingLineNumber = "152"
+         startingLineNumber = "148"
+         endingLineNumber = "148"
          landmarkName = "-init"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2855,11 +2803,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "367503791.425542"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "156"
-         endingLineNumber = "156"
+         startingLineNumber = "151"
+         endingLineNumber = "151"
          landmarkName = "-init"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2868,12 +2816,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "697"
-         endingLineNumber = "697"
-         landmarkName = "-profileButtonClick"
+         startingLineNumber = "613"
+         endingLineNumber = "613"
+         landmarkName = "-donate"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2881,12 +2829,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "701"
-         endingLineNumber = "701"
-         landmarkName = "-profileButtonClick"
+         startingLineNumber = "617"
+         endingLineNumber = "617"
+         landmarkName = "-donate"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2894,12 +2842,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1216"
-         endingLineNumber = "1216"
-         landmarkName = "-estimateApp"
+         startingLineNumber = "1124"
+         endingLineNumber = "1124"
+         landmarkName = "-connectionDidFinishLoading:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2907,12 +2855,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1224"
-         endingLineNumber = "1224"
-         landmarkName = "-estimateApp"
+         startingLineNumber = "1132"
+         endingLineNumber = "1132"
+         landmarkName = "-connectionDidFinishLoading:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2920,12 +2868,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1237"
-         endingLineNumber = "1237"
-         landmarkName = "-showProfileFirstRun"
+         startingLineNumber = "1145"
+         endingLineNumber = "1145"
+         landmarkName = "-connectionDidFinishLoading:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2933,12 +2881,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "576"
-         endingLineNumber = "576"
-         landmarkName = "-didBecomeActive"
+         startingLineNumber = "492"
+         endingLineNumber = "492"
+         landmarkName = "-viewWillAppear:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2975,35 +2923,9 @@
          timestampString = "368030890.197221"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "431"
-         endingLineNumber = "431"
-         landmarkName = "-btnFBLoginClick:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Cowboy Duel/ProfileViewController.m"
-         timestampString = "368030890.197221"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
          startingLineNumber = "404"
          endingLineNumber = "404"
          landmarkName = "-changeFBSesionAction"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Cowboy Duel/ProfileViewController.m"
-         timestampString = "368030890.197221"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "438"
-         endingLineNumber = "438"
-         landmarkName = "-btnFBLogOutClick:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -3089,12 +3011,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1186"
-         endingLineNumber = "1186"
-         landmarkName = "-isNeedBlockOnlineListForAdvertasingAppear"
+         startingLineNumber = "1094"
+         endingLineNumber = "1094"
+         landmarkName = "-connectionDidFinishLoading:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -3154,11 +3076,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1117"
-         endingLineNumber = "1117"
+         startingLineNumber = "1033"
+         endingLineNumber = "1033"
          landmarkName = "-connectionDidFinishLoading:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3245,12 +3167,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1530"
-         endingLineNumber = "1530"
-         landmarkName = "-authorizationModifier:"
+         startingLineNumber = "1438"
+         endingLineNumber = "1438"
+         landmarkName = "-deviceType"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -3271,12 +3193,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1024"
-         endingLineNumber = "1024"
-         landmarkName = "-connectionDidFinishLoading:"
+         startingLineNumber = "940"
+         endingLineNumber = "940"
+         landmarkName = "-sendRequestWithDonateSum:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -3342,19 +3264,6 @@
          startingLineNumber = "529"
          endingLineNumber = "529"
          landmarkName = "-setAccelStateTrue"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1814"
-         endingLineNumber = "1814"
-         landmarkName = "-request:didLoad:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -3453,11 +3362,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "367932871.399148"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "445"
-         endingLineNumber = "445"
+         startingLineNumber = "361"
+         endingLineNumber = "361"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3531,12 +3440,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1228"
-         endingLineNumber = "1228"
-         landmarkName = "-showProfileFirstRun"
+         startingLineNumber = "1136"
+         endingLineNumber = "1136"
+         landmarkName = "-connectionDidFinishLoading:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -3544,25 +3453,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "370193483.875188"
+         timestampString = "371472902.030048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1521"
-         endingLineNumber = "1521"
-         landmarkName = "-authorizationModifier:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Cowboy Duel/AccountDataSource.m"
-         timestampString = "368030890.197221"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "135"
-         endingLineNumber = "135"
-         landmarkName = "-fetchArray:"
+         startingLineNumber = "1429"
+         endingLineNumber = "1429"
+         landmarkName = "-deviceType"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
