@@ -37,8 +37,6 @@
 
 "LEAD"="LEADERBOARD";
 
-"ACH"="ACHIEVEMENTS";
-
 "START"="START";
 
 "CAN"="CANCEL";
@@ -46,10 +44,6 @@
 "SALYN"="SALOON";
 
 "REFRESH"="REFRESH";
-
-"INVITE" = "INVITE FRIENDS";
-
-"AUTHORIZATION" = "Connecting to Game Center";
 
 //FinalView
 
@@ -102,24 +96,6 @@ h3{font-family: “Myriad Pro”, arial,sans-serif;color:4A3E25;font-size:12pt;f
 </body>
 </html>";
 
-
-"HV_PTP"="
-
-<p>&nbsp;&nbsp;&nbsp;You can quickly find a worthy rival due to the new search system. As before the game is accessible in three ways:</p>
-<ul>
-<li>If you have the Internet connection, tap \"DUEL\" and play with strangers and friends.</li>
-<li>If you don&#039;t have an access to the Internet now, but you have a friend with iOS and the installed game on it, play with him through Bluetooth having pressed \"DUEL P2P\"</li>
-<li>If you <b>don&#039;t have the Internet</b>, or you don&#039;t want to compete - simply choose <b>\"PRACTICE\"</b></li>
-</ul>";
-
-"HV_DUEL"="<p> </p><p><h3>Duel rules</h3></p><p>&nbsp;&nbsp;&nbsp;Tap \"START\" when the screen with two opponents appeared. Take an iPhone/iPod into your hand as a revolver (\"Home\" button has to be on the bottom and you have to see the screen). Place a forefinger opposite the drawn trigger. <br />&nbsp;&nbsp;&nbsp;Lower your gun to the arm-distance, and be ready to make a shot fast.
-Wait till the music ends, then raise your arm and shoot three times in a row.
-The one who shoots first becomes a winner in the first round. <br />&nbsp;&nbsp;&nbsp;Duel consists of three rounds, therefore each of the opponents has a chance to prove the case. To become a winner, you have to be faster at least in two rounds out of three. The winner takes away 10 % of the opponent's money.</p>  
-";
-
-"HV_ALL"="<h3>Attention</h3><p>&nbsp;&nbsp;&nbsp;At “PRACTICE” mode, money which you have won isn&#039;t set off.<br />&nbsp;&nbsp;&nbsp;If you drop out iPhone/iPod at a shot, fix it by adhesive tape. It&#039;s a joke, but be careful anyway.<br />&nbsp;&nbsp;&nbsp;The expanded descriptions of rules watch at our Youtube chanell, click \"VIDEO MANUAL\".</p><br />
-";
-
 "HV_TEXT_NEW" = "<p>&nbsp;&nbsp;&nbsp;You can quickly find a worthy rival due to the new search system.</p><ul><li>If you have the Internet connection, tap \"SALOON\" and play with strangers and friends.</li><li>If you <b>don&#039;t have the Internet</b> simply choose <b>\"PRACTICE\"</b></li></ul><p> </p><h3>Duel rules</h3><p>&nbsp;&nbsp;&nbsp;Tap \"START\" when the screen with two opponents appeared. Take an iPhone/iPod into your hand as a revolver (\"Home\" button has to be on the bottom and you have to see the screen). Place a forefinger opposite the drawn trigger.</p><p>&nbsp;&nbsp;&nbsp;Lower your gun to the arm-distance, and be ready to make a shot fast. Wait for the command \"FIRE!\", then raise your arm and shoot two-six times in a row. Number of shoots differs depending on the level of the opponent. For example:</p><ul><li>Junior  and Citizen - two times in a row</li><li>Street fighter and Mercenary - three times in a row</li><li>Duelist and Killer - four times in a row</li><li>Head Hunter and Hero of Duels - five times in a row</li><li>Grave-digger and Angel of Death - six times in a row</li></ul><p>The one who shoots first becomes a winner in the first round. <br />&nbsp;&nbsp;&nbsp;Duel consists of three rounds, therefore each of the opponents has a chance to prove the case. To become a winner, you have to be faster at least in two rounds out of three. The winner takes away 10 % of the opponent's money.</p><p> </p><h3>Attention</h3><p>&nbsp;&nbsp;&nbsp;At “PRACTICE” mode, money which you have won isn&#039;t set off.</p><p>&nbsp;&nbsp;&nbsp;If you drop out iPhone/iPod at a shot, fix it by adhesive tape. It&#039;s a joke, but be careful anyway.</p><p>&nbsp;&nbsp;&nbsp;The expanded descriptions of rules watch at our Youtube channel, click \"VIDEO MANUAL\".</p>";
 
 //Bottom messge
@@ -138,44 +114,6 @@ p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font
 
 "daily10NoHTML" = "You've got daily $10";
 
-"NoServersHTML" = "
-<html>
-<head>
-<style>
-body{font-family: Neue Helvetica, 'HelveticaNeue', serif; background-color:transparent; padding-top:20px;}
-p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font-weight: 50;word-spacing: -0.1em;text-align: center;
-    line-height:1em;}
-</style>
-</head>
-<body align=\"justify\">
-<p>Enemies hid, try again.</p>
-
-
-</body>
-</html>";
-
-//Bot Duel message
-
-"BotMTitle"="Invitation from ";
-"BotMTitle2"=" to play \"Cowboy Duel\"";
-
-"BotMText"="\"Want to play Cowboy Duel?\"";
-
-"BotMBtn"="Accept";
-
-"BotMCANS"="Close";
-
-
-//invite message
-
-"acceptInv"="Do you want to accept?";
-
-"Incoming"="Incoming Invite from ";
-
-"Decline"="Decline";
-
-"Accept"="Accept";
-
 //Duel
 "LOWER" = "Hold your phone down to start";
 
@@ -190,40 +128,6 @@ p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font
 "MOREMONEY5" = "Invest $4.99 - get in-game 2 000 dollars";
 
 "MOREMONEY100" ="Invest $99.99 - get in-game 50 000 dollars";
-
-//Time format
-
-"years" = "years";
-
-"year" = "year";
-
-"ago" = "ago";
-
-"months" = "months";
-
-"months234" = "months";
-
-"month" = "month";
-
-"hours" = "hours";
-
-"hours234" = "hours";
-
-"hour" = "hour";
-
-"minutes" = "minutes";
-
-"minutes234" = "minutes";
-
-"minute" = "minute";
-
-"moment" = "a moment ago";
-
-"days" = "days";
-
-"days234" = "days";
-
-"day" = "day";
 
 //MainView of App
 "Saloon" = "SALOON";

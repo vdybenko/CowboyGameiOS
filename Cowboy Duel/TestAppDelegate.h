@@ -10,7 +10,6 @@
 #import "DuelViewController.h"
 //#import "BluetoothViewController.h"
 //#import "StartViewController.h"
-#import "TableViewController.h"
 #import "LoadViewController.h"
 #import "LoginViewController.h"
 #import "AdColonyPublic.h"

@@ -83,13 +83,6 @@ NSString *const URL_CONTACN_US=@"http://cowboyduel.com/";
                                      NSLocalizedString(@"HV_TEXT_NEW", @""),
                                      NSLocalizedString(@"HTML_ASS", @"")] 
                             baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
-//    [_webViewMessage loadHTMLString:[NSString stringWithFormat:@"%@%@%@",
-//                                     NSLocalizedString(@"HTML_HEAD", @""),
-//                                     [NSString stringWithFormat:@"%@%@%@",
-//                                      NSLocalizedString(@"HV_PTP", @""),
-//                                      NSLocalizedString(@"HV_DUEL", @""),
-//                                      NSLocalizedString(@"HV_ALL", @"")],
-//                                     NSLocalizedString(@"HTML_ASS", @"")] baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]]; 
 }
 
 -(void) viewWillAppear:(BOOL)animated

@@ -216,8 +216,6 @@ static LoginViewController *sharedHelper = nil;
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
 	
     DLog(@"Facebook request failed: %@", [error description]);
-    //	[delegate hideHudWithAns:NO];
-    //    [[NetworkActivityIndicatorManager sharedInstance] hide];
 	
 	[facebook logout:self];
 }

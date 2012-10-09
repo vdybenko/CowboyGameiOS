@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "AccountDataSource.h"
 #import "TeachingViewController.h"
-#import "TableViewController.h"
 #import "GCHelper.h"
 #import <UIKit/UIKit.h>
 #import <GameKit/GameKit.h>

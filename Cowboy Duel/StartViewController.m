@@ -18,7 +18,6 @@
 #import "CustomNSURLConnection.h"
 #import "GameCenterViewController.h"
 #import "Utils.h"
-#import "PurchasesManager.h"
 #import "LevelCongratViewController.h"
 #import "MoneyCongratViewController.h"
 

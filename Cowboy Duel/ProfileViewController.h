@@ -9,9 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
 #import "AccountDataSource.h"
-#import "ProfileImageView.h"
 #import "ScrollView.h"
-#import "ViewProjectHelper.h"
 #import "TopPlayersViewController.h"
 
 @class LoginViewController;
