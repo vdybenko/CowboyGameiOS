@@ -26,26 +26,6 @@ static AccountDataSource *sharedHelper = nil;
     return sharedHelper;
 }
 
-<<<<<<< HEAD
--(int)stringToInt:(NSString *)string
-{
-    NSMutableString *tempString = [NSMutableString stringWithCapacity:10];
-    for (int i = 0; i < 2; i++) {
-        DLog(@"%u", (int)[string characterAtIndex:i]);
-        [tempString appendString:[NSString stringWithFormat:@"%u", (int)[string characterAtIndex:i]]];
-    }
-    return [tempString intValue];
-}
-
--(int)crypt:(int)secret_int
-{
-    DLog(@"sessionID %@",sessionID);
-    return secret_int ^ [self stringToInt:sessionID];
-}
-
-
-=======
->>>>>>> refs/heads/refactor_AccountDataSource
 -(id)initWithLocalPlayer;
 {
     self.accountName=@"Anonymous";
@@ -160,14 +140,9 @@ static AccountDataSource *sharedHelper = nil;
     NSDictionary *resultObj = [NSDictionary dictionaryWithObject:[self fetchArray:transactions1] forKey:@"transactions"];
   
     NSString *resultStr = [jsonWriter stringWithObject:resultObj];
-<<<<<<< HEAD
     
     DLog(@"AccountDataSource: New actions: %@", resultStr);
 	
-    //NSString *gcAlias = [[NSUserDefaults standardUserDefaults] stringForKey:@"name"];
-=======
-
->>>>>>> refs/heads/refactor_AccountDataSource
     NSString *gcAlias = accountID;
     if ([gcAlias length] == 0)
         gcAlias = @"Anonymous";
@@ -182,10 +157,7 @@ static AccountDataSource *sharedHelper = nil;
     [dicBody setValue:gcAlias forKey:@"authentification"];
     [dicBody setValue:resultStr forKey:@"transactions"];  
     NSString *stBody=[Utils makeStringForPostRequest:dicBody];
-<<<<<<< HEAD
     DLog(@"dicBody %@",dicBody);
-=======
->>>>>>> refs/heads/refactor_AccountDataSource
 	[theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]]; 
     CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
     if (theConnection) {
@@ -197,14 +169,9 @@ static AccountDataSource *sharedHelper = nil;
 
 - (NSArray *)fetchArray:(NSMutableArray *)array {
     
-    int n = [array count];
-<<<<<<< HEAD
-    
+    int n = [array count];    
     DLog(@"actions = %d", n);
     
-=======
-        
->>>>>>> refs/heads/refactor_AccountDataSource
     NSMutableArray *result = [NSMutableArray arrayWithCapacity:n];
     
     for (int i = 0; i < n; i++) {
@@ -312,13 +279,8 @@ static AccountDataSource *sharedHelper = nil;
     NSDate *now = [[NSDate alloc] init];
     
     NSString *theDate = [dateFormat stringFromDate:now];
-    
-<<<<<<< HEAD
-    
+        
     DLog(@"\n"
-=======
-    NSLog(@"\n"
->>>>>>> refs/heads/refactor_AccountDataSource
           "theDate: |%@| \n"
           , theDate);
     
@@ -351,15 +313,10 @@ static AccountDataSource *sharedHelper = nil;
     NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
     [dicForRequests removeObjectForKey:[currentParseString lastPathComponent]];
     NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
-<<<<<<< HEAD
     
     DLog(@"AccountDataSource jsonValues %@",responseObject);
     
     DLog(@"err_des %@", ValidateObject([responseObject objectForKey:@"err_desc"], [NSString class]));
-=======
-        
-    NSLog(@"err_des %@", ValidateObject([responseObject objectForKey:@"err_desc"], [NSString class]));
->>>>>>> refs/heads/refactor_AccountDataSource
     
     int errCode=[[responseObject objectForKey:@"err_code"] intValue];
     if (errCode==-1) {
@@ -406,12 +363,8 @@ static AccountDataSource *sharedHelper = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName: kCheckfFBLoginSession
                                                         object:self
                                                       userInfo:nil];
-<<<<<<< HEAD
     // inform the user
     DLog(@"AccountDataSource Connection failed! Error - %@ %@",
-=======
-    NSLog(@"AccountDataSource Connection failed! Error - %@ %@",
->>>>>>> refs/heads/refactor_AccountDataSource
           [error localizedDescription],
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
 }
