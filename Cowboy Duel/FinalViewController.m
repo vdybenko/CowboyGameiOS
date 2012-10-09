@@ -304,7 +304,7 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
         }
         
         if(playerAccount.money<0) playerAccount.money=0;
-        [[NSUserDefaults standardUserDefaults] setInteger:playerAccount.money forKey:@"money"];
+        [playerAccount saveMoney];
         [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
 //        if ([self.delegate isKindOfClass:[BluetoothViewController class]]) [self.delegate duelCancel];
         if ([self.delegate isKindOfClass:[GameCenterViewController class]]) {
@@ -552,7 +552,7 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
         }
         DLog(@"You Win - User money %d Oponent money %d", playerAccount.money, oponentAccount.money);
         
-        [[NSUserDefaults standardUserDefaults] setInteger:playerAccount.money forKey:@"money"];
+        [playerAccount saveMoney];
         
         
         for (int i=0; i<[playerAccount.finalInfoTable count]; i++) {
@@ -683,7 +683,7 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
         }
         [def setObject:locationDataDuel forKey:@"duels"];
         
-        [def setInteger:playerAccount.money forKey:@"money"];
+        [playerAccount saveMoney];
         
         [def synchronize];
         
@@ -940,7 +940,7 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
     NSInteger oldL=playerAccount.accountPoints;
     int winPonits=[DuelRewardLogicController getPointsForWinWithOponentLevel:oponentAccount.accountLevel];
     playerAccount.accountPoints+=winPonits;
-    [[NSUserDefaults standardUserDefaults] setInteger:playerAccount.accountPoints forKey:@"lvlPoints"];
+    [playerAccount saveAccountPoints];
 
     [self compareNewLevel:playerAccount.accountPoints withOldLevel:oldL];
     
@@ -952,7 +952,7 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
     NSInteger oldL=playerAccount.accountPoints;
     int losePonits=[DuelRewardLogicController getPointsForLoseWithOponentLevel:oponentAccount.accountLevel];
     playerAccount.accountPoints+=losePonits;
-    [[NSUserDefaults standardUserDefaults] setInteger:playerAccount.accountPoints forKey:@"lvlPoints"];
+    [playerAccount saveAccountPoints];
     
     [self compareNewLevel:playerAccount.accountPoints withOldLevel:oldL];
     
@@ -968,7 +968,7 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
             int playerNewLevel=[_pointForEachLevels indexOfObject:pointMoney]+1;
             
             playerAccount.accountLevel=playerNewLevel;
-            [[NSUserDefaults standardUserDefaults] setInteger:playerAccount.accountLevel forKey:@"accountLevel"];
+            [playerAccount saveAccountLevel];
             
             reachNewLevel=YES;
             
@@ -998,7 +998,6 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
 
 -(void)checkMaxWin:(int)moneyExch;
 {
-    NSUserDefaults *udef = [NSUserDefaults standardUserDefaults];
     if (playerAccount.accountBigestWin==0){
         playerAccount.accountBigestWin=moneyExch;
     }
@@ -1008,13 +1007,11 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
             playerAccount.accountBigestWin=moneyExch;
         }
     }
-    [udef setInteger:playerAccount.accountBigestWin forKey:@"MaxWin"];
-    [udef synchronize];
+    [playerAccount saveAccountBigestWin];
 }
 
 -(void)increaseLoseCount;
 {
-    NSUserDefaults *udef = [NSUserDefaults standardUserDefaults];
     if (playerAccount.accountDraws==0){
         playerAccount.accountDraws=1;
     }
@@ -1022,8 +1019,7 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
     {
         playerAccount.accountDraws++;
     }
-    [udef setInteger:playerAccount.accountDraws forKey:@"DrawCount"];
-    [udef synchronize];
+    [playerAccount saveAccountDraws];
 }
 
 -(void)increaseWinCount;
@@ -1036,7 +1032,7 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
     {
          playerAccount.accountWins++;
     }
-    [[NSUserDefaults standardUserDefaults] setInteger:playerAccount.accountWins forKey:@"WinCount"];
+    [playerAccount accountWins];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
