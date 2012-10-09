@@ -243,8 +243,8 @@ static NSString *ShotSound = @"%@/shot.mp3";
     rollingX = (acceleration.x * kFilteringFactor) + (rollingX * (1.0 - kFilteringFactor));
     rollingY = (acceleration.y * kFilteringFactor) + (rollingY * (1.0 - kFilteringFactor));
     rollingZ = (acceleration.z * kFilteringFactor) + (rollingZ * (1.0 - kFilteringFactor));
-//    NSLog(@"acceleration x= %.1f, y= %.1f, z= %.1f", acceleration.x, acceleration.y, acceleration.z);
-//    NSLog(@"rolling x= %.1f, y= %.1f, z= %.1f", rollingX, rollingY, rollingZ);
+//    DLog(@"acceleration x= %.1f, y= %.1f, z= %.1f", acceleration.x, acceleration.y, acceleration.z);
+//    DLog(@"rolling x= %.1f, y= %.1f, z= %.1f", rollingX, rollingY, rollingZ);
     
     [self setRotationWithAngle:atan2(rollingY, rollingX) andY:rollingY];
 
@@ -284,7 +284,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
 }
 -(void)partnerFoll
 {
-    NSLog(@"Partner foll");
+    DLog(@"Partner foll");
     [player stop]; 
 }
 
@@ -351,10 +351,10 @@ if (shotCountBullet!=0) {
     shotCount++;  
     
     
-    NSLog(@"Shot %d", shotCount); 
+    DLog(@"Shot %d", shotCount); 
     if ((shotCountBullet <= 0) && (shotCount < maxShotCount))
     {
-        NSLog(@"Shot foll!!! %d", shotTime); 
+        DLog(@"Shot foll!!! %d", shotTime); 
         follViewShow = YES;
         [activityIndicatorView setText:NSLocalizedString(@"FOLL", @"")];
         [activityIndicatorView showView];
@@ -363,7 +363,7 @@ if (shotCountBullet!=0) {
         activityInterval = (nowInterval-startInterval)*1000;        
         
         shotTime = (int)activityInterval;
-        NSLog(@"Shot foll time!! %d", shotTime); 
+        DLog(@"Shot foll time!! %d", shotTime); 
 // above        
         [self performSelector:@selector(follSend) withObject:self afterDelay:2.0];
         [player stop];

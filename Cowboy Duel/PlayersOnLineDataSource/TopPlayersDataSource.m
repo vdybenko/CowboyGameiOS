@@ -206,7 +206,7 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
 - (void)connectionDidFinishLoading:(CustomNSURLConnection *)connection1 {
    
     NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-    NSLog(@"PlayersOnLineDataSource jsonString %@",jsonString);
+    DLog(@"PlayersOnLineDataSource jsonString %@",jsonString);
     NSArray *responseObject = ValidateObject([jsonString JSONValue], [NSArray class]);
     [arrItemsList removeAllObjects];
     for (NSDictionary *dic in responseObject) {
@@ -241,7 +241,7 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
   didFailWithError:(NSError *)error
 {
     // inform the user
-    NSLog(@"Connection failed! Error - %@ %@",
+    DLog(@"Connection failed! Error - %@ %@",
           [error localizedDescription],
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
     TopPlayersViewController *topPlayersViewController = (TopPlayersViewController *)delegate;

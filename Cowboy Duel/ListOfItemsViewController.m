@@ -210,7 +210,7 @@
     //    BOOL serverOnline = NO;
 //    for (NSNetService *server in serverBrowser.servers) {
 //        if ([_player.dPlayerIP isEqualToString:server.name]) serverOnline = YES;
-//        NSLog(@"Servers online%@", server.name);
+//        DLog(@"Servers online%@", server.name);
 //    }
 //    
 //    [self.navigationController pushViewController:duelStartViewController animated:YES];
@@ -349,7 +349,7 @@
         
         BOOL hostOnline = [reachability isReachable];
         player.dOnline = hostOnline;
-        if(hostOnline) NSLog(@"Reachability %@", reachability);
+        if(hostOnline) DLog(@"Reachability %@", reachability);
     }
     [_playersOnLineDataSource setCellsHide:YES];
     [tableView reloadData];

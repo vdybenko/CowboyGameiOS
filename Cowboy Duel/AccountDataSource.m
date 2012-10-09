@@ -36,7 +36,7 @@ static AccountDataSource *sharedHelper = nil;
 {
     NSMutableString *tempString = [NSMutableString stringWithCapacity:10];
     for (int i = 0; i < 2; i++) {
-        NSLog(@"%u", (int)[string characterAtIndex:i]);
+        DLog(@"%u", (int)[string characterAtIndex:i]);
         [tempString appendString:[NSString stringWithFormat:@"%u", (int)[string characterAtIndex:i]]];
     }
     return [tempString intValue];
@@ -44,7 +44,7 @@ static AccountDataSource *sharedHelper = nil;
 
 -(int)crypt:(int)secret_int
 {
-    NSLog(@"sessionID %@",sessionID);
+    DLog(@"sessionID %@",sessionID);
     return secret_int ^ [self stringToInt:sessionID];
 }
 
@@ -90,7 +90,7 @@ static AccountDataSource *sharedHelper = nil;
     
     NSString *resultStr = [jsonWriter stringWithObject:resultObj];
     
-    NSLog(@"AccountDataSource: New actions: %@", resultStr);
+    DLog(@"AccountDataSource: New actions: %@", resultStr);
 	
     //NSString *gcAlias = [[NSUserDefaults standardUserDefaults] stringForKey:@"name"];
     NSString *gcAlias = accountID;
@@ -109,7 +109,7 @@ static AccountDataSource *sharedHelper = nil;
     [dicBody setValue:gcAlias forKey:@"authentification"];
     [dicBody setValue:resultStr forKey:@"transactions"];  
     NSString *stBody=[Utils makeStringForPostRequest:dicBody];
-    NSLog(@"dicBody %@",dicBody);
+    DLog(@"dicBody %@",dicBody);
 	[theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]]; 
     CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
     if (theConnection) {
@@ -123,7 +123,7 @@ static AccountDataSource *sharedHelper = nil;
     
     int n = [array count];
     
-    NSLog(@"actions = %d", n);
+    DLog(@"actions = %d", n);
     
     NSMutableArray *result = [NSMutableArray arrayWithCapacity:n];
     
@@ -147,7 +147,7 @@ static AccountDataSource *sharedHelper = nil;
     
     NSString *resultStr = [jsonWriter stringWithObject:resultObj];
     
-    NSLog(@"AccountDataSource: New duels: %@", resultStr);
+    DLog(@"AccountDataSource: New duels: %@", resultStr);
 	
     //NSString *gcAlias = [[NSUserDefaults standardUserDefaults] stringForKey:@"name"];
     NSString *gcAlias = accountID;
@@ -217,7 +217,7 @@ static AccountDataSource *sharedHelper = nil;
     NSString *theDate = [dateFormat stringFromDate:now];
     NSString *theTime = [timeFormat stringFromDate:now];
     
-    NSLog(@"\n"
+    DLog(@"\n"
           "theDate: |%@| \n"
           "theTime: |%@| \n"
           , theDate, theTime);
@@ -236,7 +236,7 @@ static AccountDataSource *sharedHelper = nil;
     NSString *theDate = [dateFormat stringFromDate:now];
     
     
-    NSLog(@"\n"
+    DLog(@"\n"
           "theDate: |%@| \n"
           , theDate);
     
@@ -265,9 +265,9 @@ static AccountDataSource *sharedHelper = nil;
     [dicForRequests removeObjectForKey:[currentParseString lastPathComponent]];
     NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
     
-    NSLog(@"AccountDataSource jsonValues %@",responseObject);
+    DLog(@"AccountDataSource jsonValues %@",responseObject);
     
-    NSLog(@"err_des %@", ValidateObject([responseObject objectForKey:@"err_desc"], [NSString class]));
+    DLog(@"err_des %@", ValidateObject([responseObject objectForKey:@"err_desc"], [NSString class]));
     
     int errCode=[[responseObject objectForKey:@"err_code"] intValue];
     if (errCode==-1) {
@@ -288,7 +288,7 @@ static AccountDataSource *sharedHelper = nil;
     {
         money = [self crypt:[[responseObject objectForKey:@"money"] intValue]];
         if(money < 0) money = 0;
-        NSLog(@"money %d", money);
+        DLog(@"money %d", money);
         NSUserDefaults *usrDef = [NSUserDefaults standardUserDefaults];
         [usrDef removeObjectForKey:@"transactions"];
         [self.transactions removeAllObjects];
@@ -315,7 +315,7 @@ static AccountDataSource *sharedHelper = nil;
                                                         object:self
                                                       userInfo:nil];
     // inform the user
-    NSLog(@"AccountDataSource Connection failed! Error - %@ %@",
+    DLog(@"AccountDataSource Connection failed! Error - %@ %@",
           [error localizedDescription],
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
 }

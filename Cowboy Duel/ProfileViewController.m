@@ -331,7 +331,7 @@
     }
     [self changePointsLine:curentPoints maxValue:maxPoints animated:needAnimation];
     
-    NSLog(@"Profile info points %d points to next level %d",playerAccount.accountPoints,(moneyForNextLevel-playerAccount.accountPoints));
+    DLog(@"Profile info points %d points to next level %d",playerAccount.accountPoints,(moneyForNextLevel-playerAccount.accountPoints));
     
     lbDuelsWonCount.text=[NSString stringWithFormat:@"%d",playerAccount.accountWins];
     lbDuelsLostCount.text=[NSString stringWithFormat:@"%d",playerAccount.accountDraws];
@@ -443,7 +443,7 @@
     
     NSError *error= nil;
     if ([fileMgr removeItemAtPath:FilePath error:&error] != YES)
-        NSLog(@"Profile: Unable to delete file: %@", [error localizedDescription]);
+        DLog(@"Profile: Unable to delete file: %@", [error localizedDescription]);
 }
 
 - (IBAction)soundControll:(id)sender {

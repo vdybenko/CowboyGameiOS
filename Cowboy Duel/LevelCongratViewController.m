@@ -229,7 +229,7 @@
 
 - (IBAction)btnAgainClicked:(id)sender
 {
-    NSLog(@"tryButtonClick");
+    DLog(@"tryButtonClick");
     [self dismissModalViewControllerAnimated:YES];
     [activityIndicatorView showView];
     

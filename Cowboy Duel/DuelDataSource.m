@@ -23,7 +23,7 @@ static const NSString *md5SharedSecret = @"uWW4fCpfsuuL6t8sewy0RJOXJ6Sogtte";
 
 -(id)initWithLogin:(GKLocalPlayer *)localPlayer;
 {
-    NSLog(@"Init");
+    DLog(@"Init");
     playerAccount = [[AccountDataSource alloc] initWithLocalPlayer];
                      return self;
 }
@@ -142,7 +142,7 @@ static const NSString *md5SharedSecret = @"uWW4fCpfsuuL6t8sewy0RJOXJ6Sogtte";
 {
     // inform the user
     lastRequest = nil;
-    NSLog(@"Connection failed! Error - %@ %@",
+    DLog(@"Connection failed! Error - %@ %@",
           [error localizedDescription],
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
 }

@@ -159,7 +159,7 @@ static const char *A_URL =  BASE_URL"api/a";
     NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
     NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
          
-        NSLog(@"get Refresh");
+        DLog(@"get Refresh");
         int revisionNumber=[[responseObject objectForKey:@"refresh_content"] intValue];
         if ([RefreshContentDataController isRefreshEvailable:revisionNumber]) {
             
@@ -171,7 +171,7 @@ static const char *A_URL =  BASE_URL"api/a";
         }
          NSString *sesion =[[NSString alloc] initWithString:[responseObject objectForKey:@"session_id"]];
         [[AccountDataSource sharedInstance] setSessionID:sesion];
-        NSLog(@"get sesion %@",sesion);
+        DLog(@"get sesion %@",sesion);
         return;
 }
 
@@ -185,7 +185,7 @@ static const char *A_URL =  BASE_URL"api/a";
 {
     [self closeWindow];
     // inform the user
-    NSLog(@"Start Connection failed! Error - %@ %@",
+    DLog(@"Start Connection failed! Error - %@ %@",
           [error localizedDescription],
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
 }

@@ -122,7 +122,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
 -(void)increaseMutchNumber
 {
     mutchNumber++;
-    NSLog(@"Match number %d", mutchNumber);
+    DLog(@"Match number %d", mutchNumber);
 }
 -(void)increaseMutchNumberWin
 {
@@ -145,7 +145,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
 
 -(void)follSound
 {
-    NSLog(@"foll sound");
+    DLog(@"foll sound");
     if (!soundStart) {
         NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/follSound.mp3", [[NSBundle mainBundle] resourcePath]]];
         NSError *error;
@@ -167,7 +167,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
     shotTime = (int)activityInterval;
     
     if ((shotTime*0.001 >= time)&&(!start)) {
-        NSLog(@"Timer");
+        DLog(@"Timer");
         start = YES;
         NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Fire.mp3", [[NSBundle mainBundle] resourcePath]]];
         NSError *error;
@@ -193,8 +193,8 @@ static NSString *ShotSound = @"%@/shot.mp3";
         
         if (shotCount == maxShotCount) 
         {
-            NSLog(@"Kill!!!");
-            NSLog(@"Shot Time = %d.%d", (shotTime - time * 1000) / 1000, (shotTime - time * 1000));
+            DLog(@"Kill!!!");
+            DLog(@"Shot Time = %d.%d", (shotTime - time * 1000) / 1000, (shotTime - time * 1000));
             
                             
             [follPlayer stop];
@@ -211,7 +211,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
         } 
     }else{
         if (soundStart) {
-            NSLog(@"Foll!!!");
+            DLog(@"Foll!!!");
         } 
         shotCount--;
     }
@@ -230,13 +230,13 @@ static NSString *ShotSound = @"%@/shot.mp3";
         switch (fintType) {
             case FirstFint:
                 
-                NSLog(@"first fint");
+                DLog(@"first fint");
                 
                 maxShotCount = 1;
                 
                 break;
             case SecondFint:
-                NSLog(@"second fint");
+                DLog(@"second fint");
                 break;    
             default:
                 break;
@@ -253,7 +253,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
         if(!follAccelCheck){
             _infoButton.enabled=NO;
             follAccelCheck = YES;
-            NSLog(@"Foll start");
+            DLog(@"Foll start");
             [timer invalidate];
             [player stop];
             [player setCurrentTime:0.0];
@@ -270,7 +270,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
     
     
     //    if ((follAccelCheck)&&(accelerometerState)) {
-    //        NSLog(@"Down");
+    //        DLog(@"Down");
     //        follAccelCheck = NO;
     //        [self startDuel];
     //        
@@ -288,7 +288,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
 -(void)startDuel
 {
     [super startDuel];
-    NSLog(@"Teaching started");
+    DLog(@"Teaching started");
     soundStart = YES;
     [helpPracticeView removeFromSuperview];
     

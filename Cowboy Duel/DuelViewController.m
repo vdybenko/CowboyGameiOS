@@ -90,14 +90,14 @@ static NSString *ShotSound = @"%@/shot.mp3";
         fintType = [accelerometrDataSource setPositionWithX:acceleration.x andY:acceleration.y andZ:acceleration.z];
         switch (fintType) {
             case FirstFint:
-                NSLog(@"first fint");
+                DLog(@"first fint");
                 maxShotCount = 1;
                 [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                                     object:self
                                                                   userInfo:[NSDictionary dictionaryWithObject:@"Trick" forKey:@"event"]];
                 break;
             case SecondFint:
-                NSLog(@"second fint");
+                DLog(@"second fint");
                 break;    
             default:
                 break;
@@ -125,7 +125,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
             // UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Allert" message:@"Foll" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
             //[av show];
             follAccelCheck = YES;
-            NSLog(@"Foll start");
+            DLog(@"Foll start");
             [timer invalidate];
             [player stop];
 
@@ -155,7 +155,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
     shotTime = (int)activityInterval;
     UIViewController *curentVC=[self.navigationController visibleViewController];
     if ((shotTime * 0.001 >= time) && (!start) && (!foll)&&([curentVC isEqual:self])) {
-        NSLog(@"FIRE !!!!!");
+        DLog(@"FIRE !!!!!");
         start = YES;
         NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Fire.mp3", [[NSBundle mainBundle] resourcePath]]];
         NSError *error;
@@ -179,7 +179,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
 
 -(void)follSend
 {
-    NSLog(@"Foll send");
+    DLog(@"Foll send");
     if ([delegate respondsToSelector:@selector(sendShotTime:)]) 
         [delegate sendShotTime:-shotTime];
     
@@ -188,16 +188,16 @@ static NSString *ShotSound = @"%@/shot.mp3";
 -(IBAction)buttonClick
 {   
     [super buttonClick];
-    NSLog(@"shotCountBullet %d shotCount %d maxShotCount %d",shotCountBullet,shotCount,maxShotCount);
+    DLog(@"shotCountBullet %d shotCount %d maxShotCount %d",shotCountBullet,shotCount,maxShotCount);
     if (start) 
     {
         if ((shotCount == maxShotCount) && (start)) 
         {
-            NSLog(@"Kill!!!");
+            DLog(@"Kill!!!");
             
             [follPlayer stop];
        
-            NSLog(@"Shot Time = %d.%d", (shotTime - time * 1000) / 1000, (shotTime - time * 1000) % 1000);
+            DLog(@"Shot Time = %d.%d", (shotTime - time * 1000) / 1000, (shotTime - time * 1000) % 1000);
             if ([delegate respondsToSelector:@selector(sendShotTime:)]) 
                 [delegate sendShotTime:(shotTime - time * 1000)];
             [activityIndicatorView showView];
@@ -223,7 +223,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
             [timer invalidate];
             soundStart = NO;
             
-            NSLog(@"Foll!!!");
+            DLog(@"Foll!!!");
         }
         shotCount--;
     }
@@ -240,7 +240,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
 -(void)startDuel
 {   
     if (!follViewShow) {
-         NSLog(@"Duel started");
+         DLog(@"Duel started");
         [super startDuel];
         soundStart = YES;
         [player stop];

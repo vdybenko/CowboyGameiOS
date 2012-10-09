@@ -85,7 +85,7 @@ NSString  *const USER_DEFULTS_KEY_COLLECTION_APPS   = @"colectionApp";
     filemgr = [NSFileManager defaultManager];
     
     if ([filemgr fileExistsAtPath: folderPath ] == YES){
-        NSLog (@"File exists %@",folderPath);
+        DLog (@"File exists %@",folderPath);
         return pName;
     }
     
@@ -103,7 +103,7 @@ NSString  *const USER_DEFULTS_KEY_COLLECTION_APPS   = @"colectionApp";
     @synchronized(self){
             
             NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-        NSLog(@"jsonString %@",jsonString);
+        DLog(@"jsonString %@",jsonString);
 
             NSDictionary *jsonDictionary = ValidateObject([jsonString JSONValue], [NSDictionary class]);
             NSArray *arrKeys=[jsonDictionary allKeys];
@@ -131,7 +131,7 @@ NSString  *const USER_DEFULTS_KEY_COLLECTION_APPS   = @"colectionApp";
                             }   
                         }
                     }
-                    NSLog(@"Refresh Complite for key <%@> array %@",keyForUserDefualts,arrToInput);
+                    DLog(@"Refresh Complite for key <%@> array %@",keyForUserDefualts,arrToInput);
                     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:arrToInput];
                     [[NSUserDefaults standardUserDefaults] setObject:data forKey:keyForUserDefualts];
                     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -139,14 +139,14 @@ NSString  *const USER_DEFULTS_KEY_COLLECTION_APPS   = @"colectionApp";
                     
                     if ([keyForUserDefualts isEqualToString:@"img"]) {
                         [self downloadImage:element];
-                         NSLog(@"Download Complite for key <%@> image",keyForUserDefualts);
+                         DLog(@"Download Complite for key <%@> image",keyForUserDefualts);
                     }else if ([keyForUserDefualts isEqualToString:@"img_delete"]) {
                         [CollectionAppWrapper deleteImage:element];
-                        NSLog(@"Delete Image for key <%@>",keyForUserDefualts);
+                        DLog(@"Delete Image for key <%@>",keyForUserDefualts);
                     }else {
                         //                        to user def
                         [[NSUserDefaults standardUserDefaults] setObject:element forKey:keyForUserDefualts];
-                         NSLog(@"Refresh Complite for key <%@> element %@",keyForUserDefualts,element);
+                         DLog(@"Refresh Complite for key <%@> element %@",keyForUserDefualts,element);
                     }
                 }
             }
@@ -164,7 +164,7 @@ NSString  *const USER_DEFULTS_KEY_COLLECTION_APPS   = @"colectionApp";
 {
     [deledate finishWithError];
     // inform the user
-    NSLog(@"Connection failed! Error - %@ %@",
+    DLog(@"Connection failed! Error - %@ %@",
           [error localizedDescription],
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
 }

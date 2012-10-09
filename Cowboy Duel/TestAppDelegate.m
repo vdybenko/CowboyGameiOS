@@ -96,7 +96,7 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
         [defaults synchronize];
     }
     
-    NSLog(@"FBAccessTokenKey %@", [defaults objectForKey:@"FBAccessTokenKey"]);
+    DLog(@"FBAccessTokenKey %@", [defaults objectForKey:@"FBAccessTokenKey"]);
     
        
     //Sleep off
@@ -119,7 +119,7 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    NSLog(@"application handleOpenURL");
+    DLog(@"application handleOpenURL");
     if (loginViewController) return [loginViewController.facebook handleOpenURL:url];
     return NO;
 }
@@ -171,7 +171,7 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    NSLog(@"applicationWillTerminate");
+    DLog(@"applicationWillTerminate");
     
 }
 
@@ -182,19 +182,19 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
 //	
 //	[[NSUserDefaults standardUserDefaults] setObject:tokenStr forKey:@"DeviceToken"];
 //	
-//	NSLog(@"Cowboy duel: Device token: %@", tokenStr);
+//	DLog(@"Cowboy duel: Device token: %@", tokenStr);
 //    
 //}
 //
 //
 //- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err { 
 //	
-//    NSLog(@"Cowboy duel: Fail to register for remote notifications: %@", [err description]);
+//    DLog(@"Cowboy duel: Fail to register for remote notifications: %@", [err description]);
 //}
 
 //- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
 //	
-//    NSLog(@"userInfo   %@", userInfo);
+//    DLog(@"userInfo   %@", userInfo);
 //    
 //    //    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"test" message:[NSString stringWithFormat:@"userInfo   %@",userInfo] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
 //    //    [av show];   
@@ -204,7 +204,7 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
 //    
 //    sInfo = [userInfo objectForKey:@"i"];    
 //    
-//    //    NSLog(@"User %i send you message", [senderId intValue]);
+//    //    DLog(@"User %i send you message", [senderId intValue]);
 //	
 //	[[NSNotificationCenter defaultCenter] postNotificationName:NewMessageReceivedNotification
 //														object:self
@@ -231,10 +231,10 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     
     
 	NSString *page = [[notification userInfo] objectForKey:@"event"];
-	NSLog(@"GA page %@",page);
+	DLog(@"GA page %@",page);
 	if (page){
 		if (![[GANTracker sharedTracker] trackPageview:page withError:&err])
-			NSLog(@" Can't track pageview");
+			DLog(@" Can't track pageview");
         
         if (!flurryEvent) {
             [FlurryAnalytics endTimedEvent:flurryEvent withParameters:Nil];        
@@ -249,7 +249,7 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
 
 - (void)dealloc
 {
-    NSLog(@"Exit");
+    DLog(@"Exit");
     //    [window release];
     //    [super dealloc];
 }

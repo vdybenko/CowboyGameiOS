@@ -76,7 +76,7 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
             duelWithBotCheck=NO;
         }
         
-        NSLog(@"Time final %d  %d",userTime,oponentTime);
+        DLog(@"Time final %d  %d",userTime,oponentTime);
         stGA=[[NSString alloc] init];
         
 //        if ([delegateController isKindOfClass:[BluetoothViewController class]]){
@@ -107,7 +107,7 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
         resoultDataSource = [[ResoultDataSource alloc] init];
         self.delegate = delegateController;
         
-        NSLog(@"U %d O %d", userTime, oponentTime);
+        DLog(@"U %d O %d", userTime, oponentTime);
         
         if ((userTime != 0)&& (userTime != 999999) && (userTime < oponentTime)&& (oponentTime != 999999)) {
             [delegate increaseMutchNumberWin];
@@ -161,11 +161,11 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
             [delegate increaseMutchNumber];
             resoultDataSource.foll = YES;
             resoultDataSource.result = NO;
-            NSLog(@"Oponent fouled");
+            DLog(@"Oponent fouled");
         }
         
         fMutchNumberWin = [delegate fMutchNumberWin];
-        NSLog(@"win %d",fMutchNumberWin);
+        DLog(@"win %d",fMutchNumberWin);
         fMutchNumberLose = [delegate fMutchNumberLose];
         resoultDataSource.mutchNumber = [delegate fMutchNumber];
         resoultDataSource.deltaTime = userTime;
@@ -340,7 +340,7 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
 
 -(void)runAway
 {
-    NSLog(@"Run away oponent");
+    DLog(@"Run away oponent");
     fMutchNumberLose = 3;
     [self winScene];
     [self lastScene];
@@ -353,7 +353,7 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
 
 -(IBAction)nextButtonClick:(id)sender
 {
-    NSLog(@"nextButtonClick");
+    DLog(@"nextButtonClick");
     [activityIndicatorView showView];
     if(teaching)
     {
@@ -371,7 +371,7 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
 
 -(IBAction)tryButtonClick:(id)sender
 {
-    NSLog(@"tryButtonClick");
+    DLog(@"tryButtonClick");
 
     [activityIndicatorView showView];
     
@@ -452,7 +452,7 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
         }
         [self increaseLoseCount];
         
-        NSLog(@"Oponent Win - User money %d Oponent money %d", playerAccount.money, oponentAccount.money);
+        DLog(@"Oponent Win - User money %d Oponent money %d", playerAccount.money, oponentAccount.money);
         
         pointsForMatch=[self getPointsForLose];        
     }
@@ -550,7 +550,7 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
         if (![[NSUserDefaults standardUserDefaults] boolForKey:@"dontShowFeedAtFirst"]) {
             [[StartViewController sharedInstance] setShowFeedAtFirst:YES];
         }
-        NSLog(@"You Win - User money %d Oponent money %d", playerAccount.money, oponentAccount.money);
+        DLog(@"You Win - User money %d Oponent money %d", playerAccount.money, oponentAccount.money);
         
         [[NSUserDefaults standardUserDefaults] setInteger:playerAccount.money forKey:@"money"];
         
@@ -648,7 +648,7 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
         
         int local = [playerAccount.glNumber intValue];
         local++;
-        NSLog(@"number %d", local);
+        DLog(@"number %d", local);
         playerAccount.glNumber = [NSNumber numberWithInt:local];
         //            transaction.trNumber = [NSNumber numberWithInt:local];
         [playerAccount.transactions addObject:transaction];
@@ -662,7 +662,7 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
         }
         [def setObject:locationData forKey:@"transactions"];
         
-        NSLog(@"Transactions count = %d", [playerAccount.transactions count]);
+        DLog(@"Transactions count = %d", [playerAccount.transactions count]);
         [def synchronize];
         
         if (oponentAccount.accountID != nil) duel.dOpponentId = [NSString stringWithString:oponentAccount.accountID];  /////////////////////////////// save duels
@@ -671,7 +671,7 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
         duel.dDate = [playerAccount dateFormat];
         duel.dGps = [NSNumber numberWithInt: -1];
         
-        NSLog(@"%@ %@ %@ %@", duel.dOpponentId, duel.dRateFire, duel.dDate, duel.dGps);
+        DLog(@"%@ %@ %@ %@", duel.dOpponentId, duel.dRateFire, duel.dDate, duel.dGps);
         
         [playerAccount.duels addObject:duel];
         
@@ -832,7 +832,7 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
     
     NSInteger sectionRows = [tableView numberOfRowsInSection:[indexPath section]];
 	NSInteger row = [indexPath row];
-    NSLog(@"sectionRows %d row %d",sectionRows,row);
+    DLog(@"sectionRows %d row %d",sectionRows,row);
     if (runAway && (row == (sectionRows-1))){
         if (runAwayGood) {
             cell.imageView.image = [UIImage imageNamed:@"fin_img_table_win_new.png"];
@@ -1044,7 +1044,7 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
 
 -(void)startBotDuelTryAgain
 {
-    NSLog(@"Eshe Raz");
+    DLog(@"Eshe Raz");
     [playerAccount.finalInfoTable removeAllObjects];
     DuelStartViewController  *tempVC=(DuelStartViewController*)[self.navigationController.viewControllers objectAtIndex:2] ;
     [tempVC setMessageTry];

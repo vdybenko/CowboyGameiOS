@@ -185,7 +185,7 @@
     [indicatorConnectin startAnimating];
     NSArray *arr=[btnDuel subviews];
     UILabel *label1=(UILabel*)[arr objectAtIndex:([arr count]-2)];
-    NSLog(@"label1 %@",label1.text);
+    DLog(@"label1 %@",label1.text);
     [label1 setHidden:YES];
 }
 

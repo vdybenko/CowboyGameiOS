@@ -77,7 +77,7 @@
 {
 	if (buttonIndex == 1) {
         // User accepted.  Open the game screen and accept the connection.
-        NSLog(@"INVITATION_OK");
+        DLog(@"INVITATION_OK");
         [delegate didAcceptInvitation];
         [self.view setHidden:YES];
     }

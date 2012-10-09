@@ -115,7 +115,7 @@ static StartViewController *sharedHelper = nil;
             
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"moneyForIPad"];
         }
-        if(firstRun)NSLog(@"First ");
+        if(firstRun)DLog(@"First ");
         //        [[NSUserDefaults standardUserDefaults] setBool:firstRun forKey:@"AlreadyRan"];
         
         if(firstRun){
@@ -178,7 +178,7 @@ static StartViewController *sharedHelper = nil;
             
             if(playerAccount.money<0){
                 playerAccount.money=0;
-                NSLog(@"-10000");
+                DLog(@"-10000");
             }
             [uDef setObject:ValidateObject(playerAccount.accountID, [NSString class]) forKey:@"id"];
             
@@ -195,7 +195,7 @@ static StartViewController *sharedHelper = nil;
                 [[OGHelper sharedInstance ] setStartViewController:self];
             }
             
-            NSLog(@"Transactions count = %d", [playerAccount.transactions count]);
+            DLog(@"Transactions count = %d", [playerAccount.transactions count]);
             
             //NSMutableArray *locations = [NSMutableArray array];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"transactions"];
@@ -203,50 +203,51 @@ static StartViewController *sharedHelper = nil;
             NSArray *oldLocations = [uDef arrayForKey:@"transactions"];
             if( [oldLocations count]!=0)
             {
-                //NSLog(@"locations is not nil");
+                //DLog(@"locations is not nil");
                 for( NSData *data in oldLocations )
                 {
                     CDTransaction * loc = (CDTransaction*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
-                    //                    NSLog(@"money %d", [loc.trMoneyCh intValue]);
-                    //                    NSLog(@"type %d", [loc.trType intValue]);
-                    //                    NSLog(@"localID %d", [loc.trLocalID intValue]);
-                    //                    NSLog(@"globalID %d", [loc.trGlobalID intValue]);
+                    //                    DLog(@"money %d", [loc.trMoneyCh intValue]);
+                    //                    DLog(@"type %d", [loc.trType intValue]);
+                    //                    DLog(@"localID %d", [loc.trLocalID intValue]);
+                    //                    DLog(@"globalID %d", [loc.trGlobalID intValue]);
                     [playerAccount.transactions addObject:loc];
                 }
             }
             CDTransaction *localTransaction = [playerAccount.transactions lastObject];
             playerAccount.glNumber = localTransaction.trLocalID;
-            NSLog(@"Transactions count = %d", [playerAccount.transactions count]);
+          DLog(@"Transactions count = %d", [playerAccount.transactions count]);
+           // DLog(@"Transactions count = %d", [playerAccount.transactions count]);
             
             
             NSArray *oldLocations2 = [uDef arrayForKey:@"duels"];
             if( playerAccount.duels )
             {
-                //NSLog(@"locations is not nil");
+                //DLog(@"locations is not nil");
                 for( NSData *data in oldLocations2 )
                 {
                     CDDuel * loc = (CDDuel*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
-                    NSLog(@"gps %d", [loc.dGps intValue]);
-                    NSLog(@"id %@", loc.dOpponentId);
-                    NSLog(@"fire %d", [loc.dRateFire intValue]);
-                    NSLog(@"date %@", loc.dDate);
+                    DLog(@"gps %d", [loc.dGps intValue]);
+                    DLog(@"id %@", loc.dOpponentId);
+                    DLog(@"fire %d", [loc.dRateFire intValue]);
+                    DLog(@"date %@", loc.dDate);
                     [playerAccount.duels addObject:loc];
                 }
             }
-            NSLog(@"Duels count = %d", [playerAccount.duels count]);
+            DLog(@"Duels count = %d", [playerAccount.duels count]);
             
             NSArray *oldLocations3 = [uDef arrayForKey:@"achivments"];
             if( playerAccount.duels )
             {
-                //NSLog(@"locations is not nil");
+                //DLog(@"locations is not nil");
                 for( NSData *data in oldLocations3 )
                 {
                     CDAchivment * loc = (CDAchivment*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
-                    NSLog(@"achivments %@", loc.aAchivmentId);
+                    DLog(@"achivments %@", loc.aAchivmentId);
                     [playerAccount.achivments addObject:loc];
                 }
             }
-            //            NSLog(@"Achivments count = %d", [playerAccount.achivments count]);
+            //            DLog(@"Achivments count = %d", [playerAccount.achivments count]);
         }
                
 //        [self.view addSubview:_vBackground];
@@ -447,7 +448,7 @@ static StartViewController *sharedHelper = nil;
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Back1cycled.mp3", [[NSBundle mainBundle] resourcePath]]];
     NSError *error;
     player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-    if (error) NSLog(@"Player error %@", error);
+    if (error) DLog(@"Player error %@", error);
     
     [player setNumberOfLoops:999];
     [player prepareToPlay];
@@ -563,9 +564,9 @@ static StartViewController *sharedHelper = nil;
 
 -(void)didBecomeActive
 {
-    NSLog(@"did become active");
+    DLog(@"did become active");
     if ((inBackground) && (viewIsVisible)) {
-        NSLog(@"in back");
+        DLog(@"in back");
         animationCheck = YES;
     }
     if (!firstRunLocal) {
@@ -592,7 +593,7 @@ static StartViewController *sharedHelper = nil;
     
     NSError *error= nil;
     if ([fileMgr removeItemAtPath:FilePath error:&error] != YES){
-        NSLog(@"TestAppDelegate: Unable to delete file: %@", [error localizedDescription]);
+        DLog(@"TestAppDelegate: Unable to delete file: %@", [error localizedDescription]);
         
     }
     [[NSFileManager defaultManager] createDirectoryAtPath:FilePath withIntermediateDirectories:NO attributes:nil error:&error];
@@ -618,7 +619,7 @@ static StartViewController *sharedHelper = nil;
     [label3 setBackgroundColor:[UIColor clearColor]];
     [label3 setTextColor:[UIColor whiteColor]];
     [label3 setText:NSLocalizedString(@"MOREMONEY_TEXT", @"")];
-    NSLog(@"Donation %@  %@",NSLocalizedString(@"MOREMONEY_TEXT", @""),NSLocalizedString(@"ACH", @""));
+    DLog(@"Donation %@  %@",NSLocalizedString(@"MOREMONEY_TEXT", @""),NSLocalizedString(@"ACH", @""));
     
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"     " delegate:self cancelButtonTitle:NSLocalizedString(@"CAN", @"") destructiveButtonTitle:nil otherButtonTitles:
                                   NSLocalizedString(@"MOREMONEY1", @""),
@@ -893,19 +894,19 @@ static StartViewController *sharedHelper = nil;
 	switch (result)
 	{
 		case MFMailComposeResultCancelled:
-			NSLog(@"Result: canceled");
+			DLog(@"Result: canceled");
 			break;
 		case MFMailComposeResultSaved:
-			NSLog(@"Result: saved");
+			DLog(@"Result: saved");
 			break;
 		case MFMailComposeResultSent:
-			NSLog(@"Result: sent");
+			DLog(@"Result: sent");
 			break;
 		case MFMailComposeResultFailed:
-			NSLog(@"Result: failed");
+			DLog(@"Result: failed");
 			break;
 		default:
-			NSLog(@"Result: not sent");
+			DLog(@"Result: not sent");
 			break;
 	}
     [self dismissModalViewControllerAnimated:YES];
@@ -1002,7 +1003,7 @@ static StartViewController *sharedHelper = nil;
     [dicForRequests removeObjectForKey:[currentParseString lastPathComponent]];
     NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
     
-    NSLog(@"StartVC \n jsonValues %@\n string %@",jsonString,currentParseString);
+    DLog(@"StartVC \n jsonValues %@\n string %@",jsonString,currentParseString);
 //    
 //    OnLine
     if ([[currentParseString lastPathComponent] isEqualToString:@"a"]&&[responseObject objectForKey:@"session_id"]) {
@@ -1018,7 +1019,7 @@ static StartViewController *sharedHelper = nil;
     //avtorization
     if ((playerAccount.accountID != nil) && [[currentParseString lastPathComponent] isEqualToString:@"authorization"]) {
         
-        NSLog(@"avtorization /n %@",responseObject);
+        DLog(@"avtorization /n %@",responseObject);
         
         NSUserDefaults *uDef = [NSUserDefaults standardUserDefaults];
         if ([responseObject objectForKey:@"session_id"]) {
@@ -1175,7 +1176,7 @@ static StartViewController *sharedHelper = nil;
   didFailWithError:(NSError *)error
 {
     // inform the user
-    NSLog(@"Start Connection failed! Error - %@ %@",
+    DLog(@"Start Connection failed! Error - %@ %@",
           [error localizedDescription],
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
 }
@@ -1263,7 +1264,7 @@ static StartViewController *sharedHelper = nil;
         
         int local = [playerAccount.glNumber intValue];
         local++;
-        NSLog(@"number %d", local);
+        DLog(@"number %d", local);
         playerAccount.glNumber = [NSNumber numberWithInt:local];
         //            transaction.trNumber = [NSNumber numberWithInt:local];
         [playerAccount.transactions addObject:transaction];
@@ -1276,7 +1277,7 @@ static StartViewController *sharedHelper = nil;
         [userDef setObject:locationData forKey:@"transactions"];
         
         
-        NSLog(@"Transactions count = %d", [playerAccount.transactions count]);
+        DLog(@"Transactions count = %d", [playerAccount.transactions count]);
         
     };
     [userDef synchronize];
@@ -1348,7 +1349,7 @@ static StartViewController *sharedHelper = nil;
     if  (soundCheack) {
        [self performSelectorInBackground:@selector(volumeInc) withObject:self];
        // player.volume = 1.0f;
-        NSLog(@"playerStart called!");
+        DLog(@"playerStart called!");
     }
 }
 
@@ -1527,7 +1528,7 @@ static StartViewController *sharedHelper = nil;
     [dicBody setValue:playerAccount.facebookName forKey:@"facebook_name"];
 
     NSString *stBody=[Utils makeStringForPostRequest:dicBody];
-    NSLog(@"stBody %@",dicBody);
+    DLog(@"stBody %@",dicBody);
 	[theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]]; 
     CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
     if (theConnection) {
@@ -1561,7 +1562,7 @@ static StartViewController *sharedHelper = nil;
     [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.accountBigestWin] forKey:@"bigest_win"];
     
     NSString *stBody=[Utils makeStringForPostRequest:dicBody];
-    NSLog(@"modifierUser stBody %@",dicBody);
+    DLog(@"modifierUser stBody %@",dicBody);
 	[theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]]; 
     CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
     if (theConnection) {
@@ -1705,7 +1706,7 @@ static StartViewController *sharedHelper = nil;
     {
         case NotReachable:
         {
-            NSLog(@"The internet is down.");
+            DLog(@"The internet is down.");
             if (self.internetActive) {
                 self.internetActive = NO;
             }
@@ -1741,7 +1742,7 @@ static StartViewController *sharedHelper = nil;
         {
             if (self.hostActive) {
                 self.hostActive = NO;
-                NSLog(@"The internet is down IF.");
+                DLog(@"The internet is down IF.");
             }
             
             
@@ -1790,7 +1791,7 @@ static StartViewController *sharedHelper = nil;
 
 - (void)request:(FBRequest *)request didLoad:(id)result {
 	
-    NSLog(@"Start VC Facebook response: %@", result);
+    DLog(@"Start VC Facebook response: %@", result);
     
 	if ([result isKindOfClass:[NSDictionary class]]) {
         

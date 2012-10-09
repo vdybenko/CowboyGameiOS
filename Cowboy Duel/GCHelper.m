@@ -104,13 +104,13 @@ static GCHelper *sharedHelper = nil;
 
 - (void)authenticationChanged {    
     if (GClocalPlayer.isAuthenticated && !userAuthenticated) {
-        NSLog(@"Authentication changed: player authenticated.");
+        DLog(@"Authentication changed: player authenticated.");
         userAuthenticated = TRUE;
         //       DuelDataSource *duelDataSource = [[DuelDataSource alloc] initWithLogin:localPlayer];
         if (delegate2)
             [delegate2 setLocalPlayer:GClocalPlayer];
     } else if (!GClocalPlayer.isAuthenticated && userAuthenticated) {
-        NSLog(@"Authentication changed: player not authenticated");
+        DLog(@"Authentication changed: player not authenticated");
         userAuthenticated = FALSE;
     }
 }
@@ -121,17 +121,17 @@ static GCHelper *sharedHelper = nil;
     
     if (!gameCenterAvailable) return;
     
-    NSLog(@"Authenticating local user...");
+    DLog(@"Authenticating local user...");
     if (GClocalPlayer.authenticated == NO) {     
         [GClocalPlayer authenticateWithCompletionHandler:nil];        
     } else {
-        NSLog(@"Already authenticated!");
+        DLog(@"Already authenticated!");
         [self acceptedInvite];
     }
 }
 
 -(void)acceptedInvite{
-    NSLog(@"acceptedInvite...");
+    DLog(@"acceptedInvite...");
     //    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"GC" message:@"acceptedInvite" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     //    [av show];
     [presentingViewController dismissModalViewControllerAnimated:YES];  
@@ -148,7 +148,7 @@ static GCHelper *sharedHelper = nil;
             
             [presentingViewController presentModalViewController:mmvc animated:YES];
             
-            NSLog(@"invite acceptedInvite");
+            DLog(@"invite acceptedInvite");
             //NSString *st=[[NSString alloc] init];
         } else if (playersToInvite) {
             
@@ -172,10 +172,10 @@ static GCHelper *sharedHelper = nil;
             //            [presentingViewController popToRootViewControllerAnimated:YES];
             [presentingViewController presentModalViewController:mmvc animated:YES];
             
-            NSLog(@"invite playersToInvite");
+            DLog(@"invite playersToInvite");
         }
     };
-    NSLog(@"acceptedInvite end");
+    DLog(@"acceptedInvite end");
 }
 
 //--------------------------------------------------------  
@@ -196,11 +196,11 @@ static GCHelper *sharedHelper = nil;
         if (error != nil)
         {
             // handle the reporting error
-            //            NSLog(@"report false %@ ",error);
+            //            DLog(@"report false %@ ",error);
             [self saveScoreToDevice:scoreReporter];  
             
         }else{
-            NSLog(@"report good ");
+            DLog(@"report good ");
         }
     }];
     
@@ -217,7 +217,7 @@ static GCHelper *sharedHelper = nil;
             if (error != nil){  
                 // handle the reporting error  
                 [self saveScoreToDevice:scoreReporter];  
-                //                NSLog(@"report false %@ ",error);
+                //                DLog(@"report false %@ ",error);
                 
             }  
         }];   
@@ -294,10 +294,10 @@ static GCHelper *sharedHelper = nil;
     
     if(!userAuthenticated)  
         return NO;    
-    NSLog(@"leader");
+    DLog(@"leader");
     GKLeaderboardViewController *leaderboardController = [[GKLeaderboardViewController alloc] init];      
     if (leaderboardController != nil) { 
-        NSLog(@"leaderboardController");
+        DLog(@"leaderboardController");
         [leaderboardController setCategory:category];
         leaderboardController.leaderboardDelegate = self;  
         //        
@@ -328,7 +328,7 @@ static GCHelper *sharedHelper = nil;
         achievement.percentComplete = percent;        
         [achievement reportAchievementWithCompletionHandler:^(NSError *error){  
             if (error != nil){ 
-                //               NSLog(@"Achievements false %@ ",error);
+                //               DLog(@"Achievements false %@ ",error);
                 [self saveAchievementToDevice:achievement];
                 
             }  
@@ -345,7 +345,7 @@ static GCHelper *sharedHelper = nil;
         [achievement reportAchievementWithCompletionHandler:^(NSError *error){  
             if (error != nil){  
                 [self saveAchievementToDevice:achievement];  
-                //                NSLog(@"Achievements false %@ ",error);
+                //                DLog(@"Achievements false %@ ",error);
             }          
         }];  
     }  
@@ -354,7 +354,7 @@ static GCHelper *sharedHelper = nil;
 - (void)saveAchievementToDevice:(GKAchievement *)achievement  
 {  
     NSString *savePath = getGameCenterSavePath();  
-    NSLog(@"saveAchievementToDevice");
+    DLog(@"saveAchievementToDevice");
     // If achievements already exist, append the new achievement.  
     NSMutableArray *achievements = [[NSMutableArray alloc] init];  
     NSMutableDictionary *dict;  
@@ -449,9 +449,9 @@ static GCHelper *sharedHelper = nil;
                  [achievementsDictionary setObject: achievement forKey: achievement.identifier];
              
              
-             //             NSLog(@"Ach = ",[achievementsDictionary g]);
+             //             DLog(@"Ach = ",[achievementsDictionary g]);
          }else{
-             NSLog(@"load ach error %@",error);
+             DLog(@"load ach error %@",error);
          }
      }];
 }
@@ -473,7 +473,7 @@ static GCHelper *sharedHelper = nil;
                  [achievementsDictionary setObject:singleAchievement forKey:singleAchievement.identifier];
              }
          }else{
-             NSLog(@"load ach error %@",error);
+             DLog(@"load ach error %@",error);
          }
      }];
     return singleAchievement;
@@ -487,10 +487,10 @@ static GCHelper *sharedHelper = nil;
      {
          if (error == nil)
          {
-             NSLog(@"Clere good");
+             DLog(@"Clere good");
              
          }else{
-             NSLog(@"load ach error %@",error);
+             DLog(@"load ach error %@",error);
          }
          
      }];
@@ -506,10 +506,10 @@ static GCHelper *sharedHelper = nil;
     
     requestTime = [NSDate timeIntervalSinceReferenceDate];
     
-    NSLog(@"requestTime %d", requestTime);
+    DLog(@"requestTime %d", requestTime);
     
     if (!gameCenterAvailable) return;
-    NSLog(@"Find oponents.....!");
+    DLog(@"Find oponents.....!");
     matchStarted = NO;
     botDuel = YES;
     self.match = nil;
@@ -540,7 +540,7 @@ static GCHelper *sharedHelper = nil;
     botDuel = NO;
     requestTime = [NSDate timeIntervalSinceReferenceDate] - requestTime;
     [self sendRequestWithTime:requestTime andCancel:YES];
-    NSLog(@"cancel invite");
+    DLog(@"cancel invite");
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                         object:self
@@ -550,7 +550,7 @@ static GCHelper *sharedHelper = nil;
 // Matchmaking has failed with an error
 - (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFailWithError:(NSError *)error {
     [presentingViewController dismissModalViewControllerAnimated:YES];
-    NSLog(@"Error finding match: %@", error.localizedDescription); 
+    DLog(@"Error finding match: %@", error.localizedDescription); 
     botDuel = NO;
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                         object:self
@@ -565,11 +565,11 @@ static GCHelper *sharedHelper = nil;
     
     requestTime = [NSDate timeIntervalSinceReferenceDate] - requestTime;
     
-    NSLog(@"requestTime %d", requestTime);
+    DLog(@"requestTime %d", requestTime);
     
     [self sendRequestWithTime:requestTime andCancel:NO];
     
-    NSLog(@"didFindMatch math %@ delege %@",match, match.delegate);
+    DLog(@"didFindMatch math %@ delege %@",match, match.delegate);
     
     //    NSString *st=[NSString stringWithFormat:@"didFindMatch math %@ delege %@",match,match.delegate];
     //    UIAlertView* startAv = [[UIAlertView alloc] initWithTitle:@"GCHelper" message:st delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
@@ -581,13 +581,13 @@ static GCHelper *sharedHelper = nil;
         //        invaitFriend=YES;
         if (delegate==NULL){
             
-            NSLog(@"Delegate_null");
+            DLog(@"Delegate_null");
             //            UIAlertView* startAv = [[UIAlertView alloc] initWithTitle:@"matchmakerViewController" message:@"Delegate_null" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
             //            [startAv show];
             [self setDelegate:[[GameCenterViewController alloc] initWithAccount:[self playerAccount] andParentVC:nil]];
             [delegate matchStarted];
         }else{
-            NSLog(@"Delegate_not_null");
+            DLog(@"Delegate_not_null");
             //            UIAlertView* startAv = [[UIAlertView alloc] initWithTitle:@"matchmakerViewController" message:@"Delegate_not_null" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
             //            [startAv show];
             [delegate matchStarted];
@@ -630,19 +630,19 @@ static GCHelper *sharedHelper = nil;
             [match sendDataToAllPlayers: packet withDataMode: GKMatchSendDataUnreliable error:&error];
             if (error != nil)
             {
-                NSLog(@"send data false  %@",[error description]);
+                DLog(@"send data false  %@",[error description]);
                 UIAlertView *startAv = [[UIAlertView alloc] initWithTitle:@"send data false" message:@"send data false" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                 [startAv show];
                 // handle the error
             }else{
-                NSLog(@"send data good math %@ delege %@",match,match.delegate);
+                DLog(@"send data good math %@ delege %@",match,match.delegate);
                 
 //                                   NSString *st=[NSString stringWithFormat:@"send data good math "];
 //                                    UIAlertView* startAv = [[UIAlertView alloc] initWithTitle:@"GC helper" message:st delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
 //                                    [startAv show];
             }
         }else{
-            NSLog(@"match==nil");
+            DLog(@"match==nil");
         }
     }
 }
@@ -661,7 +661,7 @@ static GCHelper *sharedHelper = nil;
     if (delegate) 
         [delegate match:theMatch didReceiveData:data fromPlayer:playerID];
     else
-        NSLog(@"Delegete nil");
+        DLog(@"Delegete nil");
 }
 
 // The player state changed (eg. connected or disconnected)
@@ -674,8 +674,8 @@ static GCHelper *sharedHelper = nil;
             
             if (!matchStarted && theMatch.expectedPlayerCount == 0) {
                 matchStarted = YES;
-                NSLog(@"match didChangeState! player start");
-                NSLog(@"match %@",match.delegate);
+                DLog(@"match didChangeState! player start");
+                DLog(@"match %@",match.delegate);
                 
                 //                NSString *st=[NSString stringWithFormat:@"match didChangeState! player start math %@",match];
                 //                UIAlertView* startAv = [[UIAlertView alloc] initWithTitle:@"GC helper" message:st delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
@@ -688,7 +688,7 @@ static GCHelper *sharedHelper = nil;
             break; 
         case GKPlayerStateDisconnected:
             // a player just disconnected. 
-            NSLog(@"GC helper Player disconnected!");
+            DLog(@"GC helper Player disconnected!");
             
             //            UIAlertView* startAv = [[UIAlertView alloc] initWithTitle:@"GC helper" message:@"Player disconnected!" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
             //            [startAv show];
@@ -703,10 +703,10 @@ static GCHelper *sharedHelper = nil;
 // The match was unable to connect with the player due to an error.
 - (void)match:(GKMatch *)theMatch connectionWithPlayerFailed:(NSString *)playerID withError:(NSError *)error {
     
-    NSLog(@"Failed to connect to player with error: ");
+    DLog(@"Failed to connect to player with error: ");
     if (match != theMatch) return;
     
-    NSLog(@"Failed to connect to player with error: %@", error.localizedDescription);
+    DLog(@"Failed to connect to player with error: %@", error.localizedDescription);
     matchStarted = NO;
     [delegate matchEnded];
 }
@@ -714,10 +714,10 @@ static GCHelper *sharedHelper = nil;
 // The match was unable to be established with any players due to an error.
 - (void)match:(GKMatch *)theMatch didFailWithError:(NSError *)error {
     
-    NSLog(@"Match failed with error:");
+    DLog(@"Match failed with error:");
     if (match != theMatch) return;
     
-    NSLog(@"Match failed with error: %@", error.localizedDescription);
+    DLog(@"Match failed with error: %@", error.localizedDescription);
     matchStarted = NO;
     [delegate matchEnded];
 }
@@ -732,7 +732,7 @@ static GCHelper *sharedHelper = nil;
 
 - (void)findProgrammaticMatch
 {
-    NSLog(@"findProgrammaticMatch...... ");
+    DLog(@"findProgrammaticMatch...... ");
     
     GKMatchRequest *request = [[GKMatchRequest alloc] init];
     request.minPlayers = 2;
@@ -745,12 +745,12 @@ static GCHelper *sharedHelper = nil;
          if (error)
          {
              // Process the error.
-             NSLog(@"error %@ match %@", error, foundMatch);
+             DLog(@"error %@ match %@", error, foundMatch);
          }
          else if (foundMatch != nil)
          {
-             NSLog(@"Match good");
-             NSLog(@"Match %@",foundMatch);
+             DLog(@"Match good");
+             DLog(@"Match %@",foundMatch);
              self.match = foundMatch; // Use a retaining property to retain the match.
              self.match.delegate = self; // start!
              // Start the match.
@@ -824,7 +824,7 @@ static GCHelper *sharedHelper = nil;
   didFailWithError:(NSError *)error
 {
     // inform the user
-    NSLog(@"Chat Connection failed! Error - %@ %@",
+    DLog(@"Chat Connection failed! Error - %@ %@",
           [error localizedDescription],
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
 }

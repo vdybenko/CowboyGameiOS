@@ -270,7 +270,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
  * successfully.
  */
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
-    NSLog(@"DuelStartViewController didFailWithError: %@  error %@"  , request,[error description]);
+    DLog(@"DuelStartViewController didFailWithError: %@  error %@"  , request,[error description]);
     _ivOponent.image = [UIImage imageNamed:@"pv_photo_default.png"];
     _ivOponent.transform = CGAffineTransformIdentity;
     _ivOponent.transform = CGAffineTransformMakeScale(-1.0, 1.0);

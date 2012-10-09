@@ -47,12 +47,12 @@
 
 -(void)rotateToLandscape
 {
-    NSLog(@"Rotate Landscape");
+    DLog(@"Rotate Landscape");
 }
 
 -(void)rotateToPortrait
 {
-    NSLog(@"Rotate Portrait");
+    DLog(@"Rotate Portrait");
     [lbTopText setHidden:NO];
     CGAffineTransform transform = CGAffineTransformMakeRotation(0);
     helpView.transform = transform;
