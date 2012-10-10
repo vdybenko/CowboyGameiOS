@@ -9,7 +9,6 @@
 #import "CollectionAppWrapper.h"
 #import "UIImage+Save.h"
 
-
 @implementation CollectionAppWrapper
 
 -(void)runApp:(CDCollectionApp *)pAPP;
@@ -20,7 +19,7 @@
     }
 }
 
--(void)checkForInstal:(CDCollectionApp *)pAPP;
+-(void)checkAllAppForInstall:(CDCollectionApp *)pAPP;
 {
     if ([pAPP.cdURL isEqualToString:@""]) {
         pAPP.cdInstalStatus=AppStatusNoURL;
@@ -36,18 +35,17 @@
 
 +(void)runAppStore:(NSString *)path;
 {
-//    NSString *path2=[NSString stringWithFormat:@"itms://itunes.apple.com/ru/app/platforma/id525730690?mt=8"];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:path]];
 }
 
--(void) setImgWithURL:(CDCollectionApp *)pAPP;
+-(void) saveImgWithURL:(CDCollectionApp *)pAPP;
 {    
     [UIImage saveImage:pAPP.cdURL URL:pAPP.cdIcon];            
 }
 
--(UIImage*) getPictureImg:(CDCollectionApp *)pAPP;
+-(UIImage*) appImage:(CDCollectionApp *)pAPP;
 {
-    return [UIImage getImage:pAPP.cdIcon];
+    return [UIImage loadImageFromDocumentDirectory:pAPP.cdIcon];
 }
 
 +(void)deleteImage:(NSString *) imageName;

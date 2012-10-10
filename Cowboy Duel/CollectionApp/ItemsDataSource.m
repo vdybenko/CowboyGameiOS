@@ -20,42 +20,26 @@
 -(id) init {
 	self = [super init];
 	
-	if (!self) {
-		return nil;
+	if (self) {
+		collectionAppWrapper=[[CollectionAppWrapper alloc]init];
+        [self reloadDataSource];
 	}
-    
-    collectionAppWrapper=[[CollectionAppWrapper alloc]init];
-    
-    
-    [self reloadDataSource];
-
 	return self;
 }
 
 -(void) reloadDataSource;
 {
-    NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"colectionApp"];
-    arrItemsList=[[NSArray alloc] initWithArray:[NSKeyedUnarchiver unarchiveObjectWithData:data1]];
+    NSData *loadData = [[NSUserDefaults standardUserDefaults] objectForKey:@"colectionApp"];
+    arrItemsList=[[NSArray alloc] initWithArray:[NSKeyedUnarchiver unarchiveObjectWithData:loadData]];
     
     for (CDCollectionApp *_app in arrItemsList) {
-//        if ([_app.cdInstalStatus isEqualToNumber:[NSNumber numberWithInt:1]]) {
-//            [collectionAppWrapper checkForInstal:_app];
-//        }else if ([_app.cdInstalStatus isEqualToNumber:[NSNumber numberWithInt:2]]) {
-////            [collectionAppWrapper setImgWithURL:_app];
-//            [collectionAppWrapper checkForInstal:_app];
-//        }
-        [collectionAppWrapper checkForInstal:_app];
+        [collectionAppWrapper checkAllAppForInstall:_app];
     }
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:arrItemsList];
-    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"colectionApp"];
+    NSData *saveData = [NSKeyedArchiver archivedDataWithRootObject:arrItemsList];
+    [[NSUserDefaults standardUserDefaults] setObject:saveData forKey:@"colectionApp"];
 }
 
-#pragma mark - Memory management
-
-
-
-
-#pragma mark - Delegated methods
+#pragma mark - UITableViewDataSource
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	static NSString *subjectCellIdentifier = @"itemCellIdentifier";
@@ -104,7 +88,6 @@
     
     customText.text=[NSString stringWithFormat:@"%@   ver %@ ", _app.cdName,_app.cdAppVersion];
     
-//    customDetailText.text=_app.cdDescription;
     if (_app.cdInstalStatus==AppStatusInstall) {
         customDetailText.text=@"Install";
     }else if (_app.cdInstalStatus==AppStatusNotInstall) {
@@ -115,27 +98,20 @@
     
     dispatch_queue_t queue2 = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
     dispatch_async(queue2, ^{
-        UIImage *image=[collectionAppWrapper getPictureImg:_app];
+        UIImage *image=[collectionAppWrapper appImage:_app];
         dispatch_sync(dispatch_get_main_queue(), ^{
             [customImage setImage:image];
         });
         
     });
-    
     return cell;
 }
 
-
-
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    NSInteger *intdff=[arrItemsList count];
-//    DLog(@"");
     return [arrItemsList count];
 }
-
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return 1;
 }
-
 @end

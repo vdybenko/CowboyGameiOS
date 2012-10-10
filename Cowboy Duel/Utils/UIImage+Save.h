@@ -10,7 +10,6 @@
 
 @interface UIImage (usefull_stuff)
     +(NSString*) saveImage:(NSString*) pName URL:(NSString*)pURL;
-    +(UIImage *) getImage:(NSString *) pPath;
-    +(UIImage *) getImageFullPath:(NSString *) pPath;
-
+    +(UIImage *) loadImageFromDocumentDirectory:(NSString *) pPath;
+    +(UIImage *) loadImageFullPath:(NSString *) pPath;
 @end

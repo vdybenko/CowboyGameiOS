@@ -8,8 +8,22 @@
 
 #import "UIImageView+AttachedView.h"
 
-@implementation UIImageView_AttachedView
+@interface UIImageView_AttachedView()
+{
+    BOOL runAnimation;
+    int arrowDirection;
+    int arrowLimitRight;
+    int arrowLimitLeft;
+    int amplitude;
+    CGRect frameFirstPosition;
+    UIView *parentView;
+    
+    NSInteger frequency;
+    DirectionToAnimate  direction;
+}
+@end
 
+@implementation UIImageView_AttachedView
 
 - (id) initWithImage:(UIImage *)image attachedToFrame: (UIView *) pParentView frequence: (NSInteger ) freq amplitude: (NSInteger) pAmplitude direction: (DirectionToAnimate ) dDirection   
 {
@@ -23,22 +37,10 @@
         [self setStartPosition];
     }
     return self;   
-    
 };
-
-- (void)changeAttacheObject:(UIView *)pParentView;
-{
-    [self stopAnimation];
-    [self setStartPosition];
-    parentView = pParentView;
-    [self setStartPosition];
-    [self startAnimation];
-}
-
 
 -(void)setStartPosition
 {
-
     frameFirstPosition = self.frame;
 
     frameFirstPosition.origin.y = parentView.center.y - frameFirstPosition.size.height/2;
@@ -64,11 +66,11 @@
 
     self.frame = frameFirstPosition;
 }
+
 - (void) startAnimation 
 {
     runAnimation=YES;
     [self arrowAnimation];
-    
 }
 
 - (void) stopAnimation 
@@ -76,8 +78,6 @@
     runAnimation = NO;     
     self.frame = frameFirstPosition;
 }
-
-
 
 -(void)arrowAnimation
 {
@@ -102,14 +102,4 @@
     
     
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
-
 @end

@@ -29,7 +29,6 @@
 #import "CDAchivment.h"
 #import "ActivityIndicatorView.h"
 #import <StoreKit/StoreKit.h>
-#import "CustomAlert.h"
 #import "revision.h"
 #import "LoginViewController.h"
 //#import "OpenFeint+UserOptions.h"
@@ -71,7 +70,6 @@
     
     UIAlertView *baseAlert;
     UIView *v10DolarsForDay;
-    CustomAlert *avrorizationAlert;
         
     float globalAngle;
     BOOL soundCheack;

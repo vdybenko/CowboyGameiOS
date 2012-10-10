@@ -9,14 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "CollectionAppWrapper.h"
 
-
-@interface ItemsDataSource : NSObject <UITableViewDataSource> {
-    NSArray *arrItemsList;
-    CollectionAppWrapper *collectionAppWrapper;
-}
-@property(readonly)NSArray *arrItemsList;
-@property(strong,nonatomic)CollectionAppWrapper *collectionAppWrapper;
+@interface ItemsDataSource : NSObject <UITableViewDataSource>
+@property (readonly) NSArray *arrItemsList;
+@property (strong,nonatomic) CollectionAppWrapper *collectionAppWrapper;
 
 -(void) reloadDataSource;
-
 @end

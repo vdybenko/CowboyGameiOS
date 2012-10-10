@@ -9,13 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface HelpPracticeView : UIView
-{
-    UILabel *lbTopText;
-    UILabel *lbBottomText;
-    UIImageView *helpView;
-}
-
--(void)rotateToLandscape;
--(void)rotateToPortrait;
 
 @end

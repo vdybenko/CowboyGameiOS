@@ -10,6 +10,6 @@
 
 @interface AdvertisingOtherAppViewController : AdvertisingViewController
 {
-    NSMutableArray *_AppsForShow;
+    
 }
 @end

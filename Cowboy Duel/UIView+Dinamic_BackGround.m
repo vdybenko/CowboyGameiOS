@@ -12,9 +12,7 @@
 @implementation UIView (dinamic_height_backgroud)
 
 -(void)setDinamicHeightBackground;
-{
-    // Initialization code
-    
+{    
     UIImage *imageBackGround=[UIImage imageNamed:@"view_dinamic_height.png"];
     CGRect mainFrame=self.frame;
     CGRect frameToCrop;
@@ -30,7 +28,6 @@
     CGRect frame=CGRectMake(0, 0, imageBackGround.size.width, mainFrame.size.height);
     [ivBody setFrame:frame];
     
-   // UIView *firstView=[self.subviews objectAtIndex:0];
     [self insertSubview:ivBody atIndex:0];
     CGImageRelease(imageRef);
     
@@ -60,7 +57,6 @@
             break;
     }
     [self setFrame:frameToAttach];
-   
 }
 
 -(CGSize)fitSizeToText:(UILabel*)label;

@@ -175,7 +175,6 @@
 		761EFA501573BE91001670EB /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761EFA4C1573BE91001670EB /* HelpViewController.xib */; };
 		761EFA511573BE91001670EB /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761EFA4D1573BE91001670EB /* ProfileViewController.xib */; };
 		761EFA521573BE91001670EB /* StartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761EFA4E1573BE91001670EB /* StartViewController.xib */; };
-		762AA2F115B97FA0001B65E2 /* UIImage+Tint.m in Sources */ = {isa = PBXBuildFile; fileRef = 762AA2EF15B97FA0001B65E2 /* UIImage+Tint.m */; };
 		762AA31015B99C72001B65E2 /* TopPlayerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 762AA30F15B99C72001B65E2 /* TopPlayerCell.m */; };
 		763F8A271578A1F800D8BB42 /* DuelViewControllerWithXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 763F8A261578A1F800D8BB42 /* DuelViewControllerWithXib.xib */; };
 		763F8A291578A3A900D8BB42 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 763F8A281578A3A900D8BB42 /* libxml2.2.dylib */; };
@@ -323,7 +322,6 @@
 		BDD07BC4141E1F170085E4FB /* CDAchivment.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B59141E1F170085E4FB /* CDAchivment.m */; };
 		BDD07BC5141E1F170085E4FB /* CDDuel.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B5B141E1F170085E4FB /* CDDuel.m */; };
 		BDD07BC6141E1F170085E4FB /* CDTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B5D141E1F170085E4FB /* CDTransaction.m */; };
-		BDD07BC7141E1F170085E4FB /* CustomAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B60141E1F170085E4FB /* CustomAlert.m */; };
 		BDD07BC8141E1F170085E4FB /* DuelDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B62141E1F170085E4FB /* DuelDataSource.m */; };
 		BDD07BC9141E1F170085E4FB /* DuelStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B64141E1F170085E4FB /* DuelStartViewController.m */; };
 		BDD07BCA141E1F170085E4FB /* DuelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B66141E1F170085E4FB /* DuelViewController.m */; };
@@ -343,7 +341,6 @@
 		BDD07BE1141E1F170085E4FB /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B98141E1F170085E4FB /* ProfileViewController.m */; };
 		BDD07BE2141E1F170085E4FB /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B9B141E1F170085E4FB /* Reachability.m */; };
 		BDD07BE3141E1F170085E4FB /* ResoultDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B9D141E1F170085E4FB /* ResoultDataSource.m */; };
-		BDD07BE4141E1F170085E4FB /* ScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B9F141E1F170085E4FB /* ScrollView.m */; };
 		BDD07BE7141E1F170085E4FB /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07BA5141E1F170085E4FB /* StartViewController.m */; };
 		BDD07BEA141E1F170085E4FB /* TeachingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07BAB141E1F170085E4FB /* TeachingViewController.m */; };
 		BDD07BEC141E1F170085E4FB /* TestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07BAE141E1F170085E4FB /* TestAppDelegate.m */; };
@@ -549,8 +546,6 @@
 		761EFA4C1573BE91001670EB /* HelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HelpViewController.xib; path = Xib/HelpViewController.xib; sourceTree = "<group>"; };
 		761EFA4D1573BE91001670EB /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProfileViewController.xib; path = Xib/ProfileViewController.xib; sourceTree = "<group>"; };
 		761EFA4E1573BE91001670EB /* StartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StartViewController.xib; path = Xib/StartViewController.xib; sourceTree = "<group>"; };
-		762AA2EF15B97FA0001B65E2 /* UIImage+Tint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Tint.m"; sourceTree = "<group>"; };
-		762AA2F015B97FA0001B65E2 /* UIImage+Tint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Tint.h"; sourceTree = "<group>"; };
 		762AA30E15B99C72001B65E2 /* TopPlayerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopPlayerCell.h; sourceTree = "<group>"; };
 		762AA30F15B99C72001B65E2 /* TopPlayerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopPlayerCell.m; sourceTree = "<group>"; };
 		763F8A261578A1F800D8BB42 /* DuelViewControllerWithXib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DuelViewControllerWithXib.xib; path = Xib/DuelViewControllerWithXib.xib; sourceTree = "<group>"; };
@@ -829,8 +824,6 @@
 		BDD07B5C141E1F170085E4FB /* CDTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDTransaction.h; sourceTree = "<group>"; };
 		BDD07B5D141E1F170085E4FB /* CDTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDTransaction.m; sourceTree = "<group>"; };
 		BDD07B5E141E1F170085E4FB /* Cowboy Duel-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Cowboy Duel-Prefix.pch"; sourceTree = "<group>"; };
-		BDD07B5F141E1F170085E4FB /* CustomAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAlert.h; sourceTree = "<group>"; };
-		BDD07B60141E1F170085E4FB /* CustomAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlert.m; sourceTree = "<group>"; };
 		BDD07B61141E1F170085E4FB /* DuelDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuelDataSource.h; sourceTree = "<group>"; };
 		BDD07B62141E1F170085E4FB /* DuelDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DuelDataSource.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BDD07B63141E1F170085E4FB /* DuelStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuelStartViewController.h; sourceTree = "<group>"; };
@@ -870,8 +863,6 @@
 		BDD07B9B141E1F170085E4FB /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		BDD07B9C141E1F170085E4FB /* ResoultDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResoultDataSource.h; sourceTree = "<group>"; };
 		BDD07B9D141E1F170085E4FB /* ResoultDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResoultDataSource.m; sourceTree = "<group>"; };
-		BDD07B9E141E1F170085E4FB /* ScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollView.h; sourceTree = "<group>"; };
-		BDD07B9F141E1F170085E4FB /* ScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollView.m; sourceTree = "<group>"; };
 		BDD07BA4141E1F170085E4FB /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
 		BDD07BA5141E1F170085E4FB /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = StartViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BDD07BAA141E1F170085E4FB /* TeachingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingViewController.h; sourceTree = "<group>"; };
@@ -1744,16 +1735,10 @@
 			children = (
 				76AFC7A015ED1B740009294B /* UIScrollView+AH3DPullRefresh.h */,
 				76AFC7A115ED1B740009294B /* UIScrollView+AH3DPullRefresh.m */,
-				762AA2EF15B97FA0001B65E2 /* UIImage+Tint.m */,
-				762AA2F015B97FA0001B65E2 /* UIImage+Tint.h */,
 				767E1F72154BFBAF001FDDD5 /* OCPromptView.h */,
 				767E1F71154BFBAF001FDDD5 /* OCPromptView.m */,
-				BDD07B9E141E1F170085E4FB /* ScrollView.h */,
-				BDD07B9F141E1F170085E4FB /* ScrollView.m */,
 				BDD07B3F141E1F170085E4FB /* ActivityIndicatorView.h */,
 				BDD07B40141E1F170085E4FB /* ActivityIndicatorView.m */,
-				BDD07B5F141E1F170085E4FB /* CustomAlert.h */,
-				BDD07B60141E1F170085E4FB /* CustomAlert.m */,
 				76A6F92D15878ED1009CE450 /* UIImageView+AttachedView.m */,
 				76A6F92E15878ED1009CE450 /* UIImageView+AttachedView.h */,
 				7682BDDE15AC5F22001C09EC /* HelpPracticeView.h */,
@@ -2123,7 +2108,6 @@
 				BDD07BC4141E1F170085E4FB /* CDAchivment.m in Sources */,
 				BDD07BC5141E1F170085E4FB /* CDDuel.m in Sources */,
 				BDD07BC6141E1F170085E4FB /* CDTransaction.m in Sources */,
-				BDD07BC7141E1F170085E4FB /* CustomAlert.m in Sources */,
 				BDD07BC8141E1F170085E4FB /* DuelDataSource.m in Sources */,
 				BDD07BC9141E1F170085E4FB /* DuelStartViewController.m in Sources */,
 				BDD07BCA141E1F170085E4FB /* DuelViewController.m in Sources */,
@@ -2143,7 +2127,6 @@
 				BDD07BE1141E1F170085E4FB /* ProfileViewController.m in Sources */,
 				BDD07BE2141E1F170085E4FB /* Reachability.m in Sources */,
 				BDD07BE3141E1F170085E4FB /* ResoultDataSource.m in Sources */,
-				BDD07BE4141E1F170085E4FB /* ScrollView.m in Sources */,
 				BDD07BE7141E1F170085E4FB /* StartViewController.m in Sources */,
 				BDD07BEA141E1F170085E4FB /* TeachingViewController.m in Sources */,
 				BDD07BEC141E1F170085E4FB /* TestAppDelegate.m in Sources */,
@@ -2237,7 +2220,6 @@
 				76A1A50615ADFB9300DC581B /* FBLoginDialog.m in Sources */,
 				76A1A50715ADFB9300DC581B /* FBRequest.m in Sources */,
 				767B56CF15AEDE2F00ECA0C4 /* CustomNSURLConnection.m in Sources */,
-				762AA2F115B97FA0001B65E2 /* UIImage+Tint.m in Sources */,
 				762AA31015B99C72001B65E2 /* TopPlayerCell.m in Sources */,
 				760E676115BD8277006F6832 /* TopPlayersDataSource.m in Sources */,
 				760E676515BD844B006F6832 /* TopPlayersViewController.m in Sources */,

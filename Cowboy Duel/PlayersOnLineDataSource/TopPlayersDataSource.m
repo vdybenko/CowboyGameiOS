@@ -95,7 +95,7 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
     NSString *name=[[OGHelper sharedInstance ] getClearName:player.dAuth];
     NSString *path=[NSString stringWithFormat:@"%@/icon_%@.png",[[OGHelper sharedInstance] getSavePathForList],name];
     if([[NSFileManager defaultManager] fileExistsAtPath:path]){  
-        UIImage *image=[UIImage getImageFullPath:path];
+        UIImage *image=[UIImage loadImageFullPath:path];
         [cell setPlayerIcon:image];
     }else {
         IconDownloader *iconDownloader = [imageDownloadsInProgress objectForKey:indexPath];

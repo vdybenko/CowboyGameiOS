@@ -110,7 +110,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
     _ivPlayer.contentMode = UIViewContentModeScaleAspectFit;
     if([[OGHelper sharedInstance] isAuthorized]){
         NSString *pathToImage=[[OGHelper sharedInstance] apiGraphGetImage:@"me"];
-        UIImage *image=[UIImage getImage:[pathToImage lastPathComponent]];
+        UIImage *image=[UIImage loadImageFromDocumentDirectory:[pathToImage lastPathComponent]];
         [_ivPlayer setImage:image];
     }else {
         [_ivPlayer setImage:[UIImage imageNamed:@"pv_photo_default.png"]];
@@ -360,7 +360,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
     NSString *name=[[OGHelper sharedInstance ] getClearName:oponentAccount.accountID];
     NSString *path=[NSString stringWithFormat:@"%@/icon_%@.png",[[OGHelper sharedInstance] getSavePathForList],name];
     if([[NSFileManager defaultManager] fileExistsAtPath:path]){  
-        UIImage *image=[UIImage getImageFullPath:path];
+        UIImage *image=[UIImage loadImageFullPath:path];
         _ivOponent.image = image;
     }else {
         if ([oponentAccount.accountID rangeOfString:@"F"].location != NSNotFound) {

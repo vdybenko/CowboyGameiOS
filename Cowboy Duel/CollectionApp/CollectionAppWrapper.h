@@ -18,9 +18,9 @@ typedef enum {
 
 @interface CollectionAppWrapper : NSObject
         
--(void)checkForInstal:(CDCollectionApp *)pAPP;
--(void) setImgWithURL:(CDCollectionApp *)pAPP;
--(UIImage*) getPictureImg:(CDCollectionApp *)pAPP;
+-(void)checkAllAppForInstall:(CDCollectionApp *)pAPP;
+-(void) saveImgWithURL:(CDCollectionApp *)pAPP;
+-(UIImage*) appImage:(CDCollectionApp *)pAPP;
 +(void)runAppStore:(NSString *)path;
 -(void)runApp:(CDCollectionApp *)pAPP;
 +(void)deleteImage:(NSString *) imageName;

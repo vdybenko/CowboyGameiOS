@@ -17,8 +17,6 @@
 #import "LoginViewController.h"
 #import "DuelRewardLogicController.h"
 #import "LeaderBoardViewController.h"
-#import "UIImage+Tint.h"
-
 
 @interface ProfileViewController (private)
     -(void)setImageFromFacebook;
@@ -384,7 +382,7 @@
 -(void)setImageFromFacebook
 {
     NSString *pathToImage=[[OGHelper sharedInstance] apiGraphGetImage:@"me"];
-    UIImage *image=[UIImage getImage:[pathToImage lastPathComponent]];
+    UIImage *image=[UIImage loadImageFromDocumentDirectory:[pathToImage lastPathComponent]];
     [_ivIconUser setImage:image];
 }
 

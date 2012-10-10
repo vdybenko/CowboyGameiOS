@@ -8,7 +8,6 @@
 
 #import "ActivityIndicatorView.h"
 
-
 @implementation ActivityIndicatorView
 
 -(id)init{
@@ -31,8 +30,6 @@
         
         [hudView addSubview:activityIndicatorView];	
         [self addSubview:hudView];
-        
-        //        [hudView release];
     }
     return self;
 }
@@ -43,24 +40,8 @@
     if (self) {
         UIView *hudView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 480, 480)];
         hudView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
-        
-//        lbTopText=[[UILabel alloc]initWithFrame:CGRectMake(85, 65, 320, 150)];
-//        
-//        [lbTopText setFont: [UIFont fontWithName: @"DecreeNarrow" size:30]];
-//        lbTopText.textAlignment = UITextAlignmentCenter;
-//        lbTopText.backgroundColor=[UIColor clearColor];
-//        [lbTopText setTextColor:[UIColor whiteColor]];
-//        [hudView addSubview:lbTopText];	
-        
-//        UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-//        activityIndicatorView.frame = CGRectMake(210, 210, 60, 60);
-//        activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
-//        [activityIndicatorView startAnimating];
-//        
-//        [hudView addSubview:activityIndicatorView];	
+        	
         [self addSubview:hudView];
-        
-        //        [hudView release];
     }
     return self;
 }

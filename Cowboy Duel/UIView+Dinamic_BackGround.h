@@ -10,7 +10,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UIImageView+AttachedView.h"
 
-
 @interface UIView (dinamic_height_backgroud)
 -(void)setDinamicHeightBackground;
 -(void)dinamicAttachToView:(UIView*)attachedToView withDirection:(DirectionToAnimate)direction;

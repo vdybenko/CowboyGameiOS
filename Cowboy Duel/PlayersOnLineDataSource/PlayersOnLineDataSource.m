@@ -94,7 +94,7 @@ static const char *LIST_ONLINE_URL =  BASE_URL"users/listview";
     NSString *name=[[OGHelper sharedInstance ] getClearName:player.dAuth];
     NSString *path=[NSString stringWithFormat:@"%@/icon_%@.png",[[OGHelper sharedInstance] getSavePathForList],name];
     if([[NSFileManager defaultManager] fileExistsAtPath:path]){  
-        UIImage *image=[UIImage getImageFullPath:path];
+        UIImage *image=[UIImage loadImageFullPath:path];
         [cell setPlayerIcon:image];
     }else {
         IconDownloader *iconDownloader = [imageDownloadsInProgress objectForKey:indexPath];

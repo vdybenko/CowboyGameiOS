@@ -12,15 +12,10 @@
 @interface Utils : NSObject {
 
 }
-
 + (NSString *)applicationDocumentsDirectory;
 
 + (NSData *)md5digest:(NSString *)str;
 + (NSString *)md5:(NSString *)str;
-
-+ (NSString *)encodeBase64WithString:(NSString *)strData;
-+ (NSString *)encodeBase64WithData:(NSData *)objData;
-+ (NSData *)decodeBase64WithString:(NSString *)strBase64;
 
 +(NSString*)makeStringForPostRequest:(NSDictionary*)pDic;
 

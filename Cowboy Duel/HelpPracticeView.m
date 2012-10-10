@@ -8,15 +8,22 @@
 
 #import "HelpPracticeView.h"
 
-@implementation HelpPracticeView
+@interface HelpPracticeView()
+{
+    UILabel *lbTopText;
+    UILabel *lbBottomText;
+    UIImageView *helpView;
+}
+@end
 
+@implementation HelpPracticeView
 -(id)init{
     self = [super init];
     if (self) {
         UIView *hudView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 480, 480)];
         hudView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.65];
         
-        lbTopText=[[UITextView alloc]initWithFrame:CGRectMake(0, 0, 320, 150)];
+        lbTopText=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 320, 150)];
         
         [lbTopText setFont: [UIFont fontWithName: @"DecreeNarrow" size:30]];
         lbTopText.textAlignment = UITextAlignmentCenter;
@@ -27,9 +34,6 @@
         [hudView addSubview:lbTopText];
         [lbTopText setHidden:NO];
         
-        
-
-        
         helpView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dv_arm.png"]];
         CGRect frame = helpView.frame;
        
@@ -39,25 +43,8 @@
         [hudView addSubview:helpView];
                 
         [self addSubview:hudView];
-        
-       
     }
     return self;
 }
-
--(void)rotateToLandscape
-{
-    DLog(@"Rotate Landscape");
-}
-
--(void)rotateToPortrait
-{
-    DLog(@"Rotate Portrait");
-    [lbTopText setHidden:NO];
-    CGAffineTransform transform = CGAffineTransformMakeRotation(0);
-    helpView.transform = transform;
-    
-}
-
 
 @end

@@ -14,8 +14,8 @@
     UILabel *lbTopText;
 }
 
--(id)init;
--(id)initWithoutRotate;
+- (id)init;
+- (id)initWithoutRotate;
 - (void)setText:(NSString *)text;
 - (void)showView;
 - (void)hideView;

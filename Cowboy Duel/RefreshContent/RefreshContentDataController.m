@@ -74,7 +74,7 @@ NSString  *const USER_DEFULTS_KEY_COLLECTION_APPS   = @"colectionApp";
     return nil;
 }
 
--(NSString*)downloadImage:(NSString *)pUrl;
+-(NSString*)downloadImageFromDocumentDirectory:(NSString *)pUrl;
 {    
     NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *pName=[pUrl lastPathComponent];
@@ -138,7 +138,7 @@ NSString  *const USER_DEFULTS_KEY_COLLECTION_APPS   = @"colectionApp";
                 }else if ([element isKindOfClass:[NSString class]]){
                     
                     if ([keyForUserDefualts isEqualToString:@"img"]) {
-                        [self downloadImage:element];
+                        [self downloadImageFromDocumentDirectory:element];
                          DLog(@"Download Complite for key <%@> image",keyForUserDefualts);
                     }else if ([keyForUserDefualts isEqualToString:@"img_delete"]) {
                         [CollectionAppWrapper deleteImage:element];
@@ -224,7 +224,7 @@ NSString  *const USER_DEFULTS_KEY_COLLECTION_APPS   = @"colectionApp";
         NSString *nameProcedure=[NSString stringWithFormat:@"set%@:",keyParametr];
         
         if ([[elementWithProperties objectForKey:keyParametr] isKindOfClass:[NSDictionary class]]) {
-            stringElement=[self downloadImage:[[elementWithProperties objectForKey:keyParametr] objectForKey:@"img"]];
+            stringElement=[self downloadImageFromDocumentDirectory:[[elementWithProperties objectForKey:keyParametr] objectForKey:@"img"]];
         }else {
             stringElement=[elementWithProperties objectForKey:keyParametr];
             if ([stringElement isAllDigits]&&![stringElement isEqualToString:@""]) {

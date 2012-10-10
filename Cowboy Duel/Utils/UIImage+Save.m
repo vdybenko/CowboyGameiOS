@@ -22,7 +22,7 @@
     return nameFile;
 }
 
-+(UIImage *) getImage:(NSString *) pPath{
++(UIImage *) loadImageFromDocumentDirectory:(NSString *) pPath{
     if (pPath) {
         NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         NSString *filePath = [docDir stringByAppendingPathComponent:pPath];
@@ -34,7 +34,7 @@
     }
 }
 
-+(UIImage *) getImageFullPath:(NSString *) pPath{
++(UIImage *) loadImageFullPath:(NSString *) pPath{
     if (pPath) {
         NSData *pngData = [NSData dataWithContentsOfFile:pPath];
         UIImage *image = [UIImage imageWithData:pngData];

@@ -1542,7 +1542,6 @@ static StartViewController *sharedHelper = nil;
         [hudView setHidden:YES];
         [hudView removeFromSuperview];
         //        NSLocalizedString(@"CAN'T CONNECT", @"")
-        [avrorizationAlert dismissWithClickedButtonIndex:-1 animated:YES];
         [activityIndicatorView hideView]; 
         avtorizationInProcess = NO;
         [self performSelector:@selector(duelButtonClick) withObject:self afterDelay:5.2];

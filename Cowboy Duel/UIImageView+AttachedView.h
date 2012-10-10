@@ -14,23 +14,9 @@ typedef enum {
     DirectionToAnimateRight
 } DirectionToAnimate;
 
-
 @interface UIImageView_AttachedView : UIImageView
-{
-    BOOL runAnimation;
-    int arrowDirection;
-    int arrowLimitRight;
-    int arrowLimitLeft;
-    int amplitude;
-    CGRect frameFirstPosition;
-    UIView *parentView;
-    
-    NSInteger frequency;
-    DirectionToAnimate  direction;
-}
 
 - (id) initWithImage:(UIImage *)image attachedToFrame: (UIView *) pParentView frequence: (NSInteger ) freq amplitude: (NSInteger) amplitude direction: (DirectionToAnimate ) dDirection ;  
-- (void) changeAttacheObject:(UIView *)pParentView;
 - (void) startAnimation;
 - (void) stopAnimation;
 - (void) arrowAnimation;

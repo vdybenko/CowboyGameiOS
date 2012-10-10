@@ -9,33 +9,38 @@
 #import "AdvertisingViewController.h"
 #import "UIView+Dinamic_BackGround.h"
 
+@interface AdvertisingViewController()
+{
+    CDCollectionAdvertisingApp *_AppCurentForShow;
+    CollectionAppWrapper *_collectionAppWrapper;
+    
+    BOOL advertisingNeed;
+}
+@property (strong) IBOutlet UIView *view;
+@property (strong) IBOutlet UIView *bodyView;
+@property (strong) IBOutlet UILabel *titleView;
+@property (strong) IBOutlet UIWebView *webBody;
+@property (strong) IBOutlet UIButton *_btnAppStore;
+@end
+
 @implementation AdvertisingViewController
+@synthesize view;
+@synthesize bodyView;
+@synthesize titleView;
+@synthesize webBody;
+@synthesize _btnAppStore;
 
 -(id)init;
 {
     self = [super initWithNibName:@"AdvertisingViewController" bundle:[NSBundle mainBundle]];
     if (self) {
-        // Custom initialization
         _collectionAppWrapper=[[CollectionAppWrapper alloc] init];
     }
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-
 -(void)viewWillAppear:(BOOL)animated {
     [bodyView setDinamicHeightBackground];
-}
-
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -53,10 +58,5 @@
 -(IBAction)btnSkipClick:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
-}
-
--(void) setInformationAboutApp;
-{
-    
 }
 @end

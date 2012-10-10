@@ -14,23 +14,6 @@
 {
     self = [super init];
     if (self) {
-        // Custom initialization
-//        CDCollectionAdvertisingApp *app1=[[CDCollectionAdvertisingApp alloc] init];
-//        
-//        app1.cdIcon=@"50px-Tango_style_Wikipedia_Icon.svg.png";
-//        app1.cdAppStoreURL=@"";
-//        app1.cdDescription=@"Desc1";
-//        app1.cdName=@"App1_launchme";
-//        app1.cdURL=@"launchme";
-//        app1.cdAppVersion=@"1.5";
-//        app1.cdNumberOfShows=3;
-//        
-//        [_collectionAppWrapper checkForInstal:app1];
-        
-//        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:app1];
-//        [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"AdvertisingNewVersion"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-                        
         NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"AdvertisingNewVersion"];
         NSMutableArray *arr=[[NSMutableArray alloc] initWithArray:[NSKeyedUnarchiver unarchiveObjectWithData:data1]];
         if ([arr count]!=0) {

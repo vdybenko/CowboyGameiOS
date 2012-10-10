@@ -9,13 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "ItemsDataSource.h"
 
-@interface CollectionAppViewController : UIViewController<UITableViewDelegate>{
-    IBOutlet UITableView * tableView;
-    IBOutlet UIButton *btnBack;
-    IBOutlet UILabel *lbBackBtn;
-    ItemsDataSource *itemsDataSource;
-}
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UIButton *btnBack;
+@interface CollectionAppViewController : UIViewController<UITableViewDelegate>
 -(void)reloadController;
 @end
