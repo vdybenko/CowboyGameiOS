@@ -10,17 +10,7 @@
 #import "UIView+Dinamic_BackGround.h"
 
 @interface AdvertisingViewController()
-{
-    CDCollectionAdvertisingApp *_AppCurentForShow;
-    CollectionAppWrapper *_collectionAppWrapper;
-    
-    BOOL advertisingNeed;
-}
-@property (strong) IBOutlet UIView *view;
-@property (strong) IBOutlet UIView *bodyView;
-@property (strong) IBOutlet UILabel *titleView;
-@property (strong) IBOutlet UIWebView *webBody;
-@property (strong) IBOutlet UIButton *_btnAppStore;
+
 @end
 
 @implementation AdvertisingViewController
