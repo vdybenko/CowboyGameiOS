@@ -33,7 +33,6 @@ static const char *LIST_ONLINE_URL =  BASE_URL"users/listview";
      _tableView=pTable;
      numberFormatter = [[NSNumberFormatter alloc] init];
      [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    //[self reloadDataSource];
      
      topPlayersDataSource = [[StartViewController sharedInstance] topPlayersDataSource];
      [topPlayersDataSource reloadDataSource];
@@ -43,11 +42,6 @@ static const char *LIST_ONLINE_URL =  BASE_URL"users/listview";
 
 -(void) reloadDataSource;
 {
-//    ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
-//    for (UITableViewCell *cell in listOfItemsViewController.tableView.visibleCells) {
-//        [cell setHidden:YES];
-//    }
-//    [self setCellsHide:YES];
     NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:LIST_ONLINE_URL encoding:NSUTF8StringEncoding]]
                                               cachePolicy:NSURLRequestUseProtocolCachePolicy
                                           timeoutInterval:kTimeOutSeconds];
@@ -68,28 +62,17 @@ static const char *LIST_ONLINE_URL =  BASE_URL"users/listview";
 #pragma mark - Delegated methods
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	static NSString *subjectCellIdentifier = @"itemCellIdentifier";
-    PlayerOnLineCell *cell = [tableView dequeueReusableCellWithIdentifier:subjectCellIdentifier];
+	PlayerOnLineCell* cell;
+    cell = [tableView dequeueReusableCellWithIdentifier:[PlayerOnLineCell cellID]];
     
-    if (!cell) {
-        cell = [[PlayerOnLineCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:subjectCellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [cell setShowsReorderControl:YES];
-        [cell setShouldIndentWhileEditing:YES];        
+    if (!cell ) {
+        cell = [PlayerOnLineCell cell];
+        [cell initMainControls];
     }
-    
-//    if (cellsHide) {
-//        [cell setHidden:YES];
-//        //return cell;
-//    }else {
-//        [cell setHidden:NO];
-//    }
-    
     CDPlayerOnLine *player;
-
-    player=[arrItemsList objectAtIndex:indexPath.row];
     
-    [cell setPlayerIcon:[UIImage imageNamed:@"pv_photo_default.png"]];
+    player=[arrItemsList objectAtIndex:indexPath.row];
+    [cell populateWithPlayer:player];
     
     NSString *name=[[OGHelper sharedInstance ] getClearName:player.dAuth];
     NSString *path=[NSString stringWithFormat:@"%@/icon_%@.png",[[OGHelper sharedInstance] getSavePathForList],name];
@@ -138,9 +121,6 @@ static const char *LIST_ONLINE_URL =  BASE_URL"users/listview";
             
         }
     }
-
-    
-    cell.playerName.text=player.dNickName;
     
     if ([topPlayersDataSource isPlayerInTop10:player.dAuth]) {
         [cell setRibbonHide:NO];
@@ -149,30 +129,11 @@ static const char *LIST_ONLINE_URL =  BASE_URL"users/listview";
         [cell setRibbonHide:YES];
         player.dInTop=NO;
     }
-    
-    NSString *formattedNumberString = [numberFormatter stringFromNumber:[NSNumber numberWithInt:( player.dMoney)]];   
-    cell.gold.text=[NSString stringWithFormat:@"money %@",formattedNumberString];
-    
-    NSString *nameOfRank=[NSString stringWithFormat:@"%dRank",player.dLevel];
-    cell.rank.text = NSLocalizedString(nameOfRank, @"");
-    
-    if(player.dOnline){
-        cell.status.text=NSLocalizedString(@"OnLine", @"");
-        cell.status.textColor = [UIColor blackColor];
-//        [cell.btnDuel setEnabled:YES];
-    }else {
-        cell.status.text=NSLocalizedString(@"OffLine", @"");
-        cell.status.textColor = [UIColor redColor];
-//        [cell.btnDuel setEnabled:NO];
-    }
-    
+
     [cell.btnDuel addTarget:self action:@selector(invaiteWithMessage:) forControlEvents:UIControlEventTouchUpInside];
-    [cell hideIndicatorConnectin];
     
     return cell;
 }
-
-
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [arrItemsList count];
@@ -217,7 +178,6 @@ static const char *LIST_ONLINE_URL =  BASE_URL"users/listview";
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         [listOfItemsViewController startTableAnimation];
     });
-//    [_tableView reloadData];
 }
 
 - (void)connection:(CustomNSURLConnection *)connection didReceiveData:(NSData *)data
@@ -255,7 +215,7 @@ static const char *LIST_ONLINE_URL =  BASE_URL"users/listview";
 
 -(void)invaiteWithMessage:(id __strong)sender;
 {    
-    PlayerOnLineCell *cell=(PlayerOnLineCell *)[sender superview];
+    PlayerOnLineCell *cell=(PlayerOnLineCell *)[[sender superview] superview];
     NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
     [cell showIndicatorConnectin];
     [delegate clickButton:indexPath];

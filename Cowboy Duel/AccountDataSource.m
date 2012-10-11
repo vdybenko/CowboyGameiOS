@@ -241,7 +241,6 @@ static AccountDataSource *sharedHelper = nil;
         
         [reason setObject:duel.dRateFire forKey:@"rate_fire"];
         [reason setObject:duel.dOpponentId forKey:@"opponent"];
-        [reason setObject:duel.dGps forKey:@"gps"];
         [reason setObject:duel.dDate forKey:@"date"];
         [result addObject:[NSDictionary dictionaryWithObject:reason forKey:@"duel"]];
     }

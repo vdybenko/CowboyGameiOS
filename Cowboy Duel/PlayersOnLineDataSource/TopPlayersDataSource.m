@@ -73,14 +73,7 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
         cell = [TopPlayerCell cell];
         [cell initMainControls];
     }
-
-    if (cellsHide) {
-        [cell setHidden:YES];
-        return cell;
-    }else {
-        [cell setHidden:NO];
-    }
-
+    
     CDTopPlayer *player;
 
     player=[arrItemsList objectAtIndex:indexPath.row];
