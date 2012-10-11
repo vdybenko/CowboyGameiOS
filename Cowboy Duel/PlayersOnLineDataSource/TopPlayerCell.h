@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "FXLabel.h"
+#import "CDTopPlayer.h"
 
 typedef enum {
 	TopPlayerCellStatusSimple,
@@ -16,25 +17,19 @@ typedef enum {
 } TopPlayerCellStatus;
 
 @interface TopPlayerCell : UITableViewCell
-
-@property (strong,nonatomic) UIImageView * Icon;
-@property (strong,nonatomic) UIImageView * backGroundSelected;
-@property (strong,nonatomic) UILabel * playerName;
-@property (strong,nonatomic) UILabel * coldTitle;
-@property (strong,nonatomic) UILabel * gold;
-@property (strong,nonatomic) FXLabel * rankNumber;
-
+@property (strong,nonatomic) IBOutlet UIView * backGround;
+@property (strong,nonatomic) IBOutlet UIImageView * icon;
+@property (strong,nonatomic) IBOutlet UIImageView * backGroundSelected;
+@property (strong,nonatomic) IBOutlet UILabel * coldTitle;
+@property (strong,nonatomic) IBOutlet UILabel * gold;
+@property (strong,nonatomic) IBOutlet UILabel * playerName;
 @property (nonatomic)  TopPlayerCellStatus status;
 
-//@property (strong,nonatomic) UIImageView * starFriend;
++(TopPlayerCell*)cell;
++(NSString*) cellID;
 
-
-
+-(void)populateWithPlayer:(CDTopPlayer *) player index:(NSIndexPath *)indexPath myIndex:(int)myProfileIndex;
+-(void) initMainControls;
 -(void) setPlayerIcon:(UIImage*)iconImage;
--(void)showIndicatorConnectin;
--(void)hideIndicatorConnectin;
 -(void)setCellStatus:(TopPlayerCellStatus)status;
--(void)setLargeNumbers:(BOOL)largeNumbers;
-
-//-(void)setStarSelected:(BOOL)starSelected;
 @end

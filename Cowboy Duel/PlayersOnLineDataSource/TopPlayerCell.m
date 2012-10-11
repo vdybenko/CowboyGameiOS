@@ -9,16 +9,25 @@
 #import "TopPlayerCell.h"
 #import "Utils.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UIView+Dinamic_BackGround.h"
+#import "AccountDataSource.h"
 
+@interface TopPlayerCell()
+{
+    NSNumberFormatter *numberFormatter;
+    FXLabel *rankNumber;
+}
+@property (strong,nonatomic) IBOutlet UILabel *rankNumberFake;
+@end
 
 @implementation TopPlayerCell
 
-@synthesize Icon;
+@synthesize backGround;
+@synthesize icon;
 @synthesize playerName;
 @synthesize gold;
 @synthesize coldTitle;
-//@synthesize starFriend;
-@synthesize rankNumber;
+@synthesize rankNumberFake;
 @synthesize backGroundSelected;
 @synthesize status;
 
@@ -26,140 +35,75 @@ UIColor * bronzeColor;
 UIColor * brownColor;
 UIColor * sandColor;
 
-
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        // Initialization code
-        [self setSelectionStyle:UITableViewCellSelectionStyleNone];
-        [self setControlls];
-    }
-    return self;
++(TopPlayerCell*) cell {
+    NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"TopPlayersCell" owner:nil options:nil];
+    return [objects objectAtIndex:0];
 }
 
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    //[self setControlls];
-    
-}
-- (void)prepareForReuse
-{
-    [super prepareForReuse];
-}
++(NSString*) cellID { return @"TopPlayersCell"; }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-
-
-
-
-
--(void) setControlls {
-    
-    //    background
-    [self setBackgroundColor:[UIColor clearColor]];
-    UIImage *imageBackGround=[UIImage imageNamed:@"view_dinamic_height.png"];
-    CGRect mainFrame=CGRectMake(0, 0, 320, 78);
-    CGRect frameToCrop;
-    
+-(void) initMainControls {
     bronzeColor=[UIColor colorWithRed:0.596 green:0.525 blue:0.416 alpha:1];
     brownColor=[UIColor colorWithRed:0.38 green:0.267 blue:0.133 alpha:1];
     sandColor=[UIColor colorWithRed:1 green:0.917 blue:0.749 alpha:1];
     
-    if ([Utils isiPhoneRetina]) {
-        frameToCrop=CGRectMake(0, 0, 2*imageBackGround.size.width, 2*mainFrame.size.height);
-    }else {
-        frameToCrop=CGRectMake(0, 0, imageBackGround.size.width, mainFrame.size.height);
-    }
-    CGImageRef imageRef = CGImageCreateWithImageInRect([imageBackGround CGImage], frameToCrop);
+    numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     
-    UIImage *cropped = [UIImage imageWithCGImage:imageRef];
-    UIImageView *ivBody=[[UIImageView alloc] initWithImage:cropped];
-    CGRect frame=CGRectMake(12, 2, imageBackGround.size.width, mainFrame.size.height);
-    [ivBody setFrame:frame];
+    rankNumber=[[FXLabel alloc] initWithFrame:rankNumberFake.frame];
+    rankNumber.backgroundColor = [UIColor clearColor];
+    [rankNumber setTextAlignment:UITextAlignmentCenter];
+    [self addSubview:rankNumber];
     
-    [self addSubview:ivBody];
-    CGImageRelease(imageRef);
+    coldTitle.text=NSLocalizedString(@"Gold:", @"");
     
-    ivBody.layer.cornerRadius = 20.0;
-    ivBody.layer.masksToBounds = YES;
-        
-    UIImageView *ivBottom=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"view_dinamic_height_bottom.png"]];
-    CGRect frameBottom=ivBottom.frame;
-    frameBottom.origin.x=frame.origin.x;
-    frameBottom.origin.y=frame.origin.y+(frame.size.height-frameBottom.size.height);
-    [ivBottom setFrame:frameBottom];
-    [self addSubview:ivBottom];
-    
-    backGroundSelected=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"topPlayerCell.png"]];
-    frame=backGroundSelected.frame;
-    frame.origin=CGPointMake(14 , 3);
-    [backGroundSelected setFrame:frame];
-    [self addSubview:backGroundSelected];
-    
-//  Number in list  
-        
-        rankNumber=[[FXLabel alloc] initWithFrame:CGRectMake(32, 25, 40 , 42)];
-        rankNumber.backgroundColor = [UIColor clearColor];
-        [rankNumber setTextAlignment:UITextAlignmentCenter];
-        [self addSubview:rankNumber]; 
+    [backGround setDinamicHeightBackground];
+}
 
-//  Icon
-        Icon=[[UIImageView alloc] initWithFrame:CGRectMake(80, 20, 42, 42)];
-        Icon.contentMode = UIViewContentModeScaleAspectFit;
-        [self addSubview:Icon];
+-(void)populateWithPlayer:(CDTopPlayer *) player index:(NSIndexPath *)indexPath myIndex:(int)myProfileIndex;
+{
+    [self setPlayerIcon:[UIImage imageNamed:@"pv_photo_default.png"]];
+    
+    playerName.text=player.dNickName;
+    
+    NSString *formattedNumberString = [numberFormatter stringFromNumber:[NSNumber numberWithInt:( player.dMoney)]];
+    gold.text=[NSString stringWithFormat:@"money %@",formattedNumberString];
+    
+    rankNumber.text=[NSString stringWithFormat:@"%d",indexPath.row+1];
         
-        UIImageView *iconFrame=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ls_OnLine_frame.png"]];
-        frame=iconFrame.frame;
-        frame.origin=CGPointMake(78, 18);
-        [iconFrame setFrame:frame];
-        [self addSubview:iconFrame];
-//  Name
-        playerName=[[UILabel alloc] initWithFrame:CGRectMake(132 , 25, 130, 16)];
-        playerName.textColor = [UIColor blackColor];
-        playerName.font = [UIFont systemFontOfSize:14.0f];
-        playerName.backgroundColor = [UIColor clearColor];
-        [playerName setTextAlignment:UITextAlignmentLeft];
-        [self addSubview:playerName];   
-//  Gold
-        coldTitle=[[UILabel alloc] initWithFrame:CGRectMake(132, 46, 28, 11)];
-        coldTitle.textColor = [UIColor blackColor];
-        coldTitle.font = [UIFont systemFontOfSize:10.0f];
-        coldTitle.backgroundColor = [UIColor clearColor];
-        coldTitle.text=NSLocalizedString(@"Gold:", @"");
-        [coldTitle setTextAlignment:UITextAlignmentLeft];
-        [self addSubview:coldTitle];   
-         
-        gold=[[UILabel alloc] initWithFrame:CGRectMake(159, 46, 105 , 11)];
-        gold.textColor = [UIColor blackColor];
-        gold.font = [UIFont systemFontOfSize:10.0f];
-        gold.backgroundColor = [UIColor clearColor];
-        [gold setTextAlignment:UITextAlignmentLeft];
-        [self addSubview:gold];  
-//  Star will be in next version
-//        starFriend=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"topPlayerStar.png"]];
-//        frame=starFriend.frame;
-//        frame.origin=CGPointMake(265, 28);
-//        [starFriend setFrame:frame];
-//        [self addSubview:starFriend];
+    if ((myProfileIndex!=-1)) {
+        if (myProfileIndex==indexPath.row) {
+            [self setCellStatus:TopPlayerCellStatusRed];
+        }else {
+            if (indexPath.row==0) {
+                [self setCellStatus:TopPlayerCellStatusGold];
+            }else {
+                [self setCellStatus:TopPlayerCellStatusSimple];
+            }
+        }
+    }else {
+        if ([player.dAuth isEqualToString:[AccountDataSource sharedInstance].accountID]) {
+            [self setCellStatus:TopPlayerCellStatusRed];
+            myProfileIndex=indexPath.row;
+        }else {
+            if (indexPath.row==0) {
+                [self setCellStatus:TopPlayerCellStatusGold];
+            }else {
+                [self setCellStatus:TopPlayerCellStatusSimple];
+            }
+        }
+    }
+    
+    if (indexPath.row<=9) {
+        [self setLargeNumbers:YES];
+    }else {
+        [self setLargeNumbers:NO];
+    }
 }
 
 -(void) setPlayerIcon:(UIImage*)iconImage;
 {
-    [Icon setImage:iconImage];
-}
-
--(void)showIndicatorConnectin;
-{
-    }
-
--(void)hideIndicatorConnectin;
-{
-    
+    [icon setImage:iconImage];
 }
 
 -(void)setCellStatus:(TopPlayerCellStatus)pStatus;
@@ -167,9 +111,8 @@ UIColor * sandColor;
     status=pStatus;
     switch (pStatus) {
         case TopPlayerCellStatusSimple:
-            
             [backGroundSelected setHidden:YES];
-            [Icon setBackgroundColor:[UIColor clearColor]];
+            [icon setBackgroundColor:[UIColor clearColor]];
             rankNumber.textColor=brownColor;
             playerName.textColor=brownColor;
             coldTitle.textColor=bronzeColor;
@@ -178,7 +121,7 @@ UIColor * sandColor;
         case TopPlayerCellStatusRed:
             [backGroundSelected setImage:[UIImage imageNamed:@"topPlayerCell.png"]];
             [backGroundSelected setHidden:NO];
-            [Icon setBackgroundColor:[UIColor whiteColor]];
+            [icon setBackgroundColor:[UIColor whiteColor]];
             rankNumber.textColor=[UIColor whiteColor];
             playerName.textColor=[UIColor whiteColor];
             coldTitle.textColor=sandColor;
@@ -196,7 +139,6 @@ UIColor * sandColor;
             break;
     }
 }
-
 
 -(void)setLargeNumbers:(BOOL)largeNumbers;
 {
@@ -233,8 +175,6 @@ UIColor * sandColor;
         }
         [rankNumber setGradientStartColor:rankNumber.textColor];
         [rankNumber setGradientEndColor:rankNumber.textColor];
-
-
     }
 }
 @end

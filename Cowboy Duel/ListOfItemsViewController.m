@@ -206,27 +206,6 @@
     PlayerOnLineCell *cell = (PlayerOnLineCell *)[tableView cellForRowAtIndexPath:indexPath];
     [cell hideIndicatorConnectin];
     
-    
-    //    BOOL serverOnline = NO;
-//    for (NSNetService *server in serverBrowser.servers) {
-//        if ([_player.dPlayerIP isEqualToString:server.name]) serverOnline = YES;
-//        DLog(@"Servers online%@", server.name);
-//    }
-//    
-//    [self.navigationController pushViewController:duelStartViewController animated:YES];
-//    
-//    if (serverOnline) {
-//        //[_gameCenterViewController startClientWithName:_hostName];
-//        [self.navigationController pushViewController:duelStartViewController animated:YES];
-//    }
-//    else {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"Server Offline", @"") delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-//        [alert show];
-//        PlayerOnLineCell *cell = (PlayerOnLineCell *)[tableView cellForRowAtIndexPath:indexPath];
-//        [cell hideIndicatorConnectin];
-//
-//    }
-    
 // Не удалять!!!
 //    _indexPath=indexPath;
 //    UIAlertView *baseAlert= [[UIAlertView alloc] initWithTitle:@"Message" message:NSLocalizedString(@"BotMText", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"BotMCANS", nil) otherButtonTitles:NSLocalizedString(@"BotMBtn", nil),nil];

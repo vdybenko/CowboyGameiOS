@@ -21,7 +21,6 @@
     NSMutableData *receivedData;
     UITableView *_tableView;
     
-    NSNumberFormatter *numberFormatter;
     
     NSMutableDictionary *imageDownloadsInProgress;
     id delegate;

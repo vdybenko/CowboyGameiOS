@@ -32,9 +32,6 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
     arrItemsList=[[NSMutableArray alloc] init];
      imageDownloadsInProgress=[[NSMutableDictionary alloc] init];
      
-     numberFormatter = [[NSNumberFormatter alloc] init];
-     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-     
      _tableView=pTable;
      myProfileIndex=-1;
      cellsHide=YES;
@@ -69,29 +66,27 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
 #pragma mark - Delegated methods
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	static NSString *subjectCellIdentifier = @"itemCellIdentifier";
-    TopPlayerCell *cell = [tableView dequeueReusableCellWithIdentifier:subjectCellIdentifier];
+	TopPlayerCell* cell;
+    cell = [tableView dequeueReusableCellWithIdentifier:[TopPlayerCell cellID]];
     
-    if (!cell) {
-        cell = [[TopPlayerCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:subjectCellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [cell setShowsReorderControl:YES];
-        [cell setShouldIndentWhileEditing:YES];        
+    if (!cell ) {
+        cell = [TopPlayerCell cell];
+        [cell initMainControls];
     }
-    
+
     if (cellsHide) {
         [cell setHidden:YES];
         return cell;
     }else {
         [cell setHidden:NO];
     }
-    
+
     CDTopPlayer *player;
 
     player=[arrItemsList objectAtIndex:indexPath.row];
-    
-    [cell setPlayerIcon:[UIImage imageNamed:@"pv_photo_default.png"]];
-    
+    [cell populateWithPlayer:player index:indexPath myIndex:myProfileIndex];
+
+//  Set Image of user
     NSString *name=[[OGHelper sharedInstance ] getClearName:player.dAuth];
     NSString *path=[NSString stringWithFormat:@"%@/icon_%@.png",[[OGHelper sharedInstance] getSavePathForList],name];
     if([[NSFileManager defaultManager] fileExistsAtPath:path]){  
@@ -136,61 +131,11 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
                     }
                 }
             }
-            
         }
     }
-    
-    cell.playerName.text=player.dNickName;
-    
-    NSString *formattedNumberString = [numberFormatter stringFromNumber:[NSNumber numberWithInt:( player.dMoney)]];  
-    cell.gold.text=[NSString stringWithFormat:@"money %@",formattedNumberString];
-    
-    cell.rankNumber.text=[NSString stringWithFormat:@"%d",indexPath.row+1];
 
-    
-    
-    if ((myProfileIndex!=-1)) {
-        if (myProfileIndex==indexPath.row) {
-            [cell setCellStatus:TopPlayerCellStatusRed];
-        }else {
-            if (indexPath.row==0) {
-                [cell setCellStatus:TopPlayerCellStatusGold];
-            }else {
-                [cell setCellStatus:TopPlayerCellStatusSimple];
-            }
-        }
-    }else {
-        if ([player.dAuth isEqualToString:[AccountDataSource sharedInstance].accountID]) {
-            [cell setCellStatus:TopPlayerCellStatusRed];
-            myProfileIndex=indexPath.row;
-        }else {
-            if (indexPath.row==0) {
-                [cell setCellStatus:TopPlayerCellStatusGold];
-            }else {
-                [cell setCellStatus:TopPlayerCellStatusSimple];
-            }
-        }
-    }
-    
-    if (indexPath.row<=9) {
-        [cell setLargeNumbers:YES];
-    }else {
-        [cell setLargeNumbers:NO];
-    }
-    
-//    [UIView beginAnimations:nil context:nil];
-//    [UIView setAnimationBeginsFromCurrentState:YES]; 
-//	[UIView setAnimationCurve:UIViewAnimationCurveLinear];
-//    [UIView setAnimationDuration:1.5f];
-//	[UIView setAnimationDelegate:self];
-//    
-//    
-//    
-//    [UIView commitAnimations];
     return cell;
 }
-
-
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [arrItemsList count];
