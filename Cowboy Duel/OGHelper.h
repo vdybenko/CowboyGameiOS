@@ -20,8 +20,6 @@
 #define URL_FB_PICTURE @"http://bidoncd.s3.amazonaws.com/feedAppFB.png"
 #define URL_APP_ESTIMATE @"http://cowboyduel.mobi/"
 
-
-
 @protocol ProtocolForDelegate <NSObject>
 
 -(void)userPermissions;
@@ -79,7 +77,6 @@ typedef enum typeOfFBImage {
     typeOfFBImageLarge
 } typeOfFBImage;
 
-
 @interface OGHelper : NSObject<FBRequestDelegate,FBDialogDelegate> {
     AccountDataSource * playerAccount;
     Facebook * facebook;
@@ -103,7 +100,6 @@ typedef enum typeOfFBImage {
 @property (nonatomic, retain) CLLocation *mostRecentLocation;
 @property (strong, retain) Facebook *facebook;
 @property (nonatomic, strong) StartViewController *startViewController;
-
 
 static NSString *getOpenGraphSavePath() ;
 + (OGHelper *)sharedInstance;

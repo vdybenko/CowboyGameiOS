@@ -12,7 +12,6 @@
 @synthesize deltaTime, mutchNumber, result, foll, UserTime;
 -(id)init
 {
-    
     return self;
 }
 

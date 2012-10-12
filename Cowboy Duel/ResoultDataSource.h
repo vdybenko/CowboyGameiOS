@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-
-
 @interface ResoultDataSource : NSObject {
     int mutchNumber;
 	int deltaTime;

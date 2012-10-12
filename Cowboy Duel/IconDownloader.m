@@ -13,7 +13,6 @@
 @synthesize imageDownloaded;
 #pragma mark
 
-
 - (void)startDownloadFBIcon
 {
     [[OGHelper sharedInstance] apiGraphGetImageForList:namePlayer delegate:self];
@@ -21,18 +20,14 @@
 
 - (void)startDownloadSimpleIcon
 {
-    
     NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:avatarURL]
                                                             cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                         timeoutInterval:kTimeOutSeconds];
     
     NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self startImmediately:YES];
     if (theConnection) {
-        //        [receivedData setLength:0];
         receivedData = [[NSMutableData alloc] init];
-    } else {
     }
-
 }
 
 #pragma mark FConnect Methods
@@ -41,7 +36,6 @@
 }
 
 - (void)request:(FBRequest *)request didLoad:(id)result {
-    //    [delegate hideActivityIndicator];
     
     if ([result isKindOfClass:[NSArray class]] && ([result count] > 0)) {
         result = [result objectAtIndex:0];
@@ -59,16 +53,12 @@
  * successfully.
  */
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
-    //    [delegate hideActivityIndicator];
     DLog(@"IconDownloader didFailWithError: %@ /n error %@ /n namePlayer %@"  , request,[error description],namePlayer);
 }
-#pragma mark -
 
 #pragma mark CustomNSURLConnection handlers
 
-
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection1 {
-
     imageDownloaded = [[UIImage alloc] initWithData:receivedData];
     [delegate appImageDidLoad:self.indexPathInTableView];
     
@@ -89,6 +79,4 @@
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
 }
 
-
 @end
-
