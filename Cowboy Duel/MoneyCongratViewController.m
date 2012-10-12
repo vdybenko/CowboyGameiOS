@@ -12,22 +12,42 @@
 #import "FinalViewController.h"
 
 @interface MoneyCongratViewController ()
+{
+    AccountDataSource *playerAccount;
+    ActivityIndicatorView *activityIndicatorView;
+    
+    NSString *moneyLabel;
+    
+    double angle;
+    
+    BOOL runAnimation;
+    
+    //images to animate:
+    IBOutlet UIImageView *ivAchieveRing;
+    IBOutlet UIImageView *ivLight;
+    IBOutlet UIImageView *ivLight2;
+    IBOutlet UIImageView *ivRing;
+    
+    //labels:
+    IBOutlet UILabel *lbTitleCongratulation;
+    
+    IBOutlet UILabel *lbPlusMoney;
+    IBOutlet UILabel *lbCongMainText;
+    
+    IBOutlet UIButton *btnBack;
+    IBOutlet UIButton *btnTryAgain;
+    IBOutlet UIButton *btnPost;
+    
+    IBOutlet UILabel *lbPostOnFB;
+}
+@property(nonatomic, strong)id<DuelViewControllerDelegate> delegate;
+@property (nonatomic, strong) IBOutlet UIImageView *ivLight2;
 
 @end
 
 @implementation MoneyCongratViewController
 @synthesize delegate;
 @synthesize ivLight2;
-//
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (id) initForAchivmentPlayerAccount:(AccountDataSource *)pPlayerAccount withLabel:(NSString*)pLabel andController:(id)delegateController;
 {
     self = [super initWithNibName:@"MoneyCongratViewController" bundle:[NSBundle mainBundle]];
@@ -46,7 +66,6 @@
             [btnPost setHidden:YES];
             [MoneyCongratViewController achivmentMoney:playerAccount.money];
         }
-        
     }
     return self;
 }
@@ -89,12 +108,6 @@
     lbPostOnFB.text = NSLocalizedString(@"AchievBtnTellFriends", nil);
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-}
-
 - (void)viewDidUnload
 {
     lbTitleCongratulation = nil;
@@ -107,8 +120,6 @@
     ivLight2 = nil;
     ivRing = nil;
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -203,7 +214,6 @@
     [UIView commitAnimations];
 }
 
-
 #pragma mark -
 #pragma mark IBActions
 
@@ -214,13 +224,10 @@
     {
         [(FinalViewController *)delegate backButtonClick:sender];
     }
-    
 }
 
 - (IBAction)btnAgainClicked:(id)sender
-{
-    DLog(@"tryButtonClick");
-    
+{    
     [activityIndicatorView showView];
     [self dismissModalViewControllerAnimated:YES];
     if ([(FinalViewController *)delegate respondsToSelector:@selector(tryButtonClick:)])
@@ -247,8 +254,5 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"congratulation_achivment" forKey:@"event"]];
-    
 }
-
-
 @end

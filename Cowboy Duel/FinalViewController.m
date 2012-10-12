@@ -991,7 +991,6 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
 {
     moneyCongratulationViewController  = [[MoneyCongratViewController alloc] initForAchivmentPlayerAccount:playerAccount withLabel:labelForCongratulation andController:self];
     [self performSelector:@selector(showViewController:) withObject:moneyCongratulationViewController afterDelay:5.0];
-    //[self.navigationController  pushViewController:moneyCongratulationViewController animated:YES];
 }
 
 #pragma mark -
