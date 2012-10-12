@@ -12,13 +12,57 @@
 #import "OGHelper.h"
 #import "GCHelper.h"
 #import "UIButton+Image+Title.h"
-#import "FinalViewController.h"
 #import "UIImage+Save.h"
 #import "LoginViewController.h"
 #import "DuelRewardLogicController.h"
-#import "LeaderBoardViewController.h"
+#import "TopPlayersViewController.h"
 
-@interface ProfileViewController (private)
+@interface ProfileViewController ()
+{
+    AccountDataSource *playerAccount;
+    LoginViewController *loginViewController;
+    
+    NSString *namePlayerSaved;
+    
+    IBOutlet UIImageView *_ivIconUser;
+    
+    //Labels
+    IBOutlet UILabel *lbProfileMain;
+    IBOutlet UIView *mainProfileView;
+    IBOutlet UITextField *lbFBName;
+    IBOutlet UILabel *lbTitleTitle;
+    IBOutlet UILabel *lbUserTitle;
+    IBOutlet UILabel *lbPointsTitle;
+    IBOutlet UILabel *lbPointsCount;
+    
+    IBOutlet UIView *ivPointsLine;
+    
+    IBOutlet UILabel *lbGoldCount;
+    
+    IBOutlet UIButton *btnLogInFB;
+    IBOutlet UIButton *btnLogOutFB;
+    
+    IBOutlet UIButton *btnLeaderboard;
+    IBOutlet UILabel *lbPlayerStats;
+    IBOutlet UILabel *lbDuelsWon;
+    IBOutlet UILabel *lbDuelsWonCount;
+    IBOutlet UILabel *lbDuelsLost;
+    IBOutlet UILabel *lbDuelsLostCount;
+    IBOutlet UILabel *lbBiggestWin;
+    IBOutlet UILabel *lbBiggestWinCount;
+    IBOutlet UILabel *lbNotifyMessage;
+    IBOutlet UILabel *lbLeaderboardTitle;
+    IBOutlet UILabel *_lbMenuTitle;
+    
+    //Buttons
+    IBOutlet UIButton *_btnMusicContoller;
+    
+    IBOutlet UIView *ivBlack;
+    
+    NSNumberFormatter *numberFormatter;
+    
+    BOOL didDisappear;
+}
     -(void)setImageFromFacebook;
 @end
 
@@ -31,7 +75,6 @@
 
     if (self) {
         needAnimation = NO;
-        firstRun = NO;
         playerAccount=userAccount;
          
         loginViewController = [LoginViewController sharedInstance]; 
@@ -51,25 +94,6 @@
                                                  selector:@selector(changeFBSesionAction)
                                                      name:kCheckfFBLoginSession 
                                                    object:nil];
-        
-        [self loadView];
-        [self initMainControls];
-    }
-    return self;
-}
-
--(id)initForFirstRunWithLoginVC:(LoginViewController*) pLoginViewController Account:(AccountDataSource *)userAccount;
-{
-    self = [super initWithNibName:@"ProfileViewController" bundle:[NSBundle mainBundle]];
-    
-    if (self) {
-        
-        firstRun = YES;
-        playerAccount=userAccount;
-        
-        loginViewController=pLoginViewController;
-        [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-
         
         [self loadView];
         [self initMainControls];

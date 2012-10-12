@@ -143,7 +143,6 @@
 		31DA9F0915BD331900492A9F /* topPlayerRibbon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31DA9F0115BD331900492A9F /* topPlayerRibbon@2x.png */; };
 		31E2204415AB100E00482ED5 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 31E2204215AB100E00482ED5 /* Default.png */; };
 		31E2204515AB100E00482ED5 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31E2204315AB100E00482ED5 /* Default@2x.png */; };
-		31E8783415ADC70300BFFD9A /* LeaderBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E8783215ADC70200BFFD9A /* LeaderBoardViewController.m */; };
 		31E8783515ADC70300BFFD9A /* LeaderBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31E8783315ADC70200BFFD9A /* LeaderBoardViewController.xib */; };
 		31F6D52B15AB000F00C0F28D /* pv_btn_music_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 31F6D52715AB000F00C0F28D /* pv_btn_music_off.png */; };
 		31F6D52C15AB000F00C0F28D /* pv_btn_music_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31F6D52815AB000F00C0F28D /* pv_btn_music_off@2x.png */; };
@@ -179,7 +178,6 @@
 		763F8A271578A1F800D8BB42 /* DuelViewControllerWithXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 763F8A261578A1F800D8BB42 /* DuelViewControllerWithXib.xib */; };
 		763F8A291578A3A900D8BB42 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 763F8A281578A3A900D8BB42 /* libxml2.2.dylib */; };
 		763F8A2A1578A55700D8BB42 /* DuelViewControllerWithXib.m in Sources */ = {isa = PBXBuildFile; fileRef = 765E351415765F1400CCB6F4 /* DuelViewControllerWithXib.m */; };
-		763F8A371578E39700D8BB42 /* HelpViewControllerPractice.m in Sources */ = {isa = PBXBuildFile; fileRef = 763F8A361578E39600D8BB42 /* HelpViewControllerPractice.m */; };
 		763F8A3D1578FC0900D8BB42 /* UIView+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 763F8A3B1578FC0900D8BB42 /* UIView+Hierarchy.m */; };
 		764B07211598A5B30050D4E4 /* UIView+Dinamic_BackGround.m in Sources */ = {isa = PBXBuildFile; fileRef = 764B07201598A5B30050D4E4 /* UIView+Dinamic_BackGround.m */; };
 		766B7D3613FE790600377AA3 /* Fire.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 766B7D3513FE790600377AA3 /* Fire.mp3 */; };
@@ -512,8 +510,6 @@
 		31DA9F0115BD331900492A9F /* topPlayerRibbon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "topPlayerRibbon@2x.png"; sourceTree = "<group>"; };
 		31E2204215AB100E00482ED5 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		31E2204315AB100E00482ED5 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		31E8783115ADC70100BFFD9A /* LeaderBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaderBoardViewController.h; sourceTree = "<group>"; };
-		31E8783215ADC70200BFFD9A /* LeaderBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaderBoardViewController.m; sourceTree = "<group>"; };
 		31E8783315ADC70200BFFD9A /* LeaderBoardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LeaderBoardViewController.xib; path = "../Cowboy Duel/LeaderBoardViewController.xib"; sourceTree = "<group>"; };
 		31F6D52715AB000F00C0F28D /* pv_btn_music_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pv_btn_music_off.png; sourceTree = "<group>"; };
 		31F6D52815AB000F00C0F28D /* pv_btn_music_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pv_btn_music_off@2x.png"; sourceTree = "<group>"; };
@@ -552,8 +548,6 @@
 		762AA30F15B99C72001B65E2 /* TopPlayerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopPlayerCell.m; sourceTree = "<group>"; };
 		763F8A261578A1F800D8BB42 /* DuelViewControllerWithXib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DuelViewControllerWithXib.xib; path = Xib/DuelViewControllerWithXib.xib; sourceTree = "<group>"; };
 		763F8A281578A3A900D8BB42 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
-		763F8A351578E39500D8BB42 /* HelpViewControllerPractice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewControllerPractice.h; sourceTree = "<group>"; };
-		763F8A361578E39600D8BB42 /* HelpViewControllerPractice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewControllerPractice.m; sourceTree = "<group>"; };
 		763F8A3B1578FC0900D8BB42 /* UIView+Hierarchy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Hierarchy.m"; sourceTree = "<group>"; };
 		763F8A3C1578FC0900D8BB42 /* UIView+Hierarchy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Hierarchy.h"; sourceTree = "<group>"; };
 		764B071F1598A5B30050D4E4 /* UIView+Dinamic_BackGround.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Dinamic_BackGround.h"; sourceTree = "<group>"; };
@@ -1809,8 +1803,6 @@
 				3188979615CAD7FE002D52EA /* LevelCongratViewController.m */,
 				3115FB4D15CACA5100C4D438 /* MoneyCongratViewController.h */,
 				3115FB4E15CACA5100C4D438 /* MoneyCongratViewController.m */,
-				31E8783115ADC70100BFFD9A /* LeaderBoardViewController.h */,
-				31E8783215ADC70200BFFD9A /* LeaderBoardViewController.m */,
 				037D8B2C154AE29F003BDB3C /* AdColonyGroup */,
 				7682E360156BCC2C00A8F9A0 /* Duel */,
 				767FEF2E156A64A40016B415 /* ListOfItemsViewController.h */,
@@ -1819,8 +1811,6 @@
 				760E676315BD844B006F6832 /* TopPlayersViewController.m */,
 				BDD07B7B141E1F170085E4FB /* HelpViewController.h */,
 				BDD07B7C141E1F170085E4FB /* HelpViewController.m */,
-				763F8A351578E39500D8BB42 /* HelpViewControllerPractice.h */,
-				763F8A361578E39600D8BB42 /* HelpViewControllerPractice.m */,
 				BDD07B8B141E1F170085E4FB /* LoadViewController.h */,
 				BDD07B8C141E1F170085E4FB /* LoadViewController.m */,
 				BDD07B97141E1F170085E4FB /* ProfileViewController.h */,
@@ -2206,7 +2196,6 @@
 				767FEF30156A64A50016B415 /* ListOfItemsViewController.m in Sources */,
 				7682E363156BD22000A8F9A0 /* CDPlayerOnLine.m in Sources */,
 				BD8000D6157755A600703AC8 /* OGHelper.m in Sources */,
-				763F8A371578E39700D8BB42 /* HelpViewControllerPractice.m in Sources */,
 				763F8A3D1578FC0900D8BB42 /* UIView+Hierarchy.m in Sources */,
 				768388D3157DE37800377D88 /* UIButton+Image+Title.m in Sources */,
 				768388E5157E249900377D88 /* CDCollectionAdvertisingApp.m in Sources */,
@@ -2220,7 +2209,6 @@
 				7692812C159DCAFD00E6CE41 /* IconDownloader.m in Sources */,
 				7675CA8615A2E10C005A3BD3 /* DuelRewardLogicController.m in Sources */,
 				3150C60C15A5A26E00AC8E17 /* HCYoutubeParser.m in Sources */,
-				31E8783415ADC70300BFFD9A /* LeaderBoardViewController.m in Sources */,
 				7682BDDF15AC5F22001C09EC /* HelpPracticeView.m in Sources */,
 				76A1A50215ADFB9300DC581B /* Facebook.m in Sources */,
 				76A1A50415ADFB9300DC581B /* FBDialog.m in Sources */,

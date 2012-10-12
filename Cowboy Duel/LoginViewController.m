@@ -13,8 +13,28 @@
 #import "UIButton+Image+Title.h"
 #import "UIView+Dinamic_BackGround.h"
 
+
 #define kFacebookAppId @"284932561559672"
 NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/first/";
+
+@interface LoginViewController ()
+{
+    StartViewController * startViewController;
+    Facebook *facebook;
+    AccountDataSource *playerAccount;
+    IBOutlet UIView *view;
+    IBOutlet UILabel *congLabel;
+    IBOutlet UILabel *loginBtnTitle;
+    IBOutlet UILabel *nextTimeBtnTitle;
+    IBOutlet UIView *mainLoginView;
+    
+    IBOutlet UIButton *_btnFBLogin;
+    IBOutlet UIButton *_btnNextTime;
+    IBOutlet UIWebView *link;
+    
+    LoginFacebookStatus loginFacebookStatus;
+}
+@end
 
 @implementation LoginViewController
 
@@ -40,7 +60,6 @@ static LoginViewController *sharedHelper = nil;
     
 }
 
-
 - (void)initFacebook {
     if (!facebook) {
         self.facebook = [[Facebook alloc] initWithAppId:kFacebookAppId andDelegate:self];
@@ -50,7 +69,6 @@ static LoginViewController *sharedHelper = nil;
         facebook.expirationDate = [userDefaults objectForKey:@"FBExpirationDateKey"];
         
         [[OGHelper sharedInstance] createControllsWithAccount:playerAccount facebook:facebook];
-//        [facebook release];
     }
 }
 
@@ -88,18 +106,15 @@ static LoginViewController *sharedHelper = nil;
     [[LoginViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusSimple];
 }
 
-#pragma mark -
-
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark -
+
 -(IBAction)fbLoginBtnClick:(id)sender
 {
-//    if ([delegate respondsToSelector:@selector(loginToFB)]) {
-//        [delegate loginToFB];
-//    }
     [self initFacebook];
 
     TestAppDelegate *testAppDelegate = (TestAppDelegate *) [[UIApplication sharedApplication] delegate];
@@ -119,9 +134,6 @@ static LoginViewController *sharedHelper = nil;
 
 -(IBAction)scipLoginBtnClick:(id)sender
 {
-//    if ([delegate respondsToSelector:@selector(skipLoginFB)]) {
-//        [delegate skipLoginFB];
-//    }
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IPad"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     ProfileViewController *profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount startViewController:startViewController];
@@ -145,7 +157,6 @@ static LoginViewController *sharedHelper = nil;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     if (![userDefaults objectForKey:@"FBAccessTokenKey"]) {
         
-        //    [userDefaults setObject:self.facebook.accessToken forKey:@"AccessToken"];
         [userDefaults setObject:self.facebook.accessToken forKey:@"FBAccessTokenKey"];
         [userDefaults setObject:self.facebook.expirationDate forKey:@"FBExpirationDateKey"];
                 
@@ -179,8 +190,6 @@ static LoginViewController *sharedHelper = nil;
 }
 
 - (void)fbDidLogout {
-    //    	[self setCurrentViewState:SocialNetworkStateNotLogged];      
-    //      [[DataProvider sharedInstance].karmaDataSource clearKarma];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults removeObjectForKey:@"FBAccessTokenKey"];
     [userDefaults removeObjectForKey:@"FBExpirationDateKey"];
@@ -192,18 +201,6 @@ static LoginViewController *sharedHelper = nil;
     [playerAccount makeLocalAccountID];
      [[NSUserDefaults standardUserDefaults] setObject:ValidateObject(playerAccount.accountID, [NSString class]) forKey:@"id"];
     [startViewController authorizationModifier:NO];
-    
-//    gameCenterViewController = [GameCenterViewController sharedInstance:playerAccount andParentVC:startViewController];
-//    if (!gameCenterViewController.multiplayerServerViewController.isRunServer && !gameCenterViewController.multiplayerServerViewController.neadRestart)    [gameCenterViewController startServerWithName:playerAccount.accountID];
-//    else if (gameCenterViewController.multiplayerServerViewController.isRunServer)
-//    {
-//        gameCenterViewController.multiplayerServerViewController.neadRestart = YES;
-//        gameCenterViewController.multiplayerServerViewController.serverNameGlobal = playerAccount.accountID;
-//        [gameCenterViewController.multiplayerServerViewController shutDownServer];
-//    }
-//    
-//    gameCenterViewController.duelStartViewController = nil;
-    
 }
 
 -(void)fbDidNotLogin:(BOOL)cancelled
@@ -236,27 +233,6 @@ static LoginViewController *sharedHelper = nil;
 {
     DLog(@"OGHelper fbSessionInvalidated");
 }
-#pragma mark -
-
-- (void)viewDidUnload {
-//    achievMainView = nil;
-//    btnUpdate = nil;
-//    lbUpdateBtnTitle = nil;
-//    btnTellFriends = nil;
-//    btnNextTime = nil;
-    mainLoginView = nil;
-//    webMesView = nil;
-    [super viewDidUnload];
-    _btnFBLogin = nil;
-    _btnNextTime = nil;
-    loginBtnTitle = nil;
-    nextTimeBtnTitle = nil;
-//    achievTellFriendsBtnTitle = nil;
-//    achievNextTimeBtnTitle = nil;
-    link = nil;
-}
-- (void)dealloc {
-}
 
 #pragma mark - UIWebViewDelegate
 
@@ -278,6 +254,18 @@ static LoginViewController *sharedHelper = nil;
 -(void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     DLog(@"login Error %@",[error description]);
 }
+
 #pragma mark -
 
+- (void)viewDidUnload {
+    mainLoginView = nil;
+    _btnFBLogin = nil;
+    _btnNextTime = nil;
+    loginBtnTitle = nil;
+    nextTimeBtnTitle = nil;
+    link = nil;
+    [super viewDidUnload];
+}
+- (void)dealloc {
+}
 @end

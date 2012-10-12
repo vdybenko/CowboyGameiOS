@@ -14,48 +14,47 @@
 #import "HCYoutubeParser.h"
 #import <MediaPlayer/MediaPlayer.h>
 
+@interface HelpViewController () {
+    id startVC;
+    
+    IBOutlet UIButton *_btnVideo;
+    IBOutlet UIView *mainView;
+    IBOutlet UIButton *_btnBack;
+    IBOutlet UIButton *btnContact;
+    IBOutlet UIWebView *_webViewMessage;
+    IBOutlet UIView *_vBackground;
+    IBOutlet UILabel *lbBackBtn;
+    IBOutlet UILabel *lbVideoBtn;
+    IBOutlet UILabel *lbContactButton;
+    
+    IBOutlet UILabel *lbTitleHelp;
+}
+@property (strong, nonatomic) IBOutlet UIButton *_btnVideo;
+@property (strong, nonatomic) IBOutlet UIButton *_btnBack;
+@property (strong, nonatomic) IBOutlet UIWebView *_webViewMessage;
+@property (strong, nonatomic) IBOutlet UIView *_vBackground;
+@end
+
 @implementation HelpViewController
-@synthesize scrollView, pageControl, viewControllers;
 @synthesize _btnVideo, _vBackground, _btnBack, _webViewMessage;
 
 MPMoviePlayerViewController *mp;
 NSString *const URL_CONTACN_US=@"http://cowboyduel.com/"; 
 
-
-- (id)init:(BOOL)firstStart startVC:(id)startVCl;
+- (id)initWithStartVC:(id)startVCl;
 {
     self = [super initWithNibName:@"HelpViewController" bundle:[NSBundle mainBundle]];
     if (self) { 
-        firstRun=firstStart;
         startVC=startVCl;
     }
     return self;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
 #pragma mark - View lifecycle
-
-/*
- // Implement loadView to create a view hierarchy programmatically, without using a nib.
- - (void)loadView
- {
- }
- */
-
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-//    [_btnBack setImage:@"pv_btn_back.png" title:NSLocalizedString(@"BACK", nil)];
-//    [_btnVideo setImage:@"st_btn.png" title:NSLocalizedString(@"VIDEO MANUAL", nil)];
     
     UIColor *mainColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
     
@@ -99,13 +98,10 @@ NSString *const URL_CONTACN_US=@"http://cowboyduel.com/";
     lbContactButton = nil;
     mainView = nil;
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 

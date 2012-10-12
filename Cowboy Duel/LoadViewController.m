@@ -6,9 +6,18 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-
 #import "LoadViewController.h"
-#import "HelpViewController.h"
+#import <AVFoundation/AVFoundation.h>
+
+@interface LoadViewController()
+{
+    AVAudioPlayer *player;
+    StartViewController  *startViewController;
+    BOOL firstRun;
+    UIImageView *imgBackground;
+    NSMutableData *receivedData;
+}
+@end
 
 static const char *A_URL =  BASE_URL"api/a";
 
@@ -18,7 +27,6 @@ static const char *A_URL =  BASE_URL"api/a";
 {
     if(self==[super init])
     {
-       
         if(![[NSUserDefaults standardUserDefaults] boolForKey:@"AlreadyRun"] ) {
             firstRun = YES;
             [self login];
@@ -84,9 +92,6 @@ static const char *A_URL =  BASE_URL"api/a";
     [imgBackground addSubview:gunRightImage];
     
     [self animationWithGunsFirst:gunLeftImage andSecond:gunRightImage];
-    
-    //        
-    
 }
 
 //animation of guns:
@@ -184,7 +189,6 @@ static const char *A_URL =  BASE_URL"api/a";
   didFailWithError:(NSError *)error
 {
     [self closeWindow];
-    // inform the user
     DLog(@"Start Connection failed! Error - %@ %@",
           [error localizedDescription],
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);

@@ -9,7 +9,6 @@
 #import "TeachingViewController.h"
 #import "FinalViewController.h"
 #import "HelpViewController.h"
-//#import "HelpViewControllerPractice.h"
 
 static NSString *ShotSound = @"%@/shot.mp3";
 

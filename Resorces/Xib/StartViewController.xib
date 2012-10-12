@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1296</int>
-		<string key="IBDocument.SystemVersion">11E53</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2549</string>
-		<string key="IBDocument.AppKitVersion">1138.47</string>
+		<int key="IBDocument.SystemTarget">1536</int>
+		<string key="IBDocument.SystemVersion">11G63</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2840</string>
+		<string key="IBDocument.AppKitVersion">1138.51</string>
 		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1498</string>
+			<string key="NS.object.0">1926</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -275,6 +275,7 @@
 								<object class="NSColor" key="IBUITextColor" id="867838571">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MCAwIDAAA</bytes>
+									<string key="IBUIColorCocoaTouchKeyPath">darkTextColor</string>
 								</object>
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">0</int>
@@ -289,6 +290,7 @@
 									<double key="NSSize">17</double>
 									<int key="NSfFlags">16</int>
 								</object>
+								<double key="preferredMaxLayoutWidth">157</double>
 							</object>
 							<object class="IBUILabel" id="865090996">
 								<reference key="NSNextResponder" ref="419574726"/>
@@ -318,6 +320,7 @@
 									<double key="NSSize">16</double>
 									<int key="NSfFlags">16</int>
 								</object>
+								<double key="preferredMaxLayoutWidth">157</double>
 							</object>
 							<object class="IBUILabel" id="61270079">
 								<reference key="NSNextResponder" ref="419574726"/>
@@ -340,6 +343,7 @@
 								<int key="IBUINumberOfLines">0</int>
 								<reference key="IBUIFontDescription" ref="276077668"/>
 								<reference key="IBUIFont" ref="452731301"/>
+								<double key="preferredMaxLayoutWidth">157</double>
 							</object>
 							<object class="IBUIButton" id="312581144">
 								<reference key="NSNextResponder" ref="419574726"/>
@@ -566,14 +570,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">_vBackground</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="1048327278"/>
-					</object>
-					<int key="connectionID">41</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">profileButton</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="559891747"/>
@@ -677,30 +673,6 @@
 					<int key="connectionID">111</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">dayliMoneyView</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="343128217"/>
-					</object>
-					<int key="connectionID">117</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">dayliMoneyText</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="653645085"/>
-					</object>
-					<int key="connectionID">119</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">dayliOkButton</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="749197851"/>
-					</object>
-					<int key="connectionID">120</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">startDuel</string>
 						<reference key="source" ref="676481781"/>
@@ -798,15 +770,6 @@
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">105</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">dayliOkButtonClick:</string>
-						<reference key="source" ref="749197851"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">121</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1041,37 +1004,14 @@
 					<string key="className">StartViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="dayliOkButtonClick:">id</string>
-						<string key="fbButtonClick:">id</string>
-						<string key="feedbackButtonClick:">id</string>
-						<string key="feedbackCancelButtonClick:">id</string>
 						<string key="feedbackFacebookBtnClick:">id</string>
 						<string key="feedbackItuneskBtnClick:">id</string>
 						<string key="feedbackMailBtnClick:">id</string>
 						<string key="feedbackTweeterBtnClick:">id</string>
-						<string key="mapButtonClick">id</string>
 						<string key="profileButtonClick">id</string>
-						<string key="showHelp:">id</string>
 						<string key="startDuel">id</string>
-						<string key="teachingButtonClick">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="dayliOkButtonClick:">
-							<string key="name">dayliOkButtonClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="fbButtonClick:">
-							<string key="name">fbButtonClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="feedbackButtonClick:">
-							<string key="name">feedbackButtonClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="feedbackCancelButtonClick:">
-							<string key="name">feedbackCancelButtonClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="feedbackFacebookBtnClick:">
 							<string key="name">feedbackFacebookBtnClick:</string>
 							<string key="candidateClassName">id</string>
@@ -1088,29 +1028,16 @@
 							<string key="name">feedbackTweeterBtnClick:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="mapButtonClick">
-							<string key="name">mapButtonClick</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="profileButtonClick">
 							<string key="name">profileButtonClick</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="showHelp:">
-							<string key="name">showHelp:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="startDuel">
 							<string key="name">startDuel</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="teachingButtonClick">
-							<string key="name">teachingButtonClick</string>
-							<string key="candidateClassName">id</string>
-						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="_vBackground">UIView</string>
 						<string key="backGroundfeedbackView">UIImageView</string>
 						<string key="duelButton">UIButton</string>
 						<string key="feedbackButton">UIButton</string>
@@ -1126,10 +1053,6 @@
 						<string key="teachingButton">UIButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="_vBackground">
-							<string key="name">_vBackground</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="backGroundfeedbackView">
 							<string key="name">backGroundfeedbackView</string>
 							<string key="candidateClassName">UIImageView</string>
@@ -1194,7 +1117,7 @@
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
-			<real value="1296" key="NS.object.0"/>
+			<real value="1536" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
@@ -1208,6 +1131,6 @@
 			<string key="fb_view_top.png">{320, 8}</string>
 			<string key="st_title.png">{320, 94}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">1498</string>
+		<string key="IBCocoaTouchPluginVersion">1926</string>
 	</data>
 </archive>

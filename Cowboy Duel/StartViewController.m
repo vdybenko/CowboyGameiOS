@@ -21,23 +21,90 @@
 #import "LevelCongratViewController.h"
 #import "MoneyCongratViewController.h"
 
-#include <sys/types.h>
-#include <sys/sysctl.h>
+@interface StartViewController ()
+{
+    AccountDataSource *playerAccount;
+    AccountDataSource *oponentAccount;
+    ActivityIndicatorView *activityIndicatorView;
+    CollectionAppViewController *collectionAppViewController;
+    ListOfItemsViewController *listOfItemsViewController;
+    ProfileViewController *profileViewController;
+    TopPlayersDataSource *topPlayersDataSource;
+        
+    UIView *hudView;
+    
+    BOOL firstRun;
+    BOOL firstRunLocal;
+    BOOL firstDayWithOutAdvertising;
+    
+    AVAudioPlayer *player;
+    
+    UIView *v10DolarsForDay;
+    
+    BOOL soundCheack;
+    
+    BOOL avtorizationInProcess;
+    
+    BOOL internetActive;
+    BOOL hostActive;
+    
+    BOOL feedBackViewVisible;
+    
+    Reachability* internetReachable;
+    Reachability* hostReachable;
+    Facebook *facebook;
+    
+    UIImageView_AttachedView *arrowImage;
+    
+    NSString *oldAccounId;
+    LoginViewController *loginViewController;
+    
+    NSMutableDictionary *dicForRequests;
+    BOOL modifierName;
+    //buttons
+    IBOutlet UIButton *teachingButton;
+    IBOutlet UIButton *duelButton;
+    IBOutlet UIButton *mapButton;
+    IBOutlet UIButton *profileButton;
+    IBOutlet UIButton *feedbackButton;
+    IBOutlet UIButton *helpButton;
+    
+    IBOutlet UIView *feedbackView;
+    
+    IBOutlet UIImageView *backGroundfeedbackView;
+    IBOutlet UIActivityIndicatorView *indicatorfeedbackView;
+    
+    
+    IBOutlet UILabel *lbPostMessage;
+    IBOutlet UILabel *lbMailMessage;
+    IBOutlet UILabel *lbRateMessage;
+    IBOutlet UILabel *lbFeedbackCancelBtn;
+}
+@property (strong, nonatomic) IBOutlet UIButton *teachingButton;
+@property (strong, nonatomic) IBOutlet UIButton *duelButton;
+@property (strong, nonatomic) IBOutlet UIButton *mapButton;
+@property (strong, nonatomic) IBOutlet UIButton *helpButton;
+@property (strong, nonatomic) IBOutlet UIButton *profileButton;
+@property (strong, nonatomic) IBOutlet UIButton *feedbackButton;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *indicatorfeedbackView;
+@property (strong, nonatomic) IBOutlet UIImageView *backGroundfeedbackView;
 
-@interface StartViewController (PrivateMethods)
+@property (strong) GameCenterViewController *gameCenterViewController;
 
--(void)retrieveMessageFromDevice;
+@property (strong,nonatomic) AVAudioPlayer *player;
+
+@property (nonatomic) BOOL internetActive;
+@property (nonatomic) BOOL hostActive;
+
+@property (strong) LoginViewController *loginViewController;
+
 -(void)sendRequestWithDonateSum:(int)sum;
 - (NSString *)deviceType;
 -(void)arrowAnimation;
 
 @end
 
-#define PUSH_MES_TAG 2
 #define BOT_DUEL_TAG 3
-#define CON_GC_TAG 4
-#define ESTIMATE_APP_TAG 5
-#define TAG_HUB_VIEW 1010
 
 #define iTunesId @"http://cowboyduel.mobi/r/"
 
@@ -47,26 +114,17 @@
 
 @synthesize gameCenterViewController, player, internetActive, hostActive, soundCheack, loginViewController;
 @synthesize feedbackButton, duelButton, profileButton, teachingButton, helpButton, mapButton;
-@synthesize _vBackground,oldAccounId,feedBackViewVisible,showFeedAtFirst,topPlayersDataSource;
-//@synthesize feedbackView;
+@synthesize oldAccounId,feedBackViewVisible,showFeedAtFirst,topPlayersDataSource;
 
-static const char *DONATE_URL = BASE_URL"api/donate";
 static const char *AUTORIZATION_URL =  BASE_URL"api/authorization";
 static const char *MODIFIER_USER_URL =  BASE_URL"api/user";
-static const char *GET_RANDOM_USER_URL =  BASE_URL"api/get_random_user";
 static const char *A_URL =  BASE_URL"api/a";
 static const char *OUT_URL =  BASE_URL"api/out";
 
 NSString *const URL_FB_PAGE=@"http://cowboyduel.mobi/"; 
 NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNotification";
 
-static NSString *getGameCenterSavePath()  
-{  
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);  
-    return [NSString stringWithFormat:@"%@/FBMessageSave.txt",[paths objectAtIndex:0]];  
-}  
-
-static NSString *textArchiveKey = @"TextMes"; 
+#pragma mark
 
 static StartViewController *sharedHelper = nil;
 + (StartViewController *) sharedInstance {
@@ -80,9 +138,6 @@ static StartViewController *sharedHelper = nil;
 {
     NSUserDefaults *uDef = [NSUserDefaults standardUserDefaults];
     
-    firstRunController = YES;
-    inBackground = NO;
-        
     if (self == [super initWithNibName:nil bundle:nil]) {
         
         playerAccount = [AccountDataSource sharedInstance];
@@ -114,7 +169,6 @@ static StartViewController *sharedHelper = nil;
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"moneyForIPad"];
         }
         if(firstRun)DLog(@"First ");
-        //        [[NSUserDefaults standardUserDefaults] setBool:firstRun forKey:@"AlreadyRan"];
         
         if(firstRun){
             
@@ -183,7 +237,6 @@ static StartViewController *sharedHelper = nil;
             NSArray *oldLocations2 = [uDef arrayForKey:@"duels"];
             if( playerAccount.duels )
             {
-                //DLog(@"locations is not nil");
                 for( NSData *data in oldLocations2 )
                 {
                     CDDuel * loc = (CDDuel*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
@@ -207,43 +260,15 @@ static StartViewController *sharedHelper = nil;
                     [playerAccount.achivments addObject:loc];
                 }
             }
-            //            DLog(@"Achivments count = %d", [playerAccount.achivments count]);
 
         }
                
-//        [self.view addSubview:_vBackground];
-               
-//        UIImageView *cloudView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"st_cloud.png"]];
-//        [_vBackground addSubview:cloudView];     
-        
-
-        checkGameCenter = NO;
         dicForRequests=[[NSMutableDictionary alloc] init];
-        //        [self.view addSubview:_vBackground];
         
-
-//        chatViewController = [[ChatViewController alloc] initWithAccount:playerAccount];
-//        [_vBackground addSubview:chatViewController.view];
-
-        //        UIImageView *cloudView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"st_cloud.png"]];
-        //        [_vBackground addSubview:cloudView];     
-
-        
-
-        checkGameCenter = NO;
-        
-        globalAngle = 0;
-        
-        //gameCenterViewController = [[GameCenterViewController alloc] initWithAccount:playerAccount andParentVC:self];
         gameCenterViewController = [GameCenterViewController sharedInstance:playerAccount andParentVC:self];
         
-//        bluetoothViewController = [[BluetoothViewController alloc] initWithAccount:playerAccount andView:self andStart:YES];
         listOfItemsViewController=[[ListOfItemsViewController alloc]initWithGCVC:gameCenterViewController Account:playerAccount OnLine:self.hostActive];
-        
-        // [self performSelectorInBackground:@selector(startCloudAnimation) withObject:self];
-        avtorisationCheck = YES;
-//        [bluetoothViewController setupSession];
-        
+                
         //      GoogleAnalytics
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                             object:self
@@ -251,7 +276,6 @@ static StartViewController *sharedHelper = nil;
         
         internetActive=YES;
         hostActive=YES;
-        
         
         UIDevice *currentDevice = [UIDevice currentDevice];                                                 //server logout
         
@@ -293,23 +317,13 @@ static StartViewController *sharedHelper = nil;
         internetReachable = [Reachability reachabilityForInternetConnection];
         [internetReachable startNotifier];
         
-        // check if a pathway to a random host exists
         hostReachable = [Reachability reachabilityWithHostName: @"www.apple.com"];
         [hostReachable startNotifier];
-        
-        activityIndicatorView2 = [[ActivityIndicatorView alloc] init];
-        imgFrame = activityIndicatorView.frame;
-        imgFrame.origin = CGPointMake(0, -80);
-        activityIndicatorView2.frame=imgFrame;
-        [activityIndicatorView2 hideView]; 
-        [_vBackground addSubview:activityIndicatorView2];
-        
+
         oldAccounId = @"";
-        
         if ([playerAccount.accountID rangeOfString:@"A"].location != NSNotFound)
             [self authorizationModifier:NO];
     }
-    
     return self; 
 }
 
@@ -320,7 +334,6 @@ static StartViewController *sharedHelper = nil;
 
 - (void)viewDidLoad{
        
-    
     UIColor *buttonsTitleColor = [[UIColor alloc] initWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     
     [duelButton setTitle:NSLocalizedString(@"Saloon", @"") forState:UIControlStateNormal];
@@ -363,7 +376,6 @@ static StartViewController *sharedHelper = nil;
     mapButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
     mapButton.titleLabel.textAlignment = UITextAlignmentCenter;
     
-    
     UIColor *textColor = [UIColor whiteColor];
     
     UIFont *textFont = [UIFont systemFontOfSize:16.0f];
@@ -386,24 +398,18 @@ static StartViewController *sharedHelper = nil;
     
     feedBackViewVisible=NO;
     
-    if (firstRun) {
-//        [teachingButton bringToFront];
-        
+    if (firstRun) {        
         arrowImage=[[UIImageView_AttachedView alloc] initWithImage:[UIImage imageNamed:@"st_arrow.png"] attachedToFrame:teachingButton frequence:0.5 amplitude:10 direction:DirectionToAnimateLeft];
         
         hudView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 480, 480)];
         hudView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
-        [hudView setTag:TAG_HUB_VIEW];
         [hudView setHidden:NO];
         [self.view insertSubview:hudView belowSubview:teachingButton];
         [hudView addSubview:arrowImage];
-        
         [arrowImage startAnimation];
-        
     }else{
         [hudView setHidden:YES];
     }
-    
     [self checkFor10Dolars];
     
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Back1cycled.mp3", [[NSBundle mainBundle] resourcePath]]];
@@ -421,12 +427,9 @@ static StartViewController *sharedHelper = nil;
     {
         player.volume = 1.0;
     }
-    
     [player play];
 }
 - (void)viewDidUnload {
-    
-
     feedbackView = nil;
     lbPostMessage = nil;
     lbMailMessage = nil;
@@ -446,44 +449,7 @@ static StartViewController *sharedHelper = nil;
         return;
     }
     
-    animationCheck = YES;
-    
-    viewIsVisible = YES;
-    
-    inBackground = NO;
-    
-    //    Change order of Buttons on first start
-    NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-    if ([userDef integerForKey:@"FirstRunForPractice"] == 2) {
-        
-        //        Final exchange after first duel
-        [hudView setHidden:YES];
-        [hudView removeFromSuperview];
-        
-    }
-    if (([userDef integerForKey:@"FirstRunForPractice"] == 1) && ([self connectedToWiFi])) {
-        //        Show btn Duel GC
-        //       exchange after practice
-        
-        UIImageView_AttachedView *arrowImage3=[[UIImageView_AttachedView alloc] initWithImage:[UIImage imageNamed:@"st_arrow.png"] attachedToFrame:duelButton frequence:0.5 amplitude:10 direction:DirectionToAnimateLeft];
-        [hudView addSubview:arrowImage3];
-        [arrowImage3 startAnimation];
-        
-        [teachingButton swapDepthsWithView:duelButton];
-//        
-        [arrowImage setHidden:YES];
-        
-        [userDef setInteger:2 forKey:@"FirstRunForPractice"];
-        [userDef synchronize];
-    }
-    if ((![self connectedToWiFi]) && ([userDef integerForKey:@"FirstRunForPractice"] == 1)) {
-        //        Final exchange internet connection off
-        
-        [hudView setHidden:YES];
-        [hudView removeFromSuperview];
-        //        [self.view exchangeSubviewAtIndex:12 withSubviewAtIndex:14];
-    }
-    ////////internet conection notification
+    [self changeRankOfBlackHelpViews];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkNetworkStatus:) name:kReachabilityChangedNotification object:nil];
     
@@ -512,24 +478,9 @@ static StartViewController *sharedHelper = nil;
     [self estimateApp];
 }
 
--(void)showMessage:(NSString *)tempMessage
-{
-    
-}
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    viewIsVisible = NO;
-    animationCheck = NO;
-}
-
 -(void)didBecomeActive
 {
     DLog(@"did become active");
-    if ((inBackground) && (viewIsVisible)) {
-        DLog(@"in back");
-        animationCheck = YES;
-    }
     if (!firstRunLocal) {
          [self login];
     }
@@ -541,8 +492,6 @@ static StartViewController *sharedHelper = nil;
 
 -(void)didEnterBackground
 {
-    animationCheck = NO;
-    inBackground = YES;
     [self logout];
 }
 
@@ -558,64 +507,22 @@ static StartViewController *sharedHelper = nil;
         
     }
     [[NSFileManager defaultManager] createDirectoryAtPath:FilePath withIntermediateDirectories:NO attributes:nil error:&error];
-    
-
 }
 
--(void)donate
-{
-    stDonate = [[NSMutableString alloc] initWithString:@"/donate"] ;
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
-                                                        object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:stDonate forKey:@"event"]];
-    
-    
-    CGRect frame=CGRectMake(190, 5, 120, 26);
-    
-    
-    frame=CGRectMake(10, 10, 460, 26);
-    UILabel *label3 = [[UILabel alloc] initWithFrame:frame];
-    [label3 setFont: [UIFont fontWithName: @"Arial-BoldMT" size:13]];
-    label3.textAlignment = UITextAlignmentCenter; 
-    [label3 setBackgroundColor:[UIColor clearColor]];
-    [label3 setTextColor:[UIColor whiteColor]];
-    [label3 setText:NSLocalizedString(@"MOREMONEY_TEXT", @"")];
-    DLog(@"Donation %@  %@",NSLocalizedString(@"MOREMONEY_TEXT", @""),NSLocalizedString(@"ACH", @""));
-    
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"     " delegate:self cancelButtonTitle:NSLocalizedString(@"CAN", @"") destructiveButtonTitle:nil otherButtonTitles:
-                                  NSLocalizedString(@"MOREMONEY1", @""),
-                                  NSLocalizedString(@"MOREMONEY5", @""),
-                                  NSLocalizedString(@"MOREMONEY100", @""), nil];
-    
-    actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
-    //[actionSheet addSubview:label2];
-    [actionSheet addSubview:label3];
-    [actionSheet showInView:self.view];
-}
-
-#pragma mark -
-
--(bool)connectedToWiFi
-{
-	return hostActive;
-	
-}
+#pragma mark - IBAction main buttons
 
 -(void)duelButtonClick
 {
-    //[gameCenterViewController.multiplayerServerViewController setIsRunServer:NO];
     [listOfItemsViewController setStatusOnLine:self.hostActive];
     [self.navigationController pushViewController:listOfItemsViewController animated:YES];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"saloon_click" forKey:@"event"]];
-    
 }
 
 -(IBAction)teachingButtonClick
 {  
-   
     [playerAccount.finalInfoTable removeAllObjects];
     int randomTime = arc4random() % 6; 
     
@@ -721,7 +628,7 @@ static StartViewController *sharedHelper = nil;
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/help_click" forKey:@"event"]];
     
-    HelpViewController *helpViewController = [[HelpViewController alloc] init:firstRun startVC:self];
+    HelpViewController *helpViewController = [[HelpViewController alloc] initWithStartVC:self];
     
     CATransition* transition = [CATransition animation];
     transition.duration = 0.5;
@@ -875,43 +782,7 @@ static StartViewController *sharedHelper = nil;
     
 }
 
-#pragma mark -
-
--(void)sendRequestWithDonateSum:(int)sum
-{
-    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-    
-    UIDevice *currentDevice = [UIDevice currentDevice];
-    
-    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:DONATE_URL encoding:NSUTF8StringEncoding]]
-                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                        timeoutInterval:kTimeOutSeconds];
-    
-    [theRequest setHTTPMethod:@"POST"]; 
-    NSMutableDictionary *dicBody=[NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                  [NSString stringWithFormat:@"%d", sum],@"sum",
-                                  version,@"app_ver",
-                                  currentDevice.systemName,@"system_name",
-                                  currentDevice.systemVersion,@"system_version",
-                                  currentDevice.uniqueIdentifier ,@"unique_identifier",
-                                  nil];
-    
-    [dicBody setValue:[[NSUserDefaults standardUserDefaults] stringForKey:@"deviceType"] forKey:@"device_name"];
-    [dicBody setValue:playerAccount.accountID forKey:@"authentification"];
-    [dicBody setValue:playerAccount.accountID forKey:@"GC_id"];
-    [dicBody setValue:playerAccount.sessionID forKey:@"session_id"];    
-    
-    
-    NSString *stBody=[Utils makeStringForPostRequest:dicBody];
-	[theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]]; 
-    CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
-    if (theConnection) {
-        NSMutableData *receivedData = [[NSMutableData alloc] init];
-        [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
-    } else {
-    }
-}
-
+#pragma mark - Login/Logout
 
 -(void)login
 {    
@@ -954,7 +825,7 @@ static StartViewController *sharedHelper = nil;
     
 }
 
-#pragma mark CustomNSURLConnection handlers
+#pragma mark - CustomNSURLConnection handlers
 
 - (void)connectionDidFinishLoading:(CustomNSURLConnection *)connection1 {
     NSString * currentParseString = [NSString stringWithFormat:@"%@",connection1.requestURL];
@@ -1134,299 +1005,8 @@ static StartViewController *sharedHelper = nil;
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
 }
 
-#pragma mark -
 
--(BOOL)isNeedBlockOnlineListForAdvertasingAppear;
-{
-    BOOL advertisingWillShow=[[NSUserDefaults standardUserDefaults] boolForKey:@"advertisingWillShow"];
-        
-    int drawCount=playerAccount.accountDraws;
-    int playedMatches=playerAccount.accountWins+drawCount;
-    
-    if ((playedMatches>=2)&&([self connectedToWiFi])) {
-        if ((advertisingWillShow)&&(playerAccount.removeAds!=AdColonyAdsStatusRemoved)) {
-            [self advertButtonClick];
-            return YES;
-        }
-    }
-    return NO;
-}
-
--(BOOL)isAdvertisingOfNewVersionNeedShow;
-{
-    AdvertisingNewVersionViewController *advertisingNewVersionViewController=[[AdvertisingNewVersionViewController alloc] init];
-    if ([advertisingNewVersionViewController isAdvertisingNeed]) {
-        [self presentModalViewController:advertisingNewVersionViewController animated:NO];
-        return YES;
-    }else {
-        return NO;
-    }
-}
-
--(void)estimateApp;
-{
-    NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-    NSString *estimateApp=[userDef stringForKey:@"estimateApp"];
-    
-    int drawCount=playerAccount.accountDraws;
-    int playedMatches=playerAccount.accountWins+drawCount;
-    
-    if (estimateApp && (playedMatches>3)) {
-//        [self showFeedbackView];        
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"estimateApp"];
-        [userDef synchronize];
-    }
-}
-
--(void)showProfileFirstRun
-{    
-    NSString *LoginForIPad=[[NSUserDefaults standardUserDefaults] stringForKey:@"IPad"];
-    if (LoginForIPad&&(![[OGHelper sharedInstance] isAuthorized])) {
-        LoginViewController *loginViewControllerLocal =[LoginViewController sharedInstance];
-        
-        loginViewControllerLocal.startViewController = self;
-        [self.navigationController pushViewController:loginViewControllerLocal animated:YES];
-        firstRunLocal = NO;
-    }else {
-        if (firstRunLocal) {
-            firstRunLocal = NO;
-            [self profileButtonClick];
-        }
-    }
-}
-#pragma mark 10 dolars for day
--(void)checkFor10Dolars;
-{
-    NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];                ////////////////////////// daily money
-    
-    NSInteger lastFeedDate = [userDef integerForKey:@"lastDate"];
-    NSInteger curentDate = [playerAccount.dateFormatDay integerValue];
-    [userDef setInteger:curentDate forKey:@"lastDate"];
-    
-    if((lastFeedDate != curentDate) && (!firstRunLocal)) {
-        [userDef setInteger:[playerAccount.dateFormatDay integerValue] forKey:@"lastDate"];
-        
-        [self performSelector:@selector(showMessage10Dolars) withObject:self afterDelay:1.0];
-        [self performSelector:@selector(hideMessage10Dolars) withObject:self afterDelay:3.8];
-        playerAccount.money +=10;
-        
-        CDTransaction *transaction = [[CDTransaction alloc] init];
-        transaction.trMoneyCh = [NSNumber numberWithInt:10];
-        
-        transaction.trDescription = [[NSString alloc] initWithFormat:@"Daily money"];
-        
-        int local = [playerAccount.glNumber intValue];
-        local++;
-        DLog(@"number %d", local);
-        playerAccount.glNumber = [NSNumber numberWithInt:local];
-        //            transaction.trNumber = [NSNumber numberWithInt:local];
-        [playerAccount.transactions addObject:transaction];
-        
-        NSMutableArray *locationData = [[NSMutableArray alloc] init];
-        for( CDTransaction *loc in playerAccount.transactions)
-        {
-            [locationData addObject: [NSKeyedArchiver archivedDataWithRootObject:loc]];
-        }
-        [userDef setObject:locationData forKey:@"transactions"];
-        
-        
-        DLog(@"Transactions count = %d", [playerAccount.transactions count]);
-        
-    };
-    [userDef synchronize];
-
-}
-
--(void)showMessage10Dolars;
-{
-    v10DolarsForDay=[[UIView alloc] initWithFrame:CGRectMake(12, -40, 290, 40)];
-
-    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(10, 10, 270, 20)];
-    [label setTextAlignment:UITextAlignmentCenter];
-    [label setFont:[UIFont systemFontOfSize:18.f]];
-    UIColor *brownColor=[UIColor colorWithRed:0.38 green:0.267 blue:0.133 alpha:1];
-    [label setTextColor:brownColor];
-    [label setBackgroundColor:[UIColor clearColor]];
-    [label setText:NSLocalizedString(@"daily10NoHTML", @"")];
-    [v10DolarsForDay addSubview:label];
-    
-    [self.view addSubview:v10DolarsForDay];
-    [v10DolarsForDay setDinamicHeightBackground];
-    
-    [UIView animateWithDuration:0.6f
-                     animations:^{
-                         CGRect frame=v10DolarsForDay.frame;
-                         frame.origin.y += frame.size.height+5;
-                         v10DolarsForDay.frame = frame;
-                     }];
-}
-
--(void)hideMessage10Dolars;
-{
-    [UIView animateWithDuration:0.6f
-                     animations:^{
-                         CGRect frame=v10DolarsForDay.frame;
-                         frame.origin.y -= frame.size.height+5;
-                         v10DolarsForDay.frame = frame;
-                     }
-                     completion:^(BOOL finished) {
-						 [v10DolarsForDay removeFromSuperview];
-					 }];
-    
-}
-
-#pragma mark -
--(void)soundOff
-{
-    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"soundCheack"] == 1) {
-        soundCheack = !soundCheack;
-        [self playerStop];
-
-        NSUserDefaults *uDef = [NSUserDefaults standardUserDefaults];
-        [uDef setInteger:0 forKey:@"soundCheack"];
-        [uDef synchronize];
-    }
-    else
-    {
-        soundCheack = !soundCheack;
-        [self playerStart];
-
-        NSUserDefaults *uDef = [NSUserDefaults standardUserDefaults];
-        [uDef setInteger:1 forKey:@"soundCheack"];
-        [uDef synchronize];
-    }    
-}
-
--(void)playerStart
-{
-    if  (soundCheack) {
-       [self performSelectorInBackground:@selector(volumeInc) withObject:self];
-       // player.volume = 1.0f;
-        DLog(@"playerStart called!");
-    }
-}
-
--(void)playerStop
-{
-    //player.volume = 0.0f;
-    NSNumber *num=[NSNumber numberWithInt:0];
-    [self performSelectorInBackground:@selector(volumeDec:) withObject:num];
-}
-
--(void)playerHalf
-{
-    NSNumber *num=[NSNumber numberWithInt:2];
-    if  (soundCheack) [self performSelectorInBackground:@selector(volumeDec:) withObject:num];
-    //    [num release];
-}
-
--(void)volumeDec:(NSNumber *)level
-{
-    int lev=[level intValue];
-    for (int i = player.volume * 10; i>=lev; i--) {
-        [player setVolume:(float)i/10];
-        
-        usleep(30000);
-    } 
-    
-}
-
--(void)volumeInc
-{
-    
-//    for (int i = (int)[player volume] * 10; i <= 10; i++) {
-    for (int i = player.volume * 10; i <= 10; i++) {
-        
-        [player setVolume:(float)i / 10];
-        
-        usleep(30000);
-    } 
-    
-}
-
-- (NSString *)deviceTypeCode {
-    size_t size;
-    
-    // Set 'oldp' parameter to NULL to get the size of the data
-    // returned so we can allocate appropriate amount of space
-    sysctlbyname("hw.machine", NULL, &size, NULL, 0);
-    
-    // Allocate the space to store name
-    char *name = malloc(size);
-    
-    // Get the platform name
-    sysctlbyname("hw.machine", name, &size, NULL, 0);
-    
-    // Place name into a string
-    NSString *deviceTypeCode = [NSString stringWithCString:name encoding: NSUTF8StringEncoding];
-    
-    
-    // Done with this
-    free(name);
-    
-    return deviceTypeCode;
-}
-
-- (NSString *)deviceType {
-    
-    NSString *deviceTypeCode=[self deviceTypeCode];
-    if ([deviceTypeCode isEqualToString: @"i386"]) {
-        return @"iPhone Simulator";
-    }
-    else if ([deviceTypeCode isEqualToString: @"iPhone1,1"]) {
-        return @"iPhone";
-    }
-    else if ([deviceTypeCode isEqualToString: @"iPhone1,2"]) {
-        return @"iPhone3G";
-    }
-    else if ([deviceTypeCode isEqualToString: @"iPhone2,1"]) {
-        return @"iPhone3GS";
-    }
-    else if ([deviceTypeCode isEqualToString: @"iPhone3,1"]) {
-        return @"iPhone4";
-    }
-    else if ([deviceTypeCode isEqualToString: @"iPhone3,3"]||
-             [deviceTypeCode isEqualToString: @"iPhone3,2"]) {
-        return @"iPhone4CDMA";
-    }
-    else if ([deviceTypeCode isEqualToString: @"iPhone4,1"]) {
-        return @"iPhone4S";
-    }
-    else if ([deviceTypeCode isEqualToString: @"iPod1,1"]) {
-        return @"iPod1";
-    }
-    else if ([deviceTypeCode isEqualToString: @"iPod2,1"]) {
-        return @"iPod2";
-    }
-    else if ([deviceTypeCode isEqualToString: @"iPod2,2"]) {
-        return @"iPod2.5";
-    }
-    else if ([deviceTypeCode isEqualToString: @"iPod3,1"]) {
-        return @"iPod3";
-    }
-    else if ([deviceTypeCode isEqualToString: @"iPod4,1"]) {
-        return @"iPod4";
-    }
-    else if ([deviceTypeCode isEqualToString: @"iPad1,1"]) {
-        return @"iPad1";
-    }
-    else if ([deviceTypeCode isEqualToString: @"iPad1,2"]) {
-        return @"iPad1GSM";
-    }
-    else if ([deviceTypeCode isEqualToString: @"iPad2,1"]) {
-        return @"iPad2";
-    }
-    else if ([deviceTypeCode isEqualToString: @"iPad2,2"]) {
-        return @"iPad2GSM";
-    }
-    else if ([deviceTypeCode isEqualToString: @"iPad2,3"]) {
-        return @"iPad2CDMA";
-    }
-    else {
-        return deviceTypeCode;
-    }
-}
-
+#pragma mark - Authorization
 
 -(void)authorizationModifier:(BOOL)pModifierName;
 {
@@ -1526,8 +1106,7 @@ static StartViewController *sharedHelper = nil;
 }
 
 
-#pragma mark -
-#pragma mark protocol GCAuthenticateDelegate 
+#pragma mark - protocol GCAuthenticateDelegate 
 
 - (void)setLocalPlayer:(GKLocalPlayer *)player1
 {   
@@ -1536,93 +1115,11 @@ static StartViewController *sharedHelper = nil;
     }
 }
 
--(void)avtorizationFailed
-{
-    if (avtorizationInProcess) {
-        [hudView setHidden:YES];
-        [hudView removeFromSuperview];
-        //        NSLocalizedString(@"CAN'T CONNECT", @"")
-        [activityIndicatorView hideView]; 
-        avtorizationInProcess = NO;
-        [self performSelector:@selector(duelButtonClick) withObject:self afterDelay:5.2];
-    }
-    
-}
-
-
--(float)abs:(float)d
-{
-    if (d<0) return -1.0 * d;
-    else return d;
-}
-
-- (void)retrieveMessageFromDevice  
-{      
-    NSString *savePath = getGameCenterSavePath();
-    
-    // If there are no files saved, return  
-    if(![[NSFileManager defaultManager] fileExistsAtPath:savePath]){  
-        return;  
-    }  
-    
-    // First get the data  
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:savePath];  
-    NSData *data = [dict objectForKey:textArchiveKey];  
-    
-    // A file exists, but it isn't for the scores key so return  
-    if(!data){  
-        return;  
-    }  
-    
-    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];  
-    NSArray *textArr = [unarchiver decodeObjectForKey:textArchiveKey];  
-    [unarchiver finishDecoding];  
-    //    [unarchiver release];  
-    
-    // remove the scores key and save the dictionary back again  
-    [dict removeObjectForKey:textArchiveKey];  
-    [dict writeToFile:savePath atomically:YES];  
-}  
-
-#pragma mark AlertViewDelegate
+#pragma mark - AlertViewDelegate
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    
     switch (alertView.tag) {
-            
-        case ESTIMATE_APP_TAG:
-        {
-            if (buttonIndex==alertView.cancelButtonIndex) {
-                
-                [alertView dismissWithClickedButtonIndex:alertView.cancelButtonIndex animated:YES];
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
-                                                                    object:self
-                                                                  userInfo:[NSDictionary dictionaryWithObject:@"/estimate_ITunes_CANCEL" forKey:@"event"]];
-                
-            }else {
-                NSURL *url = [NSURL URLWithString:iTunesId];
-                
-                [[UIApplication sharedApplication] openURL:url];
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
-                                                                    object:self
-                                                                  userInfo:[NSDictionary dictionaryWithObject:@"/estimate_ITunes_OK" forKey:@"event"]];  
-            }
-        }
-            break;
-        case PUSH_MES_TAG:
-        {
-            if(buttonIndex==alertView.cancelButtonIndex  )
-            {
-                [alertView dismissWithClickedButtonIndex:alertView.cancelButtonIndex animated:YES];
-            }else
-            {
-                [self startDuel]; 
-            }
-        }
-            break;
         case BOT_DUEL_TAG:
         {
             if(buttonIndex==alertView.cancelButtonIndex  )
@@ -1631,20 +1128,17 @@ static StartViewController *sharedHelper = nil;
             }
         }
             break;   
-        case CON_GC_TAG:
-        {
-            [activityIndicatorView setHidden:YES];
-            avtorizationInProcess = NO; 
-        }
-            break;     
             
         default:
             break;
     }
-    
 }
 
 #pragma mark Notification
+-(bool)connectedToWiFi
+{
+	return hostActive;
+}
 
 - (void) checkNetworkStatus:(NSNotification *)notice
 {
@@ -1721,27 +1215,10 @@ static StartViewController *sharedHelper = nil;
     }
 }
 
-#pragma mark Bot Duel
-
-- (void)showAlertBotDuel{
-    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:GET_RANDOM_USER_URL encoding:NSUTF8StringEncoding]]
-                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                        timeoutInterval:kTimeOutSeconds];
-    
-    CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
-    if (theConnection) {
-        NSMutableData *receivedData = [[NSMutableData alloc] init];
-        [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
-    } else {
-    }
-    
-}
-
 #pragma mark FConnect Methods
 
 - (void)request:(FBRequest *)request didLoad:(id)result {
 	
-    DLog(@"Start VC Facebook response: %@", result);
     
 	if ([result isKindOfClass:[NSDictionary class]]) {
         
@@ -1779,6 +1256,247 @@ static StartViewController *sharedHelper = nil;
 
 - (void)dealloc {
 //    [super dealloc];
+}
+
+#pragma mark - Private metods
+
+-(BOOL)isNeedBlockOnlineListForAdvertasingAppear;
+{
+    BOOL advertisingWillShow=[[NSUserDefaults standardUserDefaults] boolForKey:@"advertisingWillShow"];
+    
+    int drawCount=playerAccount.accountDraws;
+    int playedMatches=playerAccount.accountWins+drawCount;
+    
+    if ((playedMatches>=2)&&([self connectedToWiFi])) {
+        if ((advertisingWillShow)&&(playerAccount.removeAds!=AdColonyAdsStatusRemoved)) {
+            [self advertButtonClick];
+            return YES;
+        }
+    }
+    return NO;
+}
+
+-(BOOL)isAdvertisingOfNewVersionNeedShow;
+{
+    AdvertisingNewVersionViewController *advertisingNewVersionViewController=[[AdvertisingNewVersionViewController alloc] init];
+    if ([advertisingNewVersionViewController isAdvertisingNeed]) {
+        [self presentModalViewController:advertisingNewVersionViewController animated:NO];
+        return YES;
+    }else {
+        return NO;
+    }
+}
+
+-(void)estimateApp;
+{
+    NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+    NSString *estimateApp=[userDef stringForKey:@"estimateApp"];
+    
+    int drawCount=playerAccount.accountDraws;
+    int playedMatches=playerAccount.accountWins+drawCount;
+    
+    if (estimateApp && (playedMatches>3)) {
+        //        [self showFeedbackView];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"estimateApp"];
+        [userDef synchronize];
+    }
+}
+
+-(void)showProfileFirstRun
+{
+    NSString *LoginForIPad=[[NSUserDefaults standardUserDefaults] stringForKey:@"IPad"];
+    if (LoginForIPad&&(![[OGHelper sharedInstance] isAuthorized])) {
+        LoginViewController *loginViewControllerLocal =[LoginViewController sharedInstance];
+        
+        loginViewControllerLocal.startViewController = self;
+        [self.navigationController pushViewController:loginViewControllerLocal animated:YES];
+        firstRunLocal = NO;
+    }else {
+        if (firstRunLocal) {
+            firstRunLocal = NO;
+            [self profileButtonClick];
+        }
+    }
+}
+-(void)changeRankOfBlackHelpViews
+{
+    //    Change order of Buttons on first start
+    NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+    if ([userDef integerForKey:@"FirstRunForPractice"] == 2) {
+        
+        //        Final exchange after first duel
+        [hudView setHidden:YES];
+        [hudView removeFromSuperview];
+        
+    }
+    if (([userDef integerForKey:@"FirstRunForPractice"] == 1) && ([self connectedToWiFi])) {
+        //        Show btn Duel GC
+        //       exchange after practice
+        
+        UIImageView_AttachedView *arrowImage3=[[UIImageView_AttachedView alloc] initWithImage:[UIImage imageNamed:@"st_arrow.png"] attachedToFrame:duelButton frequence:0.5 amplitude:10 direction:DirectionToAnimateLeft];
+        [hudView addSubview:arrowImage3];
+        [arrowImage3 startAnimation];
+        
+        [teachingButton swapDepthsWithView:duelButton];
+        //
+        [arrowImage setHidden:YES];
+        
+        [userDef setInteger:2 forKey:@"FirstRunForPractice"];
+        [userDef synchronize];
+    }
+    if ((![self connectedToWiFi]) && ([userDef integerForKey:@"FirstRunForPractice"] == 1)) {
+        [hudView setHidden:YES];
+        [hudView removeFromSuperview];
+    }
+}
+
+-(float)abs:(float)d
+{
+    if (d<0) return -1.0 * d;
+    else return d;
+}
+
+#pragma mark 10 dolars for day
+-(void)checkFor10Dolars;
+{
+    NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];                ////////////////////////// daily money
+    
+    NSInteger lastFeedDate = [userDef integerForKey:@"lastDate"];
+    NSInteger curentDate = [playerAccount.dateFormatDay integerValue];
+    [userDef setInteger:curentDate forKey:@"lastDate"];
+    
+    if((lastFeedDate != curentDate) && (!firstRunLocal)) {
+        [userDef setInteger:[playerAccount.dateFormatDay integerValue] forKey:@"lastDate"];
+        
+        [self performSelector:@selector(showMessage10Dolars) withObject:self afterDelay:1.0];
+        [self performSelector:@selector(hideMessage10Dolars) withObject:self afterDelay:3.8];
+        playerAccount.money +=10;
+        
+        CDTransaction *transaction = [[CDTransaction alloc] init];
+        transaction.trMoneyCh = [NSNumber numberWithInt:10];
+        
+        transaction.trDescription = [[NSString alloc] initWithFormat:@"Daily money"];
+        
+        int local = [playerAccount.glNumber intValue];
+        local++;
+        DLog(@"number %d", local);
+        playerAccount.glNumber = [NSNumber numberWithInt:local];
+        //            transaction.trNumber = [NSNumber numberWithInt:local];
+        [playerAccount.transactions addObject:transaction];
+        
+        NSMutableArray *locationData = [[NSMutableArray alloc] init];
+        for( CDTransaction *loc in playerAccount.transactions)
+        {
+            [locationData addObject: [NSKeyedArchiver archivedDataWithRootObject:loc]];
+        }
+        [userDef setObject:locationData forKey:@"transactions"];
+        
+        
+        DLog(@"Transactions count = %d", [playerAccount.transactions count]);
+        
+    };
+    [userDef synchronize];
+    
+}
+
+-(void)showMessage10Dolars;
+{
+    v10DolarsForDay=[[UIView alloc] initWithFrame:CGRectMake(12, -40, 290, 40)];
+    
+    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(10, 10, 270, 20)];
+    [label setTextAlignment:UITextAlignmentCenter];
+    [label setFont:[UIFont systemFontOfSize:18.f]];
+    UIColor *brownColor=[UIColor colorWithRed:0.38 green:0.267 blue:0.133 alpha:1];
+    [label setTextColor:brownColor];
+    [label setBackgroundColor:[UIColor clearColor]];
+    [label setText:NSLocalizedString(@"daily10NoHTML", @"")];
+    [v10DolarsForDay addSubview:label];
+    
+    [self.view addSubview:v10DolarsForDay];
+    [v10DolarsForDay setDinamicHeightBackground];
+    
+    [UIView animateWithDuration:0.6f
+                     animations:^{
+                         CGRect frame=v10DolarsForDay.frame;
+                         frame.origin.y += frame.size.height+5;
+                         v10DolarsForDay.frame = frame;
+                     }];
+}
+
+-(void)hideMessage10Dolars;
+{
+    [UIView animateWithDuration:0.6f
+                     animations:^{
+                         CGRect frame=v10DolarsForDay.frame;
+                         frame.origin.y -= frame.size.height+5;
+                         v10DolarsForDay.frame = frame;
+                     }
+                     completion:^(BOOL finished) {
+						 [v10DolarsForDay removeFromSuperview];
+					 }];
+    
+}
+
+#pragma mark Sound
+-(void)soundOff
+{
+    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"soundCheack"] == 1) {
+        soundCheack = !soundCheack;
+        [self playerStop];
+        
+        NSUserDefaults *uDef = [NSUserDefaults standardUserDefaults];
+        [uDef setInteger:0 forKey:@"soundCheack"];
+        [uDef synchronize];
+    }
+    else
+    {
+        soundCheack = !soundCheack;
+        [self playerStart];
+        
+        NSUserDefaults *uDef = [NSUserDefaults standardUserDefaults];
+        [uDef setInteger:1 forKey:@"soundCheack"];
+        [uDef synchronize];
+    }
+}
+
+-(void)playerStart
+{
+    if  (soundCheack) {
+        [self performSelectorInBackground:@selector(volumeInc) withObject:self];
+        // player.volume = 1.0f;
+        DLog(@"playerStart called!");
+    }
+}
+
+-(void)playerStop
+{
+    //player.volume = 0.0f;
+    NSNumber *num=[NSNumber numberWithInt:0];
+    [self performSelectorInBackground:@selector(volumeDec:) withObject:num];
+}
+
+-(void)volumeDec:(NSNumber *)level
+{
+    int lev=[level intValue];
+    for (int i = player.volume * 10; i>=lev; i--) {
+        [player setVolume:(float)i/10];
+        
+        usleep(30000);
+    }
+    
+}
+
+-(void)volumeInc
+{
+    
+    //    for (int i = (int)[player volume] * 10; i <= 10; i++) {
+    for (int i = player.volume * 10; i <= 10; i++) {
+        
+        [player setVolume:(float)i / 10];
+        
+        usleep(30000);
+    }
+    
 }
 
 @end

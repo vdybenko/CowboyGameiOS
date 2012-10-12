@@ -78,7 +78,7 @@ static AccountDataSource *sharedHelper = nil;
   self.facebookName = [uDef stringForKey:@"facebook_name"];
   
   if(![uDef stringForKey:@"deviceType"])
-    [uDef setObject:ValidateObject([[StartViewController sharedInstance] deviceType], [NSString class]) forKey:@"deviceType"];
+    [uDef setObject:ValidateObject([Utils deviceType], [NSString class]) forKey:@"deviceType"];
   
   if(self.money<0){
     self.money=0;
@@ -428,7 +428,7 @@ static AccountDataSource *sharedHelper = nil;
 
 - (void)saveDeviceType;
 {
-    [[NSUserDefaults standardUserDefaults] setObject:ValidateObject([[StartViewController sharedInstance] deviceType], [NSString class]) forKey:@"deviceType"];
+    [[NSUserDefaults standardUserDefaults] setObject:ValidateObject([Utils deviceType], [NSString class]) forKey:@"deviceType"];
 }
 
 @end

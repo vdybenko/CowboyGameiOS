@@ -10,6 +10,7 @@
 #import "StartViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "DuelRewardLogicController.h"
+#import "GameCenterViewController.h"
 
 @interface DuelViewControllerWithXib (PrivateMethods)
 

@@ -7,7 +7,8 @@
 //
 
 #import "Utils.h"
-
+#include <sys/types.h>
+#include <sys/sysctl.h>
 #import <CommonCrypto/CommonDigest.h>
 
 
@@ -163,4 +164,108 @@
         return (CFStringGetLength(state) <= 0);
     }
     return NO;
-}@end
+}
+
+#pragma mark device type
+
++ (NSString *)deviceTypeCode {
+    size_t size;
+    
+    // Set 'oldp' parameter to NULL to get the size of the data
+    // returned so we can allocate appropriate amount of space
+    sysctlbyname("hw.machine", NULL, &size, NULL, 0);
+    
+    // Allocate the space to store name
+    char *name = malloc(size);
+    
+    // Get the platform name
+    sysctlbyname("hw.machine", name, &size, NULL, 0);
+    
+    // Place name into a string
+    NSString *deviceTypeCode = [NSString stringWithCString:name encoding: NSUTF8StringEncoding];
+    
+    
+    // Done with this
+    free(name);
+    
+    return deviceTypeCode;
+}
+
++ (NSString *)deviceType {
+    
+    NSString *deviceTypeCode=[Utils deviceTypeCode];
+    if ([deviceTypeCode isEqualToString: @"i386"]) {
+        return @"iPhone Simulator";
+    }
+    else if ([deviceTypeCode isEqualToString: @"iPhone1,1"]) {
+        return @"iPhone";
+    }
+    else if ([deviceTypeCode isEqualToString: @"iPhone1,2"]) {
+        return @"iPhone3G";
+    }
+    else if ([deviceTypeCode isEqualToString: @"iPhone2,1"]) {
+        return @"iPhone3GS";
+    }
+    else if ([deviceTypeCode isEqualToString: @"iPhone3,1"]) {
+        return @"iPhone4";
+    }
+    else if ([deviceTypeCode isEqualToString: @"iPhone3,3"]||
+             [deviceTypeCode isEqualToString: @"iPhone3,2"]) {
+        return @"iPhone4CDMA";
+    }
+    else if ([deviceTypeCode isEqualToString: @"iPhone4,1"]) {
+        return @"iPhone4S";
+    }
+    else if ([deviceTypeCode isEqualToString: @"iPhone5,1"]) {
+        return @"iPhone5GSM";
+    }
+    else if ([deviceTypeCode isEqualToString: @"iPhone5,2"]) {
+        return @"iPhone5CDMA";
+    }
+    else if ([deviceTypeCode isEqualToString: @"iPod1,1"]) {
+        return @"iPod1";
+    }
+    else if ([deviceTypeCode isEqualToString: @"iPod2,1"]) {
+        return @"iPod2";
+    }
+    else if ([deviceTypeCode isEqualToString: @"iPod2,2"]) {
+        return @"iPod2.5";
+    }
+    else if ([deviceTypeCode isEqualToString: @"iPod3,1"]) {
+        return @"iPod3";
+    }
+    else if ([deviceTypeCode isEqualToString: @"iPod4,1"]) {
+        return @"iPod4";
+    }
+    else if ([deviceTypeCode isEqualToString: @"iPod5,1"]) {
+        return @"iPod5";
+    }
+    else if ([deviceTypeCode isEqualToString: @"iPad1,1"]) {
+        return @"iPad1";
+    }
+    else if ([deviceTypeCode isEqualToString: @"iPad1,2"]) {
+        return @"iPad1GSM";
+    }
+    else if ([deviceTypeCode isEqualToString: @"iPad2,1"]) {
+        return @"iPad2";
+    }
+    else if ([deviceTypeCode isEqualToString: @"iPad2,2"]) {
+        return @"iPad2GSM";
+    }
+    else if ([deviceTypeCode isEqualToString: @"iPad2,3"]) {
+        return @"iPad2CDMA";
+    }
+    else if ([deviceTypeCode isEqualToString: @"iPad3,1"]) {
+        return @"iPad3WiFi";
+    }
+    else if ([deviceTypeCode isEqualToString: @"iPad3,2"]) {
+        return @"iPad3GSM";
+    }
+    else if ([deviceTypeCode isEqualToString: @"iPad3,3"]) {
+        return @"iPad3CDMA";
+    }
+    else {
+        return deviceTypeCode;
+    }
+}
+@end

@@ -25,4 +25,7 @@
 +(BOOL)isiPhoneRetina;
 
 +(BOOL)isDeviceMuted;
+
++(NSString *)deviceType;
+
 @end

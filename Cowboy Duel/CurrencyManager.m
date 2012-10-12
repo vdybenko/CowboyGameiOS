@@ -9,7 +9,6 @@
 #import "CurrencyManager.h"
 #import "AdColonyPublic.h"
 
-
 @implementation CurrencyManager
 
 -(id)init{
@@ -21,7 +20,6 @@
     
     return self;
 }
-
 
 #pragma mark server
 
