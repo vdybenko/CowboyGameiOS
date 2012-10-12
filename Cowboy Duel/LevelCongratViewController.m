@@ -13,21 +13,43 @@
 
 
 @interface LevelCongratViewController ()
-
+{
+    AccountDataSource *playerAccount;
+    ActivityIndicatorView *activityIndicatorView;
+    
+    int money;
+    double angle;
+    
+    IBOutlet UIImageView *ivImageForLevel;
+    
+    //images to animate:
+    IBOutlet UIImageView *ivLightRays;
+    IBOutlet UIImageView *ivLightRays2;
+    IBOutlet UIImageView *ivLevelRing;
+    IBOutlet UIImageView *ivLevelCoint;
+    
+    //labels:
+    IBOutlet UILabel *lbTitleRankAchieve;
+    
+    IBOutlet UILabel *lbCongLvlMainText;
+    IBOutlet UILabel *lbAgain;
+    IBOutlet UILabel *lbMenu;
+    IBOutlet UILabel *lbPostOnFB;
+    //buttons:
+    IBOutlet UIButton *btnAgain;
+    IBOutlet UIButton *btnMenu;
+    IBOutlet UIButton *btnPost;
+    BOOL runAnimation;
+    
+    
+}
+@property(nonatomic, strong)id<DuelViewControllerDelegate> delegate;
+@property (nonatomic, strong) IBOutlet UIImageView *ivLightRays2;
 @end
 
 @implementation LevelCongratViewController
 @synthesize delegate;
 @synthesize ivLightRays2;
-
-//- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-//{
-//    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-//    if (self) {
-//        // Custom initialization
-//    }
-//    return self;
-//}
 
 - (id) initForNewLevelPlayerAccount:(AccountDataSource *)pPlayerAccount andController:(id)delegateController;
 {
@@ -56,7 +78,6 @@
             [btnPost setHidden:YES];
             [LevelCongratViewController newLevelNumber:playerAccount.accountLevel];
         }
-        
     }
     return self;
 }
@@ -68,11 +89,9 @@
     UIColor *textColor = [UIColor colorWithRed:97.0f/255.0f green:68.0f/255.0f blue:34.0f/255.0f alpha:1.0f];
     
     UIColor *congColor = [UIColor colorWithRed:255.0f/255.0f green:248.0f/255.0f blue:225.0f/255.0f alpha:1.0f];
-    UIFont *textFont = [UIFont systemFontOfSize:17.0f];
     
     lbTitleRankAchieve.textColor = textColor;
     
-    // Do any additional setup after loading the view from its nib.
 
     lbTitleRankAchieve.textColor = mainColor;
     lbTitleRankAchieve.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
@@ -92,16 +111,7 @@
     lbPostOnFB.textColor = [UIColor whiteColor];
     lbPostOnFB.numberOfLines = 2;
     lbPostOnFB.lineBreakMode = UILineBreakModeCharacterWrap;
-    lbPostOnFB.text = NSLocalizedString(@"AchievBtnTellFriends", nil);
-    //[self shineAnimation];
-    
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-   
-    // Do any additional setup after loading the view from its nib.
+    lbPostOnFB.text = NSLocalizedString(@"AchievBtnTellFriends", nil);    
 }
 
 - (void)viewDidUnload
@@ -119,11 +129,7 @@
     ivLightRays2 = nil;
     ivLevelRing = nil;
     ivImageForLevel = nil;
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
-
-
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -177,8 +183,6 @@
     [UIView commitAnimations];
 }
 
-
-
 -(void)shineAnimation
 {
     angle += 1.1415;
@@ -229,7 +233,6 @@
 
 - (IBAction)btnAgainClicked:(id)sender
 {
-    DLog(@"tryButtonClick");
     [self dismissModalViewControllerAnimated:YES];
     [activityIndicatorView showView];
     
@@ -237,7 +240,6 @@
     {
        [(FinalViewController *)delegate tryButtonClick:sender];
     }
-    
 }
 
 - (IBAction) btnPostOnFBClicked:(id)sender
@@ -261,6 +263,4 @@
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"congratulation_new_level" forKey:@"event"]];
 }
-
-
 @end
