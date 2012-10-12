@@ -164,8 +164,6 @@ static const char *LIST_ONLINE_URL =  BASE_URL"users/listview";
         if(player.dPlayerPublicIP) player.dPlayerPublicIP = @"0.0.0.0";
         player.dAvatar=[dic objectForKey:@"avatar"];
         [arrItemsList addObject: player];
-        
-              
     }
     ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
     [listOfItemsViewController.btnInvite setEnabled:YES];
@@ -197,7 +195,6 @@ static const char *LIST_ONLINE_URL =  BASE_URL"users/listview";
     [listOfItemsViewController.loadingView setHidden:YES];
     [listOfItemsViewController.activityIndicator stopAnimating];
     [listOfItemsViewController.tableView reloadData];
-    
 }
 
 #pragma mark IconDownloaderDelegate
@@ -212,7 +209,6 @@ static const char *LIST_ONLINE_URL =  BASE_URL"users/listview";
 }
 
 #pragma mark -
-
 -(void)invaiteWithMessage:(id __strong)sender;
 {    
     PlayerOnLineCell *cell=(PlayerOnLineCell *)[[sender superview] superview];
@@ -220,6 +216,4 @@ static const char *LIST_ONLINE_URL =  BASE_URL"users/listview";
     [cell showIndicatorConnectin];
     [delegate clickButton:indexPath];
 }
-
 @end
-

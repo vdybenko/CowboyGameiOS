@@ -11,13 +11,25 @@
 #import "UIButton+Image+Title.h"
 #import "CustomNSURLConnection.h"
 
-@interface TopPlayersViewController (Private)
+@interface TopPlayersViewController()
+{
+    AccountDataSource *_playerAccount;
+    TopPlayersDataSource *_playersTopDataSource;
+    
+    NSIndexPath *_indexPath;
+    
+    NSTimer *updateTimer;
+    
+    NSMutableData *receivedData;
+    NSMutableArray * arrItemsListForFindMe;
+}
+
 -(NSString *) convertToJSParametr:(NSString *) pValue;
 -(NSString *) HTMLImage:(NSString *) pValue;
 @end
 
 @implementation TopPlayersViewController
-@synthesize tableView, btnFindMe, btnBack, activityIndicator, loadingView,offLineBackGround,offLineText, updateTimer;
+@synthesize tableView, btnFindMe, btnBack, activityIndicator, loadingView,offLineBackGround,offLineText, updateTimer,saloonTitle;
 
 static const char *RANK_TOP =  "http://cd.webkate.com/users/top_rank";
 
@@ -37,21 +49,8 @@ static const char *RANK_TOP =  "http://cd.webkate.com/users/top_rank";
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-//        if([self.navigationController.navigationBar respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)] ) {
-//            //iOS 5 new UINavigationBar custom background
-//            [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"text_navigationBar_background.png"] forBarMetrics: UIBarMetricsDefault];
-//        } 
     }
     return self;
-}
-
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 #pragma mark - View lifecycle
@@ -62,9 +61,6 @@ static const char *RANK_TOP =  "http://cd.webkate.com/users/top_rank";
     
     [loadingView setHidden:NO];
     [activityIndicator startAnimating];
-//    [btnInvite setEnabled:NO];
-
-    // Do any additional setup after loading the view from its nib.
     
     _playersTopDataSource = [[TopPlayersDataSource alloc] initWithTable:tableView];
     [_playersTopDataSource reloadDataSource];
@@ -113,28 +109,14 @@ static const char *RANK_TOP =  "http://cd.webkate.com/users/top_rank";
     [updateTimer invalidate];
     updateTimer = nil;
     [super viewWillDisappear:animated];
-    
-    
 }
-
--(void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    
-    //[updateTimer invalidate];
-   
-}
-
-
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark - Delegated methods
-//table view
+#pragma mark - UITableViewDelegate
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -147,18 +129,14 @@ static const char *RANK_TOP =  "http://cd.webkate.com/users/top_rank";
     return headerView;
 }
 
-
--(void) tableView:(UITableView *)pTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-        
-    }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 82.f;
 }
+
 #pragma mark - Private methods
 -(void)getMyPositionInLeaderboard;
 {
-    
     [btnFindMe setEnabled:NO];
     [loadingView setHidden:NO];
     
@@ -179,7 +157,6 @@ static const char *RANK_TOP =  "http://cd.webkate.com/users/top_rank";
 }
 
 #pragma mark CustomNSURLConnection handlers
-
 
 - (void)connectionDidFinishLoading:(CustomNSURLConnection *)connection1 {
     
@@ -310,7 +287,6 @@ static const char *RANK_TOP =  "http://cd.webkate.com/users/top_rank";
         
         [NSThread sleepForTimeInterval:0.1];
     }
-    
 }
 @end
 

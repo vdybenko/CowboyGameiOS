@@ -11,29 +11,10 @@
 
 @class TopPlayersDataSource;
 
-@interface TopPlayersViewController : UIViewController <UITableViewDelegate>{
-    
-    AccountDataSource *_playerAccount;
-    TopPlayersDataSource *_playersTopDataSource;
-        
-    IBOutlet UITableView * tableView;
-    IBOutlet UIButton *btnBack;
-    IBOutlet UIButton *btnFindMe;
-    IBOutlet UIView *loadingView;
-    IBOutlet UIActivityIndicatorView *activityIndicator;
-    IBOutlet UILabel *saloonTitle;
-    
-    NSIndexPath *_indexPath;
-    
-    IBOutlet UIView *offLineBackGround;
-    IBOutlet UIWebView *offLineText;
-    
-    NSTimer *updateTimer;
-    
-    NSMutableData *receivedData;
-    NSMutableArray * arrItemsListForFindMe;
+@interface TopPlayersViewController : UIViewController <UITableViewDelegate>
 
-}
+@property (strong, nonatomic) IBOutlet UILabel *saloonTitle;
+
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIButton *btnBack;
 @property (strong, nonatomic) IBOutlet UIButton *btnFindMe;
@@ -46,12 +27,7 @@
 
 @property (strong, nonatomic)  NSTimer *updateTimer;
 
-//@property (nonatomic, retain) IBOutlet UIView *viewGround;
-
-
 - (id)initWithAccount:(AccountDataSource *)userAccount;
-- (void)updateServerList;
 -(IBAction)findMe:(id)sender;
--(void)getMyPositionInLeaderboard;
 
 @end
