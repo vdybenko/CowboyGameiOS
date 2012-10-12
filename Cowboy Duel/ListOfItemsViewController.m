@@ -15,14 +15,35 @@
 #include <arpa/inet.h>
 #import "UIButton+Image+Title.h"
 
+@interface ListOfItemsViewController ()
+{
+    AccountDataSource *_playerAccount;
+    GameCenterViewController *_gameCenterViewController;
+    PlayersOnLineDataSource *_playersOnLineDataSource;
+    StartViewController *startViewController;
+    
+    BOOL statusOnLine;
+            
+    NSIndexPath *_indexPath;
+    
+    IBOutlet UILabel *lbBackBtn;
+    IBOutlet UILabel *lbInviteBtn;
+    
+    IBOutlet UIView *offLineBackGround;
+    IBOutlet UIWebView *offLineText;
+    
+    IBOutlet UILabel *saloonTitle;
+    IBOutlet UIButton *btnRefresh;
+    
+    NSTimer *updateTimer;
+}
 
-@interface ListOfItemsViewController (Private)
 -(NSString *) convertToJSParametr:(NSString *) pValue;
 -(NSString *) HTMLImage:(NSString *) pValue;
 @end
 
 @implementation ListOfItemsViewController
-@synthesize tableView, btnInvite, btnBack, activityIndicator, loadingView,offLineBackGround,offLineText,statusOnLine, updateTimer;
+@synthesize tableView, btnInvite, btnBack, activityIndicator, loadingView,statusOnLine, updateTimer;
 
 #define SectionHeaderHeight 20
 
@@ -34,7 +55,6 @@
         _gameCenterViewController = GCVC;
         _playerAccount = userAccount;
         statusOnLine=YES;
-        
     }
     return self;
 }
@@ -42,21 +62,9 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-//        if([self.navigationController.navigationBar respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)] ) {
-//            //iOS 5 new UINavigationBar custom background
-//            [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"text_navigationBar_background.png"] forBarMetrics: UIBarMetricsDefault];
-//        } 
+
     }
     return self;
-}
-
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 #pragma mark - View lifecycle
@@ -67,9 +75,6 @@
     
     [loadingView setHidden:NO];
     [activityIndicator startAnimating];
-//    [btnInvite setEnabled:NO];
-
-    // Do any additional setup after loading the view from its nib.
     
     _playersOnLineDataSource = [[PlayersOnLineDataSource alloc] initWithTable:tableView];
     _playersOnLineDataSource.delegate=self;
@@ -78,13 +83,7 @@
     tableView.dataSource=_playersOnLineDataSource;
     
     [tableView setPullToRefreshHandler:^{
-        
-        /**
-         Note: Here you should deal perform a webservice request, CoreData query or
-         whatever instead of this dummy code ;-)
-         */
         [self refreshController];
-        
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                             object:self
                                                           userInfo:[NSDictionary dictionaryWithObject:@"/saloon_refresh_click" forKey:@"event"]];
@@ -124,9 +123,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
     [self checkInternetStatus:statusOnLine];
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -140,26 +137,14 @@
     [updateTimer invalidate];
     updateTimer = nil;
     [super viewWillDisappear:animated];
-    
-    
-}
-
--(void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    
-    //[updateTimer invalidate];
-   
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark - Delegated methods
-//table view
+#pragma mark - UITableViewDelegate
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -172,10 +157,6 @@
     return headerView;
 }
 
-
--(void) tableView:(UITableView *)pTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-        
-    }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 82.f;
@@ -189,7 +170,6 @@
     AccountDataSource *oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
     [oponentAccount setAccountID:_player.dAuth];
     [oponentAccount setAccountName:_player.dNickName];
-//    [oponentAccount setAccountLevel:1];
     [oponentAccount setAccountLevel:_player.dLevel];
     [oponentAccount setAccountWins:_player.dWinCount];
     [oponentAccount setAvatar:_player.dAvatar];
@@ -227,7 +207,6 @@
         AccountDataSource *oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
         [oponentAccount setAccountName:@"TestName"];
         DuelStartViewController *duelStartViewController = [[DuelStartViewController alloc]initWithAccount:_playerAccount andOpAccount:oponentAccount opopnentAvailable:NO andServerType:NO andTryAgain:NO];
-      //  [duelStartViewController setOponent:_player.dImg Label1:_player.dNickName Label1:_player.dMoney];
         [self.navigationController pushViewController:duelStartViewController animated:YES];
         duelStartViewController.delegate = _gameCenterViewController;
         _gameCenterViewController.duelStartViewController = duelStartViewController;
@@ -252,8 +231,6 @@
     {
         [alertView dismissWithClickedButtonIndex:alertView.cancelButtonIndex animated:YES];  
     }
-    
-    
 }
 
 #pragma mark - Interface methods
@@ -262,6 +239,7 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 - (IBAction)refreshBtnClick:(id)sender {
     [self refreshController];
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
@@ -279,7 +257,6 @@
         [[LoginViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusInvaitFriends];
         [[LoginViewController sharedInstance] fbLoginBtnClick:self];
     }
-    
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
@@ -341,16 +318,13 @@
         [tableView setHidden:YES];
         [offLineBackGround setHidden:NO];
     }else {
-            [tableView setHidden:NO];
-            [offLineBackGround setHidden:YES];
+        [tableView setHidden:NO];
+        [offLineBackGround setHidden:YES];
     };
 }
 
 -(void)startTableAnimation;
 {
-    //
-
-    
     int countOfCells=[_playersOnLineDataSource.arrItemsList count];
     int maxIndex;
     if (countOfCells<5) {
@@ -366,7 +340,6 @@
             [cell setHidden:YES];
             [tableView reloadRowsAtIndexPaths:rowsToReload withRowAnimation:UITableViewRowAnimationBottom];
         });
-        
         [NSThread sleepForTimeInterval:0.25];
     }
 }
@@ -376,26 +349,16 @@
 - (void)request:(FBRequest *)request didLoad:(id)result {
     NSArray *friendToInvait = [[OGHelper sharedInstance] getFriendsHowDontUseAppRequest:request didLoad:result];
     [[OGHelper sharedInstance] apiDialogRequestsSendToNonUsers:friendToInvait];
-    
     [loadingView setHidden:YES];
     [activityIndicator stopAnimating];
     [btnInvite setEnabled:YES];
 }
 
-/**
- * Called when an error prevents the Facebook API request from completing
- * successfully.
- */
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
-    //    [delegate hideActivityIndicator];
     [[OGHelper sharedInstance] request:request didFailWithError:error];
-    
     [loadingView setHidden:YES];
     [activityIndicator stopAnimating];
     [btnInvite setEnabled:YES];
-    //        [self showMessage:[error debugDescription]];
 }
-
 
 @end
-
