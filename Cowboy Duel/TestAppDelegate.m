@@ -15,7 +15,6 @@
 #import "Crittercism.h"
 #import "StartViewController.h"
 
-
 static const NSInteger kGANDispatchPeriod = 60;
 static NSString *kGAAccountID = @"UA-33080242-1";
 NSString  *const ID_CRIT_APP   = @"4fb4f482c471a10fc5000092";
@@ -25,6 +24,17 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 #endif
 
 static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNotification";
+@interface TestAppDelegate()
+{
+    UIWindow *window;
+    UINavigationController *navigationController;
+    StartViewController *startViewController;
+    LoginViewController *loginViewController;
+    Facebook * facebook;
+    AccountDataSource *playerAccount;
+}
+
+@end
 
 @implementation TestAppDelegate
 
@@ -39,10 +49,6 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     [AdColony initAdColonyWithDelegate:self];
     
 #if !(TARGET_IPHONE_SIMULATOR)	
-    //    Flurry Code
-    //    Real ID    
-    //    [FlurryAnalytics startSession:@"IE8ITABK9JS6DV7M2YGK"];
-    //    Test ID
     [Crittercism initWithAppID:ID_CRIT_APP  andKey:ID_CRIT_KEY andSecret:ID_CRIT_SECRET];
     
     [FlurryAnalytics startSession:@"E2C6ED272AGCEHPRMESX"];
@@ -71,7 +77,6 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     navigationController = [[UINavigationController alloc] initWithRootViewController:loadViewController];
 
     [navigationController setNavigationBarHidden:YES];
-    //[startViewController release];
     
     CGRect frame = [[UIScreen mainScreen]bounds];
     
@@ -175,45 +180,6 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     
 }
 
-//- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken { 
-//	
-//    NSString *tokenStr = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
-//    
-//	
-//	[[NSUserDefaults standardUserDefaults] setObject:tokenStr forKey:@"DeviceToken"];
-//	
-//	DLog(@"Cowboy duel: Device token: %@", tokenStr);
-//    
-//}
-//
-//
-//- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err { 
-//	
-//    DLog(@"Cowboy duel: Fail to register for remote notifications: %@", [err description]);
-//}
-
-//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-//	
-//    DLog(@"userInfo   %@", userInfo);
-//    
-//    //    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"test" message:[NSString stringWithFormat:@"userInfo   %@",userInfo] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
-//    //    [av show];   
-//	
-//    NSDictionary *sInfo = [userInfo objectForKey:@"aps"];
-//    NSString *message = [sInfo objectForKey:@"alert"];
-//    
-//    sInfo = [userInfo objectForKey:@"i"];    
-//    
-//    //    DLog(@"User %i send you message", [senderId intValue]);
-//	
-//	[[NSNotificationCenter defaultCenter] postNotificationName:NewMessageReceivedNotification
-//														object:self
-//                                                      userInfo:[NSDictionary dictionaryWithObjectsAndKeys:sInfo, @"messageId",message, @"message", nil]
-//     ];
-//    
-//}
-
-
 #if !(TARGET_IPHONE_SIMULATOR)
 
 - (void)AnalyticsTrackEvent:(NSNotification *)notification {
@@ -235,12 +201,6 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
 	if (page){
 		if (![[GANTracker sharedTracker] trackPageview:page withError:&err])
 			DLog(@" Can't track pageview");
-        
-        if (!flurryEvent) {
-            [FlurryAnalytics endTimedEvent:flurryEvent withParameters:Nil];        
-        }
-        flurryEvent=page;
-        [FlurryAnalytics logEvent:flurryEvent timed:YES];
 	}    
 	[[GANTracker sharedTracker] dispatch];
     
@@ -250,8 +210,6 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
 - (void)dealloc
 {
     DLog(@"Exit");
-    //    [window release];
-    //    [super dealloc];
 }
 
 @end

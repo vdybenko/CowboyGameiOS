@@ -217,7 +217,6 @@
 		769CA78F14234458006EF248 /* shot.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 769CA78E14234458006EF248 /* shot.mp3 */; };
 		769F567E13AA6A9B006BFD46 /* Duel.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 769F567B13AA6A9B006BFD46 /* Duel.mp3 */; };
 		769F567F13AA6A9B006BFD46 /* Lose.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 769F567C13AA6A9B006BFD46 /* Lose.mp3 */; };
-		76A0FDC1147A91F8008D9DCA /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76A0FDC0147A91F8008D9DCA /* libFlurryAnalytics.a */; };
 		76A1A50215ADFB9300DC581B /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 76A1A4F315ADFB9300DC581B /* Facebook.m */; };
 		76A1A50415ADFB9300DC581B /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 76A1A4F815ADFB9300DC581B /* FBDialog.m */; };
 		76A1A50515ADFB9300DC581B /* FBFrictionlessRequestSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 76A1A4FA15ADFB9300DC581B /* FBFrictionlessRequestSettings.m */; };
@@ -638,8 +637,6 @@
 		769CA78E14234458006EF248 /* shot.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = shot.mp3; sourceTree = "<group>"; };
 		769F567B13AA6A9B006BFD46 /* Duel.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Duel.mp3; sourceTree = "<group>"; };
 		769F567C13AA6A9B006BFD46 /* Lose.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Lose.mp3; sourceTree = "<group>"; };
-		76A0FDBF147A91B7008D9DCA /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAnalytics.h; sourceTree = "<group>"; };
-		76A0FDC0147A91F8008D9DCA /* libFlurryAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurryAnalytics.a; path = "Cowboy Duel/libFlurryAnalytics.a"; sourceTree = "<group>"; };
 		76A0FE7A147AAED0008D9DCA /* revision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = revision.h; sourceTree = "<group>"; };
 		76A1A4F215ADFB9300DC581B /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
 		76A1A4F315ADFB9300DC581B /* Facebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Facebook.m; sourceTree = "<group>"; };
@@ -893,7 +890,6 @@
 				BD84E2AB147CDE9E009DCEBF /* CoreText.framework in Frameworks */,
 				BD84E2A9147CDE65009DCEBF /* AddressBookUI.framework in Frameworks */,
 				BD84E2A7147CDE5D009DCEBF /* AddressBook.framework in Frameworks */,
-				76A0FDC1147A91F8008D9DCA /* libFlurryAnalytics.a in Frameworks */,
 				BDF1EF1F13D41C4E00C466DF /* MapKit.framework in Frameworks */,
 				605A7A5F138A377F00B4FB8E /* MobileCoreServices.framework in Frameworks */,
 				605A7A5B138A372700B4FB8E /* SystemConfiguration.framework in Frameworks */,
@@ -1247,7 +1243,6 @@
 				767C0B1215652C9C0007E113 /* CrittercismSDK */,
 				76A0FE7A147AAED0008D9DCA /* revision.h */,
 				76B4676E14827C1E00C4C43E /* GoogleAnalytics */,
-				76A0FDC0147A91F8008D9DCA /* libFlurryAnalytics.a */,
 				BD6F77AC1439ADE60033ED2D /* libs */,
 				BDD07B3A141E1F170085E4FB /* Cowboy Duel */,
 				60563F5C1397B88800BADD57 /* Resorces */,
@@ -1755,7 +1750,6 @@
 			isa = PBXGroup;
 			children = (
 				037DF215154BDBAC003FACDF /* CollectionApp */,
-				76A0FDBF147A91B7008D9DCA /* FlurryAnalytics.h */,
 				767FEF26156A5AF70016B415 /* PlayersOnLineDataSource */,
 				7679D8C11563949E00BDE3A6 /* RefreshContent */,
 				BD804A20143C974E009A3FAC /* serverbrowsing */,
