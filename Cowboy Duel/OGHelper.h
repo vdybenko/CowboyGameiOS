@@ -77,29 +77,13 @@ typedef enum typeOfFBImage {
     typeOfFBImageLarge
 } typeOfFBImage;
 
-@interface OGHelper : NSObject<FBRequestDelegate,FBDialogDelegate> {
-    AccountDataSource * playerAccount;
-    Facebook * facebook;
-    StartViewController *startViewController;
-    
-    int currentAPICall;
-    
-    NSUInteger childIndex;
-    NSMutableArray *apiMenuItems;
-    NSString *apiHeader;
-    NSMutableArray *savedAPIResult;
-    CLLocationManager *locationManager;
-    CLLocation *mostRecentLocation;
-} 
+@interface OGHelper : NSObject<FBRequestDelegate,FBDialogDelegate>
 @property (strong,retain) id delegate;
 @property (strong,retain) AccountDataSource *playerAccount;
-@property (nonatomic, retain) NSMutableArray *apiMenuItems;
-@property (nonatomic, retain) NSString *apiHeader;
 @property (nonatomic, retain) NSMutableArray *savedAPIResult;
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic, retain) CLLocation *mostRecentLocation;
 @property (strong, retain) Facebook *facebook;
-@property (nonatomic, strong) StartViewController *startViewController;
 
 static NSString *getOpenGraphSavePath() ;
 + (OGHelper *)sharedInstance;

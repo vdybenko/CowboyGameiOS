@@ -12,28 +12,26 @@
 
 static const char *DONATE_URL = BASE_URL"api/time";
 
+@interface OGHelper()
+{
+    AccountDataSource * playerAccount;
+    Facebook * facebook;
+    
+    int currentAPICall;
+    
+    NSMutableArray *savedAPIResult;
+    CLLocationManager *locationManager;
+    CLLocation *mostRecentLocation;
+}
+@end
+
 @implementation OGHelper;
 
 @synthesize playerAccount,delegate;
-@synthesize apiMenuItems;
-@synthesize apiHeader;
 @synthesize savedAPIResult;
 @synthesize locationManager;
 @synthesize mostRecentLocation;
 @synthesize facebook;
-@synthesize startViewController;
-
-//--------------------------------------------------------  
-// Static functions/variables  
-//--------------------------------------------------------  
-
-//static NSString *facebookIDCleare()  
-//{  
-//    }  
-//
-//static NSString *scoresArchiveKey = @"Scores";  
-//
-//static NSString *achievementsArchiveKey = @"Achievements";  
 
 //--------------------------------------------------------  
 // Authentication  
@@ -52,8 +50,7 @@ static NSString *getSavePathForList()
     return pathToDirectory; 
 }  
 
-
-#pragma mark Initialization
+#pragma mark - Initialization
 
 static OGHelper *sharedHelper = nil;
 + (OGHelper *) sharedInstance {
@@ -102,7 +99,7 @@ static OGHelper *sharedHelper = nil;
     [tfContent deleteCharactersInRange:rng];
     return tfContent;
 }
-#pragma mark - Facebook API Calls
+#pragma mark Facebook API Calls
 /*
  * Graph API: Method to get the user's friends.
  */
@@ -1093,14 +1090,6 @@ static OGHelper *sharedHelper = nil;
             for (NSUInteger i=0; i<[resultData count] && i < 5; i++) {
                 [places addObject:[resultData objectAtIndex:i]];
             }
-            // Show the places nearby in a new view controller
-            //            APIResultsViewController *controller = [[APIResultsViewController alloc]
-            //                                                    initWithTitle:@"Nearby"
-            //                                                    data:places
-            //                                                    action:@"places"];
-            //            [self.navigationController pushViewController:controller animated:YES];
-            //            [controller release];
-//            [places release];
             break;
         }
         case kAPIGraphUserPhotosPost:
@@ -1299,6 +1288,8 @@ static OGHelper *sharedHelper = nil;
 #pragma mark - Private metods
 
 -(void) showMessage:(NSString *)message;
-{}
+{
+    DLog(@"mes %@",message);
+}
 
 @end

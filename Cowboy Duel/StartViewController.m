@@ -214,7 +214,6 @@ static StartViewController *sharedHelper = nil;
                 }
                 [[LoginViewController sharedInstance] setFacebook:facebook];
                 [[OGHelper sharedInstance ] initWithAccount:playerAccount facebook:facebook];
-                [[OGHelper sharedInstance ] setStartViewController:self];
             }
             
             DLog(@"Transactions count = %d", [playerAccount.transactions count]);

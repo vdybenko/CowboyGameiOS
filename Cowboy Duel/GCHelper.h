@@ -30,45 +30,17 @@
 - (void)setLocalPlayer:(GKLocalPlayer *)player;
 @end
 
-@interface GCHelper : NSObject <GKMatchmakerViewControllerDelegate, GKMatchDelegate,GKLeaderboardViewControllerDelegate,GKAchievementViewControllerDelegate> {
-    
-    BOOL gameCenterAvailable;
-    BOOL userAuthenticated;
-    NSArray *GC_ACH;
-
-    AccountDataSource *__unsafe_unretained playerAccount;
-
-    
-    UIViewController *__unsafe_unretained presentingViewController;
-    UIViewController *nextViewController;
-
-    GKMatch *__unsafe_unretained match;
-    BOOL matchStarted;
-    BOOL botDuel;
-
-//    id <GCHelperDelegate> delegate;
-    NSMutableDictionary *__strong achievementsDictionary;
-    GKAchievement *singleAchievement;
-    
-    int requestTime;
-    
-    BOOL aceptIvite;
-    
-    NSMutableData *receivedData;
-//    BOOL invaitFriend;
-} 
-
+@interface GCHelper : NSObject <GKMatchmakerViewControllerDelegate, GKMatchDelegate,GKLeaderboardViewControllerDelegate,GKAchievementViewControllerDelegate> 
 @property (assign, readonly) BOOL gameCenterAvailable;
 
 @property (strong, readonly) NSArray *GC_ACH;
-@property  (unsafe_unretained) UIViewController *presentingViewController;
-@property  (unsafe_unretained) GKMatch *match;
+@property  (strong) UIViewController *presentingViewController;
+@property  (strong) GKMatch *match;
 @property  (strong) NSMutableDictionary *achievementsDictionary;
 @property   (unsafe_unretained) GKLocalPlayer *GClocalPlayer;
-@property (unsafe_unretained) id <GCHelperDelegate> delegate;
-@property (unsafe_unretained) id <GCAuthenticateDelegate> delegate2;
-@property (unsafe_unretained) AccountDataSource *playerAccount;
-
+@property (strong) id <GCHelperDelegate> delegate;
+@property (strong) id <GCAuthenticateDelegate> delegate2;
+@property (strong) AccountDataSource *playerAccount;
 
 + (GCHelper *)sharedInstance;
 - (void)authenticateLocalUser;
@@ -76,8 +48,6 @@
 - (void)finishLaunching;
 - (void)findMatchWithMinPlayers:(int)minPlayers maxPlayers:(int)maxPlayers ;
 - (void)findProgrammaticMatch;
-//- (void) sendDataStr:(NSString*) str;
-//- (void) sendDataInt:(void *) arg packetID:(int)packetID;
 - (void) sendDataData:(void *) data packetID:(int)packetID ofLength:(int)length;
 
 

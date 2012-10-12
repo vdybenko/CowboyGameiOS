@@ -10,9 +10,31 @@
 #import "GameCenterViewController.h"
 #import "AccountDataSource.h"
 #import "Utils.h"
-#import "CustomNSURLConnection.h"
 
-static const char *DONATE_URL = BASE_URL"api/time";
+@interface GCHelper()
+{
+    BOOL gameCenterAvailable;
+    BOOL userAuthenticated;
+    NSArray *GC_ACH;
+    
+    AccountDataSource * playerAccount;
+    
+    UIViewController *presentingViewController;
+    UIViewController *nextViewController;
+    
+    GKMatch * match;
+    BOOL matchStarted;
+    BOOL botDuel;
+    
+    NSMutableDictionary * achievementsDictionary;
+    GKAchievement *singleAchievement;
+    
+    int requestTime;
+    
+    BOOL aceptIvite;
+} 
+
+@end
 
 @implementation GCHelper
 @synthesize gameCenterAvailable;
@@ -106,7 +128,6 @@ static GCHelper *sharedHelper = nil;
     if (GClocalPlayer.isAuthenticated && !userAuthenticated) {
         DLog(@"Authentication changed: player authenticated.");
         userAuthenticated = TRUE;
-        //       DuelDataSource *duelDataSource = [[DuelDataSource alloc] initWithLogin:localPlayer];
         if (delegate2)
             [delegate2 setLocalPlayer:GClocalPlayer];
     } else if (!GClocalPlayer.isAuthenticated && userAuthenticated) {
@@ -132,8 +153,6 @@ static GCHelper *sharedHelper = nil;
 
 -(void)acceptedInvite{
     DLog(@"acceptedInvite...");
-    //    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"GC" message:@"acceptedInvite" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    //    [av show];
     [presentingViewController dismissModalViewControllerAnimated:YES];  
     [GKMatchmaker sharedMatchmaker].inviteHandler = ^(GKInvite *acceptedInvite, NSArray *playersToInvite) {
         self.delegate=NULL;
@@ -149,7 +168,6 @@ static GCHelper *sharedHelper = nil;
             [presentingViewController presentModalViewController:mmvc animated:YES];
             
             DLog(@"invite acceptedInvite");
-            //NSString *st=[[NSString alloc] init];
         } else if (playersToInvite) {
             
             // In Apple's documentation, it's not clear when this option is used.
@@ -158,18 +176,12 @@ static GCHelper *sharedHelper = nil;
             // possible.
             
             GKMatchRequest *request = [[GKMatchRequest alloc] init];
-            
             request.minPlayers = 2;
-            
             request.maxPlayers = 2;
-            
             request.playersToInvite = playersToInvite;
-            
             GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc] initWithMatchRequest:request];
-            
             mmvc.matchmakerDelegate = self;
             
-            //            [presentingViewController popToRootViewControllerAnimated:YES];
             [presentingViewController presentModalViewController:mmvc animated:YES];
             
             DLog(@"invite playersToInvite");
@@ -198,7 +210,6 @@ static GCHelper *sharedHelper = nil;
             // handle the reporting error
             //            DLog(@"report false %@ ",error);
             [self saveScoreToDevice:scoreReporter];  
-            
         }else{
             DLog(@"report good ");
         }
@@ -282,7 +293,6 @@ static GCHelper *sharedHelper = nil;
     [dict removeObjectForKey:scoresArchiveKey];  
     [dict writeToFile:savePath atomically:YES];  
     
-    
     // Since the scores key was removed, we can go ahead and report the scores again  
     for(GKScore *score in scores){  
         [self reportScore:score];  
@@ -300,9 +310,6 @@ static GCHelper *sharedHelper = nil;
         DLog(@"leaderboardController");
         [leaderboardController setCategory:category];
         leaderboardController.leaderboardDelegate = self;  
-        //        
-        //        UIWindow* window = [UIApplication sharedApplication].keyWindow;  
-        //        [window addSubview: presentingViewController.view];  
         [presentingViewController presentModalViewController: leaderboardController animated: YES]; 
         return YES;  
     }  
@@ -330,7 +337,6 @@ static GCHelper *sharedHelper = nil;
             if (error != nil){ 
                 //               DLog(@"Achievements false %@ ",error);
                 [self saveAchievementToDevice:achievement];
-                
             }  
         }];  
     }  
@@ -354,7 +360,6 @@ static GCHelper *sharedHelper = nil;
 - (void)saveAchievementToDevice:(GKAchievement *)achievement  
 {  
     NSString *savePath = getGameCenterSavePath();  
-    DLog(@"saveAchievementToDevice");
     // If achievements already exist, append the new achievement.  
     NSMutableArray *achievements = [[NSMutableArray alloc] init];  
     NSMutableDictionary *dict;  
@@ -371,7 +376,6 @@ static GCHelper *sharedHelper = nil;
     }else{  
         dict = [[NSMutableDictionary alloc] init];  
     }  
-    
     
     [achievements addObject:achievement];  
     
@@ -442,15 +446,9 @@ static GCHelper *sharedHelper = nil;
      {
          if (error == nil)
          {
-             
-             
              for (GKAchievement* achievement in achievements)
-                 
                  [achievementsDictionary setObject: achievement forKey: achievement.identifier];
-             
-             
-             //             DLog(@"Ach = ",[achievementsDictionary g]);
-         }else{
+        }else{
              DLog(@"load ach error %@",error);
          }
      }];
@@ -521,7 +519,6 @@ static GCHelper *sharedHelper = nil;
     request.minPlayers = minPlayers;     
     request.maxPlayers = maxPlayers;
     request.playersToInvite =nil;
-    //    request.playersToInvite = [NSArray arrayWithObjects: @"G:1121692656",nil ];
     
     GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc] initWithMatchRequest:request];    
     mmvc.matchmakerDelegate = self;
@@ -539,7 +536,6 @@ static GCHelper *sharedHelper = nil;
     [self finishLaunching];
     botDuel = NO;
     requestTime = [NSDate timeIntervalSinceReferenceDate] - requestTime;
-    [self sendRequestWithTime:requestTime andCancel:YES];
     DLog(@"cancel invite");
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
@@ -566,14 +562,9 @@ static GCHelper *sharedHelper = nil;
     requestTime = [NSDate timeIntervalSinceReferenceDate] - requestTime;
     
     DLog(@"requestTime %d", requestTime);
-    
-    [self sendRequestWithTime:requestTime andCancel:NO];
-    
+        
     DLog(@"didFindMatch math %@ delege %@",match, match.delegate);
-    
-    //    NSString *st=[NSString stringWithFormat:@"didFindMatch math %@ delege %@",match,match.delegate];
-    //    UIAlertView* startAv = [[UIAlertView alloc] initWithTitle:@"GCHelper" message:st delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-    //    [startAv show];
+
     match.delegate = self;
     
     if (!matchStarted && match.expectedPlayerCount == 0) {
@@ -582,14 +573,10 @@ static GCHelper *sharedHelper = nil;
         if (delegate==NULL){
             
             DLog(@"Delegate_null");
-            //            UIAlertView* startAv = [[UIAlertView alloc] initWithTitle:@"matchmakerViewController" message:@"Delegate_null" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-            //            [startAv show];
             [self setDelegate:[[GameCenterViewController alloc] initWithAccount:[self playerAccount] andParentVC:nil]];
             [delegate matchStarted];
         }else{
             DLog(@"Delegate_not_null");
-            //            UIAlertView* startAv = [[UIAlertView alloc] initWithTitle:@"matchmakerViewController" message:@"Delegate_not_null" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-            //            [startAv show];
             [delegate matchStarted];
             [delegate matchStartedSinxron];
         }
@@ -597,7 +584,6 @@ static GCHelper *sharedHelper = nil;
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                             object:self
                                                           userInfo:[NSDictionary dictionaryWithObject:@"/duel_GS(invait)" forKey:@"event"]];
-//        [TestFlight passCheckpoint:@"/duel_GS(invait)"];
         return;
     }          
 }
@@ -624,9 +610,6 @@ static GCHelper *sharedHelper = nil;
 		NSData *packet = [NSData dataWithBytes: networkPacket length: (length+10)];
         //    if(invaitFriend){
         if(match!=nil){   
-            
-            //            [delegate match:match didReceiveData:packet fromPlayer:NULL];
-            
             [match sendDataToAllPlayers: packet withDataMode: GKMatchSendDataUnreliable error:&error];
             if (error != nil)
             {
@@ -636,10 +619,6 @@ static GCHelper *sharedHelper = nil;
                 // handle the error
             }else{
                 DLog(@"send data good math %@ delege %@",match,match.delegate);
-                
-//                                   NSString *st=[NSString stringWithFormat:@"send data good math "];
-//                                    UIAlertView* startAv = [[UIAlertView alloc] initWithTitle:@"GC helper" message:st delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//                                    [startAv show];
             }
         }else{
             DLog(@"match==nil");
@@ -677,10 +656,6 @@ static GCHelper *sharedHelper = nil;
                 DLog(@"match didChangeState! player start");
                 DLog(@"match %@",match.delegate);
                 
-                //                NSString *st=[NSString stringWithFormat:@"match didChangeState! player start math %@",match];
-                //                UIAlertView* startAv = [[UIAlertView alloc] initWithTitle:@"GC helper" message:st delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                //                [startAv show];
-                
                 [delegate matchStarted];
                 [delegate matchStartedSinxronPlayNow];
             }
@@ -690,9 +665,6 @@ static GCHelper *sharedHelper = nil;
             // a player just disconnected. 
             DLog(@"GC helper Player disconnected!");
             
-            //            UIAlertView* startAv = [[UIAlertView alloc] initWithTitle:@"GC helper" message:@"Player disconnected!" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-            //            [startAv show];
-            
             matchStarted = NO;
             [delegate matchEnded];
             break;
@@ -700,7 +672,6 @@ static GCHelper *sharedHelper = nil;
     
 }
 
-// The match was unable to connect with the player due to an error.
 - (void)match:(GKMatch *)theMatch connectionWithPlayerFailed:(NSString *)playerID withError:(NSError *)error {
     
     DLog(@"Failed to connect to player with error: ");
@@ -711,7 +682,6 @@ static GCHelper *sharedHelper = nil;
     [delegate matchEnded];
 }
 
-// The match was unable to be established with any players due to an error.
 - (void)match:(GKMatch *)theMatch didFailWithError:(NSError *)error {
     
     DLog(@"Match failed with error:");
@@ -744,7 +714,6 @@ static GCHelper *sharedHelper = nil;
      {
          if (error)
          {
-             // Process the error.
              DLog(@"error %@ match %@", error, foundMatch);
          }
          else if (foundMatch != nil)
@@ -753,80 +722,9 @@ static GCHelper *sharedHelper = nil;
              DLog(@"Match %@",foundMatch);
              self.match = foundMatch; // Use a retaining property to retain the match.
              self.match.delegate = self; // start!
-             // Start the match.
-             // Start the game using the match.
              
          }
      }];
-}
-
-#pragma mark -
-
--(void)sendRequestWithTime:(int)time
-                 andCancel:(BOOL)cancel
-{
-    NSString *cancelReq;
-    if (cancel) cancelReq = @"YES";
-    else cancelReq = @"NO";
-    
-    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-    
-    UIDevice *currentDevice = [UIDevice currentDevice];
-    
-    NSLocale* curentLocale = [NSLocale currentLocale];
-    NSArray *languages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
-    
-    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:DONATE_URL encoding:NSUTF8StringEncoding]]
-                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                        timeoutInterval:kTimeOutSeconds];
-    
-    [theRequest setHTTPMethod:@"POST"]; 
-    NSMutableDictionary *dicBody=[NSMutableDictionary dictionaryWithObjectsAndKeys:
-                           [NSString stringWithFormat:@"%d", time],@"time",
-                           cancelReq,@"cancel",
-                           version,@"app_ver",
-                           currentDevice.systemName,@"system_name",
-                           currentDevice.systemVersion,@"system_version",
-                           currentDevice.uniqueIdentifier,@"unique_identifier",
-                           [curentLocale localeIdentifier],@"region",
-                           [languages objectAtIndex:0],@"current_language",
-                           nil];
-    
-    [dicBody setValue:[[NSUserDefaults standardUserDefaults] stringForKey:@"deviceType"] forKey:@"device_name"];
-    [dicBody setValue:GClocalPlayer.playerID forKey:@"authentification"];
-    [dicBody setValue:playerAccount.sessionID forKey:@"session_id"];
-    
-    NSString *stBody=[Utils makeStringForPostRequest:dicBody];
-    [theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]]; 
-    CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
-    if (theConnection) {
-//        [receivedData setLength:0];
-        receivedData = [[NSMutableData alloc] init];
-    } else {
-    }
-
-    
-}
-
-#pragma mark CustomNSURLConnection handlers
-
-- (void)connectionDidFinishLoading:(CustomNSURLConnection *)connection1 {
-    
-    NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-}
-
-- (void)connection:(CustomNSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    [receivedData appendData:data];
-}
-
-- (void)connection:(CustomNSURLConnection *)connection
-  didFailWithError:(NSError *)error
-{
-    // inform the user
-    DLog(@"Chat Connection failed! Error - %@ %@",
-          [error localizedDescription],
-          [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
 }
 
 #pragma mark DuelWithBot
