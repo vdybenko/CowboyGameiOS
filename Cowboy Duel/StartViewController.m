@@ -1111,7 +1111,10 @@ static StartViewController *sharedHelper = nil;
 #pragma mark - protocol GCAuthenticateDelegate 
 
 - (void)setLocalPlayer:(GKLocalPlayer *)player1
-{   
+{
+    if ([playerAccount.accountName isEqualToString:@"Anonymous"]||[playerAccount.accountName isEqualToString:@""]||!playerAccount.accountName) {
+        [playerAccount setAccountName:player1.alias];
+    }
     if (playerAccount.accountLevel==1) {
         [[GCHelper sharedInstance] reportAchievementIdentifier:[[GCHelper sharedInstance].GC_ACH objectAtIndex:1] percentComplete:100.0f];
     }
