@@ -689,7 +689,7 @@ static StartViewController *sharedHelper = nil;
     {
         float ver_float = [[[UIDevice currentDevice] systemVersion] floatValue];
         if (ver_float < 5.0) {
-            NSString *URL=[[NSString alloc]initWithFormat:@"http://mobile.twitter.com/home?status=%@ %@",
+            NSString *URL=[[NSString alloc]initWithFormat:@"https://twitter.com/intent/tweet?source=webclient&text=%@ %@",
                            @"I'm playing in Cowboy duels",
                            URL_FB_PAGE];
             
