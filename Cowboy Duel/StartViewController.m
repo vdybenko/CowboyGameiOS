@@ -168,6 +168,7 @@ static StartViewController *sharedHelper = nil;
             
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"moneyForIPad"];
         }
+        
         if(firstRun)DLog(@"First ");
         
         if(firstRun){
@@ -1266,7 +1267,7 @@ static StartViewController *sharedHelper = nil;
     int drawCount=playerAccount.accountDraws;
     int playedMatches=playerAccount.accountWins+drawCount;
     
-    if ((playedMatches>=2)&&([self connectedToWiFi])) {
+    if ((playedMatches>=2)&&([self connectedToWiFi]&&[AdColonyViewController isAdStatusValid])) {
         if ((advertisingWillShow)&&(playerAccount.removeAds!=AdColonyAdsStatusRemoved)) {
             [self advertButtonClick];
             return YES;

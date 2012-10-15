@@ -13,6 +13,32 @@
 #import "AccountDataSource.h"
 
 @interface AdColonyViewController ()
+{
+    CurrencyManager *__unsafe_unretained cm;
+    
+    UIAlertView *baseAlert;
+    NSMutableString *stDonate;
+    
+    IBOutlet UIView *adcolonyMainView;
+    IBOutlet UILabel *lbWatchText;
+    IBOutlet UIButton *btnWatchVideo;
+    IBOutlet UIButton *btnRemoveAdvertising;
+    
+    IBOutlet UIView *loadingView;
+    IBOutlet UIActivityIndicatorView *activityIndicator;
+}
+
+-(void)videoAdsReadyCheck;
+-(void)enableVideoButton;
+
+-(void) performNavigation;
+
+-(void)keyboardAppeared:(NSNotification *)notification;
+-(void)keyboardGone:(NSNotification *)notification;
+
+-(IBAction)watchMovieButton:(id)sender;
+-(IBAction)cancelButton:(id)sender;
+-(IBAction)removeAdvertising:(id)sender;
 
 @end
 
@@ -58,40 +84,14 @@ NSString * const productForRemoveAds=@"com.webkate.cowboyduels.four";
     
     lbWatchText.text = [NSString stringWithFormat:@"%@\n%@", NSLocalizedString(@"AdColonyText1", nil), NSLocalizedString(@"AdColonyText2", nil)];
     
-    onIPadDetermined = NO;
-    onIPad = NO;
-    //    !!!!!!!!!!!
-    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardAppeared:) name:UIKeyboardWillShowNotification object:nil];
-    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardGone:) name:UIKeyboardWillHideNotification object:nil];
-    //    !!!!!
-	// Determine if the user has previously selected to opt in and set the UI accordingly
-	userOptedIn = [[NSUserDefaults standardUserDefaults] boolForKey:@"AdColonyInterstitialVideoOptIn"];    
-    
     ADCOLONY_ZONE_STATUS s = [AdColony zoneStatusForSlot:1];
     if(s != ADCOLONY_ZONE_STATUS_ACTIVE){
-		//        !!!!!
-        //        [NSThread detachNewThreadSelector:@selector(videoAdsReadyCheck) toTarget:self withObject:nil];
-        //        !!!!!!    }
         
         [cm addDelegate:self];
     }
     [adcolonyMainView setDinamicHeightBackground];
     
 }
-
-//-(void)videoAdsReadyCheck{
-//    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-//    const float checkEvery = 0.1f; //seconds
-//	
-//	BOOL zone1Ready = ([AdColony zoneStatusForSlot:1] == ADCOLONY_ZONE_STATUS_ACTIVE);
-//    while (!zone1Ready) {
-//        [NSThread sleepForTimeInterval:checkEvery];
-//        zone1Ready = ([AdColony zoneStatusForSlot:1] == ADCOLONY_ZONE_STATUS_ACTIVE);
-//    }
-//    
-//    [self performSelectorOnMainThread:@selector(enableVideoButton) withObject:nil waitUntilDone:NO];
-//    
-//    [pool release];
 
 - (void)viewDidUnload
 {
@@ -109,7 +109,7 @@ NSString * const productForRemoveAds=@"com.webkate.cowboyduels.four";
 
 - (IBAction)watchMovieButton:(id)sender {
     
-	[AdColonyAdministratorPublic playVideoAdForSlot:2 withDelegate:self];	
+	[AdColonyAdministratorPublic playVideoAdForSlot:1 withDelegate:self];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                         object:self
@@ -122,6 +122,23 @@ NSString * const productForRemoveAds=@"com.webkate.cowboyduels.four";
 {
     [self buyProduct];
 }
+
++ (BOOL)isAdStatusValid;
+{
+    ADCOLONY_ZONE_STATUS z1Status = [AdColony zoneStatusForSlot:1];
+    if(z1Status == ADCOLONY_ZONE_STATUS_NO_ZONE ||
+       z1Status == ADCOLONY_ZONE_STATUS_OFF ||
+       z1Status == ADCOLONY_ZONE_STATUS_UNKNOWN){
+        DLog(@"Adcolony Enabled NO");
+        return NO;
+    }else if(z1Status == ADCOLONY_ZONE_STATUS_ACTIVE){
+        DLog(@"Adcolony Enabled YES");
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
 #pragma mark -
 #pragma mark AdColonyTakeoverAdDelegate
 
@@ -149,10 +166,6 @@ NSString * const productForRemoveAds=@"com.webkate.cowboyduels.four";
     
 	// If the play came from the Navigation Button, continue with execution.
     [self dismissModalViewControllerAnimated:YES];   
-    
-    //    WebPageViewController *webPageViewController = [[WebPageViewController alloc] init];
-    //    [self.navigationController presentModalViewController:webPageViewController animated:YES];
-    
 }
 
 - (IBAction)cancelButton:(id)sender {

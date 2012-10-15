@@ -20,45 +20,9 @@ typedef enum {
 
 @class StartViewController;
 
-@interface AdColonyViewController : UIViewController <AdColonyTakeoverAdDelegate, CurrencyManagerDelegate,SKPaymentTransactionObserver, SKProductsRequestDelegate> {
-    
-    
-    CurrencyManager *__unsafe_unretained cm;
-    
-    BOOL soundCheack;
-    AVAudioPlayer *player;
-    BOOL userOptedIn;
-    BOOL navigationVideoPlayed;
-    BOOL onIPadDetermined, onIPad;
-    
-    UIAlertView *baseAlert;
-    NSMutableString *stDonate;
-    
-    IBOutlet UIView *adcolonyMainView;
-    IBOutlet UILabel *lbWatchText;
-    IBOutlet UIButton *btnWatchVideo;
-    IBOutlet UIButton *btnRemoveAdvertising;
-    
-    IBOutlet UIView *loadingView;
-    IBOutlet UIActivityIndicatorView *activityIndicator;
-
-    
-}
-
+@interface AdColonyViewController : UIViewController <AdColonyTakeoverAdDelegate, CurrencyManagerDelegate,SKPaymentTransactionObserver, SKProductsRequestDelegate> 
 @property (nonatomic, unsafe_unretained) CurrencyManager *cm;
 
 - (id)initWithStartVC:(StartViewController *) pStartVC;
-
--(void)videoAdsReadyCheck;
--(void)enableVideoButton;
-
--(void) performNavigation;
-
--(void)keyboardAppeared:(NSNotification *)notification;
--(void)keyboardGone:(NSNotification *)notification;
-
--(IBAction)watchMovieButton:(id)sender;
--(IBAction)cancelButton:(id)sender;
--(IBAction)removeAdvertising:(id)sender;
-
++ (BOOL)isAdStatusValid;
 @end
