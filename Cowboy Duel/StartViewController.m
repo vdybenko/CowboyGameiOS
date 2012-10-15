@@ -514,14 +514,24 @@ static StartViewController *sharedHelper = nil;
 
 #pragma mark - IBAction main buttons
 
+-(IBAction)startDuel
+{
+    [self checkNetworkStatus:nil];
+    
+    if (![self isNeedBlockOnlineListForAdvertasingAppear]) {
+        //play duel
+        [self duelButtonClick];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                            object:self
+                                                          userInfo:[NSDictionary dictionaryWithObject:@"/saloon_click" forKey:@"event"]];
+    }
+}
+
 -(void)duelButtonClick
 {
     [listOfItemsViewController setStatusOnLine:self.hostActive];
     [self.navigationController pushViewController:listOfItemsViewController animated:YES];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
-														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"saloon_click" forKey:@"event"]];
 }
 
 -(IBAction)teachingButtonClick
@@ -581,17 +591,6 @@ static StartViewController *sharedHelper = nil;
         [self.navigationController pushViewController:profileViewController animated:NO];
     }
 }
-
--(IBAction)startDuel
-{
-    [self checkNetworkStatus:nil];
-
-    if (![self isNeedBlockOnlineListForAdvertasingAppear]) {
-        //play duel 
-        [self duelButtonClick];
-    }
-}
-
 
 - (void) showFeedbackView {
        

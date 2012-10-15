@@ -91,6 +91,9 @@ NSString * const productForRemoveAds=@"com.webkate.cowboyduels.four";
     }
     [adcolonyMainView setDinamicHeightBackground];
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/AdColony_show" forKey:@"event"]];
 }
 
 - (void)viewDidUnload

@@ -50,9 +50,7 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     
 #if !(TARGET_IPHONE_SIMULATOR)	
     [Crittercism initWithAppID:ID_CRIT_APP  andKey:ID_CRIT_KEY andSecret:ID_CRIT_SECRET];
-    
-    [FlurryAnalytics startSession:@"E2C6ED272AGCEHPRMESX"];
-    
+        
     [[GANTracker sharedTracker] startTrackerWithAccountID:kGAAccountID
                                            dispatchPeriod:kGANDispatchPeriod
                                                  delegate:nil];	
@@ -103,12 +101,10 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     
     DLog(@"FBAccessTokenKey %@", [defaults objectForKey:@"FBAccessTokenKey"]);
     
-       
     //Sleep off
     application.idleTimerDisabled = YES;
     application.applicationIconBadgeNumber = 0;
     return YES;
-    
 }
 
 //use the app id provided by adcolony.com
@@ -119,6 +115,7 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
 -(NSDictionary*)adColonyAdZoneNumberAssociation {
     return [NSDictionary dictionaryWithObjectsAndKeys:
 			@"vz2c493f6fa7cc474687a5ed", [NSNumber numberWithInt:1],
+//            @"vz74e7d81b72fb4f198a5bba", [NSNumber numberWithInt:1],//test
 			nil];
 }
 
@@ -191,7 +188,6 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
         fbUserId = @"Anonymous"; 
     
     if(![fbUserId isEqualToString:@"NoGC"]){
-        [FlurryAnalytics setUserID:fbUserId];
     }
     
     
