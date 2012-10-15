@@ -155,7 +155,10 @@ static StartViewController *sharedHelper = nil;
             firstRunLocal = YES;
             
             [[NSUserDefaults standardUserDefaults] setValue:@"YES" forKey:@"estimateApp"];
-            [[NSUserDefaults standardUserDefaults] setInteger:5 forKey:@"kFrequencyOfAdvertising"];
+            NSInteger kFrequencyOfAdvertising = [[NSUserDefaults standardUserDefaults] integerForKey:@"kFrequencyOfAdvertising"];
+            if (kFrequencyOfAdvertising==0) {
+                [[NSUserDefaults standardUserDefaults] setInteger:kFrequencyOfAdvertisingDefault forKey:@"kFrequencyOfAdvertising"];
+            }
         }
         else 
         {

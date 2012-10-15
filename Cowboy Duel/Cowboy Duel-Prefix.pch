@@ -22,8 +22,9 @@
 #define kFacebookAppId @"284932561559672"
 #define kFacebookAppToken @"284932561559672|w5GIU7o8TBWuxqPgmyZ7r7FxxKE"
 
-#define kNumberOfAdvertisingPerDay 3
+#define kNumberOfAdvertisingPerDay 4
 #define NUMBER_REVISION_DEFAULT 2
+#define kFrequencyOfAdvertisingDefault 2
 
 #define kAnalyticsTrackEventNotification @"AnalyticsTrackEventNotification"
 

@@ -20,7 +20,7 @@
         int kFrequencyOfAdvertising=[[NSUserDefaults standardUserDefaults] integerForKey:@"kFrequencyOfAdvertising"];
         
         if (kFrequencyOfAdvertising==0) {
-            kFrequencyOfAdvertising = 5;
+            kFrequencyOfAdvertising = kFrequencyOfAdvertisingDefault;
             [[NSUserDefaults standardUserDefaults] setInteger:kFrequencyOfAdvertising forKey:@"kFrequencyOfAdvertising"];
         }
         
