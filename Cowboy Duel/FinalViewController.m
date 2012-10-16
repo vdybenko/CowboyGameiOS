@@ -377,9 +377,7 @@
 -(IBAction)tryButtonClick:(id)sender
 {
     DLog(@"tryButtonClick");
-
     [activityIndicatorView showView];
-    
     if(teaching)
     {
         NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
@@ -392,8 +390,6 @@
         teachingViewController.mutchNumber = 0;
         teachingViewController.mutchNumberWin = 0;
         teachingViewController.mutchNumberLose = 0;
-        //                int randomTime = arc4random() % 6; 
-        //                [self.navigationController.viewControllers objectAtIndex:1] = [[TeachingViewController alloc] initWithTime:randomTime andAccount:playerAccount andOpAccount:oponentAccount];
         [self.navigationController popViewControllerAnimated:YES];
     }
     else
