@@ -50,10 +50,19 @@
 // added 
         NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/cry.mp3", [[NSBundle mainBundle] resourcePath]]];
         follPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
-// above        
+// above
+        teaching = teach;
+        playerAccount = userAccount;
+        oponentAccount = opAccount;
+        userTime=userTimePar;
         
         NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-        firstRun = ![userDef boolForKey:@"FirstRunForFinal"];
+
+        if (teaching) {
+            firstRun = ![userDef boolForKey:@"FirstRunForFinal"];
+        }else{
+            firstRun = NO;
+        }
         [userDef setBool:YES forKey:@"FirstRunForFinal"];
         [userDef synchronize];
         
@@ -62,10 +71,7 @@
         runAway=NO;
         tryButtonEnabled = YES;
         
-        teaching = teach;
-        playerAccount = userAccount;
-        oponentAccount = opAccount;
-        userTime=userTimePar;
+        
         
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"DUEL_VIEW_NOT_FIRST"];
         

@@ -21,8 +21,10 @@ static NSString *ShotSound = @"%@/shot.mp3";
     self = [super initWithAccount:userAccount oponentAccount:oponentAccount];
     if (self) { 
 
-        if([[NSUserDefaults standardUserDefaults] boolForKey:@"FirstRunForGun"] )  firstRun = YES;
-        else firstRun = NO;
+        if([[NSUserDefaults standardUserDefaults] boolForKey:@"FirstRunForGun"] )
+            firstRun = YES;
+        else
+            firstRun = NO;
         [[NSUserDefaults standardUserDefaults] setBool:FALSE forKey:@"FirstRunForGun"];
         
         time = randomTime + 5;
@@ -42,36 +44,33 @@ static NSString *ShotSound = @"%@/shot.mp3";
 {
     [super viewDidLoad];
     
-//    if (([[NSUserDefaults standardUserDefaults] integerForKey:@"FirstRunForPractice"] != 1)&&([[NSUserDefaults standardUserDefaults] integerForKey:@"FirstRunForPractice"] != 2))
-//    if (YES) {
-        helpPracticeView=[[UIView alloc] initWithFrame:CGRectMake(12, 480, 290, 320)];
-        
-        UIImageView *imvArm=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dv_arm.png"]];
-        CGRect frame = imvArm.frame;
-        frame.origin = CGPointMake(24, 11);
-        frame.size= CGSizeMake(242, 298);
-        imvArm.frame = frame;
-        [helpPracticeView addSubview:imvArm];
-        
-        UIButton *cancelBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-        frame=cancelBtn.frame;
-        frame.origin=CGPointMake(248, 13);
-        frame.size=CGSizeMake(33, 33);
-        cancelBtn.frame=frame;
-        [cancelBtn setImage:[UIImage imageNamed:@"btn_adcolony.png"] forState:UIControlStateNormal];
-        [cancelBtn addTarget:self action:@selector(cancelHelpArmClick:) forControlEvents:UIControlEventTouchUpInside];
-        [helpPracticeView addSubview:cancelBtn];
-        
-        [helpPracticeView setDinamicHeightBackground];
-        [self.view addSubview:helpPracticeView];
+    helpPracticeView=[[UIView alloc] initWithFrame:CGRectMake(12, 480, 290, 320)];
     
-        if ([helpViewSound isDescendantOfView:super.view]) {
-            [helpPracticeView setHidden:YES];
-        }else{
-            [self cancelSoundClick:Nil];
-        }
-        
-//    }
+    UIImageView *imvArm=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dv_arm.png"]];
+    CGRect frame = imvArm.frame;
+    frame.origin = CGPointMake(24, 11);
+    frame.size= CGSizeMake(242, 298);
+    imvArm.frame = frame;
+    [helpPracticeView addSubview:imvArm];
+    
+    UIButton *cancelBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    frame=cancelBtn.frame;
+    frame.origin=CGPointMake(248, 13);
+    frame.size=CGSizeMake(33, 33);
+    cancelBtn.frame=frame;
+    [cancelBtn setImage:[UIImage imageNamed:@"btn_adcolony.png"] forState:UIControlStateNormal];
+    [cancelBtn addTarget:self action:@selector(cancelHelpArmClick:) forControlEvents:UIControlEventTouchUpInside];
+    [helpPracticeView addSubview:cancelBtn];
+    
+    [helpPracticeView setDinamicHeightBackground];
+    [self.view addSubview:helpPracticeView];
+
+    if ([helpViewSound isDescendantOfView:super.view]) {
+        [helpPracticeView setHidden:YES];
+    }else{
+        [self cancelSoundClick:Nil];
+    }
+    
 }
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -217,7 +216,10 @@ static NSString *ShotSound = @"%@/shot.mp3";
 }
 
 - (IBAction)backButtonClick:(id)sender {
-        [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:1] animated:YES];
+    [[NSUserDefaults standardUserDefaults] setInteger:2 forKey:@"FirstRunForPractice"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:1] animated:YES];
 }
 
 -(void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
