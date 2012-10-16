@@ -48,7 +48,7 @@
 @implementation MoneyCongratViewController
 @synthesize delegate;
 @synthesize ivLight2;
-- (id) initForAchivmentPlayerAccount:(AccountDataSource *)pPlayerAccount withLabel:(NSString*)pLabel andController:(id)delegateController;
+- (id) initForAchivmentPlayerAccount:(AccountDataSource *)pPlayerAccount withLabel:(NSString*)pLabel andController:(id)delegateController tryButtonEnable:(BOOL)tryButtonEnable;
 {
     self = [super initWithNibName:@"MoneyCongratViewController" bundle:[NSBundle mainBundle]];
     if (self){
@@ -66,6 +66,8 @@
             [btnPost setHidden:YES];
             [MoneyCongratViewController achivmentMoney:playerAccount.money];
         }
+        
+        btnTryAgain.enabled = tryButtonEnable;
     }
     return self;
 }

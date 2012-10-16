@@ -17,8 +17,10 @@
 #import "DuelRewardLogicController.h"
 #import "AdvertisingAppearController.h"
 
-@interface FinalViewController (PrivateMethods)
-
+@interface FinalViewController ()
+{
+    BOOL tryButtonEnabled;
+}
 -(void)winScene;
 -(void)loseScene;
 -(void)lastScene;
@@ -33,18 +35,14 @@
 
 @implementation FinalViewController
 
-static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
-
-//static const NSString *stGABT = @"/duel/";
-//static const NSString *stGAT = @"/duel_teaching/";
-//static const NSString *stGAGC = @"/duel_GS/";
-
 @synthesize delegate;
-@synthesize viewWin, lblWinEarned, lblWinGold, lblWinGoldCount, lblWinPoints, lblWinPointsCount;
+@synthesize tryButton, viewWin, lblWinEarned, lblWinGold, lblWinGoldCount, lblWinPoints, lblWinPointsCount;
 @synthesize viewLose, lblLoseEarned, lblLoseLost, lblLoseGold, lblLoseGoldCount, lblLosePoints, lblLosePointsCount;
 @synthesize statView;
 
--(id)initWithUserTime:(int)userTimePar andOponentTime:(int)oponentTime andController:(id)delegateController andTeaching:(BOOL)teach andAccount:(AccountDataSource *)userAccount andOpAccount:(AccountDataSource *)opAccount
+#pragma mark
+
+-(id)initWithUserTime:(int)userTimePar andOponentTime:(int)oponentTime andGameCenterController:(id)delegateController andTeaching:(BOOL)teach andAccount:(AccountDataSource *)userAccount andOpAccount:(AccountDataSource *)opAccount
 {
     self = [super initWithNibName:@"FinalViewController" bundle:[NSBundle mainBundle]];
 
@@ -62,6 +60,7 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
         reachNewLevel = NO;
         lastDuel = NO;
         runAway=NO;
+        tryButtonEnabled = YES;
         
         teaching = teach;
         playerAccount = userAccount;
@@ -79,9 +78,6 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
         DLog(@"Time final %d  %d",userTime,oponentTime);
         stGA=[[NSString alloc] init];
         
-//        if ([delegateController isKindOfClass:[BluetoothViewController class]]){
-//            stGA = @"/duel/";
-//        }else 
         if([delegateController isKindOfClass:[TeachingViewController class]]){
             if (duelWithBotCheck) {
                 stGA = @"/duel_BOT/";
@@ -226,10 +222,13 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
     [tryButton setTitleByLabel:@"TRY"];
     UIColor *colorOfButtons=[UIColor colorWithRed:0.95 green:0.86 blue:0.68 alpha:1.0];
     [tryButton changeColorOfTitleByLabel:colorOfButtons];
+    tryButton.enabled = tryButtonEnabled;
     
     [nextButton setTitleByLabel:@"NEXTR"];
-    if (lastDuel) nextButton.hidden = YES;
-    else nextButton.hidden = NO;
+    if (lastDuel)
+        nextButton.hidden = YES;
+    else
+        nextButton.hidden = NO;
     [nextButton changeColorOfTitleByLabel:colorOfButtons];
     
     [backButton setTitleByLabel:@"CANCEL_DUEL"];
@@ -613,7 +612,6 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
         lblWinPoints.text=NSLocalizedString(@"Points", @"");
     }
     [self animationWithLable:lblPoints andStartNumber:[AccountDataSource sharedInstance].accountPoints - pointsForMatch andEndNumber:[AccountDataSource sharedInstance].accountPoints];
-    
 }
 
 
@@ -638,7 +636,6 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
     viewLastSceneAnimation.hidden=NO;
     
     [nextButton setHidden:YES];
-//    [lbNextRound setHidden:YES];
     [tryButton setHidden:NO];
     [backButton changeTitleByLabel:@"BACK"];
     
@@ -696,7 +693,6 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
             reachNewLevel=NO;
         }
 
-        
         if (fMutchNumberLose != 2) {
             if ((oldMoney<500)&&(playerAccount.money>=500)&&(playerAccount.money<1000)) {
                 NSString *moneyText=[NSString stringWithFormat:@"%d",playerAccount.money];
@@ -796,16 +792,13 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
             
             NSString *text=NSLocalizedString(@"win", @"");
             customText.text=[text uppercaseString];
-//            [cell.textLabel setFont: [UIFont fontWithName: @"DecreeNarrow" size:30]];
-//            [cell.textLabel setTextColor:[[UIColor alloc] initWithRed:0.317 green:0.274 blue:0.184 alpha:1]];
         }else{
             cell.imageView.image = [UIImage imageNamed:@"fin_img_table_lose_new.png"];
             cell.textLabel.text = NSLocalizedString(@"False", @"");
             
             NSString *text=NSLocalizedString(@"You lost", @"");
             customText.text=[text uppercaseString];
-//            [cell.textLabel setFont: [UIFont fontWithName: @"DecreeNarrow" size:30]];
-//            [cell.textLabel setTextColor:[[UIColor alloc] initWithRed:0.317 green:0.274 blue:0.184 alpha:1]];
+
         }
     }
     if (!rDataSource.result) {
@@ -815,16 +808,12 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
             
             NSString *text=NSLocalizedString(@"You lost", @"");
             customText.text=[text uppercaseString];
-//            [cell.textLabel setFont: [UIFont fontWithName: @"DecreeNarrow" size:30]];
-//            [cell.textLabel setTextColor:[[UIColor alloc] initWithRed:0.317 green:0.274 blue:0.184 alpha:1]];
         }else{
             cell.imageView.image = [UIImage imageNamed:@"fin_img_table_win_new.png"];
             cell.textLabel.text = NSLocalizedString(@"Falses", @"");
             
             NSString *text=NSLocalizedString(@"win", @"");
             customText.text=[text uppercaseString];
-//            [cell.textLabel setFont: [UIFont fontWithName: @"DecreeNarrow" size:30]];
-//            [cell.textLabel setTextColor:[[UIColor alloc] initWithRed:0.317 green:0.274 blue:0.184 alpha:1]];
         }
         
     }
@@ -877,6 +866,11 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
     [UIView commitAnimations];
 }
 
+-(void)prepeareForWinScene;
+{
+    tryButtonEnabled = NO;
+    fMutchNumberWin = 2;
+}
 
 -(void)loseAnimation
 {
@@ -973,7 +967,7 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
             reachNewLevel=YES;
             
             [[GCHelper sharedInstance] reportAchievementIdentifier:[[GCHelper sharedInstance].GC_ACH objectAtIndex:playerAccount.accountLevel-1] percentComplete:100.0f];
-            [[NSUserDefaults standardUserDefaults] synchronize];            
+            [[NSUserDefaults standardUserDefaults] synchronize];
         }
     }
 }
@@ -982,14 +976,13 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
 
 -(void)showMessageOfNewLevel
 {
-    lvlCongratulationViewController=[[LevelCongratViewController alloc] initForNewLevelPlayerAccount:playerAccount andController:self];
+    lvlCongratulationViewController=[[LevelCongratViewController alloc] initForNewLevelPlayerAccount:playerAccount andController:self tryButtonEnable:tryButton.enabled];
     [self performSelector:@selector(showViewController:) withObject:lvlCongratulationViewController afterDelay:5.0];
-    //[self.navigationController  pushViewController:lvlCongratulationViewController animated:YES];
 }
 
 -(void)showMessageOfMoreMoney:(NSInteger)money withLabel:(NSString *)labelForCongratulation
 {
-    moneyCongratulationViewController  = [[MoneyCongratViewController alloc] initForAchivmentPlayerAccount:playerAccount withLabel:labelForCongratulation andController:self];
+    moneyCongratulationViewController  = [[MoneyCongratViewController alloc] initForAchivmentPlayerAccount:playerAccount withLabel:labelForCongratulation andController:self tryButtonEnable:tryButton.enabled];
     [self performSelector:@selector(showViewController:) withObject:moneyCongratulationViewController afterDelay:5.0];
 }
 
@@ -1105,6 +1098,5 @@ static const char *DUEL_RES_URL = BASE_URL"api/duel_result";
 {
     [self presentModalViewController:viewController animated:YES];
 }
-
 
 @end

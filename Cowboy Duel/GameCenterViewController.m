@@ -350,7 +350,7 @@ static GameCenterViewController *gameCenterViewController;
         if ([delegate respondsToSelector:@selector(duelTimerEndFeedBack)]) 
             [delegate duelTimerEndFeedBack];
         
-        finalViewController = [[FinalViewController alloc] initWithUserTime:999999 andOponentTime:0 andController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+        finalViewController = [[FinalViewController alloc] initWithUserTime:999999 andOponentTime:0 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
         [parentVC.navigationController pushViewController:finalViewController animated:YES];
         [delegate shutDownTimer];
         return;
@@ -364,7 +364,7 @@ static GameCenterViewController *gameCenterViewController;
         if ([delegate respondsToSelector:@selector(duelTimerEndFeedBack)]) 
             [delegate duelTimerEndFeedBack];
         
-        finalViewController = [[FinalViewController alloc] initWithUserTime:0 andOponentTime:999999 andController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+        finalViewController = [[FinalViewController alloc] initWithUserTime:0 andOponentTime:999999 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
         [parentVC.navigationController pushViewController:finalViewController animated:YES];
         [delegate shutDownTimer];
         return;
@@ -378,7 +378,7 @@ static GameCenterViewController *gameCenterViewController;
         if ([delegate respondsToSelector:@selector(duelTimerEndFeedBack)]) 
             [delegate duelTimerEndFeedBack];
         
-        finalViewController = [[FinalViewController alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+        finalViewController = [[FinalViewController alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
         [parentVC.navigationController pushViewController:finalViewController animated:YES];
         [delegate shutDownTimer];
         return;
@@ -396,7 +396,7 @@ static GameCenterViewController *gameCenterViewController;
     if ((carShotTime == 0)&&(opShotTime == 0)) {
         DLog(@"Duel timer end %d %d true", carShotTime, opShotTime);
         
-        finalViewController = [[FinalViewController alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+        finalViewController = [[FinalViewController alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
         [parentVC.navigationController pushViewController:finalViewController animated:YES];
         [delegate shutDownTimer];
     }
@@ -404,7 +404,7 @@ static GameCenterViewController *gameCenterViewController;
         DLog(@"Duel timer end %d %d false", carShotTime, opShotTime);
         
         
-        finalViewController = [[FinalViewController alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+        finalViewController = [[FinalViewController alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
         [parentVC.navigationController pushViewController:finalViewController animated:YES];
         [delegate shutDownTimer];
     }
@@ -483,8 +483,7 @@ static GameCenterViewController *gameCenterViewController;
     }
 }
 
-#pragma mark - 
-
+#pragma mark 
 
 -(void)matchCanseled
 {
@@ -507,16 +506,33 @@ static GameCenterViewController *gameCenterViewController;
 
 -(void)lostConnection
 {
+    DLog(@"GameCenterViewController: lost connection");
     opponentEndMatch = NO;
     userEndMatch = YES;
-    DLog(@"GameCenterViewController: lost connection");
     multiplayerServerViewController.neadRestart = YES;
     multiplayerClientViewController.isRunClient = NO;
     multiplayerServerViewController.pingStart = NO;
     [multiplayerServerViewController shutDownServer];
     
-    UIViewController  *tempVC = [self.parentVC.navigationController.viewControllers objectAtIndex:1] ;
-    [self.parentVC.navigationController popToViewController:tempVC animated:YES];
+    if ([self.parentVC.navigationController.visibleViewController isKindOfClass:([DuelViewController class])]) {
+        finalViewController = [[FinalViewController alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+        [finalViewController prepeareForWinScene];
+        [parentVC.navigationController pushViewController:finalViewController animated:YES];
+        [delegate shutDownTimer];
+    }else if ([self.parentVC.navigationController.visibleViewController isKindOfClass:([FinalViewController class])]){
+        if (mutchNumber==3) {
+            finalViewController =(FinalViewController*) self.parentVC.navigationController.visibleViewController;
+            finalViewController.tryButton.enabled = NO;
+        }else{
+            finalViewController = [[FinalViewController alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+            [finalViewController prepeareForWinScene];
+            [parentVC.navigationController pushViewController:finalViewController animated:YES];
+            [delegate shutDownTimer];
+        }
+    }else if ([self.parentVC.navigationController.visibleViewController isKindOfClass:([DuelStartViewController class])]){
+        UIViewController *tempVC = [self.parentVC.navigationController.viewControllers objectAtIndex:1] ;
+        [self.parentVC.navigationController popToViewController:tempVC animated:YES];
+    }    
 }
 
 #pragma mark DuelViewControllerDelegate Methods
@@ -527,7 +543,6 @@ static GameCenterViewController *gameCenterViewController;
     DLog(@"Send position");
     gameInfo *gs = &gameStat;
     [multiplayerViewController sendDataData:gs packetID:NETWORK_ACCEL_STATE ofLength:sizeof(gameInfo)];
-    
 }
 
 - (void)receiveData:(NSData *)data
@@ -628,9 +643,10 @@ static GameCenterViewController *gameCenterViewController;
                 [duelStartViewController._vWait setHidden:YES];
                 duelStartViewController.tryAgain = YES;
                 duelStartViewController.oponentAvailable  = YES;
-                if ([parentVC.navigationController.viewControllers containsObject:duelStartViewController]) [parentVC.navigationController popToViewController:duelStartViewController animated:YES];
-                else [parentVC.navigationController pushViewController:duelStartViewController animated:YES];
-                //[parentVC.navigationController pushViewController:duelStartViewController animated:YES];
+                if ([parentVC.navigationController.viewControllers containsObject:duelStartViewController])
+                    [parentVC.navigationController popToViewController:duelStartViewController animated:YES];
+                else
+                    [parentVC.navigationController pushViewController:duelStartViewController animated:YES];
                 [duelStartViewController setMessageTry];
             }  
             
@@ -746,7 +762,7 @@ static GameCenterViewController *gameCenterViewController;
                     if ([delegate respondsToSelector:@selector(duelTimerEndFeedBack)])
                         [delegate duelTimerEndFeedBack];
                     
-                    finalViewController = [[FinalViewController alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+                    finalViewController = [[FinalViewController alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
                     [parentVC.navigationController pushViewController:finalViewController animated:YES];
                     [delegate shutDownTimer];
                     return;
@@ -759,7 +775,7 @@ static GameCenterViewController *gameCenterViewController;
                     if ([delegate respondsToSelector:@selector(duelTimerEndFeedBack)])
                         [delegate duelTimerEndFeedBack];
                     
-                    finalViewController = [[FinalViewController alloc] initWithUserTime:999999 andOponentTime:0 andController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+                    finalViewController = [[FinalViewController alloc] initWithUserTime:999999 andOponentTime:0 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
                     [parentVC.navigationController pushViewController:finalViewController animated:YES];
                     [delegate shutDownTimer];
                     return;
@@ -773,7 +789,7 @@ static GameCenterViewController *gameCenterViewController;
                     if ([delegate respondsToSelector:@selector(duelTimerEndFeedBack)])
                         [delegate duelTimerEndFeedBack];
                     
-                    finalViewController = [[FinalViewController alloc] initWithUserTime:0 andOponentTime:999999 andController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+                    finalViewController = [[FinalViewController alloc] initWithUserTime:0 andOponentTime:999999 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
                     [parentVC.navigationController pushViewController:finalViewController animated:YES];
                     [delegate shutDownTimer];
                 }
@@ -785,7 +801,7 @@ static GameCenterViewController *gameCenterViewController;
                    if ([delegate respondsToSelector:@selector(duelTimerEndFeedBack)])
                         [delegate duelTimerEndFeedBack];
 
-                    finalViewController = [[FinalViewController alloc] initWithUserTime:0 andOponentTime:999999 andController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+                    finalViewController = [[FinalViewController alloc] initWithUserTime:0 andOponentTime:999999 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
                     [parentVC.navigationController pushViewController:finalViewController animated:YES];
                     [delegate shutDownTimer];
 
@@ -868,12 +884,11 @@ static GameCenterViewController *gameCenterViewController;
             [self setDelegate2:duelStartViewController];
             duelStartViewController.oponentAvailable  = NO;
             duelStartViewController.delegate = self;
-            if ([parentVC.navigationController.viewControllers containsObject:duelStartViewController]) [parentVC.navigationController popToViewController:duelStartViewController animated:YES];
-            else [parentVC.navigationController pushViewController:duelStartViewController animated:YES];
+            if ([parentVC.navigationController.viewControllers containsObject:duelStartViewController])
+                [parentVC.navigationController popToViewController:duelStartViewController animated:YES];
+            else
+                [parentVC.navigationController pushViewController:duelStartViewController animated:YES];
             [duelStartViewController startButtonClick];
-                
-           // }
-      
         }
             break;
             

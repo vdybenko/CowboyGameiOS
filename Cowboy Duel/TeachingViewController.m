@@ -200,7 +200,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
             int opponentTime;
             opponentTime=3000;
         
-            FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime - time * 1000) andOponentTime:opponentTime andController:self andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
+            FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime - time * 1000) andOponentTime:opponentTime andGameCenterController:self andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
             //                [activityIndicatorView setText:NSLocalizedString(@"FOLL", @"")];
             [activityIndicatorView setText:@""];
             [activityIndicatorView showView];
@@ -279,7 +279,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
 
 -(void)follSend
 {
-    FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:999999.0 andOponentTime:0 andController:self andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
+    FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:999999.0 andOponentTime:0 andGameCenterController:self andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
     
     [self.navigationController pushViewController:finalViewController animated:YES];
 }

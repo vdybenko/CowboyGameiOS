@@ -16,7 +16,7 @@
 
 
 
-#define BASE_URL "http://cd.webkate.com/"
+#define BASE_URL "http://cowboyduel.net/"
 #define kTimeOutSeconds 20
 #define kFacebookAppId @"284932561559672"
 #define kFacebookAppToken @"284932561559672|w5GIU7o8TBWuxqPgmyZ7r7FxxKE"

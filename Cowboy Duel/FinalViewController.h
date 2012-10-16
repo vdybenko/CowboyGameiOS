@@ -77,7 +77,6 @@
     
     IBOutlet UIButton *backButton;
     IBOutlet UIButton *nextButton;
-    IBOutlet UIButton *tryButton;
 
     IBOutlet UITableView *resultTable;
     
@@ -127,6 +126,8 @@
     __unsafe_unretained IBOutlet UILabel *lblPointsTitle;
 }
 @property(unsafe_unretained)id<DuelViewControllerDelegate> delegate;
+
+@property (strong, nonatomic) IBOutlet UIButton *tryButton;
 @property (strong, nonatomic) IBOutlet UIView *statView;
 
 @property (strong, nonatomic) IBOutlet UIView *viewWin;
@@ -146,7 +147,7 @@
 
 -(id)initWithUserTime:(int)userTimePar
        andOponentTime:(int)oponentTime
-        andController:(id)delegateController
+        andGameCenterController:(id)delegateController
           andTeaching:(BOOL)teach
            andAccount:(AccountDataSource *)userAccount
          andOpAccount:(AccountDataSource *)opAccount;
@@ -156,6 +157,8 @@
 
 -(void)winAnimation;
 -(void)loseAnimation;
+
+-(void)prepeareForWinScene;
 
 -(void)runAway;
 +(NSArray *)getStaticPointsForEachLevels;

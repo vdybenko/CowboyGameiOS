@@ -40,8 +40,6 @@
     IBOutlet UIButton *btnMenu;
     IBOutlet UIButton *btnPost;
     BOOL runAnimation;
-    
-    
 }
 @property(nonatomic, strong)id<DuelViewControllerDelegate> delegate;
 @property (nonatomic, strong) IBOutlet UIImageView *ivLightRays2;
@@ -51,7 +49,7 @@
 @synthesize delegate;
 @synthesize ivLightRays2;
 
-- (id) initForNewLevelPlayerAccount:(AccountDataSource *)pPlayerAccount andController:(id)delegateController;
+- (id) initForNewLevelPlayerAccount:(AccountDataSource *)pPlayerAccount andController:(id)delegateController tryButtonEnable:(BOOL)tryButtonEnable;
 {
     self = [super initWithNibName:@"LevelCongratViewController" bundle:[NSBundle mainBundle]];
     if (self){
@@ -78,6 +76,8 @@
             [btnPost setHidden:YES];
             [LevelCongratViewController newLevelNumber:playerAccount.accountLevel];
         }
+        
+        btnAgain.enabled = tryButtonEnable;
     }
     return self;
 }

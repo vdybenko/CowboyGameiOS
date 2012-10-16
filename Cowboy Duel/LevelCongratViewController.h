@@ -13,7 +13,7 @@
 #import "ActivityIndicatorView.h"
 
 @interface LevelCongratViewController : UIViewController
-- (id) initForNewLevelPlayerAccount:(AccountDataSource *)pPlayerAccount andController:(id)delegateController;
+- (id) initForNewLevelPlayerAccount:(AccountDataSource *)pPlayerAccount andController:(id)delegateController tryButtonEnable:(BOOL)tryButtonEnable;
 +(void)newLevelNumber:(NSInteger)level;
 
 @end

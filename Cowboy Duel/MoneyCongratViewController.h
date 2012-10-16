@@ -12,7 +12,7 @@
 #import "ActivityIndicatorView.h"
 
 @interface MoneyCongratViewController : UIViewController
-- (id) initForAchivmentPlayerAccount:(AccountDataSource *)pPlayerAccount withLabel:(NSString*)pLabel andController:(id)delegateController;
+- (id) initForAchivmentPlayerAccount:(AccountDataSource *)pPlayerAccount withLabel:(NSString*)pLabel andController:(id)delegateController tryButtonEnable:(BOOL)tryButtonEnable;
 +(void)achivmentMoney:(NSUInteger)money;
 
 @end
