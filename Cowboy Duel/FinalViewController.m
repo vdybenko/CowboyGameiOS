@@ -731,7 +731,6 @@
             [self performSelector:@selector(startBotDuelTryAgain) withObject:self afterDelay:5.0];
         }
     }
-    [self compareNewLevel:0 withOldLevel:35];
 }
 
 #pragma mark -
@@ -977,13 +976,13 @@
 -(void)showMessageOfNewLevel
 {
     lvlCongratulationViewController=[[LevelCongratViewController alloc] initForNewLevelPlayerAccount:playerAccount andController:self tryButtonEnable:tryButton.enabled];
-    [self performSelector:@selector(showViewController:) withObject:lvlCongratulationViewController afterDelay:5.0];
+    [self performSelector:@selector(showViewController:) withObject:lvlCongratulationViewController afterDelay:4.5];
 }
 
 -(void)showMessageOfMoreMoney:(NSInteger)money withLabel:(NSString *)labelForCongratulation
 {
     moneyCongratulationViewController  = [[MoneyCongratViewController alloc] initForAchivmentPlayerAccount:playerAccount withLabel:labelForCongratulation andController:self tryButtonEnable:tryButton.enabled];
-    [self performSelector:@selector(showViewController:) withObject:moneyCongratulationViewController afterDelay:5.0];
+    [self performSelector:@selector(showViewController:) withObject:moneyCongratulationViewController afterDelay:4.5];
 }
 
 #pragma mark -
