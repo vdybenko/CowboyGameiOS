@@ -42,7 +42,7 @@ static AccountDataSource *sharedHelper = nil;
     self.accountBigestWin=0;
     self.removeAds=0;
     
-    self.avatar=nil;
+    self.avatar=@"";
     self.age=@"";
     self.homeTown=@"";
     self.friends=0;
@@ -407,7 +407,7 @@ static AccountDataSource *sharedHelper = nil;
 }
 - (void)saveAvatar;
 {
-    [[NSUserDefaults standardUserDefaults] setObject:ValidateObject(self.accountName, [NSString class]) forKey:@"avatar"];
+    [[NSUserDefaults standardUserDefaults] setObject:ValidateObject(self.avatar, [NSString class]) forKey:@"avatar"];
 }
 - (void)saveAge;
 {

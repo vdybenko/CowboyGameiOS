@@ -1226,7 +1226,7 @@ static StartViewController *sharedHelper = nil;
 	
     
 	if ([result isKindOfClass:[NSDictionary class]]) {
-        
+
         oldAccounId = [[NSString alloc] initWithFormat:@"%@",playerAccount.accountID];
         
 		NSString *userId = [NSString stringWithFormat:@"F:%@", ValidateObject([result objectForKey:@"id"], [NSString class])];
@@ -1238,7 +1238,11 @@ static StartViewController *sharedHelper = nil;
             [playerAccount setAccountName:playerName];  
         } 
         playerAccount.facebookName=playerName;
-        playerAccount.avatar=[NSString stringWithFormat:@"%@", ValidateObject([result objectForKey:@"picture"], [NSString class])];
+        
+        NSDictionary *data = ValidateObject([result objectForKey:@"picture"], [NSDictionary class]);
+        NSDictionary *imageDictionary = ValidateObject([data objectForKey:@"data"], [NSDictionary class]);
+        playerAccount.avatar=[NSString stringWithFormat:@"%@", ValidateObject([imageDictionary objectForKey:@"url"], [NSString class])];
+        
         playerAccount.age=[NSString stringWithFormat:@"%@", ValidateObject([result objectForKey:@"birthday"], [NSString class])];
         
         NSDictionary *town=ValidateObject([result objectForKey:@"location"], [NSDictionary class]);
@@ -1247,6 +1251,7 @@ static StartViewController *sharedHelper = nil;
         [playerAccount saveAge];
         [playerAccount saveHomeTown];
         [playerAccount saveFacebookName];
+        [playerAccount saveAvatar];
         
         [uDef setObject:ValidateObject(playerAccount.accountID, [NSString class]) forKey:@"id"];
         
