@@ -517,9 +517,7 @@ static GameCenterViewController *gameCenterViewController;
     
     UIViewController  *tempVC = [self.parentVC.navigationController.viewControllers objectAtIndex:1] ;
     [self.parentVC.navigationController popToViewController:tempVC animated:YES];
-
 }
-
 
 #pragma mark DuelViewControllerDelegate Methods
 

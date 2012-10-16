@@ -114,8 +114,8 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
 
 -(NSDictionary*)adColonyAdZoneNumberAssociation {
     return [NSDictionary dictionaryWithObjectsAndKeys:
-			@"vz2c493f6fa7cc474687a5ed", [NSNumber numberWithInt:1],
-//            @"vz74e7d81b72fb4f198a5bba", [NSNumber numberWithInt:1],//test
+//			@"vz2c493f6fa7cc474687a5ed", [NSNumber numberWithInt:1],
+            @"vz74e7d81b72fb4f198a5bba", [NSNumber numberWithInt:1],//test
 			nil];
 }
 
