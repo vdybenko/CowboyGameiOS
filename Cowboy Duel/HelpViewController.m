@@ -14,6 +14,8 @@
 #import "HCYoutubeParser.h"
 #import <MediaPlayer/MediaPlayer.h>
 
+#define videoHelp @"http://www.youtube.com/watch?v=HZST2wcGAr4"
+
 @interface HelpViewController () {
     id startVC;
     
@@ -118,24 +120,22 @@ NSString *const URL_CONTACN_US=@"http://cowboyduel.com/";
 
 -(IBAction)btnFB{
     
-    NSDictionary *videos = [HCYoutubeParser h264videosWithYoutubeURL:[NSURL URLWithString:btnFBHelp]];
-    mp = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:[videos objectForKey:@"medium"]]];
+    NSURL *url = [NSURL URLWithString:videoHelp];
+    NSDictionary *qualities = [HCYoutubeParser h264videosWithYoutubeURL:url];
     
-    if ([mp.moviePlayer respondsToSelector:@selector(setFullscreen:animated:)]) {  
-        // Use the new 3.2 style API
-        mp.moviePlayer.controlStyle = MPMovieControlStyleFullscreen;  
-        mp.moviePlayer.shouldAutoplay = YES;
-        mp.moviePlayer.repeatMode = MPMovieRepeatModeNone;
-       
-        [self presentMoviePlayerViewControllerAnimated:mp];
-        
-        [mp.moviePlayer setFullscreen:YES animated:YES];  
-    } else {  
-        // Use the old 2.0 style API  
-        mp.moviePlayer.movieControlMode = MPMovieControlModeHidden;  
-        [mp.moviePlayer play]; 
-    }      
-    if([startVC connectedToWiFi]) [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
+    NSURL *urlVideo = [NSURL URLWithString:[qualities objectForKey:@"medium"]];
+
+    MPMoviePlayerViewController *mp = [[MPMoviePlayerViewController alloc] initWithContentURL:urlVideo];
+    
+    mp.moviePlayer.controlStyle = MPMovieControlStyleFullscreen;
+    mp.moviePlayer.shouldAutoplay = YES;
+    mp.moviePlayer.repeatMode = MPMovieRepeatModeNone;
+    
+    [self presentMoviePlayerViewControllerAnimated:mp];
+    
+    [mp.moviePlayer setFullscreen:YES animated:YES];
+    
+    if([startVC connectedToWiFi]) [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                                                       object:self
                                                                                     userInfo:[NSDictionary dictionaryWithObject:@"/help_video" forKey:@"event"]];
 }
@@ -145,12 +145,9 @@ NSString *const URL_CONTACN_US=@"http://cowboyduel.com/";
     [[UIApplication sharedApplication] openURL:url];
 }
 
-- (void) moviePlayBackDidFinish:(NSNotification*)notification {  
-   
+- (void) moviePlayBackDidFinish:(NSNotification*)notification {
     mp.moviePlayer.initialPlaybackTime = -1; 
-    
     [mp.moviePlayer stop]; 
-   
     [self dismissMoviePlayerViewControllerAnimated];
 }  
 

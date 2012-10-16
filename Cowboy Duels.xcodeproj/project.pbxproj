@@ -106,7 +106,7 @@
 		312B2F4415E7A24F006D2470 /* fin_img_new_lvl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 312B2F3E15E7A24F006D2470 /* fin_img_new_lvl@2x.png */; };
 		3140030115CBB365008A876E /* fin_img_level_achiev_full_ring.png in Resources */ = {isa = PBXBuildFile; fileRef = 314002FF15CBB365008A876E /* fin_img_level_achiev_full_ring.png */; };
 		3140030215CBB365008A876E /* fin_img_level_achiev_full_ring@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3140030015CBB365008A876E /* fin_img_level_achiev_full_ring@2x.png */; };
-		3150C60C15A5A26E00AC8E17 /* HCYoutubeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3150C60B15A5A26E00AC8E17 /* HCYoutubeParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3150C60C15A5A26E00AC8E17 /* HCYoutubeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3150C60B15A5A26E00AC8E17 /* HCYoutubeParser.m */; };
 		3167BACB15CAA75F00AF2745 /* fin_img_10rank.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BAA915CAA75F00AF2745 /* fin_img_10rank.png */; };
 		3167BACC15CAA75F00AF2745 /* fin_img_10rank@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BAAA15CAA75F00AF2745 /* fin_img_10rank@2x.png */; };
 		3167BACD15CAA75F00AF2745 /* fin_img_11rank.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BAAB15CAA75F00AF2745 /* fin_img_11rank.png */; };

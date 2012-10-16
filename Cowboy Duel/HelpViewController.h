@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#define btnFBHelp @"http://www.youtube.com/watch?v=HZST2wcGAr4"
-
 @interface HelpViewController : UIViewController
 {
 }
