@@ -863,7 +863,7 @@ static StartViewController *sharedHelper = nil;
         if ([[responseObject objectForKey:@"level"] intValue]!=playerAccount.accountLevel) {
             playerAccount.accountLevel=[[responseObject objectForKey:@"level"] intValue];
             [playerAccount saveAccountLevel];
-            [[GCHelper sharedInstance] reportAchievementIdentifier:[[GCHelper sharedInstance].GC_ACH objectAtIndex:playerAccount.accountLevel-1] percentComplete:100.0f];
+            [[GCHelper sharedInstance] reportAchievementIdentifier:[[GCHelper sharedInstance].GC_ACH objectAtIndex:playerAccount.accountLevel] percentComplete:100.0f];
         }
         
         NSString *nameFromServer=[responseObject objectForKey:@"name"];
@@ -1115,7 +1115,7 @@ static StartViewController *sharedHelper = nil;
     if ([playerAccount.accountName isEqualToString:@"Anonymous"]||[playerAccount.accountName isEqualToString:@""]||!playerAccount.accountName) {
         [playerAccount setAccountName:player1.alias];
     }
-    if (playerAccount.accountLevel==1) {
+    if (playerAccount.accountLevel>=1) {
         [[GCHelper sharedInstance] reportAchievementIdentifier:[[GCHelper sharedInstance].GC_ACH objectAtIndex:1] percentComplete:100.0f];
     }
 }

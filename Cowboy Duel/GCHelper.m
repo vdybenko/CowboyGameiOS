@@ -103,7 +103,7 @@ static GCHelper *sharedHelper = nil;
         
         GC_ACH=[[NSArray alloc] initWithObjects:
                 @"com.webkate.cowboyduels.achievement.0",
-                @"com.webkate.cowboyduels.achievement.1", 
+                @"com.webkate.cowboyduels.achievement.1", //Junior
                 @"com.webkate.cowboyduels.achievement.2",
                 @"com.webkate.cowboyduels.achievement.3",
                 @"com.webkate.cowboyduels.achievement.4",
@@ -112,7 +112,7 @@ static GCHelper *sharedHelper = nil;
                 @"com.webkate.cowboyduels.achievement.7",
                 @"com.webkate.cowboyduels.achievement.8",
                 @"com.webkate.cowboyduels.achievement.9",
-                @"com.webkate.cowboyduels.achievement.10",
+                @"com.webkate.cowboyduels.achievement.10",//Angel of Death
                 nil];
         
         achievementsDictionary = [[NSMutableDictionary alloc] init];

@@ -967,7 +967,7 @@
             
             reachNewLevel=YES;
             
-            [[GCHelper sharedInstance] reportAchievementIdentifier:[[GCHelper sharedInstance].GC_ACH objectAtIndex:playerAccount.accountLevel-1] percentComplete:100.0f];
+            [[GCHelper sharedInstance] reportAchievementIdentifier:[[GCHelper sharedInstance].GC_ACH objectAtIndex:playerAccount.accountLevel] percentComplete:100.0f];
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
     }
