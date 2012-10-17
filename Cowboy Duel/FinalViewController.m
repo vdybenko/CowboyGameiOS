@@ -873,6 +873,11 @@
     fMutchNumberWin = 2;
 }
 
+-(void)prepeareForLoseScene{
+    tryButtonEnabled = NO;
+    fMutchNumberLose = 2;
+}
+
 -(void)loseAnimation
 {
     loserImg.hidden = NO;

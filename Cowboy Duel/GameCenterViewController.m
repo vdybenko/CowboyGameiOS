@@ -17,7 +17,7 @@
 #define kMaxTankPacketSize 512
 
 @implementation GameCenterViewController
-@synthesize delegate, delegate2, duelStartViewController, multiplayerClientViewController, multiplayerServerViewController, parentVC, opponentEndMatch, userEndMatch,typeGameWithMessage, multiplayerViewController;
+@synthesize delegate, delegate2, duelStartViewController, multiplayerClientViewController, multiplayerServerViewController, parentVC, opponentEndMatch, userEndMatch,userCanceledMatch, typeGameWithMessage, multiplayerViewController;
 
 static GameCenterViewController *gameCenterViewController;
 
@@ -43,6 +43,7 @@ static GameCenterViewController *gameCenterViewController;
     carShotTime = 0.0;
     opShotTime = 0.0;
     accelState = NO;
+    userCanceledMatch = NO;
     
     mutchNumber = 0;
     mutchNumberWin = 0;
@@ -516,7 +517,11 @@ static GameCenterViewController *gameCenterViewController;
     
     if ([self.parentVC.navigationController.visibleViewController isKindOfClass:([DuelViewController class])]) {
         finalViewController = [[FinalViewController alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
-        [finalViewController prepeareForWinScene];
+        if (userCanceledMatch) {
+            [finalViewController prepeareForLoseScene];
+        }else{
+            [finalViewController prepeareForWinScene];
+        }
         [parentVC.navigationController pushViewController:finalViewController animated:YES];
         [delegate shutDownTimer];
     }else if ([self.parentVC.navigationController.visibleViewController isKindOfClass:([FinalViewController class])]){

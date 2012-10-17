@@ -91,7 +91,7 @@ typedef struct {
 @property(nonatomic) BOOL opponentEndMatch;
 @property(nonatomic) BOOL userEndMatch;
 @property(nonatomic) BOOL typeGameWithMessage;
-@property(nonatomic) BOOL ;
+@property(nonatomic) BOOL userCanceledMatch;
 @property(strong, readwrite) id multiplayerViewController;
 
 

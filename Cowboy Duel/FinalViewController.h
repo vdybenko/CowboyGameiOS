@@ -159,6 +159,7 @@
 -(void)loseAnimation;
 
 -(void)prepeareForWinScene;
+-(void)prepeareForLoseScene;
 
 -(void)runAway;
 +(NSArray *)getStaticPointsForEachLevels;

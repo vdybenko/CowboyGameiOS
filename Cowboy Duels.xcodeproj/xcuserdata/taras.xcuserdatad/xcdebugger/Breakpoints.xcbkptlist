@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/GameCenterViewController.m"
-         timestampString = "372167220.161593"
+         timestampString = "372175078.503692"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "509"
-         endingLineNumber = "509"
+         startingLineNumber = "517"
+         endingLineNumber = "517"
          landmarkName = "-lostConnection"
          landmarkType = "5">
       </FileBreakpoint>
@@ -21,25 +21,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/GameCenterViewController.m"
-         timestampString = "372167472.608177"
+         timestampString = "372173642.670121"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "270"
-         endingLineNumber = "270"
+         startingLineNumber = "271"
+         endingLineNumber = "271"
          landmarkName = "-duelCancel"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Cowboy Duel/GameCenterViewController.m"
-         timestampString = "372167597.38007"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "490"
-         endingLineNumber = "490"
-         landmarkName = "-matchCanseled"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
