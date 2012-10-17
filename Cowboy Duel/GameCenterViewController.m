@@ -522,6 +522,7 @@ static GameCenterViewController *gameCenterViewController;
         }else{
             [finalViewController prepeareForWinScene];
         }
+        mutchNumber = 3;
         [parentVC.navigationController pushViewController:finalViewController animated:YES];
         [delegate shutDownTimer];
     }else if ([self.parentVC.navigationController.visibleViewController isKindOfClass:([FinalViewController class])]){
@@ -531,13 +532,23 @@ static GameCenterViewController *gameCenterViewController;
         }else{
             finalViewController = [[FinalViewController alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
             [finalViewController prepeareForWinScene];
+             mutchNumber = 3;
             [parentVC.navigationController pushViewController:finalViewController animated:YES];
             [delegate shutDownTimer];
         }
     }else if ([self.parentVC.navigationController.visibleViewController isKindOfClass:([DuelStartViewController class])]){
         UIViewController *tempVC = [self.parentVC.navigationController.viewControllers objectAtIndex:1] ;
         [self.parentVC.navigationController popToViewController:tempVC animated:YES];
-    }    
+    }
+    
+    userCanceledMatch = NO;
+}
+
+-(void)userCancelNutch;
+{
+    [self matchCanseled];
+    userCanceledMatch = YES;
+    [self lostConnection];
 }
 
 #pragma mark DuelViewControllerDelegate Methods

@@ -377,11 +377,8 @@ if (shotCountBullet!=0) {
 - (IBAction)backButtonClick:(id)sender {
 
     if ([self.delegate isKindOfClass:[GameCenterViewController class]]) {
-        [self.delegate performSelector:@selector(lostConnection)];
-        GameCenterViewController *gameCenterViewController = (GameCenterViewController*)self.delegate;
-        gameCenterViewController.userCanceledMatch = YES;
+        [self.delegate performSelector:@selector(userCancelNutch)];
     }
-//    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:1] animated:YES];
 }
 
 -(IBAction)helpBtnClick:(id)sender;
