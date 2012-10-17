@@ -132,7 +132,6 @@ static const char *GC_URL =  BASE_URL"api/gc";
     _lbNameOponent.font=fontNames;
 
     _ivOponent.contentMode = UIViewContentModeScaleAspectFit;
-    [self setOponentImage];
     
     NSString *nameOfRank=[NSString stringWithFormat:@"%dRank",oponentAccount.accountLevel];
     lbOpponentRank.text = NSLocalizedString(nameOfRank, @"");
@@ -174,6 +173,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
 {
     [mainDuelView setDinamicHeightBackground];
     [activityIndicatorView hideView];
+    [self setOponentImage];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -218,6 +218,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
 
 -(void)viewDidDisappear:(BOOL)animated
 {
+    _ivOponent.image = nil;
     [_vWait setHidden:YES];
     [activityIndicatorView hideView];
 }
