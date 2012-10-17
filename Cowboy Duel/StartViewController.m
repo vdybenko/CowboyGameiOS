@@ -206,6 +206,8 @@ static StartViewController *sharedHelper = nil;
             
             [uDef setBool:FALSE forKey:@"FirstRunForGun"];
             [uDef setBool:FALSE forKey:@"FirstRunForDuel"];
+            [uDef setInteger:2 forKey:@"FirstRunForPractice"];
+
             [playerAccount loadAllParametrs];
             
             if (!([playerAccount.accountID rangeOfString:@"F"].location == NSNotFound)){ 
@@ -263,7 +265,6 @@ static StartViewController *sharedHelper = nil;
                     [playerAccount.achivments addObject:loc];
                 }
             }
-
         }
                
         dicForRequests=[[NSMutableDictionary alloc] init];
@@ -271,7 +272,11 @@ static StartViewController *sharedHelper = nil;
         gameCenterViewController = [GameCenterViewController sharedInstance:playerAccount andParentVC:self];
         
         listOfItemsViewController=[[ListOfItemsViewController alloc]initWithGCVC:gameCenterViewController Account:playerAccount OnLine:self.hostActive];
-                
+        
+        if (firstRun) {
+            [gameCenterViewController stopServer];
+        }
+        
         //      GoogleAnalytics
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                             object:self
@@ -472,8 +477,12 @@ static StartViewController *sharedHelper = nil;
         mutchEnded = YES;
     else 
         mutchEnded = NO;
-        
-    if (!gameCenterViewController.multiplayerServerViewController.isRunServer && !gameCenterViewController.multiplayerServerViewController.neadRestart && mutchEnded)    [gameCenterViewController startServerWithName:playerAccount.accountID];
+    
+    NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+    if (!gameCenterViewController.multiplayerServerViewController.isRunServer && !gameCenterViewController.multiplayerServerViewController.neadRestart && mutchEnded && [userDef integerForKey:@"FirstRunForPractice"] == 2)
+    {
+       [gameCenterViewController startServerWithName:playerAccount.accountID];
+    }
     gameCenterViewController.duelStartViewController = nil;
     
     [self showProfileFirstRun];
@@ -1337,7 +1346,6 @@ static StartViewController *sharedHelper = nil;
         //        Final exchange after first duel
         [hudView setHidden:YES];
         [hudView removeFromSuperview];
-        
     }
     if (([userDef integerForKey:@"FirstRunForPractice"] == 1) && ([self connectedToWiFi])) {
         //        Show btn Duel GC
