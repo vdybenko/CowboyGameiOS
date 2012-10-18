@@ -184,12 +184,12 @@
         
     }
     else {
-        
-        NSDictionary *details = @{ NSLocalizedDescriptionKey : @"Could not find a valid Youtube ID" };
-        
-        NSError *error = [NSError errorWithDomain:@"com.hiddencode.yt-parser" code:0 userInfo:details];
-        
-        completeBlock(nil, error);
+//        To DO uncoment
+//        NSDictionary *details = @{ NSLocalizedDescriptionKey : @"Could not find a valid Youtube ID" };
+//        
+//        NSError *error = [NSError errorWithDomain:@"com.hiddencode.yt-parser" code:0 userInfo:details];
+//        
+//        completeBlock(nil, error);
     }
 }
 
