@@ -33,6 +33,7 @@
 #import "RefreshContentDataController.h"
 #import "UIImageView+AttachedView.h"
 #import "TopPlayersDataSource.h"
+#import "SSConnection.h"
 
 @class ListOfItemsViewController;
 @class GameCenterViewController;
