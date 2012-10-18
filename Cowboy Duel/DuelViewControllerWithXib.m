@@ -245,7 +245,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
     rollingY = (acceleration.y * kFilteringFactor) + (rollingY * (1.0 - kFilteringFactor));
     rollingZ = (acceleration.z * kFilteringFactor) + (rollingZ * (1.0 - kFilteringFactor));
 //    DLog(@"acceleration x= %.1f, y= %.1f, z= %.1f", acceleration.x, acceleration.y, acceleration.z);
-//    DLog(@"rolling x= %.1f, y= %.1f, z= %.1f", rollingX, rollingY, rollingZ);
+    DLog(@"rolling x= %.1f, y= %.1f, z= %.1f", rollingX, rollingY, rollingZ);
     
     [self setRotationWithAngle:atan2(rollingY, rollingX) andY:rollingY];
 
@@ -265,22 +265,69 @@ static NSString *ShotSound = @"%@/shot.mp3";
         }           
 //eof ifs    
     
-    if (rollingX >= -0.7)      
+//    if (rollingX >= -0.7)
+        if ((rollingX >= -0.7)&&(rollingZ > -0.6)&&(rollingY<=-0.7))      
     {
-        accelerometerState = NO;
-    }
-   
-    if ((rollingZ <= -0.7)) {
+         NSLog(@"FOLL X");
         accelerometerState = NO;
     }
     
+//    if ((rollingX >= -0.7))      
+//        
+//    {
+//        NSLog(@"X");
+////        accelerometerState = NO;
+//    }
+//
+//    
+//    if ((rollingZ >= -0.7)) {
+//    NSLog(@"Z");
+////        accelerometerState = NO;
+//    }
+    
     if (rollingX < -0.7)
         if ((rollingZ > -0.7)) {
+             NSLog(@"status STEADY");
             accelerometerState = YES;
         }           
     if (start){ 
-        if (!accelerometerState) _btnNab.enabled = YES;
-        else _btnNab.enabled = NO;
+        if (!accelerometerState) 
+            _btnNab.enabled = YES;
+        else 
+            _btnNab.enabled = NO;
+    }
+
+        
+//    if (rollingX < -0.7){
+////        NSLog(@"rollingX < -0.7");
+////    DLog(@"rolling x= %.1f, y= %.1f, z= %.1f", rollingX, rollingY, rollingZ);
+//        if ((rollingZ > -0.7)) {
+//            accelerometerState = YES;
+////            status STEADY
+//            NSLog(@"status STEADY");
+////            DLog(@"rolling x= %.1f, y= %.1f, z= %.1f", rollingX, rollingY, rollingZ);
+//        }   
+//    }else{
+////        if (rollingX >= -0.7)      
+////        {
+////            accelerometerState = NO;
+////            NSLog(@"FOLL X");
+////            //        DLog(@"rolling x= %.1f, y= %.1f, z= %.1f", rollingX, rollingY, rollingZ);
+////        }
+//        
+//        if ((rollingZ >= -0.7)) {
+//            accelerometerState = NO;
+//            NSLog(@"FOLL Z");
+//            //        DLog(@"rolling x= %.1f, y= %.1f, z= %.1f", rollingX, rollingY, rollingZ);
+//        }
+//
+//    }
+    
+    if (start){ 
+        if (!accelerometerState)
+            _btnNab.enabled = YES;
+        else 
+            _btnNab.enabled = NO;
     }
 }
 -(void)partnerFoll

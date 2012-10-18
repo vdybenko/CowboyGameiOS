@@ -268,15 +268,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
         }
         
     }
-    
-    
-    //    if ((follAccelCheck)&&(accelerometerState)) {
-    //        DLog(@"Down");
-    //        follAccelCheck = NO;
-    //        [self startDuel];
-    //        
-    //    }
-    
 }
 
 -(void)follSend

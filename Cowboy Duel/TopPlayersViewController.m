@@ -31,7 +31,7 @@
 @implementation TopPlayersViewController
 @synthesize tableView, btnFindMe, btnBack, activityIndicator, loadingView,offLineBackGround,offLineText, updateTimer,saloonTitle;
 
-static const char *RANK_TOP =  BASE_URL"users/top_rank";
+static const char *RANK_TOP = BASE_URL"users/top_rank";
 
 #define SectionHeaderHeight 20
 
