@@ -479,7 +479,7 @@ static StartViewController *sharedHelper = nil;
         mutchEnded = NO;
     
     NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-    if (!gameCenterViewController.multiplayerServerViewController.isRunServer && !gameCenterViewController.multiplayerServerViewController.neadRestart && mutchEnded && [userDef integerForKey:@"FirstRunForPractice"] == 2)
+    if (mutchEnded && [userDef integerForKey:@"FirstRunForPractice"] == 2)
     {
        [gameCenterViewController startServerWithName:playerAccount.accountID];
     }
@@ -1084,9 +1084,6 @@ static StartViewController *sharedHelper = nil;
     oldAccounId=@"";
     gameCenterViewController = [GameCenterViewController sharedInstance:playerAccount andParentVC:self];
     
-    gameCenterViewController.multiplayerServerViewController.neadRestart = YES;
-    gameCenterViewController.multiplayerServerViewController.serverNameGlobal = playerAccount.accountID;
-    [gameCenterViewController.multiplayerServerViewController shutDownServer];
 }
 
 -(void)modifierUser;

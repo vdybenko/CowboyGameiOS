@@ -192,7 +192,6 @@ static const char *GC_URL =  BASE_URL"api/gc";
     if ((!serverType)&&(!tryAgain)) {
         
         GameCenterViewController * gController = (GameCenterViewController *) delegate;
-        [gController.multiplayerServerViewController shutDownServer];
         
         NSString *convertString = serverName;
         NSUInteger bufferCount = sizeof(char) * ([convertString length] + 1);

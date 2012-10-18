@@ -594,10 +594,10 @@ static GCHelper *sharedHelper = nil;
     
     NSError *error = nil;
     
-    static unsigned char networkPacket[kMaxTankPacketSize];
+    static unsigned char networkPacket[1024];
 	const unsigned int packetHeaderSize = 2 * sizeof(int); // we have two "ints" for our header
 	
-	if(length < (kMaxTankPacketSize - packetHeaderSize)) { // our networkPacket buffer size minus the size of the header info
+	if(length < (1024 - packetHeaderSize)) { // our networkPacket buffer size minus the size of the header info
 		int *pIntData = (int *)&networkPacket[0];
 		// header info
 		pIntData[0] = 1;
