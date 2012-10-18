@@ -472,6 +472,8 @@ static StartViewController *sharedHelper = nil;
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    SSConnection *connection = [SSConnection sharedInstance];
+    
     BOOL mutchEnded;
     if ((gameCenterViewController.userEndMatch && gameCenterViewController.opponentEndMatch) || (!gameCenterViewController.userEndMatch && !gameCenterViewController.opponentEndMatch)) 
         mutchEnded = YES;

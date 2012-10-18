@@ -260,6 +260,8 @@
 		BD84E2A7147CDE5D009DCEBF /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD84E2A6147CDE5D009DCEBF /* AddressBook.framework */; };
 		BD84E2A9147CDE65009DCEBF /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD84E2A8147CDE65009DCEBF /* AddressBookUI.framework */; };
 		BD84E2AB147CDE9E009DCEBF /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD84E2AA147CDE9D009DCEBF /* CoreText.framework */; };
+		BD865F6A162FF8500049125A /* SSConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = BD865F69162FF8500049125A /* SSConnection.m */; };
+		BD865F6D1630124D0049125A /* SSServer.m in Sources */ = {isa = PBXBuildFile; fileRef = BD865F6C1630124D0049125A /* SSServer.m */; };
 		BDCABD9E148288D50051932E /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDCABD9D148288D50051932E /* libGoogleAnalytics.a */; };
 		BDCECE88148515D40007CEE3 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDCECE87148515D30007CEE3 /* LoginViewController.m */; };
 		BDD07BB8141E1F170085E4FB /* AccelerometrDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B3C141E1F170085E4FB /* AccelerometrDataSource.m */; };
@@ -639,6 +641,10 @@
 		BD84E2A6147CDE5D009DCEBF /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		BD84E2A8147CDE65009DCEBF /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		BD84E2AA147CDE9D009DCEBF /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		BD865F68162FF8500049125A /* SSConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSConnection.h; sourceTree = "<group>"; };
+		BD865F69162FF8500049125A /* SSConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSConnection.m; sourceTree = "<group>"; };
+		BD865F6B1630124D0049125A /* SSServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSServer.h; sourceTree = "<group>"; };
+		BD865F6C1630124D0049125A /* SSServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSServer.m; sourceTree = "<group>"; };
 		BDC6D7BA147E48E90012CB34 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		BDCABD9C148288D50051932E /* GANTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GANTracker.h; path = "Cowboy Duel/GoogleAnalytics/Library/GANTracker.h"; sourceTree = SOURCE_ROOT; };
 		BDCABD9D148288D50051932E /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalytics.a; path = "Cowboy Duel/GoogleAnalytics/Library/libGoogleAnalytics.a"; sourceTree = SOURCE_ROOT; };
@@ -1309,6 +1315,17 @@
 			path = Library;
 			sourceTree = "<group>";
 		};
+		BD865F67162FF8500049125A /* Connection */ = {
+			isa = PBXGroup;
+			children = (
+				BD865F68162FF8500049125A /* SSConnection.h */,
+				BD865F69162FF8500049125A /* SSConnection.m */,
+				BD865F6B1630124D0049125A /* SSServer.h */,
+				BD865F6C1630124D0049125A /* SSServer.m */,
+			);
+			path = Connection;
+			sourceTree = "<group>";
+		};
 		BDD07B3A141E1F170085E4FB /* Cowboy Duel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1433,6 +1450,7 @@
 				767B56CE15AEDE2F00ECA0C4 /* CustomNSURLConnection.m */,
 				BDD07B3B141E1F170085E4FB /* AccelerometrDataSource.h */,
 				BDD07B3C141E1F170085E4FB /* AccelerometrDataSource.m */,
+				BD865F67162FF8500049125A /* Connection */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -1814,6 +1832,8 @@
 				3188979815CAD7FE002D52EA /* LevelCongratViewController.m in Sources */,
 				76B65ACD15DD4A88000E136C /* FXLabel.m in Sources */,
 				76AFC7A215ED1B740009294B /* UIScrollView+AH3DPullRefresh.m in Sources */,
+				BD865F6A162FF8500049125A /* SSConnection.m in Sources */,
+				BD865F6D1630124D0049125A /* SSServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1854,7 +1874,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/gt2/** $(PROJECT_DIR)/**";
-				VALID_ARCHS = "armv6 armv7";
+				VALID_ARCHS = "armv7s armv7";
 				WARNING_LDFLAGS = (
 					Foundation,
 					"-framework",
@@ -1866,10 +1886,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv7,
-					armv6,
-				);
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1926,7 +1942,7 @@
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "../../.. $(PROJECT_DIR)";
 				VALIDATE_PRODUCT = NO;
-				VALID_ARCHS = "armv7 armv6";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1954,7 +1970,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/gt2/** $(PROJECT_DIR)/**";
-				VALID_ARCHS = "armv6 armv7";
+				VALID_ARCHS = "armv7s armv7";
 				WARNING_LDFLAGS = (
 					Foundation,
 					"-framework",
@@ -1966,10 +1982,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv7,
-					armv6,
-				);
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: SPE Dybenko Olga Viktorovna  (WebKate)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: SPE Dybenko Olga Viktorovna  (WebKate)";
@@ -2026,7 +2038,7 @@
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "../../.. $(PROJECT_DIR)";
 				VALIDATE_PRODUCT = NO;
-				VALID_ARCHS = "armv7 armv6";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -2054,7 +2066,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/gt2/** $(PROJECT_DIR)/**";
-				VALID_ARCHS = "armv6 armv7";
+				VALID_ARCHS = "armv7s armv7";
 				WARNING_LDFLAGS = (
 					Foundation,
 					"-framework",
@@ -2066,10 +2078,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv7,
-					armv6,
-				);
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: SPE Dybenko Olga Viktorovna  (WebKate)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: SPE Dybenko Olga Viktorovna  (WebKate)";
@@ -2128,7 +2136,7 @@
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "../../.. $(PROJECT_DIR)";
 				VALIDATE_PRODUCT = NO;
-				VALID_ARCHS = "armv7 armv6";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Distrbution;

@@ -1,6 +1,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CDPlayerOnLine.h"
+#import "SSServer.h"
 
 @interface PlayerOnLineCell : UITableViewCell {
 	
@@ -18,7 +19,7 @@
 +(PlayerOnLineCell*)cell;
 +(NSString*) cellID;
 
--(void) populateWithPlayer:(CDPlayerOnLine *)player;
+-(void) populateWithPlayer:(SSServer *)player;
 -(void) initMainControls;
 -(void) setPlayerIcon:(UIImage*)iconImage;
 -(void) setRibbonHide:(BOOL)hide;
