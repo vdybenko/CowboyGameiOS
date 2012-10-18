@@ -30,6 +30,7 @@ typedef enum {
 @property (nonatomic)  LoginFacebookStatus loginFacebookStatus;
 
 + (LoginViewController *) sharedInstance ;
+-(void)initFacebook;
 -(IBAction)fbLoginBtnClick:(id)sender;
 -(void)logOutFB;
 

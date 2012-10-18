@@ -7,6 +7,7 @@
 #import "ValidationUtils.h"
 #import "CDAchivment.h"
 
+@class StartViewController;
 @interface AccountDataSource : NSObject
 
 @property (nonatomic, readonly) NSInteger accountDataSourceID;
@@ -65,4 +66,7 @@
 - (void)saveFacebookName;
 - (void)saveDeviceType;
 
+-(void)putchAvatarImageToInitStartVC:(StartViewController*)startVC;
+-(BOOL)isAvatarImage:(NSString*)imagePath;
+-(BOOL)putchAvatarImageSendInfo;
 @end

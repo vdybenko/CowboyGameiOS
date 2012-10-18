@@ -94,10 +94,14 @@ static OGHelper *sharedHelper = nil;
 }
 
 -(NSString *)getClearName:(NSString*) pName{
-    NSMutableString *tfContent = [[NSMutableString alloc] initWithString:pName];
-    NSRange rng=NSMakeRange (0,2);
-    [tfContent deleteCharactersInRange:rng];
-    return tfContent;
+    if (pName &&([pName length]>=2)) {
+        NSMutableString *tfContent = [[NSMutableString alloc] initWithString:pName];
+        NSRange rng=NSMakeRange (0,2);
+        [tfContent deleteCharactersInRange:rng];
+        return tfContent;
+    }else {
+        return pName;
+    }
 }
 #pragma mark Facebook API Calls
 /*

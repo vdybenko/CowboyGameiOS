@@ -210,6 +210,8 @@ static StartViewController *sharedHelper = nil;
 
             [playerAccount loadAllParametrs];
             
+            [playerAccount putchAvatarImageToInitStartVC:self];
+            
             if (!([playerAccount.accountID rangeOfString:@"F"].location == NSNotFound)){ 
                 facebook = [[Facebook alloc] initWithAppId:kFacebookAppId andDelegate:[LoginViewController sharedInstance]];
                 
@@ -910,11 +912,11 @@ static StartViewController *sharedHelper = nil;
         }
 
         NSString *urlAvatar=[responseObject objectForKey:@"avatar"];
-        if (urlAvatar) {
+        if ([playerAccount isAvatarImage:urlAvatar]) {
             playerAccount.avatar=urlAvatar;
             [playerAccount saveAvatar];
         }
-//        
+        
         NSString *playerAge=[responseObject objectForKey:@"age"];
         if (playerAge) {
             playerAccount.age=playerAge;
@@ -1268,7 +1270,8 @@ static StartViewController *sharedHelper = nil;
             
         [uDef synchronize];
         
-        [self authorizationModifier:NO];
+        BOOL modifierUserInfo = [playerAccount putchAvatarImageSendInfo];
+        [self authorizationModifier:modifierUserInfo];
     }
 
 }
@@ -1516,5 +1519,6 @@ static StartViewController *sharedHelper = nil;
     }
     
 }
+
 
 @end
