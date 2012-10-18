@@ -166,19 +166,19 @@
 
 -(void)clickButton:(NSIndexPath *)indexPath;
 {
-    CDPlayerOnLine *_player;    
-    _player=[_playersOnLineDataSource.arrItemsList objectAtIndex:indexPath.row];
+    SSServer *player;
+    player=[_playersOnLineDataSource.serverObjects objectAtIndex:indexPath.row];
     AccountDataSource *oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
-    [oponentAccount setAccountID:_player.dAuth];
-    [oponentAccount setAccountName:_player.dNickName];
-    [oponentAccount setAccountLevel:_player.dLevel];
-    [oponentAccount setAccountWins:_player.dWinCount];
-    [oponentAccount setAvatar:_player.dAvatar];
+    [oponentAccount setAccountID:player.serverName];
+    [oponentAccount setAccountName:player.serverName];
+    [oponentAccount setAccountLevel:[player.rank integerValue]];
+    [oponentAccount setAccountWins:1];
+    [oponentAccount setAvatar:player.fbImageUrl];
 
-    [oponentAccount setMoney:_player.dMoney];
+    [oponentAccount setMoney:[player.money integerValue]];
     
     DuelStartViewController *duelStartViewController = [[DuelStartViewController alloc]initWithAccount:_playerAccount andOpAccount:oponentAccount opopnentAvailable:NO andServerType:NO andTryAgain:NO];
-    duelStartViewController.serverName = _player.dAuth;
+    duelStartViewController.serverName = player.serverName;
     
     duelStartViewController.delegate = _gameCenterViewController;
     _gameCenterViewController.duelStartViewController = duelStartViewController;
