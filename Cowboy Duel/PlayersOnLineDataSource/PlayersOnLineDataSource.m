@@ -13,11 +13,17 @@
 #import "Utils.h"
 #import "AccountDataSource.h"
 #import "UIImage+Save.h"
+#import "SSConnection.h"
+#import "SSServer.h"
+
+@interface PlayersOnLineDataSource ()
+@property (nonatomic) SSConnection *connection;
+@property (nonatomic) NSMutableArray *serverObjects;
+@end 
 
 @implementation PlayersOnLineDataSource
 @synthesize arrItemsList,delegate,cellsHide;
 
-static const char *LIST_ONLINE_URL =  BASE_URL"users/listview";
 
 #pragma mark - Instance initialization
 
@@ -36,28 +42,46 @@ static const char *LIST_ONLINE_URL =  BASE_URL"users/listview";
      
      topPlayersDataSource = [[StartViewController sharedInstance] topPlayersDataSource];
      [topPlayersDataSource reloadDataSource];
-
+     self.connection = [SSConnection sharedInstance];
+     self.connection.delegate = self;
 	return self;
 }
 
 -(void) reloadDataSource;
 {
-    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:LIST_ONLINE_URL encoding:NSUTF8StringEncoding]]
-                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                          timeoutInterval:kTimeOutSeconds];
-    [theRequest setHTTPMethod:@"POST"]; 
-    NSDictionary *dicBody=[NSDictionary dictionaryWithObjectsAndKeys:
-                           [AccountDataSource sharedInstance].accountID, @"authen",
-                           nil];
-    NSString *stBody=[Utils makeStringForPostRequest:dicBody];
-	[theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]]; 
-
-    CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
-    if (theConnection) {
-        receivedData = [[NSMutableData alloc] init];
-    } else {
-    } 
+	[self.connection sendData:@"" packetID:NETWORK_GET_LIST_ONLINE ofLength:sizeof(int)];
 }
+
+- (void) listOnlineResponse:(NSString *)jsonString
+{
+    NSError *jsonParseError;
+    SBJSON *parser = [[SBJSON alloc] init];
+    NSLog(@"jsonString: %@", jsonString);
+    NSArray *servers = [parser objectWithString:jsonString error:&jsonParseError];
+    self.serverObjects = [[NSMutableArray alloc] init];
+    
+    if (!servers) {
+        NSLog(@"JSON parse error: %@", jsonParseError);
+    }
+    else{
+        NSLog(@"servers: %@", servers);
+        for (NSDictionary *server in servers)
+        {
+            SSServer *serverObj = [[SSServer alloc] init];
+            [serverObj setValuesForKeysWithDictionary:server];
+            [self.serverObjects addObject:serverObj];
+        }
+        [_tableView reloadData];
+    }
+    ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
+    [listOfItemsViewController.btnInvite setEnabled:YES];
+    [listOfItemsViewController.loadingView setHidden:YES];
+    [listOfItemsViewController.activityIndicator stopAnimating];
+    [listOfItemsViewController.tableView reloadData];
+    [_tableView refreshFinished];
+
+}
+
 
 #pragma mark - Delegated methods
 
@@ -69,74 +93,74 @@ static const char *LIST_ONLINE_URL =  BASE_URL"users/listview";
         cell = [PlayerOnLineCell cell];
         [cell initMainControls];
     }
-    CDPlayerOnLine *player;
+    SSServer *player;
     
-    player=[arrItemsList objectAtIndex:indexPath.row];
+    player=[self.serverObjects objectAtIndex:indexPath.row];
     [cell populateWithPlayer:player];
     
-    NSString *name=[[OGHelper sharedInstance ] getClearName:player.dAuth];
-    NSString *path=[NSString stringWithFormat:@"%@/icon_%@.png",[[OGHelper sharedInstance] getSavePathForList],name];
-    if([[NSFileManager defaultManager] fileExistsAtPath:path]){  
-        UIImage *image=[UIImage loadImageFullPath:path];
-        [cell setPlayerIcon:image];
-    }else {
-        IconDownloader *iconDownloader = [imageDownloadsInProgress objectForKey:indexPath];
-        if (iconDownloader == nil) {
-            [cell setPlayerIcon:[UIImage imageNamed:@"pv_photo_default.png"]];
-            iconDownloader = [[IconDownloader alloc] init];
-            
-            iconDownloader.namePlayer=name;
-            iconDownloader.indexPathInTableView = indexPath;
-            iconDownloader.delegate = self;
-            [imageDownloadsInProgress setObject:iconDownloader forKey:indexPath];
-            
-            if (![player.dAvatar isEqualToString:@""])
-            {
-                [iconDownloader setAvatarURL:player.dAvatar];
-                [iconDownloader startDownloadSimpleIcon];
-            }else {
-                if ([player.dAuth rangeOfString:@"F"].location != NSNotFound){
-                    [iconDownloader startDownloadFBIcon];
-                }
-            }
-        }else {
-            if (![cell.playerName.text isEqualToString:player.dNickName]) {
-                [cell setPlayerIcon:[UIImage imageNamed:@"pv_photo_default.png"]];
-                
-                NSString *name=[[OGHelper sharedInstance ] getClearName:player.dAuth];
-                iconDownloader.namePlayer=name;
-                iconDownloader.indexPathInTableView = indexPath;
-                iconDownloader.delegate = self;
-                
-               if (![player.dAvatar isEqualToString:@""])
-                {
-                    [iconDownloader setAvatarURL:player.dAvatar];
-                    [iconDownloader startDownloadSimpleIcon];
-                }else {
-                    if ([player.dAuth rangeOfString:@"F"].location != NSNotFound){
-                        [iconDownloader startDownloadFBIcon];
-                    }
-                }
-            }
-            
-        }
-    }
-    
-    if ([topPlayersDataSource isPlayerInTop10:player.dAuth]) {
-        [cell setRibbonHide:NO];
-        player.dInTop=YES;
-    }else {
-        [cell setRibbonHide:YES];
-        player.dInTop=NO;
-    }
-
-    [cell.btnDuel addTarget:self action:@selector(invaiteWithMessage:) forControlEvents:UIControlEventTouchUpInside];
-    
+//    NSString *name=[[OGHelper sharedInstance ] getClearName:player.dAuth];
+//    NSString *path=[NSString stringWithFormat:@"%@/icon_%@.png",[[OGHelper sharedInstance] getSavePathForList],name];
+//    if([[NSFileManager defaultManager] fileExistsAtPath:path]){  
+//        UIImage *image=[UIImage loadImageFullPath:path];
+//        [cell setPlayerIcon:image];
+//    }else {
+//        IconDownloader *iconDownloader = [imageDownloadsInProgress objectForKey:indexPath];
+//        if (iconDownloader == nil) {
+//            [cell setPlayerIcon:[UIImage imageNamed:@"pv_photo_default.png"]];
+//            iconDownloader = [[IconDownloader alloc] init];
+//            
+//            iconDownloader.namePlayer=name;
+//            iconDownloader.indexPathInTableView = indexPath;
+//            iconDownloader.delegate = self;
+//            [imageDownloadsInProgress setObject:iconDownloader forKey:indexPath];
+//            
+//            if (![player.dAvatar isEqualToString:@""])
+//            {
+//                [iconDownloader setAvatarURL:player.dAvatar];
+//                [iconDownloader startDownloadSimpleIcon];
+//            }else {
+//                if ([player.dAuth rangeOfString:@"F"].location != NSNotFound){
+//                    [iconDownloader startDownloadFBIcon];
+//                }
+//            }
+//        }else {
+//            if (![cell.playerName.text isEqualToString:player.dNickName]) {
+//                [cell setPlayerIcon:[UIImage imageNamed:@"pv_photo_default.png"]];
+//                
+//                NSString *name=[[OGHelper sharedInstance ] getClearName:player.dAuth];
+//                iconDownloader.namePlayer=name;
+//                iconDownloader.indexPathInTableView = indexPath;
+//                iconDownloader.delegate = self;
+//                
+//               if (![player.dAvatar isEqualToString:@""])
+//                {
+//                    [iconDownloader setAvatarURL:player.dAvatar];
+//                    [iconDownloader startDownloadSimpleIcon];
+//                }else {
+//                    if ([player.dAuth rangeOfString:@"F"].location != NSNotFound){
+//                        [iconDownloader startDownloadFBIcon];
+//                    }
+//                }
+//            }
+//            
+//        }
+//    }
+//    
+//    if ([topPlayersDataSource isPlayerInTop10:player.dAuth]) {
+//        [cell setRibbonHide:NO];
+//        player.dInTop=YES;
+//    }else {
+//        [cell setRibbonHide:YES];
+//        player.dInTop=NO;
+//    }
+//
+//    [cell.btnDuel addTarget:self action:@selector(invaiteWithMessage:) forControlEvents:UIControlEventTouchUpInside];
+//    
     return cell;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [arrItemsList count];
+    return [self.serverObjects count];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

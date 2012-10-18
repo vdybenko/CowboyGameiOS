@@ -69,7 +69,7 @@ static SSConnection *connection;
                     len = [inputStream read:buffer maxLength:sizeof(buffer)];
                     if (len > 0) {
                         NSData *data = [[NSData alloc] initWithBytes:buffer length:len];
-                        [self.delegate getData:data andLength:len];
+                        //[self.delegate getData:data andLength:len];
                         
                         NSString *output = [[NSString alloc] initWithBytes:buffer length:len encoding:NSUTF8StringEncoding];
                         
@@ -124,19 +124,19 @@ static SSConnection *connection;
     int rang = playerAccount.accountLevel;
     int *rangData = (int *)&networkPacket[sizeof(int)];
     rangData[0] = rang;
-    const char *name = [playerAccount.accountName cStringUsingEncoding:NSUTF8StringEncoding];
+    const char *name = [[UIDevice currentDevice].uniqueIdentifier cStringUsingEncoding:NSUTF8StringEncoding];
     
-    int lenName = [playerAccount.accountName length];
+    int lenName = [[UIDevice currentDevice].uniqueIdentifier length];
     int *lenNameData = (int *)&networkPacket[sizeof(int)*2];
     lenNameData[0] = lenName;
     
-    memcpy( &networkPacket[sizeof(int) * 3], (void *)name, sizeof(char) * [playerAccount.accountName length]);
+    memcpy( &networkPacket[sizeof(int) * 3], (void *)name, sizeof(char) * [[UIDevice currentDevice].uniqueIdentifier length]);
     
     NSString *someURL = playerAccount.avatar;
     const char *fbImageURL = [someURL cStringUsingEncoding:NSUTF8StringEncoding ];
     memcpy(&networkPacket[sizeof(int) * 3 + sizeof(char) * [[UIDevice currentDevice].name length]], (void *)fbImageURL, sizeof(char) * [someURL length]);
     
-    [self sendData:(void *)(networkPacket) packetID:NETWORK_POST_INFO ofLength:sizeof(char) * [playerAccount.accountName length] + sizeof(int) * 3+sizeof(char) * [someURL length]];
+    [self sendData:(void *)(networkPacket) packetID:NETWORK_POST_INFO ofLength:sizeof(char) * [[UIDevice currentDevice].uniqueIdentifier length] + sizeof(int) * 3+sizeof(char) * [someURL length]];
 }
 
 - (void)getData:(uint8_t[1024])message andLength:(int)length
