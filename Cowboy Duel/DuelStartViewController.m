@@ -193,15 +193,17 @@ static const char *GC_URL =  BASE_URL"api/gc";
         
         GameCenterViewController * gController = (GameCenterViewController *) delegate;
         
-        NSString *convertString = serverName;
-        NSUInteger bufferCount = sizeof(char) * ([convertString length] + 1);
-        char *utf8Buffer = malloc(bufferCount);
-        [convertString getCString:utf8Buffer 
-                        maxLength:bufferCount 
-                         encoding:NSUTF8StringEncoding];
-        char *hostName = strdup(utf8Buffer);
-        
-        [gController startClientWithName:hostName];
+//        NSString *convertString = serverName;
+//        NSUInteger bufferCount = sizeof(char) * ([convertString length] + 1);
+//        char *utf8Buffer = malloc(bufferCount);
+//        [convertString getCString:utf8Buffer 
+//                        maxLength:bufferCount 
+//                         encoding:NSUTF8StringEncoding];
+//        char *hostName = strdup(utf8Buffer);
+        const char *name = [serverName cStringUsingEncoding:NSUTF8StringEncoding];
+        SSConnection *connection = [SSConnection sharedInstance];
+        [connection sendData:(void *)(name) packetID:NETWORK_SET_PAIR ofLength:sizeof(char) * [serverName length]];
+        [gController matchStartedSinxron];
     }
     [[self.navigationController.viewControllers objectAtIndex:1] performSelector:@selector(playerStop)];
     [player play];

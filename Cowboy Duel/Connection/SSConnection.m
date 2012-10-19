@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSOutputStream *outputStream;
 @property (nonatomic) NSTimer *pingTimer;
 @property (nonatomic) BOOL firstPing;
+
 @end
 
 
@@ -71,12 +72,8 @@ static SSConnection *connection;
                         NSData *data = [[NSData alloc] initWithBytes:buffer length:len];
                         //[self.delegate getData:data andLength:len];
                         
-                        NSString *output = [[NSString alloc] initWithBytes:buffer length:len encoding:NSUTF8StringEncoding];
                         
-                        if (nil != output) {
-                            NSLog(@"server said: %@", output);
-                            [self getData:buffer andLength:len];
-                        }
+                        [self getData:buffer andLength:len];
                     }
                 }
             }
@@ -89,8 +86,8 @@ static SSConnection *connection;
 		case NSStreamEventEndEncountered:
 			break;
             
-		default:
-			NSLog(@"Unknown event");
+		default:{}
+			//NSLog(@"Unknown event");
 	}
     
 }
@@ -110,7 +107,6 @@ static SSConnection *connection;
         memcpy( &networkPacket[packetHeaderSize], data, length);
         [self.outputStream write:networkPacket maxLength:length + 4];
         NSString *output = [[NSString alloc] initWithBytes:networkPacket length:length encoding:NSUTF8StringEncoding];
-        NSLog(@"packet data%@", output);
     }
 }
 
@@ -151,8 +147,11 @@ static SSConnection *connection;
     }
     else
     {
-        NSData *data = [[NSData alloc] initWithBytes:message length:length];
-        [self.delegate getData:data andLength:length];
+        if (message[0]>=NETWORK_TIME) {
+            NSData *data = [[NSData alloc] initWithBytes:message length:length];
+            [self.gameCenterViewController receiveData:data];
+        }
+        
             
     }
 }
