@@ -170,7 +170,7 @@
     player=[_playersOnLineDataSource.serverObjects objectAtIndex:indexPath.row];
     AccountDataSource *oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
     [oponentAccount setAccountID:player.serverName];
-    [oponentAccount setAccountName:player.serverName];
+    [oponentAccount setAccountName:player.displayName];
     [oponentAccount setAccountLevel:[player.rank integerValue]];
     [oponentAccount setAccountWins:1];
     [oponentAccount setAvatar:player.fbImageUrl];

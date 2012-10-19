@@ -54,7 +54,7 @@
 {
     [self setPlayerIcon:[UIImage imageNamed:@"pv_photo_default.png"]];
     
-    self.playerName.text=player.serverName;
+    self.playerName.text=player.displayName;
     
     NSString *formattedNumberString = [numberFormatter stringFromNumber:player.money];
     self.gold.text=[NSString stringWithFormat:@"money %@",formattedNumberString];
