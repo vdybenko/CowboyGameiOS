@@ -84,7 +84,6 @@ typedef struct {
 @property(nonatomic) BOOL userEndMatch;
 @property(nonatomic) BOOL typeGameWithMessage;
 @property(nonatomic) BOOL userCanceledMatch;
-@property(strong, readwrite) id multiplayerViewController;
 
 
 +(id)sharedInstance:(AccountDataSource *)userAccount andParentVC:(id)view;

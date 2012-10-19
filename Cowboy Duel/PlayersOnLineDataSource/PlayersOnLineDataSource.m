@@ -18,7 +18,7 @@
 
 @interface PlayersOnLineDataSource ()
 @property (nonatomic) SSConnection *connection;
-@property (nonatomic) NSMutableArray *serverObjects;
+
 @end 
 
 @implementation PlayersOnLineDataSource
@@ -154,7 +154,7 @@
 //        player.dInTop=NO;
 //    }
 //
-//    [cell.btnDuel addTarget:self action:@selector(invaiteWithMessage:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.btnDuel addTarget:self action:@selector(invaiteWithMessage:) forControlEvents:UIControlEventTouchUpInside];
 //    
     return cell;
 }
@@ -170,56 +170,6 @@
 #pragma mark CustomNSURLConnection handlers
 
 
-- (void)connectionDidFinishLoading:(CustomNSURLConnection *)connection1 {
-   
-    NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-    DLog(@"PlayersOnLineDataSource jsonString %@", jsonString);
-    NSArray *responseObject = ValidateObject([jsonString JSONValue], [NSArray class]);
-    [arrItemsList removeAllObjects];
-    for (NSDictionary *dic in responseObject) {
-        CDPlayerOnLine *player=[[CDPlayerOnLine alloc] init];
-        player.dAuth=[dic objectForKey:@"authen"];
-        player.dNickName=[dic objectForKey:@"nickname"];
-        player.dMoney=[[dic objectForKey:@"money"] intValue];
-        player.dLevel=[[dic objectForKey:@"level"] intValue];
-        player.dWinCount=[[dic objectForKey:@"duels_win"] intValue];
-        player.dPlayerIP = [dic objectForKey:@"private_ip"];
-        player.dPlayerPublicIP = [dic objectForKey:@"public_ip"];
-        if(player.dPlayerPublicIP) player.dPlayerPublicIP = @"0.0.0.0";
-        player.dAvatar=[dic objectForKey:@"avatar"];
-        [arrItemsList addObject: player];
-    }
-    ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
-    [listOfItemsViewController.btnInvite setEnabled:YES];
-    [listOfItemsViewController.loadingView setHidden:YES];
-    [listOfItemsViewController.activityIndicator stopAnimating];
-    [listOfItemsViewController checkOnline];
-    
-    [_tableView refreshFinished];
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        [listOfItemsViewController startTableAnimation];
-    });
-}
-
-- (void)connection:(CustomNSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    [receivedData appendData:data];
-}
-
-- (void)connection:(CustomNSURLConnection *)connection
-  didFailWithError:(NSError *)error
-{
-    // inform the user
-    DLog(@"Connection failed! Error - %@ %@",
-          [error localizedDescription],
-          [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
-    ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
-    [listOfItemsViewController.btnInvite setEnabled:YES];
-    [listOfItemsViewController.loadingView setHidden:YES];
-    [listOfItemsViewController.activityIndicator stopAnimating];
-    [listOfItemsViewController.tableView reloadData];
-}
 
 #pragma mark IconDownloaderDelegate
 - (void)appImageDidLoad:(NSIndexPath *)indexPath

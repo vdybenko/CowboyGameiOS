@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GameCenterViewController.h"
 
 
 typedef enum {
@@ -47,4 +48,5 @@ typedef enum {
 + (id)sharedInstance;
 
 @property (nonatomic) id <SSConnectionDelegate> delegate;
+@property (nonatomic, strong) GameCenterViewController *gameCenterViewController;
 @end
