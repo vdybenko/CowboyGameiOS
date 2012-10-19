@@ -265,31 +265,18 @@ static NSString *ShotSound = @"%@/shot.mp3";
         }           
 //eof ifs    
     
-//    if (rollingX >= -0.7)
         if ((rollingX >= -0.7)&&(rollingZ > -0.6)&&(rollingY<=-0.7))      
     {
-         NSLog(@"FOLL X");
+//        Position for Shot
         accelerometerState = NO;
     }
-    
-//    if ((rollingX >= -0.7))      
-//        
-//    {
-//        NSLog(@"X");
-////        accelerometerState = NO;
-//    }
-//
-//    
-//    if ((rollingZ >= -0.7)) {
-//    NSLog(@"Z");
-////        accelerometerState = NO;
-//    }
-    
+        
     if (rollingX < -0.7)
         if ((rollingZ > -0.7)) {
-             NSLog(@"status STEADY");
+//       Posirtion for STEADY
             accelerometerState = YES;
-        }           
+        } 
+    
     if (start){ 
         if (!accelerometerState) 
             _btnNab.enabled = YES;
@@ -297,32 +284,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
             _btnNab.enabled = NO;
     }
 
-        
-//    if (rollingX < -0.7){
-////        NSLog(@"rollingX < -0.7");
-////    DLog(@"rolling x= %.1f, y= %.1f, z= %.1f", rollingX, rollingY, rollingZ);
-//        if ((rollingZ > -0.7)) {
-//            accelerometerState = YES;
-////            status STEADY
-//            NSLog(@"status STEADY");
-////            DLog(@"rolling x= %.1f, y= %.1f, z= %.1f", rollingX, rollingY, rollingZ);
-//        }   
-//    }else{
-////        if (rollingX >= -0.7)      
-////        {
-////            accelerometerState = NO;
-////            NSLog(@"FOLL X");
-////            //        DLog(@"rolling x= %.1f, y= %.1f, z= %.1f", rollingX, rollingY, rollingZ);
-////        }
-//        
-//        if ((rollingZ >= -0.7)) {
-//            accelerometerState = NO;
-//            NSLog(@"FOLL Z");
-//            //        DLog(@"rolling x= %.1f, y= %.1f, z= %.1f", rollingX, rollingY, rollingZ);
-//        }
-//
-//    }
-    
     if (start){ 
         if (!accelerometerState)
             _btnNab.enabled = YES;
