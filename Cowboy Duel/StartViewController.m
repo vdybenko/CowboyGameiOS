@@ -209,9 +209,9 @@ static StartViewController *sharedHelper = nil;
             [uDef setInteger:2 forKey:@"FirstRunForPractice"];
 
             [playerAccount loadAllParametrs];
-            
+//          putch for 1.4.1
             [playerAccount putchAvatarImageToInitStartVC:self];
-            
+//            
             if (!([playerAccount.accountID rangeOfString:@"F"].location == NSNotFound)){ 
                 facebook = [[Facebook alloc] initWithAppId:kFacebookAppId andDelegate:[LoginViewController sharedInstance]];
                 
@@ -1238,6 +1238,12 @@ static StartViewController *sharedHelper = nil;
     
 	if ([result isKindOfClass:[NSDictionary class]]) {
 
+//        putch for 1.4.1
+        BOOL modifierUserInfo = NO;
+        if (([playerAccount.accountID rangeOfString:@"F:"].location != NSNotFound)&&[playerAccount putchAvatarImageSendInfo]) {
+            modifierUserInfo = YES;
+        }
+//
         oldAccounId = [[NSString alloc] initWithFormat:@"%@",playerAccount.accountID];
         
 		NSString *userId = [NSString stringWithFormat:@"F:%@", ValidateObject([result objectForKey:@"id"], [NSString class])];
@@ -1270,7 +1276,6 @@ static StartViewController *sharedHelper = nil;
             
         [uDef synchronize];
         
-        BOOL modifierUserInfo = [playerAccount putchAvatarImageSendInfo];
         [self authorizationModifier:modifierUserInfo];
     }
 
