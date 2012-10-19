@@ -29,7 +29,7 @@ static SSConnection *connection;
 {
     if (!connection) {
         connection = [[SSConnection alloc] init];
-        [connection networkCommunicationWithPort:@"8888" andIp:@"192.168.0.111"];
+        [connection networkCommunicationWithPort:@"8888" andIp:@"192.168.0.16"];
     }
     return connection;
 }

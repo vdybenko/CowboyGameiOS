@@ -61,14 +61,14 @@
     
     NSString *nameOfRank=[NSString stringWithFormat:@"%@Rank",player.rank];
     self.rank.text = NSLocalizedString(nameOfRank, @"");
-    
-//    if(player.dOnline){
-//        self.status.text=NSLocalizedString(@"OnLine", @"");
-//        self.status.textColor = [UIColor blackColor];
-//    }else {
-//        self.status.text=NSLocalizedString(@"OffLine", @"");
-//        self.status.textColor = [UIColor redColor];
-//    }
+  NSLog(@"%@", player.status);
+    if([player.status isEqualToString: @"A"]){
+        self.status.text = NSLocalizedString(@"Available", @"");
+        self.status.textColor = [UIColor blackColor];
+    }else {
+        self.status.text=NSLocalizedString(@"Busy", @"");
+        self.status.textColor = [UIColor redColor];
+    }
     
     [self hideIndicatorConnectin];
 }
