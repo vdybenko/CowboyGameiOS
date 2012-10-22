@@ -117,6 +117,7 @@ static SSConnection *connection;
     int money = playerAccount.money;
     int *moneyData = (int *)&networkPacket[0];
     moneyData[0] = money;
+  
     int rang = playerAccount.accountLevel;
     int *rangData = (int *)&networkPacket[sizeof(int)];
     rangData[0] = rang;
@@ -134,7 +135,7 @@ static SSConnection *connection;
     
     const char *name = [[UIDevice currentDevice].uniqueIdentifier cStringUsingEncoding:NSUTF8StringEncoding];
     
-    memcpy( &networkPacket[sizeof(int) * 4 +sizeof(char) * [[UIDevice currentDevice].uniqueIdentifier length]],
+    memcpy( &networkPacket[sizeof(int) * 4 +sizeof(char) * [[UIDevice currentDevice].name length]],
            (void *)name,
            sizeof(char) * [[UIDevice currentDevice].uniqueIdentifier length]);
     
