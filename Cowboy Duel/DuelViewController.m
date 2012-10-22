@@ -16,14 +16,14 @@ static NSString *ShotSound = @"%@/shot.mp3";
 
 @implementation DuelViewController
 
-@synthesize delegate, time, notFirstStart;
+@synthesize delegate, time, notFirstStart, startDuelTime;
 
 -(id)initWithTime:(int)randomTime Account:(AccountDataSource *)userAccount oponentAccount:(AccountDataSource *)pOponentAccount;
 {
     self = [super initWithAccount:userAccount oponentAccount:pOponentAccount];
     if (self) {
         time = randomTime;
-        
+        startDuelTime = [NSDate timeIntervalSinceReferenceDate];
         BOOL notFirstStartBOOL = [[NSUserDefaults standardUserDefaults] boolForKey:@"DUEL_VIEW_NOT_FIRST"];
         if (notFirstStartBOOL) {
             notFirstStart = YES;
@@ -153,6 +153,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
     nowInterval = [NSDate timeIntervalSinceReferenceDate];
     activityInterval = (nowInterval-startInterval)*1000;
     shotTime = (int)activityInterval;
+    
     UIViewController *curentVC=[self.navigationController visibleViewController];
     if ((shotTime * 0.001 >= time) && (!start) && (!foll)&&([curentVC isEqual:self])) {
         DLog(@"FIRE !!!!!");
@@ -198,8 +199,15 @@ static NSString *ShotSound = @"%@/shot.mp3";
             [follPlayer stop];
        
             DLog(@"Shot Time = %d.%d", (shotTime - time * 1000) / 1000, (shotTime - time * 1000) % 1000);
-            if ([delegate respondsToSelector:@selector(sendShotTime:)]) 
-                [delegate sendShotTime:(shotTime - time * 1000)];
+            if (shotTime == 0) {
+                shotTime = [NSDate timeIntervalSinceReferenceDate] - startDuelTime;
+                if ([delegate respondsToSelector:@selector(sendShotTime:)]) 
+                    [delegate sendShotTime:(-shotTime)];
+
+            } else {
+                if ([delegate respondsToSelector:@selector(sendShotTime:)]) 
+                    [delegate sendShotTime:(shotTime - time * 1000)];
+            }
             [activityIndicatorView showView];
             _btnNab.enabled = NO;
             acelStayt = NO;

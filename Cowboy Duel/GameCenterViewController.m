@@ -22,7 +22,7 @@
 @end
 
 @implementation GameCenterViewController
-@synthesize delegate, delegate2, duelStartViewController, parentVC, opponentEndMatch, userEndMatch,userCanceledMatch, typeGameWithMessage;
+@synthesize delegate, delegate2, duelStartViewController, parentVC, opponentEndMatch, userEndMatch,userCanceledMatch, typeGameWithMessage, connection;
 
 static GameCenterViewController *gameCenterViewController;
 
