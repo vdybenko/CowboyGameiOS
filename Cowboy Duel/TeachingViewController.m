@@ -49,7 +49,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
     }else{
         [self cancelSoundClick:Nil];
     }
-    
 }
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -141,11 +140,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
         [player play];
         [self vibrationStart];
     }    
-
-    /*   
-    if ((shotTime*0.001 >= time+0.6)&&(!start)) {
-        start = YES;
-    } */   
 }
 
 
@@ -235,9 +229,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
 {
     [super startDuel];
     NSLog(@"startDuel");
-    soundStart = YES;
-    [helpPracticeView setHidden:YES];
-    
+    soundStart = YES;    
     startInterval = [NSDate timeIntervalSinceReferenceDate];
     [player stop];
     [player setCurrentTime:0.0];

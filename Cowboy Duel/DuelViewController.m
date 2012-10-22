@@ -54,7 +54,11 @@ static NSString *ShotSound = @"%@/shot.mp3";
         }
     }
     
-    [self hideHelpViewWithArm];
+    [helpPracticeView setHidden:YES];
+    CGRect frame=helpPracticeView.frame;
+    frame.origin.y=72;
+    helpPracticeView.frame = frame;
+    
     duelIsStarted = YES;
 }
 
@@ -65,7 +69,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
 
     [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(3.0 / 60.0)];
     [[UIAccelerometer sharedAccelerometer] setDelegate:self];
-
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -78,9 +81,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
 {
     [super viewDidDisappear:animated];
     [[UIAccelerometer sharedAccelerometer] setDelegate:nil];
-
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%d", time] message:nil delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
-//    [alert show]; 
 }
 
 #pragma mark -
@@ -107,11 +107,13 @@ static NSString *ShotSound = @"%@/shot.mp3";
         
     }
     
-    if(accelerometerState){
-        if ((!accelerometerStateSend) && (!soundStart)) {
+    if((accelerometerState)&& (!soundStart)){
+        if ((!accelerometerStateSend) ) {
             if ([delegate respondsToSelector:@selector(setAccelStateTrue)]) 
                 [delegate setAccelStateTrue];
             accelerometerStateSend = YES;
+        }else {
+            [self startDuel];
         }
     }
     else {
@@ -123,9 +125,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
     if ((!accelerometerState) && (soundStart) && (!duelIsStarted)) {
         if(!follAccelCheck){
             [self restartCountdown];
-            if ([delegate respondsToSelector:@selector(sendShotTime:)]) {
-                [delegate sendShotTime:-shotTime];
-            }
         }
     }
 }
@@ -212,7 +211,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
 
 }
 
-
 #pragma mark DuelViewControllerDelegate Methods
 -(BOOL)accelerometerSendPositionSecond
 {
@@ -225,6 +223,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
          DLog(@"Duel started");
         [super startDuel];
         soundStart = YES;
+        foll = NO;
         [player stop];
         [player setCurrentTime:0.0];
         startInterval = [NSDate timeIntervalSinceReferenceDate];
@@ -239,6 +238,14 @@ static NSString *ShotSound = @"%@/shot.mp3";
     }
 }   
 
+-(void)restartCountdown
+{
+    [helpPracticeView setHidden:NO];
+    
+    foll = YES;
+    [super restartCountdown];
+    NSLog(@"%@",self.view.subviews);
+}
 -(IBAction)backButtonClick:(id)sender;
 {
     [super backButtonClick:sender];
