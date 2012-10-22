@@ -74,7 +74,7 @@ static CGFloat const ANIMATION_TIME = 0.3f;
 
  
 @interface DuelViewControllerWithXib : UIViewController <DuelViewControllerDelegate,UIAccelerometerDelegate> {
-    BOOL start;
+    BOOL duelIsStarted;
     BOOL fireSound;
 
     BOOL acelStayt;
@@ -152,6 +152,9 @@ static CGFloat const ANIMATION_TIME = 0.3f;
     IBOutlet UIView *helpViewSound;
     IBOutlet UILabel *lbWarningSound;
     IBOutlet UILabel *lbDisabledSound;
+    
+    UIView  *helpPracticeView;
+
     float steadyScale;
     float scaleDelta;
 
@@ -174,6 +177,8 @@ static CGFloat const ANIMATION_TIME = 0.3f;
 - (IBAction)cancelShotsClick:(id)sender;
 - (IBAction)cancelSoundClick:(id)sender;
 -(void)startDuel;
+-(void)restartCountdown;
+-(void)hideHelpViewWithArm;
 -(void)countUpBuletsWithLevel:(int)playerLevel oponentLevel:(int)oponentLevel;
 -(void)setTextToMessageShot; 
 

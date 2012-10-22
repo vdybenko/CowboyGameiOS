@@ -53,7 +53,9 @@ static NSString *ShotSound = @"%@/shot.mp3";
             helpViewSound.frame=frame;
         }
     }
-    start = YES;
+    
+    [self hideHelpViewWithArm];
+    duelIsStarted = YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -86,7 +88,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
 {
     [super accelerometer:accelerometer didAccelerate:acceleration];
     
-    if (start && acelStayt) {
+    if (duelIsStarted && acelStayt) {
         fintType = [accelerometrDataSource setPositionWithX:acceleration.x andY:acceleration.y andZ:acceleration.z];
         switch (fintType) {
             case FirstFint:
@@ -118,29 +120,14 @@ static NSString *ShotSound = @"%@/shot.mp3";
         accelerometerStateSend = NO;
     }
     
-    if ((!accelerometerState) && (soundStart) && (!start)) {
+    if ((!accelerometerState) && (soundStart) && (!duelIsStarted)) {
         if(!follAccelCheck){
-            //            btnChangeGun.enabled=NO;
-            _infoButton.enabled=NO;
-            // UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Allert" message:@"Foll" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-            //[av show];
-            follAccelCheck = YES;
-            DLog(@"Foll start");
-            [timer invalidate];
-            [player stop];
-
-            [follPlayer setCurrentTime:0.0];
-            [follPlayer play];
-            foll = YES;
+            [self restartCountdown];
             if ([delegate respondsToSelector:@selector(sendShotTime:)]) {
                 [delegate sendShotTime:-shotTime];
             }
-            [activityIndicatorView setText:NSLocalizedString(@"FOLL", @"")];
-            [activityIndicatorView showView];
         }
-        
     }
-    
 }
 
 -(void)setTime:(int)randomTime{
@@ -154,9 +141,9 @@ static NSString *ShotSound = @"%@/shot.mp3";
     activityInterval = (nowInterval-startInterval)*1000;
     shotTime = (int)activityInterval;
     UIViewController *curentVC=[self.navigationController visibleViewController];
-    if ((shotTime * 0.001 >= time) && (!start) && (!foll)&&([curentVC isEqual:self])) {
+    if ((shotTime * 0.001 >= time) && (!duelIsStarted) && (!foll)&&([curentVC isEqual:self])) {
         DLog(@"FIRE !!!!!");
-        start = YES;
+        duelIsStarted = YES;
         NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Fire.mp3", [[NSBundle mainBundle] resourcePath]]];
         NSError *error;
         [player stop];
@@ -189,9 +176,9 @@ static NSString *ShotSound = @"%@/shot.mp3";
 {   
     [super buttonClick];
     DLog(@"shotCountBullet %d shotCount %d maxShotCount %d",shotCountBullet,shotCount,maxShotCount);
-    if (start) 
+    if (duelIsStarted) 
     {
-        if ((shotCount == maxShotCount) && (start)) 
+        if ((shotCount == maxShotCount) && (duelIsStarted)) 
         {
             DLog(@"Kill!!!");
             
@@ -210,11 +197,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
     {
         if (soundStart) {
             foll = YES;
-            //            if ([delegate respondsToSelector:@selector(sendShotTime:)]) 
-            //                [delegate sendShotTime:999999];
-//                if ([delegate respondsToSelector:@selector(sendShotTime:)]) {
-//                    [delegate sendShotTime:-shotTime];
-//                }
             [self performSelector:@selector(follSend) withObject:self afterDelay:2.0];
 
             [activityIndicatorView setText:NSLocalizedString(@"FOLL", @"")];
@@ -251,7 +233,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
         [player prepareToPlay];
         [player play];
         timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(shotTimer) userInfo:nil repeats:YES];
-        start = NO;
+        duelIsStarted = NO;
         acelStayt = YES;
         shotTime = 0;
     }

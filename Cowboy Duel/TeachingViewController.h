@@ -25,7 +25,6 @@
     BOOL firstRun;
     
     NSTimer *deaccelTimer;
-    UIView  *helpPracticeView;
 }
 @property (nonatomic, readwrite) int mutchNumber;
 @property (nonatomic, readwrite) int mutchNumberWin;
