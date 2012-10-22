@@ -49,6 +49,11 @@ static NSString *ShotSound = @"%@/shot.mp3";
     }else{
         [self cancelSoundClick:Nil];
     }
+    
+    if(firstRun){
+        lbBackButton.text = NSLocalizedString(@"SKIP", nil);
+    }
+
 }
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
