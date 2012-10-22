@@ -13,9 +13,7 @@
 
 @interface DuelViewController : DuelViewControllerWithXib <CLLocationManagerDelegate, UIAccelerometerDelegate, DuelViewControllerDelegate> 
 {
-    
 }
-
 
 -(id)initWithTime:(int)randomTime Account:(AccountDataSource *)userAccount oponentAccount:(AccountDataSource *)oponentAccount;
 -(float)abs:(float)d;

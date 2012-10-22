@@ -155,13 +155,32 @@ static NSString *ShotSound = @"%@/shot.mp3";
             [helpViewSound removeFromSuperview];
         }
     }
+    
+    helpPracticeView=[[UIView alloc] initWithFrame:CGRectMake(12, 480, 290, 320)];
+    
+    UIImageView *imvArm=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dv_arm.png"]];
+    CGRect frame = imvArm.frame;
+    frame.origin = CGPointMake(24, 11);
+    frame.size= CGSizeMake(242, 298);
+    imvArm.frame = frame;
+    [helpPracticeView addSubview:imvArm];
+    
+    UIButton *cancelBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    frame=cancelBtn.frame;
+    frame.origin=CGPointMake(248, 13);
+    frame.size=CGSizeMake(33, 33);
+    cancelBtn.frame=frame;
+    [cancelBtn setImage:[UIImage imageNamed:@"btn_adcolony.png"] forState:UIControlStateNormal];
+    [cancelBtn addTarget:self action:@selector(cancelHelpArmClick:) forControlEvents:UIControlEventTouchUpInside];
+    [helpPracticeView addSubview:cancelBtn];
+    
+    [helpPracticeView setDinamicHeightBackground];
+    [self.view addSubview:helpPracticeView];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//    [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(3.0 / 60.0)];
-//    [[UIAccelerometer sharedAccelerometer] setDelegate:self];
     steadyScale = 1.0;
     [follPlayer setVolume:1.0];
     [activityIndicatorView hideView];
@@ -192,15 +211,11 @@ static NSString *ShotSound = @"%@/shot.mp3";
     shotCount = 0;
     shotCountForSound=1;
     soundStart = NO; 
+    foll = NO;
     follAccelCheck = NO;
     duelTimerEnd = NO;
     follViewShow = NO;
-    //    button.enabled = YES;
-    //    buttonCheck = YES;
     [accelerometrDataSource reloadFint];
-    
-    //[[self.navigationController.viewControllers objectAtIndex:1] playerStop];
-    
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -217,12 +232,21 @@ static NSString *ShotSound = @"%@/shot.mp3";
     [_vEarth setHidden:YES];
 }
 
+- (void)dealloc {
+}
+- (void)viewDidUnload {
+    lbBackButton = nil;
+    [super viewDidUnload];
+}
+#pragma mark 
+
 -(void)setRotationWithAngle:(float)angle andY:(float)y
 {
     if (steadyScale >= 1.3) scaleDelta = -0.03;
     if (steadyScale <= 1.0) scaleDelta = 0.03;
     steadyScale += scaleDelta;
-    if(start)steadyScale = 1.0;
+    if(duelIsStarted)
+        steadyScale = 1.0;
     CGAffineTransform transform = CGAffineTransformMakeRotation(-angle-89.5);
     CGAffineTransform eathTransform = CGAffineTransformTranslate(transform, 0, [self abs:y] * 50);
     _vEarth.transform = eathTransform;
@@ -245,7 +269,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
     rollingY = (acceleration.y * kFilteringFactor) + (rollingY * (1.0 - kFilteringFactor));
     rollingZ = (acceleration.z * kFilteringFactor) + (rollingZ * (1.0 - kFilteringFactor));
 //    DLog(@"acceleration x= %.1f, y= %.1f, z= %.1f", acceleration.x, acceleration.y, acceleration.z);
-    DLog(@"rolling x= %.1f, y= %.1f, z= %.1f", rollingX, rollingY, rollingZ);
+//    DLog(@"rolling x= %.1f, y= %.1f, z= %.1f", rollingX, rollingY, rollingZ);
     
     [self setRotationWithAngle:atan2(rollingY, rollingX) andY:rollingY];
 
@@ -268,24 +292,19 @@ static NSString *ShotSound = @"%@/shot.mp3";
         if ((rollingX >= -0.7)&&(rollingZ > -0.6)&&(rollingY<=-0.7))      
     {
 //        Position for Shot
+        NSLog(@" Position for Shot");
         accelerometerState = NO;
     }
         
     if (rollingX < -0.7)
         if ((rollingZ > -0.7)) {
 //       Posirtion for STEADY
+            NSLog(@" Posirtion for STEADY");
             accelerometerState = YES;
         } 
     
-    if (start){ 
+    if (duelIsStarted){ 
         if (!accelerometerState) 
-            _btnNab.enabled = YES;
-        else 
-            _btnNab.enabled = NO;
-    }
-
-    if (start){ 
-        if (!accelerometerState)
             _btnNab.enabled = YES;
         else 
             _btnNab.enabled = NO;
@@ -418,21 +437,43 @@ if (shotCountBullet!=0) {
     _ivGun.transform = gunTransform;
 }
 
-- (void)dealloc {
-}
-- (void)viewDidUnload {
-    lbBackButton = nil;
-    [super viewDidUnload];
-}
+
 
 -(void)startDuel{
     [helpViewShots removeFromSuperview];
     [helpViewSound removeFromSuperview];
+    [helpPracticeView setHidden:YES];
     
     [titleReady setHidden:YES];
     [titleSteadyFire setHidden:NO];
-    
 }
+
+-(void)restartCountdown;
+{
+    NSLog(@"restartCountdown");
+    _infoButton.enabled=NO;
+    
+    follAccelCheck = NO;
+    accelerometerState = NO;
+    soundStart = NO;
+    
+    [timer invalidate];
+    [player stop];
+    [player setCurrentTime:0.0];
+    [follPlayer setCurrentTime:0.0];
+    [follPlayer play];
+    
+    [titleReady setHidden:NO];
+    [titleSteadyFire setHidden:YES];
+    
+    [helpPracticeView setHidden:NO]; 
+}
+
+-(void)hideHelpViewWithArm;
+{    
+    [helpPracticeView setHidden:YES];
+}
+
 -(void)countUpBuletsWithLevel:(int)playerLevel oponentLevel:(int)oponentLevel;
 {
     int countBullets = [DuelRewardLogicController countUpBuletsWithPlayerLevel:oponentLevel];
