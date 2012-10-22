@@ -16,7 +16,13 @@
 #import "StartViewController.h"
 
 static const NSInteger kGANDispatchPeriod = 60;
-static NSString *kGAAccountID = @"UA-33080242-1";
+#ifdef DEBUG
+static NSString *kGAAccountID = @"UA-24007807-3";
+#else
+static NSString *kGAAccountID = @"UA-24007807-5";
+#endif
+
+
 NSString  *const ID_CRIT_APP   = @"4fb4f482c471a10fc5000092";
 NSString  *const ID_CRIT_KEY   = @"stjyktz620mziyf5rhi89ncaorab";
 NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";

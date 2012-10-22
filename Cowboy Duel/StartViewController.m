@@ -572,13 +572,12 @@ static StartViewController *sharedHelper = nil;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
 														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"more_games" forKey:@"event"]];
+													  userInfo:[NSDictionary dictionaryWithObject:@"/more_games" forKey:@"event"]];
 
 }
 
 -(IBAction)profileButtonClick 
 {   
-    
     profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount startViewController:self];
     [profileViewController setNeedAnimation:YES];
     CATransition* transition = [CATransition animation];
@@ -590,7 +589,7 @@ static StartViewController *sharedHelper = nil;
     [self.navigationController pushViewController:profileViewController animated:NO];
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                         object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"profile_click" forKey:@"event"]];
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/profile_click" forKey:@"event"]];
 }
 
 -(void)profileButtonClickWithOutAnimation;
@@ -646,8 +645,8 @@ static StartViewController *sharedHelper = nil;
     CATransition* transition = [CATransition animation];
     transition.duration = 0.5;
     transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    transition.type = kCATransitionPush; //, kCATransitionPush, kCATransitionReveal, kCATransitionFade
-    transition.subtype = kCATransitionFromBottom;//kCATransitionFromTop; kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop,
+    transition.type = kCATransitionPush; 
+    transition.subtype = kCATransitionFromBottom;
     [self.navigationController.view.layer addAnimation:transition forKey:nil];
     [self.navigationController pushViewController:helpViewController animated:NO];
 }

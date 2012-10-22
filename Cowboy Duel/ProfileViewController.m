@@ -482,7 +482,7 @@
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
 														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"leaderBoard_click" forKey:@"event"]];
+													  userInfo:[NSDictionary dictionaryWithObject:@"/leaderBoard_click" forKey:@"event"]];
 }
 
 - (void)viewDidUnload {

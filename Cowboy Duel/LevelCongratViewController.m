@@ -261,6 +261,6 @@
     [[OGHelper sharedInstance ] apiGraphCustomActionPost:URL actionTypeName:@"get" objectTypeName:@"achievement"];
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"congratulation_new_level" forKey:@"event"]];
+													  userInfo:[NSDictionary dictionaryWithObject:@"/congratulation_new_level" forKey:@"event"]];
 }
 @end

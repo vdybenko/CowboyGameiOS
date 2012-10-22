@@ -2389,7 +2389,6 @@
 				GCC_PREFIX_HEADER = "Cowboy Duel/Cowboy Duel-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_IPHONE,
-					DEBUG,
 					_NO_NONPORT_H_,
 					GSI_COMMON_DEBUG,
 				);
@@ -2490,7 +2489,6 @@
 				GCC_PREFIX_HEADER = "Cowboy Duel/Cowboy Duel-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_IPHONE,
-					DEBUG,
 					_NO_NONPORT_H_,
 					GSI_COMMON_DEBUG,
 				);

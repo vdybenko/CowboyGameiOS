@@ -256,7 +256,7 @@ static const char *RANK_TOP = BASE_URL"users/top_rank";
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                         object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"find_me" forKey:@"event"]];
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/find_me" forKey:@"event"]];
     
 }
 
