@@ -29,7 +29,7 @@ static SSConnection *connection;
 {
     if (!connection) {
         connection = [[SSConnection alloc] init];
-        [connection networkCommunicationWithPort:@"8888" andIp:@"192.168.0.16"];
+        [connection networkCommunicationWithPort:@"8888" andIp:@"176.34.226.109"];
     }
     return connection;
 }
@@ -122,7 +122,7 @@ static SSConnection *connection;
     rangData[0] = rang;
   
     int displayNameLen = [[UIDevice currentDevice].name length];
-    int *displayNameData = (int *)&networkPacket[sizeof(int)*2];
+    int *displayNameData = (int *)&networkPacket[sizeof(int) * 2];
     displayNameData[0] = displayNameLen;
     
     const char *serverDisplayName = [[UIDevice currentDevice].name cStringUsingEncoding:NSUTF8StringEncoding];
@@ -140,7 +140,7 @@ static SSConnection *connection;
     
     NSString *someURL = playerAccount.avatar;
     const char *fbImageURL = [someURL cStringUsingEncoding:NSUTF8StringEncoding ];
-    memcpy(&networkPacket[sizeof(int) * 4 + sizeof(char) * [[UIDevice currentDevice].name length] +sizeof(char) * [[UIDevice currentDevice].uniqueIdentifier length]],
+    memcpy(&networkPacket[sizeof(int) * 4 + sizeof(char) * [[UIDevice currentDevice].name length] + sizeof(char) * [[UIDevice currentDevice].uniqueIdentifier length]],
            (void *)fbImageURL,
            sizeof(char) * [someURL length]);
     

@@ -710,7 +710,6 @@ static GameCenterViewController *gameCenterViewController;
                 opShotTime = gsReceive->oponentShotTime;
                 DLog(@"NETWORK_SEND_SHOT_TIME : %d, our : %d", opShotTime, carShotTime);
 
-                
                 // case 1:
                 //no one failed
                 if((carShotTime > 0)&&(opShotTime > 0))
