@@ -65,9 +65,11 @@
     if([player.status isEqualToString: @"A"]){
         self.status.text = NSLocalizedString(@"Available", @"");
         self.status.textColor = [UIColor blackColor];
+        [self.btnDuel setEnabled:YES];
     }else {
         self.status.text=NSLocalizedString(@"Busy", @"");
         self.status.textColor = [UIColor redColor];
+        [self.btnDuel setEnabled:NO];
     }
     
     [self hideIndicatorConnectin];
