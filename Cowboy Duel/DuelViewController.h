@@ -23,6 +23,7 @@
 @property(nonatomic, strong)id<DuelViewControllerDelegate> delegate;
 @property(nonatomic)int time;
 @property(nonatomic) BOOL notFirstStart;
+@property(nonatomic) int startDuelTime;
 
 
 @end

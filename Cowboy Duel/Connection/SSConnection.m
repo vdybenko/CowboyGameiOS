@@ -23,7 +23,7 @@ static SSConnection *connection;
 
 @implementation SSConnection
 
-@synthesize inputStream, outputStream;
+@synthesize inputStream, outputStream, firstPing, pingTimer, delegate, gameCenterViewController;
 
 +(id)sharedInstance
 {

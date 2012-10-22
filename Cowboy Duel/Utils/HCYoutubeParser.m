@@ -185,7 +185,7 @@
     }
     else {
         
-        NSDictionary *details = @{ NSLocalizedDescriptionKey : @"Could not find a valid Youtube ID" };
+        NSDictionary *details = [NSDictionary dictionaryWithObject:@"Could not find a valid Youtube ID" forKey: NSLocalizedDescriptionKey];
         
         NSError *error = [NSError errorWithDomain:@"com.hiddencode.yt-parser" code:0 userInfo:details];
         
