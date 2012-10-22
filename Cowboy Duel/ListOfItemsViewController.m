@@ -92,7 +92,14 @@
     
     [offLineText setOpaque:NO];
     [offLineText setBackgroundColor:[UIColor clearColor]];
-    [offLineText.scrollView setScrollEnabled:NO];
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
+        [offLineText.scrollView setScrollEnabled:NO];
+    else
+    {
+      UIScrollView *lastScroll = (UIScrollView *)[[offLineText subviews] lastObject];
+      lastScroll.scrollEnabled = NO;
+    }
     
     saloonTitle.text = NSLocalizedString(@"SALYN", nil);
     saloonTitle.textColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
