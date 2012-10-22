@@ -72,6 +72,24 @@
     [self hideIndicatorConnectin];
 }
 
+-(void)setSelected:(BOOL)selected animated:(BOOL)animated;
+{
+    [self setSelected:selected];
+}
+
+-(void)setSelected:(BOOL)selected;
+{
+    if (selected) {
+        backGround.layer.masksToBounds = NO;
+        backGround.layer.shadowColor = [[UIColor yellowColor] CGColor];
+        backGround.layer.shadowOffset = CGSizeMake(0,1);
+        backGround.layer.shadowRadius = 5;
+        backGround.layer.shadowOpacity = 2;
+    }else {
+        backGround.layer.shadowColor = [[UIColor clearColor] CGColor];
+    }
+}
+
 -(void) setPlayerIcon:(UIImage*)iconImage;
 {
     [icon setImage:iconImage];

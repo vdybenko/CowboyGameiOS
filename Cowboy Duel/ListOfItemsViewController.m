@@ -171,6 +171,7 @@
 
 -(void)tableView:(UITableView *)pTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     [self clickButton:indexPath]; 
 }
 #pragma mark - Delegated methods
@@ -196,6 +197,7 @@
     
     [self.navigationController pushViewController:duelStartViewController animated:YES];
     PlayerOnLineCell *cell = (PlayerOnLineCell *)[tableView cellForRowAtIndexPath:indexPath];
+    [cell setSelected:YES];
     [cell hideIndicatorConnectin];
     
 // Не удалять!!!
