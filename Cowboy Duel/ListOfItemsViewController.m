@@ -168,6 +168,11 @@
 {
     return 82.f;
 }
+
+-(void)tableView:(UITableView *)pTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self clickButton:indexPath]; 
+}
 #pragma mark - Delegated methods
 
 -(void)clickButton:(NSIndexPath *)indexPath;
