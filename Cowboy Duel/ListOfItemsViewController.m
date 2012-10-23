@@ -178,6 +178,10 @@
 
 -(void)clickButton:(NSIndexPath *)indexPath;
 {
+    PlayerOnLineCell *cell = (PlayerOnLineCell *)[tableView cellForRowAtIndexPath:indexPath];
+    [cell setSelected:YES];
+    [cell hideIndicatorConnectin];
+    
     CDPlayerOnLine *_player;    
     _player=[_playersOnLineDataSource.arrItemsList objectAtIndex:indexPath.row];
     AccountDataSource *oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
@@ -196,9 +200,7 @@
     _gameCenterViewController.duelStartViewController = duelStartViewController;
     
     [self.navigationController pushViewController:duelStartViewController animated:YES];
-    PlayerOnLineCell *cell = (PlayerOnLineCell *)[tableView cellForRowAtIndexPath:indexPath];
-    [cell setSelected:YES];
-    [cell hideIndicatorConnectin];
+    
     
 // Не удалять!!!
 //    _indexPath=indexPath;

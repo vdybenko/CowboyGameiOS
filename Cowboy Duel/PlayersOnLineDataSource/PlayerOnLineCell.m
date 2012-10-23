@@ -85,6 +85,22 @@
         backGround.layer.shadowOffset = CGSizeMake(0,1);
         backGround.layer.shadowRadius = 5;
         backGround.layer.shadowOpacity = 2;
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                backGround.layer.masksToBounds = NO;
+                backGround.layer.shadowColor = [[UIColor yellowColor] CGColor];
+                backGround.layer.shadowOffset = CGSizeMake(0,1);
+                backGround.layer.shadowRadius = 5;
+                backGround.layer.shadowOpacity = 2;
+            });
+            
+            [NSThread sleepForTimeInterval:0.4];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                 backGround.layer.shadowColor = [[UIColor clearColor] CGColor];
+            });
+        });
     }else {
         backGround.layer.shadowColor = [[UIColor clearColor] CGColor];
     }
