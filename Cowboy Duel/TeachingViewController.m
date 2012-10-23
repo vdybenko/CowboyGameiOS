@@ -75,6 +75,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     [accelerometrDataSource reloadFint];
     duelIsStarted = NO;
     fireSound = NO;
@@ -252,7 +253,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
     {
         [self hideHelpViewWithArm];
     }
-
 }
 
 #pragma mark - IBAction

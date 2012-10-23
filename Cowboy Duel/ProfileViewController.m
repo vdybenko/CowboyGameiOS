@@ -115,8 +115,8 @@
 -(void)viewWillAppear:(BOOL)animated {
     lbGoldCount.text =[numberFormatter stringFromNumber:[NSNumber numberWithInt:(playerAccount.money/2)]];
     
-//    [self initMainControls];
     [self checkLocationOfViewForFBLogin];
+    
     
     didDisappear=NO;
 }

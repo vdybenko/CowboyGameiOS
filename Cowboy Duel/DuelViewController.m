@@ -57,9 +57,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
     [helpPracticeView setHidden:YES];
     CGRect frame=helpPracticeView.frame;
     frame.origin.y=72;
-    helpPracticeView.frame = frame;
-    
-    duelIsStarted = YES;
+    helpPracticeView.frame = frame;    
 }
 
 -(void)viewWillAppear:(BOOL)animated

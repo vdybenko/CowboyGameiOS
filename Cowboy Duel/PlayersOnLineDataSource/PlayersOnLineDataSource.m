@@ -90,7 +90,7 @@ static const char *LIST_ONLINE_URL =  BASE_URL"users/listview";
             iconDownloader.delegate = self;
             [imageDownloadsInProgress setObject:iconDownloader forKey:indexPath];
             
-            if (![player.dAvatar isEqualToString:@""])
+            if (player.dAvatar&&[player.dAvatar length]&&![player.dAvatar isEqualToString:@"0"])
             {
                 [iconDownloader setAvatarURL:player.dAvatar];
                 [iconDownloader startDownloadSimpleIcon];

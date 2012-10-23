@@ -210,11 +210,11 @@ static NSString *ShotSound = @"%@/shot.mp3";
     accelerometerStateSend = NO;
     shotCount = 0;
     shotCountForSound=1;
-    soundStart = NO; 
     foll = NO;
     follAccelCheck = NO;
     duelTimerEnd = NO;
     follViewShow = NO;
+    soundStart = NO;
     [accelerometrDataSource reloadFint];
 }
 
