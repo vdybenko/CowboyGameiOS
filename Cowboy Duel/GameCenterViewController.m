@@ -466,6 +466,8 @@ static GameCenterViewController *gameCenterViewController;
     //old multiplayerServerViewController.pingStart = NO;
     //old [multiplayerServerViewController shutDownServer];
     
+    [self.connection sendData:@"" packetID:NETWORK_DISCONNECT_PAIR ofLength:sizeof(@"")];
+    
     if ([self.parentVC.navigationController.visibleViewController isKindOfClass:([DuelViewController class])]) {
         finalViewController = [[FinalViewController alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
         if (userCanceledMatch) {

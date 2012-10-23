@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface SSServer : NSObject
-@property (nonatomic, strong) NSString *serverName; //serverName - string (uid)
+
 @property (nonatomic, strong) NSString *displayName;//displayName - string (Device Name)
+@property (nonatomic, strong) NSString *serverName; //serverName - string (uid)
 @property (nonatomic, strong) NSString *status;  //status - char
 @property (nonatomic, strong) NSString *fbImageUrl; //fbImageUrl - string
 @property (nonatomic, strong) NSNumber *money; //money - int
