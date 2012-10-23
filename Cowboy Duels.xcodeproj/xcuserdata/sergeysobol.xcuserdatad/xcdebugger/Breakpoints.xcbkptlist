@@ -8,11 +8,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/FinalViewController.m"
-         timestampString = "367508782.667913"
+         timestampString = "372684088.123424"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "305"
-         endingLineNumber = "305">
+         startingLineNumber = "314"
+         endingLineNumber = "314"
+         landmarkName = "-backButtonClick:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -45,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/GameCenterViewController.m"
-         timestampString = "372609297.61142"
+         timestampString = "372689564.936715"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "529"
-         endingLineNumber = "529"
+         startingLineNumber = "543"
+         endingLineNumber = "543"
          landmarkName = "-receiveData:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -58,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/GameCenterViewController.m"
-         timestampString = "372609297.61142"
+         timestampString = "372689564.936715"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "520"
-         endingLineNumber = "520"
+         startingLineNumber = "534"
+         endingLineNumber = "534"
          landmarkName = "-receiveData:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -76,8 +78,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "150"
          endingLineNumber = "150"
-         landmarkName = "-getData:andLength:"
-         landmarkType = "5">
+         landmarkName = "@implementation SSConnection"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -90,6 +92,45 @@
          startingLineNumber = "71"
          endingLineNumber = "71"
          landmarkName = "-stream:handleEvent:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Cowboy Duel/FinalViewController.m"
+         timestampString = "372684195.015713"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "173"
+         endingLineNumber = "173"
+         landmarkName = "-initWithUserTime:andOponentTime:andGameCenterController:andTeaching:andAccount:andOpAccount:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Cowboy Duel/FinalViewController.m"
+         timestampString = "372686384.377806"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "112"
+         endingLineNumber = "112"
+         landmarkName = "-initWithUserTime:andOponentTime:andGameCenterController:andTeaching:andAccount:andOpAccount:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Cowboy Duel/GameCenterViewController.m"
+         timestampString = "372689925.347938"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "727"
+         endingLineNumber = "727"
+         landmarkName = "-receiveData:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

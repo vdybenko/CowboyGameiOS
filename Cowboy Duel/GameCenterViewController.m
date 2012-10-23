@@ -112,6 +112,8 @@ static GameCenterViewController *gameCenterViewController;
 -(void)startDuel
 {
     isTryAgain = NO;
+    carShotTime = 0.0;
+    opShotTime = 0.0;
     if(!server){
         DLog(@"server");
         
@@ -292,7 +294,19 @@ static GameCenterViewController *gameCenterViewController;
     [self.connection sendData:(void *)(gsSend) packetID:NETWORK_SEND_SHOT_TIME ofLength:sizeof(gameInfo)];
 
 
-    
+    if( (carShotTime != 0) && (opShotTime == carShotTime))
+    {  
+        DLog(@"sendShotTime final foll: %d %d", carShotTime, opShotTime);
+        endDuel = YES;
+        if ([delegate respondsToSelector:@selector(duelTimerEndFeedBack)]) 
+            [delegate duelTimerEndFeedBack];
+        
+        finalViewController = [[FinalViewController alloc] initWithUserTime:999999 andOponentTime:999999 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+        [parentVC.navigationController pushViewController:finalViewController animated:YES];
+        [delegate shutDownTimer];
+        return;
+    } 
+
     // case 1: 
     //fail me (when both failed || failed with opShotTime > 0)
     if( ((carShotTime < 0) && (opShotTime < 0) && (carShotTime < opShotTime)) || ( (carShotTime < 0)&&(opShotTime > 0)) )
@@ -712,6 +726,18 @@ static GameCenterViewController *gameCenterViewController;
                 opShotTime = gsReceive->oponentShotTime;
                 DLog(@"NETWORK_SEND_SHOT_TIME : %d, our : %d", opShotTime, carShotTime);
 
+                if( (carShotTime != 0) && (opShotTime == carShotTime))
+                {  
+                    DLog(@"sendShotTime final foll: %d %d", carShotTime, opShotTime);
+                    endDuel = YES;
+                    if ([delegate respondsToSelector:@selector(duelTimerEndFeedBack)]) 
+                        [delegate duelTimerEndFeedBack];
+                    
+                    finalViewController = [[FinalViewController alloc] initWithUserTime:999999 andOponentTime:999999 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+                    [parentVC.navigationController pushViewController:finalViewController animated:YES];
+                    [delegate shutDownTimer];
+                    return;
+                } 
                 // case 1:
                 //no one failed
                 if((carShotTime > 0)&&(opShotTime > 0))
