@@ -10,7 +10,6 @@
 #import "GCHelper.h"
 #import <GameKit/GameKit.h>
 
-#if !(TARGET_IPHONE_SIMULATOR)
 #import "GANTracker.h"
 #import "Crittercism.h"
 #import "StartViewController.h"
@@ -22,12 +21,9 @@ static NSString *kGAAccountID = @"UA-24007807-3";
 static NSString *kGAAccountID = @"UA-24007807-5";
 #endif
 
-
 NSString  *const ID_CRIT_APP   = @"4fb4f482c471a10fc5000092";
 NSString  *const ID_CRIT_KEY   = @"stjyktz620mziyf5rhi89ncaorab";
 NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
-
-#endif
 
 static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNotification";
 @interface TestAppDelegate()
@@ -50,11 +46,8 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-       
-        
     [AdColony initAdColonyWithDelegate:self];
     
-#if !(TARGET_IPHONE_SIMULATOR)	
     [Crittercism initWithAppID:ID_CRIT_APP  andKey:ID_CRIT_KEY andSecret:ID_CRIT_SECRET];
         
     [[GANTracker sharedTracker] startTrackerWithAccountID:kGAAccountID
@@ -64,10 +57,6 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(AnalyticsTrackEvent:)
 												 name:kAnalyticsTrackEventNotification object:nil];
-    
-   
-
-#endif	
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     
@@ -121,7 +110,7 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
 -(NSDictionary*)adColonyAdZoneNumberAssociation {
     return [NSDictionary dictionaryWithObjectsAndKeys:
             #ifdef DEBUG
-            @"vz74e7d81b72fb4f198a5bba", [NSNumber numberWithInt:1]
+            @"vz74e7d81b72fb4f198a5bba", [NSNumber numberWithInt:1],
             #else
             @"vz2c493f6fa7cc474687a5ed", [NSNumber numberWithInt:1],
             #endif
@@ -149,7 +138,6 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
      */
     
-    
     UIDevice *currentDevice = [UIDevice currentDevice];
     
     if(!([currentDevice respondsToSelector:@selector(isMultitaskingSupported)] && [currentDevice isMultitaskingSupported]))
@@ -176,19 +164,14 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     {
         [[StartViewController sharedInstance] didBecomeActive];
     }
-    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     DLog(@"applicationWillTerminate");
-    
 }
 
-#if !(TARGET_IPHONE_SIMULATOR)
-
 - (void)AnalyticsTrackEvent:(NSNotification *)notification {
-    
     NSError	*err;
 	NSString *fbUserId;
     fbUserId = [[NSUserDefaults standardUserDefaults] stringForKey:@"id"];
@@ -207,9 +190,7 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
 			DLog(@" Can't track pageview");
 	}    
 	[[GANTracker sharedTracker] dispatch];
-    
 }
-#endif
 
 - (void)dealloc
 {
