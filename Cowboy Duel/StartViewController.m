@@ -500,7 +500,9 @@ static StartViewController *sharedHelper = nil;
     }
     
     [facebook extendAccessTokenIfNeeded];
-    
+    if (profileViewController) {
+        [profileViewController checkValidBlackActivity];
+    }
     firstDayWithOutAdvertising=[AdvertisingAppearController advertisingCheckForAppearWithFirstDayWithOutAdvertising:firstDayWithOutAdvertising];
 }
 

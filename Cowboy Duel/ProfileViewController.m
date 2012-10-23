@@ -117,8 +117,9 @@
     
     [self checkLocationOfViewForFBLogin];
     
-    
     didDisappear=NO;
+    
+    
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -361,6 +362,16 @@
     lbBiggestWinCount.text=[numberFormatter stringFromNumber:[NSNumber numberWithInt:( playerAccount.accountBigestWin)]];
 }
 
+-(void)checkValidBlackActivity{
+    if ((![ivBlack isHidden])&&(![[OGHelper sharedInstance] isAuthorized])) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:kReceiveImagefromFBNotification object:nil];	
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:kCheckfFBLoginSession object:nil];	
+        
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"moneyForIPad"];
+        
+        [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:1] animated:NO];
+    }
+}
 #pragma mark -
 #pragma mark Delegate metods
 
