@@ -73,11 +73,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/Connection/SSConnection.m"
-         timestampString = "372277422.27658"
+         timestampString = "372703620.85255"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "150"
-         endingLineNumber = "150"
+         startingLineNumber = "151"
+         endingLineNumber = "151"
          landmarkName = "@implementation SSConnection"
          landmarkType = "3">
       </FileBreakpoint>

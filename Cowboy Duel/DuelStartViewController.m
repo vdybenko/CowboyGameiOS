@@ -203,7 +203,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
         const char *name = [serverName cStringUsingEncoding:NSUTF8StringEncoding];
         SSConnection *connection = [SSConnection sharedInstance];
         [connection sendData:(void *)(name) packetID:NETWORK_SET_PAIR ofLength:sizeof(char) * [serverName length]];
-        [gController matchStartedSinxron];
+        //[gController matchStartedSinxron];
     }
     [[self.navigationController.viewControllers objectAtIndex:1] performSelector:@selector(playerStop)];
     [player play];
