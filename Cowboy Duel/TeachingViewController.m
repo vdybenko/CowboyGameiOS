@@ -289,8 +289,5 @@ static NSString *ShotSound = @"%@/shot.mp3";
                      }];
 }
 
-- (void)cancelHelpArmClick:(id)sender {
-    [self hideHelpViewWithArm ];
-}
 
 @end

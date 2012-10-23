@@ -529,6 +529,10 @@ if (shotCountBullet!=0) {
 
 }
 
+- (void)cancelHelpArmClick:(id)sender {
+    [self hideHelpViewWithArm ];
+}
+
 #pragma mark MPMusicPlayerController delegate
 -(void)handle_itemChanged:(id)sender{
     MPMusicPlayerController *iPod = [MPMusicPlayerController applicationMusicPlayer];
