@@ -82,7 +82,7 @@
         }
         
         DLog(@"Time final %d  %d",userTime,oponentTime);
-        stGA=[[NSString alloc] init];
+        stGA = [[NSString alloc] init];
         
         if([delegateController isKindOfClass:[TeachingViewController class]]){
             if (duelWithBotCheck) {
@@ -144,17 +144,18 @@
             }
         
         resoultDataSource.foll = NO;
+        resoultDataSource.deadHeat = NO;
         falseLabel =  NSLocalizedString(@"False", @"");
         foll = NO;
         
-        if (userTime == 999999) {
+        if ((userTime == 999999) && (oponentTime != 999999)) {
             falseLabel = NSLocalizedString(@"False", @"") ;
             [delegate increaseMutchNumberLose];
             [delegate increaseMutchNumber];
             resoultDataSource.foll = YES;
             resoultDataSource.result = YES;
         }
-        if (oponentTime == 999999){ 
+        if ((oponentTime == 999999) && (userTime != 999999)){ 
             falseLabel =  NSLocalizedString(@"Falses", @"");
             [delegate increaseMutchNumberWin];
             // added               
@@ -164,6 +165,14 @@
             resoultDataSource.foll = YES;
             resoultDataSource.result = NO;
             DLog(@"Oponent fouled");
+        }
+        if ((userTime == 999999) && (oponentTime == 999999))
+        {
+            //falseLabel =  NSLocalizedString(@"Bouth false", @"");
+            [follPlayer setVolume:0.2];
+            resoultDataSource.deadHeat = YES;
+            resoultDataSource.foll = YES;
+            resoultDataSource.result = YES;
         }
         
         fMutchNumberWin = [delegate fMutchNumberWin];
@@ -794,11 +803,19 @@
             NSString *text=NSLocalizedString(@"win", @"");
             customText.text=[text uppercaseString];
         }else{
-            cell.imageView.image = [UIImage imageNamed:@"fin_img_table_lose_new.png"];
-            cell.textLabel.text = NSLocalizedString(@"False", @"");
+            if (!rDataSource.deadHeat) {
+                cell.imageView.image = [UIImage imageNamed:@"fin_img_table_lose_new.png"];
+                cell.textLabel.text = NSLocalizedString(@"False", @"");
+                
+                NSString *text=NSLocalizedString(@"You lost", @"");
+                customText.text=[text uppercaseString];
+            }
+            else {
+                cell.imageView.image = [UIImage imageNamed:@"fin_img_table_lose_new.png"];
+                cell.textLabel.text = NSLocalizedString(@"Bouth false", @"");
+
+            }
             
-            NSString *text=NSLocalizedString(@"You lost", @"");
-            customText.text=[text uppercaseString];
 
         }
     }

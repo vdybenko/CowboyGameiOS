@@ -118,6 +118,7 @@
     IBOutlet UILabel *lbTryAgain;
     IBOutlet UILabel *lbNextRound;
     
+    
     __unsafe_unretained IBOutlet FXLabel *lblGold;
     __unsafe_unretained IBOutlet UILabel *gameStatusLable;
     __unsafe_unretained IBOutlet FXLabel *lblPoints;

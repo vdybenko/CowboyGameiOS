@@ -199,15 +199,15 @@ static NSString *ShotSound = @"%@/shot.mp3";
             [follPlayer stop];
        
             DLog(@"Shot Time = %d.%d", (shotTime - time * 1000) / 1000, (shotTime - time * 1000) % 1000);
-            if (shotTime == 0) {
-                shotTime = [NSDate timeIntervalSinceReferenceDate] - startDuelTime;
-                if ([delegate respondsToSelector:@selector(sendShotTime:)]) 
-                    [delegate sendShotTime:(-shotTime)];
-
-            } else {
+//            if (shotTime == 0) {
+//                shotTime = [NSDate timeIntervalSinceReferenceDate] - startDuelTime;
+//                if ([delegate respondsToSelector:@selector(sendShotTime:)]) 
+//                    [delegate sendShotTime:(-shotTime)];
+//
+//            } else {
                 if ([delegate respondsToSelector:@selector(sendShotTime:)]) 
                     [delegate sendShotTime:(shotTime - time * 1000)];
-            }
+//            }
             [activityIndicatorView showView];
             _btnNab.enabled = NO;
             acelStayt = NO;
