@@ -247,6 +247,8 @@
 		76E869C715CA8D870024ED08 /* pv_coint.png in Resources */ = {isa = PBXBuildFile; fileRef = 76E869C515CA8D870024ED08 /* pv_coint.png */; };
 		76E869C815CA8D870024ED08 /* pv_coint@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76E869C615CA8D870024ED08 /* pv_coint@2x.png */; };
 		76EB4DC01492661800A3A925 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 76EB4DBE1492661800A3A925 /* Localizable.strings */; };
+		76EC0AD81638028400481A26 /* CDDuelProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 76EC0AD71638028400481A26 /* CDDuelProduct.m */; };
+		76EC0ADB163808F100481A26 /* DuelProductDownloaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76EC0ADA163808F100481A26 /* DuelProductDownloaderController.m */; };
 		76ED65E715C997E500B14713 /* fin_achievement.png in Resources */ = {isa = PBXBuildFile; fileRef = 76ED65E515C997E400B14713 /* fin_achievement.png */; };
 		76ED65E815C997E500B14713 /* fin_achievement@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76ED65E615C997E400B14713 /* fin_achievement@2x.png */; };
 		76ED65EC15C997FE00B14713 /* pv_gold_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 76ED65EA15C997FE00B14713 /* pv_gold_background.png */; };
@@ -679,6 +681,10 @@
 		76E869C515CA8D870024ED08 /* pv_coint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pv_coint.png; sourceTree = "<group>"; };
 		76E869C615CA8D870024ED08 /* pv_coint@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pv_coint@2x.png"; sourceTree = "<group>"; };
 		76EB4DC11492662100A3A925 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		76EC0AD61638028400481A26 /* CDDuelProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDDuelProduct.h; sourceTree = "<group>"; };
+		76EC0AD71638028400481A26 /* CDDuelProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDuelProduct.m; sourceTree = "<group>"; };
+		76EC0AD9163808F100481A26 /* DuelProductDownloaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuelProductDownloaderController.h; sourceTree = "<group>"; };
+		76EC0ADA163808F100481A26 /* DuelProductDownloaderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DuelProductDownloaderController.m; sourceTree = "<group>"; };
 		76ED65E515C997E400B14713 /* fin_achievement.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fin_achievement.png; sourceTree = "<group>"; };
 		76ED65E615C997E400B14713 /* fin_achievement@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fin_achievement@2x.png"; sourceTree = "<group>"; };
 		76ED65EA15C997FE00B14713 /* pv_gold_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pv_gold_background.png; sourceTree = "<group>"; };
@@ -1477,6 +1483,17 @@
 			path = Library;
 			sourceTree = "<group>";
 		};
+		76EC0AD4163801F600481A26 /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				76EC0AD61638028400481A26 /* CDDuelProduct.h */,
+				76EC0AD71638028400481A26 /* CDDuelProduct.m */,
+				76EC0AD9163808F100481A26 /* DuelProductDownloaderController.h */,
+				76EC0ADA163808F100481A26 /* DuelProductDownloaderController.m */,
+			);
+			name = Shop;
+			sourceTree = "<group>";
+		};
 		BD6F772E1439AB870033ED2D /* qr2 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1749,6 +1766,7 @@
 		BDD07C21141E29320085E4FB /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				76EC0AD4163801F600481A26 /* Shop */,
 				037DF215154BDBAC003FACDF /* CollectionApp */,
 				767FEF26156A5AF70016B415 /* PlayersOnLineDataSource */,
 				7679D8C11563949E00BDE3A6 /* RefreshContent */,
@@ -2219,6 +2237,8 @@
 				3188979815CAD7FE002D52EA /* LevelCongratViewController.m in Sources */,
 				76B65ACD15DD4A88000E136C /* FXLabel.m in Sources */,
 				76AFC7A215ED1B740009294B /* UIScrollView+AH3DPullRefresh.m in Sources */,
+				76EC0AD81638028400481A26 /* CDDuelProduct.m in Sources */,
+				76EC0ADB163808F100481A26 /* DuelProductDownloaderController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

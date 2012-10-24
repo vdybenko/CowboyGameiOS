@@ -157,8 +157,6 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
         player.dPoints=[[dic objectForKey:@"points"] intValue];
         player.dAvatar=[dic objectForKey:@"avatar"];
         [arrItemsList addObject: player];
-        
-              
     }
     NSData *data= [NSKeyedArchiver archivedDataWithRootObject:arrItemsList];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"topPlayers"];

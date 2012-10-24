@@ -23,6 +23,7 @@
 
 #define kNumberOfAdvertisingPerDay 4
 #define NUMBER_REVISION_DEFAULT 2
+#define NUMBER_REVISION_DUEL_PRODUCT_DEFAULT 0
 #define kFrequencyOfAdvertisingDefault 2
 
 #define kAnalyticsTrackEventNotification @"AnalyticsTrackEventNotification"
