@@ -122,31 +122,31 @@ static SSConnection *connection;
     int rang = playerAccount.accountLevel;
     int *rangData = (int *)&networkPacket[sizeof(int)];
     rangData[0] = rang;
-  
-    int displayNameLen = [playerAccount.accountName length];
+
+    const char *serverDisplayName = [playerAccount.accountName cStringUsingEncoding:NSUTF8StringEncoding];
+    int displayNameLen = strlen(serverDisplayName);
     int *displayNameData = (int *)&networkPacket[sizeof(int) * 2];
     displayNameData[0] = displayNameLen;
-    
-    const char *serverDisplayName = [playerAccount.accountName cStringUsingEncoding:NSUTF8StringEncoding];
-    memcpy( &networkPacket[sizeof(int) * 3], (void *)serverDisplayName, sizeof(char) * [playerAccount.accountName length]);
-    
+
+    memcpy( &networkPacket[sizeof(int) * 3], (void *)serverDisplayName, sizeof(char) * displayNameLen);
+  
     int nameLen = [[UIDevice currentDevice].uniqueIdentifier length];
-    int *nameLenData = (int *)&networkPacket[sizeof(int) * 3+sizeof(char) * [playerAccount.accountName length]];
+    int *nameLenData = (int *)&networkPacket[sizeof(int) * 3+sizeof(char) * displayNameLen];
     nameLenData[0] = nameLen;
     
     const char *name = [[UIDevice currentDevice].uniqueIdentifier cStringUsingEncoding:NSUTF8StringEncoding];
     
-    memcpy( &networkPacket[sizeof(int) * 4 +sizeof(char) * [playerAccount.accountName length]],
+    memcpy( &networkPacket[sizeof(int) * 4 +sizeof(char) * displayNameLen],
            (void *)name,
            sizeof(char) * [[UIDevice currentDevice].uniqueIdentifier length]);
     
     NSString *someURL = playerAccount.avatar;
     const char *fbImageURL = [someURL cStringUsingEncoding:NSUTF8StringEncoding];
-    memcpy(&networkPacket[sizeof(int) * 4 + sizeof(char) * [playerAccount.accountName length] + sizeof(char) * [[UIDevice currentDevice].uniqueIdentifier length]],
+    memcpy(&networkPacket[sizeof(int) * 4 + sizeof(char) * displayNameLen + sizeof(char) * [[UIDevice currentDevice].uniqueIdentifier length]],
            (void *)fbImageURL,
            sizeof(char) * [someURL length]);
     
-    [self sendData:(void *)(networkPacket) packetID:NETWORK_POST_INFO ofLength:sizeof(int) * 4 + sizeof(char) * [playerAccount.accountName length] +sizeof(char) * [[UIDevice currentDevice].uniqueIdentifier length]+sizeof(char) * [someURL length]];
+    [self sendData:(void *)(networkPacket) packetID:NETWORK_POST_INFO ofLength:sizeof(int) * 4 + sizeof(char) * displayNameLen +sizeof(char) * [[UIDevice currentDevice].uniqueIdentifier length]+sizeof(char) * [someURL length]];
 }
 
 - (void)getData:(uint8_t[1024])message andLength:(int)length

@@ -373,7 +373,9 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if(textField.text.length != 0){
-        playerAccount.accountName = [NSString stringWithFormat:@"%@",  textField.text];
+        const char *name = [textField.text cStringUsingEncoding:NSUTF8StringEncoding];
+        playerAccount.accountName = [NSString stringWithCString:name encoding:NSUTF8StringEncoding];
+      
         NSUserDefaults *usrDef = [NSUserDefaults standardUserDefaults];
         [usrDef setObject:ValidateObject(playerAccount.accountName, [NSString class]) forKey:@"name"];
         [usrDef synchronize];
