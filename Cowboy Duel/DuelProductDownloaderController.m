@@ -15,7 +15,7 @@
 NSMutableData *responseData;
 
 
-NSString  *const URL_PRODUCT_FILE_DEFULT   = @"http://bidoncd.s3.amazonaws.com/info.xml";
+NSString  *const URL_PRODUCT_FILE_DEFULT   = @"http://bidoncd.s3.amazonaws.com/list_of_store_items.scriptJson";
 NSString  *const DUEL_PRODUCTS = @"DUEL_PRODUCT_LIST";
 
 @interface DuelProductDownloaderController()
@@ -88,7 +88,6 @@ static NSString *getSavePathForDuelProduct()
         
         product.dPrice=[[dic objectForKey:@"Price"] integerValue];
         product.dPurchaseUrl=[dic objectForKey:@"PurcheseUrl"];
-        product.dEffect=[[dic objectForKey:@"effect"] integerValue];
         [arrItemsList addObject: product];
     }
     NSData *data= [NSKeyedArchiver archivedDataWithRootObject:arrItemsList];

@@ -16,6 +16,5 @@
 @property(nonatomic, strong) NSString *dIconURL;
 @property(nonatomic) NSInteger dPrice;
 @property(nonatomic, strong) NSString *dPurchaseUrl;
-@property(nonatomic, ) NSInteger dEffect;
 
 @end

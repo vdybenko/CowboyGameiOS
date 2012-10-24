@@ -249,6 +249,8 @@
 		76EB4DC01492661800A3A925 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 76EB4DBE1492661800A3A925 /* Localizable.strings */; };
 		76EC0AD81638028400481A26 /* CDDuelProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 76EC0AD71638028400481A26 /* CDDuelProduct.m */; };
 		76EC0ADB163808F100481A26 /* DuelProductDownloaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76EC0ADA163808F100481A26 /* DuelProductDownloaderController.m */; };
+		76EC0ADE1638379F00481A26 /* CDDefenseProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 76EC0ADD1638379E00481A26 /* CDDefenseProduct.m */; };
+		76EC0AE1163837BB00481A26 /* CDWeaponProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 76EC0AE0163837BB00481A26 /* CDWeaponProduct.m */; };
 		76ED65E715C997E500B14713 /* fin_achievement.png in Resources */ = {isa = PBXBuildFile; fileRef = 76ED65E515C997E400B14713 /* fin_achievement.png */; };
 		76ED65E815C997E500B14713 /* fin_achievement@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76ED65E615C997E400B14713 /* fin_achievement@2x.png */; };
 		76ED65EC15C997FE00B14713 /* pv_gold_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 76ED65EA15C997FE00B14713 /* pv_gold_background.png */; };
@@ -685,6 +687,10 @@
 		76EC0AD71638028400481A26 /* CDDuelProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDuelProduct.m; sourceTree = "<group>"; };
 		76EC0AD9163808F100481A26 /* DuelProductDownloaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuelProductDownloaderController.h; sourceTree = "<group>"; };
 		76EC0ADA163808F100481A26 /* DuelProductDownloaderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DuelProductDownloaderController.m; sourceTree = "<group>"; };
+		76EC0ADC1638379E00481A26 /* CDDefenseProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDDefenseProduct.h; sourceTree = "<group>"; };
+		76EC0ADD1638379E00481A26 /* CDDefenseProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDefenseProduct.m; sourceTree = "<group>"; };
+		76EC0ADF163837BB00481A26 /* CDWeaponProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDWeaponProduct.h; sourceTree = "<group>"; };
+		76EC0AE0163837BB00481A26 /* CDWeaponProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDWeaponProduct.m; sourceTree = "<group>"; };
 		76ED65E515C997E400B14713 /* fin_achievement.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fin_achievement.png; sourceTree = "<group>"; };
 		76ED65E615C997E400B14713 /* fin_achievement@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fin_achievement@2x.png"; sourceTree = "<group>"; };
 		76ED65EA15C997FE00B14713 /* pv_gold_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pv_gold_background.png; sourceTree = "<group>"; };
@@ -1488,6 +1494,10 @@
 			children = (
 				76EC0AD61638028400481A26 /* CDDuelProduct.h */,
 				76EC0AD71638028400481A26 /* CDDuelProduct.m */,
+				76EC0ADC1638379E00481A26 /* CDDefenseProduct.h */,
+				76EC0ADD1638379E00481A26 /* CDDefenseProduct.m */,
+				76EC0ADF163837BB00481A26 /* CDWeaponProduct.h */,
+				76EC0AE0163837BB00481A26 /* CDWeaponProduct.m */,
 				76EC0AD9163808F100481A26 /* DuelProductDownloaderController.h */,
 				76EC0ADA163808F100481A26 /* DuelProductDownloaderController.m */,
 			);
@@ -2239,6 +2249,8 @@
 				76AFC7A215ED1B740009294B /* UIScrollView+AH3DPullRefresh.m in Sources */,
 				76EC0AD81638028400481A26 /* CDDuelProduct.m in Sources */,
 				76EC0ADB163808F100481A26 /* DuelProductDownloaderController.m in Sources */,
+				76EC0ADE1638379F00481A26 /* CDDefenseProduct.m in Sources */,
+				76EC0AE1163837BB00481A26 /* CDWeaponProduct.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
