@@ -11,12 +11,17 @@
 @implementation UIImage (usefull_stuff)
 
 +(NSString*) saveImage:(NSString*) pName URL:(NSString*)pURL{
+    
+    NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    return [UIImage saveImage:pName URL:pURL directory:docDir];
+}
+
++(NSString*) saveImage:(NSString*) pName URL:(NSString*)pURL directory:(NSString*)dir{
     NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:pURL]];
     UIImage *image = [[UIImage alloc] initWithData:imageData];
     
-    NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *nameFile=[NSString stringWithFormat:@"%@.png",pName];
-    NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@",docDir,nameFile];
+    NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@",dir,nameFile];
     NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
     [data1 writeToFile:pngFilePath atomically:YES];
     return nameFile;
@@ -43,5 +48,6 @@
         return nil;
     }
 }
+
 
 @end

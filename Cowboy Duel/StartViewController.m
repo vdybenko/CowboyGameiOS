@@ -20,6 +20,7 @@
 #import "Utils.h"
 #import "LevelCongratViewController.h"
 #import "MoneyCongratViewController.h"
+#import "DuelProductDownloaderController.h"
 
 @interface StartViewController ()
 {
@@ -513,16 +514,20 @@ static StartViewController *sharedHelper = nil;
 
 -(void)didFinishLaunching
 {    
-    NSString *FilePath = [[OGHelper sharedInstance] getSavePathForList];
+    NSString *filePath = [[OGHelper sharedInstance] getSavePathForList];
     
     NSFileManager *fileMgr = [NSFileManager defaultManager];
     
     NSError *error= nil;
-    if ([fileMgr removeItemAtPath:FilePath error:&error] != YES){
+    if ([fileMgr removeItemAtPath:filePath error:&error] != YES){
         DLog(@"TestAppDelegate: Unable to delete file: %@", [error localizedDescription]);
         
     }
-    [[NSFileManager defaultManager] createDirectoryAtPath:FilePath withIntermediateDirectories:NO attributes:nil error:&error];
+    [[NSFileManager defaultManager] createDirectoryAtPath:filePath withIntermediateDirectories:NO attributes:nil error:&error];
+    
+    filePath = [DuelProductDownloaderController getSavePathForDuelProduct];
+    
+    [[NSFileManager defaultManager] createDirectoryAtPath:filePath withIntermediateDirectories:NO attributes:nil error:&error];
 }
 
 #pragma mark - IBAction main buttons

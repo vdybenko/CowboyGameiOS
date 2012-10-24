@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "CDDuelProduct.h"
 
-NSString  *const DUEL_PRODUCT_LIST = @"DUEL_PRODUCT_LIST";
-
 @interface DuelProductDownloaderController : NSObject
 +(BOOL) isRefreshEvailable:(int)serverRevision;
 -(void) refreshDuelProduct;
++(NSString *)getSavePathForDuelProduct;
+
 @end

@@ -10,11 +10,13 @@
 #import "JSON.h"
 #import "ValidationUtils.h"
 #import "Utils.h"
+#import "UIImage+Save.h"
 
 NSMutableData *responseData;
 
 
 NSString  *const URL_PRODUCT_FILE_DEFULT   = @"http://bidoncd.s3.amazonaws.com/info.xml";
+NSString  *const DUEL_PRODUCTS = @"DUEL_PRODUCT_LIST";
 
 @interface DuelProductDownloaderController()
 {
@@ -24,6 +26,17 @@ NSString  *const URL_PRODUCT_FILE_DEFULT   = @"http://bidoncd.s3.amazonaws.com/i
 @end
 
 @implementation DuelProductDownloaderController
+
++(NSString *)getSavePathForDuelProduct{
+    return getSavePathForDuelProduct();
+}
+
+static NSString *getSavePathForDuelProduct()
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *pathToDirectory=[NSString stringWithFormat:@"%@/duelProduct",[paths objectAtIndex:0]];
+    return pathToDirectory;
+}
 
 +(BOOL) isRefreshEvailable:(int)serverRevision;
 {
@@ -70,14 +83,17 @@ NSString  *const URL_PRODUCT_FILE_DEFULT   = @"http://bidoncd.s3.amazonaws.com/i
         product.dName=[dic objectForKey:@"name"];
         product.dDescription=[dic objectForKey:@"description"];
         product.dIconURL=[dic objectForKey:@"IconURL"];
+        
+        product.dIconLocal = [UIImage saveImage:product.dName URL:product.dIconURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
+        
         product.dPrice=[[dic objectForKey:@"Price"] integerValue];
         product.dPurchaseUrl=[dic objectForKey:@"PurcheseUrl"];
         product.dEffect=[[dic objectForKey:@"effect"] integerValue];
         [arrItemsList addObject: product];
     }
     NSData *data= [NSKeyedArchiver archivedDataWithRootObject:arrItemsList];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:DUEL_PRODUCT_LIST];
-    [[NSUserDefaults standardUserDefaults] setObject:data forKey:DUEL_PRODUCT_LIST];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:DUEL_PRODUCTS];
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:DUEL_PRODUCTS];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
