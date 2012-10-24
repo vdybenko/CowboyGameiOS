@@ -167,6 +167,7 @@ static SSConnection *connection;
             [self.gameCenterViewController receiveData:data];
         }
     else if (message[0] == NETWORK_PAIR_SET_TRUE) {
+        [self.gameCenterViewController matchStarted];
         [self.gameCenterViewController matchStartedSinxron];
     }else if (message[0] == NETWORK_PAIR_SET_FALSE) {
         [self sendData:@"" packetID:NETWORK_GET_LIST_ONLINE ofLength:sizeof(@"")];

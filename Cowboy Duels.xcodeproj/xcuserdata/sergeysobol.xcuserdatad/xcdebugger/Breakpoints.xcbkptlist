@@ -138,11 +138,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/Connection/SSConnection.m"
-         timestampString = "372777257.267071"
+         timestampString = "372789495.741467"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "172"
-         endingLineNumber = "172"
+         startingLineNumber = "173"
+         endingLineNumber = "173"
          landmarkName = "-getData:andLength:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -157,6 +157,19 @@
          startingLineNumber = "43"
          endingLineNumber = "43"
          landmarkName = "-networkCommunicationWithPort:andIp:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Cowboy Duel/GameCenterViewController.m"
+         timestampString = "372787988.637721"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "678"
+         endingLineNumber = "678"
+         landmarkName = "-receiveData:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
