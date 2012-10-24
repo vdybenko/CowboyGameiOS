@@ -473,6 +473,7 @@ static StartViewController *sharedHelper = nil;
 {
     [super viewDidAppear:animated];
     SSConnection *connection = [SSConnection sharedInstance];
+    [connection networkCommunicationWithPort:@"8888" andIp:@"192.168.0.5"];
     
     BOOL mutchEnded;
     if ((gameCenterViewController.userEndMatch && gameCenterViewController.opponentEndMatch) || (!gameCenterViewController.userEndMatch && !gameCenterViewController.opponentEndMatch)) 

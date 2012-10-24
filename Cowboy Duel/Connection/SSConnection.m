@@ -24,20 +24,20 @@ static SSConnection *connection;
 
 @implementation SSConnection
 
-@synthesize inputStream, outputStream, firstPing, pingTimer, delegate, gameCenterViewController;
+@synthesize inputStream, outputStream, firstPing, pingTimer, delegate, gameCenterViewController, connectionOpen;
 
 +(id)sharedInstance
 {
     if (!connection) {
         connection = [[SSConnection alloc] init];
-        [connection networkCommunicationWithPort:@"8888" andIp:@"176.34.226.109"];
+        //[connection networkCommunicationWithPort:@"8888" andIp:@"192.168.0.5"];
     }
     return connection;
 }
 
 - (void)networkCommunicationWithPort:(NSString *)port andIp:(NSString *)ip {
-    if(self.outputStream && (self.outputStream.streamStatus != NSStreamStatusClosed)) return;
-       
+    //if(self.outputStream && (self.outputStream.streamStatus != NSStreamStatusClosed)) return;
+    if (connectionOpen) return;  
     self.firstPing = YES;
     CFReadStreamRef readStream;
     CFWriteStreamRef writeStream;
@@ -59,6 +59,7 @@ static SSConnection *connection;
             
 		case NSStreamEventOpenCompleted:
 			NSLog(@"Stream opened");
+            connectionOpen = YES;
             break;
             
 		case NSStreamEventHasBytesAvailable:
@@ -82,6 +83,7 @@ static SSConnection *connection;
 			break;
             
 		case NSStreamEventErrorOccurred:
+            connectionOpen = NO;
 			NSLog(@"Can not connect to the host!");
 			break;
             
