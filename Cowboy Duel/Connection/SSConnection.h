@@ -52,4 +52,5 @@ typedef enum {
 
 @property (nonatomic) id <SSConnectionDelegate> delegate;
 @property (nonatomic, strong) GameCenterViewController *gameCenterViewController;
+@property (nonatomic) BOOL connectionOpen;
 @end

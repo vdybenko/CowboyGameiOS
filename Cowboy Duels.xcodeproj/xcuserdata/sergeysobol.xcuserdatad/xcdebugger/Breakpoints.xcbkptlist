@@ -73,11 +73,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/Connection/SSConnection.m"
-         timestampString = "372761198.821894"
+         timestampString = "372777257.267071"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "152"
-         endingLineNumber = "152"
+         startingLineNumber = "154"
+         endingLineNumber = "154"
          landmarkName = "@implementation SSConnection"
          landmarkType = "3">
       </FileBreakpoint>
@@ -86,11 +86,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/Connection/SSConnection.m"
-         timestampString = "372761198.821894"
+         timestampString = "372777257.267071"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "72"
-         endingLineNumber = "72"
+         startingLineNumber = "73"
+         endingLineNumber = "73"
          landmarkName = "-stream:handleEvent:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -138,12 +138,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/Connection/SSConnection.m"
-         timestampString = "372761335.732098"
+         timestampString = "372777257.267071"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "170"
-         endingLineNumber = "170"
+         startingLineNumber = "172"
+         endingLineNumber = "172"
          landmarkName = "-getData:andLength:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Cowboy Duel/Connection/SSConnection.m"
+         timestampString = "372772655.119126"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "43"
+         endingLineNumber = "43"
+         landmarkName = "-networkCommunicationWithPort:andIp:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
