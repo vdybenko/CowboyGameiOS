@@ -8,6 +8,7 @@
 
 #import "SSConnection.h"
 #import "AccountDataSource.h"
+#import "ListOfItemsViewController.h"
 
 
 @interface SSConnection ()
@@ -163,10 +164,17 @@ static SSConnection *connection;
             NSData *data = [[NSData alloc] initWithBytes:message length:length];
             [self.gameCenterViewController receiveData:data];
         }
-    else if (message[0] >= NETWORK_PAIR_SET_TRUE) {
+    else if (message[0] == NETWORK_PAIR_SET_TRUE) {
         [self.gameCenterViewController matchStartedSinxron];
+    }else if (message[0] == NETWORK_PAIR_SET_FALSE) {
+        [self sendData:@"" packetID:NETWORK_GET_LIST_ONLINE ofLength:sizeof(@"")];
+        for (UIViewController *viewController in self.gameCenterViewController.parentVC.navigationController.viewControllers)
+        {
+            if ([viewController isKindOfClass:[ListOfItemsViewController class]]) {
+                [viewController.navigationController popToViewController:viewController animated:YES]; 
+            }
+        }
     }
-        
             
 }
 

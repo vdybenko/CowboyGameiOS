@@ -73,24 +73,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/Connection/SSConnection.m"
-         timestampString = "372703620.85255"
+         timestampString = "372761198.821894"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "151"
-         endingLineNumber = "151"
-         landmarkName = "@implementation SSConnection"
-         landmarkType = "3">
+         startingLineNumber = "152"
+         endingLineNumber = "152"
+         landmarkName = "-getData:andLength:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/Connection/SSConnection.m"
-         timestampString = "372277168.116742"
+         timestampString = "372761198.821894"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "71"
-         endingLineNumber = "71"
+         startingLineNumber = "72"
+         endingLineNumber = "72"
          landmarkName = "-stream:handleEvent:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -131,6 +131,19 @@
          startingLineNumber = "727"
          endingLineNumber = "727"
          landmarkName = "-receiveData:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Cowboy Duel/Connection/SSConnection.m"
+         timestampString = "372761335.732098"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "170"
+         endingLineNumber = "170"
+         landmarkName = "-getData:andLength:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
