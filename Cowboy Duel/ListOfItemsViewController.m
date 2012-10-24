@@ -138,6 +138,7 @@
 {
     [super viewDidAppear:animated];
     [self refreshController];
+    updateTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:_playersOnLineDataSource selector:@selector(reloadDataSource) userInfo:nil repeats:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
