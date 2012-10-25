@@ -84,7 +84,11 @@ static NSString *getSavePathForDuelProduct()
         product.dDescription=[dic objectForKey:@"description"];
         product.dIconURL=[dic objectForKey:@"IconURL"];
         
-        product.dIconLocal = [UIImage saveImage:product.dName URL:product.dIconURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
+        NSString *nameFile=[NSString stringWithFormat:@"%@.png",product.dName];
+        NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],nameFile];
+        if (![UIImage isImageDownloadedForPathToImage:pngFilePath]) {
+            product.dIconLocal = [UIImage saveImage:product.dName URL:product.dIconURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
+        }
         
         product.dPrice=[[dic objectForKey:@"Price"] integerValue];
         product.dPurchaseUrl=[dic objectForKey:@"PurcheseUrl"];

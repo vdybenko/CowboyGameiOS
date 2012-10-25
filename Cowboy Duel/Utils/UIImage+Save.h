@@ -11,6 +11,7 @@
 @interface UIImage (usefull_stuff)
     +(NSString*) saveImage:(NSString*) pName URL:(NSString*)pURL;
     +(NSString*) saveImage:(NSString*) pName URL:(NSString*)pURL directory:(NSString*)dir;
+    +(BOOL)isImageDownloadedForPathToImage:(NSString*)path;
     +(UIImage *) loadImageFromDocumentDirectory:(NSString *) pPath;
     +(UIImage *) loadImageFullPath:(NSString *) pPath;
 @end

@@ -27,6 +27,14 @@
     return nameFile;
 }
 
++(BOOL)isImageDownloadedForPathToImage:(NSString*)path{
+    if([[NSFileManager defaultManager] fileExistsAtPath:path]){
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
 +(UIImage *) loadImageFromDocumentDirectory:(NSString *) pPath{
     if (pPath) {
         NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
