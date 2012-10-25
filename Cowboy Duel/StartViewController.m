@@ -645,8 +645,10 @@ static StartViewController *sharedHelper = nil;
 
 -(IBAction)showHelp:(id)sender
 {
-    StoreViewController *svc=[[StoreViewController alloc] initWithNibName:nil bundle:nil];
-    [self.navigationController pushViewController:svc animated:YES];
+    DuelProductDownloaderController *duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
+    [duelProductDownloaderController refreshDuelProducts];
+//    StoreViewController *svc=[[StoreViewController alloc] initWithNibName:nil bundle:nil];
+//    [self.navigationController pushViewController:svc animated:YES];
     return;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 

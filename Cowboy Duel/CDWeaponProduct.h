@@ -8,7 +8,15 @@
 
 #import "CDDuelProduct.h"
 
+#define PRODUCT_IMG_NAME_GUN @"gun";
+
 @interface CDWeaponProduct : CDDuelProduct
 @property(nonatomic) NSInteger dDamage;
+@property(nonatomic, strong) NSString *dImageGunLocal;
+@property(nonatomic, strong) NSString *dImageGunURL;
+@property(nonatomic, strong) NSString *dSoundLocal;
+@property(nonatomic, strong) NSString *dSoundURL;
+
+-(NSString*) saveNameImageGun;
 
 @end

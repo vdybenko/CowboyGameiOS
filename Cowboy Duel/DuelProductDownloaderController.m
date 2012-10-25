@@ -59,7 +59,7 @@ static NSString *getSavePathForDuelProduct()
     }
 }
 
--(void) refreshContent;
+-(void) refreshDuelProducts;
 {
     NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:URL_PRODUCT_FILE_DEFULT]
                                                             cachePolicy:NSURLRequestUseProtocolCachePolicy
@@ -71,6 +71,31 @@ static NSString *getSavePathForDuelProduct()
     }
 }
 
+-(void)parseDuelProduct:(CDDuelProduct *)product productDic:(NSDictionary*)dic;
+{
+    product.dID = [[dic objectForKey:@"id"] integerValue];
+    product.dName=[dic objectForKey:@"title"];
+    product.dDescription=[dic objectForKey:@"description"];
+    
+    product.dIconURL=[dic objectForKey:@"thumb"];
+    if (product.dIconURL) {
+        NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],[product saveNameThumb]];
+        if (![UIImage isImageDownloadedForPathToImage:pngFilePath]) {
+            product.dIconLocal = [UIImage saveImage:product.dName URL:product.dIconURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
+        }
+    }
+    
+    product.dImageURL=[dic objectForKey:@"img"];
+    if (product.dImageURL) {
+        NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],[product saveNameImage]];
+        if (![UIImage isImageDownloadedForPathToImage:pngFilePath]) {
+            product.dImageLocal = [UIImage saveImage:product.dName URL:product.dIconURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
+        }
+    }
+    product.dPrice=[[dic objectForKey:@"golds"] integerValue];
+    product.dPurchaseUrl=[dic objectForKey:@"inappid"];
+}
+
 #pragma mark NSURLConnection handlers
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection1 {
@@ -80,43 +105,33 @@ static NSString *getSavePathForDuelProduct()
     
     NSArray *responseObjectOfProducts = [responseObject objectForKey:@"weapons"];
     for (NSDictionary *dic in responseObjectOfProducts) {
-        CDDuelProduct *product=[[CDDuelProduct alloc] init];
-        product.dName=[dic objectForKey:@"name"];
-        product.dDescription=[dic objectForKey:@"description"];
-        product.dIconURL=[dic objectForKey:@"IconURL"];
+        CDWeaponProduct *product=[[CDWeaponProduct alloc] init];
+        [self parseDuelProduct:product productDic:dic];
+        product.dDamage=[[dic objectForKey:@"damage"] integerValue];
         
-        NSString *nameFile=[NSString stringWithFormat:@"%@.png",product.dName];
-        NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],nameFile];
-        if (![UIImage isImageDownloadedForPathToImage:pngFilePath]) {
-            product.dIconLocal = [UIImage saveImage:product.dName URL:product.dIconURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
+        product.dImageGunURL=[dic objectForKey:@"bigImg"];
+        if (product.dImageGunURL) {
+            NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],[product saveNameImageGun]];
+            if (![UIImage isImageDownloadedForPathToImage:pngFilePath]) {
+                product.dIconLocal = [UIImage saveImage:product.dName URL:product.dIconURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
+            }
         }
-        
-        product.dPrice=[[dic objectForKey:@"Price"] integerValue];
-        product.dPurchaseUrl=[dic objectForKey:@"PurcheseUrl"];
         [arrItemsList addObject: product];
     }
     NSData *data= [NSKeyedArchiver archivedDataWithRootObject:arrItemsList];
+    NSLog(@"arrItemsList %@",arrItemsList);
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:DUEL_PRODUCTS_WEAPONS];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:DUEL_PRODUCTS_WEAPONS];
     
     responseObjectOfProducts = [responseObject objectForKey:@"defenses"];
     for (NSDictionary *dic in responseObjectOfProducts) {
-        CDDuelProduct *product=[[CDDuelProduct alloc] init];
-        product.dName=[dic objectForKey:@"name"];
-        product.dDescription=[dic objectForKey:@"description"];
-        product.dIconURL=[dic objectForKey:@"IconURL"];
-        
-        NSString *nameFile=[NSString stringWithFormat:@"%@.png",product.dName];
-        NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],nameFile];
-        if (![UIImage isImageDownloadedForPathToImage:pngFilePath]) {
-            product.dIconLocal = [UIImage saveImage:product.dName URL:product.dIconURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
-        }
-        
-        product.dPrice=[[dic objectForKey:@"Price"] integerValue];
-        product.dPurchaseUrl=[dic objectForKey:@"PurcheseUrl"];
+        CDDefenseProduct *product=[[CDDefenseProduct alloc] init];
+        [self parseDuelProduct:product productDic:dic];
         [arrItemsList addObject: product];
     }
     data= [NSKeyedArchiver archivedDataWithRootObject:arrItemsList];
+    NSLog(@"arrItemsList %@",arrItemsList);
+
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:DUEL_PRODUCTS_DEFENSES];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:DUEL_PRODUCTS_DEFENSES];
 
