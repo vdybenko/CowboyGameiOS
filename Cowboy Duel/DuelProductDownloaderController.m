@@ -16,7 +16,6 @@ NSMutableData *responseData;
 
 
 NSString  *const URL_PRODUCT_FILE_DEFULT   = @"http://bidoncd.s3.amazonaws.com/list_of_store_items.scriptJson";
-NSString  *const DUEL_PRODUCTS = @"DUEL_PRODUCT_LIST";
 
 @interface DuelProductDownloaderController()
 {
@@ -26,7 +25,7 @@ NSString  *const DUEL_PRODUCTS = @"DUEL_PRODUCT_LIST";
 @end
 
 @implementation DuelProductDownloaderController
-
+@synthesize didFinishBlock;
 +(NSString *)getSavePathForDuelProduct{
     return getSavePathForDuelProduct();
 }
@@ -77,8 +76,10 @@ static NSString *getSavePathForDuelProduct()
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection1 {
     NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
     DLog(@"DuelProductDownloaderController jsonString %@",jsonString);
-    NSArray *responseObject = ValidateObject([jsonString JSONValue], [NSArray class]);
-    for (NSDictionary *dic in responseObject) {
+    NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
+    
+    NSArray *responseObjectOfProducts = [responseObject objectForKey:@"weapons"];
+    for (NSDictionary *dic in responseObjectOfProducts) {
         CDDuelProduct *product=[[CDDuelProduct alloc] init];
         product.dName=[dic objectForKey:@"name"];
         product.dDescription=[dic objectForKey:@"description"];
@@ -95,8 +96,34 @@ static NSString *getSavePathForDuelProduct()
         [arrItemsList addObject: product];
     }
     NSData *data= [NSKeyedArchiver archivedDataWithRootObject:arrItemsList];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:DUEL_PRODUCTS];
-    [[NSUserDefaults standardUserDefaults] setObject:data forKey:DUEL_PRODUCTS];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:DUEL_PRODUCTS_WEAPONS];
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:DUEL_PRODUCTS_WEAPONS];
+    
+    responseObjectOfProducts = [responseObject objectForKey:@"defenses"];
+    for (NSDictionary *dic in responseObjectOfProducts) {
+        CDDuelProduct *product=[[CDDuelProduct alloc] init];
+        product.dName=[dic objectForKey:@"name"];
+        product.dDescription=[dic objectForKey:@"description"];
+        product.dIconURL=[dic objectForKey:@"IconURL"];
+        
+        NSString *nameFile=[NSString stringWithFormat:@"%@.png",product.dName];
+        NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],nameFile];
+        if (![UIImage isImageDownloadedForPathToImage:pngFilePath]) {
+            product.dIconLocal = [UIImage saveImage:product.dName URL:product.dIconURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
+        }
+        
+        product.dPrice=[[dic objectForKey:@"Price"] integerValue];
+        product.dPurchaseUrl=[dic objectForKey:@"PurcheseUrl"];
+        [arrItemsList addObject: product];
+    }
+    data= [NSKeyedArchiver archivedDataWithRootObject:arrItemsList];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:DUEL_PRODUCTS_DEFENSES];
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:DUEL_PRODUCTS_DEFENSES];
+
+    if (didFinishBlock) {
+        NSError *error;
+        didFinishBlock(error);
+    }
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
@@ -110,6 +137,9 @@ static NSString *getSavePathForDuelProduct()
     DLog(@"DuelProductDownloaderController Connection failed! Error - %@ %@",
          [error localizedDescription],
          [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
+    if (didFinishBlock) {
+        didFinishBlock(error);
+    }
 }
 
 @end

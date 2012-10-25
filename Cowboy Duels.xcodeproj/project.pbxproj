@@ -210,6 +210,10 @@
 		768388EB157E306100377D88 /* AdvertisingOtherAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388EA157E306100377D88 /* AdvertisingOtherAppViewController.m */; };
 		76864B391626A0E80095BBEF /* TopPlayersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76864B381626A0E80095BBEF /* TopPlayersCell.xib */; };
 		76864B3B1626DAC30095BBEF /* OnLinePlayersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76864B3A1626DAC30095BBEF /* OnLinePlayersCell.xib */; };
+		7687E8C016391A32003C9EE6 /* StoreProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7687E8BF16391A32003C9EE6 /* StoreProductCell.xib */; };
+		7687E8C3163920FE003C9EE6 /* StoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7687E8C2163920FE003C9EE6 /* StoreViewController.m */; };
+		7687E8C516392534003C9EE6 /* StoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7687E8C416392534003C9EE6 /* StoreViewController.xib */; };
+		7687E8C816392E1C003C9EE6 /* StoreDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7687E8C716392E1C003C9EE6 /* StoreDataSource.m */; };
 		7692812C159DCAFD00E6CE41 /* IconDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7692812B159DCAFD00E6CE41 /* IconDownloader.m */; };
 		7692BC2F1574E36C00983264 /* DuelStartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7692BC2E1574E36C00983264 /* DuelStartViewController.xib */; };
 		7693419713DDBA5000A962A4 /* DecreeNarrow.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7693419613DDBA5000A962A4 /* DecreeNarrow.ttf */; };
@@ -633,6 +637,12 @@
 		768388EA157E306100377D88 /* AdvertisingOtherAppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertisingOtherAppViewController.m; sourceTree = "<group>"; };
 		76864B381626A0E80095BBEF /* TopPlayersCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TopPlayersCell.xib; path = Xib/TopPlayersCell.xib; sourceTree = "<group>"; };
 		76864B3A1626DAC30095BBEF /* OnLinePlayersCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OnLinePlayersCell.xib; path = Xib/OnLinePlayersCell.xib; sourceTree = "<group>"; };
+		7687E8BF16391A32003C9EE6 /* StoreProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreProductCell.xib; sourceTree = "<group>"; };
+		7687E8C1163920FE003C9EE6 /* StoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreViewController.h; sourceTree = "<group>"; };
+		7687E8C2163920FE003C9EE6 /* StoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreViewController.m; sourceTree = "<group>"; };
+		7687E8C416392534003C9EE6 /* StoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StoreViewController.xib; path = Xib/StoreViewController.xib; sourceTree = "<group>"; };
+		7687E8C616392E1C003C9EE6 /* StoreDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoreDataSource.h; path = PlayersOnLineDataSource/StoreDataSource.h; sourceTree = "<group>"; };
+		7687E8C716392E1C003C9EE6 /* StoreDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoreDataSource.m; path = PlayersOnLineDataSource/StoreDataSource.m; sourceTree = "<group>"; };
 		7692812A159DCAFD00E6CE41 /* IconDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconDownloader.h; sourceTree = "<group>"; };
 		7692812B159DCAFD00E6CE41 /* IconDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconDownloader.m; sourceTree = "<group>"; };
 		7692BC2E1574E36C00983264 /* DuelStartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DuelStartViewController.xib; path = Xib/DuelStartViewController.xib; sourceTree = "<group>"; };
@@ -1389,6 +1399,8 @@
 				76864B3A1626DAC30095BBEF /* OnLinePlayersCell.xib */,
 				767F48D61593420900DCE95F /* LoginViewController.xib */,
 				767BA5BD1589F8E300825EB1 /* FinalViewController.xib */,
+				7687E8C416392534003C9EE6 /* StoreViewController.xib */,
+				7687E8BF16391A32003C9EE6 /* StoreProductCell.xib */,
 			);
 			name = Xib;
 			sourceTree = "<group>";
@@ -1789,6 +1801,8 @@
 				BD6F772E1439AB870033ED2D /* qr2 */,
 				BDD07B9C141E1F170085E4FB /* ResoultDataSource.h */,
 				BDD07B9D141E1F170085E4FB /* ResoultDataSource.m */,
+				7687E8C616392E1C003C9EE6 /* StoreDataSource.h */,
+				7687E8C716392E1C003C9EE6 /* StoreDataSource.m */,
 				7692812A159DCAFD00E6CE41 /* IconDownloader.h */,
 				7692812B159DCAFD00E6CE41 /* IconDownloader.m */,
 				7675CA8415A2E10B005A3BD3 /* DuelRewardLogicController.h */,
@@ -1839,6 +1853,8 @@
 				BDD07B98141E1F170085E4FB /* ProfileViewController.m */,
 				BDD07BA4141E1F170085E4FB /* StartViewController.h */,
 				BDD07BA5141E1F170085E4FB /* StartViewController.m */,
+				7687E8C1163920FE003C9EE6 /* StoreViewController.h */,
+				7687E8C2163920FE003C9EE6 /* StoreViewController.m */,
 				BDCECE86148515D30007CEE3 /* LoginViewController.h */,
 				BDCECE87148515D30007CEE3 /* LoginViewController.m */,
 			);
@@ -2093,6 +2109,8 @@
 				312B2F4415E7A24F006D2470 /* fin_img_new_lvl@2x.png in Resources */,
 				76864B391626A0E80095BBEF /* TopPlayersCell.xib in Resources */,
 				76864B3B1626DAC30095BBEF /* OnLinePlayersCell.xib in Resources */,
+				7687E8C016391A32003C9EE6 /* StoreProductCell.xib in Resources */,
+				7687E8C516392534003C9EE6 /* StoreViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2251,6 +2269,8 @@
 				76EC0ADB163808F100481A26 /* DuelProductDownloaderController.m in Sources */,
 				76EC0ADE1638379F00481A26 /* CDDefenseProduct.m in Sources */,
 				76EC0AE1163837BB00481A26 /* CDWeaponProduct.m in Sources */,
+				7687E8C3163920FE003C9EE6 /* StoreViewController.m in Sources */,
+				7687E8C816392E1C003C9EE6 /* StoreDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

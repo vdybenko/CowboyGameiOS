@@ -21,6 +21,8 @@
 #import "LevelCongratViewController.h"
 #import "MoneyCongratViewController.h"
 #import "DuelProductDownloaderController.h"
+#import "StoreViewController.h"
+
 
 @interface StartViewController ()
 {
@@ -643,6 +645,10 @@ static StartViewController *sharedHelper = nil;
 
 -(IBAction)showHelp:(id)sender
 {
+    StoreViewController *svc=[[StoreViewController alloc] initWithNibName:nil bundle:nil];
+    [self.navigationController pushViewController:svc animated:YES];
+    return;
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/help_click" forKey:@"event"]];

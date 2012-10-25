@@ -9,7 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "CDDuelProduct.h"
 
+#define DUEL_PRODUCTS_WEAPONS @"DUEL_PRODUCT_WEARON"
+#define DUEL_PRODUCTS_DEFENSES @"DUEL_PRODUCT_DEFENSES"
+
+typedef void (^DuelProductDownloaderControllerResult)(NSError *error);
+
 @interface DuelProductDownloaderController : NSObject
+@property (copy) DuelProductDownloaderControllerResult didFinishBlock;
 +(BOOL) isRefreshEvailable:(int)serverRevision;
 -(void) refreshDuelProduct;
 +(NSString *)getSavePathForDuelProduct;
