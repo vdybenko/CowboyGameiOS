@@ -100,6 +100,7 @@ static SSConnection *connection;
 
 -(void) sendData:(void *) data packetID:(int)packetID ofLength:(int)length
 {
+    NSLog(@"Send data with packetId %d", packetID);
     static unsigned char networkPacket[1024];
     const unsigned int packetHeaderSize = sizeof(int); // we have two "ints" for our header
 	
@@ -110,7 +111,6 @@ static SSConnection *connection;
         // copy data in after the header
         memcpy( &networkPacket[packetHeaderSize], data, length);
         [self.outputStream write:networkPacket maxLength:length + 4];
-        NSString *output = [[NSString alloc] initWithBytes:networkPacket length:length encoding:NSUTF8StringEncoding];
     }
 }
 
@@ -133,23 +133,23 @@ static SSConnection *connection;
 
     memcpy( &networkPacket[sizeof(int) * 3], (void *)serverDisplayName, sizeof(char) * displayNameLen);
   
-    int nameLen = [[UIDevice currentDevice].uniqueIdentifier length];
+    int nameLen = [playerAccount.accountID length];
     int *nameLenData = (int *)&networkPacket[sizeof(int) * 3+sizeof(char) * displayNameLen];
     nameLenData[0] = nameLen;
     
-    const char *name = [[UIDevice currentDevice].uniqueIdentifier cStringUsingEncoding:NSUTF8StringEncoding];
+    const char *name = [playerAccount.accountID cStringUsingEncoding:NSUTF8StringEncoding];
     
     memcpy( &networkPacket[sizeof(int) * 4 +sizeof(char) * displayNameLen],
            (void *)name,
-           sizeof(char) * [[UIDevice currentDevice].uniqueIdentifier length]);
+           sizeof(char) * [playerAccount.accountID length]);
     
     NSString *someURL = playerAccount.avatar;
     const char *fbImageURL = [someURL cStringUsingEncoding:NSUTF8StringEncoding];
-    memcpy(&networkPacket[sizeof(int) * 4 + sizeof(char) * displayNameLen + sizeof(char) * [[UIDevice currentDevice].uniqueIdentifier length]],
+    memcpy(&networkPacket[sizeof(int) * 4 + sizeof(char) * displayNameLen + sizeof(char) * [playerAccount.accountID length]],
            (void *)fbImageURL,
            sizeof(char) * [someURL length]);
     
-    [self sendData:(void *)(networkPacket) packetID:NETWORK_POST_INFO ofLength:sizeof(int) * 4 + sizeof(char) * displayNameLen +sizeof(char) * [[UIDevice currentDevice].uniqueIdentifier length]+sizeof(char) * [someURL length]];
+    [self sendData:(void *)(networkPacket) packetID:NETWORK_POST_INFO ofLength:sizeof(int) * 4 + sizeof(char) * displayNameLen +sizeof(char) * [playerAccount.accountID length]+sizeof(char) * [someURL length]];
 }
 
 - (void)getData:(uint8_t[1024])message andLength:(int)length
