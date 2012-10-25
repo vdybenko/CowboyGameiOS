@@ -21,8 +21,8 @@ typedef enum {
     
 }
 @property(strong, readonly)NSMutableArray *arrItemsList;
-@property(strong, nonatomic)id delegate;
 @property(nonatomic) BOOL cellsHide;
+@property(nonatomic) StoreDataSourceTypeTables typeOfTable;
 
 -(void) reloadDataSource;
 -(id) initWithTable:(UITableView *)pTable parentVC:(StoreViewController *)storeViewController;

@@ -19,7 +19,7 @@
 @end
 
 @implementation StoreDataSource
-@synthesize arrItemsList,delegate,cellsHide;
+@synthesize arrItemsList,cellsHide,typeOfTable;
 
 #pragma mark - Instance initialization
 
@@ -30,6 +30,8 @@
 	if (!self) {
 		return nil;
 	}
+     
+    typeOfTable = StoreDataSourceTypeTablesWeapons;
     arrItemsList=[[NSMutableArray alloc] init];
      
     tableView=pTable;
@@ -40,14 +42,23 @@
 
 -(void) reloadDataSource;
 {
-    NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:DUEL_PRODUCTS_DEFENSES];
+    NSString *key;
+    if (typeOfTable == StoreDataSourceTypeTablesWeapons) {
+        key=DUEL_PRODUCTS_WEAPONS;
+    }else{
+        key=DUEL_PRODUCTS_DEFENSES;
+    }
+    NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:key];
     NSMutableArray *testArr= [NSKeyedUnarchiver unarchiveObjectWithData:data1];
     if ([testArr count]==0) {
         DuelProductDownloaderController *duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
         [duelProductDownloaderController setDidFinishBlock:^(NSError *error){
             [tableView reloadData];
         }];
+        [duelProductDownloaderController refreshDuelProducts];
+        testArr = nil;
     }else {
+        testArr = nil;
         arrItemsList = [NSKeyedUnarchiver unarchiveObjectWithData:data1];
     }
 }
