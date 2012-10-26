@@ -473,7 +473,7 @@ static StartViewController *sharedHelper = nil;
 {
     [super viewDidAppear:animated];
     SSConnection *connection = [SSConnection sharedInstance];
-    [connection networkCommunicationWithPort:@"8888" andIp:@"176.34.226.109"];
+    [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
     
     BOOL mutchEnded;
     if ((gameCenterViewController.userEndMatch && gameCenterViewController.opponentEndMatch) || (!gameCenterViewController.userEndMatch && !gameCenterViewController.opponentEndMatch)) 
@@ -496,6 +496,8 @@ static StartViewController *sharedHelper = nil;
 -(void)didBecomeActive
 {
     DLog(@"did become active");
+    SSConnection *connection = [SSConnection sharedInstance];
+    [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
     if (!firstRunLocal) {
          [self login];
     }
@@ -508,6 +510,7 @@ static StartViewController *sharedHelper = nil;
 -(void)didEnterBackground
 {
     [self logout];
+    [[SSConnection sharedInstance] disconnect];
 }
 
 -(void)didFinishLaunching

@@ -49,6 +49,7 @@ typedef enum {
 - (void) sendData:(void *) data packetID:(int)packetID ofLength:(int)length;
 - (void)disconnect;
 + (id)sharedInstance;
+- (void)disconnect;
 
 @property (nonatomic) id <SSConnectionDelegate> delegate;
 @property (nonatomic, strong) GameCenterViewController *gameCenterViewController;
