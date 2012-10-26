@@ -167,6 +167,8 @@
 		605A7A5B138A372700B4FB8E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 605A7A5A138A372700B4FB8E /* SystemConfiguration.framework */; };
 		605A7A5F138A377F00B4FB8E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 605A7A5E138A377F00B4FB8E /* MobileCoreServices.framework */; };
 		60CF1BB713A8C3CF00C302C0 /* follSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 60CF1BB613A8C3CF00C302C0 /* follSound.mp3 */; };
+		76057DC0163990FD00735342 /* StoreProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76057DBF163990FD00735342 /* StoreProductCell.xib */; };
+		76057DC41639937500735342 /* StoreProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76057DC31639937500735342 /* StoreProductCell.m */; };
 		760E676115BD8277006F6832 /* TopPlayersDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 760E676015BD8277006F6832 /* TopPlayersDataSource.m */; };
 		760E676515BD844B006F6832 /* TopPlayersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 760E676315BD844B006F6832 /* TopPlayersViewController.m */; };
 		760E676715BD84C6006F6832 /* TopPlayersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 760E676615BD84C6006F6832 /* TopPlayersViewController.xib */; };
@@ -542,6 +544,9 @@
 		605A7A5A138A372700B4FB8E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		605A7A5E138A377F00B4FB8E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		60CF1BB613A8C3CF00C302C0 /* follSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = follSound.mp3; sourceTree = "<group>"; };
+		76057DBF163990FD00735342 /* StoreProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StoreProductCell.xib; path = Xib/StoreProductCell.xib; sourceTree = "<group>"; };
+		76057DC21639937500735342 /* StoreProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoreProductCell.h; path = PlayersOnLineDataSource/StoreProductCell.h; sourceTree = "<group>"; };
+		76057DC31639937500735342 /* StoreProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoreProductCell.m; path = PlayersOnLineDataSource/StoreProductCell.m; sourceTree = "<group>"; };
 		760E675F15BD8276006F6832 /* TopPlayersDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopPlayersDataSource.h; sourceTree = "<group>"; };
 		760E676015BD8277006F6832 /* TopPlayersDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopPlayersDataSource.m; sourceTree = "<group>"; };
 		760E676315BD844B006F6832 /* TopPlayersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopPlayersViewController.m; sourceTree = "<group>"; };
@@ -1396,6 +1401,7 @@
 				03285FA1159DD61900D16195 /* ListOfItemsViewController.xib */,
 				760E676615BD84C6006F6832 /* TopPlayersViewController.xib */,
 				76864B381626A0E80095BBEF /* TopPlayersCell.xib */,
+				76057DBF163990FD00735342 /* StoreProductCell.xib */,
 				76864B3A1626DAC30095BBEF /* OnLinePlayersCell.xib */,
 				767F48D61593420900DCE95F /* LoginViewController.xib */,
 				767BA5BD1589F8E300825EB1 /* FinalViewController.xib */,
@@ -1512,6 +1518,8 @@
 				76EC0AE0163837BB00481A26 /* CDWeaponProduct.m */,
 				76EC0AD9163808F100481A26 /* DuelProductDownloaderController.h */,
 				76EC0ADA163808F100481A26 /* DuelProductDownloaderController.m */,
+				7687E8C616392E1C003C9EE6 /* StoreDataSource.h */,
+				7687E8C716392E1C003C9EE6 /* StoreDataSource.m */,
 			);
 			name = Shop;
 			sourceTree = "<group>";
@@ -1781,6 +1789,8 @@
 				764B07201598A5B30050D4E4 /* UIView+Dinamic_BackGround.m */,
 				76B65ACB15DD4A88000E136C /* FXLabel.m */,
 				76B65ACC15DD4A88000E136C /* FXLabel.h */,
+				76057DC21639937500735342 /* StoreProductCell.h */,
+				76057DC31639937500735342 /* StoreProductCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1801,8 +1811,6 @@
 				BD6F772E1439AB870033ED2D /* qr2 */,
 				BDD07B9C141E1F170085E4FB /* ResoultDataSource.h */,
 				BDD07B9D141E1F170085E4FB /* ResoultDataSource.m */,
-				7687E8C616392E1C003C9EE6 /* StoreDataSource.h */,
-				7687E8C716392E1C003C9EE6 /* StoreDataSource.m */,
 				7692812A159DCAFD00E6CE41 /* IconDownloader.h */,
 				7692812B159DCAFD00E6CE41 /* IconDownloader.m */,
 				7675CA8415A2E10B005A3BD3 /* DuelRewardLogicController.h */,
@@ -2111,6 +2119,7 @@
 				76864B3B1626DAC30095BBEF /* OnLinePlayersCell.xib in Resources */,
 				7687E8C016391A32003C9EE6 /* StoreProductCell.xib in Resources */,
 				7687E8C516392534003C9EE6 /* StoreViewController.xib in Resources */,
+				76057DC0163990FD00735342 /* StoreProductCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2271,6 +2280,7 @@
 				76EC0AE1163837BB00481A26 /* CDWeaponProduct.m in Sources */,
 				7687E8C3163920FE003C9EE6 /* StoreViewController.m in Sources */,
 				7687E8C816392E1C003C9EE6 /* StoreDataSource.m in Sources */,
+				76057DC41639937500735342 /* StoreProductCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

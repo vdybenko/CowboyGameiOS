@@ -43,6 +43,8 @@
 
 "SALYN"="SALOON";
 
+"SHOP" = "STORE";
+
 "REFRESH"="REFRESH";
 
 //FinalView
@@ -286,3 +288,6 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "LOADING" = "Loading...";
 "LOADED" = "Loaded";
 
+//Store
+"WEAPONS" = "WEAPONS";
+"DEFENSES" = "DEFENSES";

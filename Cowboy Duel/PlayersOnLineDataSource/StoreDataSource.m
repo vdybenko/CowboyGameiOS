@@ -10,6 +10,7 @@
 #import "UIImage+Save.h"
 #import "DuelProductDownloaderController.h"
 #import "StoreViewController.h"
+#import "StoreProductCell.h"
 
 @interface StoreDataSource()
 {
@@ -37,6 +38,8 @@
     tableView=pTable;
     storeViewController = pStoreViewController;
     cellsHide=YES;
+     
+     [self reloadDataSource];
 	return self;
 }
 
@@ -65,10 +68,17 @@
 
 #pragma mark - Delegated methods
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	UITableViewCell* cell = [[UITableViewCell alloc] init];
-//    cell = [tableView dequeueReusableCellWithIdentifier:[TopPlayerCell cellID]];
+-(UITableViewCell *)tableView:(UITableView *)pTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	StoreProductCell *cell;
+     cell = [pTableView dequeueReusableCellWithIdentifier:[StoreProductCell cellID]];
     
+    if (!cell ) {
+        cell = [StoreProductCell cell];
+        [cell initMainControls];
+    }
+    
+    CDDuelProduct *prod=[arrItemsList objectAtIndex:indexPath.row];
+    [cell populateWithProduct:prod index:indexPath typeTable:typeOfTable];
     return cell;
 }
 

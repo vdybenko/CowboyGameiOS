@@ -26,6 +26,18 @@ NSString  *const URL_PRODUCT_FILE_DEFULT   = @"http://bidoncd.s3.amazonaws.com/l
 
 @implementation DuelProductDownloaderController
 @synthesize didFinishBlock;
+
+-(id)init{
+    self = [super init];
+	
+	if (!self) {
+		return nil;
+	}
+    arrItemsList=[[NSMutableArray alloc] init];
+    
+	return self;
+}
+
 +(NSString *)getSavePathForDuelProduct{
     return getSavePathForDuelProduct();
 }
@@ -123,10 +135,12 @@ static NSString *getSavePathForDuelProduct()
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:DUEL_PRODUCTS_WEAPONS];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:DUEL_PRODUCTS_WEAPONS];
     
+    [arrItemsList removeAllObjects];
     responseObjectOfProducts = [responseObject objectForKey:@"defenses"];
     for (NSDictionary *dic in responseObjectOfProducts) {
         CDDefenseProduct *product=[[CDDefenseProduct alloc] init];
         [self parseDuelProduct:product productDic:dic];
+        product.dDefense=[[dic objectForKey:@"defense"] integerValue];
         [arrItemsList addObject: product];
     }
     data= [NSKeyedArchiver archivedDataWithRootObject:arrItemsList];

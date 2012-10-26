@@ -7,6 +7,7 @@
 //
 
 #import "StoreViewController.h"
+#import "UIButton+Image+Title.h"
 
 @interface StoreViewController ()
 {
@@ -45,6 +46,20 @@
 {
     [super viewDidLoad];
      storeDataSource = [[StoreDataSource alloc] initWithTable:tableView parentVC:self];
+    [tableView setDataSource:storeDataSource];
+    
+    title.text = NSLocalizedString(@"SHOP", @"");
+    title.textColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
+    title.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
+    
+    UIColor *buttonsTitleColor = [[UIColor alloc] initWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
+
+    [btnBack setTitleByLabel:@"BACK"];
+    [btnBack changeColorOfTitleByLabel:buttonsTitleColor];
+    [btnWeapons setTitleByLabel:@"WEAPONS"];
+    [btnWeapons changeColorOfTitleByLabel:buttonsTitleColor];
+    [btnDefenses setTitleByLabel:@"DEFENSES"];
+    [btnDefenses changeColorOfTitleByLabel:buttonsTitleColor];
 }
 
 - (void)didReceiveMemoryWarning
@@ -63,12 +78,14 @@
 - (IBAction)weaponsButtonClick:(id)sender {
     if (storeDataSource.typeOfTable != StoreDataSourceTypeTablesWeapons) {
         storeDataSource.typeOfTable = StoreDataSourceTypeTablesWeapons;
+        [storeDataSource reloadDataSource];
         [tableView reloadData];
     }
 }
 - (IBAction)defenseButtonClick:(id)sender {
     if (storeDataSource.typeOfTable != StoreDataSourceTypeTablesDefenses) {
         storeDataSource.typeOfTable = StoreDataSourceTypeTablesDefenses;
+        [storeDataSource reloadDataSource];
         [tableView reloadData];
     }
 }
