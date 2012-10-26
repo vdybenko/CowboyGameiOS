@@ -18,11 +18,11 @@
 
 @interface PlayersOnLineDataSource ()
 @property (nonatomic) SSConnection *connection;
-
+@property (nonatomic) BOOL startLoad;
 @end 
 
 @implementation PlayersOnLineDataSource
-@synthesize arrItemsList, delegate, cellsHide, serverObjects, connection;
+@synthesize arrItemsList, delegate, cellsHide, serverObjects, connection, startLoad;
 
 
 #pragma mark - Instance initialization
@@ -50,10 +50,13 @@
 -(void) reloadDataSource;
 {
 	[self.connection sendData:@"" packetID:NETWORK_GET_LIST_ONLINE ofLength:sizeof(int)];
+    [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(connectionTimeout) userInfo:nil repeats:NO];
+    self.startLoad = YES;
 }
 
 - (void) listOnlineResponse:(NSString *)jsonString
 {
+    self.startLoad = NO;
     NSError *jsonParseError;
     SBJSON *parser = [[SBJSON alloc] init];
     NSLog(@"jsonString: %@", jsonString);
@@ -82,6 +85,16 @@
 
 }
 
+-(void)connectionTimeout
+{
+    if (!self.startLoad) return;
+    ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
+    [listOfItemsViewController.btnInvite setEnabled:YES];
+    [listOfItemsViewController.loadingView setHidden:YES];
+    [listOfItemsViewController.activityIndicator stopAnimating];
+    [listOfItemsViewController.tableView reloadData];
+    [_tableView refreshFinished];
+}
 
 #pragma mark - Delegated methods
 

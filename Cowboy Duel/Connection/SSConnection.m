@@ -197,6 +197,7 @@ static SSConnection *connection;
 
 - (void)disconnect
 {
+    self.connectionOpen = NO;
     [self.pingTimer invalidate];
     [self.outputStream close];
     [self.inputStream close];
