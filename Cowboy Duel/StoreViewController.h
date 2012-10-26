@@ -10,7 +10,7 @@
 #import "StoreDataSource.h"
 #import "AccountDataSource.h"
 
-@interface StoreViewController : UIViewController<UITableViewDelegate>
+@interface StoreViewController : UIViewController<UITableViewDelegate,TableCellWithButton>
 @property (strong, nonatomic) StoreDataSource *storeDataSource;
 
 -(id)initWithAccount:(AccountDataSource *)userAccount;

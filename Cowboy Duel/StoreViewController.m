@@ -8,6 +8,7 @@
 
 #import "StoreViewController.h"
 #import "UIButton+Image+Title.h"
+#import "StoreProductCell.h"
 
 @interface StoreViewController ()
 {
@@ -46,6 +47,7 @@
 {
     [super viewDidLoad];
      storeDataSource = [[StoreDataSource alloc] initWithTable:tableView parentVC:self];
+    storeDataSource.delegate = self;
     [tableView setDataSource:storeDataSource];
     
     title.text = NSLocalizedString(@"SHOP", @"");
@@ -72,6 +74,13 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 82.f;
+}
+
+#pragma mark - TableCellWithButton methods
+
+-(void)clickButton:(NSIndexPath *)indexPath;
+{
+    StoreProductCell *cell = (StoreProductCell *)[tableView cellForRowAtIndexPath:indexPath];
 }
 
 #pragma mark IBAction

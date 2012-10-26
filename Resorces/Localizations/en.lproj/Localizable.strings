@@ -291,3 +291,7 @@ You can upgrade this game right now through <b>iTunes Store</b>
 //Store
 "WEAPONS" = "WEAPONS";
 "DEFENSES" = "DEFENSES";
+"Golds:" = "Golds:";
+"damage" = "damage";
+"defenses" = "defenses";
+"BUYIT" = "BUY IT";

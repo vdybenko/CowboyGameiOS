@@ -167,7 +167,6 @@
 		605A7A5B138A372700B4FB8E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 605A7A5A138A372700B4FB8E /* SystemConfiguration.framework */; };
 		605A7A5F138A377F00B4FB8E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 605A7A5E138A377F00B4FB8E /* MobileCoreServices.framework */; };
 		60CF1BB713A8C3CF00C302C0 /* follSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 60CF1BB613A8C3CF00C302C0 /* follSound.mp3 */; };
-		76057DC0163990FD00735342 /* StoreProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76057DBF163990FD00735342 /* StoreProductCell.xib */; };
 		76057DC41639937500735342 /* StoreProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76057DC31639937500735342 /* StoreProductCell.m */; };
 		760E676115BD8277006F6832 /* TopPlayersDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 760E676015BD8277006F6832 /* TopPlayersDataSource.m */; };
 		760E676515BD844B006F6832 /* TopPlayersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 760E676315BD844B006F6832 /* TopPlayersViewController.m */; };
@@ -210,6 +209,7 @@
 		768388E5157E249900377D88 /* CDCollectionAdvertisingApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388E2157E249900377D88 /* CDCollectionAdvertisingApp.m */; };
 		768388E8157E304400377D88 /* AdvertisingNewVersionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388E7157E304300377D88 /* AdvertisingNewVersionViewController.m */; };
 		768388EB157E306100377D88 /* AdvertisingOtherAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388EA157E306100377D88 /* AdvertisingOtherAppViewController.m */; };
+		76848E51163A5B330026FA3D /* StoreProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76848E50163A5B330026FA3D /* StoreProductCell.xib */; };
 		76864B391626A0E80095BBEF /* TopPlayersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76864B381626A0E80095BBEF /* TopPlayersCell.xib */; };
 		76864B3B1626DAC30095BBEF /* OnLinePlayersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76864B3A1626DAC30095BBEF /* OnLinePlayersCell.xib */; };
 		7687E8C016391A32003C9EE6 /* StoreProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7687E8BF16391A32003C9EE6 /* StoreProductCell.xib */; };
@@ -229,6 +229,8 @@
 		76A1A50615ADFB9300DC581B /* FBLoginDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 76A1A4FC15ADFB9300DC581B /* FBLoginDialog.m */; };
 		76A1A50715ADFB9300DC581B /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 76A1A4FE15ADFB9300DC581B /* FBRequest.m */; };
 		76A6F92F15878ED1009CE450 /* UIImageView+AttachedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76A6F92D15878ED1009CE450 /* UIImageView+AttachedView.m */; };
+		76A72D53163AA0B400C65D6D /* shop_product_frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 76A72D51163AA0B400C65D6D /* shop_product_frame.png */; };
+		76A72D54163AA0B400C65D6D /* shop_product_frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76A72D52163AA0B400C65D6D /* shop_product_frame@2x.png */; };
 		76AFC7A215ED1B740009294B /* UIScrollView+AH3DPullRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 76AFC7A115ED1B740009294B /* UIScrollView+AH3DPullRefresh.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		76B3711213E1B7000097B8E0 /* MyriadPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 76B3711013E1B7000097B8E0 /* MyriadPro-Bold.ttf */; };
 		76B3711313E1B7000097B8E0 /* MyriadPro-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 76B3711113E1B7000097B8E0 /* MyriadPro-Semibold.ttf */; };
@@ -544,7 +546,6 @@
 		605A7A5A138A372700B4FB8E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		605A7A5E138A377F00B4FB8E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		60CF1BB613A8C3CF00C302C0 /* follSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = follSound.mp3; sourceTree = "<group>"; };
-		76057DBF163990FD00735342 /* StoreProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StoreProductCell.xib; path = Xib/StoreProductCell.xib; sourceTree = "<group>"; };
 		76057DC21639937500735342 /* StoreProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoreProductCell.h; path = PlayersOnLineDataSource/StoreProductCell.h; sourceTree = "<group>"; };
 		76057DC31639937500735342 /* StoreProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoreProductCell.m; path = PlayersOnLineDataSource/StoreProductCell.m; sourceTree = "<group>"; };
 		760E675F15BD8276006F6832 /* TopPlayersDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopPlayersDataSource.h; sourceTree = "<group>"; };
@@ -640,6 +641,7 @@
 		768388E7157E304300377D88 /* AdvertisingNewVersionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertisingNewVersionViewController.m; sourceTree = "<group>"; };
 		768388E9157E306000377D88 /* AdvertisingOtherAppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvertisingOtherAppViewController.h; sourceTree = "<group>"; };
 		768388EA157E306100377D88 /* AdvertisingOtherAppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertisingOtherAppViewController.m; sourceTree = "<group>"; };
+		76848E50163A5B330026FA3D /* StoreProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StoreProductCell.xib; path = Xib/StoreProductCell.xib; sourceTree = "<group>"; };
 		76864B381626A0E80095BBEF /* TopPlayersCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TopPlayersCell.xib; path = Xib/TopPlayersCell.xib; sourceTree = "<group>"; };
 		76864B3A1626DAC30095BBEF /* OnLinePlayersCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OnLinePlayersCell.xib; path = Xib/OnLinePlayersCell.xib; sourceTree = "<group>"; };
 		7687E8BF16391A32003C9EE6 /* StoreProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreProductCell.xib; sourceTree = "<group>"; };
@@ -671,6 +673,8 @@
 		76A1A4FE15ADFB9300DC581B /* FBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FBRequest.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		76A6F92D15878ED1009CE450 /* UIImageView+AttachedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AttachedView.m"; sourceTree = "<group>"; };
 		76A6F92E15878ED1009CE450 /* UIImageView+AttachedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AttachedView.h"; sourceTree = "<group>"; };
+		76A72D51163AA0B400C65D6D /* shop_product_frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shop_product_frame.png; sourceTree = "<group>"; };
+		76A72D52163AA0B400C65D6D /* shop_product_frame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shop_product_frame@2x.png"; sourceTree = "<group>"; };
 		76AFC7A015ED1B740009294B /* UIScrollView+AH3DPullRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+AH3DPullRefresh.h"; sourceTree = "<group>"; };
 		76AFC7A115ED1B740009294B /* UIScrollView+AH3DPullRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+AH3DPullRefresh.m"; sourceTree = "<group>"; };
 		76B3711013E1B7000097B8E0 /* MyriadPro-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "MyriadPro-Bold.ttf"; path = "Font/MyriadPro-Bold.ttf"; sourceTree = "<group>"; };
@@ -944,6 +948,7 @@
 		03285FAD159DD84000D16195 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				76A72D50163AA0B400C65D6D /* Shop */,
 				3167BAA615CAA75F00AF2745 /* Achievment */,
 				31DA9EFB15BD331900492A9F /* ListOnLine */,
 				03285FAE159DD84000D16195 /* Adcolony */,
@@ -1401,8 +1406,8 @@
 				03285FA1159DD61900D16195 /* ListOfItemsViewController.xib */,
 				760E676615BD84C6006F6832 /* TopPlayersViewController.xib */,
 				76864B381626A0E80095BBEF /* TopPlayersCell.xib */,
-				76057DBF163990FD00735342 /* StoreProductCell.xib */,
 				76864B3A1626DAC30095BBEF /* OnLinePlayersCell.xib */,
+				76848E50163A5B330026FA3D /* StoreProductCell.xib */,
 				767F48D61593420900DCE95F /* LoginViewController.xib */,
 				767BA5BD1589F8E300825EB1 /* FinalViewController.xib */,
 				7687E8C416392534003C9EE6 /* StoreViewController.xib */,
@@ -1480,6 +1485,15 @@
 				76A1A4FE15ADFB9300DC581B /* FBRequest.m */,
 			);
 			path = FBConnect;
+			sourceTree = "<group>";
+		};
+		76A72D50163AA0B400C65D6D /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				76A72D51163AA0B400C65D6D /* shop_product_frame.png */,
+				76A72D52163AA0B400C65D6D /* shop_product_frame@2x.png */,
+			);
+			path = Shop;
 			sourceTree = "<group>";
 		};
 		76B283FF13C6F876004E2669 /* Localizations */ = {
@@ -2119,7 +2133,9 @@
 				76864B3B1626DAC30095BBEF /* OnLinePlayersCell.xib in Resources */,
 				7687E8C016391A32003C9EE6 /* StoreProductCell.xib in Resources */,
 				7687E8C516392534003C9EE6 /* StoreViewController.xib in Resources */,
-				76057DC0163990FD00735342 /* StoreProductCell.xib in Resources */,
+				76848E51163A5B330026FA3D /* StoreProductCell.xib in Resources */,
+				76A72D53163AA0B400C65D6D /* shop_product_frame.png in Resources */,
+				76A72D54163AA0B400C65D6D /* shop_product_frame@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

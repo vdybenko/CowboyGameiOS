@@ -10,6 +10,8 @@
 #import "JSON.h"
 #import "ValidationUtils.h"
 #import "Utils.h"
+#import "PlayersOnLineDataSource.h"
+
 @class StoreViewController;
 
 typedef enum {
@@ -22,6 +24,7 @@ typedef enum {
 }
 @property(strong, readonly)NSMutableArray *arrItemsList;
 @property(nonatomic) BOOL cellsHide;
+@property(strong, nonatomic)id<TableCellWithButton> delegate;
 @property(nonatomic) StoreDataSourceTypeTables typeOfTable;
 
 -(void) reloadDataSource;

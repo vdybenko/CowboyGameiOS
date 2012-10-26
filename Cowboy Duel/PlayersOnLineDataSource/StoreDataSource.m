@@ -20,7 +20,7 @@
 @end
 
 @implementation StoreDataSource
-@synthesize arrItemsList,cellsHide,typeOfTable;
+@synthesize arrItemsList,cellsHide,typeOfTable,delegate;
 
 #pragma mark - Instance initialization
 
@@ -76,9 +76,8 @@
         cell = [StoreProductCell cell];
         [cell initMainControls];
     }
-    
     CDDuelProduct *prod=[arrItemsList objectAtIndex:indexPath.row];
-    [cell populateWithProduct:prod index:indexPath typeTable:typeOfTable];
+    [cell populateWithProduct:prod typeTable:typeOfTable targetToBuyButton:self cellType:typeOfTable];
     return cell;
 }
 
@@ -88,6 +87,14 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return 1;
+}
+
+#pragma mark -
+-(void)buyButtonClick:(id __strong)sender;
+{
+    CDDuelProduct *cell=(CDDuelProduct *)[[sender superview] superview];
+    NSIndexPath *indexPath = [tableView indexPathForCell:cell];
+    [delegate clickButton:indexPath];
 }
 @end
 
