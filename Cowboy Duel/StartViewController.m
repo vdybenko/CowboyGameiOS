@@ -24,6 +24,7 @@
 #import "StoreViewController.h"
 #import "DuelProductAttensionViewController.h"
 #import "DuelProductDownloaderController.h"
+#import "SoundDownload.h"
 
 @interface StartViewController ()
 {
@@ -646,6 +647,9 @@ static StartViewController *sharedHelper = nil;
 
 -(IBAction)showHelp:(id)sender
 {
+    DuelProductDownloaderController *duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
+    [duelProductDownloaderController refreshDuelProducts];
+    
     StoreViewController *svc=[[StoreViewController alloc] initWithNibName:nil bundle:nil];
     [self.navigationController pushViewController:svc animated:YES];
 //    DuelProductAttensionViewController *vc=[[DuelProductAttensionViewController alloc] initWithAccount:playerAccount];

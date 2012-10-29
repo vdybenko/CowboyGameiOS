@@ -50,7 +50,7 @@
     return self;
 }
 
--(NSString*) saveNameThumb{return [NSString stringWithFormat:@"%dthumb.png",self.dID];}
--(NSString*) saveNameImage{return [NSString stringWithFormat:@"%dimg.png",self.dID];}
+-(NSString*) saveNameThumb{return [NSString stringWithFormat:@"%dthumb",self.dID];}
+-(NSString*) saveNameImage{return [NSString stringWithFormat:@"%dimg",self.dID];}
 
 @end

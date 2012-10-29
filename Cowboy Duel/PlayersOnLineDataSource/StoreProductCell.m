@@ -81,7 +81,7 @@
     coldTitle.text=NSLocalizedString(@"Golds:", @"");
     gold.text = [NSString stringWithFormat:@"%d",product.dPrice];
     
-    icon.image = [UIImage loadImageFullPath:[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],product.dIconLocal]];
+    icon.image = [UIImage loadImageFullPath:[NSString stringWithFormat:@"%@/%@.png",[DuelProductDownloaderController getSavePathForDuelProduct],[product saveNameThumb]]];
 }
 
 - (IBAction)buyButtonClick:(id)sender {

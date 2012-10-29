@@ -209,6 +209,7 @@
 		768388E5157E249900377D88 /* CDCollectionAdvertisingApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388E2157E249900377D88 /* CDCollectionAdvertisingApp.m */; };
 		768388E8157E304400377D88 /* AdvertisingNewVersionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388E7157E304300377D88 /* AdvertisingNewVersionViewController.m */; };
 		768388EB157E306100377D88 /* AdvertisingOtherAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388EA157E306100377D88 /* AdvertisingOtherAppViewController.m */; };
+		76841B7B163EAE3800F3FD1A /* SoundDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 76841B7A163EAE3800F3FD1A /* SoundDownload.m */; };
 		76848E51163A5B330026FA3D /* StoreProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76848E50163A5B330026FA3D /* StoreProductCell.xib */; };
 		76864B391626A0E80095BBEF /* TopPlayersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76864B381626A0E80095BBEF /* TopPlayersCell.xib */; };
 		76864B3B1626DAC30095BBEF /* OnLinePlayersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76864B3A1626DAC30095BBEF /* OnLinePlayersCell.xib */; };
@@ -643,6 +644,8 @@
 		768388E7157E304300377D88 /* AdvertisingNewVersionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertisingNewVersionViewController.m; sourceTree = "<group>"; };
 		768388E9157E306000377D88 /* AdvertisingOtherAppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvertisingOtherAppViewController.h; sourceTree = "<group>"; };
 		768388EA157E306100377D88 /* AdvertisingOtherAppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertisingOtherAppViewController.m; sourceTree = "<group>"; };
+		76841B79163EAE3800F3FD1A /* SoundDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundDownload.h; sourceTree = "<group>"; };
+		76841B7A163EAE3800F3FD1A /* SoundDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundDownload.m; sourceTree = "<group>"; };
 		76848E50163A5B330026FA3D /* StoreProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StoreProductCell.xib; path = Xib/StoreProductCell.xib; sourceTree = "<group>"; };
 		76864B381626A0E80095BBEF /* TopPlayersCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TopPlayersCell.xib; path = Xib/TopPlayersCell.xib; sourceTree = "<group>"; };
 		76864B3A1626DAC30095BBEF /* OnLinePlayersCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OnLinePlayersCell.xib; path = Xib/OnLinePlayersCell.xib; sourceTree = "<group>"; };
@@ -1784,6 +1787,8 @@
 				763F8A3C1578FC0900D8BB42 /* UIView+Hierarchy.h */,
 				767CD1E2158F212A0054C9B8 /* UIImage+Save.h */,
 				767CD1E3158F212B0054C9B8 /* UIImage+Save.m */,
+				76841B79163EAE3800F3FD1A /* SoundDownload.h */,
+				76841B7A163EAE3800F3FD1A /* SoundDownload.m */,
 				765EB4EA1580E3530059355B /* NSString+isNumeric.h */,
 				765EB4EB1580E3530059355B /* NSString+isNumeric.m */,
 				3150C60A15A5A26E00AC8E17 /* HCYoutubeParser.h */,
@@ -2307,6 +2312,7 @@
 				7687E8C816392E1C003C9EE6 /* StoreDataSource.m in Sources */,
 				76057DC41639937500735342 /* StoreProductCell.m in Sources */,
 				76D6284D163AC0ED00CA07D2 /* DuelProductAttensionViewController.m in Sources */,
+				76841B7B163EAE3800F3FD1A /* SoundDownload.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

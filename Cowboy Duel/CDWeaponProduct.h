@@ -18,5 +18,6 @@
 @property(nonatomic, strong) NSString *dSoundURL;
 
 -(NSString*) saveNameImageGun;
+-(NSString*) saveNameSoundGun;
 
 @end

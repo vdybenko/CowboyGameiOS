@@ -17,17 +17,21 @@
 }
 
 +(NSString*) saveImage:(NSString*) pName URL:(NSString*)pURL directory:(NSString*)dir{
-    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:pURL]];
-    UIImage *image = [[UIImage alloc] initWithData:imageData];
-    
-    NSString *nameFile=[NSString stringWithFormat:@"%@.png",pName];
-    NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@",dir,nameFile];
-    NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
-    [data1 writeToFile:pngFilePath atomically:YES];
-    return nameFile;
+    if (pURL && ![pURL isEqualToString:@""]) {
+        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:pURL]];
+        UIImage *image = [[UIImage alloc] initWithData:imageData];
+        
+        NSString *nameFile=[NSString stringWithFormat:@"%@.png",pName];
+        NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@",dir,nameFile];
+        NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
+        [data1 writeToFile:pngFilePath atomically:YES];
+        return nameFile;
+    }else{
+        return @"";
+    }
 }
 
-+(BOOL)isImageDownloadedForPathToImage:(NSString*)path{
++(BOOL)isFileDownloadedForPath:(NSString*)path{
     if([[NSFileManager defaultManager] fileExistsAtPath:path]){
         return YES;
     }else{
@@ -57,5 +61,15 @@
     }
 }
 
++(void)deleteImageWithPath:(NSString*)path;
+{
+    if(path && [path length]){
+        NSFileManager *fileMgr = [NSFileManager defaultManager];
+        
+        NSError *error= nil;
+        if ([fileMgr removeItemAtPath:path error:&error] != YES)
+            DLog(@"Unable to delete file: %@", [error localizedDescription]);
+    }
+}
 
 @end

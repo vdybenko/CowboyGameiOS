@@ -35,6 +35,8 @@
     self.dSoundURL = [decoder decodeObjectForKey:@"SOUND_URL"];
     return self;
 }
--(NSString*) saveNameImageGun{return [NSString stringWithFormat:@"%dgun.png",self.dID];}
+-(NSString*) saveNameImageGun{return [NSString stringWithFormat:@"%dgun",self.dID];}
+-(NSString*) saveNameSoundGun{return [NSString stringWithFormat:@"gun_sound%d",self.dID];}
+
 
 @end

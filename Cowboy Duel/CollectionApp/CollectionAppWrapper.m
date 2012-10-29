@@ -52,13 +52,9 @@
 {
     if(imageName){
         NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        NSString *FilePath = [NSString stringWithFormat:@"%@/%@",docDir,imageName];
+        NSString *filePath = [NSString stringWithFormat:@"%@/%@",docDir,imageName];
         
-        NSFileManager *fileMgr = [NSFileManager defaultManager];
-        
-        NSError *error= nil;
-        if ([fileMgr removeItemAtPath:FilePath error:&error] != YES)
-            DLog(@"CollectionAppWrapper: Unable to delete file: %@", [error localizedDescription]);
+        [UIImage deleteImageWithPath:filePath];
     }
 }
 
