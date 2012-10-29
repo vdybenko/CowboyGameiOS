@@ -246,6 +246,8 @@
         [self setImageFromFacebook];
     }
     lbFBName.text = playerAccount.accountName;
+    SSConnection *connection = [SSConnection sharedInstance];
+    [connection sendInfoPacket];
 }
 
 -(void)changePointsLine:(int)points maxValue:(int) maxValue animated:(BOOL)animated;

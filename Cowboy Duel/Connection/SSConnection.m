@@ -201,5 +201,7 @@ static SSConnection *connection;
     [self.pingTimer invalidate];
     [self.outputStream close];
     [self.inputStream close];
+    [self.inputStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    [self.outputStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
 }
 @end

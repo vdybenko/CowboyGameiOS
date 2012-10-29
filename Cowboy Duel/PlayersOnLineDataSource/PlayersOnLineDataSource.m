@@ -150,16 +150,14 @@
 //        }
 //    }
 //    
-//    if ([topPlayersDataSource isPlayerInTop10:player.dAuth]) {
-//        [cell setRibbonHide:NO];
-//        player.dInTop=YES;
-//    }else {
-//        [cell setRibbonHide:YES];
-//        player.dInTop=NO;
-//    }
-//
+    if ([topPlayersDataSource isPlayerInTop10:player.serverName]) {
+        [cell setRibbonHide:NO];
+    }else {
+        [cell setRibbonHide:YES];
+    }
+
     [cell.btnDuel addTarget:self action:@selector(invaiteWithMessage:) forControlEvents:UIControlEventTouchUpInside];
-//    
+    
     return cell;
 }
 

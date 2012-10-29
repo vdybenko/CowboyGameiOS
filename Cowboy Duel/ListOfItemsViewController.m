@@ -315,33 +315,6 @@
     }
 }
 
-- (void)checkOnline
-{
-    for (CDPlayerOnLine *player in _playersOnLineDataSource.arrItemsList) {
-        NSString *convertString = player.dPlayerPublicIP;
-        NSUInteger bufferCount = sizeof(char) * ([convertString length] + 1);
-        char *utf8Buffer = malloc(bufferCount);
-        [convertString getCString:utf8Buffer
-                        maxLength:bufferCount 
-                         encoding:NSUTF8StringEncoding];
-        struct sockaddr_in hostAddress;
-        memset(&hostAddress, 0, sizeof(hostAddress));
-        hostAddress.sin_family = AF_INET;
-        hostAddress.sin_len = sizeof(hostAddress);
-        hostAddress.sin_port = ntohs(1111);
-        hostAddress.sin_addr.s_addr = inet_addr(utf8Buffer);
-        Reachability *reachability = [Reachability reachabilityWithAddress:&hostAddress];
-        
-        BOOL hostOnline = [reachability isReachable];
-        player.dOnline = hostOnline;
-        if(hostOnline) DLog(@"Reachability %@", reachability);
-    }
-    [_playersOnLineDataSource setCellsHide:YES];
-    [tableView reloadData];
-        
-    
-}
-
 -(void)startTableAnimation;
 {
     int countOfCells=[_playersOnLineDataSource.arrItemsList count];
