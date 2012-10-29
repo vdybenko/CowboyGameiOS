@@ -28,5 +28,6 @@
 - (id)initWithGCVC:(GameCenterViewController *)GCVC Account:(AccountDataSource *)userAccount OnLine:(BOOL) onLine;
 - (void)checkOnline;
 -(void)startTableAnimation;
+-(void)didRefreshController;
 
 @end

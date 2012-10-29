@@ -280,6 +280,26 @@
     [_playersOnLineDataSource reloadDataSource];
 }
 
+-(void)didRefreshController
+{
+    [loadingView setHidden:YES];
+    [activityIndicator stopAnimating];
+    [btnInvite setEnabled:YES];
+    [tableView reloadData];
+    if (_playersOnLineDataSource.serverObjects.count == 0) {
+        [offLineBackGround setDinamicHeightBackground];
+        
+        [offLineText loadHTMLString:NSLocalizedString(@"AlertTextListOnlineIsEmpty", @"") baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
+        
+        [tableView setHidden:YES];
+        [offLineBackGround setHidden:NO];
+    }else {
+        [tableView setHidden:NO];
+        [offLineBackGround setHidden:YES];
+    };
+    [self.tableView refreshFinished];
+}
+
 - (void)checkInternetStatus:(BOOL)status;
 {
     if (statusOnLine) {
@@ -319,17 +339,7 @@
     [_playersOnLineDataSource setCellsHide:YES];
     [tableView reloadData];
         
-    if (_playersOnLineDataSource.arrItemsList.count == 0) {
-        [offLineBackGround setDinamicHeightBackground];
-        
-        [offLineText loadHTMLString:NSLocalizedString(@"AlertTextListOnlineIsEmpty", @"") baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
-        
-        [tableView setHidden:YES];
-        [offLineBackGround setHidden:NO];
-    }else {
-        [tableView setHidden:NO];
-        [offLineBackGround setHidden:YES];
-    };
+    
 }
 
 -(void)startTableAnimation;
