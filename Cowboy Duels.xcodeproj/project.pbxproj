@@ -252,6 +252,8 @@
 		76CAE7161421E97900CA39EA /* cry.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 76CAE7141421E97900CA39EA /* cry.mp3 */; };
 		76CB057013AB991B0011E768 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CB056F13AB991B0011E768 /* QuartzCore.framework */; };
 		76D12895159C9DE800E799AA /* PlayerOnLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D12893159C9DE800E799AA /* PlayerOnLineCell.m */; };
+		76D6284D163AC0ED00CA07D2 /* DuelProductAttensionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D6284B163AC0EC00CA07D2 /* DuelProductAttensionViewController.m */; };
+		76D6284E163AC0ED00CA07D2 /* DuelProductAttensionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76D6284C163AC0ED00CA07D2 /* DuelProductAttensionViewController.xib */; };
 		76E869C715CA8D870024ED08 /* pv_coint.png in Resources */ = {isa = PBXBuildFile; fileRef = 76E869C515CA8D870024ED08 /* pv_coint.png */; };
 		76E869C815CA8D870024ED08 /* pv_coint@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76E869C615CA8D870024ED08 /* pv_coint@2x.png */; };
 		76EB4DC01492661800A3A925 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 76EB4DBE1492661800A3A925 /* Localizable.strings */; };
@@ -699,6 +701,9 @@
 		76CB056F13AB991B0011E768 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		76D12893159C9DE800E799AA /* PlayerOnLineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerOnLineCell.m; sourceTree = "<group>"; };
 		76D12894159C9DE800E799AA /* PlayerOnLineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerOnLineCell.h; sourceTree = "<group>"; };
+		76D6284A163AC0EC00CA07D2 /* DuelProductAttensionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuelProductAttensionViewController.h; sourceTree = "<group>"; };
+		76D6284B163AC0EC00CA07D2 /* DuelProductAttensionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DuelProductAttensionViewController.m; sourceTree = "<group>"; };
+		76D6284C163AC0ED00CA07D2 /* DuelProductAttensionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DuelProductAttensionViewController.xib; path = "../Cowboy Duel/DuelProductAttensionViewController.xib"; sourceTree = "<group>"; };
 		76E869C515CA8D870024ED08 /* pv_coint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pv_coint.png; sourceTree = "<group>"; };
 		76E869C615CA8D870024ED08 /* pv_coint@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pv_coint@2x.png"; sourceTree = "<group>"; };
 		76EB4DC11492662100A3A925 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -1412,6 +1417,7 @@
 				767BA5BD1589F8E300825EB1 /* FinalViewController.xib */,
 				7687E8C416392534003C9EE6 /* StoreViewController.xib */,
 				7687E8BF16391A32003C9EE6 /* StoreProductCell.xib */,
+				76D6284C163AC0ED00CA07D2 /* DuelProductAttensionViewController.xib */,
 			);
 			name = Xib;
 			sourceTree = "<group>";
@@ -1876,6 +1882,8 @@
 				BDD07BA4141E1F170085E4FB /* StartViewController.h */,
 				BDD07BA5141E1F170085E4FB /* StartViewController.m */,
 				7687E8C1163920FE003C9EE6 /* StoreViewController.h */,
+				76D6284A163AC0EC00CA07D2 /* DuelProductAttensionViewController.h */,
+				76D6284B163AC0EC00CA07D2 /* DuelProductAttensionViewController.m */,
 				7687E8C2163920FE003C9EE6 /* StoreViewController.m */,
 				BDCECE86148515D30007CEE3 /* LoginViewController.h */,
 				BDCECE87148515D30007CEE3 /* LoginViewController.m */,
@@ -2136,6 +2144,7 @@
 				76848E51163A5B330026FA3D /* StoreProductCell.xib in Resources */,
 				76A72D53163AA0B400C65D6D /* shop_product_frame.png in Resources */,
 				76A72D54163AA0B400C65D6D /* shop_product_frame@2x.png in Resources */,
+				76D6284E163AC0ED00CA07D2 /* DuelProductAttensionViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2297,6 +2306,7 @@
 				7687E8C3163920FE003C9EE6 /* StoreViewController.m in Sources */,
 				7687E8C816392E1C003C9EE6 /* StoreDataSource.m in Sources */,
 				76057DC41639937500735342 /* StoreProductCell.m in Sources */,
+				76D6284D163AC0ED00CA07D2 /* DuelProductAttensionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

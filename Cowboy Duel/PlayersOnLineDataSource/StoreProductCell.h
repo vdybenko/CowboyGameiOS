@@ -15,6 +15,6 @@
 +(StoreProductCell*)cell;
 +(NSString*) cellID;
 
--(void)populateWithProduct:(CDDuelProduct *)product typeTable:(StoreDataSourceTypeTables)type targetToBuyButton:(id)delegate cellType:(StoreDataSourceTypeTables)cellType;
+-(void)populateWithProduct:(CDDuelProduct *)product targetToBuyButton:(id)delegate cellType:(StoreDataSourceTypeTables)cellType;
 -(void) initMainControls;
 @end

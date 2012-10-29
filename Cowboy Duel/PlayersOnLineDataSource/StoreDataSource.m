@@ -77,7 +77,7 @@
         [cell initMainControls];
     }
     CDDuelProduct *prod=[arrItemsList objectAtIndex:indexPath.row];
-    [cell populateWithProduct:prod typeTable:typeOfTable targetToBuyButton:self cellType:typeOfTable];
+    [cell populateWithProduct:prod targetToBuyButton:self cellType:typeOfTable];
     return cell;
 }
 

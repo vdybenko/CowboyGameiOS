@@ -20,9 +20,10 @@
 #import "Utils.h"
 #import "LevelCongratViewController.h"
 #import "MoneyCongratViewController.h"
-#import "DuelProductDownloaderController.h"
-#import "StoreViewController.h"
 
+#import "StoreViewController.h"
+#import "DuelProductAttensionViewController.h"
+#import "DuelProductDownloaderController.h"
 
 @interface StartViewController ()
 {
@@ -647,6 +648,10 @@ static StartViewController *sharedHelper = nil;
 {
     StoreViewController *svc=[[StoreViewController alloc] initWithNibName:nil bundle:nil];
     [self.navigationController pushViewController:svc animated:YES];
+//    DuelProductAttensionViewController *vc=[[DuelProductAttensionViewController alloc] initWithAccount:playerAccount];
+//    [self.navigationController pushViewController:vc animated:YES];
+//    UIWindow *mainWindow = [[UIApplication sharedApplication] keyWindow];
+//    [mainWindow insertSubview:vc.view aboveSubview:mainWindow];
     return;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 

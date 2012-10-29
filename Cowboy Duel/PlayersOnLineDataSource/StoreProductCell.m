@@ -66,7 +66,7 @@
     [backGround setDinamicHeightBackground];
 }
 
--(void)populateWithProduct:(CDDuelProduct *)product typeTable:(StoreDataSourceTypeTables)type targetToBuyButton:(id)delegate cellType:(StoreDataSourceTypeTables)cellType;
+-(void)populateWithProduct:(CDDuelProduct *)product targetToBuyButton:(id)delegate cellType:(StoreDataSourceTypeTables)cellType;
 {
     buyButtonDelegate = delegate;
     name.text = product.dName;
@@ -78,8 +78,8 @@
         effect.text =[NSString stringWithFormat:@"+%d",((CDWeaponProduct*)product).dDamage];
     }
 //    descriptionText.text = product.dDescription;
-    coldTitle.text=NSLocalizedString(@"Golds:", @"");
-    gold.text = [NSString stringWithFormat:@"%d",product.dPrice];
+//    coldTitle.text=NSLocalizedString(@"Golds:", @"");
+//    gold.text = [NSString stringWithFormat:@"%d",product.dPrice];
     
 //    icon.image = [UIImage loadImageFullPath:[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],product.dIconLocal]];
 }
