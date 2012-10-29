@@ -77,23 +77,14 @@
         [_tableView reloadData];
     }
     ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
-    [listOfItemsViewController.btnInvite setEnabled:YES];
-    [listOfItemsViewController.loadingView setHidden:YES];
-    [listOfItemsViewController.activityIndicator stopAnimating];
-    [listOfItemsViewController.tableView reloadData];
-    [_tableView refreshFinished];
-
+    [listOfItemsViewController didRefreshController];
 }
 
 -(void)connectionTimeout
 {
     if (!self.startLoad) return;
     ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
-    [listOfItemsViewController.btnInvite setEnabled:YES];
-    [listOfItemsViewController.loadingView setHidden:YES];
-    [listOfItemsViewController.activityIndicator stopAnimating];
-    [listOfItemsViewController.tableView reloadData];
-    [_tableView refreshFinished];
+    [listOfItemsViewController didRefreshController];
 }
 
 #pragma mark - Delegated methods
