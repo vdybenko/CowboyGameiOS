@@ -77,12 +77,13 @@
         effectTitle.text=NSLocalizedString(@"damage", @"");
         effect.text =[NSString stringWithFormat:@"+%d",((CDWeaponProduct*)product).dDamage];
     }
-//    descriptionText.text = product.dDescription;
-//    coldTitle.text=NSLocalizedString(@"Golds:", @"");
-//    gold.text = [NSString stringWithFormat:@"%d",product.dPrice];
+    descriptionText.text = product.dDescription;
+    coldTitle.text=NSLocalizedString(@"Golds:", @"");
+    gold.text = [NSString stringWithFormat:@"%d",product.dPrice];
     
-//    icon.image = [UIImage loadImageFullPath:[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],product.dIconLocal]];
+    icon.image = [UIImage loadImageFullPath:[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],product.dIconLocal]];
 }
+
 - (IBAction)buyButtonClick:(id)sender {
     [buyButtonDelegate buyButtonClick:self];
 }
