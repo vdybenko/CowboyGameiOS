@@ -210,7 +210,6 @@
 		768388E8157E304400377D88 /* AdvertisingNewVersionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388E7157E304300377D88 /* AdvertisingNewVersionViewController.m */; };
 		768388EB157E306100377D88 /* AdvertisingOtherAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388EA157E306100377D88 /* AdvertisingOtherAppViewController.m */; };
 		76841B7B163EAE3800F3FD1A /* SoundDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 76841B7A163EAE3800F3FD1A /* SoundDownload.m */; };
-		76841B7E163EE4E900F3FD1A /* StoreProductAttensionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76841B7D163EE4E900F3FD1A /* StoreProductAttensionCell.xib */; };
 		76848E51163A5B330026FA3D /* StoreProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76848E50163A5B330026FA3D /* StoreProductCell.xib */; };
 		76864B391626A0E80095BBEF /* TopPlayersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76864B381626A0E80095BBEF /* TopPlayersCell.xib */; };
 		76864B3B1626DAC30095BBEF /* OnLinePlayersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76864B3A1626DAC30095BBEF /* OnLinePlayersCell.xib */; };
@@ -253,6 +252,11 @@
 		76B784C315E272D9004EBBEC /* dv_steady@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B784BF15E272D9004EBBEC /* dv_steady@2x.png */; };
 		76CAE7161421E97900CA39EA /* cry.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 76CAE7141421E97900CA39EA /* cry.mp3 */; };
 		76CB057013AB991B0011E768 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CB056F13AB991B0011E768 /* QuartzCore.framework */; };
+		76CE0AE3163EE7ED00B51B04 /* StoreProductAttensionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76CE0AE2163EE7ED00B51B04 /* StoreProductAttensionCell.xib */; };
+		76CE0AE5163EF01D00B51B04 /* DuelProductWinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76CE0AE4163EF01D00B51B04 /* DuelProductWinViewController.xib */; };
+		76CE0AE8163EF45C00B51B04 /* shop_product_ribbon.png in Resources */ = {isa = PBXBuildFile; fileRef = 76CE0AE6163EF45C00B51B04 /* shop_product_ribbon.png */; };
+		76CE0AE9163EF45C00B51B04 /* shop_product_ribbon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76CE0AE7163EF45C00B51B04 /* shop_product_ribbon@2x.png */; };
+		76CE0AEC163EF62800B51B04 /* DuelProductWinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76CE0AEB163EF62800B51B04 /* DuelProductWinViewController.m */; };
 		76D12895159C9DE800E799AA /* PlayerOnLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D12893159C9DE800E799AA /* PlayerOnLineCell.m */; };
 		76D6284D163AC0ED00CA07D2 /* DuelProductAttensionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D6284B163AC0EC00CA07D2 /* DuelProductAttensionViewController.m */; };
 		76D6284E163AC0ED00CA07D2 /* DuelProductAttensionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76D6284C163AC0ED00CA07D2 /* DuelProductAttensionViewController.xib */; };
@@ -647,7 +651,6 @@
 		768388EA157E306100377D88 /* AdvertisingOtherAppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertisingOtherAppViewController.m; sourceTree = "<group>"; };
 		76841B79163EAE3800F3FD1A /* SoundDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundDownload.h; sourceTree = "<group>"; };
 		76841B7A163EAE3800F3FD1A /* SoundDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundDownload.m; sourceTree = "<group>"; };
-		76841B7D163EE4E900F3FD1A /* StoreProductAttensionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreProductAttensionCell.xib; sourceTree = "<group>"; };
 		76848E50163A5B330026FA3D /* StoreProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StoreProductCell.xib; path = Xib/StoreProductCell.xib; sourceTree = "<group>"; };
 		76864B381626A0E80095BBEF /* TopPlayersCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TopPlayersCell.xib; path = Xib/TopPlayersCell.xib; sourceTree = "<group>"; };
 		76864B3A1626DAC30095BBEF /* OnLinePlayersCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OnLinePlayersCell.xib; path = Xib/OnLinePlayersCell.xib; sourceTree = "<group>"; };
@@ -704,6 +707,12 @@
 		76B784BF15E272D9004EBBEC /* dv_steady@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dv_steady@2x.png"; sourceTree = "<group>"; };
 		76CAE7141421E97900CA39EA /* cry.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cry.mp3; sourceTree = "<group>"; };
 		76CB056F13AB991B0011E768 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		76CE0AE2163EE7ED00B51B04 /* StoreProductAttensionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StoreProductAttensionCell.xib; path = Xib/StoreProductAttensionCell.xib; sourceTree = "<group>"; };
+		76CE0AE4163EF01D00B51B04 /* DuelProductWinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DuelProductWinViewController.xib; path = Xib/DuelProductWinViewController.xib; sourceTree = "<group>"; };
+		76CE0AE6163EF45C00B51B04 /* shop_product_ribbon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shop_product_ribbon.png; sourceTree = "<group>"; };
+		76CE0AE7163EF45C00B51B04 /* shop_product_ribbon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shop_product_ribbon@2x.png"; sourceTree = "<group>"; };
+		76CE0AEA163EF62800B51B04 /* DuelProductWinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuelProductWinViewController.h; sourceTree = "<group>"; };
+		76CE0AEB163EF62800B51B04 /* DuelProductWinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DuelProductWinViewController.m; sourceTree = "<group>"; };
 		76D12893159C9DE800E799AA /* PlayerOnLineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerOnLineCell.m; sourceTree = "<group>"; };
 		76D12894159C9DE800E799AA /* PlayerOnLineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerOnLineCell.h; sourceTree = "<group>"; };
 		76D6284A163AC0EC00CA07D2 /* DuelProductAttensionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuelProductAttensionViewController.h; sourceTree = "<group>"; };
@@ -1422,8 +1431,9 @@
 				767BA5BD1589F8E300825EB1 /* FinalViewController.xib */,
 				7687E8C416392534003C9EE6 /* StoreViewController.xib */,
 				7687E8BF16391A32003C9EE6 /* StoreProductCell.xib */,
-				76841B7D163EE4E900F3FD1A /* StoreProductAttensionCell.xib */,
+				76CE0AE2163EE7ED00B51B04 /* StoreProductAttensionCell.xib */,
 				76D6284C163AC0ED00CA07D2 /* DuelProductAttensionViewController.xib */,
+				76CE0AE4163EF01D00B51B04 /* DuelProductWinViewController.xib */,
 			);
 			name = Xib;
 			sourceTree = "<group>";
@@ -1504,6 +1514,8 @@
 			children = (
 				76A72D51163AA0B400C65D6D /* shop_product_frame.png */,
 				76A72D52163AA0B400C65D6D /* shop_product_frame@2x.png */,
+				76CE0AE6163EF45C00B51B04 /* shop_product_ribbon.png */,
+				76CE0AE7163EF45C00B51B04 /* shop_product_ribbon@2x.png */,
 			);
 			path = Shop;
 			sourceTree = "<group>";
@@ -1890,9 +1902,11 @@
 				BDD07BA4141E1F170085E4FB /* StartViewController.h */,
 				BDD07BA5141E1F170085E4FB /* StartViewController.m */,
 				7687E8C1163920FE003C9EE6 /* StoreViewController.h */,
+				7687E8C2163920FE003C9EE6 /* StoreViewController.m */,
 				76D6284A163AC0EC00CA07D2 /* DuelProductAttensionViewController.h */,
 				76D6284B163AC0EC00CA07D2 /* DuelProductAttensionViewController.m */,
-				7687E8C2163920FE003C9EE6 /* StoreViewController.m */,
+				76CE0AEA163EF62800B51B04 /* DuelProductWinViewController.h */,
+				76CE0AEB163EF62800B51B04 /* DuelProductWinViewController.m */,
 				BDCECE86148515D30007CEE3 /* LoginViewController.h */,
 				BDCECE87148515D30007CEE3 /* LoginViewController.m */,
 			);
@@ -2153,7 +2167,10 @@
 				76A72D53163AA0B400C65D6D /* shop_product_frame.png in Resources */,
 				76A72D54163AA0B400C65D6D /* shop_product_frame@2x.png in Resources */,
 				76D6284E163AC0ED00CA07D2 /* DuelProductAttensionViewController.xib in Resources */,
-				76841B7E163EE4E900F3FD1A /* StoreProductAttensionCell.xib in Resources */,
+				76CE0AE3163EE7ED00B51B04 /* StoreProductAttensionCell.xib in Resources */,
+				76CE0AE5163EF01D00B51B04 /* DuelProductWinViewController.xib in Resources */,
+				76CE0AE8163EF45C00B51B04 /* shop_product_ribbon.png in Resources */,
+				76CE0AE9163EF45C00B51B04 /* shop_product_ribbon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2317,6 +2334,7 @@
 				76057DC41639937500735342 /* StoreProductCell.m in Sources */,
 				76D6284D163AC0ED00CA07D2 /* DuelProductAttensionViewController.m in Sources */,
 				76841B7B163EAE3800F3FD1A /* SoundDownload.m in Sources */,
+				76CE0AEC163EF62800B51B04 /* DuelProductWinViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

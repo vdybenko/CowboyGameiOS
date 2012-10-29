@@ -45,9 +45,14 @@
     return [objects objectAtIndex:0];
 }
 
++(StoreProductCell*) cellAttension {
+    NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"StoreProductAttensionCell" owner:nil options:nil];
+    return [objects objectAtIndex:0];
+}
+
 +(NSString*) cellID { return @"StoreProductCell"; }
 
--(void) initMainControls;
+-(void) initWithOutBackGround;
 {
     UIColor *buttonsTitleColor = [[UIColor alloc] initWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     
@@ -61,8 +66,20 @@
     [label1 setBackgroundColor:[UIColor clearColor]];
     [label1 setTextColor:buttonsTitleColor];
     [label1 setText:NSLocalizedString(@"BUYIT", @"")];
-    [buyProduct addSubview:label1];
-        
+    [buyProduct addSubview:label1];    
+}
+
+-(void) initMainControlsWithNarrowBackGround;
+{
+    [self initWithOutBackGround];
+    backGround.clipsToBounds = YES;
+    [backGround setDinamicHeightBackground];
+}
+
+
+-(void) initMainControls;
+{
+    [self initWithOutBackGround];
     [backGround setDinamicHeightBackground];
 }
 

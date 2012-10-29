@@ -13,8 +13,10 @@
 @interface StoreProductCell : UITableViewCell
 
 +(StoreProductCell*)cell;
++(StoreProductCell*) cellAttension;
 +(NSString*) cellID;
 
 -(void)populateWithProduct:(CDDuelProduct *)product targetToBuyButton:(id)delegate cellType:(StoreDataSourceTypeTables)cellType;
 -(void) initMainControls;
+-(void) initMainControlsWithNarrowBackGround;
 @end

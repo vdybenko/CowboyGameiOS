@@ -26,6 +26,7 @@
 @implementation DuelProductAttensionViewController
 @synthesize title;
 @synthesize frameView;
+@synthesize webView;
 - (id)initWithAccount:(AccountDataSource*)account;
 {
     self = [super initWithNibName:Nil bundle:Nil];
@@ -39,7 +40,7 @@
 {
     [super viewDidLoad];
     [frameView setDinamicHeightBackground];
-    StoreProductCell *cell = [StoreProductCell cell];
+    StoreProductCell *cell = [StoreProductCell cellAttension];
     [cell initMainControls];
     
     NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:DUEL_PRODUCTS_WEAPONS];
@@ -49,7 +50,7 @@
     [cell populateWithProduct:prod targetToBuyButton:self cellType:StoreDataSourceTypeTablesWeapons];
     CGRect frame= cell.frame;
     frame.origin.x = 0;
-    frame.origin.y = frameView.frame.origin.y + frameView.frame.size.height-10;
+    frame.origin.y = frameView.frame.origin.y + frameView.frame.size.height-30;
     cell.frame = frame;
     [self.view insertSubview:cell belowSubview:frameView];
 }

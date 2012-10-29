@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AccountDataSource.h"
 
 @interface DuelProductWinViewController : UIViewController
+- (id)initWithAccount:(AccountDataSource*)account;
 
 @end
