@@ -647,13 +647,14 @@ static StartViewController *sharedHelper = nil;
 
 -(IBAction)showHelp:(id)sender
 {
-    DuelProductDownloaderController *duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
-    [duelProductDownloaderController refreshDuelProducts];
+//    DuelProductDownloaderController *duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
+//    [duelProductDownloaderController refreshDuelProducts];
     
-    StoreViewController *svc=[[StoreViewController alloc] initWithNibName:nil bundle:nil];
-    [self.navigationController pushViewController:svc animated:YES];
-//    DuelProductAttensionViewController *vc=[[DuelProductAttensionViewController alloc] initWithAccount:playerAccount];
-//    [self.navigationController pushViewController:vc animated:YES];
+//    StoreViewController *svc=[[StoreViewController alloc] initWithNibName:nil bundle:nil];
+//    [self.navigationController pushViewController:svc animated:YES];
+    
+    DuelProductAttensionViewController *vc=[[DuelProductAttensionViewController alloc] initWithAccount:playerAccount];
+    [self.navigationController pushViewController:vc animated:YES];
 //    UIWindow *mainWindow = [[UIApplication sharedApplication] keyWindow];
 //    [mainWindow insertSubview:vc.view aboveSubview:mainWindow];
     return;

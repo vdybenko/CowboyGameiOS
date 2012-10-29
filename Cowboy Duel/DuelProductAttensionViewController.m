@@ -46,8 +46,12 @@
     NSArray *arrItemsList = [NSKeyedUnarchiver unarchiveObjectWithData:data1];
     
     CDDuelProduct *prod=[arrItemsList objectAtIndex:0];
-    [cell populateWithProduct:prod targetToBuyButton:self cellType:StoreDataSourceTypeTablesDefenses];
-    [self.view addSubview:cell];
+    [cell populateWithProduct:prod targetToBuyButton:self cellType:StoreDataSourceTypeTablesWeapons];
+    CGRect frame= cell.frame;
+    frame.origin.x = 0;
+    frame.origin.y = frameView.frame.origin.y + frameView.frame.size.height-10;
+    cell.frame = frame;
+    [self.view insertSubview:cell belowSubview:frameView];
 }
 
 - (void)didReceiveMemoryWarning
