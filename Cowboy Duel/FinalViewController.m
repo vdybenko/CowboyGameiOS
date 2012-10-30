@@ -169,7 +169,6 @@
         if ((userTime == 999999) && (oponentTime == 999999))
         {
             //falseLabel =  NSLocalizedString(@"Bouth false", @"");
-            [follPlayer setVolume:0.2];
             resoultDataSource.deadHeat = YES;
             resoultDataSource.foll = YES;
             resoultDataSource.result = YES;
