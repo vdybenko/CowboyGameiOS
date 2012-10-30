@@ -25,5 +25,6 @@
 @property (strong, nonatomic) IBOutlet UIView *ivBlack;
 
 -(id)initWithAccount:(AccountDataSource *)userAccount startViewController:(StartViewController *)startViewController;
+-(void)checkValidBlackActivity;
 
 @end

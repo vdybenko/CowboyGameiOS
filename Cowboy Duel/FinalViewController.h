@@ -67,7 +67,7 @@
     BOOL firstRun;
     
     AVAudioPlayer *player;
-    AVAudioPlayer *follPlayer;
+    AVAudioPlayer *follPlayerFinal;
     CDTransaction *transaction;
     CDDuel *duel;
     

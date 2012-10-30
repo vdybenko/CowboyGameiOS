@@ -209,7 +209,9 @@ static StartViewController *sharedHelper = nil;
             [uDef setInteger:2 forKey:@"FirstRunForPractice"];
 
             [playerAccount loadAllParametrs];
-            
+//          putch for 1.4.1
+            [playerAccount putchAvatarImageToInitStartVC:self];
+//            
             if (!([playerAccount.accountID rangeOfString:@"F"].location == NSNotFound)){ 
                 facebook = [[Facebook alloc] initWithAppId:kFacebookAppId andDelegate:[LoginViewController sharedInstance]];
                 
@@ -505,7 +507,9 @@ static StartViewController *sharedHelper = nil;
     }
     
     [facebook extendAccessTokenIfNeeded];
-    
+    if (profileViewController) {
+        [profileViewController checkValidBlackActivity];
+    }
     firstDayWithOutAdvertising=[AdvertisingAppearController advertisingCheckForAppearWithFirstDayWithOutAdvertising:firstDayWithOutAdvertising];
 }
 
@@ -578,13 +582,12 @@ static StartViewController *sharedHelper = nil;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
 														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"more_games" forKey:@"event"]];
+													  userInfo:[NSDictionary dictionaryWithObject:@"/more_games" forKey:@"event"]];
 
 }
 
 -(IBAction)profileButtonClick 
 {   
-    
     profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount startViewController:self];
     [profileViewController setNeedAnimation:YES];
     CATransition* transition = [CATransition animation];
@@ -596,7 +599,7 @@ static StartViewController *sharedHelper = nil;
     [self.navigationController pushViewController:profileViewController animated:NO];
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                         object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"profile_click" forKey:@"event"]];
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/profile_click" forKey:@"event"]];
 }
 
 -(void)profileButtonClickWithOutAnimation;
@@ -652,8 +655,8 @@ static StartViewController *sharedHelper = nil;
     CATransition* transition = [CATransition animation];
     transition.duration = 0.5;
     transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    transition.type = kCATransitionPush; //, kCATransitionPush, kCATransitionReveal, kCATransitionFade
-    transition.subtype = kCATransitionFromBottom;//kCATransitionFromTop; kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop,
+    transition.type = kCATransitionPush; 
+    transition.subtype = kCATransitionFromBottom;
     [self.navigationController.view.layer addAnimation:transition forKey:nil];
     [self.navigationController pushViewController:helpViewController animated:NO];
 }
@@ -918,11 +921,11 @@ static StartViewController *sharedHelper = nil;
         }
 
         NSString *urlAvatar=[responseObject objectForKey:@"avatar"];
-        if (urlAvatar) {
+        if ([playerAccount isAvatarImage:urlAvatar]) {
             playerAccount.avatar=urlAvatar;
             [playerAccount saveAvatar];
         }
-//        
+        
         NSString *playerAge=[responseObject objectForKey:@"age"];
         if (playerAge) {
             playerAccount.age=playerAge;
@@ -1241,6 +1244,12 @@ static StartViewController *sharedHelper = nil;
     
 	if ([result isKindOfClass:[NSDictionary class]]) {
 
+//        putch for 1.4.1
+        BOOL modifierUserInfo = NO;
+        if (([playerAccount.accountID rangeOfString:@"F:"].location != NSNotFound)&&[playerAccount putchAvatarImageSendInfo]) {
+            modifierUserInfo = YES;
+        }
+//
         oldAccounId = [[NSString alloc] initWithFormat:@"%@",playerAccount.accountID];
         
 		NSString *userId = [NSString stringWithFormat:@"F:%@", ValidateObject([result objectForKey:@"id"], [NSString class])];
@@ -1273,7 +1282,7 @@ static StartViewController *sharedHelper = nil;
             
         [uDef synchronize];
         
-        [self authorizationModifier:NO];
+        [self authorizationModifier:modifierUserInfo];
     }
 
 }
@@ -1521,5 +1530,6 @@ static StartViewController *sharedHelper = nil;
     }
     
 }
+
 
 @end

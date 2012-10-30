@@ -43,27 +43,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    helpPracticeView=[[UIView alloc] initWithFrame:CGRectMake(12, 480, 290, 320)];
-    
-    UIImageView *imvArm=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dv_arm.png"]];
-    CGRect frame = imvArm.frame;
-    frame.origin = CGPointMake(24, 11);
-    frame.size= CGSizeMake(242, 298);
-    imvArm.frame = frame;
-    [helpPracticeView addSubview:imvArm];
-    
-    UIButton *cancelBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    frame=cancelBtn.frame;
-    frame.origin=CGPointMake(248, 13);
-    frame.size=CGSizeMake(33, 33);
-    cancelBtn.frame=frame;
-    [cancelBtn setImage:[UIImage imageNamed:@"btn_adcolony.png"] forState:UIControlStateNormal];
-    [cancelBtn addTarget:self action:@selector(cancelHelpArmClick:) forControlEvents:UIControlEventTouchUpInside];
-    [helpPracticeView addSubview:cancelBtn];
-    
-    [helpPracticeView setDinamicHeightBackground];
-    [self.view addSubview:helpPracticeView];
 
     if ([helpViewSound isDescendantOfView:super.view]) {
         [helpPracticeView setHidden:YES];
@@ -71,6 +50,10 @@ static NSString *ShotSound = @"%@/shot.mp3";
         [self cancelSoundClick:Nil];
     }
     
+    if(firstRun){
+        lbBackButton.text = NSLocalizedString(@"SKIP", nil);
+    }
+
 }
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -92,11 +75,9 @@ static NSString *ShotSound = @"%@/shot.mp3";
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     [accelerometrDataSource reloadFint];
-    //    [button setEnabled:YES];
-    soundStart = NO; 
-    follAccelCheck = NO;
-    start = NO;
+    duelIsStarted = NO;
     fireSound = NO;
     acelStayt = YES;
     shotCount = 0;
@@ -140,33 +121,24 @@ static NSString *ShotSound = @"%@/shot.mp3";
     return mutchNumberWin;
 }
 
-
 -(void)follSound
 {
     DLog(@"foll sound");
     if (!soundStart) {
-        NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/follSound.mp3", [[NSBundle mainBundle] resourcePath]]];
-        NSError *error;
-        follPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-        [follPlayer setVolume:1.0];
         [follPlayer play];
     }
-    
-    
 }
-
 
 -(void)shotTimer
 {
-    
     nowInterval = [NSDate timeIntervalSinceReferenceDate];
     activityInterval = (nowInterval - startInterval) * 1000;
     
     shotTime = (int)activityInterval;
     
-    if ((shotTime*0.001 >= time)&&(!start)) {
+    if ((shotTime*0.001 >= time)&&(!duelIsStarted)) {
         DLog(@"Timer");
-        start = YES;
+        duelIsStarted = YES;
         NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Fire.mp3", [[NSBundle mainBundle] resourcePath]]];
         NSError *error;
         [player stop];
@@ -174,11 +146,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
         [player play];
         [self vibrationStart];
     }    
-
-    /*   
-    if ((shotTime*0.001 >= time+0.6)&&(!start)) {
-        start = YES;
-    } */   
 }
 
 
@@ -186,7 +153,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
 {
     [super buttonClick]; 
     
-    if (start){    
+    if (duelIsStarted){    
         [self hideHelpViewWithArm];
         
         if (shotCount == maxShotCount) 
@@ -226,7 +193,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
 {
     [super accelerometer:accelerometer didAccelerate:acceleration];
 
-    if (start && acelStayt) {
+    if (duelIsStarted && acelStayt) {
         fintType = [accelerometrDataSource setPositionWithX:acceleration.x andY:acceleration.y andZ:acceleration.z];
         switch (fintType) {
             case FirstFint:
@@ -250,33 +217,11 @@ static NSString *ShotSound = @"%@/shot.mp3";
         [self startDuel];
     }
     
-    if ((!accelerometerState) && (soundStart) && (!start)) {
+    if ((!accelerometerState) && (soundStart) && (!duelIsStarted)) {
         if(!follAccelCheck){
-            _infoButton.enabled=NO;
-            follAccelCheck = YES;
-            DLog(@"Foll start");
-            [timer invalidate];
-            [player stop];
-            [player setCurrentTime:0.0];
-            [follPlayer setCurrentTime:0.0];
-            [follPlayer play];
-            [self hideHelpViewWithArm];
-            [activityIndicatorView setText:NSLocalizedString(@"FOLL", @"")];
-            [activityIndicatorView showView];
-            [self performSelector:@selector(follSend) withObject:self afterDelay:2.0];
-            
+            [self restartCountdown];
         }
-        
     }
-    
-    
-    //    if ((follAccelCheck)&&(accelerometerState)) {
-    //        DLog(@"Down");
-    //        follAccelCheck = NO;
-    //        [self startDuel];
-    //        
-    //    }
-    
 }
 
 -(void)follSend
@@ -289,10 +234,8 @@ static NSString *ShotSound = @"%@/shot.mp3";
 -(void)startDuel
 {
     [super startDuel];
-    DLog(@"Teaching started");
-    soundStart = YES;
-    [helpPracticeView removeFromSuperview];
-    
+    NSLog(@"startDuel");
+    soundStart = YES;    
     startInterval = [NSDate timeIntervalSinceReferenceDate];
     [player stop];
     [player setCurrentTime:0.0];
@@ -301,7 +244,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
     [player play];
     
     timer = [NSTimer scheduledTimerWithTimeInterval:0.111 target:self selector:@selector(shotTimer) userInfo:nil repeats:YES];
-    start = NO;
+    duelIsStarted = NO;
     fireSound = NO;
     acelStayt = YES;
     shotTime = 0;
@@ -310,13 +253,8 @@ static NSString *ShotSound = @"%@/shot.mp3";
     {
         [self hideHelpViewWithArm];
     }
-
 }
 
--(void)hideHelpViewWithArm;
-{    
-    [helpPracticeView removeFromSuperview];
-}
 #pragma mark - IBAction
 
 - (IBAction)cancelShotsClick:(id)sender {
@@ -351,8 +289,5 @@ static NSString *ShotSound = @"%@/shot.mp3";
                      }];
 }
 
-- (void)cancelHelpArmClick:(id)sender {
-    [self hideHelpViewWithArm ];
-}
 
 @end

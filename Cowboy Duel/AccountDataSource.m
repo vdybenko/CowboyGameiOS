@@ -431,4 +431,40 @@ static AccountDataSource *sharedHelper = nil;
     [[NSUserDefaults standardUserDefaults] setObject:ValidateObject([Utils deviceType], [NSString class]) forKey:@"deviceType"];
 }
 
+#pragma mark putch for 1.4 
+-(void)putchAvatarImageToInitStartVC:(StartViewController*)startVC
+{
+    if (![self isAvatarImage:self.avatar]){
+        if (([self.accountID rangeOfString:@"F:"].location != NSNotFound)) {
+            NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"birthday,id,name,picture,location",@"fields",nil];
+            [[LoginViewController sharedInstance] initFacebook];
+            [[LoginViewController sharedInstance].facebook requestWithGraphPath:@"me" andParams:params andDelegate:startVC];
+        }
+    }
+}
+
+-(BOOL)isAvatarImage:(NSString*)imagePath
+{
+    if (([self.accountID rangeOfString:@"F:"].location != NSNotFound)){
+        NSString *extencion=[imagePath pathExtension];
+        if (([extencion isEqualToString:@"jpg"])||([extencion isEqualToString:@"jpeg"])||([extencion isEqualToString:@"png"])||([extencion isEqualToString:@"gif"])){
+            return YES;
+        }else {
+            return NO;
+        }
+    }else {
+        return YES;
+    }
+}
+
+-(BOOL)putchAvatarImageSendInfo{
+    BOOL putchAvatarImageCHeck = [[NSUserDefaults standardUserDefaults] boolForKey:@"putchAvatarImageCHeck"];
+    if (!putchAvatarImageCHeck) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"putchAvatarImageCHeck"];
+        return YES;
+    }else {
+        return NO;
+    }
+}
+#pragma mark
 @end

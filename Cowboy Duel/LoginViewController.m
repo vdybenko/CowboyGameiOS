@@ -126,7 +126,7 @@ static LoginViewController *sharedHelper = nil;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
 														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"login_FB" forKey:@"event"]];
+													  userInfo:[NSDictionary dictionaryWithObject:@"/login_FB" forKey:@"event"]];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IPad"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self.view removeFromSuperview];
@@ -142,7 +142,7 @@ static LoginViewController *sharedHelper = nil;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
 														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"login_cancel" forKey:@"event"]];
+													  userInfo:[NSDictionary dictionaryWithObject:@"/login_cancel" forKey:@"event"]];
 }
 
 -(void)logOutFB;

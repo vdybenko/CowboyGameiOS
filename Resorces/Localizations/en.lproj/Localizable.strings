@@ -61,6 +61,8 @@
 
 "Round" = "Round";
 
+"SKIP" = "SKIP";
+
 //FEEDBACK 
 
 "OK"="OK";

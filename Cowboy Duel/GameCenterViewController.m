@@ -102,6 +102,7 @@ static GameCenterViewController *gameCenterViewController;
     randomTime = arc4random() % 6;
     gsSend->randomTime = randomTime;
     [playerAccount.accountName getCString:gsSend->accountName maxLength:MAX_LENGTH encoding:NSUTF8StringEncoding];
+    [playerAccount.accountID getCString:gsSend->oponentAuth maxLength:MAX_LENGTH encoding:NSUTF8StringEncoding];
     gsSend->oponentMoney = playerAccount.money;
     gsSend->accountLevel = playerAccount.accountLevel;
     gsSend->oponentWins = playerAccount.accountWins;
@@ -545,9 +546,10 @@ static GameCenterViewController *gameCenterViewController;
             gameInfo *gsReceive = (gameInfo *)&incomingPacket[4];
             oponentAccount.money = gsReceive->oponentMoney;
             oponentAccount.accountLevel = gsReceive->accountLevel;
-            oponentAccount.accountName = [[NSString alloc] initWithCString:gsReceive->accountName encoding:NSUTF8StringEncoding];
-            randomTime = gsReceive->randomTime;
             oponentAccount.accountWins = gsReceive->oponentWins;
+            oponentAccount.accountName = [[NSString alloc] initWithCString:gsReceive->accountName encoding:NSUTF8StringEncoding];
+            oponentAccount.accountID = [[NSString alloc] initWithCString:gsReceive->oponentAuth encoding:NSUTF8StringEncoding];
+            randomTime = gsReceive->randomTime;
             if(!oponentAccount.accountName || [oponentAccount.accountName isEqualToString:@""]) {
                 [self lostConnection];
                 return;
@@ -556,7 +558,6 @@ static GameCenterViewController *gameCenterViewController;
             endDuel = NO;
             server = NO;
             
-
             //for test
             if (!duelStartViewController) {
                 duelStartViewController = [[DuelStartViewController alloc]initWithAccount:playerAccount andOpAccount:oponentAccount  opopnentAvailable:YES andServerType:YES andTryAgain:NO];
@@ -814,7 +815,7 @@ static GameCenterViewController *gameCenterViewController;
             oponentAccount.accountName = [[NSString alloc] initWithCString:gsReceive->accountName encoding:NSUTF8StringEncoding];
             oponentAccount.accountWins = gsReceive->oponentWins;
             oponentAccount.accountID = [[NSString alloc] initWithCString:gsReceive->oponentAuth encoding:NSUTF8StringEncoding];
-
+            
             [self setDelegate2:duelStartViewController];
             duelStartViewController.delegate = self;
             if ([duelStartViewController respondsToSelector:@selector(setOponent:Label1:Label1:)]){ 

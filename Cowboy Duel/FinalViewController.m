@@ -49,7 +49,7 @@
     if (self){
 // added 
         NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/cry.mp3", [[NSBundle mainBundle] resourcePath]]];
-        follPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+        follPlayerFinal= [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
 // above
         teaching = teach;
         playerAccount = userAccount;
@@ -114,7 +114,7 @@
         if ((userTime != 0)&& (userTime != 999999) && (userTime < oponentTime)&& (oponentTime != 999999)) {
             [delegate increaseMutchNumberWin];
             // added               
-            [follPlayer setVolume:0.2];
+            [follPlayerFinal setVolume:0.2];
             // above               
             [delegate increaseMutchNumber];
             resoultDataSource.result = YES;
@@ -137,7 +137,7 @@
             if ((userTime != 0) && (userTime != 999999) && (oponentTime == 0)&& (oponentTime != 999999)) {
                 [delegate increaseMutchNumberWin];
                 // added               
-                [follPlayer setVolume:0.2];
+                [follPlayerFinal setVolume:0.2];
                 // above               
                 [delegate increaseMutchNumber];
                 resoultDataSource.result = YES;
@@ -159,7 +159,7 @@
             falseLabel =  NSLocalizedString(@"Falses", @"");
             [delegate increaseMutchNumberWin];
             // added               
-            [follPlayer setVolume:0.2];
+            [follPlayerFinal setVolume:0.2];
             // above               
             [delegate increaseMutchNumber];
             resoultDataSource.foll = YES;
@@ -212,7 +212,7 @@
         
         [player setNumberOfLoops:999];
         
-        [follPlayer play];
+        [follPlayerFinal play];
         
         if (!lastDuel) {
             NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Back2.mp3", [[NSBundle mainBundle] resourcePath]]];
@@ -367,7 +367,6 @@
 
 -(IBAction)nextButtonClick:(id)sender
 {
-    DLog(@"nextButtonClick");
     [activityIndicatorView showView];
     if(teaching)
     {
@@ -839,7 +838,6 @@
     
     NSInteger sectionRows = [tableView numberOfRowsInSection:[indexPath section]];
 	NSInteger row = [indexPath row];
-    DLog(@"sectionRows %d row %d",sectionRows,row);
     if (runAway && (row == (sectionRows-1))){
         if (runAwayGood) {
             cell.imageView.image = [UIImage imageNamed:@"fin_img_table_win_new.png"];

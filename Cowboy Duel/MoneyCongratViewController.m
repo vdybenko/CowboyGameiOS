@@ -255,6 +255,6 @@
     [[OGHelper sharedInstance] apiGraphScorePost:money];
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
 														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"congratulation_achivment" forKey:@"event"]];
+													  userInfo:[NSDictionary dictionaryWithObject:@"/congratulation_achivment" forKey:@"event"]];
 }
 @end

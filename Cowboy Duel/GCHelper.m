@@ -209,7 +209,7 @@ static GCHelper *sharedHelper = nil;
         {
             // handle the reporting error
             //            DLog(@"report false %@ ",error);
-            [self saveScoreToDevice:scoreReporter];  
+//            [self saveScoreToDevice:scoreReporter];  
         }else{
             DLog(@"report good ");
         }
@@ -227,7 +227,7 @@ static GCHelper *sharedHelper = nil;
         [scoreReporter reportScoreWithCompletionHandler:^(NSError *error) {   
             if (error != nil){  
                 // handle the reporting error  
-                [self saveScoreToDevice:scoreReporter];  
+//                [self saveScoreToDevice:scoreReporter];  
                 //                DLog(@"report false %@ ",error);
                 
             }  
@@ -336,7 +336,7 @@ static GCHelper *sharedHelper = nil;
         [achievement reportAchievementWithCompletionHandler:^(NSError *error){  
             if (error != nil){ 
                 //               DLog(@"Achievements false %@ ",error);
-                [self saveAchievementToDevice:achievement];
+//                [self saveAchievementToDevice:achievement];
             }  
         }];  
     }  
@@ -350,7 +350,7 @@ static GCHelper *sharedHelper = nil;
     if (achievement){         
         [achievement reportAchievementWithCompletionHandler:^(NSError *error){  
             if (error != nil){  
-                [self saveAchievementToDevice:achievement];  
+//                [self saveAchievementToDevice:achievement];  
                 //                DLog(@"Achievements false %@ ",error);
             }          
         }];  
