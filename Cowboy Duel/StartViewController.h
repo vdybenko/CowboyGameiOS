@@ -38,7 +38,7 @@
 @class ListOfItemsViewController;
 @class GameCenterViewController;
 
-@interface StartViewController : UIViewController <MFMailComposeViewControllerDelegate,GCAuthenticateDelegate, UIAlertViewDelegate, FBRequestDelegate>
+@interface StartViewController : UIViewController <MFMailComposeViewControllerDelegate,GCAuthenticateDelegate, UIAlertViewDelegate, FBRequestDelegate, GADBannerViewDelegate>
 
 @property (nonatomic) BOOL showFeedAtFirst;
 @property (strong, nonatomic) NSString *oldAccounId;

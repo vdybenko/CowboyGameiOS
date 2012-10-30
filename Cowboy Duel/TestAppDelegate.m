@@ -11,7 +11,7 @@
 #import <GameKit/GameKit.h>
 
 #if !(TARGET_IPHONE_SIMULATOR)
-#import "GANTracker.h"
+#import "GAI.h"
 #import "Crittercism.h"
 #import "StartViewController.h"
 
@@ -50,10 +50,12 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     
 #if !(TARGET_IPHONE_SIMULATOR)	
     [Crittercism initWithAppID:ID_CRIT_APP  andKey:ID_CRIT_KEY andSecret:ID_CRIT_SECRET];
-        
-    [[GANTracker sharedTracker] startTrackerWithAccountID:kGAAccountID
-                                           dispatchPeriod:kGANDispatchPeriod
-                                                 delegate:nil];	
+    
+    [[GAI sharedInstance] trackerWithTrackingId:kGAAccountID];
+    
+//    [[GAI sharedInstance] startTrackerWithAccountID:kGAAccountID
+//                                           dispatchPeriod:kGANDispatchPeriod
+//                                                 delegate:nil];	
     
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(AnalyticsTrackEvent:)
@@ -100,6 +102,25 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     }
     
     DLog(@"FBAccessTokenKey %@", [defaults objectForKey:@"FBAccessTokenKey"]);
+    
+    CGRect currentScreen = [[UIScreen mainScreen] bounds];
+    if (currentScreen.size.height > 480) {
+        // Initialize the banner at the bottom of the screen.
+        CGPoint origin = CGPointMake(0.0, currentScreen.size.height - 50);
+        
+        // Use predefined GADAdSize constants to define the GADBannerView.
+        self.adBanner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait
+                                                       origin:origin];
+        
+        // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID
+        // before compiling.
+        self.adBanner.adUnitID = kSampleAdUnitID;
+        self.adBanner.delegate = self;
+        [self.adBanner setRootViewController:self];
+        [window addSubview:self.adBanner];
+        [self.adBanner loadRequest:[self createRequest]];
+    }
+    
     
     //Sleep off
     application.idleTimerDisabled = YES;
@@ -194,13 +215,41 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
 	NSString *page = [[notification userInfo] objectForKey:@"event"];
 	DLog(@"GA page %@",page);
 	if (page){
-		if (![[GANTracker sharedTracker] trackPageview:page withError:&err])
+		if (![[GAI sharedInstance].defaultTracker trackView:page])
 			DLog(@" Can't track pageview");
 	}    
-	[[GANTracker sharedTracker] dispatch];
+	[[GAI sharedInstance] dispatch];
     
 }
 #endif
+
+#pragma mark GADRequest generation
+
+// Here we're creating a simple GADRequest and whitelisting the application
+// for test ads. You should request test ads during development to avoid
+// generating invalid impressions and clicks.
+- (GADRequest *)createRequest {
+    GADRequest *request = [GADRequest request];
+    
+    // Make the request for a test ad.
+    request.testing = NO;
+    
+    return request;
+}
+
+#pragma mark GADBannerViewDelegate impl
+
+// We've received an ad successfully.
+- (void)adViewDidReceiveAd:(GADBannerView *)adView {
+    NSLog(@"Received ad successfully");
+}
+
+- (void)adView:(GADBannerView *)view
+didFailToReceiveAdWithError:(GADRequestError *)error {
+    NSLog(@"Failed to receive ad with error: %@", [error localizedFailureReason]);
+}
+
+
 
 - (void)dealloc
 {

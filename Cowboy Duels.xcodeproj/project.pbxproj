@@ -213,7 +213,6 @@
 		7692812C159DCAFD00E6CE41 /* IconDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7692812B159DCAFD00E6CE41 /* IconDownloader.m */; };
 		7692BC2F1574E36C00983264 /* DuelStartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7692BC2E1574E36C00983264 /* DuelStartViewController.xib */; };
 		7693419713DDBA5000A962A4 /* DecreeNarrow.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7693419613DDBA5000A962A4 /* DecreeNarrow.ttf */; };
-		76947EF513ACC4EA008BD146 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 76947EF413ACC4EA008BD146 /* libsqlite3.0.dylib */; };
 		769CA78F14234458006EF248 /* shot.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 769CA78E14234458006EF248 /* shot.mp3 */; };
 		769F567E13AA6A9B006BFD46 /* Duel.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 769F567B13AA6A9B006BFD46 /* Duel.mp3 */; };
 		769F567F13AA6A9B006BFD46 /* Lose.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 769F567C13AA6A9B006BFD46 /* Lose.mp3 */; };
@@ -262,7 +261,7 @@
 		BD84E2AB147CDE9E009DCEBF /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD84E2AA147CDE9D009DCEBF /* CoreText.framework */; };
 		BD865F6A162FF8500049125A /* SSConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = BD865F69162FF8500049125A /* SSConnection.m */; };
 		BD865F6D1630124D0049125A /* SSServer.m in Sources */ = {isa = PBXBuildFile; fileRef = BD865F6C1630124D0049125A /* SSServer.m */; };
-		BDCABD9E148288D50051932E /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDCABD9D148288D50051932E /* libGoogleAnalytics.a */; };
+		BD886C55163FB98D002F9960 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD886C54163FB98D002F9960 /* Default-568h@2x.png */; };
 		BDCECE88148515D40007CEE3 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDCECE87148515D30007CEE3 /* LoginViewController.m */; };
 		BDD07BB8141E1F170085E4FB /* AccelerometrDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B3C141E1F170085E4FB /* AccelerometrDataSource.m */; };
 		BDD07BB9141E1F170085E4FB /* AccountDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B3E141E1F170085E4FB /* AccountDataSource.m */; };
@@ -294,6 +293,10 @@
 		BDD07BEC141E1F170085E4FB /* TestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07BAE141E1F170085E4FB /* TestAppDelegate.m */; };
 		BDD07BEF141E1F170085E4FB /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07BB5141E1F170085E4FB /* Utils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BDD07BF0141E1F170085E4FB /* ValidationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07BB7141E1F170085E4FB /* ValidationUtils.m */; };
+		BDD8E22A163EEE2E004F05A9 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDD8E229163EEE2E004F05A9 /* CoreData.framework */; };
+		BDD8E23E163EF09D004F05A9 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDD8E23D163EF09D004F05A9 /* libGoogleAdMobAds.a */; };
+		BDD8E24C163EF3BC004F05A9 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDD8E24A163EF3BC004F05A9 /* libGoogleAnalytics.a */; };
+		BDD8E24E163EF42F004F05A9 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDD8E24D163EF42F004F05A9 /* AdSupport.framework */; };
 		BDF1EF1713D41BA500C466DF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF1EF1613D41BA500C466DF /* Security.framework */; };
 		BDF1EF1F13D41C4E00C466DF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF1EF1E13D41C4E00C466DF /* MapKit.framework */; };
 /* End PBXBuildFile section */
@@ -645,9 +648,8 @@
 		BD865F69162FF8500049125A /* SSConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSConnection.m; sourceTree = "<group>"; };
 		BD865F6B1630124D0049125A /* SSServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSServer.h; sourceTree = "<group>"; };
 		BD865F6C1630124D0049125A /* SSServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSServer.m; sourceTree = "<group>"; };
+		BD886C54163FB98D002F9960 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		BDC6D7BA147E48E90012CB34 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
-		BDCABD9C148288D50051932E /* GANTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GANTracker.h; path = "Cowboy Duel/GoogleAnalytics/Library/GANTracker.h"; sourceTree = SOURCE_ROOT; };
-		BDCABD9D148288D50051932E /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalytics.a; path = "Cowboy Duel/GoogleAnalytics/Library/libGoogleAnalytics.a"; sourceTree = SOURCE_ROOT; };
 		BDCECE86148515D30007CEE3 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		BDCECE87148515D30007CEE3 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		BDD07B3B141E1F170085E4FB /* AccelerometrDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccelerometrDataSource.h; sourceTree = "<group>"; };
@@ -713,7 +715,24 @@
 		BDD07BB5141E1F170085E4FB /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		BDD07BB6141E1F170085E4FB /* ValidationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidationUtils.h; sourceTree = "<group>"; };
 		BDD07BB7141E1F170085E4FB /* ValidationUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidationUtils.m; sourceTree = "<group>"; };
-		BDD07C1D141E28700085E4FB /* GANTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GANTracker.h; path = GoogleAnalytics/Library/GANTracker.h; sourceTree = "<group>"; };
+		BDD8E229163EEE2E004F05A9 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		BDD8E234163EF09D004F05A9 /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdMobExtras.h; sourceTree = "<group>"; };
+		BDD8E235163EF09D004F05A9 /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdNetworkExtras.h; sourceTree = "<group>"; };
+		BDD8E236163EF09D004F05A9 /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSize.h; sourceTree = "<group>"; };
+		BDD8E237163EF09D004F05A9 /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
+		BDD8E238163EF09D004F05A9 /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerViewDelegate.h; sourceTree = "<group>"; };
+		BDD8E239163EF09D004F05A9 /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitial.h; sourceTree = "<group>"; };
+		BDD8E23A163EF09D004F05A9 /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitialDelegate.h; sourceTree = "<group>"; };
+		BDD8E23B163EF09D004F05A9 /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
+		BDD8E23C163EF09D004F05A9 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
+		BDD8E23D163EF09D004F05A9 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
+		BDD8E243163EF3BB004F05A9 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAI.h; path = "Cowboy Duel/GoogleAnalytics/Library/GAI.h"; sourceTree = SOURCE_ROOT; };
+		BDD8E244163EF3BB004F05A9 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITrackedViewController.h; path = "Cowboy Duel/GoogleAnalytics/Library/GAITrackedViewController.h"; sourceTree = SOURCE_ROOT; };
+		BDD8E245163EF3BB004F05A9 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITracker.h; path = "Cowboy Duel/GoogleAnalytics/Library/GAITracker.h"; sourceTree = SOURCE_ROOT; };
+		BDD8E246163EF3BB004F05A9 /* GAITransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITransaction.h; path = "Cowboy Duel/GoogleAnalytics/Library/GAITransaction.h"; sourceTree = SOURCE_ROOT; };
+		BDD8E247163EF3BC004F05A9 /* GAITransactionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITransactionItem.h; path = "Cowboy Duel/GoogleAnalytics/Library/GAITransactionItem.h"; sourceTree = SOURCE_ROOT; };
+		BDD8E24A163EF3BC004F05A9 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalytics.a; path = "Cowboy Duel/GoogleAnalytics/Library/libGoogleAnalytics.a"; sourceTree = SOURCE_ROOT; };
+		BDD8E24D163EF42F004F05A9 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		BDF1EF1613D41BA500C466DF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BDF1EF1813D41BD600C466DF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BDF1EF1E13D41C4E00C466DF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -724,6 +743,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDD8E24E163EF42F004F05A9 /* AdSupport.framework in Frameworks */,
+				BDD8E22A163EEE2E004F05A9 /* CoreData.framework in Frameworks */,
 				76CB057013AB991B0011E768 /* QuartzCore.framework in Frameworks */,
 				603B269B137AA0EA00E9ED1D /* AudioToolbox.framework in Frameworks */,
 				038366DD1549257700F3F63B /* MediaPlayer.framework in Frameworks */,
@@ -738,7 +759,6 @@
 				605A7A5F138A377F00B4FB8E /* MobileCoreServices.framework in Frameworks */,
 				605A7A5B138A372700B4FB8E /* SystemConfiguration.framework in Frameworks */,
 				BDF1EF1713D41BA500C466DF /* Security.framework in Frameworks */,
-				76947EF513ACC4EA008BD146 /* libsqlite3.0.dylib in Frameworks */,
 				6048E44313A9F4E2005BA961 /* MessageUI.framework in Frameworks */,
 				604AAC451394C9E200A73CAC /* StoreKit.framework in Frameworks */,
 				605A7A59138A371100B4FB8E /* CFNetwork.framework in Frameworks */,
@@ -748,9 +768,10 @@
 				60593A711379321800256204 /* UIKit.framework in Frameworks */,
 				60593A731379321800256204 /* Foundation.framework in Frameworks */,
 				60593A751379321800256204 /* CoreGraphics.framework in Frameworks */,
-				BDCABD9E148288D50051932E /* libGoogleAnalytics.a in Frameworks */,
 				038366DB154924E700F3F63B /* libAdColony.a in Frameworks */,
 				767C0B7D15652C9C0007E113 /* libCrittercism_v3_1_5.a in Frameworks */,
+				BDD8E23E163EF09D004F05A9 /* libGoogleAdMobAds.a in Frameworks */,
+				BDD8E24C163EF3BC004F05A9 /* libGoogleAnalytics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -892,6 +913,7 @@
 			children = (
 				31E2204215AB100E00482ED5 /* Default.png */,
 				31E2204315AB100E00482ED5 /* Default@2x.png */,
+				BD886C54163FB98D002F9960 /* Default-568h@2x.png */,
 				31F6D52F15AB034400C0F28D /* Gun.png */,
 				31F6D53015AB034400C0F28D /* Gun@2x.png */,
 				03286001159DD84000D16195 /* Icon@2x.png */,
@@ -1080,6 +1102,9 @@
 		60593A611379321700256204 = {
 			isa = PBXGroup;
 			children = (
+				BDD8E24D163EF42F004F05A9 /* AdSupport.framework */,
+				BDD8E229163EEE2E004F05A9 /* CoreData.framework */,
+				BDD8E18A163EEBFB004F05A9 /* GoogleAdMobAdsSdkiOS-6.2.1 */,
 				767EF48215D5557100548A04 /* Twitter.framework */,
 				7676679C15C10ADA001E3215 /* Icon.png */,
 				763F8A281578A3A900D8BB42 /* libxml2.2.dylib */,
@@ -1309,8 +1334,12 @@
 		76B4677214827C1E00C4C43E /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				BDCABD9C148288D50051932E /* GANTracker.h */,
-				BDCABD9D148288D50051932E /* libGoogleAnalytics.a */,
+				BDD8E243163EF3BB004F05A9 /* GAI.h */,
+				BDD8E244163EF3BB004F05A9 /* GAITrackedViewController.h */,
+				BDD8E245163EF3BB004F05A9 /* GAITracker.h */,
+				BDD8E246163EF3BB004F05A9 /* GAITransaction.h */,
+				BDD8E247163EF3BC004F05A9 /* GAITransactionItem.h */,
+				BDD8E24A163EF3BC004F05A9 /* libGoogleAnalytics.a */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -1431,7 +1460,6 @@
 				7675CA8515A2E10B005A3BD3 /* DuelRewardLogicController.m */,
 				BDD07B3D141E1F170085E4FB /* AccountDataSource.h */,
 				BDD07B3E141E1F170085E4FB /* AccountDataSource.m */,
-				BDD07C1D141E28700085E4FB /* GANTracker.h */,
 				BDD07B58141E1F170085E4FB /* CDAchivment.h */,
 				BDD07B59141E1F170085E4FB /* CDAchivment.m */,
 				BDD07B5A141E1F170085E4FB /* CDDuel.h */,
@@ -1480,6 +1508,23 @@
 				BDCECE87148515D30007CEE3 /* LoginViewController.m */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		BDD8E18A163EEBFB004F05A9 /* GoogleAdMobAdsSdkiOS-6.2.1 */ = {
+			isa = PBXGroup;
+			children = (
+				BDD8E234163EF09D004F05A9 /* GADAdMobExtras.h */,
+				BDD8E235163EF09D004F05A9 /* GADAdNetworkExtras.h */,
+				BDD8E236163EF09D004F05A9 /* GADAdSize.h */,
+				BDD8E237163EF09D004F05A9 /* GADBannerView.h */,
+				BDD8E238163EF09D004F05A9 /* GADBannerViewDelegate.h */,
+				BDD8E239163EF09D004F05A9 /* GADInterstitial.h */,
+				BDD8E23A163EF09D004F05A9 /* GADInterstitialDelegate.h */,
+				BDD8E23B163EF09D004F05A9 /* GADRequest.h */,
+				BDD8E23C163EF09D004F05A9 /* GADRequestError.h */,
+				BDD8E23D163EF09D004F05A9 /* libGoogleAdMobAds.a */,
+			);
+			path = "GoogleAdMobAdsSdkiOS-6.2.1";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1730,6 +1775,7 @@
 				312B2F4415E7A24F006D2470 /* fin_img_new_lvl@2x.png in Resources */,
 				76864B391626A0E80095BBEF /* TopPlayersCell.xib in Resources */,
 				76864B3B1626DAC30095BBEF /* OnLinePlayersCell.xib in Resources */,
+				BD886C55163FB98D002F9960 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1854,6 +1900,10 @@
 		60593A901379321800256204 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					armv6,
+					armv7,
+				);
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1874,7 +1924,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/gt2/** $(PROJECT_DIR)/**";
-				VALID_ARCHS = "armv7s armv7";
+				VALID_ARCHS = "armv6 armv7s armv7";
 				WARNING_LDFLAGS = (
 					Foundation,
 					"-framework",
@@ -1885,7 +1935,7 @@
 		60593A931379321800256204 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = (
 					armv7,
 					armv6,
@@ -1896,8 +1946,7 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/Cowboy Duel/OpenFeint.2.12.5\"",
+					"\"$(SRCROOT)\"/**",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1909,21 +1958,16 @@
 					GSI_COMMON_DEBUG,
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				HEADER_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/",
-					"$(PROJECT_DIR)/gt2/",
-				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				INFOPLIST_FILE = "Cowboy Duel/Test-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
-					"\"$(SRCROOT)/Cowboy Duel\"",
-					"\"$(SRCROOT)/../../../../../Downloads/Flurry iPhone SDK v3/FlurryAnalytics\"",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/GoogleAnalytics/Library\"",
+					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"/**",
 					"\"$(SRCROOT)/CrittercismSDK\"",
 					"\"$(SRCROOT)/Cowboy Duel/Utils/TwitterOAuth/SAOAuthTwitterEngine\"",
+					"\"$(SRCROOT)/GoogleAdMobAdsSdkiOS-6.2.1\"/**",
+					"\"$(SRCROOT)\"/**",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -1939,14 +1983,11 @@
 				PRODUCT_NAME = "Cowboy Duel";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				REZ_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Test/GoogleAnalytics/Library\"",
-				);
+				REZ_SEARCH_PATHS = "$(inherited)";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "../../.. $(PROJECT_DIR)";
 				VALIDATE_PRODUCT = NO;
-				VALID_ARCHS = "armv7 armv6";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1954,6 +1995,10 @@
 		76FE9BBB141DEDA400258D92 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					armv6,
+					armv7,
+				);
 				CODE_SIGN_IDENTITY = "iPhone Distribution: SPE Dybenko Olga Viktorovna  (WebKate)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: SPE Dybenko Olga Viktorovna  (WebKate)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1974,7 +2019,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/gt2/** $(PROJECT_DIR)/**";
-				VALID_ARCHS = "armv7s armv7";
+				VALID_ARCHS = "armv6 armv7s armv7";
 				WARNING_LDFLAGS = (
 					Foundation,
 					"-framework",
@@ -1985,7 +2030,7 @@
 		76FE9BBC141DEDA400258D92 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = (
 					armv7,
 					armv6,
@@ -1996,8 +2041,7 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/Cowboy Duel/OpenFeint.2.12.5\"",
+					"\"$(SRCROOT)\"/**",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2009,21 +2053,16 @@
 					GSI_COMMON_DEBUG,
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				HEADER_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/",
-					"$(PROJECT_DIR)/gt2/",
-				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				INFOPLIST_FILE = "Cowboy Duel/Test-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
-					"\"$(SRCROOT)/Cowboy Duel\"",
-					"\"$(SRCROOT)/../../../../../Downloads/Flurry iPhone SDK v3/FlurryAnalytics\"",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/GoogleAnalytics/Library\"",
+					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"/**",
 					"\"$(SRCROOT)/CrittercismSDK\"",
 					"\"$(SRCROOT)/Cowboy Duel/Utils/TwitterOAuth/SAOAuthTwitterEngine\"",
+					"\"$(SRCROOT)/GoogleAdMobAdsSdkiOS-6.2.1\"/**",
+					"\"$(SRCROOT)\"/**",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -2039,14 +2078,11 @@
 				PRODUCT_NAME = "Cowboy Duel";
 				PROVISIONING_PROFILE = "FC3CFCAE-2865-4B60-9333-B1EFF894DF55";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FC3CFCAE-2865-4B60-9333-B1EFF894DF55";
-				REZ_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Test/GoogleAnalytics/Library\"",
-				);
+				REZ_SEARCH_PATHS = "$(inherited)";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "../../.. $(PROJECT_DIR)";
 				VALIDATE_PRODUCT = NO;
-				VALID_ARCHS = "armv7 armv6";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -2054,6 +2090,10 @@
 		E77490411427980C00145831 /* Distrbution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					armv6,
+					armv7,
+				);
 				CODE_SIGN_IDENTITY = "iPhone Distribution: SPE Dybenko Olga Viktorovna  (WebKate)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: SPE Dybenko Olga Viktorovna  (WebKate)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2074,7 +2114,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/gt2/** $(PROJECT_DIR)/**";
-				VALID_ARCHS = "armv7s armv7";
+				VALID_ARCHS = "armv6 armv7s armv7";
 				WARNING_LDFLAGS = (
 					Foundation,
 					"-framework",
@@ -2085,7 +2125,7 @@
 		E77490421427980C00145831 /* Distrbution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = (
 					armv7,
 					armv6,
@@ -2097,8 +2137,7 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/Cowboy Duel/OpenFeint.2.12.5\"",
+					"\"$(SRCROOT)\"/**",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2110,21 +2149,16 @@
 					GSI_COMMON_DEBUG,
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				HEADER_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/",
-					"$(PROJECT_DIR)/gt2/",
-				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				INFOPLIST_FILE = "Cowboy Duel/Test-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
-					"\"$(SRCROOT)/Cowboy Duel\"",
-					"\"$(SRCROOT)/../../../../../Downloads/Flurry iPhone SDK v3/FlurryAnalytics\"",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/GoogleAnalytics/Library\"",
+					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"/**",
 					"\"$(SRCROOT)/CrittercismSDK\"",
 					"\"$(SRCROOT)/Cowboy Duel/Utils/TwitterOAuth/SAOAuthTwitterEngine\"",
+					"\"$(SRCROOT)/GoogleAdMobAdsSdkiOS-6.2.1\"/**",
+					"\"$(SRCROOT)\"/**",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -2141,14 +2175,11 @@
 				PROVISIONING_PROFILE = "FC3CFCAE-2865-4B60-9333-B1EFF894DF55";
 				"PROVISIONING_PROFILE[sdk=*]" = "FC3CFCAE-2865-4B60-9333-B1EFF894DF55";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FC3CFCAE-2865-4B60-9333-B1EFF894DF55";
-				REZ_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Test/GoogleAnalytics/Library\"",
-				);
+				REZ_SEARCH_PATHS = "$(inherited)";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "../../.. $(PROJECT_DIR)";
 				VALIDATE_PRODUCT = NO;
-				VALID_ARCHS = "armv7 armv6";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Distrbution;

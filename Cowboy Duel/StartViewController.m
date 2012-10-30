@@ -436,6 +436,8 @@ static StartViewController *sharedHelper = nil;
         player.volume = 1.0;
     }
     [player play];
+    
+    
 }
 - (void)viewDidUnload {
     feedbackView = nil;
