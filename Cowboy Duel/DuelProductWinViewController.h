@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "AccountDataSource.h"
+#import "CDDuelProduct.h"
 
 @interface DuelProductWinViewController : UIViewController
-- (id)initWithAccount:(AccountDataSource*)account;
+- (id)initWithAccount:(AccountDataSource*)account duelProduct:(CDDuelProduct*)product;
 
 @end

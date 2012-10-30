@@ -657,7 +657,12 @@ static StartViewController *sharedHelper = nil;
 //    DuelProductAttensionViewController *vc=[[DuelProductAttensionViewController alloc] initWithAccount:playerAccount];
 //    [self.navigationController pushViewController:vc animated:YES];
     
-    DuelProductWinViewController *vc=[[DuelProductWinViewController alloc] initWithAccount:playerAccount];
+    NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:DUEL_PRODUCTS_WEAPONS];
+    NSArray *arrItemsList = [NSKeyedUnarchiver unarchiveObjectWithData:data1];
+    
+    CDDuelProduct *prod=[arrItemsList objectAtIndex:0];
+    
+    DuelProductWinViewController *vc=[[DuelProductWinViewController alloc] initWithAccount:playerAccount duelProduct:prod];
     [self.navigationController pushViewController:vc animated:YES];
     return;
     
