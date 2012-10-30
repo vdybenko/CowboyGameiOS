@@ -18,5 +18,6 @@
 @property (nonatomic, readonly) UINavigationController *navigationController;
 @property  (strong) LoginViewController *loginViewController;
 @property (strong,nonatomic) Facebook *facebook;
+@property (nonatomic) GADBannerView *adBanner;
 
 @end
