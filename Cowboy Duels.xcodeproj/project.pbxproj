@@ -217,6 +217,8 @@
 		7687E8C3163920FE003C9EE6 /* StoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7687E8C2163920FE003C9EE6 /* StoreViewController.m */; };
 		7687E8C516392534003C9EE6 /* StoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7687E8C416392534003C9EE6 /* StoreViewController.xib */; };
 		7687E8C816392E1C003C9EE6 /* StoreDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7687E8C716392E1C003C9EE6 /* StoreDataSource.m */; };
+		7688AA5B1641028D000BFFB1 /* shop_product_background_cell.png in Resources */ = {isa = PBXBuildFile; fileRef = 7688AA591641028D000BFFB1 /* shop_product_background_cell.png */; };
+		7688AA5C1641028D000BFFB1 /* shop_product_background_cell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7688AA5A1641028D000BFFB1 /* shop_product_background_cell@2x.png */; };
 		7692812C159DCAFD00E6CE41 /* IconDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7692812B159DCAFD00E6CE41 /* IconDownloader.m */; };
 		7692BC2F1574E36C00983264 /* DuelStartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7692BC2E1574E36C00983264 /* DuelStartViewController.xib */; };
 		7693419713DDBA5000A962A4 /* DecreeNarrow.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7693419613DDBA5000A962A4 /* DecreeNarrow.ttf */; };
@@ -660,6 +662,8 @@
 		7687E8C416392534003C9EE6 /* StoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StoreViewController.xib; path = Xib/StoreViewController.xib; sourceTree = "<group>"; };
 		7687E8C616392E1C003C9EE6 /* StoreDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoreDataSource.h; path = PlayersOnLineDataSource/StoreDataSource.h; sourceTree = "<group>"; };
 		7687E8C716392E1C003C9EE6 /* StoreDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoreDataSource.m; path = PlayersOnLineDataSource/StoreDataSource.m; sourceTree = "<group>"; };
+		7688AA591641028D000BFFB1 /* shop_product_background_cell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shop_product_background_cell.png; sourceTree = "<group>"; };
+		7688AA5A1641028D000BFFB1 /* shop_product_background_cell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shop_product_background_cell@2x.png"; sourceTree = "<group>"; };
 		7692812A159DCAFD00E6CE41 /* IconDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconDownloader.h; sourceTree = "<group>"; };
 		7692812B159DCAFD00E6CE41 /* IconDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconDownloader.m; sourceTree = "<group>"; };
 		7692BC2E1574E36C00983264 /* DuelStartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DuelStartViewController.xib; path = Xib/DuelStartViewController.xib; sourceTree = "<group>"; };
@@ -1516,6 +1520,8 @@
 				76A72D52163AA0B400C65D6D /* shop_product_frame@2x.png */,
 				76CE0AE6163EF45C00B51B04 /* shop_product_ribbon.png */,
 				76CE0AE7163EF45C00B51B04 /* shop_product_ribbon@2x.png */,
+				7688AA591641028D000BFFB1 /* shop_product_background_cell.png */,
+				7688AA5A1641028D000BFFB1 /* shop_product_background_cell@2x.png */,
 			);
 			path = Shop;
 			sourceTree = "<group>";
@@ -2171,6 +2177,8 @@
 				76CE0AE5163EF01D00B51B04 /* DuelProductWinViewController.xib in Resources */,
 				76CE0AE8163EF45C00B51B04 /* shop_product_ribbon.png in Resources */,
 				76CE0AE9163EF45C00B51B04 /* shop_product_ribbon@2x.png in Resources */,
+				7688AA5B1641028D000BFFB1 /* shop_product_background_cell.png in Resources */,
+				7688AA5C1641028D000BFFB1 /* shop_product_background_cell@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

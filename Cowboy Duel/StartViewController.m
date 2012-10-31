@@ -654,16 +654,16 @@ static StartViewController *sharedHelper = nil;
 //    StoreViewController *svc=[[StoreViewController alloc] initWithNibName:nil bundle:nil];
 //    [self.navigationController pushViewController:svc animated:YES];
     
-//    DuelProductAttensionViewController *vc=[[DuelProductAttensionViewController alloc] initWithAccount:playerAccount];
-//    [self.navigationController pushViewController:vc animated:YES];
-    
-    NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:DUEL_PRODUCTS_WEAPONS];
-    NSArray *arrItemsList = [NSKeyedUnarchiver unarchiveObjectWithData:data1];
-    
-    CDDuelProduct *prod=[arrItemsList objectAtIndex:0];
-    
-    DuelProductWinViewController *vc=[[DuelProductWinViewController alloc] initWithAccount:playerAccount duelProduct:prod];
+    DuelProductAttensionViewController *vc=[[DuelProductAttensionViewController alloc] initWithAccount:playerAccount];
     [self.navigationController pushViewController:vc animated:YES];
+    
+//    NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:DUEL_PRODUCTS_WEAPONS];
+//    NSArray *arrItemsList = [NSKeyedUnarchiver unarchiveObjectWithData:data1];
+//    
+//    CDDuelProduct *prod=[arrItemsList objectAtIndex:0];
+//    
+//    DuelProductWinViewController *vc=[[DuelProductWinViewController alloc] initWithAccount:playerAccount duelProduct:prod];
+//    [self.navigationController pushViewController:vc animated:YES];
     return;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 

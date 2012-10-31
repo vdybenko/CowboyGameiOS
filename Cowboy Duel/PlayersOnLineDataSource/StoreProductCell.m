@@ -72,8 +72,6 @@
 -(void) initMainControlsWithNarrowBackGround;
 {
     [self initWithOutBackGround];
-    backGround.clipsToBounds = YES;
-    [backGround setDinamicHeightBackground];
 }
 
 
@@ -95,8 +93,13 @@
         effect.text =[NSString stringWithFormat:@"+%d",((CDWeaponProduct*)product).dDamage];
     }
     descriptionText.text = product.dDescription;
-    coldTitle.text=NSLocalizedString(@"Golds:", @"");
-    gold.text = [NSString stringWithFormat:@"%d",product.dPrice];
+    if (product.dPrice == 0) {
+        coldTitle.text=NSLocalizedString(@"Price:", @"");
+        gold.text = [NSString stringWithFormat:@"%d",product.dPrice];
+    }else{
+        coldTitle.text=NSLocalizedString(@"Golds:", @"");
+        gold.text = [NSString stringWithFormat:@"%d",product.dPrice];
+    }
     
     icon.image = [UIImage loadImageFullPath:[NSString stringWithFormat:@"%@/%@.png",[DuelProductDownloaderController getSavePathForDuelProduct],[product saveNameThumb]]];
 }
