@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AccountDataSource.h"
-#import "StoreDataSource.h"
 
-@interface DuelProductAttensionViewController : UIViewController<TableCellWithButton>
-- (id)initWithAccount:(AccountDataSource*)account;
+@interface DuelProductAttensionViewController : UIViewController
+- (id)initWithAccount:(AccountDataSource*)account parentVC:(UIViewController*)vc;
 @end

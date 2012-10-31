@@ -12,6 +12,8 @@
 #import "AccelerometrDataSource.h"
 #import "DuelViewControllerWithXib.h"
 
+#import "DuelProductAttensionViewController.h"
+
 //#define kFilteringFactor 0.1
 
 @interface TeachingViewController : DuelViewControllerWithXib<CLLocationManagerDelegate, UIAccelerometerDelegate,DuelViewControllerDelegate> {

@@ -21,11 +21,7 @@
 #import "LevelCongratViewController.h"
 #import "MoneyCongratViewController.h"
 
-#import "StoreViewController.h"
-#import "DuelProductAttensionViewController.h"
 #import "DuelProductDownloaderController.h"
-#import "DuelProductWinViewController.h"
-#import "SoundDownload.h"
 
 @interface StartViewController ()
 {
@@ -654,9 +650,6 @@ static StartViewController *sharedHelper = nil;
 //    StoreViewController *svc=[[StoreViewController alloc] initWithNibName:nil bundle:nil];
 //    [self.navigationController pushViewController:svc animated:YES];
     
-    DuelProductAttensionViewController *vc=[[DuelProductAttensionViewController alloc] initWithAccount:playerAccount];
-    [self.navigationController pushViewController:vc animated:YES];
-    
 //    NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:DUEL_PRODUCTS_WEAPONS];
 //    NSArray *arrItemsList = [NSKeyedUnarchiver unarchiveObjectWithData:data1];
 //    
@@ -664,7 +657,7 @@ static StartViewController *sharedHelper = nil;
 //    
 //    DuelProductWinViewController *vc=[[DuelProductWinViewController alloc] initWithAccount:playerAccount duelProduct:prod];
 //    [self.navigationController pushViewController:vc animated:YES];
-    return;
+//    return;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
 														object:self

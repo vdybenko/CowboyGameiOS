@@ -8,7 +8,6 @@
 
 #import "DuelProductAttensionViewController.h"
 #import "StoreProductCell.h"
-#import "StoreDataSource.h"
 #import "DuelProductDownloaderController.h"
 #import "FXLabel.h"
 #import "UIView+Dinamic_BackGround.h"
@@ -18,6 +17,7 @@
     AccountDataSource *playerAccount;
     StoreProductCell *productCell;
     CDDuelProduct *prod;
+    UIViewController *parentVC;
 }
 @property (strong, nonatomic) IBOutlet FXLabel *title;
 @property (strong, nonatomic) IBOutlet UIView *frameView;
@@ -29,11 +29,12 @@
 @synthesize title;
 @synthesize frameView;
 @synthesize webView;
-- (id)initWithAccount:(AccountDataSource*)account;
+- (id)initWithAccount:(AccountDataSource*)account parentVC:(UIViewController*)vc;
 {
     self = [super initWithNibName:Nil bundle:Nil];
     if (self) {
         playerAccount = account;
+        parentVC = vc;
     }
     return self;
 }
@@ -86,7 +87,7 @@
 }
 
 - (IBAction)closeButtonClick:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [parentVC dismissViewControllerAnimated:YES completion:Nil];
 }
 
 #pragma mark - TableCellWithButton methods

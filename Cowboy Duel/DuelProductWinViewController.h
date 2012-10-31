@@ -11,6 +11,6 @@
 #import "CDDuelProduct.h"
 
 @interface DuelProductWinViewController : UIViewController
-- (id)initWithAccount:(AccountDataSource*)account duelProduct:(CDDuelProduct*)product;
+- (id)initWithAccount:(AccountDataSource*)account duelProduct:(CDDuelProduct*)product parentVC:(UIViewController*)vc;;
 
 @end

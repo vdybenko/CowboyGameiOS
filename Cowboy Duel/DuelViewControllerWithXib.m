@@ -410,7 +410,6 @@ if (shotCountBullet!=0) {
 
 -(IBAction)helpBtnClick:(id)sender;
 {   
-    
     HelpViewController *helpView=[[HelpViewController alloc] init];
     [self.navigationController pushViewController:helpView animated:YES];
 }

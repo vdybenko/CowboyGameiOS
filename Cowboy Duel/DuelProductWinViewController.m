@@ -11,11 +11,13 @@
 #import "UIButton+Image+Title.h"
 #import "UIImage+Save.h"
 #import "DuelProductDownloaderController.h"
+#import "StoreViewController.h"
 
 @interface DuelProductWinViewController ()
 {
     AccountDataSource *playerAccount;
     CDDuelProduct *duelProduct;
+    UIViewController *parentVC;
 }
 @property (strong, nonatomic) IBOutlet UILabel *title;
 @property (strong, nonatomic) IBOutlet UIView *frameView;
@@ -36,12 +38,13 @@
 @synthesize gunImage;
 @synthesize buyItButton;
 
-- (id)initWithAccount:(AccountDataSource*)account duelProduct:(CDDuelProduct*)product;
+- (id)initWithAccount:(AccountDataSource*)account duelProduct:(CDDuelProduct*)product parentVC:(UIViewController*)vc;
 {
     self = [super initWithNibName:Nil bundle:Nil];
     if (self) {
         playerAccount = account;
         duelProduct = product;
+        parentVC = vc;
     }
     return self;
 }
@@ -74,12 +77,14 @@
     [super didReceiveMemoryWarning];
 }
 - (IBAction)closeButtonClick:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [parentVC dismissViewControllerAnimated:YES completion:Nil];
 }
 - (IBAction)BuyItButtonClick:(id)sender {
 }
 - (IBAction)GoToStoreClick:(id)sender {
-    
+    StoreViewController *svc=[[StoreViewController alloc] initWithAccount:playerAccount];
+    [parentVC.navigationController pushViewController:svc animated:YES];
+    [parentVC dismissViewControllerAnimated:YES completion:Nil];
 }
 
 @end

@@ -16,10 +16,13 @@
 #import "GCHelper.h"
 #import "DuelRewardLogicController.h"
 #import "AdvertisingAppearController.h"
+#import "DuelProductWinViewController.h"
+#import "DuelProductDownloaderController.h"
 
 @interface FinalViewController ()
 {
     BOOL tryButtonEnabled;
+    BOOL isDuelWinWatched;
 }
 -(void)winScene;
 -(void)loseScene;
@@ -310,7 +313,18 @@
         
         if(playerAccount.money<0) playerAccount.money=0;
         [playerAccount saveMoney];
-        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+        if (teaching&&!isDuelWinWatched) {
+            isDuelWinWatched = YES;
+            NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:DUEL_PRODUCTS_WEAPONS];
+            NSArray *arrItemsList = [NSKeyedUnarchiver unarchiveObjectWithData:data1];
+            
+            CDDuelProduct *prod=[arrItemsList objectAtIndex:0];
+            
+            DuelProductWinViewController *duelProductWinViewController=[[DuelProductWinViewController alloc] initWithAccount:playerAccount duelProduct:prod parentVC:self];
+            [self.navigationController presentViewController:duelProductWinViewController animated:YES completion:Nil];
+        }else{
+            [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+        }
 //        if ([self.delegate isKindOfClass:[BluetoothViewController class]]) [self.delegate duelCancel];
         if ([self.delegate isKindOfClass:[GameCenterViewController class]]) {
             [self.delegate performSelector:@selector(matchCanseled)];

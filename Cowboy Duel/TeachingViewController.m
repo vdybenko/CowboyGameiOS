@@ -54,6 +54,8 @@ static NSString *ShotSound = @"%@/shot.mp3";
         lbBackButton.text = NSLocalizedString(@"SKIP", nil);
     }
 
+    DuelProductAttensionViewController *duelProductAttensionViewController=[[DuelProductAttensionViewController alloc] initWithAccount:playerAccount parentVC:self];
+    [self.navigationController presentViewController:duelProductAttensionViewController animated:YES completion:nil];
 }
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
