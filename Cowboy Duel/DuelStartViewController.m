@@ -359,7 +359,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
 
 -(void)setOponentImage;
 {
-    NSString *name=oponentAccount.accountID;[[OGHelper sharedInstance ] getClearName:oponentAccount.accountID];
+    NSString *name = [[OGHelper sharedInstance ] getClearName:oponentAccount.accountID];
     NSString *path=[NSString stringWithFormat:@"%@/icon_%@.png",[[OGHelper sharedInstance] getSavePathForList],name];
     if([[NSFileManager defaultManager] fileExistsAtPath:path]){  
         UIImage *image=[UIImage loadImageFullPath:path];
