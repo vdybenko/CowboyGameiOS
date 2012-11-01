@@ -185,38 +185,34 @@
 
 -(void)shineAnimation
 {
-    angle += 1.1415;
-    [UIView beginAnimations:@"Shine" context:nil];
-    [UIView setAnimationBeginsFromCurrentState:YES];
-	[UIView setAnimationCurve:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction];
-    [UIView setAnimationDuration:2.0f];
-	[UIView setAnimationDelegate:self];
-    
-    CGAffineTransform transform = ivLightRays2.transform;
-    CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
-    transform = CGAffineTransformScale(rotateTransform, 1.0, 1.0);
-    ivLightRays2.transform = transform;
-    
-    if (runAnimation)[UIView setAnimationDidStopSelector:@selector(shineSecondAnimation)];
-    [UIView commitAnimations];
+  [UIView animateWithDuration:1.5
+                        delay:0.0
+                      options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction
+                   animations:^{
+                     angle += 5.0;
+                     CGAffineTransform transform = ivLightRays2.transform;
+                     CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
+                     transform = CGAffineTransformScale(rotateTransform, 1.0, 1.0);
+                     ivLightRays2.transform = transform;
+                   } completion:^(BOOL finished) {
+                     if (runAnimation)[self shineSecondAnimation];
+                   }];
 }
 
 -(void)shineSecondAnimation
 {
-    angle += 1.1415;
-    [UIView beginAnimations:@"ShineSecond" context:nil];
-    [UIView setAnimationBeginsFromCurrentState:YES];
-	[UIView setAnimationCurve:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction];
-    [UIView setAnimationDuration:2.0f];
-	[UIView setAnimationDelegate:self];
-    
-    CGAffineTransform transform = ivLightRays2.transform;
-    CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
-    transform = CGAffineTransformScale(rotateTransform, 1.0, 1.0);
-    ivLightRays2.transform = transform;
-    
-    if (runAnimation)[UIView setAnimationDidStopSelector:@selector(shineAnimation)];
-    [UIView commitAnimations];
+  [UIView animateWithDuration:1.5
+                        delay:0.0
+                      options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction
+                   animations:^{
+                     angle += 5.0;
+                     CGAffineTransform transform = ivLightRays2.transform;
+                     CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
+                     transform = CGAffineTransformScale(rotateTransform, 1.0, 1.0);
+                     ivLightRays2.transform = transform;
+                   } completion:^(BOOL finished) {
+                     if (runAnimation)[self shineAnimation];
+                   }];
 }
 
 #pragma mark -
