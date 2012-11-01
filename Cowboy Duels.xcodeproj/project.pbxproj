@@ -91,7 +91,6 @@
 		037DF21F154BDBAC003FACDF /* CollectionAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 037DF219154BDBAC003FACDF /* CollectionAppViewController.m */; };
 		037DF220154BDBAC003FACDF /* CollectionAppWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 037DF21B154BDBAC003FACDF /* CollectionAppWrapper.m */; };
 		037DF221154BDBAC003FACDF /* ItemsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 037DF21D154BDBAC003FACDF /* ItemsDataSource.m */; };
-		038366DB154924E700F3F63B /* libAdColony.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 038366DA154924E700F3F63B /* libAdColony.a */; };
 		038366DD1549257700F3F63B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038366DC1549257700F3F63B /* MediaPlayer.framework */; };
 		038366DF154925A100F3F63B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038366DE154925A100F3F63B /* CoreTelephony.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		038366E315493B8900F3F63B /* AdColonyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 038366E115493B8900F3F63B /* AdColonyViewController.m */; };
@@ -193,7 +192,6 @@
 		767A010B158B0BF0003C08D5 /* AdvertisingAppearController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767A010A158B0BF0003C08D5 /* AdvertisingAppearController.m */; };
 		767B56CF15AEDE2F00ECA0C4 /* CustomNSURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 767B56CE15AEDE2F00ECA0C4 /* CustomNSURLConnection.m */; };
 		767BA5BE1589F8E300825EB1 /* FinalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767BA5BD1589F8E300825EB1 /* FinalViewController.xib */; };
-		767C0B7D15652C9C0007E113 /* libCrittercism_v3_1_5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 767C0B1715652C9C0007E113 /* libCrittercism_v3_1_5.a */; };
 		767CD1E4158F212B0054C9B8 /* UIImage+Save.m in Sources */ = {isa = PBXBuildFile; fileRef = 767CD1E3158F212B0054C9B8 /* UIImage+Save.m */; };
 		767E1F73154BFBAF001FDDD5 /* OCPromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = 767E1F71154BFBAF001FDDD5 /* OCPromptView.m */; };
 		767EF48515D55F5200548A04 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767EF48215D5557100548A04 /* Twitter.framework */; };
@@ -260,8 +258,11 @@
 		76CE0AE9163EF45C00B51B04 /* shop_product_ribbon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76CE0AE7163EF45C00B51B04 /* shop_product_ribbon@2x.png */; };
 		76CE0AEC163EF62800B51B04 /* DuelProductWinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76CE0AEB163EF62800B51B04 /* DuelProductWinViewController.m */; };
 		76D12895159C9DE800E799AA /* PlayerOnLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D12893159C9DE800E799AA /* PlayerOnLineCell.m */; };
+		76D20F1C16417F5900FA0B75 /* libCrittercismCrashOnly_v3_3_4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D20F1B16417F5900FA0B75 /* libCrittercismCrashOnly_v3_3_4.a */; };
 		76D6284D163AC0ED00CA07D2 /* DuelProductAttensionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D6284B163AC0EC00CA07D2 /* DuelProductAttensionViewController.m */; };
 		76D6284E163AC0ED00CA07D2 /* DuelProductAttensionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76D6284C163AC0ED00CA07D2 /* DuelProductAttensionViewController.xib */; };
+		76D6F0DA16427DAF004A754C /* AdColonyPublic.h in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D6F0D816427DAF004A754C /* AdColonyPublic.h */; };
+		76D6F0DB16427DAF004A754C /* libAdColony.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D6F0D916427DAF004A754C /* libAdColony.a */; };
 		76E869C715CA8D870024ED08 /* pv_coint.png in Resources */ = {isa = PBXBuildFile; fileRef = 76E869C515CA8D870024ED08 /* pv_coint.png */; };
 		76E869C815CA8D870024ED08 /* pv_coint@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76E869C615CA8D870024ED08 /* pv_coint@2x.png */; };
 		76EB4DC01492661800A3A925 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 76EB4DBE1492661800A3A925 /* Localizable.strings */; };
@@ -474,8 +475,6 @@
 		037DF21B154BDBAC003FACDF /* CollectionAppWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionAppWrapper.m; sourceTree = "<group>"; };
 		037DF21C154BDBAC003FACDF /* ItemsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemsDataSource.h; sourceTree = "<group>"; };
 		037DF21D154BDBAC003FACDF /* ItemsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemsDataSource.m; sourceTree = "<group>"; };
-		038366D9154924E700F3F63B /* AdColonyPublic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdColonyPublic.h; sourceTree = "<group>"; };
-		038366DA154924E700F3F63B /* libAdColony.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdColony.a; sourceTree = "<group>"; };
 		038366DC1549257700F3F63B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		038366DE154925A100F3F63B /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		038366E015493B8900F3F63B /* AdColonyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdColonyViewController.h; sourceTree = "<group>"; };
@@ -598,7 +597,6 @@
 		767C0B1415652C9C0007E113 /* Crittercism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crittercism.h; sourceTree = "<group>"; };
 		767C0B1515652C9C0007E113 /* CrittercismJSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrittercismJSONKit.h; sourceTree = "<group>"; };
 		767C0B1615652C9C0007E113 /* CrittercismReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrittercismReachability.h; sourceTree = "<group>"; };
-		767C0B1715652C9C0007E113 /* libCrittercism_v3_1_5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCrittercism_v3_1_5.a; sourceTree = "<group>"; };
 		767C0B1815652C9C0007E113 /* PLCrashAsync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashAsync.h; sourceTree = "<group>"; };
 		767C0B1915652C9C0007E113 /* PLCrashAsyncImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashAsyncImage.h; sourceTree = "<group>"; };
 		767C0B1A15652C9C0007E113 /* PLCrashAsyncSignalInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashAsyncSignalInfo.h; sourceTree = "<group>"; };
@@ -719,9 +717,12 @@
 		76CE0AEB163EF62800B51B04 /* DuelProductWinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DuelProductWinViewController.m; sourceTree = "<group>"; };
 		76D12893159C9DE800E799AA /* PlayerOnLineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerOnLineCell.m; sourceTree = "<group>"; };
 		76D12894159C9DE800E799AA /* PlayerOnLineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerOnLineCell.h; sourceTree = "<group>"; };
+		76D20F1B16417F5900FA0B75 /* libCrittercismCrashOnly_v3_3_4.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCrittercismCrashOnly_v3_3_4.a; sourceTree = "<group>"; };
 		76D6284A163AC0EC00CA07D2 /* DuelProductAttensionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuelProductAttensionViewController.h; sourceTree = "<group>"; };
 		76D6284B163AC0EC00CA07D2 /* DuelProductAttensionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DuelProductAttensionViewController.m; sourceTree = "<group>"; };
 		76D6284C163AC0ED00CA07D2 /* DuelProductAttensionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DuelProductAttensionViewController.xib; path = "../Cowboy Duel/DuelProductAttensionViewController.xib"; sourceTree = "<group>"; };
+		76D6F0D816427DAF004A754C /* AdColonyPublic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AdColonyPublic.h; path = "Cowboy Duel/AdColony/Library/AdColonyPublic.h"; sourceTree = "<group>"; };
+		76D6F0D916427DAF004A754C /* libAdColony.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAdColony.a; path = "Cowboy Duel/AdColony/Library/libAdColony.a"; sourceTree = "<group>"; };
 		76E869C515CA8D870024ED08 /* pv_coint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pv_coint.png; sourceTree = "<group>"; };
 		76E869C615CA8D870024ED08 /* pv_coint@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pv_coint@2x.png"; sourceTree = "<group>"; };
 		76EB4DC11492662100A3A925 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -934,6 +935,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76D6F0DA16427DAF004A754C /* AdColonyPublic.h in Frameworks */,
+				76D6F0DB16427DAF004A754C /* libAdColony.a in Frameworks */,
 				76CB057013AB991B0011E768 /* QuartzCore.framework in Frameworks */,
 				603B269B137AA0EA00E9ED1D /* AudioToolbox.framework in Frameworks */,
 				038366DD1549257700F3F63B /* MediaPlayer.framework in Frameworks */,
@@ -960,8 +963,7 @@
 				60593A751379321800256204 /* CoreGraphics.framework in Frameworks */,
 				BD6F77B61439ADE60033ED2D /* AuthService.lib in Frameworks */,
 				BDCABD9E148288D50051932E /* libGoogleAnalytics.a in Frameworks */,
-				038366DB154924E700F3F63B /* libAdColony.a in Frameworks */,
-				767C0B7D15652C9C0007E113 /* libCrittercism_v3_1_5.a in Frameworks */,
+				76D20F1C16417F5900FA0B75 /* libCrittercismCrashOnly_v3_3_4.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1317,13 +1319,13 @@
 		60593A6F1379321700256204 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				76D6F0D816427DAF004A754C /* AdColonyPublic.h */,
+				76D6F0D916427DAF004A754C /* libAdColony.a */,
 				038366DE154925A100F3F63B /* CoreTelephony.framework */,
 				038366DC1549257700F3F63B /* MediaPlayer.framework */,
 				BD84E2AA147CDE9D009DCEBF /* CoreText.framework */,
 				BD84E2A8147CDE65009DCEBF /* AddressBookUI.framework */,
 				BD84E2A6147CDE5D009DCEBF /* AddressBook.framework */,
-				038366D9154924E700F3F63B /* AdColonyPublic.h */,
-				038366DA154924E700F3F63B /* libAdColony.a */,
 				BDF1EF1E13D41C4E00C466DF /* MapKit.framework */,
 				BDF1EF1813D41BD600C466DF /* SystemConfiguration.framework */,
 				BDF1EF1613D41BA500C466DF /* Security.framework */,
@@ -1362,7 +1364,7 @@
 				767C0B1415652C9C0007E113 /* Crittercism.h */,
 				767C0B1515652C9C0007E113 /* CrittercismJSONKit.h */,
 				767C0B1615652C9C0007E113 /* CrittercismReachability.h */,
-				767C0B1715652C9C0007E113 /* libCrittercism_v3_1_5.a */,
+				76D20F1B16417F5900FA0B75 /* libCrittercismCrashOnly_v3_3_4.a */,
 				767C0B1815652C9C0007E113 /* PLCrashAsync.h */,
 				767C0B1915652C9C0007E113 /* PLCrashAsyncImage.h */,
 				767C0B1A15652C9C0007E113 /* PLCrashAsyncSignalInfo.h */,
@@ -2383,7 +2385,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/gt2/** $(PROJECT_DIR)/**";
-				VALID_ARCHS = "armv6 armv7";
+				VALID_ARCHS = "armv7s armv7";
 				WARNING_LDFLAGS = (
 					Foundation,
 					"-framework",
@@ -2395,10 +2397,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv7,
-					armv6,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2406,7 +2405,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/Cowboy Duel/OpenFeint.2.12.5\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2423,16 +2421,14 @@
 					"$(PROJECT_DIR)/gt2/",
 				);
 				INFOPLIST_FILE = "Cowboy Duel/Test-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
 					"\"$(SRCROOT)/Cowboy Duel\"",
-					"\"$(SRCROOT)/../../../../../Downloads/Flurry iPhone SDK v3/FlurryAnalytics\"",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/GoogleAnalytics/Library\"",
 					"\"$(SRCROOT)/CrittercismSDK\"",
-					"\"$(SRCROOT)/Cowboy Duel/Utils/TwitterOAuth/SAOAuthTwitterEngine\"",
+					"\"$(SRCROOT)/Cowboy Duel/AdColony/Library\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -2450,12 +2446,13 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Test/GoogleAnalytics/Library\"",
+					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
 				);
+				SDKROOT = iphoneos6.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "../../.. $(PROJECT_DIR)";
 				VALIDATE_PRODUCT = NO;
-				VALID_ARCHS = "armv7 armv6";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2483,7 +2480,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/gt2/** $(PROJECT_DIR)/**";
-				VALID_ARCHS = "armv6 armv7";
+				VALID_ARCHS = "armv7s armv7";
 				WARNING_LDFLAGS = (
 					Foundation,
 					"-framework",
@@ -2495,10 +2492,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv7,
-					armv6,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -2506,7 +2500,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/Cowboy Duel/OpenFeint.2.12.5\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2522,16 +2515,14 @@
 					"$(PROJECT_DIR)/gt2/",
 				);
 				INFOPLIST_FILE = "Cowboy Duel/Test-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
 					"\"$(SRCROOT)/Cowboy Duel\"",
-					"\"$(SRCROOT)/../../../../../Downloads/Flurry iPhone SDK v3/FlurryAnalytics\"",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/GoogleAnalytics/Library\"",
 					"\"$(SRCROOT)/CrittercismSDK\"",
-					"\"$(SRCROOT)/Cowboy Duel/Utils/TwitterOAuth/SAOAuthTwitterEngine\"",
+					"\"$(SRCROOT)/Cowboy Duel/AdColony/Library\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -2549,12 +2540,13 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Test/GoogleAnalytics/Library\"",
+					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
 				);
+				SDKROOT = iphoneos6.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "../../.. $(PROJECT_DIR)";
 				VALIDATE_PRODUCT = NO;
-				VALID_ARCHS = "armv7 armv6";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -2582,7 +2574,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/gt2/** $(PROJECT_DIR)/**";
-				VALID_ARCHS = "armv6 armv7";
+				VALID_ARCHS = "armv7s armv7";
 				WARNING_LDFLAGS = (
 					Foundation,
 					"-framework",
@@ -2594,10 +2586,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv7,
-					armv6,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution";
@@ -2606,7 +2595,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/Cowboy Duel/OpenFeint.2.12.5\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2622,16 +2610,14 @@
 					"$(PROJECT_DIR)/gt2/",
 				);
 				INFOPLIST_FILE = "Cowboy Duel/Test-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
 					"\"$(SRCROOT)/Cowboy Duel\"",
-					"\"$(SRCROOT)/../../../../../Downloads/Flurry iPhone SDK v3/FlurryAnalytics\"",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/GoogleAnalytics/Library\"",
 					"\"$(SRCROOT)/CrittercismSDK\"",
-					"\"$(SRCROOT)/Cowboy Duel/Utils/TwitterOAuth/SAOAuthTwitterEngine\"",
+					"\"$(SRCROOT)/Cowboy Duel/AdColony/Library\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -2650,12 +2636,13 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Test/GoogleAnalytics/Library\"",
+					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
 				);
+				SDKROOT = iphoneos6.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "../../.. $(PROJECT_DIR)";
 				VALIDATE_PRODUCT = NO;
-				VALID_ARCHS = "armv7 armv6";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Distrbution;

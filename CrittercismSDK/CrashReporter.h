@@ -142,7 +142,7 @@ typedef enum {
  *     // Try loading the crash report
  *     crashData = [crashReporter loadPendingCrashReportDataAndReturnError: &error];
  *     if (crashData == nil) {
- *         DLog(@"Could not load crash report: %@", error);
+ *         NSLog(@"Could not load crash report: %@", error);
  *         goto finish;
  *     }
  *     
@@ -150,12 +150,12 @@ typedef enum {
  *     // some debugging info instead
  *     PLCrashReport *report = [[[PLCrashReport alloc] initWithData: crashData error: &error] autorelease];
  *     if (report == nil) {
- *         DLog(@"Could not parse crash report");
+ *         NSLog(@"Could not parse crash report");
  *         goto finish;
  *     }
  *     
- *     DLog(@"Crashed on %@", report.systemInfo.timestamp);
- *     DLog(@"Crashed with signal %@ (code %@, address=0x%" PRIx64 ")", report.signalInfo.name,
+ *     NSLog(@"Crashed on %@", report.systemInfo.timestamp);
+ *     NSLog(@"Crashed with signal %@ (code %@, address=0x%" PRIx64 ")", report.signalInfo.name,
  *           report.signalInfo.code, report.signalInfo.address);
  *     
  *     // Purge the report
@@ -175,7 +175,7 @@ typedef enum {
     
  *     // Enable the Crash Reporter
  *     if (![crashReporter enableCrashReporterAndReturnError: &error])
- *         DLog(@"Warning: Could not enable crash reporter: %@", error);
+ *         NSLog(@"Warning: Could not enable crash reporter: %@", error);
  *         
  * }
  * @endcode
