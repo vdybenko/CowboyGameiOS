@@ -589,7 +589,6 @@ static GameCenterViewController *gameCenterViewController;
             
             accelState = YES;
             btnStartClick= NO;
-            server = NO;
             
             [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                                 object:self
