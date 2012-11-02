@@ -15,6 +15,8 @@
 @synthesize dSoundLocal;
 @synthesize dSoundURL;
 
+
+
 -(void)encodeWithCoder:(NSCoder *)encoder
 {
     [super encodeWithCoder:encoder];
@@ -33,6 +35,17 @@
     self.dImageGunURL = [decoder decodeObjectForKey:@"IMAGE_GUN_URL"];
     self.dSoundLocal = [decoder decodeObjectForKey:@"SOUND_LOCAL"];
     self.dSoundURL = [decoder decodeObjectForKey:@"SOUND_URL"];
+    return self;
+}
+
+-(id)init
+{
+    self = [super init];
+    self.dDamage = 0;
+    self.dImageGunLocal = @"";
+    self.dImageGunURL = @"";
+    self.dSoundLocal = @"";
+    self.dSoundURL = @"";
     return self;
 }
 -(NSString*) saveNameImageGun{return [NSString stringWithFormat:@"%dgun",self.dID];}

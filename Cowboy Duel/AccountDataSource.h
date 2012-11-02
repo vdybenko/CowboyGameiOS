@@ -6,11 +6,12 @@
 #import "CDDuel.h"
 #import "ValidationUtils.h"
 #import "CDAchivment.h"
+#import "CDWeaponProduct.h"
 
 @class StartViewController;
 @interface AccountDataSource : NSObject
 
-@property (nonatomic, readonly) NSInteger accountDataSourceID;
+@property(nonatomic, readonly) NSInteger accountDataSourceID;
 @property(nonatomic) int money;
 @property(nonatomic, copy) NSString *accountName;
 @property(strong, nonatomic) NSString *sessionID;
@@ -21,8 +22,10 @@
 @property(nonatomic) NSInteger accountDraws; 
 @property(nonatomic) NSInteger accountBigestWin; 
 @property(nonatomic) NSInteger removeAds;
-@property(nonatomic) NSInteger accountAtack;
-@property(nonatomic) NSInteger accountDefense;
+@property(strong, nonatomic) NSMutableArray *arrDefense;
+@property(nonatomic) NSInteger accountDefenseValue;
+@property(strong, nonatomic) CDWeaponProduct *accountWeapon;
+
 @property(strong, nonatomic) NSString *avatar;
 @property(strong, nonatomic) NSString *age; 
 @property(strong, nonatomic) NSString *homeTown;
@@ -67,7 +70,7 @@
 - (void)saveFriends;
 - (void)saveFacebookName;
 - (void)saveDeviceType;
-- (void)saveAtack;
+- (void)saveWeapon;
 - (void)saveDefense;
 
 -(void)putchAvatarImageToInitStartVC:(StartViewController*)startVC;

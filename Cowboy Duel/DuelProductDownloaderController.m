@@ -126,7 +126,7 @@ static NSString *getSavePathForDuelProduct()
         if (product.dImageGunURL) {
             NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@.png",[DuelProductDownloaderController getSavePathForDuelProduct],[product saveNameImageGun]];
             if (![UIImage isFileDownloadedForPath:pngFilePath]) {
-                product.dIconLocal = [UIImage saveImage:[product saveNameImageGun] URL:product.dIconURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
+                product.dImageGunLocal = [UIImage saveImage:[product saveNameImageGun] URL:product.dIconURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
             }
         }
         
@@ -134,7 +134,7 @@ static NSString *getSavePathForDuelProduct()
         if (product.dSoundURL) {
             NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@.mp3",[DuelProductDownloaderController getSavePathForDuelProduct],[product saveNameSoundGun]];
             if (![UIImage isFileDownloadedForPath:pngFilePath]) {
-                product.dIconLocal = [SoundDownload saveSound:[product saveNameSoundGun] URL:product.dSoundURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
+                product.dSoundLocal = [SoundDownload saveSound:[product saveNameSoundGun] URL:product.dSoundURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
             }
         }
         [arrItemsList addObject: product];

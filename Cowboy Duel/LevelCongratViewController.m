@@ -66,7 +66,7 @@
         NSString *name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel];
         ivImageForLevel.image = [UIImage imageNamed:name];
         
-        int countBullets = [DuelRewardLogicController countUpBuletsWithOponentLevel:playerAccount.accountLevel defense:playerAccount.accountDefense playerAtack:0];
+        int countBullets = [DuelRewardLogicController countUpBuletsWithOponentLevel:playerAccount.accountLevel defense:playerAccount.accountDefenseValue playerAtack:0];
         lbCongLvlMainText.text = [NSString stringWithFormat:@"%@%@%@%d%@", NSLocalizedString(@"LvlAchievText1", nil),[NSString stringWithFormat:@"%@",userRank], NSLocalizedString(@"LvlAchievText2", nil),countBullets, NSLocalizedString(@"LvlAchievText3", nil)];
         
         self.delegate = delegateController;

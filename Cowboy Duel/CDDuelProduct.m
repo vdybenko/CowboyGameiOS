@@ -50,6 +50,22 @@
     return self;
 }
 
+-(id)init
+{
+    self = [super init];
+    self.dID = 0;
+    self.dName = @"";
+    self.dDescription = @"";
+    self.dIconLocal = @"";
+    self.dIconURL = @"";
+    self.dImageLocal = @"";
+    self.dImageURL = @"";
+    self.dPrice = 0;
+    self.dLevelLock = 0;
+    self.dPurchaseUrl = @"";
+    return self;
+}
+
 -(NSString*) saveNameThumb{return [NSString stringWithFormat:@"%dthumb",self.dID];}
 -(NSString*) saveNameImage{return [NSString stringWithFormat:@"%dimg",self.dID];}
 

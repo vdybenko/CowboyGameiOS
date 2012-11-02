@@ -202,7 +202,7 @@ static StartViewController *sharedHelper = nil;
             [playerAccount saveHomeTown];
             [playerAccount saveFriends];
             [playerAccount saveFacebookName];
-            [playerAccount saveAtack];
+            [playerAccount saveWeapon];
             [playerAccount saveDefense];
                         
             [uDef synchronize];
@@ -211,8 +211,9 @@ static StartViewController *sharedHelper = nil;
             [uDef setBool:FALSE forKey:@"FirstRunForGun"];
             [uDef setBool:FALSE forKey:@"FirstRunForDuel"];
             [uDef setInteger:2 forKey:@"FirstRunForPractice"];
-
+            
             [playerAccount loadAllParametrs];
+            
 //          putch for 1.4.1
             [playerAccount putchAvatarImageToInitStartVC:self];
 //            
@@ -646,6 +647,9 @@ static StartViewController *sharedHelper = nil;
 
 -(IBAction)showHelp:(id)sender
 {
+    [playerAccount saveWeapon];
+    
+    return;
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/help_click" forKey:@"event"]];

@@ -11,6 +11,7 @@
 #import "DuelProductDownloaderController.h"
 #import "FXLabel.h"
 #import "UIView+Dinamic_BackGround.h"
+#import "CDWeaponProduct.h"
 
 @interface DuelProductAttensionViewController ()
 {
@@ -94,7 +95,8 @@
 
 -(void)buyButtonClick:(id)sender;
 {
-    
+    playerAccount.accountWeapon = ((CDWeaponProduct*)prod);
+    [self closeButtonClick:Nil];
 }
 
 @end

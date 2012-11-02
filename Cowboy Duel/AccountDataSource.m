@@ -15,8 +15,9 @@ static const char *POST_DUEL_URL =  BASE_URL"api/duels";
 
 @synthesize money, accountName, teachingTimes, finalInfoTable, sessionID, accountID, accountDataSourceID, transactions, duels, achivments , glNumber,
  accountLevel,accountPoints,accountWins,accountDraws,accountBigestWin,removeAds,avatar,age,homeTown,friends,facebookName;
-@synthesize accountAtack;
-@synthesize accountDefense;
+@synthesize arrDefense;
+@synthesize accountDefenseValue;
+@synthesize accountWeapon;
 
 #pragma mark
 
@@ -43,8 +44,8 @@ static AccountDataSource *sharedHelper = nil;
     self.accountDraws=0;
     self.accountBigestWin=0;
     self.removeAds=0;
-    self.accountAtack=0;
-    self.accountDefense=0;
+    self.arrDefense = [[NSMutableArray alloc] init];
+    self.accountWeapon = [[CDWeaponProduct alloc] init];
     
     self.avatar=@"";
     self.age=@"";
@@ -74,9 +75,23 @@ static AccountDataSource *sharedHelper = nil;
   self.accountDraws = [uDef integerForKey:@"DrawCount"];
   self.accountBigestWin = [uDef integerForKey:@"MaxWin"];
   self.removeAds = [uDef integerForKey:@"RemoveAds"];
-  self.accountAtack = [uDef integerForKey:@"ATACK"];
-  self.accountDefense = [uDef integerForKey:@"DEFENSE"];
-  
+    
+  self.accountDefenseValue = [uDef integerForKey:@"DEFENSE_VALUE"];
+    
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"ARR_DEFENSE"];
+    self.arrDefense= [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    if (!self.arrDefense) {
+        self.arrDefense = [[NSMutableArray alloc] init];
+        [self saveDefense];
+    }
+
+  data = [[NSUserDefaults standardUserDefaults] objectForKey:@"WEAPON"];
+  self.accountWeapon = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    if (!self.accountWeapon) {
+        self.accountWeapon = [[CDWeaponProduct alloc] init];
+        [self saveWeapon];
+    }
+        
   self.avatar = [uDef stringForKey:@"avatar"];
   self.age = [uDef stringForKey:@"age"];
   self.homeTown = [uDef stringForKey:@"homeTown"];
@@ -437,13 +452,28 @@ static AccountDataSource *sharedHelper = nil;
     [[NSUserDefaults standardUserDefaults] setObject:ValidateObject([Utils deviceType], [NSString class]) forKey:@"deviceType"];
 }
 
-- (void)saveAtack;
+- (void)saveWeapon;
 {
-    [[NSUserDefaults standardUserDefaults] setInteger:self.accountAtack forKey:@"ATACK"];
+    self.accountWeapon.dDamage = 5;
+    NSData *data= [NSKeyedArchiver archivedDataWithRootObject:self.accountWeapon];
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"WEAPON"];
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"WEAPON"];
+    
+    data = [[NSUserDefaults standardUserDefaults] objectForKey:@"WEAPON"];
+    self.accountWeapon = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+    NSLog(@"weapon %d",self.accountWeapon.dDamage);
 }
+
 - (void)saveDefense;
 {
-    [[NSUserDefaults standardUserDefaults] setInteger:self.accountDefense forKey:@"DEFENSE"];
+    NSData *data= [NSKeyedArchiver archivedDataWithRootObject:self.arrDefense];
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ARR_DEFENSE"];
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"ARR_DEFENSE"];
+    
+    [[NSUserDefaults standardUserDefaults] setInteger:self.accountDefenseValue forKey:@"DEFENSE_VALUE"];
 }
 
 #pragma mark putch for 1.4 

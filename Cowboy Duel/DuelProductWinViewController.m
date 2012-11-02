@@ -58,7 +58,7 @@
     title.text = NSLocalizedString(@"IT_HELP", @"");
     
     gunImage.clipsToBounds = YES;
-    gunImage.image = [UIImage loadImageFullPath:[NSString stringWithFormat:@"%@/%@.png",[DuelProductDownloaderController getSavePathForDuelProduct],[duelProduct saveNameImage]]];
+    gunImage.image = [UIImage loadImageFullPath:[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],duelProduct.dImageLocal]];
     
     [ribbonLabel setFont: [UIFont fontWithName: @"DecreeNarrow" size:28]];
     ribbonLabel.text = duelProduct.dName;

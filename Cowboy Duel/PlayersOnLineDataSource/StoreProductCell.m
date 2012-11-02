@@ -24,7 +24,6 @@
 @property (strong,nonatomic) IBOutlet UILabel * descriptionText;
 @property (strong,nonatomic) IBOutlet UIButton * buyProduct;
 @property (nonatomic) id buyButtonDelegate;
-
 @end
 
 @implementation StoreProductCell
@@ -52,7 +51,7 @@
 
 +(NSString*) cellID { return @"StoreProductCell"; }
 
--(void) initWithOutBackGround;
+-(void) initWithOutBackGroundWithButtonText:(NSString*)text;
 {
     UIColor *buttonsTitleColor = [[UIColor alloc] initWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     
@@ -65,19 +64,18 @@
     label1.textAlignment = UITextAlignmentCenter;
     [label1 setBackgroundColor:[UIColor clearColor]];
     [label1 setTextColor:buttonsTitleColor];
-    [label1 setText:NSLocalizedString(@"BUYIT", @"")];
+    [label1 setText:text];
     [buyProduct addSubview:label1];    
 }
 
 -(void) initMainControlsWithNarrowBackGround;
 {
-    [self initWithOutBackGround];
+    [self initWithOutBackGroundWithButtonText:NSLocalizedString(@"TRY_IT", @"")];
 }
-
 
 -(void) initMainControls;
 {
-    [self initWithOutBackGround];
+    [self initWithOutBackGroundWithButtonText:NSLocalizedString(@"BUYIT", @"")];
     [backGround setDinamicHeightBackground];
 }
 
@@ -101,7 +99,7 @@
         gold.text = [NSString stringWithFormat:@"%d",product.dPrice];
     }
     
-    icon.image = [UIImage loadImageFullPath:[NSString stringWithFormat:@"%@/%@.png",[DuelProductDownloaderController getSavePathForDuelProduct],[product saveNameThumb]]];
+    icon.image = [UIImage loadImageFullPath:[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],product.dIconLocal]];
 }
 
 - (IBAction)buyButtonClick:(id)sender {

@@ -11,6 +11,8 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "DuelRewardLogicController.h"
 #import "GameCenterViewController.h"
+#import "UIImage+Save.h"
+#import "DuelProductDownloaderController.h"
 
 @interface DuelViewControllerWithXib (PrivateMethods)
 
@@ -181,6 +183,8 @@ static NSString *ShotSound = @"%@/shot.mp3";
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [self checkPlayerGun];
     steadyScale = 1.0;
     [follPlayer setVolume:1.0];
     [activityIndicatorView hideView];
@@ -475,7 +479,8 @@ if (shotCountBullet!=0) {
 
 -(void)countUpBulets;
 {
-    int countBullets = [DuelRewardLogicController countUpBuletsWithOponentLevel:opAccount.accountLevel defense:opAccount.accountDefense playerAtack:playerAccount.accountAtack];
+    
+    int countBullets = [DuelRewardLogicController countUpBuletsWithOponentLevel:opAccount.accountLevel defense:opAccount.accountDefenseValue playerAtack:playerAccount.accountWeapon.dDamage];
     
     shotCountBullet =  countBullets;
     maxShotCount = countBullets;
@@ -485,6 +490,13 @@ if (shotCountBullet!=0) {
 {
     lbWaitDescription.text = NSLocalizedString(@"SHOTS_DES", @"");
     lbCountOfShots.text=[NSString stringWithFormat:@"%@ %d %@",NSLocalizedString(@"SHOTS1", @""),shotCountBullet,NSLocalizedString(@"SHOTS2", @"")];
+}
+
+-(void)checkPlayerGun;
+{
+    if (playerAccount.accountWeapon.dName && [playerAccount.accountWeapon.dName length]) {
+        _ivGun.image = [UIImage loadImageFromDocumentDirectory:[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],playerAccount.accountWeapon.dImageGunLocal]];
+    }
 }
 
 #pragma mark - IBAction
