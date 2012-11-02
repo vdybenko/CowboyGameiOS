@@ -180,12 +180,7 @@ static SSConnection *connection;
                 [viewController.navigationController popToViewController:viewController animated:YES]; 
             }
         }
-    }else if (message[0] == NETWORK_DISCONNECT_PAIR)
-    {
-        UIViewController *viewController = [self.gameCenterViewController.parentVC.navigationController.viewControllers objectAtIndex:1];
-        [self.gameCenterViewController.parentVC.navigationController popToViewController:viewController animated:YES];
-    }
-        
+    }else if (message[0] == NETWORK_DISCONNECT_PAIR) [self.gameCenterViewController lostConnection];
 }
 
 

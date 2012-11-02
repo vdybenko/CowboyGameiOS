@@ -476,10 +476,6 @@ static GameCenterViewController *gameCenterViewController;
     DLog(@"GameCenterViewController: lost connection");
     opponentEndMatch = NO;
     userEndMatch = YES;
-    //old multiplayerServerViewController.neadRestart = YES;
-    //old multiplayerClientViewController.isRunClient = NO;
-    //old multiplayerServerViewController.pingStart = NO;
-    //old [multiplayerServerViewController shutDownServer];
     
     [self.connection sendData:@"" packetID:NETWORK_DISCONNECT_PAIR ofLength:sizeof(@"")];
     
