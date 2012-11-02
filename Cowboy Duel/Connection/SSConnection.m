@@ -37,7 +37,10 @@ static SSConnection *connection;
 
 - (void)networkCommunicationWithPort:(NSString *)port andIp:(NSString *)ip {
     //if(self.outputStream && (self.outputStream.streamStatus != NSStreamStatusClosed)) return;
-    if (connectionOpen) return;  
+    if (connectionOpen) {
+        [connection sendData:@"" packetID:NETWORK_SET_AVIBLE ofLength:sizeof(int)];
+        return;
+    }
     self.firstPing = YES;
     CFReadStreamRef readStream;
     CFWriteStreamRef writeStream;

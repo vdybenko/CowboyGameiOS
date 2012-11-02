@@ -568,6 +568,8 @@ static StartViewController *sharedHelper = nil;
     TeachingViewController *teachingViewController = [[TeachingViewController alloc] initWithTime:randomTime andAccount:playerAccount andOpAccount:oponentAccount];
     [self.navigationController pushViewController:teachingViewController animated:YES];
     
+    SSConnection *connection = [SSConnection sharedInstance];
+    [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                         object:self
