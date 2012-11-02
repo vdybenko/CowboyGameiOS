@@ -198,7 +198,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
     
     [titleSteadyFire setImage:[UIImage imageNamed:@"dv_steady.png"]];
     
-    [self countUpBuletsWithLevel:playerAccount.accountLevel oponentLevel:opAccount.accountLevel];
+    [self countUpBulets];
     _lbBullets.text=[NSString stringWithFormat:@"%d", shotCountBullet];
     
     [self setTextToMessageShot];
@@ -469,13 +469,13 @@ if (shotCountBullet!=0) {
 }
 
 -(void)hideHelpViewWithArm;
-{    
+{
     [helpPracticeView setHidden:YES];
 }
 
--(void)countUpBuletsWithLevel:(int)playerLevel oponentLevel:(int)oponentLevel;
+-(void)countUpBulets;
 {
-    int countBullets = [DuelRewardLogicController countUpBuletsWithPlayerLevel:oponentLevel];
+    int countBullets = [DuelRewardLogicController countUpBuletsWithOponentLevel:opAccount.accountLevel defense:opAccount.accountDefense playerAtack:playerAccount.accountAtack];
     
     shotCountBullet =  countBullets;
     maxShotCount = countBullets;

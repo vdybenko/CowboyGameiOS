@@ -202,6 +202,8 @@ static StartViewController *sharedHelper = nil;
             [playerAccount saveHomeTown];
             [playerAccount saveFriends];
             [playerAccount saveFacebookName];
+            [playerAccount saveAtack];
+            [playerAccount saveDefense];
                         
             [uDef synchronize];
         }else{
@@ -644,21 +646,6 @@ static StartViewController *sharedHelper = nil;
 
 -(IBAction)showHelp:(id)sender
 {
-//    DuelProductDownloaderController *duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
-//    [duelProductDownloaderController refreshDuelProducts];
-    
-//    StoreViewController *svc=[[StoreViewController alloc] initWithNibName:nil bundle:nil];
-//    [self.navigationController pushViewController:svc animated:YES];
-    
-//    NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:DUEL_PRODUCTS_WEAPONS];
-//    NSArray *arrItemsList = [NSKeyedUnarchiver unarchiveObjectWithData:data1];
-//    
-//    CDDuelProduct *prod=[arrItemsList objectAtIndex:0];
-//    
-//    DuelProductWinViewController *vc=[[DuelProductWinViewController alloc] initWithAccount:playerAccount duelProduct:prod];
-//    [self.navigationController pushViewController:vc animated:YES];
-//    return;
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/help_click" forKey:@"event"]];

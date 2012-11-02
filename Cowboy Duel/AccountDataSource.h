@@ -21,6 +21,8 @@
 @property(nonatomic) NSInteger accountDraws; 
 @property(nonatomic) NSInteger accountBigestWin; 
 @property(nonatomic) NSInteger removeAds;
+@property(nonatomic) NSInteger accountAtack;
+@property(nonatomic) NSInteger accountDefense;
 @property(strong, nonatomic) NSString *avatar;
 @property(strong, nonatomic) NSString *age; 
 @property(strong, nonatomic) NSString *homeTown;
@@ -65,6 +67,8 @@
 - (void)saveFriends;
 - (void)saveFacebookName;
 - (void)saveDeviceType;
+- (void)saveAtack;
+- (void)saveDefense;
 
 -(void)putchAvatarImageToInitStartVC:(StartViewController*)startVC;
 -(BOOL)isAvatarImage:(NSString*)imagePath;

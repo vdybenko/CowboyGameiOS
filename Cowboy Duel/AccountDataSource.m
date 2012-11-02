@@ -15,6 +15,8 @@ static const char *POST_DUEL_URL =  BASE_URL"api/duels";
 
 @synthesize money, accountName, teachingTimes, finalInfoTable, sessionID, accountID, accountDataSourceID, transactions, duels, achivments , glNumber,
  accountLevel,accountPoints,accountWins,accountDraws,accountBigestWin,removeAds,avatar,age,homeTown,friends,facebookName;
+@synthesize accountAtack;
+@synthesize accountDefense;
 
 #pragma mark
 
@@ -41,6 +43,8 @@ static AccountDataSource *sharedHelper = nil;
     self.accountDraws=0;
     self.accountBigestWin=0;
     self.removeAds=0;
+    self.accountAtack=0;
+    self.accountDefense=0;
     
     self.avatar=@"";
     self.age=@"";
@@ -70,6 +74,8 @@ static AccountDataSource *sharedHelper = nil;
   self.accountDraws = [uDef integerForKey:@"DrawCount"];
   self.accountBigestWin = [uDef integerForKey:@"MaxWin"];
   self.removeAds = [uDef integerForKey:@"RemoveAds"];
+  self.accountAtack = [uDef integerForKey:@"ATACK"];
+  self.accountDefense = [uDef integerForKey:@"DEFENSE"];
   
   self.avatar = [uDef stringForKey:@"avatar"];
   self.age = [uDef stringForKey:@"age"];
@@ -429,6 +435,15 @@ static AccountDataSource *sharedHelper = nil;
 - (void)saveDeviceType;
 {
     [[NSUserDefaults standardUserDefaults] setObject:ValidateObject([Utils deviceType], [NSString class]) forKey:@"deviceType"];
+}
+
+- (void)saveAtack;
+{
+    [[NSUserDefaults standardUserDefaults] setInteger:self.accountAtack forKey:@"ATACK"];
+}
+- (void)saveDefense;
+{
+    [[NSUserDefaults standardUserDefaults] setInteger:self.accountDefense forKey:@"DEFENSE"];
 }
 
 #pragma mark putch for 1.4 

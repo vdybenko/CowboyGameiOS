@@ -179,7 +179,6 @@ static CGFloat const ANIMATION_TIME = 0.3f;
 -(void)startDuel;
 -(void)restartCountdown;
 -(void)hideHelpViewWithArm;
--(void)countUpBuletsWithLevel:(int)playerLevel oponentLevel:(int)oponentLevel;
 -(void)setTextToMessageShot; 
 
 @property(unsafe_unretained)id<DuelViewControllerDelegate> delegate;

@@ -19,15 +19,15 @@
 #define MAX_LENGTH 50
 #define IMG_LENGTH 8
 typedef struct {
-    int accountLevel;
     int oponentMoney;
-    char accountName[MAX_LENGTH];
+    char oponentName[MAX_LENGTH];
     int oponentWins;
     char oponentAuth[MAX_LENGTH];
     int oponentLevel;
     int randomTime;
     int oponentShotTime;
-    
+    int oponentAtack;
+    int oponentDefense;
 } gameInfo;
 @class StartViewController;
 @class FinalViewController;
