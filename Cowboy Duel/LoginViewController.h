@@ -28,8 +28,9 @@ typedef enum {
 @property (strong,nonatomic) StartViewController *startViewController;
 @property (strong,nonatomic) id<ProfileWithLoginDelegate> delegate;
 @property (nonatomic)  LoginFacebookStatus loginFacebookStatus;
+@property (nonatomic) BOOL payment;
 
-+ (LoginViewController *) sharedInstance ;
++ (LoginViewController *) sharedInstance;
 -(void)initFacebook;
 -(IBAction)fbLoginBtnClick:(id)sender;
 -(void)logOutFB;

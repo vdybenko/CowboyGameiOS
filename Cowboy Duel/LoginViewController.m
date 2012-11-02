@@ -31,14 +31,18 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
     IBOutlet UIButton *_btnFBLogin;
     IBOutlet UIButton *_btnNextTime;
     IBOutlet UIWebView *link;
+    UIAlertView *baseAlert;
     
     LoginFacebookStatus loginFacebookStatus;
+    __unsafe_unretained IBOutlet UIView *activityView;
+    __unsafe_unretained IBOutlet UIActivityIndicatorView *activityIndicatorView;
+   
 }
 @end
 
 @implementation LoginViewController
-
-@synthesize startViewController, facebook,delegate ,loginFacebookStatus;
+NSString * const loginProduct=@"com.webkate.cowboyduels.four";
+@synthesize startViewController, facebook,delegate ,loginFacebookStatus, payment;
 
 static LoginViewController *sharedHelper = nil;
 + (LoginViewController *) sharedInstance {
@@ -76,9 +80,10 @@ static LoginViewController *sharedHelper = nil;
     UIColor *mainColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
     UIColor *btnColor = [UIColor colorWithRed:244.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     
-    congLabel.text = NSLocalizedString(@"LoginTitleAtStart", nil);
+    
     congLabel.textColor = mainColor;
     congLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
+    congLabel.text = NSLocalizedString(@"LoginTitleAtStart", nil);
     
     link.layer.masksToBounds = YES;
     [link setBackgroundColor:[UIColor clearColor]];
@@ -86,17 +91,31 @@ static LoginViewController *sharedHelper = nil;
     link.userInteractionEnabled = YES;
     [link setDelegate:self];
     [(UIScrollView *)[[link subviews] lastObject] setScrollEnabled:NO];
-    [link loadHTMLString:NSLocalizedString(@"LoginText", nil) baseURL:Nil];
     
-    loginBtnTitle.text = NSLocalizedString(@"LoginBtnLogInAtStart", nil);
+    
+    
     loginBtnTitle.textColor = btnColor;
     loginBtnTitle.textAlignment = UITextAlignmentCenter;
     loginBtnTitle.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
     
-    nextTimeBtnTitle.text = NSLocalizedString(@"LoginBtnNextTimeAtStart", nil);
+    
     nextTimeBtnTitle.textColor = btnColor;
     nextTimeBtnTitle.textAlignment = UITextAlignmentCenter;
     nextTimeBtnTitle.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
+    
+    if (payment) {
+        [link loadHTMLString:NSLocalizedString(@"LoginTextPayment", nil) baseURL:Nil];
+        loginBtnTitle.text = NSLocalizedString(@"LoginBtnLogInAtStartPayment", nil);
+        nextTimeBtnTitle.text = NSLocalizedString(@"LoginBtnNextTimeAtStartPayment", nil);
+
+    }
+    else{
+        
+        [link loadHTMLString:NSLocalizedString(@"LoginText", nil) baseURL:Nil];
+        loginBtnTitle.text = NSLocalizedString(@"LoginBtnLogInAtStart", nil);
+        nextTimeBtnTitle.text = NSLocalizedString(@"LoginBtnNextTimeAtStart", nil);
+
+    }
     
     [mainLoginView setDinamicHeightBackground];
 }
@@ -134,6 +153,22 @@ static LoginViewController *sharedHelper = nil;
 
 -(IBAction)scipLoginBtnClick:(id)sender
 {
+    if (payment) {
+        if ([SKPaymentQueue canMakePayments]) {
+            SKPayment *payment = [SKPayment paymentWithProductIdentifier:loginProduct];
+            [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+            [[SKPaymentQueue defaultQueue] addPayment:payment];
+            [activityView setHidden:NO];
+            [activityIndicatorView startAnimating];
+        }
+        
+        //    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+        //                                                        object:self
+        //                                                      userInfo:[NSDictionary dictionaryWithObject:stDonate forKey:@"event"]];
+        return;
+    }
+    
+    
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IPad"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     ProfileViewController *profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount startViewController:startViewController];
@@ -255,6 +290,128 @@ static LoginViewController *sharedHelper = nil;
     DLog(@"login Error %@",[error description]);
 }
 
+#pragma mark SKProductsRequestDelegate
+
+
+
+-(void) restorPurchases {
+    [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+    [[SKPaymentQueue defaultQueue]restoreCompletedTransactions];
+}
+
+
+- (void) performDismiss {
+    [self dismissModalViewControllerAnimated:YES];
+    [baseAlert dismissWithClickedButtonIndex:[baseAlert cancelButtonIndex] animated:NO];
+}
+
+#pragma mark -
+
+-(void)completedPurchaseTransaction:(SKPaymentTransaction *)transaction
+{
+    DLog(@"completedPurchaseTransaction");
+    [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
+    
+    
+//    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+//                                                        object:self
+//                                                      userInfo:[NSDictionary dictionaryWithObject:stDonate forKey:@"event"]];
+    [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
+    
+}
+
+- (void) handleFailedTransaction: (SKPaymentTransaction *) transaction {
+    DLog(@"handleFailedTransaction");
+    
+    if (transaction.error.code != SKErrorPaymentCancelled){
+        baseAlert = [[UIAlertView alloc] initWithTitle:@"Transaction Error. Please try again later." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: nil];
+        [self.view addSubview:baseAlert];
+        [baseAlert show];
+        
+        [activityView setHidden:YES];
+        [activityIndicatorView stopAnimating];
+
+        [self performSelector:@selector(performDismiss) withObject:self afterDelay:3.0];
+        
+        
+//        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+//                                                            object:self
+//                                                          userInfo:[NSDictionary dictionaryWithObject:stDonate forKey:@"event"]];
+        
+    }
+    else
+    {
+        baseAlert = [[UIAlertView alloc] initWithTitle:@"Payment cancelled. Please try again later." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: nil];
+        [self.view addSubview:baseAlert];
+        [baseAlert show];
+        
+        [activityView setHidden:YES];
+        [activityIndicatorView stopAnimating];
+
+        [self performSelector:@selector(performDismiss) withObject:self afterDelay:3.0];
+    }
+    
+    [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+    [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
+}
+
+
+
+- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
+{
+    DLog(@"paymentQueue: %i", queue.transactions.count);
+    
+    for (SKPaymentTransaction *transaction in transactions)
+    {
+        DLog(@"tran for product: %@ of state: %i", [[transaction payment] productIdentifier], [transaction transactionState]);
+        
+        switch (transaction.transactionState)
+        {
+            case SKPaymentTransactionStatePurchasing:
+                DLog(@"SKPaymentTransactionStatePurchasing");
+                break;
+            case SKPaymentTransactionStatePurchased:
+                DLog(@"SKPaymentTransactionStatePurchased");
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [startViewController authorizationModifier:YES];
+                [[StartViewController sharedInstance] duelButtonClick];
+                [self dismissModalViewControllerAnimated:YES];
+                
+                [activityView setHidden:YES];
+                [activityIndicatorView stopAnimating];
+
+                [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+                [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
+                
+                break;
+            case SKPaymentTransactionStateRestored:
+                DLog(@"SKPaymentTransactionStateRestored");
+                [self completedPurchaseTransaction:transaction];
+                break;
+                
+            case SKPaymentTransactionStateFailed:
+                DLog(@"Failed %@", transaction.error);
+                [self handleFailedTransaction:transaction];
+                break;
+                
+            default:
+                break;
+        }
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(void) paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error {
+    DLog(@"restoreCompletedTransactionsFailedWithError %@",[error userInfo]);
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+
+
 #pragma mark -
 
 - (void)viewDidUnload {
@@ -264,6 +421,8 @@ static LoginViewController *sharedHelper = nil;
     loginBtnTitle = nil;
     nextTimeBtnTitle = nil;
     link = nil;
+    activityView = nil;
+    activityIndicatorView = nil;
     [super viewDidUnload];
 }
 - (void)dealloc {

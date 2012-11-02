@@ -343,6 +343,10 @@ static StartViewController *sharedHelper = nil;
 }
 
 - (void)viewDidLoad{
+    
+    LoginViewController *loginViewController = [LoginViewController sharedInstance];
+    [loginViewController setPayment:YES];
+    [self.view addSubview:loginViewController.view];
        
     UIColor *buttonsTitleColor = [[UIColor alloc] initWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     
