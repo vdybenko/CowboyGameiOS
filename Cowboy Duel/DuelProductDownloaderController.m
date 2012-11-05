@@ -16,7 +16,7 @@
 NSMutableData *responseData;
 
 
-NSString  *const URL_PRODUCT_FILE_DEFULT   = @"http://bidoncd.s3.amazonaws.com/list_of_store_items_v2.2.scriptJson";
+NSString  *const URL_PRODUCT_FILE_DEFULT   = @"http://bidoncd.s3.amazonaws.com/list_of_store_itemsv_2.2.json";
 
 @interface DuelProductDownloaderController()
 {
