@@ -12,6 +12,7 @@
 #import "FXLabel.h"
 #import "UIView+Dinamic_BackGround.h"
 #import "CDWeaponProduct.h"
+#import "DuelRewardLogicController.h"
 
 @interface DuelProductAttensionViewController ()
 {
@@ -30,6 +31,10 @@
 @synthesize title;
 @synthesize frameView;
 @synthesize webView;
+
+static int playerMustShot;
+static int oponentMustShot;
+
 - (id)initWithAccount:(AccountDataSource*)account parentVC:(UIViewController*)vc;
 {
     self = [super initWithNibName:Nil bundle:Nil];
@@ -73,7 +78,7 @@
     [webView setOpaque:NO];
     [webView.scrollView setScrollEnabled:NO];
     [webView setBackgroundColor:[UIColor clearColor]];
-    NSString *webTesxt = [NSString stringWithFormat:@"%@12%@5%@",NSLocalizedString(@"ATTEN_WEB_TEXT1", @""),NSLocalizedString(@"ATTEN_WEB_TEXT2", @""),NSLocalizedString(@"ATTEN_WEB_TEXT3", @"")];
+    NSString *webTesxt = [NSString stringWithFormat:@"%@%d%@%d%@",NSLocalizedString(@"ATTEN_WEB_TEXT1", @""),playerMustShot,NSLocalizedString(@"ATTEN_WEB_TEXT2", @""),oponentMustShot,NSLocalizedString(@"ATTEN_WEB_TEXT3", @"")];
     [webView loadHTMLString:webTesxt baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
 }
 
@@ -91,6 +96,17 @@
     [parentVC dismissViewControllerAnimated:YES completion:Nil];
 }
 
++ (BOOL)isAttensionNeedForOponent:(AccountDataSource*)oponentAccount;
+{
+    playerMustShot = [DuelRewardLogicController countUpBuletsWithOponentLevel:oponentAccount.accountLevel defense:oponentAccount.accountDefenseValue playerAtack:[AccountDataSource sharedInstance].accountWeapon.dDamage];
+    oponentMustShot = [DuelRewardLogicController countUpBuletsWithOponentLevel:[AccountDataSource sharedInstance].accountLevel defense:[AccountDataSource sharedInstance].accountDefenseValue playerAtack:oponentAccount.accountWeapon.dDamage];
+    
+    if ((playerMustShot-oponentMustShot)>=2) {
+        return YES;
+    }else{
+        return NO;
+    }
+}
 #pragma mark - TableCellWithButton methods
 
 -(void)buyButtonClick:(id)sender;

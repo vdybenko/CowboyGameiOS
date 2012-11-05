@@ -102,7 +102,7 @@ static NSString *getSavePathForDuelProduct()
     if (product.dImageURL) {
         NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@.png",[DuelProductDownloaderController getSavePathForDuelProduct],[product saveNameImage]];
         if (![UIImage isFileDownloadedForPath:pngFilePath]) {
-            product.dImageLocal = [UIImage saveImage:[product saveNameImage] URL:product.dIconURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
+            product.dImageLocal = [UIImage saveImage:[product saveNameImage] URL:product.dImageURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
         }
     }
     product.dPrice=[[dic objectForKey:@"golds"] integerValue];
@@ -126,7 +126,7 @@ static NSString *getSavePathForDuelProduct()
         if (product.dImageGunURL) {
             NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@.png",[DuelProductDownloaderController getSavePathForDuelProduct],[product saveNameImageGun]];
             if (![UIImage isFileDownloadedForPath:pngFilePath]) {
-                product.dImageGunLocal = [UIImage saveImage:[product saveNameImageGun] URL:product.dIconURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
+                product.dImageGunLocal = [UIImage saveImage:[product saveNameImageGun] URL:product.dImageGunURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
             }
         }
         

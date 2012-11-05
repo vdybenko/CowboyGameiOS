@@ -11,4 +11,5 @@
 
 @interface DuelProductAttensionViewController : UIViewController
 - (id)initWithAccount:(AccountDataSource*)account parentVC:(UIViewController*)vc;
++ (BOOL)isAttensionNeedForOponent:(AccountDataSource*)oponentAccount;
 @end

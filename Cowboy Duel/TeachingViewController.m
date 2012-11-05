@@ -53,9 +53,13 @@ static NSString *ShotSound = @"%@/shot.mp3";
     if(firstRun){
         lbBackButton.text = NSLocalizedString(@"SKIP", nil);
     }
-
-    DuelProductAttensionViewController *duelProductAttensionViewController=[[DuelProductAttensionViewController alloc] initWithAccount:playerAccount parentVC:self];
-    [self.navigationController presentViewController:duelProductAttensionViewController animated:YES completion:nil];
+    
+    opAccount.accountDefenseValue = 35;
+    
+    if([DuelProductAttensionViewController isAttensionNeedForOponent:opAccount]){
+        DuelProductAttensionViewController *duelProductAttensionViewController=[[DuelProductAttensionViewController alloc] initWithAccount:playerAccount parentVC:self];
+        [self.navigationController presentViewController:duelProductAttensionViewController animated:YES completion:nil];
+    }
 }
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
