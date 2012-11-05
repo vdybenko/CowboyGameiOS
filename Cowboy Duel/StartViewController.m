@@ -343,10 +343,16 @@ static StartViewController *sharedHelper = nil;
 }
 
 - (void)viewDidLoad{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger facebookLogIn = [userDefaults integerForKey:@"facebookLogIn"];
+    NSInteger paymentRegistration = [userDefaults integerForKey:@"paymentRegistration"];
     
-    LoginViewController *loginViewController = [LoginViewController sharedInstance];
-    [loginViewController setPayment:YES];
-    [self.view addSubview:loginViewController.view];
+    if (!paymentRegistration && !facebookLogIn) {
+        LoginViewController *loginViewController = [LoginViewController sharedInstance];
+        [loginViewController setPayment:YES];
+        [self.navigationController pushViewController:loginViewController animated:YES];
+    }
+    
        
     UIColor *buttonsTitleColor = [[UIColor alloc] initWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     

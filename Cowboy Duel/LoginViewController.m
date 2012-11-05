@@ -41,7 +41,7 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
 @end
 
 @implementation LoginViewController
-NSString * const loginProduct=@"com.webkate.cowboyduels.four";
+NSString * const loginProduct=@"com.webkate.cowboyduels.registration";
 @synthesize startViewController, facebook,delegate ,loginFacebookStatus, payment;
 
 static LoginViewController *sharedHelper = nil;
@@ -301,7 +301,6 @@ static LoginViewController *sharedHelper = nil;
 
 
 - (void) performDismiss {
-    [self dismissModalViewControllerAnimated:YES];
     [baseAlert dismissWithClickedButtonIndex:[baseAlert cancelButtonIndex] animated:NO];
 }
 
@@ -314,7 +313,19 @@ static LoginViewController *sharedHelper = nil;
     
     [[NSUserDefaults standardUserDefaults] synchronize];
     
+    [activityView setHidden:YES];
+    [activityIndicatorView stopAnimating];
     
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger paymentRegistration = 1;
+    [userDefaults setInteger:paymentRegistration forKey:@"paymentRegistration"];
+    [userDefaults synchronize];
+    
+    payment = NO;
+    [self scipLoginBtnClick:nil];
+    
+    [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+    [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
     
     
 //    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
@@ -374,20 +385,16 @@ static LoginViewController *sharedHelper = nil;
             case SKPaymentTransactionStatePurchasing:
                 DLog(@"SKPaymentTransactionStatePurchasing");
                 break;
-            case SKPaymentTransactionStatePurchased:
+            case SKPaymentTransactionStatePurchased:{
                 DLog(@"SKPaymentTransactionStatePurchased");
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                [startViewController authorizationModifier:YES];
-                [[StartViewController sharedInstance] duelButtonClick];
-                [self dismissModalViewControllerAnimated:YES];
                 
-                [activityView setHidden:YES];
-                [activityIndicatorView stopAnimating];
-
+                [self completedPurchaseTransaction:transaction];
+                                
                 [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
                 [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
-                
+        
                 break;
+            }
             case SKPaymentTransactionStateRestored:
                 DLog(@"SKPaymentTransactionStateRestored");
                 [self completedPurchaseTransaction:transaction];
