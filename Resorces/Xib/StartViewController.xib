@@ -373,7 +373,6 @@
 								<string key="NSFrame">{{73, 325}, {176, 46}}</string>
 								<reference key="NSSuperview" ref="419574726"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -1021,14 +1020,25 @@
 					<string key="className">StartViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="feedbackButtonClick:">id</string>
+						<string key="feedbackCancelButtonClick:">id</string>
 						<string key="feedbackFacebookBtnClick:">id</string>
 						<string key="feedbackItuneskBtnClick:">id</string>
 						<string key="feedbackMailBtnClick:">id</string>
 						<string key="feedbackTweeterBtnClick:">id</string>
 						<string key="profileButtonClick">id</string>
+						<string key="showHelp:">id</string>
 						<string key="startDuel">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="feedbackButtonClick:">
+							<string key="name">feedbackButtonClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="feedbackCancelButtonClick:">
+							<string key="name">feedbackCancelButtonClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="feedbackFacebookBtnClick:">
 							<string key="name">feedbackFacebookBtnClick:</string>
 							<string key="candidateClassName">id</string>
@@ -1047,6 +1057,10 @@
 						</object>
 						<object class="IBActionInfo" key="profileButtonClick">
 							<string key="name">profileButtonClick</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showHelp:">
+							<string key="name">showHelp:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="startDuel">

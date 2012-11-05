@@ -46,6 +46,7 @@
 @property (nonatomic) BOOL feedBackViewVisible;
 @property (strong, nonatomic) TopPlayersDataSource *topPlayersDataSource;
 
+
 + (StartViewController *)sharedInstance;
 -(id)init;     //must be login object!!!
 -(void)playerStop;

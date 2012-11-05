@@ -12,7 +12,6 @@
 #import "UIView+Hierarchy.h"
 #import "UIButton+Image+Title.h"
 #import "AdvertisingNewVersionViewController.h"
-#import "AdvertisingOtherAppViewController.h"
 #import "AdvertisingAppearController.h"
 #import "ListOfItemsViewController.h"
 #import "CustomNSURLConnection.h"
@@ -20,6 +19,7 @@
 #import "Utils.h"
 #import "LevelCongratViewController.h"
 #import "MoneyCongratViewController.h"
+#import "AdvertisingNewViewController.h"
 
 @interface StartViewController ()
 {
@@ -97,7 +97,7 @@
 @property (nonatomic) BOOL hostActive;
 
 @property (strong) LoginViewController *loginViewController;
-
+@property (strong, nonatomic) AdvertisingNewVersionViewController *advertisingNewVersionViewController;
 -(void)sendRequestWithDonateSum:(int)sum;
 - (NSString *)deviceType;
 -(void)arrowAnimation;
@@ -114,7 +114,7 @@
 
 @synthesize gameCenterViewController, player, internetActive, hostActive, soundCheack, loginViewController;
 @synthesize feedbackButton, duelButton, profileButton, teachingButton, helpButton, mapButton;
-@synthesize oldAccounId,feedBackViewVisible,showFeedAtFirst,topPlayersDataSource;
+@synthesize oldAccounId,feedBackViewVisible,showFeedAtFirst,topPlayersDataSource, advertisingNewVersionViewController;
 
 static const char *AUTORIZATION_URL =  BASE_URL"api/authorization";
 static const char *MODIFIER_USER_URL =  BASE_URL"api/user";
@@ -1323,9 +1323,9 @@ static StartViewController *sharedHelper = nil;
 
 -(BOOL)isAdvertisingOfNewVersionNeedShow;
 {
-    AdvertisingNewVersionViewController *advertisingNewVersionViewController=[[AdvertisingNewVersionViewController alloc] init];
-    if ([advertisingNewVersionViewController isAdvertisingNeed]) {
-        [self presentModalViewController:advertisingNewVersionViewController animated:NO];
+     self.advertisingNewVersionViewController=[[AdvertisingNewVersionViewController alloc] init];
+    if ([self.advertisingNewVersionViewController advertisingNeed]) {
+        [self.navigationController pushViewController:self.advertisingNewVersionViewController animated:NO];
         return YES;
     }else {
         return NO;

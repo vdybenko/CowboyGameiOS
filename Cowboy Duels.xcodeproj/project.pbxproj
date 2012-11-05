@@ -186,7 +186,6 @@
 		7679307115BE8B61007F461F /* CDPlayerMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 7679307015BE8B60007F461F /* CDPlayerMain.m */; };
 		7679307515BE8D64007F461F /* CDTopPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7679307415BE8D64007F461F /* CDTopPlayer.m */; };
 		7679308015BEBF6F007F461F /* NSString+isNumeric.m in Sources */ = {isa = PBXBuildFile; fileRef = 765EB4EB1580E3530059355B /* NSString+isNumeric.m */; };
-		7679308115BEBF9E007F461F /* AdvertisingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388DF157E249900377D88 /* AdvertisingViewController.m */; };
 		7679308215BEC5CD007F461F /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B88141E1F170085E4FB /* SBJsonParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7679D8C41563949E00BDE3A6 /* RefreshContentDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7679D8C31563949E00BDE3A6 /* RefreshContentDataController.m */; };
 		767A010B158B0BF0003C08D5 /* AdvertisingAppearController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767A010A158B0BF0003C08D5 /* AdvertisingAppearController.m */; };
@@ -204,10 +203,8 @@
 		7682BDDF15AC5F22001C09EC /* HelpPracticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682BDDD15AC5F22001C09EC /* HelpPracticeView.m */; };
 		7682E363156BD22000A8F9A0 /* CDPlayerOnLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682E362156BD22000A8F9A0 /* CDPlayerOnLine.m */; };
 		768388D3157DE37800377D88 /* UIButton+Image+Title.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388D2157DE37800377D88 /* UIButton+Image+Title.m */; };
-		768388E4157E249900377D88 /* AdvertisingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 768388E0157E249900377D88 /* AdvertisingViewController.xib */; };
 		768388E5157E249900377D88 /* CDCollectionAdvertisingApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388E2157E249900377D88 /* CDCollectionAdvertisingApp.m */; };
 		768388E8157E304400377D88 /* AdvertisingNewVersionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388E7157E304300377D88 /* AdvertisingNewVersionViewController.m */; };
-		768388EB157E306100377D88 /* AdvertisingOtherAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388EA157E306100377D88 /* AdvertisingOtherAppViewController.m */; };
 		76864B391626A0E80095BBEF /* TopPlayersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76864B381626A0E80095BBEF /* TopPlayersCell.xib */; };
 		76864B3B1626DAC30095BBEF /* OnLinePlayersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76864B3A1626DAC30095BBEF /* OnLinePlayersCell.xib */; };
 		7692812C159DCAFD00E6CE41 /* IconDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7692812B159DCAFD00E6CE41 /* IconDownloader.m */; };
@@ -262,6 +259,9 @@
 		BD84E2AB147CDE9E009DCEBF /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD84E2AA147CDE9D009DCEBF /* CoreText.framework */; };
 		BD865F6A162FF8500049125A /* SSConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = BD865F69162FF8500049125A /* SSConnection.m */; };
 		BD865F6D1630124D0049125A /* SSServer.m in Sources */ = {isa = PBXBuildFile; fileRef = BD865F6C1630124D0049125A /* SSServer.m */; };
+		BD87D2291648057500747ED8 /* AdvertisingNewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD87D2271648057400747ED8 /* AdvertisingNewViewController.m */; };
+		BD87D22A1648057500747ED8 /* AdvertisingNewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD87D2281648057400747ED8 /* AdvertisingNewViewController.xib */; };
+		BD87D22E1648151E00747ED8 /* AdvertisingOtherAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD87D22D1648151D00747ED8 /* AdvertisingOtherAppViewController.m */; };
 		BD886C55163FB98D002F9960 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD886C54163FB98D002F9960 /* Default-568h@2x.png */; };
 		BDCECE88148515D40007CEE3 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDCECE87148515D30007CEE3 /* LoginViewController.m */; };
 		BDD07BB8141E1F170085E4FB /* AccelerometrDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B3C141E1F170085E4FB /* AccelerometrDataSource.m */; };
@@ -571,15 +571,10 @@
 		7682E362156BD22000A8F9A0 /* CDPlayerOnLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDPlayerOnLine.m; sourceTree = "<group>"; };
 		768388D1157DE37800377D88 /* UIButton+Image+Title.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Image+Title.h"; sourceTree = "<group>"; };
 		768388D2157DE37800377D88 /* UIButton+Image+Title.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Image+Title.m"; sourceTree = "<group>"; };
-		768388DE157E249900377D88 /* AdvertisingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdvertisingViewController.h; path = AdvertisingApp/AdvertisingViewController.h; sourceTree = "<group>"; };
-		768388DF157E249900377D88 /* AdvertisingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AdvertisingViewController.m; path = AdvertisingApp/AdvertisingViewController.m; sourceTree = "<group>"; };
-		768388E0157E249900377D88 /* AdvertisingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AdvertisingViewController.xib; path = AdvertisingApp/AdvertisingViewController.xib; sourceTree = "<group>"; };
 		768388E1157E249900377D88 /* CDCollectionAdvertisingApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDCollectionAdvertisingApp.h; path = AdvertisingApp/CDCollectionAdvertisingApp.h; sourceTree = "<group>"; };
 		768388E2157E249900377D88 /* CDCollectionAdvertisingApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDCollectionAdvertisingApp.m; path = AdvertisingApp/CDCollectionAdvertisingApp.m; sourceTree = "<group>"; };
 		768388E6157E304200377D88 /* AdvertisingNewVersionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvertisingNewVersionViewController.h; sourceTree = "<group>"; };
 		768388E7157E304300377D88 /* AdvertisingNewVersionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertisingNewVersionViewController.m; sourceTree = "<group>"; };
-		768388E9157E306000377D88 /* AdvertisingOtherAppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvertisingOtherAppViewController.h; sourceTree = "<group>"; };
-		768388EA157E306100377D88 /* AdvertisingOtherAppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertisingOtherAppViewController.m; sourceTree = "<group>"; };
 		76864B381626A0E80095BBEF /* TopPlayersCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TopPlayersCell.xib; path = Xib/TopPlayersCell.xib; sourceTree = "<group>"; };
 		76864B3A1626DAC30095BBEF /* OnLinePlayersCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OnLinePlayersCell.xib; path = Xib/OnLinePlayersCell.xib; sourceTree = "<group>"; };
 		7692812A159DCAFD00E6CE41 /* IconDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconDownloader.h; sourceTree = "<group>"; };
@@ -650,6 +645,11 @@
 		BD865F69162FF8500049125A /* SSConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSConnection.m; sourceTree = "<group>"; };
 		BD865F6B1630124D0049125A /* SSServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSServer.h; sourceTree = "<group>"; };
 		BD865F6C1630124D0049125A /* SSServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSServer.m; sourceTree = "<group>"; };
+		BD87D2261648057300747ED8 /* AdvertisingNewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvertisingNewViewController.h; sourceTree = "<group>"; };
+		BD87D2271648057400747ED8 /* AdvertisingNewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertisingNewViewController.m; sourceTree = "<group>"; };
+		BD87D2281648057400747ED8 /* AdvertisingNewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdvertisingNewViewController.xib; sourceTree = "<group>"; };
+		BD87D22C1648151D00747ED8 /* AdvertisingOtherAppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvertisingOtherAppViewController.h; sourceTree = "<group>"; };
+		BD87D22D1648151D00747ED8 /* AdvertisingOtherAppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertisingOtherAppViewController.m; sourceTree = "<group>"; };
 		BD886C54163FB98D002F9960 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		BDC6D7BA147E48E90012CB34 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		BDCECE86148515D30007CEE3 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -1273,13 +1273,13 @@
 		768388D5157E176D00377D88 /* AdvertisingApp */ = {
 			isa = PBXGroup;
 			children = (
-				768388DE157E249900377D88 /* AdvertisingViewController.h */,
-				768388DF157E249900377D88 /* AdvertisingViewController.m */,
+				BD87D2261648057300747ED8 /* AdvertisingNewViewController.h */,
+				BD87D2271648057400747ED8 /* AdvertisingNewViewController.m */,
+				BD87D2281648057400747ED8 /* AdvertisingNewViewController.xib */,
 				768388E6157E304200377D88 /* AdvertisingNewVersionViewController.h */,
 				768388E7157E304300377D88 /* AdvertisingNewVersionViewController.m */,
-				768388E0157E249900377D88 /* AdvertisingViewController.xib */,
-				768388E9157E306000377D88 /* AdvertisingOtherAppViewController.h */,
-				768388EA157E306100377D88 /* AdvertisingOtherAppViewController.m */,
+				BD87D22C1648151D00747ED8 /* AdvertisingOtherAppViewController.h */,
+				BD87D22D1648151D00747ED8 /* AdvertisingOtherAppViewController.m */,
 				768388E1157E249900377D88 /* CDCollectionAdvertisingApp.h */,
 				768388E2157E249900377D88 /* CDCollectionAdvertisingApp.m */,
 				767A0109158B0BF0003C08D5 /* AdvertisingAppearController.h */,
@@ -1616,7 +1616,6 @@
 				761EFA521573BE91001670EB /* StartViewController.xib in Resources */,
 				7692BC2F1574E36C00983264 /* DuelStartViewController.xib in Resources */,
 				763F8A271578A1F800D8BB42 /* DuelViewControllerWithXib.xib in Resources */,
-				768388E4157E249900377D88 /* AdvertisingViewController.xib in Resources */,
 				767F48D51593420900DCE95F /* LoginViewController.xib in Resources */,
 				767BA5BE1589F8E300825EB1 /* FinalViewController.xib in Resources */,
 				03285FA2159DD61900D16195 /* ListOfItemsViewController.xib in Resources */,
@@ -1780,6 +1779,7 @@
 				76864B3B1626DAC30095BBEF /* OnLinePlayersCell.xib in Resources */,
 				BD886C55163FB98D002F9960 /* Default-568h@2x.png in Resources */,
 				BD7E5EFB16404F92000D6897 /* st_bg_new-568h@2x.png in Resources */,
+				BD87D22A1648057500747ED8 /* AdvertisingNewViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1806,7 +1806,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7679308115BEBF9E007F461F /* AdvertisingViewController.m in Sources */,
 				7679308015BEBF6F007F461F /* NSString+isNumeric.m in Sources */,
 				763F8A2A1578A55700D8BB42 /* DuelViewControllerWithXib.m in Sources */,
 				BDD07BB8141E1F170085E4FB /* AccelerometrDataSource.m in Sources */,
@@ -1857,7 +1856,6 @@
 				768388D3157DE37800377D88 /* UIButton+Image+Title.m in Sources */,
 				768388E5157E249900377D88 /* CDCollectionAdvertisingApp.m in Sources */,
 				768388E8157E304400377D88 /* AdvertisingNewVersionViewController.m in Sources */,
-				768388EB157E306100377D88 /* AdvertisingOtherAppViewController.m in Sources */,
 				76A6F92F15878ED1009CE450 /* UIImageView+AttachedView.m in Sources */,
 				767A010B158B0BF0003C08D5 /* AdvertisingAppearController.m in Sources */,
 				767CD1E4158F212B0054C9B8 /* UIImage+Save.m in Sources */,
@@ -1884,6 +1882,8 @@
 				76AFC7A215ED1B740009294B /* UIScrollView+AH3DPullRefresh.m in Sources */,
 				BD865F6A162FF8500049125A /* SSConnection.m in Sources */,
 				BD865F6D1630124D0049125A /* SSServer.m in Sources */,
+				BD87D2291648057500747ED8 /* AdvertisingNewViewController.m in Sources */,
+				BD87D22E1648151E00747ED8 /* AdvertisingOtherAppViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
