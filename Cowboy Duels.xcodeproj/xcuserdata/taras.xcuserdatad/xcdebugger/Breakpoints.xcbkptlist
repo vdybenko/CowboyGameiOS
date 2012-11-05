@@ -7,13 +7,13 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "373822619.293884"
+         filePath = "Cowboy Duel/Utils/UIImage+Save.m"
+         timestampString = "373824357.305402"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "650"
-         endingLineNumber = "650"
-         landmarkName = "-showHelp:"
+         startingLineNumber = "44"
+         endingLineNumber = "44"
+         landmarkName = "+loadImageFromDocumentDirectory:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -461,9 +461,7 @@ static AccountDataSource *sharedHelper = nil;
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"WEAPON"];
     
     data = [[NSUserDefaults standardUserDefaults] objectForKey:@"WEAPON"];
-    self.accountWeapon = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    
-    NSLog(@"weapon %d",self.accountWeapon.dDamage);
+    self.accountWeapon = [NSKeyedUnarchiver unarchiveObjectWithData:data];    
 }
 
 - (void)saveDefense;

@@ -13,6 +13,7 @@
 #import "GameCenterViewController.h"
 #import "UIImage+Save.h"
 #import "DuelProductDownloaderController.h"
+#import "SoundDownload.h"
 
 @interface DuelViewControllerWithXib (PrivateMethods)
 
@@ -184,7 +185,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
 {
     [super viewWillAppear:animated];
     
-    [self checkPlayerGun];
     steadyScale = 1.0;
     [follPlayer setVolume:1.0];
     [activityIndicatorView hideView];
@@ -205,6 +205,8 @@ static NSString *ShotSound = @"%@/shot.mp3";
     [self countUpBulets];
     _lbBullets.text=[NSString stringWithFormat:@"%d", shotCountBullet];
     
+    [self checkPlayerGun];
+
     [self setTextToMessageShot];
 }
 
@@ -345,7 +347,7 @@ if (shotCountBullet!=0) {
     //AudioServicesPlaySystemSound(pickerTick);
     [self shotStarAnimationVer];
     
-    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:ShotSound, [[NSBundle mainBundle] resourcePath]]];
+//    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:ShotSound, [[NSBundle mainBundle] resourcePath]]];
     switch (shotCountForSound) {
         case 1:
             [titleSteadyFire setHidden:YES];
@@ -353,23 +355,19 @@ if (shotCountBullet!=0) {
             [player1 stop];
             [player1 setCurrentTime:0.0];
             
-            player1 = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
             [player1 play];
             shotCountForSound=2;
             break;    
         case 2:
             [player2 stop];
             [player2 setCurrentTime:0.0];
-            //                url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Shot.aif", [[NSBundle mainBundle] resourcePath]]];
-            player2 = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
-            [player2 play];
+                        [player2 play];
             shotCountForSound=3;
             break;   
         case 3:
             [player3 stop];
             [player3 setCurrentTime:0.0];
-            //                url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Shot.aif", [[NSBundle mainBundle] resourcePath]]];
-            player3 = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+            
             [player3 play];
             shotCountForSound=1;
             break;    
@@ -495,7 +493,25 @@ if (shotCountBullet!=0) {
 -(void)checkPlayerGun;
 {
     if (playerAccount.accountWeapon.dName && [playerAccount.accountWeapon.dName length]) {
-        _ivGun.image = [UIImage loadImageFromDocumentDirectory:[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],playerAccount.accountWeapon.dImageGunLocal]];
+        NSString *path=[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],playerAccount.accountWeapon.dImageGunLocal];
+        if ([UIImage isFileDownloadedForPath:path]) {
+            _ivGun.image = [UIImage loadImageFullPath:path];
+        }
+        path=[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],playerAccount.accountWeapon.dSoundLocal];
+        if ([UIImage isFileDownloadedForPath:path]) {
+            NSError *error;
+            player1 = [[AVAudioPlayer alloc] initWithData:[SoundDownload dataForSound:path] error:&error];
+            [player1 play];
+            [player1 stop];
+            
+            player2 = [[AVAudioPlayer alloc] initWithData:[SoundDownload dataForSound:path] error:&error];
+            [player2 play];
+            [player2 stop];
+            
+            player3 = [[AVAudioPlayer alloc] initWithData:[SoundDownload dataForSound:path] error:&error];
+            [player3 play];
+            [player3 stop];
+        }
     }
 }
 

@@ -56,6 +56,9 @@ static int oponentMustShot;
     NSArray *arrItemsList = [NSKeyedUnarchiver unarchiveObjectWithData:data1];
     
     prod=[arrItemsList objectAtIndex:0];
+    
+    NSLog(@"%d",[arrItemsList indexOfObject:playerAccount.accountWeapon]);
+    
     [cell populateWithProduct:prod targetToBuyButton:self cellType:StoreDataSourceTypeTablesWeapons];
     CGRect frame= cell.frame;
     frame.origin.x = 0;
@@ -112,6 +115,7 @@ static int oponentMustShot;
 -(void)buyButtonClick:(id)sender;
 {
     playerAccount.accountWeapon = ((CDWeaponProduct*)prod);
+    [[AccountDataSource sharedInstance] saveWeapon];
     [self closeButtonClick:Nil];
 }
 
