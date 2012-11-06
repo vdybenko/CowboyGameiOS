@@ -75,7 +75,7 @@ static int oponentMustShot;
     NSArray *arrItemsList = [NSKeyedUnarchiver unarchiveObjectWithData:data1];
     
     if (playerAccount.accountWeapon.dID==0) {
-        prod=[arrItemsList objectAtIndex:2];
+        prod=[arrItemsList objectAtIndex:0];
     }else{
         if (playerAccount.accountWeapon.dID==[arrItemsList count]) {
             cell.editing = NO;

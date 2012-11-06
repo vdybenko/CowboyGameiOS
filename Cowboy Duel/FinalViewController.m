@@ -317,14 +317,16 @@
             [userDef synchronize];
         }
         
-        if(playerAccount.money<0) playerAccount.money=0;
+        if(playerAccount.money<0)
+            playerAccount.money=0;
         [playerAccount saveMoney];
+        
         if (teaching  && playerAccount.isTryingWeapon) {
             playerAccount.isTryingWeapon = NO;
             if (!isDuelWinWatched) {
                 isDuelWinWatched = YES;
                 DuelProductWinViewController *duelProductWinViewController=[[DuelProductWinViewController alloc] initWithAccount:playerAccount duelProduct:playerAccount.accountWeapon parentVC:self];
-//                [playerAccount loadWeapon];
+                [playerAccount loadWeapon];
                 [self.navigationController presentViewController:duelProductWinViewController animated:YES completion:Nil];
             }
         }else{
