@@ -54,7 +54,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
         lbBackButton.text = NSLocalizedString(@"SKIP", nil);
     }
     
-    opAccount.accountDefenseValue = 35;
+    opAccount.accountDefenseValue = 5;
     
     if([DuelProductAttensionViewController isAttensionNeedForOponent:opAccount]){
         DuelProductAttensionViewController *duelProductAttensionViewController=[[DuelProductAttensionViewController alloc] initWithAccount:playerAccount parentVC:self];

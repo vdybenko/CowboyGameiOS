@@ -18,6 +18,7 @@ static const char *POST_DUEL_URL =  BASE_URL"api/duels";
 @synthesize arrDefense;
 @synthesize accountDefenseValue;
 @synthesize accountWeapon;
+@synthesize isTryingWeapon;
 
 #pragma mark
 
@@ -46,6 +47,7 @@ static AccountDataSource *sharedHelper = nil;
     self.removeAds=0;
     self.arrDefense = [[NSMutableArray alloc] init];
     self.accountWeapon = [[CDWeaponProduct alloc] init];
+    self.isTryingWeapon=NO;
     
     self.avatar=@"";
     self.age=@"";
@@ -454,14 +456,24 @@ static AccountDataSource *sharedHelper = nil;
 
 - (void)saveWeapon;
 {
-    self.accountWeapon.dDamage = 5;
     NSData *data= [NSKeyedArchiver archivedDataWithRootObject:self.accountWeapon];
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"WEAPON"];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"WEAPON"];
+}
+
+- (void)saveWeaponTry;
+{
+    NSData *data= [NSKeyedArchiver archivedDataWithRootObject:self.accountWeapon];
     
-    data = [[NSUserDefaults standardUserDefaults] objectForKey:@"WEAPON"];
-    self.accountWeapon = [NSKeyedUnarchiver unarchiveObjectWithData:data];    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"WEAPON_TRY"];
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"WEAPON_TRY"];
+}
+- (void)loadWeaponTry;
+{
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"WEAPON_TRY"];
+    self.accountWeapon = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"WEAPON_TRY"];
 }
 
 - (void)saveDefense;

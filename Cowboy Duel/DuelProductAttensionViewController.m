@@ -49,22 +49,6 @@ static int oponentMustShot;
 {
     [super viewDidLoad];
     [frameView setDinamicHeightBackground];
-    StoreProductCell *cell = [StoreProductCell cellAttension];
-    [cell initMainControlsWithNarrowBackGround];
-    
-    NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:DUEL_PRODUCTS_WEAPONS];
-    NSArray *arrItemsList = [NSKeyedUnarchiver unarchiveObjectWithData:data1];
-    
-    prod=[arrItemsList objectAtIndex:0];
-    
-    NSLog(@"%d",[arrItemsList indexOfObject:playerAccount.accountWeapon]);
-    
-    [cell populateWithProduct:prod targetToBuyButton:self cellType:StoreDataSourceTypeTablesWeapons];
-    CGRect frame= cell.frame;
-    frame.origin.x = 0;
-    frame.origin.y = frameView.frame.origin.y + frameView.frame.size.height-14;
-    cell.frame = frame;
-    [self.view insertSubview:cell belowSubview:frameView];
     
     title.text = NSLocalizedString(@"Atten", @"");
     [title setAdjustsFontSizeToFitWidth:YES];
@@ -83,6 +67,30 @@ static int oponentMustShot;
     [webView setBackgroundColor:[UIColor clearColor]];
     NSString *webTesxt = [NSString stringWithFormat:@"%@%d%@%d%@",NSLocalizedString(@"ATTEN_WEB_TEXT1", @""),playerMustShot,NSLocalizedString(@"ATTEN_WEB_TEXT2", @""),oponentMustShot,NSLocalizedString(@"ATTEN_WEB_TEXT3", @"")];
     [webView loadHTMLString:webTesxt baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
+    
+    StoreProductCell *cell = [StoreProductCell cellAttension];
+    [cell initMainControlsWithNarrowBackGround];
+    
+    NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:DUEL_PRODUCTS_WEAPONS];
+    NSArray *arrItemsList = [NSKeyedUnarchiver unarchiveObjectWithData:data1];
+    
+    if (playerAccount.accountWeapon.dID==0) {
+        prod=[arrItemsList objectAtIndex:0];
+    }else{
+        if (playerAccount.accountWeapon.dID==[arrItemsList count]) {
+            cell.editing = NO;
+            cell.hidden = YES;
+        }else{
+            prod=[arrItemsList objectAtIndex:playerAccount.accountWeapon.dID];
+        }
+    }
+        
+    [cell populateWithProduct:prod targetToBuyButton:self cellType:StoreDataSourceTypeTablesWeapons];
+    CGRect frame= cell.frame;
+    frame.origin.x = 0;
+    frame.origin.y = frameView.frame.origin.y + frameView.frame.size.height-14;
+    cell.frame = frame;
+    [self.view insertSubview:cell belowSubview:frameView];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -114,8 +122,9 @@ static int oponentMustShot;
 
 -(void)buyButtonClick:(id)sender;
 {
+    [playerAccount saveWeaponTry];
+    playerAccount.isTryingWeapon = YES;
     playerAccount.accountWeapon = ((CDWeaponProduct*)prod);
-    [[AccountDataSource sharedInstance] saveWeapon];
     [self closeButtonClick:Nil];
 }
 

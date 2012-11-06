@@ -25,6 +25,7 @@
 @property(strong, nonatomic) NSMutableArray *arrDefense;
 @property(nonatomic) NSInteger accountDefenseValue;
 @property(strong, nonatomic) CDWeaponProduct *accountWeapon;
+@property(nonatomic) BOOL isTryingWeapon;
 
 @property(strong, nonatomic) NSString *avatar;
 @property(strong, nonatomic) NSString *age; 
@@ -71,6 +72,8 @@
 - (void)saveFacebookName;
 - (void)saveDeviceType;
 - (void)saveWeapon;
+- (void)saveWeaponTry;
+- (void)loadWeaponTry;
 - (void)saveDefense;
 
 -(void)putchAvatarImageToInitStartVC:(StartViewController*)startVC;
