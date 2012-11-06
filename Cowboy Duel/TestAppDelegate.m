@@ -39,12 +39,12 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
 @implementation TestAppDelegate
 
 @synthesize navigationController, loginViewController;
-@synthesize facebook;
+@synthesize facebook, adBanner;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-       
+    [UIImage initialize];
         
     [AdColony initAdColonyWithDelegate:self];
     
@@ -79,10 +79,10 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     [navigationController setNavigationBarHidden:YES];
     
     CGRect frame = [[UIScreen mainScreen]bounds];
-    
     window = [[UIWindow alloc]initWithFrame:frame];
-    [window setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"st_bg_new.png"]]];
     
+    //[window setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"st_bg_new.png"]]];
+    [window addSubview:[[UIImageView alloc] initWithImage: [UIImage imageNamed:@"st_bg_new.png"]]];
     [window addSubview:navigationController.view];
     [window makeKeyAndVisible];
     
@@ -103,10 +103,10 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     
     DLog(@"FBAccessTokenKey %@", [defaults objectForKey:@"FBAccessTokenKey"]);
     
-    CGRect currentScreen = [[UIScreen mainScreen] bounds];
-    if (currentScreen.size.height > 480) {
+    
+    if (frame.size.height > 480) {
         // Initialize the banner at the bottom of the screen.
-        CGPoint origin = CGPointMake(0.0, currentScreen.size.height - 50);
+        CGPoint origin = CGPointMake(0.0, frame.size.height - 50);
         
         // Use predefined GADAdSize constants to define the GADBannerView.
         self.adBanner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait
@@ -119,6 +119,7 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
         [self.adBanner setRootViewController:self];
         [window addSubview:self.adBanner];
         [self.adBanner loadRequest:[self createRequest]];
+        [self.adBanner setHidden:YES];
     }
     
     

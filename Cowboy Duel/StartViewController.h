@@ -34,6 +34,7 @@
 #import "UIImageView+AttachedView.h"
 #import "TopPlayersDataSource.h"
 #import "SSConnection.h"
+#import "TestAppDelegate.h"
 
 @class ListOfItemsViewController;
 @class GameCenterViewController;

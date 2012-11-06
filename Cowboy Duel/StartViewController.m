@@ -347,13 +347,13 @@ static StartViewController *sharedHelper = nil;
     NSInteger facebookLogIn = [userDefaults integerForKey:@"facebookLogIn"];
     NSInteger paymentRegistration = [userDefaults integerForKey:@"paymentRegistration"];
     
-    if (!paymentRegistration && !facebookLogIn) {
-        LoginViewController *loginViewController = [LoginViewController sharedInstance];
-        [loginViewController setPayment:YES];
-        [self.navigationController pushViewController:loginViewController animated:YES];
-    }
+//    if (!paymentRegistration && !facebookLogIn) {
+//        LoginViewController *loginViewController = [LoginViewController sharedInstance];
+//        [loginViewController setPayment:YES];
+//        [self.navigationController pushViewController:loginViewController animated:YES];
+//    }
     
-       
+    
     UIColor *buttonsTitleColor = [[UIColor alloc] initWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     
     [duelButton setTitle:NSLocalizedString(@"Saloon", @"") forState:UIControlStateNormal];
@@ -505,6 +505,15 @@ static StartViewController *sharedHelper = nil;
     [self showProfileFirstRun];
     [self isAdvertisingOfNewVersionNeedShow];
     [self estimateApp];
+    TestAppDelegate *app = (TestAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [app.adBanner setHidden:NO];
+}
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    TestAppDelegate *app = (TestAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [app.adBanner setHidden:YES];
+
 }
 
 -(void)didBecomeActive
@@ -632,7 +641,9 @@ static StartViewController *sharedHelper = nil;
     [UIView setAnimationDuration:0.5f];
 	[UIView setAnimationDelegate:self];
     CGRect frame = feedbackView.frame;
-    frame.origin.y = 90.0f;
+    int delta = 0;
+    if ([[UIScreen mainScreen] bounds].size.height > 480) delta = 50;
+    frame.origin.y = [[UIScreen mainScreen] bounds].size.height - feedbackView.frame.size.height - delta;
     feedbackView.frame = frame;
     
     [UIView commitAnimations];
@@ -648,7 +659,7 @@ static StartViewController *sharedHelper = nil;
     [UIView setAnimationDuration:0.5f];
 	[UIView setAnimationDelegate:self];
     CGRect frame = feedbackView.frame;
-    frame.origin.y = 480.0f;
+    frame.origin.y = [[UIScreen mainScreen] bounds].size.height;
     feedbackView.frame = frame;
     
     [UIView commitAnimations];

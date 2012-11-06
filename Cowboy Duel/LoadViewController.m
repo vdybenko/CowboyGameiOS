@@ -43,7 +43,7 @@ static const char *A_URL =  BASE_URL"api/a";
         [[GCHelper sharedInstance] setPresentingViewController:startViewController];
         [[GCHelper sharedInstance] setDelegate2:startViewController];
     
-        imgBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default.png"]];
+        imgBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default-568h.png"]];
         [self.view addSubview:imgBackground];
         
         NSString *version = @"Version ";
@@ -54,8 +54,8 @@ static const char *A_URL =  BASE_URL"api/a";
         } else {
             version = @"";
         }
-        
-        UILabel *versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 440, 150, 40)];
+        CGRect frame = [[UIScreen mainScreen]bounds];
+        UILabel *versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, frame.size.height - 40, 150, 40)];
         [versionLabel setTextColor:[UIColor whiteColor]];
         [versionLabel setFont:[UIFont systemFontOfSize:10]];
         [versionLabel setBackgroundColor:[UIColor clearColor]];
