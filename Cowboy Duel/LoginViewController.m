@@ -32,6 +32,7 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
     IBOutlet UIButton *_btnNextTime;
     IBOutlet UIWebView *link;
     UIAlertView *baseAlert;
+    NSMutableString *stDonate;
     
     LoginFacebookStatus loginFacebookStatus;
     __unsafe_unretained IBOutlet UIView *activityView;
@@ -122,6 +123,7 @@ static LoginViewController *sharedHelper = nil;
 
 -(void)viewWillAppear:(BOOL)animated;
 {
+    [MKStoreManager sharedManager].delegate = sharedHelper;
     [[LoginViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusSimple];
 }
 
@@ -153,27 +155,25 @@ static LoginViewController *sharedHelper = nil;
 
 -(IBAction)scipLoginBtnClick:(id)sender
 {
+    stDonate=[[NSMutableString alloc] init];
     if (payment) {
-        if ([SKPaymentQueue canMakePayments]) {
-            SKPayment *payment = [SKPayment paymentWithProductIdentifier:loginProduct];
-            [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-            [[SKPaymentQueue defaultQueue] addPayment:payment];
-            [activityView setHidden:NO];
-            [activityIndicatorView startAnimating];
-        }
+        [[MKStoreManager sharedManager] buyFeatureA];
+        [activityView setHidden:NO];
+        [activityIndicatorView startAnimating];
+        [stDonate appendString:@"/paymentRegistration"];
         
-        //    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-        //                                                        object:self
-        //                                                      userInfo:[NSDictionary dictionaryWithObject:stDonate forKey:@"event"]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                            object:self
+                                                          userInfo:[NSDictionary dictionaryWithObject:stDonate forKey:@"event"]];
+    
         return;
     }
-    
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IPad"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     ProfileViewController *profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount startViewController:startViewController];
     [profileViewController setNeedAnimation:YES];
-    [self.navigationController pushViewController:profileViewController animated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
 														object:self
@@ -204,7 +204,7 @@ static LoginViewController *sharedHelper = nil;
         NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"birthday,id,name,picture,location",@"fields",nil];
         [[OGHelper sharedInstance] getCountOfUserFriends];
         
-        [self.facebook requestWithGraphPath:@"me" andParams:params andDelegate:startViewController];
+        [self.facebook requestWithGraphPath:@"me" andParams:params andDelegate:self];
         
         
         switch (loginFacebookStatus) {
@@ -222,6 +222,7 @@ static LoginViewController *sharedHelper = nil;
                 break;
         }
     }
+    
 }
 
 - (void)fbDidLogout {
@@ -243,7 +244,60 @@ static LoginViewController *sharedHelper = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName: kCheckfFBLoginSession
                                                         object:self
                                                       userInfo:nil];
-} 
+}
+
+#pragma mark FConnect Methods
+
+- (void)request:(FBRequest *)request didLoad:(id)result {
+	
+    
+	if ([result isKindOfClass:[NSDictionary class]]) {
+        
+        //        putch for 1.4.1
+        BOOL modifierUserInfo = NO;
+        if (([playerAccount.accountID rangeOfString:@"F:"].location != NSNotFound)&&[playerAccount putchAvatarImageSendInfo]) {
+            modifierUserInfo = YES;
+        }
+        //
+        startViewController.oldAccounId = [[NSString alloc] initWithFormat:@"%@",playerAccount.accountID];
+        
+		NSString *userId = [NSString stringWithFormat:@"F:%@", ValidateObject([result objectForKey:@"id"], [NSString class])];
+        playerAccount.accountID=userId;
+		NSUserDefaults *uDef = [NSUserDefaults standardUserDefaults];
+        NSString *playerName=[NSString stringWithFormat:@"%@", ValidateObject([result objectForKey:@"name"], [NSString class])];
+        
+        if ([playerAccount.accountName isEqualToString:@"Anonymous"]||[playerAccount.accountName isEqualToString:@""]||!playerAccount.accountName) {
+            [playerAccount setAccountName:playerName];
+        }
+        playerAccount.facebookName=playerName;
+        
+        NSDictionary *data = ValidateObject([result objectForKey:@"picture"], [NSDictionary class]);
+        NSDictionary *imageDictionary = ValidateObject([data objectForKey:@"data"], [NSDictionary class]);
+        playerAccount.avatar=[NSString stringWithFormat:@"%@", ValidateObject([imageDictionary objectForKey:@"url"], [NSString class])];
+        
+        playerAccount.age=[NSString stringWithFormat:@"%@", ValidateObject([result objectForKey:@"birthday"], [NSString class])];
+        
+        NSDictionary *town=ValidateObject([result objectForKey:@"location"], [NSDictionary class]);
+        playerAccount.homeTown=[NSString stringWithFormat:@"%@", ValidateObject([town objectForKey:@"name"], [NSString class])];
+        
+        [playerAccount saveAge];
+        [playerAccount saveHomeTown];
+        [playerAccount saveFacebookName];
+        [playerAccount saveAvatar];
+        
+        [uDef setObject:ValidateObject(playerAccount.accountID, [NSString class]) forKey:@"id"];
+        
+        [uDef setObject:ValidateObject(playerAccount.accountName, [NSString class]) forKey:@"name"];
+        
+        [uDef synchronize];
+        
+        [startViewController authorizationModifier:modifierUserInfo];
+        payment = NO;
+        [self scipLoginBtnClick:nil];
+    }
+    
+}
+
 
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
 	
@@ -290,26 +344,11 @@ static LoginViewController *sharedHelper = nil;
     DLog(@"login Error %@",[error description]);
 }
 
-#pragma mark SKProductsRequestDelegate
+#pragma mark MKStoreKitDelegate
 
-
-
--(void) restorPurchases {
-    [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-    [[SKPaymentQueue defaultQueue]restoreCompletedTransactions];
-}
-
-
-- (void) performDismiss {
-    [baseAlert dismissWithClickedButtonIndex:[baseAlert cancelButtonIndex] animated:NO];
-}
-
-#pragma mark -
-
--(void)completedPurchaseTransaction:(SKPaymentTransaction *)transaction
+- (void)productAPurchased
 {
-    DLog(@"completedPurchaseTransaction");
-    [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+	DLog(@"completedPurchaseTransaction");
     
     [[NSUserDefaults standardUserDefaults] synchronize];
     
@@ -321,103 +360,27 @@ static LoginViewController *sharedHelper = nil;
     [userDefaults setInteger:paymentRegistration forKey:@"paymentRegistration"];
     [userDefaults synchronize];
     
+    [stDonate appendString:@"/done"];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:stDonate forKey:@"event"]];
+    
     payment = NO;
     [self scipLoginBtnClick:nil];
-    
-    [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
-    [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
-    
-    
-//    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-//                                                        object:self
-//                                                      userInfo:[NSDictionary dictionaryWithObject:stDonate forKey:@"event"]];
-    [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
-    
+
 }
 
-- (void) handleFailedTransaction: (SKPaymentTransaction *) transaction {
-    DLog(@"handleFailedTransaction");
-    
-    if (transaction.error.code != SKErrorPaymentCancelled){
-        baseAlert = [[UIAlertView alloc] initWithTitle:@"Transaction Error. Please try again later." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: nil];
-        [self.view addSubview:baseAlert];
-        [baseAlert show];
-        
-        [activityView setHidden:YES];
-        [activityIndicatorView stopAnimating];
-
-        [self performSelector:@selector(performDismiss) withObject:self afterDelay:3.0];
-        
-        
-//        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-//                                                            object:self
-//                                                          userInfo:[NSDictionary dictionaryWithObject:stDonate forKey:@"event"]];
-        
-    }
-    else
-    {
-        baseAlert = [[UIAlertView alloc] initWithTitle:@"Payment cancelled. Please try again later." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: nil];
-        [self.view addSubview:baseAlert];
-        [baseAlert show];
-        
-        [activityView setHidden:YES];
-        [activityIndicatorView stopAnimating];
-
-        [self performSelector:@selector(performDismiss) withObject:self afterDelay:3.0];
-    }
-    
-    [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
-    [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
-}
-
-
-
-- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
+- (void)failed
 {
-    DLog(@"paymentQueue: %i", queue.transactions.count);
+    [stDonate appendString:@"/error"];
     
-    for (SKPaymentTransaction *transaction in transactions)
-    {
-        DLog(@"tran for product: %@ of state: %i", [[transaction payment] productIdentifier], [transaction transactionState]);
-        
-        switch (transaction.transactionState)
-        {
-            case SKPaymentTransactionStatePurchasing:
-                DLog(@"SKPaymentTransactionStatePurchasing");
-                break;
-            case SKPaymentTransactionStatePurchased:{
-                DLog(@"SKPaymentTransactionStatePurchased");
-                
-                [self completedPurchaseTransaction:transaction];
-                                
-                [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
-                [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
-        
-                break;
-            }
-            case SKPaymentTransactionStateRestored:
-                DLog(@"SKPaymentTransactionStateRestored");
-                [self completedPurchaseTransaction:transaction];
-                break;
-                
-            case SKPaymentTransactionStateFailed:
-                DLog(@"Failed %@", transaction.error);
-                [self handleFailedTransaction:transaction];
-                break;
-                
-            default:
-                break;
-        }
-    }
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:stDonate forKey:@"event"]];
+	[activityView setHidden:YES];
+    [activityIndicatorView stopAnimating];
 }
-
--(void) paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error {
-    DLog(@"restoreCompletedTransactionsFailedWithError %@",[error userInfo]);
-    [self dismissModalViewControllerAnimated:YES];
-}
-
-
 
 #pragma mark -
 

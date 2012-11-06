@@ -288,6 +288,8 @@
 		BD7F252415E777DC00A3C2CA /* fin_img_coin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD7F252215E777DA00A3C2CA /* fin_img_coin@2x.png */; };
 		BD7F27CD147FECB700B1D6BC /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BDC6D7BA147E48E90012CB34 /* libz.1.2.5.dylib */; };
 		BD7F2AD51649040C00D29263 /* UIImage+Retina4.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA1B23C1648450E00FFF0A1 /* UIImage+Retina4.m */; };
+		BD7F2AE91649647500D29263 /* MKStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7F2AE61649647500D29263 /* MKStoreManager.m */; };
+		BD7F2AEA1649647500D29263 /* MKStoreObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7F2AE81649647500D29263 /* MKStoreObserver.m */; };
 		BD8000D6157755A600703AC8 /* OGHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8000D5157755A600703AC8 /* OGHelper.m */; };
 		BD8165DF15E6A22700D1F189 /* fin_img_spirit.png in Resources */ = {isa = PBXBuildFile; fileRef = BD8165DD15E6A22700D1F189 /* fin_img_spirit.png */; };
 		BD8165E015E6A22700D1F189 /* fin_img_spirit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD8165DE15E6A22700D1F189 /* fin_img_spirit@2x.png */; };
@@ -707,6 +709,10 @@
 		BD7E5EFA16404F92000D6897 /* st_bg_new-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "st_bg_new-568h@2x.png"; sourceTree = "<group>"; };
 		BD7F252115E777D800A3C2CA /* fin_img_coin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fin_img_coin.png; sourceTree = "<group>"; };
 		BD7F252215E777DA00A3C2CA /* fin_img_coin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fin_img_coin@2x.png"; sourceTree = "<group>"; };
+		BD7F2AE51649647500D29263 /* MKStoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKStoreManager.h; sourceTree = "<group>"; };
+		BD7F2AE61649647500D29263 /* MKStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKStoreManager.m; sourceTree = "<group>"; };
+		BD7F2AE71649647500D29263 /* MKStoreObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKStoreObserver.h; sourceTree = "<group>"; };
+		BD7F2AE81649647500D29263 /* MKStoreObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKStoreObserver.m; sourceTree = "<group>"; };
 		BD8000D4157755A600703AC8 /* OGHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OGHelper.h; sourceTree = "<group>"; };
 		BD8000D5157755A600703AC8 /* OGHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OGHelper.m; sourceTree = "<group>"; };
 		BD8165DD15E6A22700D1F189 /* fin_img_spirit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fin_img_spirit.png; sourceTree = "<group>"; };
@@ -1458,6 +1464,17 @@
 			path = Library;
 			sourceTree = "<group>";
 		};
+		BD7F2AE41649647500D29263 /* MKStore */ = {
+			isa = PBXGroup;
+			children = (
+				BD7F2AE51649647500D29263 /* MKStoreManager.h */,
+				BD7F2AE61649647500D29263 /* MKStoreManager.m */,
+				BD7F2AE71649647500D29263 /* MKStoreObserver.h */,
+				BD7F2AE81649647500D29263 /* MKStoreObserver.m */,
+			);
+			path = MKStore;
+			sourceTree = "<group>";
+		};
 		BD865F67162FF8500049125A /* Connection */ = {
 			isa = PBXGroup;
 			children = (
@@ -1520,6 +1537,7 @@
 		BDD07BB1141E1F170085E4FB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				BD7F2AE41649647500D29263 /* MKStore */,
 				76A1A4EE15ADFB9300DC581B /* FBConnect */,
 				BDD07BB4141E1F170085E4FB /* Utils.h */,
 				BDD07BB5141E1F170085E4FB /* Utils.m */,
@@ -2034,6 +2052,8 @@
 				BD865F6D1630124D0049125A /* SSServer.m in Sources */,
 				BD87D2291648057500747ED8 /* AdvertisingNewViewController.m in Sources */,
 				BD87D22E1648151E00747ED8 /* AdvertisingOtherAppViewController.m in Sources */,
+				BD7F2AE91649647500D29263 /* MKStoreManager.m in Sources */,
+				BD7F2AEA1649647500D29263 /* MKStoreObserver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -347,11 +347,14 @@ static StartViewController *sharedHelper = nil;
     NSInteger facebookLogIn = [userDefaults integerForKey:@"facebookLogIn"];
     NSInteger paymentRegistration = [userDefaults integerForKey:@"paymentRegistration"];
     
-//    if (!paymentRegistration && !facebookLogIn) {
-//        LoginViewController *loginViewController = [LoginViewController sharedInstance];
-//        [loginViewController setPayment:YES];
-//        [self.navigationController pushViewController:loginViewController animated:YES];
-//    }
+    if (!paymentRegistration && !facebookLogIn) {
+        SSConnection *connection = [SSConnection sharedInstance];
+        [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
+        
+        LoginViewController *loginViewController = [LoginViewController sharedInstance];
+        [loginViewController setPayment:YES];
+        [self.navigationController pushViewController:loginViewController animated:YES];
+    }
     
     
     UIColor *buttonsTitleColor = [[UIColor alloc] initWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
@@ -686,6 +689,8 @@ static StartViewController *sharedHelper = nil;
 
 -(void) advertButtonClick {
     AdColonyViewController *adColonyViewController = [[AdColonyViewController alloc]initWithStartVC:self];
+    SSConnection *connection = [SSConnection sharedInstance];
+    [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
     [self presentModalViewController:adColonyViewController animated:YES];
 }
 
@@ -1260,55 +1265,6 @@ static StartViewController *sharedHelper = nil;
     }
 }
 
-#pragma mark FConnect Methods
-
-- (void)request:(FBRequest *)request didLoad:(id)result {
-	
-    
-	if ([result isKindOfClass:[NSDictionary class]]) {
-
-//        putch for 1.4.1
-        BOOL modifierUserInfo = NO;
-        if (([playerAccount.accountID rangeOfString:@"F:"].location != NSNotFound)&&[playerAccount putchAvatarImageSendInfo]) {
-            modifierUserInfo = YES;
-        }
-//
-        oldAccounId = [[NSString alloc] initWithFormat:@"%@",playerAccount.accountID];
-        
-		NSString *userId = [NSString stringWithFormat:@"F:%@", ValidateObject([result objectForKey:@"id"], [NSString class])];
-        playerAccount.accountID=userId;
-		NSUserDefaults *uDef = [NSUserDefaults standardUserDefaults];
-        NSString *playerName=[NSString stringWithFormat:@"%@", ValidateObject([result objectForKey:@"name"], [NSString class])];
-                
-        if ([playerAccount.accountName isEqualToString:@"Anonymous"]||[playerAccount.accountName isEqualToString:@""]||!playerAccount.accountName) {
-            [playerAccount setAccountName:playerName];  
-        } 
-        playerAccount.facebookName=playerName;
-        
-        NSDictionary *data = ValidateObject([result objectForKey:@"picture"], [NSDictionary class]);
-        NSDictionary *imageDictionary = ValidateObject([data objectForKey:@"data"], [NSDictionary class]);
-        playerAccount.avatar=[NSString stringWithFormat:@"%@", ValidateObject([imageDictionary objectForKey:@"url"], [NSString class])];
-        
-        playerAccount.age=[NSString stringWithFormat:@"%@", ValidateObject([result objectForKey:@"birthday"], [NSString class])];
-        
-        NSDictionary *town=ValidateObject([result objectForKey:@"location"], [NSDictionary class]);
-        playerAccount.homeTown=[NSString stringWithFormat:@"%@", ValidateObject([town objectForKey:@"name"], [NSString class])];
-        
-        [playerAccount saveAge];
-        [playerAccount saveHomeTown];
-        [playerAccount saveFacebookName];
-        [playerAccount saveAvatar];
-        
-        [uDef setObject:ValidateObject(playerAccount.accountID, [NSString class]) forKey:@"id"];
-        
-        [uDef setObject:ValidateObject(playerAccount.accountName, [NSString class]) forKey:@"name"];
-            
-        [uDef synchronize];
-        
-        [self authorizationModifier:modifierUserInfo];
-    }
-
-}
 
 - (void)dealloc {
 //    [super dealloc];
