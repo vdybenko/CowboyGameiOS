@@ -58,7 +58,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
     
     if([DuelProductAttensionViewController isAttensionNeedForOponent:opAccount]){
         DuelProductAttensionViewController *duelProductAttensionViewController=[[DuelProductAttensionViewController alloc] initWithAccount:playerAccount parentVC:self];
-        [self.navigationController presentViewController:duelProductAttensionViewController animated:YES completion:nil];
+        [self.navigationController presentViewController:duelProductAttensionViewController animated:NO completion:nil];
     }
 }
 

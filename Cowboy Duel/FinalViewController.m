@@ -246,8 +246,10 @@
     resultTable.delegate = self;
     resultTable.dataSource = self;
     
-    if (playerAccount.accountName != nil) lblNamePlayer.text = playerAccount.accountName;
-    else lblNamePlayer.text = @"YOU";
+    if (playerAccount.accountName != nil)
+        lblNamePlayer.text = playerAccount.accountName;
+    else
+        lblNamePlayer.text = @"YOU";
     [lblNamePlayer setFont: [UIFont fontWithName: @"MyriadPro-Semibold" size:20]];
     lblNameOponnent.text = oponentAccount.accountName;
     
@@ -299,6 +301,10 @@
 {
     viewLastSceneAnimation.hidden=NO;
     [player stop];
+    
+    if (lastDuel){
+        [playerAccount loadWeapon];
+    }
 }
 #pragma mark -
 
@@ -313,15 +319,14 @@
         
         if(playerAccount.money<0) playerAccount.money=0;
         [playerAccount saveMoney];
-        if (teaching&&!isDuelWinWatched) {
-            isDuelWinWatched = YES;
-            NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:DUEL_PRODUCTS_WEAPONS];
-            NSArray *arrItemsList = [NSKeyedUnarchiver unarchiveObjectWithData:data1];
-            
-            CDDuelProduct *prod=[arrItemsList objectAtIndex:0];
-            
-            DuelProductWinViewController *duelProductWinViewController=[[DuelProductWinViewController alloc] initWithAccount:playerAccount duelProduct:prod parentVC:self];
-            [self.navigationController presentViewController:duelProductWinViewController animated:YES completion:Nil];
+        if (teaching  && playerAccount.isTryingWeapon) {
+            playerAccount.isTryingWeapon = NO;
+            if (!isDuelWinWatched) {
+                isDuelWinWatched = YES;
+                DuelProductWinViewController *duelProductWinViewController=[[DuelProductWinViewController alloc] initWithAccount:playerAccount duelProduct:playerAccount.accountWeapon parentVC:self];
+//                [playerAccount loadWeapon];
+                [self.navigationController presentViewController:duelProductWinViewController animated:YES completion:Nil];
+            }
         }else{
             [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
         }

@@ -72,8 +72,7 @@
 - (void)saveFacebookName;
 - (void)saveDeviceType;
 - (void)saveWeapon;
-- (void)saveWeaponTry;
-- (void)loadWeaponTry;
+- (void)loadWeapon;
 - (void)saveDefense;
 
 -(void)putchAvatarImageToInitStartVC:(StartViewController*)startVC;

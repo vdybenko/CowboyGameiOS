@@ -86,9 +86,8 @@ static AccountDataSource *sharedHelper = nil;
         self.arrDefense = [[NSMutableArray alloc] init];
         [self saveDefense];
     }
-
-  data = [[NSUserDefaults standardUserDefaults] objectForKey:@"WEAPON"];
-  self.accountWeapon = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+    [self loadWeapon];
     if (!self.accountWeapon) {
         self.accountWeapon = [[CDWeaponProduct alloc] init];
         [self saveWeapon];
@@ -462,18 +461,10 @@ static AccountDataSource *sharedHelper = nil;
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"WEAPON"];
 }
 
-- (void)saveWeaponTry;
+- (void)loadWeapon;
 {
-    NSData *data= [NSKeyedArchiver archivedDataWithRootObject:self.accountWeapon];
-    
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"WEAPON_TRY"];
-    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"WEAPON_TRY"];
-}
-- (void)loadWeaponTry;
-{
-    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"WEAPON_TRY"];
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"WEAPON"];
     self.accountWeapon = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"WEAPON_TRY"];
 }
 
 - (void)saveDefense;

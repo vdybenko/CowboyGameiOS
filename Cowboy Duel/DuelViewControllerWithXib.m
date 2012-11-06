@@ -33,6 +33,11 @@ static NSString *ShotSound = @"%@/shot.mp3";
     if (self) { 
         playerAccount = userAccount;
         opAccount = oponentAccount;
+        
+        if (playerAccount.isTryingWeapon) {
+            playerAccount.isTryingWeapon = NO;
+            [playerAccount loadWeapon];
+        }
     }
     return self;
 }

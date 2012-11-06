@@ -122,7 +122,7 @@ static int oponentMustShot;
 
 -(void)buyButtonClick:(id)sender;
 {
-    [playerAccount saveWeaponTry];
+    [playerAccount saveWeapon];
     playerAccount.isTryingWeapon = YES;
     playerAccount.accountWeapon = ((CDWeaponProduct*)prod);
     [self closeButtonClick:Nil];

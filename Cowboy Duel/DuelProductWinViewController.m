@@ -12,11 +12,12 @@
 #import "UIImage+Save.h"
 #import "DuelProductDownloaderController.h"
 #import "StoreViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface DuelProductWinViewController ()
 {
     AccountDataSource *playerAccount;
-    CDDuelProduct *duelProduct;
+    CDWeaponProduct *duelProduct;
     UIViewController *parentVC;
 }
 @property (strong, nonatomic) IBOutlet UILabel *title;
@@ -25,6 +26,7 @@
 @property (strong, nonatomic) IBOutlet UILabel * goldTitle;
 @property (strong, nonatomic) IBOutlet UILabel * gold;
 @property (strong, nonatomic) IBOutlet UIImageView * gunImage;
+@property (strong, nonatomic) IBOutlet UIImageView * gunImageMirror;
 @property (strong, nonatomic) IBOutlet UIButton * buyItButton;
 
 @end
@@ -36,9 +38,10 @@
 @synthesize goldTitle;
 @synthesize gold;
 @synthesize gunImage;
+@synthesize gunImageMirror;
 @synthesize buyItButton;
 
-- (id)initWithAccount:(AccountDataSource*)account duelProduct:(CDDuelProduct*)product parentVC:(UIViewController*)vc;
+- (id)initWithAccount:(AccountDataSource*)account duelProduct:(CDWeaponProduct*)product parentVC:(UIViewController*)vc;
 {
     self = [super initWithNibName:Nil bundle:Nil];
     if (self) {
@@ -57,8 +60,14 @@
     [title setFont: [UIFont fontWithName: @"DecreeNarrow" size:28]];
     title.text = NSLocalizedString(@"IT_HELP", @"");
     
+    UIImage *gunImageSaved = [UIImage loadImageFullPath:[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],duelProduct.dImageLocal]];
     gunImage.clipsToBounds = YES;
-    gunImage.image = [UIImage loadImageFullPath:[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],duelProduct.dImageLocal]];
+    gunImage.image = gunImageSaved;
+    
+    gunImageMirror.clipsToBounds = YES;
+    gunImageMirror.image = gunImageSaved;
+    gunImageMirror.transform = CGAffineTransformIdentity;
+    gunImageMirror.transform = CGAffineTransformMakeScale(-1.0, 1.0);
     
     [ribbonLabel setFont: [UIFont fontWithName: @"DecreeNarrow" size:28]];
     ribbonLabel.text = duelProduct.dName;
