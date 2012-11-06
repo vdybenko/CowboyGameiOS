@@ -103,7 +103,7 @@ static SSConnection *connection;
 
 -(void) sendData:(void *) data packetID:(int)packetID ofLength:(int)length
 {
-    NSLog(@"Send data with packetId %d", packetID);
+    //NSLog(@"Send data with packetId %d", packetID);
     static unsigned char networkPacket[1024];
     const unsigned int packetHeaderSize = sizeof(int); // we have two "ints" for our header
 	

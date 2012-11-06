@@ -104,6 +104,12 @@ NSString * const productForRemoveAds=@"com.webkate.cowboyduels.four";
     [super viewDidUnload];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MKStoreManager sharedManager].delegate = self;
+}
+
 #pragma mark -
 #pragma mark These two actions are tied to the buttons that launch video ads
 
@@ -188,9 +194,7 @@ NSString * const productForRemoveAds=@"com.webkate.cowboyduels.four";
 - (void) buyProduct
 {
     if ([SKPaymentQueue canMakePayments]) {
-        SKPayment *payment = [SKPayment paymentWithProductIdentifier:productForRemoveAds];
-        [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-        [[SKPaymentQueue defaultQueue] addPayment:payment];
+        [[MKStoreManager sharedManager] buyFeatureB];
         
         loadingView.hidden=NO;
         [activityIndicator startAnimating];
@@ -202,23 +206,11 @@ NSString * const productForRemoveAds=@"com.webkate.cowboyduels.four";
                                                       userInfo:[NSDictionary dictionaryWithObject:stDonate forKey:@"event"]];
 }
 
--(void) restorPurchases {
-    [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-    [[SKPaymentQueue defaultQueue]restoreCompletedTransactions];
-}
+#pragma mark MKStoreKitDelegate
 
-
-- (void) performDismiss {
-    [baseAlert dismissWithClickedButtonIndex:[baseAlert cancelButtonIndex] animated:NO];
-    [self dismissModalViewControllerAnimated:YES];
-}
-
-#pragma mark -
-
--(void)completedPurchaseTransaction:(SKPaymentTransaction *)transaction
+- (void)productBPurchased
 {
-    DLog(@"completedPurchaseTransaction");
-    [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+	DLog(@"completedPurchaseTransaction");
     
     [[AccountDataSource sharedInstance] setRemoveAds:AdColonyAdsStatusRemoved];
     [[AccountDataSource sharedInstance] saveRemoveAds];
@@ -226,104 +218,30 @@ NSString * const productForRemoveAds=@"com.webkate.cowboyduels.four";
     [startViewController authorizationModifier:YES];
     [[StartViewController sharedInstance] duelButtonClick];
     [self dismissModalViewControllerAnimated:YES];
-
+    
     loadingView.hidden=YES;
     [activityIndicator stopAnimating];
-
+    
     
     [stDonate appendString:@"/done"];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
                                                       userInfo:[NSDictionary dictionaryWithObject:stDonate forKey:@"event"]];
-    [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
     
 }
 
-- (void) handleFailedTransaction: (SKPaymentTransaction *) transaction {
-    DLog(@"handleFailedTransaction");
-
-    if (transaction.error.code != SKErrorPaymentCancelled){
-        baseAlert = [[UIAlertView alloc] initWithTitle:@"Transaction Error. Please try again later." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: nil];
-        [self.view addSubview:baseAlert];
-        [baseAlert show];
-        
-        [self performSelector:@selector(performDismiss) withObject:self afterDelay:3.0];
-        
-        [stDonate appendString:@"/error"];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
-                                                            object:self
-                                                          userInfo:[NSDictionary dictionaryWithObject:stDonate forKey:@"event"]];
-        
-    }
-    else
-    {
-        baseAlert = [[UIAlertView alloc] initWithTitle:@"Payment cancelled. Please try again later." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: nil];
-        [self.view addSubview:baseAlert];
-        [baseAlert show];
-        
-        [self performSelector:@selector(performDismiss) withObject:self afterDelay:3.0];
-    }
-    
-    [[SKPaymentQueue defaultQueue] finishTransaction: transaction]; 
-    [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
-    loadingView.hidden=YES;
-    [activityIndicator stopAnimating];
-}
-
-
-
-- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
+- (void)failed
 {
-     DLog(@"paymentQueue: %i", queue.transactions.count);
+    [stDonate appendString:@"/error"];
     
-    for (SKPaymentTransaction *transaction in transactions)
-    {
-        DLog(@"tran for product: %@ of state: %i", [[transaction payment] productIdentifier], [transaction transactionState]);
-
-        switch (transaction.transactionState)
-        {
-            case SKPaymentTransactionStatePurchasing:
-                DLog(@"SKPaymentTransactionStatePurchasing");
-                break;
-            case SKPaymentTransactionStatePurchased:
-                DLog(@"SKPaymentTransactionStatePurchased");
-                [[AccountDataSource sharedInstance] setRemoveAds:AdColonyAdsStatusRemoved];
-                [[AccountDataSource sharedInstance] saveRemoveAds];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                [startViewController authorizationModifier:YES];
-                [[StartViewController sharedInstance] duelButtonClick];
-                [self dismissModalViewControllerAnimated:YES];
-                loadingView.hidden=YES;
-                [activityIndicator stopAnimating];
-                
-                [[SKPaymentQueue defaultQueue] finishTransaction: transaction]; 
-                [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
-                
-                break;
-            case SKPaymentTransactionStateRestored:
-                DLog(@"SKPaymentTransactionStateRestored");
-                [self completedPurchaseTransaction:transaction];
-                break;  
-                
-            case SKPaymentTransactionStateFailed:
-                DLog(@"Failed %@", transaction.error);
-                [self handleFailedTransaction:transaction];
-                break;
-                
-            default:
-                break;
-        }
-    }
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
--(void) paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error {    
-    DLog(@"restoreCompletedTransactionsFailedWithError %@",[error userInfo]);
-    loadingView.hidden=YES;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:stDonate forKey:@"event"]];
+	loadingView.hidden=YES;
     [activityIndicator stopAnimating];
-    [self dismissModalViewControllerAnimated:YES];
 }
+
+
 
 @end
