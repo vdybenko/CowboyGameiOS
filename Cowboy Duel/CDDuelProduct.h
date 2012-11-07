@@ -20,7 +20,7 @@
 @property(nonatomic) NSInteger dPrice;
 @property(nonatomic) NSInteger dLevelLock;
 @property(nonatomic, strong) NSString *dPurchaseUrl;
-@property(nonatomic) NSInteger dCount;
+@property(nonatomic) NSInteger dCountOfUse;
 
 -(NSString*) saveNameThumb;
 -(NSString*) saveNameImage;

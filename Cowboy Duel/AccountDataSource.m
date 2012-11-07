@@ -2,6 +2,7 @@
 #import "CustomNSURLConnection.h"
 #import "Utils.h"
 #import "OGHelper.h"
+#import "DuelProductDownloaderController.h"
 
 static const char *POST_TRANS_URL =  BASE_URL"api/transactions";
 static const char *POST_DUEL_URL =  BASE_URL"api/duels";
@@ -15,11 +16,10 @@ static const char *POST_DUEL_URL =  BASE_URL"api/duels";
 
 @synthesize money, accountName, teachingTimes, finalInfoTable, sessionID, accountID, accountDataSourceID, transactions, duels, achivments , glNumber,
  accountLevel,accountPoints,accountWins,accountDraws,accountBigestWin,removeAds,avatar,age,homeTown,friends,facebookName;
-@synthesize arrDefense;
 @synthesize accountDefenseValue;
-@synthesize arrWeapon;
 @synthesize curentIdWeapon;
 @synthesize isTryingWeapon;
+@synthesize accountWeapon;
 
 #pragma mark
 
@@ -46,11 +46,9 @@ static AccountDataSource *sharedHelper = nil;
     self.accountDraws=0;
     self.accountBigestWin=0;
     self.removeAds=0;
-    self.arrDefense = [[NSMutableArray alloc] init];
     self.accountDefenseValue = 0;
-    self.arrWeapon = [[NSMutableArray alloc] init];
-    self.curentIdWeapon = -1;
-    self.accountWeapon = [[CDWeaponProduct alloc] init];
+    self.curentIdWeapon = 0;
+    accountWeapon = [[CDWeaponProduct alloc] init];
     self.isTryingWeapon=NO;
     
     self.avatar=@"";
@@ -83,17 +81,9 @@ static AccountDataSource *sharedHelper = nil;
   self.removeAds = [uDef integerForKey:@"RemoveAds"];
     
     [self loadDefense];
-    if (!self.arrDefense) {
-        self.arrDefense = [[NSMutableArray alloc] init];
-        [self saveDefense];
-    }
     
     [self loadWeapon];
-    if (!self.arrWeapon) {
-        self.arrWeapon = [[NSMutableArray alloc] init];
-        [self saveWeapon];
-    }
-        
+    
   self.avatar = [uDef stringForKey:@"avatar"];
   self.age = [uDef stringForKey:@"age"];
   self.homeTown = [uDef stringForKey:@"homeTown"];
@@ -456,51 +446,38 @@ static AccountDataSource *sharedHelper = nil;
 
 - (void)saveWeapon;
 {    
-    NSData *data= [NSKeyedArchiver archivedDataWithRootObject:self.arrWeapon];
-    
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ARR_WEAPON"];
-    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"ARR_WEAPON"];
-    
     [[NSUserDefaults standardUserDefaults] setInteger:self.curentIdWeapon forKey:@"WEAPON"];
 }
 
 - (void)loadWeapon;
 {
-    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"ARR_WEAPON"];
-    self.arrWeapon = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    
     self.curentIdWeapon = [[NSUserDefaults standardUserDefaults] integerForKey:@"WEAPON"];
+    [self loadAccountWeapon];
 }
 
 - (void)saveDefense;
 {
-    NSData *data= [NSKeyedArchiver archivedDataWithRootObject:self.arrDefense];
-    
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ARR_DEFENSE"];
-    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"ARR_DEFENSE"];
-    
     [[NSUserDefaults standardUserDefaults] setInteger:self.accountDefenseValue forKey:@"DEFENSE_VALUE"];
 }
 
 - (void)loadDefense;
 {
-    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"ARR_DEFENSE"];
-    self.arrDefense = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    
     self.accountDefenseValue = [[NSUserDefaults standardUserDefaults] integerForKey:@"DEFENSE_VALUE"];
 }
 
-- (CDWeaponProduct*)accountWeapon;
+#pragma mark accountWeapon
+
+- (CDWeaponProduct*)loadAccountWeapon;
 {
-    if (self.accountWeapon.dID==0) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.dID = %d", 1];
-        NSArray *results = [self.arrWeapon filteredArrayUsingPredicate:predicate];
-        if ([results count]) {
-            self.accountWeapon = [results objectAtIndex:0];
-            return self.accountWeapon;
-        }
+    NSArray *arrayWeapon = [DuelProductDownloaderController loadWeaponArray];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.dID = %d", self.curentIdWeapon];
+    NSArray *results = [arrayWeapon filteredArrayUsingPredicate:predicate];
+    if ([results count]) {
+        self.accountWeapon = [results objectAtIndex:0];
+        return [results objectAtIndex:0];
+    }else{
+        return nil;
     }
-    return self.accountWeapon;
 }
 
 #pragma mark putch for 1.4 

@@ -88,7 +88,7 @@
             playerAccount.money -= product.dPrice;
             [playerAccount saveMoney];
             playerAccount.accountWeapon = product;
-            product.dCount +=1;
+            product.dCountOfUse +=1;
             [storeDataSource.arrItemsList replaceObjectAtIndex:indexPath.row withObject:product];
             [DuelProductDownloaderController saveWeapon:storeDataSource.arrItemsList];
             [playerAccount saveWeapon];
@@ -96,7 +96,7 @@
             playerAccount.money -= product.dPrice;
             [playerAccount saveMoney];
             playerAccount.accountWeapon = product;
-            product.dCount +=1;
+            product.dCountOfUse +=1;
             [storeDataSource.arrItemsList replaceObjectAtIndex:indexPath.row withObject:product];
             [DuelProductDownloaderController saveWeapon:storeDataSource.arrItemsList];
             [playerAccount saveWeapon];

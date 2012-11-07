@@ -25,6 +25,8 @@ NSString  *const URL_PRODUCT_FILE_RETINEA   = @"http://bidoncd.s3.amazonaws.com/
 {
     NSMutableData *responseData;
     NSMutableArray *arrItemsList;
+    NSArray *arrDefenseSaved;
+    NSArray *arrWeaponSaved;
 }
 @end
 
@@ -77,6 +79,9 @@ static NSString *getSavePathForDuelProduct()
 
 -(void) refreshDuelProducts;
 {
+    arrWeaponSaved = [DuelProductDownloaderController loadWeaponArray];
+    arrDefenseSaved = [DuelProductDownloaderController loadDefenseArray];
+    
     NSString *URL;
     if ([Utils isiPhoneRetina]) {
         URL = URL_PRODUCT_FILE_RETINEA;
@@ -117,6 +122,7 @@ static NSString *getSavePathForDuelProduct()
     }
     product.dPrice=[[dic objectForKey:@"golds"] integerValue];
     product.dPurchaseUrl=[dic objectForKey:@"inappid"];
+    
 }
 
 #pragma mark NSURLConnection handlers
@@ -147,6 +153,11 @@ static NSString *getSavePathForDuelProduct()
                 product.dSoundLocal = [SoundDownload saveSound:[product saveNameSoundGun] URL:product.dSoundURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
             }
         }
+        
+        if ([arrWeaponSaved count]!=0) {
+            product.dCountOfUse = [self checkProductForUseWithID:product.dID inArray:arrWeaponSaved];
+        }
+        
         [arrItemsList addObject: product];
     }
     NSLog(@"arrItemsList %@",arrItemsList);
@@ -158,6 +169,11 @@ static NSString *getSavePathForDuelProduct()
         CDDefenseProduct *product=[[CDDefenseProduct alloc] init];
         [self parseDuelProduct:product productDic:dic];
         product.dDefense=[[dic objectForKey:@"defense"] integerValue];
+        
+        if ([arrDefenseSaved count]!=0) {
+            product.dCountOfUse = [self checkProductForUseWithID:product.dID inArray:arrDefenseSaved];
+        }
+
         [arrItemsList addObject: product];
     }
     NSLog(@"arrItemsList %@",arrItemsList);
@@ -211,6 +227,20 @@ static NSString *getSavePathForDuelProduct()
 {
     NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:DUEL_PRODUCTS_DEFENSES];
     return [NSKeyedUnarchiver unarchiveObjectWithData:data1];
+}
+
+#pragma mark
+
+-(NSInteger)checkProductForUseWithID:(NSInteger)idValue inArray:(NSArray*)array;
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.dID = %@",idValue];
+    NSArray *results = [array filteredArrayUsingPredicate:predicate];
+    if ([results count]==0) {
+        return 0;
+    }else{
+        CDDuelProduct *product = [results objectAtIndex:0];
+        return product.dCountOfUse;
+    }
 }
 
 @end

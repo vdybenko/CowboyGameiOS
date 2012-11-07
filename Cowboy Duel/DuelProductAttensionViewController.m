@@ -112,7 +112,7 @@ static int oponentMustShot;
     playerMustShot = [DuelRewardLogicController countUpBuletsWithOponentLevel:oponentAccount.accountLevel defense:oponentAccount.accountDefenseValue playerAtack:[AccountDataSource sharedInstance].accountWeapon.dDamage];
     oponentMustShot = [DuelRewardLogicController countUpBuletsWithOponentLevel:[AccountDataSource sharedInstance].accountLevel defense:[AccountDataSource sharedInstance].accountDefenseValue playerAtack:oponentAccount.accountWeapon.dDamage];
     
-    if ((playerMustShot-oponentMustShot)>=2) {
+    if ((playerMustShot-oponentMustShot)>=2){
         return YES;
     }else{
         return NO;

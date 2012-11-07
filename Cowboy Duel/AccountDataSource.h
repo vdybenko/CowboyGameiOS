@@ -22,11 +22,11 @@
 @property(nonatomic) NSInteger accountDraws; 
 @property(nonatomic) NSInteger accountBigestWin; 
 @property(nonatomic) NSInteger removeAds;
-@property(strong, nonatomic) NSMutableArray *arrDefense;
+
 @property(nonatomic) NSInteger accountDefenseValue;
-@property(strong, nonatomic) NSMutableArray *arrWeapon;
 @property(nonatomic) NSInteger curentIdWeapon;
 @property(strong, nonatomic) CDWeaponProduct *accountWeapon;
+
 @property(nonatomic) BOOL isTryingWeapon;
 
 @property(strong, nonatomic) NSString *avatar;
@@ -77,6 +77,8 @@
 - (void)loadWeapon;
 - (void)saveDefense;
 - (void)loadDefense;
+
+- (CDWeaponProduct*)loadAccountWeapon;
 
 -(void)putchAvatarImageToInitStartVC:(StartViewController*)startVC;
 -(BOOL)isAvatarImage:(NSString*)imagePath;
