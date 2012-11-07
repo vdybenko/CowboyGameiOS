@@ -615,7 +615,10 @@ static StartViewController *sharedHelper = nil;
 }
 
 - (void) showFeedbackView {
-       
+    
+    StoreViewController *svc=[[StoreViewController alloc] initWithAccount:playerAccount];
+    [self.navigationController pushViewController:svc animated:YES];
+    return;
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationBeginsFromCurrentState:YES]; 
 	[UIView setAnimationCurve:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction];
@@ -648,6 +651,9 @@ static StartViewController *sharedHelper = nil;
 
 -(IBAction)showHelp:(id)sender
 {
+    DuelProductDownloaderController *dw=[[DuelProductDownloaderController alloc] init];
+    [dw refreshDuelProducts];
+    return;
     StoreViewController *svc=[[StoreViewController alloc] initWithAccount:playerAccount];
     [self.navigationController pushViewController:svc animated:YES];
     return;

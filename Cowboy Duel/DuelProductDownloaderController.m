@@ -17,8 +17,8 @@
 NSMutableData *responseData;
 
 
-NSString  *const URL_PRODUCT_FILE   = @"http://bidoncd.s3.amazonaws.com/list_of_store_items_v2.2.scriptJson";
-NSString  *const URL_PRODUCT_FILE_RETINEA   = @"http://bidoncd.s3.amazonaws.com/list_of_store_items_v2.2.scriptJson";
+NSString  *const URL_PRODUCT_FILE   = @"http://bidoncd.s3.amazonaws.com/list_of_store_items_v2.2.json";
+NSString  *const URL_PRODUCT_FILE_RETINEA   = @"http://bidoncd.s3.amazonaws.com/list_of_store_items_v2.2.json";
 
 
 @interface DuelProductDownloaderController()
@@ -233,7 +233,7 @@ static NSString *getSavePathForDuelProduct()
 
 -(NSInteger)checkProductForUseWithID:(NSInteger)idValue inArray:(NSArray*)array;
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.dID = %@",idValue];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.dID = %d",idValue];
     NSArray *results = [array filteredArrayUsingPredicate:predicate];
     if ([results count]==0) {
         return 0;

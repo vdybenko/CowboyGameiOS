@@ -84,21 +84,17 @@
 {
     if (storeDataSource.typeOfTable == StoreDataSourceTypeTablesWeapons) {
         CDWeaponProduct *product = [storeDataSource.arrItemsList objectAtIndex:indexPath.row];
-        if (product.dPrice==0) {
-            playerAccount.money -= product.dPrice;
-            [playerAccount saveMoney];
-            playerAccount.accountWeapon = product;
-            product.dCountOfUse +=1;
-            [storeDataSource.arrItemsList replaceObjectAtIndex:indexPath.row withObject:product];
-            [DuelProductDownloaderController saveWeapon:storeDataSource.arrItemsList];
-            [playerAccount saveWeapon];
+//        if (product.dPrice==0) {
+            if (NO) {
+           
         }else{
             playerAccount.money -= product.dPrice;
             [playerAccount saveMoney];
-            playerAccount.accountWeapon = product;
             product.dCountOfUse +=1;
             [storeDataSource.arrItemsList replaceObjectAtIndex:indexPath.row withObject:product];
             [DuelProductDownloaderController saveWeapon:storeDataSource.arrItemsList];
+            playerAccount.accountWeapon = product;
+            playerAccount.curentIdWeapon = product.dID;
             [playerAccount saveWeapon];
         }
     }else if(storeDataSource.typeOfTable == StoreDataSourceTypeTablesDefenses){

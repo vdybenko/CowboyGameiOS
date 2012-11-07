@@ -90,7 +90,7 @@
 #pragma mark -
 -(void)buyButtonClick:(id __strong)sender;
 {
-    CDDuelProduct *cell=(CDDuelProduct *)[[sender superview] superview];
+    StoreProductCell *cell=(StoreProductCell *)sender;
     NSIndexPath *indexPath = [tableView indexPathForCell:cell];
     [delegate clickButton:indexPath];
 }
