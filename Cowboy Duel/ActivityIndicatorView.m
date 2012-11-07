@@ -13,10 +13,14 @@
 -(id)init{
     self = [super init];
     if (self) {
-        UIView *hudView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 480, 480)];
+        UIView *hudView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
         hudView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
         
         lbTopText=[[UILabel alloc]initWithFrame:CGRectMake(0, 10, 480, 150)];
+        CGPoint center = lbTopText.center;
+        center.x = hudView.center.x;
+        lbTopText.center = center;
+        
         [lbTopText setFont: [UIFont fontWithName: @"DecreeNarrow" size:80]];
         lbTopText.textAlignment = UITextAlignmentCenter;
         lbTopText.backgroundColor=[UIColor clearColor];
@@ -24,7 +28,7 @@
         [hudView addSubview:lbTopText];	
                
         UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        activityIndicatorView.frame = CGRectMake(210, 210, 60, 60);
+        activityIndicatorView.center = hudView.center;
         activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
         [activityIndicatorView startAnimating];
         
@@ -38,7 +42,7 @@
 {
     self = [super init];
     if (self) {
-        UIView *hudView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 480, 480)];
+        UIView *hudView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
         hudView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
         	
         [self addSubview:hudView];

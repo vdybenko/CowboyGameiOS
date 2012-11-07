@@ -123,6 +123,7 @@ static LoginViewController *sharedHelper = nil;
 
 -(void)viewWillAppear:(BOOL)animated;
 {
+    stDonate = [NSMutableString string];
     [MKStoreManager sharedManager].delegate = sharedHelper;
     [[LoginViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusSimple];
 }
@@ -155,7 +156,6 @@ static LoginViewController *sharedHelper = nil;
 
 -(IBAction)scipLoginBtnClick:(id)sender
 {
-    stDonate=[[NSMutableString alloc] init];
     if (payment) {
         [[MKStoreManager sharedManager] buyFeatureA];
         [activityView setHidden:NO];
@@ -375,7 +375,7 @@ static LoginViewController *sharedHelper = nil;
 {
     [stDonate appendString:@"/error"];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+    if (stDonate) [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
                                                       userInfo:[NSDictionary dictionaryWithObject:stDonate forKey:@"event"]];
 	[activityView setHidden:YES];

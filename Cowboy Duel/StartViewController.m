@@ -424,7 +424,7 @@ static StartViewController *sharedHelper = nil;
     if (firstRun) {        
         arrowImage=[[UIImageView_AttachedView alloc] initWithImage:[UIImage imageNamed:@"st_arrow.png"] attachedToFrame:teachingButton frequence:0.5 amplitude:10 direction:DirectionToAnimateLeft];
         
-        hudView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 480, 480)];
+        hudView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
         hudView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
         [hudView setHidden:NO];
         [self.view insertSubview:hudView belowSubview:teachingButton];
