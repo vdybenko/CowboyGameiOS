@@ -9,10 +9,12 @@
 #import "StoreViewController.h"
 #import "UIButton+Image+Title.h"
 #import "StoreProductCell.h"
+#import "CDDefenseProduct.h"
+#import "DuelProductDownloaderController.h"
 
 @interface StoreViewController ()
 {
-    AccountDataSource *userAccount;
+    AccountDataSource *playerAccount;
 }
 @property (strong, nonatomic) IBOutlet UILabel *title;
 
@@ -38,7 +40,7 @@
 {
     self = [super initWithNibName:@"StoreViewController" bundle:[NSBundle mainBundle]];
     if (self) {
-        userAccount = pUserAccount;
+        playerAccount = pUserAccount;
     }
     return self;
 }
@@ -80,7 +82,35 @@
 
 -(void)clickButton:(NSIndexPath *)indexPath;
 {
-    StoreProductCell *cell = (StoreProductCell *)[tableView cellForRowAtIndexPath:indexPath];
+    if (storeDataSource.typeOfTable == StoreDataSourceTypeTablesWeapons) {
+        CDWeaponProduct *product = [storeDataSource.arrItemsList objectAtIndex:indexPath.row];
+        if (product.dPrice==0) {
+            playerAccount.money -= product.dPrice;
+            [playerAccount saveMoney];
+            playerAccount.accountWeapon = product;
+            product.dCount +=1;
+            [storeDataSource.arrItemsList replaceObjectAtIndex:indexPath.row withObject:product];
+            [DuelProductDownloaderController saveWeapon:storeDataSource.arrItemsList];
+            [playerAccount saveWeapon];
+        }else{
+            playerAccount.money -= product.dPrice;
+            [playerAccount saveMoney];
+            playerAccount.accountWeapon = product;
+            product.dCount +=1;
+            [storeDataSource.arrItemsList replaceObjectAtIndex:indexPath.row withObject:product];
+            [DuelProductDownloaderController saveWeapon:storeDataSource.arrItemsList];
+            [playerAccount saveWeapon];
+        }
+    }else if(storeDataSource.typeOfTable == StoreDataSourceTypeTablesDefenses){
+        CDDefenseProduct *product = [storeDataSource.arrItemsList objectAtIndex:indexPath.row];
+        if (product.dPrice==0) {
+            
+        }else{
+            playerAccount.money -= product.dPrice;
+            playerAccount.accountDefenseValue += product.dDefense;
+            [playerAccount saveMoney];
+        }
+    }
 }
 
 #pragma mark IBAction

@@ -17,7 +17,8 @@ static const char *POST_DUEL_URL =  BASE_URL"api/duels";
  accountLevel,accountPoints,accountWins,accountDraws,accountBigestWin,removeAds,avatar,age,homeTown,friends,facebookName;
 @synthesize arrDefense;
 @synthesize accountDefenseValue;
-@synthesize accountWeapon;
+@synthesize arrWeapon;
+@synthesize curentIdWeapon;
 @synthesize isTryingWeapon;
 
 #pragma mark
@@ -46,6 +47,9 @@ static AccountDataSource *sharedHelper = nil;
     self.accountBigestWin=0;
     self.removeAds=0;
     self.arrDefense = [[NSMutableArray alloc] init];
+    self.accountDefenseValue = 0;
+    self.arrWeapon = [[NSMutableArray alloc] init];
+    self.curentIdWeapon = -1;
     self.accountWeapon = [[CDWeaponProduct alloc] init];
     self.isTryingWeapon=NO;
     
@@ -78,18 +82,15 @@ static AccountDataSource *sharedHelper = nil;
   self.accountBigestWin = [uDef integerForKey:@"MaxWin"];
   self.removeAds = [uDef integerForKey:@"RemoveAds"];
     
-  self.accountDefenseValue = [uDef integerForKey:@"DEFENSE_VALUE"];
-    
-    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"ARR_DEFENSE"];
-    self.arrDefense= [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    [self loadDefense];
     if (!self.arrDefense) {
         self.arrDefense = [[NSMutableArray alloc] init];
         [self saveDefense];
     }
     
     [self loadWeapon];
-    if (!self.accountWeapon) {
-        self.accountWeapon = [[CDWeaponProduct alloc] init];
+    if (!self.arrWeapon) {
+        self.arrWeapon = [[NSMutableArray alloc] init];
         [self saveWeapon];
     }
         
@@ -454,17 +455,21 @@ static AccountDataSource *sharedHelper = nil;
 }
 
 - (void)saveWeapon;
-{
-    NSData *data= [NSKeyedArchiver archivedDataWithRootObject:self.accountWeapon];
+{    
+    NSData *data= [NSKeyedArchiver archivedDataWithRootObject:self.arrWeapon];
     
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"WEAPON"];
-    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"WEAPON"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ARR_WEAPON"];
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"ARR_WEAPON"];
+    
+    [[NSUserDefaults standardUserDefaults] setInteger:self.curentIdWeapon forKey:@"WEAPON"];
 }
 
 - (void)loadWeapon;
 {
-    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"WEAPON"];
-    self.accountWeapon = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"ARR_WEAPON"];
+    self.arrWeapon = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+    self.curentIdWeapon = [[NSUserDefaults standardUserDefaults] integerForKey:@"WEAPON"];
 }
 
 - (void)saveDefense;
@@ -475,6 +480,27 @@ static AccountDataSource *sharedHelper = nil;
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"ARR_DEFENSE"];
     
     [[NSUserDefaults standardUserDefaults] setInteger:self.accountDefenseValue forKey:@"DEFENSE_VALUE"];
+}
+
+- (void)loadDefense;
+{
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"ARR_DEFENSE"];
+    self.arrDefense = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+    self.accountDefenseValue = [[NSUserDefaults standardUserDefaults] integerForKey:@"DEFENSE_VALUE"];
+}
+
+- (CDWeaponProduct*)accountWeapon;
+{
+    if (self.accountWeapon.dID==0) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.dID = %d", 1];
+        NSArray *results = [self.arrWeapon filteredArrayUsingPredicate:predicate];
+        if ([results count]) {
+            self.accountWeapon = [results objectAtIndex:0];
+            return self.accountWeapon;
+        }
+    }
+    return self.accountWeapon;
 }
 
 #pragma mark putch for 1.4 

@@ -41,6 +41,7 @@
 @synthesize gunImageMirror;
 @synthesize buyItButton;
 
+#pragma mark
 - (id)initWithAccount:(AccountDataSource*)account duelProduct:(CDWeaponProduct*)product parentVC:(UIViewController*)vc;
 {
     self = [super initWithNibName:Nil bundle:Nil];

@@ -20,6 +20,7 @@
 @synthesize dPrice;
 @synthesize dPurchaseUrl;
 @synthesize dLevelLock;
+@synthesize dCount;
 
 -(void)encodeWithCoder:(NSCoder *)encoder
 {
@@ -33,6 +34,7 @@
     [encoder encodeInteger:self.dPrice forKey:@"PRICE"];
     [encoder encodeInteger:self.dLevelLock forKey:@"LEVEL"];
     [encoder encodeObject:self.dPurchaseUrl forKey:@"PURCH_URL"];
+    [encoder encodeInteger:self.dCount forKey:@"COUNT"];
 }
 
 -(id)initWithCoder:(NSCoder *)decoder
@@ -47,6 +49,7 @@
     self.dPrice = [decoder decodeIntegerForKey:@"PRICE"];
     self.dLevelLock = [decoder decodeIntegerForKey:@"LEVEL"];
     self.dPurchaseUrl = [decoder decodeObjectForKey:@"PURCH_URL"];
+    self.dCount = [decoder decodeIntegerForKey:@"COUNT"];
     return self;
 }
 
@@ -63,6 +66,7 @@
     self.dPrice = 0;
     self.dLevelLock = 0;
     self.dPurchaseUrl = @"";
+    self.dCount = 0;
     return self;
 }
 

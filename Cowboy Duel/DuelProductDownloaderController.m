@@ -149,10 +149,8 @@ static NSString *getSavePathForDuelProduct()
         }
         [arrItemsList addObject: product];
     }
-    NSData *data= [NSKeyedArchiver archivedDataWithRootObject:arrItemsList];
     NSLog(@"arrItemsList %@",arrItemsList);
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:DUEL_PRODUCTS_WEAPONS];
-    [[NSUserDefaults standardUserDefaults] setObject:data forKey:DUEL_PRODUCTS_WEAPONS];
+    [DuelProductDownloaderController saveWeapon:arrItemsList];
     
     [arrItemsList removeAllObjects];
     responseObjectOfProducts = [responseObject objectForKey:@"defenses"];
@@ -162,11 +160,8 @@ static NSString *getSavePathForDuelProduct()
         product.dDefense=[[dic objectForKey:@"defense"] integerValue];
         [arrItemsList addObject: product];
     }
-    data= [NSKeyedArchiver archivedDataWithRootObject:arrItemsList];
     NSLog(@"arrItemsList %@",arrItemsList);
-
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:DUEL_PRODUCTS_DEFENSES];
-    [[NSUserDefaults standardUserDefaults] setObject:data forKey:DUEL_PRODUCTS_DEFENSES];
+    [DuelProductDownloaderController saveDefense:arrItemsList];
 
     if (didFinishBlock) {
         NSError *error;
@@ -188,6 +183,34 @@ static NSString *getSavePathForDuelProduct()
     if (didFinishBlock) {
         didFinishBlock(error);
     }
+}
+
+#pragma mark
+
++(void)saveWeapon:(NSArray*)array;
+{
+    NSData *data= [NSKeyedArchiver archivedDataWithRootObject:array];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:DUEL_PRODUCTS_WEAPONS];
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:DUEL_PRODUCTS_WEAPONS];
+}
+
++(NSMutableArray*)loadWeaponArray;
+{
+    NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:DUEL_PRODUCTS_WEAPONS];
+    return [NSKeyedUnarchiver unarchiveObjectWithData:data1];
+}
+
++(void)saveDefense:(NSArray*)array;
+{
+    NSData *data= [NSKeyedArchiver archivedDataWithRootObject:array];    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:DUEL_PRODUCTS_DEFENSES];
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:DUEL_PRODUCTS_DEFENSES];
+}
+
++(NSMutableArray*)loadDefenseArray;
+{
+    NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:DUEL_PRODUCTS_DEFENSES];
+    return [NSKeyedUnarchiver unarchiveObjectWithData:data1];
 }
 
 @end

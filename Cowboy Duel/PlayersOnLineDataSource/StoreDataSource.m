@@ -45,14 +45,13 @@
 
 -(void) reloadDataSource;
 {
-    NSString *key;
+    NSMutableArray *testArr;
     if (typeOfTable == StoreDataSourceTypeTablesWeapons) {
-        key=DUEL_PRODUCTS_WEAPONS;
+        testArr = [DuelProductDownloaderController loadWeaponArray];
     }else{
-        key=DUEL_PRODUCTS_DEFENSES;
+        testArr = [DuelProductDownloaderController loadDefenseArray];
     }
-    NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:key];
-    NSMutableArray *testArr= [NSKeyedUnarchiver unarchiveObjectWithData:data1];
+
     if ([testArr count]==0) {
         DuelProductDownloaderController *duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
         [duelProductDownloaderController setDidFinishBlock:^(NSError *error){
@@ -61,8 +60,7 @@
         [duelProductDownloaderController refreshDuelProducts];
         testArr = nil;
     }else {
-        testArr = nil;
-        arrItemsList = [NSKeyedUnarchiver unarchiveObjectWithData:data1];
+        arrItemsList = testArr;
     }
 }
 

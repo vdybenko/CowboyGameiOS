@@ -90,16 +90,23 @@
         effectTitle.text=NSLocalizedString(@"damage", @"");
         effect.text =[NSString stringWithFormat:@"+%d",((CDWeaponProduct*)product).dDamage];
     }
-    descriptionText.text = product.dDescription;
+    descriptionText.text = [NSString stringWithFormat:@"%d",product.dID];
     if (product.dPrice == 0) {
         coldTitle.text=NSLocalizedString(@"Price:", @"");
         gold.text = [NSString stringWithFormat:@"%d",product.dPrice];
+        
+        if ([AccountDataSource sharedInstance].money>product.dPrice) {
+            buyProduct.enabled = YES;
+        }else{
+            buyProduct.enabled = NO;
+        }
     }else{
         coldTitle.text=NSLocalizedString(@"Golds:", @"");
         gold.text = [NSString stringWithFormat:@"%d",product.dPrice];
     }
     
     icon.image = [UIImage loadImageFullPath:[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],product.dIconLocal]];
+    
 }
 
 - (IBAction)buyButtonClick:(id)sender {

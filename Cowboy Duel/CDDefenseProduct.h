@@ -11,4 +11,5 @@
 @interface CDDefenseProduct : CDDuelProduct
 
 @property(nonatomic) NSInteger dDefense;
+
 @end

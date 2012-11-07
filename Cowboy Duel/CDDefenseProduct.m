@@ -24,4 +24,11 @@
     return self;
 }
 
+-(id)init
+{
+    self = [super init];
+    self.dDefense = 0;
+    return self;
+}
+
 @end

@@ -21,4 +21,8 @@ typedef void (^DuelProductDownloaderControllerResult)(NSError *error);
 -(void) refreshDuelProducts;
 +(NSString *)getSavePathForDuelProduct;
 
++(void)saveWeapon:(NSArray*)array;
++(NSMutableArray*)loadWeaponArray;
++(void)saveDefense:(NSArray*)array;
++(NSMutableArray*)loadDefenseArray;
 @end
