@@ -14,6 +14,9 @@
 #import "UIImage+Save.h"
 
 @interface StoreProductCell()
+{
+    UILabel *buttonLabel;
+}
 @property (strong,nonatomic) IBOutlet UIView * backGround;
 @property (strong,nonatomic) IBOutlet UIImageView * icon;
 @property (strong,nonatomic) IBOutlet UILabel * coldTitle;
@@ -51,7 +54,7 @@
 
 +(NSString*) cellID { return @"StoreProductCell"; }
 
--(void) initWithOutBackGroundWithButtonText:(NSString*)text;
+-(void) initWithOutBackGround;
 {
     UIColor *buttonsTitleColor = [[UIColor alloc] initWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     
@@ -59,38 +62,49 @@
     frame.origin.x=5;
     frame.origin.y=0;
     frame.size.width=frame.size.width-10;
-    UILabel *label1 = [[UILabel alloc] initWithFrame:frame];
-    [label1 setFont: [UIFont fontWithName: @"DecreeNarrow" size:20]];
-    label1.textAlignment = UITextAlignmentCenter;
-    [label1 setBackgroundColor:[UIColor clearColor]];
-    [label1 setTextColor:buttonsTitleColor];
-    [label1 setText:text];
-    [buyProduct addSubview:label1];    
-}
-
--(void) initMainControlsWithNarrowBackGround;
-{
-    [self initWithOutBackGroundWithButtonText:NSLocalizedString(@"TRY_IT", @"")];
+    buttonLabel = [[UILabel alloc] initWithFrame:frame];
+    [buttonLabel setFont: [UIFont fontWithName: @"DecreeNarrow" size:20]];
+    buttonLabel.textAlignment = UITextAlignmentCenter;
+    [buttonLabel setBackgroundColor:[UIColor clearColor]];
+    [buttonLabel setTextColor:buttonsTitleColor];
+    [buyProduct addSubview:buttonLabel];    
 }
 
 -(void) initMainControls;
 {
-    [self initWithOutBackGroundWithButtonText:NSLocalizedString(@"BUYIT", @"")];
+    [self initWithOutBackGround];
     [backGround setDinamicHeightBackground];
 }
 
 -(void)populateWithProduct:(CDDuelProduct *)product targetToBuyButton:(id)delegate cellType:(StoreDataSourceTypeTables)cellType;
 {
     buyButtonDelegate = delegate;
+    buyProduct.hidden = NO;
+    
     name.text = product.dName;
     if (cellType==StoreDataSourceTypeTablesDefenses) {
         effectTitle.text=NSLocalizedString(@"defenses", @"");
         effect.text =[NSString stringWithFormat:@"+%d",((CDDefenseProduct*)product).dDefense];
+        
+        buttonLabel.text = NSLocalizedString(@"BUYIT", @"");
     }else{
         effectTitle.text=NSLocalizedString(@"damage", @"");
         effect.text =[NSString stringWithFormat:@"+%d",((CDWeaponProduct*)product).dDamage];
+        
+        if (cellType == StoreDataSourceTypeTablesWeaponsTRY) {
+            buttonLabel.text = NSLocalizedString(@"TRY_IT", @"");
+        }else{
+            if (product.dCountOfUse == 0) {
+                buttonLabel.text = NSLocalizedString(@"BUYIT", @"");
+            }else{
+                if (product.dID == [AccountDataSource sharedInstance].curentIdWeapon) {
+                    buyProduct.hidden = YES;
+                }
+                buttonLabel.text = NSLocalizedString(@"USE", @"");
+            }
+        }
     }
-    descriptionText.text = product.dDescription;
+    descriptionText.text = [NSString stringWithFormat:@"%d %d",product.dCountOfUse, product.dID];//product.dDescription;
     if (product.dPrice == 0) {
         coldTitle.text=NSLocalizedString(@"Price:", @"");
         gold.text = [NSString stringWithFormat:@"%d",product.dPrice];
@@ -104,8 +118,8 @@
         coldTitle.text=NSLocalizedString(@"Golds:", @"");
         gold.text = [NSString stringWithFormat:@"%d",product.dPrice];
     }
-    icon.image = [UIImage loadImageFullPath:[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],product.dIconLocal]];
     
+    icon.image = [UIImage loadImageFullPath:[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],product.dIconLocal]];
 }
 
 - (IBAction)buyButtonClick:(id)sender {

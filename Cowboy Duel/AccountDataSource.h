@@ -79,6 +79,7 @@
 - (void)loadDefense;
 
 - (CDWeaponProduct*)loadAccountWeapon;
+-(NSUInteger(^)(NSArray *, NSInteger))findObs;
 
 -(void)putchAvatarImageToInitStartVC:(StartViewController*)startVC;
 -(BOOL)isAvatarImage:(NSString*)imagePath;

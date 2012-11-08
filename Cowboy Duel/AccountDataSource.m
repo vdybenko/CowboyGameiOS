@@ -480,6 +480,18 @@ static AccountDataSource *sharedHelper = nil;
     }
 }
 
+-(NSUInteger(^)(NSArray *, NSInteger))findObs {
+    return ^(NSArray * array, NSInteger idObject) {
+        for (NSUInteger i = 0; i < [array count]; i++) {
+            CDDuelProduct *product = [array objectAtIndex:i];
+            if (product.dID == idObject) {
+                return i;
+            }
+        }
+        return (NSUInteger)NSNotFound;
+    };
+}
+
 #pragma mark putch for 1.4 
 -(void)putchAvatarImageToInitStartVC:(StartViewController*)startVC
 {

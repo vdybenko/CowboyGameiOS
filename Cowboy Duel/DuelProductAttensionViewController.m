@@ -69,23 +69,23 @@ static int oponentMustShot;
     [webView loadHTMLString:webTesxt baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
     
     StoreProductCell *cell = [StoreProductCell cellAttension];
-    [cell initMainControlsWithNarrowBackGround];
+    [cell initWithOutBackGround];
     
-    NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:DUEL_PRODUCTS_WEAPONS];
-    NSArray *arrItemsList = [NSKeyedUnarchiver unarchiveObjectWithData:data1];
-    
-    if (playerAccount.accountWeapon.dID==0) {
+    NSArray *arrItemsList = [DuelProductDownloaderController loadWeaponArray];
+        
+    if (playerAccount.curentIdWeapon==0) {
         prod=[arrItemsList objectAtIndex:0];
     }else{
-        if (playerAccount.accountWeapon.dID==[arrItemsList count]) {
+        if (playerAccount.curentIdWeapon == ((CDWeaponProduct*)[arrItemsList lastObject]).dID) {
             cell.editing = NO;
             cell.hidden = YES;
         }else{
-            prod=[arrItemsList objectAtIndex:playerAccount.accountWeapon.dID];
+            NSUInteger index=[playerAccount findObs](arrItemsList,playerAccount.curentIdWeapon);
+            prod=[arrItemsList objectAtIndex:++index];
         }
     }
         
-    [cell populateWithProduct:prod targetToBuyButton:self cellType:StoreDataSourceTypeTablesWeapons];
+    [cell populateWithProduct:prod targetToBuyButton:self cellType:StoreDataSourceTypeTablesWeaponsTRY];
     CGRect frame= cell.frame;
     frame.origin.x = 0;
     frame.origin.y = frameView.frame.origin.y + frameView.frame.size.height-14;
