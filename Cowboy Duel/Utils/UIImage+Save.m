@@ -7,6 +7,7 @@
 //
 
 #import "UIImage+Save.h"
+#import "Utils.h"
 
 @implementation UIImage (usefull_stuff)
 
@@ -17,26 +18,22 @@
 }
 
 +(NSString*) saveImage:(NSString*) pName URL:(NSString*)pURL directory:(NSString*)dir{
-    if (pURL && ![pURL isEqualToString:@""]) {
-        NSString *nameFile=[NSString stringWithFormat:@"%@.png",pName];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:pURL]];
-            UIImage *image = [[UIImage alloc] initWithData:imageData];
-            NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@",dir,nameFile];
-            NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
-            [data1 writeToFile:pngFilePath atomically:YES];
-        });
+    NSString *nameFile=[NSString stringWithFormat:@"%@.png",pName];
+    NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@",dir,nameFile];
+    if (![Utils isFileDownloadedForPath:pngFilePath]) {
+        if (pURL && ![pURL isEqualToString:@""]) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:pURL]];
+                UIImage *image = [[UIImage alloc] initWithData:imageData];
+                NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
+                [data1 writeToFile:pngFilePath atomically:YES];
+            });
+            return nameFile;
+        }else{
+            return @"";
+        }
+    }else{
         return nameFile;
-    }else{
-        return @"";
-    }
-}
-
-+(BOOL)isFileDownloadedForPath:(NSString*)path{
-    if([[NSFileManager defaultManager] fileExistsAtPath:path]){
-        return YES;
-    }else{
-        return NO;
     }
 }
 

@@ -90,7 +90,7 @@
         effectTitle.text=NSLocalizedString(@"damage", @"");
         effect.text =[NSString stringWithFormat:@"+%d",((CDWeaponProduct*)product).dDamage];
     }
-    descriptionText.text = [NSString stringWithFormat:@"%d %d",product.dID,product.dCountOfUse];
+    descriptionText.text = product.dDescription;
     if (product.dPrice == 0) {
         coldTitle.text=NSLocalizedString(@"Price:", @"");
         gold.text = [NSString stringWithFormat:@"%d",product.dPrice];
@@ -104,7 +104,6 @@
         coldTitle.text=NSLocalizedString(@"Golds:", @"");
         gold.text = [NSString stringWithFormat:@"%d",product.dPrice];
     }
-    
     icon.image = [UIImage loadImageFullPath:[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],product.dIconLocal]];
     
 }

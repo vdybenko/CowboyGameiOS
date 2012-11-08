@@ -499,11 +499,11 @@ if (shotCountBullet!=0) {
 {
     if (playerAccount.accountWeapon.dName && [playerAccount.accountWeapon.dName length]) {
         NSString *path=[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],playerAccount.accountWeapon.dImageGunLocal];
-        if ([UIImage isFileDownloadedForPath:path]) {
+        if ([Utils isFileDownloadedForPath:path]) {
             _ivGun.image = [UIImage loadImageFullPath:path];
         }
         path=[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],playerAccount.accountWeapon.dSoundLocal];
-        if ([UIImage isFileDownloadedForPath:path]) {
+        if ([Utils isFileDownloadedForPath:path]) {
             NSError *error;
             player1 = [[AVAudioPlayer alloc] initWithData:[SoundDownload dataForSound:path] error:&error];
             [player1 play];

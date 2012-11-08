@@ -107,18 +107,12 @@ static NSString *getSavePathForDuelProduct()
     
     product.dIconURL=[dic objectForKey:@"thumb"];
     if (product.dIconURL) {
-        NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@.png",[DuelProductDownloaderController getSavePathForDuelProduct],[product saveNameThumb]];
-        if (![UIImage isFileDownloadedForPath:pngFilePath]) {
-            product.dIconLocal = [UIImage saveImage:[product saveNameThumb] URL:product.dIconURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
-        }
+        product.dIconLocal = [UIImage saveImage:[product saveNameThumb] URL:product.dIconURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
     }
     
     product.dImageURL=[dic objectForKey:@"img"];
     if (product.dImageURL) {
-        NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@.png",[DuelProductDownloaderController getSavePathForDuelProduct],[product saveNameImage]];
-        if (![UIImage isFileDownloadedForPath:pngFilePath]) {
-            product.dImageLocal = [UIImage saveImage:[product saveNameImage] URL:product.dImageURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
-        }
+        product.dImageLocal = [UIImage saveImage:[product saveNameImage] URL:product.dImageURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
     }
     product.dPrice=[[dic objectForKey:@"golds"] integerValue];
     product.dPurchaseUrl=[dic objectForKey:@"inappid"];
@@ -140,18 +134,12 @@ static NSString *getSavePathForDuelProduct()
         
         product.dImageGunURL=[dic objectForKey:@"bigImg"];
         if (product.dImageGunURL) {
-            NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@.png",[DuelProductDownloaderController getSavePathForDuelProduct],[product saveNameImageGun]];
-            if (![UIImage isFileDownloadedForPath:pngFilePath]) {
-                product.dImageGunLocal = [UIImage saveImage:[product saveNameImageGun] URL:product.dImageGunURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
-            }
+            product.dImageGunLocal = [UIImage saveImage:[product saveNameImageGun] URL:product.dImageGunURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
         }
         
         product.dSoundURL = [dic objectForKey:@"sound"];
         if (product.dSoundURL) {
-            NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@.mp3",[DuelProductDownloaderController getSavePathForDuelProduct],[product saveNameSoundGun]];
-            if (![UIImage isFileDownloadedForPath:pngFilePath]) {
-                product.dSoundLocal = [SoundDownload saveSound:[product saveNameSoundGun] URL:product.dSoundURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
-            }
+            product.dSoundLocal = [SoundDownload saveSound:[product saveNameSoundGun] URL:product.dSoundURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
         }
         
         if ([arrWeaponSaved count]!=0) {
