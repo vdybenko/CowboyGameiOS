@@ -196,6 +196,7 @@ static NSString *getSavePathForDuelProduct()
     NSData *data= [NSKeyedArchiver archivedDataWithRootObject:array];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:DUEL_PRODUCTS_WEAPONS];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:DUEL_PRODUCTS_WEAPONS];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 +(NSMutableArray*)loadWeaponArray;
@@ -209,6 +210,7 @@ static NSString *getSavePathForDuelProduct()
     NSData *data= [NSKeyedArchiver archivedDataWithRootObject:array];    
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:DUEL_PRODUCTS_DEFENSES];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:DUEL_PRODUCTS_DEFENSES];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 +(NSMutableArray*)loadDefenseArray;

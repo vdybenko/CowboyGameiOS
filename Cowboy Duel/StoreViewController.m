@@ -84,13 +84,12 @@
 {
     if (storeDataSource.typeOfTable == StoreDataSourceTypeTablesWeapons) {
         CDWeaponProduct *product = [storeDataSource.arrItemsList objectAtIndex:indexPath.row];
-//        if (product.dPrice==0) {
-            if (NO) {
+        if (product.dPrice==0) {
            
         }else{
             playerAccount.money -= product.dPrice;
             [playerAccount saveMoney];
-            product.dCountOfUse +=1;
+            product.dCountOfUse =1;
             [storeDataSource.arrItemsList replaceObjectAtIndex:indexPath.row withObject:product];
             [DuelProductDownloaderController saveWeapon:storeDataSource.arrItemsList];
             playerAccount.accountWeapon = product;
@@ -103,10 +102,16 @@
             
         }else{
             playerAccount.money -= product.dPrice;
-            playerAccount.accountDefenseValue += product.dDefense;
             [playerAccount saveMoney];
+            playerAccount.accountDefenseValue += product.dDefense;
+            [playerAccount saveDefense];
+            product.dCountOfUse +=1;
+            [storeDataSource.arrItemsList replaceObjectAtIndex:indexPath.row withObject:product];
+            [DuelProductDownloaderController saveDefense:storeDataSource.arrItemsList];
         }
     }
+    [storeDataSource reloadDataSource];
+    [tableView reloadData];
 }
 
 #pragma mark IBAction
@@ -127,5 +132,7 @@
 - (IBAction)backButtonClick:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+
 
 @end

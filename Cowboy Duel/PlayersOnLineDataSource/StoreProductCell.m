@@ -92,7 +92,11 @@
         effect.text =[NSString stringWithFormat:@"+%d",((CDWeaponProduct*)product).dDamage];
         
         if (cellType == StoreDataSourceTypeTablesWeaponsTRY) {
-            buttonLabel.text = NSLocalizedString(@"TRY_IT", @"");
+            if (product.dCountOfUse == 0) {
+                buttonLabel.text = NSLocalizedString(@"TRY_IT", @"");
+            }else{
+                buttonLabel.text = NSLocalizedString(@"USE", @"");
+            }
         }else{
             if (product.dCountOfUse == 0) {
                 buttonLabel.text = NSLocalizedString(@"BUYIT", @"");
@@ -104,7 +108,7 @@
             }
         }
     }
-    descriptionText.text = [NSString stringWithFormat:@"%d %d",product.dCountOfUse, product.dID];//product.dDescription;
+    descriptionText.text = [NSString stringWithFormat:@"use %d id %d",product.dCountOfUse, product.dID];//product.dDescription;
     if (product.dPrice == 0) {
         coldTitle.text=NSLocalizedString(@"Price:", @"");
         gold.text = [NSString stringWithFormat:@"%d",product.dPrice];

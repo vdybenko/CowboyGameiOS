@@ -387,7 +387,7 @@ static StartViewController *sharedHelper = nil;
     helpButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
     helpButton.titleLabel.textAlignment = UITextAlignmentCenter;
     
-    [mapButton setTitle:NSLocalizedString(@"MoreGames", @"") forState:UIControlStateNormal];
+    [mapButton setTitle:NSLocalizedString(@"STORE", @"") forState:UIControlStateNormal];
     [mapButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
     mapButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
     mapButton.titleLabel.textAlignment = UITextAlignmentCenter;
@@ -578,6 +578,10 @@ static StartViewController *sharedHelper = nil;
 
 -(IBAction)mapButtonClick
 {
+    StoreViewController *svc=[[StoreViewController alloc] initWithAccount:playerAccount];
+    [self.navigationController pushViewController:svc animated:YES];
+    return;
+
     collectionAppViewController=[[CollectionAppViewController alloc] init];
     [self presentModalViewController:collectionAppViewController animated:YES];
     
@@ -616,9 +620,6 @@ static StartViewController *sharedHelper = nil;
 
 - (void) showFeedbackView {
     
-    StoreViewController *svc=[[StoreViewController alloc] initWithAccount:playerAccount];
-    [self.navigationController pushViewController:svc animated:YES];
-    return;
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationBeginsFromCurrentState:YES]; 
 	[UIView setAnimationCurve:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction];
@@ -651,12 +652,6 @@ static StartViewController *sharedHelper = nil;
 
 -(IBAction)showHelp:(id)sender
 {
-    DuelProductDownloaderController *dw=[[DuelProductDownloaderController alloc] init];
-    [dw refreshDuelProducts];
-    return;
-    StoreViewController *svc=[[StoreViewController alloc] initWithAccount:playerAccount];
-    [self.navigationController pushViewController:svc animated:YES];
-    return;
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/help_click" forKey:@"event"]];

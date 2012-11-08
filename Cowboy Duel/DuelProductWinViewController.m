@@ -77,9 +77,13 @@
     UIColor *buttonsTitleColor = [[UIColor alloc] initWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     [buyItButton changeColorOfTitleByLabel:buttonsTitleColor];
     
-    gold.text = [NSString stringWithFormat:@"%d",duelProduct.dPrice];
+    if (duelProduct.dPrice == 0) {
+        goldTitle.text = NSLocalizedString(@"Price", @"");
+    }else{
+        goldTitle.text = NSLocalizedString(@"Gold", @"");
+        gold.text = [NSString stringWithFormat:@"%d",duelProduct.dPrice];
+    }
     [goldTitle dinamicAttachToView:gold withDirection:DirectionToAnimateRight];
-    goldTitle.text = NSLocalizedString(@"Gold", @"");
 }
 
 - (void)didReceiveMemoryWarning
@@ -90,6 +94,24 @@
     [parentVC dismissViewControllerAnimated:YES completion:Nil];
 }
 - (IBAction)BuyItButtonClick:(id)sender {
+    if (duelProduct.dPrice==0) {
+            
+    }else{
+        playerAccount.money -= duelProduct.dPrice;
+        [playerAccount saveMoney];
+        playerAccount.accountWeapon = duelProduct;
+        playerAccount.curentIdWeapon = duelProduct.dID;
+        [playerAccount saveWeapon];
+        
+        duelProduct.dCountOfUse =1;
+        NSMutableArray *arrWeapon = [DuelProductDownloaderController loadWeaponArray];
+        NSUInteger index=[playerAccount findObs](arrWeapon,playerAccount.curentIdWeapon);
+        [arrWeapon replaceObjectAtIndex:index withObject:duelProduct];
+        [DuelProductDownloaderController saveWeapon:arrWeapon];
+        
+        
+        [self closeButtonClick:nil];
+    }
 }
 - (IBAction)GoToStoreClick:(id)sender {
     StoreViewController *svc=[[StoreViewController alloc] initWithAccount:playerAccount];
