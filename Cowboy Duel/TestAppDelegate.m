@@ -9,11 +9,13 @@
 #import "TestAppDelegate.h"
 #import "GCHelper.h"
 #import <GameKit/GameKit.h>
+#import "LoginAnimatedViewController.h"
 
 #if !(TARGET_IPHONE_SIMULATOR)
 #import "GAI.h"
 #import "Crittercism.h"
 #import "StartViewController.h"
+
 
 static const NSInteger kGANDispatchPeriod = 60;
 static NSString *kGAAccountID = @"UA-33080242-1";
@@ -69,12 +71,13 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     
     application.statusBarOrientation = UIInterfaceOrientationPortrait;
   
-    
-    LoadViewController *loadViewController;
-    
-    loadViewController= [[LoadViewController alloc] initWithPush:NULL];
-    
-    navigationController = [[UINavigationController alloc] initWithRootViewController:loadViewController];
+    LoginAnimatedViewController *loginAnimatedViewController = [[LoginAnimatedViewController alloc] init];
+    navigationController = [[UINavigationController alloc] initWithRootViewController:loginAnimatedViewController];
+//    LoadViewController *loadViewController;
+//    
+//    loadViewController= [[LoadViewController alloc] initWithPush:NULL];
+//    
+//    navigationController = [[UINavigationController alloc] initWithRootViewController:loadViewController];
 
     [navigationController setNavigationBarHidden:YES];
     
