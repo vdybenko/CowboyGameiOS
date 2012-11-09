@@ -652,6 +652,12 @@ static StartViewController *sharedHelper = nil;
 
 -(IBAction)showHelp:(id)sender
 {
+//    DuelProductDownloaderController *dw=[[DuelProductDownloaderController alloc] init];
+//    [dw downloadUserProductsIsListProductsAvailable];
+////    [dw refreshDuelProducts];
+////    [dw buyProductID:23 transactionID:23];
+//    return;
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/help_click" forKey:@"event"]];
@@ -965,13 +971,7 @@ static StartViewController *sharedHelper = nil;
             playerAccount.money+=100;
             transaction.trDescription = [[NSString alloc] initWithFormat:@"forIPad"];
             [playerAccount.transactions addObject:transaction];
-            NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
-            NSMutableArray *locationData = [[NSMutableArray alloc] init];
-            for( CDTransaction *loc in playerAccount.transactions)
-            {
-                [locationData addObject: [NSKeyedArchiver archivedDataWithRootObject:loc]];
-            }
-            [def setObject:locationData forKey:@"transactions"];
+            [playerAccount saveTransaction];
             
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"moneyForIPad"];
         }
@@ -1425,13 +1425,7 @@ static StartViewController *sharedHelper = nil;
         //            transaction.trNumber = [NSNumber numberWithInt:local];
         [playerAccount.transactions addObject:transaction];
         
-        NSMutableArray *locationData = [[NSMutableArray alloc] init];
-        for( CDTransaction *loc in playerAccount.transactions)
-        {
-            [locationData addObject: [NSKeyedArchiver archivedDataWithRootObject:loc]];
-        }
-        [userDef setObject:locationData forKey:@"transactions"];
-        
+        [playerAccount saveTransaction];
         
         DLog(@"Transactions count = %d", [playerAccount.transactions count]);
         

@@ -19,6 +19,7 @@
     AccountDataSource *playerAccount;
     CDWeaponProduct *duelProduct;
     UIViewController *parentVC;
+    DuelProductDownloaderController *duelProductDownloaderController;
 }
 @property (strong, nonatomic) IBOutlet UILabel *title;
 @property (strong, nonatomic) IBOutlet UIView *frameView;
@@ -103,18 +104,28 @@
     if (duelProduct.dPrice==0) {
             
     }else{
+        
+        CDTransaction *transaction = [[CDTransaction alloc] init];
+        transaction.trDescription = [[NSString alloc] initWithFormat:@"BuyProductWin"];
+        transaction.trType = [NSNumber numberWithInt:-1];
+        transaction.trMoneyCh = [NSNumber numberWithInt:-duelProduct.dPrice];
+        [playerAccount.transactions addObject:transaction];
+        [playerAccount sendTransactions:playerAccount.transactions];
+        [playerAccount saveTransaction];
+        
         playerAccount.money -= duelProduct.dPrice;
         [playerAccount saveMoney];
         playerAccount.accountWeapon = duelProduct;
         playerAccount.curentIdWeapon = duelProduct.dID;
         [playerAccount saveWeapon];
         
+        [duelProductDownloaderController buyProductID:duelProduct.dID transactionID:12];
+        
         duelProduct.dCountOfUse =1;
         NSMutableArray *arrWeapon = [DuelProductDownloaderController loadWeaponArray];
         NSUInteger index=[playerAccount findObs](arrWeapon,playerAccount.curentIdWeapon);
         [arrWeapon replaceObjectAtIndex:index withObject:duelProduct];
         [DuelProductDownloaderController saveWeapon:arrWeapon];
-        
         
         [self closeButtonClick:nil];
     }
@@ -123,6 +134,14 @@
     StoreViewController *svc=[[StoreViewController alloc] initWithAccount:playerAccount];
     [parentVC.navigationController pushViewController:svc animated:YES];
     [parentVC dismissViewControllerAnimated:YES completion:Nil];
+}
+
+-(void)dealloc;
+{
+    playerAccount = nil;
+    duelProduct = nil;
+    parentVC = nil;
+    duelProductDownloaderController = nil;
 }
 
 @end

@@ -102,7 +102,6 @@
         transaction = [[CDTransaction alloc] init];
         transaction.trMoneyCh = [NSNumber numberWithInt:10];
         
-        
         transaction.trDescription = [[NSString alloc] initWithFormat:@"Duel"];
         
         duel = [[CDDuel alloc] init];
@@ -675,11 +674,7 @@
         NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
         
         NSMutableArray *locationData = [[NSMutableArray alloc] init];
-        for( CDTransaction *loc in playerAccount.transactions)
-        {
-            [locationData addObject: [NSKeyedArchiver archivedDataWithRootObject:loc]];
-        }
-        [def setObject:locationData forKey:@"transactions"];
+        [playerAccount saveTransaction];
         
         DLog(@"Transactions count = %d", [playerAccount.transactions count]);
         [def synchronize];

@@ -465,6 +465,16 @@ static AccountDataSource *sharedHelper = nil;
     self.accountDefenseValue = [[NSUserDefaults standardUserDefaults] integerForKey:@"DEFENSE_VALUE"];
 }
 
+- (void)saveTransaction;
+{
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *locationData = [[NSMutableArray alloc] init];
+    for( CDTransaction *loc in self.transactions)
+    {
+        [locationData addObject: [NSKeyedArchiver archivedDataWithRootObject:loc]];
+    }
+    [def setObject:locationData forKey:@"transactions"];
+}
 #pragma mark accountWeapon
 
 - (CDWeaponProduct*)loadAccountWeapon;

@@ -77,6 +77,7 @@
 - (void)loadWeapon;
 - (void)saveDefense;
 - (void)loadDefense;
+- (void)saveTransaction;
 
 - (CDWeaponProduct*)loadAccountWeapon;
 -(NSUInteger(^)(NSArray *, NSInteger))findObs;

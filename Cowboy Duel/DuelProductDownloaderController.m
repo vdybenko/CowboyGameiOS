@@ -22,7 +22,7 @@ NSMutableData *responseData;
 NSString  *const URL_PRODUCT_FILE   = @"http://bidoncd.s3.amazonaws.com/list_of_store_items_v2.2.json";
 NSString  *const URL_PRODUCT_FILE_RETINEA   = @"http://bidoncd.s3.amazonaws.com/list_of_store_items_v2.2.json";
 NSString  *const URL_USER_PRODUCTS = @"http://v201.cowboyduel.net/store/get_buy_items_user";
-NSString  *const URL_PRODUCTS_BUY = @"http://cowboyduel.net/store/bought";
+NSString  *const URL_PRODUCTS_BUY = @"http://v201.cowboyduel.net/store/bought";
 
 @interface DuelProductDownloaderController()
 {
@@ -132,10 +132,10 @@ static NSString *getSavePathForDuelProduct()
     NSMutableData *receivedData=[dicForRequests objectForKey:dictionaryKey];
     NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
     DLog(@"DuelProductDownloaderController jsonString %@",jsonString);
-    NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
+    
     
     if ([dictionaryKey isEqualToString:[URL_PRODUCT_FILE lastPathComponent]] || [dictionaryKey isEqualToString:[URL_PRODUCT_FILE_RETINEA lastPathComponent]]) {
-    
+        NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
         NSArray *responseObjectOfProducts = [responseObject objectForKey:@"weapons"];
         for (NSDictionary *dic in responseObjectOfProducts) {
             CDWeaponProduct *product=[[CDWeaponProduct alloc] init];
@@ -182,22 +182,21 @@ static NSString *getSavePathForDuelProduct()
             didFinishBlock(error);
         }
     }else if ([dictionaryKey isEqualToString:[URL_USER_PRODUCTS lastPathComponent]]){
-        NSArray *responseObjectOfProducts = [responseObject objectForKey:@"weapons"];
+        NSArray *responseObjectOfProducts = ValidateObject([jsonString JSONValue], [NSArray class]);
         for (NSDictionary *dic in responseObjectOfProducts) {            
             NSInteger idProduct = [[dic objectForKey:@"itemIdStore"] integerValue];
-            NSInteger productCountOfUse = 1;
             
             NSUInteger indexOfProductInSavedWeaponArray=[[AccountDataSource sharedInstance] findObs](arrWeaponSaved,idProduct);
             if (indexOfProductInSavedWeaponArray != NSNotFound) {
                 CDWeaponProduct *product=[arrWeaponSaved objectAtIndex:indexOfProductInSavedWeaponArray];
-                product.dCountOfUse = productCountOfUse;
+                product.dCountOfUse = 1;
                 [arrWeaponSaved replaceObjectAtIndex:indexOfProductInSavedWeaponArray withObject:product];
                 
             }else{
                 NSUInteger indexOfProductInSavedDefenseArray=[[AccountDataSource sharedInstance] findObs](arrDefenseSaved,idProduct);
                 if (indexOfProductInSavedDefenseArray != NSNotFound) {
                     CDDefenseProduct *product=[arrDefenseSaved objectAtIndex:indexOfProductInSavedDefenseArray];
-                    product.dCountOfUse = productCountOfUse;
+                    product.dCountOfUse += 1;
                     [arrDefenseSaved replaceObjectAtIndex:indexOfProductInSavedWeaponArray withObject:product];
                     [DuelProductDownloaderController saveDefense:arrDefenseSaved];
                 }
