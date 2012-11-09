@@ -70,12 +70,18 @@
     gunImageMirror.transform = CGAffineTransformIdentity;
     gunImageMirror.transform = CGAffineTransformMakeScale(-1.0, 1.0);
     
-    [ribbonLabel setFont: [UIFont fontWithName: @"DecreeNarrow" size:28]];
-    ribbonLabel.text = duelProduct.dName;
-    
     [buyItButton setTitleByLabel:@"BUYITNOW"];
     UIColor *buttonsTitleColor = [[UIColor alloc] initWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     [buyItButton changeColorOfTitleByLabel:buttonsTitleColor];
+    
+    [ribbonLabel setFont: [UIFont fontWithName: @"DecreeNarrow" size:28]];
+    if ([AccountDataSource sharedInstance].accountLevel>duelProduct.dLevelLock) {
+        ribbonLabel.text = [NSString stringWithFormat:@"Lock level %d",duelProduct.dLevelLock];
+        ribbonLabel.textColor = [UIColor redColor];
+        buyItButton.enabled = NO;
+    }else{
+        ribbonLabel.text = duelProduct.dName;
+    }
     
     if (duelProduct.dPrice == 0) {
         goldTitle.text = NSLocalizedString(@"Price", @"");

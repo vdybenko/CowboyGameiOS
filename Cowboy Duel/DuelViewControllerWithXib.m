@@ -184,6 +184,11 @@ static NSString *ShotSound = @"%@/shot.mp3";
     
     [helpPracticeView setDinamicHeightBackground];
     [self.view addSubview:helpPracticeView];
+    
+    if([DuelProductAttensionViewController isAttensionNeedForOponent:opAccount]){
+        DuelProductAttensionViewController *duelProductAttensionViewController=[[DuelProductAttensionViewController alloc] initWithAccount:playerAccount parentVC:self];
+        [self.navigationController presentViewController:duelProductAttensionViewController animated:NO completion:nil];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated

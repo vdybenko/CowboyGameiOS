@@ -208,7 +208,6 @@
 		768388E8157E304400377D88 /* AdvertisingNewVersionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388E7157E304300377D88 /* AdvertisingNewVersionViewController.m */; };
 		768388EB157E306100377D88 /* AdvertisingOtherAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388EA157E306100377D88 /* AdvertisingOtherAppViewController.m */; };
 		76841B7B163EAE3800F3FD1A /* SoundDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 76841B7A163EAE3800F3FD1A /* SoundDownload.m */; };
-		76848E51163A5B330026FA3D /* StoreProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76848E50163A5B330026FA3D /* StoreProductCell.xib */; };
 		76864B391626A0E80095BBEF /* TopPlayersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76864B381626A0E80095BBEF /* TopPlayersCell.xib */; };
 		76864B3B1626DAC30095BBEF /* OnLinePlayersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76864B3A1626DAC30095BBEF /* OnLinePlayersCell.xib */; };
 		768675BE1647FB2000682BCF /* st_cloud_new.png in Resources */ = {isa = PBXBuildFile; fileRef = 768675BC1647FB2000682BCF /* st_cloud_new.png */; };
@@ -653,7 +652,6 @@
 		768388EA157E306100377D88 /* AdvertisingOtherAppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertisingOtherAppViewController.m; sourceTree = "<group>"; };
 		76841B79163EAE3800F3FD1A /* SoundDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundDownload.h; sourceTree = "<group>"; };
 		76841B7A163EAE3800F3FD1A /* SoundDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundDownload.m; sourceTree = "<group>"; };
-		76848E50163A5B330026FA3D /* StoreProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StoreProductCell.xib; path = Xib/StoreProductCell.xib; sourceTree = "<group>"; };
 		76864B381626A0E80095BBEF /* TopPlayersCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TopPlayersCell.xib; path = Xib/TopPlayersCell.xib; sourceTree = "<group>"; };
 		76864B3A1626DAC30095BBEF /* OnLinePlayersCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OnLinePlayersCell.xib; path = Xib/OnLinePlayersCell.xib; sourceTree = "<group>"; };
 		768675BC1647FB2000682BCF /* st_cloud_new.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = st_cloud_new.png; sourceTree = "<group>"; };
@@ -1438,7 +1436,6 @@
 				760E676615BD84C6006F6832 /* TopPlayersViewController.xib */,
 				76864B381626A0E80095BBEF /* TopPlayersCell.xib */,
 				76864B3A1626DAC30095BBEF /* OnLinePlayersCell.xib */,
-				76848E50163A5B330026FA3D /* StoreProductCell.xib */,
 				767F48D61593420900DCE95F /* LoginViewController.xib */,
 				767BA5BD1589F8E300825EB1 /* FinalViewController.xib */,
 				7687E8C416392534003C9EE6 /* StoreViewController.xib */,
@@ -2177,7 +2174,6 @@
 				76864B3B1626DAC30095BBEF /* OnLinePlayersCell.xib in Resources */,
 				7687E8C016391A32003C9EE6 /* StoreProductCell.xib in Resources */,
 				7687E8C516392534003C9EE6 /* StoreViewController.xib in Resources */,
-				76848E51163A5B330026FA3D /* StoreProductCell.xib in Resources */,
 				76A72D53163AA0B400C65D6D /* shop_product_frame.png in Resources */,
 				76A72D54163AA0B400C65D6D /* shop_product_frame@2x.png in Resources */,
 				76D6284E163AC0ED00CA07D2 /* DuelProductAttensionViewController.xib in Resources */,

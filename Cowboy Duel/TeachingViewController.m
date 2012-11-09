@@ -42,6 +42,8 @@ static NSString *ShotSound = @"%@/shot.mp3";
 
 -(void)viewDidLoad
 {
+    opAccount.accountDefenseValue = 17;
+
     [super viewDidLoad];
 
     if ([helpViewSound isDescendantOfView:super.view]) {
@@ -54,12 +56,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
         lbBackButton.text = NSLocalizedString(@"SKIP", nil);
     }
     
-    opAccount.accountDefenseValue = 17;
-    
-    if([DuelProductAttensionViewController isAttensionNeedForOponent:opAccount]){
-        DuelProductAttensionViewController *duelProductAttensionViewController=[[DuelProductAttensionViewController alloc] initWithAccount:playerAccount parentVC:self];
-        [self.navigationController presentViewController:duelProductAttensionViewController animated:NO completion:nil];
-    }
 }
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

@@ -16,16 +16,25 @@
 #import "CustomNSURLConnection.h"
 #import "UIView+Dinamic_BackGround.h"
 
-@interface DuelStartViewController (PrivateMethods)
+@interface DuelStartViewController ()
 
 - (void)setOponentInfo;
+@property (strong, nonatomic) IBOutlet UILabel *userAtack;
+@property (strong, nonatomic) IBOutlet UILabel *userDefense;
+@property (strong, nonatomic) IBOutlet UILabel *oponentAtack;
+@property (strong, nonatomic) IBOutlet UILabel *oponentDefense;
 
 @end
 
 @implementation DuelStartViewController
 @synthesize _ivOponent, delegate ,oponentNameOnLine, serverName, oponentAvailable, tryAgain;
-@synthesize _btnStart, activityIndicatorView, _ivPlayer, _vBackground, _lbNamePlayer, _lbNameOponent, _btnBack;//, _lbMoneyOponent, _lbMoneyPlayer;
-@synthesize _vWait, _pleaseWaitLabel, _waitLabel, lbOpponentDuelsWinCount;//, _vWaitLabelLines;
+@synthesize _btnStart, activityIndicatorView, _ivPlayer, _vBackground, _lbNamePlayer, _lbNameOponent, _btnBack;
+@synthesize _vWait, _pleaseWaitLabel, _waitLabel, lbOpponentDuelsWinCount;
+@synthesize userAtack;
+@synthesize userDefense;
+@synthesize oponentAtack;
+@synthesize oponentDefense;
+
 static const char *GC_URL =  BASE_URL"api/gc";
 
 -(id)initWithAccount:(AccountDataSource *)userAccount andOpAccount:(AccountDataSource *)opAccount opopnentAvailable:(BOOL)available andServerType:(BOOL)server andTryAgain:(BOOL)tryA;
@@ -123,6 +132,16 @@ static const char *GC_URL =  BASE_URL"api/gc";
     NSString *Rank=[NSString stringWithFormat:@"%dRank",playerAccount.accountLevel];
     lbUserRank.text = NSLocalizedString(Rank, @"");
     lbUserRank.font=fontSimpleText;
+    
+    if (playerAccount.accountWeapon.dDamage!=0) {
+        userAtack.text = [NSString stringWithFormat:@"+%d",playerAccount.accountWeapon.dDamage];
+        userAtack.hidden = NO;
+    }
+    
+    if (playerAccount.accountDefenseValue!=0) {
+        userDefense.text = [NSString stringWithFormat:@"+%d",playerAccount.accountDefenseValue];
+        userDefense.hidden = NO;
+    }
     
     lbUserDuelsWinCount.text = [NSString stringWithFormat:@"%d",playerAccount.accountWins];
     lbUserDuelsWinCount.font=fontSimpleText;
@@ -354,6 +373,16 @@ static const char *GC_URL =  BASE_URL"api/gc";
     [lbGoldCount setFrame:frame];
     
     [lbGold dinamicAttachToView:lbGoldCount withDirection:DirectionToAnimateRight ];
+    
+    if (oponentAccount.accountWeapon.dDamage!=0) {
+        oponentAtack.text = [NSString stringWithFormat:@"+%d",oponentAccount.accountWeapon.dDamage];
+        oponentAtack.hidden = NO;
+    }
+    
+    if (oponentAccount.accountDefenseValue!=0) {
+        oponentDefense.text = [NSString stringWithFormat:@"+%d",oponentAccount.accountDefenseValue];
+        oponentDefense.hidden = NO;
+    }
 }
 
 -(void)setOponentImage;

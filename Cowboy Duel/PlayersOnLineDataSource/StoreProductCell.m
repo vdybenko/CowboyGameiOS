@@ -25,6 +25,7 @@
 @property (strong,nonatomic) IBOutlet UILabel * effect;
 @property (strong,nonatomic) IBOutlet UILabel * name;
 @property (strong,nonatomic) IBOutlet UILabel * descriptionText;
+@property (strong,nonatomic) IBOutlet UILabel * countOfUse;
 @property (strong,nonatomic) IBOutlet UIButton * buyProduct;
 @property (nonatomic) id buyButtonDelegate;
 @end
@@ -40,6 +41,7 @@
 @synthesize effect;
 @synthesize descriptionText;
 @synthesize buyProduct;
+@synthesize countOfUse;
 @synthesize buyButtonDelegate;
 
 +(StoreProductCell*) cell {
@@ -87,9 +89,19 @@
         effect.text =[NSString stringWithFormat:@"+%d",((CDDefenseProduct*)product).dDefense];
         
         buttonLabel.text = NSLocalizedString(@"BUYIT", @"");
+        
+        
+        if (product.dCountOfUse == 0) {
+             countOfUse.hidden = YES;
+        }else{
+            countOfUse.text = [NSString stringWithFormat:@"x%d",product.dCountOfUse];
+            countOfUse.hidden = NO;
+        }
     }else{
         effectTitle.text=NSLocalizedString(@"damage", @"");
         effect.text =[NSString stringWithFormat:@"+%d",((CDWeaponProduct*)product).dDamage];
+        
+        countOfUse.hidden = YES;
         
         if (cellType == StoreDataSourceTypeTablesWeaponsTRY) {
             if (product.dCountOfUse == 0) {
@@ -108,7 +120,17 @@
             }
         }
     }
-    descriptionText.text = [NSString stringWithFormat:@"use %d id %d",product.dCountOfUse, product.dID];//product.dDescription;
+    
+    if ([AccountDataSource sharedInstance].accountLevel<product.dLevelLock) {
+        descriptionText.text = [NSString stringWithFormat:@"Lock level %d",product.dLevelLock];
+        descriptionText.textColor = [UIColor redColor];
+        buyProduct.enabled = NO;
+    }else{
+        descriptionText.textColor = name.textColor;
+        buyProduct.enabled = YES;
+        descriptionText.text = product.dDescription;
+    }
+    
     if (product.dPrice == 0) {
         coldTitle.text=NSLocalizedString(@"Price:", @"");
         gold.text = [NSString stringWithFormat:@"%d",product.dPrice];
