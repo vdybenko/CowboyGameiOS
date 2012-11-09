@@ -15,6 +15,7 @@
 @interface StoreViewController ()
 {
     AccountDataSource *playerAccount;
+    DuelProductDownloaderController *duelProductDownloaderController;
 }
 @property (strong, nonatomic) IBOutlet UILabel *title;
 
@@ -41,6 +42,7 @@
     self = [super initWithNibName:@"StoreViewController" bundle:[NSBundle mainBundle]];
     if (self) {
         playerAccount = pUserAccount;
+        duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
     }
     return self;
 }
@@ -82,42 +84,55 @@
 
 -(void)clickButton:(NSIndexPath *)indexPath;
 {
+    StoreProductCell *cell=(StoreProductCell*)[tableView cellForRowAtIndexPath:indexPath];
+    cell.buyProduct.enabled = NO;
+    
     if (storeDataSource.typeOfTable == StoreDataSourceTypeTablesWeapons) {
         CDWeaponProduct *product = [storeDataSource.arrItemsList objectAtIndex:indexPath.row];
         if (product.dCountOfUse==0) {
-            
-        }
-        if (product.dPrice==0) {
-           
+            if (product.dPrice==0) {
+                cell.buyProduct.enabled = YES;
+            }else{
+                CDTransaction *transaction = [[CDTransaction alloc] init];
+                transaction.trDescription = [[NSString alloc] initWithFormat:@"BuyProductWeapon"];
+                transaction.trType = [NSNumber numberWithInt:-1];
+                transaction.trMoneyCh = [NSNumber numberWithInt:-product.dPrice];
+                [playerAccount.transactions addObject:transaction];
+                [playerAccount saveTransaction];
+                [playerAccount sendTransactions:playerAccount.transactions];
+                
+                playerAccount.money -= product.dPrice;
+                [playerAccount saveMoney];
+                product.dCountOfUse =1;
+                [storeDataSource.arrItemsList replaceObjectAtIndex:indexPath.row withObject:product];
+                [DuelProductDownloaderController saveWeapon:storeDataSource.arrItemsList];
+                playerAccount.accountWeapon = product;
+                playerAccount.curentIdWeapon = product.dID;
+                [playerAccount saveWeapon];
+                
+                [duelProductDownloaderController buyProductID:product.dID transactionID:12];
+                duelProductDownloaderController.didFinishBlock = ^(NSError *error){
+                    cell.buyProduct.enabled = YES;
+                };
+            }
         }else{
-            CDTransaction *transaction = [[CDTransaction alloc] init];
-            transaction.trDescription = [[NSString alloc] initWithFormat:@"BuyProductWeapon"];
-            transaction.trType = [NSNumber numberWithInt:-1];
-            transaction.trMoneyCh = [NSNumber numberWithInt:-product.dPrice];
-            [playerAccount.transactions addObject:transaction];
-            
-            playerAccount.money -= product.dPrice;
-            [playerAccount saveMoney];
-            product.dCountOfUse =1;
-            [storeDataSource.arrItemsList replaceObjectAtIndex:indexPath.row withObject:product];
-            [DuelProductDownloaderController saveWeapon:storeDataSource.arrItemsList];
             playerAccount.accountWeapon = product;
             playerAccount.curentIdWeapon = product.dID;
             [playerAccount saveWeapon];
-            
-            [playerAccount saveTransaction];
-            [playerAccount sendTransactions:playerAccount.transactions];
+            cell.buyProduct.enabled = YES;
         }
     }else if(storeDataSource.typeOfTable == StoreDataSourceTypeTablesDefenses){
         CDDefenseProduct *product = [storeDataSource.arrItemsList objectAtIndex:indexPath.row];
         if (product.dPrice==0) {
-            
+            cell.buyProduct.enabled = YES;
         }else{
             CDTransaction *transaction = [[CDTransaction alloc] init];
             transaction.trDescription = [[NSString alloc] initWithFormat:@"BuyProductWinDefense"];
             transaction.trType = [NSNumber numberWithInt:-1];
             transaction.trMoneyCh = [NSNumber numberWithInt:-product.dPrice];
             [playerAccount.transactions addObject:transaction];
+            [playerAccount saveTransaction];
+            [playerAccount sendTransactions:playerAccount.transactions];
             
             playerAccount.money -= product.dPrice;
             [playerAccount saveMoney];
@@ -127,8 +142,10 @@
             [storeDataSource.arrItemsList replaceObjectAtIndex:indexPath.row withObject:product];
             [DuelProductDownloaderController saveDefense:storeDataSource.arrItemsList];
             
-            [playerAccount saveTransaction];
-            [playerAccount sendTransactions:playerAccount.transactions];
+            [duelProductDownloaderController buyProductID:product.dID transactionID:12];
+            duelProductDownloaderController.didFinishBlock = ^(NSError *error){
+                cell.buyProduct.enabled = YES;
+            };
         }
     }
     [storeDataSource reloadDataSource];
@@ -154,6 +171,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
+#pragma mark 
+-(void)dealloc;
+{
+    duelProductDownloaderController =nil;
+}
 
 @end

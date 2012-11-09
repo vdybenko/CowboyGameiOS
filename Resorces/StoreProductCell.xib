@@ -210,7 +210,7 @@
 							<object class="IBUILabel" id="406391544">
 								<reference key="NSNextResponder" ref="643975086"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{106, 38}, {112, 13}}</string>
+								<string key="NSFrame">{{105, 38}, {112, 13}}</string>
 								<reference key="NSSuperview" ref="643975086"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="195890451"/>
@@ -234,7 +234,7 @@
 							<object class="IBUILabel" id="1001969312">
 								<reference key="NSNextResponder" ref="643975086"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{82, 38}, {25, 13}}</string>
+								<string key="NSFrame">{{81, 38}, {22, 13}}</string>
 								<reference key="NSSuperview" ref="643975086"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="406391544"/>
@@ -251,6 +251,7 @@
 								</object>
 								<reference key="IBUIHighlightedColor" ref="457632970"/>
 								<int key="IBUIBaselineAdjustment">0</int>
+								<int key="IBUITextAlignment">2</int>
 								<reference key="IBUIFontDescription" ref="376450743"/>
 								<reference key="IBUIFont" ref="326216191"/>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
@@ -569,17 +570,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">StoreProductCell</string>
 					<string key="superclassName">UITableViewCell</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">buyButtonClick:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">buyButtonClick:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">buyButtonClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="backGround">UIView</string>
 						<string key="buyProduct">UIButton</string>

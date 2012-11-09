@@ -26,7 +26,6 @@
 @property (strong,nonatomic) IBOutlet UILabel * name;
 @property (strong,nonatomic) IBOutlet UILabel * descriptionText;
 @property (strong,nonatomic) IBOutlet UILabel * countOfUse;
-@property (strong,nonatomic) IBOutlet UIButton * buyProduct;
 @property (nonatomic) id buyButtonDelegate;
 @end
 

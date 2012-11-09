@@ -104,7 +104,7 @@
     if (duelProduct.dPrice==0) {
             
     }else{
-        
+        buyItButton.enabled = NO;
         CDTransaction *transaction = [[CDTransaction alloc] init];
         transaction.trDescription = [[NSString alloc] initWithFormat:@"BuyProductWin"];
         transaction.trType = [NSNumber numberWithInt:-1];
@@ -120,6 +120,9 @@
         [playerAccount saveWeapon];
         
         [duelProductDownloaderController buyProductID:duelProduct.dID transactionID:12];
+        duelProductDownloaderController.didFinishBlock = ^(NSError *error){
+            buyItButton.enabled = YES;
+        };
         
         duelProduct.dCountOfUse =1;
         NSMutableArray *arrWeapon = [DuelProductDownloaderController loadWeaponArray];

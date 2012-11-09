@@ -26,6 +26,7 @@ typedef void (^DuelProductDownloaderControllerResult)(NSError *error);
 +(void)saveDefense:(NSArray*)array;
 +(NSMutableArray*)loadDefenseArray;
 
--(BOOL)downloadUserProductsIsListProductsAvailable;
+-(BOOL)isListProductsAvailable;
+-(void)downloadUserProducts;
 -(void)buyProductID:(int)productId transactionID:(int)transactionID;
 @end

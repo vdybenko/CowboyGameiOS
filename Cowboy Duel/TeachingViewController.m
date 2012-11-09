@@ -42,8 +42,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
 
 -(void)viewDidLoad
 {
-    opAccount.accountDefenseValue = 17;
-
     [super viewDidLoad];
 
     if ([helpViewSound isDescendantOfView:super.view]) {

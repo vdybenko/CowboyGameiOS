@@ -33,7 +33,8 @@
     ListOfItemsViewController *listOfItemsViewController;
     ProfileViewController *profileViewController;
     TopPlayersDataSource *topPlayersDataSource;
-        
+    DuelProductDownloaderController *duelProductDownloaderController;
+    
     UIView *hudView;
     
     BOOL firstRun;
@@ -278,8 +279,8 @@ static StartViewController *sharedHelper = nil;
         dicForRequests=[[NSMutableDictionary alloc] init];
         
         gameCenterViewController = [GameCenterViewController sharedInstance:playerAccount andParentVC:self];
-        
         listOfItemsViewController=[[ListOfItemsViewController alloc]initWithGCVC:gameCenterViewController Account:playerAccount OnLine:self.hostActive];
+        duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
         
         if (firstRun) {
             [gameCenterViewController stopServer];
@@ -653,8 +654,8 @@ static StartViewController *sharedHelper = nil;
 -(IBAction)showHelp:(id)sender
 {
 //    DuelProductDownloaderController *dw=[[DuelProductDownloaderController alloc] init];
-//    [dw downloadUserProductsIsListProductsAvailable];
-////    [dw refreshDuelProducts];
+////    [dw downloadUserProductsIsListProductsAvailable];
+//    [dw refreshDuelProducts];
 ////    [dw buyProductID:23 transactionID:23];
 //    return;
     
@@ -1104,6 +1105,10 @@ static StartViewController *sharedHelper = nil;
     gameCenterViewController.multiplayerServerViewController.neadRestart = YES;
     gameCenterViewController.multiplayerServerViewController.serverNameGlobal = playerAccount.accountID;
     [gameCenterViewController.multiplayerServerViewController shutDownServer];
+    
+    if (![duelProductDownloaderController isListProductsAvailable] && !modifierName) {
+        [duelProductDownloaderController downloadUserProducts];
+    }
 }
 
 -(void)modifierUser;
