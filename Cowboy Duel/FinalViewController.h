@@ -23,7 +23,7 @@
 #import "StartViewController.h"
 #import "UIButton+Image+Title.h"
 #import "UIView+Dinamic_BackGround.h"
-#import "LoginViewController.h"
+#import "LoginAnimatedViewController.h"
 
 #import "ValidationUtils.h"
 
@@ -39,7 +39,7 @@
     AccountDataSource *oponentAccount;
         
     TeachingViewController *teachingViewController;
-    LoginViewController *loginViewController;
+    LoginAnimatedViewController *loginViewController;
     
 //    CongratulationViewController *congratulationViewController;
     LevelCongratViewController *lvlCongratulationViewController;

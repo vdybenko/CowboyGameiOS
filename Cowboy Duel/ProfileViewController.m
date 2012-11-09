@@ -13,14 +13,14 @@
 #import "GCHelper.h"
 #import "UIButton+Image+Title.h"
 #import "UIImage+Save.h"
-#import "LoginViewController.h"
+#import "LoginAnimatedViewController.h"
 #import "DuelRewardLogicController.h"
 #import "TopPlayersViewController.h"
 
 @interface ProfileViewController ()
 {
     AccountDataSource *playerAccount;
-    LoginViewController *loginViewController;
+    LoginAnimatedViewController *loginViewController;
     
     NSString *namePlayerSaved;
     
@@ -77,7 +77,7 @@
         needAnimation = NO;
         playerAccount=userAccount;
          
-        loginViewController = [LoginViewController sharedInstance]; 
+        loginViewController = [LoginAnimatedViewController sharedInstance]; 
         loginViewController.startViewController = startViewController;
         
         numberFormatter = [[NSNumberFormatter alloc] init];
@@ -464,8 +464,8 @@
 
 - (IBAction)btnFBLoginClick:(id)sender {
     [ivBlack setHidden:NO];
-    [[LoginViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusSimple];
-    [loginViewController fbLoginBtnClick:self];
+    [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusSimple];
+    [loginViewController loginButtonClick:self];
 }
 
 - (IBAction)btnFBLogOutClick:(id)sender {

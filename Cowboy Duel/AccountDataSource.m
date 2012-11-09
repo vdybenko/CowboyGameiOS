@@ -437,8 +437,8 @@ static AccountDataSource *sharedHelper = nil;
     if (![self isAvatarImage:self.avatar]){
         if (([self.accountID rangeOfString:@"F:"].location != NSNotFound)) {
             NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"birthday,id,name,picture,location",@"fields",nil];
-            [[LoginViewController sharedInstance] initFacebook];
-            [[LoginViewController sharedInstance].facebook requestWithGraphPath:@"me" andParams:params andDelegate:startVC];
+            [[LoginAnimatedViewController sharedInstance] initFacebook];
+            [[LoginAnimatedViewController sharedInstance].facebook requestWithGraphPath:@"me" andParams:params andDelegate:startVC];
         }
     }
 }

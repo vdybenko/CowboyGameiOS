@@ -27,7 +27,7 @@
 #import "CDAchivment.h"
 #import "ActivityIndicatorView.h"
 #import "revision.h"
-#import "LoginViewController.h"
+#import "LoginAnimatedViewController.h"
 #import "ActivityIndicatorView.h"
 #import "CollectionAppViewController.h"
 #import "RefreshContentDataController.h"

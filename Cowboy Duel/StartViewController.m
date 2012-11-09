@@ -57,7 +57,7 @@
     UIImageView_AttachedView *arrowImage;
     
     NSString *oldAccounId;
-    LoginViewController *loginViewController;
+    LoginAnimatedViewController *loginViewController;
     
     NSMutableDictionary *dicForRequests;
     BOOL modifierName;
@@ -96,7 +96,7 @@
 @property (nonatomic) BOOL internetActive;
 @property (nonatomic) BOOL hostActive;
 
-@property (strong) LoginViewController *loginViewController;
+@property (strong) LoginAnimatedViewController *loginViewController;
 @property (strong, nonatomic) AdvertisingNewVersionViewController *advertisingNewVersionViewController;
 -(void)sendRequestWithDonateSum:(int)sum;
 - (NSString *)deviceType;
@@ -213,14 +213,14 @@ static StartViewController *sharedHelper = nil;
             [playerAccount putchAvatarImageToInitStartVC:self];
 //            
             if (!([playerAccount.accountID rangeOfString:@"F"].location == NSNotFound)){ 
-                facebook = [[Facebook alloc] initWithAppId:kFacebookAppId andDelegate:[LoginViewController sharedInstance]];
+                facebook = [[Facebook alloc] initWithAppId:kFacebookAppId andDelegate:[LoginAnimatedViewController sharedInstance]];
                 
                 if ([uDef objectForKey:@"FBAccessTokenKey"] 
                     && [uDef objectForKey:@"FBExpirationDateKey"]) {
                     facebook.accessToken = [uDef objectForKey:@"FBAccessTokenKey"];
                     facebook.expirationDate = [uDef objectForKey:@"FBExpirationDateKey"];
                 }
-                [[LoginViewController sharedInstance] setFacebook:facebook];
+                [[LoginAnimatedViewController sharedInstance] setFacebook:facebook];
                 [[OGHelper sharedInstance ] initWithAccount:playerAccount facebook:facebook];
             }
             
@@ -351,7 +351,7 @@ static StartViewController *sharedHelper = nil;
         SSConnection *connection = [SSConnection sharedInstance];
         [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
         
-        LoginViewController *loginViewController = [LoginViewController sharedInstance];
+        LoginAnimatedViewController *loginViewController = [LoginAnimatedViewController sharedInstance];
         [loginViewController setPayment:YES];
         [self.navigationController pushViewController:loginViewController animated:YES];
     }
@@ -718,8 +718,8 @@ static StartViewController *sharedHelper = nil;
                                                                     object:self
                                                                   userInfo:[NSDictionary dictionaryWithObject:@"/feedBack_Facebook_click" forKey:@"event"]];
             }else {
-                [[LoginViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusFeed];
-                [[LoginViewController sharedInstance] fbLoginBtnClick:self];
+                [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusFeed];
+                [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
         }
 }
 
@@ -1002,7 +1002,7 @@ static StartViewController *sharedHelper = nil;
             [playerAccount sendTransactions:playerAccount.transactions];
         }
         
-        switch ([[LoginViewController sharedInstance] loginFacebookStatus]) {
+        switch ([[LoginAnimatedViewController sharedInstance] loginFacebookStatus]) {
             case LoginFacebookStatusLevel:
                 [LevelCongratViewController newLevelNumber:playerAccount.accountLevel];
                 break;
@@ -1015,7 +1015,7 @@ static StartViewController *sharedHelper = nil;
             default:
                 break;
         }
-        [[LoginViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusNone];
+        [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusNone];
         
         [uDef synchronize];
     }
@@ -1318,7 +1318,7 @@ static StartViewController *sharedHelper = nil;
 {
     NSString *LoginForIPad=[[NSUserDefaults standardUserDefaults] stringForKey:@"IPad"];
     if (LoginForIPad&&(![[OGHelper sharedInstance] isAuthorized])) {
-        LoginViewController *loginViewControllerLocal =[LoginViewController sharedInstance];
+        LoginAnimatedViewController *loginViewControllerLocal =[LoginAnimatedViewController sharedInstance];
         
         loginViewControllerLocal.startViewController = self;
         [self.navigationController pushViewController:loginViewControllerLocal animated:YES];

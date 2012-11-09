@@ -263,8 +263,8 @@
         
         [[OGHelper sharedInstance] getFriendsHowDontUseAppDelegate:self];
     }else{
-        [[LoginViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusInvaitFriends];
-        [[LoginViewController sharedInstance] fbLoginBtnClick:self];
+        [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusInvaitFriends];
+        [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification

@@ -139,7 +139,7 @@ p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font
 "HelpTitle" = "HELP";
 "MoreGames" = "MORE GAMES";
 
-//LoginViewController
+//LoginAnimatedViewController
 //First Start View
 "LoginTitleAtStart" = "WELLCOME!";
 

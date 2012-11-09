@@ -9,14 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "DuelViewController.h"
 #import "LoadViewController.h"
-#import "LoginViewController.h"
+#import "LoginAnimatedViewController.h"
 #import "AdColonyPublic.h"
 #import "FBConnect.h"
 #import "AccountDataSource.h"
 
 @interface TestAppDelegate : NSObject <UIApplicationDelegate, AdColonyDelegate, FBRequestDelegate, FBDialogDelegate, FBSessionDelegate>
 @property (nonatomic, readonly) UINavigationController *navigationController;
-@property  (strong) LoginViewController *loginViewController;
+@property  (strong) LoginAnimatedViewController *loginViewController;
 @property (strong,nonatomic) Facebook *facebook;
 @property (nonatomic) GADBannerView *adBanner;
 

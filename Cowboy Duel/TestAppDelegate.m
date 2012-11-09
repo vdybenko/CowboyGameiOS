@@ -31,7 +31,7 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     UIWindow *window;
     UINavigationController *navigationController;
     StartViewController *startViewController;
-    LoginViewController *loginViewController;
+    LoginAnimatedViewController *loginViewController;
     Facebook * facebook;
     AccountDataSource *playerAccount;
 }
@@ -71,13 +71,13 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     
     application.statusBarOrientation = UIInterfaceOrientationPortrait;
   
-    LoginAnimatedViewController *loginAnimatedViewController = [[LoginAnimatedViewController alloc] init];
-    navigationController = [[UINavigationController alloc] initWithRootViewController:loginAnimatedViewController];
-//    LoadViewController *loadViewController;
-//    
-//    loadViewController= [[LoadViewController alloc] initWithPush:NULL];
-//    
-//    navigationController = [[UINavigationController alloc] initWithRootViewController:loadViewController];
+//    LoginAnimatedViewController *loginAnimatedViewController = [[LoginAnimatedViewController alloc] init];
+//    navigationController = [[UINavigationController alloc] initWithRootViewController:loginAnimatedViewController];
+    LoadViewController *loadViewController;
+    
+    loadViewController= [[LoadViewController alloc] initWithPush:NULL];
+    
+    navigationController = [[UINavigationController alloc] initWithRootViewController:loadViewController];
 
     [navigationController setNavigationBarHidden:YES];
     
