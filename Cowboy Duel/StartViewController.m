@@ -124,6 +124,9 @@ static const char *OUT_URL =  BASE_URL"api/out";
 NSString *const URL_FB_PAGE=@"http://cowboyduel.mobi/"; 
 NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNotification";
 
+static const char *BOT_LIST_URL = "http://bidoncd.s3.amazonaws.com/bot_id.json";
+NSMutableData *receivedDataBots;
+
 #pragma mark
 
 static StartViewController *sharedHelper = nil;
@@ -884,8 +887,17 @@ static StartViewController *sharedHelper = nil;
     NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
     [dicForRequests removeObjectForKey:[currentParseString lastPathComponent]];
     NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
-    
+    NSArray *responseObjectForBots = ValidateObject([jsonString JSONValue], [NSArray class]);
+
     DLog(@"StartVC \n jsonValues %@\n string %@",jsonString,currentParseString);
+//getting list online from response object:
+    NSLog(@"responseObject %@",responseObject);
+    NSLog(@"responseObjectForBots %@",responseObjectForBots);
+    if ([responseObjectForBots count]>=1) {
+      playerAccount.listBotsOnline = responseObjectForBots;
+      NSLog(@"listBotsOnline %@",playerAccount.listBotsOnline);
+    }
+  
 //    
 //    OnLine
     if ([[currentParseString lastPathComponent] isEqualToString:@"a"]&&[responseObject objectForKey:@"session_id"]) {
@@ -1122,7 +1134,23 @@ static StartViewController *sharedHelper = nil;
     
     oldAccounId=@"";
     gameCenterViewController = [GameCenterViewController sharedInstance:playerAccount andParentVC:self];
-    
+  [self getBotsList];
+}
+
+-(void)getBotsList;
+{
+
+  NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:BOT_LIST_URL encoding:NSUTF8StringEncoding]]
+                                                             cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                         timeoutInterval:kTimeOutSeconds];
+  CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
+  if (theConnection) {
+    NSMutableData *receivedData = [[NSMutableData alloc] init];
+    [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
+  } else {
+    NSLog(@"WARNING: theBotsListConnection failed..");
+  }
+
 }
 
 -(void)modifierUser;

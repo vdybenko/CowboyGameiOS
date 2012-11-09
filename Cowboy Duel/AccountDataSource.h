@@ -35,6 +35,8 @@
 @property(strong,nonatomic) NSMutableArray *teachingTimes;
 @property(strong,nonatomic) NSMutableArray *finalInfoTable;
 
+@property(strong,nonatomic) NSMutableArray *listBotsOnline;
+
 + (AccountDataSource *)sharedInstance;
 - (id)initWithLocalPlayer;
 - (void)loadAllParametrs;
