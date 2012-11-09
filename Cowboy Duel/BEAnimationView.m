@@ -7,6 +7,7 @@
 //
 
 #import "BEAnimationView.h"
+#import <QuartzCore/QuartzCore.h>
 int oldMovingKey = 4;
 
 @implementation BEAnimationView
@@ -21,33 +22,37 @@ int oldMovingKey = 4;
     return self;
 }
 
-- (void) animateWithType:(AnimationType)type
+- (void) animateWithType:(NSNumber *)type
 {
-  switch (type) {
+  switch ([type intValue]) {
     case GUILLOTINE:
     {
       CGRect currentPosition = self.frame;
       [self guillCycleWithCurrPosition:currentPosition andDelay:delays];
+        break;
     }
-    break;
     
     case HAT:
     {
       [self hatAnimationWithFreedom:freedom];
+        break;
     }
-      break;
+    
     
     case WHISKERS:
     {
       [self whiskersCycleWithAngle:angle];
+        break;
     }
-      break;
+      
     
     case FALL:
     {
       [self fallFromPosition:self.frame withDepth:depth andSpeed:speed];
+        break;
     }
-    
+      
+       
     default:
       break;
   }
@@ -141,7 +146,7 @@ int oldMovingKey = 4;
 //case Hat:
 -(void) hatAnimationWithFreedom: (int)freed {
   CGRect original = self.frame;
-  
+    if(self.stopAnimation) return;
   if (!freed) {
     freed = 5;
   }
@@ -205,11 +210,14 @@ int oldMovingKey = 4;
                          break;
                      }
                    }completion:^(BOOL finished) {
-                     [UIView animateWithDuration:flRand animations:^{
-                       self.frame = original;
-                     } completion:^(BOOL finished) {
-                         [self hatAnimationWithFreedom:freedom];
-                     }];
+                       if (!self.stopAnimation) {
+                           [UIView animateWithDuration:flRand animations:^{
+                               self.frame = original;
+                           } completion:^(BOOL finished) {
+                               [self hatAnimationWithFreedom:freedom];
+                           }];
+                       }
+   
 
                    }
    ];
@@ -217,6 +225,8 @@ int oldMovingKey = 4;
 
 //case Fall:
 -(void)fallFromPosition: (CGRect )currentPosition withDepth: (float )tdepth andSpeed: (float) speedd{
+  [self.layer removeAllAnimations];
+  self.stopAnimation = YES;
   self.frame = currentPosition;
   float tSpeed = speedd;
   if (!tdepth) {
@@ -227,7 +237,7 @@ int oldMovingKey = 4;
   }
   [UIView animateWithDuration:tSpeed
                         delay:0.0
-                      options:UIViewAnimationCurveEaseIn
+                      options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveEaseIn
                    animations:^{
                      CGRect tmpPos = self.frame;
                      tmpPos.origin.y += tdepth;

@@ -22,6 +22,6 @@ typedef enum
 @property(nonatomic) float depth;         //depth of fall
 @property(nonatomic) float speed;         //duration of fall
 @property(nonatomic) int freedom;         //freedom of hat moving
-
-- (void) animateWithType: (AnimationType )type;
+@property(nonatomic) BOOL stopAnimation;
+- (void) animateWithType: (NSNumber *)number;
 @end

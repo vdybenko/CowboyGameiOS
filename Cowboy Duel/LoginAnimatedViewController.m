@@ -24,6 +24,7 @@
 @property (unsafe_unretained, nonatomic) IBOutlet BEAnimationView *whiskersImage;
 @property (unsafe_unretained, nonatomic) IBOutlet BEAnimationView *heatImage;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *headImage;
+@property (unsafe_unretained, nonatomic) IBOutlet UIImageView *noseImage;
 @end
 
 @implementation LoginAnimatedViewController
@@ -55,9 +56,9 @@
 {
     [super viewDidAppear:animated];
     [self updateLabels];
-    [self.guillotineImage animateWithType:GUILLOTINE];
-    [self.whiskersImage animateWithType:WHISKERS];
-    [self.heatImage animateWithType:HAT];
+    [self.guillotineImage animateWithType:[NSNumber numberWithInt:GUILLOTINE]];
+    [self.whiskersImage animateWithType:[NSNumber numberWithInt:WHISKERS]];
+    [self.heatImage animateWithType:[NSNumber numberWithInt:HAT]];
     
 }
 
@@ -97,7 +98,8 @@
                              if (self.textIndex==5) {
                                  [self.headImage setHidden:YES];
                                  [self.heatImage setHidden:NO];
-                                 
+                                 [self.noseImage setHidden:YES];
+                                 [self.whiskersImage setHidden:YES];
                                  [self scaleButton:self.loginFBbutton];
                                  return;
                              }
@@ -105,7 +107,8 @@
                              
                          }
                          else {
-                             [self.guillotineImage animateWithType:FALL];
+                             [self.guillotineImage animateWithType:[NSNumber numberWithInt:FALL]];
+                             [self.heatImage performSelector:@selector(animateWithType:) withObject:[NSNumber numberWithInt:FALL] afterDelay:0.2];
                              [self performSelector:@selector(showTryAgain) withObject:nil afterDelay:0.7];
                          }
                      }];
@@ -141,12 +144,16 @@
     CGRect frame = self.guillotineImage.frame;
     frame.origin.y = -310;
     self.guillotineImage.frame = frame;
+    frame = self.heatImage.frame;
+    frame.origin.y -= 220;
+    self.heatImage.frame = frame;
+    [self.noseImage setHidden:NO];
     [self.tryAgainView setHidden:YES];
     [self.headImage setHidden:NO];
-    
+    [self.whiskersImage setHidden:NO];
     self.textIndex = 0;
     [self updateLabels];
-    [self.guillotineImage animateWithType:GUILLOTINE];
+    [self.guillotineImage animateWithType:[NSNumber numberWithInt:GUILLOTINE]];
 }
 
 - (void)viewDidUnload {
@@ -158,6 +165,7 @@
     [self setWhiskersImage:nil];
     [self setHeatImage:nil];
     [self setHeadImage:nil];
+    [self setNoseImage:nil];
     [super viewDidUnload];
 }
 @end
