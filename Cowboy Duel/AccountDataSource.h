@@ -37,7 +37,7 @@
 
 @property(strong,nonatomic) NSMutableArray *transactions;
 @property(strong,nonatomic) NSMutableArray *duels;
-@property(strong, nonatomic) NSNumber *glNumber;
+@property(nonatomic) int glNumber;
 @property(strong,nonatomic) NSMutableArray *achivments;
 
 @property(strong,nonatomic) NSMutableArray *teachingTimes;
@@ -78,6 +78,8 @@
 - (void)saveDefense;
 - (void)loadDefense;
 - (void)saveTransaction;
+- (void)saveGlNumber;
+- (int)increaseGlNumber;
 
 - (CDWeaponProduct*)loadAccountWeapon;
 -(NSUInteger(^)(NSArray *, NSInteger))findObs;

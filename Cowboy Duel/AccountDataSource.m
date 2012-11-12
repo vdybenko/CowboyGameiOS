@@ -48,6 +48,7 @@ static AccountDataSource *sharedHelper = nil;
     self.removeAds=0;
     self.accountDefenseValue = 0;
     self.curentIdWeapon = 0;
+    self.glNumber = 0;
     accountWeapon = [[CDWeaponProduct alloc] init];
     self.isTryingWeapon=NO;
     
@@ -98,6 +99,8 @@ static AccountDataSource *sharedHelper = nil;
   }
   [uDef setObject:ValidateObject(self.accountID, [NSString class]) forKey:@"id"];
   
+    self.glNumber = [uDef integerForKey:@"GL_NUMBER"];
+    
   [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"transactions"];
   
   NSArray *oldLocations = [uDef arrayForKey:@"transactions"];
@@ -109,8 +112,6 @@ static AccountDataSource *sharedHelper = nil;
       [self.transactions addObject:loc];
     }
   }
-  CDTransaction *localTransaction = [self.transactions lastObject];
-  self.glNumber = localTransaction.trLocalID;  
   
   NSArray *oldLocations2 = [uDef arrayForKey:@"duels"];
   if( self.duels )
@@ -192,6 +193,7 @@ static AccountDataSource *sharedHelper = nil;
         CDTransaction *transaction = [array objectAtIndex:i];
         [reason setObject: [NSNumber numberWithInt:[self crypt:[transaction.trMoneyCh intValue]]] forKey:@"transaction_id"];
         [reason setObject:transaction.trDescription forKey:@"description"];
+        [reason setObject:transaction.trLocalID forKey:@"local_id"];
         [result addObject:[NSDictionary dictionaryWithObject:reason forKey:@"transaction"]];
     }
     return result;
@@ -474,6 +476,18 @@ static AccountDataSource *sharedHelper = nil;
         [locationData addObject: [NSKeyedArchiver archivedDataWithRootObject:loc]];
     }
     [def setObject:locationData forKey:@"transactions"];
+}
+
+- (void)saveGlNumber;
+{
+    [[NSUserDefaults standardUserDefaults] setInteger:self.glNumber forKey:@"GL_NUMBER"];
+}
+
+- (int)increaseGlNumber;
+{
+    glNumber++;
+    [self saveGlNumber];
+    return glNumber;
 }
 #pragma mark accountWeapon
 

@@ -120,16 +120,6 @@
         }
     }
     
-    if ([AccountDataSource sharedInstance].accountLevel<product.dLevelLock) {
-        descriptionText.text = [NSString stringWithFormat:@"Lock level %d",product.dLevelLock];
-        descriptionText.textColor = [UIColor redColor];
-        buyProduct.enabled = NO;
-    }else{
-        descriptionText.textColor = name.textColor;
-        buyProduct.enabled = YES;
-        descriptionText.text = product.dDescription;
-    }
-    
     if (product.dPrice == 0) {
         coldTitle.text=NSLocalizedString(@"Price:", @"");
         gold.text = [NSString stringWithFormat:@"%d",product.dPrice];
@@ -142,6 +132,16 @@
     }else{
         coldTitle.text=NSLocalizedString(@"Golds:", @"");
         gold.text = [NSString stringWithFormat:@"%d",product.dPrice];
+    }
+    
+    if ([AccountDataSource sharedInstance].accountLevel<product.dLevelLock) {
+        descriptionText.text = [NSString stringWithFormat:@"Lock level %d",product.dLevelLock];
+        descriptionText.textColor = [UIColor redColor];
+        buyProduct.enabled = NO;
+    }else{
+        descriptionText.textColor = name.textColor;
+        buyProduct.enabled = YES;
+        descriptionText.text = product.dDescription;
     }
     
     icon.image = [UIImage loadImageFullPath:[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],product.dIconLocal]];

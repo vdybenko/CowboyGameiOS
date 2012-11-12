@@ -1,5 +1,4 @@
 //
-//  CDTransaction.h
 //  Cowboy Duel
 //
 //  Created by Sergey Sobol on 29.06.11.
@@ -14,7 +13,6 @@
     NSNumber * trMoneyCh;
     NSString * trDescription;
     NSNumber * trLocalID;
-    NSNumber * trGlobalID;
    
 }
 
@@ -22,6 +20,5 @@
 @property(nonatomic, strong) NSNumber *trMoneyCh;
 @property(nonatomic, strong) NSString *trDescription;
 @property(nonatomic, strong) NSNumber *trLocalID;
-@property(nonatomic, strong) NSNumber *trGlobalID;
 
 @end

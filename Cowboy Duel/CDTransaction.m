@@ -9,7 +9,7 @@
 #import "CDTransaction.h"
 
 @implementation CDTransaction
-@synthesize trMoneyCh, trType, trDescription, trLocalID, trGlobalID;
+@synthesize trMoneyCh, trType, trDescription, trLocalID;
 
 - (id)init
 {
@@ -27,7 +27,6 @@
     [encoder encodeObject:self.trType forKey:@"Type"];
     [encoder encodeObject:self.trDescription forKey:@"Description"];
     [encoder encodeObject:self.trLocalID forKey:@"LocalID"];
-    [encoder encodeObject:self.trGlobalID forKey:@"GlobalID"];
 }
 
 -(id)initWithCoder:(NSCoder *)decoder
@@ -36,7 +35,6 @@
     self.trType = [decoder decodeObjectForKey:@"Type"];
     self.trDescription = [decoder decodeObjectForKey:@"Description"];
     self.trLocalID = [decoder decodeObjectForKey:@"LocalID"];
-    self.trGlobalID = [decoder decodeObjectForKey:@"GlobalID"];
     return self;
 }
 

@@ -109,6 +109,7 @@
         transaction.trDescription = [[NSString alloc] initWithFormat:@"BuyProductWin"];
         transaction.trType = [NSNumber numberWithInt:-1];
         transaction.trMoneyCh = [NSNumber numberWithInt:-duelProduct.dPrice];
+        transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
         [playerAccount.transactions addObject:transaction];
         [playerAccount sendTransactions:playerAccount.transactions];
         [playerAccount saveTransaction];

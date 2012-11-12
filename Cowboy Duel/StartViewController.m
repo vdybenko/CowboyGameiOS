@@ -192,7 +192,6 @@ static StartViewController *sharedHelper = nil;
             }
             [playerAccount saveID];
             [playerAccount saveDeviceType];
-            playerAccount.glNumber = [NSNumber numberWithInt:0];
             [playerAccount saveAccountLevel];
             [playerAccount saveAccountPoints];
             [playerAccount saveAccountWins];
@@ -206,7 +205,8 @@ static StartViewController *sharedHelper = nil;
             [playerAccount saveFacebookName];
             [playerAccount saveWeapon];
             [playerAccount saveDefense];
-                        
+            [playerAccount saveTransaction];
+            [playerAccount saveGlNumber];
             [uDef synchronize];
         }else{
             
@@ -245,8 +245,7 @@ static StartViewController *sharedHelper = nil;
                 }
             }
             CDTransaction *localTransaction = [playerAccount.transactions lastObject];
-            playerAccount.glNumber = localTransaction.trLocalID;
-          DLog(@"Transactions count = %d", [playerAccount.transactions count]);            
+          DLog(@"Transactions count = %d", [playerAccount.transactions count]);
             
             NSArray *oldLocations2 = [uDef arrayForKey:@"duels"];
             if( playerAccount.duels )
@@ -969,6 +968,7 @@ static StartViewController *sharedHelper = nil;
             CDTransaction *transaction = [[CDTransaction alloc] init];
             transaction.trType = [NSNumber numberWithInt:1];
             transaction.trMoneyCh = [NSNumber numberWithInt:100];
+            transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
             playerAccount.money+=100;
             transaction.trDescription = [[NSString alloc] initWithFormat:@"forIPad"];
             [playerAccount.transactions addObject:transaction];
@@ -1420,20 +1420,14 @@ static StartViewController *sharedHelper = nil;
         
         CDTransaction *transaction = [[CDTransaction alloc] init];
         transaction.trMoneyCh = [NSNumber numberWithInt:10];
-        
+        transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
         transaction.trDescription = [[NSString alloc] initWithFormat:@"Daily money"];
         
-        int local = [playerAccount.glNumber intValue];
-        local++;
-        DLog(@"number %d", local);
-        playerAccount.glNumber = [NSNumber numberWithInt:local];
-        //            transaction.trNumber = [NSNumber numberWithInt:local];
         [playerAccount.transactions addObject:transaction];
         
         [playerAccount saveTransaction];
         
         DLog(@"Transactions count = %d", [playerAccount.transactions count]);
-        
     };
     [userDef synchronize];
     

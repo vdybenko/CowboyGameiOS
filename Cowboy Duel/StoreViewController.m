@@ -97,6 +97,8 @@
                 transaction.trDescription = [[NSString alloc] initWithFormat:@"BuyProductWeapon"];
                 transaction.trType = [NSNumber numberWithInt:-1];
                 transaction.trMoneyCh = [NSNumber numberWithInt:-product.dPrice];
+                transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
+
                 [playerAccount.transactions addObject:transaction];
                 [playerAccount saveTransaction];
                 [playerAccount sendTransactions:playerAccount.transactions];
@@ -130,6 +132,8 @@
             transaction.trDescription = [[NSString alloc] initWithFormat:@"BuyProductWinDefense"];
             transaction.trType = [NSNumber numberWithInt:-1];
             transaction.trMoneyCh = [NSNumber numberWithInt:-product.dPrice];
+            transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
+
             [playerAccount.transactions addObject:transaction];
             [playerAccount saveTransaction];
             [playerAccount sendTransactions:playerAccount.transactions];

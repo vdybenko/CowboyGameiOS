@@ -20,7 +20,7 @@ NSMutableData *responseData;
 
 
 NSString  *const URL_PRODUCT_FILE   = @"http://bidoncd.s3.amazonaws.com/list_of_store_items_v2.2.json";
-NSString  *const URL_PRODUCT_FILE_RETINEA   = @"http://bidoncd.s3.amazonaws.com/list_of_store_items_v2.2.json";
+NSString  *const URL_PRODUCT_FILE_RETINEA   = @"http://bidoncd.s3.amazonaws.com/list_of_store_items_retina_v2.2.json";
 NSString  *const URL_USER_PRODUCTS = @"http://v201.cowboyduel.net/store/get_buy_items_user";
 NSString  *const URL_PRODUCTS_BUY = @"http://v201.cowboyduel.net/store/bought";
 
@@ -120,6 +120,7 @@ static NSString *getSavePathForDuelProduct()
     }
     product.dPrice=[[dic objectForKey:@"golds"] integerValue];
     product.dPurchaseUrl=[dic objectForKey:@"inappid"];
+    product.dLevelLock=[[dic objectForKey:@"levelLock"] intValue];
     
 }
 
@@ -192,7 +193,6 @@ static NSString *getSavePathForDuelProduct()
                     CDWeaponProduct *product=[arrWeaponSaved objectAtIndex:indexOfProductInSavedWeaponArray];
                     product.dCountOfUse = 1;
                     [arrWeaponSaved replaceObjectAtIndex:indexOfProductInSavedWeaponArray withObject:product];
-                    
                 }else{
                     NSUInteger indexOfProductInSavedDefenseArray=[[AccountDataSource sharedInstance] findObs](arrDefenseSaved,idProduct);
                     if (indexOfProductInSavedDefenseArray != NSNotFound) {

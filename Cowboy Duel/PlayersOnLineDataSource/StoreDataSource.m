@@ -55,6 +55,7 @@
     if ([testArr count]==0) {
         DuelProductDownloaderController *duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
         [duelProductDownloaderController setDidFinishBlock:^(NSError *error){
+            [self reloadDataSource];
             [tableView reloadData];
         }];
         [duelProductDownloaderController refreshDuelProducts];

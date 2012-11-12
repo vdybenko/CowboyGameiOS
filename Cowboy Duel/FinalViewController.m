@@ -101,7 +101,6 @@
         
         transaction = [[CDTransaction alloc] init];
         transaction.trMoneyCh = [NSNumber numberWithInt:10];
-        
         transaction.trDescription = [[NSString alloc] initWithFormat:@"Duel"];
         
         duel = [[CDDuel alloc] init];
@@ -664,11 +663,7 @@
 
     if (!teaching||(duelWithBotCheck)) {
         
-        int local = [playerAccount.glNumber intValue];
-        local++;
-        DLog(@"number %d", local);
-        playerAccount.glNumber = [NSNumber numberWithInt:local];
-        //            transaction.trNumber = [NSNumber numberWithInt:local];
+        transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
         [playerAccount.transactions addObject:transaction];
         
         NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
@@ -676,7 +671,6 @@
         NSMutableArray *locationData = [[NSMutableArray alloc] init];
         [playerAccount saveTransaction];
         
-        DLog(@"Transactions count = %d", [playerAccount.transactions count]);
         [def synchronize];
         
         if (oponentAccount.accountID != nil) duel.dOpponentId = [NSString stringWithString:oponentAccount.accountID];  /////////////////////////////// save duels
