@@ -5,16 +5,18 @@
 
 static const char *POST_TRANS_URL =  BASE_URL"api/transactions";
 static const char *POST_DUEL_URL =  BASE_URL"api/duels";
+static const char *TEST_BOTS_URL = "http://v201.cowboyduel.net/users/get_user_data";
 
 @interface AccountDataSource(){
   NSMutableDictionary *dicForRequests;
+  
 }
 @end
 
 @implementation AccountDataSource
 
 @synthesize money, accountName, teachingTimes, finalInfoTable, sessionID, accountID, accountDataSourceID, transactions, duels, achivments , glNumber,
- accountLevel,accountPoints,accountWins,accountDraws,accountBigestWin,removeAds,avatar,age,homeTown,friends,facebookName,listBotsOnline;
+ accountLevel,accountPoints,accountWins,accountDraws,accountBigestWin,removeAds,avatar,age,homeTown,friends,facebookName,listBotsOnline,receivedBots;
 
 #pragma mark
 
@@ -52,6 +54,8 @@ static AccountDataSource *sharedHelper = nil;
     duels = [[NSMutableArray alloc] init];
     achivments = [[NSMutableArray alloc] init];
     dicForRequests=[[NSMutableDictionary alloc] init];
+  
+    receivedBots = [NSMutableArray array];
 
     return self;
 }
@@ -314,7 +318,11 @@ static AccountDataSource *sharedHelper = nil;
     NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
     
     DLog(@"AccountDataSource jsonValues %@",responseObject);
-    
+    if ([responseObject objectForKey:@"user_id"]) {
+      [receivedBots addObject:responseObject];
+    }
+    DLog(@"receivedBots %@",receivedBots);
+
     DLog(@"err_des %@", ValidateObject([responseObject objectForKey:@"err_desc"], [NSString class]));
     
     int errCode=[[responseObject objectForKey:@"err_code"] intValue];
@@ -352,8 +360,7 @@ static AccountDataSource *sharedHelper = nil;
 - (void)connection:(CustomNSURLConnection *)connection didReceiveData:(NSData *)data
 {
     NSString * currentParseString = [NSString stringWithFormat:@"%@",connection.requestURL];
-    NSMutableData *receivedData=[dicForRequests objectForKey:[currentParseString lastPathComponent]];
-    [receivedData appendData:data];
+    [dicForRequests setObject:data forKey:[currentParseString lastPathComponent]];
 }
 
 - (void)connection:(CustomNSURLConnection *)connection
@@ -467,4 +474,28 @@ static AccountDataSource *sharedHelper = nil;
     }
 }
 #pragma mark
+
+- (void)receiveBots;
+{
+  NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:TEST_BOTS_URL encoding:NSUTF8StringEncoding]]
+                                                          cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                      timeoutInterval:kTimeOutSeconds];
+  for (int i=0; i<[listBotsOnline count]; i++) {
+  
+    NSMutableDictionary *dicBody=[NSMutableDictionary dictionaryWithDictionary:listBotsOnline[i]];
+   
+    [theRequest setHTTPMethod:@"POST"];
+    NSString *stBody=[Utils makeStringForPostRequest:dicBody];
+    DLog(@"stBody %@",dicBody);
+    [theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]];
+
+    CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
+    if (theConnection) {
+      NSMutableData *receivedData = [[NSMutableData alloc] init];
+      [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
+    } else {
+      NSLog(@"WARNING: theBotsGETListConnection failed..");
+    }
+  }
+}
 @end

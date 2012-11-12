@@ -36,6 +36,7 @@
 @property(strong,nonatomic) NSMutableArray *finalInfoTable;
 
 @property(strong,nonatomic) NSMutableArray *listBotsOnline;
+@property(strong,nonatomic) NSMutableArray *receivedBots;
 
 + (AccountDataSource *)sharedInstance;
 - (id)initWithLocalPlayer;
@@ -67,6 +68,8 @@
 - (void)saveFriends;
 - (void)saveFacebookName;
 - (void)saveDeviceType;
+
+- (void)receiveBots;
 
 -(void)putchAvatarImageToInitStartVC:(StartViewController*)startVC;
 -(BOOL)isAvatarImage:(NSString*)imagePath;

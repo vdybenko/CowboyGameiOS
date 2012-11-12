@@ -124,7 +124,7 @@ static const char *OUT_URL =  BASE_URL"api/out";
 NSString *const URL_FB_PAGE=@"http://cowboyduel.mobi/"; 
 NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNotification";
 
-static const char *BOT_LIST_URL = "http://bidoncd.s3.amazonaws.com/bot_id.json";
+static const char *BOT_LIST_URL = "http://bidoncd.s3.amazonaws.com/bot.json";
 NSMutableData *receivedDataBots;
 
 #pragma mark
@@ -896,6 +896,7 @@ static StartViewController *sharedHelper = nil;
     if ([responseObjectForBots count]>=1) {
       playerAccount.listBotsOnline = responseObjectForBots;
       NSLog(@"listBotsOnline %@",playerAccount.listBotsOnline);
+      [playerAccount receiveBots];
     }
   
 //    
