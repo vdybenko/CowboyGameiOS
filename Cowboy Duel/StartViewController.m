@@ -21,6 +21,9 @@
 #import "LevelCongratViewController.h"
 #import "MoneyCongratViewController.h"
 
+#import "Social/Social.h"
+#import "accounts/Accounts.h"
+
 #import "DuelProductDownloaderController.h"
 #import "StoreViewController.h"
 
@@ -695,16 +698,30 @@ static StartViewController *sharedHelper = nil;
 
 - (IBAction)feedbackFacebookBtnClick:(id)sender {
     
-        if ([[OGHelper sharedInstance]isAuthorized]) { 
-                [[OGHelper sharedInstance] apiDialogFeedUser];
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
-                                                                    object:self
-                                                                  userInfo:[NSDictionary dictionaryWithObject:@"/feedBack_Facebook_click" forKey:@"event"]];
-            }else {
-                [[LoginViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusFeed];
-                [[LoginViewController sharedInstance] fbLoginBtnClick:self];
+    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]){
+         SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        SLComposeViewControllerCompletionHandler __block myBlock = ^(SLComposeViewControllerResult result){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [controller dismissViewControllerAnimated:YES completion:nil];
+            });
+        };
+        controller.completionHandler = myBlock;
+        [controller setInitialText:URL_APP_ESTIMATE];
+        [controller addURL:[NSURL URLWithString:URL_APP_ESTIMATE]];
+        [self presentViewController:controller animated:YES completion:Nil];
+    }
+    else{
+        if ([[OGHelper sharedInstance]isAuthorized]) {
+            [[OGHelper sharedInstance] apiDialogFeedUser];
+        }else {
+            [[LoginViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusFeed];
+            [[LoginViewController sharedInstance] fbLoginBtnClick:self];
         }
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/feedBack_Facebook_click" forKey:@"event"]];
 }
 
 - (IBAction)feedbackTweeterBtnClick:(id)sender {
