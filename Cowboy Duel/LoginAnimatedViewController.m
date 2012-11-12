@@ -24,6 +24,7 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
     __unsafe_unretained IBOutlet UIView *activityView;
     __unsafe_unretained IBOutlet UIActivityIndicatorView *activityIndicatorView;
     BOOL tryAgain;
+//    int counterTryAgain;
 }
 @property (nonatomic) int textIndex;
 @property (nonatomic) NSTimer *timer;
@@ -64,6 +65,9 @@ static LoginAnimatedViewController *sharedHelper = nil;
 	if (self) {
         playerAccount=[AccountDataSource sharedInstance];
         loginFacebookStatus = LoginFacebookStatusNone;
+//    if (!counterTryAgain) {
+//          counterTryAgain = 1;
+//    }
     }
     return self;
     
@@ -98,6 +102,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
     self.loginLable.text = NSLocalizedString(@"LOGIN", @"");
     self.loginLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
     
+//    self.donateLable.text = [NSString stringWithFormat:(@"%@ %d$"),  NSLocalizedString(@"DONATE", @""),counterTryAgain];
     self.donateLable.text = NSLocalizedString(@"DONATE 1$", @"");
     self.donateLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
     
@@ -114,7 +119,16 @@ static LoginAnimatedViewController *sharedHelper = nil;
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    textsContainer = [NSArray arrayWithObjects:@"First loooong text", @"Second loooong text", @"Third loooong text", @"Forth loooong text", @"Fifth loooong text", @"Six loooong text", nil];
+    textsContainer = [NSArray arrayWithObjects:
+                    NSLocalizedString(@"HEY", nil),             //"Hey guy. Do you hear me?"
+                    NSLocalizedString(@"HEY_YOU", nil),         //"Yes, you! Come here."
+                    NSLocalizedString(@"IPAD", nil),            //"Do you want an iPad mini?"
+                    NSLocalizedString(@"REALLY", nil),          //"Really? Do you like it?"
+                    NSLocalizedString(@"HELP_ME", nil),         //"Great. Help me. I know where it is."
+                    NSLocalizedString(@"HELP_NOW", nil),        //"Help me!!!"
+                    NSLocalizedString(@"CHOOSE_DOLLAR", nil),   //"Pay for me $1...
+                    NSLocalizedString(@"CHOOSE_FACEBOOK", nil), //...or give me your ID"
+                    nil];
     self.textIndex = 0;
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/kassa.aif", [[NSBundle mainBundle] resourcePath]]];
     NSError *error;
@@ -140,8 +154,13 @@ static LoginAnimatedViewController *sharedHelper = nil;
 
 - (void)updateLabels
 {
-    NSString * text = [textsContainer objectAtIndex:self.textIndex];
-    
+  
+    NSString * text = (self.textIndex<=7)?[textsContainer objectAtIndex:self.textIndex]:@"";
+  
+//    if (self.textIndex == 6) {
+//      text = (counterTryAgain<=1)?[textsContainer objectAtIndex:self.textIndex]:[NSString stringWithFormat:@"%@%d ...",NSLocalizedString(@"CHOOSE_DOLLAR_S", @""),counterTryAgain];
+//    }
+  
     [UIView animateWithDuration:1.0
                      animations:^{
                         [self lableScaleOut];
@@ -159,24 +178,38 @@ static LoginAnimatedViewController *sharedHelper = nil;
                      } completion:^(BOOL complete) {
                          [self.player setCurrentTime:0];
                          [self.player play];
-                         if (self.textIndex<5){
-                             self.textIndex++;
-                             if (self.textIndex==2) {
-                                 [self scaleButton:self.payButton];
+                         if (self.textIndex<8){
+
+                             if (self.textIndex==4) {                 ////"Great. Help me. I know where it is."
+                                 [self scaleButton:self.payButton];   //Scale 1$
                                  [self scaleButton:self.donateLable];
-                                 return;
+
                              }
-                             if (self.textIndex==5) {
+                             if (self.textIndex==5) {                 ////"Help me!!!"
+                               [self scaleButton:self.loginFBbutton]; //Scale Facebook login
+                               [self scaleButton:self.loginLable];
+                             }
+                             if (self.textIndex==6) {                 ////"Pay for me $1...
                                  [self.headImage setHidden:YES];
                                  [self.heatImage setHidden:NO];
                                  [self.noseImage setHidden:YES];
                                  [self.whiskersImage setHidden:YES];
-                                 [self scaleButton:self.loginFBbutton];
-                                 [self scaleButton:self.loginLable];
-                                 return;
+                                 [self scaleButton:self.payButton];   //Scale 1$
+                                 [self scaleButton:self.donateLable];
+
                              }
+                             if (self.textIndex==7) {                 ////...or give me your ID"
+                               [self.headImage setHidden:YES];
+                               [self.heatImage setHidden:NO];
+                               [self.noseImage setHidden:YES];
+                               [self.whiskersImage setHidden:YES];
+                               [self scaleButton:self.loginFBbutton]; //Scale Facebook login
+                               [self scaleButton:self.loginLable];
+
+                             }
+
                              [self performSelector:@selector(updateLabels) withObject:nil afterDelay:2.0];
-                             
+                             self.textIndex++;
                          }
                          else {
                              if(tryAgain) return;
@@ -200,7 +233,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
         [UIView animateWithDuration:0.5 animations:^{
             button.transform = CGAffineTransformMakeScale(1.0, 1.0);
         }completion:^(BOOL complete){
-            [self updateLabels];
+//            [self updateLabels];
         } ];
         
     }];
@@ -216,6 +249,8 @@ static LoginAnimatedViewController *sharedHelper = nil;
 - (IBAction)tryAgainButtonClick:(id)sender
 {
     tryAgain = NO;
+//    counterTryAgain++;
+//    self.donateLable.text = [NSString stringWithFormat:(@"%@ %d$"),  NSLocalizedString(@"DONATE", @""),counterTryAgain];
     CGRect frame = self.guillotineImage.frame;
     frame.origin.y = -310;
     self.guillotineImage.frame = frame;

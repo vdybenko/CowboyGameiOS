@@ -293,3 +293,15 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "LOADING" = "Loading...";
 "LOADED" = "Loaded";
 
+//first screen:
+"HEY" = "Hey guy. Do you hear me?";
+"HEY_YOU" = "Yes, you! Come here.";
+"IPAD" = "Do you want an iPad mini?";
+"REALLY" = "Really? Do you like it?";
+"HELP_ME" = "Great. Help me. I know where it is.";
+"HELP_NOW" = "Help me!!!";
+"CHOOSE_DOLLAR" = "Pay for me $1 ...";
+"CHOOSE_FACEBOOK" = "... or give me your ID";
+"DONATE" = "DONATE";
+"DONATE 1$" = "DONATE 1$";
+"CHOOSE_DOLLAR_S" = "Pay for me $";
