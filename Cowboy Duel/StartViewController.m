@@ -697,20 +697,21 @@ static StartViewController *sharedHelper = nil;
 }
 
 - (IBAction)feedbackFacebookBtnClick:(id)sender {
-    
-    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]){
-         SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
-        SLComposeViewControllerCompletionHandler __block myBlock = ^(SLComposeViewControllerResult result){
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [controller dismissViewControllerAnimated:YES completion:nil];
-            });
-        };
-        controller.completionHandler = myBlock;
-        [controller setInitialText:URL_APP_ESTIMATE];
-        [controller addURL:[NSURL URLWithString:URL_APP_ESTIMATE]];
-        [self presentViewController:controller animated:YES completion:Nil];
-    }
-    else{
+    float ver_float = [[[UIDevice currentDevice] systemVersion] floatValue];
+    if (ver_float >= 6.0) {
+        if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]){
+            SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+            SLComposeViewControllerCompletionHandler __block myBlock = ^(SLComposeViewControllerResult result){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [controller dismissViewControllerAnimated:YES completion:nil];
+                });
+            };
+            controller.completionHandler = myBlock;
+            [controller setInitialText:URL_APP_ESTIMATE];
+            [controller addURL:[NSURL URLWithString:URL_APP_ESTIMATE]];
+            [self presentViewController:controller animated:YES completion:Nil];
+        }
+    }else{
         if ([[OGHelper sharedInstance]isAuthorized]) {
             [[OGHelper sharedInstance] apiDialogFeedUser];
         }else {
