@@ -310,7 +310,7 @@ static StartViewController *sharedHelper = nil;
                 
         activityIndicatorView = [[ActivityIndicatorView alloc] initWithoutRotate];
         CGRect imgFrame = activityIndicatorView.frame;
-        imgFrame.origin = CGPointMake(0, -80);
+        imgFrame.origin = CGPointMake(0, 0);
         activityIndicatorView.frame=imgFrame;
         
         [activityIndicatorView hideView];

@@ -96,7 +96,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
     
     activityIndicatorView = [[ActivityIndicatorView alloc] init];
     frame = activityIndicatorView.frame;
-    frame.origin = CGPointMake(-80, 0);
+    frame.origin = CGPointMake(0, 0);
     activityIndicatorView.frame=frame;
     [self.view  addSubview:activityIndicatorView];
             

@@ -275,7 +275,7 @@
     activityIndicatorView = [[ActivityIndicatorView alloc] init];
     
     CGRect frame=activityIndicatorView.frame;
-    frame.origin=CGPointMake(-80, 0);
+    frame.origin=CGPointMake(0, 0);
     activityIndicatorView.frame=frame;
     
     [self.view addSubview:activityIndicatorView];
