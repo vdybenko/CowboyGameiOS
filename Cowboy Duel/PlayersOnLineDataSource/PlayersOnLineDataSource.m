@@ -76,17 +76,19 @@
         }
         [_tableView reloadData];
     }
-    if (!self.serverObjects.count) {
-        [self addBotsForListCount:self.serverObjects.count];
-        SSServer *serverObj = [[SSServer alloc] init];
-        serverObj.displayName = @"Bot1";
-        serverObj.status = @"A";
-        serverObj.money = [NSNumber numberWithInt:123];
-        serverObj.serverName = @"Bot1";
-        serverObj.rank = [NSNumber numberWithInt:3];
-        serverObj.bot = YES;
-        [self.serverObjects addObject:serverObj];
-    }
+    
+    [self addBotsForListCount:[self.serverObjects count]];
+//    if (!self.serverObjects.count) {
+//        [self addBotsForListCount:self.serverObjects.count];
+//        SSServer *serverObj = [[SSServer alloc] init];
+//        serverObj.displayName = @"Bot1";
+//        serverObj.status = @"A";
+//        serverObj.money = [NSNumber numberWithInt:123];
+//        serverObj.serverName = @"Bot1";
+//        serverObj.rank = [NSNumber numberWithInt:3];
+//        serverObj.bot = YES;
+//        [self.serverObjects addObject:serverObj];
+//    }
     ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
     [listOfItemsViewController didRefreshController];
 }
@@ -197,27 +199,79 @@
 
 -(void) addBotsForListCount:(int)listcount
 {
+    AccountDataSource *player = [AccountDataSource sharedInstance];
+    if([player.receivedBots count] == 0) return;
     srand ( time(NULL) );
     switch (listcount) {
         case 0:{
-            NSArray *indexes = [NSArray arrayWithObjects:[NSNumber numberWithInt:(((double)rand()/RAND_MAX) * 10)], [NSNumber numberWithInt:(((double)rand()/RAND_MAX) * 10)], [NSNumber numberWithInt:(((double)rand()/RAND_MAX) * 10)], nil];
-            NSLog(@"%@", indexes);
+            NSArray *randomIndexes = [self randomNumbersWithCount:3];
+            NSDictionary *serverDictionary = [player.receivedBots objectAtIndex:[[randomIndexes objectAtIndex:0] intValue]];
+            [self createServerForDictionary:serverDictionary];
+            serverDictionary = [player.receivedBots objectAtIndex:[[randomIndexes objectAtIndex:1] intValue]];;
+            [self createServerForDictionary:serverDictionary];
+            serverDictionary = [player.receivedBots objectAtIndex:[[randomIndexes objectAtIndex:2] intValue]];
+            [self createServerForDictionary:serverDictionary];
             break;
         }
         case 1:{
-            NSArray *indexes = [NSArray arrayWithObjects:[NSNumber numberWithInt:(((double)rand()/RAND_MAX) * 10)], [NSNumber numberWithInt:(((double)rand()/RAND_MAX) * 10)], nil];
-            NSLog(@"%@", indexes);
+            NSArray *randomIndexes = [self randomNumbersWithCount:2];
+            NSDictionary *serverDictionary = [player.receivedBots objectAtIndex:[[randomIndexes objectAtIndex:0] intValue]];
+            [self createServerForDictionary:serverDictionary];
+            serverDictionary = [player.receivedBots objectAtIndex:[[randomIndexes objectAtIndex:1] intValue]];
+            [self createServerForDictionary:serverDictionary];
             break;
         }
         case 2:{
-            NSArray *indexes = [NSArray arrayWithObjects:[NSNumber numberWithInt:(((double)rand()/RAND_MAX) * 10)], nil];
-            NSLog(@"%@", indexes);
+            NSArray *randomIndexes = [self randomNumbersWithCount:1];
+            NSDictionary *serverDictionary = [player.receivedBots objectAtIndex:[[randomIndexes objectAtIndex:0] intValue]];
+            [self createServerForDictionary:serverDictionary];
+            
             break;
         }
 
         default:
             break;
     }
+}
+
+-(NSArray *)randomNumbersWithCount:(int)count
+{
+    AccountDataSource *player = [AccountDataSource sharedInstance];
+    NSMutableArray *array = [NSMutableArray array];
+    for (int i = 0; i<count; i++) {
+        BOOL numberNotAdd = YES;
+        while (numberNotAdd) {
+            BOOL containeNumber = NO;
+            int randNumber = (((double)rand()/RAND_MAX) * ([player.receivedBots count] - 1));
+            for (NSNumber *randNumberTemp in array) {
+                if([randNumberTemp intValue] == randNumber) containeNumber = YES;
+            }
+            if (!containeNumber) {
+                [array addObject:[NSNumber numberWithInt:randNumber]];
+                numberNotAdd = NO;
+            }
+        }
+        
+        
+    }
+    return array;
+}
+
+-(void)createServerForDictionary:(NSDictionary *)serverDictionary
+{
+    DLog(@"serverDictionary %@", serverDictionary);
+    
+    SSServer *serverObj = [[SSServer alloc] init];
+    serverObj.displayName = [serverDictionary objectForKey:@"nickname"];
+    serverObj.status = @"A";
+    serverObj.money = [serverDictionary objectForKey:@"money"];
+    serverObj.serverName = [serverDictionary objectForKey:@"identifier"];
+    serverObj.rank = [serverDictionary objectForKey:@"level"];
+    serverObj.bot = YES;
+    serverObj.duelsLost = [serverDictionary objectForKey:@"duels_lost"];
+    serverObj.duelsWin = [serverDictionary objectForKey:@"duels_win"];
+    [self.serverObjects addObject:serverObj];
+
 }
 
 #pragma mark -

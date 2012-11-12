@@ -118,7 +118,7 @@
 
 static const char *REGISTRATION_URL =  BASE_URL"api/registration";
 static const char *AUTORIZATION_URL =  BASE_URL"api/authorization";
-static const char *MODIFIER_USER_URL =  BASE_URL"api/user";
+static const char *MODIFIER_USER_URL =  BASE_URL"users/set_user_data";
 
 NSString *const URL_FB_PAGE=@"http://cowboyduel.mobi/"; 
 NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNotification";
@@ -852,7 +852,8 @@ static StartViewController *sharedHelper = nil;
     if (theConnection) {
         NSMutableData *receivedData = [[NSMutableData alloc] init];
         [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
-    } 
+    }
+    [self getBotsList];
     
 }
 
@@ -1114,7 +1115,7 @@ static StartViewController *sharedHelper = nil;
     
     oldAccounId=@"";
     gameCenterViewController = [GameCenterViewController sharedInstance:playerAccount andParentVC:self];
-  [self getBotsList];
+  
 }
 
 -(void)getBotsList;

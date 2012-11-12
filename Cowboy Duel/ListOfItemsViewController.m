@@ -170,6 +170,12 @@
 {
     return 82.f;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self clickButton:indexPath];
+}
+
 #pragma mark - Delegated methods
 
 -(void)clickButton:(NSIndexPath *)indexPath;
@@ -180,7 +186,7 @@
     [oponentAccount setAccountID:player.serverName];
     [oponentAccount setAccountName:player.displayName];
     [oponentAccount setAccountLevel:[player.rank integerValue]];
-    [oponentAccount setAccountWins:1];
+    [oponentAccount setAccountWins:[player.duelsWin intValue]];
     [oponentAccount setAvatar:player.fbImageUrl];
     [oponentAccount setBot:player.bot];
     [oponentAccount setMoney:[player.money integerValue]];

@@ -196,6 +196,8 @@ static const char *GC_URL =  BASE_URL"api/gc";
             [connection sendData:(void *)(name) packetID:NETWORK_SET_PAIR ofLength:sizeof(char) * [serverName length]];
         }
         else {
+            SSConnection *connection = [SSConnection sharedInstance];
+            [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
             [self performSelector:@selector(startBotDuel) withObject:nil afterDelay:0.5];
         }
         
