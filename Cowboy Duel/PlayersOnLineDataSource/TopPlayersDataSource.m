@@ -205,7 +205,7 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
 -(BOOL) isPlayerInTop10:(NSString*)authen;
 {
     CDTopPlayer *player;
-    
+    if([arrItemsList count] == 0) return NO;
     for (int i=0; i<10; i++) {
         player=[arrItemsList objectAtIndex:i];
         if ([player.dAuth isEqualToString:authen]) {

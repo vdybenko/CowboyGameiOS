@@ -14,7 +14,7 @@ static const char *POST_DUEL_URL =  BASE_URL"api/duels";
 @implementation AccountDataSource
 
 @synthesize money, accountName, teachingTimes, finalInfoTable, sessionID, accountID, accountDataSourceID, transactions, duels, achivments , glNumber,
- accountLevel,accountPoints,accountWins,accountDraws,accountBigestWin,removeAds,avatar,age,homeTown,friends,facebookName,listBotsOnline, bot;
+ accountLevel,accountPoints,accountWins,accountDraws,accountBigestWin,removeAds,avatar,age,homeTown,friends,facebookName,listBotsOnline, bot,vOfStoreList;
 
 #pragma mark
 

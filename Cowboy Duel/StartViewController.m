@@ -116,15 +116,14 @@
 @synthesize feedbackButton, duelButton, profileButton, teachingButton, helpButton, mapButton;
 @synthesize oldAccounId,feedBackViewVisible,showFeedAtFirst,topPlayersDataSource, advertisingNewVersionViewController;
 
+static const char *REGISTRATION_URL =  BASE_URL"api/registration";
 static const char *AUTORIZATION_URL =  BASE_URL"api/authorization";
 static const char *MODIFIER_USER_URL =  BASE_URL"api/user";
-static const char *A_URL =  BASE_URL"api/a";
-static const char *OUT_URL =  BASE_URL"api/out";
 
 NSString *const URL_FB_PAGE=@"http://cowboyduel.mobi/"; 
 NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNotification";
 
-static const char *BOT_LIST_URL = "http://bidoncd.s3.amazonaws.com/bot_id.json";
+static const char *BOT_LIST_URL = "http://bidoncd.s3.amazonaws.com/bot.json";
 NSMutableData *receivedDataBots;
 
 #pragma mark
@@ -334,8 +333,8 @@ static StartViewController *sharedHelper = nil;
         [hostReachable startNotifier];
 
         oldAccounId = @"";
-        if ([playerAccount.accountID rangeOfString:@"A"].location != NSNotFound)
-            [self authorizationModifier:NO];
+//        if ([playerAccount.accountID rangeOfString:@"A"].location != NSNotFound)
+//            [self authorizationModifier:NO];
     }
     return self; 
 }
@@ -540,7 +539,6 @@ static StartViewController *sharedHelper = nil;
 
 -(void)didEnterBackground
 {
-    [self logout];
     [[SSConnection sharedInstance] disconnect];
 }
 
@@ -839,7 +837,7 @@ static StartViewController *sharedHelper = nil;
 
 -(void)login
 {    
-    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:A_URL encoding:NSUTF8StringEncoding]]
+    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:AUTORIZATION_URL encoding:NSUTF8StringEncoding]]
                                                             cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                         timeoutInterval:kTimeOutSeconds];
     
@@ -852,26 +850,6 @@ static StartViewController *sharedHelper = nil;
     CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
     
     if (theConnection) {
-        NSMutableData *receivedData = [[NSMutableData alloc] init];
-        [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
-    } 
-    
-}
-
--(void)logout
-{
-    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:OUT_URL encoding:NSUTF8StringEncoding]]
-                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                        timeoutInterval:kTimeOutSeconds];
-    
-    [theRequest setHTTPMethod:@"POST"]; 
-    NSDictionary *dicBody=[NSDictionary dictionaryWithObjectsAndKeys:
-                           playerAccount.accountID,@"id",
-                           nil];
-    NSString *stBody=[Utils makeStringForPostRequest:dicBody];
-	[theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]]; 
-    CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
-    if (theConnection) {        
         NSMutableData *receivedData = [[NSMutableData alloc] init];
         [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
     } 
@@ -900,9 +878,9 @@ static StartViewController *sharedHelper = nil;
   
 //    
 //    OnLine
-    if ([[currentParseString lastPathComponent] isEqualToString:@"a"]&&[responseObject objectForKey:@"session_id"]) {
+    if ([[currentParseString lastPathComponent] isEqualToString:@"authorization"]&&[responseObject objectForKey:@"session_id"]) {
         playerAccount.sessionID =[[NSString alloc] initWithString:[responseObject objectForKey:@"session_id"]];
-        
+        playerAccount.vOfStoreList = [[responseObject objectForKey:@"v_of_store_list"] intValue];
         int revisionNumber=[[responseObject objectForKey:@"refresh_content"] intValue];
         if ([RefreshContentDataController isRefreshEvailable:revisionNumber]) {
             RefreshContentDataController *refreshContentDataController=[[RefreshContentDataController alloc] init];
@@ -911,7 +889,7 @@ static StartViewController *sharedHelper = nil;
         return;
     }       
     //avtorization
-    if ((playerAccount.accountID != nil) && [[currentParseString lastPathComponent] isEqualToString:@"authorization"]) {
+    if ((playerAccount.accountID != nil) && [[currentParseString lastPathComponent] isEqualToString:@"registration"]) {
         
         DLog(@"avtorization /n %@",responseObject);
         
@@ -1085,7 +1063,7 @@ static StartViewController *sharedHelper = nil;
     NSLocale* curentLocale = [NSLocale currentLocale];
     NSArray *languages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
     
-    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:AUTORIZATION_URL encoding:NSUTF8StringEncoding]]
+    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:REGISTRATION_URL encoding:NSUTF8StringEncoding]]
                                                             cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                         timeoutInterval:kTimeOutSeconds];
     
@@ -1115,6 +1093,7 @@ static StartViewController *sharedHelper = nil;
     [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.accountDraws] forKey:@"duels_lost"];
     [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.accountBigestWin] forKey:@"bigest_win"];
     [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.removeAds] forKey:@"remove_ads"];
+    [dicBody setValue:playerAccount.accountID forKey:@"identifier"];
     
     [dicBody setValue:[playerAccount.avatar stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] forKey:@"avatar"];
     [dicBody setValue:[playerAccount.age stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] forKey:@"age"];

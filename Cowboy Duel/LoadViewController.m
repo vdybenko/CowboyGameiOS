@@ -19,7 +19,7 @@
 }
 @end
 
-static const char *A_URL =  BASE_URL"api/a";
+static const char *A_URL =  BASE_URL"api/authorization";
 
 @implementation LoadViewController
 
