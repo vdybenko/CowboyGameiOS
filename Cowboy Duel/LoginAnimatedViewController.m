@@ -180,15 +180,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
                          [self.player play];
                          if (self.textIndex<8){
 
-                             if (self.textIndex==4) {                 ////"Great. Help me. I know where it is."
-                                 [self scaleButton:self.payButton];   //Scale 1$
-                                 [self scaleButton:self.donateLable];
-
-                             }
-                             if (self.textIndex==5) {                 ////"Help me!!!"
-                               [self scaleButton:self.loginFBbutton]; //Scale Facebook login
-                               [self scaleButton:self.loginLable];
-                             }
                              if (self.textIndex==6) {                 ////"Pay for me $1...
                                  [self.headImage setHidden:YES];
                                  [self.heatImage setHidden:NO];
