@@ -16,4 +16,5 @@
 @property (nonatomic, strong) NSString *fbImageUrl; //fbImageUrl - string
 @property (nonatomic, strong) NSNumber *money; //money - int
 @property (nonatomic, strong) NSNumber *rank;  //rank - int
+@property (nonatomic) BOOL bot;
 @end

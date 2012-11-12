@@ -182,7 +182,7 @@
     [oponentAccount setAccountLevel:[player.rank integerValue]];
     [oponentAccount setAccountWins:1];
     [oponentAccount setAvatar:player.fbImageUrl];
-
+    [oponentAccount setBot:player.bot];
     [oponentAccount setMoney:[player.money integerValue]];
     
     DuelStartViewController *duelStartViewController = [[DuelStartViewController alloc]initWithAccount:_playerAccount andOpAccount:oponentAccount opopnentAvailable:NO andServerType:NO andTryAgain:NO];

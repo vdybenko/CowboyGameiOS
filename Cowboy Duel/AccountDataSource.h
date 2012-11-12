@@ -36,7 +36,7 @@
 @property(strong,nonatomic) NSMutableArray *finalInfoTable;
 
 @property(strong,nonatomic) NSMutableArray *listBotsOnline;
-
+@property(nonatomic) BOOL bot;
 + (AccountDataSource *)sharedInstance;
 - (id)initWithLocalPlayer;
 - (void)loadAllParametrs;

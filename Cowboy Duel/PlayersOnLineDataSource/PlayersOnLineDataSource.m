@@ -76,6 +76,17 @@
         }
         [_tableView reloadData];
     }
+    if (!self.serverObjects.count) {
+        [self addBotsForListCount:self.serverObjects.count];
+        SSServer *serverObj = [[SSServer alloc] init];
+        serverObj.displayName = @"Bot1";
+        serverObj.status = @"A";
+        serverObj.money = [NSNumber numberWithInt:123];
+        serverObj.serverName = @"Bot1";
+        serverObj.rank = [NSNumber numberWithInt:3];
+        serverObj.bot = YES;
+        [self.serverObjects addObject:serverObj];
+    }
     ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
     [listOfItemsViewController didRefreshController];
 }
@@ -182,6 +193,31 @@
             PlayerOnLineCell *cell = (PlayerOnLineCell*)[_tableView cellForRowAtIndexPath:iconDownloader.indexPathInTableView];
             [cell setPlayerIcon:iconDownloader.imageDownloaded];
         }
+}
+
+-(void) addBotsForListCount:(int)listcount
+{
+    srand ( time(NULL) );
+    switch (listcount) {
+        case 0:{
+            NSArray *indexes = [NSArray arrayWithObjects:[NSNumber numberWithInt:(((double)rand()/RAND_MAX) * 10)], [NSNumber numberWithInt:(((double)rand()/RAND_MAX) * 10)], [NSNumber numberWithInt:(((double)rand()/RAND_MAX) * 10)], nil];
+            NSLog(@"%@", indexes);
+            break;
+        }
+        case 1:{
+            NSArray *indexes = [NSArray arrayWithObjects:[NSNumber numberWithInt:(((double)rand()/RAND_MAX) * 10)], [NSNumber numberWithInt:(((double)rand()/RAND_MAX) * 10)], nil];
+            NSLog(@"%@", indexes);
+            break;
+        }
+        case 2:{
+            NSArray *indexes = [NSArray arrayWithObjects:[NSNumber numberWithInt:(((double)rand()/RAND_MAX) * 10)], nil];
+            NSLog(@"%@", indexes);
+            break;
+        }
+
+        default:
+            break;
+    }
 }
 
 #pragma mark -

@@ -753,12 +753,12 @@
     }
     [self.view bringSubviewToFront:activityIndicatorView ];
     
-    if (duelWithBotCheck) {
-        int randomTime = (arc4random() % 1);
-        if (randomTime==0) {
-            [self performSelector:@selector(startBotDuelTryAgain) withObject:self afterDelay:5.0];
-        }
-    }
+//    if (duelWithBotCheck) {
+//        int randomTime = (arc4random() % 1);
+//        if (randomTime==0) {
+//            [self performSelector:@selector(startBotDuelTryAgain) withObject:self afterDelay:5.0];
+//        }
+//    }
 }
 
 #pragma mark -
