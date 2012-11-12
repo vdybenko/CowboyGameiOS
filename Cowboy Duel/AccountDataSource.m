@@ -5,7 +5,7 @@
 
 static const char *POST_TRANS_URL =  BASE_URL"api/transactions";
 static const char *POST_DUEL_URL =  BASE_URL"api/duels";
-static const char *TEST_BOTS_URL = "http://v201.cowboyduel.net/users/get_user_data";
+static const char *LIST_BOTS_URL = BASE_URL"users/get_user_data";
 
 @interface AccountDataSource(){
   NSMutableDictionary *dicForRequests;
@@ -477,7 +477,7 @@ static AccountDataSource *sharedHelper = nil;
 
 - (void)receiveBots;
 {
-  NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:TEST_BOTS_URL encoding:NSUTF8StringEncoding]]
+  NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:LIST_BOTS_URL encoding:NSUTF8StringEncoding]]
                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                       timeoutInterval:kTimeOutSeconds];
   for (int i=0; i<[listBotsOnline count]; i++) {
