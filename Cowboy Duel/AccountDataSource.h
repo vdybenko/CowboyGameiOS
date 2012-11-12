@@ -38,6 +38,8 @@
 @property(strong,nonatomic) NSMutableArray *listBotsOnline;
 @property(nonatomic) int vOfStoreList;
 @property(nonatomic) BOOL bot;
+@property(strong,nonatomic) NSMutableArray *receivedBots;
+
 + (AccountDataSource *)sharedInstance;
 - (id)initWithLocalPlayer;
 - (void)loadAllParametrs;
@@ -68,6 +70,8 @@
 - (void)saveFriends;
 - (void)saveFacebookName;
 - (void)saveDeviceType;
+
+- (void)receiveBots;
 
 -(void)putchAvatarImageToInitStartVC:(StartViewController*)startVC;
 -(BOOL)isAvatarImage:(NSString*)imagePath;
