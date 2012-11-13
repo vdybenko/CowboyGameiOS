@@ -176,6 +176,11 @@ static LoginAnimatedViewController *sharedHelper = nil;
                      animations:^{
                         [self lableScaleOut];
                      } completion:^(BOOL complete) {
+                         if (self.textIndex==5){
+                           CGRect moveTextUp = self.animetedText.frame;
+                           moveTextUp.origin.y -= 100;
+                           self.animetedText.frame = moveTextUp;
+                         }
                          self.animetedText.text = text;
                          [self performSelector:@selector(lableScaleIn) withObject:nil afterDelay:1.0];
                      }];
