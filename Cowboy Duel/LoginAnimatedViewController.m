@@ -24,6 +24,7 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
     __unsafe_unretained IBOutlet UIView *activityView;
     __unsafe_unretained IBOutlet UIActivityIndicatorView *activityIndicatorView;
     BOOL tryAgain;
+    CGRect guillBackUp;
 //    int counterTryAgain;
 }
 @property (nonatomic) int textIndex;
@@ -130,12 +131,20 @@ static LoginAnimatedViewController *sharedHelper = nil;
                     NSLocalizedString(@"CHOOSE_FACEBOOK", nil), //...or give me your ID"
                     nil];
     self.textIndex = 0;
+    guillBackUp = self.guillotineImage.frame;
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/kassa.aif", [[NSBundle mainBundle] resourcePath]]];
     NSError *error;
     self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
     [self.player setVolume:1.0];
     [self.player prepareToPlay];
     [self updateLabels];
+  
+    [self.headImage setHidden:YES];
+    [self.heatImage setHidden:NO];
+    [self.noseImage setHidden:YES];
+    [self.whiskersImage setHidden:YES];
+  
+    [self.guillotineImage setDelays:0.0];
     [self.guillotineImage animateWithType:[NSNumber numberWithInt:GUILLOTINE]];
     [self.whiskersImage animateWithType:[NSNumber numberWithInt:WHISKERS]];
     [self.heatImage animateWithType:[NSNumber numberWithInt:HAT]];
@@ -151,6 +160,8 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark Animations
 
 - (void)updateLabels
 {
@@ -172,6 +183,13 @@ static LoginAnimatedViewController *sharedHelper = nil;
 
 -(void)lableScaleIn
 {
+  if (self.textIndex == 0) {
+    [self.headImage setHidden:NO];
+    [self.heatImage setHidden:YES];
+    [self.noseImage setHidden:NO];
+    [self.whiskersImage setHidden:NO];
+    
+  }
     [UIView animateWithDuration:0.5
                      animations:^{
                          self.animetedText.transform = CGAffineTransformMakeScale(1.0, 1.0);
@@ -181,22 +199,18 @@ static LoginAnimatedViewController *sharedHelper = nil;
                          if (self.textIndex<8){
 
                              if (self.textIndex==6) {                 ////"Pay for me $1...
-                                 [self.headImage setHidden:YES];
-                                 [self.heatImage setHidden:NO];
-                                 [self.noseImage setHidden:YES];
-                                 [self.whiskersImage setHidden:YES];
                                  [self scaleButton:self.payButton];   //Scale 1$
                                  [self scaleButton:self.donateLable];
 
                              }
                              if (self.textIndex==7) {                 ////...or give me your ID"
+
+                               [self scaleButton:self.loginFBbutton]; //Scale Facebook login
+                               [self scaleButton:self.loginLable];
                                [self.headImage setHidden:YES];
                                [self.heatImage setHidden:NO];
                                [self.noseImage setHidden:YES];
                                [self.whiskersImage setHidden:YES];
-                               [self scaleButton:self.loginFBbutton]; //Scale Facebook login
-                               [self scaleButton:self.loginLable];
-
                              }
 
                              [self performSelector:@selector(updateLabels) withObject:nil afterDelay:2.0];
@@ -242,10 +256,12 @@ static LoginAnimatedViewController *sharedHelper = nil;
     tryAgain = NO;
 //    counterTryAgain++;
 //    self.donateLable.text = [NSString stringWithFormat:(@"%@ %d$"),  NSLocalizedString(@"DONATE", @""),counterTryAgain];
-    CGRect frame = self.guillotineImage.frame;
-    frame.origin.y = -310;
-    self.guillotineImage.frame = frame;
-    frame = self.heatImage.frame;
+//    CGRect frame = self.guillotineImage.frame;
+//    frame.origin.y = -310;
+//    self.guillotineImage.frame = frame;
+
+    self.guillotineImage.frame = guillBackUp;
+    CGRect frame = self.heatImage.frame;
     frame.origin.y -= 220;
     self.heatImage.frame = frame;
     [self.noseImage setHidden:NO];

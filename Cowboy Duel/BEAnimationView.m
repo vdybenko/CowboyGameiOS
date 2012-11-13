@@ -61,7 +61,7 @@ int oldMovingKey = 4;
 - (void) guillCycleWithCurrPosition: (CGRect )curr andDelay: (float )wait{
   float tWait;
   CGRect currentPosition = self.frame;
-  if (!wait) {
+  if (!wait && wait!=0.0) {
     tWait = 0.7;
   }
   else
@@ -72,7 +72,7 @@ int oldMovingKey = 4;
                    animations:^{
 
                      CGRect moveDown = currentPosition;
-                     moveDown.origin.y += 50;
+                     moveDown.origin.y += 30;
                      self.frame = moveDown;
                      
                    } completion:^(BOOL finished) {
@@ -82,7 +82,7 @@ int oldMovingKey = 4;
                                       animations:^{
                                         CGRect currentPosition = self.frame;
                                         CGRect moveUp = currentPosition;
-                                        moveUp.origin.y -= 40;
+                                        moveUp.origin.y -= 20;
                                         self.frame = moveUp;
                                         
                                       } completion:^(BOOL finished) {
@@ -92,7 +92,7 @@ int oldMovingKey = 4;
                                                          animations:^{
                                                            CGRect currentPosition = self.frame;
                                                            CGRect moveDown = currentPosition;
-                                                           moveDown.origin.y += 20;
+                                                           moveDown.origin.y += 5;
                                                            self.frame = moveDown;
 
                                                          } completion:^(BOOL finished) {
