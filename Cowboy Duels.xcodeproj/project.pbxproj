@@ -289,6 +289,10 @@
 		76B94E6C16528CEB00F372E9 /* shop_list_castel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B94E6816528CEB00F372E9 /* shop_list_castel@2x.png */; };
 		76B94E6D16528CEB00F372E9 /* topPlayerCell_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B94E6916528CEB00F372E9 /* topPlayerCell_blue.png */; };
 		76B94E6E16528CEB00F372E9 /* topPlayerCell_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B94E6A16528CEB00F372E9 /* topPlayerCell_blue@2x.png */; };
+		76B94E781652AF6300F372E9 /* ds_attack.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B94E741652AF6300F372E9 /* ds_attack.png */; };
+		76B94E791652AF6300F372E9 /* ds_attack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B94E751652AF6300F372E9 /* ds_attack@2x.png */; };
+		76B94E7A1652AF6300F372E9 /* ds_defense.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B94E761652AF6300F372E9 /* ds_defense.png */; };
+		76B94E7B1652AF6300F372E9 /* ds_defense@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B94E771652AF6300F372E9 /* ds_defense@2x.png */; };
 		76CAE7161421E97900CA39EA /* cry.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 76CAE7141421E97900CA39EA /* cry.mp3 */; };
 		76CB057013AB991B0011E768 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CB056F13AB991B0011E768 /* QuartzCore.framework */; };
 		76CE0AE3163EE7ED00B51B04 /* StoreProductAttensionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76CE0AE2163EE7ED00B51B04 /* StoreProductAttensionCell.xib */; };
@@ -760,6 +764,10 @@
 		76B94E6816528CEB00F372E9 /* shop_list_castel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shop_list_castel@2x.png"; sourceTree = "<group>"; };
 		76B94E6916528CEB00F372E9 /* topPlayerCell_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topPlayerCell_blue.png; sourceTree = "<group>"; };
 		76B94E6A16528CEB00F372E9 /* topPlayerCell_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "topPlayerCell_blue@2x.png"; sourceTree = "<group>"; };
+		76B94E741652AF6300F372E9 /* ds_attack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ds_attack.png; sourceTree = "<group>"; };
+		76B94E751652AF6300F372E9 /* ds_attack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ds_attack@2x.png"; sourceTree = "<group>"; };
+		76B94E761652AF6300F372E9 /* ds_defense.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ds_defense.png; sourceTree = "<group>"; };
+		76B94E771652AF6300F372E9 /* ds_defense@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ds_defense@2x.png"; sourceTree = "<group>"; };
 		76CAE7141421E97900CA39EA /* cry.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cry.mp3; sourceTree = "<group>"; };
 		76CB056F13AB991B0011E768 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		76CE0AE2163EE7ED00B51B04 /* StoreProductAttensionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StoreProductAttensionCell.xib; path = Xib/StoreProductAttensionCell.xib; sourceTree = "<group>"; };
@@ -1030,6 +1038,10 @@
 				03285FC9159DD84000D16195 /* ds_guns@2x.png */,
 				03285FCC159DD84000D16195 /* ds_table_line.png */,
 				03285FCD159DD84000D16195 /* ds_table_line@2x.png */,
+				76B94E741652AF6300F372E9 /* ds_attack.png */,
+				76B94E751652AF6300F372E9 /* ds_attack@2x.png */,
+				76B94E761652AF6300F372E9 /* ds_defense.png */,
+				76B94E771652AF6300F372E9 /* ds_defense@2x.png */,
 			);
 			path = DuelStart;
 			sourceTree = "<group>";
@@ -2177,6 +2189,10 @@
 				76B94E6C16528CEB00F372E9 /* shop_list_castel@2x.png in Resources */,
 				76B94E6D16528CEB00F372E9 /* topPlayerCell_blue.png in Resources */,
 				76B94E6E16528CEB00F372E9 /* topPlayerCell_blue@2x.png in Resources */,
+				76B94E781652AF6300F372E9 /* ds_attack.png in Resources */,
+				76B94E791652AF6300F372E9 /* ds_attack@2x.png in Resources */,
+				76B94E7A1652AF6300F372E9 /* ds_defense.png in Resources */,
+				76B94E7B1652AF6300F372E9 /* ds_defense@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,6 +19,10 @@
 @interface DuelStartViewController ()
 
 - (void)setOponentInfo;
+@property (strong, nonatomic) IBOutlet UIView *userAtackView;
+@property (strong, nonatomic) IBOutlet UIView *userDefenseView;
+@property (strong, nonatomic) IBOutlet UIView *oponentAtackView;
+@property (strong, nonatomic) IBOutlet UIView *oponentDefenseView;
 @property (strong, nonatomic) IBOutlet UILabel *userAtack;
 @property (strong, nonatomic) IBOutlet UILabel *userDefense;
 @property (strong, nonatomic) IBOutlet UILabel *oponentAtack;
@@ -34,6 +38,10 @@
 @synthesize userDefense;
 @synthesize oponentAtack;
 @synthesize oponentDefense;
+@synthesize userAtackView;
+@synthesize userDefenseView;
+@synthesize oponentAtackView;
+@synthesize oponentDefenseView;
 
 static const char *GC_URL =  BASE_URL"api/gc";
 
@@ -374,12 +382,12 @@ static const char *GC_URL =  BASE_URL"api/gc";
     
     if (oponentAccount.accountWeapon.dDamage!=0) {
         oponentAtack.text = [NSString stringWithFormat:@"+%d",oponentAccount.accountWeapon.dDamage];
-        oponentAtack.hidden = NO;
+        oponentAtackView.hidden = NO;
     }
     
     if (oponentAccount.accountDefenseValue!=0) {
         oponentDefense.text = [NSString stringWithFormat:@"+%d",oponentAccount.accountDefenseValue];
-        oponentDefense.hidden = NO;
+        oponentDefenseView.hidden = NO;
     }
 }
 

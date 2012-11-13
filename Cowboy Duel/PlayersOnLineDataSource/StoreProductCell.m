@@ -93,9 +93,11 @@
     ribbonLabel.transform = transform;
     [ribbonImage addSubview:ribbonLabel];
 
-    
     lockLevelBackground.clipsToBounds = YES;
     lockLevelBackground.layer.cornerRadius = 13.f;
+    
+    countOfUse.clipsToBounds = YES;
+    countOfUse.layer.cornerRadius = 1.f;
 }
 
 -(void) initMainControls;
