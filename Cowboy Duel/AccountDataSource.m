@@ -177,11 +177,11 @@ static AccountDataSource *sharedHelper = nil;
     int n = [array count];    
     DLog(@"actions = %d", n);
     
-    NSMutableArray *result = [NSMutableArray arrayWithCapacity:n];
+    NSMutableArray *result = [NSMutableArray array];
     
-    for (int i = 0; i < n; i++) {
+    for (CDTransaction *transaction in array) {
         NSMutableDictionary *reason = [NSMutableDictionary dictionary];
-        CDTransaction *transaction = [array objectAtIndex:i];
+        [reason setObject: [NSNumber numberWithInt:-1] forKey:@"local_id"];
         [reason setObject: [NSNumber numberWithInt:[self crypt:[transaction.trMoneyCh intValue]]] forKey:@"transaction_id"];
         [reason setObject:transaction.trDescription forKey:@"description"];
         [result addObject:[NSDictionary dictionaryWithObject:reason forKey:@"transaction"]];
@@ -318,7 +318,7 @@ static AccountDataSource *sharedHelper = nil;
     [dicForRequests removeObjectForKey:[currentParseString lastPathComponent]];
     NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
     
-    DLog(@"AccountDataSource jsonValues %@",responseObject);
+    DLog(@"AccountDataSource jsonValues %@", jsonString);
     if ([responseObject objectForKey:@"user_id"]) {
       [receivedBots addObject:responseObject];
     }

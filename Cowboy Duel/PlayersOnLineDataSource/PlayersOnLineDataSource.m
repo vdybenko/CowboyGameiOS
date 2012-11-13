@@ -44,6 +44,7 @@
      [topPlayersDataSource reloadDataSource];
      self.connection = [SSConnection sharedInstance];
      self.connection.delegate = self;
+     srand ([NSDate timeIntervalSinceReferenceDate]);
 	return self;
 }
 
@@ -201,10 +202,10 @@
 {
     AccountDataSource *player = [AccountDataSource sharedInstance];
     if([player.receivedBots count] == 0) return;
-    srand ( time(NULL) );
     switch (listcount) {
         case 0:{
             NSArray *randomIndexes = [self randomNumbersWithCount:3];
+            DLog(@"%@", randomIndexes);
             NSDictionary *serverDictionary = [player.receivedBots objectAtIndex:[[randomIndexes objectAtIndex:0] intValue]];
             [self createServerForDictionary:serverDictionary];
             serverDictionary = [player.receivedBots objectAtIndex:[[randomIndexes objectAtIndex:1] intValue]];;
@@ -242,7 +243,7 @@
         BOOL numberNotAdd = YES;
         while (numberNotAdd) {
             BOOL containeNumber = NO;
-            int randNumber = (((double)rand()/RAND_MAX) * ([player.receivedBots count] - 1));
+            int randNumber = ((((double)rand())/RAND_MAX) * ([player.receivedBots count] - 1));
             for (NSNumber *randNumberTemp in array) {
                 if([randNumberTemp intValue] == randNumber) containeNumber = YES;
             }
@@ -259,17 +260,18 @@
 
 -(void)createServerForDictionary:(NSDictionary *)serverDictionary
 {
-    DLog(@"serverDictionary %@", serverDictionary);
+    AccountDataSource *player = [AccountDataSource sharedInstance];
     
     SSServer *serverObj = [[SSServer alloc] init];
     serverObj.displayName = [serverDictionary objectForKey:@"nickname"];
     serverObj.status = @"A";
     serverObj.money = [serverDictionary objectForKey:@"money"];
-    serverObj.serverName = [serverDictionary objectForKey:@"identifier"];
+    serverObj.serverName = [[player.listBotsOnline objectAtIndex:[self.serverObjects count]] objectForKey:@"authentification"];
     serverObj.rank = [serverDictionary objectForKey:@"level"];
     serverObj.bot = YES;
     serverObj.duelsLost = [serverDictionary objectForKey:@"duels_lost"];
     serverObj.duelsWin = [serverDictionary objectForKey:@"duels_win"];
+    serverObj.sessionId = [serverDictionary objectForKey:@"session_id"];
     [self.serverObjects addObject:serverObj];
 
 }

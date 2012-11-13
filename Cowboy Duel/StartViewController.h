@@ -54,7 +54,7 @@
 -(BOOL)connectedToWiFi;
 -(void)profileButtonClick;
 -(void)authorizationModifier:(BOOL)modifierName;
--(void)modifierUser;
+-(void)modifierUser:(AccountDataSource *)playerTemp;
 
 -(float)abs:(float)d;
 

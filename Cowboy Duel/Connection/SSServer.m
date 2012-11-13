@@ -9,5 +9,5 @@
 #import "SSServer.h"
 
 @implementation SSServer
-@synthesize displayName, status, fbImageUrl, money, serverName, rank, bot, duelsLost, duelsWin;
+@synthesize displayName, status, fbImageUrl, money, serverName, rank, bot, duelsLost, duelsWin, sessionId;
 @end

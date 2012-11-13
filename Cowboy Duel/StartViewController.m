@@ -486,6 +486,7 @@ static StartViewController *sharedHelper = nil;
     // check if a pathway to a random host exists
     hostReachable = [Reachability reachabilityWithHostName: @"www.apple.com"];
     [hostReachable startNotifier];
+    [self getBotsList];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -853,7 +854,7 @@ static StartViewController *sharedHelper = nil;
         NSMutableData *receivedData = [[NSMutableData alloc] init];
         [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
     }
-    [self getBotsList];
+
     
 }
 
@@ -1134,7 +1135,7 @@ static StartViewController *sharedHelper = nil;
 
 }
 
--(void)modifierUser;
+-(void)modifierUser:(AccountDataSource *)playerTemp;
 {
     NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:MODIFIER_USER_URL encoding:NSUTF8StringEncoding]]
                                                             cachePolicy:NSURLRequestUseProtocolCachePolicy
@@ -1143,12 +1144,12 @@ static StartViewController *sharedHelper = nil;
     [theRequest setHTTPMethod:@"POST"]; 
     
     NSMutableDictionary *dicBody=[NSMutableDictionary dictionary];
-    [dicBody setValue:playerAccount.accountID forKey:@"authentification"];
-    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.accountLevel ] forKey:@"level"]; 
-    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.accountPoints ] forKey:@"points"];
-    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.accountWins] forKey:@"duels_win"];
-    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.accountDraws] forKey:@"duels_lost"];
-    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.accountBigestWin] forKey:@"bigest_win"];
+    [dicBody setValue:playerTemp.accountID forKey:@"authentification"];
+    [dicBody setValue:[NSString stringWithFormat:@"%d",playerTemp.accountLevel ] forKey:@"level"]; 
+    [dicBody setValue:[NSString stringWithFormat:@"%d",playerTemp.accountPoints ] forKey:@"points"];
+    [dicBody setValue:[NSString stringWithFormat:@"%d",playerTemp.accountWins] forKey:@"duels_win"];
+    [dicBody setValue:[NSString stringWithFormat:@"%d",playerTemp.accountDraws] forKey:@"duels_lost"];
+    [dicBody setValue:[NSString stringWithFormat:@"%d",playerTemp.accountBigestWin] forKey:@"bigest_win"];
     
     NSString *stBody=[Utils makeStringForPostRequest:dicBody];
     DLog(@"modifierUser stBody %@",dicBody);
