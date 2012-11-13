@@ -9,48 +9,62 @@
 #import "AdvertisingNewVersionViewController.h"
 
 @implementation AdvertisingNewVersionViewController
-
 - (id)init
 {
-    self = [super init];
+    self = [super initWithNib];
     if (self) {
         NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"AdvertisingNewVersion"];
         NSMutableArray *arr=[[NSMutableArray alloc] initWithArray:[NSKeyedUnarchiver unarchiveObjectWithData:data1]];
         if ([arr count]!=0) {
-            _AppCurentForShow=[[CDCollectionAdvertisingApp alloc] init];
-            _AppCurentForShow=[arr objectAtIndex:0];
+            appCurentForShow
+            
+            =[[CDCollectionAdvertisingApp alloc] init];
+            appCurentForShow=[arr objectAtIndex:0];
             NSString *curentVersionApp = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
 
-            if ([_AppCurentForShow.cdAppVersion isEqualToString:curentVersionApp]) {
-                advertisingNeed=NO;
+            if ([appCurentForShow.cdAppVersion isEqualToString:curentVersionApp]) {
+                self.advertisingNeed=NO;
                 [self removeContent];
             }else {
-                advertisingNeed=YES;
+                self.advertisingNeed=YES;
             }
         }else {
-            advertisingNeed=NO;
+            self.advertisingNeed=NO;
         }
     }
     return self;
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.btnAppStore setTitleByLabel:NSLocalizedString(@"NewVersionBtn", @"")];
+    UIColor *btnColor = [UIColor colorWithRed:244.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
+    [self.btnAppStore changeColorOfTitleByLabel:btnColor];
+    
+    self.titleView.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
+    
+    [self.webBody setOpaque:NO];
+    [self.webBody.scrollView setScrollEnabled:NO];
+    [self.webBody setBackgroundColor:[UIColor clearColor]];
+    [self.webBody loadHTMLString:NSLocalizedString(@"NewVersionMainText", @"") baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
+
+    
+    
+    
+    //[super setInformationAboutApp];
+
+}
+
+-(void)loadView
+{
+    [super loadView];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];  
     
-    [_btnAppStore setTitleByLabel:NSLocalizedString(@"NewVersionBtn", @"")];
-    UIColor *btnColor = [UIColor colorWithRed:244.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
-    [_btnAppStore changeColorOfTitleByLabel:btnColor];
-    
-    titleView.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
-    
-    [webBody setOpaque:NO];
-    [webBody.scrollView setScrollEnabled:NO];
-    [webBody setBackgroundColor:[UIColor clearColor]];
-    [webBody loadHTMLString:NSLocalizedString(@"NewVersionMainText", @"") baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]]; 
-
-    
-    [super setInformationAboutApp];
 }
 
 - (void)viewDidUnload
@@ -78,32 +92,23 @@
 													  userInfo:[NSDictionary dictionaryWithObject:@"/new_Version_app" forKey:@"event"]];
 }
 
--(BOOL)isAdvertisingNeed;
-{
-    if (advertisingNeed) {
-        return YES;
-    }else {
-        return NO;
-    }
-}
-
 -(void)removeContent
 {
-    [CollectionAppWrapper deleteImage:_AppCurentForShow.cdIcon];
+    [CollectionAppWrapper deleteImage:appCurentForShow.cdIcon];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"AdvertisingNewVersion"];
 }
 
 -(BOOL)isNumberOfShowsLeft
 {
-    if (_AppCurentForShow.cdNumberOfShows==0) {
+    if (appCurentForShow.cdNumberOfShows==0) {
         return NO;
     }else {
-        int numberOfShows=_AppCurentForShow.cdNumberOfShows;
+        int numberOfShows=appCurentForShow.cdNumberOfShows;
         numberOfShows--;
-        _AppCurentForShow.cdNumberOfShows=numberOfShows;
+        appCurentForShow.cdNumberOfShows=numberOfShows;
         
         NSMutableArray *arr=[[NSMutableArray alloc] init];
-        [arr addObject:_AppCurentForShow];
+        [arr addObject:appCurentForShow];
         
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:arr];
         [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"AdvertisingNewVersion"];

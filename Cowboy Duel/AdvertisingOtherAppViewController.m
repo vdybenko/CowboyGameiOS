@@ -43,7 +43,6 @@
 {
     [super viewDidLoad];
     
-    [super setInformationAboutApp];
 }
 
 - (void)viewDidUnload
@@ -59,7 +58,7 @@
 
 -(BOOL)isAdvertisingNeed;
 {
-    if (advertisingNeed) {
+    if (self.advertisingNeed) {
         return YES;
     }else {
         return NO;
@@ -68,12 +67,12 @@
 
 -(BOOL)isNumberOfShowsLeft
 {
-    if (_AppCurentForShow.cdNumberOfShows==0) {
+    if (appCurentForShow.cdNumberOfShows==0) {
         return NO;
     }else {
-        int numberOfShows=_AppCurentForShow.cdNumberOfShows;
+        int numberOfShows=appCurentForShow.cdNumberOfShows;
         numberOfShows--;
-        _AppCurentForShow.cdNumberOfShows=numberOfShows;
+        appCurentForShow.cdNumberOfShows=numberOfShows;
         return YES;
     }
 }
@@ -95,25 +94,25 @@
         }
                 
         [[NSUserDefaults standardUserDefaults] setInteger:orderOfShow forKey:@"ORDER_OF_SHOW"];
-        _AppCurentForShow=[_AppsForShow objectAtIndex:(orderOfShow-1)];
+        appCurentForShow=[_AppsForShow objectAtIndex:(orderOfShow-1)];
         
-        if (_AppCurentForShow) {
+        if (appCurentForShow) {
             if ([self isNumberOfShowsLeft]) {
-                advertisingNeed=YES;
+                self.advertisingNeed=YES;
             }else {
-                advertisingNeed=NO;
-                [CollectionAppWrapper removeContentAdvertisingApps:_AppCurentForShow];
+                self.advertisingNeed=NO;
+                [CollectionAppWrapper removeContentAdvertisingApps:appCurentForShow];
                 [self choseAppFromShow];
             }
             NSData *data = [NSKeyedArchiver archivedDataWithRootObject:_AppsForShow];
             [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"AdvertisingAppsForShow"];
             [[NSUserDefaults standardUserDefaults] synchronize];
         }else {
-            advertisingNeed=NO;
+            self.advertisingNeed=NO;
         }
     }else {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ORDER_OF_SHOW"];
-        advertisingNeed=NO;
+        self.advertisingNeed=NO;
     }
 }
 

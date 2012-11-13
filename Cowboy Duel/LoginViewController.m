@@ -31,14 +31,19 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
     IBOutlet UIButton *_btnFBLogin;
     IBOutlet UIButton *_btnNextTime;
     IBOutlet UIWebView *link;
+    UIAlertView *baseAlert;
+    NSMutableString *stDonate;
     
     LoginFacebookStatus loginFacebookStatus;
+    __unsafe_unretained IBOutlet UIView *activityView;
+    __unsafe_unretained IBOutlet UIActivityIndicatorView *activityIndicatorView;
+   
 }
 @end
 
 @implementation LoginViewController
-
-@synthesize startViewController, facebook,delegate ,loginFacebookStatus;
+NSString * const loginProduct=@"com.webkate.cowboyduels.registration";
+@synthesize startViewController, facebook,delegate ,loginFacebookStatus, payment;
 
 static LoginViewController *sharedHelper = nil;
 + (LoginViewController *) sharedInstance {
@@ -76,9 +81,10 @@ static LoginViewController *sharedHelper = nil;
     UIColor *mainColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
     UIColor *btnColor = [UIColor colorWithRed:244.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     
-    congLabel.text = NSLocalizedString(@"LoginTitleAtStart", nil);
+    
     congLabel.textColor = mainColor;
     congLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
+    congLabel.text = NSLocalizedString(@"LoginTitleAtStart", nil);
     
     link.layer.masksToBounds = YES;
     [link setBackgroundColor:[UIColor clearColor]];
@@ -86,23 +92,39 @@ static LoginViewController *sharedHelper = nil;
     link.userInteractionEnabled = YES;
     [link setDelegate:self];
     [(UIScrollView *)[[link subviews] lastObject] setScrollEnabled:NO];
-    [link loadHTMLString:NSLocalizedString(@"LoginText", nil) baseURL:Nil];
     
-    loginBtnTitle.text = NSLocalizedString(@"LoginBtnLogInAtStart", nil);
+    
+    
     loginBtnTitle.textColor = btnColor;
     loginBtnTitle.textAlignment = UITextAlignmentCenter;
     loginBtnTitle.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
     
-    nextTimeBtnTitle.text = NSLocalizedString(@"LoginBtnNextTimeAtStart", nil);
+    
     nextTimeBtnTitle.textColor = btnColor;
     nextTimeBtnTitle.textAlignment = UITextAlignmentCenter;
     nextTimeBtnTitle.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
+    
+    if (payment) {
+        [link loadHTMLString:NSLocalizedString(@"LoginTextPayment", nil) baseURL:Nil];
+        loginBtnTitle.text = NSLocalizedString(@"LoginBtnLogInAtStartPayment", nil);
+        nextTimeBtnTitle.text = NSLocalizedString(@"LoginBtnNextTimeAtStartPayment", nil);
+
+    }
+    else{
+        
+        [link loadHTMLString:NSLocalizedString(@"LoginText", nil) baseURL:Nil];
+        loginBtnTitle.text = NSLocalizedString(@"LoginBtnLogInAtStart", nil);
+        nextTimeBtnTitle.text = NSLocalizedString(@"LoginBtnNextTimeAtStart", nil);
+
+    }
     
     [mainLoginView setDinamicHeightBackground];
 }
 
 -(void)viewWillAppear:(BOOL)animated;
 {
+    stDonate = [NSMutableString string];
+    [MKStoreManager sharedManager].delegate = sharedHelper;
     [[LoginViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusSimple];
 }
 
@@ -134,11 +156,24 @@ static LoginViewController *sharedHelper = nil;
 
 -(IBAction)scipLoginBtnClick:(id)sender
 {
+    if (payment) {
+        [[MKStoreManager sharedManager] buyFeatureA];
+        [activityView setHidden:NO];
+        [activityIndicatorView startAnimating];
+        [stDonate appendString:@"/paymentRegistration"];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                            object:self
+                                                          userInfo:[NSDictionary dictionaryWithObject:stDonate forKey:@"event"]];
+    
+        return;
+    }
+    
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IPad"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     ProfileViewController *profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount startViewController:startViewController];
     [profileViewController setNeedAnimation:YES];
-    [self.navigationController pushViewController:profileViewController animated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
 														object:self
@@ -169,7 +204,7 @@ static LoginViewController *sharedHelper = nil;
         NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"birthday,id,name,picture,location",@"fields",nil];
         [[OGHelper sharedInstance] getCountOfUserFriends];
         
-        [self.facebook requestWithGraphPath:@"me" andParams:params andDelegate:startViewController];
+        [self.facebook requestWithGraphPath:@"me" andParams:params andDelegate:self];
         
         
         switch (loginFacebookStatus) {
@@ -187,6 +222,7 @@ static LoginViewController *sharedHelper = nil;
                 break;
         }
     }
+    
 }
 
 - (void)fbDidLogout {
@@ -208,7 +244,60 @@ static LoginViewController *sharedHelper = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName: kCheckfFBLoginSession
                                                         object:self
                                                       userInfo:nil];
-} 
+}
+
+#pragma mark FConnect Methods
+
+- (void)request:(FBRequest *)request didLoad:(id)result {
+	
+    
+	if ([result isKindOfClass:[NSDictionary class]]) {
+        
+        //        putch for 1.4.1
+        BOOL modifierUserInfo = NO;
+        if (([playerAccount.accountID rangeOfString:@"F:"].location != NSNotFound)&&[playerAccount putchAvatarImageSendInfo]) {
+            modifierUserInfo = YES;
+        }
+        //
+        startViewController.oldAccounId = [[NSString alloc] initWithFormat:@"%@",playerAccount.accountID];
+        
+		NSString *userId = [NSString stringWithFormat:@"F:%@", ValidateObject([result objectForKey:@"id"], [NSString class])];
+        playerAccount.accountID=userId;
+		NSUserDefaults *uDef = [NSUserDefaults standardUserDefaults];
+        NSString *playerName=[NSString stringWithFormat:@"%@", ValidateObject([result objectForKey:@"name"], [NSString class])];
+        
+        if ([playerAccount.accountName isEqualToString:@"Anonymous"]||[playerAccount.accountName isEqualToString:@""]||!playerAccount.accountName) {
+            [playerAccount setAccountName:playerName];
+        }
+        playerAccount.facebookName=playerName;
+        
+        NSDictionary *data = ValidateObject([result objectForKey:@"picture"], [NSDictionary class]);
+        NSDictionary *imageDictionary = ValidateObject([data objectForKey:@"data"], [NSDictionary class]);
+        playerAccount.avatar=[NSString stringWithFormat:@"%@", ValidateObject([imageDictionary objectForKey:@"url"], [NSString class])];
+        
+        playerAccount.age=[NSString stringWithFormat:@"%@", ValidateObject([result objectForKey:@"birthday"], [NSString class])];
+        
+        NSDictionary *town=ValidateObject([result objectForKey:@"location"], [NSDictionary class]);
+        playerAccount.homeTown=[NSString stringWithFormat:@"%@", ValidateObject([town objectForKey:@"name"], [NSString class])];
+        
+        [playerAccount saveAge];
+        [playerAccount saveHomeTown];
+        [playerAccount saveFacebookName];
+        [playerAccount saveAvatar];
+        
+        [uDef setObject:ValidateObject(playerAccount.accountID, [NSString class]) forKey:@"id"];
+        
+        [uDef setObject:ValidateObject(playerAccount.accountName, [NSString class]) forKey:@"name"];
+        
+        [uDef synchronize];
+        
+        [startViewController authorizationModifier:modifierUserInfo];
+        payment = NO;
+        [self scipLoginBtnClick:nil];
+    }
+    
+}
+
 
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
 	
@@ -255,6 +344,44 @@ static LoginViewController *sharedHelper = nil;
     DLog(@"login Error %@",[error description]);
 }
 
+#pragma mark MKStoreKitDelegate
+
+- (void)productAPurchased
+{
+	DLog(@"completedPurchaseTransaction");
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [activityView setHidden:YES];
+    [activityIndicatorView stopAnimating];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger paymentRegistration = 1;
+    [userDefaults setInteger:paymentRegistration forKey:@"paymentRegistration"];
+    [userDefaults synchronize];
+    
+    [stDonate appendString:@"/done"];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:stDonate forKey:@"event"]];
+    
+    payment = NO;
+    [self scipLoginBtnClick:nil];
+
+}
+
+- (void)failed
+{
+    [stDonate appendString:@"/error"];
+    
+    if (stDonate) [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:stDonate forKey:@"event"]];
+	[activityView setHidden:YES];
+    [activityIndicatorView stopAnimating];
+}
+
 #pragma mark -
 
 - (void)viewDidUnload {
@@ -264,6 +391,8 @@ static LoginViewController *sharedHelper = nil;
     loginBtnTitle = nil;
     nextTimeBtnTitle = nil;
     link = nil;
+    activityView = nil;
+    activityIndicatorView = nil;
     [super viewDidUnload];
 }
 - (void)dealloc {

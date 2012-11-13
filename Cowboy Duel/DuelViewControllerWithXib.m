@@ -106,7 +106,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
     
     activityIndicatorView = [[ActivityIndicatorView alloc] init];
     imgFrame = activityIndicatorView.frame;
-    imgFrame.origin = CGPointMake(-80,0);
+    imgFrame.origin = CGPointMake(0,0);
     activityIndicatorView.frame=imgFrame;
     [self.view addSubview:activityIndicatorView];
 

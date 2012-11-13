@@ -11,13 +11,18 @@
 #import "AdvertisingAppearController.h"
 #import "FinalViewController.h"
 #import "DuelStartViewController.h"
+#import "SSConnection.h"
 
 #define SENDER_TAG 1
 #define RESEIVER_TAG 2
 #define kMaxTankPacketSize 512
 
+@interface GameCenterViewController ()
+@property (nonatomic, strong) SSConnection *connection;
+@end
+
 @implementation GameCenterViewController
-@synthesize delegate, delegate2, duelStartViewController, multiplayerClientViewController, multiplayerServerViewController, parentVC, opponentEndMatch, userEndMatch,userCanceledMatch, typeGameWithMessage, multiplayerViewController;
+@synthesize delegate, delegate2, duelStartViewController, parentVC, opponentEndMatch, userEndMatch,userCanceledMatch, typeGameWithMessage, connection;
 
 static GameCenterViewController *gameCenterViewController;
 
@@ -37,7 +42,8 @@ static GameCenterViewController *gameCenterViewController;
     parentVC = view;    
     playerAccount = userAccount;    
     oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
-    
+    self.connection = [SSConnection sharedInstance];
+    self.connection.gameCenterViewController = self;
     runAway=NO;
     
     carShotTime = 0.0;
@@ -54,50 +60,6 @@ static GameCenterViewController *gameCenterViewController;
 
 
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-}
-
-#pragma mark - View lifecycle
-
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated]; 
-    
-    
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    accelState = NO;
-    carShotTime = 0;
-    opShotTime = 0;
-    endDuel = NO;
-    
-    
-}
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-
 #pragma mark MultiplayerViewControllerDelegate 
 -(void)clientConnected
 {
@@ -109,7 +71,7 @@ static GameCenterViewController *gameCenterViewController;
     [self matchStartedSinxron];
 }
 
-- (void)matchStarted {  
+- (void)matchStarted {
     DLog(@"matchStarted");
 
     carShotTime = 0.0;
@@ -147,18 +109,20 @@ static GameCenterViewController *gameCenterViewController;
     gsSend->oponentAtack = playerAccount.accountWeapon.dDamage;
     gsSend->oponentDefense = playerAccount.accountDefenseValue;
     
-    [multiplayerViewController sendDataData:gsSend packetID:NETWORK_TIME ofLength:sizeof(gameInfo)];
+    [self.connection sendData:(void *)(gsSend) packetID:NETWORK_TIME ofLength:sizeof(gameInfo)];
+    
 }
 
 -(void)startDuel
 {
     isTryAgain = NO;
+    carShotTime = 0.0;
+    opShotTime = 0.0;
     if(!server){
         DLog(@"server");
         
         gameInfo *gsSend = &gameStat;
-        
-        [multiplayerViewController sendDataData:gsSend packetID:NETWORK_START_DUEL ofLength:sizeof(gameInfo)];
+        [self.connection sendData:(void *)(gsSend) packetID:NETWORK_START_DUEL ofLength:sizeof(gameInfo)];
         
     }else{
         if (!btnStartClick) {
@@ -171,8 +135,7 @@ static GameCenterViewController *gameCenterViewController;
             [self setDelegate:duelViewController];
             
             gameInfo *gsSend = &gameStat;
-            
-            [multiplayerViewController sendDataData:gsSend packetID:NETWORK_START_DUEL_TRUE ofLength:sizeof(gameInfo)];
+            [self.connection sendData:(void *)(gsSend) packetID:NETWORK_START_DUEL_TRUE ofLength:sizeof(gameInfo)];
             
             [parentVC.navigationController pushViewController:duelViewController animated:NO];        }
     }
@@ -191,8 +154,7 @@ static GameCenterViewController *gameCenterViewController;
             
             
             gameInfo *gsSend = &gameStat;
-            
-            [multiplayerViewController sendDataData:gsSend packetID:NETWORK_START_DUEL ofLength:sizeof(gameInfo)];
+            [self.connection sendData:(void *)(gsSend) packetID:NETWORK_START_DUEL ofLength:sizeof(gameInfo)];
 
             btnStartClick = YES;
         }else{
@@ -202,8 +164,7 @@ static GameCenterViewController *gameCenterViewController;
             [self setDelegate:duelViewController];
             
             gameInfo *gsSend = &gameStat;
-            
-            [multiplayerViewController sendDataData:gsSend packetID:NETWORK_START_DUEL_TRUE ofLength:sizeof(gameInfo)];
+            [self.connection sendData:(void *)(gsSend) packetID:NETWORK_START_DUEL_TRUE ofLength:sizeof(gameInfo)];
             
             [parentVC.navigationController pushViewController:duelViewController animated:NO];
         }
@@ -250,10 +211,7 @@ static GameCenterViewController *gameCenterViewController;
     gsSend->oponentAtack = playerAccount.accountWeapon.dDamage;
     gsSend->oponentDefense = playerAccount.accountDefenseValue;
     
-    [multiplayerViewController sendDataData:gsSend packetID:NETWORK_TIME_TRY ofLength:sizeof(gameInfo)];
-    
-    
-    
+    [self.connection sendData:(void *)(gsSend) packetID:NETWORK_TIME_TRY ofLength:sizeof(gameInfo)];
     runAway=YES;
 }
 
@@ -269,11 +227,10 @@ static GameCenterViewController *gameCenterViewController;
     mutchNumberLose = 0;
     
     gameInfo *gsSend = &gameStat;
-    
-    [multiplayerViewController sendDataData:gsSend packetID:NETWORK_START_DUEL_FALSE ofLength:sizeof(gameInfo)];
+    [self.connection sendData:(void *)(gsSend) packetID:NETWORK_START_DUEL_FALSE ofLength:sizeof(gameInfo)];
     
     [self lostConnection];
-    multiplayerClientViewController.isRunClient = NO;
+    //old multiplayerClientViewController.isRunClient = NO;
     //multiplayerServerViewController.isRunServer = NO;
 }
 
@@ -291,8 +248,7 @@ static GameCenterViewController *gameCenterViewController;
     runAway=YES;
     
     gameInfo *gsSend = &gameStat;
-    
-    [multiplayerViewController sendDataData:gsSend packetID:NETWORK_RUN_AWAY ofLength:sizeof(gameInfo)];
+    [self.connection sendData:(void *)(gsSend) packetID:NETWORK_RUN_AWAY ofLength:sizeof(gameInfo)];
     
 }
 
@@ -311,8 +267,8 @@ static GameCenterViewController *gameCenterViewController;
 {
     if ([[parentVC.navigationController visibleViewController] isKindOfClass:[DuelStartViewController class]]){
         gameInfo *gsSend = &gameStat;
-        
-        [multiplayerViewController sendDataData:gsSend packetID:NETWORK_START_DUEL_FALSE ofLength:sizeof(gameInfo)];
+        [self.connection sendData:(void *)(gsSend) packetID:NETWORK_START_DUEL_FALSE ofLength:sizeof(gameInfo)];
+
         
     }else{
         [[gameCenter match]disconnect];}
@@ -336,16 +292,28 @@ static GameCenterViewController *gameCenterViewController;
     gameInfo *gsSend = &gameStat;
     gsSend->oponentShotTime = shotTime;
     
-    
     // we send time of shoot
-   DLog(@"!sendShotTime %d %d", shotTime, opShotTime);
+    DLog(@"!sendShotTime %d %d", shotTime, opShotTime);
     
     if (endDuel) return;
     
     btnStartClick = NO;
-    [multiplayerViewController sendDataData:gsSend packetID:NETWORK_SEND_SHOT_TIME ofLength:sizeof(gameInfo)];
+    [self.connection sendData:(void *)(gsSend) packetID:NETWORK_SEND_SHOT_TIME ofLength:sizeof(gameInfo)];
 
-    
+
+    if( (carShotTime != 0) && (opShotTime == carShotTime))
+    {  
+        DLog(@"sendShotTime final foll: %d %d", carShotTime, opShotTime);
+        endDuel = YES;
+        if ([delegate respondsToSelector:@selector(duelTimerEndFeedBack)]) 
+            [delegate duelTimerEndFeedBack];
+        
+        finalViewController = [[FinalViewController alloc] initWithUserTime:999999 andOponentTime:999999 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+        [parentVC.navigationController pushViewController:finalViewController animated:YES];
+        [delegate shutDownTimer];
+        return;
+    } 
+
     // case 1: 
     //fail me (when both failed || failed with opShotTime > 0)
     if( ((carShotTime < 0) && (opShotTime < 0) && (carShotTime < opShotTime)) || ( (carShotTime < 0)&&(opShotTime > 0)) )
@@ -445,9 +413,9 @@ static GameCenterViewController *gameCenterViewController;
 -(void)startServerWithName:(NSString *)serverName
 {
     DLog(@"startServerWithName");
-    multiplayerServerViewController = [[MultiplayerServerViewController alloc] initWithServerName:serverName];
-    multiplayerServerViewController.gameCenterViewController = self;
-    multiplayerViewController = multiplayerServerViewController;
+    //old multiplayerServerViewController = [[MultiplayerServerViewController alloc] initWithServerName:serverName];
+    //old multiplayerServerViewController.gameCenterViewController = self;
+    //old multiplayerViewController = multiplayerServerViewController;
     
     //[multiplayerClientViewController shutDownClient];
     //[multiplayerClientViewController release];
@@ -456,7 +424,7 @@ static GameCenterViewController *gameCenterViewController;
 
 -(void)stopServer
 {
-    [multiplayerServerViewController shutDownServer];
+    //old [multiplayerServerViewController shutDownServer];
     //[multiplayerServerViewController release]; 
 }
 
@@ -466,9 +434,9 @@ static GameCenterViewController *gameCenterViewController;
 
     typeGameWithMessage = NO;
 
-    multiplayerClientViewController = [[MultiplayerClientViewController alloc] initWithServerName:serverName];
-    multiplayerClientViewController.gameCenterViewController = self; 
-    multiplayerViewController = multiplayerClientViewController;
+    //old multiplayerClientViewController = [[MultiplayerClientViewController alloc] initWithServerName:serverName];
+    //old multiplayerClientViewController.gameCenterViewController = self; 
+    //old multiplayerViewController = multiplayerClientViewController;
     
 }
 
@@ -483,8 +451,8 @@ static GameCenterViewController *gameCenterViewController;
 -(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == alertView.cancelButtonIndex) {
-        multiplayerServerViewController.neadRestart = YES;
-        multiplayerServerViewController.isRunServer = NO;
+        //old multiplayerServerViewController.neadRestart = YES;
+       //old  multiplayerServerViewController.isRunServer = NO;
     }
 }
 
@@ -496,8 +464,8 @@ static GameCenterViewController *gameCenterViewController;
     userEndMatch = YES;
         
     gameInfo *gsSend = &gameStat;
-        
-    [multiplayerViewController sendDataData:gsSend packetID:NETWORK_DUEL_CANSEL ofLength:sizeof(gameInfo)];
+    [self.connection sendData:(void *)(gsSend) packetID:NETWORK_DUEL_CANSEL ofLength:sizeof(gameInfo)];
+
     
     if (opponentEndMatch) {
         //[self duelCancel];
@@ -514,10 +482,8 @@ static GameCenterViewController *gameCenterViewController;
     DLog(@"GameCenterViewController: lost connection");
     opponentEndMatch = NO;
     userEndMatch = YES;
-    multiplayerServerViewController.neadRestart = YES;
-    multiplayerClientViewController.isRunClient = NO;
-    multiplayerServerViewController.pingStart = NO;
-    [multiplayerServerViewController shutDownServer];
+    
+    [self.connection sendData:@"" packetID:NETWORK_DISCONNECT_PAIR ofLength:sizeof(@"")];
     
     if ([self.parentVC.navigationController.visibleViewController isKindOfClass:([DuelViewController class])]) {
         finalViewController = [[FinalViewController alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
@@ -562,7 +528,7 @@ static GameCenterViewController *gameCenterViewController;
     accelState = YES;
     DLog(@"Send position");
     gameInfo *gs = &gameStat;
-    [multiplayerViewController sendDataData:gs packetID:NETWORK_ACCEL_STATE ofLength:sizeof(gameInfo)];
+    [self.connection sendData:(void *)(gs) packetID:NETWORK_ACCEL_STATE ofLength:sizeof(gameInfo)];
 }
 
 - (void)receiveData:(NSData *)data
@@ -575,10 +541,9 @@ static GameCenterViewController *gameCenterViewController;
 
     switch( packetID ) {
             
-		case NETWORK_TIME:                               
+	case NETWORK_TIME:
         {
             DLog(@"NETWORK_TIME");
-            [multiplayerViewController sendResponse];
             
             gameInfo *gsReceive = (gameInfo *)&incomingPacket[4];
             oponentAccount.money = gsReceive->oponentMoney;
@@ -615,13 +580,12 @@ static GameCenterViewController *gameCenterViewController;
             gsSend->oponentAtack = playerAccount.accountWeapon.dDamage;
             gsSend->oponentDefense = playerAccount.accountDefenseValue;
             
-            [multiplayerViewController sendDataData:gsSend packetID:NETWORK_OPONTYPE_RESPONSE ofLength:sizeof(gameInfo)];
+            [self.connection sendData:(void *)(gsSend) packetID:NETWORK_OPONTYPE_RESPONSE ofLength:sizeof(gameInfo)];
         }
 			break;
         case NETWORK_TIME_TRY:                               
         {
             DLog(@"NETWORK_TIME_TRY");
-            [multiplayerViewController sendResponse];
             
             endDuel = NO;
             carShotTime = 0.0;
@@ -635,7 +599,6 @@ static GameCenterViewController *gameCenterViewController;
             
             accelState = YES;
             btnStartClick= NO;
-            server = NO;
             
             [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                                 object:self
@@ -684,14 +647,13 @@ static GameCenterViewController *gameCenterViewController;
             gsSend->oponentAtack = playerAccount.accountWeapon.dDamage;
             gsSend->oponentDefense = playerAccount.accountDefenseValue;
             
-            [multiplayerViewController sendDataData:gsSend packetID:NETWORK_OPONTYPE_RESPONSE_TRY ofLength:sizeof(gameInfo)];
+            [self.connection sendData:(void *)(gsSend) packetID:NETWORK_OPONTYPE_RESPONSE_TRY ofLength:sizeof(gameInfo)];
             
         }
 			break;
 		case NETWORK_START_DUEL:
         {
             DLog(@"NETWORK_START_DUEL");
-            [multiplayerViewController sendResponse];
             accelState = NO;
             carShotTime = 0;
             opShotTime = 0;
@@ -704,8 +666,8 @@ static GameCenterViewController *gameCenterViewController;
                     DLog(@"NETWORK_START_DUEL btnStartClick Yes");
                     
                     gameInfo *gsSend = &gameStat;
-                    [multiplayerViewController sendDataData:gsSend packetID:NETWORK_START_DUEL_TRUE ofLength:sizeof(gameInfo)];
-                    
+                    [self.connection sendData:(void *)(gsSend) packetID:NETWORK_START_DUEL_TRUE ofLength:sizeof(gameInfo)];
+
                     [parentVC.navigationController pushViewController:duelViewController animated:YES];
                 }else{
                     btnStartClick = YES;
@@ -718,7 +680,6 @@ static GameCenterViewController *gameCenterViewController;
 		case NETWORK_START_DUEL_TRUE:
         {
             DLog(@"NETWORK_START_DUEL_TRUE");
-            [multiplayerViewController sendResponse];
                         
             //gameInfo *gsReceive = (gameInfo *)&incomingPacket[4];
             accelState = YES;
@@ -734,7 +695,6 @@ static GameCenterViewController *gameCenterViewController;
             
         case  NETWORK_START_DUEL_FALSE:
         {   
-            [multiplayerViewController sendResponse];
             DLog(@"NETWORK_START_DUEL_FALSE");
             if ([baseAlert isVisible]) [baseAlert dismissWithClickedButtonIndex:3 animated:YES];
             if ([delegate2 respondsToSelector:@selector(cancelDuel)]) 
@@ -746,13 +706,11 @@ static GameCenterViewController *gameCenterViewController;
         case  NETWORK_ACCEL_STATE:
         {
             DLog(@"NETWORK_ACCEL_STATE ");
-            [multiplayerViewController sendResponse];
             if ([delegate respondsToSelector:@selector(accelerometerSendPositionSecond)]) 
                 if([delegate accelerometerSendPositionSecond] && accelState) {
                     gameInfo *gsSend = &gameStat;
-                    
-                    [multiplayerViewController sendDataData:gsSend packetID:NETWORK_ACCEL_STATE_TRUE ofLength:sizeof(gameInfo)];
-                    
+                    [self.connection sendData:(void *)(gsSend) packetID:NETWORK_ACCEL_STATE_TRUE ofLength:sizeof(gameInfo)];
+
                     if ([delegate respondsToSelector:@selector(startDuel)]) 
                         [delegate startDuel];
                     accelState = NO;
@@ -762,7 +720,6 @@ static GameCenterViewController *gameCenterViewController;
             
         case  NETWORK_ACCEL_STATE_TRUE:
         {
-            [multiplayerViewController sendResponse];
             DLog(@"NETWORK_ACCEL_STATE_TRUE ");
             
             if(accelState){
@@ -774,13 +731,23 @@ static GameCenterViewController *gameCenterViewController;
 			break; 
         case  NETWORK_SEND_SHOT_TIME:
         {
-            [multiplayerViewController sendResponse];
             if (!endDuel) {
                 gameInfo *gsReceive = (gameInfo *)&incomingPacket[4];
                 opShotTime = gsReceive->oponentShotTime;
                 DLog(@"NETWORK_SEND_SHOT_TIME : %d, our : %d", opShotTime, carShotTime);
 
-                
+                if( (carShotTime != 0) && (opShotTime == carShotTime))
+                {  
+                    DLog(@"sendShotTime final foll: %d %d", carShotTime, opShotTime);
+                    endDuel = YES;
+                    if ([delegate respondsToSelector:@selector(duelTimerEndFeedBack)]) 
+                        [delegate duelTimerEndFeedBack];
+                    
+                    finalViewController = [[FinalViewController alloc] initWithUserTime:999999 andOponentTime:999999 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+                    [parentVC.navigationController pushViewController:finalViewController animated:YES];
+                    [delegate shutDownTimer];
+                    return;
+                } 
                 // case 1:
                 //no one failed
                 if((carShotTime > 0)&&(opShotTime > 0))
@@ -834,7 +801,8 @@ static GameCenterViewController *gameCenterViewController;
 
                     gameInfo *gsSend = &gameStat;
                     gsSend->oponentShotTime = carShotTime;
-                    [multiplayerViewController sendDataData:gsSend packetID:NETWORK_SEND_SHOT_TIME ofLength:sizeof(gameInfo)];
+                    [self.connection sendData:(void *)(gsSend) packetID:NETWORK_SEND_SHOT_TIME ofLength:sizeof(gameInfo)];
+
                 }
                 
 
@@ -846,7 +814,6 @@ static GameCenterViewController *gameCenterViewController;
             
         case  NETWORK_OPONTYPE_RESPONSE:
         {
-            [multiplayerViewController sendResponse];
             DLog(@"NETWORK_OPONTYPE_RESPONSE %@", delegate2);
             endDuel = NO;
             server = YES;
@@ -869,32 +836,12 @@ static GameCenterViewController *gameCenterViewController;
                 [duelStartViewController startButtonClick];
                 [duelStartViewController._vWait setHidden:YES];
                 
-//                NSString *stMessage=[[NSString alloc] initWithCString:gsReceive->messageToOponent encoding:NSUTF8StringEncoding];
-//                if (![stMessage isEqualToString:@""]) {
-//                    NSString *stMessageFull=[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"BotMText", nil),stMessage];
-//                    [duelStartViewController setMessageToOponent:stMessageFull];
-//                }
-                
             }  
-
-            
-                        
-//            if ([duelStartViewController respondsToSelector:@selector(setOponent:Label1:Label1:)]){ 
-//                [duelStartViewController setOponent:oponentAccount.typeImage Label1:oponentAccount.accountName Label1:oponentAccount.money];
-//                
-//                NSString *stMessage=[message objectForKey:@"messageToOponent"];;
-//                if (![stMessage isEqualToString:@""]) {
-//                    NSString *stMessageFull=[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"BotMText", nil),stMessage];
-//                    [duelStartViewController setMessageToOponent:stMessageFull];
-//                }
-//            }  
-            
             
         }
             break;
         case  NETWORK_OPONTYPE_RESPONSE_TRY:
         {
-            [multiplayerViewController sendResponse];
             DLog(@"NETWORK_OPONTYPE_RESPONSE_TRY %@", delegate2);
             endDuel = NO;   
             server = YES;
@@ -925,7 +872,6 @@ static GameCenterViewController *gameCenterViewController;
             
         case  NETWORK_RUN_AWAY:
         {   
-            [multiplayerViewController sendResponse];
             DLog(@"NETWORK_RUN_AWAY");
             
             [finalViewController runAway];
@@ -934,7 +880,6 @@ static GameCenterViewController *gameCenterViewController;
             
         case  NETWORK_DUEL_CANSEL:
         {   
-            [multiplayerViewController sendResponse];
             DLog(@"NETWORK_DUEL_CANSEL");
             if (userEndMatch) {
                 [self lostConnection];

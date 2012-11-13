@@ -26,23 +26,26 @@
 #import "CDAchivment.h"
 #import "ActivityIndicatorView.h"
 #import "revision.h"
-#import "LoginViewController.h"
+#import "LoginAnimatedViewController.h"
 #import "ActivityIndicatorView.h"
 #import "CollectionAppViewController.h"
 #import "RefreshContentDataController.h"
 #import "UIImageView+AttachedView.h"
 #import "TopPlayersDataSource.h"
+#import "SSConnection.h"
+#import "TestAppDelegate.h"
 
 @class ListOfItemsViewController;
 @class GameCenterViewController;
 
-@interface StartViewController : UIViewController <MFMailComposeViewControllerDelegate,GCAuthenticateDelegate, UIAlertViewDelegate, FBRequestDelegate>
+@interface StartViewController : UIViewController <MFMailComposeViewControllerDelegate,GCAuthenticateDelegate, UIAlertViewDelegate, FBRequestDelegate, GADBannerViewDelegate>
 
 @property (nonatomic) BOOL showFeedAtFirst;
 @property (strong, nonatomic) NSString *oldAccounId;
 @property (nonatomic) BOOL soundCheack;
 @property (nonatomic) BOOL feedBackViewVisible;
 @property (strong, nonatomic) TopPlayersDataSource *topPlayersDataSource;
+
 
 + (StartViewController *)sharedInstance;
 -(id)init;     //must be login object!!!

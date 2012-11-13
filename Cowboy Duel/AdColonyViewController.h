@@ -11,6 +11,7 @@
 //#import "BluetoothViewController.h"
 #import "CurrencyManager.h"
 #import "StartViewController.h"
+#import "MKStoreManager.h"
 
 typedef enum {
     AdColonyAdsStatusNotChecked=0,
@@ -20,7 +21,7 @@ typedef enum {
 
 @class StartViewController;
 
-@interface AdColonyViewController : UIViewController <AdColonyTakeoverAdDelegate, CurrencyManagerDelegate,SKPaymentTransactionObserver, SKProductsRequestDelegate> 
+@interface AdColonyViewController : UIViewController <AdColonyTakeoverAdDelegate, CurrencyManagerDelegate,SKPaymentTransactionObserver, SKProductsRequestDelegate, MKStoreKitDelegate>
 @property (nonatomic, unsafe_unretained) CurrencyManager *cm;
 
 - (id)initWithStartVC:(StartViewController *) pStartVC;

@@ -23,7 +23,7 @@
 #import "StartViewController.h"
 #import "UIButton+Image+Title.h"
 #import "UIView+Dinamic_BackGround.h"
-#import "LoginViewController.h"
+#import "LoginAnimatedViewController.h"
 
 #import "ValidationUtils.h"
 
@@ -39,14 +39,15 @@
     AccountDataSource *oponentAccount;
         
     TeachingViewController *teachingViewController;
-    LoginViewController *loginViewController;
+    LoginAnimatedViewController *loginViewController;
     
 //    CongratulationViewController *congratulationViewController;
     LevelCongratViewController *lvlCongratulationViewController;
     MoneyCongratViewController *moneyCongratulationViewController; 
     
     int oldMoney;
-    
+    int oldMoneyForAnimation;
+  
     int fMutchNumberWin;
     int fMutchNumberLose;
     int minUserTime;
@@ -84,7 +85,13 @@
     IBOutlet UILabel *lblNameOponnent;
     
     IBOutlet UILabel *lblResulDescription;
-    
+  
+    IBOutlet UIView *ivGoldCoin;
+    IBOutlet UIImageView *ivBlueLine;
+    IBOutlet UIImageView *ivCurrentRank;
+    IBOutlet UIImageView *ivNextRank;
+    IBOutlet FXLabel *lblGoldPlus;
+  
     //WinView
     IBOutlet UIView *viewWin;
     IBOutlet UILabel *lblWinEarned;
@@ -110,13 +117,15 @@
     UIImageView *loserSpiritImg;
     UIImageView *winnerImg1;
     UIImageView *winnerImg2;
-    
+    UIImageView *loserMoneyImg;
+  
     IBOutlet UIView *view;
     IBOutlet UIView *statView;
     
     IBOutlet UILabel *lbBack;
     IBOutlet UILabel *lbTryAgain;
     IBOutlet UILabel *lbNextRound;
+    
     
     __unsafe_unretained IBOutlet FXLabel *lblGold;
     __unsafe_unretained IBOutlet UILabel *gameStatusLable;

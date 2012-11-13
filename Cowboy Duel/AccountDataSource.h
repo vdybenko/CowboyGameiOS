@@ -43,6 +43,11 @@
 @property(strong,nonatomic) NSMutableArray *teachingTimes;
 @property(strong,nonatomic) NSMutableArray *finalInfoTable;
 
+@property(strong,nonatomic) NSMutableArray *listBotsOnline;
+@property(nonatomic) int vOfStoreList;
+@property(nonatomic) BOOL bot;
+@property(strong,nonatomic) NSMutableArray *receivedBots;
+
 + (AccountDataSource *)sharedInstance;
 - (id)initWithLocalPlayer;
 - (void)loadAllParametrs;
@@ -83,6 +88,8 @@
 
 - (CDWeaponProduct*)loadAccountWeapon;
 -(NSUInteger(^)(NSArray *, NSInteger))findObs;
+
+- (void)receiveBots;
 
 -(void)putchAvatarImageToInitStartVC:(StartViewController*)startVC;
 -(BOOL)isAvatarImage:(NSString*)imagePath;

@@ -11,6 +11,7 @@
 #import "AccountDataSource.h"
 #import "FBConnect.h"
 #import "ProfileViewController.h"
+#import "MKStoreManager.h"
 
 typedef enum {
     LoginFacebookStatusNone,
@@ -22,14 +23,15 @@ typedef enum {
 } LoginFacebookStatus;
 
 @class StartViewController;
-@interface LoginViewController : UIViewController <FBSessionDelegate, FBDialogDelegate, UIWebViewDelegate>
+@interface LoginViewController : UIViewController <FBSessionDelegate, FBDialogDelegate, UIWebViewDelegate, MKStoreKitDelegate, FBRequestDelegate>
 
 @property (strong,nonatomic) Facebook *facebook;
 @property (strong,nonatomic) StartViewController *startViewController;
 @property (strong,nonatomic) id<ProfileWithLoginDelegate> delegate;
 @property (nonatomic)  LoginFacebookStatus loginFacebookStatus;
+@property (nonatomic) BOOL payment;
 
-+ (LoginViewController *) sharedInstance ;
++ (LoginViewController *) sharedInstance;
 -(void)initFacebook;
 -(IBAction)fbLoginBtnClick:(id)sender;
 -(void)logOutFB;

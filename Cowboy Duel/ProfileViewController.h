@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "AccountDataSource.h"
 
-@class LoginViewController;
+@class LoginAnimatedViewController;
 @class StartViewController;
 
 #define kFbUserNameKey @"fbUserName"

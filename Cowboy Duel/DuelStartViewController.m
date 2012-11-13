@@ -105,7 +105,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
     
     activityIndicatorView = [[ActivityIndicatorView alloc] init];
     frame = activityIndicatorView.frame;
-    frame.origin = CGPointMake(-80, 0);
+    frame.origin = CGPointMake(0, 0);
     activityIndicatorView.frame=frame;
     [self.view  addSubview:activityIndicatorView];
             
@@ -209,19 +209,17 @@ static const char *GC_URL =  BASE_URL"api/gc";
         [_vWait setHidden:NO];
     }
     if ((!serverType)&&(!tryAgain)) {
+        if (!oponentAccount.bot) {
+            const char *name = [serverName cStringUsingEncoding:NSUTF8StringEncoding];
+            SSConnection *connection = [SSConnection sharedInstance];
+            [connection sendData:(void *)(name) packetID:NETWORK_SET_PAIR ofLength:sizeof(char) * [serverName length]];
+        }
+        else {
+            SSConnection *connection = [SSConnection sharedInstance];
+            [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
+            [self performSelector:@selector(startBotDuel) withObject:nil afterDelay:0.5];
+        }
         
-        GameCenterViewController * gController = (GameCenterViewController *) delegate;
-        [gController.multiplayerServerViewController shutDownServer];
-        
-        NSString *convertString = serverName;
-        NSUInteger bufferCount = sizeof(char) * ([convertString length] + 1);
-        char *utf8Buffer = malloc(bufferCount);
-        [convertString getCString:utf8Buffer 
-                        maxLength:bufferCount 
-                         encoding:NSUTF8StringEncoding];
-        char *hostName = strdup(utf8Buffer);
-        
-        [gController startClientWithName:hostName];
     }
     [[self.navigationController.viewControllers objectAtIndex:1] performSelector:@selector(playerStop)];
     [player play];
@@ -387,7 +385,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
 
 -(void)setOponentImage;
 {
-    NSString *name=[[OGHelper sharedInstance ] getClearName:oponentAccount.accountID];
+    NSString *name = [[OGHelper sharedInstance ] getClearName:oponentAccount.accountID];
     NSString *path=[NSString stringWithFormat:@"%@/icon_%@.png",[[OGHelper sharedInstance] getSavePathForList],name];
     if([[NSFileManager defaultManager] fileExistsAtPath:path]){  
         UIImage *image=[UIImage loadImageFullPath:path];
@@ -412,6 +410,13 @@ static const char *GC_URL =  BASE_URL"api/gc";
             
         }
     }   
+}
+
+-(void)startBotDuel
+{
+    int randomTime = arc4random() % 6;
+    TeachingViewController *teachingViewController = [[TeachingViewController alloc] initWithTime:randomTime andAccount:playerAccount andOpAccount:oponentAccount];
+    [self.navigationController pushViewController:teachingViewController animated:YES];
 }
 
 - (void)viewDidUnload {

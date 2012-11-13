@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "AdvertisingViewController.h"
+#import "AdvertisingNewViewController.h"
 
-@interface AdvertisingNewVersionViewController : AdvertisingViewController
+@interface AdvertisingNewVersionViewController : AdvertisingNewViewController
 
 @end

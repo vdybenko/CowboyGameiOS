@@ -9,8 +9,9 @@
 #import "TestAppDelegate.h"
 #import "GCHelper.h"
 #import <GameKit/GameKit.h>
+#import "LoginAnimatedViewController.h"
 
-#import "GANTracker.h"
+#import "GAI.h"
 #import "Crittercism.h"
 #import "StartViewController.h"
 
@@ -20,7 +21,6 @@ static NSString *kGAAccountID = @"UA-24007807-3";
 #else
 static NSString *kGAAccountID = @"UA-24007807-5";
 #endif
-
 NSString  *const ID_CRIT_APP   = @"4fb4f482c471a10fc5000092";
 NSString  *const ID_CRIT_KEY   = @"stjyktz620mziyf5rhi89ncaorab";
 NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
@@ -31,7 +31,7 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     UIWindow *window;
     UINavigationController *navigationController;
     StartViewController *startViewController;
-    LoginViewController *loginViewController;
+    LoginAnimatedViewController *loginViewController;
     Facebook * facebook;
     AccountDataSource *playerAccount;
 }
@@ -41,18 +41,22 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
 @implementation TestAppDelegate
 
 @synthesize navigationController, loginViewController;
-@synthesize facebook;
+@synthesize facebook, adBanner;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [UIImage initialize];
+        
     [AdColony initAdColonyWithDelegate:self];
     
     [Crittercism initWithAppID:ID_CRIT_APP  andKey:ID_CRIT_KEY andSecret:ID_CRIT_SECRET];
-        
-    [[GANTracker sharedTracker] startTrackerWithAccountID:kGAAccountID
-                                           dispatchPeriod:kGANDispatchPeriod
-                                                 delegate:nil];	
+    
+    [[GAI sharedInstance] trackerWithTrackingId:kGAAccountID];
+    
+//    [[GAI sharedInstance] startTrackerWithAccountID:kGAAccountID
+//                                           dispatchPeriod:kGANDispatchPeriod
+//                                                 delegate:nil];	
     
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(AnalyticsTrackEvent:)
@@ -62,7 +66,8 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     
     application.statusBarOrientation = UIInterfaceOrientationPortrait;
   
-    
+//    LoginAnimatedViewController *loginAnimatedViewController = [[LoginAnimatedViewController alloc] init];
+//    navigationController = [[UINavigationController alloc] initWithRootViewController:loginAnimatedViewController];
     LoadViewController *loadViewController;
     
     loadViewController= [[LoadViewController alloc] initWithPush:NULL];
@@ -72,10 +77,10 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     [navigationController setNavigationBarHidden:YES];
     
     CGRect frame = [[UIScreen mainScreen]bounds];
-    
     window = [[UIWindow alloc]initWithFrame:frame];
-    [window setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"st_bg_new.png"]]];
     
+    //[window setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"st_bg_new.png"]]];
+    [window addSubview:[[UIImageView alloc] initWithImage: [UIImage imageNamed:@"st_bg_new.png"]]];
     [window addSubview:navigationController.view];
     [window makeKeyAndVisible];
     
@@ -96,6 +101,26 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     
     DLog(@"FBAccessTokenKey %@", [defaults objectForKey:@"FBAccessTokenKey"]);
     
+    
+    if (frame.size.height > 480) {
+        // Initialize the banner at the bottom of the screen.
+        CGPoint origin = CGPointMake(0.0, frame.size.height - 50);
+        
+        // Use predefined GADAdSize constants to define the GADBannerView.
+        self.adBanner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait
+                                                       origin:origin];
+        
+        // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID
+        // before compiling.
+        self.adBanner.adUnitID = kSampleAdUnitID;
+        self.adBanner.delegate = self;
+        [self.adBanner setRootViewController:self];
+        [window addSubview:self.adBanner];
+        [self.adBanner loadRequest:[self createRequest]];
+        [self.adBanner setHidden:YES];
+    }
+    
+    
     //Sleep off
     application.idleTimerDisabled = YES;
     application.applicationIconBadgeNumber = 0;
@@ -109,11 +134,8 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
 
 -(NSDictionary*)adColonyAdZoneNumberAssociation {
     return [NSDictionary dictionaryWithObjectsAndKeys:
-            #ifdef DEBUG
-            @"vz74e7d81b72fb4f198a5bba", [NSNumber numberWithInt:1],
-            #else
-            @"vz2c493f6fa7cc474687a5ed", [NSNumber numberWithInt:1],
-            #endif
+//			@"vz2c493f6fa7cc474687a5ed", [NSNumber numberWithInt:1],
+            @"vz74e7d81b72fb4f198a5bba", [NSNumber numberWithInt:1],//test
 			nil];
 }
 
@@ -137,6 +159,7 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
      */
+    
     
     UIDevice *currentDevice = [UIDevice currentDevice];
     
@@ -164,14 +187,17 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     {
         [[StartViewController sharedInstance] didBecomeActive];
     }
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     DLog(@"applicationWillTerminate");
+    
 }
 
 - (void)AnalyticsTrackEvent:(NSNotification *)notification {
+    
     NSError	*err;
 	NSString *fbUserId;
     fbUserId = [[NSUserDefaults standardUserDefaults] stringForKey:@"id"];
@@ -186,11 +212,40 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
 	NSString *page = [[notification userInfo] objectForKey:@"event"];
 	DLog(@"GA page %@",page);
 	if (page){
-		if (![[GANTracker sharedTracker] trackPageview:page withError:&err])
+		if (![[GAI sharedInstance].defaultTracker trackView:page])
 			DLog(@" Can't track pageview");
 	}    
-	[[GANTracker sharedTracker] dispatch];
+	[[GAI sharedInstance] dispatch];
+    
 }
+
+#pragma mark GADRequest generation
+
+// Here we're creating a simple GADRequest and whitelisting the application
+// for test ads. You should request test ads during development to avoid
+// generating invalid impressions and clicks.
+- (GADRequest *)createRequest {
+    GADRequest *request = [GADRequest request];
+    
+    // Make the request for a test ad.
+    request.testing = NO;
+    
+    return request;
+}
+
+#pragma mark GADBannerViewDelegate impl
+
+// We've received an ad successfully.
+- (void)adViewDidReceiveAd:(GADBannerView *)adView {
+    NSLog(@"Received ad successfully");
+}
+
+- (void)adView:(GADBannerView *)view
+didFailToReceiveAdWithError:(GADRequestError *)error {
+    NSLog(@"Failed to receive ad with error: %@", [error localizedFailureReason]);
+}
+
+
 
 - (void)dealloc
 {

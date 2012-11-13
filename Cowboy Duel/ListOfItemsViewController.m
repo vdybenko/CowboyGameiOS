@@ -92,12 +92,13 @@
     
     [offLineText setOpaque:NO];
     [offLineText setBackgroundColor:[UIColor clearColor]];
-    if ([offLineText respondsToSelector:@selector(scrollView)]) {
-        offLineText.scrollView.scrollEnabled = NO; // available starting in iOS 5
-    } else {
-        for (id subview in offLineText.subviews)
-            if ([[subview class] isSubclassOfClass: [UIScrollView class]])
-                ((UIScrollView *)subview).scrollEnabled = NO;        
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
+        [offLineText.scrollView setScrollEnabled:NO];
+    else
+    {
+      UIScrollView *lastScroll = (UIScrollView *)[[offLineText subviews] lastObject];
+      lastScroll.scrollEnabled = NO;
     }
     
     saloonTitle.text = NSLocalizedString(@"SALYN", nil);
@@ -137,6 +138,7 @@
 {
     [super viewDidAppear:animated];
     [self refreshController];
+    updateTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:_playersOnLineDataSource selector:@selector(reloadDataSource) userInfo:nil repeats:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -169,38 +171,35 @@
     return 82.f;
 }
 
--(void)tableView:(UITableView *)pTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    [self clickButton:indexPath]; 
+    [self clickButton:indexPath];
 }
+
 #pragma mark - Delegated methods
 
 -(void)clickButton:(NSIndexPath *)indexPath;
 {
-    PlayerOnLineCell *cell = (PlayerOnLineCell *)[tableView cellForRowAtIndexPath:indexPath];
-    [cell setSelected:YES];
-    [cell hideIndicatorConnectin];
-    
-    CDPlayerOnLine *_player;    
-    _player=[_playersOnLineDataSource.arrItemsList objectAtIndex:indexPath.row];
+    SSServer *player;
+    player=[_playersOnLineDataSource.serverObjects objectAtIndex:indexPath.row];
     AccountDataSource *oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
-    [oponentAccount setAccountID:_player.dAuth];
-    [oponentAccount setAccountName:_player.dNickName];
-    [oponentAccount setAccountLevel:_player.dLevel];
-    [oponentAccount setAccountWins:_player.dWinCount];
-    [oponentAccount setAvatar:_player.dAvatar];
-
-    [oponentAccount setMoney:_player.dMoney];
+    [oponentAccount setAccountID:player.serverName];
+    [oponentAccount setAccountName:player.displayName];
+    [oponentAccount setAccountLevel:[player.rank integerValue]];
+    [oponentAccount setAccountWins:[player.duelsWin intValue]];
+    [oponentAccount setAvatar:player.fbImageUrl];
+    [oponentAccount setBot:player.bot];
+    [oponentAccount setMoney:[player.money integerValue]];
     
     DuelStartViewController *duelStartViewController = [[DuelStartViewController alloc]initWithAccount:_playerAccount andOpAccount:oponentAccount opopnentAvailable:NO andServerType:NO andTryAgain:NO];
-    duelStartViewController.serverName = _player.dAuth;
+    duelStartViewController.serverName = player.serverName;
     
     duelStartViewController.delegate = _gameCenterViewController;
     _gameCenterViewController.duelStartViewController = duelStartViewController;
     
     [self.navigationController pushViewController:duelStartViewController animated:YES];
-    
+    PlayerOnLineCell *cell = (PlayerOnLineCell *)[tableView cellForRowAtIndexPath:indexPath];
+    [cell hideIndicatorConnectin];
     
 // Не удалять!!!
 //    _indexPath=indexPath;
@@ -270,8 +269,8 @@
         
         [[OGHelper sharedInstance] getFriendsHowDontUseAppDelegate:self];
     }else{
-        [[LoginViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusInvaitFriends];
-        [[LoginViewController sharedInstance] fbLoginBtnClick:self];
+        [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusInvaitFriends];
+        [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
@@ -287,6 +286,26 @@
     [_playersOnLineDataSource reloadDataSource];
 }
 
+-(void)didRefreshController
+{
+    [loadingView setHidden:YES];
+    [activityIndicator stopAnimating];
+    [btnInvite setEnabled:YES];
+    [tableView reloadData];
+    if (_playersOnLineDataSource.serverObjects.count == 0) {
+        [offLineBackGround setDinamicHeightBackground];
+        
+        [offLineText loadHTMLString:NSLocalizedString(@"AlertTextListOnlineIsEmpty", @"") baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
+        
+        [tableView setHidden:YES];
+        [offLineBackGround setHidden:NO];
+    }else {
+        [tableView setHidden:NO];
+        [offLineBackGround setHidden:YES];
+    };
+    [self.tableView refreshFinished];
+}
+
 - (void)checkInternetStatus:(BOOL)status;
 {
     if (statusOnLine) {
@@ -300,43 +319,6 @@
         [tableView setHidden:YES];
         [offLineBackGround setHidden:NO];
     }
-}
-
-- (void)checkOnline
-{
-    for (CDPlayerOnLine *player in _playersOnLineDataSource.arrItemsList) {
-        NSString *convertString = player.dPlayerPublicIP;
-        NSUInteger bufferCount = sizeof(char) * ([convertString length] + 1);
-        char *utf8Buffer = malloc(bufferCount);
-        [convertString getCString:utf8Buffer
-                        maxLength:bufferCount 
-                         encoding:NSUTF8StringEncoding];
-        struct sockaddr_in hostAddress;
-        memset(&hostAddress, 0, sizeof(hostAddress));
-        hostAddress.sin_family = AF_INET;
-        hostAddress.sin_len = sizeof(hostAddress);
-        hostAddress.sin_port = ntohs(1111);
-        hostAddress.sin_addr.s_addr = inet_addr(utf8Buffer);
-        Reachability *reachability = [Reachability reachabilityWithAddress:&hostAddress];
-        
-        BOOL hostOnline = [reachability isReachable];
-        player.dOnline = hostOnline;
-        if(hostOnline) DLog(@"Reachability %@", reachability);
-    }
-    [_playersOnLineDataSource setCellsHide:YES];
-    [tableView reloadData];
-        
-    if (_playersOnLineDataSource.arrItemsList.count == 0) {
-        [offLineBackGround setDinamicHeightBackground];
-        
-        [offLineText loadHTMLString:NSLocalizedString(@"AlertTextListOnlineIsEmpty", @"") baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
-        
-        [tableView setHidden:YES];
-        [offLineBackGround setHidden:NO];
-    }else {
-        [tableView setHidden:NO];
-        [offLineBackGround setHidden:YES];
-    };
 }
 
 -(void)startTableAnimation;

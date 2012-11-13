@@ -19,7 +19,7 @@
 }
 @end
 
-static const char *A_URL =  BASE_URL"api/a";
+static const char *A_URL =  BASE_URL"api/authorization";
 
 @implementation LoadViewController
 
@@ -43,7 +43,13 @@ static const char *A_URL =  BASE_URL"api/a";
         [[GCHelper sharedInstance] setPresentingViewController:startViewController];
         [[GCHelper sharedInstance] setDelegate2:startViewController];
     
-        imgBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default.png"]];
+        CGRect frame = [[UIScreen mainScreen]bounds];
+        
+        if (frame.size.height > 480) {
+            imgBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default-568h.png"]];
+        }
+        else imgBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default.png"]];
+        
         [self.view addSubview:imgBackground];
         
         NSString *version = @"Version ";
@@ -55,7 +61,7 @@ static const char *A_URL =  BASE_URL"api/a";
             version = @"";
         }
         
-        UILabel *versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 440, 150, 40)];
+        UILabel *versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, frame.size.height - 40, 150, 40)];
         [versionLabel setTextColor:[UIColor whiteColor]];
         [versionLabel setFont:[UIFont systemFontOfSize:10]];
         [versionLabel setBackgroundColor:[UIColor clearColor]];

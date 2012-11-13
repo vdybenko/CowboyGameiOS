@@ -13,11 +13,17 @@
 #import "Utils.h"
 #import "AccountDataSource.h"
 #import "UIImage+Save.h"
+#import "SSConnection.h"
+#import "SSServer.h"
+
+@interface PlayersOnLineDataSource ()
+@property (nonatomic) SSConnection *connection;
+@property (nonatomic) BOOL startLoad;
+@end 
 
 @implementation PlayersOnLineDataSource
-@synthesize arrItemsList,delegate,cellsHide;
+@synthesize arrItemsList, delegate, cellsHide, serverObjects, connection, startLoad;
 
-static const char *LIST_ONLINE_URL =  BASE_URL"users/listview";
 
 #pragma mark - Instance initialization
 
@@ -36,27 +42,62 @@ static const char *LIST_ONLINE_URL =  BASE_URL"users/listview";
      
      topPlayersDataSource = [[StartViewController sharedInstance] topPlayersDataSource];
      [topPlayersDataSource reloadDataSource];
-
+     self.connection = [SSConnection sharedInstance];
+     self.connection.delegate = self;
 	return self;
 }
 
 -(void) reloadDataSource;
 {
-    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:LIST_ONLINE_URL encoding:NSUTF8StringEncoding]]
-                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                          timeoutInterval:kTimeOutSeconds];
-    [theRequest setHTTPMethod:@"POST"]; 
-    NSDictionary *dicBody=[NSDictionary dictionaryWithObjectsAndKeys:
-                           [AccountDataSource sharedInstance].accountID, @"authen",
-                           nil];
-    NSString *stBody=[Utils makeStringForPostRequest:dicBody];
-	[theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]]; 
+	[self.connection sendData:@"" packetID:NETWORK_GET_LIST_ONLINE ofLength:sizeof(int)];
+    [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(connectionTimeout) userInfo:nil repeats:NO];
+    self.startLoad = YES;
+}
 
-    CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
-    if (theConnection) {
-        receivedData = [[NSMutableData alloc] init];
-    } else {
-    } 
+- (void) listOnlineResponse:(NSString *)jsonString
+{
+    self.startLoad = NO;
+    NSError *jsonParseError;
+    SBJSON *parser = [[SBJSON alloc] init];
+    NSLog(@"jsonString: %@", jsonString);
+    NSArray *servers = [parser objectWithString:jsonString error:&jsonParseError];
+    self.serverObjects = [[NSMutableArray alloc] init];
+    
+    if (!servers) {
+        NSLog(@"JSON parse error: %@", jsonParseError);
+    }
+    else{
+        NSLog(@"servers: %@", servers);
+        for (NSDictionary *server in servers)
+        {
+            SSServer *serverObj = [[SSServer alloc] init];
+            [serverObj setValuesForKeysWithDictionary:server];
+            [self.serverObjects addObject:serverObj];
+        }
+        [_tableView reloadData];
+    }
+    
+    [self addBotsForListCount:[self.serverObjects count]];
+//    if (!self.serverObjects.count) {
+//        [self addBotsForListCount:self.serverObjects.count];
+//        SSServer *serverObj = [[SSServer alloc] init];
+//        serverObj.displayName = @"Bot1";
+//        serverObj.status = @"A";
+//        serverObj.money = [NSNumber numberWithInt:123];
+//        serverObj.serverName = @"Bot1";
+//        serverObj.rank = [NSNumber numberWithInt:3];
+//        serverObj.bot = YES;
+//        [self.serverObjects addObject:serverObj];
+//    }
+    ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
+    [listOfItemsViewController didRefreshController];
+}
+
+-(void)connectionTimeout
+{
+    if (!self.startLoad) return;
+    ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
+    [listOfItemsViewController didRefreshController];
 }
 
 #pragma mark - Delegated methods
@@ -69,12 +110,12 @@ static const char *LIST_ONLINE_URL =  BASE_URL"users/listview";
         cell = [PlayerOnLineCell cell];
         [cell initMainControls];
     }
-    CDPlayerOnLine *player;
+    SSServer *player;
     
-    player=[arrItemsList objectAtIndex:indexPath.row];
+    player=[self.serverObjects objectAtIndex:indexPath.row];
     [cell populateWithPlayer:player];
     
-    NSString *name=[[OGHelper sharedInstance ] getClearName:player.dAuth];
+    NSString *name=[[OGHelper sharedInstance ] getClearName:player.serverName];
     NSString *path=[NSString stringWithFormat:@"%@/icon_%@.png",[[OGHelper sharedInstance] getSavePathForList],name];
     if([[NSFileManager defaultManager] fileExistsAtPath:path]){  
         UIImage *image=[UIImage loadImageFullPath:path];
@@ -90,30 +131,30 @@ static const char *LIST_ONLINE_URL =  BASE_URL"users/listview";
             iconDownloader.delegate = self;
             [imageDownloadsInProgress setObject:iconDownloader forKey:indexPath];
             
-            if (player.dAvatar&&[player.dAvatar length]&&![player.dAvatar isEqualToString:@"0"])
+            if (![player.fbImageUrl isEqualToString:@""])
             {
-                [iconDownloader setAvatarURL:player.dAvatar];
+                [iconDownloader setAvatarURL:player.fbImageUrl];
                 [iconDownloader startDownloadSimpleIcon];
             }else {
-                if ([player.dAuth rangeOfString:@"F"].location != NSNotFound){
+                if ([player.serverName rangeOfString:@"F"].location != NSNotFound){
                     [iconDownloader startDownloadFBIcon];
                 }
             }
         }else {
-            if (![cell.playerName.text isEqualToString:player.dNickName]) {
+            if (![cell.playerName.text isEqualToString:player.displayName]) {
                 [cell setPlayerIcon:[UIImage imageNamed:@"pv_photo_default.png"]];
                 
-                NSString *name=[[OGHelper sharedInstance ] getClearName:player.dAuth];
+                NSString *name=[[OGHelper sharedInstance ] getClearName:player.serverName];
                 iconDownloader.namePlayer=name;
                 iconDownloader.indexPathInTableView = indexPath;
                 iconDownloader.delegate = self;
                 
-               if (![player.dAvatar isEqualToString:@""])
+               if (![player.fbImageUrl isEqualToString:@""])
                 {
-                    [iconDownloader setAvatarURL:player.dAvatar];
+                    [iconDownloader setAvatarURL:player.fbImageUrl];
                     [iconDownloader startDownloadSimpleIcon];
                 }else {
-                    if ([player.dAuth rangeOfString:@"F"].location != NSNotFound){
+                    if ([player.serverName rangeOfString:@"F"].location != NSNotFound){
                         [iconDownloader startDownloadFBIcon];
                     }
                 }
@@ -122,12 +163,10 @@ static const char *LIST_ONLINE_URL =  BASE_URL"users/listview";
         }
     }
     
-    if ([topPlayersDataSource isPlayerInTop10:player.dAuth]) {
+    if ([topPlayersDataSource isPlayerInTop10:player.serverName]) {
         [cell setRibbonHide:NO];
-        player.dInTop=YES;
     }else {
         [cell setRibbonHide:YES];
-        player.dInTop=NO;
     }
 
     [cell.btnDuel addTarget:self action:@selector(invaiteWithMessage:) forControlEvents:UIControlEventTouchUpInside];
@@ -136,7 +175,7 @@ static const char *LIST_ONLINE_URL =  BASE_URL"users/listview";
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [arrItemsList count];
+    return [self.serverObjects count];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -146,56 +185,6 @@ static const char *LIST_ONLINE_URL =  BASE_URL"users/listview";
 #pragma mark CustomNSURLConnection handlers
 
 
-- (void)connectionDidFinishLoading:(CustomNSURLConnection *)connection1 {
-   
-    NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-    DLog(@"PlayersOnLineDataSource jsonString %@", jsonString);
-    NSArray *responseObject = ValidateObject([jsonString JSONValue], [NSArray class]);
-    [arrItemsList removeAllObjects];
-    for (NSDictionary *dic in responseObject) {
-        CDPlayerOnLine *player=[[CDPlayerOnLine alloc] init];
-        player.dAuth=[dic objectForKey:@"authen"];
-        player.dNickName=[dic objectForKey:@"nickname"];
-        player.dMoney=[[dic objectForKey:@"money"] intValue];
-        player.dLevel=[[dic objectForKey:@"level"] intValue];
-        player.dWinCount=[[dic objectForKey:@"duels_win"] intValue];
-        player.dPlayerIP = [dic objectForKey:@"private_ip"];
-        player.dPlayerPublicIP = [dic objectForKey:@"public_ip"];
-        if(player.dPlayerPublicIP) player.dPlayerPublicIP = @"0.0.0.0";
-        player.dAvatar=[dic objectForKey:@"avatar"];
-        [arrItemsList addObject: player];
-    }
-    ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
-    [listOfItemsViewController.btnInvite setEnabled:YES];
-    [listOfItemsViewController.loadingView setHidden:YES];
-    [listOfItemsViewController.activityIndicator stopAnimating];
-    [listOfItemsViewController checkOnline];
-    
-    [_tableView refreshFinished];
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        [listOfItemsViewController startTableAnimation];
-    });
-}
-
-- (void)connection:(CustomNSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    [receivedData appendData:data];
-}
-
-- (void)connection:(CustomNSURLConnection *)connection
-  didFailWithError:(NSError *)error
-{
-    // inform the user
-    DLog(@"Connection failed! Error - %@ %@",
-          [error localizedDescription],
-          [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
-    ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
-    [listOfItemsViewController.btnInvite setEnabled:YES];
-    [listOfItemsViewController.loadingView setHidden:YES];
-    [listOfItemsViewController.activityIndicator stopAnimating];
-    [listOfItemsViewController.tableView reloadData];
-}
 
 #pragma mark IconDownloaderDelegate
 - (void)appImageDidLoad:(NSIndexPath *)indexPath
@@ -206,6 +195,83 @@ static const char *LIST_ONLINE_URL =  BASE_URL"users/listview";
             PlayerOnLineCell *cell = (PlayerOnLineCell*)[_tableView cellForRowAtIndexPath:iconDownloader.indexPathInTableView];
             [cell setPlayerIcon:iconDownloader.imageDownloaded];
         }
+}
+
+-(void) addBotsForListCount:(int)listcount
+{
+    AccountDataSource *player = [AccountDataSource sharedInstance];
+    if([player.receivedBots count] == 0) return;
+    srand ( time(NULL) );
+    switch (listcount) {
+        case 0:{
+            NSArray *randomIndexes = [self randomNumbersWithCount:3];
+            NSDictionary *serverDictionary = [player.receivedBots objectAtIndex:[[randomIndexes objectAtIndex:0] intValue]];
+            [self createServerForDictionary:serverDictionary];
+            serverDictionary = [player.receivedBots objectAtIndex:[[randomIndexes objectAtIndex:1] intValue]];;
+            [self createServerForDictionary:serverDictionary];
+            serverDictionary = [player.receivedBots objectAtIndex:[[randomIndexes objectAtIndex:2] intValue]];
+            [self createServerForDictionary:serverDictionary];
+            break;
+        }
+        case 1:{
+            NSArray *randomIndexes = [self randomNumbersWithCount:2];
+            NSDictionary *serverDictionary = [player.receivedBots objectAtIndex:[[randomIndexes objectAtIndex:0] intValue]];
+            [self createServerForDictionary:serverDictionary];
+            serverDictionary = [player.receivedBots objectAtIndex:[[randomIndexes objectAtIndex:1] intValue]];
+            [self createServerForDictionary:serverDictionary];
+            break;
+        }
+        case 2:{
+            NSArray *randomIndexes = [self randomNumbersWithCount:1];
+            NSDictionary *serverDictionary = [player.receivedBots objectAtIndex:[[randomIndexes objectAtIndex:0] intValue]];
+            [self createServerForDictionary:serverDictionary];
+            
+            break;
+        }
+
+        default:
+            break;
+    }
+}
+
+-(NSArray *)randomNumbersWithCount:(int)count
+{
+    AccountDataSource *player = [AccountDataSource sharedInstance];
+    NSMutableArray *array = [NSMutableArray array];
+    for (int i = 0; i<count; i++) {
+        BOOL numberNotAdd = YES;
+        while (numberNotAdd) {
+            BOOL containeNumber = NO;
+            int randNumber = (((double)rand()/RAND_MAX) * ([player.receivedBots count] - 1));
+            for (NSNumber *randNumberTemp in array) {
+                if([randNumberTemp intValue] == randNumber) containeNumber = YES;
+            }
+            if (!containeNumber) {
+                [array addObject:[NSNumber numberWithInt:randNumber]];
+                numberNotAdd = NO;
+            }
+        }
+        
+        
+    }
+    return array;
+}
+
+-(void)createServerForDictionary:(NSDictionary *)serverDictionary
+{
+    DLog(@"serverDictionary %@", serverDictionary);
+    
+    SSServer *serverObj = [[SSServer alloc] init];
+    serverObj.displayName = [serverDictionary objectForKey:@"nickname"];
+    serverObj.status = @"A";
+    serverObj.money = [serverDictionary objectForKey:@"money"];
+    serverObj.serverName = [serverDictionary objectForKey:@"identifier"];
+    serverObj.rank = [serverDictionary objectForKey:@"level"];
+    serverObj.bot = YES;
+    serverObj.duelsLost = [serverDictionary objectForKey:@"duels_lost"];
+    serverObj.duelsWin = [serverDictionary objectForKey:@"duels_win"];
+    [self.serverObjects addObject:serverObj];
+
 }
 
 #pragma mark -

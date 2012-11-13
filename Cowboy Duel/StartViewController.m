@@ -12,7 +12,6 @@
 #import "UIView+Hierarchy.h"
 #import "UIButton+Image+Title.h"
 #import "AdvertisingNewVersionViewController.h"
-#import "AdvertisingOtherAppViewController.h"
 #import "AdvertisingAppearController.h"
 #import "ListOfItemsViewController.h"
 #import "CustomNSURLConnection.h"
@@ -20,6 +19,7 @@
 #import "Utils.h"
 #import "LevelCongratViewController.h"
 #import "MoneyCongratViewController.h"
+#import "AdvertisingNewViewController.h"
 
 #import "Social/Social.h"
 #import "accounts/Accounts.h"
@@ -64,7 +64,7 @@
     UIImageView_AttachedView *arrowImage;
     
     NSString *oldAccounId;
-    LoginViewController *loginViewController;
+    LoginAnimatedViewController *loginViewController;
     
     NSMutableDictionary *dicForRequests;
     BOOL modifierName;
@@ -103,8 +103,8 @@
 @property (nonatomic) BOOL internetActive;
 @property (nonatomic) BOOL hostActive;
 
-@property (strong) LoginViewController *loginViewController;
-
+@property (strong) LoginAnimatedViewController *loginViewController;
+@property (strong, nonatomic) AdvertisingNewVersionViewController *advertisingNewVersionViewController;
 -(void)sendRequestWithDonateSum:(int)sum;
 - (NSString *)deviceType;
 -(void)arrowAnimation;
@@ -121,15 +121,17 @@
 
 @synthesize gameCenterViewController, player, internetActive, hostActive, soundCheack, loginViewController;
 @synthesize feedbackButton, duelButton, profileButton, teachingButton, helpButton, mapButton;
-@synthesize oldAccounId,feedBackViewVisible,showFeedAtFirst,topPlayersDataSource;
+@synthesize oldAccounId,feedBackViewVisible,showFeedAtFirst,topPlayersDataSource, advertisingNewVersionViewController;
 
+static const char *REGISTRATION_URL =  BASE_URL"api/registration";
 static const char *AUTORIZATION_URL =  BASE_URL"api/authorization";
-static const char *MODIFIER_USER_URL =  BASE_URL"api/user";
-static const char *A_URL =  BASE_URL"api/a";
-static const char *OUT_URL =  BASE_URL"api/out";
+static const char *MODIFIER_USER_URL =  BASE_URL"users/set_user_data";
 
 NSString *const URL_FB_PAGE=@"http://cowboyduel.mobi/"; 
 NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNotification";
+
+static const char *BOT_LIST_URL = "http://bidoncd.s3.amazonaws.com/bot.json";
+NSMutableData *receivedDataBots;
 
 #pragma mark
 
@@ -223,14 +225,14 @@ static StartViewController *sharedHelper = nil;
             [playerAccount putchAvatarImageToInitStartVC:self];
 //            
             if (!([playerAccount.accountID rangeOfString:@"F"].location == NSNotFound)){ 
-                facebook = [[Facebook alloc] initWithAppId:kFacebookAppId andDelegate:[LoginViewController sharedInstance]];
+                facebook = [[Facebook alloc] initWithAppId:kFacebookAppId andDelegate:[LoginAnimatedViewController sharedInstance]];
                 
                 if ([uDef objectForKey:@"FBAccessTokenKey"] 
                     && [uDef objectForKey:@"FBExpirationDateKey"]) {
                     facebook.accessToken = [uDef objectForKey:@"FBAccessTokenKey"];
                     facebook.expirationDate = [uDef objectForKey:@"FBExpirationDateKey"];
                 }
-                [[LoginViewController sharedInstance] setFacebook:facebook];
+                [[LoginAnimatedViewController sharedInstance] setFacebook:facebook];
                 [[OGHelper sharedInstance ] initWithAccount:playerAccount facebook:facebook];
             }
             
@@ -317,7 +319,7 @@ static StartViewController *sharedHelper = nil;
                 
         activityIndicatorView = [[ActivityIndicatorView alloc] initWithoutRotate];
         CGRect imgFrame = activityIndicatorView.frame;
-        imgFrame.origin = CGPointMake(0, -80);
+        imgFrame.origin = CGPointMake(0, 0);
         activityIndicatorView.frame=imgFrame;
         
         [activityIndicatorView hideView];
@@ -340,8 +342,8 @@ static StartViewController *sharedHelper = nil;
         [hostReachable startNotifier];
 
         oldAccounId = @"";
-        if ([playerAccount.accountID rangeOfString:@"A"].location != NSNotFound)
-            [self authorizationModifier:NO];
+//        if ([playerAccount.accountID rangeOfString:@"A"].location != NSNotFound)
+//            [self authorizationModifier:NO];
     }
     return self; 
 }
@@ -352,7 +354,20 @@ static StartViewController *sharedHelper = nil;
 }
 
 - (void)viewDidLoad{
-       
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger facebookLogIn = [userDefaults integerForKey:@"facebookLogIn"];
+    NSInteger paymentRegistration = [userDefaults integerForKey:@"paymentRegistration"];
+    
+    if (!paymentRegistration && !facebookLogIn) {
+        SSConnection *connection = [SSConnection sharedInstance];
+        [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
+        
+        LoginAnimatedViewController *loginViewController = [LoginAnimatedViewController sharedInstance];
+        [loginViewController setPayment:YES];
+        [self.navigationController pushViewController:loginViewController animated:YES];
+    }
+    
+    
     UIColor *buttonsTitleColor = [[UIColor alloc] initWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     
     [duelButton setTitle:NSLocalizedString(@"Saloon", @"") forState:UIControlStateNormal];
@@ -420,7 +435,7 @@ static StartViewController *sharedHelper = nil;
     if (firstRun) {        
         arrowImage=[[UIImageView_AttachedView alloc] initWithImage:[UIImage imageNamed:@"st_arrow.png"] attachedToFrame:teachingButton frequence:0.5 amplitude:10 direction:DirectionToAnimateLeft];
         
-        hudView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 480, 480)];
+        hudView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
         hudView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
         [hudView setHidden:NO];
         [self.view insertSubview:hudView belowSubview:teachingButton];
@@ -447,6 +462,8 @@ static StartViewController *sharedHelper = nil;
         player.volume = 1.0;
     }
     [player play];
+    
+    
 }
 - (void)viewDidUnload {
     feedbackView = nil;
@@ -483,6 +500,9 @@ static StartViewController *sharedHelper = nil;
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    SSConnection *connection = [SSConnection sharedInstance];
+    [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
+    
     BOOL mutchEnded;
     if ((gameCenterViewController.userEndMatch && gameCenterViewController.opponentEndMatch) || (!gameCenterViewController.userEndMatch && !gameCenterViewController.opponentEndMatch)) 
         mutchEnded = YES;
@@ -490,7 +510,7 @@ static StartViewController *sharedHelper = nil;
         mutchEnded = NO;
     
     NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-    if (!gameCenterViewController.multiplayerServerViewController.isRunServer && !gameCenterViewController.multiplayerServerViewController.neadRestart && mutchEnded && [userDef integerForKey:@"FirstRunForPractice"] == 2)
+    if (mutchEnded && [userDef integerForKey:@"FirstRunForPractice"] == 2)
     {
        [gameCenterViewController startServerWithName:playerAccount.accountID];
     }
@@ -499,11 +519,22 @@ static StartViewController *sharedHelper = nil;
     [self showProfileFirstRun];
     [self isAdvertisingOfNewVersionNeedShow];
     [self estimateApp];
+    TestAppDelegate *app = (TestAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [app.adBanner setHidden:NO];
+}
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    TestAppDelegate *app = (TestAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [app.adBanner setHidden:YES];
+
 }
 
 -(void)didBecomeActive
 {
     DLog(@"did become active");
+    SSConnection *connection = [SSConnection sharedInstance];
+    [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
     if (!firstRunLocal) {
          [self login];
     }
@@ -517,7 +548,7 @@ static StartViewController *sharedHelper = nil;
 
 -(void)didEnterBackground
 {
-    [self logout];
+    [[SSConnection sharedInstance] disconnect];
 }
 
 -(void)didFinishLaunching
@@ -573,6 +604,8 @@ static StartViewController *sharedHelper = nil;
     TeachingViewController *teachingViewController = [[TeachingViewController alloc] initWithTime:randomTime andAccount:playerAccount andOpAccount:oponentAccount];
     [self.navigationController pushViewController:teachingViewController animated:YES];
     
+    SSConnection *connection = [SSConnection sharedInstance];
+    [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                         object:self
@@ -629,7 +662,9 @@ static StartViewController *sharedHelper = nil;
     [UIView setAnimationDuration:0.5f];
 	[UIView setAnimationDelegate:self];
     CGRect frame = feedbackView.frame;
-    frame.origin.y = 90.0f;
+    int delta = 0;
+    if ([[UIScreen mainScreen] bounds].size.height > 480) delta = 50;
+    frame.origin.y = [[UIScreen mainScreen] bounds].size.height - feedbackView.frame.size.height - delta;
     feedbackView.frame = frame;
     
     [UIView commitAnimations];
@@ -645,7 +680,7 @@ static StartViewController *sharedHelper = nil;
     [UIView setAnimationDuration:0.5f];
 	[UIView setAnimationDelegate:self];
     CGRect frame = feedbackView.frame;
-    frame.origin.y = 480.0f;
+    frame.origin.y = [[UIScreen mainScreen] bounds].size.height;
     feedbackView.frame = frame;
     
     [UIView commitAnimations];
@@ -678,6 +713,8 @@ static StartViewController *sharedHelper = nil;
 
 -(void) advertButtonClick {
     AdColonyViewController *adColonyViewController = [[AdColonyViewController alloc]initWithStartVC:self];
+    SSConnection *connection = [SSConnection sharedInstance];
+    [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
     [self presentModalViewController:adColonyViewController animated:YES];
 }
 
@@ -715,8 +752,8 @@ static StartViewController *sharedHelper = nil;
         if ([[OGHelper sharedInstance]isAuthorized]) {
             [[OGHelper sharedInstance] apiDialogFeedUser];
         }else {
-            [[LoginViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusFeed];
-            [[LoginViewController sharedInstance] fbLoginBtnClick:self];
+            [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusFeed];
+            [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
         }
     }
     
@@ -838,7 +875,7 @@ static StartViewController *sharedHelper = nil;
 
 -(void)login
 {    
-    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:A_URL encoding:NSUTF8StringEncoding]]
+    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:AUTORIZATION_URL encoding:NSUTF8StringEncoding]]
                                                             cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                         timeoutInterval:kTimeOutSeconds];
     
@@ -853,27 +890,8 @@ static StartViewController *sharedHelper = nil;
     if (theConnection) {
         NSMutableData *receivedData = [[NSMutableData alloc] init];
         [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
-    } 
-    
-}
-
--(void)logout
-{
-    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:OUT_URL encoding:NSUTF8StringEncoding]]
-                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                        timeoutInterval:kTimeOutSeconds];
-    
-    [theRequest setHTTPMethod:@"POST"]; 
-    NSDictionary *dicBody=[NSDictionary dictionaryWithObjectsAndKeys:
-                           playerAccount.accountID,@"id",
-                           nil];
-    NSString *stBody=[Utils makeStringForPostRequest:dicBody];
-	[theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]]; 
-    CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
-    if (theConnection) {        
-        NSMutableData *receivedData = [[NSMutableData alloc] init];
-        [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
-    } 
+    }
+    [self getBotsList];
     
 }
 
@@ -886,13 +904,23 @@ static StartViewController *sharedHelper = nil;
     NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
     [dicForRequests removeObjectForKey:[currentParseString lastPathComponent]];
     NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
-    
+    NSArray *responseObjectForBots = ValidateObject([jsonString JSONValue], [NSArray class]);
+
     DLog(@"StartVC \n jsonValues %@\n string %@",jsonString,currentParseString);
+//getting list online from response object:
+    NSLog(@"responseObject %@",responseObject);
+    NSLog(@"responseObjectForBots %@",responseObjectForBots);
+    if ([responseObjectForBots count]>=1) {
+      playerAccount.listBotsOnline = responseObjectForBots;
+      NSLog(@"listBotsOnline %@",playerAccount.listBotsOnline);
+      [playerAccount receiveBots];
+    }
+  
 //    
 //    OnLine
-    if ([[currentParseString lastPathComponent] isEqualToString:@"a"]&&[responseObject objectForKey:@"session_id"]) {
+    if ([[currentParseString lastPathComponent] isEqualToString:@"authorization"]&&[responseObject objectForKey:@"session_id"]) {
         playerAccount.sessionID =[[NSString alloc] initWithString:[responseObject objectForKey:@"session_id"]];
-        
+        playerAccount.vOfStoreList = [[responseObject objectForKey:@"v_of_store_list"] intValue];
         int revisionNumber=[[responseObject objectForKey:@"refresh_content"] intValue];
         if ([RefreshContentDataController isRefreshEvailable:revisionNumber]) {
             RefreshContentDataController *refreshContentDataController=[[RefreshContentDataController alloc] init];
@@ -901,7 +929,7 @@ static StartViewController *sharedHelper = nil;
         return;
     }       
     //avtorization
-    if ((playerAccount.accountID != nil) && [[currentParseString lastPathComponent] isEqualToString:@"authorization"]) {
+    if ((playerAccount.accountID != nil) && [[currentParseString lastPathComponent] isEqualToString:@"registration"]) {
         
         DLog(@"avtorization /n %@",responseObject);
         
@@ -999,7 +1027,7 @@ static StartViewController *sharedHelper = nil;
             [playerAccount sendTransactions:playerAccount.transactions];
         }
         
-        switch ([[LoginViewController sharedInstance] loginFacebookStatus]) {
+        switch ([[LoginAnimatedViewController sharedInstance] loginFacebookStatus]) {
             case LoginFacebookStatusLevel:
                 [LevelCongratViewController newLevelNumber:playerAccount.accountLevel];
                 break;
@@ -1012,7 +1040,7 @@ static StartViewController *sharedHelper = nil;
             default:
                 break;
         }
-        [[LoginViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusNone];
+        [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusNone];
         
         [uDef synchronize];
     }
@@ -1070,7 +1098,7 @@ static StartViewController *sharedHelper = nil;
     NSLocale* curentLocale = [NSLocale currentLocale];
     NSArray *languages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
     
-    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:AUTORIZATION_URL encoding:NSUTF8StringEncoding]]
+    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:REGISTRATION_URL encoding:NSUTF8StringEncoding]]
                                                             cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                         timeoutInterval:kTimeOutSeconds];
     
@@ -1100,6 +1128,7 @@ static StartViewController *sharedHelper = nil;
     [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.accountDraws] forKey:@"duels_lost"];
     [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.accountBigestWin] forKey:@"bigest_win"];
     [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.removeAds] forKey:@"remove_ads"];
+    [dicBody setValue:playerAccount.accountID forKey:@"identifier"];
     
     [dicBody setValue:[playerAccount.avatar stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] forKey:@"avatar"];
     [dicBody setValue:[playerAccount.age stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] forKey:@"age"];
@@ -1120,13 +1149,24 @@ static StartViewController *sharedHelper = nil;
     oldAccounId=@"";
     gameCenterViewController = [GameCenterViewController sharedInstance:playerAccount andParentVC:self];
     
-    gameCenterViewController.multiplayerServerViewController.neadRestart = YES;
-    gameCenterViewController.multiplayerServerViewController.serverNameGlobal = playerAccount.accountID;
-    [gameCenterViewController.multiplayerServerViewController shutDownServer];
-    
     if (![duelProductDownloaderController isListProductsAvailable] && !modifierName) {
         [duelProductDownloaderController downloadUserProducts];
     }
+}
+
+-(void)getBotsList;
+{
+
+  NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:BOT_LIST_URL encoding:NSUTF8StringEncoding]]
+                                                             cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                         timeoutInterval:kTimeOutSeconds];
+  CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
+  if (theConnection) {
+    NSMutableData *receivedData = [[NSMutableData alloc] init];
+    [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
+  } else {
+    NSLog(@"WARNING: theBotsListConnection failed..");
+  }
 }
 
 -(void)modifierUser;
@@ -1269,55 +1309,6 @@ static StartViewController *sharedHelper = nil;
     }
 }
 
-#pragma mark FConnect Methods
-
-- (void)request:(FBRequest *)request didLoad:(id)result {
-	
-    
-	if ([result isKindOfClass:[NSDictionary class]]) {
-
-//        putch for 1.4.1
-        BOOL modifierUserInfo = NO;
-        if (([playerAccount.accountID rangeOfString:@"F:"].location != NSNotFound)&&[playerAccount putchAvatarImageSendInfo]) {
-            modifierUserInfo = YES;
-        }
-//
-        oldAccounId = [[NSString alloc] initWithFormat:@"%@",playerAccount.accountID];
-        
-		NSString *userId = [NSString stringWithFormat:@"F:%@", ValidateObject([result objectForKey:@"id"], [NSString class])];
-        playerAccount.accountID=userId;
-		NSUserDefaults *uDef = [NSUserDefaults standardUserDefaults];
-        NSString *playerName=[NSString stringWithFormat:@"%@", ValidateObject([result objectForKey:@"name"], [NSString class])];
-                
-        if ([playerAccount.accountName isEqualToString:@"Anonymous"]||[playerAccount.accountName isEqualToString:@""]||!playerAccount.accountName) {
-            [playerAccount setAccountName:playerName];  
-        } 
-        playerAccount.facebookName=playerName;
-        
-        NSDictionary *data = ValidateObject([result objectForKey:@"picture"], [NSDictionary class]);
-        NSDictionary *imageDictionary = ValidateObject([data objectForKey:@"data"], [NSDictionary class]);
-        playerAccount.avatar=[NSString stringWithFormat:@"%@", ValidateObject([imageDictionary objectForKey:@"url"], [NSString class])];
-        
-        playerAccount.age=[NSString stringWithFormat:@"%@", ValidateObject([result objectForKey:@"birthday"], [NSString class])];
-        
-        NSDictionary *town=ValidateObject([result objectForKey:@"location"], [NSDictionary class]);
-        playerAccount.homeTown=[NSString stringWithFormat:@"%@", ValidateObject([town objectForKey:@"name"], [NSString class])];
-        
-        [playerAccount saveAge];
-        [playerAccount saveHomeTown];
-        [playerAccount saveFacebookName];
-        [playerAccount saveAvatar];
-        
-        [uDef setObject:ValidateObject(playerAccount.accountID, [NSString class]) forKey:@"id"];
-        
-        [uDef setObject:ValidateObject(playerAccount.accountName, [NSString class]) forKey:@"name"];
-            
-        [uDef synchronize];
-        
-        [self authorizationModifier:modifierUserInfo];
-    }
-
-}
 
 - (void)dealloc {
 //    [super dealloc];
@@ -1343,9 +1334,9 @@ static StartViewController *sharedHelper = nil;
 
 -(BOOL)isAdvertisingOfNewVersionNeedShow;
 {
-    AdvertisingNewVersionViewController *advertisingNewVersionViewController=[[AdvertisingNewVersionViewController alloc] init];
-    if ([advertisingNewVersionViewController isAdvertisingNeed]) {
-        [self presentModalViewController:advertisingNewVersionViewController animated:NO];
+     self.advertisingNewVersionViewController=[[AdvertisingNewVersionViewController alloc] init];
+    if ([self.advertisingNewVersionViewController advertisingNeed]) {
+        [self.navigationController pushViewController:self.advertisingNewVersionViewController animated:NO];
         return YES;
     }else {
         return NO;
@@ -1371,7 +1362,7 @@ static StartViewController *sharedHelper = nil;
 {
     NSString *LoginForIPad=[[NSUserDefaults standardUserDefaults] stringForKey:@"IPad"];
     if (LoginForIPad&&(![[OGHelper sharedInstance] isAuthorized])) {
-        LoginViewController *loginViewControllerLocal =[LoginViewController sharedInstance];
+        LoginAnimatedViewController *loginViewControllerLocal =[LoginAnimatedViewController sharedInstance];
         
         loginViewControllerLocal.startViewController = self;
         [self.navigationController pushViewController:loginViewControllerLocal animated:YES];

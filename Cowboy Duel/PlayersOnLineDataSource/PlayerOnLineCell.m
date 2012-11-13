@@ -4,6 +4,7 @@
 #import "UIButton+Image+Title.h"
 #import "Utils.h"
 #import "UIView+Dinamic_BackGround.h"
+#import "SSServer.h"
 @interface PlayerOnLineCell(){
     NSNumberFormatter *numberFormatter;
 }
@@ -49,24 +50,26 @@
     [backGround setDinamicHeightBackground];
 }
 
--(void) populateWithPlayer:(CDPlayerOnLine *)player;
+-(void) populateWithPlayer:(SSServer *)player;
 {
     [self setPlayerIcon:[UIImage imageNamed:@"pv_photo_default.png"]];
     
-    self.playerName.text=player.dNickName;
+    self.playerName.text=player.displayName;
     
-    NSString *formattedNumberString = [numberFormatter stringFromNumber:[NSNumber numberWithInt:( player.dMoney)]];
+    NSString *formattedNumberString = [numberFormatter stringFromNumber:player.money];
     self.gold.text=[NSString stringWithFormat:@"money %@",formattedNumberString];
     
-    NSString *nameOfRank=[NSString stringWithFormat:@"%dRank",player.dLevel];
+    NSString *nameOfRank=[NSString stringWithFormat:@"%@Rank",player.rank];
     self.rank.text = NSLocalizedString(nameOfRank, @"");
-    
-    if(player.dOnline){
-        self.status.text=NSLocalizedString(@"OnLine", @"");
+  NSLog(@"%@", player.status);
+    if([player.status isEqualToString: @"A"]){
+        self.status.text = NSLocalizedString(@"Available", @"");
         self.status.textColor = [UIColor blackColor];
+        [self.btnDuel setEnabled:YES];
     }else {
-        self.status.text=NSLocalizedString(@"OffLine", @"");
+        self.status.text=NSLocalizedString(@"Busy", @"");
         self.status.textColor = [UIColor redColor];
+        [self.btnDuel setEnabled:NO];
     }
     
     [self hideIndicatorConnectin];

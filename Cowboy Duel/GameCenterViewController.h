@@ -10,10 +10,6 @@
 #import <UIKit/UIKit.h>
 #import "DuelViewController.h"
 #import "GCHelper.h"
-//#import "BluetoothViewController.h"
-
-#import "MultiplayerClientViewController.h"
-#import "MultiplayerServerViewController.h"
 
 
 #define MAX_LENGTH 50
@@ -41,8 +37,6 @@ typedef struct {
     AccountDataSource *playerAccount;
     AccountDataSource *oponentAccount;
 
-    MultiplayerClientViewController *multiplayerClientViewController;
-    MultiplayerServerViewController *multiplayerServerViewController;
     StartViewController *startViewController;
 
     UIAlertView *baseAlert;
@@ -85,14 +79,11 @@ typedef struct {
 @property(strong)id<DuelViewControllerDelegate> delegate;
 @property(strong)id<DuelStartViewControllerDelegate> delegate2;
 @property(strong,nonatomic)DuelStartViewController *duelStartViewController;
-@property(strong, readwrite) MultiplayerClientViewController *multiplayerClientViewController;
-@property(strong, readwrite) MultiplayerServerViewController *multiplayerServerViewController;
 @property( unsafe_unretained, readwrite) UIViewController *parentVC;
 @property(nonatomic) BOOL opponentEndMatch;
 @property(nonatomic) BOOL userEndMatch;
 @property(nonatomic) BOOL typeGameWithMessage;
 @property(nonatomic) BOOL userCanceledMatch;
-@property(strong, readwrite) id multiplayerViewController;
 
 
 +(id)sharedInstance:(AccountDataSource *)userAccount andParentVC:(id)view;

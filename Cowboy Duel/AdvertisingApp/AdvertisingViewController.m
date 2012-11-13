@@ -10,6 +10,7 @@
 #import "UIView+Dinamic_BackGround.h"
 
 @interface AdvertisingViewController()
+@property (strong, nonatomic) IBOutlet UIView *view;
 
 @end
 
@@ -19,10 +20,11 @@
 @synthesize titleView;
 @synthesize webBody;
 @synthesize _btnAppStore;
+@synthesize advertisingNeed;
 
--(id)init;
+-(id)initWithNib;
 {
-    self = [super initWithNibName:@"AdvertisingViewController" bundle:[NSBundle mainBundle]];
+    self = [super initWithNibName:@"AdvertisingViewController.xib" bundle:nil];
     if (self) {
         _collectionAppWrapper=[[CollectionAppWrapper alloc] init];
     }
@@ -30,6 +32,7 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [bodyView setDinamicHeightBackground];
 }
 
@@ -48,5 +51,9 @@
 -(IBAction)btnSkipClick:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
+}
+- (void)viewDidUnload {
+    [self setView:nil];
+    [super viewDidUnload];
 }
 @end

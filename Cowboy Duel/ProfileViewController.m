@@ -13,14 +13,14 @@
 #import "GCHelper.h"
 #import "UIButton+Image+Title.h"
 #import "UIImage+Save.h"
-#import "LoginViewController.h"
+#import "LoginAnimatedViewController.h"
 #import "DuelRewardLogicController.h"
 #import "TopPlayersViewController.h"
 
 @interface ProfileViewController ()
 {
     AccountDataSource *playerAccount;
-    LoginViewController *loginViewController;
+    LoginAnimatedViewController *loginViewController;
     
     NSString *namePlayerSaved;
     
@@ -77,7 +77,7 @@
         needAnimation = NO;
         playerAccount=userAccount;
          
-        loginViewController = [LoginViewController sharedInstance]; 
+        loginViewController = [LoginAnimatedViewController sharedInstance]; 
         loginViewController.startViewController = startViewController;
         
         numberFormatter = [[NSNumberFormatter alloc] init];
@@ -247,6 +247,8 @@
         [self setImageFromFacebook];
     }
     lbFBName.text = playerAccount.accountName;
+    SSConnection *connection = [SSConnection sharedInstance];
+    [connection sendInfoPacket];
 }
 
 -(void)changePointsLine:(int)points maxValue:(int) maxValue animated:(BOOL)animated;
@@ -384,7 +386,9 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if(textField.text.length != 0){
-        playerAccount.accountName = [NSString stringWithFormat:@"%@",  textField.text];
+        const char *name = [textField.text cStringUsingEncoding:NSUTF8StringEncoding];
+        playerAccount.accountName = [NSString stringWithCString:name encoding:NSUTF8StringEncoding];
+      
         NSUserDefaults *usrDef = [NSUserDefaults standardUserDefaults];
         [usrDef setObject:ValidateObject(playerAccount.accountName, [NSString class]) forKey:@"name"];
         [usrDef synchronize];
@@ -460,8 +464,8 @@
 
 - (IBAction)btnFBLoginClick:(id)sender {
     [ivBlack setHidden:NO];
-    [[LoginViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusSimple];
-    [loginViewController fbLoginBtnClick:self];
+    [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusSimple];
+    [loginViewController loginButtonClick:self];
 }
 
 - (IBAction)btnFBLogOutClick:(id)sender {

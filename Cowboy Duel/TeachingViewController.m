@@ -66,7 +66,10 @@ static NSString *ShotSound = @"%@/shot.mp3";
     [super viewWillAppear:animated];
     [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(3.0 / 60.0)];
     [[UIAccelerometer sharedAccelerometer] setDelegate:self];
-    
+    if (opAccount.bot) {
+      [helpViewShots removeFromSuperview];
+      [helpViewSound removeFromSuperview];
+    }
     if (![helpViewShots isDescendantOfView:super.view]) {
         [self cancelShotsClick:self];
     }

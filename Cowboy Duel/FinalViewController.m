@@ -85,7 +85,7 @@
         }
         
         DLog(@"Time final %d  %d",userTime,oponentTime);
-        stGA=[[NSString alloc] init];
+        stGA = [[NSString alloc] init];
         
         if([delegateController isKindOfClass:[TeachingViewController class]]){
             if (duelWithBotCheck) {
@@ -145,17 +145,18 @@
             }
         
         resoultDataSource.foll = NO;
+        resoultDataSource.deadHeat = NO;
         falseLabel =  NSLocalizedString(@"False", @"");
         foll = NO;
         
-        if (userTime == 999999) {
+        if ((userTime == 999999) && (oponentTime != 999999)) {
             falseLabel = NSLocalizedString(@"False", @"") ;
             [delegate increaseMutchNumberLose];
             [delegate increaseMutchNumber];
             resoultDataSource.foll = YES;
             resoultDataSource.result = YES;
         }
-        if (oponentTime == 999999){ 
+        if ((oponentTime == 999999) && (userTime != 999999)){ 
             falseLabel =  NSLocalizedString(@"Falses", @"");
             [delegate increaseMutchNumberWin];
             // added               
@@ -165,6 +166,13 @@
             resoultDataSource.foll = YES;
             resoultDataSource.result = NO;
             DLog(@"Oponent fouled");
+        }
+        if ((userTime == 999999) && (oponentTime == 999999))
+        {
+            //falseLabel =  NSLocalizedString(@"Bouth false", @"");
+            resoultDataSource.deadHeat = YES;
+            resoultDataSource.foll = YES;
+            resoultDataSource.result = YES;
         }
         
         fMutchNumberWin = [delegate fMutchNumberWin];
@@ -270,7 +278,7 @@
     activityIndicatorView = [[ActivityIndicatorView alloc] init];
     
     CGRect frame=activityIndicatorView.frame;
-    frame.origin=CGPointMake(-80, 0);
+    frame.origin=CGPointMake(0, 0);
     activityIndicatorView.frame=frame;
     
     [self.view addSubview:activityIndicatorView];
@@ -428,13 +436,12 @@
     lblWinGold.text = [NSString stringWithFormat:@"%@%d", @"$", moneyExch];
     
     [lblGold setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:45]];
-    [lblPoints setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:25]];
     [lblGoldTitle setFont:[UIFont fontWithName: @"DecreeNarrow" size:30]];
-    [lblPointsTitle setFont:[UIFont fontWithName: @"DecreeNarrow" size:15]];
     
-    
-    lblPoints.gradientStartColor = [UIColor colorWithRed:84.0/255.0 green:229.0/255.0 blue:255.0/255.0 alpha:1.0];
-    lblPoints.gradientEndColor = [UIColor colorWithRed:0.0 green:155.0/255.0 blue:195.0/255.0 alpha:1.0];
+    [lblGoldPlus setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:45]];
+    lblGoldPlus.text = [NSString stringWithFormat:@"-%d",moneyExch];
+    lblGoldPlus.gradientStartColor = [UIColor colorWithRed:255.0/255.0 green:181.0/255.0 blue:0.0/255.0 alpha:1.0];
+    lblGoldPlus.gradientEndColor = [UIColor colorWithRed:255.0/255.0 green:140.0/255.0 blue:0.0/255.0 alpha:1.0];
     
     lblGold.gradientStartColor = [UIColor colorWithRed:255.0/255.0 green:181.0/255.0 blue:0.0/255.0 alpha:1.0];
     lblGold.gradientEndColor = [UIColor colorWithRed:255.0/255.0 green:140.0/255.0 blue:0.0/255.0 alpha:1.0];
@@ -449,6 +456,7 @@
         oponentAccount.money += moneyExch;
         
         int difference=playerAccount.money-moneyExch;
+        oldMoneyForAnimation = difference;
         if(difference>0){
             playerAccount.money -= moneyExch;
             transaction.trType = [NSNumber numberWithInt:-1];
@@ -475,7 +483,6 @@
         
         pointsForMatch=[self getPointsForLose];        
     }
-    [self animationWithLable:lblGold andStartNumber:oldMoney andEndNumber:[AccountDataSource sharedInstance].money];
     
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Lose.mp3", [[NSBundle mainBundle] resourcePath]]];
     NSError *error;
@@ -483,21 +490,36 @@
     [player play];
     [player setNumberOfLoops:0];
     
-    loserImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fin_img_loser.png"]];
+    loserImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fv_new_corpse.png"]];
     CGRect frame = loserImg.frame;
     frame.origin.y = 60;
-    frame.origin.x = 37;
+    frame.origin.x = 0;
     loserImg.frame = frame;
     [viewLastSceneAnimation addSubview:loserImg];
     
-    loserSpiritImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fin_img_spirit.png"]];
+    loserSpiritImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fv_new_corpse_shadow.png"]];
     frame = loserSpiritImg.frame;
     frame.origin.y = 280;
-    frame.origin.x = 17;
+    frame.origin.x = 0;
     loserSpiritImg.frame = frame;
     [viewLastSceneAnimation addSubview:loserSpiritImg];
     [loserSpiritImg setHidden:YES];
     
+    loserMoneyImg = [[UIImageView alloc]initWithImage: [UIImage imageNamed:@"fv_new_money_dropped.png"]];
+    frame = loserMoneyImg.frame;
+    frame.origin.x = 20;
+    frame.origin.y = ivGoldCoin.frame.origin.y + goldPointBgView.frame.origin.y;
+    loserMoneyImg.frame = frame;
+    [viewLastSceneAnimation addSubview:loserMoneyImg];
+    [loserMoneyImg setHidden:YES];
+    
+    frame = lblGoldPlus.frame;
+    frame.origin.y = 40;
+    frame.origin.x = 0;
+    lblGoldPlus.frame = frame;
+    [viewLastSceneAnimation addSubview:lblGoldPlus];
+    [lblGoldPlus setHidden:YES];   
+
     [lblLoseEarned setFont: [UIFont fontWithName: @"MyriadPro-Semibold" size:13]];
     [lblLoseLost setFont: [UIFont fontWithName: @"MyriadPro-Semibold" size:13]];
     [lblLoseGold setFont: [UIFont fontWithName: @"MyriadPro-Semibold" size:13]];
@@ -534,18 +556,18 @@
     [gameStatusLable setFont:[UIFont fontWithName: @"DecreeNarrow" size:30]];
     
     lblWinGold.text = [NSString stringWithFormat:@"%@%d", @"$", moneyExch];
-    
+   lblGoldPlus.text = [NSString stringWithFormat:@"+%d",moneyExch];
+   
     [lblGold setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:45]];
-    [lblPoints setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:25]];
+    [lblGoldPlus setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:45]];
     [lblGoldTitle setFont:[UIFont fontWithName: @"DecreeNarrow" size:30]];
-    [lblPointsTitle setFont:[UIFont fontWithName: @"DecreeNarrow" size:15]];
     
-    lblPoints.gradientStartColor = [UIColor colorWithRed:84.0/255.0 green:229.0/255.0 blue:255.0/255.0 alpha:1.0];
-    lblPoints.gradientEndColor = [UIColor colorWithRed:0.0 green:155.0/255.0 blue:195.0/255.0 alpha:1.0];
+    lblGoldPlus.hidden = NO;
+    lblGoldPlus.gradientStartColor = [UIColor colorWithRed:255.0/255.0 green:181.0/255.0 blue:0.0/255.0 alpha:1.0];
+    lblGoldPlus.gradientEndColor = [UIColor colorWithRed:255.0/255.0 green:140.0/255.0 blue:0.0/255.0 alpha:1.0];
     
     lblGold.gradientStartColor = [UIColor colorWithRed:255.0/255.0 green:181.0/255.0 blue:0.0/255.0 alpha:1.0];
     lblGold.gradientEndColor = [UIColor colorWithRed:255.0/255.0 green:140.0/255.0 blue:0.0/255.0 alpha:1.0];
-    [self animationWithLable:lblGold andStartNumber:[AccountDataSource sharedInstance].money andEndNumber:[AccountDataSource sharedInstance].money + moneyExch];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                         object:self
@@ -555,6 +577,7 @@
             [[GCHelper sharedInstance] reportScore:moneyExch forCategory:GC_LEADEBOARD_MONEY];
 // above
         oldMoney=playerAccount.money;
+        oldMoneyForAnimation = playerAccount.money;
         playerAccount.money += moneyExch;
         oponentAccount.money -= moneyExch;
         
@@ -597,17 +620,22 @@
     
     winnerImg1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fin_img_money.png"]];
     CGRect frame = winnerImg1.frame;
-    frame.origin.y = 210;
+    frame.origin.y = 230;
     frame.origin.x = -150;
     winnerImg1.frame = frame;
     [viewLastSceneAnimation addSubview:winnerImg1];
     
     winnerImg2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fin_img_money2.png"]];
     frame = winnerImg2.frame;
-    frame.origin.y = 330;
+    frame.origin.y = 340;
     frame.origin.x = 320;
     winnerImg2.frame = frame;
     [viewLastSceneAnimation addSubview:winnerImg2];
+
+    frame = lblGoldPlus.frame;
+    frame.origin.x -= 200;
+    lblGoldPlus.frame = frame;
+    [viewLastSceneAnimation addSubview:lblGoldPlus];
 
     UIFont *labelsFont = [UIFont fontWithName: @"MyriadPro-Semibold" size:13];
     [lblWinEarned setFont:labelsFont];
@@ -644,12 +672,6 @@
     lblGold.innerShadowColor = [UIColor whiteColor];
     lblGold.innerShadowOffset=CGSizeMake(1.0, 1.0);
     lblGold.shadowBlur = 1.0;
-    
-    lblPoints.shadowColor = [UIColor whiteColor];
-    lblPoints.shadowOffset=CGSizeMake(1.0, 1.0);
-    lblPoints.innerShadowColor = [UIColor whiteColor];
-    lblPoints.innerShadowOffset=CGSizeMake(1.0, 1.0);
-    lblPoints.shadowBlur = 1.0;
     
     [statView setHidden:YES];
     [goldPointBgView setDinamicHeightBackground];
@@ -725,7 +747,12 @@
         
         [[StartViewController sharedInstance] modifierUser];
     }
-    
+
+    NSString *name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel];
+    ivCurrentRank.image = [UIImage imageNamed:name];
+    name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel+1];
+    ivNextRank.image = [UIImage imageNamed:name];
+
     if (fMutchNumberLose == 2) {
         [self loseAnimation];
     }
@@ -736,12 +763,12 @@
     }
     [self.view bringSubviewToFront:activityIndicatorView ];
     
-    if (duelWithBotCheck) {
-        int randomTime = (arc4random() % 1);
-        if (randomTime==0) {
-            [self performSelector:@selector(startBotDuelTryAgain) withObject:self afterDelay:5.0];
-        }
-    }
+//    if (duelWithBotCheck) {
+//        int randomTime = (arc4random() % 1);
+//        if (randomTime==0) {
+//            [self performSelector:@selector(startBotDuelTryAgain) withObject:self afterDelay:5.0];
+//        }
+//    }
 }
 
 #pragma mark -
@@ -803,11 +830,19 @@
             NSString *text=NSLocalizedString(@"win", @"");
             customText.text=[text uppercaseString];
         }else{
-            cell.imageView.image = [UIImage imageNamed:@"fin_img_table_lose_new.png"];
-            cell.textLabel.text = NSLocalizedString(@"False", @"");
+            if (!rDataSource.deadHeat) {
+                cell.imageView.image = [UIImage imageNamed:@"fin_img_table_lose_new.png"];
+                cell.textLabel.text = NSLocalizedString(@"False", @"");
+                
+                NSString *text=NSLocalizedString(@"You lost", @"");
+                customText.text=[text uppercaseString];
+            }
+            else {
+                cell.imageView.image = [UIImage imageNamed:@"fin_img_table_lose_new.png"];
+                cell.textLabel.text = NSLocalizedString(@"Bouth false", @"");
+
+            }
             
-            NSString *text=NSLocalizedString(@"You lost", @"");
-            customText.text=[text uppercaseString];
 
         }
     }
@@ -860,19 +895,90 @@
 
 -(void)winAnimation
 {
-    //winnerImg2.alpha = 0.0;
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationBeginsFromCurrentState:YES]; 
-	[UIView setAnimationCurve:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction];
-    [UIView setAnimationDuration:1.2f];
-	[UIView setAnimationDelegate:self];
-    CGRect frame = winnerImg1.frame;
-    frame.origin.x += 200;
-    winnerImg1.frame = frame;
-    frame = winnerImg2.frame;
-    frame.origin.x -= 230;
-    winnerImg2.frame = frame;
-    [UIView commitAnimations];
+  [lblGoldPlus setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:45]];
+  lblGold.text = [NSString stringWithFormat:@"%d",oldMoneyForAnimation];
+
+  CGRect frame1 = winnerImg1.frame;
+  frame1.origin.x += 200;
+  CGRect frame = winnerImg2.frame;
+  frame.origin.x -= 230;
+  CGRect movePlus = lblGoldPlus.frame;
+  movePlus.origin.x += 200;
+  
+  CGRect moveGoldToCoin = winnerImg2.frame;
+  moveGoldToCoin.origin.x = ivGoldCoin.frame.origin.x + goldPointBgView.frame.origin.x - 50;
+  moveGoldToCoin.origin.y = ivGoldCoin.frame.origin.y + goldPointBgView.frame.origin.y;
+  
+  CGAffineTransform goldPlusZoomIn = CGAffineTransformScale(lblGoldPlus.transform, 1.5, 1.5);
+  CGAffineTransform goldPlusZoomOut = CGAffineTransformScale(lblGoldPlus.transform, 1, 1);
+  CGAffineTransform goldCoinZoomIn = CGAffineTransformScale(ivGoldCoin.transform, 2, 2);
+  CGAffineTransform goldCoinZoomOut = CGAffineTransformScale(ivGoldCoin.transform, 1, 1);
+  CGAffineTransform goldZoomIn = CGAffineTransformScale(winnerImg2.transform, 0.5, 0.5);
+  
+  NSArray *array=[DuelRewardLogicController getStaticPointsForEachLevels];
+  
+  if (playerAccount.accountLevel < 0 || playerAccount.accountLevel > 10 ){
+    [playerAccount setAccountLevel:10];
+  }
+  
+  NSInteger num = playerAccount.accountLevel;
+  int  moneyForNextLevel=[[array objectAtIndex:num] intValue];
+  
+  int moneyForPrewLevel;
+  if (playerAccount.accountLevel==0) {
+    moneyForPrewLevel = 0;
+  }else{
+    moneyForPrewLevel=[[array objectAtIndex:(playerAccount.accountLevel-1)] intValue];
+  }
+  
+  
+  int curentPoints=(playerAccount.accountPoints-moneyForPrewLevel);
+  int maxPoints=(moneyForNextLevel-moneyForPrewLevel);
+  CGRect temp = ivBlueLine.frame;
+  temp.size.width = 0;
+  ivBlueLine.frame = temp;
+  
+  int pointsForMatch=[self getPointsForWin];
+
+  
+  [UIView animateWithDuration:0.7
+                        delay:0 options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction
+                   animations:^{
+                     winnerImg1.frame = frame1;
+                     winnerImg2.frame = frame;
+                     lblGoldPlus.frame = movePlus;
+                   } completion:^(BOOL finished) {
+                     [UIView animateWithDuration:0.7 delay:0.0 options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction
+                                      animations:^{
+                                        lblGoldPlus.transform = goldPlusZoomIn;
+                                      } completion:^(BOOL finished) {
+                                        [UIView animateWithDuration:0.5 animations:^{
+                                          lblGoldPlus.transform = goldPlusZoomOut;
+                                          
+                                        } completion:^(BOOL finished) {
+                                          [UIView animateWithDuration:0.7 animations:^{
+                                            ivGoldCoin.transform = goldCoinZoomIn;
+                                            winnerImg2.frame = moveGoldToCoin;
+
+                                          } completion:^(BOOL finished) {
+                                            [UIView animateWithDuration:0.5 animations:^{
+                                              ivGoldCoin.transform = goldCoinZoomOut;
+                                              winnerImg2.transform = goldZoomIn;
+                                              [winnerImg2 setAlpha:0.0];
+                                            } completion:^(BOOL finished) {
+                                              [self animationWithLable:lblGold andStartNumber:oldMoneyForAnimation andEndNumber:playerAccount.money];
+                                              [self changePointsLine:curentPoints maxValue:maxPoints animated:YES];
+                                              [self animationWithLable:lblPoints andStartNumber:playerAccount.accountPoints - pointsForMatch andEndNumber:playerAccount.accountPoints];
+                                              
+                                            }];
+                                          }];
+          
+                                        }];
+                                        
+
+                                     }];
+                     
+                   }];
 }
 
 -(void)prepeareForWinScene;
@@ -889,57 +995,120 @@
 -(void)loseAnimation
 {
     loserImg.hidden = NO;
+  if (teaching) oldMoneyForAnimation = [AccountDataSource sharedInstance].money;
+  loserMoneyImg.hidden = YES;
+  lblGold.text = [NSString stringWithFormat:@"%d",[AccountDataSource sharedInstance].money];
+  CGAffineTransform goldPlusZoomOut = CGAffineTransformScale(lblGoldPlus.transform, 1.5, 1.5);
+  CGAffineTransform goldPlusZoomIn = CGAffineTransformScale(lblGoldPlus.transform, 1, 1);
 
-    [UIView animateWithDuration:1.2 delay:0.0
-        options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction animations:^{
-        CGRect frame = loserImg.frame;
-        frame.origin.y += 230;
-        loserImg.frame = frame;
-        
-    }
-                     completion:^(BOOL completion){
-                         [loserSpiritImg setHidden:NO];
-                         [UIView animateWithDuration:0.5 delay:0.0
-                            options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction animations:^{
-                             CGRect frame = loserSpiritImg.frame;
-                             frame.origin.y -= 25;
-                             frame.origin.x += 20;
-                             loserSpiritImg.frame = frame;
-                             loserSpiritImg.transform = CGAffineTransformMakeScale(0.9, 0.9);
-                             loserSpiritImg.alpha = 0.6;
-                             
-                         }
-                                          completion:^(BOOL completion){
-                                              [UIView animateWithDuration:1.0 delay:0.0
-                                                options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction animations:^{
-                                                  CGRect frame = loserSpiritImg.frame;
-                                                  frame.origin.y -= 50;
-                                                  frame.origin.x -= 40;
-                                                  loserSpiritImg.frame = frame;
-                                                  loserSpiritImg.transform = CGAffineTransformMakeScale(0.8, 0.8);
-                                                  loserSpiritImg.alpha = 0.3;
-                                                  
-                                              }
-                                                               completion:^(BOOL completion){
-                                                                   [UIView animateWithDuration:2.0 delay:0.0
-                                                                    options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction animations:^{
-                                                                       CGRect frame = loserSpiritImg.frame;
-                                                                       frame.origin.y -= 100;
-                                                                       frame.origin.x += 80;
-                                                                       loserSpiritImg.frame = frame;
-                                                                       loserSpiritImg.transform = CGAffineTransformMakeScale(0.7, 0.7);
-                                                                       loserSpiritImg.alpha = 0.0;
-                                                                       
-                                                                   }
-                                                                                    completion:^(BOOL completion){
-                                                                                        
-                                                                                    }];
-                                                               }];
-                                          }];
-                          }];
-    
-    }
+  CGAffineTransform goldDroppedZoomIn = CGAffineTransformScale(loserMoneyImg.transform, 0.1, 0.1);
+  CGAffineTransform goldDroppedZoomOut = CGAffineTransformScale(loserMoneyImg.transform, 1.0, 1.0);
+  
+  CGAffineTransform goldMove = CGAffineTransformTranslate(goldDroppedZoomOut, +100, +195.0);
+  lblGoldPlus.hidden = NO;
 
+  CGRect temp = ivBlueLine.frame;
+  temp.size.width = 0;
+  ivBlueLine.frame = temp;
+  
+  CGRect frame = loserImg.frame;
+  frame.origin.x = -200;
+  frame.origin.y += 230;
+  loserImg.frame = frame;
+  
+  CGRect moveLoserToScreen = frame;
+  moveLoserToScreen.origin.x = 0;
+  
+  frame = lblGoldPlus.frame;
+  frame.origin.x = 320;
+  frame.origin.y = loserImg.frame.origin.y;
+  lblGoldPlus.frame = frame;
+  CGRect moveMinusToScreen = lblGoldPlus.frame;
+  moveMinusToScreen.origin.x = 0;
+  
+  CGRect moneyDropBup = loserMoneyImg.frame;
+  moneyDropBup.origin.x = ivGoldCoin.frame.origin.x - loserMoneyImg.frame.size.width/2;// + goldPointBgView.frame.origin.x;
+  moneyDropBup.origin.y = ivGoldCoin.frame.origin.y + goldPointBgView.frame.origin.y;
+  loserMoneyImg.frame = moneyDropBup;
+  loserMoneyImg.transform = goldDroppedZoomIn;
+  
+  [lblGoldPlus setHidden:NO];
+  
+  [UIView animateWithDuration:1.2 delay:0.0
+    options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction animations:^{
+      loserImg.frame = moveLoserToScreen;
+      lblGoldPlus.frame = moveMinusToScreen;
+    }
+    completion:^(BOOL completion){
+      [loserSpiritImg setHidden:NO];
+      
+      [UIView animateWithDuration:0.5 delay:0.0
+          options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction animations:^{
+           CGRect frame = loserSpiritImg.frame;
+           frame.origin.y -= 25;
+           frame.origin.x += 20;
+           loserSpiritImg.frame = frame;
+           loserSpiritImg.transform = CGAffineTransformMakeScale(0.9, 0.9);
+           loserSpiritImg.alpha = 0.6;
+           
+         }
+         completion:^(BOOL completion){
+            [UIView animateWithDuration:0.5 delay:0.0
+                                options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction animations:^{
+                                  CGRect frame = loserSpiritImg.frame;
+                                  frame.origin.y -= 50;
+                                  frame.origin.x -= 40;
+                                  loserSpiritImg.frame = frame;
+                                  loserSpiritImg.transform = CGAffineTransformMakeScale(0.8, 0.8);
+                                  loserSpiritImg.alpha = 0.3;
+                                  
+            }
+               completion:^(BOOL completion){
+                 [UIView animateWithDuration:0.5 delay:0.0
+                                     options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction animations:^{
+                                       CGRect frame = loserSpiritImg.frame;
+                                       frame.origin.y -= 100;
+                                       frame.origin.x += 80;
+                                       loserSpiritImg.frame = frame;
+                                       loserSpiritImg.transform = CGAffineTransformMakeScale(0.7, 0.7);
+                                       loserSpiritImg.alpha = 0.0;
+                                       lblGoldPlus.transform = goldPlusZoomOut;
+                                       
+                  }
+                  completion:^(BOOL completion){
+                    loserMoneyImg.hidden = NO;
+                    [UIView animateWithDuration:1.0 animations:^{
+                      loserMoneyImg.transform = goldMove;
+                      lblGoldPlus.transform = goldPlusZoomIn;
+                      CGRect frame = lblGoldPlus.frame;
+                      frame.origin.y -= 50;
+                      lblGoldPlus.frame = frame;
+                      [lblGoldPlus setAlpha:0.0];
+                      [self animationWithLable:lblGold andStartNumber:oldMoneyForAnimation andEndNumber:[AccountDataSource sharedInstance].money];
+                    } completion:^(BOOL finished) {
+  
+                    }];
+                  }];
+             }];
+          }];
+    }];
+  //Blue line animation:
+  NSArray *array=[DuelRewardLogicController getStaticPointsForEachLevels];
+  if (playerAccount.accountLevel < 0 || playerAccount.accountLevel > 10 ){
+    [playerAccount setAccountLevel:10];
+  }
+  NSInteger num = playerAccount.accountLevel;
+  int  moneyForNextLevel=[[array objectAtIndex:num] intValue];
+  int moneyForPrewLevel;
+  if (playerAccount.accountLevel==0) {
+    moneyForPrewLevel = 0;
+  }else{
+    moneyForPrewLevel=[[array objectAtIndex:(playerAccount.accountLevel-1)] intValue];
+  }
+  int curentPoints=(playerAccount.accountPoints-moneyForPrewLevel);
+  int maxPoints=(moneyForNextLevel-moneyForPrewLevel);
+  [self changePointsLine:curentPoints maxValue:maxPoints animated:NO];
+}
 
 #pragma mark - check Level, Points change and other saved features
 
@@ -1078,35 +1247,79 @@
     lblPoints = nil;
     lblGoldTitle = nil;
     lblPointsTitle = nil;
+    ivGoldCoin = nil;
+    ivBlueLine = nil;
+    ivCurrentRank = nil;
+    ivNextRank = nil;
+    lblGoldPlus = nil;
     [super viewDidUnload];
 }
 
 -(void)animationWithLable:(UILabel *)lable andStartNumber:(int)startNumber andEndNumber:(int)endNumber
 {
+  float goldForGoldAnimation;
+  if (endNumber - startNumber < 200) {
+    goldForGoldAnimation = 1;
+  }else {
+    goldForGoldAnimation = (endNumber - startNumber)/200;
+  }
+  if (startNumber<endNumber)
     dispatch_async(dispatch_queue_create([lable.text cStringUsingEncoding:NSUTF8StringEncoding], NULL), ^{
-        float goldForGoldAnimation;
-        if (endNumber - startNumber < 200) {
-            goldForGoldAnimation = 1;
-        }else {
-            goldForGoldAnimation = (endNumber - startNumber)/200;
-        }
+      {
         for (int i = startNumber; i <= endNumber; i += goldForGoldAnimation) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                lable.text = [NSString stringWithFormat:@"%d", i];
-            });
+          dispatch_async(dispatch_get_main_queue(), ^{
             
-            [NSThread sleepForTimeInterval:0.02];
-            
-            
+            lable.text = [NSString stringWithFormat:@"%d", i];
+          });
+          
+          [NSThread sleepForTimeInterval:0.02];
+          
+          
         }
         dispatch_async(dispatch_get_main_queue(), ^{
-            lable.text = [NSString stringWithFormat:@"%d", endNumber];
+          lable.text = [NSString stringWithFormat:@"%d", endNumber];
         });
+        
+      }
     });
-    
+  else
+    dispatch_async(dispatch_queue_create([lable.text cStringUsingEncoding:NSUTF8StringEncoding], NULL), ^{
+      for (int i = startNumber; i >= endNumber; i -= goldForGoldAnimation) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+          
+          lable.text = [NSString stringWithFormat:@"%d", i];
+        });
+        
+        [NSThread sleepForTimeInterval:0.02];
+      }
+      dispatch_async(dispatch_get_main_queue(), ^{
+        lable.text = [NSString stringWithFormat:@"%d", endNumber];
+      });
+    });
 }
 
+-(void)changePointsLine:(int)points maxValue:(int) maxValue animated:(BOOL)animated;
+{
+  
+  CGRect backup = ivBlueLine.frame;
+  CGRect temp = backup;
+  temp.size.width = 0;
+  ivBlueLine.frame = temp;
+  
+  if (points <= 0) points = 0;
+  int firstWidthOfLine=130;
+  float changeWidth=(points*firstWidthOfLine)/maxValue;
+  
+  temp.size.width = changeWidth;
+  
+  if (animated) {
+      [UIView animateWithDuration:1.4 animations:^{
+        ivBlueLine.frame = temp;
+      }];
+  }else {
+    ivBlueLine.frame = temp;
+  }
+}
 
 -(void)showViewController:(UIViewController *)viewController
 {

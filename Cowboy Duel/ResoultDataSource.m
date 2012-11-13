@@ -9,7 +9,7 @@
 #import "ResoultDataSource.h"
 
 @implementation ResoultDataSource
-@synthesize deltaTime, mutchNumber, result, foll, UserTime;
+@synthesize deltaTime, mutchNumber, result, foll, UserTime, deadHeat;
 -(id)init
 {
     return self;

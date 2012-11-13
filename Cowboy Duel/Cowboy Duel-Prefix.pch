@@ -11,16 +11,20 @@
 #ifdef __OBJC__
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import "GADBannerView.h"
+#import "GADRequest.h"
+#import "GADBannerViewDelegate.h"
+#import "UIImage+Retina4.h"
 #endif
 
 
 
 
-#define BASE_URL "http://cowboyduel.net/"
+#define BASE_URL "http://v201.cowboyduel.net/"
 #define kTimeOutSeconds 20
 #define kFacebookAppId @"284932561559672"
 #define kFacebookAppToken @"284932561559672|w5GIU7o8TBWuxqPgmyZ7r7FxxKE"
-
+#define kSampleAdUnitID @"a1508f8dc908999"
 #define kNumberOfAdvertisingPerDay 4
 #define NUMBER_REVISION_DEFAULT 2
 #define NUMBER_REVISION_DUEL_PRODUCT_DEFAULT 0
@@ -35,3 +39,9 @@
 #else
 #   define DLog(...)
 #endif
+
+#define MASTER_SERVER_IP @"176.34.226.109"
+#define MASTER_SERVER_PORT @"8888"
+
+//#define MASTER_SERVER_IP @"192.168.0.5"
+//#define MASTER_SERVER_PORT @"8888"
