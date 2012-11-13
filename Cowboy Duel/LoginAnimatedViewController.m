@@ -24,7 +24,6 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
     __unsafe_unretained IBOutlet UIView *activityView;
     __unsafe_unretained IBOutlet UIActivityIndicatorView *activityIndicatorView;
     BOOL tryAgain;
-//    int counterTryAgain;
 }
 @property (nonatomic) int textIndex;
 @property (nonatomic) NSTimer *timer;
@@ -65,9 +64,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
 	if (self) {
         playerAccount=[AccountDataSource sharedInstance];
         loginFacebookStatus = LoginFacebookStatusNone;
-//    if (!counterTryAgain) {
-//          counterTryAgain = 1;
-//    }
     }
     return self;
     
@@ -102,7 +98,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
     self.loginLable.text = NSLocalizedString(@"LOGIN", @"");
     self.loginLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
     
-//    self.donateLable.text = [NSString stringWithFormat:(@"%@ %d$"),  NSLocalizedString(@"DONATE", @""),counterTryAgain];
     self.donateLable.text = NSLocalizedString(@"DONATE 1$", @"");
     self.donateLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
     

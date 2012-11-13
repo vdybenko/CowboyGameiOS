@@ -10,8 +10,9 @@
 #import "StoreDataSource.h"
 #import "AccountDataSource.h"
 #import "PlayersOnLineDataSource.h"
+#import "MKStoreManager.h"
 
-@interface StoreViewController : UIViewController<UITableViewDelegate,TableCellWithButton>
+@interface StoreViewController : UIViewController<UITableViewDelegate,TableCellWithButton,MKStoreKitDelegate>
 @property (strong, nonatomic) StoreDataSource *storeDataSource;
 
 -(id)initWithAccount:(AccountDataSource *)userAccount;
