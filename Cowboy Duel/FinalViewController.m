@@ -671,12 +671,14 @@
         DLog(@"number %d", local);
         playerAccount.glNumber = [NSNumber numberWithInt:local];
         //            transaction.trNumber = [NSNumber numberWithInt:local];
+        transaction.trOpponentID = [NSString stringWithString:oponentAccount.accountID];
         [playerAccount.transactions addObject:transaction];
         
         CDTransaction *opponentTransaction = [CDTransaction new];
         [opponentTransaction setTrDescription:[NSString stringWithString:transaction.trDescription]];
         [opponentTransaction setTrType:[NSNumber numberWithInt:[transaction.trType intValue]]];
         [opponentTransaction setTrMoneyCh:[NSNumber numberWithInt:[transaction.trMoneyCh intValue]]];
+        opponentTransaction.trOpponentID = [NSString stringWithString:playerAccount.accountID];
         [oponentAccount.transactions addObject:opponentTransaction];
         
         NSUserDefaults *def = [NSUserDefaults standardUserDefaults];

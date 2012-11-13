@@ -181,6 +181,7 @@ static AccountDataSource *sharedHelper = nil;
     
     for (CDTransaction *transaction in array) {
         NSMutableDictionary *reason = [NSMutableDictionary dictionary];
+        [reason setObject:transaction.trOpponentID forKey:@"opponent_authen"];
         [reason setObject: [NSNumber numberWithInt:-1] forKey:@"local_id"];
         [reason setObject: [NSNumber numberWithInt:[self crypt:[transaction.trMoneyCh intValue]]] forKey:@"transaction_id"];
         [reason setObject:transaction.trDescription forKey:@"description"];

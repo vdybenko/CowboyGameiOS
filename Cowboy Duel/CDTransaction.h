@@ -15,6 +15,7 @@
     NSString * trDescription;
     NSNumber * trLocalID;
     NSNumber * trGlobalID;
+    NSString * trOpponentID;
    
 }
 
@@ -23,5 +24,6 @@
 @property(nonatomic, strong) NSString *trDescription;
 @property(nonatomic, strong) NSNumber *trLocalID;
 @property(nonatomic, strong) NSNumber *trGlobalID;
+@property(nonatomic, strong) NSString * trOpponentID;
 
 @end
