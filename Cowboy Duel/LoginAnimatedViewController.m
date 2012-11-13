@@ -274,6 +274,8 @@ static LoginAnimatedViewController *sharedHelper = nil;
 }
 
 - (IBAction)donateButtonClick:(id)sender {
+    [self.player stop];
+    [self.player setVolume:0.0];
     if (payment) {
         [[MKStoreManager sharedManager] buyFeatureA];
         [activityView setHidden:NO];
@@ -299,6 +301,8 @@ static LoginAnimatedViewController *sharedHelper = nil;
 }
 
 - (IBAction)loginButtonClick:(id)sender {
+//    [self.player stop];
+//    [self.player setVolume:0.0];
     [self initFacebook];
     
     TestAppDelegate *testAppDelegate = (TestAppDelegate *) [[UIApplication sharedApplication] delegate];
@@ -361,6 +365,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
             default:
                 break;
         }
+        [self.player setVolume:0.0];
     }
     
 }
@@ -535,6 +540,10 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [self setDonateLable:nil];
     [self setLoginLable:nil];
     [self setTryAgainLable:nil];
+    [self setPlayer:nil];
+    [CATransaction begin];
+    [self.view.layer removeAllAnimations];
+    [CATransaction commit];
     [super viewDidUnload];
 }
 @end
