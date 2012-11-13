@@ -12,10 +12,12 @@
 #import "UIButton+Image+Title.h"
 #import "DuelProductDownloaderController.h"
 #import "UIImage+Save.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface StoreProductCell()
 {
     UILabel *buttonLabel;
+    UILabel *ribbonLabel;
 }
 @property (strong,nonatomic) IBOutlet UIView * backGround;
 @property (strong,nonatomic) IBOutlet UIImageView * icon;
@@ -26,6 +28,12 @@
 @property (strong,nonatomic) IBOutlet UILabel * name;
 @property (strong,nonatomic) IBOutlet UILabel * descriptionText;
 @property (strong,nonatomic) IBOutlet UILabel * countOfUse;
+@property (strong,nonatomic) IBOutlet UIView * curentGunBlueBackground;
+@property (strong,nonatomic) IBOutlet UIView * lockLevelBackground;
+@property (strong,nonatomic) IBOutlet UILabel * lockLevelBackgroundTitle;
+@property (strong,nonatomic) IBOutlet UIImageView * ribbonImage;
+
+
 @property (nonatomic) id buyButtonDelegate;
 @end
 
@@ -42,6 +50,10 @@
 @synthesize buyProduct;
 @synthesize countOfUse;
 @synthesize buyButtonDelegate;
+@synthesize curentGunBlueBackground;
+@synthesize lockLevelBackground;
+@synthesize lockLevelBackgroundTitle;
+@synthesize ribbonImage;
 
 +(StoreProductCell*) cell {
     NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"StoreProductCell" owner:nil options:nil];
@@ -68,19 +80,36 @@
     buttonLabel.textAlignment = UITextAlignmentCenter;
     [buttonLabel setBackgroundColor:[UIColor clearColor]];
     [buttonLabel setTextColor:buttonsTitleColor];
-    [buyProduct addSubview:buttonLabel];    
+    [buyProduct addSubview:buttonLabel];
+    
+    ribbonLabel=[[UILabel alloc] initWithFrame:CGRectMake(1, 21, 40 , 13)];
+    ribbonLabel.font = [UIFont systemFontOfSize:11.0f];
+    ribbonLabel.backgroundColor = [UIColor clearColor];
+    ribbonLabel.textColor=[UIColor whiteColor];
+    [ribbonLabel setTextAlignment:UITextAlignmentCenter];
+    
+    CGFloat angle = M_PI * -0.25;
+    CGAffineTransform transform = CGAffineTransformMakeRotation(angle);
+    ribbonLabel.transform = transform;
+    [ribbonImage addSubview:ribbonLabel];
+
+    
+    lockLevelBackground.clipsToBounds = YES;
+    lockLevelBackground.layer.cornerRadius = 13.f;
 }
 
 -(void) initMainControls;
 {
     [self initWithOutBackGround];
-    [backGround setDinamicHeightBackground];
+    [backGround setDinamicHeightBackground];    
 }
 
 -(void)populateWithProduct:(CDDuelProduct *)product targetToBuyButton:(id)delegate cellType:(StoreDataSourceTypeTables)cellType;
 {
     buyButtonDelegate = delegate;
     buyProduct.hidden = NO;
+    ribbonImage.hidden = YES;
+    curentGunBlueBackground.hidden = YES;
     
     name.text = product.dName;
     if (cellType==StoreDataSourceTypeTablesDefenses) {
@@ -107,6 +136,8 @@
                 buttonLabel.text = NSLocalizedString(@"TRY_IT", @"");
             }else{
                 buttonLabel.text = NSLocalizedString(@"USE", @"");
+                ribbonImage.hidden = NO;
+                ribbonLabel.text = NSLocalizedString(@"BOUGHT", @"");
             }
         }else{
             if (product.dCountOfUse == 0) {
@@ -114,8 +145,14 @@
             }else{
                 if (product.dID == [AccountDataSource sharedInstance].curentIdWeapon) {
                     buyProduct.hidden = YES;
+                    ribbonImage.hidden = NO;
+                    ribbonLabel.text = NSLocalizedString(@"IN_HAND", @"");
+                    curentGunBlueBackground.hidden = NO;
+                }else{
+                    buttonLabel.text = NSLocalizedString(@"USE", @"");
+                    ribbonImage.hidden = NO;
+                    ribbonLabel.text = NSLocalizedString(@"BOUGHT", @"");
                 }
-                buttonLabel.text = NSLocalizedString(@"USE", @"");
             }
         }
     }
@@ -135,13 +172,12 @@
     }
     
     if ([AccountDataSource sharedInstance].accountLevel<product.dLevelLock) {
-        descriptionText.text = [NSString stringWithFormat:@"Lock level %d",product.dLevelLock];
-        descriptionText.textColor = [UIColor redColor];
+        lockLevelBackground.hidden = NO;
         buyProduct.enabled = NO;
+        lockLevelBackgroundTitle.text = [NSString stringWithFormat:@"Lock level %d",product.dLevelLock];
     }else{
-        descriptionText.textColor = name.textColor;
+        lockLevelBackground.hidden = YES;
         buyProduct.enabled = YES;
-        descriptionText.text = product.dDescription;
     }
     
     icon.image = [UIImage loadImageFullPath:[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],product.dIconLocal]];

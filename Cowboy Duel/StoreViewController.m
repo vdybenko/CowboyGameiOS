@@ -135,6 +135,7 @@
             playerAccount.curentIdWeapon = product.dID;
             [playerAccount saveWeapon];
             cell.buyProduct.enabled = YES;
+            loadingView.hidden = YES;
         }
     }else if(storeDataSource.typeOfTable == StoreDataSourceTypeTablesDefenses){
         CDDefenseProduct *product = [storeDataSource.arrItemsList objectAtIndex:indexPath.row];

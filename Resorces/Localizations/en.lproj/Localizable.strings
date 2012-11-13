@@ -308,6 +308,8 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "BUYIT" = "BUY IT";
 "TRY_IT" = "TRY IT";
 "USE" = "USE IT";
+"IN_HAND" = "In hand";
+"BOUGHT" = "Bought";
 "BUYITNOW" = "BUY IT NOW";
 "IT_HELP" = "IT HELP YOU WIN";
 

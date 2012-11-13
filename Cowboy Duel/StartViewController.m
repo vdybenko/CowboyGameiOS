@@ -521,6 +521,8 @@ static StartViewController *sharedHelper = nil;
     [self estimateApp];
     TestAppDelegate *app = (TestAppDelegate *)[[UIApplication sharedApplication] delegate];
     [app.adBanner setHidden:NO];
+    
+    playerAccount.accountLevel = 5;
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
