@@ -11,21 +11,21 @@
 @interface UIImageView_AttachedView()
 {
     BOOL runAnimation;
-    int arrowDirection;
-    int arrowLimitRight;
-    int arrowLimitLeft;
-    int amplitude;
+    float arrowDirection;
+    float arrowLimitRight;
+    float arrowLimitLeft;
+    float amplitude;
     CGRect frameFirstPosition;
     UIView *parentView;
     
-    NSInteger frequency;
+    float frequency;
     DirectionToAnimate  direction;
 }
 @end
 
 @implementation UIImageView_AttachedView
 
-- (id) initWithImage:(UIImage *)image attachedToFrame: (UIView *) pParentView frequence: (NSInteger ) freq amplitude: (NSInteger) pAmplitude direction: (DirectionToAnimate ) dDirection   
+- (id) initWithImage:(UIImage *)image attachedToFrame: (UIView *) pParentView frequence: (float ) freq amplitude: (float) pAmplitude direction: (DirectionToAnimate ) dDirection
 {
     self = [super initWithImage:image];
     if (self) {
@@ -81,25 +81,21 @@
 
 -(void)arrowAnimation
 {
-    
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationBeginsFromCurrentState:YES]; 
-    [UIView setAnimationCurve:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction];
-    [UIView setAnimationDuration:frequency];
-    [UIView setAnimationDelegate:self];
-    
-    
-    CGRect frame = self.frame;   
-    
-    
-    if (frame.origin.x >= arrowLimitRight)  arrowDirection = -1;
-    if (frame.origin.x <= arrowLimitLeft)  arrowDirection = 1;
-    frame.origin.x += arrowDirection;
-    self.frame = frame;
-  
-    if (runAnimation) [UIView setAnimationDidStopSelector:@selector(arrowAnimation)];
-    [UIView commitAnimations]; 
-    
-    
+  [UIView animateWithDuration:frequency
+                        delay:0.0
+                      options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction
+                   animations:^{
+                     CGRect frame = self.frame;
+                     
+                     
+                     if (frame.origin.x >= arrowLimitRight)  arrowDirection = -1;
+                     if (frame.origin.x <= arrowLimitLeft)  arrowDirection = 1;
+                     frame.origin.x += arrowDirection*amplitude;
+                     self.frame = frame;
+
+                   } completion:^(BOOL finished) {
+                     if (runAnimation)
+                       [self performSelector:@selector(arrowAnimation)];                    
+                   }];
 }
 @end
