@@ -354,6 +354,7 @@ static StartViewController *sharedHelper = nil;
         [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
         
         LoginAnimatedViewController *loginViewController = [LoginAnimatedViewController sharedInstance];
+        loginViewController.startViewController = self;
         [loginViewController setPayment:YES];
         [self.navigationController pushViewController:loginViewController animated:YES];
     }
@@ -971,7 +972,7 @@ static StartViewController *sharedHelper = nil;
         }
         
         BOOL moneyForIPad=[[NSUserDefaults standardUserDefaults] boolForKey:@"moneyForIPad"];
-        if (!moneyForIPad && ([[responseObject objectForKey:@"money"] intValue] == 200) && ([playerAccount.accountID rangeOfString:@"F:"].location != NSNotFound)) {
+        if (!moneyForIPad && ([[responseObject objectForKey:@"money"] intValue] == 200) && ([playerAccount.accountID rangeOfString:@"F:"].location != NSNotFound)&&([responseObject objectForKey:@"session_id"] == nil)) {
             
             CDTransaction *transaction = [[CDTransaction alloc] init];
             transaction.trType = [NSNumber numberWithInt:1];

@@ -53,6 +53,7 @@
 	[self.connection sendData:@"" packetID:NETWORK_GET_LIST_ONLINE ofLength:sizeof(int)];
     [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(connectionTimeout) userInfo:nil repeats:NO];
     self.startLoad = YES;
+    
 }
 
 - (void) listOnlineResponse:(NSString *)jsonString
@@ -62,10 +63,12 @@
     SBJSON *parser = [[SBJSON alloc] init];
     NSLog(@"jsonString: %@", jsonString);
     NSArray *servers = [parser objectWithString:jsonString error:&jsonParseError];
+    
     self.serverObjects = [[NSMutableArray alloc] init];
     
     if (!servers) {
         NSLog(@"JSON parse error: %@", jsonParseError);
+        [self.serverObjects removeAllObjects];
     }
     else{
         NSLog(@"servers: %@", servers);
@@ -96,7 +99,12 @@
 
 -(void)connectionTimeout
 {
-    if (!self.startLoad) return;
+    if (!self.startLoad)
+    {
+        
+        return;
+    }
+    
     ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
     [listOfItemsViewController didRefreshController];
 }
@@ -260,13 +268,12 @@
 
 -(void)createServerForDictionary:(NSDictionary *)serverDictionary
 {
-    AccountDataSource *player = [AccountDataSource sharedInstance];
     
     SSServer *serverObj = [[SSServer alloc] init];
     serverObj.displayName = [serverDictionary objectForKey:@"nickname"];
     serverObj.status = @"A";
-    serverObj.money = [serverDictionary objectForKey:@"money"];
-    serverObj.serverName = [[player.listBotsOnline objectAtIndex:[self.serverObjects count]] objectForKey:@"authentification"];
+    serverObj.money = ([[serverDictionary objectForKey:@"money"] intValue] >= 0) ? [serverDictionary objectForKey:@"money"]: [NSNumber numberWithInt:0];
+    serverObj.serverName = [serverDictionary objectForKey:@"authentification"];
     serverObj.rank = [serverDictionary objectForKey:@"level"];
     serverObj.bot = YES;
     serverObj.duelsLost = [serverDictionary objectForKey:@"duels_lost"];

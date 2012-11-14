@@ -676,8 +676,11 @@
         
         CDTransaction *opponentTransaction = [CDTransaction new];
         [opponentTransaction setTrDescription:[NSString stringWithString:transaction.trDescription]];
-        [opponentTransaction setTrType:[NSNumber numberWithInt:[transaction.trType intValue]]];
-        [opponentTransaction setTrMoneyCh:[NSNumber numberWithInt:[transaction.trMoneyCh intValue]]];
+        
+        if ([transaction.trType intValue] == 1) [opponentTransaction setTrType:[NSNumber numberWithInt:-1]];
+        else   [opponentTransaction setTrType:[NSNumber numberWithInt:1]];
+        
+        [opponentTransaction setTrMoneyCh:[NSNumber numberWithInt:-[transaction.trMoneyCh intValue]]];
         opponentTransaction.trOpponentID = [NSString stringWithString:playerAccount.accountID];
         [oponentAccount.transactions addObject:opponentTransaction];
         
