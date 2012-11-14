@@ -137,6 +137,7 @@ static NSString *getSavePathForDuelProduct()
         
         
         if ([dictionaryKey isEqualToString:[URL_PRODUCT_FILE lastPathComponent]] || [dictionaryKey isEqualToString:[URL_PRODUCT_FILE_RETINEA lastPathComponent]]) {
+//URL_PRODUCT_FILE
             NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
             NSArray *responseObjectOfProducts = [responseObject objectForKey:@"weapons"];
             for (NSDictionary *dic in responseObjectOfProducts) {
@@ -184,6 +185,8 @@ static NSString *getSavePathForDuelProduct()
                 didFinishBlock(error);
             }
         }else if ([dictionaryKey isEqualToString:[URL_USER_PRODUCTS lastPathComponent]]){
+//URL_USER_PRODUCTS
+            NSUInteger indexOfProductInSavedDefenseArraySaved=-1;
             NSArray *responseObjectOfProducts = ValidateObject([jsonString JSONValue], [NSArray class]);
             for (NSDictionary *dic in responseObjectOfProducts) {
                 NSInteger idProduct = [[dic objectForKey:@"itemIdStore"] integerValue];
@@ -195,11 +198,21 @@ static NSString *getSavePathForDuelProduct()
                     [arrWeaponSaved replaceObjectAtIndex:indexOfProductInSavedWeaponArray withObject:product];
                 }else{
                     NSUInteger indexOfProductInSavedDefenseArray=[[AccountDataSource sharedInstance] findObs](arrDefenseSaved,idProduct);
+                    
                     if (indexOfProductInSavedDefenseArray != NSNotFound) {
                         CDDefenseProduct *product=[arrDefenseSaved objectAtIndex:indexOfProductInSavedDefenseArray];
-                        product.dCountOfUse += 1;
+                        if (indexOfProductInSavedDefenseArray == indexOfProductInSavedDefenseArraySaved) {
+                            product.dCountOfUse += 1;
+                        }else{
+                            if (product.dCountOfUse == 0) {
+                                product.dCountOfUse += 1;
+                            }else{
+                                product.dCountOfUse = 1;
+                            }
+                        }
                         [arrDefenseSaved replaceObjectAtIndex:indexOfProductInSavedDefenseArray withObject:product];
                         [DuelProductDownloaderController saveDefense:arrDefenseSaved];
+                        indexOfProductInSavedDefenseArraySaved = indexOfProductInSavedDefenseArray;
                     }
                 }
             }
@@ -211,6 +224,7 @@ static NSString *getSavePathForDuelProduct()
                 didFinishBlock(error);
             }
         }else if ([dictionaryKey isEqualToString:[URL_PRODUCTS_BUY lastPathComponent]]){
+//URL_PRODUCTS_BUY
             if (didFinishBlock) {
                 NSError *error;
                 didFinishBlock(error);
