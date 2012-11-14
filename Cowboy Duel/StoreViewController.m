@@ -110,6 +110,8 @@
                 transaction.trType = [NSNumber numberWithInt:-1];
                 transaction.trMoneyCh = [NSNumber numberWithInt:-product.dPrice];
                 transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
+                transaction.trOpponentID = @"";
+                transaction.trGlobalID = [NSNumber numberWithInt:-1];
 
                 [playerAccount.transactions addObject:transaction];
                 [playerAccount saveTransaction];
@@ -124,7 +126,7 @@
                 playerAccount.curentIdWeapon = product.dID;
                 [playerAccount saveWeapon];
                 
-                [duelProductDownloaderController buyProductID:product.dID transactionID:12];
+                [duelProductDownloaderController buyProductID:product.dID transactionID:playerAccount.glNumber];
                 duelProductDownloaderController.didFinishBlock = ^(NSError *error){
                     cell.buyProduct.enabled = YES;
                     loadingView.hidden = YES;
@@ -141,7 +143,7 @@
         CDDefenseProduct *product = [storeDataSource.arrItemsList objectAtIndex:indexPath.row];
         if (product.dPrice==0) {
             purchesingProductIndex = indexPath.row;
-            cell.buyProduct.enabled = YES;
+            [[MKStoreManager sharedManager] buyFeature:product.dPurchaseUrl];
         }else{
             CDTransaction *transaction = [[CDTransaction alloc] init];
             transaction.trDescription = [[NSString alloc] initWithFormat:@"BuyProductWinDefense"];
@@ -161,7 +163,7 @@
             [storeDataSource.arrItemsList replaceObjectAtIndex:indexPath.row withObject:product];
             [DuelProductDownloaderController saveDefense:storeDataSource.arrItemsList];
             
-            [duelProductDownloaderController buyProductID:product.dID transactionID:12];
+            [duelProductDownloaderController buyProductID:product.dID transactionID:playerAccount.glNumber];
             duelProductDownloaderController.didFinishBlock = ^(NSError *error){
                 cell.buyProduct.enabled = YES;
                 loadingView.hidden = YES;
@@ -204,7 +206,7 @@
         playerAccount.curentIdWeapon = product.dID;
         [playerAccount saveWeapon];
         
-        [duelProductDownloaderController buyProductID:product.dID transactionID:12];
+        [duelProductDownloaderController buyProductID:product.dID transactionID:-1];
     }else if(storeDataSource.typeOfTable == StoreDataSourceTypeTablesDefenses){
         CDDefenseProduct *product = [storeDataSource.arrItemsList objectAtIndex:purchesingProductIndex];
         playerAccount.accountDefenseValue += product.dDefense;
@@ -213,7 +215,7 @@
         [storeDataSource.arrItemsList replaceObjectAtIndex:purchesingProductIndex withObject:product];
         [DuelProductDownloaderController saveDefense:storeDataSource.arrItemsList];
         
-        [duelProductDownloaderController buyProductID:product.dID transactionID:12];
+        [duelProductDownloaderController buyProductID:product.dID transactionID:-1];
     }
     
     [storeDataSource reloadDataSource];
@@ -226,6 +228,11 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
                                                       userInfo:[NSDictionary dictionaryWithObject:stringToGA forKey:@"event"]];
+}
+
+- (void)productAPurchased
+{
+    [self productPurchased];
 }
 
 - (void)failed

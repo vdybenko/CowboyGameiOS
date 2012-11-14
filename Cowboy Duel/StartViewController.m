@@ -1149,7 +1149,7 @@ static StartViewController *sharedHelper = nil;
     oldAccounId=@"";
     gameCenterViewController = [GameCenterViewController sharedInstance:playerAccount andParentVC:self];
     
-    if ([duelProductDownloaderController isListProductsAvailable] && !modifierName) {
+    if ([duelProductDownloaderController isListProductsAvailable]) {
         [duelProductDownloaderController refreshUserDuelProducts];
     }
 }
@@ -1176,7 +1176,6 @@ static StartViewController *sharedHelper = nil;
                                                         timeoutInterval:kTimeOutSeconds];
     
     [theRequest setHTTPMethod:@"POST"]; 
-    
     NSMutableDictionary *dicBody=[NSMutableDictionary dictionary];
     [dicBody setValue:playerTemp.accountID forKey:@"authentification"];
     [dicBody setValue:[NSString stringWithFormat:@"%d",playerTemp.accountLevel ] forKey:@"level"]; 
@@ -1192,8 +1191,7 @@ static StartViewController *sharedHelper = nil;
     if (theConnection) {
         NSMutableData *receivedData = [[NSMutableData alloc] init];
         [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
-    } else {
-    }    
+    }
 }
 
 

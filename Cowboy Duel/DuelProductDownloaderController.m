@@ -149,7 +149,6 @@ static NSString *getSavePathForDuelProduct()
                 if (product.dImageGunURL) {
                     product.dImageGunLocal = [UIImage saveImage:[product saveNameImageGun] URL:product.dImageGunURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
                 }
-                
                 product.dSoundURL = [dic objectForKey:@"sound"];
                 if (product.dSoundURL) {
                     product.dSoundLocal = [SoundDownload saveSound:[product saveNameSoundGun] URL:product.dSoundURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];

@@ -29,6 +29,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView * gunImage;
 @property (strong, nonatomic) IBOutlet UIImageView * gunImageMirror;
 @property (strong, nonatomic) IBOutlet UIButton * buyItButton;
+@property (strong, nonatomic) IBOutlet UIView *loadingView;
 
 @end
 
@@ -41,6 +42,7 @@
 @synthesize gunImage;
 @synthesize gunImageMirror;
 @synthesize buyItButton;
+@synthesize loadingView;
 
 #pragma mark
 - (id)initWithAccount:(AccountDataSource*)account duelProduct:(CDWeaponProduct*)product parentVC:(UIViewController*)vc;
@@ -93,16 +95,26 @@
     [goldTitle dinamicAttachToView:gold withDirection:DirectionToAnimateRight];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [MKStoreManager sharedManager].delegate = self;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
 }
+
+#pragma mark
+
 - (IBAction)closeButtonClick:(id)sender {
     [parentVC dismissViewControllerAnimated:YES completion:Nil];
 }
 - (IBAction)BuyItButtonClick:(id)sender {
     if (duelProduct.dPrice==0) {
-            
+        loadingView.hidden = NO;
+        [[MKStoreManager sharedManager] buyFeature:duelProduct.dPurchaseUrl];
     }else{
         buyItButton.enabled = NO;
         CDTransaction *transaction = [[CDTransaction alloc] init];
@@ -120,7 +132,7 @@
         playerAccount.curentIdWeapon = duelProduct.dID;
         [playerAccount saveWeapon];
         
-        [duelProductDownloaderController buyProductID:duelProduct.dID transactionID:12];
+        [duelProductDownloaderController buyProductID:duelProduct.dID transactionID:playerAccount.glNumber];
         duelProductDownloaderController.didFinishBlock = ^(NSError *error){
             buyItButton.enabled = YES;
         };
@@ -139,6 +151,37 @@
     [parentVC.navigationController pushViewController:svc animated:YES];
     [parentVC dismissViewControllerAnimated:YES completion:Nil];
 }
+
+#pragma mark MKStoreKitDelegate
+
+- (void)productPurchased
+{
+    duelProduct.dCountOfUse =1;
+    playerAccount.accountWeapon = duelProduct;
+    playerAccount.curentIdWeapon = duelProduct.dID;
+    [playerAccount saveWeapon];
+    
+    NSMutableArray *arrWeapon = [DuelProductDownloaderController loadWeaponArray];
+    NSUInteger index=[playerAccount findObs](arrWeapon,playerAccount.curentIdWeapon);
+    [arrWeapon replaceObjectAtIndex:index withObject:duelProduct];
+    [DuelProductDownloaderController saveWeapon:arrWeapon];
+    
+    [duelProductDownloaderController buyProductID:duelProduct.dID transactionID:-1];
+        
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/buy_product_win" forKey:@"event"]];
+    loadingView.hidden = YES;
+}
+
+- (void)failed
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/buy_product_fail" forKey:@"event"]];
+    loadingView.hidden = YES;
+}
+
 
 -(void)dealloc;
 {

@@ -182,6 +182,7 @@
         buyProduct.enabled = YES;
     }
     
+    descriptionText.text = product.dDescription;
     icon.image = [UIImage loadImageFullPath:[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],product.dIconLocal]];
 }
 
