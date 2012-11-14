@@ -487,6 +487,7 @@ static AccountDataSource *sharedHelper = nil;
   NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:LIST_BOTS_URL encoding:NSUTF8StringEncoding]]
                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                       timeoutInterval:kTimeOutSeconds];
+  [receivedBots removeAllObjects];
   for (int i=0; i<[listBotsOnline count]; i++) {
   
     NSMutableDictionary *dicBody=[NSMutableDictionary dictionaryWithDictionary:listBotsOnline[i]];
