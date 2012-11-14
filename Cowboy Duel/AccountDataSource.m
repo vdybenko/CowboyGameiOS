@@ -320,10 +320,15 @@ static AccountDataSource *sharedHelper = nil;
     NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
     
     DLog(@"AccountDataSource jsonValues %@", jsonString);
-    if ([responseObject objectForKey:@"user_id"]) {
-      [receivedBots addObject:responseObject];
+    if ([responseObject objectForKey:@"user_id"]&&[responseObject objectForKey:@"session_id"]) {
+        
+        NSString *newStr = [connection1.requestHTTP stringByReplacingOccurrencesOfString:@"authentification=" withString:@""];
+        
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:responseObject];
+        [dict setObject:newStr forKey:@"authentification"];
+        [receivedBots addObject:dict];
+        return;
     }
-    DLog(@"receivedBots %@",receivedBots);
 
     DLog(@"err_des %@", ValidateObject([responseObject objectForKey:@"err_desc"], [NSString class]));
     
@@ -342,7 +347,7 @@ static AccountDataSource *sharedHelper = nil;
         return;
     }   
 //    transaction
-    if([responseObject objectForKey:@"money"])
+    if([responseObject objectForKey:@"money"] && [[responseObject objectForKey:@"user_id"] isEqualToString:accountID])
     {
         money = [self crypt:[[responseObject objectForKey:@"money"] intValue]];
         if(money < 0) money = 0;

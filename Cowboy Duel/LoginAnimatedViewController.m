@@ -55,6 +55,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
 + (LoginAnimatedViewController *) sharedInstance {
     if (!sharedHelper) {
         sharedHelper = [[LoginAnimatedViewController alloc] init];
+        
     }
     return sharedHelper;
 }
@@ -296,9 +297,9 @@ static LoginAnimatedViewController *sharedHelper = nil;
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IPad"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    ProfileViewController *profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount startViewController:startViewController];
-    [profileViewController setNeedAnimation:YES];
-    [self.navigationController popViewControllerAnimated:YES];
+//    ProfileViewController *profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount startViewController:startViewController];
+//    [profileViewController setNeedAnimation:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
