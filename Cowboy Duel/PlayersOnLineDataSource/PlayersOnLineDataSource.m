@@ -44,6 +44,7 @@
      [topPlayersDataSource reloadDataSource];
      self.connection = [SSConnection sharedInstance];
      self.connection.delegate = self;
+     srand ([NSDate timeIntervalSinceReferenceDate]);
 	return self;
 }
 
@@ -52,6 +53,7 @@
 	[self.connection sendData:@"" packetID:NETWORK_GET_LIST_ONLINE ofLength:sizeof(int)];
     [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(connectionTimeout) userInfo:nil repeats:NO];
     self.startLoad = YES;
+    
 }
 
 - (void) listOnlineResponse:(NSString *)jsonString
@@ -61,10 +63,12 @@
     SBJSON *parser = [[SBJSON alloc] init];
     NSLog(@"jsonString: %@", jsonString);
     NSArray *servers = [parser objectWithString:jsonString error:&jsonParseError];
+    
     self.serverObjects = [[NSMutableArray alloc] init];
     
     if (!servers) {
         NSLog(@"JSON parse error: %@", jsonParseError);
+        [self.serverObjects removeAllObjects];
     }
     else{
         NSLog(@"servers: %@", servers);
@@ -95,7 +99,12 @@
 
 -(void)connectionTimeout
 {
-    if (!self.startLoad) return;
+    if (!self.startLoad)
+    {
+        
+        return;
+    }
+    
     ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
     [listOfItemsViewController didRefreshController];
 }
@@ -201,10 +210,10 @@
 {
     AccountDataSource *player = [AccountDataSource sharedInstance];
     if([player.receivedBots count] == 0) return;
-    srand ( time(NULL) );
     switch (listcount) {
         case 0:{
             NSArray *randomIndexes = [self randomNumbersWithCount:3];
+            DLog(@"%@", randomIndexes);
             NSDictionary *serverDictionary = [player.receivedBots objectAtIndex:[[randomIndexes objectAtIndex:0] intValue]];
             [self createServerForDictionary:serverDictionary];
             serverDictionary = [player.receivedBots objectAtIndex:[[randomIndexes objectAtIndex:1] intValue]];;
@@ -242,7 +251,7 @@
         BOOL numberNotAdd = YES;
         while (numberNotAdd) {
             BOOL containeNumber = NO;
-            int randNumber = (((double)rand()/RAND_MAX) * ([player.receivedBots count] - 1));
+            int randNumber = ((((double)rand())/RAND_MAX) * ([player.receivedBots count] - 1));
             for (NSNumber *randNumberTemp in array) {
                 if([randNumberTemp intValue] == randNumber) containeNumber = YES;
             }
@@ -259,17 +268,17 @@
 
 -(void)createServerForDictionary:(NSDictionary *)serverDictionary
 {
-    DLog(@"serverDictionary %@", serverDictionary);
     
     SSServer *serverObj = [[SSServer alloc] init];
     serverObj.displayName = [serverDictionary objectForKey:@"nickname"];
     serverObj.status = @"A";
-    serverObj.money = [serverDictionary objectForKey:@"money"];
-    serverObj.serverName = [serverDictionary objectForKey:@"identifier"];
+    serverObj.money = ([[serverDictionary objectForKey:@"money"] intValue] >= 0) ? [serverDictionary objectForKey:@"money"]: [NSNumber numberWithInt:0];
+    serverObj.serverName = [serverDictionary objectForKey:@"authentification"];
     serverObj.rank = [serverDictionary objectForKey:@"level"];
     serverObj.bot = YES;
     serverObj.duelsLost = [serverDictionary objectForKey:@"duels_lost"];
     serverObj.duelsWin = [serverDictionary objectForKey:@"duels_win"];
+    serverObj.sessionId = [serverDictionary objectForKey:@"session_id"];
     [self.serverObjects addObject:serverObj];
 
 }

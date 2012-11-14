@@ -686,7 +686,18 @@
     if (!teaching||(duelWithBotCheck)) {
         
         transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
+        transaction.trOpponentID = [NSString stringWithString:oponentAccount.accountID];
         [playerAccount.transactions addObject:transaction];
+        
+        CDTransaction *opponentTransaction = [CDTransaction new];
+        [opponentTransaction setTrDescription:[NSString stringWithString:transaction.trDescription]];
+        
+        if ([transaction.trType intValue] == 1) [opponentTransaction setTrType:[NSNumber numberWithInt:-1]];
+        else   [opponentTransaction setTrType:[NSNumber numberWithInt:1]];
+        
+        [opponentTransaction setTrMoneyCh:[NSNumber numberWithInt:-[transaction.trMoneyCh intValue]]];
+        opponentTransaction.trOpponentID = [NSString stringWithString:playerAccount.accountID];
+        [oponentAccount.transactions addObject:opponentTransaction];
         
         NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
         
@@ -718,6 +729,7 @@
         [def synchronize];
         
         [playerAccount sendTransactions:playerAccount.transactions];
+        if (oponentAccount.bot) [oponentAccount sendTransactions:oponentAccount.transactions];
         if([playerAccount.duels count] > 10) 
             [playerAccount sendDuels:playerAccount.duels];
         
@@ -745,7 +757,8 @@
             oldMoney=0;
         }
         
-        [[StartViewController sharedInstance] modifierUser];
+        [[StartViewController sharedInstance] modifierUser:playerAccount];
+        if(oponentAccount.bot) [[StartViewController sharedInstance] modifierUser:oponentAccount];
     }
 
     NSString *name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel];
@@ -761,7 +774,7 @@
         winnerImg2.hidden = NO;
         [self winAnimation];
     }
-    [self.view bringSubviewToFront:activityIndicatorView ];
+    [self.view bringSubviewToFront:activityIndicatorView];
     
 //    if (duelWithBotCheck) {
 //        int randomTime = (arc4random() % 1);

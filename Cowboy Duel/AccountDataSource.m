@@ -189,11 +189,12 @@ static AccountDataSource *sharedHelper = nil;
     int n = [array count];    
     DLog(@"actions = %d", n);
     
-    NSMutableArray *result = [NSMutableArray arrayWithCapacity:n];
+    NSMutableArray *result = [NSMutableArray array];
     
-    for (int i = 0; i < n; i++) {
+    for (CDTransaction *transaction in array) {
         NSMutableDictionary *reason = [NSMutableDictionary dictionary];
-        CDTransaction *transaction = [array objectAtIndex:i];
+        [reason setObject:transaction.trOpponentID forKey:@"opponent_authen"];
+        [reason setObject: [NSNumber numberWithInt:-1] forKey:@"local_id"];
         [reason setObject: [NSNumber numberWithInt:[self crypt:[transaction.trMoneyCh intValue]]] forKey:@"transaction_id"];
         [reason setObject:transaction.trDescription forKey:@"description"];
         [reason setObject:transaction.trLocalID forKey:@"local_id"];
@@ -331,9 +332,18 @@ static AccountDataSource *sharedHelper = nil;
     [dicForRequests removeObjectForKey:[currentParseString lastPathComponent]];
     NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
     
-    if ([responseObject objectForKey:@"user_id"]) {
-      [receivedBots addObject:responseObject];
+    DLog(@"AccountDataSource jsonValues %@", jsonString);
+    if ([responseObject objectForKey:@"user_id"]&&[responseObject objectForKey:@"session_id"]) {
+        
+        NSString *newStr = [connection1.requestHTTP stringByReplacingOccurrencesOfString:@"authentification=" withString:@""];
+        
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:responseObject];
+        [dict setObject:newStr forKey:@"authentification"];
+        [receivedBots addObject:dict];
+        return;
     }
+
+    DLog(@"err_des %@", ValidateObject([responseObject objectForKey:@"err_desc"], [NSString class]));
     
     int errCode=[[responseObject objectForKey:@"err_code"] intValue];
     if (errCode==-1) {
@@ -350,7 +360,7 @@ static AccountDataSource *sharedHelper = nil;
         return;
     }   
 //    transaction
-    if([responseObject objectForKey:@"money"])
+    if([responseObject objectForKey:@"money"] && [[responseObject objectForKey:@"user_id"] isEqualToString:accountID])
     {
         money = [self crypt:[[responseObject objectForKey:@"money"] intValue]];
         if(money < 0) money = 0;
@@ -560,6 +570,7 @@ static AccountDataSource *sharedHelper = nil;
   NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:LIST_BOTS_URL encoding:NSUTF8StringEncoding]]
                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                       timeoutInterval:kTimeOutSeconds];
+  [receivedBots removeAllObjects];
   for (int i=0; i<[listBotsOnline count]; i++) {
   
     NSMutableDictionary *dicBody=[NSMutableDictionary dictionaryWithDictionary:listBotsOnline[i]];

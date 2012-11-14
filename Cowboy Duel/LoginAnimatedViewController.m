@@ -24,6 +24,8 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
     __unsafe_unretained IBOutlet UIView *activityView;
     __unsafe_unretained IBOutlet UIActivityIndicatorView *activityIndicatorView;
     BOOL tryAgain;
+    CGRect guillBackUp;
+//    int counterTryAgain;
 }
 @property (nonatomic) int textIndex;
 @property (nonatomic) NSTimer *timer;
@@ -53,6 +55,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
 + (LoginAnimatedViewController *) sharedInstance {
     if (!sharedHelper) {
         sharedHelper = [[LoginAnimatedViewController alloc] init];
+        
     }
     return sharedHelper;
 }
@@ -125,12 +128,20 @@ static LoginAnimatedViewController *sharedHelper = nil;
                     NSLocalizedString(@"CHOOSE_FACEBOOK", nil), //...or give me your ID"
                     nil];
     self.textIndex = 0;
+    guillBackUp = self.guillotineImage.frame;
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/kassa.aif", [[NSBundle mainBundle] resourcePath]]];
     NSError *error;
     self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
     [self.player setVolume:1.0];
     [self.player prepareToPlay];
     [self updateLabels];
+  
+    [self.headImage setHidden:YES];
+    [self.heatImage setHidden:NO];
+    [self.noseImage setHidden:YES];
+    [self.whiskersImage setHidden:YES];
+  
+    [self.guillotineImage setDelays:0.0];
     [self.guillotineImage animateWithType:[NSNumber numberWithInt:GUILLOTINE]];
     [self.whiskersImage animateWithType:[NSNumber numberWithInt:WHISKERS]];
     [self.heatImage animateWithType:[NSNumber numberWithInt:HAT]];
@@ -147,6 +158,8 @@ static LoginAnimatedViewController *sharedHelper = nil;
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark Animations
+
 - (void)updateLabels
 {
   
@@ -160,6 +173,11 @@ static LoginAnimatedViewController *sharedHelper = nil;
                      animations:^{
                         [self lableScaleOut];
                      } completion:^(BOOL complete) {
+                         if (self.textIndex==5){
+                           CGRect moveTextUp = self.animetedText.frame;
+                           moveTextUp.origin.y -= 100;
+                           self.animetedText.frame = moveTextUp;
+                         }
                          self.animetedText.text = text;
                          [self performSelector:@selector(lableScaleIn) withObject:nil afterDelay:1.0];
                      }];
@@ -167,6 +185,13 @@ static LoginAnimatedViewController *sharedHelper = nil;
 
 -(void)lableScaleIn
 {
+  if (self.textIndex == 0) {
+    [self.headImage setHidden:NO];
+    [self.heatImage setHidden:YES];
+    [self.noseImage setHidden:NO];
+    [self.whiskersImage setHidden:NO];
+    
+  }
     [UIView animateWithDuration:0.5
                      animations:^{
                          self.animetedText.transform = CGAffineTransformMakeScale(1.0, 1.0);
@@ -176,22 +201,18 @@ static LoginAnimatedViewController *sharedHelper = nil;
                          if (self.textIndex<8){
 
                              if (self.textIndex==6) {                 ////"Pay for me $1...
-                                 [self.headImage setHidden:YES];
-                                 [self.heatImage setHidden:NO];
-                                 [self.noseImage setHidden:YES];
-                                 [self.whiskersImage setHidden:YES];
                                  [self scaleButton:self.payButton];   //Scale 1$
                                  [self scaleButton:self.donateLable];
 
                              }
                              if (self.textIndex==7) {                 ////...or give me your ID"
+
+                               [self scaleButton:self.loginFBbutton]; //Scale Facebook login
+                               [self scaleButton:self.loginLable];
                                [self.headImage setHidden:YES];
                                [self.heatImage setHidden:NO];
                                [self.noseImage setHidden:YES];
                                [self.whiskersImage setHidden:YES];
-                               [self scaleButton:self.loginFBbutton]; //Scale Facebook login
-                               [self scaleButton:self.loginLable];
-
                              }
 
                              [self performSelector:@selector(updateLabels) withObject:nil afterDelay:2.0];
@@ -237,10 +258,12 @@ static LoginAnimatedViewController *sharedHelper = nil;
     tryAgain = NO;
 //    counterTryAgain++;
 //    self.donateLable.text = [NSString stringWithFormat:(@"%@ %d$"),  NSLocalizedString(@"DONATE", @""),counterTryAgain];
-    CGRect frame = self.guillotineImage.frame;
-    frame.origin.y = -310;
-    self.guillotineImage.frame = frame;
-    frame = self.heatImage.frame;
+//    CGRect frame = self.guillotineImage.frame;
+//    frame.origin.y = -310;
+//    self.guillotineImage.frame = frame;
+
+    self.guillotineImage.frame = guillBackUp;
+    CGRect frame = self.heatImage.frame;
     frame.origin.y -= 220;
     self.heatImage.frame = frame;
     [self.noseImage setHidden:NO];
@@ -253,6 +276,8 @@ static LoginAnimatedViewController *sharedHelper = nil;
 }
 
 - (IBAction)donateButtonClick:(id)sender {
+    [self.player stop];
+    [self.player setVolume:0.0];
     if (payment) {
         [[MKStoreManager sharedManager] buyFeatureA];
         [activityView setHidden:NO];
@@ -268,9 +293,9 @@ static LoginAnimatedViewController *sharedHelper = nil;
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IPad"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    ProfileViewController *profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount startViewController:startViewController];
-    [profileViewController setNeedAnimation:YES];
-    [self.navigationController popViewControllerAnimated:YES];
+//    ProfileViewController *profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount startViewController:startViewController];
+//    [profileViewController setNeedAnimation:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
@@ -278,6 +303,8 @@ static LoginAnimatedViewController *sharedHelper = nil;
 }
 
 - (IBAction)loginButtonClick:(id)sender {
+//    [self.player stop];
+//    [self.player setVolume:0.0];
     [self initFacebook];
     
     TestAppDelegate *testAppDelegate = (TestAppDelegate *) [[UIApplication sharedApplication] delegate];
@@ -340,6 +367,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
             default:
                 break;
         }
+        [self.player setVolume:0.0];
     }
     
 }
@@ -514,6 +542,10 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [self setDonateLable:nil];
     [self setLoginLable:nil];
     [self setTryAgainLable:nil];
+    [self setPlayer:nil];
+    [CATransaction begin];
+    [self.view.layer removeAllAnimations];
+    [CATransaction commit];
     [super viewDidUnload];
 }
 @end

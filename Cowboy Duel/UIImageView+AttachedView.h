@@ -16,7 +16,7 @@ typedef enum {
 
 @interface UIImageView_AttachedView : UIImageView
 
-- (id) initWithImage:(UIImage *)image attachedToFrame: (UIView *) pParentView frequence: (NSInteger ) freq amplitude: (NSInteger) amplitude direction: (DirectionToAnimate ) dDirection ;  
+- (id) initWithImage:(UIImage *)image attachedToFrame: (UIView *) pParentView frequence: (float ) freq amplitude: (float) amplitude direction: (DirectionToAnimate ) dDirection ;
 - (void) startAnimation;
 - (void) stopAnimation;
 - (void) arrowAnimation;

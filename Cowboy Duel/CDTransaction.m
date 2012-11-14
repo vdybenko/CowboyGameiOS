@@ -9,7 +9,7 @@
 #import "CDTransaction.h"
 
 @implementation CDTransaction
-@synthesize trMoneyCh, trType, trDescription, trLocalID;
+@synthesize trMoneyCh, trType, trDescription, trLocalID, trGlobalID, trOpponentID;
 
 - (id)init
 {

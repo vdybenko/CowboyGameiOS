@@ -10,4 +10,5 @@
 
 @interface CustomNSURLConnection : NSURLConnection
 @property (nonatomic, strong) NSURL *requestURL;
+@property (nonatomic, strong) NSString *requestHTTP;
 @end

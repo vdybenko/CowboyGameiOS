@@ -322,8 +322,8 @@
     
     NSArray *array=[DuelRewardLogicController getStaticPointsForEachLevels];
     
-    if (playerAccount.accountLevel < 0 || playerAccount.accountLevel > 10 ){
-        [playerAccount setAccountLevel:10];
+    if (playerAccount.accountLevel < 0 || playerAccount.accountLevel > 9 ){
+        [playerAccount setAccountLevel:9];
     }
 
     NSInteger num = playerAccount.accountLevel;
