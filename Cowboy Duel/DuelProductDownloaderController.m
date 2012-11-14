@@ -185,6 +185,7 @@ static NSString *getSavePathForDuelProduct()
             }
         }else if ([dictionaryKey isEqualToString:[URL_USER_PRODUCTS lastPathComponent]]){
 //URL_USER_PRODUCTS
+            AccountDataSource *playerAccount=[AccountDataSource sharedInstance];
             NSUInteger indexOfProductInSavedDefenseArraySaved=-1;
             NSArray *responseObjectOfProducts = ValidateObject([jsonString JSONValue], [NSArray class]);
             for (NSDictionary *dic in responseObjectOfProducts) {
@@ -202,11 +203,14 @@ static NSString *getSavePathForDuelProduct()
                         CDDefenseProduct *product=[arrDefenseSaved objectAtIndex:indexOfProductInSavedDefenseArray];
                         if (indexOfProductInSavedDefenseArray == indexOfProductInSavedDefenseArraySaved) {
                             product.dCountOfUse += 1;
+                            playerAccount.accountDefenseValue += product.dDefense;
                         }else{
                             if (product.dCountOfUse == 0) {
                                 product.dCountOfUse += 1;
+                                playerAccount.accountDefenseValue += product.dDefense;
                             }else{
                                 product.dCountOfUse = 1;
+                                playerAccount.accountDefenseValue += product.dDefense;
                             }
                         }
                         [arrDefenseSaved replaceObjectAtIndex:indexOfProductInSavedDefenseArray withObject:product];
@@ -215,6 +219,7 @@ static NSString *getSavePathForDuelProduct()
                     }
                 }
             }
+            [playerAccount saveDefense];
             [DuelProductDownloaderController saveWeapon:arrWeaponSaved];
             [DuelProductDownloaderController saveDefense:arrDefenseSaved];
             

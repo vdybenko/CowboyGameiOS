@@ -150,6 +150,8 @@
             transaction.trType = [NSNumber numberWithInt:-1];
             transaction.trMoneyCh = [NSNumber numberWithInt:-product.dPrice];
             transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
+            transaction.trOpponentID = @"";
+            transaction.trGlobalID = [NSNumber numberWithInt:-1];
 
             [playerAccount.transactions addObject:transaction];
             [playerAccount saveTransaction];
