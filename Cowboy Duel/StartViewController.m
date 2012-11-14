@@ -166,9 +166,6 @@ static StartViewController *sharedHelper = nil;
         {
             firstRun = NO;
             firstRunLocal = NO;
-//            if (![GCHelper sharedInstance].GClocalPlayer.isAuthenticated) {
-//                [[GCHelper sharedInstance] authenticateLocalUser];
-//            }
             [topPlayersDataSource reloadDataSource];
             
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"moneyForIPad"];
