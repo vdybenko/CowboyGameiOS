@@ -790,8 +790,8 @@
 		76EB4DC11492662100A3A925 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		76EC0AD61638028400481A26 /* CDDuelProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDDuelProduct.h; sourceTree = "<group>"; };
 		76EC0AD71638028400481A26 /* CDDuelProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDuelProduct.m; sourceTree = "<group>"; };
-		76EC0AD9163808F100481A26 /* DuelProductDownloaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuelProductDownloaderController.h; sourceTree = "<group>"; };
-		76EC0ADA163808F100481A26 /* DuelProductDownloaderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DuelProductDownloaderController.m; sourceTree = "<group>"; };
+		76EC0AD9163808F100481A26 /* DuelProductDownloaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DuelProductDownloaderController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		76EC0ADA163808F100481A26 /* DuelProductDownloaderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DuelProductDownloaderController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		76EC0ADC1638379E00481A26 /* CDDefenseProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDDefenseProduct.h; sourceTree = "<group>"; };
 		76EC0ADD1638379E00481A26 /* CDDefenseProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDefenseProduct.m; sourceTree = "<group>"; };
 		76EC0ADF163837BB00481A26 /* CDWeaponProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDWeaponProduct.h; sourceTree = "<group>"; };

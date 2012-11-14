@@ -294,7 +294,7 @@ static NSString *getSavePathForDuelProduct()
     }
 }
 
--(void)downloadUserProducts;
+-(void)refreshUserDuelProducts;
 {
     arrDefenseSaved = [DuelProductDownloaderController loadDefenseArray];
     NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:URL_USER_PRODUCTS]

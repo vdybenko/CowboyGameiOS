@@ -354,18 +354,19 @@ static StartViewController *sharedHelper = nil;
 }
 
 - (void)viewDidLoad{
-//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-//    NSInteger facebookLogIn = [userDefaults integerForKey:@"facebookLogIn"];
-//    NSInteger paymentRegistration = [userDefaults integerForKey:@"paymentRegistration"];
-//    
-//    if (!paymentRegistration && !facebookLogIn) {
-//        SSConnection *connection = [SSConnection sharedInstance];
-//        [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
-//        
-//        LoginAnimatedViewController *loginViewController = [LoginAnimatedViewController sharedInstance];
-//        [loginViewController setPayment:YES];
-//        [self.navigationController pushViewController:loginViewController animated:YES];
-//    }
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger facebookLogIn = [userDefaults integerForKey:@"facebookLogIn"];
+    NSInteger paymentRegistration = [userDefaults integerForKey:@"paymentRegistration"];
+    
+    if (!paymentRegistration && !facebookLogIn) {
+        SSConnection *connection = [SSConnection sharedInstance];
+        [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
+        
+        LoginAnimatedViewController *loginViewController = [LoginAnimatedViewController sharedInstance];
+//        loginViewController.startViewController= self;
+        [loginViewController setPayment:YES];
+        [self.navigationController pushViewController:loginViewController animated:YES];
+    }
     
     
     UIColor *buttonsTitleColor = [[UIColor alloc] initWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
@@ -691,13 +692,7 @@ static StartViewController *sharedHelper = nil;
 }
 
 -(IBAction)showHelp:(id)sender
-{
-//    DuelProductDownloaderController *dw=[[DuelProductDownloaderController alloc] init];
-////    [dw downloadUserProductsIsListProductsAvailable];
-//    [dw refreshDuelProducts];
-////    [dw buyProductID:23 transactionID:23];
-//    return;
-    
+{    
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/help_click" forKey:@"event"]];
@@ -1151,8 +1146,8 @@ static StartViewController *sharedHelper = nil;
     oldAccounId=@"";
     gameCenterViewController = [GameCenterViewController sharedInstance:playerAccount andParentVC:self];
     
-    if (![duelProductDownloaderController isListProductsAvailable] && !modifierName) {
-        [duelProductDownloaderController downloadUserProducts];
+    if ([duelProductDownloaderController isListProductsAvailable] && !modifierName) {
+        [duelProductDownloaderController refreshUserDuelProducts];
     }
 }
 
