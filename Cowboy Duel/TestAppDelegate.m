@@ -51,7 +51,7 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     [AdColony initAdColonyWithDelegate:self];
     
 #if !(TARGET_IPHONE_SIMULATOR)	
-    [Crittercism initWithAppID:ID_CRIT_APP  andKey:ID_CRIT_KEY andSecret:ID_CRIT_SECRET];
+    //[Crittercism initWithAppID:ID_CRIT_APP  andKey:ID_CRIT_KEY andSecret:ID_CRIT_SECRET];
     
     [[GAI sharedInstance] trackerWithTrackingId:kGAAccountID];
     

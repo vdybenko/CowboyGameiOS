@@ -876,7 +876,6 @@ static StartViewController *sharedHelper = nil;
     if ([responseObjectForBots count]>=1) {
       playerAccount.listBotsOnline = responseObjectForBots;
       NSLog(@"listBotsOnline %@",playerAccount.listBotsOnline);
-      [playerAccount receiveBots];
     }
   
 //    

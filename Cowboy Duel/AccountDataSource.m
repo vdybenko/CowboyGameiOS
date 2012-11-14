@@ -9,7 +9,7 @@ static const char *LIST_BOTS_URL = BASE_URL"users/get_user_data";
 
 @interface AccountDataSource(){
   NSMutableDictionary *dicForRequests;
-  
+  NSMutableArray *receivedBotsTemp;
 }
 @end
 
@@ -57,7 +57,7 @@ static AccountDataSource *sharedHelper = nil;
     dicForRequests=[[NSMutableDictionary alloc] init];
   
     receivedBots = [NSMutableArray array];
-
+    receivedBotsTemp = [NSMutableArray array];
     return self;
 }
 
@@ -326,7 +326,8 @@ static AccountDataSource *sharedHelper = nil;
         
         NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:responseObject];
         [dict setObject:newStr forKey:@"authentification"];
-        [receivedBots addObject:dict];
+        [receivedBotsTemp addObject:dict];
+        [self refreshBotArray];
         return;
     }
 
@@ -482,28 +483,48 @@ static AccountDataSource *sharedHelper = nil;
 }
 #pragma mark
 
-- (void)receiveBots;
+- (void)receiveBotsForIdArray:(NSArray *)idArray;
 {
-  NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:LIST_BOTS_URL encoding:NSUTF8StringEncoding]]
+    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:LIST_BOTS_URL encoding:NSUTF8StringEncoding]]
                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                       timeoutInterval:kTimeOutSeconds];
-  [receivedBots removeAllObjects];
-  for (int i=0; i<[listBotsOnline count]; i++) {
-  
-    NSMutableDictionary *dicBody=[NSMutableDictionary dictionaryWithDictionary:listBotsOnline[i]];
-   
-    [theRequest setHTTPMethod:@"POST"];
-    NSString *stBody=[Utils makeStringForPostRequest:dicBody];
-    DLog(@"stBody %@",dicBody);
-    [theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]];
+    [receivedBotsTemp removeAllObjects];
+    for (NSDictionary *dicBody in idArray) {
+        [theRequest setHTTPMethod:@"POST"];
+        NSString *stBody=[Utils makeStringForPostRequest:dicBody];
+        DLog(@"stBody %@",dicBody);
+        [theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]];
 
-    CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
-    if (theConnection) {
-      NSMutableData *receivedData = [[NSMutableData alloc] init];
-      [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
-    } else {
-      NSLog(@"WARNING: theBotsGETListConnection failed..");
+        CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
+        if (theConnection) {
+            NSMutableData *receivedData = [[NSMutableData alloc] init];
+            [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
+        } else {
+            NSLog(@"WARNING: theBotsGETListConnection failed..");
+        }
     }
-  }
+}
+
+-(void)refreshBotArray
+{
+    if ([receivedBotsTemp count]) {
+        for (NSDictionary *tempBot in receivedBotsTemp) {
+            NSDictionary *tempBotForGlobal;
+            NSPredicate *predicate =
+            [NSPredicate predicateWithFormat:@"authentification == %@", [tempBot objectForKey:@"authentification"]];
+            NSArray *filtered  = [receivedBots filteredArrayUsingPredicate:predicate];
+            if([filtered count]) {
+                tempBotForGlobal = [filtered objectAtIndex:0];
+                int indexForGlobal = [receivedBots indexOfObject:tempBotForGlobal];
+                [receivedBots replaceObjectAtIndex:indexForGlobal withObject:[tempBotForGlobal copy]];
+                continue;
+            }
+            
+            int index = [receivedBotsTemp indexOfObject:tempBot];
+            if ([receivedBots count] <= index) [receivedBots addObject:[tempBot copy]];
+            else [receivedBots replaceObjectAtIndex:index withObject:[tempBot copy]];
+            
+        }
+    }
 }
 @end
