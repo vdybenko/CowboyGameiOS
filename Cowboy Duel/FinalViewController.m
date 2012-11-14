@@ -900,7 +900,25 @@
 {
   [lblGoldPlus setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:45]];
   lblGold.text = [NSString stringWithFormat:@"%d",oldMoneyForAnimation];
-
+  
+  ivGoldCoin.hidden = YES;
+  CGRect coinCentered = ivGoldCoin.frame;
+  coinCentered.origin.x = goldPointBgView.frame.size.width/2 - ivGoldCoin.frame.size.width - 10*lblGold.text.length;
+  if (coinCentered.origin.x > 0)
+    ivGoldCoin.frame = coinCentered;
+  else
+  {
+    coinCentered.origin.x = 0;
+    ivGoldCoin.frame = coinCentered;
+  }
+  ivGoldCoin.hidden = NO;
+  
+  lblGold.hidden = YES;
+  CGRect goldCountCentered = lblGold.frame;
+  goldCountCentered.origin.x = ivGoldCoin.frame.origin.x+ivGoldCoin.frame.size.width + 5;
+  lblGold.frame = goldCountCentered;
+  lblGold.hidden = NO;
+  
   CGRect frame1 = winnerImg1.frame;
   frame1.origin.x += 200;
   CGRect frame = winnerImg2.frame;
@@ -999,8 +1017,14 @@
 {
     loserImg.hidden = NO;
   if (teaching) oldMoneyForAnimation = [AccountDataSource sharedInstance].money;
-  loserMoneyImg.hidden = YES;
   lblGold.text = [NSString stringWithFormat:@"%d",[AccountDataSource sharedInstance].money];
+  
+  CGRect frameL = loserMoneyImg.frame;
+  frameL.origin.x = 20;
+  frameL.origin.y = ivGoldCoin.frame.origin.y + goldPointBgView.frame.origin.y;
+  loserMoneyImg.frame = frameL;
+  loserMoneyImg.hidden = YES;
+  
   CGAffineTransform goldPlusZoomOut = CGAffineTransformScale(lblGoldPlus.transform, 1.5, 1.5);
   CGAffineTransform goldPlusZoomIn = CGAffineTransformScale(lblGoldPlus.transform, 1, 1);
 
@@ -1036,6 +1060,24 @@
   loserMoneyImg.transform = goldDroppedZoomIn;
   
   [lblGoldPlus setHidden:NO];
+  
+  ivGoldCoin.hidden = YES;
+  CGRect coinCentered = ivGoldCoin.frame;
+  coinCentered.origin.x = goldPointBgView.frame.size.width/2 - ivGoldCoin.frame.size.width - 10*lblGold.text.length;
+  if (coinCentered.origin.x > 0)
+    ivGoldCoin.frame = coinCentered;
+  else
+  {
+    coinCentered.origin.x = 0;
+    ivGoldCoin.frame = coinCentered;
+  }
+  ivGoldCoin.hidden = NO;
+  
+  lblGold.hidden = YES;
+  CGRect goldCountCentered = lblGold.frame;
+  goldCountCentered.origin.x = ivGoldCoin.frame.origin.x+ivGoldCoin.frame.size.width + 5;
+  lblGold.frame = goldCountCentered;
+  lblGold.hidden = NO;
   
   [UIView animateWithDuration:1.2 delay:0.0
     options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction animations:^{
