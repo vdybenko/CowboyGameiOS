@@ -46,6 +46,7 @@
 @property (nonatomic) BOOL soundCheack;
 @property (nonatomic) BOOL feedBackViewVisible;
 @property (strong, nonatomic) TopPlayersDataSource *topPlayersDataSource;
+@property (nonatomic) BOOL firstRun;
 
 
 + (StartViewController *)sharedInstance;

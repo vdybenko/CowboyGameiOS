@@ -33,7 +33,7 @@
         
     UIView *hudView;
     
-    BOOL firstRun;
+//    BOOL firstRun;
     BOOL firstRunLocal;
     BOOL firstDayWithOutAdvertising;
     
@@ -114,7 +114,7 @@
 
 @synthesize gameCenterViewController, player, internetActive, hostActive, soundCheack, loginViewController;
 @synthesize feedbackButton, duelButton, profileButton, teachingButton, helpButton, mapButton;
-@synthesize oldAccounId,feedBackViewVisible,showFeedAtFirst,topPlayersDataSource, advertisingNewVersionViewController;
+@synthesize oldAccounId,feedBackViewVisible,showFeedAtFirst,topPlayersDataSource, advertisingNewVersionViewController,firstRun;
 
 static const char *REGISTRATION_URL =  BASE_URL"api/registration";
 static const char *AUTORIZATION_URL =  BASE_URL"api/authorization";
@@ -166,9 +166,6 @@ static StartViewController *sharedHelper = nil;
         {
             firstRun = NO;
             firstRunLocal = NO;
-            if (![GCHelper sharedInstance].GClocalPlayer.isAuthenticated) {
-                [[GCHelper sharedInstance] authenticateLocalUser];
-            }
             [topPlayersDataSource reloadDataSource];
             
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"moneyForIPad"];
