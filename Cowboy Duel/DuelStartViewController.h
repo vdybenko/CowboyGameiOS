@@ -118,6 +118,7 @@
 
 -(void)setMessageTry;
 -(void)setUserMoney:(int)money;
+-(void)setAttackAndDefenseOfOponent:(AccountDataSource*)oponent;
 -(void)setOponentMoney:(int)money;
 -(void)waitAnimation;
 

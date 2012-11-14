@@ -331,13 +331,9 @@ static AccountDataSource *sharedHelper = nil;
     [dicForRequests removeObjectForKey:[currentParseString lastPathComponent]];
     NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
     
-    DLog(@"AccountDataSource jsonValues %@",responseObject);
     if ([responseObject objectForKey:@"user_id"]) {
       [receivedBots addObject:responseObject];
     }
-    DLog(@"receivedBots %@",receivedBots);
-
-    DLog(@"err_des %@", ValidateObject([responseObject objectForKey:@"err_desc"], [NSString class]));
     
     int errCode=[[responseObject objectForKey:@"err_code"] intValue];
     if (errCode==-1) {

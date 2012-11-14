@@ -569,6 +569,8 @@ static GameCenterViewController *gameCenterViewController;
                 [self setDelegate2:duelStartViewController];
                 duelStartViewController.delegate = self;
                 [parentVC.navigationController pushViewController:duelStartViewController animated:YES];
+            }else{
+                [duelStartViewController setAttackAndDefenseOfOponent:oponentAccount];
             }
                         
             gameInfo *gsSend = &gameStat;
@@ -620,7 +622,11 @@ static GameCenterViewController *gameCenterViewController;
             oponentAccount.accountDefenseValue = gsReceive->oponentDefense;
             randomTime = gsReceive->randomTime;
             
-            if (!duelStartViewController) duelStartViewController = [[DuelStartViewController alloc]initWithAccount:playerAccount andOpAccount:oponentAccount  opopnentAvailable:YES andServerType:YES andTryAgain:YES];
+            if (!duelStartViewController){
+                duelStartViewController = [[DuelStartViewController alloc]initWithAccount:playerAccount andOpAccount:oponentAccount  opopnentAvailable:YES andServerType:YES andTryAgain:YES];
+            }else{
+                [duelStartViewController setAttackAndDefenseOfOponent:oponentAccount];
+            }
             
             [self setDelegate2:duelStartViewController];
             duelStartViewController.delegate = self;
@@ -835,7 +841,7 @@ static GameCenterViewController *gameCenterViewController;
                 [duelStartViewController setOponentMoney:oponentAccount.money];
                 [duelStartViewController startButtonClick];
                 [duelStartViewController._vWait setHidden:YES];
-                
+                [duelStartViewController setAttackAndDefenseOfOponent:oponentAccount];
             }  
             
         }
@@ -857,6 +863,7 @@ static GameCenterViewController *gameCenterViewController;
 
             duelStartViewController.lbOpponentDuelsWinCount=[NSString stringWithFormat:@"%d",oponentAccount.accountWins];
             [duelStartViewController setOponentMoney:oponentAccount.money];
+            [duelStartViewController setAttackAndDefenseOfOponent:oponentAccount];
             
             duelStartViewController.tryAgain = YES;
             [self setDelegate2:duelStartViewController];

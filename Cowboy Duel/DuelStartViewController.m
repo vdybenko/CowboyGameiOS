@@ -45,6 +45,8 @@
 
 static const char *GC_URL =  BASE_URL"api/gc";
 
+#pragma mark
+
 -(id)initWithAccount:(AccountDataSource *)userAccount andOpAccount:(AccountDataSource *)opAccount opopnentAvailable:(BOOL)available andServerType:(BOOL)server andTryAgain:(BOOL)tryA;
 {
     if (self == [super initWithNibName:nil bundle:nil]) {
@@ -141,15 +143,18 @@ static const char *GC_URL =  BASE_URL"api/gc";
     lbUserRank.text = NSLocalizedString(Rank, @"");
     lbUserRank.font=fontSimpleText;
     
+    userAtack.text = @"+13";
     if (playerAccount.accountWeapon.dDamage!=0) {
-        userAtack.text = [NSString stringWithFormat:@"+%d",playerAccount.accountWeapon.dDamage];
-        userAtack.hidden = NO;
+        userAtack.text = @"+13";//[NSString stringWithFormat:@"+%d",playerAccount.accountWeapon.dDamage];
+        userAtackView.hidden = NO;
+    }
+    userDefense.text = @"+13";
+    if (playerAccount.accountDefenseValue!=0) {
+        userDefense.text = @"+13";//[NSString stringWithFormat:@"+%d",playerAccount.accountDefenseValue];
+        userDefenseView.hidden = NO;
     }
     
-    if (playerAccount.accountDefenseValue!=0) {
-        userDefense.text = [NSString stringWithFormat:@"+%d",playerAccount.accountDefenseValue];
-        userDefense.hidden = NO;
-    }
+    [self setAttackAndDefenseOfOponent:oponentAccount];
     
     lbUserDuelsWinCount.text = [NSString stringWithFormat:@"%d",playerAccount.accountWins];
     lbUserDuelsWinCount.font=fontSimpleText;
@@ -361,6 +366,19 @@ static const char *GC_URL =  BASE_URL"api/gc";
     //_lbMoneyPlayer.text =  [NSString stringWithFormat:@"%@%d",@"$",money];
 }
 
+-(void)setAttackAndDefenseOfOponent:(AccountDataSource*)oponent;
+{
+    if (oponent.accountWeapon.dDamage!=0) {
+        oponentAtack.text = [NSString stringWithFormat:@"+%d",oponent.accountWeapon.dDamage];
+        oponentAtackView.hidden = NO;
+    }
+    
+    if (oponent.accountDefenseValue!=0) {
+        oponentDefense.text = [NSString stringWithFormat:@"+%d",oponent.accountDefenseValue];
+        oponentDefenseView.hidden = NO;
+    }
+}
+
 -(void)setOponentMoney:(int)money;
 {
     int moneyExch  = playerAccount.money < 10 ? 1: money / 10.0;
@@ -379,16 +397,6 @@ static const char *GC_URL =  BASE_URL"api/gc";
     [lbGoldCount setFrame:frame];
     
     [lbGold dinamicAttachToView:lbGoldCount withDirection:DirectionToAnimateRight ];
-    
-    if (oponentAccount.accountWeapon.dDamage!=0) {
-        oponentAtack.text = [NSString stringWithFormat:@"+%d",oponentAccount.accountWeapon.dDamage];
-        oponentAtackView.hidden = NO;
-    }
-    
-    if (oponentAccount.accountDefenseValue!=0) {
-        oponentDefense.text = [NSString stringWithFormat:@"+%d",oponentAccount.accountDefenseValue];
-        oponentDefenseView.hidden = NO;
-    }
 }
 
 -(void)setOponentImage;
