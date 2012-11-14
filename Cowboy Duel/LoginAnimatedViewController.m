@@ -442,7 +442,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
         payment = NO;
         [self donateButtonClick:nil];
     }
-    
 }
 
 

@@ -198,7 +198,7 @@ static NSString *getSavePathForDuelProduct()
                     if (indexOfProductInSavedDefenseArray != NSNotFound) {
                         CDDefenseProduct *product=[arrDefenseSaved objectAtIndex:indexOfProductInSavedDefenseArray];
                         product.dCountOfUse += 1;
-                        [arrDefenseSaved replaceObjectAtIndex:indexOfProductInSavedWeaponArray withObject:product];
+                        [arrDefenseSaved replaceObjectAtIndex:indexOfProductInSavedDefenseArray withObject:product];
                         [DuelProductDownloaderController saveDefense:arrDefenseSaved];
                     }
                 }

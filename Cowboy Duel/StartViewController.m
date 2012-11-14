@@ -538,9 +538,7 @@ static StartViewController *sharedHelper = nil;
     DLog(@"did become active");
     SSConnection *connection = [SSConnection sharedInstance];
     [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
-    if (!firstRunLocal) {
-         [self login];
-    }
+    [self login];
     
     [facebook extendAccessTokenIfNeeded];
     if (profileViewController) {
@@ -923,6 +921,12 @@ static StartViewController *sharedHelper = nil;
             RefreshContentDataController *refreshContentDataController=[[RefreshContentDataController alloc] init];
             [refreshContentDataController refreshContent];
         }
+        
+        int revisionProductListNumber=[[responseObject objectForKey:@"v_of_store_list"] intValue];
+        if ([DuelProductDownloaderController isRefreshEvailable:revisionProductListNumber]) {
+            [duelProductDownloaderController refreshDuelProducts];
+        }
+
         return;
     }       
     //avtorization
@@ -1140,7 +1144,6 @@ static StartViewController *sharedHelper = nil;
     if (theConnection) {
         NSMutableData *receivedData = [[NSMutableData alloc] init];
         [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
-    } else {
     }
     
     oldAccounId=@"";
