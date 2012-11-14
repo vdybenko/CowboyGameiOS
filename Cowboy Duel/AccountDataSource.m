@@ -516,7 +516,7 @@ static AccountDataSource *sharedHelper = nil;
     }
 }
 
--(NSUInteger(^)(NSArray *, NSInteger))findObs {
+-(NSUInteger(^)(NSArray *, NSInteger))findObsByID {
     return ^(NSArray * array, NSInteger idObject) {
         for (NSUInteger i = 0; i < [array count]; i++) {
             CDDuelProduct *product = [array objectAtIndex:i];
@@ -527,6 +527,19 @@ static AccountDataSource *sharedHelper = nil;
         return (NSUInteger)NSNotFound;
     };
 }
+
+-(NSUInteger(^)(NSArray *, NSString *))findObsByPurchase {
+    return ^(NSArray * array, NSString *purchaseString) {
+        for (NSUInteger i = 0; i < [array count]; i++) {
+            CDDuelProduct *product = [array objectAtIndex:i];
+            if ([product.dPurchaseUrl isEqualToString:purchaseString]) {
+                return i;
+            }
+        }
+        return (NSUInteger)NSNotFound;
+    };
+}
+
 
 #pragma mark putch for 1.4 
 -(void)putchAvatarImageToInitStartVC:(StartViewController*)startVC

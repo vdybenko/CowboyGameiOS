@@ -161,6 +161,9 @@
     
     if (product.dPrice == 0) {
         coldTitle.text=NSLocalizedString(@"Price:", @"");
+        gold.text = [NSString stringWithFormat:@"%@",product.dPurchasePrice];
+    }else{
+        coldTitle.text=NSLocalizedString(@"Golds:", @"");
         gold.text = [NSString stringWithFormat:@"%d",product.dPrice];
         
         if ([AccountDataSource sharedInstance].money>product.dPrice) {
@@ -168,9 +171,6 @@
         }else{
             buyProduct.enabled = NO;
         }
-    }else{
-        coldTitle.text=NSLocalizedString(@"Golds:", @"");
-        gold.text = [NSString stringWithFormat:@"%d",product.dPrice];
     }
     
     if ([AccountDataSource sharedInstance].accountLevel<product.dLevelLock) {

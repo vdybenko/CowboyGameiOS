@@ -142,7 +142,7 @@
         
         duelProduct.dCountOfUse =1;
         NSMutableArray *arrWeapon = [DuelProductDownloaderController loadWeaponArray];
-        NSUInteger index=[playerAccount findObs](arrWeapon,playerAccount.curentIdWeapon);
+        NSUInteger index=[playerAccount findObsByID](arrWeapon,playerAccount.curentIdWeapon);
         [arrWeapon replaceObjectAtIndex:index withObject:duelProduct];
         [DuelProductDownloaderController saveWeapon:arrWeapon];
         
@@ -165,7 +165,7 @@
     [playerAccount saveWeapon];
     
     NSMutableArray *arrWeapon = [DuelProductDownloaderController loadWeaponArray];
-    NSUInteger index=[playerAccount findObs](arrWeapon,playerAccount.curentIdWeapon);
+    NSUInteger index=[playerAccount findObsByID](arrWeapon,playerAccount.curentIdWeapon);
     [arrWeapon replaceObjectAtIndex:index withObject:duelProduct];
     [DuelProductDownloaderController saveWeapon:arrWeapon];
     

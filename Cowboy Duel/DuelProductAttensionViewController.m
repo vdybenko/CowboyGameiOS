@@ -80,7 +80,7 @@ static int oponentMustShot;
             cell.editing = NO;
             cell.hidden = YES;
         }else{
-            NSUInteger index=[playerAccount findObs](arrItemsList,playerAccount.curentIdWeapon);
+            NSUInteger index=[playerAccount findObsByID](arrItemsList,playerAccount.curentIdWeapon);
             prod=[arrItemsList objectAtIndex:++index];
         }
     }

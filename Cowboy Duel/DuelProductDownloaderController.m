@@ -27,9 +27,10 @@ NSString  *const URL_PRODUCTS_BUY = @"http://v201.cowboyduel.net/store/bought";
 @interface DuelProductDownloaderController()
 {
     NSMutableDictionary *dicForRequests;
-    NSMutableArray *arrItemsList;
     NSMutableArray *arrDefenseSaved;
     NSMutableArray *arrWeaponSaved;
+    
+    BOOL isWeaponProductsDownload;
 }
 @end
 
@@ -42,8 +43,10 @@ NSString  *const URL_PRODUCTS_BUY = @"http://v201.cowboyduel.net/store/bought";
 	if (!self) {
 		return nil;
 	}
-    arrItemsList=[[NSMutableArray alloc] init];
-    dicForRequests=[[NSMutableDictionary alloc] init];
+    dicForRequests=[NSMutableDictionary dictionary];
+    arrDefenseSaved = [NSMutableArray array];
+    arrWeaponSaved = [NSMutableArray array];
+    isWeaponProductsDownload = YES;
 
 	return self;
 }
@@ -83,9 +86,6 @@ static NSString *getSavePathForDuelProduct()
 
 -(void) refreshDuelProducts;
 {
-    arrWeaponSaved = [DuelProductDownloaderController loadWeaponArray];
-    arrDefenseSaved = [DuelProductDownloaderController loadDefenseArray];
-    
     NSString *URL;
     if ([Utils isiPhoneRetina]) {
         URL = URL_PRODUCT_FILE_RETINEA;
@@ -140,6 +140,7 @@ static NSString *getSavePathForDuelProduct()
 //URL_PRODUCT_FILE
             NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
             NSArray *responseObjectOfProducts = [responseObject objectForKey:@"weapons"];
+            NSMutableArray *arrayIDProducts = [NSMutableArray array];
             for (NSDictionary *dic in responseObjectOfProducts) {
                 CDWeaponProduct *product=[[CDWeaponProduct alloc] init];
                 [self parseDuelProduct:product productDic:dic];
@@ -158,12 +159,21 @@ static NSString *getSavePathForDuelProduct()
                     product.dCountOfUse = [self checkProductForUseWithID:product.dID inArray:arrWeaponSaved];
                 }
                 
-                [arrItemsList addObject: product];
+                if (product.dPrice == 0) {
+                    [arrayIDProducts addObject:product.dPurchaseUrl];
+                }
+                [arrWeaponSaved addObject: product];
             }
-            NSLog(@"arrItemsList %@",arrItemsList);
-            [DuelProductDownloaderController saveWeapon:arrItemsList];
+            NSLog(@"arrItemsList %@",arrWeaponSaved);
+            [DuelProductDownloaderController saveWeapon:arrWeaponSaved];
             
-            [arrItemsList removeAllObjects];
+            if ([arrayIDProducts count]!=0) {
+                [self requestProductDataWithNSSet:arrayIDProducts];
+            }else{
+                isWeaponProductsDownload = NO;
+            }
+            
+            [arrayIDProducts removeAllObjects];
             responseObjectOfProducts = [responseObject objectForKey:@"defenses"];
             for (NSDictionary *dic in responseObjectOfProducts) {
                 CDDefenseProduct *product=[[CDDefenseProduct alloc] init];
@@ -174,10 +184,17 @@ static NSString *getSavePathForDuelProduct()
                     product.dCountOfUse = [self checkProductForUseWithID:product.dID inArray:arrDefenseSaved];
                 }
                 
-                [arrItemsList addObject: product];
+                if (product.dPrice == 0) {
+                    [arrayIDProducts addObject:product.dPurchaseUrl];
+                }
+                [arrDefenseSaved addObject: product];
             }
-            NSLog(@"arrItemsList %@",arrItemsList);
-            [DuelProductDownloaderController saveDefense:arrItemsList];
+            NSLog(@"arrItemsList %@",arrDefenseSaved);
+            [DuelProductDownloaderController saveDefense:arrDefenseSaved];
+            
+            if ([arrayIDProducts count]!=0) {
+                [self requestProductDataWithNSSet:arrayIDProducts];
+            }
             
             if (didFinishBlock) {
                 NSError *error;
@@ -191,13 +208,13 @@ static NSString *getSavePathForDuelProduct()
             for (NSDictionary *dic in responseObjectOfProducts) {
                 NSInteger idProduct = [[dic objectForKey:@"itemIdStore"] integerValue];
                 
-                NSUInteger indexOfProductInSavedWeaponArray=[[AccountDataSource sharedInstance] findObs](arrWeaponSaved,idProduct);
+                NSUInteger indexOfProductInSavedWeaponArray=[[AccountDataSource sharedInstance] findObsByID](arrWeaponSaved,idProduct);
                 if (indexOfProductInSavedWeaponArray != NSNotFound) {
                     CDWeaponProduct *product=[arrWeaponSaved objectAtIndex:indexOfProductInSavedWeaponArray];
                     product.dCountOfUse = 1;
                     [arrWeaponSaved replaceObjectAtIndex:indexOfProductInSavedWeaponArray withObject:product];
                 }else{
-                    NSUInteger indexOfProductInSavedDefenseArray=[[AccountDataSource sharedInstance] findObs](arrDefenseSaved,idProduct);
+                    NSUInteger indexOfProductInSavedDefenseArray=[[AccountDataSource sharedInstance] findObsByID](arrDefenseSaved,idProduct);
                     
                     if (indexOfProductInSavedDefenseArray != NSNotFound) {
                         CDDefenseProduct *product=[arrDefenseSaved objectAtIndex:indexOfProductInSavedDefenseArray];
@@ -352,12 +369,50 @@ static NSString *getSavePathForDuelProduct()
     }
 }
 
+#pragma mark SKProductsRequestDelegate
+- (void) requestProductDataWithNSSet:(NSMutableArray*)arrayProducts
+{
+	SKProductsRequest *request= [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithArray:arrayProducts]];
+	request.delegate = self;
+	[request start];
+}
+
+- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        NSMutableArray *array = [NSMutableArray array];
+        [array addObjectsFromArray:response.products];
+        if (isWeaponProductsDownload) {
+            isWeaponProductsDownload = NO;
+            for(int i=0;i<[array count];i++)
+            {
+                SKProduct *productPurches = [array objectAtIndex:i];
+                NSUInteger indexOfProductInSavedWeaponArray=[[AccountDataSource sharedInstance] findObsByPurchase](arrWeaponSaved,[productPurches productIdentifier]);
+                CDWeaponProduct *product=[arrWeaponSaved objectAtIndex:indexOfProductInSavedWeaponArray];
+                product.dPurchasePrice = [NSString stringWithFormat:@"%.2f %@",[[productPurches price] doubleValue],[productPurches priceLocale]];
+                [arrWeaponSaved replaceObjectAtIndex:indexOfProductInSavedWeaponArray withObject:product];
+            }
+            [DuelProductDownloaderController saveWeapon:arrWeaponSaved];
+        }else{
+            for(int i=0;i<[array count];i++)
+            {
+                SKProduct *productPurches = [array objectAtIndex:i];
+                NSUInteger indexOfProductInSavedDefenseArray=[[AccountDataSource sharedInstance] findObsByPurchase](arrDefenseSaved,[productPurches productIdentifier]);
+                CDDefenseProduct *product=[arrDefenseSaved objectAtIndex:indexOfProductInSavedDefenseArray];
+                NSString *priceType = [[productPurches priceLocale] objectForKey:NSLocaleCurrencySymbol];
+                product.dPurchasePrice = [NSString stringWithFormat:@"%.2f %@",[[productPurches price] doubleValue],priceType];
+                [arrDefenseSaved replaceObjectAtIndex:indexOfProductInSavedDefenseArray withObject:product];
+            }
+            [DuelProductDownloaderController saveDefense:arrDefenseSaved];
+        }
+    });
+}
+
 #pragma mark
 
 -(void)dealloc
 {
     dicForRequests = nil;
-    arrItemsList = nil;
     arrDefenseSaved = nil;
     arrWeaponSaved = nil;
 }

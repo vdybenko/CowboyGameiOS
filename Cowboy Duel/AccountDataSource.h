@@ -87,7 +87,8 @@
 - (int)increaseGlNumber;
 
 - (CDWeaponProduct*)loadAccountWeapon;
--(NSUInteger(^)(NSArray *, NSInteger))findObs;
+-(NSUInteger(^)(NSArray *, NSInteger))findObsByID;
+-(NSUInteger(^)(NSArray *, NSString *))findObsByPurchase;
 
 - (void)receiveBots;
 

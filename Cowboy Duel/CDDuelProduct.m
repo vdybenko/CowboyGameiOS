@@ -19,6 +19,7 @@
 @synthesize dImageURL;
 @synthesize dPrice;
 @synthesize dPurchaseUrl;
+@synthesize dPurchasePrice;
 @synthesize dLevelLock;
 @synthesize dCountOfUse;
 
@@ -34,6 +35,7 @@
     [encoder encodeInteger:self.dPrice forKey:@"PRICE"];
     [encoder encodeInteger:self.dLevelLock forKey:@"LEVEL"];
     [encoder encodeObject:self.dPurchaseUrl forKey:@"PURCH_URL"];
+    [encoder encodeObject:self.dPurchasePrice forKey:@"PURCH_PRICE_URL"];
     [encoder encodeInteger:self.dCountOfUse forKey:@"COUNT"];
 }
 
@@ -49,6 +51,7 @@
     self.dPrice = [decoder decodeIntegerForKey:@"PRICE"];
     self.dLevelLock = [decoder decodeIntegerForKey:@"LEVEL"];
     self.dPurchaseUrl = [decoder decodeObjectForKey:@"PURCH_URL"];
+    self.dPurchasePrice = [decoder decodeObjectForKey:@"PURCH_PRICE_URL"];
     self.dCountOfUse = [decoder decodeIntegerForKey:@"COUNT"];
     return self;
 }
@@ -66,6 +69,7 @@
     self.dPrice = 0;
     self.dLevelLock = 0;
     self.dPurchaseUrl = @"";
+    self.dPurchasePrice = @"";
     self.dCountOfUse = 0;
     return self;
 }
