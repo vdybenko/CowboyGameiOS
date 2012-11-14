@@ -554,8 +554,12 @@
                                                         object:self
                                                       userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@%@",stGA,@"final"] forKey:@"event"]];
     if(!teaching||(duelWithBotCheck)){
-// added for GC        
-            [[GCHelper sharedInstance] reportScore:moneyExch forCategory:GC_LEADEBOARD_MONEY];
+// added for GC
+        if (![GCHelper sharedInstance].GClocalPlayer.isAuthenticated) {
+          [[GCHelper sharedInstance] authenticateLocalUser];
+        }
+
+        [[GCHelper sharedInstance] reportScore:moneyExch forCategory:GC_LEADEBOARD_MONEY];
 // above
         oldMoney=playerAccount.money;
         oldMoneyForAnimation = playerAccount.money;
@@ -1193,7 +1197,11 @@
             [playerAccount saveAccountLevel];
             
             reachNewLevel=YES;
-            
+          // added for GC
+            if (![GCHelper sharedInstance].GClocalPlayer.isAuthenticated) {
+              [[GCHelper sharedInstance] authenticateLocalUser];
+            }
+          // above
             [[GCHelper sharedInstance] reportAchievementIdentifier:[[GCHelper sharedInstance].GC_ACH objectAtIndex:playerAccount.accountLevel] percentComplete:100.0f];
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
