@@ -9,9 +9,16 @@
 #import "TeachingViewController.h"
 #import "FinalViewController.h"
 #import "HelpViewController.h"
+#import "DuelRewardLogicController.h"
+
+#define GAME_BOT_LEVEL 0.6
 
 static NSString *ShotSound = @"%@/shot.mp3";
 
+@interface TeachingViewController ()
+@property (nonatomic, strong) AccountDataSource *oponentAccount;
+@property (nonatomic, strong) AccountDataSource *userAccount;
+@end
 
 @implementation TeachingViewController
 @synthesize mutchNumber, mutchNumberWin, mutchNumberLose;
@@ -33,7 +40,8 @@ static NSString *ShotSound = @"%@/shot.mp3";
         mutchNumberLose = 0;
         mutchNumberWin = 0;
         
-        
+        self.oponentAccount = oponentAccount;
+        self.userAccount = userAccount;
         LisForShot=YES;
         accelerometrDataSource = [[AccelerometrDataSource alloc] init];
     }
@@ -167,8 +175,16 @@ static NSString *ShotSound = @"%@/shot.mp3";
                             
             [follPlayer stop];
             int opponentTime;
-            opponentTime=3000;
-        
+            if (!self.oponentAccount.bot) opponentTime=3000;
+            else{
+                int countBullets = [DuelRewardLogicController countUpBuletsWithPlayerLevel:self.userAccount.accountLevel];
+                
+                int k = (5 - self.oponentAccount.accountLevel / 2) * 100;
+                
+                opponentTime = countBullets * 500 * GAME_BOT_LEVEL + rand() % k;
+                DLog(@"bot opponentTime %d", opponentTime);
+            }
+            
             FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime - time * 1000) andOponentTime:opponentTime andGameCenterController:self andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
             //                [activityIndicatorView setText:NSLocalizedString(@"FOLL", @"")];
             [activityIndicatorView setText:@""];

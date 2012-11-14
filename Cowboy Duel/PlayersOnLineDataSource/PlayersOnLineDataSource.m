@@ -248,7 +248,7 @@
         BOOL numberNotAdd = YES;
         while (numberNotAdd) {
             BOOL containeNumber = NO;
-            int randNumber = ((((double)rand())/RAND_MAX) * ([player.listBotsOnline count] - 1));
+            int randNumber = rand() % [player.listBotsOnline count];
             for (NSNumber *randNumberTemp in array) {
                 if([randNumberTemp intValue] == randNumber) containeNumber = YES;
             }
