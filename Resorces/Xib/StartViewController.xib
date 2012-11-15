@@ -45,7 +45,7 @@
 						<string key="NSFrameSize">{320, 94}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="419574726"/>
+						<reference key="NSNextKeyView" ref="343128217"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -113,6 +113,31 @@
 						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">btnFeedBackWithText.png</string>
+						</object>
+						<reference key="IBUIFontDescription" ref="376536378"/>
+						<reference key="IBUIFont" ref="187087763"/>
+					</object>
+					<object class="IBUIButton" id="876994811">
+						<reference key="NSNextResponder" ref="1048327278"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{183, 432}, {85, 36}}</string>
+						<reference key="NSSuperview" ref="1048327278"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="419574726"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">3</int>
+						<reference key="IBUIHighlightedTitleColor" ref="407551026"/>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+						</object>
+						<reference key="IBUINormalTitleShadowColor" ref="899530917"/>
+						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">btnShareWithText.png</string>
 						</object>
 						<reference key="IBUIFontDescription" ref="376536378"/>
 						<reference key="IBUIFont" ref="187087763"/>
@@ -210,31 +235,6 @@
 						<reference key="IBUIFontDescription" ref="376536378"/>
 						<reference key="IBUIFont" ref="187087763"/>
 					</object>
-					<object class="IBUIButton" id="876994811">
-						<reference key="NSNextResponder" ref="1048327278"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{183, 432}, {85, 36}}</string>
-						<reference key="NSSuperview" ref="1048327278"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="862881662"/>
-						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<int key="IBUIContentHorizontalAlignment">0</int>
-						<int key="IBUIContentVerticalAlignment">3</int>
-						<reference key="IBUIHighlightedTitleColor" ref="407551026"/>
-						<object class="NSColor" key="IBUINormalTitleColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
-						</object>
-						<reference key="IBUINormalTitleShadowColor" ref="899530917"/>
-						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">btnShareWithText.png</string>
-						</object>
-						<reference key="IBUIFontDescription" ref="376536378"/>
-						<reference key="IBUIFont" ref="187087763"/>
-					</object>
 					<object class="IBUIView" id="419574726">
 						<reference key="NSNextResponder" ref="1048327278"/>
 						<int key="NSvFlags">292</int>
@@ -265,7 +265,7 @@
 								<string key="NSFrame">{{141, 177}, {37, 37}}</string>
 								<reference key="NSSuperview" ref="419574726"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="343128217"/>
+								<reference key="NSNextKeyView" ref="862881662"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
