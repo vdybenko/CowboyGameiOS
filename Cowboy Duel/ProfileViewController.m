@@ -54,6 +54,7 @@
     IBOutlet UILabel *lbLeaderboardTitle;
     IBOutlet UILabel *_lbMenuTitle;
     
+    __unsafe_unretained IBOutlet UILabel *lbPointsCountMain;
     //Buttons
     IBOutlet UIButton *_btnMusicContoller;
     
@@ -214,9 +215,7 @@
    
     [ivPointsLine setClipsToBounds:YES];
 
-    UIImageView *liveImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 130 , 13)];
-    [liveImage setImage:[UIImage imageNamed:@"pv_points.png"]];
-    [ivPointsLine.layer addSublayer:liveImage.layer];
+    
     
     [mainProfileView setDinamicHeightBackground];
 //music button background change:
@@ -289,22 +288,26 @@
 -(void)animationOfMoney;
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        [self animateLabelShowText];
+        [self animateLabel:lbGoldCount toValue:playerAccount.money];
     });
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [self animateLabel:lbPointsCountMain toValue:playerAccount.accountPoints];
+    });
+
     
 }
 
--(void)animateLabelShowText {
-    float goldForGoldAnimation;
-    if (playerAccount.money<200) {
-        goldForGoldAnimation=1;
+-(void)animateLabel:(UILabel *)label toValue:(int)value {
+    float valueForGoldAnimation;
+    if (value<200) {
+        valueForGoldAnimation=1;
     }else {
-        goldForGoldAnimation=playerAccount.money/200;
+        valueForGoldAnimation=value/200;
     }
-    for (int i=playerAccount.money/2; i<=playerAccount.money; i+=goldForGoldAnimation) {
+    for (int i=value/2; i<=value; i+=valueForGoldAnimation) {
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            lbGoldCount.text = [numberFormatter stringFromNumber:[NSNumber numberWithInt:(i)]];
+            label.text = [numberFormatter stringFromNumber:[NSNumber numberWithInt:(i)]];
         });
         
         [NSThread sleepForTimeInterval:0.005];
@@ -314,7 +317,7 @@
         }
     }
     dispatch_async(dispatch_get_main_queue(), ^{
-        lbGoldCount.text = [numberFormatter stringFromNumber:[NSNumber numberWithInt:(playerAccount.money)]]; 
+        label.text = [numberFormatter stringFromNumber:[NSNumber numberWithInt:(value)]]; 
     });
     needAnimation = NO;
 }
@@ -526,6 +529,7 @@
     lbBiggestWinCount = nil;
     lbNotifyMessage = nil;
     lbLeaderboardTitle = nil;
+    lbPointsCountMain = nil;
     [super viewDidUnload];
 }
 
