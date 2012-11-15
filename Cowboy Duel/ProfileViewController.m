@@ -55,6 +55,7 @@
     IBOutlet UILabel *_lbMenuTitle;
     
     __unsafe_unretained IBOutlet UILabel *lbPointsCountMain;
+    __unsafe_unretained IBOutlet UIImageView *ivCurrentRank;
     //Buttons
     IBOutlet UIButton *_btnMusicContoller;
     
@@ -122,7 +123,8 @@
     lbGoldCount.text =[numberFormatter stringFromNumber:[NSNumber numberWithInt:(playerAccount.money/2)]];
     
     [self checkLocationOfViewForFBLogin];
-    
+    NSString *name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel];
+    ivCurrentRank.image = [UIImage imageNamed:name];
     didDisappear=NO;
     
     
@@ -530,6 +532,7 @@
     lbNotifyMessage = nil;
     lbLeaderboardTitle = nil;
     lbPointsCountMain = nil;
+    ivCurrentRank = nil;
     [super viewDidUnload];
 }
 
