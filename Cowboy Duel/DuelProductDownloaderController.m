@@ -389,7 +389,7 @@ static NSString *getSavePathForDuelProduct()
                 SKProduct *productPurches = [array objectAtIndex:i];
                 NSUInteger indexOfProductInSavedWeaponArray=[[AccountDataSource sharedInstance] findObsByPurchase](arrWeaponSaved,[productPurches productIdentifier]);
                 CDWeaponProduct *product=[arrWeaponSaved objectAtIndex:indexOfProductInSavedWeaponArray];
-                product.dPurchasePrice = [NSString stringWithFormat:@"%.2f %@",[[productPurches price] doubleValue],[productPurches priceLocale]];
+                product.dPurchasePrice = [NSString stringWithFormat:@"%.2f%@",[[productPurches price] doubleValue],[productPurches priceLocale]];
                 [arrWeaponSaved replaceObjectAtIndex:indexOfProductInSavedWeaponArray withObject:product];
             }
             [DuelProductDownloaderController saveWeapon:arrWeaponSaved];
@@ -400,7 +400,7 @@ static NSString *getSavePathForDuelProduct()
                 NSUInteger indexOfProductInSavedDefenseArray=[[AccountDataSource sharedInstance] findObsByPurchase](arrDefenseSaved,[productPurches productIdentifier]);
                 CDDefenseProduct *product=[arrDefenseSaved objectAtIndex:indexOfProductInSavedDefenseArray];
                 NSString *priceType = [[productPurches priceLocale] objectForKey:NSLocaleCurrencySymbol];
-                product.dPurchasePrice = [NSString stringWithFormat:@"%.2f %@",[[productPurches price] doubleValue],priceType];
+                product.dPurchasePrice = [NSString stringWithFormat:@"%.2f%@",[[productPurches price] doubleValue],priceType];
                 [arrDefenseSaved replaceObjectAtIndex:indexOfProductInSavedDefenseArray withObject:product];
             }
             [DuelProductDownloaderController saveDefense:arrDefenseSaved];

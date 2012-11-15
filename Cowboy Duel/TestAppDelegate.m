@@ -245,8 +245,6 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
     NSLog(@"Failed to receive ad with error: %@", [error localizedFailureReason]);
 }
 
-
-
 - (void)dealloc
 {
     DLog(@"Exit");
