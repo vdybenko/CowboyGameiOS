@@ -9,6 +9,7 @@
 #import "TeachingViewController.h"
 #import "FinalViewController.h"
 #import "HelpViewController.h"
+#import "TeachingHelperViewController.h"
 
 static NSString *ShotSound = @"%@/shot.mp3";
 
@@ -33,7 +34,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
         mutchNumberLose = 0;
         mutchNumberWin = 0;
         
-        
         LisForShot=YES;
         accelerometrDataSource = [[AccelerometrDataSource alloc] init];
     }
@@ -43,6 +43,9 @@ static NSString *ShotSound = @"%@/shot.mp3";
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+
+    TeachingHelperViewController *teachingHelperViewController = [[TeachingHelperViewController alloc] initWithOponentAccount:opAccount];
+    [self.navigationController pushViewController:teachingHelperViewController animated:NO];
 
     if ([helpViewSound isDescendantOfView:super.view]) {
         [helpPracticeView setHidden:YES];

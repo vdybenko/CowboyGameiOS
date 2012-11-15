@@ -189,6 +189,10 @@ static NSString *ShotSound = @"%@/shot.mp3";
         DuelProductAttensionViewController *duelProductAttensionViewController=[[DuelProductAttensionViewController alloc] initWithAccount:playerAccount parentVC:self];
         [self.navigationController presentViewController:duelProductAttensionViewController animated:NO completion:nil];
     }
+    
+    helpPracticeView.hidden = YES;
+    helpViewShots.hidden = YES;
+    helpViewSound.hidden = YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -216,7 +220,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
     _lbBullets.text=[NSString stringWithFormat:@"%d", shotCountBullet];
     
     [self checkPlayerGun];
-
     [self setTextToMessageShot];
 }
 

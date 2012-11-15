@@ -239,6 +239,8 @@
 		768044C915AC697A005ABD3A /* dv_arm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 768044C815AC6979005ABD3A /* dv_arm@2x.png */; };
 		7682BDDF15AC5F22001C09EC /* HelpPracticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682BDDD15AC5F22001C09EC /* HelpPracticeView.m */; };
 		7682E363156BD22000A8F9A0 /* CDPlayerOnLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682E362156BD22000A8F9A0 /* CDPlayerOnLine.m */; };
+		768321D91654DDD000E78A8C /* TeachingHelperController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 768321D81654DDD000E78A8C /* TeachingHelperController.xib */; };
+		768321E01654E60D00E78A8C /* TeachingHelperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 768321DF1654E60D00E78A8C /* TeachingHelperViewController.m */; };
 		768388D3157DE37800377D88 /* UIButton+Image+Title.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388D2157DE37800377D88 /* UIButton+Image+Title.m */; };
 		768388E5157E249900377D88 /* CDCollectionAdvertisingApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388E2157E249900377D88 /* CDCollectionAdvertisingApp.m */; };
 		768388E8157E304400377D88 /* AdvertisingNewVersionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388E7157E304300377D88 /* AdvertisingNewVersionViewController.m */; };
@@ -295,6 +297,10 @@
 		76B94E7B1652AF6300F372E9 /* ds_defense@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B94E771652AF6300F372E9 /* ds_defense@2x.png */; };
 		76CAE7161421E97900CA39EA /* cry.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 76CAE7141421E97900CA39EA /* cry.mp3 */; };
 		76CB057013AB991B0011E768 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CB056F13AB991B0011E768 /* QuartzCore.framework */; };
+		76CDD0561655267A003F30BD /* dv_bullets_oval.png in Resources */ = {isa = PBXBuildFile; fileRef = 76CDD0521655267A003F30BD /* dv_bullets_oval.png */; };
+		76CDD0571655267A003F30BD /* dv_bullets_oval@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76CDD0531655267A003F30BD /* dv_bullets_oval@2x.png */; };
+		76CDD0581655267A003F30BD /* dv_fire_label_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 76CDD0541655267A003F30BD /* dv_fire_label_small.png */; };
+		76CDD0591655267A003F30BD /* dv_fire_label_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76CDD0551655267A003F30BD /* dv_fire_label_small@2x.png */; };
 		76CE0AE3163EE7ED00B51B04 /* StoreProductAttensionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76CE0AE2163EE7ED00B51B04 /* StoreProductAttensionCell.xib */; };
 		76CE0AE5163EF01D00B51B04 /* DuelProductWinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76CE0AE4163EF01D00B51B04 /* DuelProductWinViewController.xib */; };
 		76CE0AE8163EF45C00B51B04 /* shop_product_ribbon.png in Resources */ = {isa = PBXBuildFile; fileRef = 76CE0AE6163EF45C00B51B04 /* shop_product_ribbon.png */; };
@@ -695,6 +701,9 @@
 		7682BDDE15AC5F22001C09EC /* HelpPracticeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpPracticeView.h; sourceTree = "<group>"; };
 		7682E361156BD22000A8F9A0 /* CDPlayerOnLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDPlayerOnLine.h; sourceTree = "<group>"; };
 		7682E362156BD22000A8F9A0 /* CDPlayerOnLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDPlayerOnLine.m; sourceTree = "<group>"; };
+		768321D81654DDD000E78A8C /* TeachingHelperController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TeachingHelperController.xib; path = Xib/TeachingHelperController.xib; sourceTree = "<group>"; };
+		768321DE1654E60D00E78A8C /* TeachingHelperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingHelperViewController.h; sourceTree = "<group>"; };
+		768321DF1654E60D00E78A8C /* TeachingHelperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingHelperViewController.m; sourceTree = "<group>"; };
 		768388D1157DE37800377D88 /* UIButton+Image+Title.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Image+Title.h"; sourceTree = "<group>"; };
 		768388D2157DE37800377D88 /* UIButton+Image+Title.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Image+Title.m"; sourceTree = "<group>"; };
 		768388E1157E249900377D88 /* CDCollectionAdvertisingApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDCollectionAdvertisingApp.h; path = AdvertisingApp/CDCollectionAdvertisingApp.h; sourceTree = "<group>"; };
@@ -770,6 +779,10 @@
 		76B94E771652AF6300F372E9 /* ds_defense@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ds_defense@2x.png"; sourceTree = "<group>"; };
 		76CAE7141421E97900CA39EA /* cry.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cry.mp3; sourceTree = "<group>"; };
 		76CB056F13AB991B0011E768 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		76CDD0521655267A003F30BD /* dv_bullets_oval.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dv_bullets_oval.png; sourceTree = "<group>"; };
+		76CDD0531655267A003F30BD /* dv_bullets_oval@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dv_bullets_oval@2x.png"; sourceTree = "<group>"; };
+		76CDD0541655267A003F30BD /* dv_fire_label_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dv_fire_label_small.png; sourceTree = "<group>"; };
+		76CDD0551655267A003F30BD /* dv_fire_label_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dv_fire_label_small@2x.png"; sourceTree = "<group>"; };
 		76CE0AE2163EE7ED00B51B04 /* StoreProductAttensionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StoreProductAttensionCell.xib; path = Xib/StoreProductAttensionCell.xib; sourceTree = "<group>"; };
 		76CE0AE4163EF01D00B51B04 /* DuelProductWinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DuelProductWinViewController.xib; path = Xib/DuelProductWinViewController.xib; sourceTree = "<group>"; };
 		76CE0AE6163EF45C00B51B04 /* shop_product_ribbon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shop_product_ribbon.png; sourceTree = "<group>"; };
@@ -1055,6 +1068,10 @@
 				76B784BF15E272D9004EBBEC /* dv_steady@2x.png */,
 				76B75EE415DE5B40000ED207 /* dv_fire_label.png */,
 				76B75EE515DE5B40000ED207 /* dv_fire_label@2x.png */,
+				76CDD0521655267A003F30BD /* dv_bullets_oval.png */,
+				76CDD0531655267A003F30BD /* dv_bullets_oval@2x.png */,
+				76CDD0541655267A003F30BD /* dv_fire_label_small.png */,
+				76CDD0551655267A003F30BD /* dv_fire_label_small@2x.png */,
 				03285FD5159DD84000D16195 /* dv_bg_new.png */,
 				03285FD6159DD84000D16195 /* dv_bg_new@2x.png */,
 				03285FD7159DD84000D16195 /* dv_bullets.png */,
@@ -1486,6 +1503,7 @@
 				311E0D0B15A6F035003C261F /* AdColonyViewController.xib */,
 				763F8A261578A1F800D8BB42 /* DuelViewControllerWithXib.xib */,
 				7692BC2E1574E36C00983264 /* DuelStartViewController.xib */,
+				768321D81654DDD000E78A8C /* TeachingHelperController.xib */,
 				761EFA4C1573BE91001670EB /* HelpViewController.xib */,
 				761EFA4D1573BE91001670EB /* ProfileViewController.xib */,
 				761EFA4E1573BE91001670EB /* StartViewController.xib */,
@@ -1496,11 +1514,7 @@
 				76864B381626A0E80095BBEF /* TopPlayersCell.xib */,
 				76864B3A1626DAC30095BBEF /* OnLinePlayersCell.xib */,
 				767BA5BD1589F8E300825EB1 /* FinalViewController.xib */,
-				7687E8C416392534003C9EE6 /* StoreViewController.xib */,
-				7687E8BF16391A32003C9EE6 /* StoreProductCell.xib */,
-				76CE0AE2163EE7ED00B51B04 /* StoreProductAttensionCell.xib */,
-				76D6284C163AC0ED00CA07D2 /* DuelProductAttensionViewController.xib */,
-				76CE0AE4163EF01D00B51B04 /* DuelProductWinViewController.xib */,
+				768321D71654DB2400E78A8C /* Store */,
 			);
 			name = Xib;
 			sourceTree = "<group>";
@@ -1520,8 +1534,22 @@
 				BDD07B6E141E1F170085E4FB /* GameCenterViewController.m */,
 				BDD07BAA141E1F170085E4FB /* TeachingViewController.h */,
 				BDD07BAB141E1F170085E4FB /* TeachingViewController.m */,
+				768321DE1654E60D00E78A8C /* TeachingHelperViewController.h */,
+				768321DF1654E60D00E78A8C /* TeachingHelperViewController.m */,
 			);
 			name = Duel;
+			sourceTree = "<group>";
+		};
+		768321D71654DB2400E78A8C /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				7687E8C416392534003C9EE6 /* StoreViewController.xib */,
+				7687E8BF16391A32003C9EE6 /* StoreProductCell.xib */,
+				76CE0AE2163EE7ED00B51B04 /* StoreProductAttensionCell.xib */,
+				76D6284C163AC0ED00CA07D2 /* DuelProductAttensionViewController.xib */,
+				76CE0AE4163EF01D00B51B04 /* DuelProductWinViewController.xib */,
+			);
+			name = Store;
 			sourceTree = "<group>";
 		};
 		768388D5157E176D00377D88 /* AdvertisingApp */ = {
@@ -2193,6 +2221,11 @@
 				76B94E791652AF6300F372E9 /* ds_attack@2x.png in Resources */,
 				76B94E7A1652AF6300F372E9 /* ds_defense.png in Resources */,
 				76B94E7B1652AF6300F372E9 /* ds_defense@2x.png in Resources */,
+				768321D91654DDD000E78A8C /* TeachingHelperController.xib in Resources */,
+				76CDD0561655267A003F30BD /* dv_bullets_oval.png in Resources */,
+				76CDD0571655267A003F30BD /* dv_bullets_oval@2x.png in Resources */,
+				76CDD0581655267A003F30BD /* dv_fire_label_small.png in Resources */,
+				76CDD0591655267A003F30BD /* dv_fire_label_small@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2311,6 +2344,7 @@
 				BD7F2AEA1649647500D29263 /* MKStoreObserver.m in Sources */,
 				BD84DAA5164ABCA000DEEE38 /* LoginAnimatedViewController.m in Sources */,
 				BD8342A7164C0CBE00E6363B /* BEAnimationView.m in Sources */,
+				768321E01654E60D00E78A8C /* TeachingHelperViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
