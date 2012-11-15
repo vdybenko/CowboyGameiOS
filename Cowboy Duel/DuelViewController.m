@@ -55,18 +55,12 @@ static NSString *ShotSound = @"%@/shot.mp3";
     }
     */
     [helpPracticeView setHidden:YES];
-    CGRect frame=helpPracticeView.frame;
-    frame.origin.y=72;
-    helpPracticeView.frame = frame;    
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [_infoButton setHidden:YES];
-
-    [helpViewShots removeFromSuperview];
-    [helpViewSound removeFromSuperview];
 
     [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(3.0 / 60.0)];
     [[UIAccelerometer sharedAccelerometer] setDelegate:self];

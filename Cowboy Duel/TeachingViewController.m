@@ -47,12 +47,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
     TeachingHelperViewController *teachingHelperViewController = [[TeachingHelperViewController alloc] initWithOponentAccount:opAccount];
     [self.navigationController pushViewController:teachingHelperViewController animated:NO];
 
-    if ([helpViewSound isDescendantOfView:super.view]) {
-        [helpPracticeView setHidden:YES];
-    }else{
-        [self cancelSoundClick:Nil];
-    }
-    
     if(firstRun){
         lbBackButton.text = NSLocalizedString(@"SKIP", nil);
     }
@@ -69,13 +63,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
     [super viewWillAppear:animated];
     [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(3.0 / 60.0)];
     [[UIAccelerometer sharedAccelerometer] setDelegate:self];
-    if (opAccount.bot) {
-      [helpViewShots removeFromSuperview];
-      [helpViewSound removeFromSuperview];
-    }
-    if (![helpViewShots isDescendantOfView:super.view]) {
-        [self cancelShotsClick:self];
-    }
 }
 
 
@@ -260,40 +247,5 @@ static NSString *ShotSound = @"%@/shot.mp3";
         [self hideHelpViewWithArm];
     }
 }
-
-#pragma mark - IBAction
-
-- (IBAction)cancelShotsClick:(id)sender {
-    [super cancelShotsClick:sender];
-    
-    [UIView animateWithDuration:ANIMATION_TIME
-                     animations:^{
-                         [helpPracticeView setHidden:NO];
-                         CGRect frame=helpPracticeView.frame;
-                         if ([helpViewSound isDescendantOfView:self.view]) {
-                             frame.origin.y=210;
-                         }else {
-                             frame.origin.y=72;
-                         }
-                         helpPracticeView.frame = frame;
-                     }];
-}
-
-- (IBAction)cancelSoundClick:(id)sender {
-    [super cancelSoundClick:sender];
-    
-    [UIView animateWithDuration:ANIMATION_TIME
-                     animations:^{
-                         [helpPracticeView setHidden:NO];
-                         CGRect frame=helpPracticeView.frame;
-                         if ([helpViewShots isDescendantOfView:self.view]) {
-                             frame.origin.y=320;                             
-                         }else {
-                             frame.origin.y=72;
-                         }
-                         helpPracticeView.frame=frame;
-                     }];
-}
-
 
 @end

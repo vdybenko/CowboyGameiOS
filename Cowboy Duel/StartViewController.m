@@ -501,6 +501,8 @@ static StartViewController *sharedHelper = nil;
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    playerAccount.accountLevel = 7;
     SSConnection *connection = [SSConnection sharedInstance];
     [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
     

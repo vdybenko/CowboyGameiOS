@@ -141,18 +141,6 @@ static CGFloat const ANIMATION_TIME = 0.3f;
     IBOutlet UIImageView *titleSteadyFire;
     IBOutlet UIImageView *titleReady;
     
-//   View Bulets
-    IBOutlet UIView *helpViewShots;
-    IBOutlet UIView *viewDinamicHeight;
-    IBOutlet UILabel *lbWait;
-    IBOutlet UILabel *lbWaitDescription;
-    IBOutlet UILabel *lbCountOfShots;
-    IBOutlet UILabel *lbDisabledShots;
-//   View Sound
-    IBOutlet UIView *helpViewSound;
-    IBOutlet UILabel *lbWarningSound;
-    IBOutlet UILabel *lbDisabledSound;
-    
     UIView  *helpPracticeView;
 
     float steadyScale;
@@ -174,8 +162,6 @@ static CGFloat const ANIMATION_TIME = 0.3f;
 -(IBAction)buttonClick;
 -(IBAction)backButtonClick:(id)sender;
 -(void)vibrationStart;
-- (IBAction)cancelShotsClick:(id)sender;
-- (IBAction)cancelSoundClick:(id)sender;
 -(void)startDuel;
 -(void)restartCountdown;
 -(void)hideHelpViewWithArm;
