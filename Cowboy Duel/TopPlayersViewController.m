@@ -179,6 +179,7 @@ static const char *RANK_TOP = BASE_URL"users/top_rank";
     }
     
     NSMutableArray *arrItemsList=[_playersTopDataSource arrItemsList];
+  if ([arrItemsListForFindMe count]>0) {
     CDTopPlayer *firstPlayerInList=[arrItemsListForFindMe objectAtIndex:0];
     int rankOfFirstPlayer=firstPlayerInList.dPositionInList;
     if (rankOfFirstPlayer>[arrItemsList count]) {
@@ -203,7 +204,7 @@ static const char *RANK_TOP = BASE_URL"users/top_rank";
     
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:_playersTopDataSource.myProfileIndex inSection:0];
     [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
-    
+  }
     [btnFindMe setEnabled:YES];
     [loadingView setHidden:YES];
 }
