@@ -127,7 +127,7 @@ static const char *AUTORIZATION_URL =  BASE_URL"api/authorization";
 static const char *MODIFIER_USER_URL =  BASE_URL"users/set_user_data";
 
 NSString *const URL_FB_PAGE=@"http://cowboyduel.mobi/";
-NSString *const URL_COMM_FB_PAGE = @"http://m.facebook.com/pages/Cowboy-multiplayer-western-duel-iPhone-iPod-touch-Games/217230251641433?id=217230251641433";
+NSString *const URL_COMM_FB_PAGE =@"http://cowboyduel.com/";  
 
 NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNotification";
 
