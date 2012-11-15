@@ -135,7 +135,8 @@ p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font
 "Saloon" = "SALOON";
 "Practice" = "PRACTICE";
 "Profile" = "PROFILE";
-"Feedback" = "FEEDBACK";
+"Feedback" = "Feedback";
+"Share" = "Share";
 "HelpTitle" = "HELP";
 "MoreGames" = "MORE GAMES";
 
@@ -305,3 +306,5 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "DONATE" = "DONATE";
 "DONATE 1$" = "DONATE 1$";
 "CHOOSE_DOLLAR_S" = "Pay for me $";
+
+"Follow" = "Cowboy Games community on Facebook";
