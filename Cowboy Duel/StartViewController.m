@@ -535,11 +535,13 @@ static StartViewController *sharedHelper = nil;
       CGRect frame = feedbackView.frame;
       frame.origin.y = [UIScreen mainScreen].bounds.size.height;
       feedbackView.frame = frame;
+      feedBackViewVisible = NO;
     }
     if (shareViewVisible) {
       CGRect frame = shareView.frame;
       frame.origin.y = [UIScreen mainScreen].bounds.size.height;
       shareView.frame = frame;
+      shareViewVisible = NO;
     }
 }
 
@@ -659,67 +661,31 @@ static StartViewController *sharedHelper = nil;
     }
 }
 
-- (void) showFeedbackView {
-  
+- (void) showView: (UIView *)view
+{
   [UIView animateWithDuration:0.5
                         delay:0.0
                       options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction animations:^{
-                        CGRect frame = feedbackView.frame;
-                        frame.origin.y = [UIScreen mainScreen].bounds.size.height - frame.size.height;//-50;
-                        feedbackView.frame = frame;
+                        CGRect frame = view.frame;
+                        frame.origin.y = [UIScreen mainScreen].bounds.size.height - frame.size.height;
+                        view.frame = frame;
                       } completion:^(BOOL finished) {
                         ///
                       }];
-    feedBackViewVisible=YES;
 }
 
-- (void) hideFeedbackView {
-    
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationBeginsFromCurrentState:YES]; 
-	[UIView setAnimationCurve:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction];
-    [UIView setAnimationDuration:0.5f];
-	[UIView setAnimationDelegate:self];
-    CGRect frame = feedbackView.frame;
-    frame.origin.y = [[UIScreen mainScreen] bounds].size.height;
-    feedbackView.frame = frame;
-    
-    [UIView commitAnimations];
-    
-    feedBackViewVisible=NO;
-}
-
-- (void) showShareView {
-  
+- (void) hideView: (UIView *)view
+{
   [UIView animateWithDuration:0.5
                         delay:0.0
                       options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction animations:^{
-                        CGRect frame = shareView.frame;
-                        frame.origin.y = [UIScreen mainScreen].bounds.size.height - frame.size.height;//-50;
-                        shareView.frame = frame;
+                        CGRect frame = view.frame;
+                        frame.origin.y = [UIScreen mainScreen].bounds.size.height;
+                        view.frame = frame;
                       } completion:^(BOOL finished) {
                         ///
                       }];
-  
-  shareViewVisible=YES;
 }
-
-- (void) hideShareView {
-  
-  [UIView beginAnimations:nil context:nil];
-  [UIView setAnimationBeginsFromCurrentState:YES];
-	[UIView setAnimationCurve:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction];
-  [UIView setAnimationDuration:0.5f];
-	[UIView setAnimationDelegate:self];
-  CGRect frame = shareView.frame;
-  frame.origin.y = [[UIScreen mainScreen] bounds].size.height;
-  shareView.frame = frame;
-  
-  [UIView commitAnimations];
-  
-  shareViewVisible=NO;
-}
-
 
 -(IBAction)showHelp:(id)sender
 {
@@ -749,15 +715,18 @@ static StartViewController *sharedHelper = nil;
 #pragma mark feedback
 
 - (IBAction)feedbackButtonClick:(id)sender {
-    [self showFeedbackView];
-    
+    [self showView:feedbackView];
+    feedBackViewVisible = YES;
+  
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/feedBack_click" forKey:@"event"]];
 }
 
 - (IBAction)feedbackCancelButtonClick:(id)sender {
-    [self hideFeedbackView];
+  [self hideView:feedbackView];
+  feedBackViewVisible = NO;
+
 }
 - (IBAction)feedbackFollowFBClick:(id)sender {
 //  NSString *URL=[[NSString alloc]initWithFormat:@"https://twitter.com/intent/tweet?source=webclient&text=%@ %@",
@@ -795,14 +764,15 @@ static StartViewController *sharedHelper = nil;
 #pragma mark - Share
 
 - (IBAction)shareButtonClick:(id)sender {
-  [self showShareView];
-  
+  [self showView:shareView];
+  shareViewVisible = YES;
   [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                       object:self
                                                     userInfo:[NSDictionary dictionaryWithObject:@"/share_click" forKey:@"event"]];
 }
 - (IBAction)shareCancelButtonClick:(id)sender {
-  [self hideShareView];
+  [self hideView:shareView];
+  shareViewVisible = NO;
   
 }
 
