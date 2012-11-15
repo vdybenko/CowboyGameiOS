@@ -25,6 +25,7 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
     __unsafe_unretained IBOutlet UIActivityIndicatorView *activityIndicatorView;
     BOOL tryAgain;
     CGRect guillBackUp;
+    CGRect textBackUp;
 //    int counterTryAgain;
 }
 @property (nonatomic) int textIndex;
@@ -133,6 +134,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
                     nil];
     self.textIndex = 0;
     guillBackUp = self.guillotineImage.frame;
+    textBackUp = self.animetedText.frame;
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/kassa.aif", [[NSBundle mainBundle] resourcePath]]];
     NSError *error;
     self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
@@ -267,6 +269,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
 //    self.guillotineImage.frame = frame;
 
     self.guillotineImage.frame = guillBackUp;
+    self.animetedText.frame = textBackUp;
     CGRect frame = self.heatImage.frame;
     frame.origin.y -= 220;
     self.heatImage.frame = frame;
