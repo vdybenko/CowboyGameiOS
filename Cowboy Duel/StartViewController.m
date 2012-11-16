@@ -40,7 +40,7 @@
     
     UIView *hudView;
     
-    BOOL firstRun;
+//    BOOL firstRun;
     BOOL firstRunLocal;
     BOOL firstDayWithOutAdvertising;
     
@@ -56,6 +56,7 @@
     BOOL hostActive;
     
     BOOL feedBackViewVisible;
+    BOOL shareViewVisible;
     
     Reachability* internetReachable;
     Reachability* hostReachable;
@@ -74,18 +75,22 @@
     IBOutlet UIButton *mapButton;
     IBOutlet UIButton *profileButton;
     IBOutlet UIButton *feedbackButton;
+    IBOutlet UIButton *shareButton;
     IBOutlet UIButton *helpButton;
     
     IBOutlet UIView *feedbackView;
-    
+    IBOutlet UIView *shareView;
+  
     IBOutlet UIImageView *backGroundfeedbackView;
     IBOutlet UIActivityIndicatorView *indicatorfeedbackView;
     
     
+    IBOutlet UILabel *lbFollowFacebook;
     IBOutlet UILabel *lbPostMessage;
     IBOutlet UILabel *lbMailMessage;
     IBOutlet UILabel *lbRateMessage;
     IBOutlet UILabel *lbFeedbackCancelBtn;
+    IBOutlet UILabel *lbShareCancelBtn;
 }
 @property (strong, nonatomic) IBOutlet UIButton *teachingButton;
 @property (strong, nonatomic) IBOutlet UIButton *duelButton;
@@ -93,6 +98,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *helpButton;
 @property (strong, nonatomic) IBOutlet UIButton *profileButton;
 @property (strong, nonatomic) IBOutlet UIButton *feedbackButton;
+@property (strong, nonatomic) IBOutlet UIButton *shareButton;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *indicatorfeedbackView;
 @property (strong, nonatomic) IBOutlet UIImageView *backGroundfeedbackView;
 
@@ -120,14 +126,16 @@
 @implementation StartViewController
 
 @synthesize gameCenterViewController, player, internetActive, hostActive, soundCheack, loginViewController;
-@synthesize feedbackButton, duelButton, profileButton, teachingButton, helpButton, mapButton;
-@synthesize oldAccounId,feedBackViewVisible,showFeedAtFirst,topPlayersDataSource, advertisingNewVersionViewController;
+@synthesize feedbackButton, duelButton, profileButton, teachingButton, helpButton, mapButton, shareButton;
+@synthesize oldAccounId,feedBackViewVisible,showFeedAtFirst,topPlayersDataSource, advertisingNewVersionViewController,firstRun;
 
 static const char *REGISTRATION_URL =  BASE_URL"api/registration";
 static const char *AUTORIZATION_URL =  BASE_URL"api/authorization";
 static const char *MODIFIER_USER_URL =  BASE_URL"users/set_user_data";
 
-NSString *const URL_FB_PAGE=@"http://cowboyduel.mobi/"; 
+NSString *const URL_FB_PAGE=@"http://cowboyduel.mobi/";
+NSString *const URL_COMM_FB_PAGE =@"http://cowboyduel.com/";  
+
 NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNotification";
 
 static const char *BOT_LIST_URL = "http://bidoncd.s3.amazonaws.com/bot.json";
@@ -173,9 +181,6 @@ static StartViewController *sharedHelper = nil;
         {
             firstRun = NO;
             firstRunLocal = NO;
-            if (![GCHelper sharedInstance].GClocalPlayer.isAuthenticated) {
-                [[GCHelper sharedInstance] authenticateLocalUser];
-            }
             [topPlayersDataSource reloadDataSource];
             
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"moneyForIPad"];
@@ -395,12 +400,7 @@ static StartViewController *sharedHelper = nil;
     [profileButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
     profileButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
     profileButton.titleLabel.textAlignment = UITextAlignmentCenter;
-    
-    [feedbackButton setTitle:NSLocalizedString(@"Feedback", @"") forState:UIControlStateNormal];
-    [feedbackButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
-    feedbackButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
-    feedbackButton.titleLabel.textAlignment = UITextAlignmentCenter;
-    
+
     [helpButton setTitle:NSLocalizedString(@"HelpTitle", @"") forState:UIControlStateNormal];
     [helpButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
     helpButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
@@ -426,13 +426,21 @@ static StartViewController *sharedHelper = nil;
     lbRateMessage.text = NSLocalizedString(@"RateTitle", nil);
     lbRateMessage.textColor = textColor;
     lbRateMessage.font = textFont;
+  
+    lbFollowFacebook.text = NSLocalizedString(@"Follow", nil);
     
     lbFeedbackCancelBtn.text = NSLocalizedString(@"CancelButtonTitle", nil);
     lbFeedbackCancelBtn.textColor = buttonsTitleColor;
     lbFeedbackCancelBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
-    
+  
+    lbShareCancelBtn.text = NSLocalizedString(@"CancelButtonTitle", nil);
+    lbShareCancelBtn.textColor = buttonsTitleColor;
+    lbShareCancelBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
+  
+  
     feedBackViewVisible=NO;
-    
+    shareViewVisible = NO;
+  
     if (firstRun) {        
         arrowImage =[[UIImageView_AttachedView alloc] initWithImage:[UIImage imageNamed:@"st_arrow.png"] attachedToFrame:teachingButton frequence:0.2 amplitude:6 direction:DirectionToAnimateLeft];
         hudView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -471,6 +479,10 @@ static StartViewController *sharedHelper = nil;
     lbMailMessage = nil;
     lbRateMessage = nil;
     lbFeedbackCancelBtn = nil;
+    shareButton = nil;
+    shareView = nil;
+    lbFollowFacebook = nil;
+    lbShareCancelBtn = nil;
     [super viewDidUnload];
 }
     
@@ -531,7 +543,18 @@ static StartViewController *sharedHelper = nil;
     [super viewWillDisappear:animated];
     TestAppDelegate *app = (TestAppDelegate *)[[UIApplication sharedApplication] delegate];
     [app.adBanner setHidden:YES];
-
+    if(feedBackViewVisible){
+      CGRect frame = feedbackView.frame;
+      frame.origin.y = [UIScreen mainScreen].bounds.size.height;
+      feedbackView.frame = frame;
+      feedBackViewVisible = NO;
+    }
+    if (shareViewVisible) {
+      CGRect frame = shareView.frame;
+      frame.origin.y = [UIScreen mainScreen].bounds.size.height;
+      shareView.frame = frame;
+      shareViewVisible = NO;
+    }
 }
 
 -(void)didBecomeActive
@@ -674,20 +697,30 @@ static StartViewController *sharedHelper = nil;
     feedBackViewVisible=YES;
 }
 
-- (void) hideFeedbackView {
-    
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationBeginsFromCurrentState:YES]; 
-	[UIView setAnimationCurve:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction];
-    [UIView setAnimationDuration:0.5f];
-	[UIView setAnimationDelegate:self];
-    CGRect frame = feedbackView.frame;
-    frame.origin.y = [[UIScreen mainScreen] bounds].size.height;
-    feedbackView.frame = frame;
-    
-    [UIView commitAnimations];
-    
-    feedBackViewVisible=NO;
+- (void) showView: (UIView *)view
+{
+  [UIView animateWithDuration:0.5
+                        delay:0.0
+                      options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction animations:^{
+                        CGRect frame = view.frame;
+                        frame.origin.y = [UIScreen mainScreen].bounds.size.height - frame.size.height;
+                        view.frame = frame;
+                      } completion:^(BOOL finished) {
+                        ///
+                      }];
+}
+
+- (void) hideView: (UIView *)view
+{
+  [UIView animateWithDuration:0.5
+                        delay:0.0
+                      options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction animations:^{
+                        CGRect frame = view.frame;
+                        frame.origin.y = [UIScreen mainScreen].bounds.size.height;
+                        view.frame = frame;
+                      } completion:^(BOOL finished) {
+                        ///
+                      }];
 }
 
 -(IBAction)showHelp:(id)sender
@@ -718,15 +751,65 @@ static StartViewController *sharedHelper = nil;
 #pragma mark feedback
 
 - (IBAction)feedbackButtonClick:(id)sender {
-    [self showFeedbackView];
-    
+    [self showView:feedbackView];
+    feedBackViewVisible = YES;
+  
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/feedBack_click" forKey:@"event"]];
 }
 
 - (IBAction)feedbackCancelButtonClick:(id)sender {
-    [self hideFeedbackView];
+  [self hideView:feedbackView];
+  feedBackViewVisible = NO;
+
+}
+- (IBAction)feedbackFollowFBClick:(id)sender {
+//  NSString *URL=[[NSString alloc]initWithFormat:@"https://twitter.com/intent/tweet?source=webclient&text=%@ %@",
+//                 @"I'm playing in Cowboy duels",
+//                 URL_FB_PAGE];
+  
+  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[URL_COMM_FB_PAGE stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+  
+}
+
+
+
+- (IBAction)feedbackItuneskBtnClick:(id)sender {
+    
+    NSURL *url = [NSURL URLWithString:iTunesId];
+    
+    [[UIApplication sharedApplication] openURL:url];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
+														object:self
+													  userInfo:[NSDictionary dictionaryWithObject:@"/feedBack_ITunes_click" forKey:@"event"]];
+}
+
+-(void)hideActivitiIndicatorViewFeedback;
+{
+    [backGroundfeedbackView sendToBack];
+    [indicatorfeedbackView stopAnimating];
+    [indicatorfeedbackView sendToBack];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kFBFeed object:nil];	
+
+}
+
+#pragma mark -
+#pragma mark - Share
+
+- (IBAction)shareButtonClick:(id)sender {
+  [self showView:shareView];
+  shareViewVisible = YES;
+  [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                      object:self
+                                                    userInfo:[NSDictionary dictionaryWithObject:@"/share_click" forKey:@"event"]];
+}
+- (IBAction)shareCancelButtonClick:(id)sender {
+  [self hideView:shareView];
+  shareViewVisible = NO;
+  
 }
 
 - (IBAction)feedbackFacebookBtnClick:(id)sender {
@@ -807,33 +890,12 @@ static StartViewController *sharedHelper = nil;
 	[picker setMessageBody:emailBody isHTML:NO];
 	
 	[self presentModalViewController:picker animated:YES];
-    //    [picker release];
-
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
-														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"/feedBack_Mail_click" forKey:@"event"]];
-}
-
-- (IBAction)feedbackItuneskBtnClick:(id)sender {
-    
-    NSURL *url = [NSURL URLWithString:iTunesId];
-    
-    [[UIApplication sharedApplication] openURL:url];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
-														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"/feedBack_ITunes_click" forKey:@"event"]];
-}
-
--(void)hideActivitiIndicatorViewFeedback;
-{
-    [backGroundfeedbackView sendToBack];
-    [indicatorfeedbackView stopAnimating];
-    [indicatorfeedbackView sendToBack];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kFBFeed object:nil];	
-
+  //    [picker release];
+  
+  
+  [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                      object:self
+                                                    userInfo:[NSDictionary dictionaryWithObject:@"/feedBack_Mail_click" forKey:@"event"]];
 }
 
 #pragma mark -
@@ -909,7 +971,6 @@ static StartViewController *sharedHelper = nil;
     if ([responseObjectForBots count]>=1) {
       playerAccount.listBotsOnline = responseObjectForBots;
       NSLog(@"listBotsOnline %@",playerAccount.listBotsOnline);
-      [playerAccount receiveBots];
     }
   
 //    

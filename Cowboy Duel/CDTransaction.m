@@ -27,6 +27,9 @@
     [encoder encodeObject:self.trType forKey:@"Type"];
     [encoder encodeObject:self.trDescription forKey:@"Description"];
     [encoder encodeObject:self.trLocalID forKey:@"LocalID"];
+    [encoder encodeObject:self.trGlobalID forKey:@"GlobalID"];
+    [encoder encodeObject:self.trOpponentID forKey:@"OpponentID"];
+    
 }
 
 -(id)initWithCoder:(NSCoder *)decoder
@@ -35,6 +38,8 @@
     self.trType = [decoder decodeObjectForKey:@"Type"];
     self.trDescription = [decoder decodeObjectForKey:@"Description"];
     self.trLocalID = [decoder decodeObjectForKey:@"LocalID"];
+    self.trGlobalID = [decoder decodeObjectForKey:@"GlobalID"];
+    self.trOpponentID = [decoder decodeObjectForKey:@"OpponentID"];
     return self;
 }
 

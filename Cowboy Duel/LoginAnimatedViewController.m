@@ -23,8 +23,12 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
     NSMutableString *stDonate;
     __unsafe_unretained IBOutlet UIView *activityView;
     __unsafe_unretained IBOutlet UIActivityIndicatorView *activityIndicatorView;
+    __unsafe_unretained IBOutlet UIImageView *backgroundView;
+    __unsafe_unretained IBOutlet UIImageView *boardImage;
+    __unsafe_unretained IBOutlet UIImageView *tryAgainImage;
     BOOL tryAgain;
     CGRect guillBackUp;
+    CGRect textBackUp;
 //    int counterTryAgain;
 }
 @property (nonatomic) int textIndex;
@@ -98,6 +102,25 @@ static LoginAnimatedViewController *sharedHelper = nil;
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    if (self.view.frame.size.height > 480) {
+        [backgroundView setImage:[UIImage imageNamed:@"la_bg-568h.png"]];
+        [boardImage setImage:[UIImage imageNamed:@"la_board-568h.png"]];
+        CGRect frame = CGRectMake(0, 356, 320, 212);
+        [boardImage setFrame:frame];
+        [tryAgainImage setImage:[UIImage imageNamed:@"la_ta_bg-568h.png"]];
+        frame = self.guillotineImage.frame;
+        frame.size.height = 558;
+        frame.origin.y = -400;
+        self.guillotineImage.frame = frame;
+        [self.guillotineImage setImage:[UIImage imageNamed:@"ivGuillotineFull-568h.png"]];
+        
+    }
+    else {
+        [backgroundView setImage:[UIImage imageNamed:@"la_bg.png"]];
+        [boardImage setImage:[UIImage imageNamed:@"la_board.png"]];
+        [tryAgainImage setImage:[UIImage imageNamed:@"la_ta_bg.png"]];
+        [self.guillotineImage setImage:[UIImage imageNamed:@"ivGuillotineFull.png"]];
+    }
     self.loginLable.text = NSLocalizedString(@"LOGIN", @"");
     self.loginLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
     
@@ -129,6 +152,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
                     nil];
     self.textIndex = 0;
     guillBackUp = self.guillotineImage.frame;
+    textBackUp = self.animetedText.frame;
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/kassa.aif", [[NSBundle mainBundle] resourcePath]]];
     NSError *error;
     self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
@@ -263,6 +287,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
 //    self.guillotineImage.frame = frame;
 
     self.guillotineImage.frame = guillBackUp;
+    self.animetedText.frame = textBackUp;
     CGRect frame = self.heatImage.frame;
     frame.origin.y -= 220;
     self.heatImage.frame = frame;
@@ -545,6 +570,9 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [CATransaction begin];
     [self.view.layer removeAllAnimations];
     [CATransaction commit];
+    backgroundView = nil;
+    boardImage = nil;
+    tryAgainImage = nil;
     [super viewDidUnload];
 }
 @end

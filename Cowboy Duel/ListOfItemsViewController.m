@@ -190,7 +190,7 @@
     [oponentAccount setAvatar:player.fbImageUrl];
     [oponentAccount setBot:player.bot];
     [oponentAccount setMoney:[player.money integerValue]];
-    [oponentAccount setSessionID:[NSString stringWithString:player.sessionId]];
+    [oponentAccount setSessionID:(player.sessionId) ? [NSString stringWithString:player.sessionId]:@""];
     
     DuelStartViewController *duelStartViewController = [[DuelStartViewController alloc]initWithAccount:_playerAccount andOpAccount:oponentAccount opopnentAvailable:NO andServerType:NO andTryAgain:NO];
     duelStartViewController.serverName = player.serverName;
@@ -281,6 +281,7 @@
 
 -(void)refreshController;
 {
+    [_playersOnLineDataSource reloadRandomId];
     [loadingView setHidden:NO];
     [activityIndicator startAnimating];
     [btnInvite setEnabled:NO];

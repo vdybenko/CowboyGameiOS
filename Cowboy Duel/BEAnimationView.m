@@ -237,7 +237,7 @@ int oldMovingKey = 4;
   }
   [UIView animateWithDuration:tSpeed
                         delay:0.0
-                      options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationCurveEaseIn
+                      options:UIViewAnimationOptionBeginFromCurrentState 
                    animations:^{
                      CGRect tmpPos = self.frame;
                      tmpPos.origin.y += tdepth;

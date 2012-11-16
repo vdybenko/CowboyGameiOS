@@ -54,6 +54,8 @@
     IBOutlet UILabel *lbLeaderboardTitle;
     IBOutlet UILabel *_lbMenuTitle;
     
+    __unsafe_unretained IBOutlet UILabel *lbPointsCountMain;
+    __unsafe_unretained IBOutlet UIImageView *ivCurrentRank;
     //Buttons
     IBOutlet UIButton *_btnMusicContoller;
     
@@ -83,10 +85,15 @@
         numberFormatter = [[NSNumberFormatter alloc] init];
         [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
 
+        // added for GC
+        if (![GCHelper sharedInstance].GClocalPlayer.isAuthenticated && ![startViewController firstRun]) {
+          [[GCHelper sharedInstance] authenticateLocalUser];
         
-        [[GCHelper sharedInstance] reportScore:playerAccount.money forCategory:GC_LEADEBOARD_MONEY];
-            
-        [[NSNotificationCenter defaultCenter] addObserver:self 
+
+          [[GCHelper sharedInstance] reportScore:playerAccount.money forCategory:GC_LEADEBOARD_MONEY];
+        }
+        // above    
+        [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(setImageFromFacebookWithHideIndicator)
                                                      name:kReceiveImagefromFBNotification 
                                                    object:nil];	
@@ -116,7 +123,8 @@
     lbGoldCount.text =[numberFormatter stringFromNumber:[NSNumber numberWithInt:(playerAccount.money/2)]];
     
     [self checkLocationOfViewForFBLogin];
-    
+    NSString *name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel];
+    ivCurrentRank.image = [UIImage imageNamed:name];
     didDisappear=NO;
     
     
@@ -209,9 +217,7 @@
    
     [ivPointsLine setClipsToBounds:YES];
 
-    UIImageView *liveImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 130 , 13)];
-    [liveImage setImage:[UIImage imageNamed:@"pv_points.png"]];
-    [ivPointsLine.layer addSublayer:liveImage.layer];
+    
     
     [mainProfileView setDinamicHeightBackground];
 //music button background change:
@@ -284,22 +290,26 @@
 -(void)animationOfMoney;
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        [self animateLabelShowText];
+        [self animateLabel:lbGoldCount toValue:playerAccount.money];
     });
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [self animateLabel:lbPointsCountMain toValue:playerAccount.accountPoints];
+    });
+
     
 }
 
--(void)animateLabelShowText {
-    float goldForGoldAnimation;
-    if (playerAccount.money<200) {
-        goldForGoldAnimation=1;
+-(void)animateLabel:(UILabel *)label toValue:(int)value {
+    float valueForGoldAnimation;
+    if (value<200) {
+        valueForGoldAnimation=1;
     }else {
-        goldForGoldAnimation=playerAccount.money/200;
+        valueForGoldAnimation=value/200;
     }
-    for (int i=playerAccount.money/2; i<=playerAccount.money; i+=goldForGoldAnimation) {
+    for (int i=value/2; i<=value; i+=valueForGoldAnimation) {
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            lbGoldCount.text = [numberFormatter stringFromNumber:[NSNumber numberWithInt:(i)]];
+            label.text = [numberFormatter stringFromNumber:[NSNumber numberWithInt:(i)]];
         });
         
         [NSThread sleepForTimeInterval:0.005];
@@ -309,7 +319,7 @@
         }
     }
     dispatch_async(dispatch_get_main_queue(), ^{
-        lbGoldCount.text = [numberFormatter stringFromNumber:[NSNumber numberWithInt:(playerAccount.money)]]; 
+        label.text = [numberFormatter stringFromNumber:[NSNumber numberWithInt:(value)]]; 
     });
     needAnimation = NO;
 }
@@ -521,6 +531,8 @@
     lbBiggestWinCount = nil;
     lbNotifyMessage = nil;
     lbLeaderboardTitle = nil;
+    lbPointsCountMain = nil;
+    ivCurrentRank = nil;
     [super viewDidUnload];
 }
 

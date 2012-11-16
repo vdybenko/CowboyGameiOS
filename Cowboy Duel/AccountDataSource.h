@@ -90,7 +90,8 @@
 -(NSUInteger(^)(NSArray *, NSInteger))findObsByID;
 -(NSUInteger(^)(NSArray *, NSString *))findObsByPurchase;
 
-- (void)receiveBots;
+- (void)receiveBotsForIdArray:(NSArray *)idArray;
+- (void)refreshBotArray;
 
 -(void)putchAvatarImageToInitStartVC:(StartViewController*)startVC;
 -(BOOL)isAvatarImage:(NSString*)imagePath;
