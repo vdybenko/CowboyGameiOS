@@ -54,7 +54,7 @@
 					</object>
 					<object class="IBUIImageView" id="527369670">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{0, -380}, {320, 480}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="502389521"/>
@@ -68,8 +68,8 @@
 					</object>
 					<object class="IBUIImageView" id="281586085">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{0, 280}, {320, 200}}</string>
+						<int key="NSvFlags">284</int>
+						<string key="NSFrame">{{0, 312}, {320, 168}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="1013447958"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -82,7 +82,7 @@
 					</object>
 					<object class="IBUIImageView" id="1067226759">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">268</int>
+						<int key="NSvFlags">260</int>
 						<string key="NSFrame">{{35, 167}, {250, 300}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="411228171"/>
@@ -208,7 +208,7 @@
 					</object>
 					<object class="IBUIImageView" id="1013447958">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">268</int>
+						<int key="NSvFlags">260</int>
 						<string key="NSFrame">{{0, 328}, {320, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="603598148"/>
@@ -222,7 +222,7 @@
 					</object>
 					<object class="IBUIImageView" id="531838178">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">268</int>
+						<int key="NSvFlags">260</int>
 						<string key="NSFrame">{{135, 303}, {50, 50}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="263538558"/>
@@ -236,7 +236,7 @@
 					</object>
 					<object class="IBUIImageView" id="603598148">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">-2147483380</int>
+						<int key="NSvFlags">-2147483388</int>
 						<string key="NSFrame">{{57, 197}, {210, 227}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="531838178"/>
@@ -286,11 +286,11 @@
 					</object>
 					<object class="IBUIView" id="1051496206">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">-2147483356</int>
+						<int key="NSvFlags">-2147483374</int>
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUIImageView" id="1056258714">
 								<reference key="NSNextResponder" ref="1051496206"/>
-								<int key="NSvFlags">292</int>
+								<int key="NSvFlags">278</int>
 								<string key="NSFrameSize">{320, 480}</string>
 								<reference key="NSSuperview" ref="1051496206"/>
 								<reference key="NSNextKeyView" ref="423980066"/>
@@ -513,6 +513,30 @@
 					<int key="connectionID">45</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">backgroundView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="502389521"/>
+					</object>
+					<int key="connectionID">47</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">boardImage</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="281586085"/>
+					</object>
+					<int key="connectionID">48</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">tryAgainImage</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="1056258714"/>
+					</object>
+					<int key="connectionID">49</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">donateButtonClick:</string>
 						<reference key="source" ref="263538558"/>
@@ -712,7 +736,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">45</int>
+			<int key="maxID">49</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
@@ -725,7 +749,7 @@
 			<string key="ivHat.png">{204, 221}</string>
 			<string key="ivWhiskers.png">{320, 44}</string>
 			<string key="la_bg.png">{320, 480}</string>
-			<string key="la_board.png">{320, 200}</string>
+			<string key="la_board.png">{320, 168}</string>
 			<string key="la_head.png">{240, 280}</string>
 			<string key="la_nose.png">{50, 50}</string>
 			<string key="la_ta_bg.png">{320, 480}</string>
