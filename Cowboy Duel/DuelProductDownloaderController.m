@@ -111,12 +111,12 @@ static NSString *getSavePathForDuelProduct()
     
     product.dIconURL=[dic objectForKey:@"thumb"];
     if (product.dIconURL) {
-        product.dIconLocal = [UIImage saveImage:[product saveNameThumb] URL:product.dIconURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
+        product.dIconLocal = [UIImage saveImage:[product.dIconURL lastPathComponent] URL:product.dIconURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
     }
     
     product.dImageURL=[dic objectForKey:@"img"];
     if (product.dImageURL) {
-        product.dImageLocal = [UIImage saveImage:[product saveNameImage] URL:product.dImageURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
+        product.dImageLocal = [UIImage saveImage:[product.dImageURL lastPathComponent] URL:product.dImageURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
     }
     product.dPrice=[[dic objectForKey:@"golds"] integerValue];
     product.dPurchaseUrl=[dic objectForKey:@"inappid"];
@@ -148,11 +148,11 @@ static NSString *getSavePathForDuelProduct()
                 
                 product.dImageGunURL=[dic objectForKey:@"bigImg"];
                 if (product.dImageGunURL) {
-                    product.dImageGunLocal = [UIImage saveImage:[product saveNameImageGun] URL:product.dImageGunURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
+                    product.dImageGunLocal = [UIImage saveImage:[product.dImageGunURL lastPathComponent] URL:product.dImageGunURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
                 }
                 product.dSoundURL = [dic objectForKey:@"sound"];
                 if (product.dSoundURL) {
-                    product.dSoundLocal = [SoundDownload saveSound:[product saveNameSoundGun] URL:product.dSoundURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
+                    product.dSoundLocal = [SoundDownload saveSound:[product.dSoundURL lastPathComponent] URL:product.dSoundURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
                 }
                 
                 if ([arrWeaponSaved count]!=0) {
