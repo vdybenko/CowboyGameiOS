@@ -130,7 +130,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "883"
          endingLineNumber = "883"
-         landmarkName = "-connectionDidFinishLoading:"
+         landmarkName = "-login"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -300,6 +300,19 @@
          startingLineNumber = "516"
          endingLineNumber = "516"
          landmarkName = "-refreshBotArray"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Cowboy Duel/FinalViewController.m"
+         timestampString = "374766520.703381"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "905"
+         endingLineNumber = "905"
+         landmarkName = "-winAnimation"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

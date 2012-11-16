@@ -354,15 +354,15 @@ static StartViewController *sharedHelper = nil;
     NSInteger facebookLogIn = [userDefaults integerForKey:@"facebookLogIn"];
     NSInteger paymentRegistration = [userDefaults integerForKey:@"paymentRegistration"];
     
-    if (!paymentRegistration && !facebookLogIn) {
-        SSConnection *connection = [SSConnection sharedInstance];
-        [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
-        
-        LoginAnimatedViewController *loginViewController = [LoginAnimatedViewController sharedInstance];
-        loginViewController.startViewController = self;
-        [loginViewController setPayment:YES];
-        [self.navigationController pushViewController:loginViewController animated:YES];
-    }
+//    if (!paymentRegistration && !facebookLogIn) {
+//        SSConnection *connection = [SSConnection sharedInstance];
+//        [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
+//        
+//        LoginAnimatedViewController *loginViewController = [LoginAnimatedViewController sharedInstance];
+//        loginViewController.startViewController = self;
+//        [loginViewController setPayment:YES];
+//        [self.navigationController pushViewController:loginViewController animated:YES];
+//    }
     
     
     UIColor *buttonsTitleColor = [[UIColor alloc] initWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
@@ -1012,6 +1012,12 @@ static StartViewController *sharedHelper = nil;
         if (facebookName) {
             playerAccount.facebookName=facebookName;
             [playerAccount saveFacebookName];
+        }
+        
+        int playerMoney=[[responseObject objectForKey:@"money"] intValue];
+        if (playerMoney) {
+            playerAccount.money=playerMoney;
+            [playerAccount saveMoney];
         }
         
         BOOL moneyForIPad=[[NSUserDefaults standardUserDefaults] boolForKey:@"moneyForIPad"];
