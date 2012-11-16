@@ -215,6 +215,8 @@
 		7623B52D165251F4004DD5E9 /* AdColonyPublic.h in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D6F0D816427DAF004A754C /* AdColonyPublic.h */; };
 		7623B52E165251F4004DD5E9 /* libAdColony.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D6F0D916427DAF004A754C /* libAdColony.a */; };
 		762AA31015B99C72001B65E2 /* TopPlayerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 762AA30F15B99C72001B65E2 /* TopPlayerCell.m */; };
+		763BF4091656448C00D5C49C /* la_body.png in Resources */ = {isa = PBXBuildFile; fileRef = 763BF4071656448C00D5C49C /* la_body.png */; };
+		763BF40A1656448C00D5C49C /* la_body@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 763BF4081656448C00D5C49C /* la_body@2x.png */; };
 		763F8A271578A1F800D8BB42 /* DuelViewControllerWithXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 763F8A261578A1F800D8BB42 /* DuelViewControllerWithXib.xib */; };
 		763F8A291578A3A900D8BB42 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 763F8A281578A3A900D8BB42 /* libxml2.2.dylib */; };
 		763F8A2A1578A55700D8BB42 /* DuelViewControllerWithXib.m in Sources */ = {isa = PBXBuildFile; fileRef = 765E351415765F1400CCB6F4 /* DuelViewControllerWithXib.m */; };
@@ -632,6 +634,8 @@
 		761EFA4E1573BE91001670EB /* StartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StartViewController.xib; path = Xib/StartViewController.xib; sourceTree = "<group>"; };
 		762AA30E15B99C72001B65E2 /* TopPlayerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopPlayerCell.h; sourceTree = "<group>"; };
 		762AA30F15B99C72001B65E2 /* TopPlayerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopPlayerCell.m; sourceTree = "<group>"; };
+		763BF4071656448C00D5C49C /* la_body.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = la_body.png; sourceTree = "<group>"; };
+		763BF4081656448C00D5C49C /* la_body@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "la_body@2x.png"; sourceTree = "<group>"; };
 		763F8A261578A1F800D8BB42 /* DuelViewControllerWithXib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DuelViewControllerWithXib.xib; path = Xib/DuelViewControllerWithXib.xib; sourceTree = "<group>"; };
 		763F8A281578A3A900D8BB42 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		763F8A3B1578FC0900D8BB42 /* UIView+Hierarchy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Hierarchy.m"; sourceTree = "<group>"; };
@@ -1673,6 +1677,8 @@
 		BD84DAA8164ABE1D00DEEE38 /* LoginViewAnimated */ = {
 			isa = PBXGroup;
 			children = (
+				763BF4071656448C00D5C49C /* la_body.png */,
+				763BF4081656448C00D5C49C /* la_body@2x.png */,
 				BD84DAA9164ABE1D00DEEE38 /* la_bg.png */,
 				BD84DAAA164ABE1D00DEEE38 /* la_bg@2x.png */,
 				BD846569164BF4960032A77B /* la_ta_bg.png */,
@@ -2226,6 +2232,8 @@
 				76CDD0571655267A003F30BD /* dv_bullets_oval@2x.png in Resources */,
 				76CDD0581655267A003F30BD /* dv_fire_label_small.png in Resources */,
 				76CDD0591655267A003F30BD /* dv_fire_label_small@2x.png in Resources */,
+				763BF4091656448C00D5C49C /* la_body.png in Resources */,
+				763BF40A1656448C00D5C49C /* la_body@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
