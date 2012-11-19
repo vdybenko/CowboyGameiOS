@@ -16,7 +16,7 @@
 @synthesize delegate;
 
 // all your features should be managed one and only by StoreManager
-static NSString *featureAId = @"com.webkate.cowboyduels.registration";
+static NSString *featureAId = @"com.webkate.cowboyduels.user.registration";
 static NSString *featureBId = @"com.webkate.cowboyduels.four";
 
 BOOL featureAPurchased;

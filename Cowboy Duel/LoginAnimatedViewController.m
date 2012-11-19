@@ -51,7 +51,7 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
 @end
 
 @implementation LoginAnimatedViewController
-NSString * const loginProduct=@"com.webkate.cowboyduels.registration";
+NSString * const loginProduct=@"com.webkate.cowboyduels.user.registration";
 @synthesize startViewController, facebook,delegate ,loginFacebookStatus, payment;
 @synthesize timer, textsContainer;
 
@@ -329,7 +329,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"/login_cancel" forKey:@"event"]];
+													  userInfo:[NSDictionary dictionaryWithObject:@"/donate_click" forKey:@"event"]];
 }
 
 - (IBAction)loginButtonClick:(id)sender {
