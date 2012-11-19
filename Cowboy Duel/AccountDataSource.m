@@ -58,6 +58,7 @@ static AccountDataSource *sharedHelper = nil;
   
     receivedBots = [NSMutableArray array];
     receivedBotsTemp = [NSMutableArray array];
+    self.listBotsOnline = [NSMutableArray array];
     return self;
 }
 
@@ -311,20 +312,20 @@ static AccountDataSource *sharedHelper = nil;
 
 -(void) reloadRandomId
 {
-    AccountDataSource *playerAcount = [AccountDataSource sharedInstance];
+    if (![self.listBotsOnline count]) return;
     NSArray *randomIndexes = [self randomNumbersWithCount:3];
-    self.randomIds = [NSArray arrayWithObjects:[playerAcount.listBotsOnline objectAtIndex:[[randomIndexes objectAtIndex:0] intValue]],[playerAcount.listBotsOnline objectAtIndex:[[randomIndexes objectAtIndex:1] intValue]], [playerAcount.listBotsOnline objectAtIndex:[[randomIndexes objectAtIndex:2] intValue]], nil];
+    self.randomIds = [NSArray arrayWithObjects:[self.listBotsOnline objectAtIndex:[[randomIndexes objectAtIndex:0] intValue]],[self.listBotsOnline objectAtIndex:[[randomIndexes objectAtIndex:1] intValue]], [self.listBotsOnline objectAtIndex:[[randomIndexes objectAtIndex:2] intValue]], nil];
 }
 
 -(NSArray *)randomNumbersWithCount:(int)count
 {
-    AccountDataSource *player = [AccountDataSource sharedInstance];
+    
     NSMutableArray *array = [NSMutableArray array];
     for (int i = 0; i<count; i++) {
         BOOL numberNotAdd = YES;
         while (numberNotAdd) {
             BOOL containeNumber = NO;
-            int randNumber = rand() % [player.listBotsOnline count];
+            int randNumber = rand() % [self.listBotsOnline count];
             for (NSNumber *randNumberTemp in array) {
                 if([randNumberTemp intValue] == randNumber) containeNumber = YES;
             }

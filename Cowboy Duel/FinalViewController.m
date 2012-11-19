@@ -905,17 +905,7 @@
   [lblGoldPlus setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:45]];
   lblGold.text = [NSString stringWithFormat:@"%d",oldMoneyForAnimation];
   
-  ivGoldCoin.hidden = YES;
-  CGRect coinCentered = ivGoldCoin.frame;
-  coinCentered.origin.x = goldPointBgView.frame.size.width/2 - ivGoldCoin.frame.size.width - 10*lblGold.text.length;
-  if (coinCentered.origin.x > 0)
-    ivGoldCoin.frame = coinCentered;
-  else
-  {
-    coinCentered.origin.x = 0;
-    ivGoldCoin.frame = coinCentered;
-  }
-  ivGoldCoin.hidden = NO;
+  [self coinCenter];
   
   lblGold.hidden = YES;
   CGRect goldCountCentered = lblGold.frame;
@@ -1019,8 +1009,8 @@
 
 -(void)loseAnimation
 {
-    loserImg.hidden = NO;
-  if (teaching) oldMoneyForAnimation = [AccountDataSource sharedInstance].money;
+  loserImg.hidden = NO;
+  oldMoneyForAnimation = [AccountDataSource sharedInstance].money;
   lblGold.text = [NSString stringWithFormat:@"%d",[AccountDataSource sharedInstance].money];
   
   CGRect frameL = loserMoneyImg.frame;
@@ -1065,17 +1055,7 @@
   
   [lblGoldPlus setHidden:NO];
   
-  ivGoldCoin.hidden = YES;
-  CGRect coinCentered = ivGoldCoin.frame;
-  coinCentered.origin.x = goldPointBgView.frame.size.width/2 - ivGoldCoin.frame.size.width - 10*lblGold.text.length;
-  if (coinCentered.origin.x > 0)
-    ivGoldCoin.frame = coinCentered;
-  else
-  {
-    coinCentered.origin.x = 0;
-    ivGoldCoin.frame = coinCentered;
-  }
-  ivGoldCoin.hidden = NO;
+  [self coinCenter];
   
   lblGold.hidden = YES;
   CGRect goldCountCentered = lblGold.frame;
@@ -1159,6 +1139,20 @@
   [self changePointsLine:curentPoints maxValue:maxPoints animated:NO];
 }
 
+-(void)coinCenter
+{
+    ivGoldCoin.hidden = YES;
+    CGRect coinCentered = ivGoldCoin.frame;
+    coinCentered.origin.x = goldPointBgView.frame.size.width/2 - ivGoldCoin.frame.size.width - 10*lblGold.text.length;
+    if (coinCentered.origin.x > 0)
+    ivGoldCoin.frame = coinCentered;
+    else
+    {
+        coinCentered.origin.x = 0;
+        ivGoldCoin.frame = coinCentered;
+    }
+    ivGoldCoin.hidden = NO;
+}
 #pragma mark - check Level, Points change and other saved features
 
 -(NSInteger)getPointsForWin;
