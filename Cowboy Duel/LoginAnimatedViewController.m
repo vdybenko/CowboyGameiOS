@@ -321,15 +321,16 @@ static LoginAnimatedViewController *sharedHelper = nil;
     }
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IPad"];
+    [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"loginFirstShow"];
     [[NSUserDefaults standardUserDefaults] synchronize];
   
     ProfileViewController *profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount startViewController:startViewController];
     [profileViewController setNeedAnimation:YES];
     [self.navigationController popViewControllerAnimated:YES];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"/donate_click" forKey:@"event"]];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+//														object:self
+//													  userInfo:[NSDictionary dictionaryWithObject:@"/donate_click" forKey:@"event"]];
 }
 
 - (IBAction)loginButtonClick:(id)sender {

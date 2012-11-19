@@ -351,10 +351,11 @@ static StartViewController *sharedHelper = nil;
 
 - (void)viewDidLoad{
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSInteger facebookLogIn = [userDefaults integerForKey:@"facebookLogIn"];
-    NSInteger paymentRegistration = [userDefaults integerForKey:@"paymentRegistration"];
+//    NSInteger facebookLogIn = [userDefaults integerForKey:@"facebookLogIn"];
+//    NSInteger paymentRegistration = [userDefaults integerForKey:@"paymentRegistration"];
+    NSInteger loginFirstShow = [userDefaults integerForKey:@"loginFirstShow"];
     
-    if (!paymentRegistration && !facebookLogIn) {
+    if (!loginFirstShow) {
         SSConnection *connection = [SSConnection sharedInstance];
         [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
         
