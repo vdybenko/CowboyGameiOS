@@ -27,12 +27,13 @@ static const char *A_URL =  BASE_URL"api/authorization";
 {
     if(self==[super init])
     {
-        if(![[NSUserDefaults standardUserDefaults] boolForKey:@"AlreadyRun"] ) {
-            firstRun = YES;
-            [self login];
-        }else{
-            firstRun = NO;
-        }
+         firstRun = NO;
+//        if(![[NSUserDefaults standardUserDefaults] boolForKey:@"AlreadyRun"] ) {
+//            firstRun = YES;
+//            [self login];
+//        }else{
+//            firstRun = NO;
+//        }
 
         NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Back1start.mp3", [[NSBundle mainBundle] resourcePath]]];
         NSError *error;

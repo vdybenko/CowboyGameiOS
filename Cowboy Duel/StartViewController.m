@@ -623,8 +623,9 @@ static StartViewController *sharedHelper = nil;
     
     oponentAccount.accountName=NSLocalizedString(@"COMPUTER", @"");
     oponentAccount.money = 1000;
-    oponentAccount.accountLevel = 4;//playerAccount.accountLevel;
+    oponentAccount.accountLevel = 4;
     oponentAccount.accountPoints = playerAccount.accountPoints;
+    oponentAccount.accountDefenseValue = 40;
     
     TeachingViewController *teachingViewController = [[TeachingViewController alloc] initWithTime:randomTime andAccount:playerAccount andOpAccount:oponentAccount];
     [self.navigationController pushViewController:teachingViewController animated:YES];

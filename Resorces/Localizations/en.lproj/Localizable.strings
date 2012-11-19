@@ -314,23 +314,7 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "BUYITNOW" = "BUY IT NOW";
 "IT_HELP" = "IT HELP YOU WIN";
 
-"ATTEN_WEB_TEXT1" = "<head>
-<style type=\"text/css\">
-.orangeText {
-	font-size: 18px;
-	color: rgb(226,53,0);
-}
-</style>
-</head>
-<body style='background-color:transparent; text-align:center; color:rgb(97,68,34); padding-top:-20px;padding-bottom:-20px;'>
-<div style='font-size: 16px; padding-top:0px; font-weight: bold;line-height: 18px;font-family: “Myriad Pro”, arial,sans-serif;word-spacing: -1.5px;letter-spacing: -0.5px;'>
-Your opponent is stronger than you. You should shoot <span class=\"orangeText\">";
-
-"ATTEN_WEB_TEXT2" = "</span> a row. Your opponent should shoot <span class=\"orangeText\">";
-
-"ATTEN_WEB_TEXT3" = "</span> timer in a </div>
-</body>
-</html>";
+"ATTEN_TEXT" = "Your opponent is stronger than you. You should shoot %d a row. Your opponent should shoot %d a row";
 
 //first screen:
 "HEY" = "Hey guy. Do you hear me?";

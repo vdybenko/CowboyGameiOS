@@ -16,6 +16,7 @@
 {
     UITableView *tableView;
     StoreViewController *storeViewController;
+    DuelProductDownloaderController *duelProductDownloaderController;
 }
 @end
 
@@ -34,10 +35,13 @@
      
     typeOfTable = StoreDataSourceTypeTablesWeapons;
     arrItemsList=[[NSMutableArray alloc] init];
+    duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
      
     tableView=pTable;
     storeViewController = pStoreViewController;
     cellsHide=YES;
+     
+     
      
      [self reloadDataSource];
 	return self;
@@ -53,7 +57,6 @@
     }
 
     if ([testArr count]==0) {
-        DuelProductDownloaderController *duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
         [duelProductDownloaderController setDidFinishBlock:^(NSError *error){
             [self reloadDataSource];
             [tableView reloadData];

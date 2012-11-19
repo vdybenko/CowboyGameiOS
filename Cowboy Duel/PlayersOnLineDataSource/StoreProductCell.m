@@ -60,11 +60,6 @@
     return [objects objectAtIndex:0];
 }
 
-+(StoreProductCell*) cellAttension {
-    NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"StoreProductAttensionCell" owner:nil options:nil];
-    return [objects objectAtIndex:0];
-}
-
 +(NSString*) cellID { return @"StoreProductCell"; }
 
 -(void) initWithOutBackGround;
@@ -120,7 +115,6 @@
         
         buttonLabel.text = NSLocalizedString(@"BUYIT", @"");
         
-        
         if (product.dCountOfUse == 0) {
              countOfUse.hidden = YES;
         }else{
@@ -133,28 +127,18 @@
         
         countOfUse.hidden = YES;
         
-        if (cellType == StoreDataSourceTypeTablesWeaponsTRY) {
-            if (product.dCountOfUse == 0) {
-                buttonLabel.text = NSLocalizedString(@"TRY_IT", @"");
+        if (product.dCountOfUse == 0) {
+            buttonLabel.text = NSLocalizedString(@"BUYIT", @"");
+        }else{
+            if (product.dID == [AccountDataSource sharedInstance].curentIdWeapon) {
+                buyProduct.hidden = YES;
+                ribbonImage.hidden = NO;
+                ribbonLabel.text = NSLocalizedString(@"IN_HAND", @"");
+                curentGunBlueBackground.hidden = NO;
             }else{
                 buttonLabel.text = NSLocalizedString(@"USE", @"");
                 ribbonImage.hidden = NO;
                 ribbonLabel.text = NSLocalizedString(@"BOUGHT", @"");
-            }
-        }else{
-            if (product.dCountOfUse == 0) {
-                buttonLabel.text = NSLocalizedString(@"BUYIT", @"");
-            }else{
-                if (product.dID == [AccountDataSource sharedInstance].curentIdWeapon) {
-                    buyProduct.hidden = YES;
-                    ribbonImage.hidden = NO;
-                    ribbonLabel.text = NSLocalizedString(@"IN_HAND", @"");
-                    curentGunBlueBackground.hidden = NO;
-                }else{
-                    buttonLabel.text = NSLocalizedString(@"USE", @"");
-                    ribbonImage.hidden = NO;
-                    ribbonLabel.text = NSLocalizedString(@"BOUGHT", @"");
-                }
             }
         }
     }

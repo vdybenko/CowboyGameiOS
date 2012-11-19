@@ -14,7 +14,6 @@
 @property (strong,nonatomic) IBOutlet UIButton * buyProduct;
 
 +(StoreProductCell*)cell;
-+(StoreProductCell*) cellAttension;
 +(NSString*) cellID;
 
 -(void)populateWithProduct:(CDDuelProduct *)product targetToBuyButton:(id)delegate cellType:(StoreDataSourceTypeTables)cellType;

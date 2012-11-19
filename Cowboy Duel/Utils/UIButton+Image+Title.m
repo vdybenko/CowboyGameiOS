@@ -18,18 +18,22 @@
 
 -(void)setTitleByLabel:(NSString *)pTitle;
 {    
-    CGRect frame=self.frame; 
+    [self setTitleByLabel:pTitle withColor:[UIColor colorWithRed:0.243 green:0.2 blue:0.142 alpha:1]];
+}
+
+-(void)setTitleByLabel:(NSString *)pTitle withColor:(UIColor*)color;
+{
+    CGRect frame=self.frame;
     frame.origin.x=10;
     frame.origin.y=0;
     frame.size.width=frame.size.width-20;
     UILabel *label1 = [[UILabel alloc] initWithFrame:frame];
     [label1 setFont: [UIFont fontWithName: @"DecreeNarrow" size:24]];
-    label1.textAlignment = UITextAlignmentCenter; 
+    label1.textAlignment = UITextAlignmentCenter;
     [label1 setBackgroundColor:[UIColor clearColor]];
-    [label1 setTextColor:[[UIColor alloc] initWithRed:0.243 green:0.2 blue:0.142 alpha:1]];
+    [label1 setTextColor:color];
     [label1 setText:NSLocalizedString(pTitle, @"")];
-    [self addSubview:label1]; 
-    
+    [self addSubview:label1];
 }
 
 -(void)changeTitleByLabel:(NSString *)pTitle;
