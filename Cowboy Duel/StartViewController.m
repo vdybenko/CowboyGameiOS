@@ -26,6 +26,7 @@
 
 #import "DuelProductDownloaderController.h"
 #import "StoreViewController.h"
+#import "DuelProductWinViewController.h"
 
 @interface StartViewController ()
 {
@@ -617,7 +618,12 @@ static StartViewController *sharedHelper = nil;
 }
 
 -(IBAction)teachingButtonClick
-{  
+{
+     NSArray *arrItemsList = [DuelProductDownloaderController loadWeaponArray];
+    DuelProductWinViewController *duelProductWinViewController=[[DuelProductWinViewController alloc] initWithAccount:playerAccount duelProduct:[arrItemsList objectAtIndex:0] parentVC:self];
+    [playerAccount loadWeapon];
+    [self.navigationController presentViewController:duelProductWinViewController animated:YES completion:Nil];
+    return;
     [playerAccount.finalInfoTable removeAllObjects];
     int randomTime = arc4random() % 6; 
     
@@ -625,7 +631,7 @@ static StartViewController *sharedHelper = nil;
     oponentAccount.money = 1000;
     oponentAccount.accountLevel = 4;
     oponentAccount.accountPoints = playerAccount.accountPoints;
-    oponentAccount.accountDefenseValue = 40;
+    oponentAccount.accountDefenseValue = playerAccount.accountDefenseValue + 5;
     
     TeachingViewController *teachingViewController = [[TeachingViewController alloc] initWithTime:randomTime andAccount:playerAccount andOpAccount:oponentAccount];
     [self.navigationController pushViewController:teachingViewController animated:YES];

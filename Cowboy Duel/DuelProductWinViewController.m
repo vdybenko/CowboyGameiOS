@@ -67,11 +67,15 @@
     UIImage *gunImageSaved = [UIImage loadImageFullPath:[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],duelProduct.dImageLocal]];
     gunImage.clipsToBounds = YES;
     gunImage.image = gunImageSaved;
+    gunImage.transform = CGAffineTransformIdentity;
+    CGFloat angle = M_PI * 0.15;
+    gunImage.transform = CGAffineTransformMakeRotation(angle);
     
     gunImageMirror.clipsToBounds = YES;
     gunImageMirror.image = gunImageSaved;
     gunImageMirror.transform = CGAffineTransformIdentity;
-    gunImageMirror.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    CGAffineTransform transformMirror = CGAffineTransformMakeScale(-1.0, 1.0);
+    gunImageMirror.transform = CGAffineTransformRotate(transformMirror, angle);
     
     [buyItButton setTitleByLabel:@"BUYITNOW"];
     UIColor *buttonsTitleColor = [[UIColor alloc] initWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
@@ -80,7 +84,7 @@
     [ribbonLabel setFont: [UIFont fontWithName: @"DecreeNarrow" size:28]];
     if ([AccountDataSource sharedInstance].accountLevel>duelProduct.dLevelLock) {
         ribbonLabel.text = [NSString stringWithFormat:@"Lock level %d",duelProduct.dLevelLock];
-        ribbonLabel.textColor = [UIColor redColor];
+        ribbonLabel.textColor = [UIColor yellowColor];
         buyItButton.enabled = NO;
     }else{
         ribbonLabel.text = duelProduct.dName;
