@@ -309,6 +309,37 @@ static AccountDataSource *sharedHelper = nil;
   return secret_int ^ [self stringToInt:sessionID];
 }
 
+-(void) reloadRandomId
+{
+    AccountDataSource *playerAcount = [AccountDataSource sharedInstance];
+    NSArray *randomIndexes = [self randomNumbersWithCount:3];
+    self.randomIds = [NSArray arrayWithObjects:[playerAcount.listBotsOnline objectAtIndex:[[randomIndexes objectAtIndex:0] intValue]],[playerAcount.listBotsOnline objectAtIndex:[[randomIndexes objectAtIndex:1] intValue]], [playerAcount.listBotsOnline objectAtIndex:[[randomIndexes objectAtIndex:2] intValue]], nil];
+}
+
+-(NSArray *)randomNumbersWithCount:(int)count
+{
+    AccountDataSource *player = [AccountDataSource sharedInstance];
+    NSMutableArray *array = [NSMutableArray array];
+    for (int i = 0; i<count; i++) {
+        BOOL numberNotAdd = YES;
+        while (numberNotAdd) {
+            BOOL containeNumber = NO;
+            int randNumber = rand() % [player.listBotsOnline count];
+            for (NSNumber *randNumberTemp in array) {
+                if([randNumberTemp intValue] == randNumber) containeNumber = YES;
+            }
+            if (!containeNumber) {
+                [array addObject:[NSNumber numberWithInt:randNumber]];
+                numberNotAdd = NO;
+            }
+        }
+        
+        
+    }
+    return array;
+}
+
+
 #pragma mark CustomNSURLConnection handlers
 
 - (void)connectionDidFinishLoading:(CustomNSURLConnection *)connection1 {

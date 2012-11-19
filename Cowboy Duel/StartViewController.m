@@ -525,6 +525,8 @@ static StartViewController *sharedHelper = nil;
     [self estimateApp];
     TestAppDelegate *app = (TestAppDelegate *)[[UIApplication sharedApplication] delegate];
     [app.adBanner setHidden:NO];
+    [[AccountDataSource sharedInstance] reloadRandomId];
+    [[AccountDataSource sharedInstance] receiveBotsForIdArray:[AccountDataSource sharedInstance].randomIds];
 }
 -(void)viewWillDisappear:(BOOL)animated
 {

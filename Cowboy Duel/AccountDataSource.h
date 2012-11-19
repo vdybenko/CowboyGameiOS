@@ -39,6 +39,7 @@
 @property(nonatomic) int vOfStoreList;
 @property(nonatomic) BOOL bot;
 @property(strong,nonatomic) NSMutableArray *receivedBots;
+@property (nonatomic, strong) NSArray *randomIds;
 
 + (AccountDataSource *)sharedInstance;
 - (id)initWithLocalPlayer;
@@ -77,4 +78,5 @@
 -(void)putchAvatarImageToInitStartVC:(StartViewController*)startVC;
 -(BOOL)isAvatarImage:(NSString*)imagePath;
 -(BOOL)putchAvatarImageSendInfo;
+-(void)reloadRandomId;
 @end
