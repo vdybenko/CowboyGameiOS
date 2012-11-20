@@ -650,15 +650,10 @@ static StartViewController *sharedHelper = nil;
 {
     StoreViewController *svc=[[StoreViewController alloc] initWithAccount:playerAccount];
     [self.navigationController pushViewController:svc animated:YES];
-    return;
-
-    collectionAppViewController=[[CollectionAppViewController alloc] init];
-    [self presentModalViewController:collectionAppViewController animated:YES];
-    
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
 														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"/more_games" forKey:@"event"]];
+													  userInfo:[NSDictionary dictionaryWithObject:@"/store" forKey:@"event"]];
 
 }
 

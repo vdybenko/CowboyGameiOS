@@ -208,7 +208,6 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     if(![fbUserId isEqualToString:@"NoGC"]){
     }
     
-    
 	NSString *page = [[notification userInfo] objectForKey:@"event"];
 	DLog(@"GA page %@",page);
 	if (page){

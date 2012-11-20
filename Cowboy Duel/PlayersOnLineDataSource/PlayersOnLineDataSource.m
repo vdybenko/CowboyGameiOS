@@ -239,7 +239,6 @@
 
 -(void)createServerForDictionary:(NSDictionary *)serverDictionary
 {
-    
     SSServer *serverObj = [[SSServer alloc] init];
     serverObj.displayName = [serverDictionary objectForKey:@"nickname"];
     serverObj.status = @"A";
@@ -251,7 +250,6 @@
     serverObj.duelsWin = [serverDictionary objectForKey:@"duels_win"];
     serverObj.sessionId = [serverDictionary objectForKey:@"session_id"];
     [self.serverObjects addObject:serverObj];
-
 }
 
 #pragma mark -
