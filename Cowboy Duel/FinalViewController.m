@@ -433,11 +433,12 @@
 //    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@%@",stGA,@"final"]];
 
     int oldMoney=playerAccount.money;
+    oldMoneyForAnimation = playerAccount.money;
     if (!teaching||(duelWithBotCheck)) {
         oponentAccount.money += moneyExch;
         
         int difference=playerAccount.money-moneyExch;
-        oldMoneyForAnimation = difference;
+        
         if(difference>0){
             playerAccount.money -= moneyExch;
             transaction.trType = [NSNumber numberWithInt:-1];
@@ -1011,8 +1012,8 @@
 -(void)loseAnimation
 {
   loserImg.hidden = NO;
-  oldMoneyForAnimation = [AccountDataSource sharedInstance].money;
-  lblGold.text = [NSString stringWithFormat:@"%d",[AccountDataSource sharedInstance].money];
+//  if (teaching && !(duelWithBotCheck))oldMoneyForAnimation = [AccountDataSource sharedInstance].money;
+  lblGold.text = [NSString stringWithFormat:@"%d",oldMoneyForAnimation];
   
   CGRect frameL = loserMoneyImg.frame;
   frameL.origin.x = 20;
