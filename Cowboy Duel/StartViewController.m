@@ -521,7 +521,7 @@ static StartViewController *sharedHelper = nil;
     }
     gameCenterViewController.duelStartViewController = nil;
     
-    [self showProfileFirstRun];
+    //[self showProfileFirstRun];
     [self isAdvertisingOfNewVersionNeedShow];
     [self estimateApp];
     TestAppDelegate *app = (TestAppDelegate *)[[UIApplication sharedApplication] delegate];

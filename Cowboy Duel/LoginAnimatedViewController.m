@@ -471,7 +471,11 @@ static LoginAnimatedViewController *sharedHelper = nil;
         
         [startViewController authorizationModifier:modifierUserInfo];
         payment = NO;
-        [self donateButtonClick:nil];
+        [self.player stop];
+        [self.player setVolume:0.0];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IPad"];
+        [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"loginFirstShow"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
     
 }
