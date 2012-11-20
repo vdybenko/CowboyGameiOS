@@ -105,6 +105,8 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark
+
 -(void)firstAnimation;
 {
     [UIView animateWithDuration:ANIMATION_TIME
@@ -167,8 +169,10 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
    [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark
+
 - (IBAction)buttonBack:(id)sender {
-    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)dealloc

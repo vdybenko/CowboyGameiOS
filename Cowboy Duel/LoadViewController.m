@@ -161,15 +161,15 @@ static const char *A_URL =  BASE_URL"api/authorization";
         receivedData = [[NSMutableData alloc] init];
     } else {
     }
-    
 }
 
 #pragma mark CustomNSURLConnection handlers
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection1 {    
     NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
+    DLog(@"LoadViewController connectionDidFinishLoading %@",jsonString);
     NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
-    if (![responseObject objectForKey:@"refresh_content"]) {
+    if ([responseObject objectForKey:@"refresh_content"]) {
         DLog(@"get Refresh");
         int revisionNumber=[[responseObject objectForKey:@"refresh_content"] intValue];
         if ([RefreshContentDataController isRefreshEvailable:revisionNumber]) {
@@ -180,7 +180,7 @@ static const char *A_URL =  BASE_URL"api/authorization";
         }else {
             [self closeWindow];
         }
-        if (![responseObject objectForKey:@"session_id"])
+        if ([responseObject objectForKey:@"session_id"])
         {
             DLog(@"Session id error!!");
             return;
