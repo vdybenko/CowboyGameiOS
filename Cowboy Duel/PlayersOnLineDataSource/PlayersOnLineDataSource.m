@@ -17,6 +17,7 @@
 #import "SSServer.h"
 
 @interface PlayersOnLineDataSource ()
+
 @property (nonatomic) SSConnection *connection;
 @property (nonatomic) BOOL startLoad;
 
@@ -82,10 +83,10 @@
             [serverObj setValuesForKeysWithDictionary:server];
             [self.serverObjects addObject:serverObj];
         }
-        [_tableView reloadData];
     }
     [[AccountDataSource sharedInstance] refreshBotArray];
     [self addBotsForListCount:[self.serverObjects count]];
+    [self addPracticeCell];
     ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
     [listOfItemsViewController didRefreshController];
 }
@@ -250,6 +251,28 @@
     serverObj.duelsWin = [serverDictionary objectForKey:@"duels_win"];
     serverObj.sessionId = [serverDictionary objectForKey:@"session_id"];
     [self.serverObjects addObject:serverObj];
+}
+#pragma mark Practice
+
+-(void)addPracticeCell
+{
+    SSServer *serverObj = [[SSServer alloc] init];
+    serverObj.displayName = NSLocalizedString(@"PRAC", @"");
+    serverObj.status = @"A";
+    serverObj.fbImageUrl = @"";
+    serverObj.money = @1000;
+    serverObj.serverName = @"";
+    serverObj.rank = @1;
+    serverObj.bot = NO;
+    serverObj.duelsLost = @0;
+    serverObj.duelsWin = @0;
+    serverObj.sessionId = @"-1";
+    [self.serverObjects addObject:serverObj];
+}
+
+-(void)practiceCellClick
+{
+    
 }
 
 #pragma mark -

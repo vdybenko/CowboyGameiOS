@@ -23,6 +23,8 @@
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
+    self.backgroundColor = [UIColor clearColor];
+    
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 3.0);
     UIColor *color = [UIColor colorWithRed:98.0f/255.0f green:68.0f/255.0f blue:34.0f/255.0f alpha:1.0f];

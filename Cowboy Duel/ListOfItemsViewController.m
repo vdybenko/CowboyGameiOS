@@ -182,6 +182,7 @@
 {
     SSServer *player;
     player=[_playersOnLineDataSource.serverObjects objectAtIndex:indexPath.row];
+
     AccountDataSource *oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
     [oponentAccount setAccountID:player.serverName];
     [oponentAccount setAccountName:player.displayName];
@@ -191,7 +192,23 @@
     [oponentAccount setBot:player.bot];
     [oponentAccount setMoney:[player.money integerValue]];
     [oponentAccount setSessionID:(player.sessionId) ? [NSString stringWithString:player.sessionId]:@""];
-    
+
+    if ([player.sessionId isEqualToString:@"-1"]) {
+        [_playerAccount.finalInfoTable removeAllObjects];
+        int randomTime = arc4random() % 6;
+        
+        TeachingViewController *teachingViewController = [[TeachingViewController alloc] initWithTime:randomTime andAccount:_playerAccount andOpAccount:oponentAccount];
+        [self.navigationController pushViewController:teachingViewController animated:YES];
+        
+        SSConnection *connection = [SSConnection sharedInstance];
+        [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                            object:self
+                                                          userInfo:[NSDictionary dictionaryWithObject:@"/duel_teaching" forKey:@"event"]];
+        return;
+    }
+
     DuelStartViewController *duelStartViewController = [[DuelStartViewController alloc]initWithAccount:_playerAccount andOpAccount:oponentAccount opopnentAvailable:NO andServerType:NO andTryAgain:NO];
     duelStartViewController.serverName = player.serverName;
     
