@@ -344,7 +344,7 @@
 								</object>
 							</object>
 						</array>
-						<string key="NSFrame">{{10, 244}, {290, 173}}</string>
+						<string key="NSFrame">{{10, 240}, {290, 173}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="469240051"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>

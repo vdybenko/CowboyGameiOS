@@ -515,7 +515,10 @@ static StartViewController *sharedHelper = nil;
 {
     [super viewDidAppear:animated];
     
+//    to do delete this
     playerAccount.accountLevel = 7;
+//
+    
     SSConnection *connection = [SSConnection sharedInstance];
     [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
     
@@ -619,14 +622,17 @@ static StartViewController *sharedHelper = nil;
 
 -(IBAction)teachingButtonClick
 {
+    
+    
     [playerAccount.finalInfoTable removeAllObjects];
     int randomTime = arc4random() % 6; 
     
     oponentAccount.accountName=NSLocalizedString(@"COMPUTER", @"");
     oponentAccount.money = 1000;
     oponentAccount.accountLevel = 1;
-    //TO DO delete this
     oponentAccount.accountPoints = playerAccount.accountPoints;
+    //TO DO delete this
+    oponentAccount.accountDefenseValue = playerAccount.accountDefenseValue + 20;
     //
     
     TeachingViewController *teachingViewController = [[TeachingViewController alloc] initWithTime:randomTime andAccount:playerAccount andOpAccount:oponentAccount];
@@ -727,8 +733,8 @@ static StartViewController *sharedHelper = nil;
 }
 
 -(IBAction)showHelp:(id)sender
-{    
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/help_click" forKey:@"event"]];
     

@@ -11,15 +11,15 @@
 #import "UIButton+Image+Title.h"
 #import "DuelRewardLogicController.h"
 
-static const CGPoint POINT_FOR_VIEW_START_POSITION = {12, 490};
-static const CGPoint POINT_FOR_VIEW = {12, 245};
-static const CGPoint POINT_FOR_VIEW_WITH_ARROW = {12, 232};
 static CGFloat const ANIMATION_TIME = 0.4f;
 static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
 
 @interface TeachingHelperViewController ()
 {
     AccountDataSource *opAccount;
+    CGPoint pointStart;
+    CGPoint pointForView;
+    CGPoint pointForViewWithArrow;
 }
 @property (strong, nonatomic) IBOutlet UILabel *mainHelpLabel;
 @property (strong, nonatomic) IBOutlet UILabel *labelBullets;
@@ -52,7 +52,6 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
     self = [self initWithNibName:@"TeachingHelperController" bundle:[NSBundle mainBundle]];
     if (self) {
         opAccount = oponentAccount;
-        
     }
     return self;
 }
@@ -78,18 +77,27 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
     [viewSound setDinamicHeightBackground];
     [viewHand setDinamicHeightBackground];
     
+    pointStart = CGPointMake(12, [[UIScreen mainScreen] bounds].size.height+10);
+    pointForView = CGPointMake(12, pointStart.y-248);
+    pointForViewWithArrow = CGPointMake(12, pointForView.y-8);
+    
     CGRect frame = viewFire.frame;
-    frame.origin = POINT_FOR_VIEW_START_POSITION;
+    frame.origin = pointStart;
     viewFire.frame = frame;
     
     frame = viewSound.frame;
-    frame.origin = POINT_FOR_VIEW_START_POSITION;
+    frame.origin = pointStart;
     viewSound.frame = frame;
     
     frame = viewHand.frame;
-    frame.origin = POINT_FOR_VIEW_START_POSITION;
+    frame.origin = pointStart;
     viewHand.frame = frame;
     [self performSelector:@selector(firstAnimation) withObject:nil afterDelay:0.2f];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+   
 }
 
 - (void)didReceiveMemoryWarning
@@ -102,7 +110,7 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
     [UIView animateWithDuration:ANIMATION_TIME
                      animations:^{
                          CGRect frame = viewFire.frame;
-                         frame.origin = POINT_FOR_VIEW_WITH_ARROW;
+                         frame.origin = pointForViewWithArrow;
                          viewFire.frame = frame;
                      }];
     [self performSelector:@selector(secondAnimation) withObject:nil afterDelay:DELAY_BETWEEN_ANIMATION];
@@ -113,7 +121,7 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
     [UIView animateWithDuration:ANIMATION_TIME
                      animations:^{
                          CGRect frame = viewFire.frame;
-                         frame.origin = POINT_FOR_VIEW_START_POSITION;
+                         frame.origin = pointStart;
                          viewFire.frame = frame;
                          
                          mainHelpLabel.hidden = YES;
@@ -122,7 +130,7 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
                          [UIView animateWithDuration:ANIMATION_TIME
                                           animations:^{
                                               CGRect frame = viewSound.frame;
-                                              frame.origin = POINT_FOR_VIEW;
+                                              frame.origin = pointForView;
                                               viewSound.frame = frame;
                                           }];
                      }];
@@ -134,14 +142,14 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
     [UIView animateWithDuration:ANIMATION_TIME
                      animations:^{
                          CGRect frame = viewSound.frame;
-                         frame.origin = POINT_FOR_VIEW_START_POSITION;
+                         frame.origin = pointStart;
                          viewSound.frame = frame;
                      }
                      completion:^(BOOL finised){
                          [UIView animateWithDuration:ANIMATION_TIME
                                           animations:^{
                                               CGRect frame = viewHand.frame;
-                                              frame.origin = POINT_FOR_VIEW;
+                                              frame.origin = pointForView;
                                               viewHand.frame = frame;
                                           }];
                      }];
@@ -153,7 +161,7 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
     [UIView animateWithDuration:ANIMATION_TIME
                      animations:^{
                          CGRect frame = viewHand.frame;
-                         frame.origin = POINT_FOR_VIEW_START_POSITION;
+                         frame.origin = pointStart;
                          viewHand.frame = frame;
                      }];
    [self.navigationController popViewControllerAnimated:YES];
