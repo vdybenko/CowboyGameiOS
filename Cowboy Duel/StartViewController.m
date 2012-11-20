@@ -921,7 +921,9 @@ static StartViewController *sharedHelper = nil;
     NSLog(@"responseObject %@",responseObject);
     NSLog(@"responseObjectForBots %@",responseObjectForBots);
     if ([responseObjectForBots count]>=1) {
-      playerAccount.listBotsOnline = responseObjectForBots;
+      playerAccount.listBotsOnline = [NSArray arrayWithArray:responseObjectForBots];
+        [playerAccount reloadRandomId];
+        [playerAccount receiveBotsForIdArray:playerAccount.randomIds];
       NSLog(@"listBotsOnline %@",playerAccount.listBotsOnline);
     }
   

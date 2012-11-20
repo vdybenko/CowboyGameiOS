@@ -206,11 +206,12 @@
     DLog(@"player.receivedBots %@", player.receivedBots);
     switch (listcount) {
         case 0:{
-            
             NSDictionary *serverDictionary = [player.receivedBots objectAtIndex:0];
             [self createServerForDictionary:serverDictionary];
+            if([player.receivedBots count] == 1) return;
             serverDictionary = [player.receivedBots objectAtIndex:1];;
             [self createServerForDictionary:serverDictionary];
+            if([player.receivedBots count] == 2) return;
             serverDictionary = [player.receivedBots objectAtIndex:2];
             [self createServerForDictionary:serverDictionary];
             break;
@@ -218,6 +219,7 @@
         case 1:{
             NSDictionary *serverDictionary = [player.receivedBots objectAtIndex:0];
             [self createServerForDictionary:serverDictionary];
+            if([player.receivedBots count] == 1) return;
             serverDictionary = [player.receivedBots objectAtIndex:1];
             [self createServerForDictionary:serverDictionary];
             break;
