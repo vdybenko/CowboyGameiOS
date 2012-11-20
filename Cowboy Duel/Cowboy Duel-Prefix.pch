@@ -24,7 +24,7 @@
 #define kTimeOutSeconds 20
 #define kFacebookAppId @"284932561559672"
 #define kFacebookAppToken @"284932561559672|w5GIU7o8TBWuxqPgmyZ7r7FxxKE"
-#define kSampleAdUnitID @"a1508f8dc908999"
+#define kSampleAdUnitID @"a150a9f7fba307c"
 #define kNumberOfAdvertisingPerDay 4
 #define NUMBER_REVISION_DEFAULT 2
 #define NUMBER_REVISION_DUEL_PRODUCT_DEFAULT 0

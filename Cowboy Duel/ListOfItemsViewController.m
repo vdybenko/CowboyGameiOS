@@ -281,7 +281,7 @@
 
 -(void)refreshController;
 {
-    [_playersOnLineDataSource reloadRandomId];
+    //[_playersOnLineDataSource reloadRandomId];
     [loadingView setHidden:NO];
     [activityIndicator startAnimating];
     [btnInvite setEnabled:NO];

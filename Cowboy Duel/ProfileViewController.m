@@ -61,6 +61,7 @@
     
     IBOutlet UIView *ivBlack;
     
+    __unsafe_unretained IBOutlet UILabel *lbPointsText;
     NSNumberFormatter *numberFormatter;
     
     BOOL didDisappear;
@@ -111,6 +112,9 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"loginFirstShow"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -120,6 +124,9 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    lbPointsText.font = [UIFont fontWithName: @"MyriadPro-Semibold" size:12];
+    
+    lbPointsCountMain.font = [UIFont fontWithName: @"MyriadPro-Bold" size:15];
     lbGoldCount.text =[numberFormatter stringFromNumber:[NSNumber numberWithInt:(playerAccount.money/2)]];
     
     [self checkLocationOfViewForFBLogin];
@@ -131,6 +138,7 @@
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
+    
     lbGoldCount.text =[numberFormatter stringFromNumber:[NSNumber numberWithInt:(playerAccount.money/2)]];
     
     CGRect liveChRect = ivPointsLine.frame;
@@ -147,6 +155,8 @@
     
 //    UIFont *fontSimpleText=[UIFont fontWithName: @"MyriadPro-Semibold" size:13];
     UIColor *mainColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
+    
+    
     
     lbProfileMain.text = NSLocalizedString(@"ProfileTitle", @"");
     lbProfileMain.textColor = mainColor;
@@ -308,8 +318,10 @@
     }
     for (int i=value/2; i<=value; i+=valueForGoldAnimation) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            if(label == lbPointsCountMain)
+            label.text = [NSString stringWithFormat:@"%@/%@", [numberFormatter stringFromNumber:[NSNumber numberWithInt:(i)]], [[DuelRewardLogicController getStaticPointsForEachLevels] objectAtIndex:playerAccount.accountLevel]];
+            else label.text = [numberFormatter stringFromNumber:[NSNumber numberWithInt:(i)]];
             
-            label.text = [numberFormatter stringFromNumber:[NSNumber numberWithInt:(i)]];
         });
         
         [NSThread sleepForTimeInterval:0.005];
@@ -319,7 +331,9 @@
         }
     }
     dispatch_async(dispatch_get_main_queue(), ^{
-        label.text = [numberFormatter stringFromNumber:[NSNumber numberWithInt:(value)]]; 
+        if(label == lbPointsCountMain)
+            label.text = [NSString stringWithFormat:@"%@/%@", [numberFormatter stringFromNumber:[NSNumber numberWithInt:(value)]], [[DuelRewardLogicController getStaticPointsForEachLevels] objectAtIndex:playerAccount.accountLevel]];
+        else label.text = [numberFormatter stringFromNumber:[NSNumber numberWithInt:(value)]];
     });
     needAnimation = NO;
 }
@@ -359,7 +373,7 @@
     }
     int curentPoints=(playerAccount.accountPoints-moneyForPrewLevel);
     int maxPoints=(moneyForNextLevel-moneyForPrewLevel);
-    lbPointsCount.text = [NSString stringWithFormat:@"%d",(moneyForNextLevel-playerAccount.accountPoints)];
+    lbPointsCount.text = [NSString stringWithFormat:@"%@/%@", [NSString stringWithFormat:@"%d",(moneyForNextLevel-playerAccount.accountPoints)], [[DuelRewardLogicController getStaticPointsForEachLevels] objectAtIndex:playerAccount.accountLevel]];
 
     if (!needAnimation) {
         lbGoldCount.text = [numberFormatter stringFromNumber:[NSNumber numberWithInt:(playerAccount.money)]]; 
@@ -533,6 +547,7 @@
     lbLeaderboardTitle = nil;
     lbPointsCountMain = nil;
     ivCurrentRank = nil;
+    lbPointsText = nil;
     [super viewDidUnload];
 }
 

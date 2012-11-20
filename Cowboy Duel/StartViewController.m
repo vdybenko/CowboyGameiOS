@@ -361,10 +361,11 @@ static StartViewController *sharedHelper = nil;
 
 - (void)viewDidLoad{
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSInteger facebookLogIn = [userDefaults integerForKey:@"facebookLogIn"];
-    NSInteger paymentRegistration = [userDefaults integerForKey:@"paymentRegistration"];
+//    NSInteger facebookLogIn = [userDefaults integerForKey:@"facebookLogIn"];
+//    NSInteger paymentRegistration = [userDefaults integerForKey:@"paymentRegistration"];
+    NSInteger loginFirstShow = [userDefaults integerForKey:@"loginFirstShow"];
     
-    if (!paymentRegistration && !facebookLogIn) {
+    if (!loginFirstShow) {
         SSConnection *connection = [SSConnection sharedInstance];
         [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
         
@@ -535,11 +536,13 @@ static StartViewController *sharedHelper = nil;
     }
     gameCenterViewController.duelStartViewController = nil;
     
-    [self showProfileFirstRun];
+    //[self showProfileFirstRun];
     [self isAdvertisingOfNewVersionNeedShow];
     [self estimateApp];
     TestAppDelegate *app = (TestAppDelegate *)[[UIApplication sharedApplication] delegate];
     [app.adBanner setHidden:NO];
+    [[AccountDataSource sharedInstance] reloadRandomId];
+    [[AccountDataSource sharedInstance] receiveBotsForIdArray:[AccountDataSource sharedInstance].randomIds];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -978,7 +981,9 @@ static StartViewController *sharedHelper = nil;
     NSLog(@"responseObject %@",responseObject);
     NSLog(@"responseObjectForBots %@",responseObjectForBots);
     if ([responseObjectForBots count]>=1) {
-      playerAccount.listBotsOnline = responseObjectForBots;
+      playerAccount.listBotsOnline = [NSArray arrayWithArray:responseObjectForBots];
+        [playerAccount reloadRandomId];
+        [playerAccount receiveBotsForIdArray:playerAccount.randomIds];
       NSLog(@"listBotsOnline %@",playerAccount.listBotsOnline);
     }
   
@@ -1078,6 +1083,12 @@ static StartViewController *sharedHelper = nil;
         if (facebookName) {
             playerAccount.facebookName=facebookName;
             [playerAccount saveFacebookName];
+        }
+        
+        int playerMoney=[[responseObject objectForKey:@"money"] intValue];
+        if (playerMoney) {
+            playerAccount.money=playerMoney;
+            [playerAccount saveMoney];
         }
         
         BOOL moneyForIPad=[[NSUserDefaults standardUserDefaults] boolForKey:@"moneyForIPad"];

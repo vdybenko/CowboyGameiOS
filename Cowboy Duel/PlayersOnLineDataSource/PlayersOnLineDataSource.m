@@ -19,11 +19,11 @@
 @interface PlayersOnLineDataSource ()
 @property (nonatomic) SSConnection *connection;
 @property (nonatomic) BOOL startLoad;
-@property (nonatomic, strong) NSArray *randomIds;
+
 @end 
 
 @implementation PlayersOnLineDataSource
-@synthesize arrItemsList, delegate, cellsHide, serverObjects, connection, startLoad, randomIds;
+@synthesize arrItemsList, delegate, cellsHide, serverObjects, connection, startLoad;
 
 
 #pragma mark - Instance initialization
@@ -46,20 +46,14 @@
      self.connection = [SSConnection sharedInstance];
      self.connection.delegate = self;
      srand ([NSDate timeIntervalSinceReferenceDate]);
-     [self reloadRandomId];
+     //[self reloadRandomId];
 	return self;
 }
 
--(void) reloadRandomId
-{
-    AccountDataSource *playerAcount = [AccountDataSource sharedInstance];
-    NSArray *randomIndexes = [self randomNumbersWithCount:3];
-    self.randomIds = [NSArray arrayWithObjects:[playerAcount.listBotsOnline objectAtIndex:[[randomIndexes objectAtIndex:0] intValue]],[playerAcount.listBotsOnline objectAtIndex:[[randomIndexes objectAtIndex:1] intValue]], [playerAcount.listBotsOnline objectAtIndex:[[randomIndexes objectAtIndex:2] intValue]], nil];
-}
 
 -(void) reloadDataSource;
 {
-    [[AccountDataSource sharedInstance] receiveBotsForIdArray:self.randomIds];
+    
 	[self.connection sendData:@"" packetID:NETWORK_GET_LIST_ONLINE ofLength:sizeof(int)];
     [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(connectionTimeout) userInfo:nil repeats:NO];
     self.startLoad = YES;
@@ -212,11 +206,12 @@
     DLog(@"player.receivedBots %@", player.receivedBots);
     switch (listcount) {
         case 0:{
-            
             NSDictionary *serverDictionary = [player.receivedBots objectAtIndex:0];
             [self createServerForDictionary:serverDictionary];
+            if([player.receivedBots count] == 1) return;
             serverDictionary = [player.receivedBots objectAtIndex:1];;
             [self createServerForDictionary:serverDictionary];
+            if([player.receivedBots count] == 2) return;
             serverDictionary = [player.receivedBots objectAtIndex:2];
             [self createServerForDictionary:serverDictionary];
             break;
@@ -224,6 +219,7 @@
         case 1:{
             NSDictionary *serverDictionary = [player.receivedBots objectAtIndex:0];
             [self createServerForDictionary:serverDictionary];
+            if([player.receivedBots count] == 1) return;
             serverDictionary = [player.receivedBots objectAtIndex:1];
             [self createServerForDictionary:serverDictionary];
             break;
@@ -240,28 +236,6 @@
     }
 }
 
--(NSArray *)randomNumbersWithCount:(int)count
-{
-    AccountDataSource *player = [AccountDataSource sharedInstance];
-    NSMutableArray *array = [NSMutableArray array];
-    for (int i = 0; i<count; i++) {
-        BOOL numberNotAdd = YES;
-        while (numberNotAdd) {
-            BOOL containeNumber = NO;
-            int randNumber = rand() % [player.listBotsOnline count];
-            for (NSNumber *randNumberTemp in array) {
-                if([randNumberTemp intValue] == randNumber) containeNumber = YES;
-            }
-            if (!containeNumber) {
-                [array addObject:[NSNumber numberWithInt:randNumber]];
-                numberNotAdd = NO;
-            }
-        }
-        
-        
-    }
-    return array;
-}
 
 -(void)createServerForDictionary:(NSDictionary *)serverDictionary
 {

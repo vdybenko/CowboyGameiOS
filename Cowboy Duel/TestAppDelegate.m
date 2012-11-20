@@ -114,7 +114,7 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
         // before compiling.
         self.adBanner.adUnitID = kSampleAdUnitID;
         self.adBanner.delegate = self;
-        [self.adBanner setRootViewController:self];
+        [self.adBanner setRootViewController:navigationController];
         [window addSubview:self.adBanner];
         [self.adBanner loadRequest:[self createRequest]];
         [self.adBanner setHidden:YES];

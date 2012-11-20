@@ -51,7 +51,7 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
 @end
 
 @implementation LoginAnimatedViewController
-NSString * const loginProduct=@"com.webkate.cowboyduels.registration";
+NSString * const loginProduct=@"com.webkate.cowboyduels.user.registration";
 @synthesize startViewController, facebook,delegate ,loginFacebookStatus, payment;
 @synthesize timer, textsContainer;
 
@@ -317,14 +317,16 @@ static LoginAnimatedViewController *sharedHelper = nil;
     }
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IPad"];
+    [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"loginFirstShow"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-//    ProfileViewController *profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount startViewController:startViewController];
-//    [profileViewController setNeedAnimation:YES];
-//    [self.navigationController popViewControllerAnimated:YES];
+  
+    ProfileViewController *profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount startViewController:startViewController];
+    [profileViewController setNeedAnimation:YES];
+    [self.navigationController popViewControllerAnimated:YES];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"/login_cancel" forKey:@"event"]];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+//														object:self
+//													  userInfo:[NSDictionary dictionaryWithObject:@"/donate_click" forKey:@"event"]];
 }
 
 - (IBAction)loginButtonClick:(id)sender {
@@ -465,7 +467,11 @@ static LoginAnimatedViewController *sharedHelper = nil;
         
         [startViewController authorizationModifier:modifierUserInfo];
         payment = NO;
-        [self donateButtonClick:nil];
+        [self.player stop];
+        [self.player setVolume:0.0];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IPad"];
+        [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"loginFirstShow"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 

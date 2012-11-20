@@ -180,10 +180,14 @@ static const char *A_URL =  BASE_URL"api/authorization";
         }else {
             [self closeWindow];
         }
-        NSString *sesion =[[NSString alloc] initWithString:[responseObject objectForKey:@"session_id"]];
+        if (![responseObject objectForKey:@"session_id"])
+        {
+            DLog(@"Session id error!!");
+            return;
+        }
+         NSString *sesion =[[NSString alloc] initWithString:[responseObject objectForKey:@"session_id"]];
         [[AccountDataSource sharedInstance] setSessionID:sesion];
         DLog(@"get sesion %@",sesion);
-        return;
     }
 }
 

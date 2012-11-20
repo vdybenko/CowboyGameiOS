@@ -41,6 +41,6 @@
 
 
 -(void) reloadDataSource;
--(void) reloadRandomId;
+//-(void) reloadRandomId;
 -(id) initWithTable:(UITableView *)pTable;
 @end
