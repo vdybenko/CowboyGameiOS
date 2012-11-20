@@ -903,11 +903,12 @@
 -(void)winAnimation
 {
   [lblGoldPlus setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:45]];
-  lblGold.text = [NSString stringWithFormat:@"%d",oldMoneyForAnimation];
+  lblGold.hidden = YES;
+  lblGold.text = [NSString stringWithFormat:@"%d",playerAccount.money];
   
   [self coinCenter];
+  lblGold.text = [NSString stringWithFormat:@"%d",oldMoneyForAnimation];
   
-  lblGold.hidden = YES;
   CGRect goldCountCentered = lblGold.frame;
   goldCountCentered.origin.x = ivGoldCoin.frame.origin.x+ivGoldCoin.frame.size.width + 5;
   lblGold.frame = goldCountCentered;
