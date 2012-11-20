@@ -371,8 +371,8 @@
         playerAccount.accountPoints = moneyForPrewLevel;
         [playerAccount saveAccountPoints];
     }
-    int curentPoints=(playerAccount.accountPoints-moneyForPrewLevel);
-    int maxPoints=(moneyForNextLevel-moneyForPrewLevel);
+    int curentPoints=playerAccount.accountPoints;
+    int maxPoints=moneyForNextLevel;
     lbPointsCount.text = [NSString stringWithFormat:@"%@/%@", [NSString stringWithFormat:@"%d",(moneyForNextLevel-playerAccount.accountPoints)], [[DuelRewardLogicController getStaticPointsForEachLevels] objectAtIndex:playerAccount.accountLevel]];
 
     if (!needAnimation) {
