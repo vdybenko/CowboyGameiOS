@@ -66,6 +66,10 @@ static int oponentMustShot;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    TestAppDelegate *app = (TestAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [app.adBanner setHidden:YES];
+    
     [frameView setDinamicHeightBackground];
     
     description.text = [NSString stringWithFormat:NSLocalizedString(@"ATTEN_TEXT", @""),playerMustShot,oponentMustShot];

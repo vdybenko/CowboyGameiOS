@@ -634,9 +634,6 @@ static StartViewController *sharedHelper = nil;
     oponentAccount.money = 1000;
     oponentAccount.accountLevel = 1;
     oponentAccount.accountPoints = playerAccount.accountPoints;
-    //TO DO delete this
-    oponentAccount.accountDefenseValue = playerAccount.accountDefenseValue + 20;
-    //
     
     TeachingViewController *teachingViewController = [[TeachingViewController alloc] initWithTime:randomTime andAccount:playerAccount andOpAccount:oponentAccount];
     [self.navigationController pushViewController:teachingViewController animated:YES];
