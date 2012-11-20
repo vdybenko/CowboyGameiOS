@@ -82,7 +82,7 @@
 								<string key="NSFrame">{{3, 45}, {284, 15}}</string>
 								<reference key="NSSuperview" ref="69892376"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="133798179"/>
+								<reference key="NSNextKeyView" ref="710969708"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -109,7 +109,7 @@
 								<string key="NSFrame">{{10, 110}, {245, 120}}</string>
 								<reference key="NSSuperview" ref="69892376"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="188528675"/>
+								<reference key="NSNextKeyView" ref="133798179"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<int key="IBUIContentMode">1</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -121,7 +121,7 @@
 								<string key="NSFrame">{{12, 186}, {266, 45}}</string>
 								<reference key="NSSuperview" ref="69892376"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="710969708"/>
+								<reference key="NSNextKeyView" ref="188528675"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -645,25 +645,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">DuelProductWinViewController</string>
 					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="BuyItButtonClick:">id</string>
-						<string key="GoToStoreClick:">id</string>
-						<string key="closeButtonClick:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="BuyItButtonClick:">
-							<string key="name">BuyItButtonClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="GoToStoreClick:">
-							<string key="name">GoToStoreClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="closeButtonClick:">
-							<string key="name">closeButtonClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="buyItButton">UIButton</string>
 						<string key="frameView">UIView</string>

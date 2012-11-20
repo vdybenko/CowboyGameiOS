@@ -27,13 +27,12 @@ static const char *A_URL =  BASE_URL"api/authorization";
 {
     if(self==[super init])
     {
-         firstRun = NO;
-//        if(![[NSUserDefaults standardUserDefaults] boolForKey:@"AlreadyRun"] ) {
-//            firstRun = YES;
-//            [self login];
-//        }else{
-//            firstRun = NO;
-//        }
+        if(![[NSUserDefaults standardUserDefaults] boolForKey:@"AlreadyRun"] ) {
+            firstRun = YES;
+            [self login];
+        }else{
+            firstRun = NO;
+        }
 
         NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Back1start.mp3", [[NSBundle mainBundle] resourcePath]]];
         NSError *error;
@@ -170,7 +169,7 @@ static const char *A_URL =  BASE_URL"api/authorization";
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection1 {    
     NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
     NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
-         
+    if (![responseObject objectForKey:@"refresh_content"]) {
         DLog(@"get Refresh");
         int revisionNumber=[[responseObject objectForKey:@"refresh_content"] intValue];
         if ([RefreshContentDataController isRefreshEvailable:revisionNumber]) {
@@ -181,10 +180,11 @@ static const char *A_URL =  BASE_URL"api/authorization";
         }else {
             [self closeWindow];
         }
-         NSString *sesion =[[NSString alloc] initWithString:[responseObject objectForKey:@"session_id"]];
+        NSString *sesion =[[NSString alloc] initWithString:[responseObject objectForKey:@"session_id"]];
         [[AccountDataSource sharedInstance] setSessionID:sesion];
         DLog(@"get sesion %@",sesion);
         return;
+    }
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data

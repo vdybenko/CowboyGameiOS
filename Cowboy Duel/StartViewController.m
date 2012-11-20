@@ -619,19 +619,15 @@ static StartViewController *sharedHelper = nil;
 
 -(IBAction)teachingButtonClick
 {
-     NSArray *arrItemsList = [DuelProductDownloaderController loadWeaponArray];
-    DuelProductWinViewController *duelProductWinViewController=[[DuelProductWinViewController alloc] initWithAccount:playerAccount duelProduct:[arrItemsList objectAtIndex:0] parentVC:self];
-    [playerAccount loadWeapon];
-    [self.navigationController presentViewController:duelProductWinViewController animated:YES completion:Nil];
-    return;
     [playerAccount.finalInfoTable removeAllObjects];
     int randomTime = arc4random() % 6; 
     
     oponentAccount.accountName=NSLocalizedString(@"COMPUTER", @"");
     oponentAccount.money = 1000;
-    oponentAccount.accountLevel = 4;
+    oponentAccount.accountLevel = 1;
+    //TO DO delete this
     oponentAccount.accountPoints = playerAccount.accountPoints;
-    oponentAccount.accountDefenseValue = playerAccount.accountDefenseValue + 5;
+    //
     
     TeachingViewController *teachingViewController = [[TeachingViewController alloc] initWithTime:randomTime andAccount:playerAccount andOpAccount:oponentAccount];
     [self.navigationController pushViewController:teachingViewController animated:YES];

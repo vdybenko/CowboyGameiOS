@@ -53,8 +53,8 @@ static NSString *ShotSound = @"%@/shot.mp3";
 {
     [super viewDidLoad];
 
-//    TeachingHelperViewController *teachingHelperViewController = [[TeachingHelperViewController alloc] initWithOponentAccount:opAccount];
-//    [self.navigationController pushViewController:teachingHelperViewController animated:NO];
+    TeachingHelperViewController *teachingHelperViewController = [[TeachingHelperViewController alloc] initWithOponentAccount:opAccount];
+    [self.navigationController pushViewController:teachingHelperViewController animated:NO];
 
     if(firstRun){
         lbBackButton.text = NSLocalizedString(@"SKIP", nil);
