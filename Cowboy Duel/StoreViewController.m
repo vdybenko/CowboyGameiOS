@@ -105,32 +105,37 @@
                 purchesingProductIndex = indexPath.row;
                 [[MKStoreManager sharedManager] buyFeature:product.dPurchaseUrl];
             }else{
-                CDTransaction *transaction = [[CDTransaction alloc] init];
-                transaction.trDescription = [[NSString alloc] initWithFormat:@"BuyProductWeapon"];
-                transaction.trType = [NSNumber numberWithInt:-1];
-                transaction.trMoneyCh = [NSNumber numberWithInt:-product.dPrice];
-                transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
-                transaction.trOpponentID = @"";
-                transaction.trGlobalID = [NSNumber numberWithInt:-1];
-
-                [playerAccount.transactions addObject:transaction];
-                [playerAccount saveTransaction];
-                [playerAccount sendTransactions:playerAccount.transactions];
-                
-                playerAccount.money -= product.dPrice;
-                [playerAccount saveMoney];
-                product.dCountOfUse =1;
-                [storeDataSource.arrItemsList replaceObjectAtIndex:indexPath.row withObject:product];
-                [DuelProductDownloaderController saveWeapon:storeDataSource.arrItemsList];
-                playerAccount.accountWeapon = product;
-                playerAccount.curentIdWeapon = product.dID;
-                [playerAccount saveWeapon];
-                
                 [duelProductDownloaderController buyProductID:product.dID transactionID:playerAccount.glNumber];
                 duelProductDownloaderController.didFinishBlock = ^(NSError *error){
                     cell.buyProduct.enabled = YES;
                     loadingView.hidden = YES;
+                    if (!error) {
+                        CDTransaction *transaction = [[CDTransaction alloc] init];
+                        transaction.trDescription = [[NSString alloc] initWithFormat:@"BuyProductWeapon"];
+                        transaction.trType = [NSNumber numberWithInt:-1];
+                        transaction.trMoneyCh = [NSNumber numberWithInt:-product.dPrice];
+                        transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
+                        transaction.trOpponentID = @"";
+                        transaction.trGlobalID = [NSNumber numberWithInt:-1];
+                        
+                        [playerAccount.transactions addObject:transaction];
+                        [playerAccount saveTransaction];
+                        [playerAccount sendTransactions:playerAccount.transactions];
+                        
+                        playerAccount.money -= product.dPrice;
+                        [playerAccount saveMoney];
+                        product.dCountOfUse =1;
+                        [storeDataSource.arrItemsList replaceObjectAtIndex:indexPath.row withObject:product];
+                        [DuelProductDownloaderController saveWeapon:storeDataSource.arrItemsList];
+                        playerAccount.accountWeapon = product;
+                        playerAccount.curentIdWeapon = product.dID;
+                        [playerAccount saveWeapon];
+                        
+                        [storeDataSource reloadDataSource];
+                        [tableView reloadData];
+                    }                    
                 };
+                return;
             }
         }else{
             playerAccount.accountWeapon = product;
@@ -145,30 +150,34 @@
             purchesingProductIndex = indexPath.row;
             [[MKStoreManager sharedManager] buyFeature:product.dPurchaseUrl];
         }else{
-            CDTransaction *transaction = [[CDTransaction alloc] init];
-            transaction.trDescription = [[NSString alloc] initWithFormat:@"BuyProductWinDefense"];
-            transaction.trType = [NSNumber numberWithInt:-1];
-            transaction.trMoneyCh = [NSNumber numberWithInt:-product.dPrice];
-            transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
-            transaction.trOpponentID = @"";
-            transaction.trGlobalID = [NSNumber numberWithInt:-1];
-
-            [playerAccount.transactions addObject:transaction];
-            [playerAccount saveTransaction];
-            [playerAccount sendTransactions:playerAccount.transactions];
-            
-            playerAccount.money -= product.dPrice;
-            [playerAccount saveMoney];
-            playerAccount.accountDefenseValue += product.dDefense;
-            [playerAccount saveDefense];
-            product.dCountOfUse +=1;
-            [storeDataSource.arrItemsList replaceObjectAtIndex:indexPath.row withObject:product];
-            [DuelProductDownloaderController saveDefense:storeDataSource.arrItemsList];
-            
             [duelProductDownloaderController buyProductID:product.dID transactionID:playerAccount.glNumber];
             duelProductDownloaderController.didFinishBlock = ^(NSError *error){
                 cell.buyProduct.enabled = YES;
                 loadingView.hidden = YES;
+                if (!error) {
+                    CDTransaction *transaction = [[CDTransaction alloc] init];
+                    transaction.trDescription = [[NSString alloc] initWithFormat:@"BuyProductWinDefense"];
+                    transaction.trType = [NSNumber numberWithInt:-1];
+                    transaction.trMoneyCh = [NSNumber numberWithInt:-product.dPrice];
+                    transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
+                    transaction.trOpponentID = @"";
+                    transaction.trGlobalID = [NSNumber numberWithInt:-1];
+                    
+                    [playerAccount.transactions addObject:transaction];
+                    [playerAccount saveTransaction];
+                    [playerAccount sendTransactions:playerAccount.transactions];
+                    
+                    playerAccount.money -= product.dPrice;
+                    [playerAccount saveMoney];
+                    playerAccount.accountDefenseValue += product.dDefense;
+                    [playerAccount saveDefense];
+                    product.dCountOfUse +=1;
+                    [storeDataSource.arrItemsList replaceObjectAtIndex:indexPath.row withObject:product];
+                    [DuelProductDownloaderController saveDefense:storeDataSource.arrItemsList];
+                    
+                    [storeDataSource reloadDataSource];
+                    [tableView reloadData];
+                }
             };
         }
     }
@@ -249,7 +258,6 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
                                                       userInfo:[NSDictionary dictionaryWithObject:stringToGA forKey:@"event"]];
-
 }
 
 #pragma mark 
