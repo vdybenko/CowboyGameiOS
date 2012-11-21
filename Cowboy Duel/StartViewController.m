@@ -361,17 +361,17 @@ static StartViewController *sharedHelper = nil;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 //    NSInteger facebookLogIn = [userDefaults integerForKey:@"facebookLogIn"];
 //    NSInteger paymentRegistration = [userDefaults integerForKey:@"paymentRegistration"];
-    NSInteger loginFirstShow = [userDefaults integerForKey:@"loginFirstShow"];
-    
-    if (!loginFirstShow) {
-        SSConnection *connection = [SSConnection sharedInstance];
-        [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
-        
-        LoginAnimatedViewController *loginViewController = [LoginAnimatedViewController sharedInstance];
-        loginViewController.startViewController = self;
-        [loginViewController setPayment:YES];
-        [self.navigationController pushViewController:loginViewController animated:YES];
-    }
+//    NSInteger loginFirstShow = [userDefaults integerForKey:@"loginFirstShow"];
+//    
+//    if (!loginFirstShow) {
+//        SSConnection *connection = [SSConnection sharedInstance];
+//        [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
+//        
+//        LoginAnimatedViewController *loginViewController = [LoginAnimatedViewController sharedInstance];
+//        loginViewController.startViewController = self;
+//        [loginViewController setPayment:YES];
+//        [self.navigationController pushViewController:loginViewController animated:YES];
+//    }
     
     
     UIColor *buttonsTitleColor = [[UIColor alloc] initWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
@@ -522,7 +522,9 @@ static StartViewController *sharedHelper = nil;
     }
     gameCenterViewController.duelStartViewController = nil;
     
-    //[self showProfileFirstRun];
+    NSInteger paymentRegistration = [[NSUserDefaults standardUserDefaults] integerForKey:@"paymentRegistration"];
+    
+    if (paymentRegistration) [self showProfileFirstRun];
     [self isAdvertisingOfNewVersionNeedShow];
     [self estimateApp];
     TestAppDelegate *app = (TestAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -1040,7 +1042,7 @@ static StartViewController *sharedHelper = nil;
         
         int playerMoney=[[responseObject objectForKey:@"money"] intValue];
         if (playerMoney) {
-            playerAccount.money=playerMoney;
+            playerAccount.money=(playerMoney > 0) ? playerMoney : 0;
             [playerAccount saveMoney];
         }
         
@@ -1092,7 +1094,7 @@ static StartViewController *sharedHelper = nil;
 
     if([response objectForKey:@"nickname"]!=NULL){
         oponentAccount.accountName=[response objectForKey:@"nickname"];
-        oponentAccount.money = [[response objectForKey:@"money"] intValue];
+        oponentAccount.money = ([[response objectForKey:@"money"] intValue] > 0)?[[response objectForKey:@"money"] intValue] : 0;
         NSString *st=[[NSString alloc] initWithFormat:@"%@%@%@",NSLocalizedString(@"BotMTitle", nil),oponentAccount.accountName,NSLocalizedString(@"BotMTitle2", nil)];
         UIAlertView *av = [[UIAlertView alloc] initWithTitle:st message:NSLocalizedString(@"BotMText", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"BotMCANS", nil) otherButtonTitles:NSLocalizedString(@"BotMBtn", nil),nil];
         av.tag = BOT_DUEL_TAG;
