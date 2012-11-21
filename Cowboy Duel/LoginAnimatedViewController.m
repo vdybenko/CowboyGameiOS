@@ -224,7 +224,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
                          [self.player play];
                          if (self.textIndex<8){
 
-                             if (self.textIndex==6) {                 ////"Pay for me $1...
+                             if (self.textIndex==6) {                 ////"Pay for me $1.....
                                  [self scaleButton:self.payButton];   //Scale 1$
                                  [self scaleButton:self.donateLable];
 

@@ -52,7 +52,6 @@
 -(id)init;     //must be login object!!!
 -(void)playerStop;
 -(BOOL)connectedToWiFi;
--(void)profileButtonClick;
 -(void)authorizationModifier:(BOOL)modifierName;
 -(void)modifierUser:(AccountDataSource *)playerTemp;
 

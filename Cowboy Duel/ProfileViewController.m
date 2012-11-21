@@ -30,10 +30,7 @@
     IBOutlet UILabel *lbProfileMain;
     IBOutlet UIView *mainProfileView;
     IBOutlet UITextField *lbFBName;
-    IBOutlet UILabel *lbTitleTitle;
     IBOutlet UILabel *lbUserTitle;
-    IBOutlet UILabel *lbPointsTitle;
-    IBOutlet UILabel *lbPointsCount;
     
     IBOutlet UIView *ivPointsLine;
     
@@ -43,6 +40,7 @@
     IBOutlet UIButton *btnLogOutFB;
     
     IBOutlet UIButton *btnLeaderboard;
+    IBOutlet UIButton *btnBack;
     IBOutlet UILabel *lbPlayerStats;
     IBOutlet UILabel *lbDuelsWon;
     IBOutlet UILabel *lbDuelsWonCount;
@@ -59,6 +57,7 @@
     IBOutlet UILabel *userAtack;
     IBOutlet UILabel *userDefense;
     
+    
     __unsafe_unretained IBOutlet UILabel *lbPointsCountMain;
     __unsafe_unretained IBOutlet UIImageView *ivCurrentRank;
     //Buttons
@@ -70,12 +69,19 @@
     NSNumberFormatter *numberFormatter;
     
     BOOL didDisappear;
+    
+//    First run
+    int textIndex;
+    IBOutlet UILabel *lbDescription;
+    NSArray *textsContainer;
 }
     -(void)setImageFromFacebook;
 @end
 
 @implementation ProfileViewController
 @synthesize needAnimation, ivBlack;
+
+#pragma mark
 
 -(id)initWithAccount:(AccountDataSource *)userAccount startViewController:(StartViewController *)startViewController;
 {
@@ -114,6 +120,57 @@
     return self;
 }
 
+-(id)initFirstStartWithAccount:(AccountDataSource *)userAccount startViewController:(StartViewController *)startViewController;
+{
+    self = [super initWithNibName:@"ProfileViewControllerFirstRun" bundle:[NSBundle mainBundle]];
+    
+    if (self) {
+        needAnimation = NO;
+        playerAccount=userAccount;
+        
+        loginViewController = [LoginAnimatedViewController sharedInstance];
+        loginViewController.startViewController = startViewController;
+        
+        numberFormatter = [[NSNumberFormatter alloc] init];
+        [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+        
+        // added for GC
+        if (![GCHelper sharedInstance].GClocalPlayer.isAuthenticated && ![startViewController firstRun]) {
+            [[GCHelper sharedInstance] authenticateLocalUser];
+            
+            
+            [[GCHelper sharedInstance] reportScore:playerAccount.money forCategory:GC_LEADEBOARD_MONEY];
+        }
+        // above
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(setImageFromFacebookWithHideIndicator)
+                                                     name:kReceiveImagefromFBNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(changeFBSesionAction)
+                                                     name:kCheckfFBLoginSession
+                                                   object:nil];
+        
+        textsContainer = [NSArray arrayWithObjects:
+                          NSLocalizedString(@"HEY", nil),             //"Hey guy. Do you hear me?"
+                          NSLocalizedString(@"HEY_YOU", nil),         //"Yes, you! Come here."
+                          NSLocalizedString(@"IPAD", nil),            //"Do you want an iPad mini?"
+                          NSLocalizedString(@"REALLY", nil),          //"Really? Do you like it?"
+                          NSLocalizedString(@"HELP_ME", nil),         //"Great. Help me. I know where it is."
+                          NSLocalizedString(@"HELP_NOW", nil),        //"Help me!!!"
+                          NSLocalizedString(@"CHOOSE_DOLLAR", nil),   //"Pay for me $1...
+                          NSLocalizedString(@"CHOOSE_FACEBOOK", nil), //...or give me your ID"
+                          nil];
+        textIndex = 0;
+
+        [self loadView];
+        [self initMainControls];
+        lbDescription.hidden = NO;
+        lbDescription.text =@"123";
+    }
+    return self;
+}
+
 -(void)viewDidLoad
 {
     [super viewDidLoad];
@@ -139,7 +196,7 @@
     ivCurrentRank.image = [UIImage imageNamed:name];
     didDisappear=NO;
     
-    
+    [self updateLabels];
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -164,14 +221,6 @@
     lbProfileMain.text = NSLocalizedString(@"ProfileTitle", @"");
     lbProfileMain.textColor = mainColor;
     lbProfileMain.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
-   
-    lbTitleTitle.text = NSLocalizedString(@"TitleTitle", @"");
-    lbTitleTitle.font = titlesFont;
-    
-    lbPointsTitle.text = NSLocalizedString(@"PointsTitle", @"");
-    lbPointsTitle.font = titlesFont;
-
-    lbPointsCount.font = CountFont;
     
     lbGoldCount.font = NameFont;
     
@@ -190,6 +239,9 @@
     
     lbBiggestWin.text = NSLocalizedString(@"TheBiggestWinGold", @"");
     lbBiggestWin.font = titlesFont;
+    
+    UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
+    [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor];
     
     lbBiggestWinCount.font = CountFont;
 //    [lbBiggestWinCount dinamicAttachToView:lbBiggestWin withDirection:DirectionToAnimateRight ];
@@ -371,7 +423,6 @@
     }
     int curentPoints=playerAccount.accountPoints;
     int maxPoints=moneyForNextLevel;
-    lbPointsCount.text = [NSString stringWithFormat:@"%@/%@", [NSString stringWithFormat:@"%d",(moneyForNextLevel-playerAccount.accountPoints)], [[DuelRewardLogicController getStaticPointsForEachLevels] objectAtIndex:playerAccount.accountLevel]];
 
     if (!needAnimation) {
         lbGoldCount.text = [numberFormatter stringFromNumber:[NSNumber numberWithInt:(playerAccount.money)]]; 
@@ -470,6 +521,50 @@
         [ivBlack setHidden:YES];
     }
 }
+#pragma mark Animation description
+
+- (void)updateLabels
+{
+    NSString * text = (textIndex<=7)?[textsContainer objectAtIndex:textIndex]:@"";
+    
+    [UIView animateWithDuration:1.0
+                     animations:^{
+                         [self lableScaleOut];
+                     } completion:^(BOOL complete) {
+                         lbDescription.text = text;
+                         [self performSelector:@selector(lableScaleIn) withObject:nil afterDelay:1.0];
+                     }];
+}
+
+-(void)lableScaleIn
+{
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         if (textIndex<8){
+                             lbDescription.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                             [self performSelector:@selector(updateLabels) withObject:nil afterDelay:2.0];
+                             textIndex++;
+                         }
+                     }];
+}
+
+-(void)lableScaleOut
+{
+    lbDescription.transform = CGAffineTransformMakeScale(0.01, 0.01);
+}
+
+-(void)scaleButton:(UIView *)button
+{
+    [UIView animateWithDuration:0.5 animations:^{
+        button.transform = CGAffineTransformMakeScale(1.2, 1.2);
+    } completion:^(BOOL complete) {
+        [UIView animateWithDuration:0.5 animations:^{
+            button.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        }completion:^(BOOL complete){
+        } ];
+    }];
+}
+
 #pragma mark - IBAction
 
 -(IBAction)backToMenu:(id)sender;
@@ -536,9 +631,7 @@
     lbProfileMain = nil;
     mainProfileView = nil;
     lbFBName = nil;
-    lbTitleTitle = nil;
     lbUserTitle = nil;
-    lbPointsCount = nil;
     lbGoldCount = nil;
     btnLogInFB = nil;
     btnLogOutFB = nil;

@@ -303,6 +303,7 @@
 		76B94E791652AF6300F372E9 /* ds_attack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B94E751652AF6300F372E9 /* ds_attack@2x.png */; };
 		76B94E7A1652AF6300F372E9 /* ds_defense.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B94E761652AF6300F372E9 /* ds_defense.png */; };
 		76B94E7B1652AF6300F372E9 /* ds_defense@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B94E771652AF6300F372E9 /* ds_defense@2x.png */; };
+		76BC8798165D08F3001F1472 /* ProfileViewControllerFirstRun.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76BC8797165D08F3001F1472 /* ProfileViewControllerFirstRun.xib */; };
 		76CAE7161421E97900CA39EA /* cry.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 76CAE7141421E97900CA39EA /* cry.mp3 */; };
 		76CB057013AB991B0011E768 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CB056F13AB991B0011E768 /* QuartzCore.framework */; };
 		76CDD0561655267A003F30BD /* dv_bullets_oval.png in Resources */ = {isa = PBXBuildFile; fileRef = 76CDD0521655267A003F30BD /* dv_bullets_oval.png */; };
@@ -799,6 +800,7 @@
 		76B94E751652AF6300F372E9 /* ds_attack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ds_attack@2x.png"; sourceTree = "<group>"; };
 		76B94E761652AF6300F372E9 /* ds_defense.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ds_defense.png; sourceTree = "<group>"; };
 		76B94E771652AF6300F372E9 /* ds_defense@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ds_defense@2x.png"; sourceTree = "<group>"; };
+		76BC8797165D08F3001F1472 /* ProfileViewControllerFirstRun.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProfileViewControllerFirstRun.xib; path = Xib/ProfileViewControllerFirstRun.xib; sourceTree = "<group>"; };
 		76CAE7141421E97900CA39EA /* cry.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cry.mp3; sourceTree = "<group>"; };
 		76CB056F13AB991B0011E768 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		76CDD0521655267A003F30BD /* dv_bullets_oval.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dv_bullets_oval.png; sourceTree = "<group>"; };
@@ -1556,6 +1558,7 @@
 				768321D81654DDD000E78A8C /* TeachingHelperController.xib */,
 				761EFA4C1573BE91001670EB /* HelpViewController.xib */,
 				761EFA4D1573BE91001670EB /* ProfileViewController.xib */,
+				76BC8797165D08F3001F1472 /* ProfileViewControllerFirstRun.xib */,
 				761EFA4E1573BE91001670EB /* StartViewController.xib */,
 				761EFA471573BDDA001670EB /* CollectionAppViewController.xib */,
 				31E8783315ADC70200BFFD9A /* LeaderBoardViewController.xib */,
@@ -2291,6 +2294,7 @@
 				BD7F199416563588008BE1B4 /* ivGuillotineFull-568h@2x.png in Resources */,
 				BD824CDF165A9E7D00C63F61 /* fv_img_0rank.png in Resources */,
 				BD824CE0165A9E7D00C63F61 /* fv_img_0rank@2x.png in Resources */,
+				76BC8798165D08F3001F1472 /* ProfileViewControllerFirstRun.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

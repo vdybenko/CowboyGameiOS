@@ -623,6 +623,8 @@ static StartViewController *sharedHelper = nil;
 -(IBAction)profileButtonClick
 {   
     profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount startViewController:self];
+//    profileViewController = [[ProfileViewController alloc] initFirstStartWithAccount:playerAccount startViewController:self];
+
     [profileViewController setNeedAnimation:YES];
     CATransition* transition = [CATransition animation];
     transition.duration = 0.5;
@@ -642,6 +644,15 @@ static StartViewController *sharedHelper = nil;
     if (![topController isKindOfClass:[ProfileViewController class]]) {
         profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount startViewController:self];
         [profileViewController.ivBlack setHidden:NO];
+        [self.navigationController pushViewController:profileViewController animated:NO];
+    }
+}
+
+-(void)profileFirstRunButtonClickWithOutAnimation;
+{
+    UIViewController *topController=[self.navigationController topViewController];
+    if (![topController isKindOfClass:[ProfileViewController class]]) {
+        profileViewController = [[ProfileViewController alloc] initFirstStartWithAccount:playerAccount startViewController:self];
         [self.navigationController pushViewController:profileViewController animated:NO];
     }
 }
@@ -1405,7 +1416,7 @@ static StartViewController *sharedHelper = nil;
     }else {
         if (firstRunLocal) {
             firstRunLocal = NO;
-            [self profileButtonClick];
+            [self profileFirstRunButtonClickWithOutAnimation];
         }
     }
 }
