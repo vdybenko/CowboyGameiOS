@@ -60,9 +60,7 @@
     
     __unsafe_unretained IBOutlet UILabel *lbPointsCountMain;
     __unsafe_unretained IBOutlet UIImageView *ivCurrentRank;
-    //Buttons
-    IBOutlet UIButton *_btnMusicContoller;
-    
+    //Buttons    
     IBOutlet UIView *ivBlack;
     
     __unsafe_unretained IBOutlet UILabel *lbPointsText;
@@ -282,13 +280,6 @@
     [ivPointsLine setClipsToBounds:YES];
 
     [mainProfileView setDinamicHeightBackground];
-//music button background change:
-
-    if ([StartViewController sharedInstance].soundCheack )
-        [_btnMusicContoller setImage:[UIImage imageNamed:@"pv_btn_music_on.png"] forState:UIControlStateNormal];
-    else {
-        [_btnMusicContoller setImage:[UIImage imageNamed:@"pv_btn_music_off.png"] forState:UIControlStateNormal];
-    }
 }
 
 #pragma mark -
@@ -608,14 +599,6 @@
         DLog(@"Profile: Unable to delete file: %@", [error localizedDescription]);
 }
 
-- (IBAction)soundControll:(id)sender {
-    StartViewController *startViewController = [[self.navigationController viewControllers] objectAtIndex:1];
-    [startViewController soundOff];
-    if (startViewController.soundCheack == YES) [_btnMusicContoller setImage:[UIImage imageNamed:@"pv_btn_music_on.png"] forState:UIControlStateNormal];
-    else {
-        [_btnMusicContoller setImage:[UIImage imageNamed:@"pv_btn_music_off.png"] forState:UIControlStateNormal];
-    }
-}
 
 - (IBAction)btnLeaderbordClick:(id)sender {
     TopPlayersViewController *topPlayersViewController =[[TopPlayersViewController alloc] initWithAccount:playerAccount];

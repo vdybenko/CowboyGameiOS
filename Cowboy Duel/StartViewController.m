@@ -77,6 +77,7 @@
     IBOutlet UIButton *feedbackButton;
     IBOutlet UIButton *shareButton;
     IBOutlet UIButton *helpButton;
+    IBOutlet UIButton *soundButton;
     
     IBOutlet UIView *feedbackView;
     IBOutlet UIView *shareView;
@@ -459,7 +460,11 @@ static StartViewController *sharedHelper = nil;
     }
     [player play];
     
-    
+    if (self.soundCheack )
+        [soundButton setImage:[UIImage imageNamed:@"pv_btn_music_on.png"] forState:UIControlStateNormal];
+    else {
+        [soundButton setImage:[UIImage imageNamed:@"pv_btn_music_off.png"] forState:UIControlStateNormal];
+    }
 }
 - (void)viewDidUnload {
     feedbackView = nil;
@@ -723,6 +728,14 @@ static StartViewController *sharedHelper = nil;
     SSConnection *connection = [SSConnection sharedInstance];
     [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
     [self presentModalViewController:adColonyViewController animated:YES];
+}
+- (IBAction)soundButtonClick:(id)sender {
+    [self soundOff];
+    if (self.soundCheack){
+        [soundButton setImage:[UIImage imageNamed:@"pv_btn_music_on.png"] forState:UIControlStateNormal];
+    }else {
+        [soundButton setImage:[UIImage imageNamed:@"pv_btn_music_off.png"] forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark -
