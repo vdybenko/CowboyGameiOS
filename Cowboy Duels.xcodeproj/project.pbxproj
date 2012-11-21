@@ -104,6 +104,8 @@
 		312B2F4215E7A24F006D2470 /* fin_img_high_score@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 312B2F3C15E7A24F006D2470 /* fin_img_high_score@2x.png */; };
 		312B2F4315E7A24F006D2470 /* fin_img_new_lvl.png in Resources */ = {isa = PBXBuildFile; fileRef = 312B2F3D15E7A24F006D2470 /* fin_img_new_lvl.png */; };
 		312B2F4415E7A24F006D2470 /* fin_img_new_lvl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 312B2F3E15E7A24F006D2470 /* fin_img_new_lvl@2x.png */; };
+		313F4E78165CFE7B007EF4B1 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 76947EF413ACC4EA008BD146 /* libsqlite3.0.dylib */; };
+		313F4E79165CFEA2007EF4B1 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 313F4E74165CFDBC007EF4B1 /* libGoogleAnalytics.a */; };
 		3140030115CBB365008A876E /* fin_img_level_achiev_full_ring.png in Resources */ = {isa = PBXBuildFile; fileRef = 314002FF15CBB365008A876E /* fin_img_level_achiev_full_ring.png */; };
 		3140030215CBB365008A876E /* fin_img_level_achiev_full_ring@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3140030015CBB365008A876E /* fin_img_level_achiev_full_ring@2x.png */; };
 		3150C60C15A5A26E00AC8E17 /* HCYoutubeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3150C60B15A5A26E00AC8E17 /* HCYoutubeParser.m */; };
@@ -367,7 +369,6 @@
 		BDD07BF0141E1F170085E4FB /* ValidationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07BB7141E1F170085E4FB /* ValidationUtils.m */; };
 		BDD8E22A163EEE2E004F05A9 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDD8E229163EEE2E004F05A9 /* CoreData.framework */; };
 		BDD8E23E163EF09D004F05A9 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDD8E23D163EF09D004F05A9 /* libGoogleAdMobAds.a */; };
-		BDD8E24C163EF3BC004F05A9 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDD8E24A163EF3BC004F05A9 /* libGoogleAnalytics.a */; };
 		BDD8E24E163EF42F004F05A9 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDD8E24D163EF42F004F05A9 /* AdSupport.framework */; };
 		BDF1EF1713D41BA500C466DF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF1EF1613D41BA500C466DF /* Security.framework */; };
 		BDF1EF1F13D41C4E00C466DF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF1EF1E13D41C4E00C466DF /* MapKit.framework */; };
@@ -492,6 +493,9 @@
 		312B2F3C15E7A24F006D2470 /* fin_img_high_score@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fin_img_high_score@2x.png"; sourceTree = "<group>"; };
 		312B2F3D15E7A24F006D2470 /* fin_img_new_lvl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fin_img_new_lvl.png; sourceTree = "<group>"; };
 		312B2F3E15E7A24F006D2470 /* fin_img_new_lvl@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fin_img_new_lvl@2x.png"; sourceTree = "<group>"; };
+		313F4E73165CFDBC007EF4B1 /* GANTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GANTracker.h; sourceTree = "<group>"; };
+		313F4E74165CFDBC007EF4B1 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
+		313F4E76165CFDDC007EF4B1 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		314002FF15CBB365008A876E /* fin_img_level_achiev_full_ring.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fin_img_level_achiev_full_ring.png; sourceTree = "<group>"; };
 		3140030015CBB365008A876E /* fin_img_level_achiev_full_ring@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fin_img_level_achiev_full_ring@2x.png"; sourceTree = "<group>"; };
 		3150C60A15A5A26E00AC8E17 /* HCYoutubeParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCYoutubeParser.h; sourceTree = "<group>"; };
@@ -874,12 +878,6 @@
 		BDD8E23B163EF09D004F05A9 /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
 		BDD8E23C163EF09D004F05A9 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
 		BDD8E23D163EF09D004F05A9 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
-		BDD8E243163EF3BB004F05A9 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAI.h; path = "Cowboy Duel/GoogleAnalytics/Library/GAI.h"; sourceTree = SOURCE_ROOT; };
-		BDD8E244163EF3BB004F05A9 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITrackedViewController.h; path = "Cowboy Duel/GoogleAnalytics/Library/GAITrackedViewController.h"; sourceTree = SOURCE_ROOT; };
-		BDD8E245163EF3BB004F05A9 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITracker.h; path = "Cowboy Duel/GoogleAnalytics/Library/GAITracker.h"; sourceTree = SOURCE_ROOT; };
-		BDD8E246163EF3BB004F05A9 /* GAITransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITransaction.h; path = "Cowboy Duel/GoogleAnalytics/Library/GAITransaction.h"; sourceTree = SOURCE_ROOT; };
-		BDD8E247163EF3BC004F05A9 /* GAITransactionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITransactionItem.h; path = "Cowboy Duel/GoogleAnalytics/Library/GAITransactionItem.h"; sourceTree = SOURCE_ROOT; };
-		BDD8E24A163EF3BC004F05A9 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalytics.a; path = "Cowboy Duel/GoogleAnalytics/Library/libGoogleAnalytics.a"; sourceTree = SOURCE_ROOT; };
 		BDD8E24D163EF42F004F05A9 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		BDF1EF1613D41BA500C466DF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BDF1EF1813D41BD600C466DF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -919,7 +917,8 @@
 				038366DB154924E700F3F63B /* libAdColony.a in Frameworks */,
 				767C0B7D15652C9C0007E113 /* libCrittercism_v3_1_5.a in Frameworks */,
 				BDD8E23E163EF09D004F05A9 /* libGoogleAdMobAds.a in Frameworks */,
-				BDD8E24C163EF3BC004F05A9 /* libGoogleAnalytics.a in Frameworks */,
+				313F4E78165CFE7B007EF4B1 /* libsqlite3.0.dylib in Frameworks */,
+				313F4E79165CFEA2007EF4B1 /* libGoogleAnalytics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1208,6 +1207,24 @@
 			path = CollectionApp;
 			sourceTree = "<group>";
 		};
+		313F4E71165CFDBC007EF4B1 /* GoogleAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				313F4E72165CFDBC007EF4B1 /* Library */,
+			);
+			name = GoogleAnalytics;
+			path = "Cowboy Duel/GoogleAnalytics";
+			sourceTree = "<group>";
+		};
+		313F4E72165CFDBC007EF4B1 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				313F4E73165CFDBC007EF4B1 /* GANTracker.h */,
+				313F4E74165CFDBC007EF4B1 /* libGoogleAnalytics.a */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
 		3167BAA615CAA75F00AF2745 /* Achievment */ = {
 			isa = PBXGroup;
 			children = (
@@ -1297,15 +1314,16 @@
 		60593A611379321700256204 = {
 			isa = PBXGroup;
 			children = (
+				313F4E76165CFDDC007EF4B1 /* libsqlite3.dylib */,
 				BDD8E24D163EF42F004F05A9 /* AdSupport.framework */,
 				BDD8E229163EEE2E004F05A9 /* CoreData.framework */,
 				BDD8E18A163EEBFB004F05A9 /* GoogleAdMobAdsSdkiOS-6.2.1 */,
 				767EF48215D5557100548A04 /* Twitter.framework */,
 				7676679C15C10ADA001E3215 /* Icon.png */,
 				763F8A281578A3A900D8BB42 /* libxml2.2.dylib */,
+				313F4E71165CFDBC007EF4B1 /* GoogleAnalytics */,
 				767C0B1215652C9C0007E113 /* CrittercismSDK */,
 				76A0FE7A147AAED0008D9DCA /* revision.h */,
-				76B4676E14827C1E00C4C43E /* GoogleAnalytics */,
 				BDD07B3A141E1F170085E4FB /* Cowboy Duel */,
 				60563F5C1397B88800BADD57 /* Resorces */,
 				60593A6F1379321700256204 /* Frameworks */,
@@ -1515,27 +1533,6 @@
 				76EB4DBE1492661800A3A925 /* Localizable.strings */,
 			);
 			path = Localizations;
-			sourceTree = "<group>";
-		};
-		76B4676E14827C1E00C4C43E /* GoogleAnalytics */ = {
-			isa = PBXGroup;
-			children = (
-				76B4677214827C1E00C4C43E /* Library */,
-			);
-			path = GoogleAnalytics;
-			sourceTree = "<group>";
-		};
-		76B4677214827C1E00C4C43E /* Library */ = {
-			isa = PBXGroup;
-			children = (
-				BDD8E243163EF3BB004F05A9 /* GAI.h */,
-				BDD8E244163EF3BB004F05A9 /* GAITrackedViewController.h */,
-				BDD8E245163EF3BB004F05A9 /* GAITracker.h */,
-				BDD8E246163EF3BB004F05A9 /* GAITransaction.h */,
-				BDD8E247163EF3BC004F05A9 /* GAITransactionItem.h */,
-				BDD8E24A163EF3BC004F05A9 /* libGoogleAnalytics.a */,
-			);
-			path = Library;
 			sourceTree = "<group>";
 		};
 		BD7F2AE41649647500D29263 /* MKStore */ = {
@@ -2280,6 +2277,7 @@
 					"\"$(SRCROOT)/Cowboy Duel/Utils/TwitterOAuth/SAOAuthTwitterEngine\"",
 					"\"$(SRCROOT)/GoogleAdMobAdsSdkiOS-6.2.1\"/**",
 					"\"$(SRCROOT)\"/**",
+					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -2375,6 +2373,7 @@
 					"\"$(SRCROOT)/Cowboy Duel/Utils/TwitterOAuth/SAOAuthTwitterEngine\"",
 					"\"$(SRCROOT)/GoogleAdMobAdsSdkiOS-6.2.1\"/**",
 					"\"$(SRCROOT)\"/**",
+					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -2471,6 +2470,7 @@
 					"\"$(SRCROOT)/Cowboy Duel/Utils/TwitterOAuth/SAOAuthTwitterEngine\"",
 					"\"$(SRCROOT)/GoogleAdMobAdsSdkiOS-6.2.1\"/**",
 					"\"$(SRCROOT)\"/**",
+					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
