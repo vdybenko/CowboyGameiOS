@@ -95,9 +95,9 @@ static NSString *ShotSound = @"%@/shot.mp3";
             case FirstFint:
                 DLog(@"first fint");
                 maxShotCount = 1;
-                [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
-                                                                    object:self
-                                                                  userInfo:[NSDictionary dictionaryWithObject:@"/Trick" forKey:@"event"]];
+//                [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
+//                                                                    object:self
+//                                                                  userInfo:[NSDictionary dictionaryWithObject:@"/Trick" forKey:@"event"]];
                 break;
             case SecondFint:
                 DLog(@"second fint");

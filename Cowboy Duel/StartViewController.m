@@ -351,19 +351,19 @@ static StartViewController *sharedHelper = nil;
 
 - (void)viewDidLoad{
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-//    NSInteger facebookLogIn = [userDefaults integerForKey:@"facebookLogIn"];
-//    NSInteger paymentRegistration = [userDefaults integerForKey:@"paymentRegistration"];
-//    NSInteger loginFirstShow = [userDefaults integerForKey:@"loginFirstShow"];
-//    
-//    if (!loginFirstShow) {
-//        SSConnection *connection = [SSConnection sharedInstance];
-//        [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
-//        
-//        LoginAnimatedViewController *loginViewController = [LoginAnimatedViewController sharedInstance];
-//        loginViewController.startViewController = self;
-//        [loginViewController setPayment:YES];
-//        [self.navigationController pushViewController:loginViewController animated:YES];
-//    }
+    NSInteger facebookLogIn = [userDefaults integerForKey:@"facebookLogIn"];
+    NSInteger paymentRegistration = [userDefaults integerForKey:@"paymentRegistration"];
+    NSInteger loginFirstShow = [userDefaults integerForKey:@"loginFirstShow"];
+  
+    if (!loginFirstShow) {
+        SSConnection *connection = [SSConnection sharedInstance];
+        [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
+      
+        LoginAnimatedViewController *loginViewController = [LoginAnimatedViewController sharedInstance];
+        loginViewController.startViewController = self;
+        [loginViewController setPayment:YES];
+        [self.navigationController pushViewController:loginViewController animated:YES];
+    }
     
     
     UIColor *buttonsTitleColor = [[UIColor alloc] initWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
@@ -731,6 +731,9 @@ static StartViewController *sharedHelper = nil;
 - (IBAction)feedbackCancelButtonClick:(id)sender {
   [self hideView:feedbackView];
   feedBackViewVisible = NO;
+  [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                      object:self
+                                                    userInfo:[NSDictionary dictionaryWithObject:@"/feedBack_cancel" forKey:@"event"]];
 
 }
 - (IBAction)feedbackFollowFBClick:(id)sender {
@@ -739,7 +742,9 @@ static StartViewController *sharedHelper = nil;
 //                 URL_FB_PAGE];
   
   [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[URL_COMM_FB_PAGE stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
-  
+  [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                      object:self
+                                                    userInfo:[NSDictionary dictionaryWithObject:@"/feedBack_followFB_clicked" forKey:@"event"]];
 }
 
 
@@ -778,6 +783,9 @@ static StartViewController *sharedHelper = nil;
 - (IBAction)shareCancelButtonClick:(id)sender {
   [self hideView:shareView];
   shareViewVisible = NO;
+  [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                      object:self
+                                                    userInfo:[NSDictionary dictionaryWithObject:@"/share_cancel" forKey:@"event"]];
   
 }
 
@@ -788,7 +796,7 @@ static StartViewController *sharedHelper = nil;
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                                     object:self
-                                                                  userInfo:[NSDictionary dictionaryWithObject:@"/feedBack_Facebook_click" forKey:@"event"]];
+                                                                  userInfo:[NSDictionary dictionaryWithObject:@"/share_Facebook_click" forKey:@"event"]];
             }else {
                 [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusFeed];
                 [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
@@ -828,7 +836,7 @@ static StartViewController *sharedHelper = nil;
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                     object:self
-                                                  userInfo:[NSDictionary dictionaryWithObject:@"/feedBack_Tweeter_click" forKey:@"event"]];
+                                                  userInfo:[NSDictionary dictionaryWithObject:@"/share_Tweeter_click" forKey:@"event"]];
 }
 
 - (IBAction)feedbackMailBtnClick:(id)sender {
@@ -849,7 +857,7 @@ static StartViewController *sharedHelper = nil;
   
   [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                       object:self
-                                                    userInfo:[NSDictionary dictionaryWithObject:@"/feedBack_Mail_click" forKey:@"event"]];
+                                                    userInfo:[NSDictionary dictionaryWithObject:@"/share_Mail_click" forKey:@"event"]];
 }
 
 #pragma mark -
