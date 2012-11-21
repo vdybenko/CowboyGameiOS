@@ -143,14 +143,12 @@ static const char *GC_URL =  BASE_URL"api/gc";
     lbUserRank.text = NSLocalizedString(Rank, @"");
     lbUserRank.font=fontSimpleText;
     
-    userAtack.text = @"+13";
     if (playerAccount.accountWeapon.dDamage!=0) {
-        userAtack.text = @"+13";//[NSString stringWithFormat:@"+%d",playerAccount.accountWeapon.dDamage];
+        userAtack.text = [NSString stringWithFormat:@"+%d",playerAccount.accountWeapon.dDamage];
         userAtackView.hidden = NO;
     }
-    userDefense.text = @"+13";
     if (playerAccount.accountDefenseValue!=0) {
-        userDefense.text = @"+13";//[NSString stringWithFormat:@"+%d",playerAccount.accountDefenseValue];
+        userDefense.text = [NSString stringWithFormat:@"+%d",playerAccount.accountDefenseValue];
         userDefenseView.hidden = NO;
     }
     

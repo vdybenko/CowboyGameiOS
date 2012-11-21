@@ -21,6 +21,11 @@
 @synthesize indicatorConnectin;
 @synthesize ribbon;
 
+@synthesize userAtack;
+@synthesize userDefense;
+@synthesize userAtackView;
+@synthesize userDefenseView;
+
 +(PlayerOnLineCell*) cell {
     NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"OnLinePlayersCell" owner:nil options:nil];
     return [objects objectAtIndex:0];
@@ -72,6 +77,20 @@
         [self.btnDuel setEnabled:NO];
     }
     
+//    if (playerAccount.accountWeapon.dDamage!=0) {
+//        userAtack.text = [NSString stringWithFormat:@"+%d",playerAccount.accountWeapon.dDamage];
+//        userAtackView.hidden = NO;
+//    }else{
+//    userAtackView.hidden = YES;
+//}
+    
+//    if (playerAccount.accountDefenseValue!=0) {
+//        userDefense.text = [NSString stringWithFormat:@"+%d",playerAccount.accountDefenseValue];
+//        userDefenseView.hidden = NO;
+//    }else{
+//userDefenseView.hidden = YES;
+//}
+
     [self hideIndicatorConnectin];
 }
 

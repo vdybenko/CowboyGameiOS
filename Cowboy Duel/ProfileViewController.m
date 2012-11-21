@@ -54,6 +54,11 @@
     IBOutlet UILabel *lbLeaderboardTitle;
     IBOutlet UILabel *_lbMenuTitle;
     
+    IBOutlet UIView *userAtackView;
+    IBOutlet UIView *userDefenseView;
+    IBOutlet UILabel *userAtack;
+    IBOutlet UILabel *userDefense;
+    
     __unsafe_unretained IBOutlet UILabel *lbPointsCountMain;
     __unsafe_unretained IBOutlet UIImageView *ivCurrentRank;
     //Buttons
@@ -156,8 +161,6 @@
 //    UIFont *fontSimpleText=[UIFont fontWithName: @"MyriadPro-Semibold" size:13];
     UIColor *mainColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
     
-    
-    
     lbProfileMain.text = NSLocalizedString(@"ProfileTitle", @"");
     lbProfileMain.textColor = mainColor;
     lbProfileMain.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
@@ -198,7 +201,6 @@
     lbNotifyMessage.font = [UIFont systemFontOfSize:15];
     lbNotifyMessage.numberOfLines = 0;
 
-    
     CGRect frame=btnLogInFB.frame; 
     frame.origin.x=33;
     frame.origin.y=-1;
@@ -227,18 +229,14 @@
    
     [ivPointsLine setClipsToBounds:YES];
 
-    
-    
     [mainProfileView setDinamicHeightBackground];
 //music button background change:
 
-    
     if ([StartViewController sharedInstance].soundCheack )
         [_btnMusicContoller setImage:[UIImage imageNamed:@"pv_btn_music_on.png"] forState:UIControlStateNormal];
     else {
         [_btnMusicContoller setImage:[UIImage imageNamed:@"pv_btn_music_off.png"] forState:UIControlStateNormal];
     }
-
 }
 
 #pragma mark -
@@ -386,6 +384,15 @@
     lbDuelsLostCount.text=[NSString stringWithFormat:@"%d",playerAccount.accountDraws];
     
     lbBiggestWinCount.text=[numberFormatter stringFromNumber:[NSNumber numberWithInt:( playerAccount.accountBigestWin)]];
+    
+    if (playerAccount.accountWeapon.dDamage!=0) {
+        userAtack.text = [NSString stringWithFormat:@"+%d",playerAccount.accountWeapon.dDamage];
+        userAtackView.hidden = NO;
+    }
+    if (playerAccount.accountDefenseValue!=0) {
+        userDefense.text = [NSString stringWithFormat:@"+%d",playerAccount.accountDefenseValue];
+        userDefenseView.hidden = NO;
+    }
 }
 
 -(void)checkValidBlackActivity{
