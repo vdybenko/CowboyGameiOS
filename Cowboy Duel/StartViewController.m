@@ -71,7 +71,6 @@
     NSMutableDictionary *dicForRequests;
     BOOL modifierName;
     //buttons
-    IBOutlet UIButton *teachingButton;
     IBOutlet UIButton *duelButton;
     IBOutlet UIButton *mapButton;
     IBOutlet UIButton *profileButton;
@@ -93,7 +92,6 @@
     IBOutlet UILabel *lbFeedbackCancelBtn;
     IBOutlet UILabel *lbShareCancelBtn;
 }
-@property (strong, nonatomic) IBOutlet UIButton *teachingButton;
 @property (strong, nonatomic) IBOutlet UIButton *duelButton;
 @property (strong, nonatomic) IBOutlet UIButton *mapButton;
 @property (strong, nonatomic) IBOutlet UIButton *helpButton;
@@ -127,7 +125,7 @@
 @implementation StartViewController
 
 @synthesize gameCenterViewController, player, internetActive, hostActive, soundCheack, loginViewController;
-@synthesize feedbackButton, duelButton, profileButton, teachingButton, helpButton, mapButton, shareButton;
+@synthesize feedbackButton, duelButton, profileButton, helpButton, mapButton, shareButton;
 @synthesize oldAccounId,feedBackViewVisible,showFeedAtFirst,topPlayersDataSource, advertisingNewVersionViewController,firstRun;
 
 static const char *REGISTRATION_URL =  BASE_URL"api/registration";
@@ -382,21 +380,11 @@ static StartViewController *sharedHelper = nil;
     [duelButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
     duelButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
     duelButton.titleLabel.textAlignment = UITextAlignmentCenter;
-  
-    [teachingButton setTitle:NSLocalizedString(@"Practice", @"") forState:UIControlStateNormal];
-    [teachingButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
-    teachingButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
-    teachingButton.titleLabel.textAlignment = UITextAlignmentCenter;
     
     [duelButton setTitle:NSLocalizedString(@"Saloon", @"") forState:UIControlStateNormal];
     [duelButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
     duelButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
     duelButton.titleLabel.textAlignment = UITextAlignmentCenter;
-    
-    [teachingButton setTitle:NSLocalizedString(@"Practice", @"") forState:UIControlStateNormal];
-    [teachingButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
-    teachingButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
-    teachingButton.titleLabel.textAlignment = UITextAlignmentCenter;
     
     [profileButton setTitle:NSLocalizedString(@"Profile", @"") forState:UIControlStateNormal];
     [profileButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
@@ -444,11 +432,9 @@ static StartViewController *sharedHelper = nil;
     shareViewVisible = NO;
   
     if (firstRun) {        
-        arrowImage =[[UIImageView_AttachedView alloc] initWithImage:[UIImage imageNamed:@"st_arrow.png"] attachedToFrame:teachingButton frequence:0.2 amplitude:6 direction:DirectionToAnimateLeft];
         hudView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
         hudView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
         [hudView setHidden:NO];
-        [self.view insertSubview:hudView belowSubview:teachingButton];
         [hudView addSubview:arrowImage];
         [arrowImage startAnimation];
     }else{
@@ -623,41 +609,16 @@ static StartViewController *sharedHelper = nil;
     [self.navigationController pushViewController:listOfItemsViewController animated:YES];
 }
 
--(IBAction)teachingButtonClick
-{
-    
-    
-    [playerAccount.finalInfoTable removeAllObjects];
-    int randomTime = arc4random() % 6; 
-    
-    oponentAccount.accountName=NSLocalizedString(@"COMPUTER", @"");
-    oponentAccount.money = 1000;
-    oponentAccount.accountLevel = 1;
-    oponentAccount.accountPoints = playerAccount.accountPoints;
-    
-    TeachingViewController *teachingViewController = [[TeachingViewController alloc] initWithTime:randomTime andAccount:playerAccount andOpAccount:oponentAccount];
-    [self.navigationController pushViewController:teachingViewController animated:YES];
-    
-    SSConnection *connection = [SSConnection sharedInstance];
-    [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
-                                                        object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"/duel_teaching" forKey:@"event"]];
-}
-
--(IBAction)mapButtonClick
-{
+- (IBAction)storeButtonClick:(id)sender {
     StoreViewController *svc=[[StoreViewController alloc] initWithAccount:playerAccount];
     [self.navigationController pushViewController:svc animated:YES];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/store" forKey:@"event"]];
-
 }
 
--(IBAction)profileButtonClick 
+-(IBAction)profileButtonClick
 {   
     profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount startViewController:self];
     [profileViewController setNeedAnimation:YES];
@@ -1464,7 +1425,6 @@ static StartViewController *sharedHelper = nil;
         [hudView addSubview:arrowImage3];
         [arrowImage3 startAnimation];
         
-        [teachingButton swapDepthsWithView:duelButton];
         //
         [arrowImage setHidden:YES];
         

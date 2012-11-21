@@ -29,11 +29,7 @@
     IBOutlet UILabel *lbBackBtn;
     IBOutlet UILabel *lbInviteBtn;
     
-    IBOutlet UIView *offLineBackGround;
-    IBOutlet UIWebView *offLineText;
-    
     IBOutlet UILabel *saloonTitle;
-    IBOutlet UIButton *btnRefresh;
     
     NSTimer *updateTimer;
 }
@@ -90,17 +86,6 @@
 
     }];
     
-    [offLineText setOpaque:NO];
-    [offLineText setBackgroundColor:[UIColor clearColor]];
-    
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
-        [offLineText.scrollView setScrollEnabled:NO];
-    else
-    {
-      UIScrollView *lastScroll = (UIScrollView *)[[offLineText subviews] lastObject];
-      lastScroll.scrollEnabled = NO;
-    }
-    
     saloonTitle.text = NSLocalizedString(@"SALYN", nil);
     saloonTitle.textColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
     saloonTitle.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
@@ -114,16 +99,12 @@
     lbInviteBtn.text = NSLocalizedString(@"INVITE", nil);
     lbInviteBtn.textColor = btnColor;
     lbInviteBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
-        
-    [btnRefresh setTitleByLabel:@"REFRESH"];
-    [btnRefresh changeColorOfTitleByLabel:btnColor];
 }
 
 - (void)viewDidUnload
 {
-    btnInvite = nil;
-    btnRefresh = nil;
     [super viewDidUnload];
+    btnInvite = nil;
     saloonTitle = nil;
     lbBackBtn = nil;
     lbInviteBtn = nil;
@@ -131,7 +112,6 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self checkInternetStatus:statusOnLine];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -311,33 +291,7 @@
     [activityIndicator stopAnimating];
     [btnInvite setEnabled:YES];
     [tableView reloadData];
-    if (_playersOnLineDataSource.serverObjects.count == 0) {
-        [offLineBackGround setDinamicHeightBackground];
-        
-        [offLineText loadHTMLString:NSLocalizedString(@"AlertTextListOnlineIsEmpty", @"") baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
-        
-        [tableView setHidden:YES];
-        [offLineBackGround setHidden:NO];
-    }else {
-        [tableView setHidden:NO];
-        [offLineBackGround setHidden:YES];
-    };
     [self.tableView refreshFinished];
-}
-
-- (void)checkInternetStatus:(BOOL)status;
-{
-    if (statusOnLine) {
-        [tableView setHidden:NO];
-        [offLineBackGround setHidden:YES];
-    }else {
-        [offLineBackGround setDinamicHeightBackground];
-        
-        [offLineText loadHTMLString:NSLocalizedString(@"InternetAlertTextListOnline", @"") baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]]; 
-        
-        [tableView setHidden:YES];
-        [offLineBackGround setHidden:NO];
-    }
 }
 
 -(void)startTableAnimation;
