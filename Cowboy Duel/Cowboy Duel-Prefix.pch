@@ -41,8 +41,8 @@
 #endif
 
 #define MASTER_SERVER_URL @"http://cowboyduel.net/"
-//#define MASTER_SERVER_IP @"176.34.226.109"
-//#define MASTER_SERVER_PORT @"8888"
-
-#define MASTER_SERVER_IP @"192.168.0.9"
+#define MASTER_SERVER_IP @"176.34.226.109"
 #define MASTER_SERVER_PORT @"8888"
+
+//#define MASTER_SERVER_IP @"192.168.0.9"
+//#define MASTER_SERVER_PORT @"8888"
