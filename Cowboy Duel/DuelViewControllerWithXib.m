@@ -502,14 +502,18 @@ if (shotCountBullet!=0) {
 }
 - (IBAction)cancelSoundClick:(id)sender {
     [helpViewSound removeFromSuperview];
+  
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMusicPlayerControllerVolumeDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/cancel_sound_hint" forKey:@"event"]];
 }
 - (IBAction)checkShotsClick:(id)sender {
     UIButton *shotsChecker=(UIButton *)sender;
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"disableShotsHelp"]) {
         [shotsChecker setImage:[UIImage imageNamed:@"cheker_uncheck.png"] forState:UIControlStateNormal];
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"disableShotsHelp"];
-        
+      
     }else {
         [shotsChecker setImage:[UIImage imageNamed:@"cheker_check.png"] forState:UIControlStateNormal];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"disableShotsHelp"];
@@ -526,6 +530,10 @@ if (shotCountBullet!=0) {
                          helpViewSound.frame=frame;
                          
                      }];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                      object:self
+                                                    userInfo:[NSDictionary dictionaryWithObject:@"/cancel_shots_hint" forKey:@"event"]];
+
 
 }
 

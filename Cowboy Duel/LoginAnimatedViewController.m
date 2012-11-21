@@ -302,6 +302,9 @@ static LoginAnimatedViewController *sharedHelper = nil;
     self.textIndex = 0;
     [self updateLabels];
     [self.guillotineImage animateWithType:[NSNumber numberWithInt:GUILLOTINE]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/first_login_again" forKey:@"event"]];
 }
 
 - (IBAction)donateButtonClick:(id)sender {
@@ -361,6 +364,9 @@ static LoginAnimatedViewController *sharedHelper = nil;
 {
     [self initFacebook];
 	[facebook logout:self];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                      object:self
+                                                    userInfo:[NSDictionary dictionaryWithObject:@"/logOut_FB_click" forKey:@"event"]];
 }
 #pragma mark -
 #pragma mark FConnect Methods

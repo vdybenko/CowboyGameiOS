@@ -107,6 +107,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
 //        }
 //        
 //    }
+
     
     if((accelerometerState)&& (!soundStart)){
         if ((!accelerometerStateSend) ) {

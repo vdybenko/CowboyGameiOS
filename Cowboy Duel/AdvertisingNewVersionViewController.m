@@ -81,6 +81,9 @@
 -(IBAction)btnSkipClick:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/skip_newVersion" forKey:@"event"]];
 }
 
 -(IBAction)btnAppStoreClick:(id)sender;

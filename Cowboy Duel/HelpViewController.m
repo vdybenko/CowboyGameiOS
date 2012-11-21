@@ -143,6 +143,10 @@ NSString *const URL_CONTACN_US=@"http://cowboyduel.com/";
 -(IBAction)btnContactClicked{
     NSURL *url=[NSURL URLWithString:URL_CONTACN_US];
     [[UIApplication sharedApplication] openURL:url];
+    if([startVC connectedToWiFi]) [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                                                    object:self
+                                                                                  userInfo:[NSDictionary dictionaryWithObject:@"/help_contact_us" forKey:@"event"]];
+  
 }
 
 - (void) moviePlayBackDidFinish:(NSNotification*)notification {
