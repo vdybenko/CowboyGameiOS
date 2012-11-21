@@ -176,7 +176,7 @@
 							<object class="IBUIImageView" id="250395111">
 								<reference key="NSNextResponder" ref="933964600"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{137, 86}, {124, 21}}</string>
+								<string key="NSFrame">{{137, 86}, {121, 21}}</string>
 								<reference key="NSSuperview" ref="933964600"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="63360886"/>
@@ -1380,40 +1380,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">ProfileViewController</string>
 					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="backToMenu:">id</string>
-						<string key="btnFBLogOutClick:">id</string>
-						<string key="btnFBLoginClick:">id</string>
-						<string key="btnLeaderbordClick:">id</string>
-						<string key="btnSoundClick:">id</string>
-						<string key="soundControll:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="backToMenu:">
-							<string key="name">backToMenu:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="btnFBLogOutClick:">
-							<string key="name">btnFBLogOutClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="btnFBLoginClick:">
-							<string key="name">btnFBLoginClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="btnLeaderbordClick:">
-							<string key="name">btnLeaderbordClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="btnSoundClick:">
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">btnSoundClick:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">btnSoundClick:</string>
+						<object class="IBActionInfo" key="NS.object.0">
 							<string key="name">btnSoundClick:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="soundControll:">
-							<string key="name">soundControll:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
+					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="_btnMusicContoller">UIButton</string>
 						<string key="_ivIconUser">UIImageView</string>

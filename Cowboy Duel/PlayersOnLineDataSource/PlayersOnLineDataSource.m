@@ -84,8 +84,6 @@
         }
         [_tableView reloadData];
     }
-    [[AccountDataSource sharedInstance] refreshBotArray];
-    [self addBotsForListCount:[self.serverObjects count]];
     ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
     [listOfItemsViewController didRefreshController];
 }
@@ -199,60 +197,6 @@
         }
 }
 
--(void) addBotsForListCount:(int)listcount
-{
-    AccountDataSource *player = [AccountDataSource sharedInstance];
-    if([player.receivedBots count] == 0) return;
-    DLog(@"player.receivedBots %@", player.receivedBots);
-    switch (listcount) {
-        case 0:{
-            NSDictionary *serverDictionary = [player.receivedBots objectAtIndex:0];
-            [self createServerForDictionary:serverDictionary];
-            if([player.receivedBots count] == 1) return;
-            serverDictionary = [player.receivedBots objectAtIndex:1];;
-            [self createServerForDictionary:serverDictionary];
-            if([player.receivedBots count] == 2) return;
-            serverDictionary = [player.receivedBots objectAtIndex:2];
-            [self createServerForDictionary:serverDictionary];
-            break;
-        }
-        case 1:{
-            NSDictionary *serverDictionary = [player.receivedBots objectAtIndex:0];
-            [self createServerForDictionary:serverDictionary];
-            if([player.receivedBots count] == 1) return;
-            serverDictionary = [player.receivedBots objectAtIndex:1];
-            [self createServerForDictionary:serverDictionary];
-            break;
-        }
-        case 2:{
-            NSDictionary *serverDictionary = [player.receivedBots objectAtIndex:0];
-            [self createServerForDictionary:serverDictionary];
-            
-            break;
-        }
-
-        default:
-            break;
-    }
-}
-
-
--(void)createServerForDictionary:(NSDictionary *)serverDictionary
-{
-    
-    SSServer *serverObj = [[SSServer alloc] init];
-    serverObj.displayName = [serverDictionary objectForKey:@"nickname"];
-    serverObj.status = @"A";
-    serverObj.money = ([[serverDictionary objectForKey:@"money"] intValue] >= 0) ? [serverDictionary objectForKey:@"money"]: [NSNumber numberWithInt:0];
-    serverObj.serverName = [serverDictionary objectForKey:@"authentification"];
-    serverObj.rank = [serverDictionary objectForKey:@"level"];
-    serverObj.bot = YES;
-    serverObj.duelsLost = [serverDictionary objectForKey:@"duels_lost"];
-    serverObj.duelsWin = [serverDictionary objectForKey:@"duels_win"];
-    serverObj.sessionId = [serverDictionary objectForKey:@"session_id"];
-    [self.serverObjects addObject:serverObj];
-
-}
 
 #pragma mark -
 -(void)invaiteWithMessage:(id __strong)sender;

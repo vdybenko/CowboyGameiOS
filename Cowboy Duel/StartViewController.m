@@ -131,7 +131,6 @@ NSString *const URL_COMM_FB_PAGE =@"http://cowboyduel.com/";
 
 NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNotification";
 
-static const char *BOT_LIST_URL = "http://bidoncd.s3.amazonaws.com/bot.json";
 NSMutableData *receivedDataBots;
 
 #pragma mark
@@ -499,7 +498,6 @@ static StartViewController *sharedHelper = nil;
     // check if a pathway to a random host exists
     hostReachable = [Reachability reachabilityWithHostName: @"www.apple.com"];
     [hostReachable startNotifier];
-    [self getBotsList];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -528,8 +526,6 @@ static StartViewController *sharedHelper = nil;
     [self estimateApp];
     TestAppDelegate *app = (TestAppDelegate *)[[UIApplication sharedApplication] delegate];
     [app.adBanner setHidden:NO];
-    [[AccountDataSource sharedInstance] reloadRandomId];
-    [[AccountDataSource sharedInstance] receiveBotsForIdArray:[AccountDataSource sharedInstance].randomIds];
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -916,19 +912,8 @@ static StartViewController *sharedHelper = nil;
     NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
     [dicForRequests removeObjectForKey:[currentParseString lastPathComponent]];
     NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
-    NSArray *responseObjectForBots = ValidateObject([jsonString JSONValue], [NSArray class]);
 
     DLog(@"StartVC \n jsonValues %@\n string %@",jsonString,currentParseString);
-//getting list online from response object:
-    NSLog(@"responseObject %@",responseObject);
-    NSLog(@"responseObjectForBots %@",responseObjectForBots);
-    if ([responseObjectForBots count]>=1) {
-      playerAccount.listBotsOnline = [NSArray arrayWithArray:responseObjectForBots];
-        [playerAccount reloadRandomId];
-        [playerAccount receiveBotsForIdArray:playerAccount.randomIds];
-      NSLog(@"listBotsOnline %@",playerAccount.listBotsOnline);
-    }
-  
 //    
 //    OnLine
     if ([[currentParseString lastPathComponent] isEqualToString:@"authorization"]&&[responseObject objectForKey:@"session_id"]) {
@@ -1173,22 +1158,6 @@ static StartViewController *sharedHelper = nil;
     oldAccounId=@"";
     gameCenterViewController = [GameCenterViewController sharedInstance:playerAccount andParentVC:self];
   
-}
-
--(void)getBotsList;
-{
-
-  NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:BOT_LIST_URL encoding:NSUTF8StringEncoding]]
-                                                             cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                         timeoutInterval:kTimeOutSeconds];
-  CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
-  if (theConnection) {
-    NSMutableData *receivedData = [[NSMutableData alloc] init];
-    [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
-  } else {
-    NSLog(@"WARNING: theBotsListConnection failed..");
-  }
-
 }
 
 -(void)modifierUser:(AccountDataSource *)playerTemp;
