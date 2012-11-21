@@ -89,24 +89,24 @@ static NSString *ShotSound = @"%@/shot.mp3";
 {
     [super accelerometer:accelerometer didAccelerate:acceleration];
     
-    if (duelIsStarted && acelStayt) {
-        fintType = [accelerometrDataSource setPositionWithX:acceleration.x andY:acceleration.y andZ:acceleration.z];
-        switch (fintType) {
-            case FirstFint:
-                DLog(@"first fint");
-                maxShotCount = 1;
-                [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
-                                                                    object:self
-                                                                  userInfo:[NSDictionary dictionaryWithObject:@"/Trick" forKey:@"event"]];
-                break;
-            case SecondFint:
-                DLog(@"second fint");
-                break;    
-            default:
-                break;
-        }
-        
-    }
+//    if (duelIsStarted && acelStayt) {
+//        fintType = [accelerometrDataSource setPositionWithX:acceleration.x andY:acceleration.y andZ:acceleration.z];
+//        switch (fintType) {
+//            case FirstFint:
+//                DLog(@"first fint");
+//                maxShotCount = 1;
+//                [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
+//                                                                    object:self
+//                                                                  userInfo:[NSDictionary dictionaryWithObject:@"/Trick" forKey:@"event"]];
+//                break;
+//            case SecondFint:
+//                DLog(@"second fint");
+//                break;    
+//            default:
+//                break;
+//        }
+//        
+//    }
     
     if((accelerometerState)&& (!soundStart)){
         if ((!accelerometerStateSend) ) {
