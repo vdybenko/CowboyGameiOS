@@ -12,13 +12,13 @@
 #import "LoginAnimatedViewController.h"
 
 #if !(TARGET_IPHONE_SIMULATOR)
-#import "GAI.h"
+//#import "GAI.h"
 #import "Crittercism.h"
 #import "StartViewController.h"
 
 
-static const NSInteger kGANDispatchPeriod = 60;
-static NSString *kGAAccountID = @"UA-33080242-1";
+static const NSInteger kGANDispatchPeriod = 5;
+static NSString *kGAAccountID = @"UA-24007807-3";
 NSString  *const ID_CRIT_APP   = @"4fb4f482c471a10fc5000092";
 NSString  *const ID_CRIT_KEY   = @"stjyktz620mziyf5rhi89ncaorab";
 NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
@@ -49,16 +49,18 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     [UIImage initialize];
         
     [AdColony initAdColonyWithDelegate:self];
-    
-#if !(TARGET_IPHONE_SIMULATOR)	
+#if !(TARGET_IPHONE_SIMULATOR)  
+    [[GANTracker sharedTracker] startTrackerWithAccountID:kGAAccountID
+                                           dispatchPeriod:kGANDispatchPeriod delegate:self];
+	
     //[Crittercism initWithAppID:ID_CRIT_APP  andKey:ID_CRIT_KEY andSecret:ID_CRIT_SECRET];
-    
-    [[GAI sharedInstance] trackerWithTrackingId:kGAAccountID];
-    
+/*
+  [[GAI sharedInstance] trackerWithTrackingId:kGAAccountID];
+  
 //    [[GAI sharedInstance] startTrackerWithAccountID:kGAAccountID
 //                                           dispatchPeriod:kGANDispatchPeriod
 //                                                 delegate:nil];	
-    
+  */  
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(AnalyticsTrackEvent:)
 												 name:kAnalyticsTrackEventNotification object:nil];
@@ -219,13 +221,27 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
 	NSString *page = [[notification userInfo] objectForKey:@"event"];
 	DLog(@"GA page %@",page);
 	if (page){
-		if (![[GAI sharedInstance].defaultTracker trackView:page])
-			DLog(@" Can't track pageview");
-	}    
-	[[GAI sharedInstance] dispatch];
-    
+//		if (![[GAI sharedInstance].defaultTracker trackView:page])			DLog(@" Can't track pageview");
+    [[GANTracker sharedTracker] trackPageview:page withError:nil];
+	}else DLog(@" Can't track pageview");
+//	[[GAI sharedInstance] dispatch];
+  
+}
+#pragma mark -
+#pragma mark GANTrackerDelegate methods
+
+- (void)hitDispatched:(NSString *)hitString {
+  NSLog(@"Hit Dispatched: %@", hitString);
+}
+
+- (void)trackerDispatchDidComplete:(GANTracker *)tracker
+                  eventsDispatched:(NSUInteger)hitsDispatched
+              eventsFailedDispatch:(NSUInteger)hitsFailedDispatch {
+  NSLog(@"Dispatch completed (%u OK, %u failed)",
+        hitsDispatched, hitsFailedDispatch);
 }
 #endif
+
 
 #pragma mark GADRequest generation
 
