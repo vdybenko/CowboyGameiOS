@@ -175,10 +175,6 @@
 		319A991B1649331B000D2A45 /* fv_new_money_dropped@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 319A991916493319000D2A45 /* fv_new_money_dropped@2x.png */; };
 		31C2E11E1653F43600518F62 /* btnFeedBackBackgr.png in Resources */ = {isa = PBXBuildFile; fileRef = 31C2E1181653F43600518F62 /* btnFeedBackBackgr.png */; };
 		31C2E11F1653F43600518F62 /* btnFeedBackBackgr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31C2E1191653F43600518F62 /* btnFeedBackBackgr@2x.png */; };
-		31C2E1201653F43600518F62 /* btnFeedBackWithText.png in Resources */ = {isa = PBXBuildFile; fileRef = 31C2E11A1653F43600518F62 /* btnFeedBackWithText.png */; };
-		31C2E1211653F43600518F62 /* btnFeedBackWithText@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31C2E11B1653F43600518F62 /* btnFeedBackWithText@2x.png */; };
-		31C2E1221653F43600518F62 /* btnShareWithText.png in Resources */ = {isa = PBXBuildFile; fileRef = 31C2E11C1653F43600518F62 /* btnShareWithText.png */; };
-		31C2E1231653F43600518F62 /* btnShareWithText@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31C2E11D1653F43600518F62 /* btnShareWithText@2x.png */; };
 		31DA9F0415BD331900492A9F /* ls_OnLine_frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 31DA9EFC15BD331900492A9F /* ls_OnLine_frame.png */; };
 		31DA9F0515BD331900492A9F /* ls_OnLine_frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31DA9EFD15BD331900492A9F /* ls_OnLine_frame@2x.png */; };
 		31DA9F0615BD331900492A9F /* topPlayerCell.png in Resources */ = {isa = PBXBuildFile; fileRef = 31DA9EFE15BD331900492A9F /* topPlayerCell.png */; };
@@ -567,10 +563,6 @@
 		319A991916493319000D2A45 /* fv_new_money_dropped@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fv_new_money_dropped@2x.png"; sourceTree = "<group>"; };
 		31C2E1181653F43600518F62 /* btnFeedBackBackgr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnFeedBackBackgr.png; sourceTree = "<group>"; };
 		31C2E1191653F43600518F62 /* btnFeedBackBackgr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btnFeedBackBackgr@2x.png"; sourceTree = "<group>"; };
-		31C2E11A1653F43600518F62 /* btnFeedBackWithText.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnFeedBackWithText.png; sourceTree = "<group>"; };
-		31C2E11B1653F43600518F62 /* btnFeedBackWithText@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btnFeedBackWithText@2x.png"; sourceTree = "<group>"; };
-		31C2E11C1653F43600518F62 /* btnShareWithText.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnShareWithText.png; sourceTree = "<group>"; };
-		31C2E11D1653F43600518F62 /* btnShareWithText@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btnShareWithText@2x.png"; sourceTree = "<group>"; };
 		31DA9EFC15BD331900492A9F /* ls_OnLine_frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ls_OnLine_frame.png; sourceTree = "<group>"; };
 		31DA9EFD15BD331900492A9F /* ls_OnLine_frame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ls_OnLine_frame@2x.png"; sourceTree = "<group>"; };
 		31DA9EFE15BD331900492A9F /* topPlayerCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topPlayerCell.png; sourceTree = "<group>"; };
@@ -1170,10 +1162,6 @@
 				03286028159DD84000D16195 /* st_title@2x.png */,
 				31C2E1181653F43600518F62 /* btnFeedBackBackgr.png */,
 				31C2E1191653F43600518F62 /* btnFeedBackBackgr@2x.png */,
-				31C2E11A1653F43600518F62 /* btnFeedBackWithText.png */,
-				31C2E11B1653F43600518F62 /* btnFeedBackWithText@2x.png */,
-				31C2E11C1653F43600518F62 /* btnShareWithText.png */,
-				31C2E11D1653F43600518F62 /* btnShareWithText@2x.png */,
 			);
 			path = StartView;
 			sourceTree = "<group>";
@@ -2071,10 +2059,6 @@
 				BD7F96AF164CF694003CE2AA /* la_nose.png in Resources */,
 				31C2E11E1653F43600518F62 /* btnFeedBackBackgr.png in Resources */,
 				31C2E11F1653F43600518F62 /* btnFeedBackBackgr@2x.png in Resources */,
-				31C2E1201653F43600518F62 /* btnFeedBackWithText.png in Resources */,
-				31C2E1211653F43600518F62 /* btnFeedBackWithText@2x.png in Resources */,
-				31C2E1221653F43600518F62 /* btnShareWithText.png in Resources */,
-				31C2E1231653F43600518F62 /* btnShareWithText@2x.png in Resources */,
 				BD83A15216550FD80073D49F /* la_bg-568h@2x.png in Resources */,
 				BD83A1551655208A0073D49F /* la_board-568h@2x.png in Resources */,
 				BD83A159165532DE0073D49F /* la_ta_bg-568h@2x.png in Resources */,
