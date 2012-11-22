@@ -76,8 +76,11 @@
   
     IBOutlet UIImageView *backGroundfeedbackView;
     IBOutlet UIActivityIndicatorView *indicatorfeedbackView;
+  
     
-    
+    IBOutlet UILabel *lbFeedbackButton;
+    IBOutlet UILabel *lbShareButton;
+  
     IBOutlet UILabel *lbFollowFacebook;
     IBOutlet UILabel *lbPostMessage;
     IBOutlet UILabel *lbMailMessage;
@@ -363,10 +366,20 @@ static StartViewController *sharedHelper = nil;
         [loginViewController setPayment:YES];
         [self.navigationController pushViewController:loginViewController animated:YES];
     }
-    
-    
+
+  
     UIColor *buttonsTitleColor = [[UIColor alloc] initWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
-    
+
+    lbFeedbackButton.text = NSLocalizedString(@"Feedback", @"");
+    lbFeedbackButton.textColor = buttonsTitleColor;
+    lbFeedbackButton.textAlignment = UITextAlignmentCenter;
+    lbFeedbackButton.font = [UIFont fontWithName: @"MyriadPro-Semibold" size:15];
+  
+    lbShareButton.text = NSLocalizedString(@"Share", @"");
+    lbShareButton.textColor = buttonsTitleColor;
+    lbShareButton.textAlignment = UITextAlignmentCenter;
+    lbShareButton.font = [UIFont fontWithName: @"MyriadPro-Semibold" size:15];
+  
     [duelButton setTitle:NSLocalizedString(@"Saloon", @"") forState:UIControlStateNormal];
     [duelButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
     duelButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
@@ -376,7 +389,7 @@ static StartViewController *sharedHelper = nil;
     [teachingButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
     teachingButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
     teachingButton.titleLabel.textAlignment = UITextAlignmentCenter;
-    
+  
     [duelButton setTitle:NSLocalizedString(@"Saloon", @"") forState:UIControlStateNormal];
     [duelButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
     duelButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
@@ -474,6 +487,8 @@ static StartViewController *sharedHelper = nil;
     shareView = nil;
     lbFollowFacebook = nil;
     lbShareCancelBtn = nil;
+    lbFeedbackButton = nil;
+    lbShareButton = nil;
     [super viewDidUnload];
 }
     
