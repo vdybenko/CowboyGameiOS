@@ -302,10 +302,11 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         [self animateLabel:lbGoldCount toValue:playerAccount.money];
     });
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        [self animateLabel:lbPointsCountMain toValue:playerAccount.accountPoints];
-    });
-
+    if (playerAccount.accountLevel != 10) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            [self animateLabel:lbPointsCountMain toValue:playerAccount.accountPoints];
+        });
+    }
     
 }
 
@@ -343,13 +344,14 @@
     // added for thousands separate   
     
     [lbDuelsWonCount dinamicAttachToView:lbDuelsWon withDirection:DirectionToAnimateRight ];
-    
+    NSString *nameOfRank=[NSString stringWithFormat:@"%dRank",playerAccount.accountLevel];
+    lbUserTitle.text = NSLocalizedString(nameOfRank, @"");
     NSArray *array=[DuelRewardLogicController getStaticPointsForEachLevels];
     
-    if (playerAccount.accountLevel < 0 || playerAccount.accountLevel > 9 ){
-        [playerAccount setAccountLevel:9];
+    if (playerAccount.accountLevel < 0 || playerAccount.accountLevel > 10 ){
+        [playerAccount setAccountLevel:10];
     }
-
+if (playerAccount.accountLevel != 10) {
     NSInteger num = playerAccount.accountLevel;
     int  moneyForNextLevel=[[array objectAtIndex:num] intValue];
     
@@ -363,24 +365,28 @@
         playerAccount.accountPoints=moneyForPrewLevel;
         [playerAccount saveAccountPoints];
     }
-    
-    NSString *nameOfRank=[NSString stringWithFormat:@"%dRank",playerAccount.accountLevel];
-    lbUserTitle.text = NSLocalizedString(nameOfRank, @"");
-    
+   
     if (playerAccount.accountPoints <= moneyForPrewLevel) {
         playerAccount.accountPoints = moneyForPrewLevel;
         [playerAccount saveAccountPoints];
     }
     int curentPoints=playerAccount.accountPoints - moneyForPrewLevel;
     int maxPoints=moneyForNextLevel - moneyForPrewLevel;
+    
     lbPointsCount.text = [NSString stringWithFormat:@"%@/%@", [NSString stringWithFormat:@"%d",(moneyForNextLevel-playerAccount.accountPoints)], [[DuelRewardLogicController getStaticPointsForEachLevels] objectAtIndex:playerAccount.accountLevel]];
-
-    if (!needAnimation) {
-        lbGoldCount.text = [numberFormatter stringFromNumber:[NSNumber numberWithInt:(playerAccount.money)]]; 
-    }
     [self changePointsLine:curentPoints maxValue:maxPoints animated:needAnimation];
     
     DLog(@"Profile info points %d points to next level %d",playerAccount.accountPoints,(moneyForNextLevel-playerAccount.accountPoints));
+}else{
+    DLog(@"Profile info points %d points ",playerAccount.accountPoints);
+
+        lbPointsCountMain.text = [NSString stringWithFormat:@"%d",playerAccount.accountPoints];
+    DLog(@"%@", lbPointsCountMain.text);
+    }
+    if (!needAnimation) {
+        lbGoldCount.text = [numberFormatter stringFromNumber:[NSNumber numberWithInt:(playerAccount.money)]];
+    }
+
     
     lbDuelsWonCount.text=[NSString stringWithFormat:@"%d",playerAccount.accountWins];
     lbDuelsLostCount.text=[NSString stringWithFormat:@"%d",playerAccount.accountDraws];
