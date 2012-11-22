@@ -277,7 +277,7 @@
     ivPointsLine.frame = liveChRect;
 
     if (points <= 0) points = 0;
-    int firstWidthOfLine=130;
+    int firstWidthOfLine=121;
     float changeWidth=(points*firstWidthOfLine)/maxValue;
     liveChRect.size.width = changeWidth;
     
@@ -371,8 +371,8 @@
         playerAccount.accountPoints = moneyForPrewLevel;
         [playerAccount saveAccountPoints];
     }
-    int curentPoints=playerAccount.accountPoints;
-    int maxPoints=moneyForNextLevel;
+    int curentPoints=playerAccount.accountPoints - moneyForPrewLevel;
+    int maxPoints=moneyForNextLevel - moneyForPrewLevel;
     lbPointsCount.text = [NSString stringWithFormat:@"%@/%@", [NSString stringWithFormat:@"%d",(moneyForNextLevel-playerAccount.accountPoints)], [[DuelRewardLogicController getStaticPointsForEachLevels] objectAtIndex:playerAccount.accountLevel]];
 
     if (!needAnimation) {

@@ -555,6 +555,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                         object:self
                                                       userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@%@",stGA,@"final"] forKey:@"event"]];
+    oldMoneyForAnimation = playerAccount.money;
     if(!teaching||(duelWithBotCheck)){
 // added for GC
         if (![GCHelper sharedInstance].GClocalPlayer.isAuthenticated) {
@@ -564,7 +565,7 @@
         [[GCHelper sharedInstance] reportScore:moneyExch forCategory:GC_LEADEBOARD_MONEY];
 // above
         oldMoney=playerAccount.money;
-        oldMoneyForAnimation = playerAccount.money;
+        
         playerAccount.money += moneyExch;
         oponentAccount.money -= moneyExch;
         
@@ -958,9 +959,6 @@
   temp.size.width = 0;
   ivBlueLine.frame = temp;
   
-  int pointsForMatch=[self getPointsForWin];
-
-  
   [UIView animateWithDuration:0.7
                         delay:0 options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction
                    animations:^{
@@ -988,7 +986,6 @@
                                             } completion:^(BOOL finished) {
                                               [self animationWithLable:lblGold andStartNumber:oldMoneyForAnimation andEndNumber:playerAccount.money];
                                               [self changePointsLine:curentPoints maxValue:maxPoints animated:YES];
-                                              [self animationWithLable:lblPoints andStartNumber:playerAccount.accountPoints - pointsForMatch andEndNumber:playerAccount.accountPoints];
                                               
                                             }];
                                           }];
