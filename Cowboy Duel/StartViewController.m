@@ -405,7 +405,7 @@ static StartViewController *sharedHelper = nil;
     UIColor *textColor = [UIColor whiteColor];
     
     UIFont *textFont = [UIFont systemFontOfSize:16.0f];
-    
+        
     lbPostMessage.text = NSLocalizedString(@"SocialNetworksTitle", nil);
     lbPostMessage.textColor = textColor;
     lbPostMessage.font = textFont;
@@ -628,7 +628,6 @@ static StartViewController *sharedHelper = nil;
 -(IBAction)profileButtonClick
 {   
     profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount startViewController:self];
-//    profileViewController = [[ProfileViewController alloc] initFirstStartWithAccount:playerAccount startViewController:self];
 
     [profileViewController setNeedAnimation:YES];
     CATransition* transition = [CATransition animation];

@@ -17,6 +17,9 @@
 #import "DuelRewardLogicController.h"
 #import "TopPlayersViewController.h"
 
+static const CGFloat changeYPointWhenKeyboard = 155;
+static const CGFloat timeToStandartTitles = 1.8;
+
 @interface ProfileViewController ()
 {
     AccountDataSource *playerAccount;
@@ -29,17 +32,19 @@
     //Labels
     IBOutlet UILabel *lbProfileMain;
     IBOutlet UIView *mainProfileView;
-    IBOutlet UITextField *lbFBName;
+    IBOutlet UITextField *tfFBName;
     IBOutlet UILabel *lbUserTitle;
     
     IBOutlet UIView *ivPointsLine;
     
     IBOutlet UILabel *lbGoldCount;
+    IBOutlet UIImageView *lbGoldIcon;
     
     IBOutlet UIButton *btnLogInFB;
     IBOutlet UIButton *btnLogOutFB;
     
     IBOutlet UIButton *btnLeaderboard;
+    IBOutlet UIButton *btnLeaderboardBig;
     IBOutlet UIButton *btnBack;
     IBOutlet UILabel *lbPlayerStats;
     IBOutlet UILabel *lbDuelsWon;
@@ -48,7 +53,6 @@
     IBOutlet UILabel *lbDuelsLostCount;
     IBOutlet UILabel *lbBiggestWin;
     IBOutlet UILabel *lbBiggestWinCount;
-    IBOutlet UILabel *lbNotifyMessage;
     IBOutlet UILabel *lbLeaderboardTitle;
     IBOutlet UILabel *_lbMenuTitle;
     
@@ -150,21 +154,19 @@
                                                    object:nil];
         
         textsContainer = [NSArray arrayWithObjects:
-                          NSLocalizedString(@"HEY", nil),             //"Hey guy. Do you hear me?"
-                          NSLocalizedString(@"HEY_YOU", nil),         //"Yes, you! Come here."
-                          NSLocalizedString(@"IPAD", nil),            //"Do you want an iPad mini?"
-                          NSLocalizedString(@"REALLY", nil),          //"Really? Do you like it?"
-                          NSLocalizedString(@"HELP_ME", nil),         //"Great. Help me. I know where it is."
-                          NSLocalizedString(@"HELP_NOW", nil),        //"Help me!!!"
-                          NSLocalizedString(@"CHOOSE_DOLLAR", nil),   //"Pay for me $1...
-                          NSLocalizedString(@"CHOOSE_FACEBOOK", nil), //...or give me your ID"
+                          NSLocalizedString(@"PROFILE_MESS_1_THANKS", nil),
+                          [NSString stringWithFormat:NSLocalizedString(@"PROFILE_MESS_2_NAME", nil),playerAccount.accountName],
+                          NSLocalizedString(@"PROFILE_MESS_3_NAME", nil),            
+                          NSLocalizedString(@"PROFILE_MESS_4_SALOON", nil),          
+                          NSLocalizedString(@"PROFILE_MESS_5_LEAD", nil),         
+                          NSLocalizedString(@"PROFILE_MESS_6_GOLD", nil),
+                          NSLocalizedString(@"PROFILE_MESS_7_LETS", nil),
                           nil];
+        
         textIndex = 0;
-
         [self loadView];
         [self initMainControls];
         lbDescription.hidden = NO;
-        lbDescription.text =@"123";
     }
     return self;
 }
@@ -174,7 +176,6 @@
     [super viewDidLoad];
     [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"loginFirstShow"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -194,7 +195,9 @@
     ivCurrentRank.image = [UIImage imageNamed:name];
     didDisappear=NO;
     
-    [self updateLabels];
+    if (![lbDescription isHidden] && lbDescription) {
+        [self updateLabels];
+    }
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -241,15 +244,13 @@
     UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor];
     
+    [btnLeaderboardBig setTitleByLabel:@"LeaderboardTitle" withColor:buttonsTitleColor];
+    
     lbBiggestWinCount.font = CountFont;
 //    [lbBiggestWinCount dinamicAttachToView:lbBiggestWin withDirection:DirectionToAnimateRight ];
     
     lbLeaderboardTitle.text = NSLocalizedString(@"LeaderboardTitle", @"");
     lbLeaderboardTitle.font = [UIFont fontWithName: @"DecreeNarrow" size:18];
-
-    lbNotifyMessage.text = NSLocalizedString(@"SoundButton", @"");
-    lbNotifyMessage.font = [UIFont systemFontOfSize:15];
-    lbNotifyMessage.numberOfLines = 0;
 
     CGRect frame=btnLogInFB.frame; 
     frame.origin.x=33;
@@ -272,8 +273,8 @@
     
     lbUserTitle.font = NameFont;
     
-    lbFBName.font = NameFont;
-    [lbFBName setDelegate:self];
+    tfFBName.font = NameFont;
+    [tfFBName setDelegate:self];
     
     lbPlayerStats.font = CountFont;
    
@@ -303,7 +304,7 @@
         [btnLeaderboard setEnabled:YES];
         [self setImageFromFacebook];
     }
-    lbFBName.text = playerAccount.accountName;
+    tfFBName.text = playerAccount.accountName;
     SSConnection *connection = [SSConnection sharedInstance];
     [connection sendInfoPacket];
 }
@@ -465,7 +466,18 @@
         NSUserDefaults *usrDef = [NSUserDefaults standardUserDefaults];
         [usrDef setObject:ValidateObject(playerAccount.accountName, [NSString class]) forKey:@"name"];
         [usrDef synchronize];
-        [textField resignFirstResponder]; 
+        [textField resignFirstResponder];
+        
+        if (![lbDescription isHidden] && lbDescription) {
+            [UIView animateWithDuration:0.4
+                             animations:^{
+                                 CGRect frame = mainProfileView.frame;
+                                 frame.origin.y += changeYPointWhenKeyboard;
+                                 mainProfileView.frame = frame;
+                             } completion:^(BOOL complete) {
+                                 [self updateLabels];
+                             }];
+        }
         if (![namePlayerSaved isEqualToString:textField.text]) {
             [loginViewController.startViewController authorizationModifier:YES];
         }
@@ -516,26 +528,56 @@
 
 - (void)updateLabels
 {
-    NSString * text = (textIndex<=7)?[textsContainer objectAtIndex:textIndex]:@"";
-    
-    [UIView animateWithDuration:1.0
-                     animations:^{
-                         [self lableScaleOut];
-                     } completion:^(BOOL complete) {
-                         lbDescription.text = text;
-                         [self performSelector:@selector(lableScaleIn) withObject:nil afterDelay:1.0];
-                     }];
+    NSString * text;
+    if (textIndex==0) {
+        text = [textsContainer objectAtIndex:0];
+        lbDescription.transform = CGAffineTransformMakeScale(0.01, 0.01);
+        lbDescription.text = text;
+        [self performSelector:@selector(lableScaleIn) withObject:nil afterDelay:1.0];
+    }else{
+        text = (textIndex<=6)?[textsContainer objectAtIndex:textIndex]:@"";
+        [UIView animateWithDuration:1.0
+                         animations:^{
+                             [self lableScaleOut];
+                         } completion:^(BOOL complete) {
+                             lbDescription.text = text;
+                             [self performSelector:@selector(lableScaleIn) withObject:nil afterDelay:1.0];
+                         }];
+    }
 }
 
 -(void)lableScaleIn
 {
-    [UIView animateWithDuration:0.5
+    [UIView animateWithDuration:0.4
                      animations:^{
-                         if (textIndex<8){
-                             lbDescription.transform = CGAffineTransformMakeScale(1.0, 1.0);
-                             [self performSelector:@selector(updateLabels) withObject:nil afterDelay:2.0];
-                             textIndex++;
-                         }
+                         lbDescription.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                    }completion:^(BOOL complete) {
+                        if (textIndex==2) {
+                            [tfFBName becomeFirstResponder];
+                            [UIView animateWithDuration:0.4
+                                             animations:^{
+                                                 CGRect frame = mainProfileView.frame;
+                                                 frame.origin.y -=changeYPointWhenKeyboard;
+                                                 mainProfileView.frame = frame;
+                                                 textIndex++;
+                                             } completion:nil];
+                        }else if(textIndex==4){
+                            [self scaleButton:btnLeaderboardBig];
+                            textIndex++;
+                            [self performSelector:@selector(updateLabels) withObject:nil afterDelay:timeToStandartTitles];
+                        }else if(textIndex==5){
+                            [self scaleButton:lbGoldCount];
+                            [self scaleButton:lbGoldIcon];
+                            textIndex++;
+                            [self performSelector:@selector(updateLabels) withObject:nil afterDelay:timeToStandartTitles];
+                        }else if(textIndex==6){
+                            [self scaleButton:btnBack];
+                            textIndex++;
+                            [self performSelector:@selector(updateLabels) withObject:nil afterDelay:timeToStandartTitles];
+                        }else if (textIndex<=6){
+                            [self performSelector:@selector(updateLabels) withObject:nil afterDelay:timeToStandartTitles];
+                            textIndex++;
+                        }
                      }];
 }
 
@@ -547,7 +589,7 @@
 -(void)scaleButton:(UIView *)button
 {
     [UIView animateWithDuration:0.5 animations:^{
-        button.transform = CGAffineTransformMakeScale(1.2, 1.2);
+        button.transform = CGAffineTransformMakeScale(1.4, 1.4);
     } completion:^(BOOL complete) {
         [UIView animateWithDuration:0.5 animations:^{
             button.transform = CGAffineTransformMakeScale(1.0, 1.0);
@@ -560,7 +602,7 @@
 
 -(IBAction)backToMenu:(id)sender;
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReceiveImagefromFBNotification object:nil];	
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReceiveImagefromFBNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kCheckfFBLoginSession object:nil];	
 
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"moneyForIPad"];
@@ -613,7 +655,7 @@
     _lbMenuTitle = nil;
     lbProfileMain = nil;
     mainProfileView = nil;
-    lbFBName = nil;
+    tfFBName = nil;
     lbUserTitle = nil;
     lbGoldCount = nil;
     btnLogInFB = nil;
@@ -626,7 +668,6 @@
     lbDuelsLostCount = nil;
     lbBiggestWin = nil;
     lbBiggestWinCount = nil;
-    lbNotifyMessage = nil;
     lbLeaderboardTitle = nil;
     lbPointsCountMain = nil;
     ivCurrentRank = nil;
