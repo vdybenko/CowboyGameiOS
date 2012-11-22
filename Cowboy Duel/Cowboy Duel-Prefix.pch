@@ -20,7 +20,7 @@
 
 
 
-#define BASE_URL "http://test.cowboyduel.net/"
+#define BASE_URL "http://v201.cowboyduel.net/"
 //#define BASE_URL "http://cowboyduel.net/"
 #define kTimeOutSeconds 20
 #define kFacebookAppId @"284932561559672"

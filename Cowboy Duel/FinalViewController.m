@@ -606,16 +606,18 @@
     [player play];
     [player setNumberOfLoops:0];
     
+    int iPhone5Delta = [UIScreen mainScreen].bounds.size.height - 480;
+    
     winnerImg1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fin_img_money.png"]];
     CGRect frame = winnerImg1.frame;
-    frame.origin.y = 230;
+    frame.origin.y = 230  + iPhone5Delta;
     frame.origin.x = -150;
     winnerImg1.frame = frame;
     [viewLastSceneAnimation addSubview:winnerImg1];
     
     winnerImg2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fin_img_money2.png"]];
     frame = winnerImg2.frame;
-    frame.origin.y = 340;
+    frame.origin.y = 340 + iPhone5Delta;
     frame.origin.x = 320;
     winnerImg2.frame = frame;
     [viewLastSceneAnimation addSubview:winnerImg2];
@@ -906,7 +908,7 @@
 -(void)winAnimation
 {
     
-    int iPhone5Delta = [UIScreen mainScreen].bounds.size.height - 480;
+    
   [lblGoldPlus setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:45]];
   lblGold.hidden = YES;
   lblGold.text = [NSString stringWithFormat:@"%d",playerAccount.money];
@@ -925,10 +927,10 @@
   frame.origin.x -= 230;
   CGRect movePlus = lblGoldPlus.frame;
   movePlus.origin.x += 200;
-  
+  int iPhone5Delta = [UIScreen mainScreen].bounds.size.height - 480;
   CGRect moveGoldToCoin = winnerImg2.frame;
   moveGoldToCoin.origin.x = ivGoldCoin.frame.origin.x + goldPointBgView.frame.origin.x - 50;
-  moveGoldToCoin.origin.y = ivGoldCoin.frame.origin.y + goldPointBgView.frame.origin.y;
+  moveGoldToCoin.origin.y = ivGoldCoin.frame.origin.y + goldPointBgView.frame.origin.y + iPhone5Delta;
   
   CGAffineTransform goldPlusZoomIn = CGAffineTransformScale(lblGoldPlus.transform, 1.5, 1.5);
   CGAffineTransform goldPlusZoomOut = CGAffineTransformScale(lblGoldPlus.transform, 1, 1);
