@@ -229,6 +229,7 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
 -(IBAction)backToMenu:(id)sender;
 {
     [self.navigationController popViewControllerAnimated:YES];
+  
 }
 -(IBAction)findMe:(id)sender;
 {
@@ -268,6 +269,10 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
     [activityIndicator startAnimating];
     [btnFindMe setEnabled:NO];
     [_playersTopDataSource reloadDataSource];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                      object:self
+                                                    userInfo:[NSDictionary dictionaryWithObject:@"/refresh_top_players" forKey:@"event"]];
+  
 }
 
 -(void)startTableAnimation
