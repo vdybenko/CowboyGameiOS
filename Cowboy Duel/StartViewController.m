@@ -664,11 +664,15 @@ static StartViewController *sharedHelper = nil;
 
 - (void) showView: (UIView *)view
 {
+    int delta = 0;
+    TestAppDelegate *app = (TestAppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (app.adBanner) delta = 50;
+    
   [UIView animateWithDuration:0.5
                         delay:0.0
                       options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction animations:^{
                         CGRect frame = view.frame;
-                        frame.origin.y = [UIScreen mainScreen].bounds.size.height - frame.size.height;
+                        frame.origin.y = [UIScreen mainScreen].bounds.size.height - frame.size.height - delta;
                         view.frame = frame;
                       } completion:^(BOOL finished) {
                         ///

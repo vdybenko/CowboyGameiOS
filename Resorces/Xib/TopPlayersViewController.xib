@@ -42,7 +42,7 @@
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIView" id="526757190">
 						<reference key="NSNextResponder" ref="1048327278"/>
-						<int key="NSvFlags">-2147483356</int>
+						<int key="NSvFlags">-2147483352</int>
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUIWebView" id="303963139">
 								<reference key="NSNextResponder" ref="526757190"/>

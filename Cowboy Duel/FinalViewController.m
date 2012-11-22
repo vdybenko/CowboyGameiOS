@@ -477,6 +477,7 @@
     frame.origin.y = 60;
     frame.origin.x = 0;
     loserImg.frame = frame;
+    
     [viewLastSceneAnimation addSubview:loserImg];
     
     loserSpiritImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fv_new_corpse_shadow.png"]];
@@ -903,6 +904,8 @@
 
 -(void)winAnimation
 {
+    
+    int iPhone5Delta = [UIScreen mainScreen].bounds.size.height - 480;
   [lblGoldPlus setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:45]];
   lblGold.hidden = YES;
   lblGold.text = [NSString stringWithFormat:@"%d",playerAccount.money];
@@ -1011,6 +1014,8 @@
 
 -(void)loseAnimation
 {
+    int iPhone5Delta = [UIScreen mainScreen].bounds.size.height - 480;
+    
   loserImg.hidden = NO;
 //  if (teaching && !(duelWithBotCheck))oldMoneyForAnimation = [AccountDataSource sharedInstance].money;
   lblGold.text = [NSString stringWithFormat:@"%d",oldMoneyForAnimation];
@@ -1027,7 +1032,7 @@
   CGAffineTransform goldDroppedZoomIn = CGAffineTransformScale(loserMoneyImg.transform, 0.1, 0.1);
   CGAffineTransform goldDroppedZoomOut = CGAffineTransformScale(loserMoneyImg.transform, 1.0, 1.0);
   
-  CGAffineTransform goldMove = CGAffineTransformTranslate(goldDroppedZoomOut, +100, +195.0);
+  CGAffineTransform goldMove = CGAffineTransformTranslate(goldDroppedZoomOut, +100, +195 + iPhone5Delta);
   lblGoldPlus.hidden = NO;
 
   CGRect temp = ivBlueLine.frame;
@@ -1036,7 +1041,7 @@
   
   CGRect frame = loserImg.frame;
   frame.origin.x = -200;
-  frame.origin.y += 230;
+  frame.origin.y += 230 + iPhone5Delta;
   loserImg.frame = frame;
   
   CGRect moveLoserToScreen = frame;

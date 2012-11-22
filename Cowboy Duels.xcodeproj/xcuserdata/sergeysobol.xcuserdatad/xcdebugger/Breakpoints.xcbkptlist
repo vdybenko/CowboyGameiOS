@@ -125,11 +125,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "375203262.740512"
+         timestampString = "375212673.509374"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "884"
-         endingLineNumber = "884"
+         startingLineNumber = "888"
+         endingLineNumber = "888"
          landmarkName = "-login"
          landmarkType = "5">
       </FileBreakpoint>
@@ -138,11 +138,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/FinalViewController.m"
-         timestampString = "375103221.89681"
+         timestampString = "375207959.091783"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "752"
-         endingLineNumber = "752"
+         startingLineNumber = "753"
+         endingLineNumber = "753"
          landmarkName = "-lastScene"
          landmarkType = "5">
       </FileBreakpoint>
@@ -177,11 +177,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/FinalViewController.m"
-         timestampString = "375103221.89681"
+         timestampString = "375207959.091783"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "679"
-         endingLineNumber = "679"
+         startingLineNumber = "680"
+         endingLineNumber = "680"
          landmarkName = "-lastScene"
          landmarkType = "5">
       </FileBreakpoint>
@@ -216,11 +216,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/FinalViewController.m"
-         timestampString = "375103221.89681"
+         timestampString = "375212673.509374"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1118"
-         endingLineNumber = "1118"
+         startingLineNumber = "1123"
+         endingLineNumber = "1123"
          landmarkName = "-loseAnimation"
          landmarkType = "5">
       </FileBreakpoint>
