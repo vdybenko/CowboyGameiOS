@@ -757,12 +757,17 @@
         [[StartViewController sharedInstance] modifierUser:playerAccount];
         if(oponentAccount.bot) [[StartViewController sharedInstance] modifierUser:oponentAccount];
     }
-
-    NSString *name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel];
-    ivCurrentRank.image = [UIImage imageNamed:name];
-    name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel+1];
-    ivNextRank.image = [UIImage imageNamed:name];
-
+    
+    if (playerAccount.accountLevel == 10){
+        NSString *name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel];
+        ivCurrentRank.image = [UIImage imageNamed:name];
+    }
+    else{
+        NSString *name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel];
+        ivCurrentRank.image = [UIImage imageNamed:name];
+        name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel+1];
+        ivNextRank.image = [UIImage imageNamed:name];
+    }
     if (fMutchNumberLose == 2) {
         [self loseAnimation];
     }
@@ -943,12 +948,17 @@
   }
   
   NSInteger num = playerAccount.accountLevel;
-  int  moneyForNextLevel=[[array objectAtIndex:num] intValue];
+    int  moneyForNextLevel=(playerAccount.accountLevel != 10)? [[array objectAtIndex:num] intValue]:playerAccount.accountPoints+1000;
   
   int moneyForPrewLevel;
   if (playerAccount.accountLevel==0) {
     moneyForPrewLevel = 0;
-  }else{
+  }else
+      if (playerAccount.accountLevel == 10) {
+          moneyForPrewLevel = playerAccount.accountPoints;
+      }
+    else
+  {
     moneyForPrewLevel=[[array objectAtIndex:(playerAccount.accountLevel-1)] intValue];
   }
   
@@ -1131,13 +1141,17 @@
     [playerAccount setAccountLevel:10];
   }
   NSInteger num = playerAccount.accountLevel;
-  int  moneyForNextLevel=[[array objectAtIndex:num] intValue];
+  int  moneyForNextLevel=(playerAccount.accountLevel != 10)? [[array objectAtIndex:num] intValue]:playerAccount.accountPoints+1000;
   int moneyForPrewLevel;
   if (playerAccount.accountLevel==0) {
     moneyForPrewLevel = 0;
-  }else{
-    moneyForPrewLevel=[[array objectAtIndex:(playerAccount.accountLevel-1)] intValue];
-  }
+  }else
+      if (playerAccount.accountLevel == 10) {
+          moneyForPrewLevel = playerAccount.accountPoints;
+      }
+      else{
+        moneyForPrewLevel=[[array objectAtIndex:(playerAccount.accountLevel-1)] intValue];
+      }
   int curentPoints=(playerAccount.accountPoints-moneyForPrewLevel);
   int maxPoints=(moneyForNextLevel-moneyForPrewLevel);
   [self changePointsLine:curentPoints maxValue:maxPoints animated:NO];
