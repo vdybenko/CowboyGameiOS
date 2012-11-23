@@ -22,6 +22,7 @@
 
 @implementation StoreDataSource
 @synthesize arrItemsList,typeOfTable,delegate;
+@synthesize cellsHide;
 
 #pragma mark - Instance initialization
 
@@ -32,7 +33,7 @@
 	if (!self) {
 		return nil;
 	}
-     
+     cellsHide = YES;
     typeOfTable = StoreDataSourceTypeTablesWeapons;
     arrItemsList=[[NSMutableArray alloc] init];
     duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
@@ -73,6 +74,8 @@
         cell = [StoreProductCell cell];
         [cell initMainControls];
     }
+    
+    cell.hidden = cellsHide;
     CDDuelProduct *prod=[arrItemsList objectAtIndex:indexPath.row];
     [cell populateWithProduct:prod targetToBuyButton:self cellType:typeOfTable];
     return cell;

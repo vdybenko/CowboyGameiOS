@@ -629,7 +629,6 @@ static StartViewController *sharedHelper = nil;
 -(IBAction)profileButtonClick
 {
     profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount startViewController:self];
-
     [profileViewController setNeedAnimation:YES];
     CATransition* transition = [CATransition animation];
     transition.duration = 0.5;

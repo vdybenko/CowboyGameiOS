@@ -25,6 +25,7 @@ typedef enum {
 @property(strong, readonly)NSMutableArray *arrItemsList;
 @property(strong, nonatomic)id<TableCellWithButton> delegate;
 @property(nonatomic) StoreDataSourceTypeTables typeOfTable;
+@property(nonatomic) BOOL cellsHide;
 
 -(void) reloadDataSource;
 -(id) initWithTable:(UITableView *)pTable parentVC:(StoreViewController *)storeViewController;
