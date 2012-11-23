@@ -244,9 +244,9 @@ static const CGFloat timeToStandartTitles = 1.8;
     lbBiggestWin.font = titlesFont;
     
     UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
-    [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor];
+    [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:24];
     
-    [btnLeaderboardBig setTitleByLabel:@"LeaderboardTitle" withColor:buttonsTitleColor];
+    [btnLeaderboardBig setTitleByLabel:@"LeaderboardTitle" withColor:buttonsTitleColor fontSize:24];
     
     lbBiggestWinCount.font = CountFont;
 //    [lbBiggestWinCount dinamicAttachToView:lbBiggestWin withDirection:DirectionToAnimateRight ];

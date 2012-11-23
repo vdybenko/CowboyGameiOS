@@ -15,6 +15,7 @@
 #import "UIImage+Save.h"
 #import "SSConnection.h"
 #import "SSServer.h"
+#import "PracticeCell.h"
 
 @interface PlayersOnLineDataSource ()
 
@@ -72,6 +73,7 @@
 {
     self.startLoad = NO;
     NSError *jsonParseError;
+    [self.serverObjects removeAllObjects];
     SBJSON *parser = [[SBJSON alloc] init];
     NSLog(@"jsonString: %@", jsonString);
     NSArray *servers = [parser objectWithString:jsonString error:&jsonParseError];
@@ -111,53 +113,45 @@
 #pragma mark - Delegated methods
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	PlayerOnLineCell* cell;
-    cell = [tableView dequeueReusableCellWithIdentifier:[PlayerOnLineCell cellID]];
-    
-    if (!cell ) {
-        cell = [PlayerOnLineCell cell];
-        [cell initMainControls];
-    }
-    SSServer *player;
-    
-    player=[self.serverObjects objectAtIndex:indexPath.row];
-    [cell populateWithPlayer:player];
-    
-    NSString *name=[[OGHelper sharedInstance ] getClearName:player.serverName];
-    NSString *path=[NSString stringWithFormat:@"%@/icon_%@.png",[[OGHelper sharedInstance] getSavePathForList],name];
-    if([[NSFileManager defaultManager] fileExistsAtPath:path]){  
-        UIImage *image=[UIImage loadImageFullPath:path];
-        [cell setPlayerIcon:image];
-    }else {
-        IconDownloader *iconDownloader = [imageDownloadsInProgress objectForKey:indexPath];
-        if (iconDownloader == nil) {
-            [cell setPlayerIcon:[UIImage imageNamed:@"pv_photo_default.png"]];
-            iconDownloader = [[IconDownloader alloc] init];
-            
-            iconDownloader.namePlayer=name;
-            iconDownloader.indexPathInTableView = indexPath;
-            iconDownloader.delegate = self;
-            [imageDownloadsInProgress setObject:iconDownloader forKey:indexPath];
-            
-            if (![player.fbImageUrl isEqualToString:@""])
-            {
-                [iconDownloader setAvatarURL:player.fbImageUrl];
-                [iconDownloader startDownloadSimpleIcon];
-            }else {
-                if ([player.serverName rangeOfString:@"F"].location != NSNotFound){
-                    [iconDownloader startDownloadFBIcon];
-                }
-            }
+    NSLog(@"%d %d",indexPath.row,[tableView numberOfRowsInSection:0]);
+    if (indexPath.row == ([tableView numberOfRowsInSection:0]-1)) {
+        PracticeCell *cell = [tableView dequeueReusableCellWithIdentifier:[PracticeCell cellID]];
+        if (!cell ) {
+            cell = [PracticeCell cell];
+            [cell initMainControls];
+        }
+        [cell.btnDuel addTarget:self action:@selector(invaiteWithMessage:) forControlEvents:UIControlEventTouchUpInside];
+        return cell;
+    }else{
+        PlayerOnLineCell* cell;
+        cell = [tableView dequeueReusableCellWithIdentifier:[PlayerOnLineCell cellID]];
+        
+        if (!cell ) {
+            cell = [PlayerOnLineCell cell];
+            [cell initMainControls];
+        }
+        SSServer *player;
+        
+        player=[self.serverObjects objectAtIndex:indexPath.row];
+        [cell populateWithPlayer:player];
+        
+        NSString *name=[[OGHelper sharedInstance ] getClearName:player.serverName];
+        NSString *path=[NSString stringWithFormat:@"%@/icon_%@.png",[[OGHelper sharedInstance] getSavePathForList],name];
+        if([[NSFileManager defaultManager] fileExistsAtPath:path]){  
+            UIImage *image=[UIImage loadImageFullPath:path];
+            [cell setPlayerIcon:image];
         }else {
-            if (![cell.playerName.text isEqualToString:player.displayName]) {
+            IconDownloader *iconDownloader = [imageDownloadsInProgress objectForKey:indexPath];
+            if (iconDownloader == nil) {
                 [cell setPlayerIcon:[UIImage imageNamed:@"pv_photo_default.png"]];
+                iconDownloader = [[IconDownloader alloc] init];
                 
-                NSString *name=[[OGHelper sharedInstance ] getClearName:player.serverName];
                 iconDownloader.namePlayer=name;
                 iconDownloader.indexPathInTableView = indexPath;
                 iconDownloader.delegate = self;
+                [imageDownloadsInProgress setObject:iconDownloader forKey:indexPath];
                 
-               if (![player.fbImageUrl isEqualToString:@""])
+                if (![player.fbImageUrl isEqualToString:@""])
                 {
                     [iconDownloader setAvatarURL:player.fbImageUrl];
                     [iconDownloader startDownloadSimpleIcon];
@@ -166,20 +160,39 @@
                         [iconDownloader startDownloadFBIcon];
                     }
                 }
+            }else {
+                if (![cell.playerName.text isEqualToString:player.displayName]) {
+                    [cell setPlayerIcon:[UIImage imageNamed:@"pv_photo_default.png"]];
+                    
+                    NSString *name=[[OGHelper sharedInstance ] getClearName:player.serverName];
+                    iconDownloader.namePlayer=name;
+                    iconDownloader.indexPathInTableView = indexPath;
+                    iconDownloader.delegate = self;
+                    
+                   if (![player.fbImageUrl isEqualToString:@""])
+                    {
+                        [iconDownloader setAvatarURL:player.fbImageUrl];
+                        [iconDownloader startDownloadSimpleIcon];
+                    }else {
+                        if ([player.serverName rangeOfString:@"F"].location != NSNotFound){
+                            [iconDownloader startDownloadFBIcon];
+                        }
+                    }
+                }
+                
             }
-            
         }
-    }
-    
-    if ([topPlayersDataSource isPlayerInTop10:player.serverName]) {
-        [cell setRibbonHide:NO];
-    }else {
-        [cell setRibbonHide:YES];
-    }
+        
+        if ([topPlayersDataSource isPlayerInTop10:player.serverName]) {
+            [cell setRibbonHide:NO];
+        }else {
+            [cell setRibbonHide:YES];
+        }
 
-    [cell.btnDuel addTarget:self action:@selector(invaiteWithMessage:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btnDuel addTarget:self action:@selector(invaiteWithMessage:) forControlEvents:UIControlEventTouchUpInside];
+        return cell;
+    }
     
-    return cell;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -276,17 +289,11 @@
     [self.serverObjects addObject:serverObj];
 }
 
--(void)practiceCellClick
-{
-    
-}
-
 #pragma mark -
 -(void)invaiteWithMessage:(id __strong)sender;
 {    
     PlayerOnLineCell *cell=(PlayerOnLineCell *)[[sender superview] superview];
     NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
-    [cell showIndicatorConnectin];
     [delegate clickButton:indexPath];
 }
 @end

@@ -47,9 +47,7 @@
     rankLevelCode.text=@"TOP 10";
     [ribbon addSubview:rankLevelCode];
     
-    [btnDuel setTitleByLabel:@"DUEL"];
-    [btnDuel changeColorOfTitleByLabel:[UIColor colorWithRed:0.95 green:0.86 blue:0.68 alpha:1.0]];
-    
+    [btnDuel setTitleByLabel:@"DUEL" withColor:[UIColor colorWithRed:0.95 green:0.86 blue:0.68 alpha:1.0] fontSize:18];
     [backGround setDinamicHeightBackground];
 }
 

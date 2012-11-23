@@ -108,9 +108,9 @@ static int oponentMustShot;
     
     UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     if (prod.dCountOfUse == 0) {
-        [buyButton setTitleByLabel:@"TRY_IT" withColor:buttonsTitleColor];
+        [buyButton setTitleByLabel:@"TRY_IT" withColor:buttonsTitleColor fontSize:24];
     }else{
-        [buyButton setTitleByLabel:@"USE" withColor:buttonsTitleColor];
+        [buyButton setTitleByLabel:@"USE" withColor:buttonsTitleColor fontSize:24];
     }
 }
 

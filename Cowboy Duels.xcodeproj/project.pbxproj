@@ -228,6 +228,10 @@
 		763F8A2A1578A55700D8BB42 /* DuelViewControllerWithXib.m in Sources */ = {isa = PBXBuildFile; fileRef = 765E351415765F1400CCB6F4 /* DuelViewControllerWithXib.m */; };
 		763F8A3D1578FC0900D8BB42 /* UIView+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 763F8A3B1578FC0900D8BB42 /* UIView+Hierarchy.m */; };
 		764B07211598A5B30050D4E4 /* UIView+Dinamic_BackGround.m in Sources */ = {isa = PBXBuildFile; fileRef = 764B07201598A5B30050D4E4 /* UIView+Dinamic_BackGround.m */; };
+		764B8919165FCBDC0014E35B /* list_online_practica_target.png in Resources */ = {isa = PBXBuildFile; fileRef = 764B8915165FCBDC0014E35B /* list_online_practica_target.png */; };
+		764B891A165FCBDC0014E35B /* list_online_practica_target@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 764B8916165FCBDC0014E35B /* list_online_practica_target@2x.png */; };
+		764B891F165FCCCE0014E35B /* PracticaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 764B891E165FCCCE0014E35B /* PracticaCell.xib */; };
+		764B8927165FD0F70014E35B /* PracticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 764B8926165FD0F70014E35B /* PracticeCell.m */; };
 		766B7D3613FE790600377AA3 /* Fire.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 766B7D3513FE790600377AA3 /* Fire.mp3 */; };
 		7675CA8615A2E10C005A3BD3 /* DuelRewardLogicController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7675CA8515A2E10B005A3BD3 /* DuelRewardLogicController.m */; };
 		7676679D15C10ADA001E3215 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7676679C15C10ADA001E3215 /* Icon.png */; };
@@ -661,6 +665,11 @@
 		763F8A3C1578FC0900D8BB42 /* UIView+Hierarchy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Hierarchy.h"; sourceTree = "<group>"; };
 		764B071F1598A5B30050D4E4 /* UIView+Dinamic_BackGround.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Dinamic_BackGround.h"; sourceTree = "<group>"; };
 		764B07201598A5B30050D4E4 /* UIView+Dinamic_BackGround.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Dinamic_BackGround.m"; sourceTree = "<group>"; };
+		764B8915165FCBDC0014E35B /* list_online_practica_target.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list_online_practica_target.png; sourceTree = "<group>"; };
+		764B8916165FCBDC0014E35B /* list_online_practica_target@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_online_practica_target@2x.png"; sourceTree = "<group>"; };
+		764B891E165FCCCE0014E35B /* PracticaCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PracticaCell.xib; path = Xib/PracticaCell.xib; sourceTree = "<group>"; };
+		764B8925165FD0F70014E35B /* PracticeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PracticeCell.h; sourceTree = "<group>"; };
+		764B8926165FD0F70014E35B /* PracticeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PracticeCell.m; sourceTree = "<group>"; };
 		765E351415765F1400CCB6F4 /* DuelViewControllerWithXib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DuelViewControllerWithXib.m; sourceTree = "<group>"; };
 		765E351515765F1400CCB6F4 /* DuelViewControllerWithXib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DuelViewControllerWithXib.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		765EB4EA1580E3530059355B /* NSString+isNumeric.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+isNumeric.h"; sourceTree = "<group>"; };
@@ -1360,6 +1369,8 @@
 		31DA9EFB15BD331900492A9F /* ListOnLine */ = {
 			isa = PBXGroup;
 			children = (
+				764B8915165FCBDC0014E35B /* list_online_practica_target.png */,
+				764B8916165FCBDC0014E35B /* list_online_practica_target@2x.png */,
 				31DA9EFC15BD331900492A9F /* ls_OnLine_frame.png */,
 				31DA9EFD15BD331900492A9F /* ls_OnLine_frame@2x.png */,
 				31DA9EFE15BD331900492A9F /* topPlayerCell.png */,
@@ -1480,6 +1491,25 @@
 			name = Store;
 			sourceTree = "<group>";
 		};
+		764B891C165FCC4E0014E35B /* TopPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				76864B381626A0E80095BBEF /* TopPlayersCell.xib */,
+				760E676615BD84C6006F6832 /* TopPlayersViewController.xib */,
+			);
+			name = TopPlayer;
+			sourceTree = "<group>";
+		};
+		764B891D165FCC660014E35B /* ListOnLine */ = {
+			isa = PBXGroup;
+			children = (
+				03285FA1159DD61900D16195 /* ListOfItemsViewController.xib */,
+				76864B3A1626DAC30095BBEF /* OnLinePlayersCell.xib */,
+				764B891E165FCCCE0014E35B /* PracticaCell.xib */,
+			);
+			name = ListOnLine;
+			sourceTree = "<group>";
+		};
 		7679D8C11563949E00BDE3A6 /* RefreshContent */ = {
 			isa = PBXGroup;
 			children = (
@@ -1535,6 +1565,8 @@
 				767FEF28156A5AF80016B415 /* PlayersOnLineDataSource.m */,
 				76D12894159C9DE800E799AA /* PlayerOnLineCell.h */,
 				76D12893159C9DE800E799AA /* PlayerOnLineCell.m */,
+				764B8925165FD0F70014E35B /* PracticeCell.h */,
+				764B8926165FD0F70014E35B /* PracticeCell.m */,
 				762AA30E15B99C72001B65E2 /* TopPlayerCell.h */,
 				762AA30F15B99C72001B65E2 /* TopPlayerCell.m */,
 				7679306F15BE8B60007F461F /* CDPlayerMain.h */,
@@ -1562,10 +1594,8 @@
 				761EFA4E1573BE91001670EB /* StartViewController.xib */,
 				761EFA471573BDDA001670EB /* CollectionAppViewController.xib */,
 				31E8783315ADC70200BFFD9A /* LeaderBoardViewController.xib */,
-				03285FA1159DD61900D16195 /* ListOfItemsViewController.xib */,
-				760E676615BD84C6006F6832 /* TopPlayersViewController.xib */,
-				76864B381626A0E80095BBEF /* TopPlayersCell.xib */,
-				76864B3A1626DAC30095BBEF /* OnLinePlayersCell.xib */,
+				764B891D165FCC660014E35B /* ListOnLine */,
+				764B891C165FCC4E0014E35B /* TopPlayer */,
 				767BA5BD1589F8E300825EB1 /* FinalViewController.xib */,
 				768321D71654DB2400E78A8C /* Store */,
 			);
@@ -2295,6 +2325,9 @@
 				BD824CDF165A9E7D00C63F61 /* fv_img_0rank.png in Resources */,
 				BD824CE0165A9E7D00C63F61 /* fv_img_0rank@2x.png in Resources */,
 				76BC8798165D08F3001F1472 /* ProfileViewControllerFirstRun.xib in Resources */,
+				764B8919165FCBDC0014E35B /* list_online_practica_target.png in Resources */,
+				764B891A165FCBDC0014E35B /* list_online_practica_target@2x.png in Resources */,
+				764B891F165FCCCE0014E35B /* PracticaCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2415,6 +2448,7 @@
 				BD8342A7164C0CBE00E6363B /* BEAnimationView.m in Sources */,
 				768321E01654E60D00E78A8C /* TeachingHelperViewController.m in Sources */,
 				76F71904165A6AD700719D8A /* UIView+Frame.m in Sources */,
+				764B8927165FD0F70014E35B /* PracticeCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
