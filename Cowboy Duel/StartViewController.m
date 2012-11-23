@@ -983,11 +983,6 @@ static StartViewController *sharedHelper = nil;
         
         int revisionProductListNumber=[[responseObject objectForKey:@"v_of_store_list"] intValue];
         if ([DuelProductDownloaderController isRefreshEvailable:revisionProductListNumber]) {
-            if ([[self.navigationController visibleViewController] isKindOfClass:[StoreViewController class]]) {
-                [duelProductDownloaderController setDidFinishBlock:^(NSError *error){
-                    [storeViewController refreshController];
-                }];
-            }
             [duelProductDownloaderController refreshDuelProducts];
         }
 
@@ -1159,8 +1154,10 @@ static StartViewController *sharedHelper = nil;
         if (type == DuelProductDownloaderTypeDuelProduct) {
             [duelProductDownloaderController refreshUserDuelProducts];
         }else if (type == DuelProductDownloaderTypeUserProduct) {
-            [duelProductDownloaderController refreshDuelProducts];
-        }
+            if ([[self.navigationController visibleViewController] isKindOfClass:[StoreViewController class]]) {
+                [storeViewController refreshController];
+            }
+        }   
     }
 }
 
