@@ -114,6 +114,7 @@
     [super viewDidLoad];
     [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"loginFirstShow"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
 
 }
 
@@ -303,9 +304,11 @@
         [self animateLabel:lbGoldCount toValue:playerAccount.money];
     });
     if (playerAccount.accountLevel != 10) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            [self animateLabel:lbPointsCountMain toValue:playerAccount.accountPoints];
-        });
+        lbPointsCountMain.text = [NSString stringWithFormat:@"%@/%@", [numberFormatter stringFromNumber:[NSNumber numberWithInt:playerAccount.accountPoints]], [[DuelRewardLogicController getStaticPointsForEachLevels] objectAtIndex:playerAccount.accountLevel]];
+        
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+//            [self animateLabel:lbPointsCountMain toValue:playerAccount.accountPoints];
+//        });
     }
     
 }
