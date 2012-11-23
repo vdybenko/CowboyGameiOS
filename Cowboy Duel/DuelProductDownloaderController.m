@@ -18,16 +18,16 @@
 
 NSMutableData *responseData;
 
-
-NSString  *const URL_PRODUCT_FILE   = @"http://bidoncd.s3.amazonaws.com/list_of_store_items_v2.2.json";
-NSString  *const URL_PRODUCT_FILE_RETINEA   = @"http://bidoncd.s3.amazonaws.com/list_of_store_items_retina_v2.2.json";
-NSString  *const URL_USER_PRODUCTS = @"http://v201.cowboyduel.net/store/get_buy_items_user";
-NSString  *const URL_PRODUCTS_BUY = @"http://v201.cowboyduel.net/store/bought";
+NSString  *const URL_PRODUCT_FILE   = @BASE_S3_URL"list_of_store_items_v2.2.json";
+NSString  *const URL_PRODUCT_FILE_RETINEA   = @BASE_S3_URL"list_of_store_items_retina_v2.2.json";
+NSString  *const URL_USER_PRODUCTS = @BASE_URL"store/get_buy_items_user";
+NSString  *const URL_PRODUCTS_BUY = @BASE_URL"store/bought";
 
 @interface DuelProductDownloaderController()
 {
     NSMutableDictionary *dicForRequests;
     NSMutableArray *arrDefenseSaved;
+    NSMutableArray *arrItems;
     NSMutableArray *arrWeaponSaved;
     
     BOOL isWeaponProductsDownload;
@@ -36,6 +36,7 @@ NSString  *const URL_PRODUCTS_BUY = @"http://v201.cowboyduel.net/store/bought";
 
 @implementation DuelProductDownloaderController
 @synthesize didFinishBlock;
+@synthesize delegate;
 
 -(id)init{
     self = [super init];
@@ -46,6 +47,7 @@ NSString  *const URL_PRODUCTS_BUY = @"http://v201.cowboyduel.net/store/bought";
     dicForRequests=[NSMutableDictionary dictionary];
     arrDefenseSaved = [NSMutableArray array];
     arrWeaponSaved = [NSMutableArray array];
+    arrItems = [NSMutableArray array];
     isWeaponProductsDownload = YES;
 
 	return self;
@@ -84,6 +86,8 @@ static NSString *getSavePathForDuelProduct()
     }
 }
 
+#pragma mark user products
+
 -(void) refreshDuelProducts;
 {
     NSString *URL;
@@ -102,6 +106,58 @@ static NSString *getSavePathForDuelProduct()
         [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
     }
 }
+
+-(BOOL)isListProductsAvailable;
+{
+    arrWeaponSaved = [DuelProductDownloaderController loadWeaponArray];
+    if ([arrWeaponSaved count]) {
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
+-(void)refreshUserDuelProducts;
+{
+    arrDefenseSaved = [DuelProductDownloaderController loadDefenseArray];
+    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:URL_USER_PRODUCTS]
+                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                        timeoutInterval:kTimeOutSeconds];
+    [theRequest setHTTPMethod:@"POST"];
+    NSDictionary *dicBody=[NSDictionary dictionaryWithObjectsAndKeys:
+                           [AccountDataSource sharedInstance].accountID,@"authentification",
+                           nil];
+    NSString *stBody=[Utils makeStringForPostRequest:dicBody];
+    [theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]];
+    CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
+    if (theConnection) {
+        NSMutableData *receivedData = [[NSMutableData alloc] init];
+        [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
+    }
+}
+
+-(void)buyProductID:(int)productId transactionID:(int)transactionID;
+{
+    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:URL_PRODUCTS_BUY]
+                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                        timeoutInterval:kTimeOutSeconds];
+    [theRequest setHTTPMethod:@"POST"];
+    NSDictionary *dicBody=[NSDictionary dictionaryWithObjectsAndKeys:
+                           [AccountDataSource sharedInstance].accountID,@"authentification",
+                           [NSString stringWithFormat:@"%d",productId],@"itemId",
+                           [NSString stringWithFormat:@"%d",transactionID],@"transactionsId",
+                           nil];
+    
+    NSString *stBody=[Utils makeStringForPostRequest:dicBody];
+    [theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]];
+    CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
+    if (theConnection) {
+        NSMutableData *receivedData = [[NSMutableData alloc] init];
+        [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
+    }
+}
+
+#pragma mark
 
 -(void)parseDuelProduct:(CDDuelProduct *)product productDic:(NSDictionary*)dic;
 {
@@ -141,6 +197,7 @@ static NSString *getSavePathForDuelProduct()
             NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
             NSArray *responseObjectOfProducts = [responseObject objectForKey:@"weapons"];
             NSMutableArray *arrayIDProducts = [NSMutableArray array];
+            [arrItems removeAllObjects];
             for (NSDictionary *dic in responseObjectOfProducts) {
                 CDWeaponProduct *product=[[CDWeaponProduct alloc] init];
                 [self parseDuelProduct:product productDic:dic];
@@ -162,10 +219,10 @@ static NSString *getSavePathForDuelProduct()
                 if (product.dPrice == 0) {
                     [arrayIDProducts addObject:product.dPurchaseUrl];
                 }
-                [arrWeaponSaved addObject: product];
+                [arrItems addObject: product];
             }
-            NSLog(@"arrItemsList %@",arrWeaponSaved);
-            [DuelProductDownloaderController saveWeapon:arrWeaponSaved];
+            NSLog(@"arrItemsList %@",arrItems);
+            [DuelProductDownloaderController saveWeapon:arrItems];
             
             if ([arrayIDProducts count]!=0) {
                 [self requestProductDataWithNSSet:arrayIDProducts];
@@ -174,6 +231,7 @@ static NSString *getSavePathForDuelProduct()
             }
             
             [arrayIDProducts removeAllObjects];
+            [arrItems removeAllObjects];
             responseObjectOfProducts = [responseObject objectForKey:@"defenses"];
             for (NSDictionary *dic in responseObjectOfProducts) {
                 CDDefenseProduct *product=[[CDDefenseProduct alloc] init];
@@ -187,19 +245,23 @@ static NSString *getSavePathForDuelProduct()
                 if (product.dPrice == 0) {
                     [arrayIDProducts addObject:product.dPurchaseUrl];
                 }
-                [arrDefenseSaved addObject: product];
+                [arrItems addObject: product];
             }
-            NSLog(@"arrItemsList %@",arrDefenseSaved);
-            [DuelProductDownloaderController saveDefense:arrDefenseSaved];
+            NSLog(@"arrItemsList %@",arrItems);
+            [DuelProductDownloaderController saveDefense:arrItems];
             
             if ([arrayIDProducts count]!=0) {
                 [self requestProductDataWithNSSet:arrayIDProducts];
             }
             
+            NSError *error;
             if (didFinishBlock) {
-                NSError *error;
                 didFinishBlock(error);
             }
+            if (delegate) {
+                [delegate didiFinishDownloadWithType:DuelProductDownloaderTypeDuelProduct error:error];
+            }
+
         }else if ([dictionaryKey isEqualToString:[URL_USER_PRODUCTS lastPathComponent]]){
 //URL_USER_PRODUCTS
             AccountDataSource *playerAccount=[AccountDataSource sharedInstance];
@@ -240,15 +302,22 @@ static NSString *getSavePathForDuelProduct()
             [DuelProductDownloaderController saveWeapon:arrWeaponSaved];
             [DuelProductDownloaderController saveDefense:arrDefenseSaved];
             
+            NSError *error;
             if (didFinishBlock) {
-                NSError *error;
                 didFinishBlock(error);
             }
+            if (delegate) {
+                [delegate didiFinishDownloadWithType:DuelProductDownloaderTypeUserProduct error:error];
+            }
+            
         }else if ([dictionaryKey isEqualToString:[URL_PRODUCTS_BUY lastPathComponent]]){
 //URL_PRODUCTS_BUY
+            NSError *error;
             if (didFinishBlock) {
-                NSError *error;
                 didFinishBlock(error);
+            }
+            if (delegate) {
+                [delegate didiFinishDownloadWithType:DuelProductDownloaderTypeBuyProduct error:error];
             }
         }
         didFinishBlock = nil;
@@ -262,7 +331,7 @@ static NSString *getSavePathForDuelProduct()
     [receivedData appendData:data];
 }
 
-- (void)connection:(NSURLConnection *)connection
+- (void)connection:(CustomNSURLConnection *)connection
   didFailWithError:(NSError *)error
 {  
     DLog(@"DuelProductDownloaderController Connection failed! Error - %@ %@",
@@ -270,6 +339,21 @@ static NSString *getSavePathForDuelProduct()
          [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
     if (didFinishBlock) {
         didFinishBlock(error);
+    }
+    
+    NSString * currentParseString = [NSString stringWithFormat:@"%@",connection.requestURL];
+    NSString *dictionaryKey = [currentParseString lastPathComponent];
+    DuelProductDownloaderType type;
+    if ([dictionaryKey isEqualToString:[URL_PRODUCT_FILE lastPathComponent]] || [dictionaryKey isEqualToString:[URL_PRODUCT_FILE_RETINEA lastPathComponent]]) {
+        type = DuelProductDownloaderTypeDuelProduct;
+    }else if ([dictionaryKey isEqualToString:[URL_USER_PRODUCTS lastPathComponent]]){
+        type = DuelProductDownloaderTypeUserProduct;        
+    }else if ([dictionaryKey isEqualToString:[URL_PRODUCTS_BUY lastPathComponent]]){
+        type = DuelProductDownloaderTypeBuyProduct;
+    }
+
+    if (delegate) {
+        [delegate didiFinishDownloadWithType:type error:error];
     }
 }
 
@@ -314,58 +398,6 @@ static NSString *getSavePathForDuelProduct()
     }else{
         CDDuelProduct *product = [results objectAtIndex:0];
         return product.dCountOfUse;
-    }
-}
-
-#pragma mark user products
-
--(BOOL)isListProductsAvailable;
-{
-    arrWeaponSaved = [DuelProductDownloaderController loadWeaponArray];
-    if ([arrWeaponSaved count]) {
-         return YES;
-    }else{
-        return NO;
-    }
-}
-
--(void)refreshUserDuelProducts;
-{
-    arrDefenseSaved = [DuelProductDownloaderController loadDefenseArray];
-    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:URL_USER_PRODUCTS]
-                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                        timeoutInterval:kTimeOutSeconds];
-    [theRequest setHTTPMethod:@"POST"];
-    NSDictionary *dicBody=[NSDictionary dictionaryWithObjectsAndKeys:
-                           [AccountDataSource sharedInstance].accountID,@"authentification",
-                           nil];
-    NSString *stBody=[Utils makeStringForPostRequest:dicBody];
-    [theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]];
-    CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
-    if (theConnection) {
-        NSMutableData *receivedData = [[NSMutableData alloc] init];
-        [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
-    }
-}
-
--(void)buyProductID:(int)productId transactionID:(int)transactionID;
-{
-    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:URL_PRODUCTS_BUY]
-                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                        timeoutInterval:kTimeOutSeconds];
-    [theRequest setHTTPMethod:@"POST"];
-    NSDictionary *dicBody=[NSDictionary dictionaryWithObjectsAndKeys:
-                           [AccountDataSource sharedInstance].accountID,@"authentification",
-                           [NSString stringWithFormat:@"%d",productId],@"itemId",
-                           [NSString stringWithFormat:@"%d",transactionID],@"transactionsId",
-                           nil];
-
-    NSString *stBody=[Utils makeStringForPostRequest:dicBody];
-    [theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]];
-    CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
-    if (theConnection) {
-        NSMutableData *receivedData = [[NSMutableData alloc] init];
-        [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
     }
 }
 

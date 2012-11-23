@@ -24,12 +24,12 @@
 @end 
 
 @implementation PlayersOnLineDataSource
-@synthesize arrItemsList, delegate, cellsHide, serverObjects, connection, startLoad;
+@synthesize arrItemsList, delegate, cellsHide, statusOnLine, serverObjects, connection, startLoad;
 
 
 #pragma mark - Instance initialization
 
--(id) initWithTable:(UITableView *)pTable;
+-(id) initWithTable:(UITableView *)pTable ;
  {
 	self = [super init];
 	
@@ -41,6 +41,8 @@
      _tableView=pTable;
      numberFormatter = [[NSNumberFormatter alloc] init];
      [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+     
+     self.serverObjects = [[NSMutableArray alloc] init];
      
      topPlayersDataSource = [[StartViewController sharedInstance] topPlayersDataSource];
      [topPlayersDataSource reloadDataSource];
@@ -54,11 +56,16 @@
 
 -(void) reloadDataSource;
 {
-    
-	[self.connection sendData:@"" packetID:NETWORK_GET_LIST_ONLINE ofLength:sizeof(int)];
-    [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(connectionTimeout) userInfo:nil repeats:NO];
-    self.startLoad = YES;
-    
+    if (statusOnLine) {
+        [self.connection sendData:@"" packetID:NETWORK_GET_LIST_ONLINE ofLength:sizeof(int)];
+        [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(connectionTimeout) userInfo:nil repeats:NO];
+        self.startLoad = YES;
+    }else{
+        self.startLoad = NO;
+        [self addPracticeCell];
+        ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
+        [listOfItemsViewController didRefreshController];
+    }
 }
 
 - (void) listOnlineResponse:(NSString *)jsonString
@@ -68,8 +75,6 @@
     SBJSON *parser = [[SBJSON alloc] init];
     NSLog(@"jsonString: %@", jsonString);
     NSArray *servers = [parser objectWithString:jsonString error:&jsonParseError];
-    
-    self.serverObjects = [[NSMutableArray alloc] init];
     
     if (!servers) {
         NSLog(@"JSON parse error: %@", jsonParseError);
@@ -178,6 +183,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSLog(@"count %d",[self.serverObjects count]);
     return [self.serverObjects count];
 }
 

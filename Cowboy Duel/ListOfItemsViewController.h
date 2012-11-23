@@ -27,6 +27,7 @@
 
 - (id)initWithGCVC:(GameCenterViewController *)GCVC Account:(AccountDataSource *)userAccount OnLine:(BOOL) onLine;
 -(void)startTableAnimation;
+-(void)refreshController;
 -(void)didRefreshController;
 
 @end

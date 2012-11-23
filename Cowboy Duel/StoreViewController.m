@@ -26,7 +26,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnWeapons;
 @property (strong, nonatomic) IBOutlet UIButton *btnDefenses;
 
-@property (strong, nonatomic) IBOutlet UIView *loadingView;
 @end
 
 @implementation StoreViewController
@@ -72,10 +71,21 @@
     [btnDefenses changeColorOfTitleByLabel:buttonsTitleColor];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    
+}
+
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     [MKStoreManager sharedManager].delegate = self;
+    [storeDataSource reloadDataSource];
+}
+
+-(void)refreshController;
+{
+    [storeDataSource reloadDataSource];
 }
 
 - (void)didReceiveMemoryWarning

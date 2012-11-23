@@ -41,14 +41,12 @@
     storeViewController = pStoreViewController;
     cellsHide=YES;
      
-     
-     
-     [self reloadDataSource];
 	return self;
 }
 
 -(void) reloadDataSource;
 {
+    storeViewController.loadingView.hidden = NO;
     NSMutableArray *testArr;
     if (typeOfTable == StoreDataSourceTypeTablesWeapons) {
         testArr = [DuelProductDownloaderController loadWeaponArray];
@@ -57,14 +55,12 @@
     }
 
     if ([testArr count]==0) {
-        [duelProductDownloaderController setDidFinishBlock:^(NSError *error){
-            [self reloadDataSource];
-            [tableView reloadData];
-        }];
-        [duelProductDownloaderController refreshDuelProducts];
-        testArr = nil;
+        arrItemsList = testArr;
+        storeViewController.loadingView.hidden = YES;
     }else {
         arrItemsList = testArr;
+        [tableView reloadData];
+        storeViewController.loadingView.hidden = YES;
     }
 }
 

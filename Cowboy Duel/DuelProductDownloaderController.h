@@ -16,8 +16,23 @@
 
 typedef void (^DuelProductDownloaderControllerResult)(NSError *error);
 
+typedef enum{
+    DuelProductDownloaderTypeDuelProduct,
+    DuelProductDownloaderTypeUserProduct,
+    DuelProductDownloaderTypeBuyProduct
+}DuelProductDownloaderType;
+
+@protocol DuelProductDownloaderControllerDelegate
+
+-(void)didiFinishDownloadWithType:(DuelProductDownloaderType)type error:(NSError *)error;
+
+@end
+
 @interface DuelProductDownloaderController : NSObject<SKProductsRequestDelegate>
+
 @property (copy) DuelProductDownloaderControllerResult didFinishBlock;
+@property (nonatomic) id<DuelProductDownloaderControllerDelegate> delegate;
+
 +(BOOL) isRefreshEvailable:(int)serverRevision;
 -(void) refreshDuelProducts;
 +(NSString *)getSavePathForDuelProduct;

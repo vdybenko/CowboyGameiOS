@@ -14,7 +14,9 @@
 
 @interface StoreViewController : UIViewController<UITableViewDelegate,TableCellWithButton,MKStoreKitDelegate>
 @property (strong, nonatomic) StoreDataSource *storeDataSource;
+@property (strong, nonatomic) IBOutlet UIView *loadingView;
 
 -(id)initWithAccount:(AccountDataSource *)userAccount;
-
+- (IBAction)backButtonClick:(id)sender;
+-(void)refreshController;
 @end

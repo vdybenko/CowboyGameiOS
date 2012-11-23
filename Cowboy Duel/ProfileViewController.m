@@ -219,6 +219,8 @@ static const CGFloat timeToStandartTitles = 1.8;
 //    UIFont *fontSimpleText=[UIFont fontWithName: @"MyriadPro-Semibold" size:13];
     UIColor *mainColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
     
+    _ivIconUser.clipsToBounds = YES;
+    
     lbProfileMain.text = NSLocalizedString(@"ProfileTitle", @"");
     lbProfileMain.textColor = mainColor;
     lbProfileMain.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
@@ -298,7 +300,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     }
     else 
     {
-        _ivIconUser.contentMode = UIViewContentModeScaleAspectFit;
+        _ivIconUser.contentMode = UIViewContentModeScaleAspectFill;
         [btnLogOutFB setHidden:NO];
         [btnLogInFB setHidden:YES];
         [btnLeaderboard setEnabled:YES];

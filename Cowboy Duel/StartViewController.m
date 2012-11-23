@@ -24,7 +24,6 @@
 #import "Social/Social.h"
 #import "accounts/Accounts.h"
 
-#import "DuelProductDownloaderController.h"
 #import "StoreViewController.h"
 #import "DuelProductWinViewController.h"
 
@@ -38,6 +37,7 @@
     ProfileViewController *profileViewController;
     TopPlayersDataSource *topPlayersDataSource;
     DuelProductDownloaderController *duelProductDownloaderController;
+    StoreViewController *storeViewController;
     
     UIView *hudView;
     
@@ -290,6 +290,7 @@ static StartViewController *sharedHelper = nil;
         gameCenterViewController = [GameCenterViewController sharedInstance:playerAccount andParentVC:self];
         listOfItemsViewController=[[ListOfItemsViewController alloc]initWithGCVC:gameCenterViewController Account:playerAccount OnLine:self.hostActive];
         duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
+        duelProductDownloaderController.delegate = self;
         
         if (firstRun) {
             [gameCenterViewController stopServer];
@@ -299,7 +300,7 @@ static StartViewController *sharedHelper = nil;
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                             object:self
                                                           userInfo:[NSDictionary dictionaryWithObject:@"/" forKey:@"event"]];
-        
+                
         internetActive=YES;
         hostActive=YES;
         
@@ -617,8 +618,8 @@ static StartViewController *sharedHelper = nil;
 }
 
 - (IBAction)storeButtonClick:(id)sender {
-    StoreViewController *svc=[[StoreViewController alloc] initWithAccount:playerAccount];
-    [self.navigationController pushViewController:svc animated:YES];
+    storeViewController=[[StoreViewController alloc] initWithAccount:playerAccount];
+    [self.navigationController pushViewController:storeViewController animated:YES];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
@@ -626,7 +627,9 @@ static StartViewController *sharedHelper = nil;
 }
 
 -(IBAction)profileButtonClick
-{   
+{
+    [duelProductDownloaderController refreshDuelProducts];
+    return;
     profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount startViewController:self];
 
     [profileViewController setNeedAnimation:YES];
@@ -707,6 +710,8 @@ static StartViewController *sharedHelper = nil;
 
 -(IBAction)showHelp:(id)sender
 {
+    [duelProductDownloaderController refreshUserDuelProducts];
+    return;
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/help_click" forKey:@"event"]];
@@ -978,6 +983,11 @@ static StartViewController *sharedHelper = nil;
         
         int revisionProductListNumber=[[responseObject objectForKey:@"v_of_store_list"] intValue];
         if ([DuelProductDownloaderController isRefreshEvailable:revisionProductListNumber]) {
+            if ([[self.navigationController visibleViewController] isKindOfClass:[StoreViewController class]]) {
+                [duelProductDownloaderController setDidFinishBlock:^(NSError *error){
+                    [storeViewController refreshController];
+                }];
+            }
             [duelProductDownloaderController refreshDuelProducts];
         }
 
@@ -1141,6 +1151,18 @@ static StartViewController *sharedHelper = nil;
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
 }
 
+#pragma mark DuelProductDownloaderControllerDelegate
+
+-(void)didiFinishDownloadWithType:(DuelProductDownloaderType)type error:(NSError *)error;
+{
+    if (!error) {
+        if (type == DuelProductDownloaderTypeDuelProduct) {
+            [duelProductDownloaderController refreshUserDuelProducts];
+        }else if (type == DuelProductDownloaderTypeUserProduct) {
+            [duelProductDownloaderController refreshDuelProducts];
+        }
+    }
+}
 
 #pragma mark - Authorization
 
@@ -1306,8 +1328,6 @@ static StartViewController *sharedHelper = nil;
             if (self.internetActive) {
                 self.internetActive = NO;
             }
-            
-            
             break;
             
         }
@@ -1339,6 +1359,8 @@ static StartViewController *sharedHelper = nil;
             if (self.hostActive) {
                 self.hostActive = NO;
                 DLog(@"The internet is down IF.");
+                listOfItemsViewController.statusOnLine = hostActive;
+                [listOfItemsViewController refreshController];
             }
             
             

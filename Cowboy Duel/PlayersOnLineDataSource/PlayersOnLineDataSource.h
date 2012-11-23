@@ -37,8 +37,8 @@
 @property(strong, readonly)NSArray *arrItemsList;
 @property(strong, nonatomic)id<TableCellWithButton> delegate;
 @property(nonatomic) BOOL cellsHide;
+@property(nonatomic) BOOL statusOnLine;
 @property (nonatomic, strong) NSMutableArray *serverObjects;
-
 
 -(void) reloadDataSource;
 //-(void) reloadRandomId;

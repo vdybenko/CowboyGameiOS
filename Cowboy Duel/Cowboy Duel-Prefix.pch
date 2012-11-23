@@ -21,7 +21,8 @@
 
 
 #define BASE_URL "http://v201.cowboyduel.net/"
-//#define BASE_URL "http://cowboyduel.net/"
+#define BASE_S3_URL "http://bidoncd.s3.amazonaws.com/"
+
 #define kTimeOutSeconds 20
 #define kFacebookAppId @"284932561559672"
 #define kFacebookAppToken @"284932561559672|w5GIU7o8TBWuxqPgmyZ7r7FxxKE"

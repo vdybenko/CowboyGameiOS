@@ -50,7 +50,7 @@
 	if (self) {
         _gameCenterViewController = GCVC;
         _playerAccount = userAccount;
-        statusOnLine=YES;
+        statusOnLine=onLine;
     }
     return self;
 }
@@ -74,6 +74,7 @@
     
     _playersOnLineDataSource = [[PlayersOnLineDataSource alloc] initWithTable:tableView];
     _playersOnLineDataSource.delegate=self;
+    _playersOnLineDataSource.statusOnLine = statusOnLine;
     
     tableView.delegate=self;
     tableView.dataSource=_playersOnLineDataSource;
@@ -253,12 +254,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)refreshBtnClick:(id)sender {
-    [self refreshController];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"/saloon_refresh_click_offline" forKey:@"event"]];
-}
 - (IBAction)inviteFriendsClick:(id)sender {
     if([[OGHelper sharedInstance] isAuthorized]){
         [loadingView setHidden:NO];
@@ -282,6 +277,7 @@
     [loadingView setHidden:NO];
     [activityIndicator startAnimating];
     [btnInvite setEnabled:NO];
+    _playersOnLineDataSource.statusOnLine = statusOnLine;
     [_playersOnLineDataSource reloadDataSource];
 }
 
