@@ -24,7 +24,7 @@
 @end 
 
 @implementation PlayersOnLineDataSource
-@synthesize arrItemsList, delegate, cellsHide, statusOnLine, serverObjects, connection, startLoad;
+@synthesize arrItemsList, delegate, statusOnLine, serverObjects, connection, startLoad;
 
 
 #pragma mark - Instance initialization

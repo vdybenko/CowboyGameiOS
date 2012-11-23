@@ -23,7 +23,6 @@ typedef enum {
     
 }
 @property(strong, readonly)NSMutableArray *arrItemsList;
-@property(nonatomic) BOOL cellsHide;
 @property(strong, nonatomic)id<TableCellWithButton> delegate;
 @property(nonatomic) StoreDataSourceTypeTables typeOfTable;
 

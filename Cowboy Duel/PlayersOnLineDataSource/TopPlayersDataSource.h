@@ -25,14 +25,10 @@
     NSMutableDictionary *imageDownloadsInProgress;
     id delegate;
     int myProfileIndex;
-    BOOL cellsHide;
 }
 @property(strong, readonly)NSMutableArray *arrItemsList;
 @property(strong, nonatomic)id delegate;
 @property(nonatomic) int myProfileIndex;
-@property(nonatomic) BOOL cellsHide;
-
-
 
 -(void) reloadDataSource;
 -(id) initWithTable:(UITableView *)pTable;

@@ -21,7 +21,7 @@
 @end
 
 @implementation StoreDataSource
-@synthesize arrItemsList,cellsHide,typeOfTable,delegate;
+@synthesize arrItemsList,typeOfTable,delegate;
 
 #pragma mark - Instance initialization
 
@@ -39,7 +39,6 @@
      
     tableView=pTable;
     storeViewController = pStoreViewController;
-    cellsHide=YES;
      
 	return self;
 }

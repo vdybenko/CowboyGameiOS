@@ -628,8 +628,6 @@ static StartViewController *sharedHelper = nil;
 
 -(IBAction)profileButtonClick
 {
-    [duelProductDownloaderController refreshDuelProducts];
-    return;
     profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount startViewController:self];
 
     [profileViewController setNeedAnimation:YES];
@@ -710,8 +708,6 @@ static StartViewController *sharedHelper = nil;
 
 -(IBAction)showHelp:(id)sender
 {
-    [duelProductDownloaderController refreshUserDuelProducts];
-    return;
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/help_click" forKey:@"event"]];
@@ -1171,7 +1167,6 @@ static StartViewController *sharedHelper = nil;
     NSString *deviceToken; 
     if ([[NSUserDefaults standardUserDefaults] stringForKey:@"DeviceToken"]) deviceToken = [[NSUserDefaults standardUserDefaults] stringForKey:@"DeviceToken"];
     else deviceToken = @"";
-    
     
     UIDevice *currentDevice = [UIDevice currentDevice];
     
