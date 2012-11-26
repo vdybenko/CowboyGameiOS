@@ -73,17 +73,16 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [storeDataSource reloadDataSource];
+        [self startTableAnimation];
+    });
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     [MKStoreManager sharedManager].delegate = self;    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        [storeDataSource reloadDataSource];
-        [self startTableAnimation];
-    });
 }
 
 -(void)refreshController;
