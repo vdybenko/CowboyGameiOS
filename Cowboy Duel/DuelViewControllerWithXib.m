@@ -24,7 +24,7 @@
 static NSString *ShotSound = @"%@/shot.mp3";
 
 @implementation DuelViewControllerWithXib
-@synthesize _vEarth, _infoButton, _ivGun, _btnNab, _lbBullets, _vBackground, delegate,titleSteadyFire;
+@synthesize _vEarth, _infoButton, _ivGun, _btnNab, _lbBullets, delegate,titleSteadyFire;
 
 -(id)initWithAccount:(AccountDataSource *)userAccount oponentAccount:(AccountDataSource *)oponentAccount;
 {
@@ -207,7 +207,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
     lbBackButton = nil;
     [super viewDidUnload];
 }
-#pragma mark 
+#pragma mark Earth animation
 
 -(void)setRotationWithAngle:(float)angle andY:(float)y
 {
@@ -222,6 +222,8 @@ static NSString *ShotSound = @"%@/shot.mp3";
     CGAffineTransform steadyTransform = CGAffineTransformScale(eathTransform, steadyScale, steadyScale);
     titleSteadyFire.transform = steadyTransform;
 }
+
+#pragma mark
 
 -(float)abs:(float)d
 {
@@ -378,6 +380,8 @@ if (shotCountBullet!=0) {
     HelpViewController *helpView=[[HelpViewController alloc] init];
     [self.navigationController pushViewController:helpView animated:YES];
 }
+
+#pragma mark Gun animation
 -(void)shotStarAnimationVer
 {
     [UIView beginAnimations:nil context:nil];
@@ -401,7 +405,7 @@ if (shotCountBullet!=0) {
     _ivGun.transform = gunTransform;
 }
 
-
+#pragma mark
 
 -(void)startDuel{
     [helpPracticeView setHidden:YES];

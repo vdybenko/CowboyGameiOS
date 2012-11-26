@@ -39,6 +39,45 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
+					<object class="IBUIImageView" id="598959102">
+						<reference key="NSNextResponder" ref="1048327278"/>
+						<int key="NSvFlags">282</int>
+						<string key="NSFrame">{{-150, -70}, {620, 620}}</string>
+						<reference key="NSSuperview" ref="1048327278"/>
+						<reference key="NSNextKeyView" ref="851280587"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">dv_img_eath_new.png</string>
+						</object>
+					</object>
+					<object class="IBUIImageView" id="198539093">
+						<reference key="NSNextResponder" ref="1048327278"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{480, -68}, {480, 258}}</string>
+						<reference key="NSSuperview" ref="1048327278"/>
+						<reference key="NSNextKeyView" ref="559891747"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<object class="NSCustomResource" key="IBUIImage" id="493286909">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">st_cloud_new.png</string>
+						</object>
+					</object>
+					<object class="IBUIImageView" id="851280587">
+						<reference key="NSNextResponder" ref="1048327278"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{0, -68}, {480, 258}}</string>
+						<reference key="NSSuperview" ref="1048327278"/>
+						<reference key="NSNextKeyView" ref="722101784"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<reference key="IBUIImage" ref="493286909"/>
+					</object>
 					<object class="IBUIImageView" id="722101784">
 						<reference key="NSNextResponder" ref="1048327278"/>
 						<int key="NSvFlags">292</int>
@@ -164,7 +203,7 @@
 						<int key="NSvFlags">296</int>
 						<string key="NSFrame">{{71, 173}, {180, 52}}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
-						<reference key="NSNextKeyView" ref="559891747"/>
+						<reference key="NSNextKeyView" ref="198539093"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -553,6 +592,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{73, 260}, {176, 46}}</string>
 								<reference key="NSSuperview" ref="862881662"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -695,7 +735,7 @@
 				</array>
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSNextKeyView" ref="722101784"/>
+				<reference key="NSNextKeyView" ref="598959102"/>
 				<string key="NSReuseIdentifierKey">_NS:196</string>
 				<reference key="IBUIBackgroundColor" ref="680841487"/>
 				<object class="IBUIScreenMetrics" key="IBUISimulatedDestinationMetrics">
@@ -865,6 +905,22 @@
 					<int key="connectionID">155</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">cloudView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="198539093"/>
+					</object>
+					<int key="connectionID">163</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">cloudSecondView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="851280587"/>
+					</object>
+					<int key="connectionID">164</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">startDuel</string>
 						<reference key="source" ref="676481781"/>
@@ -1025,6 +1081,9 @@
 							<reference ref="876994811"/>
 							<reference ref="871925023"/>
 							<reference ref="1003356675"/>
+							<reference ref="598959102"/>
+							<reference ref="198539093"/>
+							<reference ref="851280587"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -1237,6 +1296,24 @@
 						<reference key="object" ref="1003356675"/>
 						<reference key="parent" ref="1048327278"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">156</int>
+						<reference key="object" ref="598959102"/>
+						<reference key="parent" ref="1048327278"/>
+						<string key="objectName">BackgroundWithOutClouds</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">160</int>
+						<reference key="object" ref="198539093"/>
+						<reference key="parent" ref="1048327278"/>
+						<string key="objectName">Cloud1</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">161</int>
+						<reference key="object" ref="851280587"/>
+						<reference key="parent" ref="1048327278"/>
+						<string key="objectName">Cloud2</string>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -1265,6 +1342,9 @@
 				<string key="144.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="145.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="153.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="156.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="160.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="161.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="24.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<real value="0.0" key="24.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="26.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1283,7 +1363,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">155</int>
+			<int key="maxID">164</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
@@ -1298,6 +1378,7 @@
 			<string key="btnFeedBackWithText.png">{92, 33}</string>
 			<string key="btnShareWithText.png">{85, 36}</string>
 			<string key="btn_big.png">{180, 52}</string>
+			<string key="dv_img_eath_new.png">{600, 600}</string>
 			<string key="fb_btn_facebook.png">{57, 57}</string>
 			<string key="fb_btn_itunes.png">{57, 57}</string>
 			<string key="fb_btn_mail.png">{57, 57}</string>
@@ -1305,6 +1386,7 @@
 			<string key="fb_view_down_new.png">{5, 7}</string>
 			<string key="fb_view_top.png">{320, 8}</string>
 			<string key="pv_btn_music_on.png">{36, 35}</string>
+			<string key="st_cloud_new.png">{480, 258}</string>
 			<string key="st_title.png">{320, 94}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1929</string>

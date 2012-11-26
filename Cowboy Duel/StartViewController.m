@@ -92,6 +92,13 @@
     IBOutlet UILabel *lbRateMessage;
     IBOutlet UILabel *lbFeedbackCancelBtn;
     IBOutlet UILabel *lbShareCancelBtn;
+
+    //Cloud
+    IBOutlet UIImageView *cloudView;
+    IBOutlet UIImageView *cloudSecondView;
+    int cloudX;
+    int cloud2X;
+    BOOL animationCheck;
 }
 @property (strong, nonatomic) IBOutlet UIButton *duelButton;
 @property (strong, nonatomic) IBOutlet UIButton *mapButton;
@@ -284,7 +291,7 @@ static StartViewController *sharedHelper = nil;
                 }
             }
         }
-               
+        
         dicForRequests=[[NSMutableDictionary alloc] init];
         
         gameCenterViewController = [GameCenterViewController sharedInstance:playerAccount andParentVC:self];
@@ -348,8 +355,9 @@ static StartViewController *sharedHelper = nil;
         [hostReachable startNotifier];
 
         oldAccounId = @"";
-//        if ([playerAccount.accountID rangeOfString:@"A"].location != NSNotFound)
-//            [self authorizationModifier:NO];
+        
+        cloudX=480;
+        cloud2X=0;
     }
     return self; 
 }
@@ -466,6 +474,9 @@ static StartViewController *sharedHelper = nil;
     else {
         [soundButton setImage:[UIImage imageNamed:@"pv_btn_music_off.png"] forState:UIControlStateNormal];
     }
+    
+    CGAffineTransform transform = CGAffineTransformMakeScale(-1, 1);
+    cloudView.transform = transform;
 }
 - (void)viewDidUnload {
     feedbackView = nil;
@@ -490,6 +501,10 @@ static StartViewController *sharedHelper = nil;
         firstRun = NO;
         return;
     }
+    
+    animationCheck = YES;
+    [self cloudAnimation];
+    [self cloudSecondAnimation];
     
     [self changeRankOfBlackHelpViews];
     
@@ -537,6 +552,7 @@ static StartViewController *sharedHelper = nil;
     [app.adBanner setHidden:NO];
     [[AccountDataSource sharedInstance] reloadRandomId];
     [[AccountDataSource sharedInstance] receiveBotsForIdArray:[AccountDataSource sharedInstance].randomIds];
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -556,6 +572,8 @@ static StartViewController *sharedHelper = nil;
       shareView.frame = frame;
       shareViewVisible = NO;
     }
+    
+    animationCheck = NO;
 }
 
 -(void)didBecomeActive
@@ -570,11 +588,19 @@ static StartViewController *sharedHelper = nil;
         [profileViewController checkValidBlackActivity];
     }
     firstDayWithOutAdvertising=[AdvertisingAppearController advertisingCheckForAppearWithFirstDayWithOutAdvertising:firstDayWithOutAdvertising];
+    
+    
+    if ([self isViewLoaded]) {
+        animationCheck = YES;
+        [self cloudAnimation];
+        [self cloudSecondAnimation];
+    }
 }
 
 -(void)didEnterBackground
 {
     [[SSConnection sharedInstance] disconnect];
+    animationCheck = NO;
 }
 
 -(void)didFinishLaunching
@@ -1479,6 +1505,87 @@ static StartViewController *sharedHelper = nil;
 {
     if (d<0) return -1.0 * d;
     else return d;
+}
+
+#pragma mark CloudAnimation
+
+-(void)cloudAnimation;
+{
+    if (animationCheck) {
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationBeginsFromCurrentState:YES];
+        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+        [UIView setAnimationDuration:0.7f];
+        [UIView setAnimationDelegate:self];
+        
+        CGRect frame = cloudView.frame;
+        frame.origin.x = cloudX;
+        cloudView.frame = frame;
+        cloudX-=10;
+        
+        [UIView setAnimationDidStopSelector:@selector(cloudRevAnimation)];
+        [UIView commitAnimations];
+    }
+}
+
+-(void)cloudRevAnimation
+{    
+    if(cloudX == 460){
+        [cloudView setHidden:NO];
+        
+    }
+    
+    if(cloudX==0){
+        [self cloudSecondAnimation];        
+    }
+    
+    if(cloudX==-480){
+        [cloudView setHidden:YES];
+        CGRect frame = cloudView.frame;
+        frame.origin.x = 480;
+        cloudView.frame = frame;
+        cloudX=480;
+    }else{
+        [self cloudAnimation];
+    }
+}
+
+-(void)cloudSecondAnimation
+{
+    if (animationCheck) {
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationBeginsFromCurrentState:YES];
+        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+        [UIView setAnimationDuration:0.7f];
+        [UIView setAnimationDelegate:self];
+        
+        CGRect frame = cloudSecondView.frame;
+        frame.origin.x = cloud2X;
+        cloudSecondView.frame = frame;
+        cloud2X-=10;
+        
+        [UIView setAnimationDidStopSelector:@selector(cloudSecondRevAnimation)];
+        [UIView commitAnimations];
+    }
+}
+
+-(void)cloudSecondRevAnimation
+{
+    if(cloud2X ==460){
+        [cloudSecondView setHidden:NO];
+    }
+    if(cloud2X==0){
+        [self cloudAnimation];
+    }
+    if(cloud2X==-480){
+        [cloudSecondView setHidden:YES];
+        CGRect frame = cloudSecondView.frame;
+        frame.origin.x = 480;
+        cloudSecondView.frame = frame;
+        cloud2X=480;
+    }else{
+        [self cloudSecondAnimation];
+    }
 }
 
 #pragma mark 10 dolars for day

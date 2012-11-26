@@ -148,7 +148,6 @@ static CGFloat const ANIMATION_TIME = 0.3f;
 
 
 }
-@property (strong, nonatomic) IBOutlet UIView *_vBackground;
 @property (strong, nonatomic) IBOutlet UIView *_vEarth;
 @property (strong, nonatomic) IBOutlet UIButton *_btnNab;
 @property (strong, nonatomic) IBOutlet UIImageView *_ivGun;
