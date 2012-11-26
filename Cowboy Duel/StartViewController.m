@@ -94,6 +94,7 @@
     IBOutlet UILabel *lbShareCancelBtn;
 
     //Cloud
+    IBOutlet UIImageView *background;
     IBOutlet UIImageView *cloudView;
     IBOutlet UIImageView *cloudSecondView;
     int cloudX;
@@ -502,6 +503,9 @@ static StartViewController *sharedHelper = nil;
         return;
     }
     
+    background.hidden = NO;
+    cloudView.hidden = NO;
+    cloudSecondView.hidden = NO;
     animationCheck = YES;
     [self cloudAnimation];
     [self cloudSecondAnimation];
@@ -573,6 +577,9 @@ static StartViewController *sharedHelper = nil;
       shareViewVisible = NO;
     }
     
+    background.hidden = YES;
+    cloudView.hidden = YES;
+    cloudSecondView.hidden = YES;
     animationCheck = NO;
 }
 
