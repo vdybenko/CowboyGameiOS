@@ -357,8 +357,8 @@ static StartViewController *sharedHelper = nil;
 
         oldAccounId = @"";
         
-        cloudX=470;
-        cloud2X=-20;
+        cloudX=480;
+        cloud2X=0;
     }
     return self; 
 }
@@ -1523,7 +1523,7 @@ static StartViewController *sharedHelper = nil;
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationBeginsFromCurrentState:YES];
         [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-        [UIView setAnimationDuration:0.1f];
+        [UIView setAnimationDuration:0.05f];
         [UIView setAnimationDelegate:self];
         
         CGRect frame = cloudView.frame;
@@ -1538,21 +1538,20 @@ static StartViewController *sharedHelper = nil;
 
 -(void)cloudRevAnimation
 {
-    NSLog(@"cloudX %d",cloudX);
-    if(cloudX == 440){
+    if(cloudX == 460){
         [cloudView setHidden:NO];
     }
     
-    if(cloudX==-10){
+    if(cloudX==0){
         [self cloudSecondAnimation];
     }
     
     if(cloudX==-500){
         [cloudView setHidden:YES];
         CGRect frame = cloudView.frame;
-        frame.origin.x = 470;
+        frame.origin.x = 480;
         cloudView.frame = frame;
-        cloudX=470;
+        cloudX=480;
     }else{
         [self cloudAnimation];
     }
@@ -1564,7 +1563,7 @@ static StartViewController *sharedHelper = nil;
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationBeginsFromCurrentState:YES];
         [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-        [UIView setAnimationDuration:0.1f];
+        [UIView setAnimationDuration:0.05f];
         [UIView setAnimationDelegate:self];
         
         CGRect frame = cloudSecondView.frame;
@@ -1579,19 +1578,18 @@ static StartViewController *sharedHelper = nil;
 
 -(void)cloudSecondRevAnimation
 {
-    NSLog(@"cloud2X %d",cloud2X);
-    if(cloud2X ==440){
+    if(cloud2X ==460){
         [cloudSecondView setHidden:NO];
     }
-    if(cloud2X==-10){
+    if(cloud2X==0){
         [self cloudAnimation];
     }
     if(cloud2X==-500){
         [cloudSecondView setHidden:YES];
         CGRect frame = cloudSecondView.frame;
-        frame.origin.x = 470;
+        frame.origin.x = 480;
         cloudSecondView.frame = frame;
-        cloud2X=470;
+        cloud2X=480;
     }else{
         [self cloudSecondAnimation];
     }
