@@ -680,7 +680,7 @@
         DLog(@"number %d", local);
         playerAccount.glNumber = [NSNumber numberWithInt:local];
         //            transaction.trNumber = [NSNumber numberWithInt:local];
-        transaction.trOpponentID = [NSString stringWithString:oponentAccount.accountID];
+        transaction.trOpponentID = [NSString stringWithString:(oponentAccount.accountID) ? [NSString stringWithString:oponentAccount.accountID]:@""];
         [playerAccount.transactions addObject:transaction];
         
         CDTransaction *opponentTransaction = [CDTransaction new];
@@ -690,7 +690,7 @@
         else   [opponentTransaction setTrType:[NSNumber numberWithInt:1]];
         
         [opponentTransaction setTrMoneyCh:[NSNumber numberWithInt:-[transaction.trMoneyCh intValue]]];
-        opponentTransaction.trOpponentID = [NSString stringWithString:playerAccount.accountID];
+        opponentTransaction.trOpponentID = [NSString stringWithString:(playerAccount.accountID) ? [NSString stringWithString:playerAccount.accountID]:@""];
         [oponentAccount.transactions addObject:opponentTransaction];
         
         NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
