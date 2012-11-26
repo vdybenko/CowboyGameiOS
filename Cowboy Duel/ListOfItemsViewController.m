@@ -294,7 +294,7 @@
     [activityIndicator stopAnimating];
     [btnInvite setEnabled:YES];
     [tableView reloadData];
-    if (_playersOnLineDataSource.serverObjects.count == 0) {
+    if (_playersOnLineDataSource.serverObjects.count == 0 && statusOnLine) {
         [offLineBackGround setDinamicHeightBackground];
         
         [offLineText loadHTMLString:NSLocalizedString(@"AlertTextListOnlineIsEmpty", @"") baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
@@ -302,8 +302,10 @@
         [tableView setHidden:YES];
         [offLineBackGround setHidden:NO];
     }else {
-        [tableView setHidden:NO];
-        [offLineBackGround setHidden:YES];
+        if(statusOnLine){
+            [tableView setHidden:NO];
+            [offLineBackGround setHidden:YES];
+        }
     };
     [self.tableView refreshFinished];
 }
