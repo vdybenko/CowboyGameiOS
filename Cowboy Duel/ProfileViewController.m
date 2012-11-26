@@ -264,6 +264,8 @@
         [self setImageFromFacebook];
     }
     lbFBName.text = playerAccount.accountName;
+    NSString *name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel];
+    ivCurrentRank.image = [UIImage imageNamed:name];
     SSConnection *connection = [SSConnection sharedInstance];
     [connection sendInfoPacket];
 }
