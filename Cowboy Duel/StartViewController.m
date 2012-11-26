@@ -357,8 +357,8 @@ static StartViewController *sharedHelper = nil;
 
         oldAccounId = @"";
         
-        cloudX=480;
-        cloud2X=0;
+        cloudX=470;
+        cloud2X=-20;
     }
     return self; 
 }
@@ -498,17 +498,17 @@ static StartViewController *sharedHelper = nil;
     
     [self playerStart];
     
-    if (firstRun) {
-        firstRun = NO;
-        return;
-    }
-    
     background.hidden = NO;
     cloudView.hidden = NO;
     cloudSecondView.hidden = NO;
     animationCheck = YES;
     [self cloudAnimation];
     [self cloudSecondAnimation];
+    
+    if (firstRun) {
+        firstRun = NO;
+        return;
+    }
     
     [self changeRankOfBlackHelpViews];
     
@@ -588,7 +588,10 @@ static StartViewController *sharedHelper = nil;
     DLog(@"did become active");
     SSConnection *connection = [SSConnection sharedInstance];
     [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
-    [self login];
+    
+    if (firstRunLocal) {
+        [self login];
+    }
     
     [facebook extendAccessTokenIfNeeded];
     if (profileViewController) {
@@ -972,8 +975,6 @@ static StartViewController *sharedHelper = nil;
         NSMutableData *receivedData = [[NSMutableData alloc] init];
         [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
     }
-
-    
 }
 
 #pragma mark - CustomNSURLConnection handlers
@@ -1522,7 +1523,7 @@ static StartViewController *sharedHelper = nil;
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationBeginsFromCurrentState:YES];
         [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-        [UIView setAnimationDuration:0.7f];
+        [UIView setAnimationDuration:0.1f];
         [UIView setAnimationDelegate:self];
         
         CGRect frame = cloudView.frame;
@@ -1536,22 +1537,22 @@ static StartViewController *sharedHelper = nil;
 }
 
 -(void)cloudRevAnimation
-{    
-    if(cloudX == 460){
+{
+    NSLog(@"cloudX %d",cloudX);
+    if(cloudX == 440){
         [cloudView setHidden:NO];
-        
     }
     
-    if(cloudX==0){
-        [self cloudSecondAnimation];        
+    if(cloudX==-10){
+        [self cloudSecondAnimation];
     }
     
-    if(cloudX==-480){
+    if(cloudX==-500){
         [cloudView setHidden:YES];
         CGRect frame = cloudView.frame;
-        frame.origin.x = 480;
+        frame.origin.x = 470;
         cloudView.frame = frame;
-        cloudX=480;
+        cloudX=470;
     }else{
         [self cloudAnimation];
     }
@@ -1563,7 +1564,7 @@ static StartViewController *sharedHelper = nil;
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationBeginsFromCurrentState:YES];
         [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-        [UIView setAnimationDuration:0.7f];
+        [UIView setAnimationDuration:0.1f];
         [UIView setAnimationDelegate:self];
         
         CGRect frame = cloudSecondView.frame;
@@ -1578,18 +1579,19 @@ static StartViewController *sharedHelper = nil;
 
 -(void)cloudSecondRevAnimation
 {
-    if(cloud2X ==460){
+    NSLog(@"cloud2X %d",cloud2X);
+    if(cloud2X ==440){
         [cloudSecondView setHidden:NO];
     }
-    if(cloud2X==0){
+    if(cloud2X==-10){
         [self cloudAnimation];
     }
-    if(cloud2X==-480){
+    if(cloud2X==-500){
         [cloudSecondView setHidden:YES];
         CGRect frame = cloudSecondView.frame;
-        frame.origin.x = 480;
+        frame.origin.x = 470;
         cloudSecondView.frame = frame;
-        cloud2X=480;
+        cloud2X=470;
     }else{
         [self cloudSecondAnimation];
     }
