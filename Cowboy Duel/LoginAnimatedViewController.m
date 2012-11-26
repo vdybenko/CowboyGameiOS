@@ -306,6 +306,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
 }
 
 - (IBAction)donateButtonClick:(id)sender {
+    stDonate = [NSMutableString string];
     [self.player stop];
     [self.player setVolume:0.0];
     animationPause = YES;
@@ -375,8 +376,8 @@ static LoginAnimatedViewController *sharedHelper = nil;
 
 - (void)fbDidLogin {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    if (![userDefaults objectForKey:@"FBAccessTokenKey"]) {
-        
+    if (![userDefaults objectForKey:@"FBAccessTokenKey"] || ![userDefaults objectForKey:@"FBLoginV2.1"]) {
+        [userDefaults setInteger:1 forKey:@"FBLoginV2.1"];
         [userDefaults setObject:self.facebook.accessToken forKey:@"FBAccessTokenKey"];
         [userDefaults setObject:self.facebook.expirationDate forKey:@"FBExpirationDateKey"];
         
@@ -391,6 +392,9 @@ static LoginAnimatedViewController *sharedHelper = nil;
         
         [self.facebook requestWithGraphPath:@"me" andParams:params andDelegate:self];
         
+        [[NSNotificationCenter defaultCenter] postNotificationName: kCheckfFBLoginSession
+                                                            object:self
+                                                          userInfo:nil];
         
         switch (loginFacebookStatus) {
             case LoginFacebookStatusSimple:

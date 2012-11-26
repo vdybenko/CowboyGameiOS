@@ -26,5 +26,6 @@
 
 -(id)initWithAccount:(AccountDataSource *)userAccount startViewController:(StartViewController *)startViewController;
 -(void)checkValidBlackActivity;
+-(void)checkLocationOfViewForFBLogin;
 
 @end

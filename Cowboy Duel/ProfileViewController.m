@@ -345,7 +345,7 @@
 -(void)refreshContentFromPlayerAccount;
 {
     // added for thousands separate   
-    
+    [ivBlack setHidden:YES];
     [lbDuelsWonCount dinamicAttachToView:lbDuelsWon withDirection:DirectionToAnimateRight ];
     NSString *nameOfRank=[NSString stringWithFormat:@"%dRank",playerAccount.accountLevel];
     lbUserTitle.text = NSLocalizedString(nameOfRank, @"");
