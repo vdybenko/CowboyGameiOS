@@ -17,6 +17,14 @@
 #define videoHelp @"http://www.youtube.com/watch?v=HZST2wcGAr4"
 @interface MyMovieViewController : MPMoviePlayerViewController
 @end
+
+@implementation MyMovieViewController
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
+}
+@end
+
 @interface HelpViewController () {
     id startVC;
     
@@ -138,7 +146,7 @@ BOOL isSoundControl;
     [self presentMoviePlayerViewControllerAnimated:mp];
     
     [mp.moviePlayer setFullscreen:YES animated:YES];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayBackDidFinish:) name:MPMoviePlayerDidExitFullscreenNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayBackDidFinish:) name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
     if (isSoundControl)[startVC soundOff];
     
     if([startVC connectedToWiFi]) [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
@@ -161,16 +169,9 @@ BOOL isSoundControl;
     [self dismissMoviePlayerViewControllerAnimated];
     
     if (isSoundControl)[startVC soundOff];
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:MPMoviePlayerDidExitFullscreenNotification object:nil];
-}  
-
-@end
-
-
-@implementation MyMovieViewController
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-    return UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
 }
+
+
 
 @end

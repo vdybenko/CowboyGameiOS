@@ -464,15 +464,15 @@ static StartViewController *sharedHelper = nil;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSInteger loginFirstShow = [userDefaults integerForKey:@"loginFirstShow"];
     
-    if (!loginFirstShow) {
-        SSConnection *connection = [SSConnection sharedInstance];
-        [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
-        
-        LoginAnimatedViewController *loginViewControllerLocal = [LoginAnimatedViewController sharedInstance];
-        loginViewControllerLocal.startViewController = self;
-        [loginViewControllerLocal setPayment:YES];
-        [self.navigationController pushViewController:loginViewControllerLocal animated:YES];
-    }
+//    if (!loginFirstShow) {
+//        SSConnection *connection = [SSConnection sharedInstance];
+//        [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
+//        
+//        LoginAnimatedViewController *loginViewControllerLocal = [LoginAnimatedViewController sharedInstance];
+//        loginViewControllerLocal.startViewController = self;
+//        [loginViewControllerLocal setPayment:YES];
+//        [self.navigationController pushViewController:loginViewControllerLocal animated:YES];
+//    }
 
     
 }

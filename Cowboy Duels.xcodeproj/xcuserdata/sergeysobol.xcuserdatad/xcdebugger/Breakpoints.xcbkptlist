@@ -137,19 +137,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "375383680.423465"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "467"
-         endingLineNumber = "467"
-         landmarkName = "-viewDidLoad"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ProfileViewController.m"
          timestampString = "375611349.2174"
          startingColumnNumber = "9223372036854775807"
@@ -172,10 +159,23 @@
          landmarkName = "-refreshContentFromPlayerAccount"
          landmarkType = "5">
       </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Cowboy Duel/StartViewController.m"
+         timestampString = "375624481.788242"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "566"
+         endingLineNumber = "566"
+         landmarkName = "-didBecomeActive"
+         landmarkType = "5">
+      </FileBreakpoint>
    </FileBreakpoints>
    <ExceptionBreakpoints>
       <ExceptionBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          scope = "0"
