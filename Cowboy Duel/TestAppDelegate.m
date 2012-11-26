@@ -48,7 +48,7 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
 {
     [UIImage initialize];
         
-    [AdColony initAdColonyWithDelegate:self];
+   // [AdColony initAdColonyWithDelegate:self];
 #if !(TARGET_IPHONE_SIMULATOR)  
     [[GANTracker sharedTracker] startTrackerWithAccountID:kGAAccountID
                                            dispatchPeriod:kGANDispatchPeriod delegate:self];

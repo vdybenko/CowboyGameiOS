@@ -8,7 +8,6 @@
 //
 
 #import "StartViewController.h"
-#import "AdColonyViewController.h"
 #import "UIView+Hierarchy.h"
 #import "UIButton+Image+Title.h"
 #import "AdvertisingNewVersionViewController.h"
@@ -724,10 +723,10 @@ static StartViewController *sharedHelper = nil;
 }
 
 -(void) advertButtonClick {
-    AdColonyViewController *adColonyViewController = [[AdColonyViewController alloc]initWithStartVC:self];
+    //AdColonyViewController *adColonyViewController = [[AdColonyViewController alloc]initWithStartVC:self];
     SSConnection *connection = [SSConnection sharedInstance];
     [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
-    [self presentModalViewController:adColonyViewController animated:YES];
+    //[self presentModalViewController:adColonyViewController animated:YES];
 }
 
 #pragma mark -
@@ -996,11 +995,11 @@ static StartViewController *sharedHelper = nil;
             [playerAccount saveAccountBigestWin];
         }
         
-        if (playerAccount.removeAds!=AdColonyAdsStatusRemoved) {
-            int removeAds=[[responseObject objectForKey:@"remove_ads"] intValue];
-            playerAccount.removeAds=removeAds;
-            [playerAccount saveRemoveAds];
-        }
+//        if (playerAccount.removeAds!=AdColonyAdsStatusRemoved) {
+//            int removeAds=[[responseObject objectForKey:@"remove_ads"] intValue];
+//            playerAccount.removeAds=removeAds;
+//            [playerAccount saveRemoveAds];
+//        }
 
         NSString *urlAvatar=[responseObject objectForKey:@"avatar"];
         if ([playerAccount isAvatarImage:urlAvatar]) {
@@ -1341,12 +1340,12 @@ static StartViewController *sharedHelper = nil;
     int drawCount=playerAccount.accountDraws;
     int playedMatches=playerAccount.accountWins+drawCount;
     
-    if ((playedMatches>=2)&&([self connectedToWiFi]&&[AdColonyViewController isAdStatusValid])) {
-        if ((advertisingWillShow)&&(playerAccount.removeAds!=AdColonyAdsStatusRemoved)) {
-            [self advertButtonClick];
-            return YES;
-        }
-    }
+//    if ((playedMatches>=2)&&([self connectedToWiFi]&&[AdColonyViewController isAdStatusValid])) {
+//        if ((advertisingWillShow)&&(playerAccount.removeAds!=AdColonyAdsStatusRemoved)) {
+//            [self advertButtonClick];
+//            return YES;
+//        }
+//    }
     return NO;
 }
 

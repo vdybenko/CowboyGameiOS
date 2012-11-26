@@ -7,7 +7,6 @@
 //
 
 #import "CurrencyManager.h"
-#import "AdColonyPublic.h"
 
 @implementation CurrencyManager
 

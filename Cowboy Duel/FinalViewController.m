@@ -11,7 +11,6 @@
 #import "TeachingViewController.h"
 #import "GameCenterViewController.h"
 #import "StartViewController.h"
-#import "AdColonyViewController.h"
 #import "ProfileViewController.h"
 #import "GCHelper.h"
 #import "DuelRewardLogicController.h"

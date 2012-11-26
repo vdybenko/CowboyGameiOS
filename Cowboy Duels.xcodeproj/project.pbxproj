@@ -85,19 +85,14 @@
 		03286090159DD84000D16195 /* st_bg_new@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03286024159DD84000D16195 /* st_bg_new@2x.png */; };
 		03286093159DD84000D16195 /* st_title.png in Resources */ = {isa = PBXBuildFile; fileRef = 03286027159DD84000D16195 /* st_title.png */; };
 		03286094159DD84000D16195 /* st_title@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03286028159DD84000D16195 /* st_title@2x.png */; };
-		037D8B31154AE493003BDB3C /* CurrencyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 037D8B2E154AE493003BDB3C /* CurrencyManager.m */; };
-		037D8B32154AE493003BDB3C /* GameContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 037D8B30154AE493003BDB3C /* GameContentViewController.m */; };
 		037DF21E154BDBAC003FACDF /* CDCollectionApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 037DF217154BDBAC003FACDF /* CDCollectionApp.m */; };
 		037DF21F154BDBAC003FACDF /* CollectionAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 037DF219154BDBAC003FACDF /* CollectionAppViewController.m */; };
 		037DF220154BDBAC003FACDF /* CollectionAppWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 037DF21B154BDBAC003FACDF /* CollectionAppWrapper.m */; };
 		037DF221154BDBAC003FACDF /* ItemsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 037DF21D154BDBAC003FACDF /* ItemsDataSource.m */; };
-		038366DB154924E700F3F63B /* libAdColony.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 038366DA154924E700F3F63B /* libAdColony.a */; };
 		038366DD1549257700F3F63B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038366DC1549257700F3F63B /* MediaPlayer.framework */; };
 		038366DF154925A100F3F63B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038366DE154925A100F3F63B /* CoreTelephony.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		038366E315493B8900F3F63B /* AdColonyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 038366E115493B8900F3F63B /* AdColonyViewController.m */; };
 		3115FB5015CACA5100C4D438 /* MoneyCongratViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3115FB4E15CACA5100C4D438 /* MoneyCongratViewController.m */; };
 		3115FB5115CACA5100C4D438 /* MoneyCongratViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3115FB4F15CACA5100C4D438 /* MoneyCongratViewController.xib */; };
-		311E0D0A15A6F035003C261F /* AdColonyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 311E0D0B15A6F035003C261F /* AdColonyViewController.xib */; };
 		312B2F3F15E7A24F006D2470 /* fin_img_achieve.png in Resources */ = {isa = PBXBuildFile; fileRef = 312B2F3915E7A24F006D2470 /* fin_img_achieve.png */; };
 		312B2F4015E7A24F006D2470 /* fin_img_achieve@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 312B2F3A15E7A24F006D2470 /* fin_img_achieve@2x.png */; };
 		312B2F4115E7A24F006D2470 /* fin_img_high_score.png in Resources */ = {isa = PBXBuildFile; fileRef = 312B2F3B15E7A24F006D2470 /* fin_img_high_score.png */; };
@@ -230,7 +225,6 @@
 		767A010B158B0BF0003C08D5 /* AdvertisingAppearController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767A010A158B0BF0003C08D5 /* AdvertisingAppearController.m */; };
 		767B56CF15AEDE2F00ECA0C4 /* CustomNSURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 767B56CE15AEDE2F00ECA0C4 /* CustomNSURLConnection.m */; };
 		767BA5BE1589F8E300825EB1 /* FinalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767BA5BD1589F8E300825EB1 /* FinalViewController.xib */; };
-		767C0B7D15652C9C0007E113 /* libCrittercism_v3_1_5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 767C0B1715652C9C0007E113 /* libCrittercism_v3_1_5.a */; };
 		767CD1E4158F212B0054C9B8 /* UIImage+Save.m in Sources */ = {isa = PBXBuildFile; fileRef = 767CD1E3158F212B0054C9B8 /* UIImage+Save.m */; };
 		767E1F73154BFBAF001FDDD5 /* OCPromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = 767E1F71154BFBAF001FDDD5 /* OCPromptView.m */; };
 		767EF48515D55F5200548A04 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767EF48215D5557100548A04 /* Twitter.framework */; };
@@ -299,6 +293,7 @@
 		BD8165DF15E6A22700D1F189 /* fin_img_spirit.png in Resources */ = {isa = PBXBuildFile; fileRef = BD8165DD15E6A22700D1F189 /* fin_img_spirit.png */; };
 		BD8165E015E6A22700D1F189 /* fin_img_spirit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD8165DE15E6A22700D1F189 /* fin_img_spirit@2x.png */; };
 		BD821281165FCB900072075A /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BD821280165FCB900072075A /* Icon.png */; };
+		BD822AF31663ADB300D874F4 /* libCrittercism_v3_4_0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD822AF21663ADB300D874F4 /* libCrittercism_v3_4_0.a */; };
 		BD824CDF165A9E7D00C63F61 /* fv_img_0rank.png in Resources */ = {isa = PBXBuildFile; fileRef = BD824CDD165A9E7D00C63F61 /* fv_img_0rank.png */; };
 		BD824CE0165A9E7D00C63F61 /* fv_img_0rank@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD824CDE165A9E7D00C63F61 /* fv_img_0rank@2x.png */; };
 		BD82C8EC165E5EEC00AAAB44 /* fin_img_0rank.png in Resources */ = {isa = PBXBuildFile; fileRef = BD82C8EA165E5EEC00AAAB44 /* fin_img_0rank.png */; };
@@ -463,10 +458,6 @@
 		03286024159DD84000D16195 /* st_bg_new@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "st_bg_new@2x.png"; sourceTree = "<group>"; };
 		03286027159DD84000D16195 /* st_title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = st_title.png; sourceTree = "<group>"; };
 		03286028159DD84000D16195 /* st_title@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "st_title@2x.png"; sourceTree = "<group>"; };
-		037D8B2D154AE493003BDB3C /* CurrencyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrencyManager.h; sourceTree = "<group>"; };
-		037D8B2E154AE493003BDB3C /* CurrencyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrencyManager.m; sourceTree = "<group>"; };
-		037D8B2F154AE493003BDB3C /* GameContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameContentViewController.h; sourceTree = "<group>"; };
-		037D8B30154AE493003BDB3C /* GameContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameContentViewController.m; sourceTree = "<group>"; };
 		037DF216154BDBAC003FACDF /* CDCollectionApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDCollectionApp.h; sourceTree = "<group>"; };
 		037DF217154BDBAC003FACDF /* CDCollectionApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDCollectionApp.m; sourceTree = "<group>"; };
 		037DF218154BDBAC003FACDF /* CollectionAppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionAppViewController.h; sourceTree = "<group>"; };
@@ -475,16 +466,11 @@
 		037DF21B154BDBAC003FACDF /* CollectionAppWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionAppWrapper.m; sourceTree = "<group>"; };
 		037DF21C154BDBAC003FACDF /* ItemsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemsDataSource.h; sourceTree = "<group>"; };
 		037DF21D154BDBAC003FACDF /* ItemsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemsDataSource.m; sourceTree = "<group>"; };
-		038366D9154924E700F3F63B /* AdColonyPublic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdColonyPublic.h; sourceTree = "<group>"; };
-		038366DA154924E700F3F63B /* libAdColony.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdColony.a; sourceTree = "<group>"; };
 		038366DC1549257700F3F63B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		038366DE154925A100F3F63B /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		038366E015493B8900F3F63B /* AdColonyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdColonyViewController.h; sourceTree = "<group>"; };
-		038366E115493B8900F3F63B /* AdColonyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdColonyViewController.m; sourceTree = "<group>"; };
 		3115FB4D15CACA5100C4D438 /* MoneyCongratViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MoneyCongratViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		3115FB4E15CACA5100C4D438 /* MoneyCongratViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MoneyCongratViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		3115FB4F15CACA5100C4D438 /* MoneyCongratViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MoneyCongratViewController.xib; path = "../Cowboy Duel/MoneyCongratViewController.xib"; sourceTree = "<group>"; };
-		311E0D0B15A6F035003C261F /* AdColonyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = AdColonyViewController.xib; path = "../Cowboy Duel/AdColonyViewController.xib"; sourceTree = "<group>"; };
 		312B2F3915E7A24F006D2470 /* fin_img_achieve.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fin_img_achieve.png; sourceTree = "<group>"; };
 		312B2F3A15E7A24F006D2470 /* fin_img_achieve@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fin_img_achieve@2x.png"; sourceTree = "<group>"; };
 		312B2F3B15E7A24F006D2470 /* fin_img_high_score.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fin_img_high_score.png; sourceTree = "<group>"; };
@@ -633,36 +619,7 @@
 		767B56CD15AEDE2F00ECA0C4 /* CustomNSURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CustomNSURLConnection.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		767B56CE15AEDE2F00ECA0C4 /* CustomNSURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNSURLConnection.m; sourceTree = "<group>"; };
 		767BA5BD1589F8E300825EB1 /* FinalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FinalViewController.xib; sourceTree = "<group>"; };
-		767C0B1315652C9C0007E113 /* CrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrashReporter.h; sourceTree = "<group>"; };
 		767C0B1415652C9C0007E113 /* Crittercism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crittercism.h; sourceTree = "<group>"; };
-		767C0B1515652C9C0007E113 /* CrittercismJSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrittercismJSONKit.h; sourceTree = "<group>"; };
-		767C0B1615652C9C0007E113 /* CrittercismReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrittercismReachability.h; sourceTree = "<group>"; };
-		767C0B1715652C9C0007E113 /* libCrittercism_v3_1_5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCrittercism_v3_1_5.a; sourceTree = "<group>"; };
-		767C0B1815652C9C0007E113 /* PLCrashAsync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashAsync.h; sourceTree = "<group>"; };
-		767C0B1915652C9C0007E113 /* PLCrashAsyncImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashAsyncImage.h; sourceTree = "<group>"; };
-		767C0B1A15652C9C0007E113 /* PLCrashAsyncSignalInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashAsyncSignalInfo.h; sourceTree = "<group>"; };
-		767C0B1B15652C9C0007E113 /* PLCrashFrameWalker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashFrameWalker.h; sourceTree = "<group>"; };
-		767C0B1C15652C9C0007E113 /* PLCrashFrameWalker_arm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashFrameWalker_arm.h; sourceTree = "<group>"; };
-		767C0B1D15652C9C0007E113 /* PLCrashFrameWalker_i386.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashFrameWalker_i386.h; sourceTree = "<group>"; };
-		767C0B1E15652C9C0007E113 /* PLCrashFrameWalker_ppc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashFrameWalker_ppc.h; sourceTree = "<group>"; };
-		767C0B1F15652C9C0007E113 /* PLCrashFrameWalker_x86_64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashFrameWalker_x86_64.h; sourceTree = "<group>"; };
-		767C0B2015652C9C0007E113 /* PLCrashLogWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashLogWriter.h; sourceTree = "<group>"; };
-		767C0B2115652C9C0007E113 /* PLCrashLogWriterEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashLogWriterEncoding.h; sourceTree = "<group>"; };
-		767C0B2215652C9C0007E113 /* PLCrashReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReport.h; sourceTree = "<group>"; };
-		767C0B2315652C9C0007E113 /* PLCrashReportApplicationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReportApplicationInfo.h; sourceTree = "<group>"; };
-		767C0B2415652C9C0007E113 /* PLCrashReportBinaryImageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReportBinaryImageInfo.h; sourceTree = "<group>"; };
-		767C0B2515652C9C0007E113 /* PLCrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReporter.h; sourceTree = "<group>"; };
-		767C0B2615652C9C0007E113 /* PLCrashReportExceptionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReportExceptionInfo.h; sourceTree = "<group>"; };
-		767C0B2715652C9C0007E113 /* PLCrashReportFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReportFormatter.h; sourceTree = "<group>"; };
-		767C0B2815652C9C0007E113 /* PLCrashReportMachineInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReportMachineInfo.h; sourceTree = "<group>"; };
-		767C0B2915652C9C0007E113 /* PLCrashReportProcessInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReportProcessInfo.h; sourceTree = "<group>"; };
-		767C0B2A15652C9C0007E113 /* PLCrashReportProcessorInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReportProcessorInfo.h; sourceTree = "<group>"; };
-		767C0B2B15652C9C0007E113 /* PLCrashReportSignalInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReportSignalInfo.h; sourceTree = "<group>"; };
-		767C0B2C15652C9C0007E113 /* PLCrashReportSystemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReportSystemInfo.h; sourceTree = "<group>"; };
-		767C0B2D15652C9C0007E113 /* PLCrashReportTextFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReportTextFormatter.h; sourceTree = "<group>"; };
-		767C0B2E15652C9C0007E113 /* PLCrashReportThreadInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReportThreadInfo.h; sourceTree = "<group>"; };
-		767C0B2F15652C9C0007E113 /* PLCrashSignalHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashSignalHandler.h; sourceTree = "<group>"; };
-		767C0B3015652C9C0007E113 /* PLCrashSysctl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashSysctl.h; sourceTree = "<group>"; };
 		767CD1E2158F212A0054C9B8 /* UIImage+Save.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Save.h"; sourceTree = "<group>"; };
 		767CD1E3158F212B0054C9B8 /* UIImage+Save.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Save.m"; sourceTree = "<group>"; };
 		767E1F71154BFBAF001FDDD5 /* OCPromptView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCPromptView.m; sourceTree = "<group>"; };
@@ -755,6 +712,7 @@
 		BD8165DD15E6A22700D1F189 /* fin_img_spirit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fin_img_spirit.png; sourceTree = "<group>"; };
 		BD8165DE15E6A22700D1F189 /* fin_img_spirit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fin_img_spirit@2x.png"; sourceTree = "<group>"; };
 		BD821280165FCB900072075A /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		BD822AF21663ADB300D874F4 /* libCrittercism_v3_4_0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCrittercism_v3_4_0.a; path = CrittercismSDK/libCrittercism_v3_4_0.a; sourceTree = "<group>"; };
 		BD824CDD165A9E7D00C63F61 /* fv_img_0rank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fv_img_0rank.png; sourceTree = "<group>"; };
 		BD824CDE165A9E7D00C63F61 /* fv_img_0rank@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fv_img_0rank@2x.png"; sourceTree = "<group>"; };
 		BD82C8EA165E5EEC00AAAB44 /* fin_img_0rank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fin_img_0rank.png; sourceTree = "<group>"; };
@@ -910,11 +868,10 @@
 				60593A711379321800256204 /* UIKit.framework in Frameworks */,
 				60593A731379321800256204 /* Foundation.framework in Frameworks */,
 				60593A751379321800256204 /* CoreGraphics.framework in Frameworks */,
-				038366DB154924E700F3F63B /* libAdColony.a in Frameworks */,
-				767C0B7D15652C9C0007E113 /* libCrittercism_v3_1_5.a in Frameworks */,
 				BDD8E23E163EF09D004F05A9 /* libGoogleAdMobAds.a in Frameworks */,
 				313F4E78165CFE7B007EF4B1 /* libsqlite3.0.dylib in Frameworks */,
 				313F4E79165CFEA2007EF4B1 /* libGoogleAnalytics.a in Frameworks */,
+				BD822AF31663ADB300D874F4 /* libCrittercism_v3_4_0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1171,19 +1128,6 @@
 			path = StartView;
 			sourceTree = "<group>";
 		};
-		037D8B2C154AE29F003BDB3C /* AdColonyGroup */ = {
-			isa = PBXGroup;
-			children = (
-				037D8B2D154AE493003BDB3C /* CurrencyManager.h */,
-				037D8B2E154AE493003BDB3C /* CurrencyManager.m */,
-				037D8B2F154AE493003BDB3C /* GameContentViewController.h */,
-				037D8B30154AE493003BDB3C /* GameContentViewController.m */,
-				038366E015493B8900F3F63B /* AdColonyViewController.h */,
-				038366E115493B8900F3F63B /* AdColonyViewController.m */,
-			);
-			name = AdColonyGroup;
-			sourceTree = "<group>";
-		};
 		037DF215154BDBAC003FACDF /* CollectionApp */ = {
 			isa = PBXGroup;
 			children = (
@@ -1336,13 +1280,12 @@
 		60593A6F1379321700256204 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BD822AF21663ADB300D874F4 /* libCrittercism_v3_4_0.a */,
 				038366DE154925A100F3F63B /* CoreTelephony.framework */,
 				038366DC1549257700F3F63B /* MediaPlayer.framework */,
 				BD84E2AA147CDE9D009DCEBF /* CoreText.framework */,
 				BD84E2A8147CDE65009DCEBF /* AddressBookUI.framework */,
 				BD84E2A6147CDE5D009DCEBF /* AddressBook.framework */,
-				038366D9154924E700F3F63B /* AdColonyPublic.h */,
-				038366DA154924E700F3F63B /* libAdColony.a */,
 				BDF1EF1E13D41C4E00C466DF /* MapKit.framework */,
 				BDF1EF1813D41BD600C466DF /* SystemConfiguration.framework */,
 				BDF1EF1613D41BA500C466DF /* Security.framework */,
@@ -1377,36 +1320,7 @@
 		767C0B1215652C9C0007E113 /* CrittercismSDK */ = {
 			isa = PBXGroup;
 			children = (
-				767C0B1315652C9C0007E113 /* CrashReporter.h */,
 				767C0B1415652C9C0007E113 /* Crittercism.h */,
-				767C0B1515652C9C0007E113 /* CrittercismJSONKit.h */,
-				767C0B1615652C9C0007E113 /* CrittercismReachability.h */,
-				767C0B1715652C9C0007E113 /* libCrittercism_v3_1_5.a */,
-				767C0B1815652C9C0007E113 /* PLCrashAsync.h */,
-				767C0B1915652C9C0007E113 /* PLCrashAsyncImage.h */,
-				767C0B1A15652C9C0007E113 /* PLCrashAsyncSignalInfo.h */,
-				767C0B1B15652C9C0007E113 /* PLCrashFrameWalker.h */,
-				767C0B1C15652C9C0007E113 /* PLCrashFrameWalker_arm.h */,
-				767C0B1D15652C9C0007E113 /* PLCrashFrameWalker_i386.h */,
-				767C0B1E15652C9C0007E113 /* PLCrashFrameWalker_ppc.h */,
-				767C0B1F15652C9C0007E113 /* PLCrashFrameWalker_x86_64.h */,
-				767C0B2015652C9C0007E113 /* PLCrashLogWriter.h */,
-				767C0B2115652C9C0007E113 /* PLCrashLogWriterEncoding.h */,
-				767C0B2215652C9C0007E113 /* PLCrashReport.h */,
-				767C0B2315652C9C0007E113 /* PLCrashReportApplicationInfo.h */,
-				767C0B2415652C9C0007E113 /* PLCrashReportBinaryImageInfo.h */,
-				767C0B2515652C9C0007E113 /* PLCrashReporter.h */,
-				767C0B2615652C9C0007E113 /* PLCrashReportExceptionInfo.h */,
-				767C0B2715652C9C0007E113 /* PLCrashReportFormatter.h */,
-				767C0B2815652C9C0007E113 /* PLCrashReportMachineInfo.h */,
-				767C0B2915652C9C0007E113 /* PLCrashReportProcessInfo.h */,
-				767C0B2A15652C9C0007E113 /* PLCrashReportProcessorInfo.h */,
-				767C0B2B15652C9C0007E113 /* PLCrashReportSignalInfo.h */,
-				767C0B2C15652C9C0007E113 /* PLCrashReportSystemInfo.h */,
-				767C0B2D15652C9C0007E113 /* PLCrashReportTextFormatter.h */,
-				767C0B2E15652C9C0007E113 /* PLCrashReportThreadInfo.h */,
-				767C0B2F15652C9C0007E113 /* PLCrashSignalHandler.h */,
-				767C0B3015652C9C0007E113 /* PLCrashSysctl.h */,
 			);
 			path = CrittercismSDK;
 			sourceTree = "<group>";
@@ -1437,7 +1351,6 @@
 			children = (
 				3115FB4F15CACA5100C4D438 /* MoneyCongratViewController.xib */,
 				3188979715CAD7FE002D52EA /* LevelCongratViewController.xib */,
-				311E0D0B15A6F035003C261F /* AdColonyViewController.xib */,
 				763F8A261578A1F800D8BB42 /* DuelViewControllerWithXib.xib */,
 				7692BC2E1574E36C00983264 /* DuelStartViewController.xib */,
 				761EFA4C1573BE91001670EB /* HelpViewController.xib */,
@@ -1720,7 +1633,6 @@
 				3188979615CAD7FE002D52EA /* LevelCongratViewController.m */,
 				3115FB4D15CACA5100C4D438 /* MoneyCongratViewController.h */,
 				3115FB4E15CACA5100C4D438 /* MoneyCongratViewController.m */,
-				037D8B2C154AE29F003BDB3C /* AdColonyGroup */,
 				7682E360156BCC2C00A8F9A0 /* Duel */,
 				767FEF2E156A64A40016B415 /* ListOfItemsViewController.h */,
 				767FEF2F156A64A40016B415 /* ListOfItemsViewController.m */,
@@ -1837,7 +1749,6 @@
 				76CAE7161421E97900CA39EA /* cry.mp3 in Resources */,
 				769CA78F14234458006EF248 /* shot.mp3 in Resources */,
 				76EB4DC01492661800A3A925 /* Localizable.strings in Resources */,
-				311E0D0A15A6F035003C261F /* AdColonyViewController.xib in Resources */,
 				761EFA491573BDDA001670EB /* CollectionAppViewController.xib in Resources */,
 				761EFA501573BE91001670EB /* HelpViewController.xib in Resources */,
 				761EFA511573BE91001670EB /* ProfileViewController.xib in Resources */,
@@ -2132,9 +2043,6 @@
 				BDD07BEC141E1F170085E4FB /* TestAppDelegate.m in Sources */,
 				BDD07BEF141E1F170085E4FB /* Utils.m in Sources */,
 				BDD07BF0141E1F170085E4FB /* ValidationUtils.m in Sources */,
-				038366E315493B8900F3F63B /* AdColonyViewController.m in Sources */,
-				037D8B31154AE493003BDB3C /* CurrencyManager.m in Sources */,
-				037D8B32154AE493003BDB3C /* GameContentViewController.m in Sources */,
 				037DF21E154BDBAC003FACDF /* CDCollectionApp.m in Sources */,
 				037DF21F154BDBAC003FACDF /* CollectionAppViewController.m in Sources */,
 				037DF220154BDBAC003FACDF /* CollectionAppWrapper.m in Sources */,
@@ -2201,10 +2109,7 @@
 		60593A901379321800256204 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv6,
-					armv7,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2225,7 +2130,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/gt2/** $(PROJECT_DIR)/**";
-				VALID_ARCHS = "armv6 armv7s armv7";
+				VALID_ARCHS = "armv7s armv7";
 				WARNING_LDFLAGS = (
 					Foundation,
 					"-framework",
@@ -2237,10 +2142,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = (
-					armv7,
-					armv6,
-				);
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2261,7 +2162,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				INFOPLIST_FILE = "Cowboy Duel/Test-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"/**",
@@ -2297,10 +2198,7 @@
 		76FE9BBB141DEDA400258D92 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv6,
-					armv7,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: SPE Dybenko Olga Viktorovna  (WebKate)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: SPE Dybenko Olga Viktorovna  (WebKate)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2321,7 +2219,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/gt2/** $(PROJECT_DIR)/**";
-				VALID_ARCHS = "armv6 armv7s armv7";
+				VALID_ARCHS = "armv7s armv7";
 				WARNING_LDFLAGS = (
 					Foundation,
 					"-framework",
@@ -2333,13 +2231,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = (
-					armv7,
-					armv6,
-				);
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Sergij Sobol (DF8EH42X59)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sergij Sobol (DF8EH42X59)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: SPE Dybenko Olga Viktorovna  (WebKate)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: SPE Dybenko Olga Viktorovna  (WebKate)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2357,7 +2251,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				INFOPLIST_FILE = "Cowboy Duel/Test-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"/**",
@@ -2374,13 +2268,12 @@
 				);
 				"OTHER_LDFLAGS[sdk=iphoneos*][arch=*]" = (
 					"-ObjC",
-					"-all_load",
 					"-weak_library",
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Cowboy Duel";
-				PROVISIONING_PROFILE = "A10F6559-8646-4CF0-BCE0-FF422012A420";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A10F6559-8646-4CF0-BCE0-FF422012A420";
+				PROVISIONING_PROFILE = "FC3CFCAE-2865-4B60-9333-B1EFF894DF55";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FC3CFCAE-2865-4B60-9333-B1EFF894DF55";
 				REZ_SEARCH_PATHS = "$(inherited)";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "../../.. $(PROJECT_DIR)";
@@ -2393,10 +2286,7 @@
 		E77490411427980C00145831 /* Distrbution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv6,
-					armv7,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: SPE Dybenko Olga Viktorovna  (WebKate)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: SPE Dybenko Olga Viktorovna  (WebKate)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2417,7 +2307,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/gt2/** $(PROJECT_DIR)/**";
-				VALID_ARCHS = "armv6 armv7s armv7";
+				VALID_ARCHS = "armv7s armv7";
 				WARNING_LDFLAGS = (
 					Foundation,
 					"-framework",
@@ -2429,10 +2319,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = (
-					armv7,
-					armv6,
-				);
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Sergij Sobol (DF8EH42X59)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Sergij Sobol (DF8EH42X59)";
@@ -2454,7 +2340,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				INFOPLIST_FILE = "Cowboy Duel/Test-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"/**",

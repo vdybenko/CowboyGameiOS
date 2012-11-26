@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "CurrencyManager.h"
-#import "AdColonyPublic.h"
 
 @interface GameContentViewController : UIViewController <CurrencyManagerDelegate>{
 	IBOutlet UILabel *currentBalanceLabel1, *currentBalanceLabel2;
