@@ -113,14 +113,19 @@ static NSString *ShotSound = @"%@/shot.mp3";
     lbBackButton.textColor = btnColor;
     lbBackButton.font = [UIFont fontWithName: @"DecreeNarrow" size:24];  
     
-    helpPracticeView=[[UIView alloc] initWithFrame:CGRectMake(12, 72, 290, 320)];
+    helpPracticeView=[[UIView alloc] initWithFrame:CGRectMake(12, (([UIScreen mainScreen].bounds.size.height - 172)/2), 290, 172)];
     
     UIImageView *imvArm=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dv_arm.png"]];
     CGRect frame = imvArm.frame;
-    frame.origin = CGPointMake(24, 11);
-    frame.size= CGSizeMake(242, 298);
+    frame.origin = CGPointMake(90, 12);
     imvArm.frame = frame;
     [helpPracticeView addSubview:imvArm];
+    
+    UIImageView *imvArrow=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dv_arm_arrow.png"]];
+    frame = imvArrow.frame;
+    frame.origin = CGPointMake(37, 24);
+    imvArrow.frame = frame;
+    [helpPracticeView addSubview:imvArrow];
     
     UIButton *cancelBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     frame=cancelBtn.frame;
