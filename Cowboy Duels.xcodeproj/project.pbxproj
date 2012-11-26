@@ -232,6 +232,8 @@
 		764B891A165FCBDC0014E35B /* list_online_practica_target@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 764B8916165FCBDC0014E35B /* list_online_practica_target@2x.png */; };
 		764B891F165FCCCE0014E35B /* PracticaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 764B891E165FCCCE0014E35B /* PracticaCell.xib */; };
 		764B8927165FD0F70014E35B /* PracticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 764B8926165FD0F70014E35B /* PracticeCell.m */; };
+		765A97AB166359EC0059390B /* dv_arm_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 765A97A9166359EC0059390B /* dv_arm_arrow.png */; };
+		765A97AC166359EC0059390B /* dv_arm_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 765A97AA166359EC0059390B /* dv_arm_arrow@2x.png */; };
 		766B7D3613FE790600377AA3 /* Fire.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 766B7D3513FE790600377AA3 /* Fire.mp3 */; };
 		7675CA8615A2E10C005A3BD3 /* DuelRewardLogicController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7675CA8515A2E10B005A3BD3 /* DuelRewardLogicController.m */; };
 		7676679D15C10ADA001E3215 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7676679C15C10ADA001E3215 /* Icon.png */; };
@@ -670,6 +672,8 @@
 		764B891E165FCCCE0014E35B /* PracticaCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PracticaCell.xib; path = Xib/PracticaCell.xib; sourceTree = "<group>"; };
 		764B8925165FD0F70014E35B /* PracticeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PracticeCell.h; sourceTree = "<group>"; };
 		764B8926165FD0F70014E35B /* PracticeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PracticeCell.m; sourceTree = "<group>"; };
+		765A97A9166359EC0059390B /* dv_arm_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dv_arm_arrow.png; sourceTree = "<group>"; };
+		765A97AA166359EC0059390B /* dv_arm_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dv_arm_arrow@2x.png"; sourceTree = "<group>"; };
 		765E351415765F1400CCB6F4 /* DuelViewControllerWithXib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DuelViewControllerWithXib.m; sourceTree = "<group>"; };
 		765E351515765F1400CCB6F4 /* DuelViewControllerWithXib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DuelViewControllerWithXib.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		765EB4EA1580E3530059355B /* NSString+isNumeric.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+isNumeric.h"; sourceTree = "<group>"; };
@@ -1122,6 +1126,8 @@
 				03285FDC159DD84000D16195 /* dv_img_gun1@2x.png */,
 				768044C215AC68FD005ABD3A /* dv_arm.png */,
 				768044C815AC6979005ABD3A /* dv_arm@2x.png */,
+				765A97A9166359EC0059390B /* dv_arm_arrow.png */,
+				765A97AA166359EC0059390B /* dv_arm_arrow@2x.png */,
 			);
 			path = DuelView;
 			sourceTree = "<group>";
@@ -2328,6 +2334,8 @@
 				764B8919165FCBDC0014E35B /* list_online_practica_target.png in Resources */,
 				764B891A165FCBDC0014E35B /* list_online_practica_target@2x.png in Resources */,
 				764B891F165FCCCE0014E35B /* PracticaCell.xib in Resources */,
+				765A97AB166359EC0059390B /* dv_arm_arrow.png in Resources */,
+				765A97AC166359EC0059390B /* dv_arm_arrow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -30,7 +30,9 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
 @property (strong, nonatomic) IBOutlet UILabel *labelFireTitle;
 
 @property (strong, nonatomic) IBOutlet UIView *viewSound;
+
 @property (strong, nonatomic) IBOutlet UIView *viewHand;
+@property (strong, nonatomic) IBOutlet UIImageView *ivArrow;
 
 @property (strong, nonatomic) IBOutlet UIButton *buttonBack;
 
@@ -44,6 +46,7 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
 @synthesize labelFireDescription;
 @synthesize viewSound;
 @synthesize viewHand;
+@synthesize ivArrow;
 @synthesize buttonBack;
 @synthesize labelFireTitle;
 
@@ -153,6 +156,9 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
                                               CGRect frame = viewHand.frame;
                                               frame.origin = pointForView;
                                               viewHand.frame = frame;
+                                          }
+                                          completion:^(BOOL finised){
+                                              [self scaleView:ivArrow];
                                           }];
                      }];
     [self performSelector:@selector(fourthAnimation) withObject:nil afterDelay:DELAY_BETWEEN_ANIMATION];
@@ -165,8 +171,26 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
                          CGRect frame = viewHand.frame;
                          frame.origin = pointStart;
                          viewHand.frame = frame;
+                     }
+                     completion:^(BOOL finised){
+                         [self.navigationController popViewControllerAnimated:YES];
                      }];
-   [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)scaleView:(UIView *)view
+{
+    [UIView animateWithDuration:0.4 animations:^{
+        view.transform = CGAffineTransformMakeScale(1.3, 1.3);
+    } completion:^(BOOL complete) {
+        [UIView animateWithDuration:0.4 animations:^{
+            view.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        }completion:^(BOOL complete){
+            CGRect frame = viewHand.frame;
+            if (frame.origin.y==pointForView.y) {
+                [self scaleView:view];
+            }
+        } ];
+    }];
 }
 
 #pragma mark
