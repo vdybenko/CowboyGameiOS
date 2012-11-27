@@ -96,7 +96,6 @@
     IBOutlet UILabel *lbShareCancelBtn;
 
     //Cloud
-    IBOutlet UIImageView *background;
     IBOutlet UIImageView *cloudView;
     IBOutlet UIImageView *cloudSecondView;
     int cloudX;
@@ -358,8 +357,8 @@ static StartViewController *sharedHelper = nil;
 
         oldAccounId = @"";
         
-        cloudX=480;
-        cloud2X=0;
+        cloudX=460;
+        cloud2X=-20;
     }
     return self; 
 }
@@ -507,15 +506,8 @@ static StartViewController *sharedHelper = nil;
 -(void)viewWillAppear:(BOOL)animated
 {   
     [super viewWillAppear:animated];
-    
+
     [self playerStart];
-    
-    background.hidden = NO;
-    cloudView.hidden = NO;
-    cloudSecondView.hidden = NO;
-    animationCheck = YES;
-    [self cloudAnimation];
-    [self cloudSecondAnimation];
     
     if (firstRun) {
         firstRun = NO;
@@ -537,10 +529,20 @@ static StartViewController *sharedHelper = nil;
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
+
 //    to do delete this
     playerAccount.accountLevel = 7;
 //
+    
+    TestAppDelegate *app = (TestAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [app.adBanner setHidden:NO];
+    app.clouds.hidden = YES;
+    
+    cloudView.hidden = NO;
+    cloudSecondView.hidden = NO;
+    animationCheck = YES;
+    [self cloudAnimation];
+    [self cloudSecondAnimation];
     
     SSConnection *connection = [SSConnection sharedInstance];
     [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
@@ -563,8 +565,6 @@ static StartViewController *sharedHelper = nil;
     if (paymentRegistration) [self showProfileFirstRun];
     [self isAdvertisingOfNewVersionNeedShow];
     [self estimateApp];
-    TestAppDelegate *app = (TestAppDelegate *)[[UIApplication sharedApplication] delegate];
-    [app.adBanner setHidden:NO];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -572,6 +572,23 @@ static StartViewController *sharedHelper = nil;
     [super viewWillDisappear:animated];
     TestAppDelegate *app = (TestAppDelegate *)[[UIApplication sharedApplication] delegate];
     [app.adBanner setHidden:YES];
+    app.clouds.hidden = NO;
+    
+    cloudView.hidden = YES;
+    cloudSecondView.hidden = YES;
+    animationCheck = NO;
+    
+    cloudX=460;
+    cloud2X=-20;
+    
+    CGRect frame = cloudView.frame;
+    frame.origin.x = cloudX;
+    cloudView.frame = frame;
+    
+    frame = cloudSecondView.frame;
+    frame.origin.x = cloud2X;
+    cloudSecondView.frame = frame;
+    
     if(feedBackViewVisible){
       CGRect frame = feedbackView.frame;
       frame.origin.y = [UIScreen mainScreen].bounds.size.height;
@@ -584,11 +601,6 @@ static StartViewController *sharedHelper = nil;
       shareView.frame = frame;
       shareViewVisible = NO;
     }
-    
-    background.hidden = YES;
-    cloudView.hidden = YES;
-    cloudSecondView.hidden = YES;
-    animationCheck = NO;
 }
 
 -(void)didBecomeActive
@@ -622,7 +634,7 @@ static StartViewController *sharedHelper = nil;
 }
 
 -(void)didFinishLaunching
-{    
+{
     NSString *filePath = [[OGHelper sharedInstance] getSavePathForList];
     
     NSFileManager *fileMgr = [NSFileManager defaultManager];
@@ -1537,20 +1549,20 @@ static StartViewController *sharedHelper = nil;
 
 -(void)cloudRevAnimation
 {
-    if(cloudX == 460){
+    if(cloudX == 440){
         [cloudView setHidden:NO];
     }
     
-    if(cloudX==0){
+    if(cloudX==-20){
         [self cloudSecondAnimation];
     }
     
-    if(cloudX==-500){
+    if(cloudX==-520){
         [cloudView setHidden:YES];
         CGRect frame = cloudView.frame;
-        frame.origin.x = 480;
+        frame.origin.x = 460;
         cloudView.frame = frame;
-        cloudX=480;
+        cloudX=460;
     }else{
         [self cloudAnimation];
     }
@@ -1577,18 +1589,18 @@ static StartViewController *sharedHelper = nil;
 
 -(void)cloudSecondRevAnimation
 {
-    if(cloud2X ==460){
+    if(cloud2X ==440){
         [cloudSecondView setHidden:NO];
     }
-    if(cloud2X==0){
+    if(cloud2X==-20){
         [self cloudAnimation];
     }
-    if(cloud2X==-500){
+    if(cloud2X==-520){
         [cloudSecondView setHidden:YES];
         CGRect frame = cloudSecondView.frame;
-        frame.origin.x = 480;
+        frame.origin.x = 460;
         cloudSecondView.frame = frame;
-        cloud2X=480;
+        cloud2X=460;
     }else{
         [self cloudSecondAnimation];
     }
@@ -1622,7 +1634,6 @@ static StartViewController *sharedHelper = nil;
         DLog(@"Transactions count = %d", [playerAccount.transactions count]);
     };
     [userDef synchronize];
-    
 }
 
 -(void)showMessage10Dolars;
