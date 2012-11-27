@@ -69,20 +69,23 @@
     [btnWeapons changeColorOfTitleByLabel:buttonsTitleColor];
     [btnDefenses setTitleByLabel:@"DEFENSES"];
     [btnDefenses changeColorOfTitleByLabel:buttonsTitleColor];
+    
+    [storeDataSource reloadDataSource];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        [storeDataSource reloadDataSource];
-        [self startTableAnimation];
-    });
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [MKStoreManager sharedManager].delegate = self;    
+    [MKStoreManager sharedManager].delegate = self;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [self startTableAnimation];
+    });
 }
 
 -(void)refreshController;
@@ -112,6 +115,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             UITableViewCell *cell = [tableView.visibleCells lastObject];
             [cell setHidden:YES];
+            
             UITableViewRowAnimation type;
             if (storeDataSource.typeOfTable == StoreDataSourceTypeTablesWeapons)
             {
@@ -122,7 +126,7 @@
             [storeDataSource setCellsHide:NO];
             [tableView reloadRowsAtIndexPaths:rowsToReload withRowAnimation:type];
         });
-        [NSThread sleepForTimeInterval:0.3];
+        [NSThread sleepForTimeInterval:0.09];
     }
 }
 
