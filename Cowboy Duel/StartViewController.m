@@ -384,7 +384,6 @@ static StartViewController *sharedHelper = nil;
 //        [self.navigationController pushViewController:loginViewController animated:YES];
 //    }
     
-    
     UIColor *buttonsTitleColor = [[UIColor alloc] initWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     
     [duelButton setTitle:NSLocalizedString(@"Saloon", @"") forState:UIControlStateNormal];
@@ -1523,7 +1522,7 @@ static StartViewController *sharedHelper = nil;
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationBeginsFromCurrentState:YES];
         [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-        [UIView setAnimationDuration:0.05f];
+        [UIView setAnimationDuration:0.7f];
         [UIView setAnimationDelegate:self];
         
         CGRect frame = cloudView.frame;
@@ -1563,7 +1562,7 @@ static StartViewController *sharedHelper = nil;
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationBeginsFromCurrentState:YES];
         [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-        [UIView setAnimationDuration:0.05f];
+        [UIView setAnimationDuration:0.7f];
         [UIView setAnimationDelegate:self];
         
         CGRect frame = cloudSecondView.frame;
