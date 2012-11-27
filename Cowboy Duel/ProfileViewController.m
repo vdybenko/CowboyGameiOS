@@ -433,10 +433,14 @@ static const CGFloat timeToStandartTitles = 1.8;
     if (playerAccount.accountWeapon.dDamage!=0) {
         userAtack.text = [NSString stringWithFormat:@"+%d",playerAccount.accountWeapon.dDamage];
         userAtackView.hidden = NO;
+    }else{
+        userAtackView.hidden = YES;
     }
     if (playerAccount.accountDefenseValue!=0) {
         userDefense.text = [NSString stringWithFormat:@"+%d",playerAccount.accountDefenseValue];
         userDefenseView.hidden = NO;
+    }else{
+         userDefenseView.hidden = YES;
     }
 }
 
@@ -625,11 +629,13 @@ static const CGFloat timeToStandartTitles = 1.8;
 
 - (IBAction)btnFBLoginClick:(id)sender {
     [ivBlack setHidden:NO];
+    [playerAccount cleareWeaponAndDefense];
     [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusSimple];
     [loginViewController loginButtonClick:self];
 }
 
 - (IBAction)btnFBLogOutClick:(id)sender {
+    [playerAccount cleareWeaponAndDefense];
     [ivBlack setHidden:NO];
     [loginViewController logOutFB];
         

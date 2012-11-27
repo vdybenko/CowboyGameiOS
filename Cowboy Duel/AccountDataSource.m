@@ -512,6 +512,28 @@ static AccountDataSource *sharedHelper = nil;
     self.accountDefenseValue = [[NSUserDefaults standardUserDefaults] integerForKey:@"DEFENSE_VALUE"];
 }
 
+- (void)cleareWeaponAndDefense;
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        NSArray *arrWeaponSaved = [DuelProductDownloaderController loadWeaponArray];
+        for (CDWeaponProduct *product in arrWeaponSaved) {
+            product.dCountOfUse = 0;
+        }
+        [DuelProductDownloaderController saveWeapon:arrWeaponSaved];
+        self.curentIdWeapon = 0;
+        self.accountWeapon = [[CDWeaponProduct alloc] init];
+        [self saveWeapon];
+        
+        NSArray *arrDefenseSaved = [DuelProductDownloaderController loadDefenseArray];
+        for (CDDefenseProduct *product in arrDefenseSaved) {
+            product.dCountOfUse = 0;
+        }
+        [DuelProductDownloaderController saveDefense:arrDefenseSaved];
+        self.accountDefenseValue = 0;
+        [self saveDefense];
+    });
+}
+
 - (void)saveTransaction;
 {
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];

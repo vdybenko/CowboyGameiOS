@@ -83,6 +83,7 @@
 - (void)loadWeapon;
 - (void)saveDefense;
 - (void)loadDefense;
+- (void)cleareWeaponAndDefense;
 - (void)saveTransaction;
 - (void)saveGlNumber;
 - (int)increaseGlNumber;
