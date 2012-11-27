@@ -152,7 +152,15 @@ static SSConnection *connection;
            (void *)fbImageURL,
            sizeof(char) * [someURL length]);
     
-    [self sendData:(void *)(networkPacket) packetID:NETWORK_POST_INFO ofLength:sizeof(int) * 4 + sizeof(char) * displayNameLen +sizeof(char) * [playerAccount.accountID length]+sizeof(char) * [someURL length]];
+    NSString *versionKey = @"ver2.2";
+    const char *versionKeyChar = [versionKey cStringUsingEncoding:NSUTF8StringEncoding];
+    
+    memcpy(&networkPacket[sizeof(int) * 4 + sizeof(char) * displayNameLen + sizeof(char) * [playerAccount.accountID length] + sizeof(char) * [someURL length]],
+           (void *)versionKeyChar,
+           sizeof(char) * [versionKey length]);
+    
+    
+    [self sendData:(void *)(networkPacket) packetID:NETWORK_POST_INFO ofLength:sizeof(int) * 4 + sizeof(char) * displayNameLen +sizeof(char) * [playerAccount.accountID length]+sizeof(char) * [someURL length] + sizeof(char) * [versionKey length]];
 }
 
 - (void)getData:(uint8_t[1024])message andLength:(int)length
