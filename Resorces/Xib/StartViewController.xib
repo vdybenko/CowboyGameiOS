@@ -152,9 +152,9 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="899530917"/>
-						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+						<object class="NSCustomResource" key="IBUINormalBackgroundImage" id="561224417">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">btnFeedBackWithText.png</string>
+							<string key="NSResourceName">btnFeedBackBackgr.png</string>
 						</object>
 						<reference key="IBUIFontDescription" ref="376536378"/>
 						<reference key="IBUIFont" ref="187087763"/>
@@ -177,10 +177,7 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="899530917"/>
-						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">btnShareWithText.png</string>
-						</object>
+						<reference key="IBUINormalBackgroundImage" ref="561224417"/>
 						<reference key="IBUIFontDescription" ref="376536378"/>
 						<reference key="IBUIFont" ref="187087763"/>
 					</object>
@@ -620,6 +617,7 @@
 								<string key="NSFrame">{{73, 260}, {176, 46}}</string>
 								<reference key="NSSuperview" ref="862881662"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -829,14 +827,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">feedbackButton</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="871925023"/>
-					</object>
-					<int key="connectionID">75</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">helpButton</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="492574981"/>
@@ -882,14 +872,6 @@
 						<reference key="destination" ref="1027760956"/>
 					</object>
 					<int key="connectionID">111</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">shareButton</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="876994811"/>
-					</object>
-					<int key="connectionID">123</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -962,6 +944,22 @@
 						<reference key="destination" ref="319986819"/>
 					</object>
 					<int key="connectionID">165</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">feedbackButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="871925023"/>
+					</object>
+					<int key="connectionID">167</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">shareButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="876994811"/>
+					</object>
+					<int key="connectionID">168</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -1406,7 +1404,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">165</int>
+			<int key="maxID">168</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1414,16 +1412,36 @@
 					<string key="className">StartViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="feedbackButtonClick:">id</string>
+						<string key="feedbackCancelButtonClick:">id</string>
 						<string key="feedbackFacebookBtnClick:">id</string>
+						<string key="feedbackFollowFBClick:">id</string>
 						<string key="feedbackItuneskBtnClick:">id</string>
 						<string key="feedbackMailBtnClick:">id</string>
 						<string key="feedbackTweeterBtnClick:">id</string>
 						<string key="profileButtonClick">id</string>
+						<string key="shareButtonClick:">id</string>
+						<string key="shareCancelButtonClick:">id</string>
+						<string key="showHelp:">id</string>
+						<string key="soundButtonClick:">id</string>
 						<string key="startDuel">id</string>
+						<string key="storeButtonClick:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="feedbackButtonClick:">
+							<string key="name">feedbackButtonClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="feedbackCancelButtonClick:">
+							<string key="name">feedbackCancelButtonClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="feedbackFacebookBtnClick:">
 							<string key="name">feedbackFacebookBtnClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="feedbackFollowFBClick:">
+							<string key="name">feedbackFollowFBClick:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="feedbackItuneskBtnClick:">
@@ -1442,8 +1460,28 @@
 							<string key="name">profileButtonClick</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="shareButtonClick:">
+							<string key="name">shareButtonClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="shareCancelButtonClick:">
+							<string key="name">shareCancelButtonClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showHelp:">
+							<string key="name">showHelp:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="soundButtonClick:">
+							<string key="name">soundButtonClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="startDuel">
 							<string key="name">startDuel</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="storeButtonClick:">
+							<string key="name">storeButtonClick:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>
@@ -1577,8 +1615,7 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="btnFeedBackWithText.png">{92, 33}</string>
-			<string key="btnShareWithText.png">{85, 36}</string>
+			<string key="btnFeedBackBackgr.png">{92, 33}</string>
 			<string key="btn_big.png">{180, 52}</string>
 			<string key="dv_img_eath_new.png">{600, 600}</string>
 			<string key="fb_btn_facebook.png">{57, 57}</string>
