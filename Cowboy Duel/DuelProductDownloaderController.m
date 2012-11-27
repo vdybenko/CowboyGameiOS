@@ -409,6 +409,11 @@ static NSString *getSavePathForDuelProduct()
             CDWeaponProduct *product=[arrWeaponSaved objectAtIndex:indexOfProductInSavedWeaponArray];
             product.dCountOfUse = 1;
             [arrWeaponSaved replaceObjectAtIndex:indexOfProductInSavedWeaponArray withObject:product];
+            
+            if (playerAccount.accountWeapon.dDamage < product.dDamage) {
+                playerAccount.accountWeapon = product;
+                playerAccount.curentIdWeapon = product.dID;
+            }
         }else{
             NSUInteger indexOfProductInSavedDefenseArray=[[AccountDataSource sharedInstance] findObsByID](arrDefenseSaved,idProduct);
             
@@ -432,6 +437,7 @@ static NSString *getSavePathForDuelProduct()
             }
         }
     }
+    [playerAccount saveWeapon];
     [playerAccount saveDefense];
     [DuelProductDownloaderController saveWeapon:arrWeaponSaved];
     [DuelProductDownloaderController saveDefense:arrDefenseSaved];

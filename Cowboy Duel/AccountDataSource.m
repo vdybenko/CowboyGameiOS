@@ -503,8 +503,6 @@ static AccountDataSource *sharedHelper = nil;
     if ([results count]) {
         self.accountWeapon = [results objectAtIndex:0];
         return [results objectAtIndex:0];
-    }else{
-        return nil;
     }
 }
 
