@@ -59,6 +59,7 @@ int oldMovingKey = 4;
 }
 //case Guillotine:
 - (void) guillCycleWithCurrPosition: (CGRect )curr andDelay: (float )wait{
+    if(self.stopAnimation)return;
   float tWait;
   CGRect currentPosition = self.frame;
   if (!wait && wait!=0.0) {
@@ -112,7 +113,7 @@ int oldMovingKey = 4;
 
 //case Whiskers:
 - (void) whiskersCycleWithAngle:(float) angleRotate {
-
+    if(self.stopAnimation)return;
   if(!angleRotate)
     angleRotate = M_1_PI/4;
 
@@ -145,6 +146,7 @@ int oldMovingKey = 4;
 
 //case Hat:
 -(void) hatAnimationWithFreedom: (int)freed {
+    if(self.stopAnimation)return;
   CGRect original = self.frame;
     if(self.stopAnimation) return;
   if (!freed) {
@@ -225,6 +227,7 @@ int oldMovingKey = 4;
 
 //case Fall:
 -(void)fallFromPosition: (CGRect )currentPosition withDepth: (float )tdepth andSpeed: (float) speedd{
+    if(self.stopAnimation)return;
   [self.layer removeAllAnimations];
   self.stopAnimation = YES;
   self.frame = currentPosition;

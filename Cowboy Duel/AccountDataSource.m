@@ -10,13 +10,14 @@ static const char *LIST_BOTS_URL = BASE_URL"users/get_user_data";
 
 @interface AccountDataSource(){
   NSMutableDictionary *dicForRequests;
-  NSMutableArray *receivedBotsTemp;
 }
 @end
 
 @implementation AccountDataSource
 
-@synthesize money, accountName, teachingTimes, finalInfoTable, sessionID, accountID, accountDataSourceID, transactions, duels, achivments , glNumber,accountLevel,accountPoints,accountWins,accountDraws,accountBigestWin,removeAds,avatar,age,homeTown,friends,facebookName,listBotsOnline, bot,vOfStoreList,receivedBots;
+@synthesize money, accountName, teachingTimes, finalInfoTable, sessionID, accountID, accountDataSourceID, transactions, duels, achivments , glNumber,
+ accountLevel,accountPoints,accountWins,accountDraws,accountBigestWin,removeAds,avatar,age,homeTown,friends,facebookName, bot,vOfStoreList;
+
 @synthesize accountDefenseValue;
 @synthesize curentIdWeapon;
 @synthesize isTryingWeapon;
@@ -64,9 +65,6 @@ static AccountDataSource *sharedHelper = nil;
     achivments = [[NSMutableArray alloc] init];
     dicForRequests=[[NSMutableDictionary alloc] init];
   
-    receivedBots = [NSMutableArray array];
-    receivedBotsTemp = [NSMutableArray array];
-    self.listBotsOnline = [NSMutableArray array];
     return self;
 }
 
@@ -323,35 +321,6 @@ static AccountDataSource *sharedHelper = nil;
   return secret_int ^ [self stringToInt:sessionID];
 }
 
--(void) reloadRandomId
-{
-    if (![self.listBotsOnline count]) return;
-    NSArray *randomIndexes = [self randomNumbersWithCount:3];
-    self.randomIds = [NSArray arrayWithObjects:[self.listBotsOnline objectAtIndex:[[randomIndexes objectAtIndex:0] intValue]],[self.listBotsOnline objectAtIndex:[[randomIndexes objectAtIndex:1] intValue]], [self.listBotsOnline objectAtIndex:[[randomIndexes objectAtIndex:2] intValue]], nil];
-}
-
--(NSArray *)randomNumbersWithCount:(int)count
-{
-    
-    NSMutableArray *array = [NSMutableArray array];
-    for (int i = 0; i<count; i++) {
-        BOOL numberNotAdd = YES;
-        while (numberNotAdd) {
-            BOOL containeNumber = NO;
-            int randNumber = rand() % [self.listBotsOnline count];
-            for (NSNumber *randNumberTemp in array) {
-                if([randNumberTemp intValue] == randNumber) containeNumber = YES;
-            }
-            if (!containeNumber) {
-                [array addObject:[NSNumber numberWithInt:randNumber]];
-                numberNotAdd = NO;
-            }
-        }
-        
-        
-    }
-    return array;
-}
 
 
 #pragma mark CustomNSURLConnection handlers
@@ -365,17 +334,7 @@ static AccountDataSource *sharedHelper = nil;
     NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
     
     DLog(@"AccountDataSource jsonValues %@", jsonString);
-    if ([responseObject objectForKey:@"user_id"]&&[responseObject objectForKey:@"session_id"]) {
-        
-        NSString *newStr = [connection1.requestHTTP stringByReplacingOccurrencesOfString:@"authentification=" withString:@""];
-        
-        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:responseObject];
-        [dict setObject:newStr forKey:@"authentification"];
-        [receivedBotsTemp addObject:dict];
-        [self refreshBotArray];
-        return;
-    }
-
+    
     DLog(@"err_des %@", ValidateObject([responseObject objectForKey:@"err_desc"], [NSString class]));
     
     int errCode=[[responseObject objectForKey:@"err_code"] intValue];
@@ -629,50 +588,5 @@ static AccountDataSource *sharedHelper = nil;
         return NO;
     }
 }
-#pragma mark
 
-- (void)receiveBotsForIdArray:(NSArray *)idArray;
-{
-    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:LIST_BOTS_URL encoding:NSUTF8StringEncoding]]
-                                                          cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                      timeoutInterval:kTimeOutSeconds];
-    [receivedBotsTemp removeAllObjects];
-    for (NSDictionary *dicBody in idArray) {
-        [theRequest setHTTPMethod:@"POST"];
-        NSString *stBody=[Utils makeStringForPostRequest:dicBody];
-        DLog(@"stBody %@",dicBody);
-        [theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]];
-
-        CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
-        if (theConnection) {
-            NSMutableData *receivedData = [[NSMutableData alloc] init];
-            [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
-        } else {
-            NSLog(@"WARNING: theBotsGETListConnection failed..");
-        }
-    }
-}
-
--(void)refreshBotArray
-{
-    if ([receivedBotsTemp count]) {
-        for (NSDictionary *tempBot in receivedBotsTemp) {
-            NSDictionary *tempBotForGlobal;
-            NSPredicate *predicate =
-            [NSPredicate predicateWithFormat:@"authentification == %@", [tempBot objectForKey:@"authentification"]];
-            NSArray *filtered  = [receivedBots filteredArrayUsingPredicate:predicate];
-            if([filtered count]) {
-                tempBotForGlobal = [filtered objectAtIndex:0];
-                int indexForGlobal = [receivedBots indexOfObject:tempBotForGlobal];
-                [receivedBots replaceObjectAtIndex:indexForGlobal withObject:[tempBotForGlobal copy]];
-                continue;
-            }
-            
-            int index = [receivedBotsTemp indexOfObject:tempBot];
-            if ([receivedBots count] <= index) [receivedBots addObject:[tempBot copy]];
-            else [receivedBots replaceObjectAtIndex:index withObject:[tempBot copy]];
-            
-        }
-    }
-}
 @end

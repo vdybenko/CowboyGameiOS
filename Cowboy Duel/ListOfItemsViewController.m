@@ -165,7 +165,7 @@
     player=[_playersOnLineDataSource.serverObjects objectAtIndex:indexPath.row];
 
     AccountDataSource *oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
-    [oponentAccount setAccountID:player.serverName];
+    [oponentAccount setAccountID:(player.serverName) ? [NSString stringWithString:player.serverName]:@""];
     [oponentAccount setAccountName:player.displayName];
     [oponentAccount setAccountLevel:[player.rank integerValue]];
     [oponentAccount setAccountWins:[player.duelsWin intValue]];

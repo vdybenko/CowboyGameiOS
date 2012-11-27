@@ -38,6 +38,5 @@
 @property (nonatomic, strong) NSMutableArray *serverObjects;
 
 -(void) reloadDataSource;
-//-(void) reloadRandomId;
 -(id) initWithTable:(UITableView *)pTable;
 @end

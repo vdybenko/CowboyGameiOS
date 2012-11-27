@@ -11,7 +11,6 @@
 #import "TeachingViewController.h"
 #import "GameCenterViewController.h"
 #import "StartViewController.h"
-#import "AdColonyViewController.h"
 #import "ProfileViewController.h"
 #import "GCHelper.h"
 #import "DuelRewardLogicController.h"
@@ -496,6 +495,7 @@
     frame.origin.y = 60;
     frame.origin.x = 0;
     loserImg.frame = frame;
+    
     [viewLastSceneAnimation addSubview:loserImg];
     
     loserSpiritImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fv_new_corpse_shadow.png"]];
@@ -573,6 +573,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                         object:self
                                                       userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@%@",stGA,@"final"] forKey:@"event"]];
+    oldMoneyForAnimation = playerAccount.money;
     if(!teaching||(duelWithBotCheck)){
 // added for GC
         if (![GCHelper sharedInstance].GClocalPlayer.isAuthenticated) {
@@ -582,7 +583,7 @@
         [[GCHelper sharedInstance] reportScore:moneyExch forCategory:GC_LEADEBOARD_MONEY];
 // above
         oldMoney=playerAccount.money;
-        oldMoneyForAnimation = playerAccount.money;
+        
         playerAccount.money += moneyExch;
         oponentAccount.money -= moneyExch;
         
@@ -623,16 +624,18 @@
     [player play];
     [player setNumberOfLoops:0];
     
+    int iPhone5Delta = [UIScreen mainScreen].bounds.size.height - 480;
+    
     winnerImg1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fin_img_money.png"]];
     CGRect frame = winnerImg1.frame;
-    frame.origin.y = 230;
+    frame.origin.y = 230  + iPhone5Delta;
     frame.origin.x = -150;
     winnerImg1.frame = frame;
     [viewLastSceneAnimation addSubview:winnerImg1];
     
     winnerImg2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fin_img_money2.png"]];
     frame = winnerImg2.frame;
-    frame.origin.y = 340;
+    frame.origin.y = 340 + iPhone5Delta;
     frame.origin.x = 320;
     winnerImg2.frame = frame;
     [viewLastSceneAnimation addSubview:winnerImg2];
@@ -690,8 +693,8 @@
 
     if (!teaching||(duelWithBotCheck)) {
         
+        transaction.trOpponentID = [NSString stringWithString:(oponentAccount.accountID) ? [NSString stringWithString:oponentAccount.accountID]:@""];
         transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
-        transaction.trOpponentID = [NSString stringWithString:oponentAccount.accountID];
         [playerAccount.transactions addObject:transaction];
         
         CDTransaction *opponentTransaction = [CDTransaction new];
@@ -701,7 +704,7 @@
         else   [opponentTransaction setTrType:[NSNumber numberWithInt:1]];
         
         [opponentTransaction setTrMoneyCh:[NSNumber numberWithInt:-[transaction.trMoneyCh intValue]]];
-        opponentTransaction.trOpponentID = [NSString stringWithString:playerAccount.accountID];
+        opponentTransaction.trOpponentID = [NSString stringWithString:(playerAccount.accountID) ? [NSString stringWithString:playerAccount.accountID]:@""];
         [oponentAccount.transactions addObject:opponentTransaction];
         
         NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
@@ -765,12 +768,17 @@
         [[StartViewController sharedInstance] modifierUser:playerAccount];
         if(oponentAccount.bot) [[StartViewController sharedInstance] modifierUser:oponentAccount];
     }
-
-    NSString *name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel];
-    ivCurrentRank.image = [UIImage imageNamed:name];
-    name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel+1];
-    ivNextRank.image = [UIImage imageNamed:name];
-
+    
+    if (playerAccount.accountLevel == 10){
+        NSString *name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel];
+        ivCurrentRank.image = [UIImage imageNamed:name];
+    }
+    else{
+        NSString *name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel];
+        ivCurrentRank.image = [UIImage imageNamed:name];
+        name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel+1];
+        ivNextRank.image = [UIImage imageNamed:name];
+    }
     if (fMutchNumberLose == 2) {
         [self loseAnimation];
     }
@@ -913,6 +921,8 @@
 
 -(void)winAnimation
 {
+    
+    
   [lblGoldPlus setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:45]];
   lblGold.hidden = YES;
   lblGold.text = [NSString stringWithFormat:@"%d",playerAccount.money];
@@ -931,10 +941,10 @@
   frame.origin.x -= 230;
   CGRect movePlus = lblGoldPlus.frame;
   movePlus.origin.x += 200;
-  
+  int iPhone5Delta = [UIScreen mainScreen].bounds.size.height - 480;
   CGRect moveGoldToCoin = winnerImg2.frame;
   moveGoldToCoin.origin.x = ivGoldCoin.frame.origin.x + goldPointBgView.frame.origin.x - 50;
-  moveGoldToCoin.origin.y = ivGoldCoin.frame.origin.y + goldPointBgView.frame.origin.y;
+  moveGoldToCoin.origin.y = ivGoldCoin.frame.origin.y + goldPointBgView.frame.origin.y + iPhone5Delta;
   
   CGAffineTransform goldPlusZoomIn = CGAffineTransformScale(lblGoldPlus.transform, 1.5, 1.5);
   CGAffineTransform goldPlusZoomOut = CGAffineTransformScale(lblGoldPlus.transform, 1, 1);
@@ -949,12 +959,17 @@
   }
   
   NSInteger num = playerAccount.accountLevel;
-  int  moneyForNextLevel=[[array objectAtIndex:num] intValue];
+    int  moneyForNextLevel=(playerAccount.accountLevel != 10)? [[array objectAtIndex:num] intValue]:playerAccount.accountPoints+1000;
   
   int moneyForPrewLevel;
   if (playerAccount.accountLevel==0) {
     moneyForPrewLevel = 0;
-  }else{
+  }else
+      if (playerAccount.accountLevel == 10) {
+          moneyForPrewLevel = playerAccount.accountPoints;
+      }
+    else
+  {
     moneyForPrewLevel=[[array objectAtIndex:(playerAccount.accountLevel-1)] intValue];
   }
   
@@ -964,9 +979,6 @@
   CGRect temp = ivBlueLine.frame;
   temp.size.width = 0;
   ivBlueLine.frame = temp;
-  
-  int pointsForMatch=[self getPointsForWin];
-
   
   [UIView animateWithDuration:0.7
                         delay:0 options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction
@@ -995,7 +1007,6 @@
                                             } completion:^(BOOL finished) {
                                               [self animationWithLable:lblGold andStartNumber:oldMoneyForAnimation andEndNumber:playerAccount.money];
                                               [self changePointsLine:curentPoints maxValue:maxPoints animated:YES];
-                                              [self animationWithLable:lblPoints andStartNumber:playerAccount.accountPoints - pointsForMatch andEndNumber:playerAccount.accountPoints];
                                               
                                             }];
                                           }];
@@ -1021,6 +1032,8 @@
 
 -(void)loseAnimation
 {
+    int iPhone5Delta = [UIScreen mainScreen].bounds.size.height - 480;
+    
   loserImg.hidden = NO;
 //  if (teaching && !(duelWithBotCheck))oldMoneyForAnimation = [AccountDataSource sharedInstance].money;
   lblGold.text = [NSString stringWithFormat:@"%d",oldMoneyForAnimation];
@@ -1037,7 +1050,7 @@
   CGAffineTransform goldDroppedZoomIn = CGAffineTransformScale(loserMoneyImg.transform, 0.1, 0.1);
   CGAffineTransform goldDroppedZoomOut = CGAffineTransformScale(loserMoneyImg.transform, 1.0, 1.0);
   
-  CGAffineTransform goldMove = CGAffineTransformTranslate(goldDroppedZoomOut, +100, +195.0);
+  CGAffineTransform goldMove = CGAffineTransformTranslate(goldDroppedZoomOut, +100, +195 + iPhone5Delta);
   lblGoldPlus.hidden = NO;
 
   CGRect temp = ivBlueLine.frame;
@@ -1046,7 +1059,7 @@
   
   CGRect frame = loserImg.frame;
   frame.origin.x = -200;
-  frame.origin.y += 230;
+  frame.origin.y += 230 + iPhone5Delta;
   loserImg.frame = frame;
   
   CGRect moveLoserToScreen = frame;
@@ -1139,13 +1152,17 @@
     [playerAccount setAccountLevel:10];
   }
   NSInteger num = playerAccount.accountLevel;
-  int  moneyForNextLevel=[[array objectAtIndex:num] intValue];
+  int  moneyForNextLevel=(playerAccount.accountLevel != 10)? [[array objectAtIndex:num] intValue]:playerAccount.accountPoints+1000;
   int moneyForPrewLevel;
   if (playerAccount.accountLevel==0) {
     moneyForPrewLevel = 0;
-  }else{
-    moneyForPrewLevel=[[array objectAtIndex:(playerAccount.accountLevel-1)] intValue];
-  }
+  }else
+      if (playerAccount.accountLevel == 10) {
+          moneyForPrewLevel = playerAccount.accountPoints;
+      }
+      else{
+        moneyForPrewLevel=[[array objectAtIndex:(playerAccount.accountLevel-1)] intValue];
+      }
   int curentPoints=(playerAccount.accountPoints-moneyForPrewLevel);
   int maxPoints=(moneyForNextLevel-moneyForPrewLevel);
   [self changePointsLine:curentPoints maxValue:maxPoints animated:NO];

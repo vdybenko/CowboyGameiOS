@@ -12,7 +12,7 @@
 #import "TeachingHelperViewController.h"
 #import "DuelRewardLogicController.h"
 
-#define GAME_BOT_LEVEL 0.6
+#define GAME_BOT_LEVEL 0.7
 
 static NSString *ShotSound = @"%@/shot.mp3";
 

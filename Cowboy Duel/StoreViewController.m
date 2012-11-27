@@ -122,7 +122,7 @@
             [storeDataSource setCellsHide:NO];
             [tableView reloadRowsAtIndexPaths:rowsToReload withRowAnimation:type];
         });
-        [NSThread sleepForTimeInterval:0.2];
+        [NSThread sleepForTimeInterval:0.3];
     }
 }
 
@@ -232,15 +232,19 @@
 - (IBAction)weaponsButtonClick:(id)sender {
     if (storeDataSource.typeOfTable != StoreDataSourceTypeTablesWeapons) {
         storeDataSource.typeOfTable = StoreDataSourceTypeTablesWeapons;
-        [storeDataSource reloadDataSource];
-        [self startTableAnimation];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            [storeDataSource reloadDataSource];
+            [self startTableAnimation];
+        });
     }
 }
 - (IBAction)defenseButtonClick:(id)sender {
     if (storeDataSource.typeOfTable != StoreDataSourceTypeTablesDefenses) {
         storeDataSource.typeOfTable = StoreDataSourceTypeTablesDefenses;
-        [storeDataSource reloadDataSource];
-        [self startTableAnimation];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            [storeDataSource reloadDataSource];
+            [self startTableAnimation];
+        });
     }
 }
 - (IBAction)backButtonClick:(id)sender {

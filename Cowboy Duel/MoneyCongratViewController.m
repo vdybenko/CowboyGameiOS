@@ -245,8 +245,11 @@
         [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
     }
     [self dismissModalViewControllerAnimated:YES];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                      object:self
+                                                    userInfo:[NSDictionary dictionaryWithObject:@"/achievement_posted_on_FB" forKey:@"event"]];
 }
-#pragma mark  - Facebook methods 
+#pragma mark  - Facebook methods
 
 +(void)achivmentMoney:(NSUInteger)money;
 {

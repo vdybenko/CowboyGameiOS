@@ -8,49 +8,108 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "CrittercismJSONKit.h"
 #import <QuartzCore/QuartzCore.h>
-#import "CrittercismReachability.h"
-//#import "<CoreLocation/CoreLocation.h>"
 
 @protocol CrittercismDelegate <NSObject>
 
 @optional
--(void) crittercismDidClose;
--(void) crittercismDidCrashOnLastLoad;
+- (void)crittercismDidClose;
+- (void)crittercismDidCrashOnLastLoad;
 @end
 
 @interface Crittercism : NSObject {
-	NSMutableData *responseData;
-	CFMutableDictionaryRef *connectionToInfoMapping;
-	id <CrittercismDelegate> delegate;
-    BOOL didCrashOnLastLoad;
+  // tracks our HTTP connections
+  CFMutableDictionaryRef connectionMap;
+  id <CrittercismDelegate> delegate;
+  BOOL didCrashOnLastLoad;
 }
 
 @property(retain) id <CrittercismDelegate> delegate;
 @property(assign) BOOL didCrashOnLastLoad;
 
-+ (Crittercism*)sharedInstance;
-+ (void) initWithAppID:(NSString *)_app_id;
-+ (void) initWithAppID:(NSString *)_app_id andMainViewController:(UIViewController *)_mainViewController andDelegate:(id) critterDelegate;
+//
+// Methods for Enabling Crittercism
+//
+// You must call one of these before using any other Crittercism functionality
 
-// Deprecated in v3.3.1
-+ (void) initWithAppID:(NSString *)_app_id andKey:(NSString *)_keyStr andSecret:(NSString *)_secretStr;
-+ (void) initWithAppID:(NSString *)_app_id andKey:(NSString *)_keyStr andSecret:(NSString *)_secretStr andMainViewController:(UIViewController *)_mainViewController;
++ (void)enableWithAppID:(NSString *)appId;
 
-+ (NSString *) getAppID;
-+ (void) configurePushNotification:(NSData *) deviceToken;
-+ (int) getCurrentOrientation;
-+ (void) setCurrentOrientation: (int)_orientation;
-+ (void) setOptOutStatus: (BOOL) _optOutStatus;
-+ (BOOL) getOptOutStatus;
+// Designated "initializer"
++ (void)enableWithAppID:(NSString *)appId
+            andDelegate:(id <CrittercismDelegate>)critterDelegate;
 
-+ (BOOL) logHandledException:(NSException *)exception;
-+ (void) leaveBreadcrumb:(NSString *)breadcrumb;
-+ (void) setAge:(int)age;
-+ (void) setGender:(NSString *)gender;
-+ (void) setUsername:(NSString *)username;
-+ (void) setEmail:(NSString *)email;
-+ (void) setValue:(NSString *)value forKey:(NSString *)key;
++ (Crittercism *)sharedInstance;
+
+// Retrieve your app id
++ (NSString *)getAppID;
+
+// Disable or enable all communication with Crittercism servers.
+// If called to disable (status == YES), any pending crash reports will be
+// purged, and feedback will be reset (if using the forum feature.)
++ (void)setOptOutStatus:(BOOL)status;
+
+// Retrieve currently stored opt out status.
++ (BOOL)getOptOutStatus;
+
+// Record an exception that you purposely caught via Crittercism.
+//
+// Note: Crittercism limits logging handled exceptions to once per minute. If
+// you've logged an exception within the last minute, we buffer the last five
+// exceptions and send those after a minute has passed.
++ (BOOL)logHandledException:(NSException *)exception;
+
+// Leave a breadcrumb for the current run of your app. If the app ever crashes,
+// these breadcrumbs will be uploaded along with that crash report to
+// Crittercism's servers.
++ (void)leaveBreadcrumb:(NSString *)breadcrumb;
+
+//
+// Methods for User Metadata
+//
+
++ (void)setAge:(int)age;
++ (void)setGender:(NSString *)gender;
++ (void)setUsername:(NSString *)username;
++ (void)setEmail:(NSString *)email;
+// Set an arbitrary key/value pair in the User Metadata
++ (void)setValue:(NSString *)value forKey:(NSString *)key;
+
+////////////////////////////////////////////////////////////////////////////////
+// DEPRECATED METHODS
+////////////////////////////////////////////////////////////////////////////////
+
+//
+// Initializers - Will be removed in a future release. Please change your code
+// to use one of the enable* methods
+//
+
++ (void)initWithAppID:(NSString *)appId __attribute__((deprecated));
+
++ (void)initWithAppID:(NSString *)appId
+    andMainViewController:(UIViewController *)viewController
+    __attribute__((deprecated));
+
++ (void)initWithAppID:(NSString *)appId
+    andMainViewController:(UIViewController *)viewController
+    andDelegate:(id)critterDelegate
+    __attribute__((deprecated));
+
+// Deprecated in v3.3.1 - key and secret are no longer needed
++ (void)initWithAppID:(NSString *)appId
+    andKey:(NSString *)keyStr
+    andSecret:(NSString *)secretStr
+    __attribute__((deprecated));
+
+// Deprecated in v3.3.1 - key and secret are no longer needed
++ (void)initWithAppID:(NSString *)appId
+    andKey:(NSString *)keyStr
+    andSecret:(NSString *)secretStr
+    andMainViewController:(UIViewController *)viewController
+    __attribute__((deprecated));
+
+// This method does nothing and will be removed in a future release.
++ (void)configurePushNotification:(NSData *)deviceToken
+    __attribute__((deprecated));
+
 @end
 

@@ -8,7 +8,6 @@
 //
 
 #import "StartViewController.h"
-#import "AdColonyViewController.h"
 #import "UIView+Hierarchy.h"
 #import "UIButton+Image+Title.h"
 #import "AdvertisingNewVersionViewController.h"
@@ -84,8 +83,11 @@
   
     IBOutlet UIImageView *backGroundfeedbackView;
     IBOutlet UIActivityIndicatorView *indicatorfeedbackView;
+  
     
-    
+    IBOutlet UILabel *lbFeedbackButton;
+    IBOutlet UILabel *lbShareButton;
+  
     IBOutlet UILabel *lbFollowFacebook;
     IBOutlet UILabel *lbPostMessage;
     IBOutlet UILabel *lbMailMessage;
@@ -146,7 +148,6 @@ NSString *const URL_COMM_FB_PAGE =@"http://cowboyduel.com/";
 
 NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNotification";
 
-static const char *BOT_LIST_URL = "http://bidoncd.s3.amazonaws.com/bot.json";
 NSMutableData *receivedDataBots;
 
 #pragma mark
@@ -369,28 +370,25 @@ static StartViewController *sharedHelper = nil;
 }
 
 - (void)viewDidLoad{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-//    NSInteger facebookLogIn = [userDefaults integerForKey:@"facebookLogIn"];
-//    NSInteger paymentRegistration = [userDefaults integerForKey:@"paymentRegistration"];
-//    NSInteger loginFirstShow = [userDefaults integerForKey:@"loginFirstShow"];
-//    
-//    if (!loginFirstShow) {
-//        SSConnection *connection = [SSConnection sharedInstance];
-//        [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
-//        
-//        LoginAnimatedViewController *loginViewController = [LoginAnimatedViewController sharedInstance];
-//        loginViewController.startViewController = self;
-//        [loginViewController setPayment:YES];
-//        [self.navigationController pushViewController:loginViewController animated:YES];
-//    }
-    
+    [super viewDidLoad];
+  
     UIColor *buttonsTitleColor = [[UIColor alloc] initWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
-    
+
+    lbFeedbackButton.text = NSLocalizedString(@"Feedback", @"");
+    lbFeedbackButton.textColor = buttonsTitleColor;
+    lbFeedbackButton.textAlignment = UITextAlignmentCenter;
+    lbFeedbackButton.font = [UIFont fontWithName: @"MyriadPro-Semibold" size:15];
+  
+    lbShareButton.text = NSLocalizedString(@"Share", @"");
+    lbShareButton.textColor = buttonsTitleColor;
+    lbShareButton.textAlignment = UITextAlignmentCenter;
+    lbShareButton.font = [UIFont fontWithName: @"MyriadPro-Semibold" size:15];
+  
     [duelButton setTitle:NSLocalizedString(@"Saloon", @"") forState:UIControlStateNormal];
     [duelButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
     duelButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
     duelButton.titleLabel.textAlignment = UITextAlignmentCenter;
-    
+
     [duelButton setTitle:NSLocalizedString(@"Saloon", @"") forState:UIControlStateNormal];
     [duelButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
     duelButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
@@ -469,6 +467,19 @@ static StartViewController *sharedHelper = nil;
     }
     [player play];
     
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger loginFirstShow = [userDefaults integerForKey:@"loginFirstShow"];
+    
+    if (!loginFirstShow) {
+        SSConnection *connection = [SSConnection sharedInstance];
+        [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
+        
+        LoginAnimatedViewController *loginViewControllerLocal = [LoginAnimatedViewController sharedInstance];
+        loginViewControllerLocal.startViewController = self;
+        [loginViewControllerLocal setPayment:YES];
+        [self.navigationController pushViewController:loginViewControllerLocal animated:YES];
+    }
+
     if (self.soundCheack )
         [soundButton setImage:[UIImage imageNamed:@"pv_btn_music_on.png"] forState:UIControlStateNormal];
     else {
@@ -488,6 +499,8 @@ static StartViewController *sharedHelper = nil;
     shareView = nil;
     lbFollowFacebook = nil;
     lbShareCancelBtn = nil;
+    lbFeedbackButton = nil;
+    lbShareButton = nil;
     [super viewDidUnload];
 }
     
@@ -519,7 +532,6 @@ static StartViewController *sharedHelper = nil;
     // check if a pathway to a random host exists
     hostReachable = [Reachability reachabilityWithHostName: @"www.apple.com"];
     [hostReachable startNotifier];
-    [self getBotsList];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -553,9 +565,6 @@ static StartViewController *sharedHelper = nil;
     [self estimateApp];
     TestAppDelegate *app = (TestAppDelegate *)[[UIApplication sharedApplication] delegate];
     [app.adBanner setHidden:NO];
-    [[AccountDataSource sharedInstance] reloadRandomId];
-    [[AccountDataSource sharedInstance] receiveBotsForIdArray:[AccountDataSource sharedInstance].randomIds];
-    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -716,11 +725,15 @@ static StartViewController *sharedHelper = nil;
 
 - (void) showView: (UIView *)view
 {
+    int delta = 0;
+    TestAppDelegate *app = (TestAppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (app.adBanner) delta = 50;
+    
   [UIView animateWithDuration:0.5
                         delay:0.0
                       options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction animations:^{
                         CGRect frame = view.frame;
-                        frame.origin.y = [UIScreen mainScreen].bounds.size.height - frame.size.height;
+                        frame.origin.y = [UIScreen mainScreen].bounds.size.height - frame.size.height - delta;
                         view.frame = frame;
                       } completion:^(BOOL finished) {
                         ///
@@ -758,10 +771,10 @@ static StartViewController *sharedHelper = nil;
 }
 
 -(void) advertButtonClick {
-    AdColonyViewController *adColonyViewController = [[AdColonyViewController alloc]initWithStartVC:self];
+    //AdColonyViewController *adColonyViewController = [[AdColonyViewController alloc]initWithStartVC:self];
     SSConnection *connection = [SSConnection sharedInstance];
     [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
-    [self presentModalViewController:adColonyViewController animated:YES];
+    //[self presentModalViewController:adColonyViewController animated:YES];
 }
 - (IBAction)soundButtonClick:(id)sender {
     [self soundOff];
@@ -787,6 +800,9 @@ static StartViewController *sharedHelper = nil;
 - (IBAction)feedbackCancelButtonClick:(id)sender {
   [self hideView:feedbackView];
   feedBackViewVisible = NO;
+  [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                      object:self
+                                                    userInfo:[NSDictionary dictionaryWithObject:@"/feedBack_cancel" forKey:@"event"]];
 
 }
 - (IBAction)feedbackFollowFBClick:(id)sender {
@@ -795,7 +811,9 @@ static StartViewController *sharedHelper = nil;
 //                 URL_FB_PAGE];
   
   [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[URL_COMM_FB_PAGE stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
-  
+  [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                      object:self
+                                                    userInfo:[NSDictionary dictionaryWithObject:@"/feedBack_followFB_clicked" forKey:@"event"]];
 }
 
 
@@ -834,6 +852,9 @@ static StartViewController *sharedHelper = nil;
 - (IBAction)shareCancelButtonClick:(id)sender {
   [self hideView:shareView];
   shareViewVisible = NO;
+  [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                      object:self
+                                                    userInfo:[NSDictionary dictionaryWithObject:@"/share_cancel" forKey:@"event"]];
   
 }
 
@@ -855,6 +876,10 @@ static StartViewController *sharedHelper = nil;
     }else{
         if ([[OGHelper sharedInstance]isAuthorized]) {
             [[OGHelper sharedInstance] apiDialogFeedUser];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                                object:self
+                                                              userInfo:[NSDictionary dictionaryWithObject:@"/share_Facebook_click" forKey:@"event"]];
         }else {
             [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusFeed];
             [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
@@ -899,7 +924,7 @@ static StartViewController *sharedHelper = nil;
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                     object:self
-                                                  userInfo:[NSDictionary dictionaryWithObject:@"/feedBack_Tweeter_click" forKey:@"event"]];
+                                                  userInfo:[NSDictionary dictionaryWithObject:@"/share_Tweeter_click" forKey:@"event"]];
 }
 
 - (IBAction)feedbackMailBtnClick:(id)sender {
@@ -920,7 +945,7 @@ static StartViewController *sharedHelper = nil;
   
   [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                       object:self
-                                                    userInfo:[NSDictionary dictionaryWithObject:@"/feedBack_Mail_click" forKey:@"event"]];
+                                                    userInfo:[NSDictionary dictionaryWithObject:@"/share_Mail_click" forKey:@"event"]];
 }
 
 #pragma mark -
@@ -985,19 +1010,8 @@ static StartViewController *sharedHelper = nil;
     NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
     [dicForRequests removeObjectForKey:[currentParseString lastPathComponent]];
     NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
-    NSArray *responseObjectForBots = ValidateObject([jsonString JSONValue], [NSArray class]);
 
     DLog(@"StartVC \n jsonValues %@\n string %@",jsonString,currentParseString);
-//getting list online from response object:
-    NSLog(@"responseObject %@",responseObject);
-    NSLog(@"responseObjectForBots %@",responseObjectForBots);
-    if ([responseObjectForBots count]>=1) {
-      playerAccount.listBotsOnline = [NSArray arrayWithArray:responseObjectForBots];
-        [playerAccount reloadRandomId];
-        [playerAccount receiveBotsForIdArray:playerAccount.randomIds];
-      NSLog(@"listBotsOnline %@",playerAccount.listBotsOnline);
-    }
-  
 //    
 //    OnLine
     if ([[currentParseString lastPathComponent] isEqualToString:@"authorization"]&&[responseObject objectForKey:@"session_id"]) {
@@ -1060,11 +1074,11 @@ static StartViewController *sharedHelper = nil;
             [playerAccount saveAccountBigestWin];
         }
         
-        if (playerAccount.removeAds!=AdColonyAdsStatusRemoved) {
-            int removeAds=[[responseObject objectForKey:@"remove_ads"] intValue];
-            playerAccount.removeAds=removeAds;
-            [playerAccount saveRemoveAds];
-        }
+//        if (playerAccount.removeAds!=AdColonyAdsStatusRemoved) {
+//            int removeAds=[[responseObject objectForKey:@"remove_ads"] intValue];
+//            playerAccount.removeAds=removeAds;
+//            [playerAccount saveRemoveAds];
+//        }
 
         NSString *urlAvatar=[responseObject objectForKey:@"avatar"];
         if ([playerAccount isAvatarImage:urlAvatar]) {
@@ -1116,6 +1130,7 @@ static StartViewController *sharedHelper = nil;
             
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"moneyForIPad"];
         }
+        [profileViewController checkLocationOfViewForFBLogin];
 
         if (!modifierName) {
             [playerAccount sendTransactions:playerAccount.transactions];
@@ -1258,21 +1273,6 @@ static StartViewController *sharedHelper = nil;
     if ([duelProductDownloaderController isListProductsAvailable]) {
         [duelProductDownloaderController refreshUserDuelProducts];
     }
-}
-
--(void)getBotsList;
-{
-
-  NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:BOT_LIST_URL encoding:NSUTF8StringEncoding]]
-                                                             cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                         timeoutInterval:kTimeOutSeconds];
-  CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
-  if (theConnection) {
-    NSMutableData *receivedData = [[NSMutableData alloc] init];
-    [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
-  } else {
-    NSLog(@"WARNING: theBotsListConnection failed..");
-  }
 }
 
 -(void)modifierUser:(AccountDataSource *)playerTemp;
@@ -1427,12 +1427,12 @@ static StartViewController *sharedHelper = nil;
     int drawCount=playerAccount.accountDraws;
     int playedMatches=playerAccount.accountWins+drawCount;
     
-    if ((playedMatches>=2)&&([self connectedToWiFi]&&[AdColonyViewController isAdStatusValid])) {
-        if ((advertisingWillShow)&&(playerAccount.removeAds!=AdColonyAdsStatusRemoved)) {
-            [self advertButtonClick];
-            return YES;
-        }
-    }
+//    if ((playedMatches>=2)&&([self connectedToWiFi]&&[AdColonyViewController isAdStatusValid])) {
+//        if ((advertisingWillShow)&&(playerAccount.removeAds!=AdColonyAdsStatusRemoved)) {
+//            [self advertButtonClick];
+//            return YES;
+//        }
+//    }
     return NO;
 }
 

@@ -15,6 +15,15 @@
 #import <MediaPlayer/MediaPlayer.h>
 
 #define videoHelp @"http://www.youtube.com/watch?v=HZST2wcGAr4"
+@interface MyMovieViewController : MPMoviePlayerViewController
+@end
+
+@implementation MyMovieViewController
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
+}
+@end
 
 @interface HelpViewController () {
     id startVC;
@@ -41,13 +50,15 @@
 @synthesize _btnVideo, _vBackground, _btnBack, _webViewMessage;
 
 MPMoviePlayerViewController *mp;
-NSString *const URL_CONTACN_US=@"http://cowboyduel.com/"; 
+NSString *const URL_CONTACN_US=@"http://cowboyduel.com/";
+BOOL isSoundControl;
 
 - (id)initWithStartVC:(id)startVCl;
 {
     self = [super initWithNibName:@"HelpViewController" bundle:[NSBundle mainBundle]];
     if (self) { 
         startVC=startVCl;
+        isSoundControl = [startVCl soundCheack];
     }
     return self;
 }
@@ -125,15 +136,18 @@ NSString *const URL_CONTACN_US=@"http://cowboyduel.com/";
     
     NSURL *urlVideo = [NSURL URLWithString:[qualities objectForKey:@"medium"]];
 
-    MPMoviePlayerViewController *mp = [[MPMoviePlayerViewController alloc] initWithContentURL:urlVideo];
+    MyMovieViewController *mp = [[MyMovieViewController alloc] initWithContentURL:urlVideo];
     
     mp.moviePlayer.controlStyle = MPMovieControlStyleFullscreen;
     mp.moviePlayer.shouldAutoplay = YES;
     mp.moviePlayer.repeatMode = MPMovieRepeatModeNone;
     
+    [mp shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationIsLandscape(YES)];
     [self presentMoviePlayerViewControllerAnimated:mp];
     
     [mp.moviePlayer setFullscreen:YES animated:YES];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayBackDidFinish:) name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
+    if (isSoundControl)[startVC soundOff];
     
     if([startVC connectedToWiFi]) [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                                                       object:self
@@ -143,12 +157,21 @@ NSString *const URL_CONTACN_US=@"http://cowboyduel.com/";
 -(IBAction)btnContactClicked{
     NSURL *url=[NSURL URLWithString:URL_CONTACN_US];
     [[UIApplication sharedApplication] openURL:url];
+    if([startVC connectedToWiFi]) [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                                                    object:self
+                                                                                  userInfo:[NSDictionary dictionaryWithObject:@"/help_contact_us" forKey:@"event"]];
+  
 }
 
 - (void) moviePlayBackDidFinish:(NSNotification*)notification {
     mp.moviePlayer.initialPlaybackTime = -1; 
     [mp.moviePlayer stop]; 
     [self dismissMoviePlayerViewControllerAnimated];
-}  
+    
+    if (isSoundControl)[startVC soundOff];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
+}
+
+
 
 @end

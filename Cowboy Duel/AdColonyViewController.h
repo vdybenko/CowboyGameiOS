@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AdColonyPublic.h"
 //#import "BluetoothViewController.h"
 #import "CurrencyManager.h"
 #import "StartViewController.h"

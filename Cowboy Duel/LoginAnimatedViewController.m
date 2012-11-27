@@ -29,6 +29,8 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
     BOOL tryAgain;
     CGRect guillBackUp;
     CGRect textBackUp;
+    CGRect hatBackUp;
+    BOOL animationPause;
 //    int counterTryAgain;
 }
 @property (nonatomic) int textIndex;
@@ -102,6 +104,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    animationPause = NO;
     if (self.view.frame.size.height > 480) {
         [backgroundView setImage:[UIImage imageNamed:@"la_bg-568h.png"]];
         [boardImage setImage:[UIImage imageNamed:@"la_board-568h.png"]];
@@ -153,6 +156,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
     self.textIndex = 0;
     guillBackUp = self.guillotineImage.frame;
     textBackUp = self.animetedText.frame;
+    hatBackUp = self.heatImage.frame;
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/kassa.aif", [[NSBundle mainBundle] resourcePath]]];
     NSError *error;
     self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
@@ -186,22 +190,17 @@ static LoginAnimatedViewController *sharedHelper = nil;
 
 - (void)updateLabels
 {
-  
+  if (animationPause) return;
+    
     NSString * text = (self.textIndex<=7)?[textsContainer objectAtIndex:self.textIndex]:@"";
-  
-//    if (self.textIndex == 6) {
-//      text = (counterTryAgain<=1)?[textsContainer objectAtIndex:self.textIndex]:[NSString stringWithFormat:@"%@%d ...",NSLocalizedString(@"CHOOSE_DOLLAR_S", @""),counterTryAgain];
-//    }
-  
     [UIView animateWithDuration:1.0
                      animations:^{
                         [self lableScaleOut];
                      } completion:^(BOOL complete) {
-                         if (self.textIndex==5){
-                           CGRect moveTextUp = self.animetedText.frame;
-                           moveTextUp.origin.y -= 100;
-                           self.animetedText.frame = moveTextUp;
-                         }
+                         CGRect moveTextUp = textBackUp;
+                         if (self.textIndex >= 5) moveTextUp.origin.y -= 100;
+                         self.animetedText.frame = moveTextUp;
+                         self.animetedText.bounds = moveTextUp;
                          self.animetedText.text = text;
                          [self performSelector:@selector(lableScaleIn) withObject:nil afterDelay:1.0];
                      }];
@@ -209,6 +208,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
 
 -(void)lableScaleIn
 {
+  if (animationPause) return;
   if (self.textIndex == 0) {
     [self.headImage setHidden:NO];
     [self.heatImage setHidden:YES];
@@ -287,10 +287,8 @@ static LoginAnimatedViewController *sharedHelper = nil;
 //    self.guillotineImage.frame = frame;
 
     self.guillotineImage.frame = guillBackUp;
-    self.animetedText.frame = textBackUp;
-    CGRect frame = self.heatImage.frame;
-    frame.origin.y -= 220;
-    self.heatImage.frame = frame;
+    self.guillotineImage.stopAnimation = NO;
+    self.heatImage.frame = hatBackUp;
     [self.noseImage setHidden:NO];
     [self.tryAgainView setHidden:YES];
     [self.headImage setHidden:NO];
@@ -298,11 +296,19 @@ static LoginAnimatedViewController *sharedHelper = nil;
     self.textIndex = 0;
     [self updateLabels];
     [self.guillotineImage animateWithType:[NSNumber numberWithInt:GUILLOTINE]];
+    if (sender) [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/first_login_again" forKey:@"event"]];
 }
 
 - (IBAction)donateButtonClick:(id)sender {
+    stDonate = [NSMutableString string];
     [self.player stop];
     [self.player setVolume:0.0];
+    animationPause = YES;
+    self.heatImage.stopAnimation = YES;
+    self.whiskersImage.stopAnimation = YES;
+    self.guillotineImage.stopAnimation = YES;
     if (payment) {
         [[MKStoreManager sharedManager] buyFeatureA];
         [activityView setHidden:NO];
@@ -323,7 +329,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
     ProfileViewController *profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount startViewController:startViewController];
     [profileViewController setNeedAnimation:YES];
     [self.navigationController popViewControllerAnimated:YES];
-    
+     [startViewController authorizationModifier:NO];
 //    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 //														object:self
 //													  userInfo:[NSDictionary dictionaryWithObject:@"/donate_click" forKey:@"event"]];
@@ -357,14 +363,17 @@ static LoginAnimatedViewController *sharedHelper = nil;
 {
     [self initFacebook];
 	[facebook logout:self];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                      object:self
+                                                    userInfo:[NSDictionary dictionaryWithObject:@"/logOut_FB_click" forKey:@"event"]];
 }
 #pragma mark -
 #pragma mark FConnect Methods
 
 - (void)fbDidLogin {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    if (![userDefaults objectForKey:@"FBAccessTokenKey"]) {
-        
+    if (![userDefaults objectForKey:@"FBAccessTokenKey"] || ![userDefaults objectForKey:@"FBLoginV2.1"]) {
+        [userDefaults setInteger:1 forKey:@"FBLoginV2.1"];
         [userDefaults setObject:self.facebook.accessToken forKey:@"FBAccessTokenKey"];
         [userDefaults setObject:self.facebook.expirationDate forKey:@"FBExpirationDateKey"];
         
@@ -379,6 +388,9 @@ static LoginAnimatedViewController *sharedHelper = nil;
         
         [self.facebook requestWithGraphPath:@"me" andParams:params andDelegate:self];
         
+        [[NSNotificationCenter defaultCenter] postNotificationName: kCheckfFBLoginSession
+                                                            object:self
+                                                          userInfo:nil];
         
         switch (loginFacebookStatus) {
             case LoginFacebookStatusSimple:
@@ -557,6 +569,14 @@ static LoginAnimatedViewController *sharedHelper = nil;
                                                                     userInfo:[NSDictionary dictionaryWithObject:stDonate forKey:@"event"]];
 	[activityView setHidden:YES];
     [activityIndicatorView stopAnimating];
+    animationPause = NO;
+    self.heatImage.stopAnimation = NO;
+    self.whiskersImage.stopAnimation = NO;
+    self.guillotineImage.stopAnimation = NO;
+    [self.heatImage setHidden:YES];
+    [self tryAgainButtonClick:nil];
+    [self.whiskersImage animateWithType:[NSNumber numberWithInt:WHISKERS]];
+    [self.heatImage animateWithType:[NSNumber numberWithInt:HAT]];
 }
 
 - (void)viewDidUnload {
@@ -569,13 +589,13 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [self setHeatImage:nil];
     [self setHeadImage:nil];
     [self setNoseImage:nil];
+    [CATransaction begin];
+    [self.view.layer removeAllAnimations];
+    [CATransaction commit];
     [self setDonateLable:nil];
     [self setLoginLable:nil];
     [self setTryAgainLable:nil];
     [self setPlayer:nil];
-    [CATransaction begin];
-    [self.view.layer removeAllAnimations];
-    [CATransaction commit];
     backgroundView = nil;
     boardImage = nil;
     tryAgainImage = nil;
