@@ -41,7 +41,7 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
 
 @synthesize navigationController, loginViewController;
 @synthesize facebook, adBanner;
-
+@synthesize clouds;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -81,8 +81,18 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     CGRect frame = [[UIScreen mainScreen]bounds];
     window = [[UIWindow alloc]initWithFrame:frame];
     
-    //[window setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"st_bg_new.png"]]];
-    [window addSubview:[[UIImageView alloc] initWithImage: [UIImage imageNamed:@"st_bg_new.png"]]];
+    UIImageView *background = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"dv_img_eath_new.png"]];
+    frame = background.frame;
+    frame.origin = CGPointMake(-150, -70);
+    background.frame = frame;
+    [window addSubview:background];
+    
+    clouds = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"st_cloud_new.png"]];
+    frame = clouds.frame;
+    frame.origin = CGPointMake(-20, -68);
+    clouds.frame = frame;
+    [window addSubview:clouds];
+    
     [window addSubview:navigationController.view];
     [window makeKeyAndVisible];
     

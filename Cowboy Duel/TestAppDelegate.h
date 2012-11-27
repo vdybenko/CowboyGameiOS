@@ -19,5 +19,6 @@
 @property  (strong) LoginAnimatedViewController *loginViewController;
 @property (strong,nonatomic) Facebook *facebook;
 @property (nonatomic) GADBannerView *adBanner;
+@property (strong, nonatomic) IBOutlet UIImageView *clouds;
 
 @end

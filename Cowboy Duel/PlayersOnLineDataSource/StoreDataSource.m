@@ -46,7 +46,6 @@
 
 -(void) reloadDataSource;
 {
-    storeViewController.loadingView.hidden = NO;
     NSMutableArray *testArr;
     if (typeOfTable == StoreDataSourceTypeTablesWeapons) {
         testArr = [DuelProductDownloaderController loadWeaponArray];
@@ -56,11 +55,9 @@
 
     if ([testArr count]==0) {
         arrItemsList = testArr;
-        storeViewController.loadingView.hidden = YES;
+        
     }else {
         arrItemsList = testArr;
-        [tableView reloadData];
-        storeViewController.loadingView.hidden = YES;
     }
 }
 
