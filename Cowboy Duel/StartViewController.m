@@ -20,6 +20,12 @@
 #import "MoneyCongratViewController.h"
 #import "AdvertisingNewViewController.h"
 
+#import "Social/Social.h"
+#import "accounts/Accounts.h"
+
+#import "StoreViewController.h"
+#import "DuelProductWinViewController.h"
+
 @interface StartViewController ()
 {
     AccountDataSource *playerAccount;
@@ -29,7 +35,9 @@
     ListOfItemsViewController *listOfItemsViewController;
     ProfileViewController *profileViewController;
     TopPlayersDataSource *topPlayersDataSource;
-        
+    DuelProductDownloaderController *duelProductDownloaderController;
+    StoreViewController *storeViewController;
+    
     UIView *hudView;
     
 //    BOOL firstRun;
@@ -62,13 +70,13 @@
     NSMutableDictionary *dicForRequests;
     BOOL modifierName;
     //buttons
-    IBOutlet UIButton *teachingButton;
     IBOutlet UIButton *duelButton;
     IBOutlet UIButton *mapButton;
     IBOutlet UIButton *profileButton;
     IBOutlet UIButton *feedbackButton;
     IBOutlet UIButton *shareButton;
     IBOutlet UIButton *helpButton;
+    IBOutlet UIButton *soundButton;
     
     IBOutlet UIView *feedbackView;
     IBOutlet UIView *shareView;
@@ -86,8 +94,15 @@
     IBOutlet UILabel *lbRateMessage;
     IBOutlet UILabel *lbFeedbackCancelBtn;
     IBOutlet UILabel *lbShareCancelBtn;
+
+    //Cloud
+    IBOutlet UIImageView *background;
+    IBOutlet UIImageView *cloudView;
+    IBOutlet UIImageView *cloudSecondView;
+    int cloudX;
+    int cloud2X;
+    BOOL animationCheck;
 }
-@property (strong, nonatomic) IBOutlet UIButton *teachingButton;
 @property (strong, nonatomic) IBOutlet UIButton *duelButton;
 @property (strong, nonatomic) IBOutlet UIButton *mapButton;
 @property (strong, nonatomic) IBOutlet UIButton *helpButton;
@@ -121,7 +136,7 @@
 @implementation StartViewController
 
 @synthesize gameCenterViewController, player, internetActive, hostActive, soundCheack, loginViewController;
-@synthesize feedbackButton, duelButton, profileButton, teachingButton, helpButton, mapButton, shareButton;
+@synthesize feedbackButton, duelButton, profileButton, helpButton, mapButton, shareButton;
 @synthesize oldAccounId,feedBackViewVisible,showFeedAtFirst,topPlayersDataSource, advertisingNewVersionViewController,firstRun;
 
 static const char *REGISTRATION_URL =  BASE_URL"api/registration";
@@ -196,7 +211,6 @@ static StartViewController *sharedHelper = nil;
             }
             [playerAccount saveID];
             [playerAccount saveDeviceType];
-            playerAccount.glNumber = [NSNumber numberWithInt:0];
             [playerAccount saveAccountLevel];
             [playerAccount saveAccountPoints];
             [playerAccount saveAccountWins];
@@ -208,15 +222,19 @@ static StartViewController *sharedHelper = nil;
             [playerAccount saveHomeTown];
             [playerAccount saveFriends];
             [playerAccount saveFacebookName];
-                        
+            [playerAccount saveWeapon];
+            [playerAccount saveDefense];
+            [playerAccount saveTransaction];
+            [playerAccount saveGlNumber];
             [uDef synchronize];
         }else{
             
             [uDef setBool:FALSE forKey:@"FirstRunForGun"];
             [uDef setBool:FALSE forKey:@"FirstRunForDuel"];
             [uDef setInteger:2 forKey:@"FirstRunForPractice"];
-
+            
             [playerAccount loadAllParametrs];
+            
 //          putch for 1.4.1
             [playerAccount putchAvatarImageToInitStartVC:self];
 //            
@@ -246,8 +264,7 @@ static StartViewController *sharedHelper = nil;
                 }
             }
             CDTransaction *localTransaction = [playerAccount.transactions lastObject];
-            playerAccount.glNumber = localTransaction.trLocalID;
-          DLog(@"Transactions count = %d", [playerAccount.transactions count]);            
+          DLog(@"Transactions count = %d", [playerAccount.transactions count]);
             
             NSArray *oldLocations2 = [uDef arrayForKey:@"duels"];
             if( playerAccount.duels )
@@ -276,12 +293,13 @@ static StartViewController *sharedHelper = nil;
                 }
             }
         }
-               
+        
         dicForRequests=[[NSMutableDictionary alloc] init];
         
         gameCenterViewController = [GameCenterViewController sharedInstance:playerAccount andParentVC:self];
-        
         listOfItemsViewController=[[ListOfItemsViewController alloc]initWithGCVC:gameCenterViewController Account:playerAccount OnLine:self.hostActive];
+        duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
+        duelProductDownloaderController.delegate = self;
         
         if (firstRun) {
             [gameCenterViewController stopServer];
@@ -291,7 +309,7 @@ static StartViewController *sharedHelper = nil;
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                             object:self
                                                           userInfo:[NSDictionary dictionaryWithObject:@"/" forKey:@"event"]];
-        
+                
         internetActive=YES;
         hostActive=YES;
         
@@ -339,8 +357,9 @@ static StartViewController *sharedHelper = nil;
         [hostReachable startNotifier];
 
         oldAccounId = @"";
-//        if ([playerAccount.accountID rangeOfString:@"A"].location != NSNotFound)
-//            [self authorizationModifier:NO];
+        
+        cloudX=470;
+        cloud2X=-20;
     }
     return self; 
 }
@@ -369,21 +388,11 @@ static StartViewController *sharedHelper = nil;
     [duelButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
     duelButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
     duelButton.titleLabel.textAlignment = UITextAlignmentCenter;
-  
-    [teachingButton setTitle:NSLocalizedString(@"Practice", @"") forState:UIControlStateNormal];
-    [teachingButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
-    teachingButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
-    teachingButton.titleLabel.textAlignment = UITextAlignmentCenter;
-  
+
     [duelButton setTitle:NSLocalizedString(@"Saloon", @"") forState:UIControlStateNormal];
     [duelButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
     duelButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
     duelButton.titleLabel.textAlignment = UITextAlignmentCenter;
-    
-    [teachingButton setTitle:NSLocalizedString(@"Practice", @"") forState:UIControlStateNormal];
-    [teachingButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
-    teachingButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
-    teachingButton.titleLabel.textAlignment = UITextAlignmentCenter;
     
     [profileButton setTitle:NSLocalizedString(@"Profile", @"") forState:UIControlStateNormal];
     [profileButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
@@ -395,7 +404,7 @@ static StartViewController *sharedHelper = nil;
     helpButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
     helpButton.titleLabel.textAlignment = UITextAlignmentCenter;
     
-    [mapButton setTitle:NSLocalizedString(@"MoreGames", @"") forState:UIControlStateNormal];
+    [mapButton setTitle:NSLocalizedString(@"STORE", @"") forState:UIControlStateNormal];
     [mapButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
     mapButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
     mapButton.titleLabel.textAlignment = UITextAlignmentCenter;
@@ -403,7 +412,7 @@ static StartViewController *sharedHelper = nil;
     UIColor *textColor = [UIColor whiteColor];
     
     UIFont *textFont = [UIFont systemFontOfSize:16.0f];
-    
+        
     lbPostMessage.text = NSLocalizedString(@"SocialNetworksTitle", nil);
     lbPostMessage.textColor = textColor;
     lbPostMessage.font = textFont;
@@ -431,11 +440,9 @@ static StartViewController *sharedHelper = nil;
     shareViewVisible = NO;
   
     if (firstRun) {        
-        arrowImage =[[UIImageView_AttachedView alloc] initWithImage:[UIImage imageNamed:@"st_arrow.png"] attachedToFrame:teachingButton frequence:0.2 amplitude:6 direction:DirectionToAnimateLeft];
         hudView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
         hudView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
         [hudView setHidden:NO];
-        [self.view insertSubview:hudView belowSubview:teachingButton];
         [hudView addSubview:arrowImage];
         [arrowImage startAnimation];
     }else{
@@ -473,7 +480,14 @@ static StartViewController *sharedHelper = nil;
         [self.navigationController pushViewController:loginViewControllerLocal animated:YES];
     }
 
+    if (self.soundCheack )
+        [soundButton setImage:[UIImage imageNamed:@"pv_btn_music_on.png"] forState:UIControlStateNormal];
+    else {
+        [soundButton setImage:[UIImage imageNamed:@"pv_btn_music_off.png"] forState:UIControlStateNormal];
+    }
     
+    CGAffineTransform transform = CGAffineTransformMakeScale(-1, 1);
+    cloudView.transform = transform;
 }
 - (void)viewDidUnload {
     feedbackView = nil;
@@ -496,6 +510,13 @@ static StartViewController *sharedHelper = nil;
     
     [self playerStart];
     
+    background.hidden = NO;
+    cloudView.hidden = NO;
+    cloudSecondView.hidden = NO;
+    animationCheck = YES;
+    [self cloudAnimation];
+    [self cloudSecondAnimation];
+    
     if (firstRun) {
         firstRun = NO;
         return;
@@ -516,6 +537,11 @@ static StartViewController *sharedHelper = nil;
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+//    to do delete this
+    playerAccount.accountLevel = 7;
+//
+    
     SSConnection *connection = [SSConnection sharedInstance];
     [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
     
@@ -540,6 +566,7 @@ static StartViewController *sharedHelper = nil;
     TestAppDelegate *app = (TestAppDelegate *)[[UIApplication sharedApplication] delegate];
     [app.adBanner setHidden:NO];
 }
+
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -557,6 +584,11 @@ static StartViewController *sharedHelper = nil;
       shareView.frame = frame;
       shareViewVisible = NO;
     }
+    
+    background.hidden = YES;
+    cloudView.hidden = YES;
+    cloudSecondView.hidden = YES;
+    animationCheck = NO;
 }
 
 -(void)didBecomeActive
@@ -564,8 +596,9 @@ static StartViewController *sharedHelper = nil;
     DLog(@"did become active");
     SSConnection *connection = [SSConnection sharedInstance];
     [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
-    if (!firstRunLocal) {
-         [self login];
+    
+    if (firstRunLocal) {
+        [self login];
     }
     
     [facebook extendAccessTokenIfNeeded];
@@ -573,25 +606,37 @@ static StartViewController *sharedHelper = nil;
         [profileViewController checkValidBlackActivity];
     }
     firstDayWithOutAdvertising=[AdvertisingAppearController advertisingCheckForAppearWithFirstDayWithOutAdvertising:firstDayWithOutAdvertising];
+    
+    
+    if ([self isViewLoaded]) {
+        animationCheck = YES;
+        [self cloudAnimation];
+        [self cloudSecondAnimation];
+    }
 }
 
 -(void)didEnterBackground
 {
     [[SSConnection sharedInstance] disconnect];
+    animationCheck = NO;
 }
 
 -(void)didFinishLaunching
 {    
-    NSString *FilePath = [[OGHelper sharedInstance] getSavePathForList];
+    NSString *filePath = [[OGHelper sharedInstance] getSavePathForList];
     
     NSFileManager *fileMgr = [NSFileManager defaultManager];
     
     NSError *error= nil;
-    if ([fileMgr removeItemAtPath:FilePath error:&error] != YES){
+    if ([fileMgr removeItemAtPath:filePath error:&error] != YES){
         DLog(@"TestAppDelegate: Unable to delete file: %@", [error localizedDescription]);
         
     }
-    [[NSFileManager defaultManager] createDirectoryAtPath:FilePath withIntermediateDirectories:NO attributes:nil error:&error];
+    [[NSFileManager defaultManager] createDirectoryAtPath:filePath withIntermediateDirectories:NO attributes:nil error:&error];
+    
+    filePath = [DuelProductDownloaderController getSavePathForDuelProduct];
+    
+    [[NSFileManager defaultManager] createDirectoryAtPath:filePath withIntermediateDirectories:NO attributes:nil error:&error];
 }
 
 #pragma mark - IBAction main buttons
@@ -616,41 +661,17 @@ static StartViewController *sharedHelper = nil;
     [self.navigationController pushViewController:listOfItemsViewController animated:YES];
 }
 
--(IBAction)teachingButtonClick
-{  
-    [playerAccount.finalInfoTable removeAllObjects];
-    int randomTime = arc4random() % 6; 
+- (IBAction)storeButtonClick:(id)sender {
+    storeViewController=[[StoreViewController alloc] initWithAccount:playerAccount];
+    [self.navigationController pushViewController:storeViewController animated:YES];
     
-    oponentAccount.accountName=NSLocalizedString(@"COMPUTER", @"");
-    oponentAccount.money = 1000;
-    oponentAccount.accountLevel = 4;//playerAccount.accountLevel;
-    oponentAccount.accountPoints = playerAccount.accountPoints;
-    
-    TeachingViewController *teachingViewController = [[TeachingViewController alloc] initWithTime:randomTime andAccount:playerAccount andOpAccount:oponentAccount];
-    [self.navigationController pushViewController:teachingViewController animated:YES];
-    
-    SSConnection *connection = [SSConnection sharedInstance];
-    [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
-                                                        object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"/duel_teaching" forKey:@"event"]];
-}
-
--(IBAction)mapButtonClick
-{
-    collectionAppViewController=[[CollectionAppViewController alloc] init];
-    [self presentModalViewController:collectionAppViewController animated:YES];
-    
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"/more_games" forKey:@"event"]];
-
+													  userInfo:[NSDictionary dictionaryWithObject:@"/store" forKey:@"event"]];
 }
 
--(IBAction)profileButtonClick 
-{   
+-(IBAction)profileButtonClick
+{
     profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount startViewController:self];
     [profileViewController setNeedAnimation:YES];
     CATransition* transition = [CATransition animation];
@@ -673,6 +694,33 @@ static StartViewController *sharedHelper = nil;
         [profileViewController.ivBlack setHidden:NO];
         [self.navigationController pushViewController:profileViewController animated:NO];
     }
+}
+
+-(void)profileFirstRunButtonClickWithOutAnimation;
+{
+    UIViewController *topController=[self.navigationController topViewController];
+    if (![topController isKindOfClass:[ProfileViewController class]]) {
+        profileViewController = [[ProfileViewController alloc] initFirstStartWithAccount:playerAccount startViewController:self];
+        [self.navigationController pushViewController:profileViewController animated:NO];
+    }
+}
+
+- (void) showFeedbackView {
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationBeginsFromCurrentState:YES]; 
+	[UIView setAnimationCurve:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction];
+    [UIView setAnimationDuration:0.5f];
+	[UIView setAnimationDelegate:self];
+    CGRect frame = feedbackView.frame;
+    int delta = 0;
+    if ([[UIScreen mainScreen] bounds].size.height > 480) delta = 50;
+    frame.origin.y = [[UIScreen mainScreen] bounds].size.height - feedbackView.frame.size.height - delta;
+    feedbackView.frame = frame;
+    
+    [UIView commitAnimations];
+    
+    feedBackViewVisible=YES;
 }
 
 - (void) showView: (UIView *)view
@@ -707,7 +755,7 @@ static StartViewController *sharedHelper = nil;
 
 -(IBAction)showHelp:(id)sender
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/help_click" forKey:@"event"]];
     
@@ -727,6 +775,14 @@ static StartViewController *sharedHelper = nil;
     SSConnection *connection = [SSConnection sharedInstance];
     [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
     //[self presentModalViewController:adColonyViewController animated:YES];
+}
+- (IBAction)soundButtonClick:(id)sender {
+    [self soundOff];
+    if (self.soundCheack){
+        [soundButton setImage:[UIImage imageNamed:@"pv_btn_music_on.png"] forState:UIControlStateNormal];
+    }else {
+        [soundButton setImage:[UIImage imageNamed:@"pv_btn_music_off.png"] forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark -
@@ -803,17 +859,36 @@ static StartViewController *sharedHelper = nil;
 }
 
 - (IBAction)feedbackFacebookBtnClick:(id)sender {
-    
-        if ([[OGHelper sharedInstance]isAuthorized]) { 
-                [[OGHelper sharedInstance] apiDialogFeedUser];
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
-                                                                    object:self
-                                                                  userInfo:[NSDictionary dictionaryWithObject:@"/share_Facebook_click" forKey:@"event"]];
-            }else {
-                [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusFeed];
-                [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
+    float ver_float = [[[UIDevice currentDevice] systemVersion] floatValue];
+    if (ver_float >= 6.0) {
+        if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]){
+            SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+            SLComposeViewControllerCompletionHandler __block myBlock = ^(SLComposeViewControllerResult result){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [controller dismissViewControllerAnimated:YES completion:nil];
+                });
+            };
+            controller.completionHandler = myBlock;
+            [controller setInitialText:URL_APP_ESTIMATE];
+            [controller addURL:[NSURL URLWithString:URL_APP_ESTIMATE]];
+            [self presentViewController:controller animated:YES completion:Nil];
         }
+    }else{
+        if ([[OGHelper sharedInstance]isAuthorized]) {
+            [[OGHelper sharedInstance] apiDialogFeedUser];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                                object:self
+                                                              userInfo:[NSDictionary dictionaryWithObject:@"/share_Facebook_click" forKey:@"event"]];
+        }else {
+            [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusFeed];
+            [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
+        }
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/feedBack_Facebook_click" forKey:@"event"]];
 }
 
 - (IBAction)feedbackTweeterBtnClick:(id)sender {
@@ -924,8 +999,6 @@ static StartViewController *sharedHelper = nil;
         NSMutableData *receivedData = [[NSMutableData alloc] init];
         [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
     }
-
-    
 }
 
 #pragma mark - CustomNSURLConnection handlers
@@ -949,6 +1022,12 @@ static StartViewController *sharedHelper = nil;
             RefreshContentDataController *refreshContentDataController=[[RefreshContentDataController alloc] init];
             [refreshContentDataController refreshContent];
         }
+        
+        int revisionProductListNumber=[[responseObject objectForKey:@"v_of_store_list"] intValue];
+        if ([DuelProductDownloaderController isRefreshEvailable:revisionProductListNumber]) {
+            [duelProductDownloaderController refreshDuelProducts];
+        }
+
         return;
     }       
     //avtorization
@@ -1043,16 +1122,11 @@ static StartViewController *sharedHelper = nil;
             CDTransaction *transaction = [[CDTransaction alloc] init];
             transaction.trType = [NSNumber numberWithInt:1];
             transaction.trMoneyCh = [NSNumber numberWithInt:100];
+            transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
             playerAccount.money+=100;
             transaction.trDescription = [[NSString alloc] initWithFormat:@"forIPad"];
             [playerAccount.transactions addObject:transaction];
-            NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
-            NSMutableArray *locationData = [[NSMutableArray alloc] init];
-            for( CDTransaction *loc in playerAccount.transactions)
-            {
-                [locationData addObject: [NSKeyedArchiver archivedDataWithRootObject:loc]];
-            }
-            [def setObject:locationData forKey:@"transactions"];
+            [playerAccount saveTransaction];
             
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"moneyForIPad"];
         }
@@ -1115,6 +1189,20 @@ static StartViewController *sharedHelper = nil;
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
 }
 
+#pragma mark DuelProductDownloaderControllerDelegate
+
+-(void)didiFinishDownloadWithType:(DuelProductDownloaderType)type error:(NSError *)error;
+{
+    if (!error) {
+        if (type == DuelProductDownloaderTypeDuelProduct) {
+            [duelProductDownloaderController refreshUserDuelProducts];
+        }else if (type == DuelProductDownloaderTypeUserProduct) {
+            if ([[self.navigationController visibleViewController] isKindOfClass:[StoreViewController class]]) {
+                [storeViewController refreshController];
+            }
+        }   
+    }
+}
 
 #pragma mark - Authorization
 
@@ -1126,7 +1214,6 @@ static StartViewController *sharedHelper = nil;
     NSString *deviceToken; 
     if ([[NSUserDefaults standardUserDefaults] stringForKey:@"DeviceToken"]) deviceToken = [[NSUserDefaults standardUserDefaults] stringForKey:@"DeviceToken"];
     else deviceToken = @"";
-    
     
     UIDevice *currentDevice = [UIDevice currentDevice];
     
@@ -1178,12 +1265,14 @@ static StartViewController *sharedHelper = nil;
     if (theConnection) {
         NSMutableData *receivedData = [[NSMutableData alloc] init];
         [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
-    } else {
     }
     
     oldAccounId=@"";
     gameCenterViewController = [GameCenterViewController sharedInstance:playerAccount andParentVC:self];
-  
+    
+    if ([duelProductDownloaderController isListProductsAvailable]) {
+        [duelProductDownloaderController refreshUserDuelProducts];
+    }
 }
 
 -(void)modifierUser:(AccountDataSource *)playerTemp;
@@ -1193,7 +1282,6 @@ static StartViewController *sharedHelper = nil;
                                                         timeoutInterval:kTimeOutSeconds];
     
     [theRequest setHTTPMethod:@"POST"]; 
-    
     NSMutableDictionary *dicBody=[NSMutableDictionary dictionary];
     [dicBody setValue:playerTemp.accountID forKey:@"authentification"];
     [dicBody setValue:[NSString stringWithFormat:@"%d",playerTemp.accountLevel ] forKey:@"level"]; 
@@ -1209,8 +1297,7 @@ static StartViewController *sharedHelper = nil;
     if (theConnection) {
         NSMutableData *receivedData = [[NSMutableData alloc] init];
         [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
-    } else {
-    }    
+    }
 }
 
 
@@ -1265,8 +1352,6 @@ static StartViewController *sharedHelper = nil;
             if (self.internetActive) {
                 self.internetActive = NO;
             }
-            
-            
             break;
             
         }
@@ -1298,6 +1383,8 @@ static StartViewController *sharedHelper = nil;
             if (self.hostActive) {
                 self.hostActive = NO;
                 DLog(@"The internet is down IF.");
+                listOfItemsViewController.statusOnLine = hostActive;
+                [listOfItemsViewController refreshController];
             }
             
             
@@ -1387,7 +1474,7 @@ static StartViewController *sharedHelper = nil;
     }else {
         if (firstRunLocal) {
             firstRunLocal = NO;
-            [self profileButtonClick];
+            [self profileFirstRunButtonClickWithOutAnimation];
         }
     }
 }
@@ -1409,7 +1496,6 @@ static StartViewController *sharedHelper = nil;
         [hudView addSubview:arrowImage3];
         [arrowImage3 startAnimation];
         
-        [teachingButton swapDepthsWithView:duelButton];
         //
         [arrowImage setHidden:YES];
         
@@ -1426,6 +1512,88 @@ static StartViewController *sharedHelper = nil;
 {
     if (d<0) return -1.0 * d;
     else return d;
+}
+
+#pragma mark CloudAnimation
+
+-(void)cloudAnimation;
+{
+    if (animationCheck) {
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationBeginsFromCurrentState:YES];
+        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+        [UIView setAnimationDuration:0.1f];
+        [UIView setAnimationDelegate:self];
+        
+        CGRect frame = cloudView.frame;
+        frame.origin.x = cloudX;
+        cloudView.frame = frame;
+        cloudX-=10;
+        
+        [UIView setAnimationDidStopSelector:@selector(cloudRevAnimation)];
+        [UIView commitAnimations];
+    }
+}
+
+-(void)cloudRevAnimation
+{
+    NSLog(@"cloudX %d",cloudX);
+    if(cloudX == 440){
+        [cloudView setHidden:NO];
+    }
+    
+    if(cloudX==-10){
+        [self cloudSecondAnimation];
+    }
+    
+    if(cloudX==-500){
+        [cloudView setHidden:YES];
+        CGRect frame = cloudView.frame;
+        frame.origin.x = 470;
+        cloudView.frame = frame;
+        cloudX=470;
+    }else{
+        [self cloudAnimation];
+    }
+}
+
+-(void)cloudSecondAnimation
+{
+    if (animationCheck) {
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationBeginsFromCurrentState:YES];
+        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+        [UIView setAnimationDuration:0.1f];
+        [UIView setAnimationDelegate:self];
+        
+        CGRect frame = cloudSecondView.frame;
+        frame.origin.x = cloud2X;
+        cloudSecondView.frame = frame;
+        cloud2X-=10;
+        
+        [UIView setAnimationDidStopSelector:@selector(cloudSecondRevAnimation)];
+        [UIView commitAnimations];
+    }
+}
+
+-(void)cloudSecondRevAnimation
+{
+    NSLog(@"cloud2X %d",cloud2X);
+    if(cloud2X ==440){
+        [cloudSecondView setHidden:NO];
+    }
+    if(cloud2X==-10){
+        [self cloudAnimation];
+    }
+    if(cloud2X==-500){
+        [cloudSecondView setHidden:YES];
+        CGRect frame = cloudSecondView.frame;
+        frame.origin.x = 470;
+        cloudSecondView.frame = frame;
+        cloud2X=470;
+    }else{
+        [self cloudSecondAnimation];
+    }
 }
 
 #pragma mark 10 dolars for day
@@ -1446,26 +1614,14 @@ static StartViewController *sharedHelper = nil;
         
         CDTransaction *transaction = [[CDTransaction alloc] init];
         transaction.trMoneyCh = [NSNumber numberWithInt:10];
-        
+        transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
         transaction.trDescription = [[NSString alloc] initWithFormat:@"Daily money"];
         
-        int local = [playerAccount.glNumber intValue];
-        local++;
-        DLog(@"number %d", local);
-        playerAccount.glNumber = [NSNumber numberWithInt:local];
-        //            transaction.trNumber = [NSNumber numberWithInt:local];
         [playerAccount.transactions addObject:transaction];
         
-        NSMutableArray *locationData = [[NSMutableArray alloc] init];
-        for( CDTransaction *loc in playerAccount.transactions)
-        {
-            [locationData addObject: [NSKeyedArchiver archivedDataWithRootObject:loc]];
-        }
-        [userDef setObject:locationData forKey:@"transactions"];
-        
+        [playerAccount saveTransaction];
         
         DLog(@"Transactions count = %d", [playerAccount.transactions count]);
-        
     };
     [userDef synchronize];
     

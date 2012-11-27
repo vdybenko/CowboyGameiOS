@@ -20,4 +20,5 @@
 @property (nonatomic, strong) NSNumber *duelsWin;
 @property (nonatomic, strong) NSNumber *duelsLost;
 @property (nonatomic, strong) NSString *sessionId;
+
 @end

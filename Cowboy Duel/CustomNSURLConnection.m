@@ -22,7 +22,7 @@ static CustomNSURLConnection *connection;
 }
 
 - (id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate {
-    self = [super initWithRequest:request delegate:delegate];
+    self = [super initWithRequest:request delegate:delegate startImmediately:YES];
     if (self) {
         self.requestURL = [[NSURL alloc] init];
         self.requestURL = request.URL;

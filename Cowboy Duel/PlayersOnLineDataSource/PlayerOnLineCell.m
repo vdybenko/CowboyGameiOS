@@ -21,6 +21,9 @@
 @synthesize indicatorConnectin;
 @synthesize ribbon;
 
+@synthesize userAtack;
+@synthesize userDefense;
+
 +(PlayerOnLineCell*) cell {
     NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"OnLinePlayersCell" owner:nil options:nil];
     return [objects objectAtIndex:0];
@@ -44,9 +47,7 @@
     rankLevelCode.text=@"TOP 10";
     [ribbon addSubview:rankLevelCode];
     
-    [btnDuel setTitleByLabel:@"DUEL"];
-    [btnDuel changeColorOfTitleByLabel:[UIColor colorWithRed:0.95 green:0.86 blue:0.68 alpha:1.0]];
-    
+    [btnDuel setTitleByLabel:@"DUEL" withColor:[UIColor colorWithRed:0.95 green:0.86 blue:0.68 alpha:1.0] fontSize:18];
     [backGround setDinamicHeightBackground];
 }
 
@@ -72,6 +73,20 @@
         [self.btnDuel setEnabled:NO];
     }
     
+//    if (playerAccount.accountWeapon.dDamage!=0) {
+//        userAtack.text = [NSString stringWithFormat:@"+%d",playerAccount.accountWeapon.dDamage];
+//        userAtack.hidden = NO;
+//    }else{
+//    userAtack.hidden = YES;
+//}
+    
+//    if (playerAccount.accountDefenseValue!=0) {
+//        userDefense.text = [NSString stringWithFormat:@"+%d",playerAccount.accountDefenseValue];
+//        userDefense.hidden = NO;
+//    }else{
+//userDefense.hidden = YES;
+//}
+
     [self hideIndicatorConnectin];
 }
 

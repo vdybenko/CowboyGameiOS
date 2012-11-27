@@ -29,11 +29,7 @@
     IBOutlet UILabel *lbBackBtn;
     IBOutlet UILabel *lbInviteBtn;
     
-    IBOutlet UIView *offLineBackGround;
-    IBOutlet UIWebView *offLineText;
-    
     IBOutlet UILabel *saloonTitle;
-    IBOutlet UIButton *btnRefresh;
     
     NSTimer *updateTimer;
 }
@@ -54,7 +50,7 @@
 	if (self) {
         _gameCenterViewController = GCVC;
         _playerAccount = userAccount;
-        statusOnLine=YES;
+        statusOnLine=onLine;
     }
     return self;
 }
@@ -78,6 +74,7 @@
     
     _playersOnLineDataSource = [[PlayersOnLineDataSource alloc] initWithTable:tableView];
     _playersOnLineDataSource.delegate=self;
+    _playersOnLineDataSource.statusOnLine = statusOnLine;
     
     tableView.delegate=self;
     tableView.dataSource=_playersOnLineDataSource;
@@ -89,17 +86,6 @@
                                                           userInfo:[NSDictionary dictionaryWithObject:@"/saloon_refresh_click" forKey:@"event"]];
 
     }];
-    
-    [offLineText setOpaque:NO];
-    [offLineText setBackgroundColor:[UIColor clearColor]];
-    
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
-        [offLineText.scrollView setScrollEnabled:NO];
-    else
-    {
-      UIScrollView *lastScroll = (UIScrollView *)[[offLineText subviews] lastObject];
-      lastScroll.scrollEnabled = NO;
-    }
     
     saloonTitle.text = NSLocalizedString(@"SALYN", nil);
     saloonTitle.textColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
@@ -114,16 +100,12 @@
     lbInviteBtn.text = NSLocalizedString(@"INVITE", nil);
     lbInviteBtn.textColor = btnColor;
     lbInviteBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
-        
-    [btnRefresh setTitleByLabel:@"REFRESH"];
-    [btnRefresh changeColorOfTitleByLabel:btnColor];
 }
 
 - (void)viewDidUnload
 {
-    btnInvite = nil;
-    btnRefresh = nil;
     [super viewDidUnload];
+    btnInvite = nil;
     saloonTitle = nil;
     lbBackBtn = nil;
     lbInviteBtn = nil;
@@ -131,7 +113,6 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self checkInternetStatus:statusOnLine];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -182,6 +163,7 @@
 {
     SSServer *player;
     player=[_playersOnLineDataSource.serverObjects objectAtIndex:indexPath.row];
+
     AccountDataSource *oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
     [oponentAccount setAccountID:(player.serverName) ? [NSString stringWithString:player.serverName]:@""];
     [oponentAccount setAccountName:player.displayName];
@@ -191,7 +173,23 @@
     [oponentAccount setBot:player.bot];
     [oponentAccount setMoney:[player.money integerValue]];
     [oponentAccount setSessionID:(player.sessionId) ? [NSString stringWithString:player.sessionId]:@""];
-    
+
+    if ([player.sessionId isEqualToString:@"-1"]) {
+        [_playerAccount.finalInfoTable removeAllObjects];
+        int randomTime = arc4random() % 6;
+        
+        TeachingViewController *teachingViewController = [[TeachingViewController alloc] initWithTime:randomTime andAccount:_playerAccount andOpAccount:oponentAccount];
+        [self.navigationController pushViewController:teachingViewController animated:YES];
+        
+        SSConnection *connection = [SSConnection sharedInstance];
+        [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                            object:self
+                                                          userInfo:[NSDictionary dictionaryWithObject:@"/duel_teaching" forKey:@"event"]];
+        return;
+    }
+
     DuelStartViewController *duelStartViewController = [[DuelStartViewController alloc]initWithAccount:_playerAccount andOpAccount:oponentAccount opopnentAvailable:NO andServerType:NO andTryAgain:NO];
     duelStartViewController.serverName = player.serverName;
     
@@ -256,12 +254,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)refreshBtnClick:(id)sender {
-    [self refreshController];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"/saloon_refresh_click_offline" forKey:@"event"]];
-}
 - (IBAction)inviteFriendsClick:(id)sender {
     if([[OGHelper sharedInstance] isAuthorized]){
         [loadingView setHidden:NO];
@@ -285,6 +277,7 @@
     [loadingView setHidden:NO];
     [activityIndicator startAnimating];
     [btnInvite setEnabled:NO];
+    _playersOnLineDataSource.statusOnLine = statusOnLine;
     [_playersOnLineDataSource reloadDataSource];
 }
 
@@ -294,35 +287,7 @@
     [activityIndicator stopAnimating];
     [btnInvite setEnabled:YES];
     [tableView reloadData];
-    if (_playersOnLineDataSource.serverObjects.count == 0 && statusOnLine) {
-        [offLineBackGround setDinamicHeightBackground];
-        
-        [offLineText loadHTMLString:NSLocalizedString(@"AlertTextListOnlineIsEmpty", @"") baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
-        
-        [tableView setHidden:YES];
-        [offLineBackGround setHidden:NO];
-    }else {
-        if(statusOnLine){
-            [tableView setHidden:NO];
-            [offLineBackGround setHidden:YES];
-        }
-    };
     [self.tableView refreshFinished];
-}
-
-- (void)checkInternetStatus:(BOOL)status;
-{
-    if (statusOnLine) {
-        [tableView setHidden:NO];
-        [offLineBackGround setHidden:YES];
-    }else {
-        [offLineBackGround setDinamicHeightBackground];
-        
-        [offLineText loadHTMLString:NSLocalizedString(@"InternetAlertTextListOnline", @"") baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]]; 
-        
-        [tableView setHidden:YES];
-        [offLineBackGround setHidden:NO];
-    }
 }
 
 -(void)startTableAnimation;

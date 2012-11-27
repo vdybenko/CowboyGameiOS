@@ -220,24 +220,24 @@ static OGHelper *sharedHelper = nil;
          andDelegate:self];
 }
 
-- (void)publishPostOnFeed {
-    currentAPICall = kParseByURL;
-    
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-//                                   @"Cowboy duel", @"name",
-                                   URL_APP_ESTIMATE, @"link",
-//                                   @" App for iPhone!", @"caption",
-//                                   @"This is a description of my app", @"description",
-                                   [NSString stringWithFormat:@"I'm playing in Cowboy duels %@",URL_APP_ESTIMATE], @"message", 
-//                                   URL_FB_PICTURE, @"picture",
-                                   nil];
-    
-    facebook.accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"FBAccessTokenKey"];
-    [facebook requestWithGraphPath:@"me/feed"
-                         andParams:params
-                     andHttpMethod:@"POST" 
-                       andDelegate:self];
-}
+//- (void)publishPostOnFeed {
+//    currentAPICall = kParseByURL;
+//    
+//    NSMutableDictionary *params = [NSMutableDictionary diationaryWithObjectsAndKeys:
+////                                   @"Cowboy duel", @"name",
+//                                   URL_APP_ESTIMATE, @"link",
+////                                   @" App for iPhone!", @"caption",
+////                                   @"This is a description of my app", @"description",
+//                                   [NSString stringWithFormat:@"I'm playing in Cowboy duels %@",URL_APP_ESTIMATE], @"message", 
+////                                   URL_FB_PICTURE, @"picture",
+//                                   nil];
+//    
+//    facebook.accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"FBAccessTokenKey"];
+//    [facebook requestWithGraphPath:@"me/feed"
+//                         andParams:params
+//                     andHttpMethod:@"POST" 
+//                       andDelegate:self];
+//}
 
 
 /*

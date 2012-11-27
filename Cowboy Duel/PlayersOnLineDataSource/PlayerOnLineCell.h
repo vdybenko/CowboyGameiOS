@@ -16,6 +16,9 @@
 @property (strong,nonatomic) IBOutlet UIActivityIndicatorView *indicatorConnectin;
 @property (strong,nonatomic) IBOutlet UIImageView * ribbon;
 
+@property (strong, nonatomic) IBOutlet UILabel *userAtack;
+@property (strong, nonatomic) IBOutlet UILabel *userDefense;
+
 +(PlayerOnLineCell*)cell;
 +(NSString*) cellID;
 

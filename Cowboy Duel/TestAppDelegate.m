@@ -11,19 +11,18 @@
 #import <GameKit/GameKit.h>
 #import "LoginAnimatedViewController.h"
 
-#if !(TARGET_IPHONE_SIMULATOR)
-//#import "GAI.h"
 #import "Crittercism.h"
 #import "StartViewController.h"
 
-
-static const NSInteger kGANDispatchPeriod = 5;
+static const NSInteger kGANDispatchPeriod = 60;
+#ifdef DEBUG
+static NSString *kGAAccountID = @"UA-24007807-3";
+#else
 static NSString *kGAAccountID = @"UA-24007807-6";
+#endif
 NSString  *const ID_CRIT_APP   = @"4fb4f482c471a10fc5000092";
 NSString  *const ID_CRIT_KEY   = @"stjyktz620mziyf5rhi89ncaorab";
 NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
-
-#endif
 
 static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNotification";
 @interface TestAppDelegate()
@@ -49,7 +48,6 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     [UIImage initialize];
         
    // [AdColony initAdColonyWithDelegate:self];
-#if !(TARGET_IPHONE_SIMULATOR)  
     [[GANTracker sharedTracker] startTrackerWithAccountID:kGAAccountID
                                            dispatchPeriod:kGANDispatchPeriod delegate:self];
 	
@@ -57,6 +55,7 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
 /*
   [[GAI sharedInstance] trackerWithTrackingId:kGAAccountID];
   
+
 //    [[GAI sharedInstance] startTrackerWithAccountID:kGAAccountID
 //                                           dispatchPeriod:kGANDispatchPeriod
 //                                                 delegate:nil];	
@@ -64,10 +63,6 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(AnalyticsTrackEvent:)
 												 name:kAnalyticsTrackEventNotification object:nil];
-    
-   
-
-#endif	
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     
@@ -203,8 +198,6 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     
 }
 
-#if !(TARGET_IPHONE_SIMULATOR)
-
 - (void)AnalyticsTrackEvent:(NSNotification *)notification {
     
     NSError	*err;
@@ -216,7 +209,6 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     
     if(![fbUserId isEqualToString:@"NoGC"]){
     }
-    
     
 	NSString *page = [[notification userInfo] objectForKey:@"event"];
 	DLog(@"GA page %@",page);
@@ -240,7 +232,6 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
   NSLog(@"Dispatch completed (%u OK, %u failed)",
         hitsDispatched, hitsFailedDispatch);
 }
-#endif
 
 
 #pragma mark GADRequest generation
@@ -268,8 +259,6 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
 didFailToReceiveAdWithError:(GADRequestError *)error {
     NSLog(@"Failed to receive ad with error: %@", [error localizedFailureReason]);
 }
-
-
 
 - (void)dealloc
 {

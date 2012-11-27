@@ -6,11 +6,12 @@
 #import "CDDuel.h"
 #import "ValidationUtils.h"
 #import "CDAchivment.h"
+#import "CDWeaponProduct.h"
 
 @class StartViewController;
 @interface AccountDataSource : NSObject
 
-@property (nonatomic, readonly) NSInteger accountDataSourceID;
+@property(nonatomic, readonly) NSInteger accountDataSourceID;
 @property(nonatomic) int money;
 @property(nonatomic, copy) NSString *accountName;
 @property(strong, nonatomic) NSString *sessionID;
@@ -21,6 +22,13 @@
 @property(nonatomic) NSInteger accountDraws; 
 @property(nonatomic) NSInteger accountBigestWin; 
 @property(nonatomic) NSInteger removeAds;
+
+@property(nonatomic) NSInteger accountDefenseValue;
+@property(nonatomic) NSInteger curentIdWeapon;
+@property(strong, nonatomic) CDWeaponProduct *accountWeapon;
+
+@property(nonatomic) BOOL isTryingWeapon;
+
 @property(strong, nonatomic) NSString *avatar;
 @property(strong, nonatomic) NSString *age; 
 @property(strong, nonatomic) NSString *homeTown;
@@ -29,7 +37,7 @@
 
 @property(strong,nonatomic) NSMutableArray *transactions;
 @property(strong,nonatomic) NSMutableArray *duels;
-@property(strong, nonatomic) NSNumber *glNumber;
+@property(nonatomic) int glNumber;
 @property(strong,nonatomic) NSMutableArray *achivments;
 
 @property(strong,nonatomic) NSMutableArray *teachingTimes;
@@ -68,6 +76,17 @@
 - (void)saveFriends;
 - (void)saveFacebookName;
 - (void)saveDeviceType;
+- (void)saveWeapon;
+- (void)loadWeapon;
+- (void)saveDefense;
+- (void)loadDefense;
+- (void)saveTransaction;
+- (void)saveGlNumber;
+- (int)increaseGlNumber;
+
+- (CDWeaponProduct*)loadAccountWeapon;
+-(NSUInteger(^)(NSArray *, NSInteger))findObsByID;
+-(NSUInteger(^)(NSArray *, NSString *))findObsByPurchase;
 
 -(void)putchAvatarImageToInitStartVC:(StartViewController*)startVC;
 -(BOOL)isAvatarImage:(NSString*)imagePath;

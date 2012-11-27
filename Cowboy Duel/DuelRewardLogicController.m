@@ -77,7 +77,6 @@
 
 +(NSInteger)countUpBuletsWithPlayerLevel:(int)playerLevel;
 {
-    DLog(@"countUpBuletsWithPlayerLevel %d", playerLevel);
     NSArray *array=[[NSArray alloc] initWithObjects:
                     [NSNumber numberWithInt:2],//0
                     [NSNumber numberWithInt:2],//1
@@ -96,5 +95,17 @@
     }
     int countBullets=[[array objectAtIndex:(playerLevel)] intValue];
     return countBullets;
+}
+
++(NSInteger)countUpBuletsWithOponentLevel:(int)playerLevel defense:(NSInteger)defense playerAtack:(NSInteger)atack;
+{
+    int countBullets = [DuelRewardLogicController countUpBuletsWithPlayerLevel:playerLevel];
+    countBullets += defense;
+    countBullets -= atack;
+    if (countBullets<2) {
+        return 2;
+    }else{
+        return countBullets;
+    }
 }
 @end

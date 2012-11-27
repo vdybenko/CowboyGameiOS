@@ -1,5 +1,4 @@
 //
-//  CDTransaction.h
 //  Cowboy Duel
 //
 //  Created by Sergey Sobol on 29.06.11.

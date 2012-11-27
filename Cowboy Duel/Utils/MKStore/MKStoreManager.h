@@ -14,6 +14,7 @@
 @optional
 - (void)productAPurchased;
 - (void)productBPurchased;
+- (void)productPurchased;
 - (void)failed;
 @end
 

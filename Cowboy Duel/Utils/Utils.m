@@ -268,4 +268,13 @@
         return deviceTypeCode;
     }
 }
+
++(BOOL)isFileDownloadedForPath:(NSString*)path{
+    if([[NSFileManager defaultManager] fileExistsAtPath:path]){
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
 @end

@@ -101,14 +101,17 @@ static GameCenterViewController *gameCenterViewController;
     gameInfo *gsSend = &gameStat;
     randomTime = arc4random() % 6;
     gsSend->randomTime = randomTime;
-    [playerAccount.accountName getCString:gsSend->accountName maxLength:MAX_LENGTH encoding:NSUTF8StringEncoding];
+    [playerAccount.accountName getCString:gsSend->oponentName maxLength:MAX_LENGTH encoding:NSUTF8StringEncoding];
     [playerAccount.accountID getCString:gsSend->oponentAuth maxLength:MAX_LENGTH encoding:NSUTF8StringEncoding];
     gsSend->oponentMoney = playerAccount.money;
-    gsSend->accountLevel = playerAccount.accountLevel;
+    gsSend->oponentLevel = playerAccount.accountLevel;
     gsSend->oponentWins = playerAccount.accountWins;
+    gsSend->oponentAtack = playerAccount.accountWeapon.dDamage;
+    gsSend->oponentDefense = playerAccount.accountDefenseValue;
+    
     [self.connection sendData:(void *)(gsSend) packetID:NETWORK_TIME ofLength:sizeof(gameInfo)];
+    
 }
-
 
 -(void)startDuel
 {
@@ -201,10 +204,13 @@ static GameCenterViewController *gameCenterViewController;
     gameInfo *gsSend = &gameStat;
     randomTime = arc4random() % 6;
     gsSend->randomTime = randomTime;
-    [playerAccount.accountName getCString:gsSend->accountName maxLength:MAX_LENGTH encoding:NSUTF8StringEncoding];
+    [playerAccount.accountName getCString:gsSend->oponentName maxLength:MAX_LENGTH encoding:NSUTF8StringEncoding];
     gsSend->oponentMoney = playerAccount.money;
-    gsSend->accountLevel = playerAccount.accountLevel;
+    gsSend->oponentLevel = playerAccount.accountLevel;
     gsSend->oponentWins = playerAccount.accountWins;
+    gsSend->oponentAtack = playerAccount.accountWeapon.dDamage;
+    gsSend->oponentDefense = playerAccount.accountDefenseValue;
+    
     [self.connection sendData:(void *)(gsSend) packetID:NETWORK_TIME_TRY ofLength:sizeof(gameInfo)];
     runAway=YES;
 }
@@ -541,9 +547,11 @@ static GameCenterViewController *gameCenterViewController;
             
             gameInfo *gsReceive = (gameInfo *)&incomingPacket[4];
             oponentAccount.money = gsReceive->oponentMoney;
-            oponentAccount.accountLevel = gsReceive->accountLevel;
+            oponentAccount.accountLevel = gsReceive->oponentLevel;
             oponentAccount.accountWins = gsReceive->oponentWins;
-            oponentAccount.accountName = [[NSString alloc] initWithCString:gsReceive->accountName encoding:NSUTF8StringEncoding];
+            oponentAccount.accountWeapon.dDamage = gsReceive->oponentAtack;
+            oponentAccount.accountDefenseValue = gsReceive->oponentDefense;
+            oponentAccount.accountName = [[NSString alloc] initWithCString:gsReceive->oponentName encoding:NSUTF8StringEncoding];
             oponentAccount.accountID = [[NSString alloc] initWithCString:gsReceive->oponentAuth encoding:NSUTF8StringEncoding];
             randomTime = gsReceive->randomTime;
             if(!oponentAccount.accountName || [oponentAccount.accountName isEqualToString:@""]) {
@@ -561,16 +569,20 @@ static GameCenterViewController *gameCenterViewController;
                 [self setDelegate2:duelStartViewController];
                 duelStartViewController.delegate = self;
                 [parentVC.navigationController pushViewController:duelStartViewController animated:YES];
+            }else{
+                [duelStartViewController setAttackAndDefenseOfOponent:oponentAccount];
             }
                         
             gameInfo *gsSend = &gameStat;
-            [playerAccount.accountName getCString:gsSend->accountName maxLength:MAX_LENGTH encoding:NSUTF8StringEncoding];
+            [playerAccount.accountName getCString:gsSend->oponentName maxLength:MAX_LENGTH encoding:NSUTF8StringEncoding];
             [playerAccount.accountID getCString:gsSend->oponentAuth maxLength:MAX_LENGTH encoding:NSUTF8StringEncoding];
             gsSend->oponentMoney = playerAccount.money;
             gsSend->oponentLevel = playerAccount.accountLevel;
             gsSend->oponentWins = playerAccount.accountWins;
+            gsSend->oponentAtack = playerAccount.accountWeapon.dDamage;
+            gsSend->oponentDefense = playerAccount.accountDefenseValue;
+            
             [self.connection sendData:(void *)(gsSend) packetID:NETWORK_OPONTYPE_RESPONSE ofLength:sizeof(gameInfo)];
-                       
         }
 			break;
         case NETWORK_TIME_TRY:                               
@@ -603,12 +615,18 @@ static GameCenterViewController *gameCenterViewController;
             gameInfo *gsReceive = (gameInfo *)&incomingPacket[4];
             
             oponentAccount.money = gsReceive->oponentMoney;
-            oponentAccount.accountLevel = gsReceive->accountLevel;
-            oponentAccount.accountName = [[NSString alloc] initWithCString:gsReceive->accountName encoding:NSUTF8StringEncoding];
+            oponentAccount.accountLevel = gsReceive->oponentLevel;
+            oponentAccount.accountName = [[NSString alloc] initWithCString:gsReceive->oponentName encoding:NSUTF8StringEncoding];
             oponentAccount.accountWins = gsReceive->oponentWins;
+            oponentAccount.accountWeapon.dDamage = gsReceive->oponentAtack;
+            oponentAccount.accountDefenseValue = gsReceive->oponentDefense;
             randomTime = gsReceive->randomTime;
             
-            if (!duelStartViewController) duelStartViewController = [[DuelStartViewController alloc]initWithAccount:playerAccount andOpAccount:oponentAccount  opopnentAvailable:YES andServerType:YES andTryAgain:YES];
+            if (!duelStartViewController){
+                duelStartViewController = [[DuelStartViewController alloc]initWithAccount:playerAccount andOpAccount:oponentAccount  opopnentAvailable:YES andServerType:YES andTryAgain:YES];
+            }else{
+                [duelStartViewController setAttackAndDefenseOfOponent:oponentAccount];
+            }
             
             [self setDelegate2:duelStartViewController];
             duelStartViewController.delegate = self;
@@ -627,13 +645,15 @@ static GameCenterViewController *gameCenterViewController;
             }  
             
             gameInfo *gsSend = &gameStat;
-            [playerAccount.accountName getCString:gsSend->accountName maxLength:MAX_LENGTH encoding:NSUTF8StringEncoding];
+            [playerAccount.accountName getCString:gsSend->oponentName maxLength:MAX_LENGTH encoding:NSUTF8StringEncoding];
             [playerAccount.accountID getCString:gsSend->oponentAuth maxLength:MAX_LENGTH encoding:NSUTF8StringEncoding];
             gsSend->oponentMoney = playerAccount.money;
             gsSend->oponentLevel = playerAccount.accountLevel;
             gsSend->oponentWins = playerAccount.accountWins;
+            gsSend->oponentAtack = playerAccount.accountWeapon.dDamage;
+            gsSend->oponentDefense = playerAccount.accountDefenseValue;
+            
             [self.connection sendData:(void *)(gsSend) packetID:NETWORK_OPONTYPE_RESPONSE_TRY ofLength:sizeof(gameInfo)];
-
             
         }
 			break;
@@ -807,8 +827,10 @@ static GameCenterViewController *gameCenterViewController;
             
             oponentAccount.money = gsReceive->oponentMoney;
             oponentAccount.accountLevel = gsReceive->oponentLevel;
-            oponentAccount.accountName = [[NSString alloc] initWithCString:gsReceive->accountName encoding:NSUTF8StringEncoding];
+            oponentAccount.accountName = [[NSString alloc] initWithCString:gsReceive->oponentName encoding:NSUTF8StringEncoding];
             oponentAccount.accountWins = gsReceive->oponentWins;
+            oponentAccount.accountWeapon.dDamage = gsReceive->oponentAtack;
+            oponentAccount.accountDefenseValue = gsReceive->oponentDefense;
             oponentAccount.accountID = [[NSString alloc] initWithCString:gsReceive->oponentAuth encoding:NSUTF8StringEncoding];
             
             [self setDelegate2:duelStartViewController];
@@ -819,7 +841,7 @@ static GameCenterViewController *gameCenterViewController;
                 [duelStartViewController setOponentMoney:oponentAccount.money];
                 [duelStartViewController startButtonClick];
                 [duelStartViewController._vWait setHidden:YES];
-                
+                [duelStartViewController setAttackAndDefenseOfOponent:oponentAccount];
             }  
             
         }
@@ -833,12 +855,15 @@ static GameCenterViewController *gameCenterViewController;
             
             oponentAccount.money = gsReceive->oponentMoney;
             oponentAccount.accountLevel = gsReceive->oponentLevel;
-            oponentAccount.accountName = [[NSString alloc] initWithCString:gsReceive->accountName encoding:NSUTF8StringEncoding];
+            oponentAccount.accountName = [[NSString alloc] initWithCString:gsReceive->oponentName encoding:NSUTF8StringEncoding];
             oponentAccount.accountWins = gsReceive->oponentWins;
+            oponentAccount.accountWeapon.dDamage = gsReceive->oponentAtack;
+            oponentAccount.accountDefenseValue = gsReceive->oponentDefense;
             oponentAccount.accountID = [[NSString alloc] initWithCString:gsReceive->oponentAuth encoding:NSUTF8StringEncoding];
 
             duelStartViewController.lbOpponentDuelsWinCount=[NSString stringWithFormat:@"%d",oponentAccount.accountWins];
             [duelStartViewController setOponentMoney:oponentAccount.money];
+            [duelStartViewController setAttackAndDefenseOfOponent:oponentAccount];
             
             duelStartViewController.tryAgain = YES;
             [self setDelegate2:duelStartViewController];

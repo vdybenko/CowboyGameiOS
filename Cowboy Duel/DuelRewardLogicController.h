@@ -14,5 +14,5 @@
 +(NSInteger)getPointsForLoseWithOponentLevel:(NSInteger)oponentlevel;
 +(NSArray *)getStaticPointsForEachLevels;
 +(NSInteger)countUpBuletsWithPlayerLevel:(int)playerLevel;
-
++(NSInteger)countUpBuletsWithOponentLevel:(int)playerLevel defense:(NSInteger)defense playerAtack:(NSInteger)atack;
 @end

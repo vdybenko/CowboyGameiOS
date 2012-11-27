@@ -30,6 +30,5 @@
 
 +(BOOL) isRefreshEvailable:(int)serverRevision;
 -(void) refreshContent;
--(NSString*)downloadImageFromDocumentDirectory:(NSString *)pUrl;
 
 @end

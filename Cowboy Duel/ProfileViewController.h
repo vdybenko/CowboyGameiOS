@@ -25,6 +25,8 @@
 @property (strong, nonatomic) IBOutlet UIView *ivBlack;
 
 -(id)initWithAccount:(AccountDataSource *)userAccount startViewController:(StartViewController *)startViewController;
+-(id)initFirstStartWithAccount:(AccountDataSource *)userAccount startViewController:(StartViewController *)startViewController;
+
 -(void)checkValidBlackActivity;
 -(void)checkLocationOfViewForFBLogin;
 

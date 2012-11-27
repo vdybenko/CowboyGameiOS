@@ -15,10 +15,13 @@
 #import "GCHelper.h"
 #import "DuelRewardLogicController.h"
 #import "AdvertisingAppearController.h"
+#import "DuelProductWinViewController.h"
+#import "DuelProductDownloaderController.h"
 
 @interface FinalViewController ()
 {
     BOOL tryButtonEnabled;
+    BOOL isDuelWinWatched;
 }
 -(void)winScene;
 -(void)loseScene;
@@ -97,8 +100,6 @@
         
         transaction = [[CDTransaction alloc] init];
         transaction.trMoneyCh = [NSNumber numberWithInt:10];
-        
-        
         transaction.trDescription = [[NSString alloc] initWithFormat:@"Duel"];
         
         duel = [[CDDuel alloc] init];
@@ -250,8 +251,10 @@
     resultTable.delegate = self;
     resultTable.dataSource = self;
     
-    if (playerAccount.accountName != nil) lblNamePlayer.text = playerAccount.accountName;
-    else lblNamePlayer.text = @"YOU";
+    if (playerAccount.accountName != nil)
+        lblNamePlayer.text = playerAccount.accountName;
+    else
+        lblNamePlayer.text = @"YOU";
     [lblNamePlayer setFont: [UIFont fontWithName: @"MyriadPro-Semibold" size:20]];
     lblNameOponnent.text = oponentAccount.accountName;
     
@@ -303,6 +306,10 @@
 {
     viewLastSceneAnimation.hidden=NO;
     [player stop];
+    
+    if (lastDuel){
+        [playerAccount loadWeapon];
+    }
 }
 #pragma mark -
 
@@ -315,9 +322,21 @@
             [userDef synchronize];
         }
         
-        if(playerAccount.money<0) playerAccount.money=0;
+        if(playerAccount.money<0)
+            playerAccount.money=0;
         [playerAccount saveMoney];
-        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+        
+        if (teaching  && playerAccount.isTryingWeapon) {
+            playerAccount.isTryingWeapon = NO;
+            if (!isDuelWinWatched) {
+                isDuelWinWatched = YES;
+                DuelProductWinViewController *duelProductWinViewController=[[DuelProductWinViewController alloc] initWithAccount:playerAccount duelProduct:playerAccount.accountWeapon parentVC:self];
+                [playerAccount loadWeapon];
+                [self.navigationController presentViewController:duelProductWinViewController animated:YES completion:Nil];
+            }
+        }else{
+            [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+        }
 //        if ([self.delegate isKindOfClass:[BluetoothViewController class]]) [self.delegate duelCancel];
         if ([self.delegate isKindOfClass:[GameCenterViewController class]]) {
             [self.delegate performSelector:@selector(matchCanseled)];
@@ -674,12 +693,8 @@
 
     if (!teaching||(duelWithBotCheck)) {
         
-        int local = [playerAccount.glNumber intValue];
-        local++;
-        DLog(@"number %d", local);
-        playerAccount.glNumber = [NSNumber numberWithInt:local];
-        //            transaction.trNumber = [NSNumber numberWithInt:local];
         transaction.trOpponentID = [NSString stringWithString:(oponentAccount.accountID) ? [NSString stringWithString:oponentAccount.accountID]:@""];
+        transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
         [playerAccount.transactions addObject:transaction];
         
         CDTransaction *opponentTransaction = [CDTransaction new];
@@ -695,13 +710,8 @@
         NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
         
         NSMutableArray *locationData = [[NSMutableArray alloc] init];
-        for( CDTransaction *loc in playerAccount.transactions)
-        {
-            [locationData addObject: [NSKeyedArchiver archivedDataWithRootObject:loc]];
-        }
-        [def setObject:locationData forKey:@"transactions"];
+        [playerAccount saveTransaction];
         
-        DLog(@"Transactions count = %d", [playerAccount.transactions count]);
         [def synchronize];
         
         if (oponentAccount.accountID != nil) duel.dOpponentId = [NSString stringWithString:oponentAccount.accountID];  /////////////////////////////// save duels

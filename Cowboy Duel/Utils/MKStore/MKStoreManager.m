@@ -16,7 +16,7 @@
 @synthesize delegate;
 
 // all your features should be managed one and only by StoreManager
-static NSString *featureAId = @"com.webkate.cowboyduels.user.registration";
+static NSString *featureAId = @"com.webkate.cowboyduels.registration";
 static NSString *featureBId = @"com.webkate.cowboyduels.four";
 
 BOOL featureAPurchased;
@@ -98,12 +98,10 @@ static MKStoreManager* _sharedStoreManager; // self
 	// populate your UI Controls here
 	for(int i=0;i<[purchasableObjects count];i++)
 	{
-		
 		SKProduct *product = [purchasableObjects objectAtIndex:i];
 		NSLog(@"Feature: %@, Cost: %f, ID: %@",[product localizedTitle],
 			  [[product price] doubleValue], [product productIdentifier]);
 	}
-	
 }
 
 - (void) buyFeatureA
@@ -155,14 +153,15 @@ static MKStoreManager* _sharedStoreManager; // self
 		featureAPurchased = YES;
 		if([delegate respondsToSelector:@selector(productAPurchased)])
 			[delegate productAPurchased];
-	}
-
-	if([productIdentifier isEqualToString:featureBId])
+	}else if([productIdentifier isEqualToString:featureBId])
 	{
 		featureBPurchased = YES;
 		if([delegate respondsToSelector:@selector(productBPurchased)])
 			[delegate productBPurchased];
-	}
+	}else{
+        if([delegate respondsToSelector:@selector(productPurchased)])
+			[delegate productPurchased];
+    }
 	
 	[MKStoreManager updatePurchases];
 }

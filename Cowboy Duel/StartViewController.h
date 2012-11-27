@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <Twitter/Twitter.h>
 #import <StoreKit/StoreKit.h>
-#import <StoreKit/StoreKit.h>
 #import <MessageUI/MFMailComposeViewController.h>
 
 #import "AccountDataSource.h"
@@ -35,11 +34,12 @@
 #import "TopPlayersDataSource.h"
 #import "SSConnection.h"
 #import "TestAppDelegate.h"
+#import "DuelProductDownloaderController.h"
 
 @class ListOfItemsViewController;
 @class GameCenterViewController;
 
-@interface StartViewController : UIViewController <MFMailComposeViewControllerDelegate,GCAuthenticateDelegate, UIAlertViewDelegate, FBRequestDelegate, GADBannerViewDelegate>
+@interface StartViewController : UIViewController <MFMailComposeViewControllerDelegate,GCAuthenticateDelegate, UIAlertViewDelegate, FBRequestDelegate, GADBannerViewDelegate,DuelProductDownloaderControllerDelegate>
 
 @property (nonatomic) BOOL showFeedAtFirst;
 @property (strong, nonatomic) NSString *oldAccounId;
@@ -48,12 +48,10 @@
 @property (strong, nonatomic) TopPlayersDataSource *topPlayersDataSource;
 @property (nonatomic) BOOL firstRun;
 
-
 + (StartViewController *)sharedInstance;
 -(id)init;     //must be login object!!!
 -(void)playerStop;
 -(BOOL)connectedToWiFi;
--(void)profileButtonClick;
 -(void)authorizationModifier:(BOOL)modifierName;
 -(void)modifierUser:(AccountDataSource *)playerTemp;
 

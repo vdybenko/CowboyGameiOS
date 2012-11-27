@@ -73,9 +73,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
 	if (self) {
         playerAccount=[AccountDataSource sharedInstance];
         loginFacebookStatus = LoginFacebookStatusNone;
-//    if (!counterTryAgain) {
-//          counterTryAgain = 1;
-//    }
     }
     return self;
     
@@ -130,7 +127,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
     self.loginLable.text = NSLocalizedString(@"LOGIN", @"");
     self.loginLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
     
-//    self.donateLable.text = [NSString stringWithFormat:(@"%@ %d$"),  NSLocalizedString(@"DONATE", @""),counterTryAgain];
     self.donateLable.text = NSLocalizedString(@"DONATE 1$", @"");
     self.donateLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
     
@@ -228,7 +224,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
                          [self.player play];
                          if (self.textIndex<8){
 
-                             if (self.textIndex==6) {                 ////"Pay for me $1...
+                             if (self.textIndex==6) {                 ////"Pay for me $1.....
                                  [self scaleButton:self.payButton];   //Scale 1$
                                  [self scaleButton:self.donateLable];
 
@@ -489,7 +485,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
         [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"loginFirstShow"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
-    
 }
 
 

@@ -277,7 +277,6 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
 
 -(void)startTableAnimation
 {
-    [_playersTopDataSource setCellsHide:NO];
     int countOfCells=[_playersTopDataSource.arrItemsList count];
     int maxIndex;
     if (countOfCells<5) {

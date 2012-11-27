@@ -13,7 +13,7 @@
 #import "IconDownloader.h"
 
 @implementation TopPlayersDataSource
-@synthesize arrItemsList,delegate,myProfileIndex,cellsHide;
+@synthesize arrItemsList,delegate,myProfileIndex;
 
 //static const char *TOP_PLAYERS_URL =  BASE_URL"users/listview";
 static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json";
@@ -34,7 +34,6 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
      
      _tableView=pTable;
      myProfileIndex=-1;
-     cellsHide=YES;
 	return self;
 }
 
@@ -157,8 +156,6 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
         player.dPoints=[[dic objectForKey:@"points"] intValue];
         player.dAvatar=[dic objectForKey:@"avatar"];
         [arrItemsList addObject: player];
-        
-              
     }
     NSData *data= [NSKeyedArchiver archivedDataWithRootObject:arrItemsList];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"topPlayers"];
@@ -183,7 +180,6 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
           [error localizedDescription],
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
     TopPlayersViewController *topPlayersViewController = (TopPlayersViewController *)delegate;
-//    [topPlayersViewController.btnFindMe setEnabled:YES];
     [topPlayersViewController.loadingView setHidden:YES];
     [topPlayersViewController.activityIndicator stopAnimating];
     [topPlayersViewController.tableView reloadData];

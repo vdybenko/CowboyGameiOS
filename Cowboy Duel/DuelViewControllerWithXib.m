@@ -8,9 +8,11 @@
 
 #import "DuelViewControllerWithXib.h"
 #import "StartViewController.h"
-#import <MediaPlayer/MediaPlayer.h>
 #import "DuelRewardLogicController.h"
 #import "GameCenterViewController.h"
+#import "UIImage+Save.h"
+#import "DuelProductDownloaderController.h"
+#import "SoundDownload.h"
 
 @interface DuelViewControllerWithXib (PrivateMethods)
 
@@ -22,7 +24,7 @@
 static NSString *ShotSound = @"%@/shot.mp3";
 
 @implementation DuelViewControllerWithXib
-@synthesize _vEarth, _infoButton, _ivGun, _btnNab, _lbBullets, _vBackground, delegate,titleSteadyFire;
+@synthesize _vEarth, _infoButton, _ivGun, _btnNab, _lbBullets, delegate,titleSteadyFire;
 
 -(id)initWithAccount:(AccountDataSource *)userAccount oponentAccount:(AccountDataSource *)oponentAccount;
 {
@@ -30,6 +32,11 @@ static NSString *ShotSound = @"%@/shot.mp3";
     if (self) { 
         playerAccount = userAccount;
         opAccount = oponentAccount;
+        
+        if (playerAccount.isTryingWeapon) {
+            playerAccount.isTryingWeapon = NO;
+            [playerAccount loadWeapon];
+        }
     }
     return self;
 }
@@ -106,64 +113,19 @@ static NSString *ShotSound = @"%@/shot.mp3";
     lbBackButton.textColor = btnColor;
     lbBackButton.font = [UIFont fontWithName: @"DecreeNarrow" size:24];  
     
-    UIFont *fontShot=[UIFont fontWithName: @"MyriadPro-Semibold" size:18];
-    UIFont *fontSound=[UIFont fontWithName: @"MyriadPro-Semibold" size:15];
-
-//    Shots
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"disableShotsHelp"]) {
-        [helpViewShots removeFromSuperview];
-    }else {
-        [viewDinamicHeight setDinamicHeightBackground];
-        [lbWait setFont:fontShot];
-        [lbCountOfShots setFont:fontShot];
-        lbWait.text=NSLocalizedString(@"WAIT", @"");
-        
-        lbDisabledShots.text = NSLocalizedString(@"ENABLED_HELP", @"");
-    }
-    
-//     Sound    
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"disableSoundHelp"]) {
-        [helpViewSound removeFromSuperview];
-    }else {
-        
-        MPMusicPlayerController *iPod = [MPMusicPlayerController applicationMusicPlayer];
-        float volumeLevel = iPod.volume;
-        
-        BOOL showHelpMessage=NO;
-        if ([Utils isDeviceMuted]) {
-            showHelpMessage = YES;
-        }else {
-            if (volumeLevel < 0.2){
-                showHelpMessage = YES;
-            }
-        }
-        if (showHelpMessage) {
-            [helpViewSound setDinamicHeightBackground];
-            [lbWarningSound setFont:fontSound];
-            lbWarningSound.text=NSLocalizedString(@"SOUND_WARNING", @"");
-            lbDisabledSound.text = NSLocalizedString(@"ENABLED_HELP", @"");
-            
-            [iPod setShuffleMode:MPMusicShuffleModeOff];
-            [iPod setRepeatMode:MPMusicRepeatModeNone];
-            
-            [[NSNotificationCenter defaultCenter] addObserver:self 
-                                                     selector:@selector(handle_itemChanged:) 
-                                                         name:MPMusicPlayerControllerVolumeDidChangeNotification 
-                                                       object:nil];
-            [iPod beginGeneratingPlaybackNotifications];
-        }else {
-            [helpViewSound removeFromSuperview];
-        }
-    }
-    
-    helpPracticeView=[[UIView alloc] initWithFrame:CGRectMake(12, 480, 290, 320)];
+    helpPracticeView=[[UIView alloc] initWithFrame:CGRectMake(12, (([UIScreen mainScreen].bounds.size.height - 172)/2), 290, 172)];
     
     UIImageView *imvArm=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dv_arm.png"]];
     CGRect frame = imvArm.frame;
-    frame.origin = CGPointMake(24, 11);
-    frame.size= CGSizeMake(242, 298);
+    frame.origin = CGPointMake(90, 12);
     imvArm.frame = frame;
     [helpPracticeView addSubview:imvArm];
+    
+    UIImageView *imvArrow=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dv_arm_arrow.png"]];
+    frame = imvArrow.frame;
+    frame.origin = CGPointMake(37, 24);
+    imvArrow.frame = frame;
+    [helpPracticeView addSubview:imvArrow];
     
     UIButton *cancelBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     frame=cancelBtn.frame;
@@ -175,12 +137,19 @@ static NSString *ShotSound = @"%@/shot.mp3";
     [helpPracticeView addSubview:cancelBtn];
     
     [helpPracticeView setDinamicHeightBackground];
+    [helpPracticeView setHidden:YES];
     [self.view addSubview:helpPracticeView];
+    
+    if([DuelProductAttensionViewController isAttensionNeedForOponent:opAccount]){
+        DuelProductAttensionViewController *duelProductAttensionViewController=[[DuelProductAttensionViewController alloc] initWithAccount:playerAccount parentVC:self];
+        [self.navigationController presentViewController:duelProductAttensionViewController animated:NO completion:nil];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     steadyScale = 1.0;
     [follPlayer setVolume:1.0];
     [activityIndicatorView hideView];
@@ -198,10 +167,10 @@ static NSString *ShotSound = @"%@/shot.mp3";
     
     [titleSteadyFire setImage:[UIImage imageNamed:@"dv_steady.png"]];
     
-    [self countUpBuletsWithLevel:playerAccount.accountLevel oponentLevel:opAccount.accountLevel];
+    [self countUpBulets];
     _lbBullets.text=[NSString stringWithFormat:@"%d", shotCountBullet];
     
-    [self setTextToMessageShot];
+    [self checkPlayerGun];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -238,7 +207,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
     lbBackButton = nil;
     [super viewDidUnload];
 }
-#pragma mark 
+#pragma mark Earth animation
 
 -(void)setRotationWithAngle:(float)angle andY:(float)y
 {
@@ -253,6 +222,8 @@ static NSString *ShotSound = @"%@/shot.mp3";
     CGAffineTransform steadyTransform = CGAffineTransformScale(eathTransform, steadyScale, steadyScale);
     titleSteadyFire.transform = steadyTransform;
 }
+
+#pragma mark
 
 -(float)abs:(float)d
 {
@@ -341,7 +312,7 @@ if (shotCountBullet!=0) {
     //AudioServicesPlaySystemSound(pickerTick);
     [self shotStarAnimationVer];
     
-    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:ShotSound, [[NSBundle mainBundle] resourcePath]]];
+//    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:ShotSound, [[NSBundle mainBundle] resourcePath]]];
     switch (shotCountForSound) {
         case 1:
             [titleSteadyFire setHidden:YES];
@@ -349,23 +320,19 @@ if (shotCountBullet!=0) {
             [player1 stop];
             [player1 setCurrentTime:0.0];
             
-            player1 = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
             [player1 play];
             shotCountForSound=2;
             break;    
         case 2:
             [player2 stop];
             [player2 setCurrentTime:0.0];
-            //                url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Shot.aif", [[NSBundle mainBundle] resourcePath]]];
-            player2 = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
-            [player2 play];
+                        [player2 play];
             shotCountForSound=3;
             break;   
         case 3:
             [player3 stop];
             [player3 setCurrentTime:0.0];
-            //                url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Shot.aif", [[NSBundle mainBundle] resourcePath]]];
-            player3 = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+            
             [player3 play];
             shotCountForSound=1;
             break;    
@@ -410,10 +377,11 @@ if (shotCountBullet!=0) {
 
 -(IBAction)helpBtnClick:(id)sender;
 {   
-    
     HelpViewController *helpView=[[HelpViewController alloc] init];
     [self.navigationController pushViewController:helpView animated:YES];
 }
+
+#pragma mark Gun animation
 -(void)shotStarAnimationVer
 {
     [UIView beginAnimations:nil context:nil];
@@ -437,11 +405,9 @@ if (shotCountBullet!=0) {
     _ivGun.transform = gunTransform;
 }
 
-
+#pragma mark
 
 -(void)startDuel{
-    [helpViewShots removeFromSuperview];
-    [helpViewSound removeFromSuperview];
     [helpPracticeView setHidden:YES];
     
     [titleReady setHidden:YES];
@@ -470,85 +436,47 @@ if (shotCountBullet!=0) {
 }
 
 -(void)hideHelpViewWithArm;
-{    
+{
     [helpPracticeView setHidden:YES];
 }
 
--(void)countUpBuletsWithLevel:(int)playerLevel oponentLevel:(int)oponentLevel;
+-(void)countUpBulets;
 {
-    int countBullets = [DuelRewardLogicController countUpBuletsWithPlayerLevel:oponentLevel];
+    
+    int countBullets = [DuelRewardLogicController countUpBuletsWithOponentLevel:opAccount.accountLevel defense:opAccount.accountDefenseValue playerAtack:playerAccount.accountWeapon.dDamage];
     
     shotCountBullet =  countBullets;
     maxShotCount = countBullets;
 }
 
--(void)setTextToMessageShot;
+-(void)checkPlayerGun;
 {
-    lbWaitDescription.text = NSLocalizedString(@"SHOTS_DES", @"");
-    lbCountOfShots.text=[NSString stringWithFormat:@"%@ %d %@",NSLocalizedString(@"SHOTS1", @""),shotCountBullet,NSLocalizedString(@"SHOTS2", @"")];
+    if (playerAccount.accountWeapon.dName && [playerAccount.accountWeapon.dName length]) {
+        NSString *path=[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],playerAccount.accountWeapon.dImageGunLocal];
+        if ([Utils isFileDownloadedForPath:path]) {
+            _ivGun.image = [UIImage loadImageFullPath:path];
+        }
+        path=[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],playerAccount.accountWeapon.dSoundLocal];
+        if ([Utils isFileDownloadedForPath:path]) {
+            NSError *error;
+            player1 = [[AVAudioPlayer alloc] initWithData:[SoundDownload dataForSound:path] error:&error];
+            [player1 play];
+            [player1 stop];
+            
+            player2 = [[AVAudioPlayer alloc] initWithData:[SoundDownload dataForSound:path] error:&error];
+            [player2 play];
+            [player2 stop];
+            
+            player3 = [[AVAudioPlayer alloc] initWithData:[SoundDownload dataForSound:path] error:&error];
+            [player3 play];
+            [player3 stop];
+        }
+    }
 }
 
 #pragma mark - IBAction
-- (IBAction)checkSoundClick:(id)sender {
-    UIButton *soundChecker=(UIButton *)sender;
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"disableSoundHelp"]) {
-        [soundChecker setImage:[UIImage imageNamed:@"cheker_uncheck.png"] forState:UIControlStateNormal];
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"disableSoundHelp"];
-
-    }else {
-        [soundChecker setImage:[UIImage imageNamed:@"cheker_check.png"] forState:UIControlStateNormal];
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"disableSoundHelp"];
-    }
-}
-- (IBAction)cancelSoundClick:(id)sender {
-    [helpViewSound removeFromSuperview];
-  
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMusicPlayerControllerVolumeDidChangeNotification object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-                                                        object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"/cancel_sound_hint" forKey:@"event"]];
-}
-- (IBAction)checkShotsClick:(id)sender {
-    UIButton *shotsChecker=(UIButton *)sender;
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"disableShotsHelp"]) {
-        [shotsChecker setImage:[UIImage imageNamed:@"cheker_uncheck.png"] forState:UIControlStateNormal];
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"disableShotsHelp"];
-      
-    }else {
-        [shotsChecker setImage:[UIImage imageNamed:@"cheker_check.png"] forState:UIControlStateNormal];
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"disableShotsHelp"];
-    }
-}
-
-- (IBAction)cancelShotsClick:(id)sender {
-    [helpViewShots removeFromSuperview];   
-    
-    [UIView animateWithDuration:ANIMATION_TIME
-                     animations:^{
-                         CGRect frame=helpViewSound.frame;
-                         frame.origin.y=72;
-                         helpViewSound.frame=frame;
-                         
-                     }];
-  [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-                                                      object:self
-                                                    userInfo:[NSDictionary dictionaryWithObject:@"/cancel_shots_hint" forKey:@"event"]];
-
-
-}
-
 - (void)cancelHelpArmClick:(id)sender {
     [self hideHelpViewWithArm ];
-}
-
-#pragma mark MPMusicPlayerController delegate
--(void)handle_itemChanged:(id)sender{
-    MPMusicPlayerController *iPod = [MPMusicPlayerController applicationMusicPlayer];
-    float volumeLevel = iPod.volume;
-    if (volumeLevel > 0.2) {
-        [helpViewSound removeFromSuperview];
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMusicPlayerControllerVolumeDidChangeNotification object:nil];
-    }
 }
 
 @end

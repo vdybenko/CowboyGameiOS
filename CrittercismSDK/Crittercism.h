@@ -2,8 +2,8 @@
 //  Crittercism.h
 //  Crittercism-iOS
 //
-//  Created by Robert Kwok on 8/15/10.
-//  Copyright 2010-2012 Crittercism Corp. All rights reserved.
+//  Created by Alvin Liang on 2/14/12.
+//  Copyright (c) 2012 Crittercism. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -112,3 +112,4 @@
     __attribute__((deprecated));
 
 @end
+

@@ -2,6 +2,7 @@
 #import "CustomNSURLConnection.h"
 #import "Utils.h"
 #import "OGHelper.h"
+#import "DuelProductDownloaderController.h"
 
 static const char *POST_TRANS_URL =  BASE_URL"api/transactions";
 static const char *POST_DUEL_URL =  BASE_URL"api/duels";
@@ -17,6 +18,10 @@ static const char *LIST_BOTS_URL = BASE_URL"users/get_user_data";
 @synthesize money, accountName, teachingTimes, finalInfoTable, sessionID, accountID, accountDataSourceID, transactions, duels, achivments , glNumber,
  accountLevel,accountPoints,accountWins,accountDraws,accountBigestWin,removeAds,avatar,age,homeTown,friends,facebookName, bot,vOfStoreList;
 
+@synthesize accountDefenseValue;
+@synthesize curentIdWeapon;
+@synthesize isTryingWeapon;
+@synthesize accountWeapon;
 
 #pragma mark
 
@@ -43,6 +48,11 @@ static AccountDataSource *sharedHelper = nil;
     self.accountDraws=0;
     self.accountBigestWin=0;
     self.removeAds=0;
+    self.accountDefenseValue = 0;
+    self.curentIdWeapon = 0;
+    self.glNumber = 0;
+    accountWeapon = [[CDWeaponProduct alloc] init];
+    self.isTryingWeapon=NO;
     
     self.avatar=@"";
     self.age=@"";
@@ -72,7 +82,11 @@ static AccountDataSource *sharedHelper = nil;
   self.accountDraws = [uDef integerForKey:@"DrawCount"];
   self.accountBigestWin = [uDef integerForKey:@"MaxWin"];
   self.removeAds = [uDef integerForKey:@"RemoveAds"];
-  
+    
+    [self loadDefense];
+    
+    [self loadWeapon];
+    
   self.avatar = [uDef stringForKey:@"avatar"];
   self.age = [uDef stringForKey:@"age"];
   self.homeTown = [uDef stringForKey:@"homeTown"];
@@ -87,6 +101,8 @@ static AccountDataSource *sharedHelper = nil;
   }
   [uDef setObject:ValidateObject(self.accountID, [NSString class]) forKey:@"id"];
   
+    self.glNumber = [uDef integerForKey:@"GL_NUMBER"];
+    
   [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"transactions"];
   
   NSArray *oldLocations = [uDef arrayForKey:@"transactions"];
@@ -98,8 +114,6 @@ static AccountDataSource *sharedHelper = nil;
       [self.transactions addObject:loc];
     }
   }
-  CDTransaction *localTransaction = [self.transactions lastObject];
-  self.glNumber = localTransaction.trLocalID;  
   
   NSArray *oldLocations2 = [uDef arrayForKey:@"duels"];
   if( self.duels )
@@ -182,6 +196,7 @@ static AccountDataSource *sharedHelper = nil;
         [reason setObject: [NSNumber numberWithInt:-1] forKey:@"local_id"];
         [reason setObject: [NSNumber numberWithInt:[self crypt:[transaction.trMoneyCh intValue]]] forKey:@"transaction_id"];
         [reason setObject:transaction.trDescription forKey:@"description"];
+        [reason setObject:transaction.trLocalID forKey:@"local_id"];
         [result addObject:[NSDictionary dictionaryWithObject:reason forKey:@"transaction"]];
     }
     return result;
@@ -434,6 +449,89 @@ static AccountDataSource *sharedHelper = nil;
 {
     [[NSUserDefaults standardUserDefaults] setObject:ValidateObject([Utils deviceType], [NSString class]) forKey:@"deviceType"];
 }
+
+- (void)saveWeapon;
+{    
+    [[NSUserDefaults standardUserDefaults] setInteger:self.curentIdWeapon forKey:@"WEAPON"];
+}
+
+- (void)loadWeapon;
+{
+    self.curentIdWeapon = [[NSUserDefaults standardUserDefaults] integerForKey:@"WEAPON"];
+    [self loadAccountWeapon];
+}
+
+- (void)saveDefense;
+{
+    [[NSUserDefaults standardUserDefaults] setInteger:self.accountDefenseValue forKey:@"DEFENSE_VALUE"];
+}
+
+- (void)loadDefense;
+{
+    self.accountDefenseValue = [[NSUserDefaults standardUserDefaults] integerForKey:@"DEFENSE_VALUE"];
+}
+
+- (void)saveTransaction;
+{
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *locationData = [[NSMutableArray alloc] init];
+    for( CDTransaction *loc in self.transactions)
+    {
+        [locationData addObject: [NSKeyedArchiver archivedDataWithRootObject:loc]];
+    }
+    [def setObject:locationData forKey:@"transactions"];
+}
+
+- (void)saveGlNumber;
+{
+    [[NSUserDefaults standardUserDefaults] setInteger:self.glNumber forKey:@"GL_NUMBER"];
+}
+
+- (int)increaseGlNumber;
+{
+    glNumber++;
+    [self saveGlNumber];
+    return glNumber;
+}
+#pragma mark accountWeapon
+
+- (CDWeaponProduct*)loadAccountWeapon;
+{
+    NSArray *arrayWeapon = [DuelProductDownloaderController loadWeaponArray];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.dID = %d", self.curentIdWeapon];
+    NSArray *results = [arrayWeapon filteredArrayUsingPredicate:predicate];
+    if ([results count]) {
+        self.accountWeapon = [results objectAtIndex:0];
+        return [results objectAtIndex:0];
+    }else{
+        return nil;
+    }
+}
+
+-(NSUInteger(^)(NSArray *, NSInteger))findObsByID {
+    return ^(NSArray * array, NSInteger idObject) {
+        for (NSUInteger i = 0; i < [array count]; i++) {
+            CDDuelProduct *product = [array objectAtIndex:i];
+            if (product.dID == idObject) {
+                return i;
+            }
+        }
+        return (NSUInteger)NSNotFound;
+    };
+}
+
+-(NSUInteger(^)(NSArray *, NSString *))findObsByPurchase {
+    return ^(NSArray * array, NSString *purchaseString) {
+        for (NSUInteger i = 0; i < [array count]; i++) {
+            CDDuelProduct *product = [array objectAtIndex:i];
+            if ([product.dPurchaseUrl isEqualToString:purchaseString]) {
+                return i;
+            }
+        }
+        return (NSUInteger)NSNotFound;
+    };
+}
+
 
 #pragma mark putch for 1.4 
 -(void)putchAvatarImageToInitStartVC:(StartViewController*)startVC

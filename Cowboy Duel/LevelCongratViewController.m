@@ -66,8 +66,8 @@
         NSString *name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel];
         ivImageForLevel.image = [UIImage imageNamed:name];
         
-        
-        lbCongLvlMainText.text = [NSString stringWithFormat:@"%@%@%@%d%@", NSLocalizedString(@"LvlAchievText1", nil),[NSString stringWithFormat:@"%@",userRank], NSLocalizedString(@"LvlAchievText2", nil),[DuelRewardLogicController countUpBuletsWithPlayerLevel:playerAccount.accountLevel], NSLocalizedString(@"LvlAchievText3", nil)];
+        int countBullets = [DuelRewardLogicController countUpBuletsWithOponentLevel:playerAccount.accountLevel defense:playerAccount.accountDefenseValue playerAtack:0];
+        lbCongLvlMainText.text = [NSString stringWithFormat:@"%@%@%@%d%@", NSLocalizedString(@"LvlAchievText1", nil),[NSString stringWithFormat:@"%@",userRank], NSLocalizedString(@"LvlAchievText2", nil),countBullets, NSLocalizedString(@"LvlAchievText3", nil)];
         
         self.delegate = delegateController;
         
@@ -76,7 +76,6 @@
             [btnPost setHidden:YES];
             [LevelCongratViewController newLevelNumber:playerAccount.accountLevel];
         }
-        
         btnAgain.enabled = tryButtonEnable;
     }
     return self;

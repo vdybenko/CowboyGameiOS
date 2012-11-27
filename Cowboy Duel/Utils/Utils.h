@@ -28,4 +28,7 @@
 
 +(NSString *)deviceType;
 
++(BOOL)isFileDownloadedForPath:(NSString*)path;
+
+
 @end

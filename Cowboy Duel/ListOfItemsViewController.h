@@ -26,8 +26,8 @@
 @property (strong, nonatomic)  NSTimer *updateTimer;
 
 - (id)initWithGCVC:(GameCenterViewController *)GCVC Account:(AccountDataSource *)userAccount OnLine:(BOOL) onLine;
-- (void)checkOnline;
 -(void)startTableAnimation;
+-(void)refreshController;
 -(void)didRefreshController;
 
 @end
