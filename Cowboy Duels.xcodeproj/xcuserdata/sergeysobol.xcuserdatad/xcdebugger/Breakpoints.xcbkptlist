@@ -117,8 +117,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "784"
          endingLineNumber = "784"
-         landmarkName = "@implementation StartViewController"
-         landmarkType = "3">
+         landmarkName = "-advertButtonClick"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -130,7 +130,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "647"
          endingLineNumber = "647"
-         landmarkName = "-startDuel"
+         landmarkName = "-didFinishLaunching"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
