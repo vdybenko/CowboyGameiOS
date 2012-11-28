@@ -49,7 +49,7 @@ static AccountDataSource *sharedHelper = nil;
     self.accountBigestWin=0;
     self.removeAds=0;
     self.accountDefenseValue = 0;
-    self.curentIdWeapon = 0;
+    self.curentIdWeapon = -1;
     self.glNumber = 0;
     accountWeapon = [[CDWeaponProduct alloc] init];
     self.isTryingWeapon=NO;
@@ -479,7 +479,7 @@ static AccountDataSource *sharedHelper = nil;
             product.dCountOfUse = 0;
         }
         [DuelProductDownloaderController saveWeapon:arrWeaponSaved];
-        self.curentIdWeapon = 0;
+        self.curentIdWeapon = -1;
         self.accountWeapon = [[CDWeaponProduct alloc] init];
         [self saveWeapon];
         
@@ -536,6 +536,7 @@ static AccountDataSource *sharedHelper = nil;
         self.accountWeapon = [results objectAtIndex:0];
         return [results objectAtIndex:0];
     }
+    return nil;
 }
 
 -(NSUInteger(^)(NSArray *, NSInteger))findObsByID {
