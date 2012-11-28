@@ -101,6 +101,7 @@
     int cloudX;
     int cloud2X;
     BOOL animationCheck;
+    BOOL inBackground;
 }
 @property (strong, nonatomic) IBOutlet UIButton *duelButton;
 @property (strong, nonatomic) IBOutlet UIButton *mapButton;
@@ -359,8 +360,10 @@ static StartViewController *sharedHelper = nil;
         
         cloudX=460;
         cloud2X=-20;
+        
+        inBackground = NO;
     }
-    return self; 
+    return self;
 }
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -533,11 +536,24 @@ static StartViewController *sharedHelper = nil;
     [app.adBanner setHidden:NO];
     app.clouds.hidden = YES;
     
-    cloudView.hidden = NO;
-    cloudSecondView.hidden = NO;
-    animationCheck = YES;
-    [self cloudAnimation];
-    [self cloudSecondAnimation];
+     animationCheck = YES;
+    
+    
+    if (!inBackground) {
+        [self cloudAnimation];
+        [self cloudSecondAnimation];
+        cloudView.hidden = NO;
+        cloudSecondView.hidden = NO;
+    }
+//    if ((inBackground)&&[self isViewLoaded]) {
+//        [self cloudAnimation];
+//        [self cloudSecondAnimation];
+//        cloudView.hidden = NO;
+//        cloudSecondView.hidden = NO;
+//        
+//    }
+    
+    inBackground = NO;
     
     SSConnection *connection = [SSConnection sharedInstance];
     [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
@@ -616,11 +632,13 @@ static StartViewController *sharedHelper = nil;
     }
     firstDayWithOutAdvertising=[AdvertisingAppearController advertisingCheckForAppearWithFirstDayWithOutAdvertising:firstDayWithOutAdvertising];
     
+     animationCheck = YES;
     
-    if ([self isViewLoaded]) {
-        animationCheck = YES;
+    if ((inBackground)&&[self isViewLoaded]) {
         [self cloudAnimation];
         [self cloudSecondAnimation];
+        cloudView.hidden = NO;
+        cloudSecondView.hidden = NO;
     }
 }
 
@@ -628,6 +646,18 @@ static StartViewController *sharedHelper = nil;
 {
     [[SSConnection sharedInstance] disconnect];
     animationCheck = NO;
+    inBackground = YES;
+    
+    cloudX=460;
+    cloud2X=-20;
+    
+    CGRect frame = cloudView.frame;
+    frame.origin.x = cloudX;
+    cloudView.frame = frame;
+    
+    frame = cloudSecondView.frame;
+    frame.origin.x = cloud2X;
+    cloudSecondView.frame = frame;
 }
 
 -(void)didFinishLaunching
@@ -1527,6 +1557,7 @@ static StartViewController *sharedHelper = nil;
 
 -(void)cloudAnimation;
 {
+    NSLog(@"cloudX %d",cloudX);
     if (animationCheck) {
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationBeginsFromCurrentState:YES];
@@ -1567,6 +1598,7 @@ static StartViewController *sharedHelper = nil;
 
 -(void)cloudSecondAnimation
 {
+    NSLog(@"cloud2X %d",cloud2X);
     if (animationCheck) {
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationBeginsFromCurrentState:YES];
