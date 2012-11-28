@@ -174,6 +174,12 @@ static const char *A_URL =  BASE_URL"api/authorization";
     if ([responseObject objectForKey:@"refresh_content"]) {
         DLog(@"get Refresh");
         int revisionNumber=[[responseObject objectForKey:@"refresh_content"] intValue];
+        
+        int revisionProductListNumber=[[responseObject objectForKey:@"v_of_store_list"] intValue];
+        if ([DuelProductDownloaderController isRefreshEvailable:revisionProductListNumber]) {
+            [startViewController.duelProductDownloaderController refreshDuelProducts];
+        }
+        
         if ([RefreshContentDataController isRefreshEvailable:revisionNumber]) {
             
             RefreshContentDataController *refreshContentDataController=[[RefreshContentDataController alloc] init];

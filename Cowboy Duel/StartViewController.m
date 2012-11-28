@@ -35,7 +35,6 @@
     ListOfItemsViewController *listOfItemsViewController;
     ProfileViewController *profileViewController;
     TopPlayersDataSource *topPlayersDataSource;
-    DuelProductDownloaderController *duelProductDownloaderController;
     StoreViewController *storeViewController;
     
     UIView *hudView;
@@ -138,6 +137,7 @@
 @synthesize gameCenterViewController, player, internetActive, hostActive, soundCheack, loginViewController;
 @synthesize feedbackButton, duelButton, profileButton, helpButton, mapButton, shareButton;
 @synthesize oldAccounId,feedBackViewVisible,showFeedAtFirst,topPlayersDataSource, advertisingNewVersionViewController,firstRun;
+@synthesize duelProductDownloaderController;
 
 static const char *REGISTRATION_URL =  BASE_URL"api/registration";
 static const char *AUTORIZATION_URL =  BASE_URL"api/authorization";
@@ -620,9 +620,7 @@ static StartViewController *sharedHelper = nil;
     SSConnection *connection = [SSConnection sharedInstance];
     [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
     
-    if (firstRunLocal) {
-        [duelProductDownloaderController refreshDuelProducts];
-    }else{
+    if (!firstRunLocal) {
         [self login];
     }
     
@@ -1055,7 +1053,6 @@ static StartViewController *sharedHelper = nil;
 //    OnLine
     if ([[currentParseString lastPathComponent] isEqualToString:@"authorization"]&&[responseObject objectForKey:@"session_id"]) {
         playerAccount.sessionID =[[NSString alloc] initWithString:[responseObject objectForKey:@"session_id"]];
-        playerAccount.vOfStoreList = [[responseObject objectForKey:@"v_of_store_list"] intValue];
         int revisionNumber=[[responseObject objectForKey:@"refresh_content"] intValue];
         if ([RefreshContentDataController isRefreshEvailable:revisionNumber]) {
             RefreshContentDataController *refreshContentDataController=[[RefreshContentDataController alloc] init];
@@ -1557,7 +1554,6 @@ static StartViewController *sharedHelper = nil;
 
 -(void)cloudAnimation;
 {
-    NSLog(@"cloudX %d",cloudX);
     if (animationCheck) {
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationBeginsFromCurrentState:YES];
@@ -1598,7 +1594,6 @@ static StartViewController *sharedHelper = nil;
 
 -(void)cloudSecondAnimation
 {
-    NSLog(@"cloud2X %d",cloud2X);
     if (animationCheck) {
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationBeginsFromCurrentState:YES];

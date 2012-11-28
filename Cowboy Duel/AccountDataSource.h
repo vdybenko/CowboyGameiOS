@@ -43,7 +43,6 @@
 @property(strong,nonatomic) NSMutableArray *teachingTimes;
 @property(strong,nonatomic) NSMutableArray *finalInfoTable;
 
-@property(nonatomic) int vOfStoreList;
 @property(nonatomic) BOOL bot;
 
 + (AccountDataSource *)sharedInstance;

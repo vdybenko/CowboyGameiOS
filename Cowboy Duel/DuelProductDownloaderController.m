@@ -34,6 +34,8 @@ NSString  *const URL_PRODUCTS_BUY = @BASE_URL"store/bought";
 }
 @end
 
+static int numberRevision;
+
 @implementation DuelProductDownloaderController
 @synthesize didFinishBlock;
 @synthesize delegate;
@@ -66,20 +68,15 @@ static NSString *getSavePathForDuelProduct()
 
 +(BOOL) isRefreshEvailable:(int)serverRevision;
 {
-    int _numberRevision;
     NSUserDefaults *userDef=[NSUserDefaults standardUserDefaults];
     if (![userDef objectForKey:@"SERVER_REVISION_DUEL_PRODUCT"]) {
-        _numberRevision=NUMBER_REVISION_DUEL_PRODUCT_DEFAULT;
-        [userDef setInteger:_numberRevision forKey:@"SERVER_REVISION_DUEL_PRODUCT"];
+        numberRevision=NUMBER_REVISION_DUEL_PRODUCT_DEFAULT;
     }else {
-        _numberRevision=[userDef integerForKey:@"SERVER_REVISION_DUEL_PRODUCT"];
+        numberRevision=[userDef integerForKey:@"SERVER_REVISION_DUEL_PRODUCT"];
     }
     
-    if (serverRevision>_numberRevision){
-        _numberRevision=serverRevision;
-        
-        [userDef setInteger:_numberRevision forKey:@"SERVER_REVISION_DUEL_PRODUCT"];
-        
+    if (serverRevision>numberRevision){
+        numberRevision=serverRevision;
         return YES;
     }else {
         return NO;
@@ -385,6 +382,8 @@ static NSString *getSavePathForDuelProduct()
     if ([arrayIDProducts count]!=0) {
         [self requestProductDataWithNSSet:arrayIDProducts];
     }
+    
+    [[NSUserDefaults standardUserDefaults] setInteger:numberRevision forKey:@"SERVER_REVISION_DUEL_PRODUCT"];
     
     NSError *error;
     if (didFinishBlock) {
