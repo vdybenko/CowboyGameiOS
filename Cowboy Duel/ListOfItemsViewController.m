@@ -177,7 +177,7 @@
     if (player.bot) {
         [oponentAccount setCurentIdWeapon:5];
         [oponentAccount loadAccountWeapon];
-        [oponentAccount setAccountDefenseValue:10];
+        [oponentAccount setAccountDefenseValue:0];
     }
 
     if ([player.sessionId isEqualToString:@"-1"]) {

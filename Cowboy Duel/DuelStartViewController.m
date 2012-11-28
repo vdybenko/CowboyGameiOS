@@ -143,14 +143,11 @@ static const char *GC_URL =  BASE_URL"api/gc";
     lbUserRank.text = NSLocalizedString(Rank, @"");
     lbUserRank.font=fontSimpleText;
     
-    if (playerAccount.accountWeapon.dDamage!=0) {
-        userAtack.text = [NSString stringWithFormat:@"+%d",playerAccount.accountWeapon.dDamage];
-        userAtackView.hidden = NO;
-    }
-    if (playerAccount.accountDefenseValue!=0) {
-        userDefense.text = [NSString stringWithFormat:@"+%d",playerAccount.accountDefenseValue];
-        userDefenseView.hidden = NO;
-    }
+    userAtack.text = [NSString stringWithFormat:@"+%d",playerAccount.accountWeapon.dDamage];
+    userAtackView.hidden = NO;
+
+    userDefense.text = [NSString stringWithFormat:@"+%d",playerAccount.accountDefenseValue];
+    userDefenseView.hidden = NO;
     
     [self setAttackAndDefenseOfOponent:oponentAccount];
     
@@ -366,15 +363,10 @@ static const char *GC_URL =  BASE_URL"api/gc";
 
 -(void)setAttackAndDefenseOfOponent:(AccountDataSource*)oponent;
 {
-    if (oponent.accountWeapon.dDamage!=0) {
-        oponentAtack.text = [NSString stringWithFormat:@"+%d",oponent.accountWeapon.dDamage];
-        oponentAtackView.hidden = NO;
-    }
-    
-    if (oponent.accountDefenseValue!=0) {
-        oponentDefense.text = [NSString stringWithFormat:@"+%d",oponent.accountDefenseValue];
-        oponentDefenseView.hidden = NO;
-    }
+    oponentAtack.text = [NSString stringWithFormat:@"+%d",oponent.accountWeapon.dDamage];
+    oponentAtackView.hidden = NO;
+    oponentDefense.text = [NSString stringWithFormat:@"+%d",oponent.accountDefenseValue];
+    oponentDefenseView.hidden = NO;
 }
 
 -(void)setOponentMoney:(int)money;

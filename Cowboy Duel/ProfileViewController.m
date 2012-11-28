@@ -442,17 +442,18 @@ if (playerAccount.accountLevel != 10) {
     
     lbBiggestWinCount.text=[numberFormatter stringFromNumber:[NSNumber numberWithInt:( playerAccount.accountBigestWin)]];
     
+    userAtackView.hidden = NO;
+    userDefenseView.hidden = NO;
     if (playerAccount.accountWeapon.dDamage!=0) {
         userAtack.text = [NSString stringWithFormat:@"+%d",playerAccount.accountWeapon.dDamage];
-        userAtackView.hidden = NO;
+       
     }else{
-        userAtackView.hidden = YES;
+        userAtack.text = @"+0";
     }
     if (playerAccount.accountDefenseValue!=0) {
         userDefense.text = [NSString stringWithFormat:@"+%d",playerAccount.accountDefenseValue];
-        userDefenseView.hidden = NO;
     }else{
-         userDefenseView.hidden = YES;
+        userDefense.text = @"+0";
     }
 }
 
