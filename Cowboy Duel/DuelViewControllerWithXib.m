@@ -140,7 +140,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
     [helpPracticeView setHidden:YES];
     [self.view addSubview:helpPracticeView];
     
-    if([DuelProductAttensionViewController isAttensionNeedForOponent:opAccount]){
+    if([DuelProductAttensionViewController isAttensionNeedForOponent:opAccount] && ![playerAccount isPlayerPlayDuel]){
         DuelProductAttensionViewController *duelProductAttensionViewController=[[DuelProductAttensionViewController alloc] initWithAccount:playerAccount parentVC:self];
         [self.navigationController presentViewController:duelProductAttensionViewController animated:NO completion:nil];
     }

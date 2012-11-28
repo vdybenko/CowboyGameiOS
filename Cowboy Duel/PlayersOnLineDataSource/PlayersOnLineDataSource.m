@@ -227,11 +227,13 @@
     serverObj.fbImageUrl = @"";
     serverObj.money = @1000;
     serverObj.serverName = @"";
-    serverObj.rank = @1;
+    serverObj.rank = @9;
     serverObj.bot = NO;
     serverObj.duelsLost = @0;
     serverObj.duelsWin = @0;
     serverObj.sessionId = @"-1";
+    serverObj.defense = @"";
+    serverObj.weapon = @"";
     [self.serverObjects addObject:serverObj];
 }
 

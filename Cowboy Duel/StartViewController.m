@@ -525,10 +525,6 @@ static StartViewController *sharedHelper = nil;
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-
-//    to do delete this
-    playerAccount.accountLevel = 7;
-//
     
     TestAppDelegate *app = (TestAppDelegate *)[[UIApplication sharedApplication] delegate];
     [app.adBanner setHidden:NO];
@@ -543,13 +539,6 @@ static StartViewController *sharedHelper = nil;
         cloudView.hidden = NO;
         cloudSecondView.hidden = NO;
     }
-//    if ((inBackground)&&[self isViewLoaded]) {
-//        [self cloudAnimation];
-//        [self cloudSecondAnimation];
-//        cloudView.hidden = NO;
-//        cloudSecondView.hidden = NO;
-//        
-//    }
     
     inBackground = NO;
     

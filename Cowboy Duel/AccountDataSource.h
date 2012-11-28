@@ -84,6 +84,8 @@
 - (void)saveGlNumber;
 - (int)increaseGlNumber;
 
+- (BOOL)isPlayerPlayDuel;
+
 - (CDWeaponProduct*)loadAccountWeapon;
 -(NSUInteger(^)(NSArray *, NSInteger))findObsByID;
 -(NSUInteger(^)(NSArray *, NSString *))findObsByPurchase;

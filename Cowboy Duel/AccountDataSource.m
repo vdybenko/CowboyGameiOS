@@ -515,6 +515,16 @@ static AccountDataSource *sharedHelper = nil;
     [self saveGlNumber];
     return glNumber;
 }
+
+- (BOOL)isPlayerPlayDuel;
+{
+    if (self.finalInfoTable && [self.finalInfoTable count]) {
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
 #pragma mark accountWeapon
 
 - (CDWeaponProduct*)loadAccountWeapon;
