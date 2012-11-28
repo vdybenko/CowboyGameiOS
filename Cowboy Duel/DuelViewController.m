@@ -59,17 +59,16 @@ static NSString *ShotSound = @"%@/shot.mp3";
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-    [_infoButton setHidden:YES];
-
     [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(3.0 / 60.0)];
     [[UIAccelerometer sharedAccelerometer] setDelegate:self];
+    
+    [super viewWillAppear:animated];
+    [_infoButton setHidden:YES];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
 }
 
 -(void)viewDidDisappear:(BOOL)animated

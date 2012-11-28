@@ -227,7 +227,6 @@ static const char *GC_URL =  BASE_URL"api/gc";
             [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
             [self performSelector:@selector(startBotDuel) withObject:nil afterDelay:0.5];
         }
-        
     }
     [[self.navigationController.viewControllers objectAtIndex:1] performSelector:@selector(playerStop)];
     [player play];

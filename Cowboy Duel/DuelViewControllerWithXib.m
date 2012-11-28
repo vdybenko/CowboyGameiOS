@@ -14,8 +14,10 @@
 #import "DuelProductDownloaderController.h"
 #import "SoundDownload.h"
 
-@interface DuelViewControllerWithXib (PrivateMethods)
-
+@interface DuelViewControllerWithXib()
+{
+    BOOL attentionMustShow;
+}
 -(void)verticalMode;
 -(void)shotStarAnimationVer;
 
@@ -37,6 +39,8 @@ static NSString *ShotSound = @"%@/shot.mp3";
             playerAccount.isTryingWeapon = NO;
             [playerAccount loadWeapon];
         }
+        
+        attentionMustShow = YES;
     }
     return self;
 }
@@ -138,18 +142,20 @@ static NSString *ShotSound = @"%@/shot.mp3";
     
     [helpPracticeView setDinamicHeightBackground];
     [helpPracticeView setHidden:YES];
-    [self.view addSubview:helpPracticeView];
-    
-    if([DuelProductAttensionViewController isAttensionNeedForOponent:opAccount] && ![playerAccount isPlayerPlayDuel]){
-        DuelProductAttensionViewController *duelProductAttensionViewController=[[DuelProductAttensionViewController alloc] initWithAccount:playerAccount parentVC:self];
-        [self.navigationController presentViewController:duelProductAttensionViewController animated:NO completion:nil];
-    }
+    [self.view addSubview:helpPracticeView];    
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
+    if([DuelProductAttensionViewController isAttensionNeedForOponent:opAccount] && ![playerAccount isPlayerPlayDuel] && attentionMustShow){
+        DuelProductAttensionViewController *duelProductAttensionViewController=[[DuelProductAttensionViewController alloc] initWithAccount:playerAccount parentVC:self];
+        [self.navigationController presentViewController:duelProductAttensionViewController animated:NO completion:nil];
+        [[UIAccelerometer sharedAccelerometer] setDelegate:nil];
+        attentionMustShow = NO;
+    }
+
     steadyScale = 1.0;
     [follPlayer setVolume:1.0];
     [activityIndicatorView hideView];
