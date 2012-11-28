@@ -605,6 +605,8 @@ static StartViewController *sharedHelper = nil;
     [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
     
     if (firstRunLocal) {
+        [duelProductDownloaderController refreshDuelProducts];
+    }else{
         [self login];
     }
     
