@@ -76,7 +76,7 @@ static int oponentMustShot;
         
     NSArray *arrItemsList = [DuelProductDownloaderController loadWeaponArray];
     
-    if (playerAccount.curentIdWeapon==0) {
+    if (playerAccount.curentIdWeapon==-1) {
         prod=[arrItemsList objectAtIndex:0];
     }else{
         if (playerAccount.curentIdWeapon == ((CDWeaponProduct*)[arrItemsList lastObject]).dID) {
