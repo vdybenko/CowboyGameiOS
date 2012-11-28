@@ -173,6 +173,12 @@
     [oponentAccount setBot:player.bot];
     [oponentAccount setMoney:[player.money integerValue]];
     [oponentAccount setSessionID:(player.sessionId) ? [NSString stringWithString:player.sessionId]:@""];
+    
+    if (player.bot) {
+        [oponentAccount setCurentIdWeapon:5];
+        [oponentAccount loadAccountWeapon];
+        [oponentAccount setAccountDefenseValue:10];
+    }
 
     if ([player.sessionId isEqualToString:@"-1"]) {
         [_playerAccount.finalInfoTable removeAllObjects];
