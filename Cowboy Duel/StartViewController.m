@@ -375,16 +375,14 @@ static StartViewController *sharedHelper = nil;
     [super viewDidLoad];
   
     UIColor *buttonsTitleColor = [[UIColor alloc] initWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
-
-    [feedbackButton setTitle:NSLocalizedString(@"Feedback", @"") forState:UIControlStateNormal];
-    [feedbackButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
-    feedbackButton.titleLabel.textAlignment = UITextAlignmentCenter;
-    feedbackButton.titleLabel.font = [UIFont fontWithName: @"MyriadPro-Semibold" size:15];
-  
-    [shareButton setTitle:NSLocalizedString(@"Share", @"") forState:UIControlStateNormal];
-    [shareButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
-    shareButton.titleLabel.textAlignment = UITextAlignmentCenter;
-    shareButton.titleLabel.font = [UIFont fontWithName: @"MyriadPro-Semibold" size:15];
+    
+    [lbFeedbackButton setText:NSLocalizedString(@"Feedback", @"")];
+    [lbFeedbackButton setTextColor:buttonsTitleColor];
+    [lbFeedbackButton setFont:[UIFont fontWithName: @"MyriadPro-Semibold" size:15]];
+    
+    [lbShareButton setText:NSLocalizedString(@"Share", @"")];
+    [lbShareButton setTextColor:buttonsTitleColor];
+    [lbShareButton setFont:[UIFont fontWithName: @"MyriadPro-Semibold" size:15]];
 
     [duelButton setTitle:NSLocalizedString(@"Saloon", @"") forState:UIControlStateNormal];
     [duelButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
