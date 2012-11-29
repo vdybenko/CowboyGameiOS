@@ -20,7 +20,7 @@
 @property (nonatomic, strong) NSNumber *duelsWin;
 @property (nonatomic, strong) NSNumber *duelsLost;
 @property (nonatomic, strong) NSString *sessionId;
-@property (nonatomic, strong) NSString *weapon;
-@property (nonatomic, strong) NSString *defense;
+@property (nonatomic) NSInteger weapon;
+@property (nonatomic) NSInteger defense;
 
 @end

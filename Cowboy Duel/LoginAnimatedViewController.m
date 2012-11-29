@@ -396,7 +396,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
         
         switch (loginFacebookStatus) {
             case LoginFacebookStatusSimple:
-                [startViewController profileButtonClickWithOutAnimation];
+                [startViewController profileFirstRunButtonClickWithOutAnimation];
                 loginFacebookStatus = LoginFacebookStatusNone;
                 break;
             case LoginFacebookStatusFeed:

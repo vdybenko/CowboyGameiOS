@@ -63,6 +63,7 @@
 -(void)duelButtonClick;
 -(IBAction)profileButtonClick;
 -(void)profileButtonClickWithOutAnimation;
+-(void)profileFirstRunButtonClickWithOutAnimation;
 -(IBAction)startDuel;
 
 -(IBAction)feedbackFacebookBtnClick:(id)sender;

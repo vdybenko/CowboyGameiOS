@@ -301,10 +301,6 @@ static StartViewController *sharedHelper = nil;
         duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
         duelProductDownloaderController.delegate = self;
         
-        if (firstRun) {
-            [gameCenterViewController stopServer];
-        }
-        
         //      GoogleAnalytics
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                             object:self
@@ -552,10 +548,6 @@ static StartViewController *sharedHelper = nil;
         mutchEnded = NO;
     
     NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-    if (mutchEnded && [userDef integerForKey:@"FirstRunForPractice"] == 2)
-    {
-       [gameCenterViewController startServerWithName:playerAccount.accountID];
-    }
     gameCenterViewController.duelStartViewController = nil;
     
     NSInteger paymentRegistration = [[NSUserDefaults standardUserDefaults] integerForKey:@"paymentRegistration"];
