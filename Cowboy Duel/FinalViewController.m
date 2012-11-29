@@ -38,9 +38,8 @@
 @implementation FinalViewController
 
 @synthesize delegate;
-@synthesize tryButton, viewWin, lblWinEarned, lblWinGold, lblWinGoldCount, lblWinPoints, lblWinPointsCount;
-@synthesize viewLose, lblLoseEarned, lblLoseLost, lblLoseGold, lblLoseGoldCount, lblLosePoints, lblLosePointsCount;
 @synthesize statView;
+@synthesize tryButton;
 
 #pragma mark
 
@@ -290,9 +289,6 @@
     if (firstRun) {
         firstRun = NO; 
     }
-    else {
-        [hudView setHidden:YES];
-    }
     
     [statView setDinamicHeightBackground];
 }
@@ -431,8 +427,6 @@
     int pointsForMatch=0;
     gameStatusLable.text = @"You lost";
     [gameStatusLable setFont:[UIFont fontWithName: @"DecreeNarrow" size:30]];
-
-    lblWinGold.text = [NSString stringWithFormat:@"%@%d", @"$", moneyExch];
     
     [lblGold setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:45]];
     [lblGoldTitle setFont:[UIFont fontWithName: @"DecreeNarrow" size:30]];
@@ -520,30 +514,10 @@
     lblGoldPlus.frame = frame;
     [viewLastSceneAnimation addSubview:lblGoldPlus];
     [lblGoldPlus setHidden:YES];   
-
-    [lblLoseEarned setFont: [UIFont fontWithName: @"MyriadPro-Semibold" size:13]];
-    [lblLoseLost setFont: [UIFont fontWithName: @"MyriadPro-Semibold" size:13]];
-    [lblLoseGold setFont: [UIFont fontWithName: @"MyriadPro-Semibold" size:13]];
-    [lblLoseGoldCount setFont: [UIFont fontWithName: @"MyriadPro-Semibold" size:13]];
-    [lblLosePoints setFont: [UIFont fontWithName: @"MyriadPro-Semibold" size:13]];
-    [lblLosePointsCount setFont: [UIFont fontWithName: @"MyriadPro-Semibold" size:13]];
-
-    lblLoseEarned.text=NSLocalizedString(@"YouEarned", @"");
-    lblLoseLost.text=NSLocalizedString(@"YouLost", @"");
-    lblLoseGold.text=NSLocalizedString(@"Gold", @"");
     
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    NSString *formattedNumberString = [numberFormatter stringFromNumber:[NSNumber numberWithInt:( playerAccount.money)]];
-    lblLoseGoldCount.text=[NSString stringWithFormat:@"%@",formattedNumberString];
     
-    lblLosePointsCount.text=[NSString stringWithFormat:@"%d",pointsForMatch];   
-    
-    if ([lblLosePointsCount isEqual:@"1"]) {
-        lblLosePoints.text=NSLocalizedString(@"Point", @"");
-    } else {
-        lblLosePoints.text=NSLocalizedString(@"Points", @"");
-    }
     [self animationWithLable:lblPoints andStartNumber:[AccountDataSource sharedInstance].accountPoints - pointsForMatch andEndNumber:[AccountDataSource sharedInstance].accountPoints];
     
 }
@@ -556,7 +530,6 @@
     gameStatusLable.text = @"You win";
     [gameStatusLable setFont:[UIFont fontWithName: @"DecreeNarrow" size:30]];
     
-    lblWinGold.text = [NSString stringWithFormat:@"%@%d", @"$", moneyExch];
    lblGoldPlus.text = [NSString stringWithFormat:@"+%d",moneyExch];
    
     [lblGold setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:45]];
@@ -644,29 +617,7 @@
     frame.origin.x -= 200;
     lblGoldPlus.frame = frame;
     [viewLastSceneAnimation addSubview:lblGoldPlus];
-
-    UIFont *labelsFont = [UIFont fontWithName: @"MyriadPro-Semibold" size:13];
-    [lblWinEarned setFont:labelsFont];
-    [lblWinGold setFont:labelsFont];
-    [lblWinGoldCount setFont:labelsFont];
-    [lblWinPoints setFont:labelsFont];
-    [lblWinPointsCount setFont:labelsFont];
-
-    lblWinEarned.text=NSLocalizedString(@"YouEarned", @"");
-    lblWinGold.text=NSLocalizedString(@"Gold", @"");
     
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    NSString *formattedNumberString = [numberFormatter stringFromNumber:[NSNumber numberWithInt:( playerAccount.money)]];   
-    lblWinGoldCount.text=[NSString stringWithFormat:@"%@",formattedNumberString];
-    
-    lblWinPointsCount.text=[NSString stringWithFormat:@"%d",pointsForMatch];
-    
-    if ([lblWinPointsCount isEqual:@"1"]) {
-        lblWinPoints.text=NSLocalizedString(@"Point", @"");
-    } else {
-        lblWinPoints.text=NSLocalizedString(@"Points", @"");
-    }
     [self animationWithLable:lblPoints andStartNumber:[AccountDataSource sharedInstance].accountPoints - pointsForMatch andEndNumber:[AccountDataSource sharedInstance].accountPoints];
 }
 
@@ -1304,18 +1255,6 @@
 
 - (void)viewDidUnload {
     statView = nil;
-    lblWinEarned = nil;
-    lblWinGold = nil;
-    lblWinGoldCount = nil;
-    lblWinPoints = nil;
-    lblWinPointsCount = nil;
-    viewLose = nil;
-    lblLoseEarned = nil;
-    lblLoseGold = nil;
-    lblLoseGoldCount = nil;
-    lblLosePoints = nil;
-    lblLosePointsCount = nil;
-    lblLoseLost = nil;
     lbBack = nil;
     lbTryAgain = nil;
     lbNextRound = nil;
@@ -1323,7 +1262,6 @@
     gameStatusLable = nil;
     lblPoints = nil;
     lblGoldTitle = nil;
-    lblPointsTitle = nil;
     ivGoldCoin = nil;
     ivBlueLine = nil;
     ivCurrentRank = nil;

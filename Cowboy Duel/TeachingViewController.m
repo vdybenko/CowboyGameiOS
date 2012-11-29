@@ -33,7 +33,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
             firstRun = YES;
         else
             firstRun = NO;
-        [[NSUserDefaults standardUserDefaults] setBool:FALSE forKey:@"FirstRunForGun"];
         
         time = randomTime + 5;
         
@@ -53,11 +52,12 @@ static NSString *ShotSound = @"%@/shot.mp3";
 {
     [super viewDidLoad];
 
-    if(firstRun){
+    if(firstRun && !opAccount.bot){
         TeachingHelperViewController *teachingHelperViewController = [[TeachingHelperViewController alloc] initWithOponentAccount:opAccount];
         [self.navigationController pushViewController:teachingHelperViewController animated:NO];
         
         lbBackButton.text = NSLocalizedString(@"SKIP", nil);
+        [[NSUserDefaults standardUserDefaults] setBool:FALSE forKey:@"FirstRunForGun"];
     }
 }
 
@@ -68,9 +68,10 @@ static NSString *ShotSound = @"%@/shot.mp3";
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
     [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(3.0 / 60.0)];
     [[UIAccelerometer sharedAccelerometer] setDelegate:self];
+    
+    [super viewWillAppear:animated];
 }
 
 

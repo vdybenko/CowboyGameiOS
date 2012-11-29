@@ -91,28 +91,9 @@
     IBOutlet UIImageView *ivCurrentRank;
     IBOutlet UIImageView *ivNextRank;
     IBOutlet FXLabel *lblGoldPlus;
-  
-    //WinView
-    IBOutlet UIView *viewWin;
-    IBOutlet UILabel *lblWinEarned;
-    IBOutlet UILabel *lblWinGold;
-    IBOutlet UILabel *lblWinGoldCount;
-    IBOutlet UILabel *lblWinPoints;
-    IBOutlet UILabel *lblWinPointsCount;
-    
-    //LoseView
-    IBOutlet UIView *viewLose;
-    IBOutlet UILabel *lblLoseEarned;
-    IBOutlet UILabel *lblLoseLost;
-    IBOutlet UILabel *lblLoseGold;
-    IBOutlet UILabel *lblLoseGoldCount;
-    IBOutlet UILabel *lblLosePoints;
-    IBOutlet UILabel *lblLosePointsCount;
 
     IBOutlet UIView *viewLastSceneAnimation;
-    
-    IBOutlet UIView *hudView;
-    
+        
     UIImageView *loserImg;
     UIImageView *loserSpiritImg;
     UIImageView *winnerImg1;
@@ -132,27 +113,11 @@
     __unsafe_unretained IBOutlet FXLabel *lblPoints;
     __unsafe_unretained IBOutlet UIView *goldPointBgView;
     __unsafe_unretained IBOutlet UILabel *lblGoldTitle;
-    __unsafe_unretained IBOutlet UILabel *lblPointsTitle;
 }
 @property(unsafe_unretained)id<DuelViewControllerDelegate> delegate;
 
 @property (strong, nonatomic) IBOutlet UIButton *tryButton;
 @property (strong, nonatomic) IBOutlet UIView *statView;
-
-@property (strong, nonatomic) IBOutlet UIView *viewWin;
-@property (strong, nonatomic) IBOutlet UILabel *lblWinEarned;
-@property (strong, nonatomic) IBOutlet UILabel *lblWinGold;
-@property (strong, nonatomic) IBOutlet UILabel *lblWinGoldCount;
-@property (strong, nonatomic) IBOutlet UILabel *lblWinPoints;
-@property (strong, nonatomic) IBOutlet UILabel *lblWinPointsCount;
- 
-@property (strong, nonatomic) IBOutlet UIView *viewLose;
-@property (strong, nonatomic) IBOutlet UILabel *lblLoseEarned;
-@property (strong, nonatomic) IBOutlet UILabel *lblLoseLost;
-@property (strong, nonatomic) IBOutlet UILabel *lblLoseGold;
-@property (strong, nonatomic) IBOutlet UILabel *lblLoseGoldCount;
-@property (strong, nonatomic) IBOutlet UILabel *lblLosePoints;
-@property (strong, nonatomic) IBOutlet UILabel *lblLosePointsCount;
 
 -(id)initWithUserTime:(int)userTimePar
        andOponentTime:(int)oponentTime
