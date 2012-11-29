@@ -314,7 +314,7 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "BUYITNOW" = "BUY IT NOW";
 "IT_HELP" = "IT HELP YOU WIN";
 
-"ATTEN_TEXT" = "Your opponent is stronger than you. You should shoot %d a row. Your opponent should shoot %d a row";
+"ATTEN_TEXT" = "Your opponent is stronger than you. You should shoot %d a row.";
 
 //first screen:
 "HEY" = "Hey guy. Do you hear me?";

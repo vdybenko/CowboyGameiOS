@@ -72,7 +72,7 @@ static int oponentMustShot;
     
     [frameView setDinamicHeightBackground];
     
-    description.text = [NSString stringWithFormat:NSLocalizedString(@"ATTEN_TEXT", @""),playerMustShot,oponentMustShot];
+    description.text = [NSString stringWithFormat:NSLocalizedString(@"ATTEN_TEXT", @""),playerMustShot];
         
     NSArray *arrItemsList = [DuelProductDownloaderController loadWeaponArray];
     
