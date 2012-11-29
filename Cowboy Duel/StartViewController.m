@@ -199,7 +199,6 @@ static StartViewController *sharedHelper = nil;
         
         if(firstRun){
             
-            [uDef setBool:TRUE forKey:@"FirstRunForGun"];
             [uDef setBool:TRUE forKey:@"FirstRunForDuel"];
             [playerAccount saveMoney];
             [playerAccount saveAccountName];
@@ -229,7 +228,6 @@ static StartViewController *sharedHelper = nil;
             [uDef synchronize];
         }else{
             
-            [uDef setBool:FALSE forKey:@"FirstRunForGun"];
             [uDef setBool:FALSE forKey:@"FirstRunForDuel"];
             [uDef setInteger:2 forKey:@"FirstRunForPractice"];
             
@@ -677,13 +675,7 @@ static StartViewController *sharedHelper = nil;
     [self.navigationController pushViewController:listOfItemsViewController animated:YES];
 }
 
-- (IBAction)storeButtonClick:(id)sender {
-    //    to do delete
-
-    playerAccount.accountLevel = 8;
-    playerAccount.money = 1000;
-    
-    
+- (IBAction)storeButtonClick:(id)sender {    
     storeViewController=[[StoreViewController alloc] initWithAccount:playerAccount];
     [self.navigationController pushViewController:storeViewController animated:YES];
     

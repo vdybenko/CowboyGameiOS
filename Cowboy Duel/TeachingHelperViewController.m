@@ -194,7 +194,6 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
 }
 
 #pragma mark
-
 - (IBAction)buttonBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }

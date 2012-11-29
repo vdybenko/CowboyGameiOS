@@ -27,12 +27,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
 -(id)initWithTime:(int)randomTime andAccount:(AccountDataSource *)userAccount andOpAccount:(AccountDataSource *)oponentAccount
 {
     self = [super initWithAccount:userAccount oponentAccount:oponentAccount];
-    if (self) { 
-
-        if([[NSUserDefaults standardUserDefaults] boolForKey:@"FirstRunForGun"] )
-            firstRun = YES;
-        else
-            firstRun = NO;
+    if (self) {
         
         time = randomTime + 5;
         
@@ -52,12 +47,9 @@ static NSString *ShotSound = @"%@/shot.mp3";
 {
     [super viewDidLoad];
 
-    if(firstRun && !opAccount.bot){
+    if(!opAccount.bot){
         TeachingHelperViewController *teachingHelperViewController = [[TeachingHelperViewController alloc] initWithOponentAccount:opAccount];
-        [self.navigationController pushViewController:teachingHelperViewController animated:NO];
-        
-        lbBackButton.text = NSLocalizedString(@"SKIP", nil);
-        [[NSUserDefaults standardUserDefaults] setBool:FALSE forKey:@"FirstRunForGun"];
+        [self.navigationController pushViewController:teachingHelperViewController animated:NO];        
     }
 }
 
