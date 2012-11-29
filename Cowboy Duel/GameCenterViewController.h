@@ -92,7 +92,6 @@ typedef struct {
 -(void)startDuel;
 - (void)clientConnected;
 -(void)receiveData:(NSData *)data;
--(void)stopServer;
 -(void)startClientWithName:(char *)serverName;
 -(void)startClientWithName:(char *)serverName AndMessage:(NSString*)pMes;
 -(void)matchStartedSinxron;

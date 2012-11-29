@@ -232,7 +232,6 @@
         [self.navigationController pushViewController:duelStartViewController animated:YES];
         duelStartViewController.delegate = _gameCenterViewController;
         _gameCenterViewController.duelStartViewController = duelStartViewController;
-        [_gameCenterViewController stopServer];
         
         NSString *convertString=_player.dAuth;
         NSUInteger bufferCount = sizeof(char) * ([convertString length] + 1);

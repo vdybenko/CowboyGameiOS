@@ -301,10 +301,6 @@ static StartViewController *sharedHelper = nil;
         duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
         duelProductDownloaderController.delegate = self;
         
-        if (firstRun) {
-            [gameCenterViewController stopServer];
-        }
-        
         //      GoogleAnalytics
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                             object:self
