@@ -10,7 +10,6 @@
 #import "UIButton+Image+Title.h"
 #import "StoreProductCell.h"
 #import "CDDefenseProduct.h"
-#import "DuelProductDownloaderController.h"
 
 @interface StoreViewController ()
 {
@@ -22,9 +21,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *title;
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UIButton *btnBack;
 @property (strong, nonatomic) IBOutlet UIButton *btnWeapons;
 @property (strong, nonatomic) IBOutlet UIButton *btnDefenses;
+@property (strong, nonatomic) IBOutlet UIButton *btnBack;
+
 
 @end
 
@@ -38,6 +38,7 @@
 @synthesize btnWeapons;
 @synthesize btnDefenses;
 @synthesize loadingView;
+
 #pragma mark
 -(id)initWithAccount:(AccountDataSource *)pUserAccount;
 {
@@ -45,6 +46,7 @@
     if (self) {
         playerAccount = pUserAccount;
         duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
+        duelProductDownloaderController.delegate = self;
         purchesingProductIndex =-1;
     }
     return self;
@@ -143,8 +145,9 @@
 {
     StoreProductCell *cell=(StoreProductCell*)[tableView cellForRowAtIndexPath:indexPath];
     cell.buyProduct.enabled = NO;
-    loadingView.hidden = NO;
-
+    
+    [self activityShow];
+    
     if (storeDataSource.typeOfTable == StoreDataSourceTypeTablesWeapons) {
         CDWeaponProduct *product = [storeDataSource.arrItemsList objectAtIndex:indexPath.row];
         if (product.dCountOfUse==0) {
@@ -154,8 +157,7 @@
             }else{
                 [duelProductDownloaderController buyProductID:product.dID transactionID:playerAccount.glNumber];
                 duelProductDownloaderController.didFinishBlock = ^(NSError *error){
-                    cell.buyProduct.enabled = YES;
-                    loadingView.hidden = YES;
+                    self.view.userInteractionEnabled = YES;
                     if (!error) {
                         CDTransaction *transaction = [[CDTransaction alloc] init];
                         transaction.trDescription = [[NSString alloc] initWithFormat:@"BuyProductWeapon"];
@@ -189,7 +191,9 @@
             playerAccount.curentIdWeapon = product.dID;
             [playerAccount saveWeapon];
             cell.buyProduct.enabled = YES;
-            loadingView.hidden = YES;
+            [self activityHide];
+            [storeDataSource reloadDataSource];
+            [tableView reloadData];
         }
     }else if(storeDataSource.typeOfTable == StoreDataSourceTypeTablesDefenses){
         CDDefenseProduct *product = [storeDataSource.arrItemsList objectAtIndex:indexPath.row];
@@ -200,7 +204,6 @@
             [duelProductDownloaderController buyProductID:product.dID transactionID:playerAccount.glNumber];
             duelProductDownloaderController.didFinishBlock = ^(NSError *error){
                 cell.buyProduct.enabled = YES;
-                loadingView.hidden = YES;
                 if (!error) {
                     CDTransaction *transaction = [[CDTransaction alloc] init];
                     transaction.trDescription = [[NSString alloc] initWithFormat:@"BuyProductWinDefense"];
@@ -228,8 +231,13 @@
             };
         }
     }
-    [storeDataSource reloadDataSource];
-    [tableView reloadData];
+}
+
+#pragma mark DuelProductDownloaderControllerDelegate
+
+-(void)didiFinishDownloadWithType:(DuelProductDownloaderType)type error:(NSError *)error;
+{    
+    [self activityHide];
 }
 
 #pragma mark IBAction
@@ -253,6 +261,19 @@
 }
 - (IBAction)backButtonClick:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+#pragma mark Activity view
+
+-(void)activityShow;
+{    
+    loadingView.hidden = NO;
+    self.view.userInteractionEnabled = NO;
+}
+
+-(void)activityHide;
+{
+    loadingView.hidden = YES;
+    self.view.userInteractionEnabled = YES;
 }
 
 #pragma mark MKStoreKitDelegate
@@ -285,6 +306,7 @@
     
     purchesingProductIndex = -1;
     loadingView.hidden = YES;
+    self.view.userInteractionEnabled = YES;
     
     NSString *stringToGA = [NSString stringWithFormat:@"/buy_product_%d",purchesingProductIndex];
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
@@ -304,6 +326,7 @@
     
     purchesingProductIndex = -1;
     loadingView.hidden = YES;
+    self.view.userInteractionEnabled = YES;
     
     NSString *stringToGA = [NSString stringWithFormat:@"/buy_product_fail_%d",purchesingProductIndex];
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification

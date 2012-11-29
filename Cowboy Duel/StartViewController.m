@@ -686,6 +686,12 @@ static StartViewController *sharedHelper = nil;
 }
 
 - (IBAction)storeButtonClick:(id)sender {
+    //    to do delete
+
+    playerAccount.accountLevel = 8;
+    playerAccount.money = 1000;
+    
+    
     storeViewController=[[StoreViewController alloc] initWithAccount:playerAccount];
     [self.navigationController pushViewController:storeViewController animated:YES];
     

@@ -143,6 +143,15 @@
         }
     }
     
+    if ([AccountDataSource sharedInstance].accountLevel<product.dLevelLock) {
+        lockLevelBackground.hidden = NO;
+        buyProduct.enabled = NO;
+        lockLevelBackgroundTitle.text = [NSString stringWithFormat:@"Lock level %d",product.dLevelLock];
+    }else{
+        lockLevelBackground.hidden = YES;
+        buyProduct.enabled = YES;
+    }
+    
     if (product.dPrice == 0) {
         coldTitle.text=NSLocalizedString(@"Price:", @"");
         gold.text = [NSString stringWithFormat:@"%@",product.dPurchasePrice];
@@ -155,15 +164,6 @@
         }else{
             buyProduct.enabled = NO;
         }
-    }
-    
-    if ([AccountDataSource sharedInstance].accountLevel<product.dLevelLock) {
-        lockLevelBackground.hidden = NO;
-        buyProduct.enabled = NO;
-        lockLevelBackgroundTitle.text = [NSString stringWithFormat:@"Lock level %d",product.dLevelLock];
-    }else{
-        lockLevelBackground.hidden = YES;
-        buyProduct.enabled = YES;
     }
     
     descriptionText.text = product.dDescription;

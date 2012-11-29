@@ -281,7 +281,7 @@ static NSString *getSavePathForDuelProduct()
 //URL_PRODUCTS_BUY
             [self parsingResultBuyProduct];
         }
-        didFinishBlock = nil;
+        
     });
 }
 
@@ -389,6 +389,8 @@ static NSString *getSavePathForDuelProduct()
     if (didFinishBlock) {
         didFinishBlock(error);
     }
+    
+    didFinishBlock = nil;
     if (delegate) {
         [delegate didiFinishDownloadWithType:DuelProductDownloaderTypeDuelProduct error:error];
     } 
@@ -445,6 +447,7 @@ static NSString *getSavePathForDuelProduct()
     if (didFinishBlock) {
         didFinishBlock(error);
     }
+    didFinishBlock = nil;
     if (delegate) {
         [delegate didiFinishDownloadWithType:DuelProductDownloaderTypeUserProduct error:error];
     }
@@ -458,6 +461,7 @@ static NSString *getSavePathForDuelProduct()
     if (didFinishBlock) {
         didFinishBlock(error);
     }
+    didFinishBlock = nil;
     if (delegate) {
         [delegate didiFinishDownloadWithType:DuelProductDownloaderTypeBuyProduct error:error];
     }

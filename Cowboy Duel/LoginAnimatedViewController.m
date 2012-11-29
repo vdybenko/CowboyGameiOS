@@ -340,6 +340,8 @@ static LoginAnimatedViewController *sharedHelper = nil;
 //    [self.player setVolume:0.0];
     [self initFacebook];
     
+    [playerAccount cleareWeaponAndDefense];
+    
     TestAppDelegate *testAppDelegate = (TestAppDelegate *) [[UIApplication sharedApplication] delegate];
     
     [testAppDelegate setLoginViewController:self];

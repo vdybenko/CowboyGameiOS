@@ -11,8 +11,9 @@
 #import "AccountDataSource.h"
 #import "PlayersOnLineDataSource.h"
 #import "MKStoreManager.h"
+#import "DuelProductDownloaderController.h"
 
-@interface StoreViewController : UIViewController<UITableViewDelegate,TableCellWithButton,MKStoreKitDelegate>
+@interface StoreViewController : UIViewController<UITableViewDelegate,TableCellWithButton,MKStoreKitDelegate,DuelProductDownloaderControllerDelegate>
 @property (strong, nonatomic) StoreDataSource *storeDataSource;
 @property (strong, nonatomic) IBOutlet UIView *loadingView;
 
