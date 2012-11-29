@@ -175,9 +175,11 @@
     [oponentAccount setSessionID:(player.sessionId) ? [NSString stringWithString:player.sessionId]:@""];
     
     if (player.bot) {
-        [oponentAccount setCurentIdWeapon:5];
+        if (player.weapon) [oponentAccount setCurentIdWeapon:player.weapon];
+        else [oponentAccount setCurentIdWeapon:-1];
         [oponentAccount loadAccountWeapon];
-        [oponentAccount setAccountDefenseValue:0];
+        if (player.defense) [oponentAccount setAccountDefenseValue:player.defense];
+        else [oponentAccount setAccountDefenseValue:0];
     }
 
     if ([player.sessionId isEqualToString:@"-1"]) {
