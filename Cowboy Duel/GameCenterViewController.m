@@ -410,25 +410,6 @@ static GameCenterViewController *gameCenterViewController;
     return mutchNumberWin;
 }
 
--(void)startServerWithName:(NSString *)serverName
-{
-    DLog(@"startServerWithName");
-    //old multiplayerServerViewController = [[MultiplayerServerViewController alloc] initWithServerName:serverName];
-    //old multiplayerServerViewController.gameCenterViewController = self;
-    //old multiplayerViewController = multiplayerServerViewController;
-    
-    //[multiplayerClientViewController shutDownClient];
-    //[multiplayerClientViewController release];
-    
-}
-
--(void)stopServer
-{
-    //old [multiplayerServerViewController shutDownServer];
-    //[multiplayerServerViewController release]; 
-}
-
-
 
 -(void)startClientWithName:(char *)serverName{
 
@@ -439,7 +420,6 @@ static GameCenterViewController *gameCenterViewController;
     //old multiplayerViewController = multiplayerClientViewController;
     
 }
-
 
 -(void)startClientWithName:(char *)serverName AndMessage:(NSString*)pMes;
 {
@@ -598,7 +578,7 @@ static GameCenterViewController *gameCenterViewController;
             mutchNumberLose = 0;
             
             start = NO;   
-            
+            server = NO;
             accelState = YES;
             btnStartClick= NO;
             

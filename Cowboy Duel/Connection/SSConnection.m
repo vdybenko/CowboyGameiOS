@@ -185,9 +185,11 @@ static SSConnection *connection;
         for (UIViewController *viewController in self.gameCenterViewController.parentVC.navigationController.viewControllers)
         {
             if ([viewController isKindOfClass:[ListOfItemsViewController class]]) {
-                [viewController.navigationController popToViewController:viewController animated:YES]; 
+                [viewController.navigationController popToViewController:viewController animated:YES];
+                return;
             }
         }
+        [self.gameCenterViewController.parentVC.navigationController popToViewController:[StartViewController sharedInstance] animated:YES];
     }else if (message[0] == NETWORK_DISCONNECT_PAIR) [self.gameCenterViewController lostConnection];
 }
 
