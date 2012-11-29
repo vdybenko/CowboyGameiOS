@@ -322,7 +322,7 @@
             playerAccount.money=0;
         [playerAccount saveMoney];
         
-        if (teaching  && playerAccount.isTryingWeapon) {
+        if (playerAccount.isTryingWeapon) {
             playerAccount.isTryingWeapon = NO;
             if (!isDuelWinWatched) {
                 isDuelWinWatched = YES;

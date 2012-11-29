@@ -52,6 +52,8 @@
         playerAccount = account;
         duelProduct = product;
         parentVC = vc;
+        
+        duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
     }
     return self;
 }
@@ -77,12 +79,17 @@
     CGAffineTransform transformMirror = CGAffineTransformMakeScale(-1.0, 1.0);
     gunImageMirror.transform = CGAffineTransformRotate(transformMirror, angle);
     
-    [buyItButton setTitleByLabel:@"BUYITNOW"];
+    if (duelProduct.dCountOfUse == 0) {
+        [buyItButton setTitleByLabel:@"BUYITNOW"];
+    }else{
+        [buyItButton setTitleByLabel:@"USE"];
+    }
+    
     UIColor *buttonsTitleColor = [[UIColor alloc] initWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     [buyItButton changeColorOfTitleByLabel:buttonsTitleColor];
     
     [ribbonLabel setFont: [UIFont fontWithName: @"DecreeNarrow" size:28]];
-    if ([AccountDataSource sharedInstance].accountLevel>duelProduct.dLevelLock) {
+    if ([AccountDataSource sharedInstance].accountLevel<duelProduct.dLevelLock) {
         ribbonLabel.text = [NSString stringWithFormat:@"Lock level %d",duelProduct.dLevelLock];
         ribbonLabel.textColor = [UIColor yellowColor];
         buyItButton.enabled = NO;
@@ -116,40 +123,49 @@
     [parentVC dismissViewControllerAnimated:YES completion:Nil];
 }
 - (IBAction)BuyItButtonClick:(id)sender {
-    if (duelProduct.dPrice==0) {
-        loadingView.hidden = NO;
-        [[MKStoreManager sharedManager] buyFeature:duelProduct.dPurchaseUrl];
+    
+    if (duelProduct.dCountOfUse == 0) {
+        if (duelProduct.dPrice==0) {
+            loadingView.hidden = NO;
+            [[MKStoreManager sharedManager] buyFeature:duelProduct.dPurchaseUrl];
+        }else{
+            buyItButton.enabled = NO;
+            CDTransaction *transaction = [[CDTransaction alloc] init];
+            transaction.trDescription = [[NSString alloc] initWithFormat:@"BuyProductWin"];
+            transaction.trType = [NSNumber numberWithInt:-1];
+            transaction.trMoneyCh = [NSNumber numberWithInt:-duelProduct.dPrice];
+            transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
+            transaction.trOpponentID = @"";
+            transaction.trGlobalID = [NSNumber numberWithInt:-1];
+            
+            [playerAccount.transactions addObject:transaction];
+            [playerAccount sendTransactions:playerAccount.transactions];
+            [playerAccount saveTransaction];
+            
+            [duelProductDownloaderController buyProductID:duelProduct.dID transactionID:playerAccount.glNumber];
+            duelProductDownloaderController.didFinishBlock = ^(NSError *error){
+                loadingView.hidden = YES;
+                if (error) {
+                    buyItButton.enabled = YES;
+                }else{
+                    playerAccount.money -= duelProduct.dPrice;
+                    [playerAccount saveMoney];
+                    playerAccount.accountWeapon = duelProduct;
+                    playerAccount.curentIdWeapon = duelProduct.dID;
+                    [playerAccount saveWeapon];
+                    
+                    duelProduct.dCountOfUse =1;
+                    NSMutableArray *arrWeapon = [DuelProductDownloaderController loadWeaponArray];
+                    NSUInteger index=[playerAccount findObsByID](arrWeapon,playerAccount.curentIdWeapon);
+                    [arrWeapon replaceObjectAtIndex:index withObject:duelProduct];
+                    [DuelProductDownloaderController saveWeapon:arrWeapon];
+                }
+            };
+        }
     }else{
-        buyItButton.enabled = NO;
-        CDTransaction *transaction = [[CDTransaction alloc] init];
-        transaction.trDescription = [[NSString alloc] initWithFormat:@"BuyProductWin"];
-        transaction.trType = [NSNumber numberWithInt:-1];
-        transaction.trMoneyCh = [NSNumber numberWithInt:-duelProduct.dPrice];
-        transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
-        transaction.trOpponentID = @"";
-        transaction.trGlobalID = [NSNumber numberWithInt:-1];
-
-        [playerAccount.transactions addObject:transaction];
-        [playerAccount sendTransactions:playerAccount.transactions];
-        [playerAccount saveTransaction];
-        
-        playerAccount.money -= duelProduct.dPrice;
-        [playerAccount saveMoney];
         playerAccount.accountWeapon = duelProduct;
         playerAccount.curentIdWeapon = duelProduct.dID;
         [playerAccount saveWeapon];
-        
-        [duelProductDownloaderController buyProductID:duelProduct.dID transactionID:playerAccount.glNumber];
-        duelProductDownloaderController.didFinishBlock = ^(NSError *error){
-            buyItButton.enabled = YES;
-        };
-        
-        duelProduct.dCountOfUse =1;
-        NSMutableArray *arrWeapon = [DuelProductDownloaderController loadWeaponArray];
-        NSUInteger index=[playerAccount findObsByID](arrWeapon,playerAccount.curentIdWeapon);
-        [arrWeapon replaceObjectAtIndex:index withObject:duelProduct];
-        [DuelProductDownloaderController saveWeapon:arrWeapon];
-        
         [self closeButtonClick:nil];
     }
 }
@@ -187,6 +203,7 @@
                                                         object:self
                                                       userInfo:[NSDictionary dictionaryWithObject:@"/buy_product_fail" forKey:@"event"]];
     loadingView.hidden = YES;
+    buyItButton.enabled = YES;
 }
 
 

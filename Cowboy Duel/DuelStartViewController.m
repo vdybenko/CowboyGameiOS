@@ -55,6 +55,11 @@ static const char *GC_URL =  BASE_URL"api/gc";
         serverType = server;
         playerAccount = userAccount;
         oponentAccount = opAccount;
+        
+        if (playerAccount.isTryingWeapon) {
+            playerAccount.isTryingWeapon = NO;
+            [playerAccount loadWeapon];
+        }
     }
     return self;
 }
