@@ -90,12 +90,14 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
     frame = viewHand.frame;
     frame.origin = pointStart;
     viewHand.frame = frame;
-    [self performSelector:@selector(firstAnimation) withObject:nil afterDelay:0.2f];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
-   
+    viewFire.hidden = NO;
+    viewSound.hidden = NO;
+    viewHand.hidden = NO;
+    [self performSelector:@selector(firstAnimation) withObject:nil afterDelay:0.2f];
 }
 
 - (void)didReceiveMemoryWarning
@@ -155,20 +157,6 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
                                           completion:^(BOOL finised){
                                               [self scaleView:ivArrow];
                                           }];
-                     }];
-    [self performSelector:@selector(fourthAnimation) withObject:nil afterDelay:DELAY_BETWEEN_ANIMATION];
-}
-
--(void)fourthAnimation;
-{
-    [UIView animateWithDuration:ANIMATION_TIME
-                     animations:^{
-                         CGRect frame = viewHand.frame;
-                         frame.origin = pointStart;
-                         viewHand.frame = frame;
-                     }
-                     completion:^(BOOL finised){
-                         [self.navigationController popViewControllerAnimated:YES];
                      }];
 }
 
