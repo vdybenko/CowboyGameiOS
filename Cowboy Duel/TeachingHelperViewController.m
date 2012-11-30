@@ -12,7 +12,7 @@
 #import "DuelRewardLogicController.h"
 
 static CGFloat const ANIMATION_TIME = 0.4f;
-static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
+static CGFloat const DELAY_BETWEEN_ANIMATION = 4.f;
 
 @interface TeachingHelperViewController ()
 {
@@ -20,8 +20,11 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
     CGPoint pointStart;
     CGPoint pointForView;
     CGPoint pointForViewWithArrow;
+    id<UIAccelerometerDelegate> parentVC;
 }
 @property (strong, nonatomic) IBOutlet UILabel *mainHelpLabel;
+
+@property (strong, nonatomic) IBOutlet UIImageView *ivBullets;
 @property (strong, nonatomic) IBOutlet UILabel *labelBullets;
 
 @property (strong, nonatomic) IBOutlet UIView *viewFire;
@@ -29,32 +32,28 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
 @property (strong, nonatomic) IBOutlet UILabel *labelFireDescription;
 @property (strong, nonatomic) IBOutlet UILabel *labelFireTitle;
 
-@property (strong, nonatomic) IBOutlet UIView *viewSound;
-
 @property (strong, nonatomic) IBOutlet UIView *viewHand;
 @property (strong, nonatomic) IBOutlet UIImageView *ivArrow;
-
-@property (strong, nonatomic) IBOutlet UIButton *buttonBack;
 
 @end
 
 @implementation TeachingHelperViewController
 @synthesize mainHelpLabel;
 @synthesize labelBullets;
+@synthesize ivBullets;
 @synthesize viewFire;
 @synthesize viewFireInside;
 @synthesize labelFireDescription;
-@synthesize viewSound;
 @synthesize viewHand;
 @synthesize ivArrow;
-@synthesize buttonBack;
 @synthesize labelFireTitle;
 
--(id)initWithOponentAccount:(AccountDataSource *)oponentAccount;
+-(id)initWithOponentAccount:(AccountDataSource *)oponentAccount parentVC:(id<UIAccelerometerDelegate>)pParentVC;
 {
     self = [self initWithNibName:@"TeachingHelperController" bundle:[NSBundle mainBundle]];
     if (self) {
         opAccount = oponentAccount;
+        parentVC = pParentVC;
     }
     return self;
 }
@@ -65,10 +64,6 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
     
     mainHelpLabel.text = NSLocalizedString(@"WAIT", @"");
     
-    [buttonBack setTitleByLabel:@"BACK"];
-    UIColor *btnColor = [UIColor colorWithRed:244.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
-    [buttonBack changeColorOfTitleByLabel:btnColor];
-    
     AccountDataSource *playerAccount = [AccountDataSource sharedInstance];
     int countBullets = [DuelRewardLogicController countUpBuletsWithOponentLevel:opAccount.accountLevel defense:opAccount.accountDefenseValue playerAtack:playerAccount.accountWeapon.dDamage];
     labelBullets.text=[NSString stringWithFormat:@"%d",countBullets];
@@ -77,7 +72,6 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
     labelFireTitle.text=[NSString stringWithFormat:@"%@ %d %@",NSLocalizedString(@"SHOTS1", @""),countBullets,NSLocalizedString(@"SHOTS2", @"")];
 
     [viewFireInside setDinamicHeightBackground];
-    [viewSound setDinamicHeightBackground];
     [viewHand setDinamicHeightBackground];
     
     pointStart = CGPointMake(12, [[UIScreen mainScreen] bounds].size.height+10);
@@ -88,19 +82,16 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
     frame.origin = pointStart;
     viewFire.frame = frame;
     
-    frame = viewSound.frame;
-    frame.origin = pointStart;
-    viewSound.frame = frame;
-    
     frame = viewHand.frame;
     frame.origin = pointStart;
     viewHand.frame = frame;
-    [self performSelector:@selector(firstAnimation) withObject:nil afterDelay:0.2f];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
-   
+    viewFire.hidden = NO;
+    viewHand.hidden = NO;
+    [self performSelector:@selector(firstAnimation) withObject:nil afterDelay:0.2f];
 }
 
 - (void)didReceiveMemoryWarning
@@ -117,6 +108,10 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
                          CGRect frame = viewFire.frame;
                          frame.origin = pointForViewWithArrow;
                          viewFire.frame = frame;
+                     }
+                     completion:^(BOOL finised){
+                         ivBullets.hidden = NO;
+                         labelBullets.hidden = NO;
                      }];
     [self performSelector:@selector(secondAnimation) withObject:nil afterDelay:DELAY_BETWEEN_ANIMATION];
 }
@@ -130,25 +125,8 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
                          viewFire.frame = frame;
                          
                          mainHelpLabel.hidden = YES;
-                     }
-                     completion:^(BOOL finised){
-                         [UIView animateWithDuration:ANIMATION_TIME
-                                          animations:^{
-                                              CGRect frame = viewSound.frame;
-                                              frame.origin = pointForView;
-                                              viewSound.frame = frame;
-                                          }];
-                     }];
-    [self performSelector:@selector(thirdAnimation) withObject:nil afterDelay:DELAY_BETWEEN_ANIMATION];
-}
-
--(void)thirdAnimation;
-{
-    [UIView animateWithDuration:ANIMATION_TIME
-                     animations:^{
-                         CGRect frame = viewSound.frame;
-                         frame.origin = pointStart;
-                         viewSound.frame = frame;
+                         ivBullets.hidden = YES;
+                         labelBullets.hidden = YES;
                      }
                      completion:^(BOOL finised){
                          [UIView animateWithDuration:ANIMATION_TIME
@@ -160,20 +138,6 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
                                           completion:^(BOOL finised){
                                               [self scaleView:ivArrow];
                                           }];
-                     }];
-    [self performSelector:@selector(fourthAnimation) withObject:nil afterDelay:DELAY_BETWEEN_ANIMATION];
-}
-
--(void)fourthAnimation;
-{
-    [UIView animateWithDuration:ANIMATION_TIME
-                     animations:^{
-                         CGRect frame = viewHand.frame;
-                         frame.origin = pointStart;
-                         viewHand.frame = frame;
-                     }
-                     completion:^(BOOL finised){
-                         [self.navigationController popViewControllerAnimated:YES];
                      }];
 }
 
@@ -195,7 +159,12 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
 
 #pragma mark
 - (IBAction)buttonBack:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(3.0 / 60.0)];
+    [[UIAccelerometer sharedAccelerometer] setDelegate:parentVC];
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.view removeFromSuperview];
+    }];
 }
 
 -(void)dealloc
@@ -204,7 +173,6 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
     labelBullets = nil;
     viewFire = nil;
     labelFireDescription = nil;
-    viewSound = nil;
     viewHand = nil;
 }
 @end

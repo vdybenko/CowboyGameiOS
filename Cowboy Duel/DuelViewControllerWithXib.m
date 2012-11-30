@@ -114,6 +114,8 @@ static NSString *ShotSound = @"%@/shot.mp3";
     
     helpPracticeView=[[UIView alloc] initWithFrame:CGRectMake(12, (([UIScreen mainScreen].bounds.size.height - 172)/2), 290, 172)];
     
+    [helpPracticeView setHidden:YES];
+
     UIImageView *imvArm=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dv_arm.png"]];
     CGRect frame = imvArm.frame;
     frame.origin = CGPointMake(90, 12);
@@ -136,7 +138,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
     [helpPracticeView addSubview:cancelBtn];
     
     [helpPracticeView setDinamicHeightBackground];
-    [helpPracticeView setHidden:YES];
     [self.view addSubview:helpPracticeView];    
 }
 
