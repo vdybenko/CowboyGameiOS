@@ -232,9 +232,10 @@
     serverObj.duelsLost = @0;
     serverObj.duelsWin = @0;
     serverObj.sessionId = @"-1";
-    serverObj.defense = @"";
-    serverObj.weapon = @"";
-    [self.serverObjects addObject:serverObj];
+    serverObj.defense = 0;
+    serverObj.weapon = 0;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.displayName == %@", NSLocalizedString(@"PRAC", @"")];
+    if (![[self.serverObjects filteredArrayUsingPredicate:predicate] count]) [self.serverObjects addObject:serverObj];
 }
 
 
