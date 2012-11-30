@@ -111,6 +111,7 @@
     }else {
         maxIndex=5;
     }
+    
     for (int i=0; i<maxIndex; i++) {
         NSIndexPath* rowToReload = [NSIndexPath indexPathForRow:i inSection:0];
         NSArray* rowsToReload = [NSArray arrayWithObjects:rowToReload, nil];
@@ -128,7 +129,7 @@
             [storeDataSource setCellsHide:NO];
             [tableView reloadRowsAtIndexPaths:rowsToReload withRowAnimation:type];
         });
-        [NSThread sleepForTimeInterval:0.09];
+        [NSThread sleepForTimeInterval:0.12];
     }
 }
 
@@ -150,7 +151,7 @@
     
     if (storeDataSource.typeOfTable == StoreDataSourceTypeTablesWeapons) {
         CDWeaponProduct *product = [storeDataSource.arrItemsList objectAtIndex:indexPath.row];
-        if (product.dCountOfUse==0) {
+        if (product.dCountOfUse==0 && product.dID!=-1) {
             if (product.dPrice==0) {
                 purchesingProductIndex = indexPath.row;
                 [[MKStoreManager sharedManager] buyFeature:product.dPurchaseUrl];
@@ -244,8 +245,11 @@
 - (IBAction)weaponsButtonClick:(id)sender {
     if (storeDataSource.typeOfTable != StoreDataSourceTypeTablesWeapons) {
         storeDataSource.typeOfTable = StoreDataSourceTypeTablesWeapons;
+        [storeDataSource reloadDataSource];
+        [storeDataSource setCellsHide:YES];
+        [tableView reloadData];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            [storeDataSource reloadDataSource];
+            
             [self startTableAnimation];
         });
     }
@@ -253,8 +257,11 @@
 - (IBAction)defenseButtonClick:(id)sender {
     if (storeDataSource.typeOfTable != StoreDataSourceTypeTablesDefenses) {
         storeDataSource.typeOfTable = StoreDataSourceTypeTablesDefenses;
+        [storeDataSource reloadDataSource];
+        [storeDataSource setCellsHide:YES];
+        [tableView reloadData];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            [storeDataSource reloadDataSource];
+            
             [self startTableAnimation];
         });
     }

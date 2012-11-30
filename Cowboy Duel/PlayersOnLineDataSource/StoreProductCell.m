@@ -127,7 +127,7 @@
         
         countOfUse.hidden = YES;
         
-        if (product.dCountOfUse == 0) {
+        if (product.dCountOfUse == 0 && product.dID!=-1) {
             buttonLabel.text = NSLocalizedString(@"BUYIT", @"");
         }else{
             if (product.dID == [AccountDataSource sharedInstance].curentIdWeapon) {
