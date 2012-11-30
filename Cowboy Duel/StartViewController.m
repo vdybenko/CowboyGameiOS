@@ -524,18 +524,15 @@ static StartViewController *sharedHelper = nil;
     [app.adBanner setHidden:NO];
     app.clouds.hidden = YES;
     
-     animationCheck = YES;
-    
-    
     if (!inBackground) {
+         animationCheck = YES;
         [self cloudAnimation];
         [self cloudSecondAnimation];
         cloudView.hidden = NO;
         cloudSecondView.hidden = NO;
     }
-    
     inBackground = NO;
-    
+
     SSConnection *connection = [SSConnection sharedInstance];
     [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
     
@@ -552,7 +549,7 @@ static StartViewController *sharedHelper = nil;
     
     if (paymentRegistration) [self showProfileFirstRun];
     [self isAdvertisingOfNewVersionNeedShow];
-    [self estimateApp];
+    [self estimateApp];    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -607,9 +604,8 @@ static StartViewController *sharedHelper = nil;
     }
     firstDayWithOutAdvertising=[AdvertisingAppearController advertisingCheckForAppearWithFirstDayWithOutAdvertising:firstDayWithOutAdvertising];
     
-     animationCheck = YES;
-    
     if ((inBackground)&&[self isViewLoaded]) {
+        animationCheck = YES;
         [self cloudAnimation];
         [self cloudSecondAnimation];
         cloudView.hidden = NO;
@@ -712,6 +708,19 @@ static StartViewController *sharedHelper = nil;
 
 -(void)profileFirstRunButtonClickWithOutAnimation;
 {
+    animationCheck = NO;
+    
+    cloudX=460;
+    cloud2X=-20;
+    
+    CGRect frame = cloudView.frame;
+    frame.origin.x = cloudX;
+    cloudView.frame = frame;
+    
+    frame = cloudSecondView.frame;
+    frame.origin.x = cloud2X;
+    cloudSecondView.frame = frame;
+    
     UIViewController *topController=[self.navigationController topViewController];
     if (![topController isKindOfClass:[ProfileViewController class]]) {
         profileViewController = [[ProfileViewController alloc] initFirstStartWithAccount:playerAccount startViewController:self];
@@ -1479,14 +1488,15 @@ static StartViewController *sharedHelper = nil;
 {
     NSString *LoginForIPad=[[NSUserDefaults standardUserDefaults] stringForKey:@"IPad"];
     if (LoginForIPad&&(![[OGHelper sharedInstance] isAuthorized])) {
+        firstRunLocal = NO;
+        animationCheck = NO;
         LoginAnimatedViewController *loginViewControllerLocal =[LoginAnimatedViewController sharedInstance];
-        
         loginViewControllerLocal.startViewController = self;
         [self.navigationController pushViewController:loginViewControllerLocal animated:YES];
-        firstRunLocal = NO;
     }else {
         if (firstRunLocal) {
             firstRunLocal = NO;
+            animationCheck = NO;
             [self profileFirstRunButtonClickWithOutAnimation];
         }
     }
