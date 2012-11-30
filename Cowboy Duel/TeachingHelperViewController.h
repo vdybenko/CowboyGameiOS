@@ -10,5 +10,5 @@
 #import "AccountDataSource.h"
 
 @interface TeachingHelperViewController : UIViewController
--(id)initWithOponentAccount:(AccountDataSource *)oponentAccount;
+-(id)initWithOponentAccount:(AccountDataSource *)oponentAccount parentVC:(id<UIAccelerometerDelegate>)parentVC;
 @end

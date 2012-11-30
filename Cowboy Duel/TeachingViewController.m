@@ -17,6 +17,9 @@
 static NSString *ShotSound = @"%@/shot.mp3";
 
 @interface TeachingViewController ()
+{
+    TeachingHelperViewController *teachingHelperViewController;
+}
 @property (nonatomic, strong) AccountDataSource *oponentAccount;
 @property (nonatomic, strong) AccountDataSource *userAccount;
 @end
@@ -48,8 +51,17 @@ static NSString *ShotSound = @"%@/shot.mp3";
     [super viewDidLoad];
 
     if(!opAccount.bot){
-        TeachingHelperViewController *teachingHelperViewController = [[TeachingHelperViewController alloc] initWithOponentAccount:opAccount];
-        [self.navigationController pushViewController:teachingHelperViewController animated:NO];        
+        teachingHelperViewController = [[TeachingHelperViewController alloc] initWithOponentAccount:opAccount parentVC:self];
+                
+        [UIView animateWithDuration:0.5 animations:^{
+            UIWindow *mainWindow = [[UIApplication sharedApplication] keyWindow];
+            [mainWindow insertSubview:teachingHelperViewController.view aboveSubview:mainWindow];
+        }];
+        
+//        [[UIAccelerometer sharedAccelerometer] setDelegate:nil];
+    }else{
+        [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(3.0 / 60.0)];
+        [[UIAccelerometer sharedAccelerometer] setDelegate:self];
     }
 }
 
@@ -60,9 +72,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(3.0 / 60.0)];
-    [[UIAccelerometer sharedAccelerometer] setDelegate:self];
-    
     [super viewWillAppear:animated];
 }
 
@@ -257,4 +266,9 @@ static NSString *ShotSound = @"%@/shot.mp3";
     }
 }
 
+#pragma mark 
+-(void)dealloc
+{
+    teachingHelperViewController = nil;
+}
 @end

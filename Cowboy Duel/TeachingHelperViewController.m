@@ -20,6 +20,7 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
     CGPoint pointStart;
     CGPoint pointForView;
     CGPoint pointForViewWithArrow;
+    id<UIAccelerometerDelegate> parentVC;
 }
 @property (strong, nonatomic) IBOutlet UILabel *mainHelpLabel;
 @property (strong, nonatomic) IBOutlet UILabel *labelBullets;
@@ -34,8 +35,6 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
 @property (strong, nonatomic) IBOutlet UIView *viewHand;
 @property (strong, nonatomic) IBOutlet UIImageView *ivArrow;
 
-@property (strong, nonatomic) IBOutlet UIButton *buttonBack;
-
 @end
 
 @implementation TeachingHelperViewController
@@ -47,14 +46,14 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
 @synthesize viewSound;
 @synthesize viewHand;
 @synthesize ivArrow;
-@synthesize buttonBack;
 @synthesize labelFireTitle;
 
--(id)initWithOponentAccount:(AccountDataSource *)oponentAccount;
+-(id)initWithOponentAccount:(AccountDataSource *)oponentAccount parentVC:(id<UIAccelerometerDelegate>)pParentVC;
 {
     self = [self initWithNibName:@"TeachingHelperController" bundle:[NSBundle mainBundle]];
     if (self) {
         opAccount = oponentAccount;
+        parentVC = pParentVC;
     }
     return self;
 }
@@ -64,10 +63,6 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
     [super viewDidLoad];
     
     mainHelpLabel.text = NSLocalizedString(@"WAIT", @"");
-    
-    [buttonBack setTitleByLabel:@"BACK"];
-    UIColor *btnColor = [UIColor colorWithRed:244.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
-    [buttonBack changeColorOfTitleByLabel:btnColor];
     
     AccountDataSource *playerAccount = [AccountDataSource sharedInstance];
     int countBullets = [DuelRewardLogicController countUpBuletsWithOponentLevel:opAccount.accountLevel defense:opAccount.accountDefenseValue playerAtack:playerAccount.accountWeapon.dDamage];
@@ -195,7 +190,12 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 3.f;
 
 #pragma mark
 - (IBAction)buttonBack:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(3.0 / 60.0)];
+    [[UIAccelerometer sharedAccelerometer] setDelegate:parentVC];
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.view removeFromSuperview];
+    }];
 }
 
 -(void)dealloc
