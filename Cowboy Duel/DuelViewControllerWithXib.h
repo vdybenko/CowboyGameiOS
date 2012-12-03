@@ -164,6 +164,7 @@ static CGFloat const ANIMATION_TIME = 0.3f;
 -(void)startDuel;
 -(void)restartCountdown;
 -(void)hideHelpViewWithArm;
+-(void)showHelpViewWithArm;
 -(void)setTextToMessageShot; 
 
 @property(unsafe_unretained)id<DuelViewControllerDelegate> delegate;

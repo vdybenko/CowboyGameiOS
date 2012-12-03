@@ -73,6 +73,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    //[helpPracticeView setHidden:NO];
 }
 
 

@@ -442,6 +442,11 @@ if (shotCountBullet!=0) {
     [helpPracticeView setHidden:YES];
 }
 
+-(void)showHelpViewWithArm;
+{
+    [helpPracticeView setHidden:NO];
+}
+
 -(void)countUpBulets;
 {
     

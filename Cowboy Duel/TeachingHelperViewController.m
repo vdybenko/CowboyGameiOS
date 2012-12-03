@@ -10,8 +10,9 @@
 #import "UIView+Dinamic_BackGround.h"
 #import "UIButton+Image+Title.h"
 #import "DuelRewardLogicController.h"
+#import "TeachingViewController.h"
 
-static CGFloat const ANIMATION_TIME = 0.4f;
+//static CGFloat const ANIMATION_TIME = 0.4f;
 static CGFloat const DELAY_BETWEEN_ANIMATION = 4.f;
 
 @interface TeachingHelperViewController ()
@@ -34,6 +35,7 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 4.f;
 
 @property (strong, nonatomic) IBOutlet UIView *viewHand;
 @property (strong, nonatomic) IBOutlet UIImageView *ivArrow;
+@property (nonatomic) BOOL firstAnimationIsRun;
 
 @end
 
@@ -103,6 +105,7 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 4.f;
 
 -(void)firstAnimation;
 {
+    self.firstAnimationIsRun = YES;
     [UIView animateWithDuration:ANIMATION_TIME
                      animations:^{
                          CGRect frame = viewFire.frame;
@@ -113,11 +116,12 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 4.f;
                          ivBullets.hidden = NO;
                          labelBullets.hidden = NO;
                      }];
-    [self performSelector:@selector(secondAnimation) withObject:nil afterDelay:DELAY_BETWEEN_ANIMATION];
+    //[self performSelector:@selector(secondAnimation) withObject:nil afterDelay:DELAY_BETWEEN_ANIMATION];
 }
 
 -(void)secondAnimation;
 {
+    self.firstAnimationIsRun = NO;
     [UIView animateWithDuration:ANIMATION_TIME
                      animations:^{
                          CGRect frame = viewFire.frame;
@@ -159,6 +163,13 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 4.f;
 
 #pragma mark
 - (IBAction)buttonBack:(id)sender {
+//    if (self.firstAnimationIsRun) {
+//        [self secondAnimation];
+//        return;
+//    }
+    TeachingViewController *teachingViewController = (TeachingViewController *)parentVC;
+    [teachingViewController showHelpViewWithArm];
+    
     [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(3.0 / 60.0)];
     [[UIAccelerometer sharedAccelerometer] setDelegate:parentVC];
     

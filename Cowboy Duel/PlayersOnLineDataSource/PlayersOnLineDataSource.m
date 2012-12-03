@@ -227,7 +227,7 @@
     serverObj.fbImageUrl = @"";
     serverObj.money = @1000;
     serverObj.serverName = @"";
-    serverObj.rank = @9;
+    serverObj.rank = @2;
     serverObj.bot = NO;
     serverObj.duelsLost = @0;
     serverObj.duelsWin = @0;
