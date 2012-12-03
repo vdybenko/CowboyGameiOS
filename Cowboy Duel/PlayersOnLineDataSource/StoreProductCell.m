@@ -155,6 +155,10 @@
     if (product.dPrice == 0) {
         coldTitle.text=NSLocalizedString(@"Price:", @"");
         gold.text = [NSString stringWithFormat:@"%@",product.dPurchasePrice];
+        if (product.dID == -1) {
+            [coldTitle setHidden:YES];
+            [gold setHidden:YES];
+        }
     }else{
         coldTitle.text=NSLocalizedString(@"Golds:", @"");
         gold.text = [NSString stringWithFormat:@"%d",product.dPrice];
@@ -168,6 +172,9 @@
     
     descriptionText.text = product.dDescription;
     icon.image = [UIImage loadImageFullPath:[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],product.dIconLocal]];
+    if (product.dID == -1) {
+        icon.image = [UIImage imageNamed:@"iconGun.png"];
+    }
 }
 
 - (IBAction)buyButtonClick:(id)sender {
