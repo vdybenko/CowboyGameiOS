@@ -117,6 +117,10 @@ static const CGFloat timeToStandartTitles = 1.8;
                                                    object:nil];
         
         [self loadView];
+        _lbMenuTitle.text = NSLocalizedString(@"BACK", @"");
+        UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
+        [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:24];
+        [btnLeaderboardBig setTitleByLabel:@"LeaderboardTitle" withColor:buttonsTitleColor fontSize:24];
         [self initMainControls];
     }
     return self;
@@ -165,6 +169,10 @@ static const CGFloat timeToStandartTitles = 1.8;
         
         textIndex = 0;
         [self loadView];
+        _lbMenuTitle.text = NSLocalizedString(@"CONTINUE", @"");
+        UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
+        [btnBack setTitleByLabel:@"CONTINUE" withColor:buttonsTitleColor fontSize:24];
+        [btnLeaderboardBig setTitleByLabel:@"LeaderboardTitle" withColor:buttonsTitleColor fontSize:24];
         [self initMainControls];
         lbDescription.hidden = NO;
     }
@@ -243,11 +251,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     lbBiggestWin.text = NSLocalizedString(@"TheBiggestWinGold", @"");
     lbBiggestWin.font = titlesFont;
     
-    UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
-    [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:24];
-    
-    [btnLeaderboardBig setTitleByLabel:@"LeaderboardTitle" withColor:buttonsTitleColor fontSize:24];
-    
     lbBiggestWinCount.font = CountFont;
 //    [lbBiggestWinCount dinamicAttachToView:lbBiggestWin withDirection:DirectionToAnimateRight ];
     
@@ -270,7 +273,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     
     lbDuelsWonCount.font = CountFont;
     
-    _lbMenuTitle.text = NSLocalizedString(@"BACK", @"");
     _lbMenuTitle.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
     
     lbUserTitle.font = NameFont;
