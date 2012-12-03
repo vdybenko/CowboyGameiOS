@@ -104,19 +104,19 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "638"
          endingLineNumber = "638"
-         landmarkName = "@implementation StartViewController"
-         landmarkType = "3">
+         landmarkName = "-didFinishLaunching"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ProfileViewController.m"
-         timestampString = "375611349.2174"
+         timestampString = "376232237.028391"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "357"
-         endingLineNumber = "357"
+         startingLineNumber = "358"
+         endingLineNumber = "358"
          landmarkName = "-animationOfMoney"
          landmarkType = "5">
       </FileBreakpoint>
@@ -125,11 +125,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ProfileViewController.m"
-         timestampString = "375611360.884449"
+         timestampString = "376232237.028391"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "380"
-         endingLineNumber = "380"
+         startingLineNumber = "381"
+         endingLineNumber = "381"
          landmarkName = "-animateLabel:toValue:"
          landmarkType = "5">
       </FileBreakpoint>

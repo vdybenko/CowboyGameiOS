@@ -75,7 +75,7 @@ static const CGFloat timeToStandartTitles = 1.8;
 //    First run
     int textIndex;
     IBOutlet UILabel *lbDescription;
-    NSArray *textsContainer;
+    NSMutableArray *textsContainer;
 }
     -(void)setImageFromFacebook;
 @end
@@ -153,7 +153,7 @@ static const CGFloat timeToStandartTitles = 1.8;
                                                      name:kCheckfFBLoginSession
                                                    object:nil];
         
-        textsContainer = [NSArray arrayWithObjects:
+        textsContainer = [NSMutableArray arrayWithObjects:
                           NSLocalizedString(@"PROFILE_MESS_1_THANKS", nil),
                           [NSString stringWithFormat:NSLocalizedString(@"PROFILE_MESS_2_NAME", nil),playerAccount.accountName],
                           NSLocalizedString(@"PROFILE_MESS_3_NAME", nil),            
@@ -309,6 +309,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     NSString *name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel];
     ivCurrentRank.image = [UIImage imageNamed:name];
     tfFBName.text = playerAccount.accountName;
+    if([textsContainer count]) [textsContainer replaceObjectAtIndex:1 withObject:[NSString stringWithFormat:NSLocalizedString(@"PROFILE_MESS_2_NAME", nil),playerAccount.accountName]];
     SSConnection *connection = [SSConnection sharedInstance];
     [connection sendInfoPacket];
 }
