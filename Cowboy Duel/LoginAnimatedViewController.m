@@ -176,7 +176,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
     stDonate = [NSMutableString string];
     [MKStoreManager sharedManager].delegate = sharedHelper;
     [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusSimple];
-    
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"FirstRun_v2.2"];
     
 }
 

@@ -37,7 +37,7 @@
     TopPlayersDataSource *topPlayersDataSource;
     StoreViewController *storeViewController;
     
-    UIView *hudView;
+    IBOutlet UIView *hudView;
     
 //    BOOL firstRun;
     BOOL firstRunLocal;
@@ -428,15 +428,6 @@ static StartViewController *sharedHelper = nil;
     feedBackViewVisible=NO;
     shareViewVisible = NO;
   
-    if (firstRun) {        
-        hudView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-        hudView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
-        [hudView setHidden:NO];
-        [hudView addSubview:arrowImage];
-        [arrowImage startAnimation];
-    }else{
-        [hudView setHidden:YES];
-    }
     [self checkFor10Dolars];
     
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Back1cycled.mp3", [[NSBundle mainBundle] resourcePath]]];
@@ -499,12 +490,21 @@ static StartViewController *sharedHelper = nil;
 
     [self playerStart];
     
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"FirstRun_v2.2"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"FirstRun_v2.2"];
+        UIImageView_AttachedView *arrowImage3=[[UIImageView_AttachedView alloc] initWithImage:[UIImage imageNamed:@"st_arrow.png"] attachedToFrame:duelButton frequence:0.5 amplitude:10 direction:DirectionToAnimateLeft];
+        [hudView setHidden:NO];
+        [hudView addSubview:arrowImage3];
+        [arrowImage3 startAnimation];
+    }
+    else [hudView setHidden:YES];
+
+    
     if (firstRun) {
         firstRun = NO;
         return;
     }
     
-    [self changeRankOfBlackHelpViews];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkNetworkStatus:) name:kReachabilityChangedNotification object:nil];
     
@@ -514,6 +514,7 @@ static StartViewController *sharedHelper = nil;
     // check if a pathway to a random host exists
     hostReachable = [Reachability reachabilityWithHostName: @"www.apple.com"];
     [hostReachable startNotifier];
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -1486,6 +1487,7 @@ static StartViewController *sharedHelper = nil;
 
 -(void)showProfileFirstRun
 {
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"FirstRun_v2.2"];
     NSString *LoginForIPad=[[NSUserDefaults standardUserDefaults] stringForKey:@"IPad"];
     if (LoginForIPad&&(![[OGHelper sharedInstance] isAuthorized])) {
         firstRunLocal = NO;
@@ -1499,35 +1501,6 @@ static StartViewController *sharedHelper = nil;
             animationCheck = NO;
             [self profileFirstRunButtonClickWithOutAnimation];
         }
-    }
-}
--(void)changeRankOfBlackHelpViews
-{
-    //    Change order of Buttons on first start
-    NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-    if ([userDef integerForKey:@"FirstRunForPractice"] == 2) {
-        
-        //        Final exchange after first duel
-        [hudView setHidden:YES];
-        [hudView removeFromSuperview];
-    }
-    if (([userDef integerForKey:@"FirstRunForPractice"] == 1) && ([self connectedToWiFi])) {
-        //        Show btn Duel GC
-        //       exchange after practice
-        
-        UIImageView_AttachedView *arrowImage3=[[UIImageView_AttachedView alloc] initWithImage:[UIImage imageNamed:@"st_arrow.png"] attachedToFrame:duelButton frequence:0.5 amplitude:10 direction:DirectionToAnimateLeft];
-        [hudView addSubview:arrowImage3];
-        [arrowImage3 startAnimation];
-        
-        //
-        [arrowImage setHidden:YES];
-        
-        [userDef setInteger:2 forKey:@"FirstRunForPractice"];
-        [userDef synchronize];
-    }
-    if ((![self connectedToWiFi]) && ([userDef integerForKey:@"FirstRunForPractice"] == 1)) {
-        [hudView setHidden:YES];
-        [hudView removeFromSuperview];
     }
 }
 
