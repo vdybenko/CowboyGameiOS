@@ -3,12 +3,12 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1536</int>
 		<string key="IBDocument.SystemVersion">11G63</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2843</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
 		<string key="IBDocument.AppKitVersion">1138.51</string>
 		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1929</string>
+			<string key="NS.object.0">1930</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -46,6 +46,7 @@
 								<int key="NSvFlags">282</int>
 								<string key="NSFrame">{{-150, -90}, {620, 620}}</string>
 								<reference key="NSSuperview" ref="97585809"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="491249714"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -60,6 +61,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{-64, -109}, {480, 258}}</string>
 								<reference key="NSSuperview" ref="97585809"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="240996334"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -72,6 +74,7 @@
 						</array>
 						<string key="NSFrameSize">{320, 480}</string>
 						<reference key="NSSuperview" ref="66472398"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="677642255"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -79,15 +82,16 @@
 					<object class="IBUIImageView" id="434465475">
 						<reference key="NSNextResponder" ref="66472398"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{224, 19}, {70, 50}}</string>
+						<string key="NSFrame">{{224, 26}, {65, 35}}</string>
 						<reference key="NSSuperview" ref="66472398"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="568237099"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">dv_bullets.png</string>
+							<string key="NSResourceName">dv_bullets_oval.png</string>
 						</object>
 					</object>
 					<object class="IBUILabel" id="568237099">
@@ -95,6 +99,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{255, 33}, {20, 21}}</string>
 						<reference key="NSSuperview" ref="66472398"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="322421072"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -129,6 +134,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{-50, 28}, {480, 423}}</string>
 						<reference key="NSSuperview" ref="66472398"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="97585809"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -143,6 +149,7 @@
 						<int key="NSvFlags">-2147483356</int>
 						<string key="NSFrame">{{80, 80}, {159, 50}}</string>
 						<reference key="NSSuperview" ref="66472398"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="483829604"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -153,6 +160,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{49, 20}, {143, 50}}</string>
 						<reference key="NSSuperview" ref="66472398"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="434465475"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -167,6 +175,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{-8, 207}, {146, 120}}</string>
 						<reference key="NSSuperview" ref="66472398"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="174741406"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -200,6 +209,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{288, 448}, {18, 19}}</string>
 						<reference key="NSSuperview" ref="66472398"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -222,6 +232,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{11, 420}, {142, 33}}</string>
 						<reference key="NSSuperview" ref="66472398"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="71530807"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -246,6 +257,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{11, 420}, {141, 31}}</string>
 						<reference key="NSSuperview" ref="66472398"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="631021553"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -269,6 +281,7 @@
 				</array>
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="827286106"/>
 				<string key="NSReuseIdentifierKey">_NS:196</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
@@ -531,11 +544,6 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="backButtonClick:">id</string>
 						<string key="buttonClick">id</string>
-						<string key="cancelShotsClick:">id</string>
-						<string key="cancelSoundClick:">id</string>
-						<string key="checkShotsClick:">id</string>
-						<string key="checkSoundClick:">id</string>
-						<string key="helpBtnClick:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="backButtonClick:">
@@ -546,26 +554,6 @@
 							<string key="name">buttonClick</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="cancelShotsClick:">
-							<string key="name">cancelShotsClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="cancelSoundClick:">
-							<string key="name">cancelSoundClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="checkShotsClick:">
-							<string key="name">checkShotsClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="checkSoundClick:">
-							<string key="name">checkSoundClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="helpBtnClick:">
-							<string key="name">helpBtnClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="_btnNab">UIButton</string>
@@ -574,20 +562,11 @@
 						<string key="_lbBullets">UILabel</string>
 						<string key="_vBackground">UIView</string>
 						<string key="_vEarth">UIView</string>
-						<string key="helpViewShots">UIView</string>
-						<string key="helpViewSound">UIView</string>
 						<string key="lbBackButton">UILabel</string>
-						<string key="lbCountOfShots">UILabel</string>
-						<string key="lbDisabledShots">UILabel</string>
-						<string key="lbDisabledSound">UILabel</string>
-						<string key="lbWait">UILabel</string>
-						<string key="lbWaitDescription">UILabel</string>
-						<string key="lbWarningSound">UILabel</string>
 						<string key="menuButton">UIButton</string>
 						<string key="titleReady">UIImageView</string>
 						<string key="titleSteadyFire">UIImageView</string>
 						<string key="view">UIView</string>
-						<string key="viewDinamicHeight">UIView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="_btnNab">
@@ -614,40 +593,8 @@
 							<string key="name">_vEarth</string>
 							<string key="candidateClassName">UIView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="helpViewShots">
-							<string key="name">helpViewShots</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="helpViewSound">
-							<string key="name">helpViewSound</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="lbBackButton">
 							<string key="name">lbBackButton</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbCountOfShots">
-							<string key="name">lbCountOfShots</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbDisabledShots">
-							<string key="name">lbDisabledShots</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbDisabledSound">
-							<string key="name">lbDisabledSound</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbWait">
-							<string key="name">lbWait</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbWaitDescription">
-							<string key="name">lbWaitDescription</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbWarningSound">
-							<string key="name">lbWarningSound</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="menuButton">
@@ -664,10 +611,6 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="view">
 							<string key="name">view</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="viewDinamicHeight">
-							<string key="name">viewDinamicHeight</string>
 							<string key="candidateClassName">UIView</string>
 						</object>
 					</dictionary>
@@ -688,12 +631,12 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="btn_small.png">{142, 33}</string>
-			<string key="dv_bullets.png">{70, 50}</string>
+			<string key="dv_bullets_oval.png">{65, 35}</string>
 			<string key="dv_img_eath_new.png">{600, 600}</string>
 			<string key="dv_img_gun1.png">{480, 423}</string>
 			<string key="dv_ready.png">{143, 50}</string>
 			<string key="st_cloud_new.png">{480, 258}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">1929</string>
+		<string key="IBCocoaTouchPluginVersion">1930</string>
 	</data>
 </archive>
