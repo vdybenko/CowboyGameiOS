@@ -76,7 +76,7 @@
         
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"DUEL_VIEW_NOT_FIRST"];
         
-        if (teaching&&(oponentAccount.accountName != NSLocalizedString(@"COMPUTER", @""))) {
+        if (teaching&&(oponentAccount.bot)) {
             duelWithBotCheck=YES;
         }else{
             duelWithBotCheck=NO;
