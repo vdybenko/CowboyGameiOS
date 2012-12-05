@@ -68,7 +68,7 @@ static SSConnection *connection;
 		case NSStreamEventHasBytesAvailable:
             if (theStream == inputStream) {
                 
-                uint8_t buffer[1024];
+                uint8_t buffer[4096];
                 int len;
                 
                 while ([inputStream hasBytesAvailable]) {
@@ -163,9 +163,9 @@ static SSConnection *connection;
     [self sendData:(void *)(networkPacket) packetID:NETWORK_POST_INFO ofLength:sizeof(int) * 4 + sizeof(char) * displayNameLen +sizeof(char) * [playerAccount.accountID length]+sizeof(char) * [someURL length] + sizeof(char) * [versionKey length]];
 }
 
-- (void)getData:(uint8_t[1024])message andLength:(int)length
+- (void)getData:(uint8_t[4096])message andLength:(int)length
 {
-    NSLog(@"get data with packet id %d", message[0]);
+    NSLog(@"get data with packet id %d length %d", message[0], length);
     if(message[0] == NETWORK_GET_LIST_ONLINE) {
         char *tempBuffer = (char *)&message[1];
         NSData *data = [[NSData alloc] initWithBytes:tempBuffer length:length-1];
