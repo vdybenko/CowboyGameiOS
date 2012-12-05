@@ -329,6 +329,8 @@
                 DuelProductWinViewController *duelProductWinViewController=[[DuelProductWinViewController alloc] initWithAccount:playerAccount duelProduct:playerAccount.accountWeapon parentVC:self];
                 [playerAccount loadWeapon];
                 [self.navigationController presentViewController:duelProductWinViewController animated:YES completion:Nil];
+            }else{
+                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
             }
         }else{
             [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
@@ -422,6 +424,7 @@
 #pragma  mark -
 -(void)loseScene
 {
+    isDuelWinWatched = YES;
     lastDuel = YES;
     int moneyExch  = playerAccount.money < 10 ? 1: playerAccount.money / 10.0;
     int pointsForMatch=0;
@@ -524,6 +527,7 @@
 
 -(void)winScene
 {
+    isDuelWinWatched = NO;
     lastDuel = YES;
     int moneyExch  = oponentAccount.money < 10 ? 1: oponentAccount.money / 10.0;
     int pointsForMatch=0;

@@ -124,6 +124,7 @@ static int oponentMustShot;
 }
 
 - (IBAction)closeButtonClick:(id)sender {
+    [[UIAccelerometer sharedAccelerometer] setDelegate:parentVC];
     [parentVC dismissViewControllerAnimated:YES completion:Nil];
 }
 

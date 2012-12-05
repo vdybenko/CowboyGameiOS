@@ -155,10 +155,14 @@
     if (product.dPrice == 0) {
         coldTitle.text=NSLocalizedString(@"Price:", @"");
         gold.text = [NSString stringWithFormat:@"%@",product.dPurchasePrice];
-        if (product.dID == -1) {
-            [coldTitle setHidden:YES];
-            [gold setHidden:YES];
-        }
+//        if (product.dID == -1) {
+//            [coldTitle setHidden:YES];
+//            [gold setHidden:YES];
+//        }
+//        else{
+//            [coldTitle setHidden:NO];
+//            [gold setHidden:NO];
+//        }
     }else{
         coldTitle.text=NSLocalizedString(@"Golds:", @"");
         gold.text = [NSString stringWithFormat:@"%d",product.dPrice];
