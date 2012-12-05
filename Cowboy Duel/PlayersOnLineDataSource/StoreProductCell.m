@@ -170,7 +170,7 @@
         if ([AccountDataSource sharedInstance].money>product.dPrice) {
             buyProduct.enabled = YES;
         }else{
-            buyProduct.enabled = NO;
+            if (product.dCountOfUse == 0) buyProduct.enabled = NO;
         }
     }
     

@@ -319,19 +319,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Cowboy Duel/DuelProductAttensionViewController.m"
-         timestampString = "376329398.968075"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "136"
-         endingLineNumber = "136"
-         landmarkName = "+isAttensionNeedForOponent:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/DuelViewControllerWithXib.m"
          timestampString = "376300714.256009"
          startingColumnNumber = "9223372036854775807"
@@ -365,6 +352,32 @@
          startingLineNumber = "145"
          endingLineNumber = "145"
          landmarkName = "-buyButtonClick:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Cowboy Duel/DuelProductAttensionViewController.m"
+         timestampString = "376387219.766516"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "133"
+         endingLineNumber = "133"
+         landmarkName = "+isAttensionNeedForOponent:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Cowboy Duel/DuelRewardLogicController.m"
+         timestampString = "376387347.523723"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "102"
+         endingLineNumber = "102"
+         landmarkName = "+countUpBuletsWithOponentLevel:defense:playerAtack:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
