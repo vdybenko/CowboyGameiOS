@@ -117,7 +117,7 @@
         NSArray* rowsToReload = [NSArray arrayWithObjects:rowToReload, nil];
         dispatch_async(dispatch_get_main_queue(), ^{
             UITableViewCell *cell = [tableView.visibleCells lastObject];
-            [cell setHidden:YES];
+            //[cell setHidden:YES];
             
             UITableViewRowAnimation type;
             if (storeDataSource.typeOfTable == StoreDataSourceTypeTablesWeapons)

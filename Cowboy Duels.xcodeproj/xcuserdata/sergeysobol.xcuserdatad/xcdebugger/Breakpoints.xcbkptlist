@@ -255,11 +255,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/DuelProductDownloaderController.m"
-         timestampString = "375973762.12039"
+         timestampString = "376406846.258118"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "488"
-         endingLineNumber = "488"
+         startingLineNumber = "490"
+         endingLineNumber = "490"
          landmarkName = "+saveWeapon:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -378,6 +378,32 @@
          startingLineNumber = "102"
          endingLineNumber = "102"
          landmarkName = "+countUpBuletsWithOponentLevel:defense:playerAtack:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Cowboy Duel/PlayersOnLineDataSource/StoreProductCell.m"
+         timestampString = "376402965.707828"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "107"
+         endingLineNumber = "107"
+         landmarkName = "-populateWithProduct:targetToBuyButton:cellType:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Cowboy Duel/PlayersOnLineDataSource/StoreProductCell.m"
+         timestampString = "376403532.655339"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "177"
+         endingLineNumber = "177"
+         landmarkName = "-populateWithProduct:targetToBuyButton:cellType:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

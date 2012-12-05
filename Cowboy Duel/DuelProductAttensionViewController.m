@@ -76,9 +76,9 @@ static int oponentMustShot;
         
     NSArray *arrItemsList = [DuelProductDownloaderController loadWeaponArray];
     
-    if (playerAccount.curentIdWeapon==-1) {
-        prod=[arrItemsList objectAtIndex:0];
-    }else{
+//    if (playerAccount.curentIdWeapon==-1) {
+//        prod=[arrItemsList objectAtIndex:0];
+//    }else{
         if (playerAccount.curentIdWeapon == ((CDWeaponProduct*)[arrItemsList lastObject]).dID) {
             frameView.hidden = YES;
            //last gun
@@ -90,7 +90,7 @@ static int oponentMustShot;
             else prod = tempProduct;
             //help for gun
         }
-    }
+//    }
     
     [title setFont: [UIFont fontWithName: @"DecreeNarrow" size:25]];
     title.text = prod.dName;
