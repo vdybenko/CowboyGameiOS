@@ -244,9 +244,9 @@ static LoginAnimatedViewController *sharedHelper = nil;
                          }
                          else {
                              if(tryAgain) return;
-                             [self.guillotineImage animateWithType:[NSNumber numberWithInt:FALL]];
-                             [self.heatImage performSelector:@selector(animateWithType:) withObject:[NSNumber numberWithInt:FALL] afterDelay:0.2];
-                             [self performSelector:@selector(showTryAgain) withObject:nil afterDelay:0.7];
+                             //[self.guillotineImage animateWithType:[NSNumber numberWithInt:FALL]];
+                             //[self.heatImage performSelector:@selector(animateWithType:) withObject:[NSNumber numberWithInt:FALL] afterDelay:0.2];
+                             //[self performSelector:@selector(showTryAgain) withObject:nil afterDelay:0.7];
                          }
                      }];
 }

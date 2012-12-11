@@ -10,6 +10,12 @@
 #import <QuartzCore/QuartzCore.h>
 int oldMovingKey = 4;
 
+@interface BEAnimationView ()
+{
+    __block  BOOL neadShift;
+}
+@end
+
 @implementation BEAnimationView
 
 @synthesize delays,angle,depth,freedom,speed;
@@ -28,6 +34,7 @@ int oldMovingKey = 4;
     case GUILLOTINE:
     {
       CGRect currentPosition = self.frame;
+        neadShift = YES;
       [self guillCycleWithCurrPosition:currentPosition andDelay:delays];
         break;
     }
@@ -59,8 +66,9 @@ int oldMovingKey = 4;
 }
 //case Guillotine:
 - (void) guillCycleWithCurrPosition: (CGRect )curr andDelay: (float )wait{
-    if(self.stopAnimation)return;
+    if(self.stopAnimation) return;
   float tWait;
+  
   CGRect currentPosition = self.frame;
   if (!wait && wait!=0.0) {
     tWait = 0.7;
@@ -71,10 +79,11 @@ int oldMovingKey = 4;
                         delay:tWait
                       options:UIViewAnimationCurveLinear | UIViewAnimationOptionAllowUserInteraction
                    animations:^{
-
-                     CGRect moveDown = currentPosition;
-                     moveDown.origin.y += 30;
-                     self.frame = moveDown;
+                       CGRect moveDown = currentPosition;
+                       if (neadShift) moveDown.origin.y += 30;
+                       else moveDown.origin.y += 15;
+                       
+                       self.frame = moveDown;
                      
                    } completion:^(BOOL finished) {
                      [UIView animateWithDuration:1.3
@@ -102,9 +111,10 @@ int oldMovingKey = 4;
                                                            NSLog(@"abs(y): %d",abs(self.frame.origin.y));
                                                            NSLog(@"h/2: %f",self.frame.size.height/2);
 
-                                                           if (self.frame.origin.y+self.frame.size.height <= [UIScreen mainScreen].bounds.size.height/2) {
-                                                             [self guillCycleWithCurrPosition:self.frame andDelay:tWait];
+                                                           if (self.frame.origin.y+self.frame.size.height > [UIScreen mainScreen].bounds.size.height/2) {
+                                                               neadShift = NO;
                                                            }
+                                                             [self guillCycleWithCurrPosition:self.frame andDelay:tWait];
                                                          }];
                                       }];
                    }];
