@@ -13,6 +13,7 @@
 #import "FBConnect.h"
 #import "AccountDataSource.h"
 #import "GANTracker.h"
+#import "GADBannerView.h"
 
 @interface TestAppDelegate : NSObject <UIApplicationDelegate, FBRequestDelegate, FBDialogDelegate, FBSessionDelegate, GANTrackerDelegate>
 @property (nonatomic, readonly) UINavigationController *navigationController;
