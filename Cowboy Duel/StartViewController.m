@@ -548,7 +548,7 @@ static StartViewController *sharedHelper = nil;
     
     NSInteger paymentRegistration = [[NSUserDefaults standardUserDefaults] integerForKey:@"paymentRegistration"];
     
-    if (paymentRegistration) [self showProfileFirstRun];
+    [self showProfileFirstRun];
     [self isAdvertisingOfNewVersionNeedShow];
     [self estimateApp];    
 }

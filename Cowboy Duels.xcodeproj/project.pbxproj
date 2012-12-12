@@ -342,6 +342,7 @@
 		BD8000D6157755A600703AC8 /* OGHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8000D5157755A600703AC8 /* OGHelper.m */; };
 		BD8165DF15E6A22700D1F189 /* fin_img_spirit.png in Resources */ = {isa = PBXBuildFile; fileRef = BD8165DD15E6A22700D1F189 /* fin_img_spirit.png */; };
 		BD8165E015E6A22700D1F189 /* fin_img_spirit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD8165DE15E6A22700D1F189 /* fin_img_spirit@2x.png */; };
+		BD81FB431678847D00417076 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD81FB421678847D00417076 /* Accounts.framework */; };
 		BD821281165FCB900072075A /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BD821280165FCB900072075A /* Icon.png */; };
 		BD822AF31663ADB300D874F4 /* libCrittercism_v3_4_0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD822AF21663ADB300D874F4 /* libCrittercism_v3_4_0.a */; };
 		BD824CDF165A9E7D00C63F61 /* fv_img_0rank.png in Resources */ = {isa = PBXBuildFile; fileRef = BD824CDD165A9E7D00C63F61 /* fv_img_0rank.png */; };
@@ -832,6 +833,7 @@
 		BD8000D5157755A600703AC8 /* OGHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OGHelper.m; sourceTree = "<group>"; };
 		BD8165DD15E6A22700D1F189 /* fin_img_spirit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fin_img_spirit.png; sourceTree = "<group>"; };
 		BD8165DE15E6A22700D1F189 /* fin_img_spirit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fin_img_spirit@2x.png"; sourceTree = "<group>"; };
+		BD81FB421678847D00417076 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		BD821280165FCB900072075A /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		BD822AF21663ADB300D874F4 /* libCrittercism_v3_4_0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCrittercism_v3_4_0.a; path = CrittercismSDK/libCrittercism_v3_4_0.a; sourceTree = "<group>"; };
 		BD824CDD165A9E7D00C63F61 /* fv_img_0rank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fv_img_0rank.png; sourceTree = "<group>"; };
@@ -954,6 +956,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD81FB431678847D00417076 /* Accounts.framework in Frameworks */,
 				763E6BC31664B1DF00FA4E86 /* libGoogleAdMobAds.a in Frameworks */,
 				763E6BB71664B0F900FA4E86 /* Social.framework in Frameworks */,
 				76D7D79C165126940072D420 /* Twitter.framework in Frameworks */,
@@ -1386,6 +1389,7 @@
 		60593A611379321700256204 = {
 			isa = PBXGroup;
 			children = (
+				BD81FB421678847D00417076 /* Accounts.framework */,
 				763E6BB81664B18500FA4E86 /* GoogleAdMobAdsSdkiOS-6.2.1 */,
 				763E6BB61664B0F900FA4E86 /* Social.framework */,
 				313F4E76165CFDDC007EF4B1 /* libsqlite3.dylib */,

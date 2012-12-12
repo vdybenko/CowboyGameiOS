@@ -45,6 +45,11 @@
 
 @property(nonatomic) BOOL bot;
 
+@property (nonatomic, strong) ACAccountStore *accountStore;
+@property (nonatomic, strong) ACAccount *facebookAccount;
+
+@property (nonatomic, strong) id loginAnimatedViewController;
+
 + (AccountDataSource *)sharedInstance;
 - (id)initWithLocalPlayer;
 - (void)loadAllParametrs;
@@ -93,4 +98,7 @@
 -(void)putchAvatarImageToInitStartVC:(StartViewController*)startVC;
 -(BOOL)isAvatarImage:(NSString*)imagePath;
 -(BOOL)putchAvatarImageSendInfo;
+
+-(BOOL)loginFacebookiOS6;
+
 @end

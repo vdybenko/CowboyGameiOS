@@ -22,6 +22,8 @@ static const char *LIST_BOTS_URL = BASE_URL"users/get_user_data";
 @synthesize curentIdWeapon;
 @synthesize isTryingWeapon;
 @synthesize accountWeapon;
+@synthesize accountStore;
+@synthesize loginAnimatedViewController;
 
 #pragma mark
 
@@ -64,7 +66,8 @@ static AccountDataSource *sharedHelper = nil;
     duels = [[NSMutableArray alloc] init];
     achivments = [[NSMutableArray alloc] init];
     dicForRequests=[[NSMutableDictionary alloc] init];
-  
+    
+        
     return self;
 }
 
@@ -598,6 +601,60 @@ static AccountDataSource *sharedHelper = nil;
     }else {
         return NO;
     }
+}
+
+-(BOOL)loginFacebookiOS6
+{
+    if (self.accountStore == nil) self.accountStore = [[ACAccountStore alloc] init];
+    ACAccountType *facebookAccountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
+    
+    NSMutableDictionary *options = [@{
+                                    ACFacebookAppIdKey: @"284932561559672",
+                                    ACFacebookPermissionsKey: @[@"email"],
+                                    ACFacebookAudienceKey: ACFacebookAudienceEveryone
+                                    } mutableCopy];
+    
+    [self.accountStore requestAccessToAccountsWithType:facebookAccountType options:options completion:^(BOOL success, NSError *error) {
+        if (success) {
+            /**
+             * The user granted us the basic read permission.
+             * Now we can ask for more permissions
+             **/
+            NSArray *accounts = [self.accountStore accountsWithAccountType:facebookAccountType];
+            self.facebookAccount = [accounts lastObject];
+            
+            NSArray *readPermissions = @[@"publish_stream", @"publish_actions", @"offline_access", @"user_games_activity", @"user_birthday", @" user_location"];
+            [options setObject:readPermissions forKey: ACFacebookPermissionsKey];
+            
+            [self.accountStore requestAccessToAccountsWithType:facebookAccountType options:options completion:^(BOOL granted, NSError *error) {
+                if(granted && error == nil) {
+                    /**
+                     * We now should have some read permission
+                     * Now we may ask for write permissions or
+                     * do something else.
+                     **/
+                    
+                    [loginAnimatedViewController facebookiOS6DidLogin];
+                    
+                } else {
+                    DLog(@"Facebook login error %@", error);
+                    if([error code]==6)
+                        DLog(@"Account not found. Please setup your account in settings app.")
+                    else
+                        DLog(@"Account access denied.");
+                }
+            }];
+        } else {
+            DLog(@"Facebook login error %@", error);
+            if([error code]==6)
+                DLog(@"Account not found. Please setup your account in settings app.")
+            else
+                DLog(@"Account access denied.");
+            
+        }
+        
+    }];
+    return YES;
 }
 
 @end

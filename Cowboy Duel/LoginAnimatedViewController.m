@@ -329,7 +329,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
     ProfileViewController *profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount startViewController:startViewController];
     [profileViewController setNeedAnimation:YES];
     [self.navigationController popViewControllerAnimated:YES];
-     [startViewController authorizationModifier:NO];
+    [startViewController authorizationModifier:NO];
 //    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 //														object:self
 //													  userInfo:[NSDictionary dictionaryWithObject:@"/donate_click" forKey:@"event"]];
@@ -342,19 +342,25 @@ static LoginAnimatedViewController *sharedHelper = nil;
     
     [playerAccount cleareWeaponAndDefense];
     
-    TestAppDelegate *testAppDelegate = (TestAppDelegate *) [[UIApplication sharedApplication] delegate];
-    
-    [testAppDelegate setLoginViewController:self];
+//    TestAppDelegate *testAppDelegate = (TestAppDelegate *) [[UIApplication sharedApplication] delegate];
+//    
+//    [testAppDelegate setLoginViewController:self];
     
     DLog(@"fbLogIn");
-	[facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"publish_actions" ,@"offline_access",@"user_games_activity",@"user_birthday",@" user_location",nil]];
+    
+    playerAccount.loginAnimatedViewController = self;
+    if (![playerAccount loginFacebookiOS6]) {
+        [facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"publish_actions" ,@"offline_access",@"user_games_activity",@"user_birthday",@" user_location",nil]];
+    }
+    
+	
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/login_FB" forKey:@"event"]];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IPad"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [self.view removeFromSuperview];
+    //[self.view removeFromSuperview];
 
 }
 
@@ -369,6 +375,19 @@ static LoginAnimatedViewController *sharedHelper = nil;
                                                       object:self
                                                     userInfo:[NSDictionary dictionaryWithObject:@"/logOut_FB_click" forKey:@"event"]];
 }
+
+-(void)facebookiOS6DidLogin
+{
+    NSDictionary *parameters =[NSMutableDictionary dictionaryWithObjectsAndKeys:@"birthday,id,name,picture,location",@"fields",nil];
+    NSURL *feedURL = [NSURL URLWithString:@"https://graph.facebook.com/me"];
+    SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeFacebook requestMethod:SLRequestMethodGET URL:feedURL parameters:parameters];
+    request.account = playerAccount.facebookAccount;
+    [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+        DLog(@"Facebook me: %@", [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]);
+        [self request:nil didLoad:ValidateObject([[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding] JSONValue], [NSDictionary class])];
+    }];
+}
+
 #pragma mark -
 #pragma mark FConnect Methods
 
@@ -486,6 +505,11 @@ static LoginAnimatedViewController *sharedHelper = nil;
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IPad"];
         [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"loginFirstShow"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        payment = NO;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self donateButtonClick:nil];
+        });
     }
 }
 

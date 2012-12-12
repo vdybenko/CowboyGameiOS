@@ -35,5 +35,6 @@ typedef enum {
 -(void)initFacebook;
 -(IBAction)loginButtonClick:(id)sender;
 -(void)logOutFB;
+-(void)facebookiOS6DidLogin;
 
 @end
