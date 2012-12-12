@@ -492,6 +492,7 @@ static StartViewController *sharedHelper = nil;
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"FirstRun_v2.2"]) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"FirstRun_v2.2"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         UIImageView_AttachedView *arrowImage3=[[UIImageView_AttachedView alloc] initWithImage:[UIImage imageNamed:@"st_arrow.png"] attachedToFrame:duelButton frequence:0.5 amplitude:10 direction:DirectionToAnimateLeft];
         [hudView setHidden:NO];
         [hudView addSubview:arrowImage3];
@@ -709,6 +710,8 @@ static StartViewController *sharedHelper = nil;
 
 -(void)profileFirstRunButtonClickWithOutAnimation;
 {
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"FirstRun_v2.2"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     animationCheck = NO;
     
     cloudX=460;
@@ -1487,9 +1490,9 @@ static StartViewController *sharedHelper = nil;
 
 -(void)showProfileFirstRun
 {
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"FirstRun_v2.2"];
+    
     NSString *LoginForIPad=[[NSUserDefaults standardUserDefaults] stringForKey:@"IPad"];
-    if (LoginForIPad&&(![[OGHelper sharedInstance] isAuthorized])) {
+    if (LoginForIPad &&(![[OGHelper sharedInstance] isAuthorized])) {
         firstRunLocal = NO;
         animationCheck = NO;
         LoginAnimatedViewController *loginViewControllerLocal =[LoginAnimatedViewController sharedInstance];

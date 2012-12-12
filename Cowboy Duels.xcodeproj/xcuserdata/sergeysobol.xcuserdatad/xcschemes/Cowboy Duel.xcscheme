@@ -68,15 +68,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       debugDocumentVersioning = "YES">
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "60593A6B1379321700256204"
             BuildableName = "Cowboy Duel.app"
-            BlueprintName = "Cowboy Duel"
-            ReferencedContainer = "container:Cowboy Duel 1.xcodeproj">
+            BlueprintName = "Cowboy Duels"
+            ReferencedContainer = "container:Cowboy Duels.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

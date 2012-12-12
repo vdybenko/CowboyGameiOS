@@ -139,7 +139,7 @@ static const char *A_URL =  BASE_URL"api/authorization";
     [self.navigationController pushViewController:startViewController animated:NO];
 //    // First run message
 	if(![[NSUserDefaults standardUserDefaults] boolForKey:@"AlreadyRun"] ) {
-		[[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"AlreadyRun"];
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AlreadyRun"];
     }
 }
 

@@ -30,6 +30,7 @@ int oldMovingKey = 4;
 
 - (void) animateWithType:(NSNumber *)type
 {
+    self.stopAnimation = NO;
   switch ([type intValue]) {
     case GUILLOTINE:
     {
@@ -79,6 +80,7 @@ int oldMovingKey = 4;
                         delay:tWait
                       options:UIViewAnimationCurveLinear | UIViewAnimationOptionAllowUserInteraction
                    animations:^{
+                       if(self.stopAnimation) return;
                        CGRect moveDown = currentPosition;
                        if (neadShift) moveDown.origin.y += 30;
                        else moveDown.origin.y += 15;
@@ -90,6 +92,7 @@ int oldMovingKey = 4;
                                            delay:0.0
                                          options:UIViewAnimationCurveLinear | UIViewAnimationOptionAllowUserInteraction
                                       animations:^{
+                                          if(self.stopAnimation) return;
                                         CGRect currentPosition = self.frame;
                                         CGRect moveUp = currentPosition;
                                         moveUp.origin.y -= 20;
@@ -100,12 +103,14 @@ int oldMovingKey = 4;
                                                               delay:0.1
                                                             options:UIViewAnimationCurveLinear | UIViewAnimationOptionAllowUserInteraction
                                                          animations:^{
+                                                             if(self.stopAnimation) return;
                                                            CGRect currentPosition = self.frame;
                                                            CGRect moveDown = currentPosition;
                                                            moveDown.origin.y += 5;
                                                            self.frame = moveDown;
 
                                                          } completion:^(BOOL finished) {
+                                                             if(self.stopAnimation) return;
                                                            NSLog(@"y: %f",self.frame.origin.y);
                                                            NSLog(@"h: %f",self.frame.size.height);
                                                            NSLog(@"abs(y): %d",abs(self.frame.origin.y));
