@@ -76,18 +76,21 @@ static int oponentMustShot;
         
     NSArray *arrItemsList = [DuelProductDownloaderController loadWeaponArray];
     
-    if (playerAccount.curentIdWeapon==-1) {
-        prod=[arrItemsList objectAtIndex:0];
-    }else{
+//    if (playerAccount.curentIdWeapon==-1) {
+//        prod=[arrItemsList objectAtIndex:0];
+//    }else{
         if (playerAccount.curentIdWeapon == ((CDWeaponProduct*)[arrItemsList lastObject]).dID) {
             frameView.hidden = YES;
            //last gun
         }else{
             NSUInteger index=[playerAccount findObsByID](arrItemsList,playerAccount.curentIdWeapon);
-            prod=[arrItemsList objectAtIndex:++index];
+            CDWeaponProduct *currentProd = [arrItemsList objectAtIndex:index];
+            CDWeaponProduct *tempProduct = [arrItemsList objectAtIndex:++index];
+            if(currentProd.dDamage > tempProduct.dDamage) [frameView setHidden:YES];
+            else prod = tempProduct;
             //help for gun
         }
-    }
+//    }
     
     [title setFont: [UIFont fontWithName: @"DecreeNarrow" size:25]];
     title.text = prod.dName;
@@ -124,6 +127,7 @@ static int oponentMustShot;
 }
 
 - (IBAction)closeButtonClick:(id)sender {
+    [[UIAccelerometer sharedAccelerometer] setDelegate:parentVC];
     [parentVC dismissViewControllerAnimated:YES completion:Nil];
 }
 

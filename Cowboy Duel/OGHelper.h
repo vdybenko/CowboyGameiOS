@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <GameKit/GameKit.h>
-#import "FBConnect.h"
 #import <CoreLocation/CoreLocation.h>
 #import "StartViewController.h"
 

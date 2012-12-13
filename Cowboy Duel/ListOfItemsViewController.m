@@ -297,7 +297,8 @@
     [self.tableView refreshFinished];
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"FirstRunSalun_v2.2"]){
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"FirstRunSalun_v2.2"];
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[_playersOnLineDataSource.serverObjects count]-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        if([_playersOnLineDataSource.serverObjects count]) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[_playersOnLineDataSource.serverObjects count]-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
 }
 

@@ -10,14 +10,12 @@
 #import "DuelViewController.h"
 #import "LoadViewController.h"
 #import "LoginAnimatedViewController.h"
-#import "FBConnect.h"
 #import "AccountDataSource.h"
 #import "GANTracker.h"
 
-@interface TestAppDelegate : NSObject <UIApplicationDelegate, FBRequestDelegate, FBDialogDelegate, FBSessionDelegate, GANTrackerDelegate>
+@interface TestAppDelegate : NSObject <UIApplicationDelegate,   GANTrackerDelegate>
 @property (nonatomic, readonly) UINavigationController *navigationController;
 @property  (strong) LoginAnimatedViewController *loginViewController;
-@property (strong,nonatomic) Facebook *facebook;
 @property (nonatomic) GADBannerView *adBanner;
 @property (strong, nonatomic) IBOutlet UIImageView *clouds;
 

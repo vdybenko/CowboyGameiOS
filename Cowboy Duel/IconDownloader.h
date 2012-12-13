@@ -1,6 +1,5 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import "FBConnect.h"
 #import "OGHelper.h"
 
 @protocol IconDownloaderDelegate;

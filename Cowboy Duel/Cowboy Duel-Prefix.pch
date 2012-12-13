@@ -17,6 +17,7 @@
 #import "UIImage+Retina4.h"
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
+#import <FacebookSDK/FacebookSDK.h>
 #endif
 
 

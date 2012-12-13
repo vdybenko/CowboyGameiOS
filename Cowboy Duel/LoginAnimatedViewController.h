@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "AccountDataSource.h"
-#import "FBConnect.h"
 #import "ProfileViewController.h"
 #import "MKStoreManager.h"
 

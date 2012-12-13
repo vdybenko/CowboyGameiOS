@@ -17,7 +17,6 @@
 #import "ActivityIndicatorView.h"
 #import "Utils.h"
 #import "ProfileViewController.h"
-#import "FBConnect.h"
 #import "StartViewController.h"
 #import "IconDownloader.h"
 

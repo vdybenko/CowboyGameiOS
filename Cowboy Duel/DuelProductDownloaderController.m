@@ -471,12 +471,12 @@ static NSString *getSavePathForDuelProduct()
 
 +(void)saveWeapon:(NSArray*)array;
 {
-    NSMutableArray *arrayForSave = [NSMutableArray arrayWithArray:array];
+    NSMutableArray *arrayForSave = [NSMutableArray array];
     if (![self loadWeaponArray]) {
         CDWeaponProduct *product=[[CDWeaponProduct alloc] init];
         product.dID = -1;
-        product.dName=@"Colt";
-        product.dDescription=@"Colt";
+        product.dName=@"Pepperbox";
+        product.dDescription=@"Pepperbox";
         product.dPrice=0;
         product.dPurchaseUrl=nil;
         product.dLevelLock=0;
@@ -484,6 +484,8 @@ static NSString *getSavePathForDuelProduct()
         
         [arrayForSave addObject:product];
     }
+    
+    [arrayForSave addObjectsFromArray:array];
     
     NSData *data= [NSKeyedArchiver archivedDataWithRootObject:arrayForSave];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:DUEL_PRODUCTS_WEAPONS];

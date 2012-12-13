@@ -49,6 +49,7 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *donateLable;
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *loginLable;
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *tryAgainLable;
+@property (unsafe_unretained, nonatomic) IBOutlet UIButton *tryAgainButton;
 
 @end
 
@@ -104,6 +105,15 @@ static LoginAnimatedViewController *sharedHelper = nil;
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    FBLoginView *loginview = [[FBLoginView alloc] init];
+    
+    loginview.frame = CGRectOffset(loginview.frame, 5, 5);
+    loginview.delegate = self;
+    
+    [self.view addSubview:loginview];
+    
+    [loginview sizeToFit];
+
     animationPause = NO;
     if (self.view.frame.size.height > 480) {
         [backgroundView setImage:[UIImage imageNamed:@"la_bg-568h.png"]];
@@ -138,6 +148,8 @@ static LoginAnimatedViewController *sharedHelper = nil;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self.tryAgainButton setHidden:YES];
+    [self.tryAgainLable setHidden:YES];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -177,7 +189,14 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [MKStoreManager sharedManager].delegate = sharedHelper;
     [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusSimple];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"FirstRun_v2.2"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    self.guillotineImage.stopAnimation = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -233,10 +252,10 @@ static LoginAnimatedViewController *sharedHelper = nil;
 
                                [self scaleButton:self.loginFBbutton]; //Scale Facebook login
                                [self scaleButton:self.loginLable];
-                               [self.headImage setHidden:YES];
-                               [self.heatImage setHidden:NO];
-                               [self.noseImage setHidden:YES];
-                               [self.whiskersImage setHidden:YES];
+//                               [self.headImage setHidden:YES];
+//                               [self.heatImage setHidden:NO];
+//                               [self.noseImage setHidden:YES];
+//                               [self.whiskersImage setHidden:YES];
                              }
 
                              [self performSelector:@selector(updateLabels) withObject:nil afterDelay:2.0];
@@ -244,9 +263,10 @@ static LoginAnimatedViewController *sharedHelper = nil;
                          }
                          else {
                              if(tryAgain) return;
-                             [self.guillotineImage animateWithType:[NSNumber numberWithInt:FALL]];
-                             [self.heatImage performSelector:@selector(animateWithType:) withObject:[NSNumber numberWithInt:FALL] afterDelay:0.2];
+                             //[self.guillotineImage animateWithType:[NSNumber numberWithInt:FALL]];
+                             //[self.heatImage performSelector:@selector(animateWithType:) withObject:[NSNumber numberWithInt:FALL] afterDelay:0.2];
                              [self performSelector:@selector(showTryAgain) withObject:nil afterDelay:0.7];
+                             
                          }
                      }];
 }
@@ -273,8 +293,11 @@ static LoginAnimatedViewController *sharedHelper = nil;
 -(void)showTryAgain
 {
     tryAgain = YES;
-    [self.heatImage setHidden:YES];
-    [self.tryAgainView setHidden:NO];
+    [self.tryAgainButton setHidden:NO];
+    [self.tryAgainLable setHidden:NO];
+    
+    //[self.heatImage setHidden:YES];
+    //[self.tryAgainView setHidden:NO];
 }
 
 - (IBAction)tryAgainButtonClick:(id)sender
@@ -285,9 +308,24 @@ static LoginAnimatedViewController *sharedHelper = nil;
 //    CGRect frame = self.guillotineImage.frame;
 //    frame.origin.y = -310;
 //    self.guillotineImage.frame = frame;
-
+    self.guillotineImage.stopAnimation = YES;
+    [self.view.layer removeAllAnimations];
+    for (CALayer* layer in [self.view.layer sublayers]) {
+        [CATransaction begin];
+        [layer removeAllAnimations];
+        [CATransaction commit];
+        
+    }
+    [self.guillotineImage.layer removeAllAnimations];
+    for (CALayer* layer in [self.guillotineImage.layer sublayers]) {
+        [CATransaction begin];
+        [layer removeAllAnimations];
+        [CATransaction commit];
+    }
+    [self.tryAgainButton setHidden:YES];
+    [self.tryAgainLable setHidden:YES];
     self.guillotineImage.frame = guillBackUp;
-    self.guillotineImage.stopAnimation = NO;
+    
     self.heatImage.frame = hatBackUp;
     [self.noseImage setHidden:NO];
     [self.tryAgainView setHidden:YES];
@@ -295,7 +333,8 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [self.whiskersImage setHidden:NO];
     self.textIndex = 0;
     [self updateLabels];
-    [self.guillotineImage animateWithType:[NSNumber numberWithInt:GUILLOTINE]];
+    //self.guillotineImage.stopAnimation = NO;
+    [self.guillotineImage performSelector:@selector(animateWithType:) withObject:[NSNumber numberWithInt:GUILLOTINE] afterDelay:0.5];
     if (sender) [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
                                                       userInfo:[NSDictionary dictionaryWithObject:@"/first_login_again" forKey:@"event"]];
@@ -352,7 +391,10 @@ static LoginAnimatedViewController *sharedHelper = nil;
     if (![playerAccount loginFacebookiOS6]) {
         [facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"publish_actions" ,@"offline_access",@"user_games_activity",@"user_birthday",@" user_location",nil]];
     }
-    
+    else {
+        [activityView setHidden:NO];
+        [activityIndicatorView startAnimating];
+    }
 	
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
@@ -360,7 +402,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
 													  userInfo:[NSDictionary dictionaryWithObject:@"/login_FB" forKey:@"event"]];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IPad"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    //[self.view removeFromSuperview];
 
 }
 

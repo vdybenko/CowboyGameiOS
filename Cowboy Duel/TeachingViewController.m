@@ -58,7 +58,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+    
     //[helpPracticeView setHidden:NO];
     if(!opAccount.bot && (mutchNumber == 0)){
             teachingHelperViewController = [[TeachingHelperViewController alloc] initWithOponentAccount:opAccount parentVC:self];
@@ -72,7 +72,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
         [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(3.0 / 60.0)];
         [[UIAccelerometer sharedAccelerometer] setDelegate:self];
     }
-
+    [super viewWillAppear:animated];
 }
 
 
@@ -169,11 +169,10 @@ static NSString *ShotSound = @"%@/shot.mp3";
             int opponentTime;
             if (!self.oponentAccount.bot) opponentTime=3000;
             else{
-                int countBullets = [DuelRewardLogicController countUpBuletsWithPlayerLevel:self.userAccount.accountLevel];
+                int countBullets = [DuelRewardLogicController countUpBuletsWithOponentLevel:[AccountDataSource sharedInstance].accountLevel defense:[AccountDataSource sharedInstance].accountDefenseValue playerAtack:self.oponentAccount.accountWeapon.dDamage];
                 
-                int k = (5 - self.oponentAccount.accountLevel / 2) * 100;
                 
-                opponentTime = countBullets * 500 * GAME_BOT_LEVEL + rand() % k;
+                opponentTime = 600 + countBullets * (220 + rand() % 160);
                 DLog(@"bot opponentTime %d", opponentTime);
             }
             
