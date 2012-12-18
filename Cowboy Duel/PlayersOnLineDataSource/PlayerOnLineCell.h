@@ -18,6 +18,7 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *userAtack;
 @property (strong, nonatomic) IBOutlet UILabel *userDefense;
+@property (unsafe_unretained, nonatomic) IBOutlet FBProfilePictureView *facebookAvatar;
 
 +(PlayerOnLineCell*)cell;
 +(NSString*) cellID;

@@ -198,7 +198,26 @@ static const char *GC_URL =  BASE_URL"api/gc";
     [lbPointsCount setFrame:frame];
     
     [lbPoints dinamicAttachToView:lbPointsCount withDirection:DirectionToAnimateRight];
+    if (([playerAccount.accountID rangeOfString:@"F:"].location != NSNotFound))
+    {
+        [self.fbPlayerImage setHidden:NO];
+        NSMutableString *playerName = [playerAccount.accountID mutableCopy];
+        [playerName replaceCharactersInRange:[playerAccount.accountID rangeOfString:@"F:"] withString:@""];
+        self.fbPlayerImage.profileID = playerName;
+    } else {
+        [self.fbPlayerImage setHidden:YES];
+    }
     
+    if (([oponentAccount.accountID rangeOfString:@"F:"].location != NSNotFound))
+    {
+        [self.fbOpponentImage setHidden:NO];
+        NSMutableString *playerName = [oponentAccount.accountID mutableCopy];
+        [playerName replaceCharactersInRange:[oponentAccount.accountID rangeOfString:@"F:"] withString:@""];
+        self.fbOpponentImage.profileID = playerName;
+    } else {
+        [self.fbOpponentImage setHidden:YES];
+    }
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -443,6 +462,8 @@ static const char *GC_URL =  BASE_URL"api/gc";
     lbGold = nil;
     lbPointsCount = nil;
     lbPoints = nil;
+    [self setFbPlayerImage:nil];
+    [self setFbOpponentImage:nil];
     [super viewDidUnload];
 }
 

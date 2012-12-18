@@ -334,7 +334,7 @@
 }
 
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
-    [[OGHelper sharedInstance] request:request didFailWithError:error];
+    //[[OGHelper sharedInstance] request:request didFailWithError:error];
     [loadingView setHidden:YES];
     [activityIndicator stopAnimating];
     [btnInvite setEnabled:YES];

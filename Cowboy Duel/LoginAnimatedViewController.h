@@ -22,9 +22,8 @@ typedef enum {
 } LoginFacebookStatus;
 
 @class StartViewController;
-@interface LoginAnimatedViewController : UIViewController <FBSessionDelegate, FBDialogDelegate, UIWebViewDelegate, MKStoreKitDelegate, FBRequestDelegate>
+@interface LoginAnimatedViewController : UIViewController <UIWebViewDelegate, MKStoreKitDelegate>
 
-@property (strong,nonatomic) Facebook *facebook;
 @property (strong,nonatomic) StartViewController *startViewController;
 @property (strong,nonatomic) id<ProfileWithLoginDelegate> delegate;
 @property (nonatomic)  LoginFacebookStatus loginFacebookStatus;
@@ -34,6 +33,7 @@ typedef enum {
 -(void)initFacebook;
 -(IBAction)loginButtonClick:(id)sender;
 -(void)logOutFB;
--(void)facebookiOS6DidLogin;
+- (void)fbDidLogin;
+- (void)fbDidLogout;
 
 @end

@@ -3,10 +3,12 @@
 #import "Utils.h"
 #import "OGHelper.h"
 #import "DuelProductDownloaderController.h"
+#import "TestAppDelegate.h"
 
 static const char *POST_TRANS_URL =  BASE_URL"api/transactions";
 static const char *POST_DUEL_URL =  BASE_URL"api/duels";
 static const char *LIST_BOTS_URL = BASE_URL"users/get_user_data";
+
 
 @interface AccountDataSource(){
   NSMutableDictionary *dicForRequests;
@@ -67,6 +69,10 @@ static AccountDataSource *sharedHelper = nil;
     achivments = [[NSMutableArray alloc] init];
     dicForRequests=[[NSMutableDictionary alloc] init];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(sessionStateChanged:)
+                                                 name:SCSessionStateChangedNotification
+                                               object:nil];
         
     return self;
 }
@@ -574,7 +580,7 @@ static AccountDataSource *sharedHelper = nil;
         if (([self.accountID rangeOfString:@"F:"].location != NSNotFound)) {
             NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"birthday,id,name,picture,location",@"fields",nil];
             [[LoginAnimatedViewController sharedInstance] initFacebook];
-            [[LoginAnimatedViewController sharedInstance].facebook requestWithGraphPath:@"me" andParams:params andDelegate:startVC];
+            //[[LoginAnimatedViewController sharedInstance].facebook requestWithGraphPath:@"me" andParams:params andDelegate:startVC];
         }
     }
 }
@@ -603,58 +609,66 @@ static AccountDataSource *sharedHelper = nil;
     }
 }
 
--(BOOL)loginFacebookiOS6
-{
-    if (self.accountStore == nil) self.accountStore = [[ACAccountStore alloc] init];
-    ACAccountType *facebookAccountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-    
-    NSMutableDictionary *options = [@{
-                                    ACFacebookAppIdKey: @"284932561559672",
-                                    ACFacebookPermissionsKey: @[@"email"],
-                                    ACFacebookAudienceKey: ACFacebookAudienceEveryone
-                                    } mutableCopy];
-    
-    [self.accountStore requestAccessToAccountsWithType:facebookAccountType options:options completion:^(BOOL success, NSError *error) {
-        if (success) {
-            /**
-             * The user granted us the basic read permission.
-             * Now we can ask for more permissions
-             **/
-            NSArray *accounts = [self.accountStore accountsWithAccountType:facebookAccountType];
-            self.facebookAccount = [accounts lastObject];
-            
-            NSArray *readPermissions = @[@"publish_stream", @"publish_actions", @"offline_access", @"user_games_activity", @"user_birthday", @" user_location"];
-            [options setObject:readPermissions forKey: ACFacebookPermissionsKey];
-            
-            [self.accountStore requestAccessToAccountsWithType:facebookAccountType options:options completion:^(BOOL granted, NSError *error) {
-                if(granted && error == nil) {
-                    /**
-                     * We now should have some read permission
-                     * Now we may ask for write permissions or
-                     * do something else.
-                     **/
-                    
-                    [loginAnimatedViewController facebookiOS6DidLogin];
-                    
-                } else {
-                    DLog(@"Facebook login error %@", error);
-                    if([error code]==6)
-                        DLog(@"Account not found. Please setup your account in settings app.")
-                    else
-                        DLog(@"Account access denied.");
-                }
-            }];
-        } else {
-            DLog(@"Facebook login error %@", error);
-            if([error code]==6)
-                DLog(@"Account not found. Please setup your account in settings app.")
-            else
-                DLog(@"Account access denied.");
-            
-        }
-        
-    }];
-    return YES;
+
+#pragma mark - FBLoginViewDelegate
+
+//- (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView {
+//    // first get the buttons set for login mode
+////    self.buttonPostPhoto.enabled = YES;
+////    self.buttonPostStatus.enabled = YES;
+////    self.buttonPickFriends.enabled = YES;
+////    self.buttonPickPlace.enabled = YES;
+//    DLog(@"User login");
+//}
+//
+//- (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
+//                            user:(id<FBGraphUser>)user {
+//    // here we use helper properties of FBGraphUser to dot-through to first_name and
+//    // id properties of the json response from the server; alternatively we could use
+//    // NSDictionary methods such as objectForKey to get values from the my json object
+//    // setting the profileID property of the FBProfilePictureView instance
+//    // causes the control to fetch and display the profile picture for the user
+//    self.facebookUser = user;
+//    if(user) [self.loginAnimatedViewController fbDidLogin];
+//}
+//
+//- (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
+////    BOOL canShareAnyhow = [FBNativeDialogs canPresentShareDialogWithSession:nil];
+////    self.buttonPostPhoto.enabled = canShareAnyhow;
+////    self.buttonPostStatus.enabled = canShareAnyhow;
+////    self.buttonPickFriends.enabled = NO;
+////    self.buttonPickPlace.enabled = NO;
+////    
+////    self.profilePic.profileID = nil;
+////    self.labelFirstName.text = nil;
+////    self.loggedInUser = nil;
+//}
+
+- (void)sessionStateChanged:(NSNotification*)notification {
+    // A more complex app might check the state to see what the appropriate course of
+    // action is, but our needs are simple, so just make sure our idea of the session is
+    // up to date and repopulate the user's name and picture (which will fail if the session
+    // has become invalid).
+    [self populateUserDetails];
 }
+
+
+// FBSample logic
+// Displays the user's name and profile picture so they are aware of the Facebook
+// identity they are logged in as.
+- (void)populateUserDetails {
+    if (FBSession.activeSession.isOpen) {
+        [[FBRequest requestForMe] startWithCompletionHandler:
+         ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
+             if (!error) {
+                 self.facebookUser = user;
+                 if(user) [self.loginAnimatedViewController fbDidLogin];
+//                 self.userNameLabel.text = user.name;
+//                 self.userProfileImage.profileID = [user objectForKey:@"id"];
+             }
+         }];
+    }
+}
+
 
 @end

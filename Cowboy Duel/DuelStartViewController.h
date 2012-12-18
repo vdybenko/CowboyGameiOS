@@ -102,6 +102,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *_waitLabel;
 @property (strong, nonatomic) IBOutlet UILabel *_pleaseWaitLabel;
 @property (strong, nonatomic) IBOutlet UIView  *_vWait;
+@property (unsafe_unretained, nonatomic) IBOutlet FBProfilePictureView *fbPlayerImage;
+@property (unsafe_unretained, nonatomic) IBOutlet FBProfilePictureView *fbOpponentImage;
 
 @property(strong)id<DuelViewControllerDelegate> delegate;
 @property (unsafe_unretained, nonatomic) NSString *oponentNameOnLine;

@@ -11,6 +11,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "BEAnimationView.h"
 #import "StartViewController.h"
+#import "TestAppDelegate.h"
 
 #define kFacebookAppId @"284932561559672"
 NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/first/";
@@ -18,7 +19,6 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
 @interface LoginAnimatedViewController ()
 {
     StartViewController * startViewController;
-    Facebook *facebook;
     AccountDataSource *playerAccount;
     NSMutableString *stDonate;
     __unsafe_unretained IBOutlet UIView *activityView;
@@ -55,7 +55,7 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
 
 @implementation LoginAnimatedViewController
 NSString * const loginProduct=@"com.webkate.cowboyduels.user.registration";
-@synthesize startViewController, facebook,delegate ,loginFacebookStatus, payment;
+@synthesize startViewController, delegate ,loginFacebookStatus, payment;
 @synthesize timer, textsContainer;
 
 static LoginAnimatedViewController *sharedHelper = nil;
@@ -73,6 +73,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
     
 	if (self) {
         playerAccount=[AccountDataSource sharedInstance];
+        playerAccount.loginAnimatedViewController = self;
         loginFacebookStatus = LoginFacebookStatusNone;
     }
     return self;
@@ -80,15 +81,18 @@ static LoginAnimatedViewController *sharedHelper = nil;
 }
 
 - (void)initFacebook {
-    if (!facebook) {
-        self.facebook = [[Facebook alloc] initWithAppId:kFacebookAppId andDelegate:self];
-        
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        facebook.accessToken = [userDefaults objectForKey:@"FBAccessTokenKey"];
-        facebook.expirationDate = [userDefaults objectForKey:@"FBExpirationDateKey"];
-        
-        [[OGHelper sharedInstance] createControllsWithAccount:playerAccount facebook:facebook];
-    }
+//    if (!facebook) {
+//        self.facebook = [[Facebook alloc] initWithAppId:kFacebookAppId andDelegate:self];
+//        
+//        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//        facebook.accessToken = [userDefaults objectForKey:@"FBAccessTokenKey"];
+//        facebook.expirationDate = [userDefaults objectForKey:@"FBExpirationDateKey"];
+//        
+//        [[OGHelper sharedInstance] createControllsWithAccount:playerAccount];
+//    }
+    
+    //[FBSession openActiveSessionWithAllowLoginUI:YES];
+    [[OGHelper sharedInstance] createControllsWithAccount:playerAccount];
 }
 
 
@@ -105,14 +109,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    FBLoginView *loginview = [[FBLoginView alloc] init];
-    
-    loginview.frame = CGRectOffset(loginview.frame, 5, 5);
-    loginview.delegate = self;
-    
-    [self.view addSubview:loginview];
-    
-    [loginview sizeToFit];
 
     animationPause = NO;
     if (self.view.frame.size.height > 480) {
@@ -155,6 +151,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
     textsContainer = [NSArray arrayWithObjects:
                     NSLocalizedString(@"HEY", nil),             //"Hey guy. Do you hear me?"
                     NSLocalizedString(@"HEY_YOU", nil),         //"Yes, you! Come here."
@@ -377,6 +374,13 @@ static LoginAnimatedViewController *sharedHelper = nil;
 - (IBAction)loginButtonClick:(id)sender {
 //    [self.player stop];
 //    [self.player setVolume:0.0];
+    
+    TestAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    [appDelegate openSessionWithAllowLoginUI:YES];
+    
+    [activityView setHidden:NO];
+    [activityIndicatorView startAnimating];
+    
     [self initFacebook];
     
     [playerAccount cleareWeaponAndDefense];
@@ -388,13 +392,12 @@ static LoginAnimatedViewController *sharedHelper = nil;
     DLog(@"fbLogIn");
     
     playerAccount.loginAnimatedViewController = self;
-    if (![playerAccount loginFacebookiOS6]) {
-        [facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"publish_actions" ,@"offline_access",@"user_games_activity",@"user_birthday",@" user_location",nil]];
-    }
-    else {
-        [activityView setHidden:NO];
-        [activityIndicatorView startAnimating];
-    }
+//    if (![playerAccount loginFacebookiOS6]) {
+//        //[facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"publish_actions" ,@"offline_access",@"user_games_activity",@"user_birthday",@" user_location",nil]];
+//    }
+//    else {
+        
+    //}
 	
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
@@ -411,69 +414,61 @@ static LoginAnimatedViewController *sharedHelper = nil;
 -(void)logOutFB;
 {
     [self initFacebook];
-	[facebook logout:self];
+    [[FBSession activeSession] closeAndClearTokenInformation];
+	//[facebook logout:self];
   [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                       object:self
                                                     userInfo:[NSDictionary dictionaryWithObject:@"/logOut_FB_click" forKey:@"event"]];
 }
 
--(void)facebookiOS6DidLogin
-{
-    NSDictionary *parameters =[NSMutableDictionary dictionaryWithObjectsAndKeys:@"birthday,id,name,picture,location",@"fields",nil];
-    NSURL *feedURL = [NSURL URLWithString:@"https://graph.facebook.com/me"];
-    SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeFacebook requestMethod:SLRequestMethodGET URL:feedURL parameters:parameters];
-    request.account = playerAccount.facebookAccount;
-    [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-        DLog(@"Facebook me: %@", [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]);
-        [self request:nil didLoad:ValidateObject([[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding] JSONValue], [NSDictionary class])];
-    }];
-}
-
-#pragma mark -
-#pragma mark FConnect Methods
 
 - (void)fbDidLogin {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     if (![userDefaults objectForKey:@"FBAccessTokenKey"] || ![userDefaults objectForKey:@"FBLoginV2.1"]) {
         [userDefaults setInteger:1 forKey:@"FBLoginV2.1"];
-        [userDefaults setObject:self.facebook.accessToken forKey:@"FBAccessTokenKey"];
-        [userDefaults setObject:self.facebook.expirationDate forKey:@"FBExpirationDateKey"];
+        [userDefaults setObject:[FBSession activeSession].accessToken forKey:@"FBAccessTokenKey"];
+        [userDefaults setObject:[FBSession activeSession].expirationDate forKey:@"FBExpirationDateKey"];
         
-        [[OGHelper sharedInstance] createControllsWithAccount:playerAccount facebook:facebook];
+        [[OGHelper sharedInstance] createControllsWithAccount:playerAccount];
         
         NSInteger facebookLogIn = 1;
         [userDefaults setInteger:facebookLogIn forKey:@"facebookLogIn"];
         [userDefaults synchronize];
         
         NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"birthday,id,name,picture,location",@"fields",nil];
-        [[OGHelper sharedInstance] getCountOfUserFriends];
+        //[[OGHelper sharedInstance] getCountOfUserFriends];
         
-        [self.facebook requestWithGraphPath:@"me" andParams:params andDelegate:self];
+        [FBRequestConnection startWithGraphPath:@"me" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+            [self request:nil didLoad:result];
+            DLog(@"%@ %@", result, error);
+        }];
+        //[self.facebook requestWithGraphPath:@"me" andParams:params andDelegate:self];
         
         [[NSNotificationCenter defaultCenter] postNotificationName: kCheckfFBLoginSession
                                                             object:self
                                                           userInfo:nil];
         
-        switch (loginFacebookStatus) {
-            case LoginFacebookStatusSimple:
-                [startViewController profileFirstRunButtonClickWithOutAnimation];
-                loginFacebookStatus = LoginFacebookStatusNone;
-                break;
-            case LoginFacebookStatusFeed:
-                if (startViewController.feedBackViewVisible) {
-                    [startViewController feedbackFacebookBtnClick:self];
-                }
-                loginFacebookStatus = LoginFacebookStatusNone;
-                break;
-            default:
-                break;
-        }
+//        switch (loginFacebookStatus) {
+//            case LoginFacebookStatusSimple:
+//                [startViewController profileFirstRunButtonClickWithOutAnimation];
+//                loginFacebookStatus = LoginFacebookStatusNone;
+//                break;
+//            case LoginFacebookStatusFeed:
+//                if (startViewController.feedBackViewVisible) {
+//                    [startViewController feedbackFacebookBtnClick:self];
+//                }
+//                loginFacebookStatus = LoginFacebookStatusNone;
+//                break;
+//            default:
+//                break;
+//        }
         [self.player setVolume:0.0];
     }
     
 }
 
 - (void)fbDidLogout {
+    [[FBSession activeSession] closeAndClearTokenInformation];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults removeObjectForKey:@"FBAccessTokenKey"];
     [userDefaults removeObjectForKey:@"FBExpirationDateKey"];
@@ -559,14 +554,14 @@ static LoginAnimatedViewController *sharedHelper = nil;
 	
     DLog(@"Facebook request failed: %@", [error description]);
 	
-	[facebook logout:self];
+	//[facebook logout:self];
 }
 
 -(void)fbDidExtendToken:(NSString *)accessToken expiresAt:(NSDate *)expiresAt {
     DLog(@"token extended");
     
-    facebook.accessToken = accessToken;
-    facebook.expirationDate = expiresAt;
+//    facebook.accessToken = accessToken;
+//    facebook.expirationDate = expiresAt;
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:accessToken forKey:@"FBAccessTokenKey"];

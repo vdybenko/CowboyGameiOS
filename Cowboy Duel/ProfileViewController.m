@@ -60,6 +60,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     IBOutlet UIView *userDefenseView;
     IBOutlet UILabel *userAtack;
     IBOutlet UILabel *userDefense;
+    __unsafe_unretained IBOutlet FBProfilePictureView *profilePictureView;
     
     
     __unsafe_unretained IBOutlet UILabel *lbPointsCountMain;
@@ -113,7 +114,7 @@ static const CGFloat timeToStandartTitles = 1.8;
                                                    object:nil];	
         [[NSNotificationCenter defaultCenter] addObserver:self 
                                                  selector:@selector(changeFBSesionAction)
-                                                     name:kCheckfFBLoginSession 
+                                                     name:SCSessionStateChangedNotification
                                                    object:nil];
         
         [self loadView];
@@ -154,7 +155,7 @@ static const CGFloat timeToStandartTitles = 1.8;
                                                    object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(changeFBSesionAction)
-                                                     name:kCheckfFBLoginSession
+                                                     name:SCSessionStateChangedNotification
                                                    object:nil];
         
         textsContainer = [NSMutableArray arrayWithObjects:
@@ -182,6 +183,9 @@ static const CGFloat timeToStandartTitles = 1.8;
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    
     [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"loginFirstShow"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
@@ -193,6 +197,8 @@ static const CGFloat timeToStandartTitles = 1.8;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    profilePictureView.profileID = playerAccount.facebookUser.id;
+    
     lbPointsText.font = [UIFont fontWithName: @"MyriadPro-Semibold" size:12];
     
     lbPointsCountMain.font = [UIFont fontWithName: @"MyriadPro-Bold" size:15];
@@ -542,6 +548,7 @@ if (playerAccount.accountLevel != 10) {
 {
     needAnimation = YES;
     [self checkLocationOfViewForFBLogin];
+    
     if (![[OGHelper sharedInstance] isAuthorized]) {
         [ivBlack setHidden:YES];
     }
@@ -653,7 +660,7 @@ if (playerAccount.accountLevel != 10) {
 - (IBAction)btnFBLogOutClick:(id)sender {
     [playerAccount cleareWeaponAndDefense];
     [ivBlack setHidden:NO];
-    [loginViewController logOutFB];
+    [loginViewController fbDidLogout];
         
     NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *FilePath = [NSString stringWithFormat:@"%@/me.png",docDir];
@@ -696,6 +703,7 @@ if (playerAccount.accountLevel != 10) {
     lbPointsCountMain = nil;
     ivCurrentRank = nil;
     lbPointsText = nil;
+    profilePictureView = nil;
     [super viewDidUnload];
 }
 

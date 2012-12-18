@@ -24,23 +24,24 @@ NSString  *const ID_CRIT_APP   = @"4fb4f482c471a10fc5000092";
 NSString  *const ID_CRIT_KEY   = @"stjyktz620mziyf5rhi89ncaorab";
 NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 
-static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNotification";
+
 @interface TestAppDelegate()
 {
     UIWindow *window;
     UINavigationController *navigationController;
     StartViewController *startViewController;
     LoginAnimatedViewController *loginViewController;
-    Facebook * facebook;
+    
     AccountDataSource *playerAccount;
 }
+@property (nonatomic, strong) id<FBGraphUser> facebookUser;
 
 @end
 
 @implementation TestAppDelegate
 
 @synthesize navigationController, loginViewController;
-@synthesize facebook, adBanner;
+@synthesize facebookUser, adBanner;
 @synthesize clouds;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -68,8 +69,8 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
     
     application.statusBarOrientation = UIInterfaceOrientationPortrait;
   
-//    LoginAnimatedViewController *loginAnimatedViewController = [[LoginAnimatedViewController alloc] init];
-//    navigationController = [[UINavigationController alloc] initWithRootViewController:loginAnimatedViewController];
+    loginViewController = [[LoginAnimatedViewController alloc] init];
+    navigationController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
     LoadViewController *loadViewController;
     
     loadViewController= [[LoadViewController alloc] initWithPush:NULL];
@@ -132,6 +133,9 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
         [self.adBanner setHidden:YES];
     }
     
+    if([[OGHelper sharedInstance] isAuthorized]){
+        [self openSessionWithAllowLoginUI:YES];
+    }
     
     //Sleep off
     application.idleTimerDisabled = YES;
@@ -153,9 +157,121 @@ static NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNoti
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
     DLog(@"application handleOpenURL");
-    if (loginViewController) return [loginViewController.facebook handleOpenURL:url];
+    if (loginViewController) return [[FBSession activeSession] handleOpenURL:url];
+
     return NO;
 }
+
+- (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI {
+    
+    NSArray *permissions =
+    [NSArray arrayWithObjects:@"email", @"user_photos", nil];
+    return [FBSession openActiveSessionWithReadPermissions:permissions
+                                              allowLoginUI:allowLoginUI
+                                         completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
+                                             [self sessionStateChanged:session state:state error:error];
+                                         }];
+}
+
+- (void)sessionStateChanged:(FBSession *)session
+                      state:(FBSessionState)state
+                      error:(NSError *)error
+{
+    // FBSample logic
+    // Any time the session is closed, we want to display the login controller (the user
+    // cannot use the application unless they are logged in to Facebook). When the session
+    // is opened successfully, hide the login controller and show the main UI.
+    switch (state) {
+        case FBSessionStateOpen: {
+ //           [self.mainViewController startLocationManager];
+//            if (self.loginViewController != nil) {
+//                UIViewController *topViewController = [self.navController topViewController];
+//                [topViewController dismissModalViewControllerAnimated:YES];
+//                self.loginViewController = nil;
+//            }
+            
+            // FBSample logic
+            // Pre-fetch and cache the friends for the friend picker as soon as possible to improve
+            // responsiveness when the user tags their friends.
+            FBCacheDescriptor *cacheDescriptor = [FBFriendPickerViewController cacheDescriptor];
+            [cacheDescriptor prefetchAndCacheForSession:session];
+        }
+            break;
+        case FBSessionStateClosed: {
+            // FBSample logic
+            // Once the user has logged out, we want them to be looking at the root view.
+//            UIViewController *topViewController = [self.navigationController topViewController];
+//            UIViewController *modalViewController = [topViewController modalViewController];
+//            if (modalViewController != nil) {
+//                [topViewController dismissModalViewControllerAnimated:NO];
+//            }
+//            [self.navigationController popToRootViewControllerAnimated:NO];
+            
+            [FBSession.activeSession closeAndClearTokenInformation];
+            
+//            [self performSelector:@selector(showLoginView)
+//                       withObject:nil
+//                       afterDelay:0.5f];
+        }
+            break;
+        case FBSessionStateClosedLoginFailed: {
+            // if the token goes invalid we want to switch right back to
+            // the login view, however we do it with a slight delay in order to
+            // account for a race between this and the login view dissappearing
+            // a moment before
+//            [self performSelector:@selector(showLoginView)
+//                       withObject:nil
+//                       afterDelay:0.5f];
+        }
+            break;
+        default:
+            break;
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:SCSessionStateChangedNotification
+                                                        object:session];
+    
+    if (error) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Error: %@",
+                                                                     [TestAppDelegate FBErrorCodeDescription:error.code]]
+                                                            message:error.localizedDescription
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }
+}
+
++ (NSString *)FBErrorCodeDescription:(FBErrorCode) code {
+    switch(code){
+        case FBErrorInvalid :{
+            return @"FBErrorInvalid";
+        }
+        case FBErrorOperationCancelled:{
+            return @"FBErrorOperationCancelled";
+        }
+        case FBErrorLoginFailedOrCancelled:{
+            return @"FBErrorLoginFailedOrCancelled";
+        }
+        case FBErrorRequestConnectionApi:{
+            return @"FBErrorRequestConnectionApi";
+        }case FBErrorProtocolMismatch:{
+            return @"FBErrorProtocolMismatch";
+        }
+        case FBErrorHTTPError:{
+            return @"FBErrorHTTPError";
+        }
+        case FBErrorNonTextMimeTypeReturned:{
+            return @"FBErrorNonTextMimeTypeReturned";
+        }
+        case FBErrorNativeDialog:{
+            return @"FBErrorNativeDialog";
+        }
+        default:
+            return @"[Unknown]";
+    }
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

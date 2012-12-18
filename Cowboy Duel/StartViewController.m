@@ -59,7 +59,6 @@
     
     Reachability* internetReachable;
     Reachability* hostReachable;
-    Facebook *facebook;
     
     UIImageView_AttachedView *arrowImage;
     
@@ -146,7 +145,6 @@ static const char *MODIFIER_USER_URL =  BASE_URL"users/set_user_data";
 NSString *const URL_FB_PAGE=@"http://cowboyduel.mobi/";
 NSString *const URL_COMM_FB_PAGE =@"http://cowboyduel.com/";  
 
-NSString *const NewMessageReceivedNotification = @"NewMessageReceivedNotification";
 
 NSMutableData *receivedDataBots;
 
@@ -237,15 +235,15 @@ static StartViewController *sharedHelper = nil;
             [playerAccount putchAvatarImageToInitStartVC:self];
 //            
             if (!([playerAccount.accountID rangeOfString:@"F"].location == NSNotFound)){ 
-                facebook = [[Facebook alloc] initWithAppId:kFacebookAppId andDelegate:[LoginAnimatedViewController sharedInstance]];
+                //facebook = [[Facebook alloc] initWithAppId:kFacebookAppId andDelegate:[LoginAnimatedViewController sharedInstance]];
                 
                 if ([uDef objectForKey:@"FBAccessTokenKey"] 
                     && [uDef objectForKey:@"FBExpirationDateKey"]) {
-                    facebook.accessToken = [uDef objectForKey:@"FBAccessTokenKey"];
-                    facebook.expirationDate = [uDef objectForKey:@"FBExpirationDateKey"];
+                    //facebook.accessToken = [uDef objectForKey:@"FBAccessTokenKey"];
+                    //facebook.expirationDate = [uDef objectForKey:@"FBExpirationDateKey"];
                 }
-                [[LoginAnimatedViewController sharedInstance] setFacebook:facebook];
-                [[OGHelper sharedInstance ] initWithAccount:playerAccount facebook:facebook];
+                
+                [[OGHelper sharedInstance] initWithAccount:playerAccount];
             }
             
             DLog(@"Transactions count = %d", [playerAccount.transactions count]);
@@ -600,7 +598,7 @@ static StartViewController *sharedHelper = nil;
         [self login];
     }
     
-    [facebook extendAccessTokenIfNeeded];
+    //[facebook extendAccessTokenIfNeeded];
     if (profileViewController) {
         [profileViewController checkValidBlackActivity];
     }
@@ -886,20 +884,30 @@ static StartViewController *sharedHelper = nil;
 }
 
 - (IBAction)feedbackFacebookBtnClick:(id)sender {
+        
     float ver_float = [[[UIDevice currentDevice] systemVersion] floatValue];
     if (ver_float >= 6.0) {
-        if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]){
-            SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
-            SLComposeViewControllerCompletionHandler __block myBlock = ^(SLComposeViewControllerResult result){
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [controller dismissViewControllerAnimated:YES completion:nil];
-                });
-            };
-            controller.completionHandler = myBlock;
-            [controller setInitialText:URL_APP_ESTIMATE];
-            [controller addURL:[NSURL URLWithString:URL_APP_ESTIMATE]];
-            [self presentViewController:controller animated:YES completion:Nil];
+        BOOL displayedNativeDialog =
+        [FBNativeDialogs
+         presentShareDialogModallyFrom:self
+         initialText:@"Get Started"
+         image:[UIImage imageNamed:@"icon@2x.png"]
+         url:[NSURL URLWithString:URL_APP_ESTIMATE]
+         handler:^(FBNativeDialogResult result, NSError *error) {
+             if (error) {
+                 /* handle failure */
+             } else {
+                 if (result == FBNativeDialogResultSucceeded) {
+                     /* handle success */
+                 } else {
+                     /* handle user cancel */
+                 }
+             }
+         }];
+        if (!displayedNativeDialog) {
+            /* handle fallback to native dialog  */
         }
+
     }else{
         if ([[OGHelper sharedInstance]isAuthorized]) {
             [[OGHelper sharedInstance] apiDialogFeedUser];

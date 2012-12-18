@@ -9,7 +9,7 @@
 #import "CDWeaponProduct.h"
 
 @class StartViewController;
-@interface AccountDataSource : NSObject
+@interface AccountDataSource : NSObject <FBLoginViewDelegate>
 
 @property(nonatomic, readonly) NSInteger accountDataSourceID;
 @property(nonatomic) int money;
@@ -49,6 +49,7 @@
 @property (nonatomic, strong) ACAccount *facebookAccount;
 
 @property (nonatomic, strong) id loginAnimatedViewController;
+@property (nonatomic, strong) id<FBGraphUser> facebookUser;
 
 + (AccountDataSource *)sharedInstance;
 - (id)initWithLocalPlayer;

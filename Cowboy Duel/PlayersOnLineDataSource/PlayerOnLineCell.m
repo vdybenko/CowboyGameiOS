@@ -72,7 +72,15 @@
         self.status.textColor = [UIColor redColor];
         [self.btnDuel setEnabled:NO];
     }
-    
+    if (([player.serverName rangeOfString:@"F:"].location != NSNotFound))
+    {
+        [self.facebookAvatar setHidden:NO];
+        NSMutableString *serverName = [player.serverName mutableCopy];
+        [serverName replaceCharactersInRange:[player.serverName rangeOfString:@"F:"] withString:@""];
+        self.facebookAvatar.profileID = serverName;
+    } else {
+        [self.facebookAvatar setHidden:YES];
+    }
 //    if (playerAccount.accountWeapon.dDamage!=0) {
 //        userAtack.text = [NSString stringWithFormat:@"+%d",playerAccount.accountWeapon.dDamage];
 //        userAtack.hidden = NO;
