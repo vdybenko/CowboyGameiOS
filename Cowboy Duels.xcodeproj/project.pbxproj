@@ -324,6 +324,8 @@
 		76F71904165A6AD700719D8A /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F71903165A6AD700719D8A /* UIView+Frame.m */; };
 		BD05E7CF1669192600F04140 /* iconGun@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD05E7CD1669192600F04140 /* iconGun@2x.png */; };
 		BD05E7D01669192600F04140 /* iconGun.png in Resources */ = {isa = PBXBuildFile; fileRef = BD05E7CE1669192600F04140 /* iconGun.png */; };
+		BD16BF971680934F00628CCC /* FunPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD16BF951680934F00628CCC /* FunPageViewController.m */; };
+		BD16BF981680934F00628CCC /* FunPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD16BF961680934F00628CCC /* FunPageViewController.xib */; };
 		BD7E5EFB16404F92000D6897 /* st_bg_new-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD7E5EFA16404F92000D6897 /* st_bg_new-568h@2x.png */; };
 		BD7F199416563588008BE1B4 /* ivGuillotineFull-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD7F199316563588008BE1B4 /* ivGuillotineFull-568h@2x.png */; };
 		BD7F252315E777DC00A3C2CA /* fin_img_coin.png in Resources */ = {isa = PBXBuildFile; fileRef = BD7F252115E777D800A3C2CA /* fin_img_coin.png */; };
@@ -804,6 +806,9 @@
 		76F71903165A6AD700719D8A /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 		BD05E7CD1669192600F04140 /* iconGun@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconGun@2x.png"; sourceTree = "<group>"; };
 		BD05E7CE1669192600F04140 /* iconGun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconGun.png; sourceTree = "<group>"; };
+		BD16BF941680934F00628CCC /* FunPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FunPageViewController.h; sourceTree = "<group>"; };
+		BD16BF951680934F00628CCC /* FunPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FunPageViewController.m; sourceTree = "<group>"; };
+		BD16BF961680934F00628CCC /* FunPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FunPageViewController.xib; sourceTree = "<group>"; };
 		BD7E5EFA16404F92000D6897 /* st_bg_new-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "st_bg_new-568h@2x.png"; sourceTree = "<group>"; };
 		BD7F199316563588008BE1B4 /* ivGuillotineFull-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ivGuillotineFull-568h@2x.png"; sourceTree = "<group>"; };
 		BD7F252115E777D800A3C2CA /* fin_img_coin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fin_img_coin.png; sourceTree = "<group>"; };
@@ -1862,6 +1867,9 @@
 				BD84DAA2164ABC9F00DEEE38 /* LoginAnimatedViewController.h */,
 				BD84DAA3164ABC9F00DEEE38 /* LoginAnimatedViewController.m */,
 				BD84DAA4164ABCA000DEEE38 /* LoginAnimatedViewController.xib */,
+				BD16BF941680934F00628CCC /* FunPageViewController.h */,
+				BD16BF951680934F00628CCC /* FunPageViewController.m */,
+				BD16BF961680934F00628CCC /* FunPageViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -2216,6 +2224,7 @@
 				BD05E7CF1669192600F04140 /* iconGun@2x.png in Resources */,
 				BD05E7D01669192600F04140 /* iconGun.png in Resources */,
 				BDA8F85D167A0DC5002BEC03 /* FacebookSDKResources.bundle in Resources */,
+				BD16BF981680934F00628CCC /* FunPageViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2329,6 +2338,7 @@
 				768321E01654E60D00E78A8C /* TeachingHelperViewController.m in Sources */,
 				76F71904165A6AD700719D8A /* UIView+Frame.m in Sources */,
 				764B8927165FD0F70014E35B /* PracticeCell.m in Sources */,
+				BD16BF971680934F00628CCC /* FunPageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

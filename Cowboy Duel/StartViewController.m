@@ -26,6 +26,8 @@
 #import "StoreViewController.h"
 #import "DuelProductWinViewController.h"
 
+#import "FunPageViewController.h"
+
 @interface StartViewController ()
 {
     AccountDataSource *playerAccount;
@@ -835,8 +837,19 @@ static StartViewController *sharedHelper = nil;
 //                 @"I'm playing in Cowboy duels",
 //                 URL_FB_PAGE];
   
-  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[URL_COMM_FB_PAGE stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
-  [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[URL_COMM_FB_PAGE stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+    FunPageViewController *funPageViewController = [[FunPageViewController alloc] init];
+    
+    CATransition* transition = [CATransition animation];
+    transition.duration = 0.5;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+    transition.type = kCATransitionReveal;
+    transition.subtype = kCATransitionFromBottom;
+    [self.navigationController.view.layer addAnimation:transition forKey:nil];
+    [self.navigationController pushViewController:funPageViewController animated:NO];
+    
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                       object:self
                                                     userInfo:[NSDictionary dictionaryWithObject:@"/feedBack_followFB_clicked" forKey:@"event"]];
 }
