@@ -17,6 +17,7 @@
     DuelProductDownloaderController *duelProductDownloaderController;
     
     int purchesingProductIndex;
+    BOOL bagFlag;
 }
 @property (strong, nonatomic) IBOutlet UILabel *title;
 
@@ -24,6 +25,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnWeapons;
 @property (strong, nonatomic) IBOutlet UIButton *btnDefenses;
 @property (strong, nonatomic) IBOutlet UIButton *btnBack;
+@property (unsafe_unretained, nonatomic) IBOutlet UIButton *btnBag;
+
 
 
 @end
@@ -67,6 +70,8 @@
 
     [btnBack setTitleByLabel:@"BACK"];
     [btnBack changeColorOfTitleByLabel:buttonsTitleColor];
+    [self.btnBag setTitleByLabel:@"BAG"];
+    [self.btnBag changeColorOfTitleByLabel:buttonsTitleColor];
     [btnWeapons setTitleByLabel:@"WEAPONS"];
     [btnWeapons changeColorOfTitleByLabel:buttonsTitleColor];
     [btnDefenses setTitleByLabel:@"DEFENSES"];
@@ -266,6 +271,31 @@
         });
     }
 }
+
+- (IBAction)bagButtonClick:(id)sender {
+    if (bagFlag) {
+        bagFlag = NO;
+        title.text = NSLocalizedString(@"SHOP", @"");
+        [self.btnBag changeTitleByLabel:NSLocalizedString(@"BAG", @"")];
+    }
+    else
+    {
+        bagFlag = YES;
+        title.text = NSLocalizedString(@"BAG", @"");
+        [self.btnBag changeTitleByLabel:NSLocalizedString(@"SHOP", @"")];
+    }
+    
+    storeDataSource.bagFlag = bagFlag;
+    [storeDataSource reloadDataSource];
+    [storeDataSource setCellsHide:YES];
+    [tableView reloadData];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        
+        [self startTableAnimation];
+    });
+    
+}
+
 - (IBAction)backButtonClick:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -348,4 +378,8 @@
     playerAccount = nil;
 }
 
+- (void)viewDidUnload {
+    [self setBtnBag:nil];
+    [super viewDidUnload];
+}
 @end

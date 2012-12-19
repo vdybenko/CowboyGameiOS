@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface UIButton(Hierarchy)
-
 -(void)setImage:(NSString *)pImag title:(NSString *)pTitle;
 -(void)setImage:(NSString *)pImag;
 -(void)setTitleByLabel:(NSString *)pTitle;

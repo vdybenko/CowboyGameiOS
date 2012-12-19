@@ -9,7 +9,6 @@
 #import "UIButton+Image+Title.h"
 
 @implementation UIButton (Hierarchy)
-
 -(void)setImage:(NSString *)pImag title:(NSString *)pTitle;
 {
     [self setImage:pImag];

@@ -22,7 +22,7 @@
 
 @implementation StoreDataSource
 @synthesize arrItemsList,typeOfTable,delegate;
-@synthesize cellsHide;
+@synthesize cellsHide, bagFlag;
 
 #pragma mark - Instance initialization
 
@@ -53,6 +53,9 @@
         testArr = [DuelProductDownloaderController loadDefenseArray];
     }
 
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.dCountOfUse > 0 || SELF.dID == -1"];
+    if (self.bagFlag) [testArr filterUsingPredicate:predicate];
+    
     if ([testArr count]==0) {
         arrItemsList = testArr;
         

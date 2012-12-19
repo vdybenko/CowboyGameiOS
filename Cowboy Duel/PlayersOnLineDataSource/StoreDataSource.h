@@ -26,6 +26,7 @@ typedef enum {
 @property(strong, nonatomic)id<TableCellWithButton> delegate;
 @property(nonatomic) StoreDataSourceTypeTables typeOfTable;
 @property(nonatomic) BOOL cellsHide;
+@property(nonatomic) BOOL bagFlag;
 
 -(void) reloadDataSource;
 -(id) initWithTable:(UITableView *)pTable parentVC:(StoreViewController *)storeViewController;
