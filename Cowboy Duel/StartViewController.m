@@ -145,7 +145,7 @@ static const char *AUTORIZATION_URL =  BASE_URL"api/authorization";
 static const char *MODIFIER_USER_URL =  BASE_URL"users/set_user_data";
 
 NSString *const URL_FB_PAGE=@"http://cowboyduel.mobi/";
-NSString *const URL_COMM_FB_PAGE =@"http://cowboyduel.com/";  
+
 
 
 NSMutableData *receivedDataBots;
@@ -837,17 +837,19 @@ static StartViewController *sharedHelper = nil;
 //                 @"I'm playing in Cowboy duels",
 //                 URL_FB_PAGE];
   
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[URL_COMM_FB_PAGE stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
-    FunPageViewController *funPageViewController = [[FunPageViewController alloc] init];
+//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[URL_COMM_FB_PAGE stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+    FunPageViewController *funPageViewController = [[FunPageViewController alloc] initWithNibName:@"FunPageViewController" bundle:[NSBundle mainBundle]];
     
-    CATransition* transition = [CATransition animation];
-    transition.duration = 0.5;
-    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
-    transition.type = kCATransitionReveal;
-    transition.subtype = kCATransitionFromBottom;
-    [self.navigationController.view.layer addAnimation:transition forKey:nil];
-    [self.navigationController pushViewController:funPageViewController animated:NO];
+//    CATransition* transition = [CATransition animation];
+//    transition.duration = 0.5;
+//    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+//    transition.type = kCATransition;
+//    transition.subtype = kCATransitionFromBottom;
+//    [self.navigationController.view.layer addAnimation:transition forKey:nil];
+//    [self.navigationController pushViewController:funPageViewController animated:NO];
     
+    funPageViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentModalViewController:funPageViewController animated:YES];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                       object:self
