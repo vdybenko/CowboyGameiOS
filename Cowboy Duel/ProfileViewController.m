@@ -16,6 +16,8 @@
 #import "LoginAnimatedViewController.h"
 #import "DuelRewardLogicController.h"
 #import "TopPlayersViewController.h"
+#import "SSServer.h"
+#import "DuelStartViewController.h"
 
 static const CGFloat changeYPointWhenKeyboard = 155;
 static const CGFloat timeToStandartTitles = 1.8;
@@ -24,6 +26,8 @@ static const CGFloat timeToStandartTitles = 1.8;
 {
     AccountDataSource *playerAccount;
     LoginAnimatedViewController *loginViewController;
+    
+    SSServer *playerServer;
     
     NSString *namePlayerSaved;
     
@@ -62,6 +66,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     IBOutlet UILabel *userDefense;
     __unsafe_unretained IBOutlet FBProfilePictureView *profilePictureView;
     
+    __unsafe_unretained IBOutlet UIButton *duelButton;
     
     __unsafe_unretained IBOutlet UILabel *lbPointsCountMain;
     __unsafe_unretained IBOutlet UIImageView *ivCurrentRank;
@@ -122,7 +127,39 @@ static const CGFloat timeToStandartTitles = 1.8;
         UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
         [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:24];
         [btnLeaderboardBig setTitleByLabel:@"LeaderboardTitle" withColor:buttonsTitleColor fontSize:24];
+       ;
+        
         [self initMainControls];
+    }
+    return self;
+}
+
+-(id)initForOponent:(AccountDataSource *)oponentAccount
+{
+    self = [super initWithNibName:@"ProfileViewController" bundle:[NSBundle mainBundle]];
+    
+    if (self) {
+        needAnimation = NO;
+        playerAccount=oponentAccount;
+        
+        numberFormatter = [[NSNumberFormatter alloc] init];
+        [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+        
+        [self loadView];
+        _lbMenuTitle.text = NSLocalizedString(@"BACK", @"");
+        UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
+        [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:24];
+        [btnLeaderboardBig setTitleByLabel:@"LeaderboardTitle" withColor:buttonsTitleColor fontSize:24];
+        [duelButton setTitleByLabel:@"DUEL"];
+        [duelButton changeColorOfTitleByLabel:buttonsTitleColor];
+        
+        [self initMainControls];
+        [btnLeaderboard setHidden:YES];
+        [btnLogInFB setHidden:YES];
+        [btnLogOutFB setHidden:YES];
+        [lbLeaderboardTitle setHidden:YES];
+        [duelButton setHidden:NO];
+        
     }
     return self;
 }
@@ -314,6 +351,11 @@ static const CGFloat timeToStandartTitles = 1.8;
         [btnLeaderboard setEnabled:YES];
         [self setImageFromFacebook];
     }
+    if(!duelButton.isHidden){
+        [btnLogOutFB setHidden:YES];
+        [btnLogInFB setHidden:YES];
+    }
+    
     NSString *name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel];
     ivCurrentRank.image = [UIImage imageNamed:name];
     tfFBName.text = playerAccount.accountName;
@@ -704,7 +746,38 @@ if (playerAccount.accountLevel != 10) {
     ivCurrentRank = nil;
     lbPointsText = nil;
     profilePictureView = nil;
+    duelButton = nil;
     [super viewDidUnload];
+}
+
+- (IBAction)duelButtonClick:(id)sender {
+        
+    if ([playerAccount.sessionID isEqualToString:@"-1"]) {
+        [playerAccount.finalInfoTable removeAllObjects];
+        int randomTime = arc4random() % 6;
+        
+        TeachingViewController *teachingViewController = [[TeachingViewController alloc] initWithTime:randomTime andAccount:[AccountDataSource sharedInstance] andOpAccount:playerAccount];
+        [self.navigationController pushViewController:teachingViewController animated:YES];
+        
+        SSConnection *connection = [SSConnection sharedInstance];
+        [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                            object:self
+                                                          userInfo:[NSDictionary dictionaryWithObject:@"/duel_teaching" forKey:@"event"]];
+        return;
+    }
+    
+    DuelStartViewController *duelStartViewController = [[DuelStartViewController alloc]initWithAccount:[AccountDataSource sharedInstance] andOpAccount:playerAccount opopnentAvailable:NO andServerType:NO andTryAgain:NO];
+    duelStartViewController.serverName = playerAccount.accountID;
+    
+    GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+    duelStartViewController.delegate = gameCenterViewController;
+    gameCenterViewController.duelStartViewController = duelStartViewController;
+    
+    [self.navigationController pushViewController:duelStartViewController animated:YES];
+//    PlayerOnLineCell *cell = (PlayerOnLineCell *)[tableView cellForRowAtIndexPath:indexPath];
+//    [cell hideIndicatorConnectin];
 }
 
 - (void)dealloc {

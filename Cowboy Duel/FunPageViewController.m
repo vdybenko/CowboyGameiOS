@@ -40,7 +40,7 @@
 //    self.backButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
     self.backButton.titleLabel.textAlignment = UITextAlignmentCenter;
     
-    NSString *urlAddress = @"http://www.google.com";
+    NSString *urlAddress = URL_COMM_FB_PAGE;
     
     //Create a URL object.
     NSURL *url = [NSURL URLWithString:urlAddress];

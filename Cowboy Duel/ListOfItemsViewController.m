@@ -154,7 +154,31 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self clickButton:indexPath];
+    //[self clickButton:indexPath];
+    SSServer *player;
+    player=[_playersOnLineDataSource.serverObjects objectAtIndex:indexPath.row];
+    
+    AccountDataSource *oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
+    [oponentAccount setAccountID:(player.serverName) ? [NSString stringWithString:player.serverName]:@""];
+    [oponentAccount setAccountName:player.displayName];
+    [oponentAccount setAccountLevel:[player.rank integerValue]];
+    [oponentAccount setAccountWins:[player.duelsWin intValue]];
+    [oponentAccount setAvatar:player.fbImageUrl];
+    [oponentAccount setBot:player.bot];
+    [oponentAccount setMoney:[player.money integerValue]];
+    [oponentAccount setSessionID:(player.sessionId) ? [NSString stringWithString:player.sessionId]:@""];
+
+    
+    if (player.bot) {
+        if (player.weapon) [oponentAccount setCurentIdWeapon:player.weapon];
+        else [oponentAccount setCurentIdWeapon:-1];
+        [oponentAccount loadAccountWeapon];
+        if (player.defense) [oponentAccount setAccountDefenseValue:player.defense];
+        else [oponentAccount setAccountDefenseValue:0];
+    }
+    
+    ProfileViewController *profileViewController = [[ProfileViewController alloc] initForOponent:oponentAccount];
+    [self.navigationController pushViewController:profileViewController animated:YES];
 }
 
 #pragma mark - Delegated methods
