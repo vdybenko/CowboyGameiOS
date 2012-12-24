@@ -14,6 +14,8 @@
 #import "Crittercism.h"
 #import "StartViewController.h"
 
+#define kFacebookSettingsButtonIndex 1
+
 static const NSInteger kGANDispatchPeriod = 60;
 #ifdef DEBUG
 static NSString *kGAAccountID = @"UA-24007807-3";
@@ -165,12 +167,86 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 - (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI {
     
     NSArray *permissions =
-    [NSArray arrayWithObjects:@"email", @"user_photos", nil];
-    return [FBSession openActiveSessionWithReadPermissions:permissions
-                                              allowLoginUI:allowLoginUI
-                                         completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
-                                             [self sessionStateChanged:session state:state error:error];
-                                         }];
+    [NSArray arrayWithObjects:@"email", nil];
+    float ver_float = [[[UIDevice currentDevice] systemVersion] floatValue];
+    if (ver_float >= 6.0) {
+        ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+        ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
+        if (![accountStore accountsWithAccountType:accountType]){
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry", @"AlertView")
+                                                                message:NSLocalizedString(@"You can't connnect to Facebook right now, make sure  your device has an internet connection and you have at least one Facebook account setup", @"AlertView")
+                                                               delegate:self
+                                                      cancelButtonTitle:NSLocalizedString(@"Cancel", @"AlertView")
+                                                      otherButtonTitles: nil];
+            [alertView show];
+            return NO;
+
+        }
+    }
+    [FBSession openActiveSessionWithReadPermissions:nil
+                                       allowLoginUI:YES
+                                  completionHandler:
+     ^(FBSession *session,
+       FBSessionState state, NSError *error) {
+         [self sessionStateChanged:session state:state error:error];
+     }];
+//    if( [FBSession openActiveSessionWithAllowLoginUI:NO])
+//        [self sessionStateChanged:[FBSession activeSession] state:[FBSession activeSession].state error:nil];
+////    else [self sessionStateChanged:[FBSession activeSession] state:[FBSession activeSession].state error:nil];
+//    return YES;
+//    if ([[FBSession activeSession] isOpen]) {
+//        //do something
+//        [[NSNotificationCenter defaultCenter] postNotificationName:SCSessionStateChangedNotification
+//                                                            object:[FBSession activeSession]];
+//    }
+//    else {
+//        [FBSession openActiveSessionWithReadPermissions:nil allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+//            [self sessionStateChanged:session state:status error:error];
+//            if(FB_ISSESSIONOPENWITHSTATE(status)) {
+//                //do something
+//                
+//                [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+//                    if (!error){
+//                        
+//                        NSLog(@"success on first try");
+//                    } else if ([[error userInfo][FBErrorParsedJSONResponseKey][@"body"][@"error"][@"code"] compare:@190] == NSOrderedSame) {
+//                        //requestForMe failed due to error validating access token (code 190), so retry login
+//                        [FBSession openActiveSessionWithReadPermissions:nil allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+//                            if (!error){
+//                                //do something again, or consider recursive call with a max retry count.
+//                                [self sessionStateChanged:session state:status error:error];
+//                                NSLog(@"success on retry");
+//                                
+//                            }
+//                        }];
+//                    }
+//                }];
+//            }
+//        }];
+//    }
+    
+//    if ([FBSession openActiveSessionWithReadPermissions:permissions
+//                                           allowLoginUI:NO
+//                                      completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
+//                                          [self sessionStateChanged:session state:state error:error];
+//                                      }]) {
+//                                          return YES;
+//    }
+//    else{
+////        FBSession *session = [FBSession activeSession];
+////        [session openWithCompletionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+////            [self sessionStateChanged:session state:status error:error];
+////        }];
+//        
+//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry", @"AlertView")
+//                                                            message:NSLocalizedString(@"You can't connnect to Facebook right now, make sure  your device has an internet connection and you have at least one Facebook account setup", @"AlertView")
+//                                                           delegate:self
+//                                                  cancelButtonTitle:NSLocalizedString(@"Cancel", @"AlertView")
+//                                                  otherButtonTitles: nil];
+//        [alertView show];
+//        return NO;
+//    }
+    
 }
 
 - (void)sessionStateChanged:(FBSession *)session
@@ -192,9 +268,9 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
             
             // FBSample logic
             // Pre-fetch and cache the friends for the friend picker as soon as possible to improve
-            // responsiveness when the user tags their friends.
-            FBCacheDescriptor *cacheDescriptor = [FBFriendPickerViewController cacheDescriptor];
-            [cacheDescriptor prefetchAndCacheForSession:session];
+//            // responsiveness when the user tags their friends.
+//            FBCacheDescriptor *cacheDescriptor = [FBFriendPickerViewController cacheDescriptor];
+//            [cacheDescriptor prefetchAndCacheForSession:session];
         }
             break;
         case FBSessionStateClosed: {
@@ -222,6 +298,11 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 //            [self performSelector:@selector(showLoginView)
 //                       withObject:nil
 //                       afterDelay:0.5f];
+            [FBSession.activeSession closeAndClearTokenInformation];
+            if ([[[navigationController viewControllers] lastObject] isKindOfClass:[LoginAnimatedViewController class]]) {
+                loginViewController = (LoginAnimatedViewController *)[[navigationController viewControllers] lastObject];
+            }
+            [loginViewController failed];
         }
             break;
         default:
@@ -230,6 +311,7 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     
     [[NSNotificationCenter defaultCenter] postNotificationName:SCSessionStateChangedNotification
                                                         object:session];
+    
     
     if (error) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Error: %@",
@@ -309,6 +391,8 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
+    //[FBSession.activeSession handleDidBecomeActive];
+    
     UIDevice *currentDevice = [UIDevice currentDevice];
 
     if(!([currentDevice respondsToSelector:@selector(isMultitaskingSupported)] && [currentDevice isMultitaskingSupported]))
@@ -321,6 +405,7 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     DLog(@"applicationWillTerminate");
+    [FBSession.activeSession close];
     
 }
 
@@ -372,6 +457,28 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     request.testing = NO;
     
     return request;
+}
+
+#pragma mark - AlertViewDelegate
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        if ([[[navigationController viewControllers] lastObject] isKindOfClass:[LoginAnimatedViewController class]]) {
+            loginViewController = (LoginAnimatedViewController *)[[navigationController viewControllers] lastObject];
+        }
+        [loginViewController failed];
+        SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+    
+        if ([controller respondsToSelector:@selector(alertView:clickedButtonAtIndex:)]) {
+            // Manually invoke the alert view button handler
+            [(id <UIAlertViewDelegate>)controller alertView:nil
+                                    clickedButtonAtIndex:kFacebookSettingsButtonIndex];
+        }
+
+    }
+    
 }
 
 #pragma mark GADBannerViewDelegate impl

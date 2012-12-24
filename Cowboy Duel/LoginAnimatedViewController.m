@@ -374,12 +374,17 @@ static LoginAnimatedViewController *sharedHelper = nil;
 - (IBAction)loginButtonClick:(id)sender {
 //    [self.player stop];
 //    [self.player setVolume:0.0];
+    [activityView setHidden:NO];
+    [activityIndicatorView startAnimating];
+    animationPause = YES;
+    self.heatImage.stopAnimation = YES;
+    self.whiskersImage.stopAnimation = YES;
+    self.guillotineImage.stopAnimation = YES;
     
     TestAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     [appDelegate openSessionWithAllowLoginUI:YES];
     
-    [activityView setHidden:NO];
-    [activityIndicatorView startAnimating];
+    
     
     [self initFacebook];
     
@@ -392,13 +397,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
     DLog(@"fbLogIn");
     
     playerAccount.loginAnimatedViewController = self;
-//    if (![playerAccount loginFacebookiOS6]) {
-//        //[facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"publish_actions" ,@"offline_access",@"user_games_activity",@"user_birthday",@" user_location",nil]];
-//    }
-//    else {
-        
-    //}
-	
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self

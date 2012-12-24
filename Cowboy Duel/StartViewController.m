@@ -28,6 +28,8 @@
 
 #import "FunPageViewController.h"
 
+#define kTwitterSettingsButtonIndex 0
+
 @interface StartViewController ()
 {
     AccountDataSource *playerAccount;
@@ -521,7 +523,7 @@ static StartViewController *sharedHelper = nil;
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
+       
     TestAppDelegate *app = (TestAppDelegate *)[[UIApplication sharedApplication] delegate];
     [app.adBanner setHidden:NO];
     app.clouds.hidden = YES;
@@ -906,7 +908,7 @@ static StartViewController *sharedHelper = nil;
         [FBNativeDialogs
          presentShareDialogModallyFrom:self
          initialText:@"Get Started"
-         image:[UIImage imageNamed:@"icon@2x.png"]
+         image:[UIImage imageNamed:@"Icon@2x.png"]
          url:[NSURL URLWithString:URL_APP_ESTIMATE]
          handler:^(FBNativeDialogResult result, NSError *error) {
              if (error) {
@@ -947,6 +949,7 @@ static StartViewController *sharedHelper = nil;
         TWTweetComposeViewController *tweetSheet = 
         [[TWTweetComposeViewController alloc] init];
         [tweetSheet setInitialText:@"I'm playing in Cowboy duels"];
+        [tweetSheet addImage:[UIImage imageNamed:@"Icon@2x.png"]];
         [tweetSheet addURL:[NSURL URLWithString:URL_FB_PAGE]];
         
 	    [self presentModalViewController:tweetSheet animated:YES];
@@ -961,15 +964,16 @@ static StartViewController *sharedHelper = nil;
             
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[URL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
         }else {
-            UIAlertView *alertView = [[UIAlertView alloc] 
-                                      initWithTitle:@"Sorry"                                                             
-                                      message:@"You can't send a tweet right now, make sure  your device has an internet connection and you have at least one Twitter account setup"                                                          
-                                      delegate:self                                              
-                                      cancelButtonTitle:@"OK"                                                   
-                                      otherButtonTitles:nil];
+            
+            
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry", @"AlertView")
+                    message:NSLocalizedString(@"You can't send a tweet right now, make sure  your device has an internet connection and you have at least one Twitter account setup", @"AlertView")
+                    delegate:self
+                    cancelButtonTitle:NSLocalizedString(@"Cancel", @"AlertView")
+                    otherButtonTitles:NSLocalizedString(@"Open settings", @"AlertView"), nil];
             [alertView show];
-
-        }        
+            
+        }
         
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
@@ -1366,19 +1370,16 @@ static StartViewController *sharedHelper = nil;
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    switch (alertView.tag) {
-        case BOT_DUEL_TAG:
-        {
-            if(buttonIndex==alertView.cancelButtonIndex  )
-            {
-                [alertView dismissWithClickedButtonIndex:alertView.cancelButtonIndex animated:YES];
-            }
+    if (buttonIndex == 1)
+    {
+        TWTweetComposeViewController *ctrl = [[TWTweetComposeViewController alloc] init];
+        if ([ctrl respondsToSelector:@selector(alertView:clickedButtonAtIndex:)]) {
+            // Manually invoke the alert view button handler
+            [(id <UIAlertViewDelegate>)ctrl alertView:nil
+                                 clickedButtonAtIndex:kTwitterSettingsButtonIndex];
         }
-            break;   
-            
-        default:
-            break;
     }
+    
 }
 
 #pragma mark Notification

@@ -34,6 +34,7 @@ typedef enum {
 -(IBAction)loginButtonClick:(id)sender;
 -(void)logOutFB;
 - (void)fbDidLogin;
-- (void)fbDidLogout;
+-(void)fbDidLogout;
+-(void)failed;
 
 @end
