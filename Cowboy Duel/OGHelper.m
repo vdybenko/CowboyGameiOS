@@ -805,11 +805,32 @@ static OGHelper *sharedHelper = nil;
     
     id<FBGraphObject> graphObject = (id<FBGraphObject>)[FBGraphObject graphObjectWrappingDictionary:params];
     
+    // Ask for publish_actions permissions in context
+    if ([FBSession.activeSession.permissions
+         indexOfObject:@"publish_actions"] == NSNotFound) {
+        // No permissions found in session, ask for it
+        [FBSession.activeSession
+         reauthorizeWithPublishPermissions:
+         [NSArray arrayWithObject:@"publish_actions"]
+         defaultAudience:FBSessionDefaultAudienceFriends
+         completionHandler:^(FBSession *session, NSError *error) {
+             if (!error) {
+                 // If permissions granted, publish the story
+                 [FBRequestConnection startForPostWithGraphPath:requestSt graphObject:graphObject completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                     DLog(@"%@ %@", result, error);
+                     
+                 }];
+             }
+         }];
+    } else {
+        // If permissions present, publish the story
+        [FBRequestConnection startForPostWithGraphPath:requestSt graphObject:graphObject completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+            DLog(@"%@ %@", result, error);
+            
+        }];
+    }
     
-    [FBRequestConnection startForPostWithGraphPath:requestSt graphObject:graphObject completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        DLog(@"%@ %@", result, error);
-        
-    }];
+    
 
 }
 

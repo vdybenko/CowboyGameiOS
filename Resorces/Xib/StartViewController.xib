@@ -238,27 +238,6 @@
 						<reference key="IBUIFontDescription" ref="376536378"/>
 						<reference key="IBUIFont" ref="187087763"/>
 					</object>
-					<object class="IBUIButton" id="273843970">
-						<reference key="NSNextResponder" ref="1048327278"/>
-						<int key="NSvFlags">296</int>
-						<string key="NSFrame">{{71, 173}, {180, 52}}</string>
-						<reference key="NSSuperview" ref="1048327278"/>
-						<reference key="NSNextKeyView" ref="638093522"/>
-						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<int key="IBUIContentHorizontalAlignment">0</int>
-						<int key="IBUIContentVerticalAlignment">0</int>
-						<reference key="IBUIHighlightedTitleColor" ref="407551026"/>
-						<object class="NSColor" key="IBUINormalTitleColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
-						</object>
-						<reference key="IBUINormalTitleShadowColor" ref="899530917"/>
-						<reference key="IBUINormalBackgroundImage" ref="395966042"/>
-						<reference key="IBUIFontDescription" ref="376536378"/>
-						<reference key="IBUIFont" ref="187087763"/>
-					</object>
 					<object class="IBUIButton" id="1003356675">
 						<reference key="NSNextResponder" ref="1048327278"/>
 						<int key="NSvFlags">268</int>
@@ -280,6 +259,27 @@
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">pv_btn_music_on.png</string>
 						</object>
+						<reference key="IBUIFontDescription" ref="376536378"/>
+						<reference key="IBUIFont" ref="187087763"/>
+					</object>
+					<object class="IBUIButton" id="273843970">
+						<reference key="NSNextResponder" ref="1048327278"/>
+						<int key="NSvFlags">296</int>
+						<string key="NSFrame">{{71, 173}, {180, 52}}</string>
+						<reference key="NSSuperview" ref="1048327278"/>
+						<reference key="NSNextKeyView" ref="638093522"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<reference key="IBUIHighlightedTitleColor" ref="407551026"/>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+						</object>
+						<reference key="IBUINormalTitleShadowColor" ref="899530917"/>
+						<reference key="IBUINormalBackgroundImage" ref="395966042"/>
 						<reference key="IBUIFontDescription" ref="376536378"/>
 						<reference key="IBUIFont" ref="187087763"/>
 					</object>
@@ -1138,7 +1138,6 @@
 							<reference ref="559891747"/>
 							<reference ref="419574726"/>
 							<reference ref="492574981"/>
-							<reference ref="273843970"/>
 							<reference ref="343128217"/>
 							<reference ref="722101784"/>
 							<reference ref="862881662"/>
@@ -1150,6 +1149,7 @@
 							<reference ref="721836411"/>
 							<reference ref="325282025"/>
 							<reference ref="676481781"/>
+							<reference ref="273843970"/>
 							<reference ref="563480174"/>
 						</array>
 						<reference key="parent" ref="0"/>

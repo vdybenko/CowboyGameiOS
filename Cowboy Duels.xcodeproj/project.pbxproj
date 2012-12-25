@@ -410,6 +410,7 @@
 		BDD07BEC141E1F170085E4FB /* TestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07BAE141E1F170085E4FB /* TestAppDelegate.m */; };
 		BDD07BEF141E1F170085E4FB /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07BB5141E1F170085E4FB /* Utils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BDD07BF0141E1F170085E4FB /* ValidationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07BB7141E1F170085E4FB /* ValidationUtils.m */; };
+		BDD0D13B16887D5B000755E9 /* BBCyclingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD0D13A16887D5B000755E9 /* BBCyclingLabel.m */; };
 		BDD8E22A163EEE2E004F05A9 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDD8E229163EEE2E004F05A9 /* CoreData.framework */; };
 		BDD8E24E163EF42F004F05A9 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDD8E24D163EF42F004F05A9 /* AdSupport.framework */; };
 		BDF1EF1713D41BA500C466DF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF1EF1613D41BA500C466DF /* Security.framework */; };
@@ -936,6 +937,8 @@
 		BDD07BB5141E1F170085E4FB /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		BDD07BB6141E1F170085E4FB /* ValidationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidationUtils.h; sourceTree = "<group>"; };
 		BDD07BB7141E1F170085E4FB /* ValidationUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidationUtils.m; sourceTree = "<group>"; };
+		BDD0D13916887D5B000755E9 /* BBCyclingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBCyclingLabel.h; sourceTree = "<group>"; };
+		BDD0D13A16887D5B000755E9 /* BBCyclingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBCyclingLabel.m; sourceTree = "<group>"; };
 		BDD8E229163EEE2E004F05A9 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		BDD8E24D163EF42F004F05A9 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		BDF1EF1613D41BA500C466DF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -1781,6 +1784,7 @@
 		BDD07C20141E29210085E4FB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BDD0D13816887D5B000755E9 /* BBCyclingLabel */,
 				76AFC7A015ED1B740009294B /* UIScrollView+AH3DPullRefresh.h */,
 				76AFC7A115ED1B740009294B /* UIScrollView+AH3DPullRefresh.m */,
 				767E1F72154BFBAF001FDDD5 /* OCPromptView.h */,
@@ -1872,6 +1876,15 @@
 				BD16BF961680934F00628CCC /* FunPageViewController.xib */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		BDD0D13816887D5B000755E9 /* BBCyclingLabel */ = {
+			isa = PBXGroup;
+			children = (
+				BDD0D13916887D5B000755E9 /* BBCyclingLabel.h */,
+				BDD0D13A16887D5B000755E9 /* BBCyclingLabel.m */,
+			);
+			path = BBCyclingLabel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2339,6 +2352,7 @@
 				76F71904165A6AD700719D8A /* UIView+Frame.m in Sources */,
 				764B8927165FD0F70014E35B /* PracticeCell.m in Sources */,
 				BD16BF971680934F00628CCC /* FunPageViewController.m in Sources */,
+				BDD0D13B16887D5B000755E9 /* BBCyclingLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -27,7 +27,7 @@
 @property (strong,nonatomic) IBOutlet UILabel * effect;
 @property (strong,nonatomic) IBOutlet UILabel * name;
 @property (strong,nonatomic) IBOutlet UILabel * descriptionText;
-@property (strong,nonatomic) IBOutlet UILabel * countOfUse;
+@property (strong,nonatomic) IBOutlet BBCyclingLabel * countOfUse;
 @property (strong,nonatomic) IBOutlet UIView * curentGunBlueBackground;
 @property (strong,nonatomic) IBOutlet UIView * lockLevelBackground;
 @property (strong,nonatomic) IBOutlet UILabel * lockLevelBackgroundTitle;
@@ -93,12 +93,20 @@
     
     countOfUse.clipsToBounds = YES;
     countOfUse.layer.cornerRadius = 1.f;
+    countOfUse.font = [UIFont systemFontOfSize:13];
+    //countOfUse.transitionEffect = BBCyclingLabelTransitionEffectScrollUp;
+    countOfUse.transitionDuration = 1.0;
+    countOfUse.textColor = [UIColor colorWithWhite:1 alpha:1];
+    countOfUse.transitionEffect = BBCyclingLabelTransitionEffectScrollUp;
+    
+    countOfUse.clipsToBounds = YES;
+    
 }
 
 -(void) initMainControls;
 {
     [self initWithOutBackGround];
-    [backGround setDinamicHeightBackground];    
+    [backGround setDinamicHeightBackground];
 }
 
 -(void)populateWithProduct:(CDDuelProduct *)product targetToBuyButton:(id)delegate cellType:(StoreDataSourceTypeTables)cellType;
@@ -118,7 +126,7 @@
         if (product.dCountOfUse == 0) {
              countOfUse.hidden = YES;
         }else{
-            countOfUse.text = [NSString stringWithFormat:@"x%d",product.dCountOfUse];
+            [countOfUse setText:[NSString stringWithFormat:@"x%d",product.dCountOfUse] animated:YES];
             countOfUse.hidden = NO;
         }
     }else{

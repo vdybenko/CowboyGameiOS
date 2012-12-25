@@ -258,19 +258,13 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     // cannot use the application unless they are logged in to Facebook). When the session
     // is opened successfully, hide the login controller and show the main UI.
     switch (state) {
+        case FBSessionStateCreatedOpening: {
+           
+        }
+            break;
+
         case FBSessionStateOpen: {
- //           [self.mainViewController startLocationManager];
-//            if (self.loginViewController != nil) {
-//                UIViewController *topViewController = [self.navController topViewController];
-//                [topViewController dismissModalViewControllerAnimated:YES];
-//                self.loginViewController = nil;
-//            }
-            
-            // FBSample logic
-            // Pre-fetch and cache the friends for the friend picker as soon as possible to improve
-//            // responsiveness when the user tags their friends.
-//            FBCacheDescriptor *cacheDescriptor = [FBFriendPickerViewController cacheDescriptor];
-//            [cacheDescriptor prefetchAndCacheForSession:session];
+ 
         }
             break;
         case FBSessionStateClosed: {
