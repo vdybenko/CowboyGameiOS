@@ -12,6 +12,7 @@
 #import "LoginAnimatedViewController.h"
 #import "AccountDataSource.h"
 #import "GANTracker.h"
+#import "GADBannerView.h"
 
 
 @interface TestAppDelegate :  UIResponder <UIApplicationDelegate, GANTrackerDelegate>
