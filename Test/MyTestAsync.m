@@ -30,7 +30,7 @@ static const char *URL_USER_PRODUCTS = BASE_URL"store/get_buy_items_user";
 - (BOOL)shouldRunOnMainThread {
     // By default NO, but if you have a UI test or test dependent on running on the main thread return YES.
     // Also an async test that calls back on the main thread, you'll probably want to return YES.
-    return NO;
+    return YES;
 }
 
 - (void)setUpClass {
@@ -194,6 +194,68 @@ static const char *URL_USER_PRODUCTS = BASE_URL"store/get_buy_items_user";
     currentSelector = @selector(testUserProductConnection);
     
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
+}
+
+- (void)testUserFBScorePost
+{
+    currentSelector = @selector(testUserFBScorePost);
+    
+    [FBSession openActiveSessionWithReadPermissions:nil
+                                       allowLoginUI:YES
+                                  completionHandler:
+     ^(FBSession *session,
+       FBSessionState state, NSError *error) {
+         
+         NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                         [NSString stringWithFormat:@"%d",100], @"score",
+                                         nil];
+         
+         NSString *name=[[OGHelper sharedInstance ] getClearName:[AccountDataSource sharedInstance].accountID];
+         NSString *requestSt=[NSString stringWithFormat:@"%@/scores",name];
+         
+         //facebook.accessToken = kFacebookAppToken;
+         //    [facebook requestWithGraphPath:requestSt
+         //                         andParams:params
+         //                     andHttpMethod:@"POST"
+         //                       andDelegate:self];
+         
+         id<FBGraphObject> graphObject = (id<FBGraphObject>)[FBGraphObject graphObjectWrappingDictionary:params];
+         
+         // Ask for publish_actions permissions in context
+         if ([FBSession.activeSession.permissions
+              indexOfObject:@"publish_actions"] == NSNotFound) {
+             // No permissions found in session, ask for it
+             [FBSession.activeSession
+              reauthorizeWithPublishPermissions:
+              [NSArray arrayWithObject:@"publish_actions"]
+              defaultAudience:FBSessionDefaultAudienceFriends
+              completionHandler:^(FBSession *session, NSError *error) {
+                  GHAssertNULL((__bridge void *) error, nil);
+                  if (!error) {
+                      // If permissions granted, publish the story
+                      [FBRequestConnection startForPostWithGraphPath:requestSt graphObject:graphObject completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                          [self notify:kGHUnitWaitStatusSuccess forSelector:currentSelector];
+                          
+                      }];
+                  }
+                  else {
+                      [self notify:kGHUnitWaitStatusFailure forSelector:currentSelector];
+                  }
+              }];
+         } else {
+             // If permissions present, publish the story
+             [FBRequestConnection startForPostWithGraphPath:requestSt graphObject:graphObject completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                 GHAssertNULL((__bridge void *) error, nil);
+                 if (!error) {
+                     [self notify:kGHUnitWaitStatusSuccess forSelector:currentSelector];
+                 } else{
+                     [self notify:kGHUnitWaitStatusFailure forSelector:currentSelector];
+                 }
+                 
+             }];
+         }
+
+     }];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {

@@ -45,6 +45,13 @@ static const char *A_URL =  BASE_URL"api/authorization";
         [[GCHelper sharedInstance] setPresentingViewController:startViewController];
         [[GCHelper sharedInstance] setDelegate2:startViewController];
     
+        NSDictionary *remoteNotif =
+        [notification objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+        if (remoteNotif)
+            //[self application:[UIApplication sharedApplication] didReceiveRemoteNotification:remoteNotif];
+            [self openSaloon];
+        
+
         CGRect frame = [[UIScreen mainScreen]bounds];
         
         if (frame.size.height > 480) {
@@ -212,6 +219,13 @@ static const char *A_URL =  BASE_URL"api/authorization";
           [error localizedDescription],
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
 }
+
+-(void)openSaloon
+{
+    [startViewController performSelector:@selector(startDuel) withObject:nil afterDelay:5.0];
+}
+
+
 #pragma mark RefreshContentDataControllerDelegate
 
 -(void)finishRefresh;

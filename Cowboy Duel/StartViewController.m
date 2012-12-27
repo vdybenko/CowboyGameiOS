@@ -691,7 +691,10 @@ static StartViewController *sharedHelper = nil;
 -(void)duelButtonClick
 {
     [listOfItemsViewController setStatusOnLine:self.hostActive];
-    [self.navigationController pushViewController:listOfItemsViewController animated:YES];
+    if (self.navigationController.visibleViewController != listOfItemsViewController) {
+        [self.navigationController pushViewController:listOfItemsViewController animated:YES];
+    }
+
 }
 
 - (IBAction)storeButtonClick:(id)sender {    

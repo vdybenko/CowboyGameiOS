@@ -10,6 +10,7 @@
 #import "GCHelper.h"
 #import <GameKit/GameKit.h>
 #import "LoginAnimatedViewController.h"
+#import "ListOfItemsViewController.h"
 
 #import "Crittercism.h"
 #import "StartViewController.h"
@@ -75,7 +76,7 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     navigationController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
     LoadViewController *loadViewController;
     
-    loadViewController= [[LoadViewController alloc] initWithPush:NULL];
+    loadViewController= [[LoadViewController alloc] initWithPush:launchOptions];
     
     navigationController = [[UINavigationController alloc] initWithRootViewController:loadViewController];
 
@@ -138,6 +139,10 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     if([[OGHelper sharedInstance] isAuthorized]){
         [self openSessionWithAllowLoginUI:YES];
     }
+    
+    // Let the device know we want to receive push notifications
+	[[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+     (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeNewsstandContentAvailability | UIRemoteNotificationTypeAlert)];
     
     //Sleep off
     application.idleTimerDisabled = YES;
@@ -403,6 +408,35 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     
 }
 
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
+{
+	NSLog(@"My token is: %@", deviceToken);
+    
+    NSString* newToken = [deviceToken description];
+	newToken = [newToken stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+	newToken = [newToken stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    NSUserDefaults *usrDef = [NSUserDefaults standardUserDefaults];
+    [usrDef setObject:newToken forKey:@"DeviceToken"];
+    [usrDef synchronize];
+}
+
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
+{
+	NSLog(@"Failed to get token, error: %@", error);
+}
+
+- (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
+{
+	NSLog(@"Received notification: %@", userInfo);
+    
+    NSDictionary *notificationDict = [userInfo objectForKey:@"aps"];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Be ready!!!" message:[notificationDict objectForKey:@"alert"] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Go to Saloon", nil];
+    alert.tag = 1;
+    [alert show];
+}
+
 - (void)AnalyticsTrackEvent:(NSNotification *)notification {
     
     NSError	*err;
@@ -457,6 +491,21 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    if (alertView.tag == 1) {
+        if (buttonIndex == 1)
+        {
+            for (UIViewController *viewController in navigationController.viewControllers) {
+                
+                if ([viewController isKindOfClass:[StartViewController class]]) {
+                    startViewController = (StartViewController *)viewController;
+                    [startViewController startDuel];
+                    return;
+                }
+                
+            }
+        }
+    }
+    
     if (buttonIndex == 0)
     {
         if ([[[navigationController viewControllers] lastObject] isKindOfClass:[LoginAnimatedViewController class]]) {
@@ -474,6 +523,7 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     }
     
 }
+
 
 #pragma mark GADBannerViewDelegate impl
 
