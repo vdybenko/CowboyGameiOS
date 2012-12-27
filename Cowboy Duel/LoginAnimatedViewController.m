@@ -12,6 +12,7 @@
 #import "BEAnimationView.h"
 #import "StartViewController.h"
 #import "TestAppDelegate.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 #define kFacebookAppId @"284932561559672"
 NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/first/";
@@ -54,7 +55,6 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
 @end
 
 @implementation LoginAnimatedViewController
-NSString * const loginProduct=@"com.webkate.cowboyduels.user.registration";
 @synthesize startViewController, delegate ,loginFacebookStatus, payment;
 @synthesize timer, textsContainer;
 
