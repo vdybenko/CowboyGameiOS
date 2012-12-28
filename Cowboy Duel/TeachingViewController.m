@@ -164,7 +164,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
             DLog(@"Kill!!!");
             DLog(@"Shot Time = %d.%d", (shotTime - time * 1000) / 1000, (shotTime - time * 1000));
             
-                            
             [follPlayer stop];
             int opponentTime;
             if (!self.oponentAccount.bot) opponentTime=3000;

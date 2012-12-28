@@ -142,6 +142,8 @@ static CGFloat const ANIMATION_TIME = 0.3f;
     IBOutlet UIImageView *titleReady;
     
     UIView  *helpPracticeView;
+    UIImageView *imvArrow;
+    BOOL arrowAnimationContinue;
 
     float steadyScale;
     float scaleDelta;
@@ -165,7 +167,7 @@ static CGFloat const ANIMATION_TIME = 0.3f;
 -(void)restartCountdown;
 -(void)hideHelpViewWithArm;
 -(void)showHelpViewWithArm;
--(void)setTextToMessageShot; 
+-(void)setTextToMessageShot;
 
 @property(unsafe_unretained)id<DuelViewControllerDelegate> delegate;
 @end

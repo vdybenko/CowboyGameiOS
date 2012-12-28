@@ -113,8 +113,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
     lbBackButton.font = [UIFont fontWithName: @"DecreeNarrow" size:24];  
     
     helpPracticeView=[[UIView alloc] initWithFrame:CGRectMake(12, (([UIScreen mainScreen].bounds.size.height - 172)/2), 290, 172)];
-    
-    [helpPracticeView setHidden:YES];
 
     UIImageView *imvArm=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dv_arm.png"]];
     CGRect frame = imvArm.frame;
@@ -122,7 +120,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
     imvArm.frame = frame;
     [helpPracticeView addSubview:imvArm];
     
-    UIImageView *imvArrow=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dv_arm_arrow.png"]];
+    imvArrow=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dv_arm_arrow.png"]];
     frame = imvArrow.frame;
     frame.origin = CGPointMake(37, 24);
     imvArrow.frame = frame;
@@ -136,6 +134,8 @@ static NSString *ShotSound = @"%@/shot.mp3";
     [cancelBtn setImage:[UIImage imageNamed:@"btn_adcolony.png"] forState:UIControlStateNormal];
     [cancelBtn addTarget:self action:@selector(cancelHelpArmClick:) forControlEvents:UIControlEventTouchUpInside];
     [helpPracticeView addSubview:cancelBtn];
+    
+    [self hideHelpViewWithArm];
     
     [helpPracticeView setDinamicHeightBackground];
     [self.view addSubview:helpPracticeView];    
@@ -407,10 +407,25 @@ if (shotCountBullet!=0) {
     _ivGun.transform = gunTransform;
 }
 
+-(void)scaleView:(UIView *)viewForAnimation
+{
+    [UIView animateWithDuration:0.4 animations:^{
+        viewForAnimation.transform = CGAffineTransformMakeScale(1.3, 1.3);
+    } completion:^(BOOL complete) {
+        [UIView animateWithDuration:0.4 animations:^{
+            viewForAnimation.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        }completion:^(BOOL complete){
+            if(arrowAnimationContinue){
+                [self scaleView:viewForAnimation];
+            }
+        }];
+    }];
+}
+
 #pragma mark
 
 -(void)startDuel{
-    [helpPracticeView setHidden:YES];
+    [self hideHelpViewWithArm];
     
     [titleReady setHidden:YES];
     [titleSteadyFire setHidden:NO];
@@ -434,17 +449,22 @@ if (shotCountBullet!=0) {
     [titleReady setHidden:NO];
     [titleSteadyFire setHidden:YES];
     
-    [helpPracticeView setHidden:NO]; 
+    [self showHelpViewWithArm];
 }
 
 -(void)hideHelpViewWithArm;
 {
     [helpPracticeView setHidden:YES];
+    arrowAnimationContinue = NO;
 }
 
 -(void)showHelpViewWithArm;
 {
     [helpPracticeView setHidden:NO];
+    if (!arrowAnimationContinue) {
+        arrowAnimationContinue = YES;
+        [self scaleView:imvArrow];
+    }
 }
 
 -(void)countUpBulets;

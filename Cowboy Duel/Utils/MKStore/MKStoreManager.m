@@ -56,7 +56,6 @@ static MKStoreManager* _sharedStoreManager; // self
     return _sharedStoreManager;
 }
 
-
 #pragma mark Singleton Methods
 
 + (id)allocWithZone:(NSZone *)zone
@@ -74,14 +73,10 @@ static MKStoreManager* _sharedStoreManager; // self
     return nil; //on subsequent allocation attempts return nil	
 }
 
-
 - (id)copyWithZone:(NSZone *)zone
 {
     return self;	
 }
-
-
-
 
 - (void) requestProductData
 {
@@ -90,7 +85,6 @@ static MKStoreManager* _sharedStoreManager; // self
 	request.delegate = self;
 	[request start];
 }
-
 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
 {
@@ -165,7 +159,6 @@ static MKStoreManager* _sharedStoreManager; // self
 	
 	[MKStoreManager updatePurchases];
 }
-
 
 +(void) loadPurchases 
 {
