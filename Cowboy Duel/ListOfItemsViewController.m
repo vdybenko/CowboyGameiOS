@@ -178,7 +178,19 @@
     }
     
     ProfileViewController *profileViewController = [[ProfileViewController alloc] initForOponent:oponentAccount];
-    [self.navigationController pushViewController:profileViewController animated:YES];
+    [UIView animateWithDuration:0.75
+                     animations:^{
+                         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                         [self.navigationController pushViewController:profileViewController animated:NO];
+                         [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
+                     }];//    CATransition* transition = [CATransition animation];
+//    transition.duration = 0.5;
+//    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+//    transition.type = kCATransition;//, kCATransitionReveal, kCATransitionFade,kCATransitionMoveIn;
+//    transition.subtype =kCATransitionFromLeft;//kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom;
+//    [self.navigationController.view.layer addAnimation:transition forKey:nil];
+//    [self.navigationController pushViewController:profileViewController animated:NO];
+    
 }
 
 #pragma mark - Delegated methods

@@ -29,6 +29,8 @@ static const CGFloat timeToStandartTitles = 1.8;
     
     SSServer *playerServer;
     
+    IconDownloader *iconDownloader;
+    
     NSString *namePlayerSaved;
     
     IBOutlet UIImageView *_ivIconUser;
@@ -66,6 +68,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     IBOutlet UILabel *userDefense;
     __unsafe_unretained IBOutlet FBProfilePictureView *profilePictureView;
     
+    __unsafe_unretained IBOutlet UIImageView *profilePictureViewDefault;
     __unsafe_unretained IBOutlet UIButton *duelButton;
     
     __unsafe_unretained IBOutlet UILabel *lbPointsCountMain;
@@ -328,6 +331,35 @@ static const CGFloat timeToStandartTitles = 1.8;
     [ivPointsLine setClipsToBounds:YES];
 
     [mainProfileView setDinamicHeightBackground];
+    NSString *name = [[OGHelper sharedInstance ] getClearName:playerAccount.accountID];
+    
+    if ([playerAccount.accountID rangeOfString:@"A"].location != NSNotFound){
+        iconDownloader = [[IconDownloader alloc] init];
+        iconDownloader.namePlayer=name;
+        iconDownloader.delegate = self;
+        [iconDownloader setAvatarURL:playerAccount.avatar];
+        [iconDownloader startDownloadSimpleIcon];
+    }
+    
+//    if ([playerAccount.accountID rangeOfString:@"F"].location != NSNotFound) {
+//        iconDownloader = [[IconDownloader alloc] init];
+//        
+//        iconDownloader.namePlayer=name;
+//        iconDownloader.delegate = self;
+//        if ([playerAccount.avatar isEqualToString:@""]) {
+//            NSString *urlOponent=[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large",name];
+//            [iconDownloader setAvatarURL:urlOponent];
+//        }else {
+//            [iconDownloader setAvatarURL:playerAccount.avatar];
+//        }
+//        [iconDownloader startDownloadSimpleIcon];
+//    }else {
+//        profilePictureViewDefault.image = [UIImage imageNamed:@"pv_photo_default.png"];
+//        profilePictureViewDefault.transform = CGAffineTransformIdentity;
+//        profilePictureViewDefault.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+//        
+//    }
+
 }
 
 #pragma mark -
@@ -682,9 +714,22 @@ if (playerAccount.accountLevel != 10) {
     transition.duration = 0.5;
     transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     transition.type = kCATransitionPush; 
-    transition.subtype = kCATransitionFromRight;
-    [self.navigationController.view.layer addAnimation:transition forKey:nil];
-    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:1] animated:YES];
+    
+    if (duelButton.hidden) {
+        transition.subtype = kCATransitionFromRight;
+        [self.navigationController.view.layer addAnimation:transition forKey:nil];
+        [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:1] animated:NO];
+    }
+    else {
+        [UIView animateWithDuration:0.75
+                         animations:^{
+                             [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                             [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
+                         }];
+        [self.navigationController popViewControllerAnimated:NO];
+        
+    }
+    
 }
 
 - (IBAction)btnSoundClick:(id)sender {
@@ -747,6 +792,7 @@ if (playerAccount.accountLevel != 10) {
     lbPointsText = nil;
     profilePictureView = nil;
     duelButton = nil;
+    profilePictureViewDefault = nil;
     [super viewDidUnload];
 }
 
@@ -775,9 +821,20 @@ if (playerAccount.accountLevel != 10) {
     duelStartViewController.delegate = gameCenterViewController;
     gameCenterViewController.duelStartViewController = duelStartViewController;
     
-    [self.navigationController pushViewController:duelStartViewController animated:YES];
-//    PlayerOnLineCell *cell = (PlayerOnLineCell *)[tableView cellForRowAtIndexPath:indexPath];
-//    [cell hideIndicatorConnectin];
+    [UIView animateWithDuration:0.75
+                     animations:^{
+                         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                         [self.navigationController pushViewController:duelStartViewController animated:NO];
+                         [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
+                     }];
+    
+}
+
+#pragma mark IconDownloaderDelegate
+- (void)appImageDidLoad:(NSIndexPath *)indexPath
+{
+    profilePictureViewDefault.image = iconDownloader.imageDownloaded;
+    profilePictureViewDefault.hidden = NO;
 }
 
 - (void)dealloc {
