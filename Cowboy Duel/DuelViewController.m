@@ -54,7 +54,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
         }
     }
     */
-    [helpPracticeView setHidden:YES];
+    [self hideHelpViewWithArm];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -243,7 +243,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
 
 -(void)restartCountdown
 {
-    [helpPracticeView setHidden:NO];
+    [super showHelpViewWithArm];
     
     foll = YES;
     [super restartCountdown];
