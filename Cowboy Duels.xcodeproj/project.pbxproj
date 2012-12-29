@@ -203,8 +203,6 @@
 		605A7A5F138A377F00B4FB8E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 605A7A5E138A377F00B4FB8E /* MobileCoreServices.framework */; };
 		60CF1BB713A8C3CF00C302C0 /* follSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 60CF1BB613A8C3CF00C302C0 /* follSound.mp3 */; };
 		76057DC41639937500735342 /* StoreProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76057DC31639937500735342 /* StoreProductCell.m */; };
-		7608D15C168C56C900824ACE /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7608D15B168C56C900824ACE /* FacebookSDK.framework */; };
-		7608D15E168C56E500824ACE /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7608D15D168C56E500824ACE /* FacebookSDKResources.bundle */; };
 		760E676115BD8277006F6832 /* TopPlayersDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 760E676015BD8277006F6832 /* TopPlayersDataSource.m */; };
 		760E676515BD844B006F6832 /* TopPlayersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 760E676315BD844B006F6832 /* TopPlayersViewController.m */; };
 		760E676715BD84C6006F6832 /* TopPlayersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 760E676615BD84C6006F6832 /* TopPlayersViewController.xib */; };
@@ -826,6 +824,8 @@
 		BDD8E24E163EF42F004F05A9 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDD8E24D163EF42F004F05A9 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		BDF1EF1713D41BA500C466DF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF1EF1613D41BA500C466DF /* Security.framework */; };
 		BDF1EF1F13D41C4E00C466DF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF1EF1E13D41C4E00C466DF /* MapKit.framework */; };
+		BDFE6326168D987E00646864 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDFE6325168D987E00646864 /* FacebookSDK.framework */; };
+		BDFE6328168D989000646864 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BDFE6327168D989000646864 /* FacebookSDKResources.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -1056,8 +1056,6 @@
 		60CF1BB613A8C3CF00C302C0 /* follSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = follSound.mp3; sourceTree = "<group>"; };
 		76057DC21639937500735342 /* StoreProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoreProductCell.h; path = PlayersOnLineDataSource/StoreProductCell.h; sourceTree = "<group>"; };
 		76057DC31639937500735342 /* StoreProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoreProductCell.m; path = PlayersOnLineDataSource/StoreProductCell.m; sourceTree = "<group>"; };
-		7608D15B168C56C900824ACE /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../../FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
-		7608D15D168C56E500824ACE /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = ../../../../FacebookSDK/FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle; sourceTree = "<group>"; };
 		760E675F15BD8276006F6832 /* TopPlayersDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopPlayersDataSource.h; sourceTree = "<group>"; };
 		760E676015BD8277006F6832 /* TopPlayersDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopPlayersDataSource.m; sourceTree = "<group>"; };
 		760E676315BD844B006F6832 /* TopPlayersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopPlayersViewController.m; sourceTree = "<group>"; };
@@ -1375,6 +1373,8 @@
 		BDF1EF1613D41BA500C466DF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BDF1EF1813D41BD600C466DF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BDF1EF1E13D41C4E00C466DF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		BDFE6325168D987E00646864 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		BDFE6327168D989000646864 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKResources.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1413,7 +1413,7 @@
 				313F4E78165CFE7B007EF4B1 /* libsqlite3.0.dylib in Frameworks */,
 				313F4E79165CFEA2007EF4B1 /* libGoogleAnalytics.a in Frameworks */,
 				BD822AF31663ADB300D874F4 /* libCrittercism_v3_4_0.a in Frameworks */,
-				7608D15C168C56C900824ACE /* FacebookSDK.framework in Frameworks */,
+				BDFE6326168D987E00646864 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1855,8 +1855,8 @@
 		60593A611379321700256204 = {
 			isa = PBXGroup;
 			children = (
-				7608D15D168C56E500824ACE /* FacebookSDKResources.bundle */,
-				7608D15B168C56C900824ACE /* FacebookSDK.framework */,
+				BDFE6327168D989000646864 /* FacebookSDKResources.bundle */,
+				BDFE6325168D987E00646864 /* FacebookSDK.framework */,
 				BD81FB421678847D00417076 /* Accounts.framework */,
 				BD83A3EF1671E7CB003EE4B3 /* GHUnitIOS.framework */,
 				763E6BB81664B18500FA4E86 /* GoogleAdMobAdsSdkiOS-6.2.1 */,
@@ -2763,7 +2763,7 @@
 				BD05E7CF1669192600F04140 /* iconGun@2x.png in Resources */,
 				BD05E7D01669192600F04140 /* iconGun.png in Resources */,
 				BD16BF981680934F00628CCC /* FunPageViewController.xib in Resources */,
-				7608D15E168C56E500824ACE /* FacebookSDKResources.bundle in Resources */,
+				BDFE6328168D989000646864 /* FacebookSDKResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
