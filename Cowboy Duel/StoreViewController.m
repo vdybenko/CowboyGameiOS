@@ -121,19 +121,28 @@
         for (int i=0; i<maxIndex; i++) {
             NSIndexPath* rowToReload = [NSIndexPath indexPathForRow:i inSection:0];
             NSArray* rowsToReload = [NSArray arrayWithObjects:rowToReload, nil];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                UITableViewCell *cell = [tableView.visibleCells lastObject];
-                //[cell setHidden:YES];
-                
-                UITableViewRowAnimation type;
-                if (storeDataSource.typeOfTable == StoreDataSourceTypeTablesWeapons)
-                {
-                    type = UITableViewRowAnimationRight;
-                }else{
-                    type = UITableViewRowAnimationLeft;
+            
+            dispatch_async(dispatch_get_main_queue(), ^{                
+                if ([tableView.visibleCells count]>i) {
+                    UITableViewCell *cell = [tableView.visibleCells lastObject];
+                    [cell setHidden:YES];
+                    
+                    UITableViewRowAnimation type;
+                    if (storeDataSource.typeOfTable == StoreDataSourceTypeTablesWeapons)
+                    {
+                        type = UITableViewRowAnimationRight;
+                    }else{
+                        type = UITableViewRowAnimationLeft;
+                    }
+                    
+                    [self.tableView beginUpdates];
+                    
+                    [storeDataSource setCellsHide:NO];
+                                        
+                    [tableView reloadRowsAtIndexPaths:rowsToReload withRowAnimation:type];
+                    
+                    [self.tableView endUpdates];
                 }
-                [storeDataSource setCellsHide:NO];
-                [tableView reloadRowsAtIndexPaths:rowsToReload withRowAnimation:type];
             });
             [NSThread sleepForTimeInterval:0.12];
         }
