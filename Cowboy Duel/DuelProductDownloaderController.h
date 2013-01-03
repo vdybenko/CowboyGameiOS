@@ -24,7 +24,7 @@ typedef enum{
 
 @protocol DuelProductDownloaderControllerDelegate
 
--(void)didiFinishDownloadWithType:(DuelProductDownloaderType)type error:(NSError *)error;
+-(void)didFinishDownloadWithType:(DuelProductDownloaderType)type error:(NSError *)error;
 
 @end
 

@@ -18,16 +18,14 @@
     
     int purchesingProductIndex;
     BOOL bagFlag;
+    
 }
 @property (strong, nonatomic) IBOutlet UILabel *title;
-
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIButton *btnWeapons;
 @property (strong, nonatomic) IBOutlet UIButton *btnDefenses;
 @property (strong, nonatomic) IBOutlet UIButton *btnBack;
 @property (unsafe_unretained, nonatomic) IBOutlet UIButton *btnBag;
-
-
 
 @end
 
@@ -40,6 +38,7 @@
 @synthesize btnBack;
 @synthesize btnWeapons;
 @synthesize btnDefenses;
+@synthesize btnBag;
 @synthesize loadingView;
 
 #pragma mark
@@ -90,9 +89,7 @@
     [super viewDidAppear:animated];
     [MKStoreManager sharedManager].delegate = self;
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        [self startTableAnimation];
-    });
+    [self startTableAnimation];
 }
 
 -(void)refreshController;
@@ -109,35 +106,38 @@
 
 -(void)startTableAnimation;
 {
-    int countOfCells=[storeDataSource.arrItemsList count];
-    int maxIndex;
-    if (countOfCells<5) {
-        maxIndex=countOfCells;
-    }else {
-        maxIndex=5;
-    }
-    
-    for (int i=0; i<maxIndex; i++) {
-        NSIndexPath* rowToReload = [NSIndexPath indexPathForRow:i inSection:0];
-        NSArray* rowsToReload = [NSArray arrayWithObjects:rowToReload, nil];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UITableViewCell *cell = [tableView.visibleCells lastObject];
-            //[cell setHidden:YES];
-            
-            UITableViewRowAnimation type;
-            if (storeDataSource.typeOfTable == StoreDataSourceTypeTablesWeapons)
-            {
-                type = UITableViewRowAnimationRight;
-            }else{
-                type = UITableViewRowAnimationLeft;
-            }
-            [storeDataSource setCellsHide:NO];
-            [tableView reloadRowsAtIndexPaths:rowsToReload withRowAnimation:type];
-        });
-        [NSThread sleepForTimeInterval:0.12];
-    }
+    dispatch_queue_t queue = dispatch_queue_create("com.bidon.cowboychalenge.table_animation", NULL);
+        
+    dispatch_async(queue, ^(void) {
+        int countOfCells=[storeDataSource.arrItemsList count];
+        int maxIndex;
+        if (countOfCells<5) {
+            maxIndex=countOfCells;
+        }else {
+            maxIndex=5;
+        }
+        
+        for (int i=0; i<maxIndex; i++) {
+            NSIndexPath* rowToReload = [NSIndexPath indexPathForRow:i inSection:0];
+            NSArray* rowsToReload = [NSArray arrayWithObjects:rowToReload, nil];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UITableViewCell *cell = [tableView.visibleCells lastObject];
+                //[cell setHidden:YES];
+                
+                UITableViewRowAnimation type;
+                if (storeDataSource.typeOfTable == StoreDataSourceTypeTablesWeapons)
+                {
+                    type = UITableViewRowAnimationRight;
+                }else{
+                    type = UITableViewRowAnimationLeft;
+                }
+                [storeDataSource setCellsHide:NO];
+                [tableView reloadRowsAtIndexPaths:rowsToReload withRowAnimation:type];
+            });
+            [NSThread sleepForTimeInterval:0.12];
+        }
+    });
 }
-
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -241,7 +241,7 @@
 
 #pragma mark DuelProductDownloaderControllerDelegate
 
--(void)didiFinishDownloadWithType:(DuelProductDownloaderType)type error:(NSError *)error;
+-(void)didFinishDownloadWithType:(DuelProductDownloaderType)type error:(NSError *)error;
 {    
     [self activityHide];
 }
@@ -249,26 +249,22 @@
 #pragma mark IBAction
 - (IBAction)weaponsButtonClick:(id)sender {
     if (storeDataSource.typeOfTable != StoreDataSourceTypeTablesWeapons) {
+    
         storeDataSource.typeOfTable = StoreDataSourceTypeTablesWeapons;
         [storeDataSource reloadDataSource];
         [storeDataSource setCellsHide:YES];
         [tableView reloadData];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            
-            [self startTableAnimation];
-        });
+        [self startTableAnimation];
     }
 }
 - (IBAction)defenseButtonClick:(id)sender {
     if (storeDataSource.typeOfTable != StoreDataSourceTypeTablesDefenses) {
+    
         storeDataSource.typeOfTable = StoreDataSourceTypeTablesDefenses;
         [storeDataSource reloadDataSource];
         [storeDataSource setCellsHide:YES];
         [tableView reloadData];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            
-            [self startTableAnimation];
-        });
+        [self startTableAnimation];
     }
 }
 
@@ -289,16 +285,14 @@
     [storeDataSource reloadDataSource];
     [storeDataSource setCellsHide:YES];
     [tableView reloadData];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        
-        [self startTableAnimation];
-    });
     
+    [self startTableAnimation];
 }
 
 - (IBAction)backButtonClick:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 #pragma mark Activity view
 
 -(void)activityShow;

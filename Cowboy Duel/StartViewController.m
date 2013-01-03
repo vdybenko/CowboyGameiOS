@@ -1266,7 +1266,7 @@ static StartViewController *sharedHelper = nil;
 
 #pragma mark DuelProductDownloaderControllerDelegate
 
--(void)didiFinishDownloadWithType:(DuelProductDownloaderType)type error:(NSError *)error;
+-(void)didFinishDownloadWithType:(DuelProductDownloaderType)type error:(NSError *)error;
 {
     if (!error) {
         if (type == DuelProductDownloaderTypeDuelProduct) {
