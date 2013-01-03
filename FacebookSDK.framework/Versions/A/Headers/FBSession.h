@@ -49,7 +49,7 @@ extern NSString *const FBSessionDidBecomeClosedActiveSessionNotification;
  */
 typedef enum {
     /*! One of two initial states indicating that no valid cached token was found */
-    FBSessionStateCreated                   = 0,
+    FBSessionStateCreated = 0,
     /*! One of two initial session states indicating that a cached token was loaded;
      when a session is in this state, a call to open* will result in an open session,
      without UX or app-switching*/

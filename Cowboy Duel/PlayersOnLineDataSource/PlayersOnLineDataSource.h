@@ -17,6 +17,8 @@
 @protocol TableCellWithButton
 
 -(void)clickButton:(NSIndexPath *)indexPath;
+@optional
+-(void)didFinishLoadTable:(UITableView*)table;
 
 @end
 

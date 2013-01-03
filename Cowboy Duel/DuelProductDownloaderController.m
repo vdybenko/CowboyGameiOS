@@ -124,7 +124,7 @@ static NSString *getSavePathForDuelProduct()
             DuelProductDownloaderType type = DuelProductDownloaderTypeDuelProduct;
                           
              if (delegate) {
-                 [delegate didiFinishDownloadWithType:type error:error];
+                 [delegate didFinishDownloadWithType:type error:error];
              }
          }
      }];
@@ -180,7 +180,7 @@ static NSString *getSavePathForDuelProduct()
              }
              DuelProductDownloaderType type = DuelProductDownloaderTypeUserProduct;
              if (delegate) {
-                 [delegate didiFinishDownloadWithType:type error:error];
+                 [delegate didFinishDownloadWithType:type error:error];
              }
          }
          
@@ -228,7 +228,7 @@ static NSString *getSavePathForDuelProduct()
              DuelProductDownloaderType type = DuelProductDownloaderTypeBuyProduct;
              
              if (delegate) {
-                 [delegate didiFinishDownloadWithType:type error:error];
+                 [delegate didFinishDownloadWithType:type error:error];
              }
          }
          
@@ -315,7 +315,7 @@ static NSString *getSavePathForDuelProduct()
     }
 
     if (delegate) {
-        [delegate didiFinishDownloadWithType:type error:error];
+        [delegate didFinishDownloadWithType:type error:error];
     }
 }
 
@@ -392,7 +392,7 @@ static NSString *getSavePathForDuelProduct()
     
     didFinishBlock = nil;
     if (delegate) {
-        [delegate didiFinishDownloadWithType:DuelProductDownloaderTypeDuelProduct error:error];
+        [delegate didFinishDownloadWithType:DuelProductDownloaderTypeDuelProduct error:error];
     } 
 }
 
@@ -449,7 +449,7 @@ static NSString *getSavePathForDuelProduct()
     }
     didFinishBlock = nil;
     if (delegate) {
-        [delegate didiFinishDownloadWithType:DuelProductDownloaderTypeUserProduct error:error];
+        [delegate didFinishDownloadWithType:DuelProductDownloaderTypeUserProduct error:error];
     }
     
     DLog(@"parsingResultUserProduct refresh complite");
@@ -463,7 +463,7 @@ static NSString *getSavePathForDuelProduct()
     }
     didFinishBlock = nil;
     if (delegate) {
-        [delegate didiFinishDownloadWithType:DuelProductDownloaderTypeBuyProduct error:error];
+        [delegate didFinishDownloadWithType:DuelProductDownloaderTypeBuyProduct error:error];
     }
 }
 
