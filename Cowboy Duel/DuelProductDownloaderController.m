@@ -29,8 +29,6 @@ NSString  *const URL_PRODUCTS_BUY = @BASE_URL"store/bought";
     NSMutableArray *arrDefenseSaved;
     NSMutableArray *arrItems;
     NSMutableArray *arrWeaponSaved;
-    
-    BOOL isWeaponProductsDownload;
 }
 @end
 
@@ -50,8 +48,6 @@ static int numberRevision;
     arrDefenseSaved = [NSMutableArray array];
     arrWeaponSaved = [NSMutableArray array];
     arrItems = [NSMutableArray array];
-    isWeaponProductsDownload = YES;
-
 	return self;
 }
 
@@ -352,14 +348,8 @@ static NSString *getSavePathForDuelProduct()
     }
     DLog(@"arrItemsList %@",arrItems);
     [DuelProductDownloaderController saveWeapon:arrItems];
+    arrWeaponSaved = arrItems;
     
-    if ([arrayIDProducts count]!=0) {
-        [self requestProductDataWithNSSet:arrayIDProducts];
-    }else{
-        isWeaponProductsDownload = NO;
-    }
-    
-    [arrayIDProducts removeAllObjects];
     [arrItems removeAllObjects];
     responseObjectOfProducts = [responseObject objectForKey:@"defenses"];
     for (NSDictionary *dic in responseObjectOfProducts) {
@@ -378,6 +368,8 @@ static NSString *getSavePathForDuelProduct()
     }
     DLog(@"arrItemsList %@",arrItems);
     [DuelProductDownloaderController saveDefense:arrItems];
+    
+    arrDefenseSaved = arrItems;
     
     if ([arrayIDProducts count]!=0) {
         [self requestProductDataWithNSSet:arrayIDProducts];
@@ -540,31 +532,32 @@ static NSString *getSavePathForDuelProduct()
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         NSMutableArray *array = [NSMutableArray array];
         [array addObjectsFromArray:response.products];
-        if (isWeaponProductsDownload) {
-            isWeaponProductsDownload = NO;
-            arrWeaponSaved = [DuelProductDownloaderController loadWeaponArray];
-            for(int i=0;i<[array count];i++)
-            {
-                SKProduct *productPurches = [array objectAtIndex:i];
-                NSUInteger indexOfProductInSavedWeaponArray=[[AccountDataSource sharedInstance] findObsByPurchase](arrWeaponSaved,[productPurches productIdentifier]);
-                CDWeaponProduct *product=[arrWeaponSaved objectAtIndex:indexOfProductInSavedWeaponArray];
-                product.dPurchasePrice = [NSString stringWithFormat:@"%.2f%@",[[productPurches price] doubleValue],[productPurches priceLocale]];
-                [arrWeaponSaved replaceObjectAtIndex:indexOfProductInSavedWeaponArray withObject:product];
-            }
-            [DuelProductDownloaderController saveWeapon:arrWeaponSaved];
-        }else{
-            arrDefenseSaved = [DuelProductDownloaderController loadDefenseArray];
-            for(int i=0;i<[array count];i++)
-            {
-                SKProduct *productPurches = [array objectAtIndex:i];
-                NSUInteger indexOfProductInSavedDefenseArray=[[AccountDataSource sharedInstance] findObsByPurchase](arrDefenseSaved,[productPurches productIdentifier]);
-                CDDefenseProduct *product=[arrDefenseSaved objectAtIndex:indexOfProductInSavedDefenseArray];
-                NSString *priceType = [[productPurches priceLocale] objectForKey:NSLocaleCurrencySymbol];
+        
+        NSMutableArray *arrWeapon = [DuelProductDownloaderController loadWeaponArray];
+        NSMutableArray *arrDefense = [DuelProductDownloaderController loadDefenseArray];
+        
+        for(int i=0;i<[array count];i++)
+        {
+            SKProduct *productPurches = [array objectAtIndex:i];
+            NSString *priceType = [[productPurches priceLocale] objectForKey:NSLocaleCurrencySymbol];
+            
+            NSUInteger indexOfProductInSavedWeaponArray=[[AccountDataSource sharedInstance] findObsByPurchase](arrWeapon,[productPurches productIdentifier]);
+            if (indexOfProductInSavedWeaponArray != NSNotFound) {
+                CDWeaponProduct *product=[arrWeapon objectAtIndex:indexOfProductInSavedWeaponArray];
                 product.dPurchasePrice = [NSString stringWithFormat:@"%.2f%@",[[productPurches price] doubleValue],priceType];
-                [arrDefenseSaved replaceObjectAtIndex:indexOfProductInSavedDefenseArray withObject:product];
+                [arrWeapon replaceObjectAtIndex:indexOfProductInSavedWeaponArray withObject:product];
+            }else{
+                NSUInteger indexOfProductInSavedDefenseArray=[[AccountDataSource sharedInstance] findObsByPurchase](arrDefense,[productPurches productIdentifier]);
+                if (indexOfProductInSavedDefenseArray != NSNotFound){
+                    CDDefenseProduct *product=[arrDefense objectAtIndex:indexOfProductInSavedDefenseArray];
+                    product.dPurchasePrice = [NSString stringWithFormat:@"%.2f%@",[[productPurches price] doubleValue],priceType];
+                    [arrDefense replaceObjectAtIndex:indexOfProductInSavedDefenseArray withObject:product];
+                }
             }
-            [DuelProductDownloaderController saveDefense:arrDefenseSaved];
         }
+        
+        [DuelProductDownloaderController saveWeapon:arrWeapon];
+        [DuelProductDownloaderController saveDefense:arrDefense];
     });
 }
 
