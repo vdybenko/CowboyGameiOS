@@ -18,6 +18,7 @@
 #import "TopPlayersViewController.h"
 #import "SSServer.h"
 #import "DuelStartViewController.h"
+#import "StoreViewController.h"
 
 static const CGFloat changeYPointWhenKeyboard = 155;
 static const CGFloat timeToStandartTitles = 1.8;
@@ -86,7 +87,9 @@ static const CGFloat timeToStandartTitles = 1.8;
     IBOutlet UILabel *lbDescription;
     NSMutableArray *textsContainer;
 }
-    -(void)setImageFromFacebook;
+-(void)setImageFromFacebook;
+-(IBAction)showStoreWeapon:(id)sender;
+-(IBAction)showStoreDefence:(id)sender;
 @end
 
 @implementation ProfileViewController
@@ -830,6 +833,32 @@ if (playerAccount.accountLevel != 10) {
     
 }
 
+-(IBAction)showStoreWeapon:(id)sender
+{
+    StoreViewController *storeViewController=[[StoreViewController alloc] initWithAccount:playerAccount];
+    storeViewController.bagFlag = YES;
+    [UIView animateWithDuration:0.75
+                     animations:^{
+                         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                         [self.navigationController pushViewController:storeViewController animated:NO];
+                         [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
+                     }];
+}
+
+-(IBAction)showStoreDefence:(id)sender
+{
+    StoreViewController *storeViewController=[[StoreViewController alloc] initWithAccount:playerAccount];
+    storeViewController.bagFlag = YES;
+    storeViewController.storeDataSource.typeOfTable = StoreDataSourceTypeTablesDefenses;
+    [UIView animateWithDuration:0.75
+                     animations:^{
+                         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                         [self.navigationController pushViewController:storeViewController animated:NO];
+                         [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
+                     }];
+    
+    
+}
 #pragma mark IconDownloaderDelegate
 - (void)appImageDidLoad:(NSIndexPath *)indexPath
 {

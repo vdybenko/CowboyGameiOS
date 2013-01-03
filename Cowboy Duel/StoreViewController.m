@@ -40,7 +40,7 @@
 @synthesize btnWeapons;
 @synthesize btnDefenses;
 @synthesize btnBag;
-@synthesize loadingView;
+@synthesize loadingView, bagFlag;
 
 #pragma mark
 -(id)initWithAccount:(AccountDataSource *)pUserAccount;
@@ -51,6 +51,9 @@
         duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
         duelProductDownloaderController.delegate = self;
         purchesingProductIndex =-1;
+        storeDataSource = [[StoreDataSource alloc] initWithTable:tableView parentVC:self];
+        storeDataSource.delegate = self;
+        //bagFlag = YES;
     }
     return self;
 }
@@ -58,10 +61,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-     storeDataSource = [[StoreDataSource alloc] initWithTable:tableView parentVC:self];
-    storeDataSource.delegate = self;
-    [tableView setDataSource:storeDataSource];
     
+    [tableView setDataSource:storeDataSource];
     title.text = NSLocalizedString(@"SHOP", @"");
     title.textColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
     title.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
@@ -89,6 +90,17 @@
 {
     [super viewDidAppear:animated];
     [MKStoreManager sharedManager].delegate = self;
+    
+    if (self.bagFlag) {
+        title.text = NSLocalizedString(@"BAG", @"");
+        [self.btnBag changeTitleByLabel:NSLocalizedString(@"SHOP", @"")];
+        storeDataSource.bagFlag = bagFlag;
+        [storeDataSource reloadDataSource];
+        [storeDataSource setCellsHide:YES];
+        [tableView reloadData];
+        
+        [self startTableAnimation];
+    }
     
     [self startTableAnimation];
 }
@@ -306,7 +318,13 @@
 }
 
 - (IBAction)backButtonClick:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    //[self.navigationController popViewControllerAnimated:YES];
+    [UIView animateWithDuration:0.75
+                     animations:^{
+                         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                         [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
+                     }];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 #pragma mark Activity view
