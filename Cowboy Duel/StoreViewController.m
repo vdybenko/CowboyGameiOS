@@ -26,6 +26,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnDefenses;
 @property (strong, nonatomic) IBOutlet UIButton *btnBack;
 @property (unsafe_unretained, nonatomic) IBOutlet UIButton *btnBag;
+@property (unsafe_unretained, nonatomic) IBOutlet UIView *loadingView;
 
 @end
 
@@ -197,7 +198,11 @@
             playerAccount.curentIdWeapon = product.dID;
             [playerAccount saveWeapon];
             cell.buyProduct.enabled = YES;
-            [self activityHide];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [self activityHide];
+            });
+            
             [storeDataSource reloadDataSource];
             [tableView reloadData];
         }
@@ -243,7 +248,9 @@
 
 -(void)didFinishDownloadWithType:(DuelProductDownloaderType)type error:(NSError *)error;
 {    
-    [self activityHide];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self activityHide];
+    });
 }
 
 #pragma mark IBAction
@@ -303,7 +310,7 @@
 
 -(void)activityHide;
 {
-    loadingView.hidden = YES;
+    [self.loadingView setHidden:YES];
     self.view.userInteractionEnabled = YES;
 }
 

@@ -178,7 +178,7 @@
         if ([AccountDataSource sharedInstance].money>product.dPrice) {
             buyProduct.enabled = YES;
         }else{
-            if (product.dCountOfUse == 0) buyProduct.enabled = NO;
+            if ((cellType==StoreDataSourceTypeTablesDefenses)||(product.dCountOfUse == 0)) buyProduct.enabled = NO;
         }
     }
     

@@ -15,7 +15,6 @@
 
 @interface StoreViewController : UIViewController<UITableViewDelegate,TableCellWithButton,MKStoreKitDelegate,DuelProductDownloaderControllerDelegate>
 @property (strong, nonatomic) StoreDataSource *storeDataSource;
-@property (strong, nonatomic) IBOutlet UIView *loadingView;
 
 -(id)initWithAccount:(AccountDataSource *)userAccount;
 - (IBAction)backButtonClick:(id)sender;
