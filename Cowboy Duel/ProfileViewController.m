@@ -391,7 +391,10 @@ static const CGFloat timeToStandartTitles = 1.8;
     NSString *name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel];
     ivCurrentRank.image = [UIImage imageNamed:name];
     tfFBName.text = playerAccount.accountName;
-    if([textsContainer count]) [textsContainer replaceObjectAtIndex:1 withObject:[NSString stringWithFormat:NSLocalizedString(@"PROFILE_MESS_2_NAME", nil),playerAccount.accountName]];
+    if([textsContainer count]){
+        [textsContainer replaceObjectAtIndex:1 withObject:[NSString stringWithFormat:NSLocalizedString(@"PROFILE_MESS_2_NAME", nil),playerAccount.accountName]];
+    }
+    NSLog(@"tfFBName.text %@",playerAccount.accountName);
     SSConnection *connection = [SSConnection sharedInstance];
     [connection sendInfoPacket];
 }
