@@ -697,7 +697,8 @@ static StartViewController *sharedHelper = nil;
 
 }
 
-- (IBAction)storeButtonClick:(id)sender {    
+- (IBAction)storeButtonClick:(id)sender {
+    playerAccount.accountLevel = 3;
     storeViewController=[[StoreViewController alloc] initWithAccount:playerAccount];
     [self.navigationController pushViewController:storeViewController animated:YES];
     

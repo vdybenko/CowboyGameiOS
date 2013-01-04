@@ -111,7 +111,6 @@
 #pragma mark - Delegated methods
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%d %d",indexPath.row,[tableView numberOfRowsInSection:0]);
     if (indexPath.row == ([tableView numberOfRowsInSection:0]-1)) {
         PracticeCell *cell = [tableView dequeueReusableCellWithIdentifier:[PracticeCell cellID]];
         if (!cell ) {
@@ -197,7 +196,6 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSLog(@"count %d",[self.serverObjects count]);
     return [self.serverObjects count];
 }
 

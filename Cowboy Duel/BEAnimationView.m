@@ -111,10 +111,6 @@ int oldMovingKey = 4;
 
                                                          } completion:^(BOOL finished) {
                                                              if(self.stopAnimation) return;
-                                                           NSLog(@"y: %f",self.frame.origin.y);
-                                                           NSLog(@"h: %f",self.frame.size.height);
-                                                           NSLog(@"abs(y): %d",abs(self.frame.origin.y));
-                                                           NSLog(@"h/2: %f",self.frame.size.height/2);
 
                                                            if (self.frame.origin.y+self.frame.size.height > [UIScreen mainScreen].bounds.size.height/2) {
                                                                neadShift = NO;
