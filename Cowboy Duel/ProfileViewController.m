@@ -227,8 +227,6 @@ static const CGFloat timeToStandartTitles = 1.8;
 {
     [super viewDidLoad];
     
-    
-    
     [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"loginFirstShow"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
@@ -370,17 +368,22 @@ static const CGFloat timeToStandartTitles = 1.8;
 {
     [self refreshContentFromPlayerAccount];
     NSUserDefaults *uDef=[NSUserDefaults standardUserDefaults];
-
+    profilePictureView.profileID = playerAccount.facebookUser.id;
     if (![uDef objectForKey:@"FBAccessTokenKey"]) {
         [btnLogOutFB setHidden:YES];
         [btnLogInFB setHidden:NO];
         [btnLeaderboard setEnabled:NO];
-        _ivIconUser.contentMode = UIViewContentModeBottomLeft;
-        _ivIconUser.image = [UIImage imageNamed:@"pv_photo_default.png"];
+        [profilePictureView setHidden:YES];
+        profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
+        //profilePictureViewDefault.contentMode = UIViewContentModeBottomLeft;
+        profilePictureViewDefault.image = [UIImage imageNamed:@"pv_photo_default.png"];
+        [profilePictureViewDefault setHidden:NO];
     }
     else 
     {
-        _ivIconUser.contentMode = UIViewContentModeScaleAspectFill;
+        [profilePictureView setHidden:NO];
+        [profilePictureViewDefault setHidden:YES];
+        profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
         [btnLogOutFB setHidden:NO];
         [btnLogInFB setHidden:YES];
         [btnLeaderboard setEnabled:YES];

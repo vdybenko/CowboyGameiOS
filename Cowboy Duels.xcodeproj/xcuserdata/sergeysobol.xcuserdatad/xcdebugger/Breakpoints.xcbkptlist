@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ProfileViewController.m"
-         timestampString = "378907563.057935"
+         timestampString = "378982819.823046"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "627"
-         endingLineNumber = "627"
+         startingLineNumber = "628"
+         endingLineNumber = "628"
          landmarkName = "-changeFBSesionAction"
          landmarkType = "5">
       </FileBreakpoint>
@@ -138,11 +138,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ProfileViewController.m"
-         timestampString = "378907563.057935"
+         timestampString = "378982238.601699"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "341"
-         endingLineNumber = "341"
+         startingLineNumber = "339"
+         endingLineNumber = "339"
          landmarkName = "-initMainControls"
          landmarkType = "5">
       </FileBreakpoint>
@@ -209,6 +209,19 @@
          startingLineNumber = "65"
          endingLineNumber = "65"
          landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Cowboy Duel/ProfileViewController.m"
+         timestampString = "378982238.601699"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "372"
+         endingLineNumber = "372"
+         landmarkName = "-checkLocationOfViewForFBLogin"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
