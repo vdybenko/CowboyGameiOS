@@ -12,7 +12,7 @@
 @implementation SoundDownload
 +(NSString*) saveSound:(NSString*) pName URL:(NSString*)pURL directory:(NSString*)dir;
 {
-    NSString *nameFile=[NSString stringWithFormat:@"%@.mp3",pName];
+    NSString *nameFile=[NSString stringWithFormat:@"%@.mp3",[pName stringByDeletingPathExtension]];
     NSString *soundFilePath = [NSString stringWithFormat:@"%@/%@",dir,nameFile];
     if (![Utils isFileDownloadedForPath:soundFilePath]) {
         if (pURL && [pURL length]) {

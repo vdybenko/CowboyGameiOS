@@ -346,7 +346,6 @@ static NSString *getSavePathForDuelProduct()
         }
         [arrItems addObject: product];
     }
-    DLog(@"arrItemsList %@",arrItems);
     [DuelProductDownloaderController saveWeapon:arrItems];
     arrWeaponSaved = arrItems;
     
@@ -366,7 +365,6 @@ static NSString *getSavePathForDuelProduct()
         }
         [arrItems addObject: product];
     }
-    DLog(@"arrItemsList %@",arrItems);
     [DuelProductDownloaderController saveDefense:arrItems];
     
     arrDefenseSaved = arrItems;

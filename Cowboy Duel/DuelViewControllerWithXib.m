@@ -265,14 +265,12 @@ static NSString *ShotSound = @"%@/shot.mp3";
         if ((rollingX >= -0.7)&&(rollingZ > -0.6)&&(rollingY<=-0.7))      
     {
 //        Position for Shot
-        NSLog(@" Position for Shot");
         accelerometerState = NO;
     }
         
     if (rollingX < -0.7)
         if ((rollingZ > -0.7)) {
 //       Posirtion for STEADY
-            NSLog(@" Posirtion for STEADY");
             accelerometerState = YES;
         } 
     
