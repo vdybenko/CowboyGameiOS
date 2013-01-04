@@ -209,6 +209,12 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
         }
     }
 
+    [self openSessionWithPermission:permissions];
+}
+
+-(void)openSessionWithPermission:(NSArray *)permissions
+{
+    float ver_float = [[[UIDevice currentDevice] systemVersion] floatValue];
     [FBSession openActiveSessionWithReadPermissions:permissions
                                        allowLoginUI:YES
                                   completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
@@ -216,13 +222,8 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
                                       {
                                           NSLog(@"Session error");
                                           if (ver_float >= 6.0) [self fbResync];
-                                          [NSThread sleepForTimeInterval:0.5];   //half a second
-                                          [FBSession openActiveSessionWithReadPermissions:permissions
-                                                                             allowLoginUI:YES
-                                                                        completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
-                                                                            [self sessionStateChanged:session state:state error:error];
-                                                                        }];
-                                          
+                                          [NSThread sleepForTimeInterval:1.5];   //half a second
+                                          [self openSessionWithPermission:permissions];
                                       }
                                       else
                                           [self sessionStateChanged:session state:state error:error];
