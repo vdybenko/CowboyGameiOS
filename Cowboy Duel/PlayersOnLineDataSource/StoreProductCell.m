@@ -13,6 +13,7 @@
 #import "DuelProductDownloaderController.h"
 #import "UIImage+Save.h"
 #import <QuartzCore/QuartzCore.h>
+#import "BBCyclingLabel.h"
 
 @interface StoreProductCell()
 {
@@ -186,7 +187,7 @@
     icon.image = [UIImage loadImageFullPath:[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],product.dIconLocal]];
     if (product.dID == -1) {
         icon.image = [UIImage imageNamed:@"iconGun.png"];
-    }
+    }    
 }
 
 - (IBAction)buyButtonClick:(id)sender {

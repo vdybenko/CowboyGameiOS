@@ -51,7 +51,7 @@
         duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
         duelProductDownloaderController.delegate = self;
         purchesingProductIndex =-1;
-        storeDataSource = [[StoreDataSource alloc] initWithTable:tableView parentVC:self];
+        storeDataSource = [[StoreDataSource alloc] initWithTable:Nil parentVC:self];
         storeDataSource.delegate = self;
         //bagFlag = YES;
     }
@@ -62,6 +62,7 @@
 {
     [super viewDidLoad];
     
+    storeDataSource.tableView = tableView;
     [tableView setDataSource:storeDataSource];
     title.text = NSLocalizedString(@"SHOP", @"");
     title.textColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
@@ -207,9 +208,6 @@
                         playerAccount.accountWeapon = product;
                         playerAccount.curentIdWeapon = product.dID;
                         [playerAccount saveWeapon];
-                        
-                        [storeDataSource reloadDataSource];
-                        [tableView reloadData];
                     }                    
                 };
                 return;
@@ -256,9 +254,6 @@
                     product.dCountOfUse +=1;
                     [storeDataSource.arrItemsList replaceObjectAtIndex:indexPath.row withObject:product];
                     [DuelProductDownloaderController saveDefense:storeDataSource.arrItemsList];
-                    
-                    [storeDataSource reloadDataSource];
-                    [tableView reloadData];
                 }
             };
         }
@@ -270,6 +265,9 @@
 -(void)didFinishDownloadWithType:(DuelProductDownloaderType)type error:(NSError *)error;
 {    
     dispatch_async(dispatch_get_main_queue(), ^{
+        [storeDataSource reloadDataSource];
+        [tableView reloadData];
+        
         [self activityHide];
     });
 }
