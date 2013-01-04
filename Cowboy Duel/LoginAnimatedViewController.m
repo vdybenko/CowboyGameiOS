@@ -495,10 +495,10 @@ static LoginAnimatedViewController *sharedHelper = nil;
 	if ([result isKindOfClass:[NSDictionary class]]) {
         
         //        putch for 1.4.1
-        BOOL modifierUserInfo = NO;
-        if (([playerAccount.accountID rangeOfString:@"F:"].location != NSNotFound)&&[playerAccount putchAvatarImageSendInfo]) {
-            modifierUserInfo = YES;
-        }
+        BOOL modifierUserInfo = YES;
+//        if (([playerAccount.accountID rangeOfString:@"F:"].location != NSNotFound)&&[playerAccount putchAvatarImageSendInfo]) {
+//            modifierUserInfo = YES;
+//        }
         //
         startViewController.oldAccounId = [[NSString alloc] initWithFormat:@"%@",playerAccount.accountID];
         

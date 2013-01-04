@@ -169,6 +169,26 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     return NO;
 }
 
+-(void)fbResync
+{
+    ACAccountStore *accountStore;
+    ACAccountType *accountTypeFB;
+    if ((accountStore = [[ACAccountStore alloc] init]) && (accountTypeFB = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook] ) ){
+        
+        NSArray *fbAccounts = [accountStore accountsWithAccountType:accountTypeFB];
+        id account;
+        if (fbAccounts && [fbAccounts count] > 0 && (account = [fbAccounts objectAtIndex:0])){
+            
+            [accountStore renewCredentialsForAccount:account completion:^(ACAccountCredentialRenewResult renewResult, NSError *error) {
+                //we don't actually need to inspect renewResult or error.
+                if (error){
+                    
+                }
+            }];
+        }
+    }
+}
+
 - (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI {
     
     NSArray *permissions =
@@ -188,70 +208,25 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 
         }
     }
-    [FBSession openActiveSessionWithReadPermissions:nil
+
+    [FBSession openActiveSessionWithReadPermissions:permissions
                                        allowLoginUI:YES
-                                  completionHandler:
-     ^(FBSession *session,
-       FBSessionState state, NSError *error) {
-         [self sessionStateChanged:session state:state error:error];
-     }];
-//    if( [FBSession openActiveSessionWithAllowLoginUI:NO])
-//        [self sessionStateChanged:[FBSession activeSession] state:[FBSession activeSession].state error:nil];
-////    else [self sessionStateChanged:[FBSession activeSession] state:[FBSession activeSession].state error:nil];
-//    return YES;
-//    if ([[FBSession activeSession] isOpen]) {
-//        //do something
-//        [[NSNotificationCenter defaultCenter] postNotificationName:SCSessionStateChangedNotification
-//                                                            object:[FBSession activeSession]];
-//    }
-//    else {
-//        [FBSession openActiveSessionWithReadPermissions:nil allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
-//            [self sessionStateChanged:session state:status error:error];
-//            if(FB_ISSESSIONOPENWITHSTATE(status)) {
-//                //do something
-//                
-//                [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-//                    if (!error){
-//                        
-//                        NSLog(@"success on first try");
-//                    } else if ([[error userInfo][FBErrorParsedJSONResponseKey][@"body"][@"error"][@"code"] compare:@190] == NSOrderedSame) {
-//                        //requestForMe failed due to error validating access token (code 190), so retry login
-//                        [FBSession openActiveSessionWithReadPermissions:nil allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
-//                            if (!error){
-//                                //do something again, or consider recursive call with a max retry count.
-//                                [self sessionStateChanged:session state:status error:error];
-//                                NSLog(@"success on retry");
-//                                
-//                            }
-//                        }];
-//                    }
-//                }];
-//            }
-//        }];
-//    }
-    
-//    if ([FBSession openActiveSessionWithReadPermissions:permissions
-//                                           allowLoginUI:NO
-//                                      completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
-//                                          [self sessionStateChanged:session state:state error:error];
-//                                      }]) {
-//                                          return YES;
-//    }
-//    else{
-////        FBSession *session = [FBSession activeSession];
-////        [session openWithCompletionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
-////            [self sessionStateChanged:session state:status error:error];
-////        }];
-//        
-//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry", @"AlertView")
-//                                                            message:NSLocalizedString(@"You can't connnect to Facebook right now, make sure  your device has an internet connection and you have at least one Facebook account setup", @"AlertView")
-//                                                           delegate:self
-//                                                  cancelButtonTitle:NSLocalizedString(@"Cancel", @"AlertView")
-//                                                  otherButtonTitles: nil];
-//        [alertView show];
-//        return NO;
-//    }
-    
+                                  completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
+                                      if(error)
+                                      {
+                                          NSLog(@"Session error");
+                                          if (ver_float >= 6.0) [self fbResync];
+                                          [NSThread sleepForTimeInterval:0.5];   //half a second
+                                          [FBSession openActiveSessionWithReadPermissions:permissions
+                                                                             allowLoginUI:YES
+                                                                        completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
+                                                                            [self sessionStateChanged:session state:state error:error];
+                                                                        }];
+                                          
+                                      }
+                                      else
+                                          [self sessionStateChanged:session state:state error:error];
+                                  }];
 }
 
 - (void)sessionStateChanged:(FBSession *)session
