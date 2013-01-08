@@ -14,7 +14,6 @@
 
 @interface StoreDataSource()
 {
-    UITableView *tableView;
     StoreViewController *storeViewController;
     DuelProductDownloaderController *duelProductDownloaderController;
 }
@@ -23,6 +22,7 @@
 @implementation StoreDataSource
 @synthesize arrItemsList,typeOfTable,delegate;
 @synthesize cellsHide, bagFlag;
+@synthesize tableView;
 
 #pragma mark - Instance initialization
 
@@ -92,6 +92,7 @@
 #pragma mark -
 -(void)buyButtonClick:(id __strong)sender;
 {
+    
     StoreProductCell *cell=(StoreProductCell *)sender;
     NSIndexPath *indexPath = [tableView indexPathForCell:cell];
     [delegate clickButton:indexPath];
