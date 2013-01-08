@@ -15,10 +15,10 @@
  */
 
 #import "FBLoginDialog.h"
-#import "FBRequest.h"
+//#import "FBRequest.h"
 #import "FBSessionManualTokenCachingStrategy.h"
 #import "FBFrictionlessRequestSettings.h"
-#import "FacebookSDK.h"
+//#import "FacebookSDK.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // deprecated API

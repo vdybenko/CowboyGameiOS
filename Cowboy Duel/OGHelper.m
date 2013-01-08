@@ -8,6 +8,7 @@
 
 #import "OGHelper.h"
 #import "AccountDataSource.h"
+#import "Facebook.h"
 
 
 static const char *DONATE_URL = BASE_URL"api/time";
@@ -21,6 +22,7 @@ static const char *DONATE_URL = BASE_URL"api/time";
     NSMutableArray *savedAPIResult;
     CLLocationManager *locationManager;
     CLLocation *mostRecentLocation;
+    Facebook *facebook;
 }
 @end
 
@@ -395,19 +397,19 @@ static OGHelper *sharedHelper = nil;
 ///*
 // * Dialog: Requests - send to friends not currently using the app.
 // */
-//- (void)apiDialogRequestsSendToNonUsers:(NSArray *)selectIDs {
-//    currentAPICall = kDialogRequestsSendToSelect;
-//    NSString *selectIDsStr = [selectIDs componentsJoinedByString:@","];
-//    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-//                                   NSLocalizedString(@"INVITE_FRIENDS", @""),  @"message",
-//                                   selectIDsStr, @"suggestions",
-//                                   nil];
-//    
-//    // HackbookAppDelegate *delegate = (HackbookAppDelegate *)[[UIApplication sharedApplication] delegate];
-//    [facebook dialog:@"apprequests"
-//           andParams:params
-//         andDelegate:self];
-//}
+- (void)apiDialogRequestsSendToNonUsers:(NSArray *)selectIDs {
+    currentAPICall = kDialogRequestsSendToSelect;
+    NSString *selectIDsStr = [selectIDs componentsJoinedByString:@","];
+    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                   NSLocalizedString(@"INVITE_FRIENDS", @""),  @"message",
+                                   selectIDsStr, @"suggestions",
+                                   nil];
+    
+    // HackbookAppDelegate *delegate = (HackbookAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [facebook dialog:@"apprequests"
+           andParams:params
+         andDelegate:self];
+}
 //
 ///*
 // * Dialog: Requests - send to select users, in this case friends
@@ -491,40 +493,48 @@ static OGHelper *sharedHelper = nil;
 //    [[AccountDataSource sharedInstance] setFriends:countOfFriends];
 //    [[AccountDataSource sharedInstance] saveFriends];
 //}
-//- (void)getFriendsHowDontUseAppDelegate:(id<FBRequestDelegate>)pDelegate;
-//{
-//    currentAPICall = kAPIFriendsHowDontUseApp;
-//    facebook.accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"FBAccessTokenKey"];
-//    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-//                                    @"SELECT uid,devices FROM user WHERE uid IN ( SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 0 ORDER BY rand()", @"query",
-//                                    nil];
-//    if (!pDelegate) {
-//        pDelegate = self;
-//    }
-//    [facebook   requestWithMethodName: @"fql.query"
-//                            andParams: params
-//                        andHttpMethod: @"GET"
-//                          andDelegate: pDelegate];
-//}
-//- (__autoreleasing NSArray *)getFriendsHowDontUseAppRequest:(FBRequest *)request didLoad:(id)result;
-//{
-//    NSArray  * arrResult =ValidateObject(result, [NSArray class]);
-//    __autoreleasing NSMutableArray *friendToInvait = [NSMutableArray array];
-//    for (NSDictionary *dic in arrResult) {
-//        NSArray *arrDevises = [dic objectForKey:@"devices"];
-//        if ([arrDevises count]==0) {
-////            [friendToInvait addObject:[dic objectForKey:@"uid"]];
-//        }else{
-//            NSDictionary *dicOS=[arrDevises objectAtIndex:0];
-//            NSString *userDeviseOS = [dicOS objectForKey:@"os"];
-//            if ([userDeviseOS isEqualToString:@"iOS"]) {
-//                [friendToInvait insertObject:[dic objectForKey:@"uid"] atIndex:0];
-//            }
-//        }
-//        
-//    }
-//    return friendToInvait;
-//}
+- (void)getFriendsHowDontUseAppDelegate:(id<FBRequestDelegate>)pDelegate;
+{
+    currentAPICall = kAPIFriendsHowDontUseApp;
+    
+    facebook  = [[Facebook alloc]
+                     initWithAppId:FBSession.activeSession.appID
+                     andDelegate:nil];
+    
+    // Store the Facebook session information
+    facebook.accessToken = FBSession.activeSession.accessToken;
+    facebook.expirationDate = FBSession.activeSession.expirationDate;
+    
+    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                    @"SELECT uid,devices FROM user WHERE uid IN ( SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 0 ORDER BY rand()", @"query",
+                                    nil];
+    if (!pDelegate) {
+        pDelegate = self;
+    }
+    [facebook   requestWithMethodName: @"fql.query"
+                            andParams: params
+                        andHttpMethod: @"GET"
+                          andDelegate: pDelegate];
+}
+- (__autoreleasing NSArray *)getFriendsHowDontUseAppRequest:(FBRequest *)request didLoad:(id)result;
+{
+    NSArray  * arrResult =ValidateObject(result, [NSArray class]);
+    __autoreleasing NSMutableArray *friendToInvait = [NSMutableArray array];
+    for (NSDictionary *dic in arrResult) {
+        NSArray *arrDevises = [dic objectForKey:@"devices"];
+        if ([arrDevises count]==0) {
+//            [friendToInvait addObject:[dic objectForKey:@"uid"]];
+        }else{
+            NSDictionary *dicOS=[arrDevises objectAtIndex:0];
+            NSString *userDeviseOS = [dicOS objectForKey:@"os"];
+            if ([userDeviseOS isEqualToString:@"iOS"]) {
+                [friendToInvait insertObject:[dic objectForKey:@"uid"] atIndex:0];
+            }
+        }
+        
+    }
+    return friendToInvait;
+}
 
 #pragma mark Graph API
 

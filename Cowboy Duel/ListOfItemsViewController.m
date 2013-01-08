@@ -113,6 +113,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    lbInviteBtn.enabled = FBSession.activeSession.isOpen;
+    btnInvite.enabled = FBSession.activeSession.isOpen;
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -328,7 +330,7 @@
 {
     [loadingView setHidden:YES];
     [activityIndicator stopAnimating];
-    [btnInvite setEnabled:YES];
+    btnInvite.enabled = FBSession.activeSession.isOpen;
     [tableView reloadData];
     [self.tableView refreshFinished];
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"FirstRunSalun_v2.2"]){
@@ -366,14 +368,14 @@
     [[OGHelper sharedInstance] apiDialogRequestsSendToNonUsers:friendToInvait];
     [loadingView setHidden:YES];
     [activityIndicator stopAnimating];
-    [btnInvite setEnabled:YES];
+    btnInvite.enabled = FBSession.activeSession.isOpen;
 }
 
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
     //[[OGHelper sharedInstance] request:request didFailWithError:error];
     [loadingView setHidden:YES];
     [activityIndicator stopAnimating];
-    [btnInvite setEnabled:YES];
+    btnInvite.enabled = FBSession.activeSession.isOpen;
 }
 
 @end
