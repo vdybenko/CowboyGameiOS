@@ -23,7 +23,7 @@ static const char *A_URL =  BASE_URL"api/authorization";
 
 @implementation LoadViewController
 
--(id)initWithPush:(NSDictionary *)notification
+-(id)initWithPush:(__unsafe_unretained NSDictionary *)notification
 {
     if(self==[super init])
     {

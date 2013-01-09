@@ -39,10 +39,8 @@
     ListOfItemsViewController *listOfItemsViewController;
     ProfileViewController *profileViewController;
     TopPlayersDataSource *topPlayersDataSource;
-    StoreViewController *storeViewController;
     
     IBOutlet UIView *hudView;
-    IBOutlet UIView *hudViewSaloon;
 //    BOOL firstRun;
     BOOL firstRunLocal;
     BOOL firstDayWithOutAdvertising;
@@ -698,7 +696,7 @@ static StartViewController *sharedHelper = nil;
 }
 
 - (IBAction)storeButtonClick:(id)sender {
-    storeViewController=[[StoreViewController alloc] initWithAccount:playerAccount];
+    StoreViewController *storeViewController=[[StoreViewController alloc] initWithAccount:playerAccount];
     [self.navigationController pushViewController:storeViewController animated:YES];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
@@ -1273,9 +1271,9 @@ static StartViewController *sharedHelper = nil;
             [duelProductDownloaderController refreshUserDuelProducts];
         }else if (type == DuelProductDownloaderTypeUserProduct) {
             if ([[self.navigationController visibleViewController] isKindOfClass:[StoreViewController class]]) {
-                [storeViewController refreshController];
+                [(StoreViewController*)[self.navigationController visibleViewController] refreshController];
             }
-        }   
+        }
     }
 }
 

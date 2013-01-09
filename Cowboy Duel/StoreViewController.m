@@ -13,18 +13,18 @@
 
 @interface StoreViewController ()
 {
-    AccountDataSource *playerAccount;
+    __unsafe_unretained AccountDataSource *playerAccount;
     DuelProductDownloaderController *duelProductDownloaderController;
     
     int purchesingProductIndex;
     BOOL bagFlag;
     
 }
-@property (strong, nonatomic) IBOutlet UILabel *title;
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UIButton *btnWeapons;
-@property (strong, nonatomic) IBOutlet UIButton *btnDefenses;
-@property (strong, nonatomic) IBOutlet UIButton *btnBack;
+@property (unsafe_unretained, nonatomic) IBOutlet UILabel *title;
+@property (unsafe_unretained, nonatomic) IBOutlet UITableView *tableView;
+@property (unsafe_unretained, nonatomic) IBOutlet UIButton *btnWeapons;
+@property (unsafe_unretained, nonatomic) IBOutlet UIButton *btnDefenses;
+@property (unsafe_unretained, nonatomic) IBOutlet UIButton *btnBack;
 @property (unsafe_unretained, nonatomic) IBOutlet UIButton *btnBag;
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *loadingView;
 
@@ -68,7 +68,7 @@
     title.textColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
     title.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
     
-    UIColor *buttonsTitleColor = [[UIColor alloc] initWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
+    UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
 
     [btnBack setTitleByLabel:@"BACK"];
     [btnBack changeColorOfTitleByLabel:buttonsTitleColor];
@@ -120,9 +120,7 @@
 
 -(void)startTableAnimation;
 {
-    dispatch_queue_t queue = dispatch_queue_create("com.bidon.cowboychalenge.table_animation", NULL);
-        
-    dispatch_async(queue, ^(void) {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         int countOfCells=[storeDataSource.arrItemsList count];
         int maxIndex;
         if (countOfCells<5) {
@@ -189,7 +187,7 @@
                     self.view.userInteractionEnabled = YES;
                     if (!error) {
                         CDTransaction *transaction = [[CDTransaction alloc] init];
-                        transaction.trDescription = [[NSString alloc] initWithFormat:@"BuyProductWeapon"];
+                        transaction.trDescription = @"BuyProductWeapon";
                         transaction.trType = [NSNumber numberWithInt:-1];
                         transaction.trMoneyCh = [NSNumber numberWithInt:-product.dPrice];
                         transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
@@ -218,7 +216,6 @@
             [playerAccount saveWeapon];
             cell.buyProduct.enabled = YES;
             dispatch_async(dispatch_get_main_queue(), ^{
-                
                 [self activityHide];
             });
             
@@ -236,7 +233,7 @@
                 cell.buyProduct.enabled = YES;
                 if (!error) {
                     CDTransaction *transaction = [[CDTransaction alloc] init];
-                    transaction.trDescription = [[NSString alloc] initWithFormat:@"BuyProductWinDefense"];
+                    transaction.trDescription = @"BuyProductWinDefense";
                     transaction.trType = [NSNumber numberWithInt:-1];
                     transaction.trMoneyCh = [NSNumber numberWithInt:-product.dPrice];
                     transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
@@ -316,7 +313,6 @@
 }
 
 - (IBAction)backButtonClick:(id)sender {
-    //[self.navigationController popViewControllerAnimated:YES];
     [UIView animateWithDuration:0.75
                      animations:^{
                          [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
@@ -406,6 +402,15 @@
 
 - (void)viewDidUnload {
     [self setBtnBag:nil];
+    duelProductDownloaderController = nil;
+    storeDataSource = nil;
+    title = nil;
+    tableView = nil;
+    btnWeapons = nil;
+    btnDefenses = nil;
+    btnBack = nil;
+    btnBag = nil;
+    loadingView = nil;
     [super viewDidUnload];
 }
 @end

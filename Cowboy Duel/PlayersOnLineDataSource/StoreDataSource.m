@@ -14,7 +14,7 @@
 
 @interface StoreDataSource()
 {
-    StoreViewController *storeViewController;
+    __unsafe_unretained StoreViewController *storeViewController;
     DuelProductDownloaderController *duelProductDownloaderController;
 }
 @end
@@ -46,7 +46,7 @@
 
 -(void) reloadDataSource;
 {
-    NSMutableArray *testArr;
+    __unsafe_unretained NSMutableArray *testArr;
     if (typeOfTable == StoreDataSourceTypeTablesWeapons) {
         testArr = [DuelProductDownloaderController loadWeaponArray];
     }else{
@@ -58,7 +58,6 @@
     
     if ([testArr count]==0) {
         arrItemsList = testArr;
-        
     }else {
         arrItemsList = testArr;
     }
@@ -92,7 +91,6 @@
 #pragma mark -
 -(void)buyButtonClick:(id __strong)sender;
 {
-    
     StoreProductCell *cell=(StoreProductCell *)sender;
     NSIndexPath *indexPath = [tableView indexPathForCell:cell];
     [delegate clickButton:indexPath];
