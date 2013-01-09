@@ -169,5 +169,5 @@ static CGFloat const ANIMATION_TIME = 0.3f;
 -(void)showHelpViewWithArm;
 -(void)setTextToMessageShot;
 
-@property(unsafe_unretained)id<DuelViewControllerDelegate> delegate;
+@property(weak)id<DuelViewControllerDelegate> delegate;
 @end

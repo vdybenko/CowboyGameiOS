@@ -10,9 +10,9 @@
 
 @interface CDAchivment : NSObject
 {
-    NSString *__unsafe_unretained aAchivmentId;
+    NSString *__weak aAchivmentId;
 }
-@property(unsafe_unretained, nonatomic)  NSString *aAchivmentId;
+@property(weak, nonatomic)  NSString *aAchivmentId;
 
 
 @end

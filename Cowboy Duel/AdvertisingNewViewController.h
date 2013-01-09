@@ -18,10 +18,10 @@
     
 }
 @property (nonatomic) BOOL advertisingNeed;
-@property (unsafe_unretained, nonatomic) IBOutlet UILabel *titleView;
-@property (unsafe_unretained, nonatomic) IBOutlet UIView *bodyView;
-@property (unsafe_unretained, nonatomic) IBOutlet UIButton *btnAppStore;
-@property (unsafe_unretained, nonatomic) IBOutlet UIWebView *webBody;
+@property (weak, nonatomic) IBOutlet UILabel *titleView;
+@property (weak, nonatomic) IBOutlet UIView *bodyView;
+@property (weak, nonatomic) IBOutlet UIButton *btnAppStore;
+@property (weak, nonatomic) IBOutlet UIWebView *webBody;
 
 -(id)initWithNib;
 - (IBAction)btnAppStoreClick:(id)sender;

@@ -696,7 +696,7 @@ static StartViewController *sharedHelper = nil;
 }
 
 - (IBAction)storeButtonClick:(id)sender {
-    StoreViewController *storeViewController=[[StoreViewController alloc] initWithAccount:playerAccount];
+    __weak StoreViewController *storeViewController=[[StoreViewController alloc] initWithAccount:playerAccount];
     [self.navigationController pushViewController:storeViewController animated:YES];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification

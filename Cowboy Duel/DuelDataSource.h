@@ -11,12 +11,12 @@
 
 
 @interface DuelDataSource : NSObject {
-    NSMutableURLRequest *__unsafe_unretained lastRequest;
+    NSMutableURLRequest *__weak lastRequest;
     AccountDataSource *playerAccount;
     BOOL isAuthenticated;
     NSMutableData *receivedData;
 }
-@property(unsafe_unretained, nonatomic) NSMutableURLRequest *lastRequest;
+@property(weak, nonatomic) NSMutableURLRequest *lastRequest;
 @property (assign, readonly) BOOL isAuthenticated;
 
 -(id)initWithLogin:(GKLocalPlayer *)localPlayer;

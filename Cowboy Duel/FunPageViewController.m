@@ -12,8 +12,8 @@
 
 
 @interface FunPageViewController ()
-@property (unsafe_unretained, nonatomic) IBOutlet UIWebView *webView;
-@property (unsafe_unretained, nonatomic) IBOutlet UIButton *backButton;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (weak, nonatomic) IBOutlet UIButton *backButton;
 
 @end
 

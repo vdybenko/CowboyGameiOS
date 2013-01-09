@@ -13,20 +13,20 @@
 
 @interface StoreViewController ()
 {
-    __unsafe_unretained AccountDataSource *playerAccount;
+    __weak AccountDataSource *playerAccount;
     DuelProductDownloaderController *duelProductDownloaderController;
     
     int purchesingProductIndex;
     BOOL bagFlag;
     
 }
-@property (unsafe_unretained, nonatomic) IBOutlet UILabel *title;
-@property (unsafe_unretained, nonatomic) IBOutlet UITableView *tableView;
-@property (unsafe_unretained, nonatomic) IBOutlet UIButton *btnWeapons;
-@property (unsafe_unretained, nonatomic) IBOutlet UIButton *btnDefenses;
-@property (unsafe_unretained, nonatomic) IBOutlet UIButton *btnBack;
-@property (unsafe_unretained, nonatomic) IBOutlet UIButton *btnBag;
-@property (unsafe_unretained, nonatomic) IBOutlet UIView *loadingView;
+@property (weak, nonatomic) IBOutlet UILabel *title;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIButton *btnWeapons;
+@property (weak, nonatomic) IBOutlet UIButton *btnDefenses;
+@property (weak, nonatomic) IBOutlet UIButton *btnBack;
+@property (weak, nonatomic) IBOutlet UIButton *btnBag;
+@property (weak, nonatomic) IBOutlet UIView *loadingView;
 
 @end
 
@@ -393,24 +393,4 @@
                                                       userInfo:[NSDictionary dictionaryWithObject:stringToGA forKey:@"event"]];
 }
 
-#pragma mark 
--(void)dealloc;
-{
-    duelProductDownloaderController =nil;
-    playerAccount = nil;
-}
-
-- (void)viewDidUnload {
-    [self setBtnBag:nil];
-    duelProductDownloaderController = nil;
-    storeDataSource = nil;
-    title = nil;
-    tableView = nil;
-    btnWeapons = nil;
-    btnDefenses = nil;
-    btnBack = nil;
-    btnBag = nil;
-    loadingView = nil;
-    [super viewDidUnload];
-}
 @end

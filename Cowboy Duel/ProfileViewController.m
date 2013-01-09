@@ -67,17 +67,17 @@ static const CGFloat timeToStandartTitles = 1.8;
     IBOutlet UIView *userDefenseView;
     IBOutlet UILabel *userAtack;
     IBOutlet UILabel *userDefense;
-    __unsafe_unretained IBOutlet FBProfilePictureView *profilePictureView;
+    __weak IBOutlet FBProfilePictureView *profilePictureView;
     
-    __unsafe_unretained IBOutlet UIImageView *profilePictureViewDefault;
-    __unsafe_unretained IBOutlet UIButton *duelButton;
+    __weak IBOutlet UIImageView *profilePictureViewDefault;
+    __weak IBOutlet UIButton *duelButton;
     
-    __unsafe_unretained IBOutlet UILabel *lbPointsCountMain;
-    __unsafe_unretained IBOutlet UIImageView *ivCurrentRank;
+    __weak IBOutlet UILabel *lbPointsCountMain;
+    __weak IBOutlet UIImageView *ivCurrentRank;
     //Buttons    
     IBOutlet UIView *ivBlack;
     
-    __unsafe_unretained IBOutlet UILabel *lbPointsText;
+    __weak IBOutlet UILabel *lbPointsText;
     NSNumberFormatter *numberFormatter;
     
     BOOL didDisappear;

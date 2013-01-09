@@ -37,7 +37,7 @@
 @property  (strong) UIViewController *presentingViewController;
 @property  (strong) GKMatch *match;
 @property  (strong) NSMutableDictionary *achievementsDictionary;
-@property   (unsafe_unretained) GKLocalPlayer *GClocalPlayer;
+@property   (weak) GKLocalPlayer *GClocalPlayer;
 @property (strong) id <GCHelperDelegate> delegate;
 @property (strong) id <GCAuthenticateDelegate> delegate2;
 @property (strong) AccountDataSource *playerAccount;

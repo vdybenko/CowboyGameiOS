@@ -44,7 +44,7 @@ typedef struct {
     id multiplayerViewController;
     
     GCHelper *gameCenter;
-    UIViewController *__unsafe_unretained parentVC;
+    UIViewController *__weak parentVC;
 
     int randomTime;
     int myTime;
@@ -79,7 +79,7 @@ typedef struct {
 @property(strong)id<DuelViewControllerDelegate> delegate;
 @property(strong)id<DuelStartViewControllerDelegate> delegate2;
 @property(strong,nonatomic)DuelStartViewController *duelStartViewController;
-@property( unsafe_unretained, readwrite) UIViewController *parentVC;
+@property( weak, readwrite) UIViewController *parentVC;
 @property(nonatomic) BOOL opponentEndMatch;
 @property(nonatomic) BOOL userEndMatch;
 @property(nonatomic) BOOL typeGameWithMessage;

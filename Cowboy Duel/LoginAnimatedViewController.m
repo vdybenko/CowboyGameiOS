@@ -22,11 +22,11 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
     StartViewController * startViewController;
     AccountDataSource *playerAccount;
     NSMutableString *stDonate;
-    __unsafe_unretained IBOutlet UIView *activityView;
-    __unsafe_unretained IBOutlet UIActivityIndicatorView *activityIndicatorView;
-    __unsafe_unretained IBOutlet UIImageView *backgroundView;
-    __unsafe_unretained IBOutlet UIImageView *boardImage;
-    __unsafe_unretained IBOutlet UIImageView *tryAgainImage;
+    __weak IBOutlet UIView *activityView;
+    __weak IBOutlet UIActivityIndicatorView *activityIndicatorView;
+    __weak IBOutlet UIImageView *backgroundView;
+    __weak IBOutlet UIImageView *boardImage;
+    __weak IBOutlet UIImageView *tryAgainImage;
     BOOL tryAgain;
     CGRect guillBackUp;
     CGRect textBackUp;
@@ -38,19 +38,19 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
 @property (nonatomic) NSTimer *timer;
 @property (nonatomic) NSArray *textsContainer;
 @property (nonatomic) AVAudioPlayer *player;
-@property (unsafe_unretained, nonatomic) IBOutlet UIButton *payButton;
-@property (unsafe_unretained, nonatomic) IBOutlet UILabel *animetedText;
-@property (unsafe_unretained, nonatomic) IBOutlet UIButton *loginFBbutton;
-@property (unsafe_unretained, nonatomic) IBOutlet UIView *tryAgainView;
-@property (unsafe_unretained, nonatomic) IBOutlet BEAnimationView *guillotineImage;
-@property (unsafe_unretained, nonatomic) IBOutlet BEAnimationView *whiskersImage;
-@property (unsafe_unretained, nonatomic) IBOutlet BEAnimationView *heatImage;
-@property (unsafe_unretained, nonatomic) IBOutlet UIImageView *headImage;
-@property (unsafe_unretained, nonatomic) IBOutlet UIImageView *noseImage;
-@property (unsafe_unretained, nonatomic) IBOutlet UILabel *donateLable;
-@property (unsafe_unretained, nonatomic) IBOutlet UILabel *loginLable;
-@property (unsafe_unretained, nonatomic) IBOutlet UILabel *tryAgainLable;
-@property (unsafe_unretained, nonatomic) IBOutlet UIButton *tryAgainButton;
+@property (weak, nonatomic) IBOutlet UIButton *payButton;
+@property (weak, nonatomic) IBOutlet UILabel *animetedText;
+@property (weak, nonatomic) IBOutlet UIButton *loginFBbutton;
+@property (weak, nonatomic) IBOutlet UIView *tryAgainView;
+@property (weak, nonatomic) IBOutlet BEAnimationView *guillotineImage;
+@property (weak, nonatomic) IBOutlet BEAnimationView *whiskersImage;
+@property (weak, nonatomic) IBOutlet BEAnimationView *heatImage;
+@property (weak, nonatomic) IBOutlet UIImageView *headImage;
+@property (weak, nonatomic) IBOutlet UIImageView *noseImage;
+@property (weak, nonatomic) IBOutlet UILabel *donateLable;
+@property (weak, nonatomic) IBOutlet UILabel *loginLable;
+@property (weak, nonatomic) IBOutlet UILabel *tryAgainLable;
+@property (weak, nonatomic) IBOutlet UIButton *tryAgainButton;
 
 @end
 

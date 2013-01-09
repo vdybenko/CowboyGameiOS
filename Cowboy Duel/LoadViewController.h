@@ -11,5 +11,5 @@
 #import "StartViewController.h"
 
 @interface LoadViewController : UIViewController <RefreshContentDataControllerDelegate>
--(id)initWithPush:(__unsafe_unretained NSDictionary *)notification;
+-(id)initWithPush:(__weak NSDictionary *)notification;
 @end

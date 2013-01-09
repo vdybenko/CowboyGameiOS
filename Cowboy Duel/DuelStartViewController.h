@@ -25,7 +25,7 @@
     AccountDataSource *playerAccount;
     AccountDataSource *oponentAccount;
     ProfileViewController *profileViewController;
-    NSString *__unsafe_unretained oponentNameOnLine;
+    NSString *__weak oponentNameOnLine;
     
     GCHelper *gameCenter;
     
@@ -102,11 +102,11 @@
 @property (strong, nonatomic) IBOutlet UILabel *_waitLabel;
 @property (strong, nonatomic) IBOutlet UILabel *_pleaseWaitLabel;
 @property (strong, nonatomic) IBOutlet UIView  *_vWait;
-@property (unsafe_unretained, nonatomic) IBOutlet FBProfilePictureView *fbPlayerImage;
-@property (unsafe_unretained, nonatomic) IBOutlet FBProfilePictureView *fbOpponentImage;
+@property (weak, nonatomic) IBOutlet FBProfilePictureView *fbPlayerImage;
+@property (weak, nonatomic) IBOutlet FBProfilePictureView *fbOpponentImage;
 
 @property(strong)id<DuelViewControllerDelegate> delegate;
-@property (unsafe_unretained, nonatomic) NSString *oponentNameOnLine;
+@property (weak, nonatomic) NSString *oponentNameOnLine;
 @property (strong, nonatomic) NSString *serverName;
 @property (nonatomic) BOOL oponentAvailable;
 @property (nonatomic) BOOL tryAgain;

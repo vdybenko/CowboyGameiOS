@@ -14,7 +14,7 @@
 
 @interface StoreDataSource()
 {
-    __unsafe_unretained StoreViewController *storeViewController;
+    __weak StoreViewController *storeViewController;
     DuelProductDownloaderController *duelProductDownloaderController;
 }
 @end
@@ -46,7 +46,7 @@
 
 -(void) reloadDataSource;
 {
-    __unsafe_unretained NSMutableArray *testArr;
+    __weak NSMutableArray *testArr;
     if (typeOfTable == StoreDataSourceTypeTablesWeapons) {
         testArr = [DuelProductDownloaderController loadWeaponArray];
     }else{

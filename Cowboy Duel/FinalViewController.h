@@ -108,13 +108,13 @@
     IBOutlet UILabel *lbNextRound;
     
     
-    __unsafe_unretained IBOutlet FXLabel *lblGold;
-    __unsafe_unretained IBOutlet UILabel *gameStatusLable;
-    __unsafe_unretained IBOutlet FXLabel *lblPoints;
-    __unsafe_unretained IBOutlet UIView *goldPointBgView;
-    __unsafe_unretained IBOutlet UILabel *lblGoldTitle;
+    __weak IBOutlet FXLabel *lblGold;
+    __weak IBOutlet UILabel *gameStatusLable;
+    __weak IBOutlet FXLabel *lblPoints;
+    __weak IBOutlet UIView *goldPointBgView;
+    __weak IBOutlet UILabel *lblGoldTitle;
 }
-@property(unsafe_unretained)id<DuelViewControllerDelegate> delegate;
+@property(weak)id<DuelViewControllerDelegate> delegate;
 
 @property (strong, nonatomic) IBOutlet UIButton *tryButton;
 @property (strong, nonatomic) IBOutlet UIView *statView;
