@@ -1238,13 +1238,13 @@
 
 -(void)showMessageOfNewLevel
 {
-    lvlCongratulationViewController=[[LevelCongratViewController alloc] initForNewLevelPlayerAccount:playerAccount andController:self tryButtonEnable:tryButton.enabled];
+    LevelCongratViewController *lvlCongratulationViewController=[[LevelCongratViewController alloc] initForNewLevelPlayerAccount:playerAccount andController:self tryButtonEnable:tryButton.enabled];
     [self performSelector:@selector(showViewController:) withObject:lvlCongratulationViewController afterDelay:4.5];
 }
 
 -(void)showMessageOfMoreMoney:(NSInteger)money withLabel:(NSString *)labelForCongratulation
 {
-    moneyCongratulationViewController  = [[MoneyCongratViewController alloc] initForAchivmentPlayerAccount:playerAccount withLabel:labelForCongratulation andController:self tryButtonEnable:tryButton.enabled];
+    MoneyCongratViewController *moneyCongratulationViewController  = [[MoneyCongratViewController alloc] initForAchivmentPlayerAccount:playerAccount withLabel:labelForCongratulation andController:self tryButtonEnable:tryButton.enabled];
     [self performSelector:@selector(showViewController:) withObject:moneyCongratulationViewController afterDelay:4.5];
 }
 
@@ -1390,6 +1390,7 @@
 -(void)showViewController:(UIViewController *)viewController
 {
     [self presentModalViewController:viewController animated:YES];
+    viewController = nil;
 }
 
 @end

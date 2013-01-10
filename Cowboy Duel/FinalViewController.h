@@ -41,10 +41,6 @@
     TeachingViewController *teachingViewController;
     LoginAnimatedViewController *loginViewController;
     
-//    CongratulationViewController *congratulationViewController;
-    LevelCongratViewController *lvlCongratulationViewController;
-    MoneyCongratViewController *moneyCongratulationViewController; 
-    
     int oldMoney;
     int oldMoneyForAnimation;
   
