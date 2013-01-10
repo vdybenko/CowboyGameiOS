@@ -33,6 +33,7 @@
     [label1 setTextColor:color];
     [label1 setText:NSLocalizedString(pTitle, @"")];
     [self addSubview:label1];
+    label1 = nil;
 }
 
 -(void)changeTitleByLabel:(NSString *)pTitle;

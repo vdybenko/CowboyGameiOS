@@ -57,7 +57,8 @@ static const char *A_URL =  BASE_URL"api/authorization";
         if (frame.size.height > 480) {
             imgBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default-568h.png"]];
         }
-        else imgBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default.png"]];
+        else
+            imgBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default.png"]];
         
         [self.view addSubview:imgBackground];
         
@@ -77,7 +78,8 @@ static const char *A_URL =  BASE_URL"api/authorization";
         versionLabel.text = version;
         [versionLabel setHidden:NO];
         [self.view addSubview:versionLabel];
-
+        versionLabel = nil;
+        
         if (!firstRun) {
             [self performSelector:@selector(closeWindow) withObject:self afterDelay:3.0]; 
         }
@@ -87,7 +89,6 @@ static const char *A_URL =  BASE_URL"api/authorization";
 
 - (void) viewDidLoad 
 {
-     
     UIImageView *gunLeftImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Gun.png"]];
     [gunLeftImage setFrame:CGRectMake(32-gunLeftImage.frame.size.width, 
                                       self.view.frame.size.height, 
@@ -107,8 +108,17 @@ static const char *A_URL =  BASE_URL"api/authorization";
     [imgBackground addSubview:gunRightImage];
     
     [self animationWithGunsFirst:gunLeftImage andSecond:gunRightImage];
+    gunLeftImage = nil;
+    gunRightImage = nil;
 }
 
+-(void)releaseComponents
+{
+    player = nil;
+    startViewController = nil;
+    imgBackground = nil;
+    receivedData = nil;
+}
 //animation of guns:
 - (void) animationWithGunsFirst:  (UIImageView *)imageLeft andSecond:(UIImageView *)imageRight
 {
@@ -148,6 +158,7 @@ static const char *A_URL =  BASE_URL"api/authorization";
 	if(![[NSUserDefaults standardUserDefaults] boolForKey:@"AlreadyRun"] ) {
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AlreadyRun"];
     }
+    [self releaseComponents];
 }
 
 -(void)login
