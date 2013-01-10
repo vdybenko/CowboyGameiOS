@@ -238,8 +238,7 @@ static const CGFloat timeToStandartTitles = 1.8;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    profilePictureView.profileID = playerAccount.facebookUser.id;
-    
+    [profilePictureView setProfileID:playerAccount.facebookUser.id];
     lbPointsText.font = [UIFont fontWithName: @"MyriadPro-Semibold" size:12];
     
     lbPointsCountMain.font = [UIFont fontWithName: @"MyriadPro-Bold" size:15];
@@ -265,6 +264,49 @@ static const CGFloat timeToStandartTitles = 1.8;
     
     didDisappear=YES;
 }
+
+-(void)releaseComponents
+{
+    playerAccount = nil;
+    playerServer = nil;
+    iconDownloader = nil;
+    namePlayerSaved = nil;
+    _ivIconUser = nil;
+    lbProfileMain = nil;
+    mainProfileView = nil;
+    tfFBName = nil;
+    lbUserTitle = nil;
+    ivPointsLine = nil;
+    lbGoldCount = nil;
+    lbGoldIcon = nil;
+    btnLogInFB = nil;
+    btnLogOutFB = nil;
+    btnLeaderboard = nil;
+    btnLeaderboardBig = nil;
+    btnBack = nil;
+    lbPlayerStats = nil;
+    lbDuelsWon = nil;
+    lbDuelsWonCount = nil;
+    lbDuelsLost = nil;
+    lbDuelsLostCount = nil;
+    lbBiggestWin = nil;
+    lbBiggestWinCount = nil;
+    lbLeaderboardTitle = nil;
+    _lbMenuTitle = nil;
+    userAtackView = nil;
+    userDefenseView = nil;
+    userAtack = nil;
+    userDefense = nil;
+    profilePictureView = nil;
+    profilePictureViewDefault = nil;
+    duelButton = nil;
+    lbPointsCountMain = nil;
+    ivCurrentRank = nil;
+    ivBlack = nil;
+    lbPointsText = nil;
+    numberFormatter  = nil;
+}
+
 -(void)initMainControls;
 {    
     UIFont *titlesFont = [UIFont systemFontOfSize:12.0f];
@@ -368,7 +410,7 @@ static const CGFloat timeToStandartTitles = 1.8;
 {
     [self refreshContentFromPlayerAccount];
     NSUserDefaults *uDef=[NSUserDefaults standardUserDefaults];
-    profilePictureView.profileID = playerAccount.facebookUser.id;
+    [profilePictureView setProfileID:playerAccount.facebookUser.id];
     if (![uDef objectForKey:@"FBAccessTokenKey"]) {
         [btnLogOutFB setHidden:YES];
         [btnLogInFB setHidden:NO];
@@ -738,6 +780,7 @@ if (playerAccount.accountLevel != 10) {
         [self.navigationController popViewControllerAnimated:NO];
         
     }
+    [self releaseComponents];
     
 }
 

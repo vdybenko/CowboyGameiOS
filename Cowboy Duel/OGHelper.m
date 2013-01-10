@@ -579,9 +579,7 @@ static OGHelper *sharedHelper = nil;
 //                                 andParams:params 
 //                               andDelegate:self];
             FBProfilePictureView *profilePic = [[FBProfilePictureView alloc] init];
-            profilePic.profileID = playerAccount.facebookUser.id;
-            
-            
+            [profilePic setProfileID:playerAccount.facebookUser.id];
             
             NSMutableString *tfContent = [profilePic.profileID mutableCopy];
 //            NSRange rng=NSMakeRange (0,27);

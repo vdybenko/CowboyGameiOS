@@ -56,7 +56,7 @@
 
 +(NSString*)makeStringForPostRequest:(NSDictionary*)pDic;
 {
-    NSMutableString *st=[[NSMutableString alloc] init];
+    NSMutableString *st=[NSMutableString string];
     NSArray *allKeys=[pDic allKeys];
     for (NSString *key in allKeys) {
         NSString *stForParametr=[NSString stringWithFormat:@"%@=%@&",key,[pDic objectForKey:key]];
@@ -75,12 +75,13 @@
         return NO;
     }else {
         
-        NSDate *startDate=[[NSDate alloc] initWithTimeIntervalSince1970:savedDate];
-        
+        NSDate *startDate=[NSDate dateWithTimeIntervalSince1970:savedDate];
         NSDateComponents* oneDay = [[NSDateComponents alloc] init];
         [oneDay setDay: 1];
         NSCalendar* calendar = [NSCalendar currentCalendar];
         NSDate* endOfDate = [calendar dateByAddingComponents: oneDay toDate: startDate options: 0];
+        
+        oneDay = nil;
         
         NSDate *curentDate=[NSDate date];
         
@@ -109,9 +110,8 @@
         
         return YES;
     }else {
-        
-        NSDate *startDate=[[NSDate alloc] initWithTimeIntervalSince1970:savedDate];
-        
+        NSDate *startDate=[NSDate dateWithTimeIntervalSince1970:savedDate];
+
         NSDateComponents* oneDay = [[NSDateComponents alloc] init];
         [oneDay setHour:1];
         NSCalendar* calendar = [NSCalendar currentCalendar];

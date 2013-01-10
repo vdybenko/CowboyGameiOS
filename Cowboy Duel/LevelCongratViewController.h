@@ -12,7 +12,7 @@
 #import "DuelViewController.h"
 #import "ActivityIndicatorView.h"
 
-@interface LevelCongratViewController : UIViewController
+@interface LevelCongratViewController : UIViewController<MemoryManagement>
 - (id) initForNewLevelPlayerAccount:(AccountDataSource *)pPlayerAccount andController:(id)delegateController tryButtonEnable:(BOOL)tryButtonEnable;
 +(void)newLevelNumber:(NSInteger)level;
 

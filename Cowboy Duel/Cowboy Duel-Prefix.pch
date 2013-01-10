@@ -19,6 +19,7 @@
 #import <Social/Social.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import "BBCyclingLabel.h"
+#import "MemoryManagement.h"
 #endif
 
 

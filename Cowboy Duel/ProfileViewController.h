@@ -21,7 +21,8 @@
 -(void)loginToFB;
 @end
 
-@interface ProfileViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate,ProfileWithLoginDelegate>@property (nonatomic) BOOL needAnimation;
+@interface ProfileViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate,ProfileWithLoginDelegate,MemoryManagement>
+@property (nonatomic) BOOL needAnimation;
 @property (strong, nonatomic) IBOutlet UIView *ivBlack;
 
 -(id)initWithAccount:(AccountDataSource *)userAccount startViewController:(StartViewController *)startViewController;

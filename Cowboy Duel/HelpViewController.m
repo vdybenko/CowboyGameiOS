@@ -28,12 +28,8 @@
 @interface HelpViewController () {
     id startVC;
     
-    IBOutlet UIButton *_btnVideo;
     IBOutlet UIView *mainView;
-    IBOutlet UIButton *_btnBack;
     IBOutlet UIButton *btnContact;
-    IBOutlet UIWebView *_webViewMessage;
-    IBOutlet UIView *_vBackground;
     IBOutlet UILabel *lbBackBtn;
     IBOutlet UILabel *lbVideoBtn;
     IBOutlet UILabel *lbContactButton;
@@ -118,6 +114,21 @@ BOOL isSoundControl;
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+-(void)releaseComponents
+{
+    mainView = nil;
+    btnContact = nil;
+    lbBackBtn = nil;
+    lbVideoBtn = nil;
+    lbContactButton = nil;
+    lbTitleHelp = nil;
+    _btnVideo = nil;
+    _btnBack = nil;
+    _webViewMessage = nil;
+    _vBackground = nil;
+}
+
+#pragma mark
 -(IBAction)backButtonClick
 {
     CATransition* transition = [CATransition animation];
@@ -127,6 +138,7 @@ BOOL isSoundControl;
     transition.subtype = kCATransitionFromTop; //kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop,
     [self.navigationController.view.layer addAnimation:transition forKey:nil];
     [self.navigationController popViewControllerAnimated:NO];
+    [self releaseComponents];
 }
 
 -(IBAction)btnFB{

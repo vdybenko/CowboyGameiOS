@@ -1162,6 +1162,7 @@
 		76A6F92E15878ED1009CE450 /* UIImageView+AttachedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AttachedView.h"; sourceTree = "<group>"; };
 		76A72D51163AA0B400C65D6D /* shop_product_frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shop_product_frame.png; sourceTree = "<group>"; };
 		76A72D52163AA0B400C65D6D /* shop_product_frame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shop_product_frame@2x.png"; sourceTree = "<group>"; };
+		76AB20E5169DA7130073A9C9 /* MemoryManagement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryManagement.h; sourceTree = "<group>"; };
 		76AFC7A015ED1B740009294B /* UIScrollView+AH3DPullRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+AH3DPullRefresh.h"; sourceTree = "<group>"; };
 		76AFC7A115ED1B740009294B /* UIScrollView+AH3DPullRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+AH3DPullRefresh.m"; sourceTree = "<group>"; };
 		76B3711013E1B7000097B8E0 /* MyriadPro-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "MyriadPro-Bold.ttf"; path = "Font/MyriadPro-Bold.ttf"; sourceTree = "<group>"; };
@@ -2350,6 +2351,7 @@
 				765EB4EB1580E3530059355B /* NSString+isNumeric.m */,
 				3150C60A15A5A26E00AC8E17 /* HCYoutubeParser.h */,
 				3150C60B15A5A26E00AC8E17 /* HCYoutubeParser.m */,
+				76AB20E5169DA7130073A9C9 /* MemoryManagement.h */,
 			);
 			path = Utils;
 			sourceTree = "<group>";

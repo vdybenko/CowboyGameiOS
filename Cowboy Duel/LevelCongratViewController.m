@@ -150,6 +150,31 @@
     runAnimation = NO;
 }
 
+- (void)releaseComponents
+{
+    playerAccount = nil;
+    activityIndicatorView = nil;
+    
+    ivImageForLevel = nil;
+    
+    ivLightRays = nil;
+    ivLightRays2 = nil;
+    ivLevelRing = nil;
+    ivLevelCoint = nil;
+    lbTitleRankAchieve = nil;
+    lbCongLvlMainText = nil;
+    lbAgain = nil;
+    lbMenu = nil;
+    lbPostOnFB = nil;
+    
+    btnAgain = nil;
+    btnMenu = nil;
+    btnPost = nil;
+    ivLightRays2 = nil;
+}
+
+#pragma mark
+
 -(void)scaleAnimation
 {
     [UIView beginAnimations:nil context:nil];
@@ -224,6 +249,7 @@
     {
         [(FinalViewController *)delegate backButtonClick:sender];
     }
+    [self releaseComponents];
 }
 
 - (IBAction)btnAgainClicked:(id)sender
@@ -235,6 +261,7 @@
     {
        [(FinalViewController *)delegate tryButtonClick:sender];
     }
+    [self releaseComponents];
 }
 
 - (IBAction) btnPostOnFBClicked:(id)sender
