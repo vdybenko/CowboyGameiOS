@@ -79,7 +79,7 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     loadViewController= [[LoadViewController alloc] initWithPush:launchOptions];
     
     navigationController = [[UINavigationController alloc] initWithRootViewController:loadViewController];
-
+    loadViewController = nil;
     [navigationController setNavigationBarHidden:YES];
     
     CGRect frame = [[UIScreen mainScreen]bounds];
