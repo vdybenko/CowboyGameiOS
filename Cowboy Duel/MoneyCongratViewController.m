@@ -145,6 +145,18 @@
     runAnimation = NO;
 }
 
+-(void)releaseComponents
+{
+    lbTitleCongratulation = nil;
+    lbPlusMoney = nil;
+    lbCongMainText = nil;
+    
+    lbPostOnFB = nil;
+    ivAchieveRing = nil;
+    ivLight = nil;
+    ivLight2 = nil;
+    ivRing = nil;
+}
 #pragma mark -
 #pragma mark animations
 
@@ -224,6 +236,7 @@
     {
         [(FinalViewController *)delegate backButtonClick:sender];
     }
+    [self releaseComponents];
 }
 
 - (IBAction)btnAgainClicked:(id)sender
@@ -234,6 +247,7 @@
     {
         [(FinalViewController *)delegate tryButtonClick:sender];
     }
+    [self releaseComponents];
 }
 
 - (IBAction) btnPostOnFBClicked:(id)sender
@@ -248,6 +262,7 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                       object:self
                                                     userInfo:[NSDictionary dictionaryWithObject:@"/achievement_posted_on_FB" forKey:@"event"]];
+    [self releaseComponents];
 }
 #pragma mark  - Facebook methods
 

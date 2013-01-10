@@ -11,7 +11,7 @@
 #import "DuelViewController.h"
 #import "ActivityIndicatorView.h"
 
-@interface MoneyCongratViewController : UIViewController
+@interface MoneyCongratViewController : UIViewController<MemoryManagement>
 - (id) initForAchivmentPlayerAccount:(AccountDataSource *)pPlayerAccount withLabel:(NSString*)pLabel andController:(id)delegateController tryButtonEnable:(BOOL)tryButtonEnable;
 +(void)achivmentMoney:(NSUInteger)money;
 
