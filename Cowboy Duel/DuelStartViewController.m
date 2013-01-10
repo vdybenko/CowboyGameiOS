@@ -270,6 +270,55 @@ static const char *GC_URL =  BASE_URL"api/gc";
     [_vWait setHidden:YES];
     [activityIndicatorView hideView];
 }
+
+-(void)releaseComponents
+{
+    _ivOponent = nil;
+    oponentNameOnLine = nil;
+    serverName = nil;
+    _btnStart = nil;
+    activityIndicatorView  = nil;
+    _ivPlayer = nil;
+    _vBackground = nil;
+    _lbNamePlayer = nil;
+    _lbNameOponent = nil;
+    _btnBack = nil;
+    _vWait = nil;
+    _pleaseWaitLabel = nil;
+    _waitLabel = nil;
+    lbOpponentDuelsWinCount = nil;
+    userAtack = nil;
+    userDefense = nil;
+    oponentAtack = nil;
+    oponentDefense = nil;
+    userAtackView = nil;
+    userDefenseView = nil;
+    oponentAtackView = nil;
+    oponentDefenseView = nil;
+    playerAccount = nil;
+    oponentAccount = nil;
+    oponentNameOnLine = nil;
+    player = nil;
+    pathFile = nil;
+    waitTimer = nil;    
+    lineViews = nil;
+    twoLineViews = nil;    
+    iconDownloader = nil;
+    mainDuelView = nil;
+    lbDuelStart = nil;
+    lbUserRank = nil;
+    lbUserDuelsWin = nil;
+    lbUserDuelsWinCount = nil;
+    lbOpponentRank = nil;
+    lbOpponentDuelsWin = nil;
+    lbForTheMurder = nil;
+    lbReward = nil;
+    lbGoldCount = nil;
+    lbGold = nil;
+    lbPointsCount = nil;
+    lbPoints = nil;
+    serverName = nil;
+}
 #pragma mark - 
 
 
@@ -295,6 +344,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
     
     [delegate duelCancel];
+    [self releaseComponents];
 }
 
 #pragma mark FConnect Methods

@@ -209,6 +209,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
     lbBackButton = nil;
     [super viewDidUnload];
 }
+
 #pragma mark Earth animation
 
 -(void)setRotationWithAngle:(float)angle andY:(float)y

@@ -101,6 +101,19 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 4.f;
     [super didReceiveMemoryWarning];
 }
 
+-(void)releaseComponents
+{
+    opAccount = nil;
+    mainHelpLabel = nil;
+    ivBullets = nil;
+    labelBullets = nil;
+    viewFire = nil;
+    viewFireInside = nil;
+    labelFireDescription = nil;
+    labelFireTitle = nil;
+    viewHand = nil;
+    ivArrow = nil;
+}
 #pragma mark
 
 -(void)firstAnimation;
@@ -176,6 +189,7 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 4.f;
     [UIView animateWithDuration:0.5 animations:^{
         [self.view removeFromSuperview];
     }];
+    [self releaseComponents];
 }
 
 -(void)dealloc

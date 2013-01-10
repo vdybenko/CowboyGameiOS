@@ -307,6 +307,50 @@
         [playerAccount loadWeapon];
     }
 }
+
+-(void)releaseComponents
+{
+    activityIndicatorView = nil;
+    playerAccount = nil;
+    oponentAccount = nil;
+    resoultDataSource = nil;
+    stGA = nil;
+    falseLabel = nil;
+    player = nil;
+    follPlayerFinal = nil;
+    transaction = nil;
+    duel = nil;
+    _pointForEachLevels = nil;
+    _pontsForWin = nil;
+    _pontsForLose = nil;
+    backButton = nil;
+    nextButton = nil;
+    resultTable = nil;
+    lblNamePlayer = nil;
+    lblNameOponnent = nil;
+    lblResulDescription = nil;
+    ivGoldCoin = nil;
+    ivBlueLine = nil;
+    ivCurrentRank = nil;
+    ivNextRank = nil;
+    lblGoldPlus = nil;
+    viewLastSceneAnimation = nil;
+    loserImg = nil;
+    loserSpiritImg = nil;
+    winnerImg1 = nil;
+    winnerImg2 = nil;
+    loserMoneyImg = nil;
+    view = nil;
+    statView = nil;
+    lbBack = nil;
+    lbTryAgain = nil;
+    lbNextRound = nil;
+    lblGold = nil;
+    gameStatusLable = nil;
+    lblPoints = nil;
+    goldPointBgView = nil;
+    lblGoldTitle = nil;
+}
 #pragma mark -
 
 -(IBAction)backButtonClick:(id)sender
@@ -331,9 +375,11 @@
                 [self.navigationController presentViewController:duelProductWinViewController animated:YES completion:Nil];
             }else{
                 [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+                [self releaseComponents];
             }
         }else{
             [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+            [self releaseComponents];
         }
 //        if ([self.delegate isKindOfClass:[BluetoothViewController class]]) [self.delegate duelCancel];
         if ([self.delegate isKindOfClass:[GameCenterViewController class]]) {
@@ -363,6 +409,7 @@
             
         }else{
             [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+            [self releaseComponents];
         }
     }
 }

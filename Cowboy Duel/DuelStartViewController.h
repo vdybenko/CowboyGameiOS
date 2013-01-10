@@ -21,7 +21,7 @@
 #import "IconDownloader.h"
 
 @class GameCenterViewController;
-@interface DuelStartViewController : UIViewController<DuelStartViewControllerDelegate,FBRequestDelegate,IconDownloaderDelegate> {
+@interface DuelStartViewController : UIViewController<DuelStartViewControllerDelegate,FBRequestDelegate,IconDownloaderDelegate,MemoryManagement> {
     AccountDataSource *playerAccount;
     AccountDataSource *oponentAccount;
     ProfileViewController *profileViewController;
@@ -53,7 +53,6 @@
     
     IconDownloader *iconDownloader;
     
-    IBOutlet ActivityIndicatorView *activityIndicatorView;
     
     IBOutlet UIButton *_btnBack;
     IBOutlet UIButton *_btnStart;

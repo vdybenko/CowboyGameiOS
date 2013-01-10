@@ -32,7 +32,7 @@
 #import "LevelCongratViewController.h"
 #import "MoneyCongratViewController.h"
 
-@interface FinalViewController : UIViewController <DuelViewControllerDelegate, UITableViewDataSource, UITableViewDelegate> {
+@interface FinalViewController : UIViewController <DuelViewControllerDelegate, UITableViewDataSource, UITableViewDelegate,MemoryManagement> {
     ActivityIndicatorView *activityIndicatorView;
     
     AccountDataSource *playerAccount;
