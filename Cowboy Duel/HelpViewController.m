@@ -35,6 +35,7 @@
     IBOutlet UILabel *lbContactButton;
     
     IBOutlet UILabel *lbTitleHelp;
+    MPMoviePlayerViewController *mp;
 }
 @property (strong, nonatomic) IBOutlet UIButton *_btnVideo;
 @property (strong, nonatomic) IBOutlet UIButton *_btnBack;
@@ -45,7 +46,6 @@
 @implementation HelpViewController
 @synthesize _btnVideo, _vBackground, _btnBack, _webViewMessage;
 
-MPMoviePlayerViewController *mp;
 NSString *const URL_CONTACN_US=@"http://cowboyduel.com/";
 BOOL isSoundControl;
 
@@ -126,6 +126,7 @@ BOOL isSoundControl;
     _btnBack = nil;
     _webViewMessage = nil;
     _vBackground = nil;
+    mp = nil;
 }
 
 #pragma mark
@@ -148,7 +149,7 @@ BOOL isSoundControl;
     
     NSURL *urlVideo = [NSURL URLWithString:[qualities objectForKey:@"medium"]];
 
-    MyMovieViewController *mp = [[MyMovieViewController alloc] initWithContentURL:urlVideo];
+    mp = [[MyMovieViewController alloc] initWithContentURL:urlVideo];
     
     mp.moviePlayer.controlStyle = MPMovieControlStyleFullscreen;
     mp.moviePlayer.shouldAutoplay = YES;
@@ -179,7 +180,7 @@ BOOL isSoundControl;
     mp.moviePlayer.initialPlaybackTime = -1; 
     [mp.moviePlayer stop]; 
     [self dismissMoviePlayerViewControllerAnimated];
-    
+    mp = nil;
     if (isSoundControl)[startVC soundOff];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
 }
