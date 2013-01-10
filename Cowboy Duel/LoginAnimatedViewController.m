@@ -27,36 +27,37 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
     __weak IBOutlet UIImageView *backgroundView;
     __weak IBOutlet UIImageView *boardImage;
     __weak IBOutlet UIImageView *tryAgainImage;
+    __weak IBOutlet UIButton *payButton;
+    __weak IBOutlet UILabel *animetedText;
+    __weak IBOutlet UIButton *loginFBbutton;
+    __weak IBOutlet UIView *tryAgainView;
+    __weak IBOutlet BEAnimationView *guillotineImage;
+    __weak IBOutlet BEAnimationView *whiskersImage;
+    __weak IBOutlet BEAnimationView *heatImage;
+    __weak IBOutlet UIImageView *headImage;
+    __weak IBOutlet UIImageView *noseImage;
+    __weak IBOutlet UILabel *donateLable;
+    __weak IBOutlet UILabel *loginLable;
+    __weak IBOutlet UILabel *tryAgainLable;
+    __weak IBOutlet UIButton *tryAgainButton;
+    
     BOOL tryAgain;
     CGRect guillBackUp;
     CGRect textBackUp;
     CGRect hatBackUp;
     BOOL animationPause;
-//    int counterTryAgain;
 }
 @property (nonatomic) int textIndex;
 @property (nonatomic) NSTimer *timer;
 @property (nonatomic) NSArray *textsContainer;
 @property (nonatomic) AVAudioPlayer *player;
-@property (weak, nonatomic) IBOutlet UIButton *payButton;
-@property (weak, nonatomic) IBOutlet UILabel *animetedText;
-@property (weak, nonatomic) IBOutlet UIButton *loginFBbutton;
-@property (weak, nonatomic) IBOutlet UIView *tryAgainView;
-@property (weak, nonatomic) IBOutlet BEAnimationView *guillotineImage;
-@property (weak, nonatomic) IBOutlet BEAnimationView *whiskersImage;
-@property (weak, nonatomic) IBOutlet BEAnimationView *heatImage;
-@property (weak, nonatomic) IBOutlet UIImageView *headImage;
-@property (weak, nonatomic) IBOutlet UIImageView *noseImage;
-@property (weak, nonatomic) IBOutlet UILabel *donateLable;
-@property (weak, nonatomic) IBOutlet UILabel *loginLable;
-@property (weak, nonatomic) IBOutlet UILabel *tryAgainLable;
-@property (weak, nonatomic) IBOutlet UIButton *tryAgainButton;
 
 @end
 
 @implementation LoginAnimatedViewController
 @synthesize startViewController, delegate ,loginFacebookStatus, payment;
 @synthesize timer, textsContainer;
+@synthesize player;
 
 static LoginAnimatedViewController *sharedHelper = nil;
 + (LoginAnimatedViewController *) sharedInstance {
@@ -117,35 +118,35 @@ static LoginAnimatedViewController *sharedHelper = nil;
         CGRect frame = CGRectMake(0, 356, 320, 212);
         [boardImage setFrame:frame];
         [tryAgainImage setImage:[UIImage imageNamed:@"la_ta_bg-568h.png"]];
-        frame = self.guillotineImage.frame;
+        frame = guillotineImage.frame;
         frame.size.height = 558;
         frame.origin.y = -400;
-        self.guillotineImage.frame = frame;
-        [self.guillotineImage setImage:[UIImage imageNamed:@"ivGuillotineFull-568h.png"]];
+        guillotineImage.frame = frame;
+        [guillotineImage setImage:[UIImage imageNamed:@"ivGuillotineFull-568h.png"]];
         
     }
     else {
         [backgroundView setImage:[UIImage imageNamed:@"la_bg.png"]];
         [boardImage setImage:[UIImage imageNamed:@"la_board.png"]];
         [tryAgainImage setImage:[UIImage imageNamed:@"la_ta_bg.png"]];
-        [self.guillotineImage setImage:[UIImage imageNamed:@"ivGuillotineFull.png"]];
+        [guillotineImage setImage:[UIImage imageNamed:@"ivGuillotineFull.png"]];
     }
-    self.loginLable.text = NSLocalizedString(@"LOGIN", @"");
-    self.loginLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
+    loginLable.text = NSLocalizedString(@"LOGIN", @"");
+    loginLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
     
-    self.donateLable.text = NSLocalizedString(@"DONATE 1$", @"");
-    self.donateLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
+    donateLable.text = NSLocalizedString(@"DONATE 1$", @"");
+    donateLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
     
-    self.tryAgainLable.text = NSLocalizedString(@"TRY AGAIN", @"");
-    self.tryAgainLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
+    tryAgainLable.text = NSLocalizedString(@"TRY AGAIN", @"");
+    tryAgainLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self.tryAgainButton setHidden:YES];
-    [self.tryAgainLable setHidden:YES];
+    [tryAgainButton setHidden:YES];
+    [tryAgainLable setHidden:YES];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -163,9 +164,9 @@ static LoginAnimatedViewController *sharedHelper = nil;
                     NSLocalizedString(@"CHOOSE_FACEBOOK", nil), //...or give me your ID"
                     nil];
     self.textIndex = 0;
-    guillBackUp = self.guillotineImage.frame;
-    textBackUp = self.animetedText.frame;
-    hatBackUp = self.heatImage.frame;
+    guillBackUp = guillotineImage.frame;
+    textBackUp = animetedText.frame;
+    hatBackUp = heatImage.frame;
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/kassa.aif", [[NSBundle mainBundle] resourcePath]]];
     NSError *error;
     self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
@@ -173,15 +174,15 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [self.player prepareToPlay];
     [self updateLabels];
   
-    [self.headImage setHidden:YES];
-    [self.heatImage setHidden:NO];
-    [self.noseImage setHidden:YES];
-    [self.whiskersImage setHidden:YES];
+    [headImage setHidden:YES];
+    [heatImage setHidden:NO];
+    [noseImage setHidden:YES];
+    [whiskersImage setHidden:YES];
   
-    [self.guillotineImage setDelays:0.0];
-    [self.guillotineImage animateWithType:[NSNumber numberWithInt:GUILLOTINE]];
-    [self.whiskersImage animateWithType:[NSNumber numberWithInt:WHISKERS]];
-    [self.heatImage animateWithType:[NSNumber numberWithInt:HAT]];
+    [guillotineImage setDelays:0.0];
+    [guillotineImage animateWithType:[NSNumber numberWithInt:GUILLOTINE]];
+    [whiskersImage animateWithType:[NSNumber numberWithInt:WHISKERS]];
+    [heatImage animateWithType:[NSNumber numberWithInt:HAT]];
     stDonate = [NSMutableString string];
     [MKStoreManager sharedManager].delegate = sharedHelper;
     [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusSimple];
@@ -193,13 +194,41 @@ static LoginAnimatedViewController *sharedHelper = nil;
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    self.guillotineImage.stopAnimation = YES;
+    guillotineImage.stopAnimation = YES;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)releaseComponents
+{
+    startViewController = nil;
+    playerAccount = nil;
+    stDonate = nil;
+    activityView = nil;
+    activityIndicatorView = nil;
+    backgroundView = nil;
+    boardImage = nil;
+    tryAgainImage = nil;
+    timer = nil;
+    textsContainer = nil;
+    player = nil;
+    payButton = nil;
+    animetedText = nil;
+    loginFBbutton = nil;
+    tryAgainView = nil;
+    guillotineImage = nil;
+    whiskersImage = nil;
+    heatImage = nil;
+    headImage = nil;
+    noseImage = nil;
+    donateLable = nil;
+    loginLable = nil;
+    tryAgainLable = nil;
+    tryAgainButton = nil;
 }
 
 #pragma mark Animations
@@ -215,9 +244,9 @@ static LoginAnimatedViewController *sharedHelper = nil;
                      } completion:^(BOOL complete) {
                          CGRect moveTextUp = textBackUp;
                          if (self.textIndex >= 5) moveTextUp.origin.y -= 100;
-                         self.animetedText.frame = moveTextUp;
-                         self.animetedText.bounds = moveTextUp;
-                         self.animetedText.text = text;
+                         animetedText.frame = moveTextUp;
+                         animetedText.bounds = moveTextUp;
+                         animetedText.text = text;
                          [self performSelector:@selector(lableScaleIn) withObject:nil afterDelay:1.0];
                      }];
 }
@@ -226,29 +255,29 @@ static LoginAnimatedViewController *sharedHelper = nil;
 {
   if (animationPause) return;
   if (self.textIndex == 0) {
-    [self.headImage setHidden:NO];
-    [self.heatImage setHidden:YES];
-    [self.noseImage setHidden:NO];
-    [self.whiskersImage setHidden:NO];
+    [headImage setHidden:NO];
+    [heatImage setHidden:YES];
+    [noseImage setHidden:NO];
+    [whiskersImage setHidden:NO];
     
   }
     [UIView animateWithDuration:0.5
                      animations:^{
-                         self.animetedText.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                         animetedText.transform = CGAffineTransformMakeScale(1.0, 1.0);
                      } completion:^(BOOL complete) {
                          [self.player setCurrentTime:0];
                          [self.player play];
                          if (self.textIndex<8){
 
                              if (self.textIndex==6) {                 ////"Pay for me $1.....
-                                 [self scaleButton:self.payButton];   //Scale 1$
-                                 [self scaleButton:self.donateLable];
+                                 [self scaleButton:payButton];   //Scale 1$
+                                 [self scaleButton:donateLable];
 
                              }
                              if (self.textIndex==7) {                 ////...or give me your ID"
 
-                               [self scaleButton:self.loginFBbutton]; //Scale Facebook login
-                               [self scaleButton:self.loginLable];
+                               [self scaleButton:loginFBbutton]; //Scale Facebook login
+                               [self scaleButton:loginLable];
 //                               [self.headImage setHidden:YES];
 //                               [self.heatImage setHidden:NO];
 //                               [self.noseImage setHidden:YES];
@@ -270,7 +299,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
 
 -(void)lableScaleOut
 {
-    self.animetedText.transform = CGAffineTransformMakeScale(0.01, 0.01);
+    animetedText.transform = CGAffineTransformMakeScale(0.01, 0.01);
 }
 
 -(void)scaleButton:(UIView *)button
@@ -290,8 +319,8 @@ static LoginAnimatedViewController *sharedHelper = nil;
 -(void)showTryAgain
 {
     tryAgain = YES;
-    [self.tryAgainButton setHidden:NO];
-    [self.tryAgainLable setHidden:NO];
+    [tryAgainButton setHidden:NO];
+    [tryAgainLable setHidden:NO];
     
     //[self.heatImage setHidden:YES];
     //[self.tryAgainView setHidden:NO];
@@ -305,7 +334,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
 //    CGRect frame = self.guillotineImage.frame;
 //    frame.origin.y = -310;
 //    self.guillotineImage.frame = frame;
-    self.guillotineImage.stopAnimation = YES;
+    guillotineImage.stopAnimation = YES;
     [self.view.layer removeAllAnimations];
     for (CALayer* layer in [self.view.layer sublayers]) {
         [CATransaction begin];
@@ -313,25 +342,25 @@ static LoginAnimatedViewController *sharedHelper = nil;
         [CATransaction commit];
         
     }
-    [self.guillotineImage.layer removeAllAnimations];
-    for (CALayer* layer in [self.guillotineImage.layer sublayers]) {
+    [guillotineImage.layer removeAllAnimations];
+    for (CALayer* layer in [guillotineImage.layer sublayers]) {
         [CATransaction begin];
         [layer removeAllAnimations];
         [CATransaction commit];
     }
-    [self.tryAgainButton setHidden:YES];
-    [self.tryAgainLable setHidden:YES];
-    self.guillotineImage.frame = guillBackUp;
+    [tryAgainButton setHidden:YES];
+    [tryAgainLable setHidden:YES];
+    guillotineImage.frame = guillBackUp;
     
-    self.heatImage.frame = hatBackUp;
-    [self.noseImage setHidden:NO];
-    [self.tryAgainView setHidden:YES];
-    [self.headImage setHidden:NO];
-    [self.whiskersImage setHidden:NO];
+    heatImage.frame = hatBackUp;
+    [noseImage setHidden:NO];
+    [tryAgainView setHidden:YES];
+    [headImage setHidden:NO];
+    [whiskersImage setHidden:NO];
     self.textIndex = 0;
     [self updateLabels];
     //self.guillotineImage.stopAnimation = NO;
-    [self.guillotineImage performSelector:@selector(animateWithType:) withObject:[NSNumber numberWithInt:GUILLOTINE] afterDelay:0.5];
+    [guillotineImage performSelector:@selector(animateWithType:) withObject:[NSNumber numberWithInt:GUILLOTINE] afterDelay:0.5];
     if (sender) [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
                                                       userInfo:[NSDictionary dictionaryWithObject:@"/first_login_again" forKey:@"event"]];
@@ -342,9 +371,9 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [self.player stop];
     [self.player setVolume:0.0];
     animationPause = YES;
-    self.heatImage.stopAnimation = YES;
-    self.whiskersImage.stopAnimation = YES;
-    self.guillotineImage.stopAnimation = YES;
+    heatImage.stopAnimation = YES;
+    whiskersImage.stopAnimation = YES;
+    guillotineImage.stopAnimation = YES;
     if (payment) {
         [[MKStoreManager sharedManager] buyFeatureA];
         [activityView setHidden:NO];
@@ -377,9 +406,9 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [activityView setHidden:NO];
     [activityIndicatorView startAnimating];
     animationPause = YES;
-    self.heatImage.stopAnimation = YES;
-    self.whiskersImage.stopAnimation = YES;
-    self.guillotineImage.stopAnimation = YES;
+    heatImage.stopAnimation = YES;
+    whiskersImage.stopAnimation = YES;
+    guillotineImage.stopAnimation = YES;
     
     TestAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     [appDelegate openSessionWithAllowLoginUI:YES];
@@ -630,35 +659,13 @@ static LoginAnimatedViewController *sharedHelper = nil;
 	[activityView setHidden:YES];
     [activityIndicatorView stopAnimating];
     animationPause = NO;
-    self.heatImage.stopAnimation = NO;
-    self.whiskersImage.stopAnimation = NO;
-    self.guillotineImage.stopAnimation = NO;
-    [self.heatImage setHidden:YES];
+    heatImage.stopAnimation = NO;
+    whiskersImage.stopAnimation = NO;
+    guillotineImage.stopAnimation = NO;
+    [heatImage setHidden:YES];
     [self tryAgainButtonClick:nil];
-    [self.whiskersImage animateWithType:[NSNumber numberWithInt:WHISKERS]];
-    [self.heatImage animateWithType:[NSNumber numberWithInt:HAT]];
+    [whiskersImage animateWithType:[NSNumber numberWithInt:WHISKERS]];
+    [heatImage animateWithType:[NSNumber numberWithInt:HAT]];
 }
 
-- (void)viewDidUnload {
-    [self setAnimetedText:nil];
-    [self setPayButton:nil];
-    [self setLoginFBbutton:nil];
-    [self setTryAgainView:nil];
-    [self setGuillotineImage:nil];
-    [self setWhiskersImage:nil];
-    [self setHeatImage:nil];
-    [self setHeadImage:nil];
-    [self setNoseImage:nil];
-    [CATransaction begin];
-    [self.view.layer removeAllAnimations];
-    [CATransaction commit];
-    [self setDonateLable:nil];
-    [self setLoginLable:nil];
-    [self setTryAgainLable:nil];
-    [self setPlayer:nil];
-    backgroundView = nil;
-    boardImage = nil;
-    tryAgainImage = nil;
-    [super viewDidUnload];
-}
 @end
