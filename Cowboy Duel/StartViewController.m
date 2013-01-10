@@ -696,12 +696,13 @@ static StartViewController *sharedHelper = nil;
 }
 
 - (IBAction)storeButtonClick:(id)sender {
-    __weak StoreViewController *storeViewController=[[StoreViewController alloc] initWithAccount:playerAccount];
+    StoreViewController *storeViewController=[[StoreViewController alloc] initWithAccount:playerAccount];
     [self.navigationController pushViewController:storeViewController animated:YES];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/store" forKey:@"event"]];
+    storeViewController = nil;
 }
 
 -(IBAction)profileButtonClick
@@ -817,6 +818,7 @@ static StartViewController *sharedHelper = nil;
     transition.subtype = kCATransitionFromBottom;
     [self.navigationController.view.layer addAnimation:transition forKey:nil];
     [self.navigationController pushViewController:helpViewController animated:NO];
+    helpViewController = nil;
 }
 
 -(void) advertButtonClick {

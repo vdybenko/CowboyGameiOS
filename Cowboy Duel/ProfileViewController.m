@@ -359,7 +359,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     [label1 setLineBreakMode:UILineBreakModeWordWrap];
     [label1 setText:NSLocalizedString(@"LOGIN TO FACEBOOK", @"")];
     [btnLogInFB addSubview:label1]; 
-    
+    label1 = nil;
     lbDuelsWonCount.font = CountFont;
     
     _lbMenuTitle.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
