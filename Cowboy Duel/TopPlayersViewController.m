@@ -18,8 +18,6 @@
     
     NSIndexPath *_indexPath;
     
-    NSTimer *updateTimer;
-    
     NSMutableData *receivedData;
     NSMutableArray * arrItemsListForFindMe;
 }
@@ -29,7 +27,7 @@
 @end
 
 @implementation TopPlayersViewController
-@synthesize tableView, btnFindMe, btnBack, activityIndicator, loadingView,offLineBackGround,offLineText, updateTimer,saloonTitle;
+@synthesize tableView, btnFindMe, btnBack, activityIndicator, loadingView,offLineBackGround,offLineText,saloonTitle;
 
 static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
 
@@ -107,14 +105,28 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [updateTimer invalidate];
-    updateTimer = nil;
     [super viewWillDisappear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+-(void)releaseComponents
+{
+    tableView = nil;
+    btnFindMe = nil;
+    btnBack = nil;
+    activityIndicator = nil;
+    loadingView = nil;
+    offLineBackGround = nil;
+    offLineText = nil;
+    saloonTitle = nil;
+    _playerAccount = nil;
+    _playersTopDataSource = nil;
+    receivedData = nil;
+    arrItemsListForFindMe = nil;
 }
 
 #pragma mark - UITableViewDelegate
@@ -163,7 +175,8 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
     
     NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
     DLog(@"TopPlayersViewController jsonString %@",jsonString);
-    NSArray *responseObject = ValidateObject([jsonString JSONValue], [NSArray class]);   
+    NSArray *responseObject = ValidateObject([jsonString JSONValue], [NSArray class]);
+    jsonString = nil;
     for (NSDictionary *dic in responseObject) {
         CDTopPlayer *player=[[CDTopPlayer alloc] init];
         player.dPositionInList=[[dic objectForKey:@"rank"] intValue];
@@ -229,7 +242,7 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
 -(IBAction)backToMenu:(id)sender;
 {
     [self.navigationController popViewControllerAnimated:YES];
-  
+    [self releaseComponents];
 }
 -(IBAction)findMe:(id)sender;
 {

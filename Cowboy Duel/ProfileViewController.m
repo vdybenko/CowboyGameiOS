@@ -815,7 +815,7 @@ if (playerAccount.accountLevel != 10) {
 - (IBAction)btnLeaderbordClick:(id)sender {
     TopPlayersViewController *topPlayersViewController =[[TopPlayersViewController alloc] initWithAccount:playerAccount];
     [self.navigationController pushViewController:topPlayersViewController animated:YES];
-    
+    topPlayersViewController = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/leaderBoard_click" forKey:@"event"]];

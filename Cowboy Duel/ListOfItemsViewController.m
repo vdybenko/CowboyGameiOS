@@ -136,6 +136,24 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+-(void)releaseComponents
+{
+    tableView = nil;
+    btnInvite = nil;
+    btnBack = nil;
+    activityIndicator = nil;
+    loadingView = nil;
+    updateTimer = nil;
+    _playerAccount = nil;
+     _gameCenterViewController = nil;
+     _playersOnLineDataSource = nil;
+     startViewController = nil;
+    lbBackBtn = nil;
+    lbInviteBtn = nil;
+    saloonTitle = nil;
+    updateTimer = nil;
+
+}
 #pragma mark - UITableViewDelegate
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -185,7 +203,8 @@
                          [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
                          [self.navigationController pushViewController:profileViewController animated:NO];
                          [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
-                     }];//    CATransition* transition = [CATransition animation];
+                     }];
+    //    CATransition* transition = [CATransition animation];
 //    transition.duration = 0.5;
 //    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
 //    transition.type = kCATransition;//, kCATransitionReveal, kCATransitionFade,kCATransitionMoveIn;
@@ -238,7 +257,7 @@
 
     DuelStartViewController *duelStartViewController = [[DuelStartViewController alloc]initWithAccount:_playerAccount andOpAccount:oponentAccount opopnentAvailable:NO andServerType:NO andTryAgain:NO];
     duelStartViewController.serverName = player.serverName;
-    
+        
     duelStartViewController.delegate = _gameCenterViewController;
     _gameCenterViewController.duelStartViewController = duelStartViewController;
     
@@ -297,6 +316,7 @@
 -(IBAction)backToMenu:(id)sender;
 {
     [self.navigationController popViewControllerAnimated:YES];
+    [self releaseComponents];
 }
 
 - (IBAction)inviteFriendsClick:(id)sender {
