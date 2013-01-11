@@ -10,6 +10,7 @@
 #import "TopPlayersDataSource.h"
 #import "UIButton+Image+Title.h"
 #import "CustomNSURLConnection.h"
+#import "StartViewController.h"
 
 @interface TopPlayersViewController()
 {
@@ -61,7 +62,7 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
     [loadingView setHidden:NO];
     [activityIndicator startAnimating];
     
-    _playersTopDataSource = [[TopPlayersDataSource alloc] initWithTable:tableView];
+    _playersTopDataSource = [[StartViewController sharedInstance] topPlayersDataSource];
     [_playersTopDataSource reloadDataSource];
     _playersTopDataSource.delegate=self;
     
@@ -138,8 +139,10 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
 
 -(UIView *) tableView:(UITableView *)pTableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, pTableView.frame.size.width, 20)];
-    return headerView;
+    @autoreleasepool {
+        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, pTableView.frame.size.width, 20)];
+        return headerView;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

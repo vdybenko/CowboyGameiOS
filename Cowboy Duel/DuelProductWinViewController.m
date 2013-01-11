@@ -117,10 +117,26 @@
     [super didReceiveMemoryWarning];
 }
 
+-(void)releaseComponents
+{
+    playerAccount = nil;
+    duelProduct = nil;
+    title = nil;
+    frameView = nil;
+    ribbonLabel = nil;
+    goldTitle = nil;
+    gold = nil;
+    gunImage = nil;
+    gunImageMirror = nil;
+    buyItButton = nil;
+    loadingView = nil;
+}
+
 #pragma mark
 
 - (IBAction)closeButtonClick:(id)sender {
     [parentVC dismissViewControllerAnimated:YES completion:Nil];
+    [self releaseComponents];
 }
 - (IBAction)BuyItButtonClick:(id)sender {
     

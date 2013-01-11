@@ -126,9 +126,28 @@ static int oponentMustShot;
     [super didReceiveMemoryWarning];
 }
 
+-(void)releaseComponents
+{
+    playerAccount = nil;
+    productCell = nil;
+    prod = nil;
+    description = nil;
+    frameView = nil;
+    title = nil;
+    gunIcon = nil;
+    gunIconFrame = nil;
+    goldTitle = nil;
+    gold = nil;
+    effectTitle = nil;
+    effect = nil;
+    buyButton = nil;
+}
+
+#pragma mark
 - (IBAction)closeButtonClick:(id)sender {
     [[UIAccelerometer sharedAccelerometer] setDelegate:parentVC];
     [parentVC dismissViewControllerAnimated:YES completion:Nil];
+    [self releaseComponents ];
 }
 
 + (BOOL)isAttensionNeedForOponent:(AccountDataSource*)oponentAccount;

@@ -163,8 +163,10 @@
 
 -(UIView *) tableView:(UITableView *)pTableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, pTableView.frame.size.width, 20)];
-    return headerView;
+    @autoreleasepool {
+        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, pTableView.frame.size.width, 20)];
+        return headerView;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -316,7 +318,6 @@
 -(IBAction)backToMenu:(id)sender;
 {
     [self.navigationController popViewControllerAnimated:YES];
-    [self releaseComponents];
 }
 
 - (IBAction)inviteFriendsClick:(id)sender {

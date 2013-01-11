@@ -118,6 +118,7 @@
 
 - (void)releaseComponents
 {
+    [storeDataSource releaseComponents];
     storeDataSource = nil;
     title = nil;
     tableView = nil;

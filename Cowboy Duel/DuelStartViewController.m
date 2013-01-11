@@ -295,7 +295,6 @@ static const char *GC_URL =  BASE_URL"api/gc";
     userDefenseView = nil;
     oponentAtackView = nil;
     oponentDefenseView = nil;
-    playerAccount = nil;
     oponentAccount = nil;
     oponentNameOnLine = nil;
     player = nil;

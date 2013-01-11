@@ -57,8 +57,10 @@
 @synthesize ribbonImage;
 
 +(StoreProductCell*) cell {
-    NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"StoreProductCell" owner:nil options:nil];
-    return [objects objectAtIndex:0];
+    @autoreleasepool {
+        NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"StoreProductCell" owner:nil options:nil];
+        return [objects objectAtIndex:0];
+    }
 }
 
 +(NSString*) cellID { return @"StoreProductCell"; }
@@ -71,24 +73,26 @@
     frame.origin.x=5;
     frame.origin.y=0;
     frame.size.width=frame.size.width-10;
-    buttonLabel = [[UILabel alloc] initWithFrame:frame];
-    [buttonLabel setFont: [UIFont fontWithName: @"DecreeNarrow" size:20]];
-    buttonLabel.textAlignment = UITextAlignmentCenter;
-    [buttonLabel setBackgroundColor:[UIColor clearColor]];
-    [buttonLabel setTextColor:buttonsTitleColor];
-    [buyProduct addSubview:buttonLabel];
+    @autoreleasepool {
+        buttonLabel = [[UILabel alloc] initWithFrame:frame];
+        [buttonLabel setFont: [UIFont fontWithName: @"DecreeNarrow" size:20]];
+        buttonLabel.textAlignment = UITextAlignmentCenter;
+        [buttonLabel setBackgroundColor:[UIColor clearColor]];
+        [buttonLabel setTextColor:buttonsTitleColor];
+        [buyProduct addSubview:buttonLabel];
+        
+        ribbonLabel=[[UILabel alloc] initWithFrame:CGRectMake(1, 21, 40 , 13)];
+        ribbonLabel.font = [UIFont systemFontOfSize:11.0f];
+        ribbonLabel.backgroundColor = [UIColor clearColor];
+        ribbonLabel.textColor=[UIColor whiteColor];
+        [ribbonLabel setTextAlignment:UITextAlignmentCenter];
+        
+        CGFloat angle = M_PI * -0.25;
+        CGAffineTransform transform = CGAffineTransformMakeRotation(angle);
+        ribbonLabel.transform = transform;
+        [ribbonImage addSubview:ribbonLabel];
+    }
     
-    ribbonLabel=[[UILabel alloc] initWithFrame:CGRectMake(1, 21, 40 , 13)];
-    ribbonLabel.font = [UIFont systemFontOfSize:11.0f];
-    ribbonLabel.backgroundColor = [UIColor clearColor];
-    ribbonLabel.textColor=[UIColor whiteColor];
-    [ribbonLabel setTextAlignment:UITextAlignmentCenter];
-    
-    CGFloat angle = M_PI * -0.25;
-    CGAffineTransform transform = CGAffineTransformMakeRotation(angle);
-    ribbonLabel.transform = transform;
-    [ribbonImage addSubview:ribbonLabel];
-
     lockLevelBackground.clipsToBounds = YES;
     lockLevelBackground.layer.cornerRadius = 13.f;
     

@@ -12,6 +12,17 @@
 #import "UIImage+Save.h"
 #import "IconDownloader.h"
 
+@interface TopPlayersDataSource()
+{
+    NSMutableData *receivedData;
+    UITableView *_tableView;
+    
+    NSMutableDictionary *imageDownloadsInProgress;
+    int myProfileIndex;
+}
+
+@end
+
 @implementation TopPlayersDataSource
 @synthesize arrItemsList,delegate,myProfileIndex;
 
@@ -62,6 +73,13 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
     }
 }
 
+-(void)releaseComponents
+{
+    arrItemsList = nil;
+    receivedData = nil;
+    _tableView = nil;
+    imageDownloadsInProgress = nil;
+}
 #pragma mark - Delegated methods
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -142,6 +160,7 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
 
 - (void)connectionDidFinishLoading:(CustomNSURLConnection *)connection1 {
    
+    connection1 = nil;
     NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
     DLog(@"PlayersOnLineDataSource jsonString %@",jsonString);
     NSArray *responseObject = ValidateObject([jsonString JSONValue], [NSArray class]);

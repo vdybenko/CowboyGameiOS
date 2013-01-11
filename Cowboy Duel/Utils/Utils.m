@@ -81,6 +81,7 @@
         NSCalendar* calendar = [NSCalendar currentCalendar];
         NSDate* endOfDate = [calendar dateByAddingComponents: oneDay toDate: startDate options: 0];
         
+        [oneDay release];
         oneDay = nil;
         
         NSDate *curentDate=[NSDate date];
@@ -116,6 +117,9 @@
         [oneDay setHour:1];
         NSCalendar* calendar = [NSCalendar currentCalendar];
         NSDate* endOfDate = [calendar dateByAddingComponents: oneDay toDate: startDate options: 0];
+        
+        [oneDay release];
+        oneDay = nil;
         
         NSDate *curentDate=[NSDate date];
         
