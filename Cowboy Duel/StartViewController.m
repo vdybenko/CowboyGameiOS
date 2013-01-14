@@ -162,10 +162,9 @@ static StartViewController *sharedHelper = nil;
 
 -(id)init
 {
-    NSUserDefaults *uDef = [NSUserDefaults standardUserDefaults];
-    
-    if (self == [super initWithNibName:nil bundle:nil]) {
-        
+    self = [super initWithNibName:nil bundle:nil];
+    if (self) {
+         NSUserDefaults *uDef = [NSUserDefaults standardUserDefaults];
         playerAccount = [AccountDataSource sharedInstance];
         oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
         oponentAccount.money = 1000;        
@@ -202,12 +201,6 @@ static StartViewController *sharedHelper = nil;
             [uDef setBool:TRUE forKey:@"FirstRunForDuel"];
             [playerAccount saveMoney];
             [playerAccount saveAccountName];
-            NSString *accID=[[NSString alloc]init];
-            if(playerAccount.accountID==NULL){
-                accID=@"NoGC";
-            }else{
-                accID=playerAccount.accountID;
-            }
             [playerAccount saveID];
             [playerAccount saveDeviceType];
             [playerAccount saveAccountLevel];
@@ -233,8 +226,6 @@ static StartViewController *sharedHelper = nil;
             
             [playerAccount loadAllParametrs];
             
-//          putch for 1.4.1
-            [playerAccount putchAvatarImageToInitStartVC:self];
 //            
             if (!([playerAccount.accountID rangeOfString:@"F"].location == NSNotFound)){ 
                 //facebook = [[Facebook alloc] initWithAppId:kFacebookAppId andDelegate:[LoginAnimatedViewController sharedInstance]];
@@ -261,7 +252,6 @@ static StartViewController *sharedHelper = nil;
                     [playerAccount.transactions addObject:loc];
                 }
             }
-            CDTransaction *localTransaction = [playerAccount.transactions lastObject];
           DLog(@"Transactions count = %d", [playerAccount.transactions count]);
             
             NSArray *oldLocations2 = [uDef arrayForKey:@"duels"];
@@ -558,16 +548,7 @@ static StartViewController *sharedHelper = nil;
     SSConnection *connection = [SSConnection sharedInstance];
     [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
     
-    BOOL mutchEnded;
-    if ((gameCenterViewController.userEndMatch && gameCenterViewController.opponentEndMatch) || (!gameCenterViewController.userEndMatch && !gameCenterViewController.opponentEndMatch)) 
-        mutchEnded = YES;
-    else 
-        mutchEnded = NO;
-    
-    NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
     gameCenterViewController.duelStartViewController = nil;
-    
-    NSInteger paymentRegistration = [[NSUserDefaults standardUserDefaults] integerForKey:@"paymentRegistration"];
     
     [self showProfileFirstRun];
     [self isAdvertisingOfNewVersionNeedShow];
@@ -1495,10 +1476,10 @@ static StartViewController *sharedHelper = nil;
 
 -(BOOL)isNeedBlockOnlineListForAdvertasingAppear;
 {
-    BOOL advertisingWillShow=[[NSUserDefaults standardUserDefaults] boolForKey:@"advertisingWillShow"];
-    
-    int drawCount=playerAccount.accountDraws;
-    int playedMatches=playerAccount.accountWins+drawCount;
+//    BOOL advertisingWillShow=[[NSUserDefaults standardUserDefaults] boolForKey:@"advertisingWillShow"];
+//    
+//    int drawCount=playerAccount.accountDraws;
+//    int playedMatches=playerAccount.accountWins+drawCount;
     
 //    if ((playedMatches>=2)&&([self connectedToWiFi]&&[AdColonyViewController isAdStatusValid])) {
 //        if ((advertisingWillShow)&&(playerAccount.removeAds!=AdColonyAdsStatusRemoved)) {

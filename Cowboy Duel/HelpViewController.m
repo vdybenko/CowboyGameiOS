@@ -124,6 +124,7 @@ BOOL isSoundControl;
     lbTitleHelp = nil;
     _btnVideo = nil;
     _btnBack = nil;
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
     _webViewMessage = nil;
     _vBackground = nil;
     mp = nil;

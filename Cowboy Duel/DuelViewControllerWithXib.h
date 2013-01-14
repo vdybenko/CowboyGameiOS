@@ -66,7 +66,6 @@ static CGFloat const ANIMATION_TIME = 0.3f;
 
 @optional
 -(void)setOponent:(NSString*)iv Label1:(NSString*)uil1 Label1:(int)uil2;
--(void)setMessageToOponent:(NSString*)pMessage;
 -(void)cancelDuel;
 -(void)setUserMoney:(int)money;
 -(void)setOponentMoney:(int)money;

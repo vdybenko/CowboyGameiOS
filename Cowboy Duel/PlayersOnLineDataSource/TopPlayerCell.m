@@ -88,7 +88,6 @@ UIColor * sandColor;
     }else {
         if ([player.dAuth isEqualToString:[AccountDataSource sharedInstance].accountID]) {
             [self setCellStatus:TopPlayerCellStatusRed];
-            myProfileIndex=indexPath.row;
         }else {
             if (indexPath.row==0) {
                 [self setCellStatus:TopPlayerCellStatusGold];

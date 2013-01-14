@@ -62,7 +62,8 @@ static OGHelper *sharedHelper = nil;
 
 - (id)initWithAccount:(AccountDataSource *)userAccount
 {
-    if (self == [super init]) {   
+    self = [super init];
+    if (self) {   
         [self createControllsWithAccount:userAccount];
     }
     return self;
@@ -672,22 +673,22 @@ static OGHelper *sharedHelper = nil;
  * Graph API: Search query to get nearby location.
  */
 - (void)apiGraphSearchPlace:(CLLocation *)location {
-//    [delegate showActivityIndicator];
-    currentAPICall = kAPIGraphSearchPlace;
-    NSString *centerLocation = [[NSString alloc] initWithFormat:@"%f,%f",
-                                location.coordinate.latitude,
-                                location.coordinate.longitude];
-    // HackbookAppDelegate *delegate = (HackbookAppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   @"place",  @"type",
-                                   centerLocation, @"center",
-                                   @"1000",  @"distance",
-                                   nil];
-//    [centerLocation release];
-    //[facebook requestWithGraphPath:@"search" andParams:params andDelegate:self];
-    [FBRequestConnection startWithGraphPath:@"search" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        DLog(@"%@ %@", result, error);
-    }];
+////    [delegate showActivityIndicator];
+//    currentAPICall = kAPIGraphSearchPlace;
+//    NSString *centerLocation = [[NSString alloc] initWithFormat:@"%f,%f",
+//                                location.coordinate.latitude,
+//                                location.coordinate.longitude];
+//    // HackbookAppDelegate *delegate = (HackbookAppDelegate *)[[UIApplication sharedApplication] delegate];
+////    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+////                                   @"place",  @"type",
+////                                   centerLocation, @"center",
+////                                   @"1000",  @"distance",
+////                                   nil];
+////    [centerLocation release];
+//    //[facebook requestWithGraphPath:@"search" andParams:params andDelegate:self];
+//    [FBRequestConnection startWithGraphPath:@"search" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+//        DLog(@"%@ %@", result, error);
+//    }];
 
 }
 

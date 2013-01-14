@@ -25,9 +25,8 @@ static const char *A_URL =  BASE_URL"api/authorization";
 
 -(id)initWithPush:(__weak NSDictionary *)notification
 {
-    if(self==[super init])
-    {
-        
+    self = [super init];
+    if(self){
         [AccountDataSource sharedInstance];
         if(![[NSUserDefaults standardUserDefaults] boolForKey:@"AlreadyRun"] ) {
             firstRun = YES;

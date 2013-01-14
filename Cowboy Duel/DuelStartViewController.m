@@ -49,7 +49,8 @@ static const char *GC_URL =  BASE_URL"api/gc";
 
 -(id)initWithAccount:(AccountDataSource *)userAccount andOpAccount:(AccountDataSource *)opAccount opopnentAvailable:(BOOL)available andServerType:(BOOL)server andTryAgain:(BOOL)tryA;
 {
-    if (self == [super initWithNibName:nil bundle:nil]) {
+    self = [super initWithNibName:nil bundle:nil];
+    if (self) {
         oponentAvailable=available;
         tryAgain = tryA;
         serverType = server;
@@ -412,10 +413,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
 //    col=[[UIColor alloc] initWithRed:0.317 green:0.274 blue:0.184 alpha:1];
 //    //[_lbMoneyOponent setTextColor:col];
 }
--(void)setMessageToOponent:(NSString*)pMessage;
-{
-    NSString *mesFull=[NSString stringWithFormat:@"%@%@%@",NSLocalizedString(@"HTML_MES_HEAD", @""),pMessage,NSLocalizedString(@"HTML_ASS", @"")];
-}
+
 -(void)cancelDuel;
 {
 //   Выводитса сообщение NSLocalizedString(@"RanAway", @"")

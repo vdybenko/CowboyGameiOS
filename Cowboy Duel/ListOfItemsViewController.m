@@ -309,6 +309,8 @@
             NSString *entered = [(OCPromptView *)alertView enteredText];
             [_gameCenterViewController startClientWithName:_hostName AndMessage:entered];
         }
+        
+        
     }
     else
     {

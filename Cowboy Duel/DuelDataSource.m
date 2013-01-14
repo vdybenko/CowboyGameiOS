@@ -23,9 +23,12 @@ static const NSString *md5SharedSecret = @"uWW4fCpfsuuL6t8sewy0RJOXJ6Sogtte";
 
 -(id)initWithLogin:(GKLocalPlayer *)localPlayer;
 {
-    DLog(@"Init");
-    playerAccount = [[AccountDataSource alloc] initWithLocalPlayer];
-                     return self;
+    self = [super init];
+    if (self) {
+        DLog(@"Init");
+        playerAccount = [[AccountDataSource alloc] initWithLocalPlayer];
+    }
+    return self;
 }
 
 #pragma mark -

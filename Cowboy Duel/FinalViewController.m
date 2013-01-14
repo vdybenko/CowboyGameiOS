@@ -494,7 +494,6 @@
                                                       userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@%@",stGA,@"final"] forKey:@"event"]];
 //    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@%@",stGA,@"final"]];
 
-    int oldMoney=playerAccount.money;
     oldMoneyForAnimation = playerAccount.money;
     if (!teaching||(duelWithBotCheck)) {
         oponentAccount.money += moneyExch;
