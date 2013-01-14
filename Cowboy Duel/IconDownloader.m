@@ -15,7 +15,13 @@
 
 - (void)startDownloadFBIcon
 {
-    [[OGHelper sharedInstance] apiGraphGetImageForList:namePlayer delegate:self];
+    [[OGHelper sharedInstance] apiGraphGetImageForList:namePlayer didFinishBlock:^(UIImage *image){
+        imageDownloaded = image;
+        [delegate appImageDidLoad:self.indexPathInTableView];
+        
+        NSString *path = [NSString stringWithFormat:@"%@/icon_%@.png",[[OGHelper sharedInstance] getSavePathForList],namePlayer];
+        [UIImagePNGRepresentation(imageDownloaded) writeToFile:path atomically:YES];
+    }];
 }
 
 - (void)startDownloadSimpleIcon
@@ -24,7 +30,7 @@
                                                             cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                         timeoutInterval:kTimeOutSeconds];
     
-    NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self startImmediately:YES];
+    NSURLConnection *theConnection=[NSURLConnection connectionWithRequest:theRequest delegate:self];
     if (theConnection) {
         receivedData = [[NSMutableData alloc] init];
     }
@@ -42,25 +48,6 @@
     imageDownloaded = nil;
     receivedData = nil;
 }
-
-#pragma mark FConnect Methods
-
-- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
-}
-
-- (void)request:(FBRequest *)request didLoad:(id)result {
-    
-    if ([result isKindOfClass:[NSArray class]] && ([result count] > 0)) {
-        result = [result objectAtIndex:0];
-    }
-    
-    imageDownloaded = [[UIImage alloc] initWithData:result];
-    [delegate appImageDidLoad:self.indexPathInTableView];
-
-    NSString *path = [NSString stringWithFormat:@"%@/icon_%@.png",[[OGHelper sharedInstance] getSavePathForList],namePlayer];
-    [UIImagePNGRepresentation(imageDownloaded) writeToFile:path atomically:YES];
-}
-
 /**
  * Called when an error prevents the Facebook API request from completing
  * successfully.
@@ -72,12 +59,11 @@
 #pragma mark CustomNSURLConnection handlers
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection1 {
-    imageDownloaded = [[UIImage alloc] initWithData:receivedData];
+    imageDownloaded = [UIImage imageWithData:receivedData];
     [delegate appImageDidLoad:self.indexPathInTableView];
     
     NSString *path = [NSString stringWithFormat:@"%@/icon_%@.png",[[OGHelper sharedInstance] getSavePathForList],namePlayer];
     [UIImagePNGRepresentation(imageDownloaded) writeToFile:path atomically:YES];
-    connection1 = nil;
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data

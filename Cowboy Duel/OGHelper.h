@@ -121,9 +121,8 @@ static NSString *getOpenGraphSavePath() ;
 - (void)apiGraphCustomActionGet:(NSString *)objectID ;
 - (void)apiGraphCustomActionUpdate:(NSString *)objectID;
 -(NSString *)apiGraphGetImage:(NSString *)URL;
--(void)apiGraphGetImageForList:(NSString *)URL delegate:(id<FBRequestDelegate>)delegate;
--(void)apiGraphGetImage:(NSString *)URL delegate:(id<FBRequestDelegate>)pDelegate imageType:(typeOfFBImage)type;
-
+-(void)apiGraphGetImageForList:(NSString *)URL didFinishBlock:(void (^)(UIImage*)) finishBlock;
+-(void)apiGraphGetImage:(NSString *)URL didFinishBlock:(void (^)(UIImage*)) finishBlock imageType:(typeOfFBImage)type;
 
 - (void)apiGraphMe;
 -(void) showMessage:(NSString *)message;

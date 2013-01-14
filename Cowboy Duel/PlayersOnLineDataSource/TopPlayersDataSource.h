@@ -17,7 +17,8 @@
 
 
 @interface TopPlayersDataSource : NSObject <UITableViewDataSource,IconDownloaderDelegate,MemoryManagement>
-@property(strong, readonly)NSMutableArray *arrItemsList;
+@property(strong, readonly) NSMutableArray *arrItemsList;
+@property(weak, nonatomic) UITableView *tableView;
 @property(weak, nonatomic)id delegate;
 @property(nonatomic) int myProfileIndex;
 

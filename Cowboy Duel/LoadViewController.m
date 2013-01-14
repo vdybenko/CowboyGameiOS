@@ -175,7 +175,7 @@ static const char *A_URL =  BASE_URL"api/authorization";
     NSString *stBody=[Utils makeStringForPostRequest:dicBody];
 	[theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]]; 
     
-    NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self startImmediately:YES];
+    NSURLConnection *theConnection=[NSURLConnection connectionWithRequest:theRequest delegate:self];
     if (theConnection) {
         //        [receivedData setLength:0];
         receivedData = [[NSMutableData alloc] init];

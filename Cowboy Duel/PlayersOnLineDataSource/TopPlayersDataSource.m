@@ -15,7 +15,6 @@
 @interface TopPlayersDataSource()
 {
     NSMutableData *receivedData;
-    UITableView *_tableView;
     
     NSMutableDictionary *imageDownloadsInProgress;
     int myProfileIndex;
@@ -25,6 +24,7 @@
 
 @implementation TopPlayersDataSource
 @synthesize arrItemsList,delegate,myProfileIndex;
+@synthesize tableView;
 
 //static const char *TOP_PLAYERS_URL =  BASE_URL"users/listview";
 static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json";
@@ -43,7 +43,7 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
     arrItemsList=[[NSMutableArray alloc] init];
      imageDownloadsInProgress=[[NSMutableDictionary alloc] init];
      
-     _tableView=pTable;
+     tableView=pTable;
      myProfileIndex=-1;
 	return self;
 }
@@ -77,7 +77,7 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
 {
     arrItemsList = nil;
     receivedData = nil;
-    _tableView = nil;
+    tableView = nil;
     imageDownloadsInProgress = nil;
 }
 #pragma mark - Delegated methods
@@ -183,7 +183,7 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
     TopPlayersViewController *topPlayersViewController = (TopPlayersViewController *)delegate;
     [topPlayersViewController.btnFindMe setEnabled:YES];
     [topPlayersViewController.loadingView setHidden:YES];
-    [_tableView reloadData];
+    [tableView reloadData];
 }
 
 - (void)connection:(CustomNSURLConnection *)connection didReceiveData:(NSData *)data
@@ -210,13 +210,15 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
     IconDownloader *iconDownloader = [imageDownloadsInProgress objectForKey:indexPath];
     if (iconDownloader != nil)
         {
-            TopPlayerCell  *cell = (TopPlayerCell*)[_tableView cellForRowAtIndexPath:iconDownloader.indexPathInTableView];
-            [cell setPlayerIcon:iconDownloader.imageDownloaded];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                TopPlayerCell *cell = (TopPlayerCell*)[tableView cellForRowAtIndexPath:iconDownloader.indexPathInTableView];
+                [cell setPlayerIcon:iconDownloader.imageDownloaded];
+            });
             [imageDownloadsInProgress removeObjectForKey:indexPath];
             iconDownloader = nil;
         }
 }
-
+//
 #pragma mark -
 
 -(BOOL) isPlayerInTop10:(NSString*)authen;

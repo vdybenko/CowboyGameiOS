@@ -238,6 +238,7 @@ static const CGFloat timeToStandartTitles = 1.8;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    [profilePictureView setProfileID:nil];
     [profilePictureView setProfileID:playerAccount.facebookUser.id];
     lbPointsText.font = [UIFont fontWithName: @"MyriadPro-Semibold" size:12];
     
@@ -410,6 +411,7 @@ static const CGFloat timeToStandartTitles = 1.8;
 {
     [self refreshContentFromPlayerAccount];
     NSUserDefaults *uDef=[NSUserDefaults standardUserDefaults];
+    [profilePictureView setProfileID:nil];
     [profilePictureView setProfileID:playerAccount.facebookUser.id];
     if (![uDef objectForKey:@"FBAccessTokenKey"]) {
         [btnLogOutFB setHidden:YES];

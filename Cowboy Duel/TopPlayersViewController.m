@@ -63,7 +63,7 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
     [activityIndicator startAnimating];
     
     _playersTopDataSource = [[StartViewController sharedInstance] topPlayersDataSource];
-    [_playersTopDataSource reloadDataSource];
+    _playersTopDataSource.tableView = tableView;
     _playersTopDataSource.delegate=self;
     
     tableView.delegate=self;
