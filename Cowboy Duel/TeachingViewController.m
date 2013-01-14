@@ -182,6 +182,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
             [activityIndicatorView showView];
             [self.navigationController pushViewController:finalViewController animated:YES];
             //                [button setEnabled:NO];
+            finalViewController = nil;
             [timer invalidate];
         } 
     }else{

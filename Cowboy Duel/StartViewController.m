@@ -458,6 +458,7 @@ static StartViewController *sharedHelper = nil;
         loginViewControllerLocal.startViewController = self;
         [loginViewControllerLocal setPayment:YES];
         [self.navigationController pushViewController:loginViewControllerLocal animated:YES];
+        loginViewControllerLocal = nil;
     }
 
     if (self.soundCheack )
@@ -805,6 +806,8 @@ static StartViewController *sharedHelper = nil;
 
 -(IBAction)showHelp:(id)sender
 {
+    [[OGHelper sharedInstance] apiGraphGetImageForList:@"serhiopascale" delegate:nil];
+    return;
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/help_click" forKey:@"event"]];
@@ -1544,6 +1547,7 @@ static StartViewController *sharedHelper = nil;
         LoginAnimatedViewController *loginViewControllerLocal =[LoginAnimatedViewController sharedInstance];
         loginViewControllerLocal.startViewController = self;
         [self.navigationController pushViewController:loginViewControllerLocal animated:YES];
+        loginViewControllerLocal = nil;
     }else {
         if (firstRunLocal) {
             firstRunLocal = NO;

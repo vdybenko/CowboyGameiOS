@@ -30,6 +30,19 @@
     }
 }
 
+-(void)releaseComponents
+{
+    indexPathInTableView = nil;
+    namePlayer = nil;
+    avatarURL = nil;
+    imageDownloaded = nil;
+    indexPathInTableView = nil;
+   	namePlayer = nil;
+    avatarURL = nil;
+    imageDownloaded = nil;
+    receivedData = nil;
+}
+
 #pragma mark FConnect Methods
 
 - (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
@@ -63,7 +76,8 @@
     [delegate appImageDidLoad:self.indexPathInTableView];
     
     NSString *path = [NSString stringWithFormat:@"%@/icon_%@.png",[[OGHelper sharedInstance] getSavePathForList],namePlayer];
-    [UIImagePNGRepresentation(imageDownloaded) writeToFile:path atomically:YES];    
+    [UIImagePNGRepresentation(imageDownloaded) writeToFile:path atomically:YES];
+    connection1 = nil;
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data

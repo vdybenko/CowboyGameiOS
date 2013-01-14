@@ -856,7 +856,7 @@ if (playerAccount.accountLevel != 10) {
         
         TeachingViewController *teachingViewController = [[TeachingViewController alloc] initWithTime:randomTime andAccount:[AccountDataSource sharedInstance] andOpAccount:playerAccount];
         [self.navigationController pushViewController:teachingViewController animated:YES];
-        
+        teachingViewController = nil;
         SSConnection *connection = [SSConnection sharedInstance];
         [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
         
@@ -879,6 +879,7 @@ if (playerAccount.accountLevel != 10) {
                          [self.navigationController pushViewController:duelStartViewController animated:NO];
                          [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
                      }];
+    duelStartViewController = nil;
     
 }
 
@@ -892,6 +893,7 @@ if (playerAccount.accountLevel != 10) {
                          [self.navigationController pushViewController:storeViewController animated:NO];
                          [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
                      }];
+    storeViewController = nil;
 }
 
 -(IBAction)showStoreDefence:(id)sender
@@ -905,8 +907,7 @@ if (playerAccount.accountLevel != 10) {
                          [self.navigationController pushViewController:storeViewController animated:NO];
                          [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
                      }];
-    
-    
+    storeViewController = nil;
 }
 #pragma mark IconDownloaderDelegate
 - (void)appImageDidLoad:(NSIndexPath *)indexPath

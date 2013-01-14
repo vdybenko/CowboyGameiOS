@@ -380,6 +380,7 @@ if (shotCountBullet!=0) {
 {   
     HelpViewController *helpView=[[HelpViewController alloc] init];
     [self.navigationController pushViewController:helpView animated:YES];
+    helpView = nil;
 }
 
 #pragma mark Gun animation

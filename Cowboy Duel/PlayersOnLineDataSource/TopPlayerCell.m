@@ -36,8 +36,10 @@ UIColor * brownColor;
 UIColor * sandColor;
 
 +(TopPlayerCell*) cell {
-    NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"TopPlayersCell" owner:nil options:nil];
-    return [objects objectAtIndex:0];
+    @autoreleasepool {
+        NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"TopPlayersCell" owner:nil options:nil];
+        return [objects objectAtIndex:0];
+    }
 }
 
 +(NSString*) cellID { return @"TopPlayersCell"; }
@@ -50,10 +52,12 @@ UIColor * sandColor;
     numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     
-    rankNumber=[[FXLabel alloc] initWithFrame:rankNumberFake.frame];
-    rankNumber.backgroundColor = [UIColor clearColor];
-    [rankNumber setTextAlignment:UITextAlignmentCenter];
-    [self addSubview:rankNumber];
+    @autoreleasepool {
+        rankNumber=[[FXLabel alloc] initWithFrame:rankNumberFake.frame];
+        rankNumber.backgroundColor = [UIColor clearColor];
+        [rankNumber setTextAlignment:UITextAlignmentCenter];
+        [self addSubview:rankNumber];
+    }
     
     coldTitle.text=NSLocalizedString(@"Gold:", @"");
     

@@ -642,24 +642,42 @@ static OGHelper *sharedHelper = nil;
     [FBRequestConnection startWithGraphPath:requestSt completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         DLog(@"%@ %@", result, error);
     }];
-
 }
 
 
 -(void)apiGraphGetImageForList:(NSString *)URL delegate:(id<FBRequestDelegate>)pDelegate {
         
-    NSString *requestSt=[NSString stringWithFormat:@"%@/picture",URL];
-    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                    @"square",@"type",
-                                    nil];
+    NSString *requestSt=[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture",URL];
+//    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+//                                    @"square",@"type",
+//                                    nil];
     
 //    [facebook requestWithGraphPath:requestSt 
 //                         andParams:params 
 //                       andDelegate:pDelegate];
-    [FBRequestConnection startWithGraphPath:requestSt completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        DLog(@"%@ %@", result, error);
-    }];
-
+//    [FBRequestConnection startWithGraphPath:requestSt completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+//        DLog(@"%@ %@", result, error);
+//    }];
+    
+    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:requestSt]
+                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                        timeoutInterval:kTimeOutSeconds];
+    [theRequest setHTTPMethod:@"GET"];
+//    NSDictionary *dicBody=[NSDictionary dictionaryWithObjectsAndKeys:
+//                           @"square",@"type",
+//                           nil];
+//    NSString *stBody=[Utils makeStringForPostRequest:dicBody];
+//    [theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    [NSURLConnection
+     sendAsynchronousRequest:theRequest
+     queue:[[NSOperationQueue alloc] init]
+     completionHandler:^(NSURLResponse *response,
+                         NSData *data,
+                         NSError *error)
+     {
+         DLog(@"%@ %@", data, error);
+     }];
 }
 
 /*

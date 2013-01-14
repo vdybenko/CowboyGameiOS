@@ -212,6 +212,8 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
         {
             TopPlayerCell  *cell = (TopPlayerCell*)[_tableView cellForRowAtIndexPath:iconDownloader.indexPathInTableView];
             [cell setPlayerIcon:iconDownloader.imageDownloaded];
+            [imageDownloadsInProgress removeObjectForKey:indexPath];
+            iconDownloader = nil;
         }
 }
 

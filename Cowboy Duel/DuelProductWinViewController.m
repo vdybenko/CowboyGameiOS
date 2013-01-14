@@ -189,6 +189,7 @@
     StoreViewController *svc=[[StoreViewController alloc] initWithAccount:playerAccount];
     [parentVC.navigationController pushViewController:svc animated:YES];
     [parentVC dismissViewControllerAnimated:YES completion:Nil];
+    svc = nil;
 }
 
 #pragma mark MKStoreKitDelegate

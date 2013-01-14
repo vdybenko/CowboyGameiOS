@@ -206,6 +206,7 @@
                          [self.navigationController pushViewController:profileViewController animated:NO];
                          [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
                      }];
+    profileViewController = nil;
     //    CATransition* transition = [CATransition animation];
 //    transition.duration = 0.5;
 //    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
@@ -247,7 +248,7 @@
         
         TeachingViewController *teachingViewController = [[TeachingViewController alloc] initWithTime:randomTime andAccount:_playerAccount andOpAccount:oponentAccount];
         [self.navigationController pushViewController:teachingViewController animated:YES];
-        
+        teachingViewController = nil;
         SSConnection *connection = [SSConnection sharedInstance];
         [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
         
@@ -264,6 +265,7 @@
     _gameCenterViewController.duelStartViewController = duelStartViewController;
     
     [self.navigationController pushViewController:duelStartViewController animated:YES];
+    duelStartViewController = nil;
     PlayerOnLineCell *cell = (PlayerOnLineCell *)[tableView cellForRowAtIndexPath:indexPath];
     [cell hideIndicatorConnectin];
     
@@ -291,7 +293,8 @@
         [self.navigationController pushViewController:duelStartViewController animated:YES];
         duelStartViewController.delegate = _gameCenterViewController;
         _gameCenterViewController.duelStartViewController = duelStartViewController;
-        
+        duelStartViewController = nil;
+
         NSString *convertString=_player.dAuth;
         NSUInteger bufferCount = sizeof(char) * ([convertString length] + 1);
         char *utf8Buffer = malloc(bufferCount);

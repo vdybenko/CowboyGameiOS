@@ -495,6 +495,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
     int randomTime = arc4random() % 6;
     TeachingViewController *teachingViewController = [[TeachingViewController alloc] initWithTime:randomTime andAccount:playerAccount andOpAccount:oponentAccount];
     [self.navigationController pushViewController:teachingViewController animated:YES];
+    teachingViewController = nil;
 }
 
 - (void)viewDidUnload {
