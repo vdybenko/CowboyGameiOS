@@ -771,7 +771,7 @@
         if(oponentAccount.bot) [[StartViewController sharedInstance] modifierUser:oponentAccount];
     }
     
-    if (playerAccount.accountLevel == 10){
+    if (playerAccount.accountLevel == kCountOfLevels){
         NSString *name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel];
         ivCurrentRank.image = [UIImage imageNamed:name];
     }
@@ -956,18 +956,18 @@
   
   NSArray *array=[DuelRewardLogicController getStaticPointsForEachLevels];
   
-  if (playerAccount.accountLevel < 0 || playerAccount.accountLevel > 10 ){
-    [playerAccount setAccountLevel:10];
+  if (playerAccount.accountLevel < 0 || playerAccount.accountLevel > kCountOfLevels ){
+    [playerAccount setAccountLevel:kCountOfLevels];
   }
   
   NSInteger num = playerAccount.accountLevel;
-    int  moneyForNextLevel=(playerAccount.accountLevel != 10)? [[array objectAtIndex:num] intValue]:playerAccount.accountPoints+1000;
+    int  moneyForNextLevel=(playerAccount.accountLevel != kCountOfLevels)? [[array objectAtIndex:num] intValue]:playerAccount.accountPoints+1000;
   
   int moneyForPrewLevel;
   if (playerAccount.accountLevel==0) {
     moneyForPrewLevel = 0;
   }else
-      if (playerAccount.accountLevel == 10) {
+      if (playerAccount.accountLevel == kCountOfLevels) {
           moneyForPrewLevel = playerAccount.accountPoints;
       }
     else
@@ -1150,16 +1150,16 @@
     }];
   //Blue line animation:
   NSArray *array=[DuelRewardLogicController getStaticPointsForEachLevels];
-  if (playerAccount.accountLevel < 0 || playerAccount.accountLevel > 10 ){
+  if (playerAccount.accountLevel < 0 || playerAccount.accountLevel > kCountOfLevels ){
     [playerAccount setAccountLevel:10];
   }
   NSInteger num = playerAccount.accountLevel;
-  int  moneyForNextLevel=(playerAccount.accountLevel != 10)? [[array objectAtIndex:num] intValue]:playerAccount.accountPoints+1000;
+  int  moneyForNextLevel=(playerAccount.accountLevel != kCountOfLevels)? [[array objectAtIndex:num] intValue]:playerAccount.accountPoints+1000;
   int moneyForPrewLevel;
   if (playerAccount.accountLevel==0) {
     moneyForPrewLevel = 0;
   }else
-      if (playerAccount.accountLevel == 10) {
+      if (playerAccount.accountLevel == kCountOfLevels) {
           moneyForPrewLevel = playerAccount.accountPoints;
       }
       else{

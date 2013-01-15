@@ -345,7 +345,7 @@ static StartViewController *sharedHelper = nil;
         cloudX=460;
         cloud2X=-20;
         
-        inBackground = NO;
+        inBackground = NO;        
     }
     return self;
 }

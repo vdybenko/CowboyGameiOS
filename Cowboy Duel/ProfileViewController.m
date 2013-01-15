@@ -484,7 +484,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         [self animateLabel:lbGoldCount toValue:playerAccount.money];
     });
-    if (playerAccount.accountLevel != 10) {
+    if (playerAccount.accountLevel != kCountOfLevels) {
         lbPointsCountMain.text = [NSString stringWithFormat:@"%@/%@", [numberFormatter stringFromNumber:[NSNumber numberWithInt:playerAccount.accountPoints]], [[DuelRewardLogicController getStaticPointsForEachLevels] objectAtIndex:playerAccount.accountLevel]];
         
 //        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
@@ -532,10 +532,10 @@ static const CGFloat timeToStandartTitles = 1.8;
     lbUserTitle.text = NSLocalizedString(nameOfRank, @"");
     NSArray *array=[DuelRewardLogicController getStaticPointsForEachLevels];
     
-    if (playerAccount.accountLevel < 0 || playerAccount.accountLevel > 10 ){
-        [playerAccount setAccountLevel:10];
+    if (playerAccount.accountLevel < 0 || playerAccount.accountLevel > kCountOfLevels){
+        [playerAccount setAccountLevel:kCountOfLevels];
     }
-if (playerAccount.accountLevel != 10) {
+if (playerAccount.accountLevel != kCountOfLevels) {
     NSInteger num = playerAccount.accountLevel;
     int  moneyForNextLevel=[[array objectAtIndex:num] intValue];
     
@@ -567,7 +567,7 @@ if (playerAccount.accountLevel != 10) {
 
         lbPointsCountMain.text = [NSString stringWithFormat:@"%d",playerAccount.accountPoints];
     DLog(@"%@", lbPointsCountMain.text);
-    }
+}
     if (!needAnimation) {
         lbGoldCount.text = [numberFormatter stringFromNumber:[NSNumber numberWithInt:(playerAccount.money)]];
     }

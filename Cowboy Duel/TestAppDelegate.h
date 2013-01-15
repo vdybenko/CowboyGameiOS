@@ -29,5 +29,4 @@
 
 + (NSString *)FBErrorCodeDescription:(FBErrorCode) code;
 
-
 @end
