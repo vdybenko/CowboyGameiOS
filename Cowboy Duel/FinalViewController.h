@@ -72,23 +72,23 @@
     NSArray *_pontsForWin;
     NSArray *_pontsForLose;
     
-    IBOutlet UIButton *backButton;
-    IBOutlet UIButton *nextButton;
+    __weak IBOutlet UIButton *backButton;
+    __weak IBOutlet UIButton *nextButton;
 
-    IBOutlet UITableView *resultTable;
+    __weak IBOutlet UITableView *resultTable;
     
-    IBOutlet UILabel *lblNamePlayer;
-    IBOutlet UILabel *lblNameOponnent;
+    __weak IBOutlet UILabel *lblNamePlayer;
+    __weak IBOutlet UILabel *lblNameOponnent;
     
-    IBOutlet UILabel *lblResulDescription;
+    __weak IBOutlet UILabel *lblResulDescription;
   
-    IBOutlet UIView *ivGoldCoin;
-    IBOutlet UIImageView *ivBlueLine;
-    IBOutlet UIImageView *ivCurrentRank;
-    IBOutlet UIImageView *ivNextRank;
-    IBOutlet FXLabel *lblGoldPlus;
+    __weak IBOutlet UIView *ivGoldCoin;
+    __weak IBOutlet UIImageView *ivBlueLine;
+    __weak IBOutlet UIImageView *ivCurrentRank;
+    __weak IBOutlet UIImageView *ivNextRank;
+    __weak IBOutlet FXLabel *lblGoldPlus;
 
-    IBOutlet UIView *viewLastSceneAnimation;
+    __weak IBOutlet UIView *viewLastSceneAnimation;
         
     UIImageView *loserImg;
     UIImageView *loserSpiritImg;
@@ -96,12 +96,12 @@
     UIImageView *winnerImg2;
     UIImageView *loserMoneyImg;
   
-    IBOutlet UIView *view;
-    IBOutlet UIView *statView;
+    __weak IBOutlet UIView *view;
+    __weak IBOutlet UIView *statView;
     
-    IBOutlet UILabel *lbBack;
-    IBOutlet UILabel *lbTryAgain;
-    IBOutlet UILabel *lbNextRound;
+    __weak IBOutlet UILabel *lbBack;
+    __weak IBOutlet UILabel *lbTryAgain;
+    __weak IBOutlet UILabel *lbNextRound;
     
     
     __weak IBOutlet FXLabel *lblGold;
@@ -112,8 +112,8 @@
 }
 @property(weak)id<DuelViewControllerDelegate> delegate;
 
-@property (strong, nonatomic) IBOutlet UIButton *tryButton;
-@property (strong, nonatomic) IBOutlet UIView *statView;
+@property (weak, nonatomic) IBOutlet UIButton *tryButton;
+@property (weak, nonatomic) IBOutlet UIView *statView;
 
 -(id)initWithUserTime:(int)userTimePar
        andOponentTime:(int)oponentTime

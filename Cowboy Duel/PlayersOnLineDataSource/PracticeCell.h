@@ -4,7 +4,7 @@
 @interface PracticeCell : UITableViewCell {
 	
 }
-@property (strong,nonatomic) IBOutlet UIButton * btnDuel;
+@property (weak,nonatomic) IBOutlet UIButton * btnDuel;
 
 +(PracticeCell*)cell;
 +(NSString*) cellID;

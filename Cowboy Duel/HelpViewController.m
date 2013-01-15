@@ -28,19 +28,19 @@
 @interface HelpViewController () {
     id startVC;
     
-    IBOutlet UIView *mainView;
-    IBOutlet UIButton *btnContact;
-    IBOutlet UILabel *lbBackBtn;
-    IBOutlet UILabel *lbVideoBtn;
-    IBOutlet UILabel *lbContactButton;
+    __weak IBOutlet UIView *mainView;
+    __weak IBOutlet UIButton *btnContact;
+    __weak IBOutlet UILabel *lbBackBtn;
+    __weak IBOutlet UILabel *lbVideoBtn;
+    __weak IBOutlet UILabel *lbContactButton;
     
-    IBOutlet UILabel *lbTitleHelp;
+    __weak IBOutlet UILabel *lbTitleHelp;
     MPMoviePlayerViewController *mp;
 }
-@property (strong, nonatomic) IBOutlet UIButton *_btnVideo;
-@property (strong, nonatomic) IBOutlet UIButton *_btnBack;
-@property (strong, nonatomic) IBOutlet UIWebView *_webViewMessage;
-@property (strong, nonatomic) IBOutlet UIView *_vBackground;
+@property (weak, nonatomic) IBOutlet UIButton *_btnVideo;
+@property (weak, nonatomic) IBOutlet UIButton *_btnBack;
+@property (weak, nonatomic) IBOutlet UIWebView *_webViewMessage;
+@property (weak, nonatomic) IBOutlet UIView *_vBackground;
 @end
 
 @implementation HelpViewController

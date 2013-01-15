@@ -20,29 +20,28 @@
     int money;
     double angle;
     
-    IBOutlet UIImageView *ivImageForLevel;
+    __weak IBOutlet UIImageView *ivImageForLevel;
     
     //images to animate:
-    IBOutlet UIImageView *ivLightRays;
-    IBOutlet UIImageView *ivLightRays2;
-    IBOutlet UIImageView *ivLevelRing;
-    IBOutlet UIImageView *ivLevelCoint;
+    __weak IBOutlet UIImageView *ivLightRays;
+    __weak IBOutlet UIImageView *ivLevelRing;
+    __weak IBOutlet UIImageView *ivLevelCoint;
     
     //labels:
-    IBOutlet UILabel *lbTitleRankAchieve;
+    __weak IBOutlet UILabel *lbTitleRankAchieve;
     
-    IBOutlet UILabel *lbCongLvlMainText;
-    IBOutlet UILabel *lbAgain;
-    IBOutlet UILabel *lbMenu;
-    IBOutlet UILabel *lbPostOnFB;
+    __weak IBOutlet UILabel *lbCongLvlMainText;
+    __weak IBOutlet UILabel *lbAgain;
+    __weak IBOutlet UILabel *lbMenu;
+    __weak IBOutlet UILabel *lbPostOnFB;
     //buttons:
-    IBOutlet UIButton *btnAgain;
-    IBOutlet UIButton *btnMenu;
-    IBOutlet UIButton *btnPost;
+    __weak IBOutlet UIButton *btnAgain;
+    __weak IBOutlet UIButton *btnMenu;
+    __weak IBOutlet UIButton *btnPost;
     BOOL runAnimation;
 }
-@property(nonatomic, strong)id<DuelViewControllerDelegate> delegate;
-@property (nonatomic, strong) IBOutlet UIImageView *ivLightRays2;
+@property(nonatomic, weak)id<DuelViewControllerDelegate> delegate;
+@property (nonatomic, weak) IBOutlet UIImageView *ivLightRays2;
 @end
 
 @implementation LevelCongratViewController

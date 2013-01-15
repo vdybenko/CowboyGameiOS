@@ -129,12 +129,6 @@ static CGFloat const ANIMATION_TIME = 0.3f;
     BOOL accelerometerStateSend;
     
     IBOutlet UIView *view;
-    IBOutlet UIView *_vBackground;
-    IBOutlet UIView *_vEarth;
-    IBOutlet UIButton *_btnNab;
-    IBOutlet UIImageView *_ivGun;
-    IBOutlet UILabel *_lbBullets;
-    IBOutlet UIButton *_infoButton;
     IBOutlet UILabel *lbBackButton;
     IBOutlet UIButton *menuButton;
     IBOutlet UIImageView *titleSteadyFire;
@@ -149,12 +143,12 @@ static CGFloat const ANIMATION_TIME = 0.3f;
 
 
 }
-@property (strong, nonatomic) IBOutlet UIView *_vEarth;
-@property (strong, nonatomic) IBOutlet UIButton *_btnNab;
-@property (strong, nonatomic) IBOutlet UIImageView *_ivGun;
-@property (strong, nonatomic) IBOutlet UILabel *_lbBullets;
-@property (strong, nonatomic) IBOutlet UIButton *_infoButton;
-@property (strong, nonatomic) IBOutlet UIImageView *titleSteadyFire;
+@property (weak, nonatomic) IBOutlet UIView *_vEarth;
+@property (weak, nonatomic) IBOutlet UIButton *_btnNab;
+@property (weak, nonatomic) IBOutlet UIImageView *_ivGun;
+@property (weak, nonatomic) IBOutlet UILabel *_lbBullets;
+@property (weak, nonatomic) IBOutlet UIButton *_infoButton;
+@property (weak, nonatomic) IBOutlet UIImageView *titleSteadyFire;
 
 -(id)initWithAccount:(AccountDataSource *)userAccount oponentAccount:(AccountDataSource *)oponentAccount;
 -(float)abs:(float)d;

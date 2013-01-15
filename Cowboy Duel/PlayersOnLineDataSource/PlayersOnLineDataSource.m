@@ -131,6 +131,7 @@
         
         player=[self.serverObjects objectAtIndex:indexPath.row];
         [cell populateWithPlayer:player];
+        [cell setPlayerIcon:nil];
         
         NSString *name=[[OGHelper sharedInstance ] getClearName:player.serverName];
         NSString *path=[NSString stringWithFormat:@"%@/icon_%@.png",[[OGHelper sharedInstance] getSavePathForList],name];

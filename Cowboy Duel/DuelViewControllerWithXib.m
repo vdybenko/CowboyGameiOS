@@ -26,7 +26,7 @@
 static NSString *ShotSound = @"%@/shot.mp3";
 
 @implementation DuelViewControllerWithXib
-@synthesize _vEarth, _infoButton, _ivGun, _btnNab, _lbBullets, delegate,titleSteadyFire;
+@synthesize _vEarth, _infoButton, _ivGun, _btnNab, _lbBullets, delegate;
 
 -(id)initWithAccount:(AccountDataSource *)userAccount oponentAccount:(AccountDataSource *)oponentAccount;
 {

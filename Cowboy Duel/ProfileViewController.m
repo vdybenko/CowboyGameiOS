@@ -34,39 +34,39 @@ static const CGFloat timeToStandartTitles = 1.8;
     
     NSString *namePlayerSaved;
     
-    IBOutlet UIImageView *_ivIconUser;
+    __weak IBOutlet UIImageView *_ivIconUser;
     
     //Labels
-    IBOutlet UILabel *lbProfileMain;
-    IBOutlet UIView *mainProfileView;
-    IBOutlet UITextField *tfFBName;
-    IBOutlet UILabel *lbUserTitle;
+    __weak IBOutlet UILabel *lbProfileMain;
+    __weak IBOutlet UIView *mainProfileView;
+    __weak IBOutlet UITextField *tfFBName;
+    __weak IBOutlet UILabel *lbUserTitle;
     
-    IBOutlet UIView *ivPointsLine;
+    __weak IBOutlet UIView *ivPointsLine;
     
-    IBOutlet UILabel *lbGoldCount;
-    IBOutlet UIImageView *lbGoldIcon;
+    __weak IBOutlet UILabel *lbGoldCount;
+    __weak IBOutlet UIImageView *lbGoldIcon;
     
-    IBOutlet UIButton *btnLogInFB;
-    IBOutlet UIButton *btnLogOutFB;
+    __weak IBOutlet UIButton *btnLogInFB;
+    __weak IBOutlet UIButton *btnLogOutFB;
     
-    IBOutlet UIButton *btnLeaderboard;
-    IBOutlet UIButton *btnLeaderboardBig;
-    IBOutlet UIButton *btnBack;
-    IBOutlet UILabel *lbPlayerStats;
-    IBOutlet UILabel *lbDuelsWon;
-    IBOutlet UILabel *lbDuelsWonCount;
-    IBOutlet UILabel *lbDuelsLost;
-    IBOutlet UILabel *lbDuelsLostCount;
-    IBOutlet UILabel *lbBiggestWin;
-    IBOutlet UILabel *lbBiggestWinCount;
-    IBOutlet UILabel *lbLeaderboardTitle;
-    IBOutlet UILabel *_lbMenuTitle;
+    __weak IBOutlet UIButton *btnLeaderboard;
+    __weak IBOutlet UIButton *btnLeaderboardBig;
+    __weak IBOutlet UIButton *btnBack;
+    __weak IBOutlet UILabel *lbPlayerStats;
+    __weak IBOutlet UILabel *lbDuelsWon;
+    __weak IBOutlet UILabel *lbDuelsWonCount;
+    __weak IBOutlet UILabel *lbDuelsLost;
+    __weak IBOutlet UILabel *lbDuelsLostCount;
+    __weak IBOutlet UILabel *lbBiggestWin;
+    __weak IBOutlet UILabel *lbBiggestWinCount;
+    __weak IBOutlet UILabel *lbLeaderboardTitle;
+    __weak IBOutlet UILabel *_lbMenuTitle;
     
-    IBOutlet UIView *userAtackView;
-    IBOutlet UIView *userDefenseView;
-    IBOutlet UILabel *userAtack;
-    IBOutlet UILabel *userDefense;
+    __weak IBOutlet UIView *userAtackView;
+    __weak IBOutlet UIView *userDefenseView;
+    __weak IBOutlet UILabel *userAtack;
+    __weak IBOutlet UILabel *userDefense;
     __weak IBOutlet FBProfilePictureView *profilePictureView;
     
     __weak IBOutlet UIImageView *profilePictureViewDefault;
@@ -74,8 +74,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     
     __weak IBOutlet UILabel *lbPointsCountMain;
     __weak IBOutlet UIImageView *ivCurrentRank;
-    //Buttons    
-    IBOutlet UIView *ivBlack;
     
     __weak IBOutlet UILabel *lbPointsText;
     NSNumberFormatter *numberFormatter;
@@ -84,7 +82,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     
 //    First run
     int textIndex;
-    IBOutlet UILabel *lbDescription;
+    __weak IBOutlet UILabel *lbDescription;
     NSMutableArray *textsContainer;
 }
 -(void)setImageFromFacebook;
@@ -821,33 +819,6 @@ if (playerAccount.accountLevel != 10) {
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/leaderBoard_click" forKey:@"event"]];
-}
-
-- (void)viewDidUnload {
-    _lbMenuTitle = nil;
-    lbProfileMain = nil;
-    mainProfileView = nil;
-    tfFBName = nil;
-    lbUserTitle = nil;
-    lbGoldCount = nil;
-    btnLogInFB = nil;
-    btnLogOutFB = nil;
-    btnLeaderboard = nil;
-    lbPlayerStats = nil;
-    lbDuelsWon = nil;
-    lbDuelsWonCount = nil;
-    lbDuelsLost = nil;
-    lbDuelsLostCount = nil;
-    lbBiggestWin = nil;
-    lbBiggestWinCount = nil;
-    lbLeaderboardTitle = nil;
-    lbPointsCountMain = nil;
-    ivCurrentRank = nil;
-    lbPointsText = nil;
-    profilePictureView = nil;
-    duelButton = nil;
-    profilePictureViewDefault = nil;
-    [super viewDidUnload];
 }
 
 - (IBAction)duelButtonClick:(id)sender {

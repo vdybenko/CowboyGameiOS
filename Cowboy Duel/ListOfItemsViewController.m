@@ -26,10 +26,10 @@
             
     NSIndexPath *_indexPath;
     
-    IBOutlet UILabel *lbBackBtn;
-    IBOutlet UILabel *lbInviteBtn;
+    __weak IBOutlet UILabel *lbBackBtn;
+    __weak IBOutlet UILabel *lbInviteBtn;
     
-    IBOutlet UILabel *saloonTitle;
+    __weak IBOutlet UILabel *saloonTitle;
     
     NSTimer *updateTimer;
 }

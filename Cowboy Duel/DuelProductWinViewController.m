@@ -16,20 +16,20 @@
 
 @interface DuelProductWinViewController ()
 {
-    AccountDataSource *playerAccount;
+    AccountDataSource __weak *playerAccount;
     CDWeaponProduct *duelProduct;
     UIViewController *parentVC;
     DuelProductDownloaderController *duelProductDownloaderController;
 }
-@property (strong, nonatomic) IBOutlet UILabel *title;
-@property (strong, nonatomic) IBOutlet UIView *frameView;
-@property (strong, nonatomic) IBOutlet UILabel *ribbonLabel;
-@property (strong, nonatomic) IBOutlet UILabel * goldTitle;
-@property (strong, nonatomic) IBOutlet UILabel * gold;
-@property (strong, nonatomic) IBOutlet UIImageView * gunImage;
-@property (strong, nonatomic) IBOutlet UIImageView * gunImageMirror;
-@property (strong, nonatomic) IBOutlet UIButton * buyItButton;
-@property (strong, nonatomic) IBOutlet UIView *loadingView;
+@property (weak, nonatomic) IBOutlet UILabel *title;
+@property (weak, nonatomic) IBOutlet UIView *frameView;
+@property (weak, nonatomic) IBOutlet UILabel *ribbonLabel;
+@property (weak, nonatomic) IBOutlet UILabel * goldTitle;
+@property (weak, nonatomic) IBOutlet UILabel * gold;
+@property (weak, nonatomic) IBOutlet UIImageView * gunImage;
+@property (weak, nonatomic) IBOutlet UIImageView * gunImageMirror;
+@property (weak, nonatomic) IBOutlet UIButton * buyItButton;
+@property (weak, nonatomic) IBOutlet UIView *loadingView;
 
 @end
 

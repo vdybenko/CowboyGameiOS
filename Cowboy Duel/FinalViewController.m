@@ -374,19 +374,16 @@
                 [playerAccount loadWeapon];
                 [self.navigationController presentViewController:duelProductWinViewController animated:YES completion:Nil];
             }else{
-                [self showMessageOfNewLevel ];
-//                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
-//                [self releaseComponents];
+                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+                [self releaseComponents];
             }
         }else{
-            [self showMessageOfNewLevel ];
-//            [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
-//            [self releaseComponents];
+            [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+            [self releaseComponents];
         }
 //        if ([self.delegate isKindOfClass:[BluetoothViewController class]]) [self.delegate duelCancel];
         if ([self.delegate isKindOfClass:[GameCenterViewController class]]) {
             [self.delegate performSelector:@selector(matchCanseled)];
-            
         }
         
     }else{

@@ -63,7 +63,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
     [[UIAccelerometer sharedAccelerometer] setDelegate:self];
     
     [super viewWillAppear:animated];
-    [_infoButton setHidden:YES];
+    [super._infoButton setHidden:YES];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -190,7 +190,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
                     [delegate sendShotTime:(shotTime - time * 1000)];
 //            }
             [activityIndicatorView showView];
-            _btnNab.enabled = NO;
+            super._btnNab.enabled = NO;
             acelStayt = NO;
             [timer invalidate];
         } 

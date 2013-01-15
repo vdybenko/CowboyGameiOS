@@ -11,7 +11,7 @@
 #import "CDDuelProduct.h"
 
 @interface StoreProductCell : UITableViewCell
-@property (strong,nonatomic) IBOutlet UIButton * buyProduct;
+@property (weak,nonatomic) IBOutlet UIButton * buyProduct;
 
 +(StoreProductCell*)cell;
 +(NSString*) cellID;

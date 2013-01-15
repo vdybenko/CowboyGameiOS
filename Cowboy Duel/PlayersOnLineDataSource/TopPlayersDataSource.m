@@ -96,6 +96,7 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
     player=[arrItemsList objectAtIndex:indexPath.row];
     [cell populateWithPlayer:player index:indexPath myIndex:myProfileIndex];
     
+    [cell setPlayerIcon:nil];
 //  Set Image of user
     NSString *name=[[OGHelper sharedInstance ] getClearName:player.dAuth];
     NSString *path=[NSString stringWithFormat:@"%@/icon_%@.png",[[OGHelper sharedInstance] getSavePathForList],name];
@@ -143,7 +144,6 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
             }
         }
     }
-
     return cell;
 }
 

@@ -8,13 +8,11 @@
 #import "CollectionAppViewController.h"
 
 @interface CollectionAppViewController (){
-    IBOutlet UITableView * tableView;
-    IBOutlet UIButton *btnBack;
-    IBOutlet UILabel *lbBackBtn;
+    __weak IBOutlet UILabel *lbBackBtn;
     ItemsDataSource *itemsDataSource;
 }
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UIButton *btnBack;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIButton *btnBack;
 @end
 
 @implementation CollectionAppViewController
