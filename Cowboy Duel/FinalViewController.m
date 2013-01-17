@@ -72,9 +72,6 @@
         runAway=NO;
         tryButtonEnabled = YES;
         
-        playerAccount.accountLevel = 1;
-        
-        
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"DUEL_VIEW_NOT_FIRST"];
         
         if (teaching&&(oponentAccount.bot)) {
@@ -356,8 +353,6 @@
 
 -(IBAction)backButtonClick:(id)sender
 {
-    [self showMessageOfNewLevel];
-    return;
     if (lastDuel) {
         NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
         if (([userDef integerForKey:@"FirstRunForPractice"] != 1)&&([userDef integerForKey:@"FirstRunForPractice"] != 2)) {
@@ -958,7 +953,7 @@
   
   NSArray *array=[DuelRewardLogicController getStaticPointsForEachLevels];
   
-  if (playerAccount.accountLevel < 0 || playerAccount.accountLevel > kCountOfLevels ){
+  if (playerAccount.accountLevel < kCountOfLevelsMinimal || playerAccount.accountLevel > kCountOfLevels ){
     [playerAccount setAccountLevel:kCountOfLevels];
   }
   
@@ -966,7 +961,7 @@
     int  moneyForNextLevel=(playerAccount.accountLevel != kCountOfLevels)? [[array objectAtIndex:num] intValue]:playerAccount.accountPoints+1000;
   
   int moneyForPrewLevel;
-  if (playerAccount.accountLevel==0) {
+  if (playerAccount.accountLevel==kCountOfLevelsMinimal) {
     moneyForPrewLevel = 0;
   }else
       if (playerAccount.accountLevel == kCountOfLevels) {
@@ -1152,13 +1147,13 @@
     }];
   //Blue line animation:
   NSArray *array=[DuelRewardLogicController getStaticPointsForEachLevels];
-  if (playerAccount.accountLevel < 0 || playerAccount.accountLevel > kCountOfLevels ){
+  if (playerAccount.accountLevel < kCountOfLevelsMinimal || playerAccount.accountLevel > kCountOfLevels ){
     [playerAccount setAccountLevel:10];
   }
   NSInteger num = playerAccount.accountLevel;
   int  moneyForNextLevel=(playerAccount.accountLevel != kCountOfLevels)? [[array objectAtIndex:num] intValue]:playerAccount.accountPoints+1000;
   int moneyForPrewLevel;
-  if (playerAccount.accountLevel==0) {
+  if (playerAccount.accountLevel==kCountOfLevelsMinimal) {
     moneyForPrewLevel = 0;
   }else
       if (playerAccount.accountLevel == kCountOfLevels) {

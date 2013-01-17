@@ -503,8 +503,8 @@ static const CGFloat timeToStandartTitles = 1.8;
         dispatch_async(dispatch_get_main_queue(), ^{
             if(label == lbPointsCountMain)
             label.text = [NSString stringWithFormat:@"%@/%@", [numberFormatter stringFromNumber:[NSNumber numberWithInt:(i)]], [[DuelRewardLogicController getStaticPointsForEachLevels] objectAtIndex:playerAccount.accountLevel]];
-            else label.text = [numberFormatter stringFromNumber:[NSNumber numberWithInt:(i)]];
-            
+            else
+                label.text = [numberFormatter stringFromNumber:[NSNumber numberWithInt:(i)]];
         });
         
         [NSThread sleepForTimeInterval:0.005];
@@ -516,7 +516,8 @@ static const CGFloat timeToStandartTitles = 1.8;
     dispatch_async(dispatch_get_main_queue(), ^{
         if(label == lbPointsCountMain)
             label.text = [NSString stringWithFormat:@"%@/%@", [numberFormatter stringFromNumber:[NSNumber numberWithInt:(value)]], [[DuelRewardLogicController getStaticPointsForEachLevels] objectAtIndex:playerAccount.accountLevel]];
-        else label.text = [numberFormatter stringFromNumber:[NSNumber numberWithInt:(value)]];
+        else
+            label.text = [numberFormatter stringFromNumber:[NSNumber numberWithInt:(value)]];
     });
     needAnimation = NO;
 }
@@ -530,7 +531,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     lbUserTitle.text = NSLocalizedString(nameOfRank, @"");
     NSArray *array=[DuelRewardLogicController getStaticPointsForEachLevels];
     
-    if (playerAccount.accountLevel < 0 || playerAccount.accountLevel > kCountOfLevels){
+    if (playerAccount.accountLevel < kCountOfLevelsMinimal || playerAccount.accountLevel > kCountOfLevels){
         [playerAccount setAccountLevel:kCountOfLevels];
     }
 if (playerAccount.accountLevel != kCountOfLevels) {
@@ -538,7 +539,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     int  moneyForNextLevel=[[array objectAtIndex:num] intValue];
     
     int moneyForPrewLevel;
-    if (playerAccount.accountLevel==0) {
+    if (playerAccount.accountLevel==kCountOfLevelsMinimal) {
         moneyForPrewLevel = 0;
     }else{
         moneyForPrewLevel=[[array objectAtIndex:(playerAccount.accountLevel-1)] intValue];

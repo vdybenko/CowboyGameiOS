@@ -1065,6 +1065,9 @@ static StartViewController *sharedHelper = nil;
     NSString * currentParseString = [NSString stringWithFormat:@"%@",connection1.requestURL];
     
     NSMutableData *receivedData=[dicForRequests objectForKey:[currentParseString lastPathComponent]];
+    if ([receivedData length] == 0) {
+        return;
+    }
     NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
     [dicForRequests removeObjectForKey:[currentParseString lastPathComponent]];
     NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
@@ -1365,7 +1368,7 @@ static StartViewController *sharedHelper = nil;
     if ([playerAccount.accountName isEqualToString:@"Anonymous"]||[playerAccount.accountName isEqualToString:@""]||!playerAccount.accountName) {
         [playerAccount setAccountName:player1.alias];
     }
-    if (playerAccount.accountLevel>=1) {
+    if (playerAccount.accountLevel>=kCountOfLevelsMinimal) {
         [[GCHelper sharedInstance] reportAchievementIdentifier:[[GCHelper sharedInstance].GC_ACH objectAtIndex:1] percentComplete:100.0f];
     }
 }

@@ -37,6 +37,7 @@
 #define NUMBER_REVISION_DUEL_PRODUCT_DEFAULT 0
 #define kFrequencyOfAdvertisingDefault 2
 
+#define kCountOfLevelsMinimal 1
 #define kCountOfLevels 7
 
 #define kAnalyticsTrackEventNotification @"AnalyticsTrackEventNotification"
