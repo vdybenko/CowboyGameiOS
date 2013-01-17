@@ -72,6 +72,7 @@
         runAway=NO;
         tryButtonEnabled = YES;
         
+        playerAccount.accountLevel = 1;
         
         
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"DUEL_VIEW_NOT_FIRST"];
@@ -355,6 +356,8 @@
 
 -(IBAction)backButtonClick:(id)sender
 {
+    [self showMessageOfNewLevel];
+    return;
     if (lastDuel) {
         NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
         if (([userDef integerForKey:@"FirstRunForPractice"] != 1)&&([userDef integerForKey:@"FirstRunForPractice"] != 2)) {
@@ -1238,6 +1241,7 @@
 -(void)showMessageOfNewLevel
 {
     LevelCongratViewController *lvlCongratulationViewController=[[LevelCongratViewController alloc] initForNewLevelPlayerAccount:playerAccount andController:self tryButtonEnable:tryButton.enabled];
+    playerAccount.accountLevel +=1;
     [self performSelector:@selector(showViewController:) withObject:lvlCongratulationViewController afterDelay:4.5];
 }
 
