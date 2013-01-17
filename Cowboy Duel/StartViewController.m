@@ -40,7 +40,7 @@
     ProfileViewController *profileViewController;
     TopPlayersDataSource *topPlayersDataSource;
     
-    IBOutlet UIView *hudView;
+    __weak IBOutlet UIView *hudView;
 //    BOOL firstRun;
     BOOL firstRunLocal;
     BOOL firstDayWithOutAdvertising;
@@ -70,47 +70,47 @@
     NSMutableDictionary *dicForRequests;
     BOOL modifierName;
     //buttons
-    IBOutlet UIButton *duelButton;
-    IBOutlet UIButton *mapButton;
-    IBOutlet UIButton *profileButton;
-    IBOutlet UIButton *feedbackButton;
-    IBOutlet UIButton *shareButton;
-    IBOutlet UIButton *helpButton;
-    IBOutlet UIButton *soundButton;
+    __weak IBOutlet UIButton *duelButton;
+    __weak IBOutlet UIButton *mapButton;
+    __weak IBOutlet UIButton *profileButton;
+    __weak IBOutlet UIButton *feedbackButton;
+    __weak IBOutlet UIButton *shareButton;
+    __weak IBOutlet UIButton *helpButton;
+    __weak IBOutlet UIButton *soundButton;
     
-    IBOutlet UIView *feedbackView;
-    IBOutlet UIView *shareView;
+    __weak IBOutlet UIView *feedbackView;
+    __weak IBOutlet UIView *shareView;
   
-    IBOutlet UIImageView *backGroundfeedbackView;
-    IBOutlet UIActivityIndicatorView *indicatorfeedbackView;
+    __weak IBOutlet UIImageView *backGroundfeedbackView;
+    __weak IBOutlet UIActivityIndicatorView *indicatorfeedbackView;
   
     
-    IBOutlet UILabel *lbFeedbackButton;
-    IBOutlet UILabel *lbShareButton;
+    __weak IBOutlet UILabel *lbFeedbackButton;
+    __weak IBOutlet UILabel *lbShareButton;
   
-    IBOutlet UILabel *lbFollowFacebook;
-    IBOutlet UILabel *lbPostMessage;
-    IBOutlet UILabel *lbMailMessage;
-    IBOutlet UILabel *lbRateMessage;
-    IBOutlet UILabel *lbFeedbackCancelBtn;
-    IBOutlet UILabel *lbShareCancelBtn;
+    __weak IBOutlet UILabel *lbFollowFacebook;
+    __weak IBOutlet UILabel *lbPostMessage;
+    __weak IBOutlet UILabel *lbMailMessage;
+    __weak IBOutlet UILabel *lbRateMessage;
+    __weak IBOutlet UILabel *lbFeedbackCancelBtn;
+    __weak IBOutlet UILabel *lbShareCancelBtn;
 
     //Cloud
-    IBOutlet UIImageView *cloudView;
-    IBOutlet UIImageView *cloudSecondView;
+    __weak IBOutlet UIImageView *cloudView;
+    __weak IBOutlet UIImageView *cloudSecondView;
     int cloudX;
     int cloud2X;
     BOOL animationCheck;
     BOOL inBackground;
 }
-@property (strong, nonatomic) IBOutlet UIButton *duelButton;
-@property (strong, nonatomic) IBOutlet UIButton *mapButton;
-@property (strong, nonatomic) IBOutlet UIButton *helpButton;
-@property (strong, nonatomic) IBOutlet UIButton *profileButton;
-@property (strong, nonatomic) IBOutlet UIButton *feedbackButton;
-@property (strong, nonatomic) IBOutlet UIButton *shareButton;
-@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *indicatorfeedbackView;
-@property (strong, nonatomic) IBOutlet UIImageView *backGroundfeedbackView;
+@property (weak, nonatomic) IBOutlet UIButton *duelButton;
+@property (weak, nonatomic) IBOutlet UIButton *mapButton;
+@property (weak, nonatomic) IBOutlet UIButton *helpButton;
+@property (weak, nonatomic) IBOutlet UIButton *profileButton;
+@property (weak, nonatomic) IBOutlet UIButton *feedbackButton;
+@property (weak, nonatomic) IBOutlet UIButton *shareButton;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorfeedbackView;
+@property (weak, nonatomic) IBOutlet UIImageView *backGroundfeedbackView;
 
 @property (strong) GameCenterViewController *gameCenterViewController;
 

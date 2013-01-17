@@ -23,7 +23,7 @@
 
 @interface ProfileViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate,ProfileWithLoginDelegate,MemoryManagement>
 @property (nonatomic) BOOL needAnimation;
-@property (strong, nonatomic) IBOutlet UIView *ivBlack;
+@property (weak, nonatomic) IBOutlet UIView *ivBlack;
 
 -(id)initWithAccount:(AccountDataSource *)userAccount startViewController:(StartViewController *)startViewController;
 -(id)initFirstStartWithAccount:(AccountDataSource *)userAccount startViewController:(StartViewController *)startViewController;

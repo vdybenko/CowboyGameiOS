@@ -25,8 +25,10 @@
 @synthesize userDefense;
 
 +(PlayerOnLineCell*) cell {
-    NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"OnLinePlayersCell" owner:nil options:nil];
-    return [objects objectAtIndex:0];
+    @autoreleasepool {
+        NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"OnLinePlayersCell" owner:nil options:nil];
+        return [objects objectAtIndex:0];
+    }
 }
 
 +(NSString*) cellID { return @"OnLinePlayersCell"; }
@@ -47,14 +49,14 @@
     rankLevelCode.text=@"TOP 10";
     [ribbon addSubview:rankLevelCode];
     
+    rankLevelCode = nil;
+    
     [btnDuel setTitleByLabel:@"DUEL" withColor:[UIColor colorWithRed:0.95 green:0.86 blue:0.68 alpha:1.0] fontSize:18];
     [backGround setDinamicHeightBackground];
 }
 
 -(void) populateWithPlayer:(SSServer *)player;
-{
-    [self setPlayerIcon:[UIImage imageNamed:@"pv_photo_default.png"]];
-    
+{    
     self.playerName.text=player.displayName;
     
     NSString *formattedNumberString = [numberFormatter stringFromNumber:player.money];

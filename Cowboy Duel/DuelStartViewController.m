@@ -19,21 +19,21 @@
 @interface DuelStartViewController ()
 
 - (void)setOponentInfo;
-@property (strong, nonatomic) IBOutlet UIView *userAtackView;
-@property (strong, nonatomic) IBOutlet UIView *userDefenseView;
-@property (strong, nonatomic) IBOutlet UIView *oponentAtackView;
-@property (strong, nonatomic) IBOutlet UIView *oponentDefenseView;
-@property (strong, nonatomic) IBOutlet UILabel *userAtack;
-@property (strong, nonatomic) IBOutlet UILabel *userDefense;
-@property (strong, nonatomic) IBOutlet UILabel *oponentAtack;
-@property (strong, nonatomic) IBOutlet UILabel *oponentDefense;
+@property (weak, nonatomic) IBOutlet UIView *userAtackView;
+@property (weak, nonatomic) IBOutlet UIView *userDefenseView;
+@property (weak, nonatomic) IBOutlet UIView *oponentAtackView;
+@property (weak, nonatomic) IBOutlet UIView *oponentDefenseView;
+@property (weak, nonatomic) IBOutlet UILabel *userAtack;
+@property (weak, nonatomic) IBOutlet UILabel *userDefense;
+@property (weak, nonatomic) IBOutlet UILabel *oponentAtack;
+@property (weak, nonatomic) IBOutlet UILabel *oponentDefense;
 
 @end
 
 @implementation DuelStartViewController
 @synthesize _ivOponent, delegate ,oponentNameOnLine, serverName, oponentAvailable, tryAgain;
-@synthesize _btnStart, activityIndicatorView, _ivPlayer, _vBackground, _lbNamePlayer, _lbNameOponent, _btnBack;
-@synthesize _vWait, _pleaseWaitLabel, _waitLabel, lbOpponentDuelsWinCount;
+@synthesize _btnStart, _ivPlayer, _vBackground, _lbNamePlayer, _lbNameOponent, _btnBack;
+@synthesize _vWait, lbOpponentDuelsWinCount;
 @synthesize userAtack;
 @synthesize userDefense;
 @synthesize oponentAtack;
@@ -42,6 +42,7 @@
 @synthesize userDefenseView;
 @synthesize oponentAtackView;
 @synthesize oponentDefenseView;
+@synthesize activityIndicatorView;
 
 static const char *GC_URL =  BASE_URL"api/gc";
 
@@ -285,8 +286,6 @@ static const char *GC_URL =  BASE_URL"api/gc";
     _lbNameOponent = nil;
     _btnBack = nil;
     _vWait = nil;
-    _pleaseWaitLabel = nil;
-    _waitLabel = nil;
     lbOpponentDuelsWinCount = nil;
     userAtack = nil;
     userDefense = nil;

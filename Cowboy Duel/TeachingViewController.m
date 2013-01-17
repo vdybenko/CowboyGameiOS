@@ -210,7 +210,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
             case FirstFint:
                 
                 DLog(@"first fint");
-                
                 maxShotCount = 1;
                 
                 break;
@@ -224,7 +223,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
     }
     
     if ((accelerometerState)&&(!soundStart)) {
-        _infoButton.enabled=NO;
+        super._infoButton.enabled=NO;
         [self startDuel];
     }
     

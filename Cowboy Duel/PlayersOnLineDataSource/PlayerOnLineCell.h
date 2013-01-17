@@ -6,18 +6,18 @@
 @interface PlayerOnLineCell : UITableViewCell {
 	
 }
-@property (strong,nonatomic) IBOutlet UIView * backGround;
-@property (strong,nonatomic) IBOutlet UIImageView * icon;
-@property (strong,nonatomic) IBOutlet UILabel * playerName;
-@property (strong,nonatomic) IBOutlet UILabel * gold;
-@property (strong,nonatomic) IBOutlet UILabel * rank;
-@property (strong,nonatomic) IBOutlet UIButton * btnDuel;
-@property (strong,nonatomic) IBOutlet UILabel * status;
-@property (strong,nonatomic) IBOutlet UIActivityIndicatorView *indicatorConnectin;
-@property (strong,nonatomic) IBOutlet UIImageView * ribbon;
+@property (weak,nonatomic) IBOutlet UIView * backGround;
+@property (weak,nonatomic) IBOutlet UIImageView * icon;
+@property (weak,nonatomic) IBOutlet UILabel * playerName;
+@property (weak,nonatomic) IBOutlet UILabel * gold;
+@property (weak,nonatomic) IBOutlet UILabel * rank;
+@property (weak,nonatomic) IBOutlet UIButton * btnDuel;
+@property (weak,nonatomic) IBOutlet UILabel * status;
+@property (weak,nonatomic) IBOutlet UIActivityIndicatorView *indicatorConnectin;
+@property (weak,nonatomic) IBOutlet UIImageView * ribbon;
 
-@property (strong, nonatomic) IBOutlet UILabel *userAtack;
-@property (strong, nonatomic) IBOutlet UILabel *userDefense;
+@property (weak, nonatomic) IBOutlet UILabel *userAtack;
+@property (weak, nonatomic) IBOutlet UILabel *userDefense;
 @property (weak, nonatomic) IBOutlet FBProfilePictureView *facebookAvatar;
 
 +(PlayerOnLineCell*)cell;

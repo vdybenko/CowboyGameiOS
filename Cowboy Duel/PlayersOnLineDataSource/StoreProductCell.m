@@ -20,19 +20,19 @@
     UILabel *buttonLabel;
     UILabel *ribbonLabel;
 }
-@property (strong,nonatomic) IBOutlet UIView * backGround;
-@property (strong,nonatomic) IBOutlet UIImageView * icon;
-@property (strong,nonatomic) IBOutlet UILabel * coldTitle;
-@property (strong,nonatomic) IBOutlet UILabel * gold;
-@property (strong,nonatomic) IBOutlet UILabel * effectTitle;
-@property (strong,nonatomic) IBOutlet UILabel * effect;
-@property (strong,nonatomic) IBOutlet UILabel * name;
-@property (strong,nonatomic) IBOutlet UILabel * descriptionText;
-@property (strong,nonatomic) IBOutlet BBCyclingLabel * countOfUse;
-@property (strong,nonatomic) IBOutlet UIView * curentGunBlueBackground;
-@property (strong,nonatomic) IBOutlet UIView * lockLevelBackground;
-@property (strong,nonatomic) IBOutlet UILabel * lockLevelBackgroundTitle;
-@property (strong,nonatomic) IBOutlet UIImageView * ribbonImage;
+@property (weak,nonatomic) IBOutlet UIView * backGround;
+@property (weak,nonatomic) IBOutlet UIImageView * icon;
+@property (weak,nonatomic) IBOutlet UILabel * coldTitle;
+@property (weak,nonatomic) IBOutlet UILabel * gold;
+@property (weak,nonatomic) IBOutlet UILabel * effectTitle;
+@property (weak,nonatomic) IBOutlet UILabel * effect;
+@property (weak,nonatomic) IBOutlet UILabel * name;
+@property (weak,nonatomic) IBOutlet UILabel * descriptionText;
+@property (weak,nonatomic) IBOutlet BBCyclingLabel * countOfUse;
+@property (weak,nonatomic) IBOutlet UIView * curentGunBlueBackground;
+@property (weak,nonatomic) IBOutlet UIView * lockLevelBackground;
+@property (weak,nonatomic) IBOutlet UILabel * lockLevelBackgroundTitle;
+@property (weak,nonatomic) IBOutlet UIImageView * ribbonImage;
 
 
 @property (nonatomic) id buyButtonDelegate;

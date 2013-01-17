@@ -4,7 +4,7 @@
 
 "You won" = "You won";
 
-"win" = "You win";
+"win" = "You won";
 
 "You lost" = "You lost";
 
@@ -102,7 +102,7 @@ h3{font-family: “Myriad Pro”, arial,sans-serif;color:4A3E25;font-size:12pt;f
 </body>
 </html>";
 
-"HV_TEXT_NEW" = "<p>&nbsp;&nbsp;&nbsp;You can quickly find a worthy rival due to the new search system.</p><ul><li>If you have the Internet connection, tap \"SALOON\" and play with strangers and friends.</li><li>If you <b>don&#039;t have the Internet</b> simply choose <b>\"PRACTICE\"</b></li></ul><p> </p><h3>Duel rules</h3><p>&nbsp;&nbsp;&nbsp;Tap \"START\" when the screen with two opponents appeared. Take an iPhone/iPod into your hand as a revolver (\"Home\" button has to be on the bottom and you have to see the screen). Place a forefinger opposite the drawn trigger.</p><p>&nbsp;&nbsp;&nbsp;Lower your gun to the arm-distance, and be ready to make a shot fast. Wait for the command \"FIRE!\", then raise your arm and shoot two-six times in a row. Number of shoots differs depending on the level of the opponent. For example:</p><ul><li>Junior  and Citizen - two times in a row</li><li>Street fighter and Mercenary - three times in a row</li><li>Duelist and Killer - four times in a row</li><li>Head Hunter and Hero of Duels - five times in a row</li><li>Grave-digger and Angel of Death - six times in a row</li></ul><p>The one who shoots first becomes a winner in the first round. <br />&nbsp;&nbsp;&nbsp;Duel consists of three rounds, therefore each of the opponents has a chance to prove the case. To become a winner, you have to be faster at least in two rounds out of three. The winner takes away 10 % of the opponent's money.</p><p> </p><h3>Attention</h3><p>&nbsp;&nbsp;&nbsp;At “PRACTICE” mode, money which you have won isn&#039;t set off.</p><p>&nbsp;&nbsp;&nbsp;If you drop out iPhone/iPod at a shot, fix it by adhesive tape. It&#039;s a joke, but be careful anyway.</p><p>&nbsp;&nbsp;&nbsp;The expanded descriptions of rules watch at our Youtube channel, click \"VIDEO MANUAL\".</p>";
+"HV_TEXT_NEW" = "<p>&nbsp;&nbsp;&nbsp;You can quickly find a worthy rival due to the new search system.</p><ul><li>If you have the Internet connection, tap \"SALOON\" and play with strangers and friends.</li><li>If you <b>don&#039;t have the Internet</b> simply choose <b>\"PRACTICE\"</b></li></ul><p> </p><h3>Duel rules</h3><p>&nbsp;&nbsp;&nbsp;Tap \"START\" when the screen with two opponents appears. Take iPhone/iPod into your hand as a revolver (\"Home\" button has to be on the bottom and you have to see the screen). Place forefinger opposite the trigger.</p><p>&nbsp;&nbsp;&nbsp;Lower your gun to the arm-distance, and be ready to make a shot fast. Wait for the command \"FIRE!\", then raise your arm and shoot two-six times in a row. Number of shots differs depending on the level of the opponent. For example:</p><ul><li>Slave and Refugee or Runaway - two times in a row</li><li>Free Man and Gunfighter - three times in a row</li><li>Bounty Hunter Apprentice and Bounty Hunter - four times in a row</li><li>Lawman - five times in a row</li><li>Grave-digger and Angel of Death - six times in a row</li></ul><p>The one who shoots first becomes a winner in the first round. <br />&nbsp;&nbsp;&nbsp;A duel consists of three rounds, therefore each of the opponents has a chance to prove the case. To become a winner, you have to be faster at least in two rounds out of three. The winner takes away 10% of the opponent's money.</p><p> </p><h3>Attention</h3><p>&nbsp;&nbsp;&nbsp;At “PRACTICE” mode, the money you have won isn&#039;t set off.</p><p>&nbsp;&nbsp;&nbsp;If you drop the iPhone/iPod at a shot, fix it by adhesive tape. It&#039;s a joke, but be careful anyway.</p><p>&nbsp;&nbsp;&nbsp; Click \"VIDEO MANUAL\" to see the expended version  of ruels on your YouTube channel.</p>";
 
 //Bottom messge
 
@@ -232,7 +232,7 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "GoldTitle" = "Gold:";
 "LogOutFBBtn" = "Log out of Facebook";
 "LogInToFBBtn" = "Log in to Facebook";
-"PlayerStatsTitle" = "Player statistic:";
+"PlayerStatsTitle" = "Player statistics:";
 "DuelsWonTitle" = "Duels won:";
 "DuelsLostTitle" = "Duels lost:";
 "TheBiggestWinGold" = "The biggest win:";
@@ -244,16 +244,27 @@ You can upgrade this game right now through <b>iTunes Store</b>
 
 //Titles for Users
 "0Rank" = "Guest";
-"1Rank" = "Junior"; 
-"2Rank" = "Citizen"; 
-"3Rank" = "Street fighter"; 
-"4Rank" = "Mercenary"; 
-"5Rank" = "Duelist"; 
-"6Rank" = "Killer"; 
-"7Rank" = "Head Hunter"; 
+"1Rank" = "Slave"; 
+"2Rank" = "Refugee"; 
+"3Rank" = "Free Man"; 
+"4Rank" = "Gunfighter"; 
+"5Rank" = "Bounty Hunter Apprentice"; 
+"6Rank" = "Bounty Hunter"; 
+"7Rank" = "Lawman"; 
 "8Rank" = "Hero of Duels"; 
 "9Rank" = "Grave-digger"; 
 "10Rank" = "Angel of Death"; 
+
+//Rank Text
+"Intro" = "Ye know who bounty hunters are, boy? They chase criminals 'n get a reward for 'em, dead or alive. I'm one of the best out there, 'n I could do with some help. Seems yer tough enough for the job. Come with me, help me get'em bad guys, and ye'll get yer freedom. If yer good, yer gonna be a big bounty hunter, just like me.";
+"0RankText" = "";
+"1RankText" = "";
+"2RankText" = "No chains for ye any more, eh? But there're still a few outlaws between ye and yer freedom.";
+"3RankText" = "Yer gun got ye some freedom, boy! But don't ye relax, more folks out there 're waiting for justice.";
+"4RankText" = "Ye were born for this gun! Let’s go get more outlaws, gunfighter!";
+"5RankText" = "Yer a hell of a shooter, ain’t ye? Now yer my 'apprentice 'and I'll teach ye all I know.";
+"6RankText" = "Ye shoot like devil, boy! Looks like yer a real bounty hunter now! Let's go get more bad guys 'n more rewards.";
+"7RankText" = "Yer the toughest bounty hunter in the West! Now yer gonna guard the justice here.";
 
 //Win/Lose View
 "YouEarned" = "You earned:";

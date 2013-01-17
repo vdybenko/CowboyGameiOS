@@ -23,25 +23,24 @@
     BOOL runAnimation;
     
     //images to animate:
-    IBOutlet UIImageView *ivAchieveRing;
-    IBOutlet UIImageView *ivLight;
-    IBOutlet UIImageView *ivLight2;
-    IBOutlet UIImageView *ivRing;
+    __weak IBOutlet UIImageView *ivAchieveRing;
+    __weak IBOutlet UIImageView *ivLight;
+    __weak IBOutlet UIImageView *ivRing;
     
     //labels:
-    IBOutlet UILabel *lbTitleCongratulation;
+    __weak IBOutlet UILabel *lbTitleCongratulation;
     
-    IBOutlet UILabel *lbPlusMoney;
-    IBOutlet UILabel *lbCongMainText;
+    __weak IBOutlet UILabel *lbPlusMoney;
+    __weak IBOutlet UILabel *lbCongMainText;
     
-    IBOutlet UIButton *btnBack;
-    IBOutlet UIButton *btnTryAgain;
-    IBOutlet UIButton *btnPost;
+    __weak IBOutlet UIButton *btnBack;
+    __weak IBOutlet UIButton *btnTryAgain;
+    __weak IBOutlet UIButton *btnPost;
     
-    IBOutlet UILabel *lbPostOnFB;
+    __weak IBOutlet UILabel *lbPostOnFB;
 }
-@property(nonatomic, strong)id<DuelViewControllerDelegate> delegate;
-@property (nonatomic, strong) IBOutlet UIImageView *ivLight2;
+@property(nonatomic, weak)id<DuelViewControllerDelegate> delegate;
+@property (nonatomic, weak) IBOutlet UIImageView *ivLight2;
 
 @end
 

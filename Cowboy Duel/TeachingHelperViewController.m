@@ -23,18 +23,18 @@ static CGFloat const DELAY_BETWEEN_ANIMATION = 4.f;
     CGPoint pointForViewWithArrow;
     id<UIAccelerometerDelegate> parentVC;
 }
-@property (strong, nonatomic) IBOutlet UILabel *mainHelpLabel;
+@property (weak, nonatomic) IBOutlet UILabel *mainHelpLabel;
 
-@property (strong, nonatomic) IBOutlet UIImageView *ivBullets;
-@property (strong, nonatomic) IBOutlet UILabel *labelBullets;
+@property (weak, nonatomic) IBOutlet UIImageView *ivBullets;
+@property (weak, nonatomic) IBOutlet UILabel *labelBullets;
 
-@property (strong, nonatomic) IBOutlet UIView *viewFire;
-@property (strong, nonatomic) IBOutlet UIView *viewFireInside;
-@property (strong, nonatomic) IBOutlet UILabel *labelFireDescription;
-@property (strong, nonatomic) IBOutlet UILabel *labelFireTitle;
+@property (weak, nonatomic) IBOutlet UIView *viewFire;
+@property (weak, nonatomic) IBOutlet UIView *viewFireInside;
+@property (weak, nonatomic) IBOutlet UILabel *labelFireDescription;
+@property (weak, nonatomic) IBOutlet UILabel *labelFireTitle;
 
-@property (strong, nonatomic) IBOutlet UIView *viewHand;
-@property (strong, nonatomic) IBOutlet UIImageView *ivArrow;
+@property (weak, nonatomic) IBOutlet UIView *viewHand;
+@property (weak, nonatomic) IBOutlet UIImageView *ivArrow;
 @property (nonatomic) BOOL firstAnimationIsRun;
 
 @end
