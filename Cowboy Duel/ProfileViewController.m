@@ -47,6 +47,9 @@ static const CGFloat timeToStandartTitles = 1.8;
     __weak IBOutlet UILabel *lbGoldCount;
     __weak IBOutlet UIImageView *lbGoldIcon;
     
+    __weak IBOutlet UILabel *lbWantedText;
+    __weak IBOutlet UILabel *lbWantedTitle;
+    
     __weak IBOutlet UIButton *btnLogInFB;
     __weak IBOutlet UIButton *btnLogOutFB;
     
@@ -140,7 +143,7 @@ static const CGFloat timeToStandartTitles = 1.8;
 
 -(id)initForOponent:(AccountDataSource *)oponentAccount
 {
-    self = [super initWithNibName:@"ProfileViewController" bundle:[NSBundle mainBundle]];
+    self = [super initWithNibName:@"ProfileViewControllerWanted" bundle:[NSBundle mainBundle]];
     
     if (self) {
         needAnimation = NO;
@@ -157,13 +160,21 @@ static const CGFloat timeToStandartTitles = 1.8;
         [duelButton setTitleByLabel:@"DUEL"];
         [duelButton changeColorOfTitleByLabel:buttonsTitleColor];
         
+        needAnimation = YES;
         [self initMainControls];
-        [btnLeaderboard setHidden:YES];
-        [btnLogInFB setHidden:YES];
-        [btnLogOutFB setHidden:YES];
-        [lbLeaderboardTitle setHidden:YES];
-        [duelButton setHidden:NO];
         
+        lbProfileMain.text = NSLocalizedString(@"WANTED", @"");
+        [lbWantedTitle setFont: [UIFont fontWithName: @"DecreeNarrow" size:30]];
+        lbWantedTitle.text = NSLocalizedString(@"DOL", @"");
+        [lbWantedText setFont: [UIFont fontWithName: @"DecreeNarrow" size:20]];
+        lbWantedText.text = NSLocalizedString(@"ForBody", @"");
+        
+        int moneyExch  = playerAccount.money < 10 ? 1: playerAccount.money / 10.0;
+        lbGoldCount.text = [NSString stringWithFormat:@"%d$",moneyExch];
+        [lbGoldCount setFont: [UIFont fontWithName: @"DecreeNarrow" size:25]];
+        
+        [tfFBName setFont: [UIFont fontWithName: @"DecreeNarrow" size:30]];
+        tfFBName.text = [NSString stringWithFormat:@"\"%@\"",playerAccount.accountName];
     }
     return self;
 }
@@ -239,10 +250,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     [profilePictureView setProfileID:nil];
     [profilePictureView setProfileID:playerAccount.facebookUser.id];
     lbPointsText.font = [UIFont fontWithName: @"MyriadPro-Semibold" size:12];
-    
-    lbPointsCountMain.font = [UIFont fontWithName: @"MyriadPro-Bold" size:15];
-    lbGoldCount.text =[numberFormatter stringFromNumber:[NSNumber numberWithInt:(playerAccount.money/2)]];
-    
+
     [self checkLocationOfViewForFBLogin];
 //    NSString *name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel];
 //    ivCurrentRank.image = [UIImage imageNamed:name];
@@ -255,7 +263,7 @@ static const CGFloat timeToStandartTitles = 1.8;
 
 -(void)viewDidDisappear:(BOOL)animated{
     
-    lbGoldCount.text =[numberFormatter stringFromNumber:[NSNumber numberWithInt:(playerAccount.money/2)]];
+//    lbGoldCount.text =[numberFormatter stringFromNumber:[NSNumber numberWithInt:(playerAccount.money/2)]];
     
     CGRect liveChRect = ivPointsLine.frame;
     liveChRect.size.width=0;
@@ -322,6 +330,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     lbProfileMain.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
     
     lbGoldCount.font = NameFont;
+    lbGoldCount.text =[numberFormatter stringFromNumber:[NSNumber numberWithInt:(playerAccount.money/2)]];
     
     lbPlayerStats.text = NSLocalizedString(@"PlayerStatsTitle", @"");
     lbPlayerStats.font = CountFont;
@@ -338,6 +347,8 @@ static const CGFloat timeToStandartTitles = 1.8;
     
     lbBiggestWin.text = NSLocalizedString(@"TheBiggestWinGold", @"");
     lbBiggestWin.font = titlesFont;
+    
+    lbPointsCountMain.font = [UIFont fontWithName: @"MyriadPro-Bold" size:15];
     
     lbBiggestWinCount.font = CountFont;
 //    [lbBiggestWinCount dinamicAttachToView:lbBiggestWin withDirection:DirectionToAnimateRight ];
@@ -442,7 +453,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     if([textsContainer count]){
         [textsContainer replaceObjectAtIndex:1 withObject:[NSString stringWithFormat:NSLocalizedString(@"PROFILE_MESS_2_NAME", nil),playerAccount.accountName]];
     }
-    NSLog(@"tfFBName.text %@",playerAccount.accountName);
     SSConnection *connection = [SSConnection sharedInstance];
     [connection sendInfoPacket];
 }
@@ -854,7 +864,6 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                          [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
                      }];
     duelStartViewController = nil;
-    
 }
 
 -(IBAction)showStoreWeapon:(id)sender

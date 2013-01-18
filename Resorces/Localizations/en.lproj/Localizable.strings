@@ -240,6 +240,11 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "LeaderboardTitle" = "LEADERBOARD";
 "SoundButton" = "Turn on/off sound effects";
 "CONTINUE" = "CONTINUE";
+"WANTED" = "WANTED";
+"DOL" = "DEAD OR LIVE";
+"ForBody" = "for the body of";
+
+
 
 
 //Titles for Users

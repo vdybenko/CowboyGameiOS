@@ -291,6 +291,7 @@
 		76ED65E815C997E500B14713 /* fin_achievement@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76ED65E615C997E400B14713 /* fin_achievement@2x.png */; };
 		76ED65EC15C997FE00B14713 /* pv_gold_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 76ED65EA15C997FE00B14713 /* pv_gold_background.png */; };
 		76ED65ED15C997FE00B14713 /* pv_gold_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76ED65EB15C997FE00B14713 /* pv_gold_background@2x.png */; };
+		76F48C1816A987C5000123AC /* ProfileViewControllerWanted.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76F48C1716A987C5000123AC /* ProfileViewControllerWanted.xib */; };
 		76F71904165A6AD700719D8A /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F71903165A6AD700719D8A /* UIView+Frame.m */; };
 		BD017BFD16723FCC005C5471 /* MyViewTest-testLoadViewController-1-0-UIView.png in Resources */ = {isa = PBXBuildFile; fileRef = BD017BFC16723FCC005C5471 /* MyViewTest-testLoadViewController-1-0-UIView.png */; };
 		BD017C0016724DBF005C5471 /* MyTestAsync.m in Sources */ = {isa = PBXBuildFile; fileRef = BD017BFF16724DBF005C5471 /* MyTestAsync.m */; };
@@ -1125,6 +1126,7 @@
 		76ED65E615C997E400B14713 /* fin_achievement@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fin_achievement@2x.png"; sourceTree = "<group>"; };
 		76ED65EA15C997FE00B14713 /* pv_gold_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pv_gold_background.png; sourceTree = "<group>"; };
 		76ED65EB15C997FE00B14713 /* pv_gold_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pv_gold_background@2x.png"; sourceTree = "<group>"; };
+		76F48C1716A987C5000123AC /* ProfileViewControllerWanted.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProfileViewControllerWanted.xib; path = Xib/ProfileViewControllerWanted.xib; sourceTree = "<group>"; };
 		76F71902165A6AD700719D8A /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
 		76F71903165A6AD700719D8A /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 		BD017BFC16723FCC005C5471 /* MyViewTest-testLoadViewController-1-0-UIView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MyViewTest-testLoadViewController-1-0-UIView.png"; sourceTree = "<group>"; };
@@ -1910,6 +1912,7 @@
 				768321D81654DDD000E78A8C /* TeachingHelperController.xib */,
 				761EFA4C1573BE91001670EB /* HelpViewController.xib */,
 				761EFA4D1573BE91001670EB /* ProfileViewController.xib */,
+				76F48C1716A987C5000123AC /* ProfileViewControllerWanted.xib */,
 				76BC8797165D08F3001F1472 /* ProfileViewControllerFirstRun.xib */,
 				761EFA4E1573BE91001670EB /* StartViewController.xib */,
 				761EFA471573BDDA001670EB /* CollectionAppViewController.xib */,
@@ -2663,6 +2666,7 @@
 				BD05E7CF1669192600F04140 /* iconGun@2x.png in Resources */,
 				BD05E7D01669192600F04140 /* iconGun.png in Resources */,
 				BD16BF981680934F00628CCC /* FunPageViewController.xib in Resources */,
+				76F48C1816A987C5000123AC /* ProfileViewControllerWanted.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
