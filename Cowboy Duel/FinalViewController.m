@@ -769,13 +769,13 @@
     }
     
     if (playerAccount.accountLevel == kCountOfLevels){
-        NSString *name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel];
+        NSString *name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel];
         ivCurrentRank.image = [UIImage imageNamed:name];
     }
     else{
-        NSString *name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel];
+        NSString *name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel];
         ivCurrentRank.image = [UIImage imageNamed:name];
-        name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel+1];
+        name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel+1];
         ivNextRank.image = [UIImage imageNamed:name];
     }
     if (fMutchNumberLose == 2) {

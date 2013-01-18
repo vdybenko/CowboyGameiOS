@@ -244,8 +244,8 @@ static const CGFloat timeToStandartTitles = 1.8;
     lbGoldCount.text =[numberFormatter stringFromNumber:[NSNumber numberWithInt:(playerAccount.money/2)]];
     
     [self checkLocationOfViewForFBLogin];
-    NSString *name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel];
-    ivCurrentRank.image = [UIImage imageNamed:name];
+//    NSString *name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel];
+//    ivCurrentRank.image = [UIImage imageNamed:name];
     didDisappear=NO;
     
     if (![lbDescription isHidden] && lbDescription) {
@@ -436,7 +436,7 @@ static const CGFloat timeToStandartTitles = 1.8;
         [btnLogInFB setHidden:YES];
     }
     
-    NSString *name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel];
+    NSString *name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel];
     ivCurrentRank.image = [UIImage imageNamed:name];
     tfFBName.text = playerAccount.accountName;
     if([textsContainer count]){
