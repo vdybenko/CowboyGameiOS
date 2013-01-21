@@ -40,7 +40,7 @@
     if (!image || CGSizeEqualToSize(size, CGSizeZero) || range.length == 0) return nil;
     NSLog(@"%i %i", range.location, range.length);
     CGImageRef spriteSheet = [image CGImage];
-    NSMutableArray *tempArray = [[[NSMutableArray alloc] init] autorelease];
+    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
     
     int width = CGImageGetWidth(spriteSheet);
     int height = CGImageGetHeight(spriteSheet);

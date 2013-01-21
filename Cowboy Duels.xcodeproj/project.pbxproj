@@ -385,6 +385,7 @@
 		BD3503C616AD370800956BB7 /* ivMan.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3503AF16AD370800956BB7 /* ivMan.png */; };
 		BD3503C716AD370800956BB7 /* ivMan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3503B016AD370800956BB7 /* ivMan@2x.png */; };
 		BD3503C816AD370800956BB7 /* ivMan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3503B016AD370800956BB7 /* ivMan@2x.png */; };
+		BD3503CA16AD7E2E00956BB7 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3851F6169C3BE70066419B /* FacebookSDK.framework */; };
 		BD3851F7169C3BE70066419B /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3851F6169C3BE70066419B /* FacebookSDK.framework */; };
 		BD3B88FA1689AC2100FB68F5 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD81FB421678847D00417076 /* Accounts.framework */; };
 		BD3B88FC1689AC5B00FB68F5 /* FunPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD16BF951680934F00628CCC /* FunPageViewController.m */; };
@@ -1565,6 +1566,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD3503CA16AD7E2E00956BB7 /* FacebookSDK.framework in Frameworks */,
 				BD3B88FA1689AC2100FB68F5 /* Accounts.framework in Frameworks */,
 				BD83A5AF167212B5003EE4B3 /* GHUnitIOS.framework in Frameworks */,
 				BD83A46616720DFE003EE4B3 /* libGoogleAdMobAds.a in Frameworks */,
@@ -3852,7 +3854,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				INFOPLIST_FILE = "$(SRCROOT)/Test/Test-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
@@ -3914,7 +3916,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				INFOPLIST_FILE = "$(SRCROOT)/Test/Test-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
@@ -3979,7 +3981,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				INFOPLIST_FILE = "$(SRCROOT)/Test/Test-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",

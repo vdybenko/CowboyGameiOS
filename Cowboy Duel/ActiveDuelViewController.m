@@ -199,6 +199,10 @@
     foll = NO;
     duelTimerEnd = NO;
     
+    follAccelCheck = NO;
+    accelerometerState = NO;
+    soundStart = NO;
+    
     [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(3.0 / 60.0)];
     [[UIAccelerometer sharedAccelerometer] setDelegate:self];
     
@@ -532,17 +536,13 @@
         }
     //eof ifs
     
-    if ((rollingX >= -0.7)&&(rollingZ > -0.6)&&(rollingY<=-0.7))
-    {
-        //        Position for Shot
-        accelerometerState = NO;
-    }
+    //        Position for Shot
+    if ((rollingY < 0.0) || (rollingX < -0.2) || (rollingX > 0.2)) accelerometerState = NO;
     
-    if (rollingY > 0.7)
-        //if ((rollingZ > -0.7)) {
-            //       Posirtion for STEADY
-            accelerometerState = YES;
-        //}
+    //       Posirtion for STEADY
+    if ((rollingY > 0.0) && (rollingX > -0.2) && (rollingX < 0.2)) accelerometerState = YES;
+            
+            
     
 //    if (duelIsStarted){
 //        if (!accelerometerState)
