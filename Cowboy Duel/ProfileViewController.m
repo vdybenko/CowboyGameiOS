@@ -46,6 +46,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     
     __weak IBOutlet UILabel *lbGoldCount;
     __weak IBOutlet UIImageView *lbGoldIcon;
+    __weak IBOutlet UIImageView *lbGoldIconBackground;
     
     __weak IBOutlet UILabel *lbWantedText;
     __weak IBOutlet UILabel *lbWantedTitle;
@@ -164,17 +165,49 @@ static const CGFloat timeToStandartTitles = 1.8;
         [self initMainControls];
         
         lbProfileMain.text = NSLocalizedString(@"WANTED", @"");
-        [lbWantedTitle setFont: [UIFont fontWithName: @"DecreeNarrow" size:30]];
+        [lbWantedTitle setFont: [UIFont fontWithName: @"DecreeNarrow" size:lbProfileMain.font.pointSize]];
         lbWantedTitle.text = NSLocalizedString(@"DOL", @"");
-        [lbWantedText setFont: [UIFont fontWithName: @"DecreeNarrow" size:20]];
+        [lbWantedText setFont: [UIFont fontWithName: @"DecreeNarrow" size:lbWantedText.font.pointSize]];
         lbWantedText.text = NSLocalizedString(@"ForBody", @"");
         
         int moneyExch  = playerAccount.money < 10 ? 1: playerAccount.money / 10.0;
         lbGoldCount.text = [NSString stringWithFormat:@"%d$",moneyExch];
-        [lbGoldCount setFont: [UIFont fontWithName: @"DecreeNarrow" size:25]];
-        
+        [lbGoldCount setFont: [UIFont  systemFontOfSize:25.0f]];
+                
         [tfFBName setFont: [UIFont fontWithName: @"DecreeNarrow" size:30]];
         tfFBName.text = [NSString stringWithFormat:@"\"%@\"",playerAccount.accountName];
+        
+        NSString *nameOfRank=[NSString stringWithFormat:@"%dRank",playerAccount.accountLevel];
+        lbUserTitle.text = NSLocalizedString(nameOfRank, @"");
+        
+        CGRect frame;
+        
+        frame = lbGoldCount.frame;
+        frame.size.width = [lbGoldCount fitSizeToText:lbGoldCount].width;
+        lbGoldCount.frame = frame;
+        
+        frame = lbUserTitle.frame;
+        frame.size.width = [lbUserTitle fitSizeToText:lbUserTitle].width;
+        lbUserTitle.frame = frame;
+        
+        CGFloat allWidth = lbGoldCount.frame.size.width + lbGoldIcon.frame.size.width +2;
+        CGFloat xCentralPoint = (mainProfileView.frame.size.width - allWidth)/2;
+        frame = lbGoldIcon.frame;
+        frame.origin.x = xCentralPoint;
+        lbGoldIcon.frame = frame;
+        
+        allWidth = lbUserTitle.frame.size.width + ivCurrentRank.frame.size.width +2;
+        xCentralPoint = (mainProfileView.frame.size.width - allWidth)/2;
+        frame = ivCurrentRank.frame;
+        frame.origin.x = xCentralPoint;
+        ivCurrentRank.frame = frame;
+        
+        frame = lbGoldIconBackground.frame;
+        frame.origin.x = xCentralPoint-2;
+        lbGoldIconBackground.frame = frame;
+
+        [lbGoldCount dinamicAttachToView:lbGoldIcon withDirection:DirectionToAnimateRight];
+        [lbUserTitle dinamicAttachToView:ivCurrentRank withDirection:DirectionToAnimateRight];
     }
     return self;
 }
@@ -286,6 +319,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     ivPointsLine = nil;
     lbGoldCount = nil;
     lbGoldIcon = nil;
+    lbGoldIconBackground = nil;
     btnLogInFB = nil;
     btnLogOutFB = nil;
     btnLeaderboard = nil;
@@ -374,7 +408,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     
     _lbMenuTitle.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
     
-    lbUserTitle.font = NameFont;
+    lbUserTitle.font = [UIFont  systemFontOfSize:lbUserTitle.font.pointSize];;
     
     tfFBName.font = NameFont;
     [tfFBName setDelegate:self];
