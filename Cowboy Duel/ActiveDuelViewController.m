@@ -43,6 +43,14 @@
     BOOL finalAnimationStarted;
     
     NSTimer *shotTimer;
+    int time;
+    
+    UIView  *helpPracticeView;
+    UIImageView *imvArrow;
+    BOOL arrowAnimationContinue;
+    
+    BOOL foll;
+    BOOL duelTimerEnd;
 }
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *floatView;
@@ -58,7 +66,7 @@
 @end
 
 @implementation ActiveDuelViewController
-
+@synthesize delegate;
 -(id)initWithTime:(int)randomTime Account:(AccountDataSource *)userAccount oponentAccount:(AccountDataSource *)pOponentAccount
 {
     self = [super initWithNibName:nil bundle:nil];
@@ -66,8 +74,8 @@
         // Custom initialization
         playerAccount = userAccount;
         opAccount  = pOponentAccount;
+        time = randomTime;
         
-                
         NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/shot.aif", [[NSBundle mainBundle] resourcePath]]];
         
         shotAudioPlayer1 = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
@@ -79,7 +87,7 @@
         shotAudioPlayer3 = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
         [shotAudioPlayer3 prepareToPlay];
 
-        url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/cry.aif", [[NSBundle mainBundle] resourcePath]]];
+        url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/cry.mp3", [[NSBundle mainBundle] resourcePath]]];
 
         hitAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
         [hitAudioPlayer prepareToPlay];
@@ -153,12 +161,48 @@
 //	}
 	[arView setPlacesOfInterest:placesOfInterest];
 
+    helpPracticeView=[[UIView alloc] initWithFrame:CGRectMake(12, (([UIScreen mainScreen].bounds.size.height - 172)/2), 290, 172)];
+    
+    UIImageView *imvArm=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dv_arm.png"]];
+    CGRect frame = imvArm.frame;
+    frame.origin = CGPointMake(90, 12);
+    imvArm.frame = frame;
+    [helpPracticeView addSubview:imvArm];
+    
+    imvArrow=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dv_arm_arrow.png"]];
+    frame = imvArrow.frame;
+    frame.origin = CGPointMake(37, 24);
+    imvArrow.frame = frame;
+    [helpPracticeView addSubview:imvArrow];
+    
+    UIButton *cancelBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+    frame=cancelBtn.frame;
+    frame.origin=CGPointMake(248, 13);
+    frame.size=CGSizeMake(33, 33);
+    cancelBtn.frame=frame;
+    [cancelBtn setImage:[UIImage imageNamed:@"btn_adcolony.png"] forState:UIControlStateNormal];
+    [cancelBtn addTarget:self action:@selector(cancelHelpArmClick:) forControlEvents:UIControlEventTouchUpInside];
+    [helpPracticeView addSubview:cancelBtn];
+    
+    [self hideHelpViewWithArm];
+    
+    [helpPracticeView setDinamicHeightBackground];
+    [self.view addSubview:helpPracticeView];
+
 
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    foll = NO;
+    duelTimerEnd = NO;
+    
+    [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(3.0 / 60.0)];
+    [[UIAccelerometer sharedAccelerometer] setDelegate:self];
+    
+    [self showHelpViewWithArm];
     
     userHitCount = 0;
     
@@ -168,7 +212,7 @@
     [self countUpBulets];
     self.buletLabel.text=[NSString stringWithFormat:@"%d", shotCountBullet];
     [self updateOpponentViewToRamdomPosition];
-    shotTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
+    
     ARView *arView = (ARView *)self.view;
 	[arView start];
 
@@ -177,7 +221,13 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [[UIAccelerometer sharedAccelerometer] setDelegate:nil];
     [shotTimer invalidate];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
     ARView *arView = (ARView *)self.view;
 	[arView stop];
 }
@@ -426,6 +476,196 @@
 -(int)fMutchNumberWin
 {
     return 2;
+}
+
+-(void)startDuel
+{
+    NSLog(@"startDuel");
+    soundStart = YES;
+    startInterval = [NSDate timeIntervalSinceReferenceDate];
+    [player stop];
+    [player setCurrentTime:0.0];
+    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Duel.mp3", [[NSBundle mainBundle] resourcePath]]];
+    player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+    [player play];
+    
+    //timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(shotTimer) userInfo:nil repeats:YES];
+    duelIsStarted = NO;
+    fireSound = NO;
+    acelStatus = YES;
+    shotTime = 0;
+    
+    [self hideHelpViewWithArm];
+    if (([[NSUserDefaults standardUserDefaults] integerForKey:@"FirstRunForPractice"] != 1)&&([[NSUserDefaults standardUserDefaults] integerForKey:@"FirstRunForPractice"] != 2))
+    {
+        //[self hideHelpViewWithArm];
+    }
+}
+
+
+-(void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
+{
+    //[self setRotationWithAngle:atan2(acceleration.y, acceleration.x) andY:acceleration.y];
+    
+    
+    rollingX = (acceleration.x * kFilteringFactor) + (rollingX * (1.0 - kFilteringFactor));
+    rollingY = (acceleration.y * kFilteringFactor) + (rollingY * (1.0 - kFilteringFactor));
+    rollingZ = (acceleration.z * kFilteringFactor) + (rollingZ * (1.0 - kFilteringFactor));
+    //    DLog(@"acceleration x= %.1f, y= %.1f, z= %.1f", acceleration.x, acceleration.y, acceleration.z);
+    DLog(@"rolling x= %.1f, y= %.1f, z= %.1f", rollingX, rollingY, rollingZ);
+    
+    //[self setRotationWithAngle:atan2(rollingY, rollingX) andY:rollingY];
+    
+    //ifs for buttons enable/disable
+    if (rollingX >= -0.2) {
+//        _infoButton.enabled=YES;
+//        menuButton.enabled = YES;
+    }
+    if (rollingZ <= -0.7) {
+//        _infoButton.enabled=YES;
+//        menuButton.enabled = YES;
+    }
+    if (rollingX < -0.2)
+        if ((rollingZ > -0.7)) {
+//            _infoButton.enabled=NO;
+//            menuButton.enabled = NO;
+        }
+    //eof ifs
+    
+    if ((rollingX >= -0.7)&&(rollingZ > -0.6)&&(rollingY<=-0.7))
+    {
+        //        Position for Shot
+        accelerometerState = NO;
+    }
+    
+    if (rollingY > 0.7)
+        //if ((rollingZ > -0.7)) {
+            //       Posirtion for STEADY
+            accelerometerState = YES;
+        //}
+    
+//    if (duelIsStarted){
+//        if (!accelerometerState)
+////            _btnNab.enabled = YES;
+//        else
+////            _btnNab.enabled = NO;
+//    }
+    
+    if((accelerometerState)&& (!soundStart)){
+        if (!accelerometerStateSend) {
+//            if ([delegate respondsToSelector:@selector(setAccelStateTrue)])
+//                [delegate setAccelStateTrue];
+            accelerometerStateSend = YES;
+        }else {
+            [self startDuel];
+        }
+    }
+    else {
+//        if ([delegate respondsToSelector:@selector(setAccelStateFalse)])
+//            [delegate setAccelStateFalse];
+        accelerometerStateSend = NO;
+    }
+    
+    if ((!accelerometerState) && (soundStart) && (!duelIsStarted)) {
+        if(!follAccelCheck){
+            [self restartCountdown];
+        }
+    }
+
+}
+
+-(void)restartCountdown;
+{
+    NSLog(@"restartCountdown");
+//    _infoButton.enabled=NO;
+    
+    follAccelCheck = NO;
+    accelerometerState = NO;
+    soundStart = NO;
+    
+    [timer invalidate];
+    [player stop];
+    [player setCurrentTime:0.0];
+//    [follPlayer setCurrentTime:0.0];
+//    [follPlayer play];
+//    
+//    [titleReady setHidden:NO];
+//    [titleSteadyFire setHidden:YES];
+//    
+    [self showHelpViewWithArm];
+}
+
+-(void)shotTimer
+{
+    nowInterval = [NSDate timeIntervalSinceReferenceDate];
+    activityInterval = (nowInterval-startInterval)*1000;
+    shotTime = (int)activityInterval;
+    
+    UIViewController *curentVC=[self.navigationController visibleViewController];
+    if ((shotTime * 0.001 >= time) && (!duelIsStarted) && (!foll)&&([curentVC isEqual:self])) {
+        DLog(@"FIRE !!!!!");
+        duelIsStarted = YES;
+        NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Fire.mp3", [[NSBundle mainBundle] resourcePath]]];
+        NSError *error;
+        [player stop];
+        player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+        [player play];
+        [self vibrationStart];
+    shotTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
+    }
+    if ((shotTime * 0.001 >= 30.0) && (!duelTimerEnd) && (soundStart)) {
+//        if ([delegate respondsToSelector:@selector(duelTimerEnd)])
+//            [delegate duelTimerEnd];
+        duelTimerEnd = YES;
+        [timer invalidate];
+    }
+}
+
+-(void)hideHelpViewWithArm;
+{
+    [helpPracticeView setHidden:YES];
+    arrowAnimationContinue = NO;
+}
+
+-(void)showHelpViewWithArm;
+{
+    [helpPracticeView setHidden:NO];
+    if (!arrowAnimationContinue) {
+        arrowAnimationContinue = YES;
+        [self scaleView:imvArrow];
+    }
+}
+
+-(void)scaleView:(UIView *)viewForAnimation
+{
+    [UIView animateWithDuration:0.4 animations:^{
+        viewForAnimation.transform = CGAffineTransformMakeScale(1.3, 1.3);
+    } completion:^(BOOL complete) {
+        [UIView animateWithDuration:0.4 animations:^{
+            viewForAnimation.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        }completion:^(BOOL complete){
+            if(arrowAnimationContinue){
+                [self scaleView:viewForAnimation];
+            }
+        }];
+    }];
+}
+
+-(void)vibrationStart;
+{
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    
+//    CGRect frame=titleSteadyFire.bounds;
+//    frame.origin = CGPointMake(18, -50);
+//    frame.size = CGSizeMake(270, 275);
+//    titleSteadyFire.bounds = frame;
+//    
+//    [titleSteadyFire setImage:[UIImage imageNamed:@"dv_fire_label.png"]];
+}
+
+-(void)duelTimerEndFeedBack
+{
+    duelTimerEnd = YES;
 }
 
 
