@@ -489,7 +489,7 @@
     player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
     [player play];
     
-    //timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(shotTimer) userInfo:nil repeats:YES];
+    timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(shotTimer) userInfo:nil repeats:YES];
     duelIsStarted = NO;
     fireSound = NO;
     acelStatus = YES;
@@ -611,7 +611,7 @@
         player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
         [player play];
         [self vibrationStart];
-    shotTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
+        shotTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
     }
     if ((shotTime * 0.001 >= 30.0) && (!duelTimerEnd) && (soundStart)) {
 //        if ([delegate respondsToSelector:@selector(duelTimerEnd)])
@@ -668,5 +668,9 @@
     duelTimerEnd = YES;
 }
 
+#pragma mark - IBAction
+- (void)cancelHelpArmClick:(id)sender {
+    [self hideHelpViewWithArm];
+}
 
 @end
