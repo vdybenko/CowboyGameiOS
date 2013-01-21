@@ -302,7 +302,7 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "SOUND_WARNING" = "Turn the sound on in your device for more realistic feeling";
 
 //added for PlayerOnlineCell.m:
-"Gold:" = "Gold:";
+"Award:" = "Award:";
 "Rank:" = "Rank:";
 
 //added for PlayersOnlineDataSource.m:
