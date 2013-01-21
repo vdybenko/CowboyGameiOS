@@ -19,6 +19,7 @@
 #import "SSServer.h"
 #import "DuelStartViewController.h"
 #import "StoreViewController.h"
+#import "ActiveDuelViewController.h"
 
 static const CGFloat changeYPointWhenKeyboard = 155;
 static const CGFloat timeToStandartTitles = 1.8;
@@ -811,9 +812,15 @@ if (playerAccount.accountLevel != 10) {
         [playerAccount.finalInfoTable removeAllObjects];
         int randomTime = arc4random() % 6;
         
-        TeachingViewController *teachingViewController = [[TeachingViewController alloc] initWithTime:randomTime andAccount:[AccountDataSource sharedInstance] andOpAccount:playerAccount];
-        [self.navigationController pushViewController:teachingViewController animated:YES];
-        
+        if ([AccountDataSource sharedInstance].activeDuel) {
+            ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:[AccountDataSource sharedInstance] oponentAccount:playerAccount];
+            [self.navigationController pushViewController:activeDuelViewController animated:YES];
+        }
+        else
+        {
+            TeachingViewController *teachingViewController = [[TeachingViewController alloc] initWithTime:randomTime andAccount:[AccountDataSource sharedInstance] andOpAccount:playerAccount];
+            [self.navigationController pushViewController:teachingViewController animated:YES];
+        }
         SSConnection *connection = [SSConnection sharedInstance];
         [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
         

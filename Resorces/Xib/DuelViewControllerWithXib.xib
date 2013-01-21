@@ -440,12 +440,6 @@
 						<string key="objectName">Down</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">26</int>
-						<reference key="object" ref="827286106"/>
-						<reference key="parent" ref="66472398"/>
-						<string key="objectName">Gun</string>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">25</int>
 						<reference key="object" ref="483829604"/>
 						<reference key="parent" ref="66472398"/>
@@ -494,6 +488,12 @@
 						<reference key="object" ref="240996334"/>
 						<reference key="parent" ref="66472398"/>
 						<string key="objectName">imgReady</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">26</int>
+						<reference key="object" ref="827286106"/>
+						<reference key="parent" ref="66472398"/>
+						<string key="objectName">Gun</string>
 					</object>
 				</array>
 			</object>
