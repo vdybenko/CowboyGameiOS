@@ -40,7 +40,9 @@
         frameBottom.origin.y=mainFrame.size.height-frameBottom.size.height;
         [ivBottom setFrame:frameBottom];
         [self insertSubview:ivBottom aboveSubview:ivBody];
+        ivBottom = nil;
     }
+    ivBody = nil;
 }
 
 -(void)dinamicAttachToView:(UIView*)attachedToView withDirection:(DirectionToAnimate)direction;

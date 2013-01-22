@@ -19,7 +19,7 @@ typedef enum {
     StoreDataSourceTypeTablesDefenses,
 } StoreDataSourceTypeTables;
 
-@interface StoreDataSource : NSObject <UITableViewDataSource> {
+@interface StoreDataSource : NSObject <UITableViewDataSource,MemoryManagement> {
     
 }
 @property(strong, readonly)NSMutableArray *arrItemsList;

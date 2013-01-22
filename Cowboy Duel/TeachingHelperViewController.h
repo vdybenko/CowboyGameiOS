@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "AccountDataSource.h"
 
-@interface TeachingHelperViewController : UIViewController
+@interface TeachingHelperViewController : UIViewController<MemoryManagement>
 -(id)initWithOponentAccount:(AccountDataSource *)oponentAccount parentVC:(id<UIAccelerometerDelegate>)parentVC;
 @end

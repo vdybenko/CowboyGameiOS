@@ -11,7 +11,7 @@
 #import "CDWeaponProduct.h"
 #import "MKStoreManager.h"
 
-@interface DuelProductWinViewController : UIViewController<MKStoreKitDelegate>
+@interface DuelProductWinViewController : UIViewController<MKStoreKitDelegate,MemoryManagement>
 - (id)initWithAccount:(AccountDataSource*)account duelProduct:(CDWeaponProduct*)product parentVC:(UIViewController*)vc;;
 
 @end

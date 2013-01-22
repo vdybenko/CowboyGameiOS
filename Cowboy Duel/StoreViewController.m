@@ -116,6 +116,21 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)releaseComponents
+{
+    [storeDataSource releaseComponents];
+    storeDataSource = nil;
+    title = nil;
+    tableView = nil;
+    btnWeapons = nil;
+    btnDefenses = nil;
+    btnBack = nil;
+    btnBag = nil;
+    loadingView = nil;
+    playerAccount = nil;
+    duelProductDownloaderController = nil;
+}
+
 #pragma mark
 
 -(void)startTableAnimation;
@@ -319,6 +334,7 @@
                          [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
                      }];
     [self.navigationController popViewControllerAnimated:NO];
+    [self releaseComponents];
 }
 
 #pragma mark Activity view
@@ -393,4 +409,8 @@
                                                       userInfo:[NSDictionary dictionaryWithObject:stringToGA forKey:@"event"]];
 }
 
+-(void)dealloc
+{
+
+}
 @end

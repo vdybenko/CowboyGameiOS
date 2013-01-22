@@ -20,19 +20,19 @@
     UILabel *buttonLabel;
     UILabel *ribbonLabel;
 }
-@property (strong,nonatomic) IBOutlet UIView * backGround;
-@property (strong,nonatomic) IBOutlet UIImageView * icon;
-@property (strong,nonatomic) IBOutlet UILabel * coldTitle;
-@property (strong,nonatomic) IBOutlet UILabel * gold;
-@property (strong,nonatomic) IBOutlet UILabel * effectTitle;
-@property (strong,nonatomic) IBOutlet UILabel * effect;
-@property (strong,nonatomic) IBOutlet UILabel * name;
-@property (strong,nonatomic) IBOutlet UILabel * descriptionText;
-@property (strong,nonatomic) IBOutlet BBCyclingLabel * countOfUse;
-@property (strong,nonatomic) IBOutlet UIView * curentGunBlueBackground;
-@property (strong,nonatomic) IBOutlet UIView * lockLevelBackground;
-@property (strong,nonatomic) IBOutlet UILabel * lockLevelBackgroundTitle;
-@property (strong,nonatomic) IBOutlet UIImageView * ribbonImage;
+@property (weak,nonatomic) IBOutlet UIView * backGround;
+@property (weak,nonatomic) IBOutlet UIImageView * icon;
+@property (weak,nonatomic) IBOutlet UILabel * coldTitle;
+@property (weak,nonatomic) IBOutlet UILabel * gold;
+@property (weak,nonatomic) IBOutlet UILabel * effectTitle;
+@property (weak,nonatomic) IBOutlet UILabel * effect;
+@property (weak,nonatomic) IBOutlet UILabel * name;
+@property (weak,nonatomic) IBOutlet UILabel * descriptionText;
+@property (weak,nonatomic) IBOutlet BBCyclingLabel * countOfUse;
+@property (weak,nonatomic) IBOutlet UIView * curentGunBlueBackground;
+@property (weak,nonatomic) IBOutlet UIView * lockLevelBackground;
+@property (weak,nonatomic) IBOutlet UILabel * lockLevelBackgroundTitle;
+@property (weak,nonatomic) IBOutlet UIImageView * ribbonImage;
 
 
 @property (nonatomic) id buyButtonDelegate;
@@ -57,8 +57,10 @@
 @synthesize ribbonImage;
 
 +(StoreProductCell*) cell {
-    NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"StoreProductCell" owner:nil options:nil];
-    return [objects objectAtIndex:0];
+    @autoreleasepool {
+        NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"StoreProductCell" owner:nil options:nil];
+        return [objects objectAtIndex:0];
+    }
 }
 
 +(NSString*) cellID { return @"StoreProductCell"; }
@@ -71,24 +73,26 @@
     frame.origin.x=5;
     frame.origin.y=0;
     frame.size.width=frame.size.width-10;
-    buttonLabel = [[UILabel alloc] initWithFrame:frame];
-    [buttonLabel setFont: [UIFont fontWithName: @"DecreeNarrow" size:20]];
-    buttonLabel.textAlignment = UITextAlignmentCenter;
-    [buttonLabel setBackgroundColor:[UIColor clearColor]];
-    [buttonLabel setTextColor:buttonsTitleColor];
-    [buyProduct addSubview:buttonLabel];
+    @autoreleasepool {
+        buttonLabel = [[UILabel alloc] initWithFrame:frame];
+        [buttonLabel setFont: [UIFont fontWithName: @"DecreeNarrow" size:20]];
+        buttonLabel.textAlignment = UITextAlignmentCenter;
+        [buttonLabel setBackgroundColor:[UIColor clearColor]];
+        [buttonLabel setTextColor:buttonsTitleColor];
+        [buyProduct addSubview:buttonLabel];
+        
+        ribbonLabel=[[UILabel alloc] initWithFrame:CGRectMake(1, 21, 40 , 13)];
+        ribbonLabel.font = [UIFont systemFontOfSize:11.0f];
+        ribbonLabel.backgroundColor = [UIColor clearColor];
+        ribbonLabel.textColor=[UIColor whiteColor];
+        [ribbonLabel setTextAlignment:UITextAlignmentCenter];
+        
+        CGFloat angle = M_PI * -0.25;
+        CGAffineTransform transform = CGAffineTransformMakeRotation(angle);
+        ribbonLabel.transform = transform;
+        [ribbonImage addSubview:ribbonLabel];
+    }
     
-    ribbonLabel=[[UILabel alloc] initWithFrame:CGRectMake(1, 21, 40 , 13)];
-    ribbonLabel.font = [UIFont systemFontOfSize:11.0f];
-    ribbonLabel.backgroundColor = [UIColor clearColor];
-    ribbonLabel.textColor=[UIColor whiteColor];
-    [ribbonLabel setTextAlignment:UITextAlignmentCenter];
-    
-    CGFloat angle = M_PI * -0.25;
-    CGAffineTransform transform = CGAffineTransformMakeRotation(angle);
-    ribbonLabel.transform = transform;
-    [ribbonImage addSubview:ribbonLabel];
-
     lockLevelBackground.clipsToBounds = YES;
     lockLevelBackground.layer.cornerRadius = 13.f;
     

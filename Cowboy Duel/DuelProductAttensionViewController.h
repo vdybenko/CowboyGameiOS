@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AccountDataSource.h"
 
-@interface DuelProductAttensionViewController : UIViewController
+@interface DuelProductAttensionViewController : UIViewController<MemoryManagement>
 - (id)initWithAccount:(AccountDataSource*)account parentVC:(UIViewController*)vc;
 + (BOOL)isAttensionNeedForOponent:(AccountDataSource*)oponentAccount;
 @end

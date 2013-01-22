@@ -41,7 +41,7 @@
     ProfileViewController *profileViewController;
     TopPlayersDataSource *topPlayersDataSource;
     
-    IBOutlet UIView *hudView;
+    __weak IBOutlet UIView *hudView;
 //    BOOL firstRun;
     BOOL firstRunLocal;
     BOOL firstDayWithOutAdvertising;
@@ -71,48 +71,48 @@
     NSMutableDictionary *dicForRequests;
     BOOL modifierName;
     //buttons
-    IBOutlet UIButton *duelButton;
-    IBOutlet UIButton *mapButton;
-    IBOutlet UIButton *profileButton;
-    IBOutlet UIButton *feedbackButton;
-    IBOutlet UIButton *shareButton;
-    IBOutlet UIButton *helpButton;
-    IBOutlet UIButton *soundButton;
-    __unsafe_unretained IBOutlet UIButton *saloon2Button;
+    __weak IBOutlet UIButton *duelButton;
+    __weak IBOutlet UIButton *mapButton;
+    __weak IBOutlet UIButton *profileButton;
+    __weak IBOutlet UIButton *feedbackButton;
+    __weak IBOutlet UIButton *shareButton;
+    __weak IBOutlet UIButton *helpButton;
+    __weak IBOutlet UIButton *soundButton;
+    __weak IBOutlet UIButton *saloon2Button;
     
-    IBOutlet UIView *feedbackView;
-    IBOutlet UIView *shareView;
+    __weak IBOutlet UIView *feedbackView;
+    __weak IBOutlet UIView *shareView;
   
-    IBOutlet UIImageView *backGroundfeedbackView;
-    IBOutlet UIActivityIndicatorView *indicatorfeedbackView;
+    __weak IBOutlet UIImageView *backGroundfeedbackView;
+    __weak IBOutlet UIActivityIndicatorView *indicatorfeedbackView;
   
     
-    IBOutlet UILabel *lbFeedbackButton;
-    IBOutlet UILabel *lbShareButton;
+    __weak IBOutlet UILabel *lbFeedbackButton;
+    __weak IBOutlet UILabel *lbShareButton;
   
-    IBOutlet UILabel *lbFollowFacebook;
-    IBOutlet UILabel *lbPostMessage;
-    IBOutlet UILabel *lbMailMessage;
-    IBOutlet UILabel *lbRateMessage;
-    IBOutlet UILabel *lbFeedbackCancelBtn;
-    IBOutlet UILabel *lbShareCancelBtn;
+    __weak IBOutlet UILabel *lbFollowFacebook;
+    __weak IBOutlet UILabel *lbPostMessage;
+    __weak IBOutlet UILabel *lbMailMessage;
+    __weak IBOutlet UILabel *lbRateMessage;
+    __weak IBOutlet UILabel *lbFeedbackCancelBtn;
+    __weak IBOutlet UILabel *lbShareCancelBtn;
 
     //Cloud
-    IBOutlet UIImageView *cloudView;
-    IBOutlet UIImageView *cloudSecondView;
+    __weak IBOutlet UIImageView *cloudView;
+    __weak IBOutlet UIImageView *cloudSecondView;
     int cloudX;
     int cloud2X;
     BOOL animationCheck;
     BOOL inBackground;
 }
-@property (strong, nonatomic) IBOutlet UIButton *duelButton;
-@property (strong, nonatomic) IBOutlet UIButton *mapButton;
-@property (strong, nonatomic) IBOutlet UIButton *helpButton;
-@property (strong, nonatomic) IBOutlet UIButton *profileButton;
-@property (strong, nonatomic) IBOutlet UIButton *feedbackButton;
-@property (strong, nonatomic) IBOutlet UIButton *shareButton;
-@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *indicatorfeedbackView;
-@property (strong, nonatomic) IBOutlet UIImageView *backGroundfeedbackView;
+@property (weak, nonatomic) IBOutlet UIButton *duelButton;
+@property (weak, nonatomic) IBOutlet UIButton *mapButton;
+@property (weak, nonatomic) IBOutlet UIButton *helpButton;
+@property (weak, nonatomic) IBOutlet UIButton *profileButton;
+@property (weak, nonatomic) IBOutlet UIButton *feedbackButton;
+@property (weak, nonatomic) IBOutlet UIButton *shareButton;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorfeedbackView;
+@property (weak, nonatomic) IBOutlet UIImageView *backGroundfeedbackView;
 
 @property (strong) GameCenterViewController *gameCenterViewController;
 
@@ -164,8 +164,9 @@ static StartViewController *sharedHelper = nil;
 
 -(id)init
 {
-    NSUserDefaults *uDef = [NSUserDefaults standardUserDefaults];
-    if (self == [super initWithNibName:nil bundle:nil]) {
+    self = [super initWithNibName:nil bundle:nil];
+    if (self) {
+         NSUserDefaults *uDef = [NSUserDefaults standardUserDefaults];
         playerAccount = [AccountDataSource sharedInstance];
         oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
         oponentAccount.money = 1000;        
@@ -202,12 +203,6 @@ static StartViewController *sharedHelper = nil;
             [uDef setBool:TRUE forKey:@"FirstRunForDuel"];
             [playerAccount saveMoney];
             [playerAccount saveAccountName];
-            NSString *accID=[[NSString alloc]init];
-            if(playerAccount.accountID==NULL){
-                accID=@"NoGC";
-            }else{
-                accID=playerAccount.accountID;
-            }
             [playerAccount saveID];
             [playerAccount saveDeviceType];
             [playerAccount saveAccountLevel];
@@ -233,8 +228,6 @@ static StartViewController *sharedHelper = nil;
             
             [playerAccount loadAllParametrs];
             
-//          putch for 1.4.1
-            [playerAccount putchAvatarImageToInitStartVC:self];
 //            
             if (!([playerAccount.accountID rangeOfString:@"F"].location == NSNotFound)){ 
                 //facebook = [[Facebook alloc] initWithAppId:kFacebookAppId andDelegate:[LoginAnimatedViewController sharedInstance]];
@@ -261,7 +254,6 @@ static StartViewController *sharedHelper = nil;
                     [playerAccount.transactions addObject:loc];
                 }
             }
-            CDTransaction *localTransaction = [playerAccount.transactions lastObject];
           DLog(@"Transactions count = %d", [playerAccount.transactions count]);
             
             NSArray *oldLocations2 = [uDef arrayForKey:@"duels"];
@@ -355,7 +347,7 @@ static StartViewController *sharedHelper = nil;
         cloudX=460;
         cloud2X=-20;
         
-        inBackground = NO;
+        inBackground = NO;        
     }
     return self;
 }
@@ -463,6 +455,7 @@ static StartViewController *sharedHelper = nil;
         loginViewControllerLocal.startViewController = self;
         [loginViewControllerLocal setPayment:YES];
         [self.navigationController pushViewController:loginViewControllerLocal animated:YES];
+        loginViewControllerLocal = nil;
     }
 
     if (self.soundCheack )
@@ -563,16 +556,7 @@ static StartViewController *sharedHelper = nil;
     SSConnection *connection = [SSConnection sharedInstance];
     [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
     
-    BOOL mutchEnded;
-    if ((gameCenterViewController.userEndMatch && gameCenterViewController.opponentEndMatch) || (!gameCenterViewController.userEndMatch && !gameCenterViewController.opponentEndMatch)) 
-        mutchEnded = YES;
-    else 
-        mutchEnded = NO;
-    
-    NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
     gameCenterViewController.duelStartViewController = nil;
-    
-    NSInteger paymentRegistration = [[NSUserDefaults standardUserDefaults] integerForKey:@"paymentRegistration"];
     
     [self showProfileFirstRun];
     [self isAdvertisingOfNewVersionNeedShow];
@@ -703,12 +687,13 @@ static StartViewController *sharedHelper = nil;
 }
 
 - (IBAction)storeButtonClick:(id)sender {
-    __weak StoreViewController *storeViewController=[[StoreViewController alloc] initWithAccount:playerAccount];
+    StoreViewController *storeViewController=[[StoreViewController alloc] initWithAccount:playerAccount];
     [self.navigationController pushViewController:storeViewController animated:YES];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/store" forKey:@"event"]];
+    storeViewController = nil;
 }
 
 -(IBAction)profileButtonClick
@@ -834,6 +819,7 @@ static StartViewController *sharedHelper = nil;
     transition.subtype = kCATransitionFromBottom;
     [self.navigationController.view.layer addAnimation:transition forKey:nil];
     [self.navigationController pushViewController:helpViewController animated:NO];
+    helpViewController = nil;
 }
 
 -(void) advertButtonClick {
@@ -1098,6 +1084,9 @@ static StartViewController *sharedHelper = nil;
     NSString * currentParseString = [NSString stringWithFormat:@"%@",connection1.requestURL];
     
     NSMutableData *receivedData=[dicForRequests objectForKey:[currentParseString lastPathComponent]];
+    if ([receivedData length] == 0) {
+        return;
+    }
     NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
     [dicForRequests removeObjectForKey:[currentParseString lastPathComponent]];
     NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
@@ -1398,7 +1387,7 @@ static StartViewController *sharedHelper = nil;
     if ([playerAccount.accountName isEqualToString:@"Anonymous"]||[playerAccount.accountName isEqualToString:@""]||!playerAccount.accountName) {
         [playerAccount setAccountName:player1.alias];
     }
-    if (playerAccount.accountLevel>=1) {
+    if (playerAccount.accountLevel>=kCountOfLevelsMinimal) {
         [[GCHelper sharedInstance] reportAchievementIdentifier:[[GCHelper sharedInstance].GC_ACH objectAtIndex:1] percentComplete:100.0f];
     }
 }
@@ -1509,10 +1498,10 @@ static StartViewController *sharedHelper = nil;
 
 -(BOOL)isNeedBlockOnlineListForAdvertasingAppear;
 {
-    BOOL advertisingWillShow=[[NSUserDefaults standardUserDefaults] boolForKey:@"advertisingWillShow"];
-    
-    int drawCount=playerAccount.accountDraws;
-    int playedMatches=playerAccount.accountWins+drawCount;
+//    BOOL advertisingWillShow=[[NSUserDefaults standardUserDefaults] boolForKey:@"advertisingWillShow"];
+//    
+//    int drawCount=playerAccount.accountDraws;
+//    int playedMatches=playerAccount.accountWins+drawCount;
     
 //    if ((playedMatches>=2)&&([self connectedToWiFi]&&[AdColonyViewController isAdStatusValid])) {
 //        if ((advertisingWillShow)&&(playerAccount.removeAds!=AdColonyAdsStatusRemoved)) {
@@ -1559,6 +1548,7 @@ static StartViewController *sharedHelper = nil;
         LoginAnimatedViewController *loginViewControllerLocal =[LoginAnimatedViewController sharedInstance];
         loginViewControllerLocal.startViewController = self;
         [self.navigationController pushViewController:loginViewControllerLocal animated:YES];
+        loginViewControllerLocal = nil;
     }else {
         if (firstRunLocal) {
             firstRunLocal = NO;

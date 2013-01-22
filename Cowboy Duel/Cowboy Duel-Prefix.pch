@@ -19,6 +19,7 @@
 #import <Social/Social.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import "BBCyclingLabel.h"
+#import "MemoryManagement.h"
 #endif
 
 
@@ -35,6 +36,9 @@
 #define NUMBER_REVISION_DEFAULT 2
 #define NUMBER_REVISION_DUEL_PRODUCT_DEFAULT 0
 #define kFrequencyOfAdvertisingDefault 2
+
+#define kCountOfLevelsMinimal 1
+#define kCountOfLevels 7
 
 #define kAnalyticsTrackEventNotification @"AnalyticsTrackEventNotification"
 

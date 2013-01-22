@@ -16,18 +16,10 @@
 @protocol IconDownloaderDelegate;
 
 
-@interface TopPlayersDataSource : NSObject <UITableViewDataSource,IconDownloaderDelegate> {
-    NSMutableArray * arrItemsList;
-    NSMutableData *receivedData;
-    UITableView *_tableView;
-    
-    
-    NSMutableDictionary *imageDownloadsInProgress;
-    id delegate;
-    int myProfileIndex;
-}
-@property(strong, readonly)NSMutableArray *arrItemsList;
-@property(strong, nonatomic)id delegate;
+@interface TopPlayersDataSource : NSObject <UITableViewDataSource,IconDownloaderDelegate,MemoryManagement>
+@property(strong, readonly) NSMutableArray *arrItemsList;
+@property(weak, nonatomic) UITableView *tableView;
+@property(weak, nonatomic)id delegate;
 @property(nonatomic) int myProfileIndex;
 
 -(void) reloadDataSource;

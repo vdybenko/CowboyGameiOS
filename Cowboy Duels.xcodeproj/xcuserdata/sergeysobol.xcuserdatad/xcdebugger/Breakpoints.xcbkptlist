@@ -130,7 +130,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "420"
          endingLineNumber = "420"
-         landmarkName = "-setOponentImage"
+         landmarkName = "-cancelDuel"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint

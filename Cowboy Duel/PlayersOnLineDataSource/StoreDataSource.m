@@ -61,6 +61,14 @@
     }else {
         arrItemsList = testArr;
     }
+    testArr = nil;
+}
+
+-(void)releaseComponents
+{
+    arrItemsList = nil;
+    tableView = nil;
+    duelProductDownloaderController = nil;
 }
 
 #pragma mark - Delegated methods

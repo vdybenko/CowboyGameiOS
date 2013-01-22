@@ -20,21 +20,21 @@
 @interface DuelStartViewController ()
 
 - (void)setOponentInfo;
-@property (strong, nonatomic) IBOutlet UIView *userAtackView;
-@property (strong, nonatomic) IBOutlet UIView *userDefenseView;
-@property (strong, nonatomic) IBOutlet UIView *oponentAtackView;
-@property (strong, nonatomic) IBOutlet UIView *oponentDefenseView;
-@property (strong, nonatomic) IBOutlet UILabel *userAtack;
-@property (strong, nonatomic) IBOutlet UILabel *userDefense;
-@property (strong, nonatomic) IBOutlet UILabel *oponentAtack;
-@property (strong, nonatomic) IBOutlet UILabel *oponentDefense;
+@property (weak, nonatomic) IBOutlet UIView *userAtackView;
+@property (weak, nonatomic) IBOutlet UIView *userDefenseView;
+@property (weak, nonatomic) IBOutlet UIView *oponentAtackView;
+@property (weak, nonatomic) IBOutlet UIView *oponentDefenseView;
+@property (weak, nonatomic) IBOutlet UILabel *userAtack;
+@property (weak, nonatomic) IBOutlet UILabel *userDefense;
+@property (weak, nonatomic) IBOutlet UILabel *oponentAtack;
+@property (weak, nonatomic) IBOutlet UILabel *oponentDefense;
 
 @end
 
 @implementation DuelStartViewController
 @synthesize _ivOponent, delegate ,oponentNameOnLine, serverName, oponentAvailable, tryAgain;
-@synthesize _btnStart, activityIndicatorView, _ivPlayer, _vBackground, _lbNamePlayer, _lbNameOponent, _btnBack;
-@synthesize _vWait, _pleaseWaitLabel, _waitLabel, lbOpponentDuelsWinCount;
+@synthesize _btnStart, _ivPlayer, _vBackground, _lbNamePlayer, _lbNameOponent, _btnBack;
+@synthesize _vWait, lbOpponentDuelsWinCount;
 @synthesize userAtack;
 @synthesize userDefense;
 @synthesize oponentAtack;
@@ -43,6 +43,7 @@
 @synthesize userDefenseView;
 @synthesize oponentAtackView;
 @synthesize oponentDefenseView;
+@synthesize activityIndicatorView;
 
 static const char *GC_URL =  BASE_URL"api/gc";
 
@@ -50,7 +51,8 @@ static const char *GC_URL =  BASE_URL"api/gc";
 
 -(id)initWithAccount:(AccountDataSource *)userAccount andOpAccount:(AccountDataSource *)opAccount opopnentAvailable:(BOOL)available andServerType:(BOOL)server andTryAgain:(BOOL)tryA;
 {
-    if (self == [super initWithNibName:nil bundle:nil]) {
+    self = [super initWithNibName:nil bundle:nil];
+    if (self) {
         oponentAvailable=available;
         tryAgain = tryA;
         serverType = server;
@@ -271,6 +273,52 @@ static const char *GC_URL =  BASE_URL"api/gc";
     [_vWait setHidden:YES];
     [activityIndicatorView hideView];
 }
+
+-(void)releaseComponents
+{
+    _ivOponent = nil;
+    oponentNameOnLine = nil;
+    serverName = nil;
+    _btnStart = nil;
+    activityIndicatorView  = nil;
+    _ivPlayer = nil;
+    _vBackground = nil;
+    _lbNamePlayer = nil;
+    _lbNameOponent = nil;
+    _btnBack = nil;
+    _vWait = nil;
+    lbOpponentDuelsWinCount = nil;
+    userAtack = nil;
+    userDefense = nil;
+    oponentAtack = nil;
+    oponentDefense = nil;
+    userAtackView = nil;
+    userDefenseView = nil;
+    oponentAtackView = nil;
+    oponentDefenseView = nil;
+    oponentAccount = nil;
+    oponentNameOnLine = nil;
+    player = nil;
+    pathFile = nil;
+    waitTimer = nil;    
+    lineViews = nil;
+    twoLineViews = nil;    
+    iconDownloader = nil;
+    mainDuelView = nil;
+    lbDuelStart = nil;
+    lbUserRank = nil;
+    lbUserDuelsWin = nil;
+    lbUserDuelsWinCount = nil;
+    lbOpponentRank = nil;
+    lbOpponentDuelsWin = nil;
+    lbForTheMurder = nil;
+    lbReward = nil;
+    lbGoldCount = nil;
+    lbGold = nil;
+    lbPointsCount = nil;
+    lbPoints = nil;
+    serverName = nil;
+}
 #pragma mark - 
 
 
@@ -296,6 +344,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
     
     [delegate duelCancel];
+    [self releaseComponents];
 }
 
 #pragma mark FConnect Methods
@@ -364,10 +413,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
 //    col=[[UIColor alloc] initWithRed:0.317 green:0.274 blue:0.184 alpha:1];
 //    //[_lbMoneyOponent setTextColor:col];
 }
--(void)setMessageToOponent:(NSString*)pMessage;
-{
-    NSString *mesFull=[NSString stringWithFormat:@"%@%@%@",NSLocalizedString(@"HTML_MES_HEAD", @""),pMessage,NSLocalizedString(@"HTML_ASS", @"")];
-}
+
 -(void)cancelDuel;
 {
 //   Выводитса сообщение NSLocalizedString(@"RanAway", @"")

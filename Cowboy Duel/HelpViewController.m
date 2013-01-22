@@ -28,28 +28,24 @@
 @interface HelpViewController () {
     id startVC;
     
-    IBOutlet UIButton *_btnVideo;
-    IBOutlet UIView *mainView;
-    IBOutlet UIButton *_btnBack;
-    IBOutlet UIButton *btnContact;
-    IBOutlet UIWebView *_webViewMessage;
-    IBOutlet UIView *_vBackground;
-    IBOutlet UILabel *lbBackBtn;
-    IBOutlet UILabel *lbVideoBtn;
-    IBOutlet UILabel *lbContactButton;
+    __weak IBOutlet UIView *mainView;
+    __weak IBOutlet UIButton *btnContact;
+    __weak IBOutlet UILabel *lbBackBtn;
+    __weak IBOutlet UILabel *lbVideoBtn;
+    __weak IBOutlet UILabel *lbContactButton;
     
-    IBOutlet UILabel *lbTitleHelp;
+    __weak IBOutlet UILabel *lbTitleHelp;
+    MPMoviePlayerViewController *mp;
 }
-@property (strong, nonatomic) IBOutlet UIButton *_btnVideo;
-@property (strong, nonatomic) IBOutlet UIButton *_btnBack;
-@property (strong, nonatomic) IBOutlet UIWebView *_webViewMessage;
-@property (strong, nonatomic) IBOutlet UIView *_vBackground;
+@property (weak, nonatomic) IBOutlet UIButton *_btnVideo;
+@property (weak, nonatomic) IBOutlet UIButton *_btnBack;
+@property (weak, nonatomic) IBOutlet UIWebView *_webViewMessage;
+@property (weak, nonatomic) IBOutlet UIView *_vBackground;
 @end
 
 @implementation HelpViewController
 @synthesize _btnVideo, _vBackground, _btnBack, _webViewMessage;
 
-MPMoviePlayerViewController *mp;
 NSString *const URL_CONTACN_US=@"http://cowboyduel.com/";
 BOOL isSoundControl;
 
@@ -118,6 +114,23 @@ BOOL isSoundControl;
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+-(void)releaseComponents
+{
+    mainView = nil;
+    btnContact = nil;
+    lbBackBtn = nil;
+    lbVideoBtn = nil;
+    lbContactButton = nil;
+    lbTitleHelp = nil;
+    _btnVideo = nil;
+    _btnBack = nil;
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    _webViewMessage = nil;
+    _vBackground = nil;
+    mp = nil;
+}
+
+#pragma mark
 -(IBAction)backButtonClick
 {
     CATransition* transition = [CATransition animation];
@@ -127,6 +140,7 @@ BOOL isSoundControl;
     transition.subtype = kCATransitionFromTop; //kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop,
     [self.navigationController.view.layer addAnimation:transition forKey:nil];
     [self.navigationController popViewControllerAnimated:NO];
+    [self releaseComponents];
 }
 
 -(IBAction)btnFB{
@@ -136,7 +150,7 @@ BOOL isSoundControl;
     
     NSURL *urlVideo = [NSURL URLWithString:[qualities objectForKey:@"medium"]];
 
-    MyMovieViewController *mp = [[MyMovieViewController alloc] initWithContentURL:urlVideo];
+    mp = [[MyMovieViewController alloc] initWithContentURL:urlVideo];
     
     mp.moviePlayer.controlStyle = MPMovieControlStyleFullscreen;
     mp.moviePlayer.shouldAutoplay = YES;
@@ -167,7 +181,7 @@ BOOL isSoundControl;
     mp.moviePlayer.initialPlaybackTime = -1; 
     [mp.moviePlayer stop]; 
     [self dismissMoviePlayerViewControllerAnimated];
-    
+    mp = nil;
     if (isSoundControl)[startVC soundOff];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
 }

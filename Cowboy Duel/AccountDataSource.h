@@ -97,7 +97,6 @@
 -(NSUInteger(^)(NSArray *, NSInteger))findObsByID;
 -(NSUInteger(^)(NSArray *, NSString *))findObsByPurchase;
 
--(void)putchAvatarImageToInitStartVC:(StartViewController*)startVC;
 -(BOOL)isAvatarImage:(NSString*)imagePath;
 -(BOOL)putchAvatarImageSendInfo;
 

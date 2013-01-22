@@ -72,8 +72,6 @@
         runAway=NO;
         tryButtonEnabled = YES;
         
-        
-        
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"DUEL_VIEW_NOT_FIRST"];
         
         if (teaching&&(oponentAccount.bot)) {
@@ -307,6 +305,50 @@
         [playerAccount loadWeapon];
     }
 }
+
+-(void)releaseComponents
+{
+    activityIndicatorView = nil;
+    playerAccount = nil;
+    oponentAccount = nil;
+    resoultDataSource = nil;
+    stGA = nil;
+    falseLabel = nil;
+    player = nil;
+    follPlayerFinal = nil;
+    transaction = nil;
+    duel = nil;
+    _pointForEachLevels = nil;
+    _pontsForWin = nil;
+    _pontsForLose = nil;
+    backButton = nil;
+    nextButton = nil;
+    resultTable = nil;
+    lblNamePlayer = nil;
+    lblNameOponnent = nil;
+    lblResulDescription = nil;
+    ivGoldCoin = nil;
+    ivBlueLine = nil;
+    ivCurrentRank = nil;
+    ivNextRank = nil;
+    lblGoldPlus = nil;
+    viewLastSceneAnimation = nil;
+    loserImg = nil;
+    loserSpiritImg = nil;
+    winnerImg1 = nil;
+    winnerImg2 = nil;
+    loserMoneyImg = nil;
+    view = nil;
+    statView = nil;
+    lbBack = nil;
+    lbTryAgain = nil;
+    lbNextRound = nil;
+    lblGold = nil;
+    gameStatusLable = nil;
+    lblPoints = nil;
+    goldPointBgView = nil;
+    lblGoldTitle = nil;
+}
 #pragma mark -
 
 -(IBAction)backButtonClick:(id)sender
@@ -331,14 +373,15 @@
                 [self.navigationController presentViewController:duelProductWinViewController animated:YES completion:Nil];
             }else{
                 [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+                [self releaseComponents];
             }
         }else{
             [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+            [self releaseComponents];
         }
 //        if ([self.delegate isKindOfClass:[BluetoothViewController class]]) [self.delegate duelCancel];
         if ([self.delegate isKindOfClass:[GameCenterViewController class]]) {
             [self.delegate performSelector:@selector(matchCanseled)];
-            
         }
         
     }else{
@@ -363,6 +406,7 @@
             
         }else{
             [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+            [self releaseComponents];
         }
     }
 }
@@ -447,7 +491,6 @@
                                                       userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@%@",stGA,@"final"] forKey:@"event"]];
 //    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@%@",stGA,@"final"]];
 
-    int oldMoney=playerAccount.money;
     oldMoneyForAnimation = playerAccount.money;
     if (!teaching||(duelWithBotCheck)) {
         oponentAccount.money += moneyExch;
@@ -725,14 +768,14 @@
         if(oponentAccount.bot) [[StartViewController sharedInstance] modifierUser:oponentAccount];
     }
     
-    if (playerAccount.accountLevel == 10){
-        NSString *name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel];
+    if (playerAccount.accountLevel == kCountOfLevels){
+        NSString *name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel];
         ivCurrentRank.image = [UIImage imageNamed:name];
     }
     else{
-        NSString *name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel];
+        NSString *name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel];
         ivCurrentRank.image = [UIImage imageNamed:name];
-        name = [NSString stringWithFormat:@"fv_img_%drank.png", playerAccount.accountLevel+1];
+        name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel+1];
         ivNextRank.image = [UIImage imageNamed:name];
     }
     if (fMutchNumberLose == 2) {
@@ -910,18 +953,18 @@
   
   NSArray *array=[DuelRewardLogicController getStaticPointsForEachLevels];
   
-  if (playerAccount.accountLevel < 0 || playerAccount.accountLevel > 10 ){
-    [playerAccount setAccountLevel:10];
+  if (playerAccount.accountLevel < kCountOfLevelsMinimal || playerAccount.accountLevel > kCountOfLevels ){
+    [playerAccount setAccountLevel:kCountOfLevels];
   }
   
   NSInteger num = playerAccount.accountLevel;
-    int  moneyForNextLevel=(playerAccount.accountLevel != 10)? [[array objectAtIndex:num] intValue]:playerAccount.accountPoints+1000;
+    int  moneyForNextLevel=(playerAccount.accountLevel != kCountOfLevels)? [[array objectAtIndex:num] intValue]:playerAccount.accountPoints+1000;
   
   int moneyForPrewLevel;
-  if (playerAccount.accountLevel==0) {
+  if (playerAccount.accountLevel==kCountOfLevelsMinimal) {
     moneyForPrewLevel = 0;
   }else
-      if (playerAccount.accountLevel == 10) {
+      if (playerAccount.accountLevel == kCountOfLevels) {
           moneyForPrewLevel = playerAccount.accountPoints;
       }
     else
@@ -1104,16 +1147,16 @@
     }];
   //Blue line animation:
   NSArray *array=[DuelRewardLogicController getStaticPointsForEachLevels];
-  if (playerAccount.accountLevel < 0 || playerAccount.accountLevel > 10 ){
+  if (playerAccount.accountLevel < kCountOfLevelsMinimal || playerAccount.accountLevel > kCountOfLevels ){
     [playerAccount setAccountLevel:10];
   }
   NSInteger num = playerAccount.accountLevel;
-  int  moneyForNextLevel=(playerAccount.accountLevel != 10)? [[array objectAtIndex:num] intValue]:playerAccount.accountPoints+1000;
+  int  moneyForNextLevel=(playerAccount.accountLevel != kCountOfLevels)? [[array objectAtIndex:num] intValue]:playerAccount.accountPoints+1000;
   int moneyForPrewLevel;
-  if (playerAccount.accountLevel==0) {
+  if (playerAccount.accountLevel==kCountOfLevelsMinimal) {
     moneyForPrewLevel = 0;
   }else
-      if (playerAccount.accountLevel == 10) {
+      if (playerAccount.accountLevel == kCountOfLevels) {
           moneyForPrewLevel = playerAccount.accountPoints;
       }
       else{
@@ -1191,13 +1234,14 @@
 
 -(void)showMessageOfNewLevel
 {
-    lvlCongratulationViewController=[[LevelCongratViewController alloc] initForNewLevelPlayerAccount:playerAccount andController:self tryButtonEnable:tryButton.enabled];
+    LevelCongratViewController *lvlCongratulationViewController=[[LevelCongratViewController alloc] initForNewLevelPlayerAccount:playerAccount andController:self tryButtonEnable:tryButton.enabled];
+    playerAccount.accountLevel +=1;
     [self performSelector:@selector(showViewController:) withObject:lvlCongratulationViewController afterDelay:4.5];
 }
 
 -(void)showMessageOfMoreMoney:(NSInteger)money withLabel:(NSString *)labelForCongratulation
 {
-    moneyCongratulationViewController  = [[MoneyCongratViewController alloc] initForAchivmentPlayerAccount:playerAccount withLabel:labelForCongratulation andController:self tryButtonEnable:tryButton.enabled];
+    MoneyCongratViewController *moneyCongratulationViewController  = [[MoneyCongratViewController alloc] initForAchivmentPlayerAccount:playerAccount withLabel:labelForCongratulation andController:self tryButtonEnable:tryButton.enabled];
     [self performSelector:@selector(showViewController:) withObject:moneyCongratulationViewController afterDelay:4.5];
 }
 
@@ -1343,6 +1387,7 @@
 -(void)showViewController:(UIViewController *)viewController
 {
     [self presentModalViewController:viewController animated:YES];
+    viewController = nil;
 }
 
 @end

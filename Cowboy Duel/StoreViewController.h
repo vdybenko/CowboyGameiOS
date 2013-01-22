@@ -13,7 +13,7 @@
 #import "MKStoreManager.h"
 #import "DuelProductDownloaderController.h"
 
-@interface StoreViewController : UIViewController<UITableViewDelegate,TableCellWithButton,MKStoreKitDelegate,DuelProductDownloaderControllerDelegate>
+@interface StoreViewController : UIViewController<UITableViewDelegate,TableCellWithButton,MKStoreKitDelegate,DuelProductDownloaderControllerDelegate,MemoryManagement>
 
 @property (strong, nonatomic) StoreDataSource *storeDataSource;
 @property (nonatomic) BOOL bagFlag;

@@ -22,7 +22,7 @@ typedef enum {
 } LoginFacebookStatus;
 
 @class StartViewController;
-@interface LoginAnimatedViewController : UIViewController <UIWebViewDelegate, MKStoreKitDelegate>
+@interface LoginAnimatedViewController : UIViewController <UIWebViewDelegate, MKStoreKitDelegate,MemoryManagement>
 
 @property (strong,nonatomic) StartViewController *startViewController;
 @property (strong,nonatomic) id<ProfileWithLoginDelegate> delegate;
