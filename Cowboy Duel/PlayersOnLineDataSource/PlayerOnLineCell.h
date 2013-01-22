@@ -10,6 +10,8 @@
 @property (weak,nonatomic) IBOutlet UIImageView * icon;
 @property (weak,nonatomic) IBOutlet UILabel * playerName;
 @property (weak,nonatomic) IBOutlet UILabel * gold;
+@property (weak, nonatomic) IBOutlet UILabel * goldTitle;
+@property (unsafe_unretained, nonatomic) IBOutlet UILabel *rankTitle;
 @property (weak,nonatomic) IBOutlet UILabel * rank;
 @property (weak,nonatomic) IBOutlet UIButton * btnDuel;
 @property (weak,nonatomic) IBOutlet UILabel * status;
