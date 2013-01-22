@@ -458,32 +458,7 @@
     [self.navigationController pushViewController:finalViewController animated:YES];
 }
 
-#pragma mark -
--(void)increaseMutchNumberLose
-{
-    
-}
--(void)increaseMutchNumber
-{
-    
-}
--(void)increaseMutchNumberWin
-{
-    
-}
 
--(int)fMutchNumberLose
-{
-    return 0;
-}
--(int)fMutchNumber
-{
-    return 2;
-}
--(int)fMutchNumberWin
-{
-    return 2;
-}
 
 -(void)startDuel
 {
@@ -512,32 +487,10 @@
 
 -(void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
 {
-    //[self setRotationWithAngle:atan2(acceleration.y, acceleration.x) andY:acceleration.y];
-    
-    
     rollingX = (acceleration.x * kFilteringFactor) + (rollingX * (1.0 - kFilteringFactor));
     rollingY = (acceleration.y * kFilteringFactor) + (rollingY * (1.0 - kFilteringFactor));
     rollingZ = (acceleration.z * kFilteringFactor) + (rollingZ * (1.0 - kFilteringFactor));
-    //    DLog(@"acceleration x= %.1f, y= %.1f, z= %.1f", acceleration.x, acceleration.y, acceleration.z);
     //DLog(@"rolling x= %.1f, y= %.1f, z= %.1f", rollingX, rollingY, rollingZ);
-    
-    //[self setRotationWithAngle:atan2(rollingY, rollingX) andY:rollingY];
-    
-    //ifs for buttons enable/disable
-    if (rollingX >= -0.2) {
-//        _infoButton.enabled=YES;
-//        menuButton.enabled = YES;
-    }
-    if (rollingZ <= -0.7) {
-//        _infoButton.enabled=YES;
-//        menuButton.enabled = YES;
-    }
-    if (rollingX < -0.2)
-        if ((rollingZ > -0.7)) {
-//            _infoButton.enabled=NO;
-//            menuButton.enabled = NO;
-        }
-    //eof ifs
     
     //        Position for Shot
     if ((rollingY < 0.0) || (rollingX < -0.2) || (rollingX > 0.2)) accelerometerState = NO;
@@ -580,7 +533,6 @@
 -(void)restartCountdown;
 {
     NSLog(@"restartCountdown");
-//    _infoButton.enabled=NO;
     
     follAccelCheck = NO;
     accelerometerState = NO;
@@ -657,13 +609,6 @@
 -(void)vibrationStart;
 {
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-    
-//    CGRect frame=titleSteadyFire.bounds;
-//    frame.origin = CGPointMake(18, -50);
-//    frame.size = CGSizeMake(270, 275);
-//    titleSteadyFire.bounds = frame;
-//    
-//    [titleSteadyFire setImage:[UIImage imageNamed:@"dv_fire_label.png"]];
 }
 
 -(void)duelTimerEndFeedBack
