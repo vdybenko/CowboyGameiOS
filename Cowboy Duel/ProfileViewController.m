@@ -50,7 +50,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     
     __weak IBOutlet UILabel *lbWantedText;
     __weak IBOutlet UILabel *lbWantedTitle;
-    __weak IBOutlet UILabel *lbAvard;
+    __weak IBOutlet UILabel *lbAward;
     
     __weak IBOutlet UIButton *btnLogInFB;
     __weak IBOutlet UIButton *btnLogOutFB;
@@ -171,6 +171,8 @@ static const CGFloat timeToStandartTitles = 1.8;
         lbProfileMain.text = NSLocalizedString(@"WANTED", @"");
         [lbWantedTitle setFont: [UIFont fontWithName: @"DecreeNarrow" size:lbProfileMain.font.pointSize]];
         lbWantedTitle.text = NSLocalizedString(@"DOL", @"");
+        [lbAward setFont: [UIFont fontWithName: @"DecreeNarrow" size:lbAward.font.pointSize]];
+        lbAward.text = NSLocalizedString(@"AWARD", @"");
         [lbWantedText setFont: [UIFont fontWithName: @"DecreeNarrow" size:lbWantedText.font.pointSize]];
         lbWantedText.text = NSLocalizedString(@"ForBody", @"");
         
@@ -180,7 +182,6 @@ static const CGFloat timeToStandartTitles = 1.8;
                 
         [tfFBName setFont: [UIFont fontWithName: @"DecreeNarrow" size:30]];
         tfFBName.text = [NSString stringWithFormat:@"\"%@\"",playerAccount.accountName];
-        
     }
     return self;
 }
@@ -293,7 +294,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     ivPointsLine = nil;
     lbGoldCount = nil;
     lbGoldIcon = nil;
-    lbAvard = nil;
+    lbAward = nil;
     btnLogInFB = nil;
     btnLogOutFB = nil;
     btnLeaderboard = nil;

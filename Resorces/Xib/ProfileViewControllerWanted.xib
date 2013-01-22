@@ -158,7 +158,7 @@
 							<object class="IBUITextField" id="216755311">
 								<reference key="NSNextResponder" ref="933964600"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{52, 221}, {192, 30}}</string>
+								<string key="NSFrame">{{52, 229}, {192, 30}}</string>
 								<reference key="NSSuperview" ref="933964600"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1051110668"/>
@@ -196,7 +196,7 @@
 							<object class="IBUIImageView" id="183146280">
 								<reference key="NSNextResponder" ref="933964600"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{139, 178}, {21, 21}}</string>
+								<string key="NSFrame">{{139, 186}, {21, 21}}</string>
 								<reference key="NSSuperview" ref="933964600"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="47572277"/>
@@ -211,7 +211,7 @@
 							<object class="IBUILabel" id="47572277">
 								<reference key="NSNextResponder" ref="933964600"/>
 								<int key="NSvFlags">288</int>
-								<string key="NSFrame">{{164, 178}, {93, 21}}</string>
+								<string key="NSFrame">{{164, 186}, {93, 21}}</string>
 								<reference key="NSSuperview" ref="933964600"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="216755311"/>
@@ -229,20 +229,20 @@
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">0</int>
 								<float key="IBUIMinimumFontSize">25</float>
-								<object class="IBUIFontDescription" key="IBUIFontDescription" id="592349227">
+								<object class="IBUIFontDescription" key="IBUIFontDescription" id="661293988">
 									<int key="type">2</int>
 									<double key="pointSize">25</double>
 								</object>
-								<object class="NSFont" key="IBUIFont" id="840228994">
+								<object class="NSFont" key="IBUIFont" id="304165642">
 									<string key="NSName">Helvetica-Bold</string>
 									<double key="NSSize">25</double>
 									<int key="NSfFlags">16</int>
 								</object>
 							</object>
-							<object class="IBUILabel" id="272243538">
+							<object class="IBUILabel" id="304109128">
 								<reference key="NSNextResponder" ref="933964600"/>
 								<int key="NSvFlags">288</int>
-								<string key="NSFrame">{{61, 178}, {73, 21}}</string>
+								<string key="NSFrame">{{61, 186}, {73, 21}}</string>
 								<reference key="NSSuperview" ref="933964600"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="183146280"/>
@@ -261,8 +261,8 @@
 								<int key="IBUIBaselineAdjustment">0</int>
 								<float key="IBUIMinimumFontSize">25</float>
 								<int key="IBUITextAlignment">2</int>
-								<reference key="IBUIFontDescription" ref="592349227"/>
-								<reference key="IBUIFont" ref="840228994"/>
+								<reference key="IBUIFontDescription" ref="661293988"/>
+								<reference key="IBUIFont" ref="304165642"/>
 							</object>
 							<object class="IBUIView" id="374469283">
 								<reference key="NSNextResponder" ref="933964600"/>
@@ -466,10 +466,10 @@
 							<object class="IBUILabel" id="80938399">
 								<reference key="NSNextResponder" ref="933964600"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{26, 197}, {244, 27}}</string>
+								<string key="NSFrame">{{26, 205}, {244, 27}}</string>
 								<reference key="NSSuperview" ref="933964600"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="272243538"/>
+								<reference key="NSNextKeyView" ref="304109128"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -726,11 +726,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">lbAvard</string>
+						<string key="label">lbAward</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="272243538"/>
+						<reference key="destination" ref="304109128"/>
 					</object>
-					<int key="connectionID">250</int>
+					<int key="connectionID">251</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -839,7 +839,7 @@
 							<reference ref="662009342"/>
 							<reference ref="563327705"/>
 							<reference ref="80938399"/>
-							<reference ref="272243538"/>
+							<reference ref="304109128"/>
 						</array>
 						<reference key="parent" ref="1048327278"/>
 						<string key="objectName">mainProfileView</string>
@@ -962,7 +962,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">249</int>
-						<reference key="object" ref="272243538"/>
+						<reference key="object" ref="304109128"/>
 						<reference key="parent" ref="933964600"/>
 						<string key="objectName">GoldCount</string>
 					</object>
@@ -1005,7 +1005,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">250</int>
+			<int key="maxID">251</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1022,9 +1022,7 @@
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="backToMenu:">id</string>
-						<string key="btnFBLogOutClick:">id</string>
 						<string key="btnFBLoginClick:">id</string>
-						<string key="btnLeaderbordClick:">id</string>
 						<string key="btnSoundClick:">id</string>
 						<string key="duelButtonClick:">id</string>
 						<string key="showStoreDefence:">id</string>
@@ -1035,16 +1033,8 @@
 							<string key="name">backToMenu:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="btnFBLogOutClick:">
-							<string key="name">btnFBLogOutClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="btnFBLoginClick:">
 							<string key="name">btnFBLoginClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="btnLeaderbordClick:">
-							<string key="name">btnLeaderbordClick:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="btnSoundClick:">
@@ -1076,7 +1066,7 @@
 						<string key="ivBlack">UIView</string>
 						<string key="ivCurrentRank">UIImageView</string>
 						<string key="ivPointsLine">UIView</string>
-						<string key="lbAvard">UILabel</string>
+						<string key="lbAward">UILabel</string>
 						<string key="lbBiggestWin">UILabel</string>
 						<string key="lbBiggestWinCount">UILabel</string>
 						<string key="lbDescription">UILabel</string>
@@ -1148,8 +1138,8 @@
 							<string key="name">ivPointsLine</string>
 							<string key="candidateClassName">UIView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="lbAvard">
-							<string key="name">lbAvard</string>
+						<object class="IBToOneOutletInfo" key="lbAward">
+							<string key="name">lbAward</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="lbBiggestWin">
