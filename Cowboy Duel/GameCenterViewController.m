@@ -131,18 +131,14 @@ static GameCenterViewController *gameCenterViewController;
                                     
         }else{
             
-            duelViewController = [[DuelViewController alloc] initWithTime:(5 + randomTime) Account:playerAccount oponentAccount:oponentAccount];
-            [duelViewController setDelegate:self];
-            [self setDelegate:duelViewController];
+            activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:(5 + randomTime) Account:playerAccount oponentAccount:oponentAccount];
+            [activeDuelViewController setDelegate:self];
+            [self setDelegate:activeDuelViewController];
             
             gameInfo *gsSend = &gameStat;
             [self.connection sendData:(void *)(gsSend) packetID:NETWORK_START_DUEL_TRUE ofLength:sizeof(gameInfo)];
             
-            if ([AccountDataSource sharedInstance].activeDuel) {
-                ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:[AccountDataSource sharedInstance] oponentAccount:playerAccount];
-                [parentVC.navigationController pushViewController:activeDuelViewController animated:YES];
-            }
-            else [parentVC.navigationController pushViewController:duelViewController animated:NO];
+            [parentVC.navigationController pushViewController:activeDuelViewController animated:NO];
         }
     }
 }
@@ -165,18 +161,14 @@ static GameCenterViewController *gameCenterViewController;
             btnStartClick = YES;
         }else{
             DLog(@"nextDuelStart btnStartClick = Yes");
-            duelViewController = [[DuelViewController alloc] initWithTime:(5 + randomTime) Account:playerAccount oponentAccount:oponentAccount];
-            [duelViewController setDelegate:self];
-            [self setDelegate:duelViewController];
+            activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:(5 + randomTime) Account:playerAccount oponentAccount:oponentAccount];
+            [activeDuelViewController setDelegate:self];
+            [self setDelegate:activeDuelViewController];
             
             gameInfo *gsSend = &gameStat;
             [self.connection sendData:(void *)(gsSend) packetID:NETWORK_START_DUEL_TRUE ofLength:sizeof(gameInfo)];
             
-            if ([AccountDataSource sharedInstance].activeDuel) {
-                ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:[AccountDataSource sharedInstance] oponentAccount:playerAccount];
-                [parentVC.navigationController pushViewController:activeDuelViewController animated:YES];
-            }
-            else [parentVC.navigationController pushViewController:duelViewController animated:NO];
+            [parentVC.navigationController pushViewController:activeDuelViewController animated:NO];
         }
     //}
     
@@ -475,7 +467,7 @@ static GameCenterViewController *gameCenterViewController;
     
     [self.connection sendData:@"" packetID:NETWORK_DISCONNECT_PAIR ofLength:sizeof(@"")];
     
-    if ([self.parentVC.navigationController.visibleViewController isKindOfClass:([DuelViewController class])]) {
+    if ([self.parentVC.navigationController.visibleViewController isKindOfClass:([ActiveDuelViewController class])]) {
         finalViewController = [[FinalViewController alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
         if (userCanceledMatch) {
             [finalViewController prepeareForLoseScene];
@@ -554,15 +546,11 @@ static GameCenterViewController *gameCenterViewController;
             
             //for test
             if (!duelStartViewController) {
-                duelStartViewController = [[DuelStartViewController alloc]initWithAccount:playerAccount andOpAccount:oponentAccount  opopnentAvailable:YES andServerType:YES andTryAgain:NO];
+                duelStartViewController = [[DuelStartViewController alloc] initWithAccount:playerAccount andOpAccount:oponentAccount  opopnentAvailable:YES andServerType:YES andTryAgain:NO];
                 
                 [self setDelegate2:duelStartViewController];
                 duelStartViewController.delegate = self;
-                if ([AccountDataSource sharedInstance].activeDuel) {
-                    ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:[AccountDataSource sharedInstance] oponentAccount:playerAccount];
-                    [parentVC.navigationController pushViewController:activeDuelViewController animated:YES];
-                }
-                else [parentVC.navigationController pushViewController:duelViewController animated:YES];
+                [parentVC.navigationController pushViewController:duelStartViewController animated:YES];
             }else{
                 [duelStartViewController setAttackAndDefenseOfOponent:oponentAccount];
             }
@@ -632,17 +620,9 @@ static GameCenterViewController *gameCenterViewController;
                 duelStartViewController.tryAgain = YES;
                 duelStartViewController.oponentAvailable  = YES;
                 if ([parentVC.navigationController.viewControllers containsObject:duelStartViewController])
-                    if ([AccountDataSource sharedInstance].activeDuel) {
-                        ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:[AccountDataSource sharedInstance] oponentAccount:playerAccount];
-                        [parentVC.navigationController pushViewController:activeDuelViewController animated:YES];
-                    }
-                    else [parentVC.navigationController pushViewController:duelViewController animated:YES];
+                    [parentVC.navigationController pushViewController:activeDuelViewController animated:YES];
                 else{
-                    if ([AccountDataSource sharedInstance].activeDuel) {
-                        ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:[AccountDataSource sharedInstance] oponentAccount:playerAccount];
-                        [parentVC.navigationController pushViewController:activeDuelViewController animated:YES];
-                    }
-                    else [parentVC.navigationController pushViewController:duelViewController animated:YES];
+                     [parentVC.navigationController pushViewController:activeDuelViewController animated:YES];
                 }
                 [duelStartViewController setMessageTry];
             }  
@@ -668,20 +648,16 @@ static GameCenterViewController *gameCenterViewController;
             opShotTime = 0;
             
             if(!start){
-                duelViewController = [[DuelViewController alloc] initWithTime:(5 + randomTime) Account:playerAccount oponentAccount:oponentAccount];
-                [duelViewController setDelegate:self];
-                [self setDelegate:duelViewController];
+                activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:(5 + randomTime) Account:playerAccount oponentAccount:oponentAccount];
+                [activeDuelViewController setDelegate:self];
+                [self setDelegate:activeDuelViewController];
                 if (btnStartClick) {
                     DLog(@"NETWORK_START_DUEL btnStartClick Yes");
                     
                     gameInfo *gsSend = &gameStat;
                     [self.connection sendData:(void *)(gsSend) packetID:NETWORK_START_DUEL_TRUE ofLength:sizeof(gameInfo)];
 
-                    if ([AccountDataSource sharedInstance].activeDuel) {
-                        ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:[AccountDataSource sharedInstance] oponentAccount:playerAccount];
-                        [parentVC.navigationController pushViewController:activeDuelViewController animated:YES];
-                    }
-                    else [parentVC.navigationController pushViewController:duelViewController animated:YES];
+                    [parentVC.navigationController pushViewController:activeDuelViewController animated:YES];
                 }else{
                     btnStartClick = YES;
                     DLog(@"NETWORK_START_DUEL btnStartClick No");
@@ -696,17 +672,13 @@ static GameCenterViewController *gameCenterViewController;
                         
             //gameInfo *gsReceive = (gameInfo *)&incomingPacket[4];
             accelState = YES;
-            if ([[parentVC.navigationController visibleViewController] isKindOfClass:[DuelViewController class]]) return;
+            if ([[parentVC.navigationController visibleViewController] isKindOfClass:[ActiveDuelViewController class]]) return;
             
-            duelViewController = [[DuelViewController alloc] initWithTime:(5 + randomTime) Account:playerAccount oponentAccount:oponentAccount];
-            [duelViewController setDelegate:self];
-            [self setDelegate:duelViewController];
+            activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:(5 + randomTime) Account:playerAccount oponentAccount:oponentAccount];
+            [activeDuelViewController setDelegate:self];
+            [self setDelegate:activeDuelViewController];
             
-            if ([AccountDataSource sharedInstance].activeDuel) {
-                ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:[AccountDataSource sharedInstance] oponentAccount:playerAccount];
-                [parentVC.navigationController pushViewController:activeDuelViewController animated:YES];
-            }
-            else [parentVC.navigationController pushViewController:duelViewController animated:YES];
+            [parentVC.navigationController pushViewController:activeDuelViewController animated:YES];
         }
 			break;
             

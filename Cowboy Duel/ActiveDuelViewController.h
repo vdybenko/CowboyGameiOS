@@ -9,10 +9,60 @@
 #import <UIKit/UIKit.h>
 #import "AccountDataSource.h"
 #import <AVFoundation/AVFoundation.h>
+
 @protocol ActiveDuelViewControllerDelegate <NSObject>
 
 @optional
+-(void)setAccelStateTrue;
+-(void)setAccelStateFalse;
+-(BOOL)accelerometerSendPositionSecond;
+-(void)sendShotTime:(int)shotTime;
+-(void)startDuel;
+-(void)btnClickStart;
+-(void)follStart;
+-(void)follEnd;
+- (void) peerListDidChange:(NSMutableArray *)peer;
+- (void) connect:(NSString *)currentPeer;
+- (void) didReceiveInvitation:(GKSession *)session fromPeer:(NSString *)participantID;
+
+-(void)partnerFoll;
+
+-(BOOL) didAcceptInvitation;
+-(void) didDeclineInvitation;
+
+-(void)duelTimerEnd;
+-(void)duelTimerEndFeedBack;
+
+-(void)setNumWins;
+
+-(void)nextDuelStart;
+
+-(void)matchStartedTry;
+
+-(void)increaseMutchNumberLose;
+-(void)increaseMutchNumber;
+-(void)increaseMutchNumberWin;
+-(int)fMutchNumberLose;
+-(int)fMutchNumber;
+-(int)fMutchNumberWin;
+
+-(void)duelCancel;
+-(void)duelRunAway;
+
+-(void)shutDownTimer;
+
 @end
+
+@protocol DuelStartViewControllerDelegate <NSObject>
+
+@optional
+-(void)setOponent:(NSString*)iv Label1:(NSString*)uil1 Label1:(int)uil2;
+-(void)setMessageToOponent:(NSString*)pMessage;
+-(void)cancelDuel;
+-(void)setUserMoney:(int)money;
+-(void)setOponentMoney:(int)money;
+@end
+
 
 @interface ActiveDuelViewController : UIViewController
 {

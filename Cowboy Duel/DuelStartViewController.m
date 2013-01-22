@@ -15,6 +15,7 @@
 #import "UIImage+Save.h"
 #import "CustomNSURLConnection.h"
 #import "UIView+Dinamic_BackGround.h"
+#import "ActiveDuelViewController.h"
 
 @interface DuelStartViewController ()
 
@@ -444,8 +445,8 @@ static const char *GC_URL =  BASE_URL"api/gc";
 -(void)startBotDuel
 {
     int randomTime = arc4random() % 6;
-    TeachingViewController *teachingViewController = [[TeachingViewController alloc] initWithTime:randomTime andAccount:playerAccount andOpAccount:oponentAccount];
-    [self.navigationController pushViewController:teachingViewController animated:YES];
+    ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:playerAccount oponentAccount:oponentAccount];
+    [self.navigationController pushViewController:activeDuelViewController animated:YES];
 }
 
 - (void)viewDidUnload {

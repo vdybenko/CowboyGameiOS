@@ -145,7 +145,7 @@
     ARView *arView = (ARView *)self.view;
 	
 	// Create array of hard-coded places-of-interest, in this case some famous parks
-    CLLocationCoordinate2D poiCoords[] = {{40.7711329, -73.9741874},
+    CLLocationCoordinate2D poiCoords[] = {{4.7711329, -7.9741874},
         {37.7690400, -122.4835193},
         {32.7343822, -117.1441227},
         {51.5068670, -0.1708030},
@@ -323,8 +323,6 @@
     centerOfScreanPoint.y = [UIScreen mainScreen].bounds.size.height / 2;
     
     [self cheackHitForShot:centerOfScreanPoint andTargetPoint:targetPoint];
-    
-    
 }
 
 - (void)horizontalFlip{
@@ -352,7 +350,7 @@
 
 -(void)cheackHitForShot:(CGPoint)shotPoint andTargetPoint:(CGPoint)targetPoint
 {
-    if (([self abs:(shotPoint.x - targetPoint.x)] < targetWeidth / 2) && ([self abs:(shotPoint.y - targetPoint.y)] < targetHeight / 2)) {
+    //if (([self abs:(shotPoint.x - targetPoint.x)] < targetWeidth / 2) && ([self abs:(shotPoint.y - targetPoint.y)] < targetHeight / 2)) {
         [self startRandomBloodAnimation];
         shotCountBullet--;
         
@@ -367,8 +365,13 @@
         [hitAudioPlayer play];
         
         
-        if(!shotCountBullet) [self opponentLost];
-    }
+
+        if(!shotCountBullet) {
+            if ([delegate respondsToSelector:@selector(sendShotTime:)])
+                [delegate sendShotTime:(shotTime - time * 1000)];
+            [self opponentLost];
+        }
+    //}
 }
 
 -(void)startRandomBloodAnimation
@@ -516,7 +519,7 @@
     rollingY = (acceleration.y * kFilteringFactor) + (rollingY * (1.0 - kFilteringFactor));
     rollingZ = (acceleration.z * kFilteringFactor) + (rollingZ * (1.0 - kFilteringFactor));
     //    DLog(@"acceleration x= %.1f, y= %.1f, z= %.1f", acceleration.x, acceleration.y, acceleration.z);
-    DLog(@"rolling x= %.1f, y= %.1f, z= %.1f", rollingX, rollingY, rollingZ);
+    //DLog(@"rolling x= %.1f, y= %.1f, z= %.1f", rollingX, rollingY, rollingZ);
     
     //[self setRotationWithAngle:atan2(rollingY, rollingX) andY:rollingY];
     
@@ -553,16 +556,16 @@
     
     if((accelerometerState)&& (!soundStart)){
         if (!accelerometerStateSend) {
-//            if ([delegate respondsToSelector:@selector(setAccelStateTrue)])
-//                [delegate setAccelStateTrue];
+            if ([delegate respondsToSelector:@selector(setAccelStateTrue)])
+                [delegate setAccelStateTrue];
             accelerometerStateSend = YES;
         }else {
             [self startDuel];
         }
     }
     else {
-//        if ([delegate respondsToSelector:@selector(setAccelStateFalse)])
-//            [delegate setAccelStateFalse];
+        if ([delegate respondsToSelector:@selector(setAccelStateFalse)])
+            [delegate setAccelStateFalse];
         accelerometerStateSend = NO;
     }
     
@@ -614,8 +617,8 @@
         shotTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
     }
     if ((shotTime * 0.001 >= 30.0) && (!duelTimerEnd) && (soundStart)) {
-//        if ([delegate respondsToSelector:@selector(duelTimerEnd)])
-//            [delegate duelTimerEnd];
+        if ([delegate respondsToSelector:@selector(duelTimerEnd)])
+            [delegate duelTimerEnd];
         duelTimerEnd = YES;
         [timer invalidate];
     }
@@ -671,6 +674,11 @@
 #pragma mark - IBAction
 - (void)cancelHelpArmClick:(id)sender {
     [self hideHelpViewWithArm];
+}
+
+-(void)shutDownTimer;
+{
+    [timer invalidate];
 }
 
 @end

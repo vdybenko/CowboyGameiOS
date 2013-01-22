@@ -228,7 +228,33 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 	motionManager.deviceMotionUpdateInterval = 3.0 / 60.0;
 	
 	// New in iOS 5.0: Attitude that is referenced to true north
-	[motionManager startDeviceMotionUpdates];
+	[motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
+        CMRotationMatrix r = motion.attitude.rotationMatrix;
+		transformFromCMRotationMatrix(cameraTransform, &r);
+        
+        if (placesOfInterestCoordinates == nil) {
+            return;
+        }
+        
+        mat4f_t projectionCameraTransform;
+        multiplyMatrixAndMatrix(projectionCameraTransform, projectionTransform, cameraTransform);
+        
+        int i = 0;
+        for (OponentCoordinateView *poi in [placesOfInterest objectEnumerator]) {
+            vec4f_t v;
+            multiplyMatrixAndVector(v, projectionCameraTransform, placesOfInterestCoordinates[i]);
+            
+            float x = (v[0] / v[3] + 1.0f) * 0.5f;
+            float y = (v[1] / v[3] + 1.0f) * 0.5f;
+            if (v[2] < 0.0f) {
+                poi.view.center = CGPointMake(x*self.bounds.size.width, self.bounds.size.height-y*self.bounds.size.height);
+            } else {
+                //poi.view.hidden = YES;
+            }
+            i++;
+        }
+
+    }];
 }
 
 - (void)stopDeviceMotion
@@ -239,9 +265,9 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 
 - (void)startDisplayLink
 {
-	displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(onDisplayLink:)];
-	[displayLink setFrameInterval:1];
-	[displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+//	displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(onDisplayLink:)];
+//	[displayLink setFrameInterval:1];
+//	[displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
 }
 
 - (void)stopDisplayLink
@@ -338,11 +364,18 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 		
 		float x = (v[0] / v[3] + 1.0f) * 0.5f;
 		float y = (v[1] / v[3] + 1.0f) * 0.5f;
+        NSLog(@"men centre %f %f", x, y);
 		if (v[2] < 0.0f) {
-			poi.view.center = CGPointMake(x*self.bounds.size.width, self.bounds.size.height-y*self.bounds.size.height);
-			poi.view.hidden = NO;
+            
+            [UIView animateWithDuration:0.1 animations:^{
+                poi.view.center = CGPointMake(x*self.bounds.size.width, self.bounds.size.height-y*self.bounds.size.height);
+            }completion:^(BOOL complete){
+                
+            }];
+			
+			//poi.view.hidden = NO;
 		} else {
-            poi.view.hidden = YES;
+            //poi.view.hidden = YES;
 		}
 		i++;
 	}

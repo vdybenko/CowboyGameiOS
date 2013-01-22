@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "DuelViewController.h"
 #import "GCHelper.h"
+#import "ActiveDuelViewController.h"
 
 
 #define MAX_LENGTH 50
@@ -29,9 +29,9 @@ typedef struct {
 @class FinalViewController;
 @class DuelStartViewController;
 
-@interface GameCenterViewController : UIViewController< UIAlertViewDelegate, DuelViewControllerDelegate, DuelStartViewControllerDelegate, GCHelperDelegate>
+@interface GameCenterViewController : UIViewController< UIAlertViewDelegate, GCHelperDelegate, ActiveDuelViewControllerDelegate, DuelStartViewControllerDelegate>
 {
-    DuelViewController *duelViewController;
+    ActiveDuelViewController *activeDuelViewController;
     DuelStartViewController *duelStartViewController;
     FinalViewController *finalViewController;
     AccountDataSource *playerAccount;
@@ -76,7 +76,7 @@ typedef struct {
     BOOL userEndMatch;
     BOOL isTryAgain;
 }
-@property(strong)id<DuelViewControllerDelegate> delegate;
+@property(strong)id<ActiveDuelViewControllerDelegate> delegate;
 @property(strong)id<DuelStartViewControllerDelegate> delegate2;
 @property(strong,nonatomic)DuelStartViewController *duelStartViewController;
 @property( weak, readwrite) UIViewController *parentVC;

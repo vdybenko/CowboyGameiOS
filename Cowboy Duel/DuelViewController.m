@@ -22,7 +22,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
 {
     self = [super initWithAccount:userAccount oponentAccount:pOponentAccount];
     if (self) {
-        time = randomTime;
+        time = randomTime + 5.0;
         startDuelTime = [NSDate timeIntervalSinceReferenceDate];
         BOOL notFirstStartBOOL = [[NSUserDefaults standardUserDefaults] boolForKey:@"DUEL_VIEW_NOT_FIRST"];
         if (notFirstStartBOOL) {
