@@ -16,14 +16,13 @@
 @synthesize playerName;
 @synthesize gold;
 @synthesize goldTitle;
-@synthesize rank;
-@synthesize rankTitle;
 @synthesize btnDuel;
 @synthesize status;
 @synthesize indicatorConnectin;
 @synthesize ribbon;
-
+@synthesize userAttackTitle;
 @synthesize userAtack;
+@synthesize userDefenseTitle;
 @synthesize userDefense;
 
 +(PlayerOnLineCell*) cell {
@@ -54,8 +53,14 @@
     rankLevelCode = nil;
     self.goldTitle.text = NSLocalizedString(@"Award:", "");
     self.goldTitle = nil;
-    self.rankTitle.text = NSLocalizedString(@"Rank:", "");
-    self.rankTitle = nil;
+    
+    self.userAttackTitle.text = NSLocalizedString(@"Attack:", "");
+    self.userAttackTitle = nil;
+    
+    self.userDefenseTitle.text = NSLocalizedString(@"Defense:", "");
+    self.userDefenseTitle = nil;
+    
+    
     [btnDuel setTitleByLabel:@"DUEL" withColor:[UIColor colorWithRed:0.95 green:0.86 blue:0.68 alpha:1.0] fontSize:18];
     [backGround setDinamicHeightBackground];
 }
@@ -66,9 +71,7 @@
     
     NSString *formattedNumberString = [numberFormatter stringFromNumber:[NSNumber numberWithInt:([player.money intValue]/100)*10]];
     self.gold.text=[NSString stringWithFormat:@"%@ $",formattedNumberString];
-    
-    NSString *nameOfRank=[NSString stringWithFormat:@"%@Rank",player.rank];
-    self.rank.text = NSLocalizedString(nameOfRank, @"");
+  
     NSLog(@"%@", player.status);
     if([player.status isEqualToString: @"A"]){
         self.status.text = NSLocalizedString(@"Available", @"");
@@ -88,19 +91,15 @@
     } else {
         [self.facebookAvatar setHidden:YES];
     }
-//    if (playerAccount.accountWeapon.dDamage!=0) {
-//        userAtack.text = [NSString stringWithFormat:@"+%d",playerAccount.accountWeapon.dDamage];
-//        userAtack.hidden = NO;
-//    }else{
-//    userAtack.hidden = YES;
-//}
+    NSLog(@"\nattack: %d\ndefense: %d", player.weapon, player.defense);
     
-//    if (playerAccount.accountDefenseValue!=0) {
-//        userDefense.text = [NSString stringWithFormat:@"+%d",playerAccount.accountDefenseValue];
-//        userDefense.hidden = NO;
-//    }else{
-//userDefense.hidden = YES;
-//}
+    userAtack.text = [NSString stringWithFormat:@"+%d",player.weapon];
+    userAtack.hidden = NO;
+    userAtack = nil;
+    
+    userDefense.text = [NSString stringWithFormat:@"+%d",player.defense];
+    userDefense.hidden = NO;
+    userDefense = nil;
 
     [self hideIndicatorConnectin];
 }

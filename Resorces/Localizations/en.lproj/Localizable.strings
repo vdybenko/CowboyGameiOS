@@ -305,6 +305,8 @@ You can upgrade this game right now through <b>iTunes Store</b>
 //added for PlayerOnlineCell.m:
 "Award:" = "Award:";
 "Rank:" = "Rank:";
+"Attack:" = "Attack: ";
+"Defense:"="Defense: ";
 
 //added for PlayersOnlineDataSource.m:
 "OnLine" = "OnLine";
