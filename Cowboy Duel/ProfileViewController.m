@@ -47,10 +47,10 @@ static const CGFloat timeToStandartTitles = 1.8;
     
     __weak IBOutlet UILabel *lbGoldCount;
     __weak IBOutlet UIImageView *lbGoldIcon;
-    __weak IBOutlet UIImageView *lbGoldIconBackground;
     
     __weak IBOutlet UILabel *lbWantedText;
     __weak IBOutlet UILabel *lbWantedTitle;
+    __weak IBOutlet UILabel *lbAvard;
     
     __weak IBOutlet UIButton *btnLogInFB;
     __weak IBOutlet UIButton *btnLogOutFB;
@@ -84,6 +84,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     NSNumberFormatter *numberFormatter;
     
     BOOL didDisappear;
+    BOOL needMoneyAnimation;
     
 //    First run
     int textIndex;
@@ -106,6 +107,7 @@ static const CGFloat timeToStandartTitles = 1.8;
 
     if (self) {
         needAnimation = NO;
+        needMoneyAnimation = YES;
         playerAccount=userAccount;
          
         loginViewController = [LoginAnimatedViewController sharedInstance]; 
@@ -149,6 +151,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     
     if (self) {
         needAnimation = NO;
+        needMoneyAnimation = NO;
         playerAccount=oponentAccount;
         
         numberFormatter = [[NSNumberFormatter alloc] init];
@@ -178,37 +181,6 @@ static const CGFloat timeToStandartTitles = 1.8;
         [tfFBName setFont: [UIFont fontWithName: @"DecreeNarrow" size:30]];
         tfFBName.text = [NSString stringWithFormat:@"\"%@\"",playerAccount.accountName];
         
-        NSString *nameOfRank=[NSString stringWithFormat:@"%dRank",playerAccount.accountLevel];
-        lbUserTitle.text = NSLocalizedString(nameOfRank, @"");
-        
-        CGRect frame;
-        
-        frame = lbGoldCount.frame;
-        frame.size.width = [lbGoldCount fitSizeToText:lbGoldCount].width;
-        lbGoldCount.frame = frame;
-        
-        frame = lbUserTitle.frame;
-        frame.size.width = [lbUserTitle fitSizeToText:lbUserTitle].width;
-        lbUserTitle.frame = frame;
-        
-        CGFloat allWidth = lbGoldCount.frame.size.width + lbGoldIcon.frame.size.width +2;
-        CGFloat xCentralPoint = (mainProfileView.frame.size.width - allWidth)/2;
-        frame = lbGoldIcon.frame;
-        frame.origin.x = xCentralPoint;
-        lbGoldIcon.frame = frame;
-        
-        allWidth = lbUserTitle.frame.size.width + ivCurrentRank.frame.size.width +2;
-        xCentralPoint = (mainProfileView.frame.size.width - allWidth)/2;
-        frame = ivCurrentRank.frame;
-        frame.origin.x = xCentralPoint;
-        ivCurrentRank.frame = frame;
-        
-        frame = lbGoldIconBackground.frame;
-        frame.origin.x = xCentralPoint-2;
-        lbGoldIconBackground.frame = frame;
-
-        [lbGoldCount dinamicAttachToView:lbGoldIcon withDirection:DirectionToAnimateRight];
-        [lbUserTitle dinamicAttachToView:ivCurrentRank withDirection:DirectionToAnimateRight];
     }
     return self;
 }
@@ -219,6 +191,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     
     if (self) {
         needAnimation = NO;
+        needMoneyAnimation = YES;
         playerAccount=userAccount;
         
         loginViewController = [LoginAnimatedViewController sharedInstance];
@@ -320,7 +293,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     ivPointsLine = nil;
     lbGoldCount = nil;
     lbGoldIcon = nil;
-    lbGoldIconBackground = nil;
+    lbAvard = nil;
     btnLogInFB = nil;
     btnLogOutFB = nil;
     btnLeaderboard = nil;
@@ -603,7 +576,9 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     
     lbPointsCountMain.text = [NSString stringWithFormat:@"%@/%@", [numberFormatter stringFromNumber:[NSNumber numberWithInt:playerAccount.accountPoints]], [[DuelRewardLogicController getStaticPointsForEachLevels] objectAtIndex:playerAccount.accountLevel]];
 
-    [self changePointsLine:curentPoints maxValue:maxPoints animated:needAnimation];
+    if (needMoneyAnimation) {
+        [self changePointsLine:curentPoints maxValue:maxPoints animated:needAnimation];
+    }
     
     DLog(@"Profile info points %d points to next level %d",playerAccount.accountPoints,(moneyForNextLevel-playerAccount.accountPoints));
 }else{

@@ -137,6 +137,7 @@ p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font
 
 //MainView of App
 "Saloon" = "SALOON";
+"Saloon2" = "PLAY";
 "Practice" = "PRACTICE";
 "Profile" = "PROFILE";
 "Feedback" = "Feedback";
@@ -241,7 +242,7 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "SoundButton" = "Turn on/off sound effects";
 "CONTINUE" = "CONTINUE";
 "WANTED" = "WANTED";
-"DOL" = "DEAD OR LIVE";
+"DOL" = "DEAD OR ALIVE";
 "ForBody" = "for the body of";
 
 //Titles for Users
@@ -249,7 +250,7 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "1Rank" = "Slave"; 
 "2Rank" = "Refugee"; 
 "3Rank" = "Free Man"; 
-"4Rank" = "Gunfighter"; 
+"4Rank" = "Gunfighter";
 "5Rank" = "Bounty Hunter Apprentice"; 
 "6Rank" = "Bounty Hunter"; 
 "7Rank" = "Lawman"; 
