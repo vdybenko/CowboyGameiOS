@@ -18,7 +18,7 @@ static const char *LIST_BOTS_URL = BASE_URL"users/get_user_data";
 @implementation AccountDataSource
 
 @synthesize money, accountName, teachingTimes, finalInfoTable, sessionID, accountID, accountDataSourceID, transactions, duels, achivments , glNumber,
- accountLevel,accountPoints,accountWins,accountDraws,accountBigestWin,removeAds,avatar,age,homeTown,friends,facebookName, bot;
+ accountLevel,accountPoints,accountWins,accountDraws,accountBigestWin,removeAds,avatar,age,homeTown,friends,facebookName, bot, activeDuel;
 
 @synthesize accountDefenseValue;
 @synthesize curentIdWeapon;

@@ -82,6 +82,7 @@
 		<string>wifi</string>
 		<string>accelerometer</string>
 		<string>peer-peer</string>
+		<string>location-services</string>
 	</array>
 	<key>UIStatusBarHidden</key>
 	<true/>

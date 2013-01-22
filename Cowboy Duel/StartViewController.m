@@ -27,6 +27,7 @@
 #import "DuelProductWinViewController.h"
 
 #import "FunPageViewController.h"
+#import "ActiveDuelViewController.h"
 
 #define kTwitterSettingsButtonIndex 0
 
@@ -77,6 +78,7 @@
     __weak IBOutlet UIButton *shareButton;
     __weak IBOutlet UIButton *helpButton;
     __weak IBOutlet UIButton *soundButton;
+    __weak IBOutlet UIButton *saloon2Button;
     
     __weak IBOutlet UIView *feedbackView;
     __weak IBOutlet UIView *shareView;
@@ -373,6 +375,11 @@ static StartViewController *sharedHelper = nil;
     duelButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
     duelButton.titleLabel.textAlignment = UITextAlignmentCenter;
     
+    [saloon2Button setTitle:NSLocalizedString(@"Saloon2", @"") forState:UIControlStateNormal];
+    [saloon2Button setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
+    saloon2Button.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
+    saloon2Button.titleLabel.textAlignment = UITextAlignmentCenter;
+    
     [profileButton setTitle:NSLocalizedString(@"Profile", @"") forState:UIControlStateNormal];
     [profileButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
     profileButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
@@ -472,6 +479,7 @@ static StartViewController *sharedHelper = nil;
     lbShareCancelBtn = nil;
     lbFeedbackButton = nil;
     lbShareButton = nil;
+    saloon2Button = nil;
     [super viewDidUnload];
 }
     
@@ -670,6 +678,7 @@ static StartViewController *sharedHelper = nil;
 
 -(void)duelButtonClick
 {
+    [playerAccount setActiveDuel:NO];
     [listOfItemsViewController setStatusOnLine:self.hostActive];
     if (self.navigationController.visibleViewController != listOfItemsViewController) {
         [self.navigationController pushViewController:listOfItemsViewController animated:YES];
@@ -701,6 +710,16 @@ static StartViewController *sharedHelper = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                         object:self
                                                       userInfo:[NSDictionary dictionaryWithObject:@"/profile_click" forKey:@"event"]];
+}
+
+
+- (IBAction)startActiveDuel:(id)sender {
+    [playerAccount setActiveDuel:YES];
+    [listOfItemsViewController setStatusOnLine:self.hostActive];
+    if (self.navigationController.visibleViewController != listOfItemsViewController) {
+        [self.navigationController pushViewController:listOfItemsViewController animated:YES];
+    }
+    
 }
 
 -(void)profileButtonClickWithOutAnimation;

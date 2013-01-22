@@ -22,6 +22,7 @@
 @property(nonatomic) NSInteger accountDraws; 
 @property(nonatomic) NSInteger accountBigestWin; 
 @property(nonatomic) NSInteger removeAds;
+@property(nonatomic) BOOL activeDuel;
 
 @property(nonatomic) NSInteger accountDefenseValue;
 @property(nonatomic) NSInteger curentIdWeapon;
