@@ -13,6 +13,7 @@
 #import "StartViewController.h"
 #import "TestAppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "ActiveDuelViewController.h"
 
 #define kFacebookAppId @"284932561559672"
 NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/first/";
@@ -27,7 +28,8 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
     __weak IBOutlet UIImageView *backgroundView;
     __weak IBOutlet UIImageView *boardImage;
     __weak IBOutlet UIImageView *tryAgainImage;
-    __weak IBOutlet UIButton *payButton;
+//    __weak IBOutlet UIButton *payButton;
+    __weak IBOutlet UIButton *practiceButton;
     __weak IBOutlet UILabel *animetedText;
     __weak IBOutlet UIButton *loginFBbutton;
     __weak IBOutlet UIView *tryAgainView;
@@ -36,7 +38,8 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
     __weak IBOutlet BEAnimationView *heatImage;
     __weak IBOutlet UIImageView *headImage;
     __weak IBOutlet UIImageView *noseImage;
-    __weak IBOutlet UILabel *donateLable;
+//    __weak IBOutlet UILabel *donateLable;
+    __weak IBOutlet UILabel *practiceLable;
     __weak IBOutlet UILabel *loginLable;
     __weak IBOutlet UILabel *tryAgainLable;
     __weak IBOutlet UIButton *tryAgainButton;
@@ -134,8 +137,8 @@ static LoginAnimatedViewController *sharedHelper = nil;
     loginLable.text = NSLocalizedString(@"LOGIN", @"");
     loginLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
     
-    donateLable.text = NSLocalizedString(@"DONATE 1$", @"");
-    donateLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
+    practiceLable.text = NSLocalizedString(@"PRACTICE", @"");
+    practiceLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
     
     tryAgainLable.text = NSLocalizedString(@"TRY AGAIN", @"");
     tryAgainLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
@@ -216,7 +219,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
     timer = nil;
     textsContainer = nil;
     player = nil;
-    payButton = nil;
+    practiceButton = nil;
     animetedText = nil;
     loginFBbutton = nil;
     tryAgainView = nil;
@@ -225,7 +228,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
     heatImage = nil;
     headImage = nil;
     noseImage = nil;
-    donateLable = nil;
+    practiceLable = nil;
     loginLable = nil;
     tryAgainLable = nil;
     tryAgainButton = nil;
@@ -270,8 +273,8 @@ static LoginAnimatedViewController *sharedHelper = nil;
                          if (self.textIndex<8){
 
                              if (self.textIndex==6) {                 ////"Pay for me $1.....
-                                 [self scaleButton:payButton];   //Scale 1$
-                                 [self scaleButton:donateLable];
+                                 [self scaleButton:practiceButton];   //Scale 1$
+                                 [self scaleButton:practiceLable];
 
                              }
                              if (self.textIndex==7) {                 ////...or give me your ID"
@@ -326,6 +329,9 @@ static LoginAnimatedViewController *sharedHelper = nil;
     //[self.tryAgainView setHidden:NO];
 }
 
+#pragma mark -
+#pragma mark IBActions
+
 - (IBAction)tryAgainButtonClick:(id)sender
 {
     tryAgain = NO;
@@ -365,7 +371,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
                                                         object:self
                                                       userInfo:[NSDictionary dictionaryWithObject:@"/first_login_again" forKey:@"event"]];
 }
-
+/*
 - (IBAction)donateButtonClick:(id)sender {
     stDonate = [NSMutableString string];
     [self.player stop];
@@ -399,6 +405,16 @@ static LoginAnimatedViewController *sharedHelper = nil;
 //														object:self
 //													  userInfo:[NSDictionary dictionaryWithObject:@"/donate_click" forKey:@"event"]];
 }
+*/
+
+- (IBAction)practiceButtonClick:(id)sender {
+    int randomTime = arc4random() % 6;
+    AccountDataSource *oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
+    [oponentAccount setAccountName:@"TestName"];
+    ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:playerAccount oponentAccount:oponentAccount];
+    [self.navigationController pushViewController:activeDuelViewController animated:YES];
+}
+
 
 - (IBAction)loginButtonClick:(id)sender {
 //    [self.player stop];
@@ -570,9 +586,9 @@ static LoginAnimatedViewController *sharedHelper = nil;
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         payment = NO;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self donateButtonClick:nil];
-        });
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self donateButtonClick:nil];
+//        });
     }
 }
 
@@ -645,7 +661,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
                                                       userInfo:[NSDictionary dictionaryWithObject:stDonate forKey:@"event"]];
     
     payment = NO;
-    [self donateButtonClick:nil];
+//    [self donateButtonClick:nil];
     
 }
 
@@ -668,4 +684,9 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [heatImage animateWithType:[NSNumber numberWithInt:HAT]];
 }
 
+- (void)viewDidUnload {
+    practiceButton = nil;
+    practiceLable = nil;
+    [super viewDidUnload];
+}
 @end
