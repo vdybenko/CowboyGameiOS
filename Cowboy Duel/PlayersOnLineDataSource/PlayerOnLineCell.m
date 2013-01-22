@@ -15,7 +15,9 @@
 @synthesize icon;
 @synthesize playerName;
 @synthesize gold;
+@synthesize goldTitle;
 @synthesize rank;
+@synthesize rankTitle;
 @synthesize btnDuel;
 @synthesize status;
 @synthesize indicatorConnectin;
@@ -50,7 +52,10 @@
     [ribbon addSubview:rankLevelCode];
     
     rankLevelCode = nil;
-    
+    self.goldTitle.text = NSLocalizedString(@"Award:", "");
+    self.goldTitle = nil;
+    self.rankTitle.text = NSLocalizedString(@"Rank:", "");
+    self.rankTitle = nil;
     [btnDuel setTitleByLabel:@"DUEL" withColor:[UIColor colorWithRed:0.95 green:0.86 blue:0.68 alpha:1.0] fontSize:18];
     [backGround setDinamicHeightBackground];
 }
@@ -59,12 +64,12 @@
 {    
     self.playerName.text=player.displayName;
     
-    NSString *formattedNumberString = [numberFormatter stringFromNumber:player.money];
-    self.gold.text=[NSString stringWithFormat:@"money %@",formattedNumberString];
+    NSString *formattedNumberString = [numberFormatter stringFromNumber:[NSNumber numberWithInt:([player.money intValue]/100)*10]];
+    self.gold.text=[NSString stringWithFormat:@"%@ $",formattedNumberString];
     
     NSString *nameOfRank=[NSString stringWithFormat:@"%@Rank",player.rank];
     self.rank.text = NSLocalizedString(nameOfRank, @"");
-  NSLog(@"%@", player.status);
+    NSLog(@"%@", player.status);
     if([player.status isEqualToString: @"A"]){
         self.status.text = NSLocalizedString(@"Available", @"");
         self.status.textColor = [UIColor blackColor];

@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1536</int>
-		<string key="IBDocument.SystemVersion">11G63</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2843</string>
-		<string key="IBDocument.AppKitVersion">1138.51</string>
+		<string key="IBDocument.SystemVersion">11E53</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
+		<string key="IBDocument.AppKitVersion">1138.47</string>
 		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -75,7 +75,7 @@
 								<string key="NSFrame">{{33, 21}, {42, 42}}</string>
 								<reference key="NSSuperview" ref="643975086"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="122732070"/>
+								<reference key="NSNextKeyView" ref="1060316597"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="IBUIBackgroundColor" ref="515096031"/>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -86,7 +86,7 @@
 								<string key="NSFrame">{{32, 19}, {46, 46}}</string>
 								<reference key="NSSuperview" ref="643975086"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="684150605"/>
+								<reference key="NSNextKeyView" ref="122732070"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<int key="IBUIContentMode">1</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -117,7 +117,7 @@
 								<string key="NSFrame">{{32, 60}, {22, 21}}</string>
 								<reference key="NSSuperview" ref="643975086"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="1060316597"/>
+								<reference key="NSNextKeyView" ref="684150605"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
@@ -205,7 +205,7 @@
 							<object class="IBUILabel" id="156543104">
 								<reference key="NSNextResponder" ref="643975086"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{84, 39}, {28, 11}}</string>
+								<string key="NSFrame">{{84, 39}, {36, 11}}</string>
 								<reference key="NSSuperview" ref="643975086"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="36475871"/>
@@ -215,7 +215,7 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">Gold:</string>
+								<string key="IBUIText">Award:</string>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MC42IDAuNTI1NDkwMTk2MSAwLjQxOTYwNzg0MzEAA</bytes>
@@ -236,7 +236,7 @@
 							<object class="IBUILabel" id="36475871">
 								<reference key="NSNextResponder" ref="643975086"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{112, 39}, {105, 11}}</string>
+								<string key="NSFrame">{{119, 39}, {96, 11}}</string>
 								<reference key="NSSuperview" ref="643975086"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="321017174"/>
@@ -284,7 +284,7 @@
 							<object class="IBUILabel" id="1001969312">
 								<reference key="NSNextResponder" ref="643975086"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{112, 54}, {105, 11}}</string>
+								<string key="NSFrame">{{119, 54}, {96, 11}}</string>
 								<reference key="NSSuperview" ref="643975086"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="725272323"/>
@@ -311,6 +311,7 @@
 								<string key="NSFrame">{{217, 50}, {71, 11}}</string>
 								<reference key="NSSuperview" ref="643975086"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -501,6 +502,22 @@
 					</object>
 					<int key="connectionID">58</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">goldTitle</string>
+						<reference key="source" ref="886287858"/>
+						<reference key="destination" ref="156543104"/>
+					</object>
+					<int key="connectionID">59</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">rankTitle</string>
+						<reference key="source" ref="886287858"/>
+						<reference key="destination" ref="406391544"/>
+					</object>
+					<int key="connectionID">61</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -661,7 +678,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">58</int>
+			<int key="maxID">61</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -681,10 +698,12 @@
 						<string key="btnDuel">UIButton</string>
 						<string key="facebookAvatar">FBProfilePictureView</string>
 						<string key="gold">UILabel</string>
+						<string key="goldTitle">UILabel</string>
 						<string key="icon">UIImageView</string>
 						<string key="indicatorConnectin">UIActivityIndicatorView</string>
 						<string key="playerName">UILabel</string>
 						<string key="rank">UILabel</string>
+						<string key="rankTitle">UILabel</string>
 						<string key="ribbon">UIImageView</string>
 						<string key="status">UILabel</string>
 						<string key="userAtack">UILabel</string>
@@ -707,6 +726,10 @@
 							<string key="name">gold</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="goldTitle">
+							<string key="name">goldTitle</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="icon">
 							<string key="name">icon</string>
 							<string key="candidateClassName">UIImageView</string>
@@ -721,6 +744,10 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="rank">
 							<string key="name">rank</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="rankTitle">
+							<string key="name">rankTitle</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="ribbon">
