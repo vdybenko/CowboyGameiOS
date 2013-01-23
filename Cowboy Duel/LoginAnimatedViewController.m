@@ -408,11 +408,24 @@ static LoginAnimatedViewController *sharedHelper = nil;
 */
 
 - (IBAction)practiceButtonClick:(id)sender {
-    int randomTime = arc4random() % 6;
+    //stop animations
+    animationPause = YES;
+    heatImage.stopAnimation = YES;
+    whiskersImage.stopAnimation = YES;
+    guillotineImage.stopAnimation = YES;
+    
+    //creating ActiveDuelVC
+    int randomTime = arc4random() % 6+5;
     AccountDataSource *oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
-    [oponentAccount setAccountName:@"TestName"];
     ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:playerAccount oponentAccount:oponentAccount];
     [self.navigationController pushViewController:activeDuelViewController animated:YES];
+    
+    SSConnection *connection = [SSConnection sharedInstance];
+    [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/duel_teaching" forKey:@"event"]];
 }
 
 
