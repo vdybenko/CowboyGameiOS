@@ -620,9 +620,9 @@ static GameCenterViewController *gameCenterViewController;
                 duelStartViewController.tryAgain = YES;
                 duelStartViewController.oponentAvailable  = YES;
                 if ([parentVC.navigationController.viewControllers containsObject:duelStartViewController])
-                    [parentVC.navigationController pushViewController:activeDuelViewController animated:YES];
+                    [parentVC.navigationController popToViewController:duelStartViewController animated:YES];
                 else{
-                     [parentVC.navigationController pushViewController:activeDuelViewController animated:YES];
+                     [parentVC.navigationController pushViewController:duelStartViewController animated:YES];
                 }
                 [duelStartViewController setMessageTry];
             }  

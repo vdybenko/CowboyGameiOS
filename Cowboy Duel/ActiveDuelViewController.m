@@ -51,6 +51,8 @@
     
     BOOL foll;
     BOOL duelTimerEnd;
+    
+    ActivityIndicatorView *activityIndicatorView;
 }
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *floatView;
@@ -188,6 +190,12 @@
     
     [helpPracticeView setDinamicHeightBackground];
     [self.view addSubview:helpPracticeView];
+    
+    activityIndicatorView = [[ActivityIndicatorView alloc] init];
+    frame = activityIndicatorView.frame;
+    frame.origin = CGPointMake(0,0);
+    activityIndicatorView.frame=frame;
+    [self.view addSubview:activityIndicatorView];
 
 
 }
@@ -219,6 +227,8 @@
     
     ARView *arView = (ARView *)self.view;
 	[arView start];
+    
+    [activityIndicatorView hideView];
 
 }
 
@@ -361,6 +371,10 @@
         self.oponentLiveImageView.frame = frame;
         
         if(!shotCountBullet) {
+            
+            [activityIndicatorView setText:@""];
+            [activityIndicatorView showView];
+            
             if(!delegate)
             {
                 DLog(@"Kill!!!");
@@ -376,13 +390,8 @@
                 }
                 
                 FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime - time * 1000) andOponentTime:opponentTime andGameCenterController:self andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
-                //                [activityIndicatorView setText:NSLocalizedString(@"FOLL", @"")];
- //               [activityIndicatorView setText:@""];
- //               [activityIndicatorView showView];
+                
                 [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
-                //[NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(dismissWithController:) userInfo:finalViewController repeats:NO];
-                //                [button setEnabled:NO];
-                //finalViewController = nil;
                 [timer invalidate];
             } 
             else
