@@ -39,13 +39,6 @@
 
 -(void)matchStartedTry;
 
--(void)increaseMutchNumberLose;
--(void)increaseMutchNumber;
--(void)increaseMutchNumberWin;
--(int)fMutchNumberLose;
--(int)fMutchNumber;
--(int)fMutchNumberWin;
-
 -(void)duelCancel;
 -(void)duelRunAway;
 

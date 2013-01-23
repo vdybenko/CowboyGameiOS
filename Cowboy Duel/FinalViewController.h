@@ -10,8 +10,6 @@
 #import "DuelViewController.h"
 #import "DuelStartViewController.h"
 #import "AccountDataSource.h"
-//#import "BluetoothViewController.h"
-#import "ResoultDataSource.h"
 #import "ValidationUtils.h"
 #import "CDTransaction.h"
 #import "CDDuel.h"
@@ -19,7 +17,6 @@
 #import "TeachingViewController.h"
 #import "SBJSON.h"
 #import "JSON.h"
-//#import "ASIFormDataRequest.h"
 #import "StartViewController.h"
 #import "UIButton+Image+Title.h"
 #import "UIView+Dinamic_BackGround.h"
@@ -27,7 +24,6 @@
 
 #import "ValidationUtils.h"
 
-//#import "CongratulationViewController.h"
 
 #import "LevelCongratViewController.h"
 #import "MoneyCongratViewController.h"
@@ -44,11 +40,8 @@
     int oldMoney;
     int oldMoneyForAnimation;
   
-    int fMutchNumberWin;
-    int fMutchNumberLose;
     int minUserTime;
     int userTime;
-    ResoultDataSource *resoultDataSource;
       
     NSString *stGA;
     NSString *falseLabel;
@@ -73,14 +66,11 @@
     NSArray *_pontsForLose;
     
     __weak IBOutlet UIButton *backButton;
-    __weak IBOutlet UIButton *nextButton;
 
-    __weak IBOutlet UITableView *resultTable;
     
     __weak IBOutlet UILabel *lblNamePlayer;
     __weak IBOutlet UILabel *lblNameOponnent;
     
-    __weak IBOutlet UILabel *lblResulDescription;
   
     __weak IBOutlet UIView *ivGoldCoin;
     __weak IBOutlet UIImageView *ivBlueLine;
@@ -97,11 +87,9 @@
     UIImageView *loserMoneyImg;
   
     __weak IBOutlet UIView *view;
-    __weak IBOutlet UIView *statView;
     
     __weak IBOutlet UILabel *lbBack;
     __weak IBOutlet UILabel *lbTryAgain;
-    __weak IBOutlet UILabel *lbNextRound;
     
     
     __weak IBOutlet FXLabel *lblGold;
@@ -110,10 +98,9 @@
     __weak IBOutlet UIView *goldPointBgView;
     __weak IBOutlet UILabel *lblGoldTitle;
 }
-@property(weak)id<DuelViewControllerDelegate> delegate;
+@property(weak)id<ActiveDuelViewControllerDelegate> delegate;
 
 @property (weak, nonatomic) IBOutlet UIButton *tryButton;
-@property (weak, nonatomic) IBOutlet UIView *statView;
 
 -(id)initWithUserTime:(int)userTimePar
        andOponentTime:(int)oponentTime

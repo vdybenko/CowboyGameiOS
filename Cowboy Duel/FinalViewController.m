@@ -7,7 +7,6 @@
 //
 
 #import "FinalViewController.h"
-//#import "BluetoothViewController.h"
 #import "TeachingViewController.h"
 #import "GameCenterViewController.h"
 #import "StartViewController.h"
@@ -22,6 +21,7 @@
 {
     BOOL tryButtonEnabled;
     BOOL isDuelWinWatched;
+    BOOL userWon;
 }
 -(void)winScene;
 -(void)loseScene;
@@ -38,7 +38,6 @@
 @implementation FinalViewController
 
 @synthesize delegate;
-@synthesize statView;
 @synthesize tryButton;
 
 #pragma mark
@@ -101,122 +100,50 @@
         
         duel = [[CDDuel alloc] init];
         duel.dOpponentId = [[NSString alloc] initWithFormat:@""];
-      
         
-        resoultDataSource = [[ResoultDataSource alloc] init];
         self.delegate = delegateController;
         
         DLog(@"U %d O %d", userTime, oponentTime);
         
         if ((userTime != 0)&& (userTime != 999999) && (userTime < oponentTime)&& (oponentTime != 999999)) {
-            [delegate increaseMutchNumberWin];
-            // added               
             [follPlayerFinal setVolume:0.2];
-            // above               
-            [delegate increaseMutchNumber];
-            resoultDataSource.result = YES;
+            userWon = YES;
             
         }
         else
             if ((userTime == 0) && (oponentTime != 0) && (oponentTime != 999999)&& (userTime != 999999)) {
-                [delegate increaseMutchNumberLose];
-                [delegate increaseMutchNumber];
-                resoultDataSource.result = NO;
+                userWon = NO;
               
             }
         
         if ((oponentTime != 0) && (oponentTime != 999999) && (userTime > oponentTime)&& (userTime != 999999)) {
-            [delegate increaseMutchNumberLose];
-            [delegate increaseMutchNumber];
-            resoultDataSource.result = NO;              
+            userWon = NO;              
         } 
         else
             if ((userTime != 0) && (userTime != 999999) && (oponentTime == 0)&& (oponentTime != 999999)) {
-                [delegate increaseMutchNumberWin];
-                // added               
                 [follPlayerFinal setVolume:0.2];
-                // above               
-                [delegate increaseMutchNumber];
-                resoultDataSource.result = YES;
+                userWon = YES;
             }
         
-        resoultDataSource.foll = NO;
-        resoultDataSource.deadHeat = NO;
         falseLabel =  NSLocalizedString(@"False", @"");
         foll = NO;
         
         if ((userTime == 999999) && (oponentTime != 999999)) {
-            falseLabel = NSLocalizedString(@"False", @"") ;
-            [delegate increaseMutchNumberLose];
-            [delegate increaseMutchNumber];
-            resoultDataSource.foll = YES;
-            resoultDataSource.result = YES;
+            userWon = YES;
         }
         if ((oponentTime == 999999) && (userTime != 999999)){ 
-            falseLabel =  NSLocalizedString(@"Falses", @"");
-            [delegate increaseMutchNumberWin];
-            // added               
             [follPlayerFinal setVolume:0.2];
-            // above               
-            [delegate increaseMutchNumber];
-            resoultDataSource.foll = YES;
-            resoultDataSource.result = NO;
-            DLog(@"Oponent fouled");
+            userWon = NO;
         }
         if ((userTime == 999999) && (oponentTime == 999999))
         {
-            //falseLabel =  NSLocalizedString(@"Bouth false", @"");
-            resoultDataSource.deadHeat = YES;
-            resoultDataSource.foll = YES;
-            resoultDataSource.result = YES;
+            userWon = YES;
         }
-        
-        fMutchNumberWin = [delegate fMutchNumberWin];
-        DLog(@"win %d",fMutchNumberWin);
-        fMutchNumberLose = [delegate fMutchNumberLose];
-        resoultDataSource.mutchNumber = [delegate fMutchNumber];
-        resoultDataSource.deltaTime = userTime;
-        resoultDataSource.UserTime= userTime;  
-        
-        [playerAccount.finalInfoTable addObject:resoultDataSource];
-        
-        if((resoultDataSource.mutchNumber!=3)&&(resoultDataSource.mutchNumber!=0)) {
-            NSString *resultOfMutch;
-            if (resoultDataSource.result) {
                 
-                if(!resoultDataSource.foll){
-                    resultOfMutch=@"Win";
-                }else{
-                    resultOfMutch=@"Fouled_User";
-                }
-            }
-            else {
-                if(!resoultDataSource.foll){
-                    resultOfMutch=@"Lost";
-                }else{
-                    resultOfMutch=@"Fouled_Oponent";
-                }
-                
-            }
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
-                                                                object:self
-                                                              userInfo:
-             [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@match_%d(%@)",stGA,resoultDataSource.mutchNumber,resultOfMutch] forKey:@"event"]];
-            
-        }
-        
         [player setNumberOfLoops:999];
         
         [follPlayerFinal play];
         
-        if (!lastDuel) {
-            NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Back2.mp3", [[NSBundle mainBundle] resourcePath]]];
-            NSError *error;
-            player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-            [player play];
-            [player stop];
-        }
     }
     return self;
 }
@@ -227,26 +154,13 @@
 }
 
 -(void) viewDidLoad {
-     
-    [lblResulDescription setFont: [UIFont fontWithName: @"DecreeNarrow" size:30]];
-       
     [tryButton setTitleByLabel:@"TRY"];
     UIColor *colorOfButtons=[UIColor colorWithRed:0.95 green:0.86 blue:0.68 alpha:1.0];
     [tryButton changeColorOfTitleByLabel:colorOfButtons];
     tryButton.enabled = tryButtonEnabled;
     
-    [nextButton setTitleByLabel:@"NEXTR"];
-    if (lastDuel)
-        nextButton.hidden = YES;
-    else
-        nextButton.hidden = NO;
-    [nextButton changeColorOfTitleByLabel:colorOfButtons];
-    
     [backButton setTitleByLabel:@"CANCEL_DUEL"];
     [backButton changeColorOfTitleByLabel:colorOfButtons ];
-    
-    resultTable.delegate = self;
-    resultTable.dataSource = self;
     
     if (playerAccount.accountName != nil)
         lblNamePlayer.text = playerAccount.accountName;
@@ -257,20 +171,11 @@
     
     [lblNameOponnent setFont: [UIFont fontWithName: @"MyriadPro-Semibold" size:20]];
     
-    if (fMutchNumberWin == 2) {
-        [self winScene];
-    }
-    if (fMutchNumberLose == 2) {
-        [self loseScene];
-    }
-
-    if (lastDuel) {
-        [self lastScene];
-        [player play];
-    }
-    else {
-        viewLastSceneAnimation.hidden=YES;
-    }
+    if (userWon) [self winScene];
+    else [self loseScene];
+    
+    [self lastScene];
+    [player play];
     activityIndicatorView = [[ActivityIndicatorView alloc] init];
     
     CGRect frame=activityIndicatorView.frame;
@@ -287,8 +192,6 @@
     if (firstRun) {
         firstRun = NO; 
     }
-    
-    [statView setDinamicHeightBackground];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -301,9 +204,7 @@
     viewLastSceneAnimation.hidden=NO;
     [player stop];
     
-    if (lastDuel){
-        [playerAccount loadWeapon];
-    }
+    [playerAccount loadWeapon];
 }
 
 -(void)releaseComponents
@@ -311,7 +212,6 @@
     activityIndicatorView = nil;
     playerAccount = nil;
     oponentAccount = nil;
-    resoultDataSource = nil;
     stGA = nil;
     falseLabel = nil;
     player = nil;
@@ -322,11 +222,8 @@
     _pontsForWin = nil;
     _pontsForLose = nil;
     backButton = nil;
-    nextButton = nil;
-    resultTable = nil;
     lblNamePlayer = nil;
     lblNameOponnent = nil;
-    lblResulDescription = nil;
     ivGoldCoin = nil;
     ivBlueLine = nil;
     ivCurrentRank = nil;
@@ -339,10 +236,8 @@
     winnerImg2 = nil;
     loserMoneyImg = nil;
     view = nil;
-    statView = nil;
     lbBack = nil;
     lbTryAgain = nil;
-    lbNextRound = nil;
     lblGold = nil;
     gameStatusLable = nil;
     lblPoints = nil;
@@ -386,7 +281,6 @@
         
     }else{
         if (!teaching||duelWithBotCheck) {     
-            fMutchNumberLose = 2;
             [self loseScene];
             [self lastScene];
 
@@ -395,10 +289,7 @@
             
             runAway=YES;
             runAwayGood=NO;
-            resoultDataSource = [[ResoultDataSource alloc] init];
-            [playerAccount.finalInfoTable addObject:resoultDataSource];
-            [resultTable reloadData];
-            
+                        
             [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                                 object:self
                                                               userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@%@",stGA,@"run_away"] forKey:@"event"]];
@@ -414,32 +305,12 @@
 -(void)runAway
 {
     DLog(@"Run away oponent");
-    fMutchNumberLose = 3;
     [self winScene];
     [self lastScene];
     runAway=YES;
     runAwayGood=YES;
-    resoultDataSource = [[ResoultDataSource alloc] init];
-    [playerAccount.finalInfoTable addObject:resoultDataSource];
-    [resultTable reloadData];
 }
 
--(IBAction)nextButtonClick:(id)sender
-{
-    [activityIndicatorView showView];
-    if(teaching)
-    {
-        if ((fMutchNumberWin != 2)&&(fMutchNumberLose != 2)) 
-            [self.navigationController popViewControllerAnimated:YES];
-    }
-    else
-    {
-        if ([delegate respondsToSelector:@selector(nextDuelStart)])
-        {
-            [delegate nextDuelStart];
-        }
-    }
-}
 
 -(IBAction)tryButtonClick:(id)sender
 {
@@ -507,16 +378,6 @@
             playerAccount.money=0;
         }
         
-        for (int i=0; i<[playerAccount.finalInfoTable count]; i++) {
-            resoultDataSource = [playerAccount.finalInfoTable objectAtIndex:i];
-            if(i==0){
-                minUserTime=resoultDataSource.UserTime;
-            }else{
-                if (minUserTime>resoultDataSource.UserTime) {
-                    minUserTime=resoultDataSource.UserTime;
-                }
-            }
-        }
         [self increaseLoseCount];
         
         DLog(@"Oponent Win - User money %d Oponent money %d", playerAccount.money, oponentAccount.money);
@@ -622,18 +483,6 @@
         
         [playerAccount saveMoney];
         
-        
-        for (int i=0; i<[playerAccount.finalInfoTable count]; i++) {
-            resoultDataSource = [playerAccount.finalInfoTable objectAtIndex:i];
-            if(i==0){
-                minUserTime=resoultDataSource.UserTime;
-            }else{
-                if (minUserTime>resoultDataSource.UserTime) {
-                    minUserTime=resoultDataSource.UserTime;
-                }
-            }
-        }
-
         [self increaseWinCount];
         
        pointsForMatch=[self getPointsForWin];
@@ -679,11 +528,9 @@
     lblGold.innerShadowOffset=CGSizeMake(1.0, 1.0);
     lblGold.shadowBlur = 1.0;
     
-    [statView setHidden:YES];
     [goldPointBgView setDinamicHeightBackground];
     viewLastSceneAnimation.hidden=NO;
     
-    [nextButton setHidden:YES];
     [tryButton setHidden:NO];
     [backButton changeTitleByLabel:@"BACK"];
     
@@ -745,7 +592,7 @@
             reachNewLevel=NO;
         }
 
-        if (fMutchNumberLose != 2) {
+        if (userWon) {
             if ((oldMoney<500)&&(playerAccount.money>=500)&&(playerAccount.money<1000)) {
                 NSString *moneyText=[NSString stringWithFormat:@"%d",playerAccount.money];
                 [self showMessageOfMoreMoney:playerAccount.money withLabel:moneyText];
@@ -778,7 +625,7 @@
         name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel+1];
         ivNextRank.image = [UIImage imageNamed:name];
     }
-    if (fMutchNumberLose == 2) {
+    if (!userWon) {
         [self loseAnimation];
     }
     else {
@@ -788,132 +635,6 @@
     }
     [self.view bringSubviewToFront:activityIndicatorView];
     
-//    if (duelWithBotCheck) {
-//        int randomTime = (arc4random() % 1);
-//        if (randomTime==0) {
-//            [self performSelector:@selector(startBotDuelTryAgain) withObject:self afterDelay:5.0];
-//        }
-//    }
-}
-
-#pragma mark -
-#pragma mark Table Data Source Methods
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)aTableView 
-{ 
-	return 1; 
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-	return [playerAccount.finalInfoTable count];
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCellStyle style = UITableViewCellStyleDefault;
-    NSString *cellType = @"Default";
-    
-    ResoultDataSource *rDataSource = [[ResoultDataSource alloc] init];
-    rDataSource = [playerAccount.finalInfoTable objectAtIndex:indexPath.row];
-    
-    UILabel *customText;
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellType];
-    if(!cell)
-    {
-        cell = [[UITableViewCell alloc]initWithStyle:style reuseIdentifier:cellType];
-        [cell.textLabel setFont: [UIFont fontWithName: @"DecreeNarrow" size:21]];
-        [cell.textLabel setTextColor:[[UIColor alloc] initWithRed:0.378 green:0.265 blue:0.184 alpha:1]];
-        
-        customText=[[UILabel alloc] initWithFrame:CGRectMake(tableView.frame.size.width-100, 8, 100,20)];
-        [customText setBackgroundColor:[UIColor clearColor]];
-        [customText setFont: [UIFont fontWithName: @"DecreeNarrow" size:21]];
-        [customText setTextColor:[[UIColor alloc] initWithRed:0.378 green:0.265 blue:0.184 alpha:1]];
-        [customText setTextAlignment:UITextAlignmentRight];
-        [customText setTag:TAG_TEXT];
-        [customText setNumberOfLines:1];
-        [cell.contentView addSubview:customText];   
-
-    }else {
-        customText=(UILabel*)[cell viewWithTag:TAG_TEXT];
-    }
-    
-    if (fMutchNumberLose == 2) {
-        lblResulDescription.text=NSLocalizedString(@"lose", @"");
-    }
-    else if (fMutchNumberWin == 2){
-        lblResulDescription.text=NSLocalizedString(@"win", @"");
-    } else
-    lblResulDescription.text=[NSString stringWithFormat:@"%@ %d",NSLocalizedString(@"Round", @""),[playerAccount.finalInfoTable count]];
-    
-    if (rDataSource.result) {
-        
-        if(!rDataSource.foll){
-            cell.imageView.image = [UIImage imageNamed:@"fin_img_table_win_new.png"];
-            cell.textLabel.text = [NSString stringWithFormat:@"%d.%d", abs(rDataSource.deltaTime / 1000), abs(rDataSource.deltaTime % 1000)];
-            
-            NSString *text=NSLocalizedString(@"win", @"");
-            customText.text=[text uppercaseString];
-        }else{
-            if (!rDataSource.deadHeat) {
-                cell.imageView.image = [UIImage imageNamed:@"fin_img_table_lose_new.png"];
-                cell.textLabel.text = NSLocalizedString(@"False", @"");
-                
-                NSString *text=NSLocalizedString(@"You lost", @"");
-                customText.text=[text uppercaseString];
-            }
-            else {
-                cell.imageView.image = [UIImage imageNamed:@"fin_img_table_lose_new.png"];
-                cell.textLabel.text = NSLocalizedString(@"Bouth false", @"");
-
-            }
-            
-
-        }
-    }
-    if (!rDataSource.result) {
-        if(!rDataSource.foll){
-            cell.imageView.image = [UIImage imageNamed:@"fin_img_table_lose_new.png"];
-            cell.textLabel.text = [NSString stringWithFormat:@"%d.%d", abs(rDataSource.deltaTime / 1000), abs(rDataSource.deltaTime % 1000)];
-            
-            NSString *text=NSLocalizedString(@"You lost", @"");
-            customText.text=[text uppercaseString];
-        }else{
-            cell.imageView.image = [UIImage imageNamed:@"fin_img_table_win_new.png"];
-            cell.textLabel.text = NSLocalizedString(@"Falses", @"");
-            
-            NSString *text=NSLocalizedString(@"win", @"");
-            customText.text=[text uppercaseString];
-        }
-        
-    }
-    [cell.textLabel.text uppercaseString];
-    
-    NSInteger sectionRows = [tableView numberOfRowsInSection:[indexPath section]];
-	NSInteger row = [indexPath row];
-    if (runAway && (row == (sectionRows-1))){
-        if (runAwayGood) {
-            cell.imageView.image = [UIImage imageNamed:@"fin_img_table_win_new.png"];
-            cell.textLabel.text = NSLocalizedString(@"TB_RUN_AWAY_GOOD", @"");
-          
-            NSString *text=NSLocalizedString(@"win", @"");
-            customText.text=[text uppercaseString];
-
-        }else{
-            cell.imageView.image = [UIImage imageNamed:@"fin_img_table_lose_new.png"];
-            cell.textLabel.text = NSLocalizedString(@"TB_RUN_AWAY", @"");
-        }
-    }
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    
-    return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 36; // your dynamic height...
 }
 
 #pragma mark -
@@ -1021,12 +742,12 @@
 -(void)prepeareForWinScene;
 {
     tryButtonEnabled = NO;
-    fMutchNumberWin = 2;
+    userWon = YES;
 }
 
 -(void)prepeareForLoseScene{
     tryButtonEnabled = NO;
-    fMutchNumberLose = 2;
+    userWon = NO;
 }
 
 -(void)loseAnimation
@@ -1148,10 +869,10 @@
   //Blue line animation:
   NSArray *array=[DuelRewardLogicController getStaticPointsForEachLevels];
   if (playerAccount.accountLevel < kCountOfLevelsMinimal || playerAccount.accountLevel > kCountOfLevels ){
-    [playerAccount setAccountLevel:10];
+    [playerAccount setAccountLevel:kCountOfLevels];
   }
   NSInteger num = playerAccount.accountLevel;
-  int  moneyForNextLevel=(playerAccount.accountLevel != kCountOfLevels)? [[array objectAtIndex:num] intValue]:playerAccount.accountPoints+1000;
+  int  moneyForNextLevel=(playerAccount.accountLevel != kCountOfLevels) ? [[array objectAtIndex:num] intValue]:playerAccount.accountPoints+1000;
   int moneyForPrewLevel;
   if (playerAccount.accountLevel==kCountOfLevelsMinimal) {
     moneyForPrewLevel = 0;
@@ -1302,10 +1023,8 @@
 
 
 - (void)viewDidUnload {
-    statView = nil;
     lbBack = nil;
     lbTryAgain = nil;
-    lbNextRound = nil;
     lblGold = nil;
     gameStatusLable = nil;
     lblPoints = nil;
@@ -1363,7 +1082,6 @@
 
 -(void)changePointsLine:(int)points maxValue:(int) maxValue animated:(BOOL)animated;
 {
-  
   CGRect backup = ivBlueLine.frame;
   CGRect temp = backup;
   temp.size.width = 0;
@@ -1379,7 +1097,7 @@
       [UIView animateWithDuration:1.4 animations:^{
         ivBlueLine.frame = temp;
       }];
-  }else {
+  } else {
     ivBlueLine.frame = temp;
   }
 }

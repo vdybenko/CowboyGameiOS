@@ -284,7 +284,7 @@
     if ([self.fireImageView isAnimating]) {
         [self.fireImageView stopAnimating];
     }
-    [self.fireImageView startAnimating];
+    //[self.fireImageView startAnimating];
     
     self.buletLabel.text=[NSString stringWithFormat:@"%d", shotCountBullet];
     
@@ -350,8 +350,8 @@
 
 -(void)cheackHitForShot:(CGPoint)shotPoint andTargetPoint:(CGPoint)targetPoint
 {
-    //if (([self abs:(shotPoint.x - targetPoint.x)] < targetWeidth / 2) && ([self abs:(shotPoint.y - targetPoint.y)] < targetHeight / 2)) {
-        [self startRandomBloodAnimation];
+    if (([self abs:(shotPoint.x - targetPoint.x)] < targetWeidth / 2) && ([self abs:(shotPoint.y - targetPoint.y)] < targetHeight / 2)) {
+        //[self startRandomBloodAnimation];
         shotCountBullet--;
         
         userHitCount++;
@@ -360,18 +360,39 @@
         frame.size.width = ((float)(maxShotCount - userHitCount))/(float)maxShotCount * frame.size.width;
         self.oponentLiveImageView.frame = frame;
         
-        [hitAudioPlayer stop];
-        [hitAudioPlayer setCurrentTime:0.0];
-        [hitAudioPlayer play];
-        
-        
-
         if(!shotCountBullet) {
-            if ([delegate respondsToSelector:@selector(sendShotTime:)])
-                [delegate sendShotTime:(shotTime - time * 1000)];
+            if(!delegate)
+            {
+                DLog(@"Kill!!!");
+                DLog(@"Shot Time = %d.%d", (shotTime - time * 1000) / 1000, (shotTime - time * 1000));
+                int opponentTime;
+                if (!opAccount.bot) opponentTime=3000;
+                else{
+                    int countBullets = [DuelRewardLogicController countUpBuletsWithOponentLevel:[AccountDataSource sharedInstance].accountLevel defense:[AccountDataSource sharedInstance].accountDefenseValue playerAtack:opAccount.accountWeapon.dDamage];
+                    
+                    
+                    opponentTime = 600 + countBullets * (220 + rand() % 160);
+                    DLog(@"bot opponentTime %d", opponentTime);
+                }
+                
+                FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime - time * 1000) andOponentTime:opponentTime andGameCenterController:self andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
+                //                [activityIndicatorView setText:NSLocalizedString(@"FOLL", @"")];
+ //               [activityIndicatorView setText:@""];
+ //               [activityIndicatorView showView];
+                [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
+                //[NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(dismissWithController:) userInfo:finalViewController repeats:NO];
+                //                [button setEnabled:NO];
+                //finalViewController = nil;
+                [timer invalidate];
+            } 
+            else
+            {
+                if ([delegate respondsToSelector:@selector(sendShotTime:)])
+                    [delegate sendShotTime:(shotTime - time * 1000)];
+            }
             [self opponentLost];
         }
-    //}
+    }
 }
 
 -(void)startRandomBloodAnimation
@@ -427,8 +448,8 @@
         [self.smokeImage stopAnimating];
     }
     [self.smokeImage startAnimating];
-    [oponentShotAudioPlayer setCurrentTime:0];
-    [oponentShotAudioPlayer play];
+    //[oponentShotAudioPlayer setCurrentTime:0];
+    //[oponentShotAudioPlayer play];
     if (!shotCountBulletForOpponent) [self userLost];
     
     shotCountBulletForOpponent--;
@@ -436,26 +457,26 @@
 
 -(void)opponentLost
 {
-    [self horizontalFlip];
-    [self endDuel];
+    //[self horizontalFlip];
+    //[self endDuel];
 }
 
 -(void)userLost
 {
     [self.glassImageView setHidden:NO];
     [brockenGlassAudioPlayer play];
-    [self endDuel];
+    //[self endDuel];
 }
 
--(void)endDuel
-{
-    [shotTimer invalidate];
-    [self performSelector:@selector(dismissController) withObject:nil afterDelay:2.0];
-}
+//-(void)endDuel
+//{
+//    [shotTimer invalidate];
+//    [self performSelector:@selector(dismissController) withObject:nil afterDelay:2.0];
+//}
 
-- (void) dismissController {
-    FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:nil andOponentTime:nil andGameCenterController:self andTeaching:YES andAccount:playerAccount andOpAccount:opAccount];
-    [self.navigationController pushViewController:finalViewController animated:YES];
+- (void) dismissWithController:(UIViewController *)controller {
+
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 

@@ -247,7 +247,12 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
             float x = (v[0] / v[3] + 1.0f) * 0.5f;
             float y = (v[1] / v[3] + 1.0f) * 0.5f;
             if (v[2] < 0.0f) {
-                poi.view.center = CGPointMake(x*self.bounds.size.width, self.bounds.size.height-y*self.bounds.size.height);
+                [UIView animateWithDuration:0.01 animations:^{
+                    poi.view.center = CGPointMake(x*self.bounds.size.width, self.bounds.size.height-y*self.bounds.size.height);
+                }completion:^(BOOL complete){
+                    
+                }];
+
             } else {
                 //poi.view.hidden = YES;
             }
