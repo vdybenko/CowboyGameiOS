@@ -174,7 +174,6 @@
         DLog(@"win %d",fMutchNumberWin);
         fMutchNumberLose = [delegate fMutchNumberLose];
         resoultDataSource.mutchNumber = [delegate fMutchNumber];
-
         resoultDataSource.deltaTime = userTime;
         resoultDataSource.UserTime= userTime;  
         
@@ -373,7 +372,7 @@
                 [playerAccount loadWeapon];
                 [self.navigationController presentViewController:duelProductWinViewController animated:YES completion:Nil];
             }else{
-                if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
+                if ([StartViewController sharedInstance].firstRun && [LoginAnimatedViewController sharedInstance].isDemoPractice){
                     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
                     [self releaseComponents];
                 }
@@ -383,7 +382,7 @@
                 }
             }
         }else{
-            if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
+            if ([StartViewController sharedInstance].firstRun && [LoginAnimatedViewController sharedInstance].isDemoPractice){
                 [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
                 [self releaseComponents];
             }
@@ -418,7 +417,7 @@
             
             
         }else{
-            if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
+            if ([StartViewController sharedInstance].firstRun && [LoginAnimatedViewController sharedInstance].isDemoPractice){
                 [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
                 [self releaseComponents];
             }
