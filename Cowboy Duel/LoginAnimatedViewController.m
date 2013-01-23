@@ -413,11 +413,9 @@ static LoginAnimatedViewController *sharedHelper = nil;
     heatImage.stopAnimation = YES;
     whiskersImage.stopAnimation = YES;
     guillotineImage.stopAnimation = YES;
+
+    [LoginAnimatedViewController sharedInstance].isDemoPractice = YES;
     
-    NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-    [userDef setBool:YES forKey:@"DemoPractice"];
-    [userDef synchronize];
-       
     //creating ActiveDuelVC
     int randomTime = arc4random() % 6+5;
     AccountDataSource *oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
@@ -461,7 +459,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/login_FB" forKey:@"event"]];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IPad"];
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"DemoPractice"];
+    [LoginAnimatedViewController sharedInstance].isDemoPractice = NO;
     [[NSUserDefaults standardUserDefaults] synchronize];
 
 }

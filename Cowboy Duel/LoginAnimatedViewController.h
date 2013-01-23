@@ -28,6 +28,8 @@ typedef enum {
 @property (strong,nonatomic) id<ProfileWithLoginDelegate> delegate;
 @property (nonatomic)  LoginFacebookStatus loginFacebookStatus;
 @property (nonatomic) BOOL payment;
+@property (nonatomic) BOOL isDemoPractice;
+
 
 + (LoginAnimatedViewController *) sharedInstance;
 -(void)initFacebook;

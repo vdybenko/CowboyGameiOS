@@ -170,11 +170,11 @@
             resoultDataSource.foll = YES;
             resoultDataSource.result = YES;
         }
-        
         fMutchNumberWin = [delegate fMutchNumberWin];
         DLog(@"win %d",fMutchNumberWin);
         fMutchNumberLose = [delegate fMutchNumberLose];
         resoultDataSource.mutchNumber = [delegate fMutchNumber];
+
         resoultDataSource.deltaTime = userTime;
         resoultDataSource.UserTime= userTime;  
         
@@ -373,7 +373,7 @@
                 [playerAccount loadWeapon];
                 [self.navigationController presentViewController:duelProductWinViewController animated:YES completion:Nil];
             }else{
-                if ([userDef boolForKey:@"DemoPractice"]){
+                if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
                     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
                     [self releaseComponents];
                 }
@@ -383,7 +383,7 @@
                 }
             }
         }else{
-            if ([userDef boolForKey:@"DemoPractice"]){
+            if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
                 [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
                 [self releaseComponents];
             }
@@ -418,7 +418,7 @@
             
             
         }else{
-            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"DemoPractice"]){
+            if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
                 [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
                 [self releaseComponents];
             }
