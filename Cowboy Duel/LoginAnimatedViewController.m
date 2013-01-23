@@ -414,14 +414,15 @@ static LoginAnimatedViewController *sharedHelper = nil;
     whiskersImage.stopAnimation = YES;
     guillotineImage.stopAnimation = YES;
     
+    NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+    [userDef setBool:YES forKey:@"DemoPractice"];
+    [userDef synchronize];
+       
     //creating ActiveDuelVC
     int randomTime = arc4random() % 6+5;
     AccountDataSource *oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
     ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:playerAccount oponentAccount:oponentAccount];
     [self.navigationController pushViewController:activeDuelViewController animated:YES];
-    
-    SSConnection *connection = [SSConnection sharedInstance];
-    [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
@@ -460,6 +461,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/login_FB" forKey:@"event"]];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IPad"];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"DemoPractice"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
 }
