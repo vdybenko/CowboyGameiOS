@@ -44,6 +44,8 @@
 
 -(void)shutDownTimer;
 
+-(void)opponentShot;
+-(void)sendShot;
 @end
 
 @protocol DuelStartViewControllerDelegate <NSObject>

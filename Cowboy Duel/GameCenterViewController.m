@@ -879,6 +879,13 @@ static GameCenterViewController *gameCenterViewController;
         }
 			break;
             
+        case  NETWORK_SHOT:
+        {
+            DLog(@"NETWORK_SHOT");
+            [self.delegate opponentShot];
+        }
+			break;
+            
             
 		default:
 			// error
@@ -888,5 +895,13 @@ static GameCenterViewController *gameCenterViewController;
 
 }
 
+-(void)sendShot
+{
+    gameInfo *gsSend = &gameStat;
+    
+    if (endDuel) return;
+    
+    [self.connection sendData:(void *)(gsSend) packetID:NETWORK_SHOT ofLength:sizeof(gameInfo)];
+}
 
 @end

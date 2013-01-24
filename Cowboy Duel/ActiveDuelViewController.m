@@ -18,7 +18,7 @@
 #define kFilteringFactor 0.1
 #define targetHeight 200
 #define targetWeidth 50
-
+#define MOVE_DISTANCE 100
 @interface ActiveDuelViewController ()
 {
     float startPoint;
@@ -43,6 +43,7 @@
     BOOL finalAnimationStarted;
     
     NSTimer *shotTimer;
+    NSTimer *moveTimer;
     int time;
     
     UIView  *helpPracticeView;
@@ -51,8 +52,10 @@
     
     BOOL foll;
     BOOL duelTimerEnd;
+    BOOL duelEnd;
     
     ActivityIndicatorView *activityIndicatorView;
+    NSMutableArray *placesOfInterest;
 }
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *floatView;
@@ -64,6 +67,8 @@
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *smokeImage;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *glassImageView;
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *oponentLiveImageView;
+@property (weak, nonatomic) IBOutlet UIButton *gunButton;
+
 
 @end
 
@@ -156,9 +161,9 @@
     
     int numPois = sizeof(poiCoords) / sizeof(CLLocationCoordinate2D);
     
-	NSMutableArray *placesOfInterest = [NSMutableArray arrayWithCapacity:numPois];
+	placesOfInterest = [NSMutableArray arrayWithCapacity:numPois];
 //	for (int i = 0; i < numPois; i++) {
-		OponentCoordinateView *poi = [OponentCoordinateView oponentCoordinateWithView:self.opponentImage at:[[CLLocation alloc] initWithLatitude:poiCoords[0].latitude longitude:poiCoords[0].longitude]];
+		OponentCoordinateView *poi = [OponentCoordinateView oponentCoordinateWithView:self.floatView at:[[CLLocation alloc] initWithLatitude:poiCoords[0].latitude longitude:poiCoords[0].longitude]];
 		[placesOfInterest insertObject:poi atIndex:0];
 //	}
 	[arView setPlacesOfInterest:placesOfInterest];
@@ -206,7 +211,7 @@
     
     foll = NO;
     duelTimerEnd = NO;
-    
+    duelEnd = NO;
     follAccelCheck = NO;
     accelerometerState = NO;
     soundStart = NO;
@@ -229,6 +234,7 @@
 	[arView start];
     
     [activityIndicatorView hideView];
+    [self.gunButton setEnabled:NO];
 
 }
 
@@ -237,6 +243,7 @@
     [super viewWillDisappear:animated];
     [[UIAccelerometer sharedAccelerometer] setDelegate:nil];
     [shotTimer invalidate];
+    [moveTimer invalidate];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -257,6 +264,8 @@
     [self setSmokeImage:nil];
     [self setGlassImageView:nil];
     [self setOponentLiveImageView:nil];
+    [self setGunButton:nil];
+    [self setGunButton:nil];
     [super viewDidUnload];
 }
 
@@ -298,25 +307,29 @@
     
     self.buletLabel.text=[NSString stringWithFormat:@"%d", shotCountBullet];
     
+    if(delegate)
+    {
+        [delegate sendShot];
+    }
     switch (shotCountForSound) {
         case 1:
             [shotAudioPlayer1 stop];
             [shotAudioPlayer1 setCurrentTime:0.0];
-            [shotAudioPlayer1 play];
+            [shotAudioPlayer1 performSelectorInBackground:@selector(play) withObject:nil];
             
             shotCountForSound = 2;
             break;
         case 2:
             [shotAudioPlayer2 stop];
             [shotAudioPlayer2 setCurrentTime:0.0];
-            [shotAudioPlayer2 play];
+            [shotAudioPlayer2 performSelectorInBackground:@selector(play) withObject:nil];
             
             shotCountForSound = 3;
             break;
         case 3:
             [shotAudioPlayer3 stop];
             [shotAudioPlayer3 setCurrentTime:0.0];
-            [shotAudioPlayer3 play];
+            [shotAudioPlayer3 performSelectorInBackground:@selector(play) withObject:nil];
 
             shotCountForSound = 1;
             break;
@@ -331,11 +344,14 @@
     CGPoint centerOfScreanPoint;
     centerOfScreanPoint.x = [UIScreen mainScreen].bounds.size.width / 2;
     centerOfScreanPoint.y = [UIScreen mainScreen].bounds.size.height / 2;
-    
+   
     [self cheackHitForShot:centerOfScreanPoint andTargetPoint:targetPoint];
 }
 
 - (void)horizontalFlip{
+    
+    if (duelEnd) return;
+    duelEnd = YES;
     
     if (finalAnimationStarted) return;
     else finalAnimationStarted = YES;
@@ -393,6 +409,7 @@
                 
                 [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
                 [timer invalidate];
+                [moveTimer invalidate];
             } 
             else
             {
@@ -453,6 +470,8 @@
 
 -(void)opponentShot
 {
+    if (duelEnd) return;
+    duelEnd = YES;
     if ([self.smokeImage isAnimating]) {
         [self.smokeImage stopAnimating];
     }
@@ -472,8 +491,17 @@
 
 -(void)userLost
 {
+    if (duelEnd) return;
+    duelEnd = YES;
+    
     [self.glassImageView setHidden:NO];
     [brockenGlassAudioPlayer play];
+    FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime - time * 1000) andOponentTime:1 andGameCenterController:self andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
+    
+    [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
+    [timer invalidate];
+    [moveTimer invalidate];
+
     //[self endDuel];
 }
 
@@ -520,12 +548,11 @@
     rollingX = (acceleration.x * kFilteringFactor) + (rollingX * (1.0 - kFilteringFactor));
     rollingY = (acceleration.y * kFilteringFactor) + (rollingY * (1.0 - kFilteringFactor));
     rollingZ = (acceleration.z * kFilteringFactor) + (rollingZ * (1.0 - kFilteringFactor));
-    //DLog(@"rolling x= %.1f, y= %.1f, z= %.1f", rollingX, rollingY, rollingZ);
     
     //        Position for Shot
     if ((rollingY < 0.0) || (rollingX < -0.2) || (rollingX > 0.2)) accelerometerState = NO;
     
-    //       Posirtion for STEADY
+    //       Position for STEADY
     if ((rollingY > 0.0) && (rollingX > -0.2) && (rollingX < 0.2)) accelerometerState = YES;
             
             
@@ -571,19 +598,13 @@
     [timer invalidate];
     [player stop];
     [player setCurrentTime:0.0];
-//    [follPlayer setCurrentTime:0.0];
-//    [follPlayer play];
-//    
-//    [titleReady setHidden:NO];
-//    [titleSteadyFire setHidden:YES];
-//    
     [self showHelpViewWithArm];
 }
 
 -(void)shotTimer
 {
     nowInterval = [NSDate timeIntervalSinceReferenceDate];
-    activityInterval = (nowInterval-startInterval)*1000;
+    activityInterval = (nowInterval-startInterval) * 1000;
     shotTime = (int)activityInterval;
     
     UIViewController *curentVC=[self.navigationController visibleViewController];
@@ -596,9 +617,11 @@
         player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
         [player play];
         [self vibrationStart];
-        shotTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
+        [self.gunButton setEnabled:YES];
+        if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
+        moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
     }
-    if ((shotTime * 0.001 >= 30.0) && (!duelTimerEnd) && (soundStart)) {
+    if ((shotTime * 0.001 >= 60.0) && (!duelTimerEnd) && (soundStart)) {
         if ([delegate respondsToSelector:@selector(duelTimerEnd)])
             [delegate duelTimerEnd];
         duelTimerEnd = YES;
@@ -644,6 +667,36 @@
 -(void)duelTimerEndFeedBack
 {
     duelTimerEnd = YES;
+}
+
+-(void)moveOponent
+{
+    [self performSelectorInBackground:@selector(moveOponentInBackground) withObject:nil];
+}
+
+-(void)moveOponentInBackground
+{
+    int randomDirection = rand() % 3 - 1;
+    [UIView animateWithDuration:0.2 animations:^{
+        CGRect frame = self.opponentImage.frame;
+        frame.origin.x += randomDirection * 60;
+        self.opponentImage.frame = frame;
+    }completion:^(BOOL complete){
+        [UIView animateWithDuration:0.2 animations:^{
+            CGRect frame = self.opponentImage.frame;
+            frame.origin.x += randomDirection * 60;
+            self.opponentImage.frame = frame;
+        }completion:^(BOOL complete){
+            [UIView animateWithDuration:0.2 animations:^{
+                CGRect frame = self.opponentImage.frame;
+                frame.origin.x += randomDirection * 60;
+                self.opponentImage.frame = frame;
+            }completion:^(BOOL complete){
+            }];
+
+        }];
+    }];
+
 }
 
 #pragma mark - IBAction

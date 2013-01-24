@@ -35,7 +35,8 @@ typedef enum {
     NETWORK_OPONTYPE_RESPONSE_TRY,          //11
     NETWORK_RUN_AWAY,                       //12
     NETWORK_RESPONSE,                       //13
-    NETWORK_DUEL_CANSEL                     //16
+    NETWORK_DUEL_CANSEL,                     //16
+    NETWORK_SHOT
     
 } packetCodes;
 

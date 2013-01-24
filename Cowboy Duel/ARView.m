@@ -112,8 +112,6 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 - (void)startDisplayLink;
 - (void)stopDisplayLink;
 
-- (void)updatePlacesOfInterestCoordinates;
-
 - (void)onDisplayLink:(id)sender;
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation;
 
@@ -152,7 +150,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 	
 	placesOfInterest = pois;	
 	if (location != nil) {
-		[self updatePlacesOfInterestCoordinates];
+		[self updateOponentCoordinates];
 	}
 }
 
@@ -207,7 +205,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 {
     location = [[CLLocation alloc] initWithLatitude:0 longitude:0];
     if (placesOfInterest != nil) {
-		[self updatePlacesOfInterestCoordinates];
+		[self updateOponentCoordinates];
 	}
 }
 
@@ -246,9 +244,16 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
             
             float x = (v[0] / v[3] + 1.0f) * 0.5f;
             float y = (v[1] / v[3] + 1.0f) * 0.5f;
+            
+            float distance;
+            CGPoint currentPosition = poi.view.center;
+            CGPoint newPosition = CGPointMake(x*self.bounds.size.width, self.bounds.size.height-y*self.bounds.size.height);
+            
+            distance = powf(powf(currentPosition.x - newPosition.x, 2) + powf(currentPosition.y - newPosition.y, 2), 0.5);
+            printf("%0.2f\n", distance);
             if (v[2] < 0.0f) {
-                [UIView animateWithDuration:0.01 animations:^{
-                    poi.view.center = CGPointMake(x*self.bounds.size.width, self.bounds.size.height-y*self.bounds.size.height);
+                [UIView animateWithDuration:distance animations:^{
+                    poi.view.center = CGPointMake(x*self.bounds.size.width, self.bounds.size.height - y*self.bounds.size.height);
                 }completion:^(BOOL complete){
                     
                 }];
@@ -281,7 +286,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 	displayLink = nil;		
 }
 
-- (void)updatePlacesOfInterestCoordinates
+- (void)updateOponentCoordinates
 {
 	
 	if (placesOfInterestCoordinates != NULL) {
@@ -391,7 +396,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 {
 	location = newLocation;
 	if (placesOfInterest != nil) {
-		[self updatePlacesOfInterestCoordinates];
+		[self updateOponentCoordinates];
 	}	
 }
 
