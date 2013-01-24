@@ -41,7 +41,6 @@
     ProfileViewController *profileViewController;
     TopPlayersDataSource *topPlayersDataSource;
     
-    __weak IBOutlet UIView *hudView;
 //    BOOL firstRun;
     BOOL firstRunLocal;
     BOOL firstDayWithOutAdvertising;
@@ -488,37 +487,7 @@ static StartViewController *sharedHelper = nil;
     [super viewWillAppear:animated];
 
     [self playerStart];
-    
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"FirstRun_v2.2"]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"FirstRun_v2.2"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        UIImageView_AttachedView *arrowImage3=[[UIImageView_AttachedView alloc] initWithImage:[UIImage imageNamed:@"st_arrow.png"] attachedToFrame:duelButton frequence:0.5 amplitude:10 direction:DirectionToAnimateLeft];
-        if(!hudView.hidden) [hudView addSubview:arrowImage3];
-        [hudView setHidden:NO];
-        [arrowImage3 startAnimation];
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"FirstRunForStore_v2.2"];
-    }
-    else
-    {
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"FirstRunForStore_v2.2"])
-        {
-            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"FirstRunForStore_v2.2"];
-            int saloonIndex = [self.view.subviews indexOfObject:duelButton];
-            int storeIndex = [self.view.subviews indexOfObject:mapButton];
-            [self.view exchangeSubviewAtIndex:storeIndex withSubviewAtIndex:saloonIndex];
-            for (UIView *view in hudView.subviews) {
-                [view removeFromSuperview];
-            }
-            UIImageView_AttachedView *arrowImage3=[[UIImageView_AttachedView alloc] initWithImage:[UIImage imageNamed:@"st_arrow.png"] attachedToFrame:mapButton frequence:0.5 amplitude:10 direction:DirectionToAnimateLeft];
-            if(!hudView.hidden) [hudView addSubview:arrowImage3];
-            [hudView setHidden:NO];
-            [arrowImage3 startAnimation];
-        }
-        else [hudView setHidden:YES];
-    }
-        
 
-    
     if (firstRun) {
         firstRun = NO;
         return;
