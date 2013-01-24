@@ -155,16 +155,16 @@ static LoginAnimatedViewController *sharedHelper = nil;
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
+
     textsContainer = [NSArray arrayWithObjects:
-                    NSLocalizedString(@"HEY", nil),             //"Hey guy. Do you hear me?"
-                    NSLocalizedString(@"HEY_YOU", nil),         //"Yes, you! Come here."
-                    NSLocalizedString(@"IPAD", nil),            //"Do you want an iPad mini?"
-                    NSLocalizedString(@"REALLY", nil),          //"Really? Do you like it?"
-                    NSLocalizedString(@"HELP_ME", nil),         //"Great. Help me. I know where it is."
-                    NSLocalizedString(@"HELP_NOW", nil),        //"Help me!!!"
-                    NSLocalizedString(@"CHOOSE_DOLLAR", nil),   //"Pay for me $1...
-                    NSLocalizedString(@"CHOOSE_FACEBOOK", nil), //...or give me your ID"
+                    NSLocalizedString(@"INTRO1", nil),  //"Ye know who bounty hunters are, boy?";
+                    NSLocalizedString(@"INTRO2", nil),  //"They chase criminals 'n get a reward for 'em,\ndead or alive";
+                    NSLocalizedString(@"INTRO3", nil),  //"The harder to get these bastards are,\nthe bigger’s the reward for their head.";
+                    NSLocalizedString(@"INTRO4", nil),  //"I'm one of the best hunters out there,\n 'n I could do with some help.";
+                    NSLocalizedString(@"INTRO5", nil),  //"Seems yer tough enough for the job.";
+                    NSLocalizedString(@"INTRO6", nil),  //"Come with me, help me get'em bad guys,\nand ye'll get yer freedom.";
+                    NSLocalizedString(@"INTRO7", nil),  //"If yer good, yer gonna be a big bounty hunter,\njust like me.";
+                    NSLocalizedString(@"INTRO8", nil),  //"Remember: their guns are fast.\nYe better be faster.";
                     nil];
     self.textIndex = 0;
     guillBackUp = guillotineImage.frame;
@@ -287,7 +287,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
 //                               [self.whiskersImage setHidden:YES];
                              }
 
-                             [self performSelector:@selector(updateLabels) withObject:nil afterDelay:2.0];
+                             [self performSelector:@selector(updateLabels) withObject:nil afterDelay:4.0];
                              self.textIndex++;
                          }
                          else {
