@@ -157,6 +157,8 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{168, 428}, {142, 33}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -251,7 +253,7 @@
 					<object class="IBUILabel" id="639264680">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{38, 132}, {249, 65}}</string>
+						<string key="NSFrame">{{38, 132}, {249, 100}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="281586085"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -746,7 +748,140 @@
 			<nil key="sourceID"/>
 			<int key="maxID">55</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">BEAnimationView</string>
+					<string key="superclassName">UIImageView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/BEAnimationView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">LoginAnimatedViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="loginButtonClick:">id</string>
+						<string key="practiceButtonClick:">id</string>
+						<string key="tryAgainButtonClick:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="loginButtonClick:">
+							<string key="name">loginButtonClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="practiceButtonClick:">
+							<string key="name">practiceButtonClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="tryAgainButtonClick:">
+							<string key="name">tryAgainButtonClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="activityIndicatorView">UIActivityIndicatorView</string>
+						<string key="activityView">UIView</string>
+						<string key="animetedText">UILabel</string>
+						<string key="backgroundView">UIImageView</string>
+						<string key="boardImage">UIImageView</string>
+						<string key="guillotineImage">BEAnimationView</string>
+						<string key="headImage">UIImageView</string>
+						<string key="heatImage">BEAnimationView</string>
+						<string key="loginFBbutton">UIButton</string>
+						<string key="loginLable">UILabel</string>
+						<string key="noseImage">UIImageView</string>
+						<string key="practiceButton">UIButton</string>
+						<string key="practiceLable">UILabel</string>
+						<string key="tryAgainButton">UIButton</string>
+						<string key="tryAgainImage">UIImageView</string>
+						<string key="tryAgainLable">UILabel</string>
+						<string key="tryAgainView">UIView</string>
+						<string key="whiskersImage">BEAnimationView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="activityIndicatorView">
+							<string key="name">activityIndicatorView</string>
+							<string key="candidateClassName">UIActivityIndicatorView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="activityView">
+							<string key="name">activityView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="animetedText">
+							<string key="name">animetedText</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="backgroundView">
+							<string key="name">backgroundView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="boardImage">
+							<string key="name">boardImage</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="guillotineImage">
+							<string key="name">guillotineImage</string>
+							<string key="candidateClassName">BEAnimationView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="headImage">
+							<string key="name">headImage</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="heatImage">
+							<string key="name">heatImage</string>
+							<string key="candidateClassName">BEAnimationView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="loginFBbutton">
+							<string key="name">loginFBbutton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="loginLable">
+							<string key="name">loginLable</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="noseImage">
+							<string key="name">noseImage</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="practiceButton">
+							<string key="name">practiceButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="practiceLable">
+							<string key="name">practiceLable</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tryAgainButton">
+							<string key="name">tryAgainButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tryAgainImage">
+							<string key="name">tryAgainImage</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tryAgainLable">
+							<string key="name">tryAgainLable</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tryAgainView">
+							<string key="name">tryAgainView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="whiskersImage">
+							<string key="name">whiskersImage</string>
+							<string key="candidateClassName">BEAnimationView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/LoginAnimatedViewController.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
+
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>

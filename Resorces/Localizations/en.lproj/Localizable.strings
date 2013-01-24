@@ -337,14 +337,14 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "ATTEN_TEXT" = "Your opponent is stronger than you. You should shoot %d a row.";
 
 //first screen:
-"HEY" = "Hey guy. Do you hear me?";
-"HEY_YOU" = "Yes, you! Come here.";
-"IPAD" = "Do you want an iPad mini?";
-"REALLY" = "Really? Do you like it?";
-"HELP_ME" = "Great. Help me. I know where it is.";
-"HELP_NOW" = "Help me!!!";
-"CHOOSE_DOLLAR" = "Pay for me $1 ...";
-"CHOOSE_FACEBOOK" = "... or give me your ID";
+"INTRO1" = "Ye know who bounty hunters are, boy?";
+"INTRO2" = "They chase criminals 'n get a reward for 'em,\ndead or alive";
+"INTRO3" = "The harder to get these bastards are,\nthe bigger’s the reward for their head.";
+"INTRO4" = "I'm one of the best hunters out there,\n 'n I could do with some help.";
+"INTRO5" = "Seems yer tough enough for the job.";
+"INTRO6" = "Come with me, help me get'em bad guys,\nand ye'll get yer freedom.";
+"INTRO7" = "If yer good, yer gonna be a big bounty hunter,\njust like me.";
+"INTRO8" = "Remember: their guns are fast.\nYe better be faster.";
 "DONATE" = "DONATE";
 "DONATE 1$" = "PAY 1$";
 "CHOOSE_DOLLAR_S" = "Pay for me $";
