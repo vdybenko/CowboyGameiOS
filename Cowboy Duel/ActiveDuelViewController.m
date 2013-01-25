@@ -16,8 +16,8 @@
 #import "OponentCoordinateView.h"
 
 #define kFilteringFactor 0.1
-#define targetHeight 200
-#define targetWeidth 50
+#define targetHeight 260
+#define targetWeidth 100
 #define MOVE_DISTANCE 100
 @interface ActiveDuelViewController ()
 {
@@ -68,6 +68,10 @@
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *glassImageView;
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *oponentLiveImageView;
 @property (weak, nonatomic) IBOutlet UIButton *gunButton;
+@property (unsafe_unretained, nonatomic) IBOutlet UILabel *opStatsLabel;
+@property (unsafe_unretained, nonatomic) IBOutlet UILabel *userStatsLabel;
+
+
 
 
 @end
@@ -107,6 +111,7 @@
         url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/brocken_glass.aif", [[NSBundle mainBundle] resourcePath]]];
         brockenGlassAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
         [brockenGlassAudioPlayer prepareToPlay];
+
     }
     return self;
 }
@@ -235,6 +240,13 @@
     
     [activityIndicatorView hideView];
     [self.gunButton setEnabled:NO];
+    
+    CGRect frame = self.oponentLiveImageView.frame;
+    frame.size.width = 84;
+    self.oponentLiveImageView.frame = frame;
+    self.opStatsLabel.text = [NSString stringWithFormat: @"A: +%d\rD: +%d",opAccount.accountWeapon.dDamage,opAccount.accountDefenseValue];
+    self.userStatsLabel.text = [NSString stringWithFormat: @"A: +%d\nD: +%d",playerAccount.accountWeapon.dDamage,playerAccount.accountDefenseValue];
+    
 
 }
 
@@ -266,6 +278,8 @@
     [self setOponentLiveImageView:nil];
     [self setGunButton:nil];
     [self setGunButton:nil];
+    [self setOpStatsLabel:nil];
+    [self setUserStatsLabel:nil];
     [super viewDidUnload];
 }
 
@@ -679,17 +693,17 @@
     int randomDirection = rand() % 3 - 1;
     [UIView animateWithDuration:0.2 animations:^{
         CGRect frame = self.opponentImage.frame;
-        frame.origin.x += randomDirection * 60;
+        frame.origin.x += randomDirection * 40;
         self.opponentImage.frame = frame;
     }completion:^(BOOL complete){
         [UIView animateWithDuration:0.2 animations:^{
             CGRect frame = self.opponentImage.frame;
-            frame.origin.x += randomDirection * 60;
+            frame.origin.x += randomDirection * 40;
             self.opponentImage.frame = frame;
         }completion:^(BOOL complete){
             [UIView animateWithDuration:0.2 animations:^{
                 CGRect frame = self.opponentImage.frame;
-                frame.origin.x += randomDirection * 60;
+                frame.origin.x += randomDirection * 40;
                 self.opponentImage.frame = frame;
             }completion:^(BOOL complete){
             }];

@@ -307,11 +307,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ActiveDuelViewController.m"
-         timestampString = "380725899.802013"
+         timestampString = "380801991.884827"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "348"
-         endingLineNumber = "348"
+         startingLineNumber = "352"
+         endingLineNumber = "352"
          landmarkName = "-shotButtonClick:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -346,11 +346,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ActiveDuelViewController.m"
-         timestampString = "380729615.388696"
+         timestampString = "380801991.884827"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "390"
-         endingLineNumber = "390"
+         startingLineNumber = "394"
+         endingLineNumber = "394"
          landmarkName = "-cheackHitForShot:andTargetPoint:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -359,13 +359,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ActiveDuelViewController.m"
-         timestampString = "380729615.388696"
+         timestampString = "380801991.884827"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "530"
-         endingLineNumber = "530"
-         landmarkName = "-startDuel"
-         landmarkType = "5">
+         startingLineNumber = "534"
+         endingLineNumber = "534"
+         landmarkName = "@implementation ActiveDuelViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -424,12 +424,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ActiveDuelViewController.m"
-         timestampString = "380729595.725797"
+         timestampString = "380801991.884827"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "379"
-         endingLineNumber = "379"
-         landmarkName = "-cheackHitForShot:andTargetPoint:"
+         startingLineNumber = "383"
+         endingLineNumber = "383"
+         landmarkName = "-horizontalFlip"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -472,7 +472,7 @@
          landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/DuelProductDownloaderController.m"
