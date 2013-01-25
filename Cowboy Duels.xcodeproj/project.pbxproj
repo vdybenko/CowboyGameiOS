@@ -171,6 +171,7 @@
 		761EFA491573BDDA001670EB /* CollectionAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761EFA471573BDDA001670EB /* CollectionAppViewController.xib */; };
 		761EFA501573BE91001670EB /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761EFA4C1573BE91001670EB /* HelpViewController.xib */; };
 		761EFA511573BE91001670EB /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761EFA4D1573BE91001670EB /* ProfileViewController.xib */; };
+		761EFA521573BE91001670EB /* StartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761EFA4E1573BE91001670EB /* StartViewController.xib */; };
 		762AA31015B99C72001B65E2 /* TopPlayerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 762AA30F15B99C72001B65E2 /* TopPlayerCell.m */; };
 		763BF4091656448C00D5C49C /* la_body.png in Resources */ = {isa = PBXBuildFile; fileRef = 763BF4071656448C00D5C49C /* la_body.png */; };
 		763BF40A1656448C00D5C49C /* la_body@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 763BF4081656448C00D5C49C /* la_body@2x.png */; };
@@ -525,6 +526,7 @@
 		BD83A49416720DFE003EE4B3 /* CollectionAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761EFA471573BDDA001670EB /* CollectionAppViewController.xib */; };
 		BD83A49516720DFE003EE4B3 /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761EFA4C1573BE91001670EB /* HelpViewController.xib */; };
 		BD83A49616720DFE003EE4B3 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761EFA4D1573BE91001670EB /* ProfileViewController.xib */; };
+		BD83A49716720DFE003EE4B3 /* StartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761EFA4E1573BE91001670EB /* StartViewController.xib */; };
 		BD83A49816720DFE003EE4B3 /* DuelStartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7692BC2E1574E36C00983264 /* DuelStartViewController.xib */; };
 		BD83A49916720DFE003EE4B3 /* DuelViewControllerWithXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 763F8A261578A1F800D8BB42 /* DuelViewControllerWithXib.xib */; };
 		BD83A49A16720DFE003EE4B3 /* FinalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767BA5BD1589F8E300825EB1 /* FinalViewController.xib */; };
@@ -2549,6 +2551,7 @@
 				761EFA491573BDDA001670EB /* CollectionAppViewController.xib in Resources */,
 				761EFA501573BE91001670EB /* HelpViewController.xib in Resources */,
 				761EFA511573BE91001670EB /* ProfileViewController.xib in Resources */,
+				761EFA521573BE91001670EB /* StartViewController.xib in Resources */,
 				7692BC2F1574E36C00983264 /* DuelStartViewController.xib in Resources */,
 				763F8A271578A1F800D8BB42 /* DuelViewControllerWithXib.xib in Resources */,
 				767BA5BE1589F8E300825EB1 /* FinalViewController.xib in Resources */,
@@ -2828,6 +2831,7 @@
 				BD83A49416720DFE003EE4B3 /* CollectionAppViewController.xib in Resources */,
 				BD83A49516720DFE003EE4B3 /* HelpViewController.xib in Resources */,
 				BD83A49616720DFE003EE4B3 /* ProfileViewController.xib in Resources */,
+				BD83A49716720DFE003EE4B3 /* StartViewController.xib in Resources */,
 				BD83A49816720DFE003EE4B3 /* DuelStartViewController.xib in Resources */,
 				BD83A49916720DFE003EE4B3 /* DuelViewControllerWithXib.xib in Resources */,
 				BD83A49A16720DFE003EE4B3 /* FinalViewController.xib in Resources */,
