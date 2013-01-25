@@ -16,8 +16,8 @@
 #import "OponentCoordinateView.h"
 
 #define kFilteringFactor 0.1
-#define targetHeight 200
-#define targetWeidth 50
+#define targetHeight 260
+#define targetWeidth 100
 #define MOVE_DISTANCE 100
 @interface ActiveDuelViewController ()
 {
@@ -235,6 +235,10 @@
     
     [activityIndicatorView hideView];
     [self.gunButton setEnabled:NO];
+    
+    CGRect frame = self.oponentLiveImageView.frame;
+    frame.size.width = 84;
+    self.oponentLiveImageView.frame = frame;
 
 }
 
@@ -679,17 +683,17 @@
     int randomDirection = rand() % 3 - 1;
     [UIView animateWithDuration:0.2 animations:^{
         CGRect frame = self.opponentImage.frame;
-        frame.origin.x += randomDirection * 60;
+        frame.origin.x += randomDirection * 40;
         self.opponentImage.frame = frame;
     }completion:^(BOOL complete){
         [UIView animateWithDuration:0.2 animations:^{
             CGRect frame = self.opponentImage.frame;
-            frame.origin.x += randomDirection * 60;
+            frame.origin.x += randomDirection * 40;
             self.opponentImage.frame = frame;
         }completion:^(BOOL complete){
             [UIView animateWithDuration:0.2 animations:^{
                 CGRect frame = self.opponentImage.frame;
-                frame.origin.x += randomDirection * 60;
+                frame.origin.x += randomDirection * 40;
                 self.opponentImage.frame = frame;
             }completion:^(BOOL complete){
             }];
