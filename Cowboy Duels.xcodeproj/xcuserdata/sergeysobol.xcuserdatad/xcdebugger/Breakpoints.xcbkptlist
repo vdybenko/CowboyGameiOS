@@ -364,8 +364,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "534"
          endingLineNumber = "534"
-         landmarkName = "-startDuel"
-         landmarkType = "5">
+         landmarkName = "@implementation ActiveDuelViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -429,7 +429,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "383"
          endingLineNumber = "383"
-         landmarkName = "-cheackHitForShot:andTargetPoint:"
+         landmarkName = "-horizontalFlip"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
