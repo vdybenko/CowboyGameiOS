@@ -68,6 +68,10 @@
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *glassImageView;
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *oponentLiveImageView;
 @property (weak, nonatomic) IBOutlet UIButton *gunButton;
+@property (unsafe_unretained, nonatomic) IBOutlet UILabel *opStatsLabel;
+@property (unsafe_unretained, nonatomic) IBOutlet UILabel *userStatsLabel;
+
+
 
 
 @end
@@ -107,6 +111,7 @@
         url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/brocken_glass.aif", [[NSBundle mainBundle] resourcePath]]];
         brockenGlassAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
         [brockenGlassAudioPlayer prepareToPlay];
+
     }
     return self;
 }
@@ -235,6 +240,10 @@
     
     [activityIndicatorView hideView];
     [self.gunButton setEnabled:NO];
+    
+    self.opStatsLabel.text = [NSString stringWithFormat: @"A: +%d\rD: +%d",opAccount.accountWeapon.dDamage,opAccount.accountDefenseValue];
+    self.userStatsLabel.text = [NSString stringWithFormat: @"A: +%d\nD: +%d",playerAccount.accountWeapon.dDamage,playerAccount.accountDefenseValue];
+    
 
 }
 
@@ -266,6 +275,8 @@
     [self setOponentLiveImageView:nil];
     [self setGunButton:nil];
     [self setGunButton:nil];
+    [self setOpStatsLabel:nil];
+    [self setUserStatsLabel:nil];
     [super viewDidUnload];
 }
 
