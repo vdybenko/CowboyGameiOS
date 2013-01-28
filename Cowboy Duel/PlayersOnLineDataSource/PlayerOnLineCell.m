@@ -72,7 +72,6 @@
     int moneyExch  = [player.money intValue]< 10 ? 1: [player.money intValue] / 10.0;
     self.gold.text = [NSString stringWithFormat:@"%d $",moneyExch];
   
-    NSLog(@"%@", player.status);
     if([player.status isEqualToString: @"A"]){
         self.status.text = NSLocalizedString(@"Available", @"");
         self.status.textColor = [UIColor blackColor];
@@ -91,7 +90,6 @@
     } else {
         [self.facebookAvatar setHidden:YES];
     }
-    NSLog(@"\nattack: %d\ndefense: %d", player.weapon, player.defense);
     
     userAtack.text = [NSString stringWithFormat:@"+%d",player.weapon];
     userAtack.hidden = NO;

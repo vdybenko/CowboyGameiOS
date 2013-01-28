@@ -61,6 +61,8 @@
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *floatView;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *fireImageView;
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *opponentImage;
+@property (weak, nonatomic) IBOutlet UIImageView *opponentBody;
+@property (weak, nonatomic) IBOutlet UIImageView *ivSight;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *bloodImageView;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *bloodCImageView;
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *buletLabel;
@@ -247,7 +249,11 @@
     self.opStatsLabel.text = [NSString stringWithFormat: @"A: +%d\rD: +%d",opAccount.accountWeapon.dDamage,opAccount.accountDefenseValue];
     self.userStatsLabel.text = [NSString stringWithFormat: @"A: +%d\nD: +%d",playerAccount.accountWeapon.dDamage,playerAccount.accountDefenseValue];
     
-
+    for(UIView *subview in [self.opponentBody subviews])
+    {
+        [subview removeFromSuperview];
+    }
+        
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -280,6 +286,8 @@
     [self setGunButton:nil];
     [self setOpStatsLabel:nil];
     [self setUserStatsLabel:nil];
+    [self setOpponentBody:nil];
+    [self setIvSight:nil];
     [super viewDidUnload];
 }
 
@@ -289,6 +297,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark
 
 - (IBAction)backButtonClick:(id)sender {
     [self dismissModalViewControllerAnimated:NO];
@@ -399,6 +409,12 @@
         CGRect frame = self.oponentLiveImageView.frame;
         frame.size.width = ((float)(maxShotCount - userHitCount))/(float)maxShotCount * frame.size.width;
         self.oponentLiveImageView.frame = frame;
+        
+        
+        if (CGRectContainsPoint(self.opponentBody.frame, shotPoint)) {
+            CGPoint point = [self.view convertPoint:shotPoint toView:self.opponentImage];
+            [self hitTheOponentWithPoint:point];
+        }
         
         if(!shotCountBullet) {
             
@@ -711,6 +727,16 @@
         }];
     }];
 
+}
+
+-(void)hitTheOponentWithPoint:(CGPoint)hitPoint
+{
+    UIImageView *ivHit = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ivHit.png"]];
+    CGRect frame = ivHit.frame;
+    frame.origin = [self.opponentImage convertPoint:hitPoint toView:self.opponentBody];
+    ivHit.frame = frame;
+    [self.opponentBody addSubview:ivHit];
+    ivHit = nil;
 }
 
 #pragma mark - IBAction

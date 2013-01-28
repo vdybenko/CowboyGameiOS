@@ -219,6 +219,8 @@
 		7687E8C3163920FE003C9EE6 /* StoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7687E8C2163920FE003C9EE6 /* StoreViewController.m */; };
 		7687E8C516392534003C9EE6 /* StoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7687E8C416392534003C9EE6 /* StoreViewController.xib */; };
 		7687E8C816392E1C003C9EE6 /* StoreDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7687E8C716392E1C003C9EE6 /* StoreDataSource.m */; };
+		7689F5DD16B6A48E00D8AC5C /* ivHit.png in Resources */ = {isa = PBXBuildFile; fileRef = 7689F5DB16B6A48E00D8AC5C /* ivHit.png */; };
+		7689F5DE16B6A48E00D8AC5C /* ivHit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7689F5DC16B6A48E00D8AC5C /* ivHit@2x.png */; };
 		7692812C159DCAFD00E6CE41 /* IconDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7692812B159DCAFD00E6CE41 /* IconDownloader.m */; };
 		7692BC2F1574E36C00983264 /* DuelStartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7692BC2E1574E36C00983264 /* DuelStartViewController.xib */; };
 		7693419713DDBA5000A962A4 /* DecreeNarrow.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7693419613DDBA5000A962A4 /* DecreeNarrow.ttf */; };
@@ -1037,6 +1039,8 @@
 		7687E8C416392534003C9EE6 /* StoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StoreViewController.xib; path = Xib/StoreViewController.xib; sourceTree = "<group>"; };
 		7687E8C616392E1C003C9EE6 /* StoreDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoreDataSource.h; path = PlayersOnLineDataSource/StoreDataSource.h; sourceTree = "<group>"; };
 		7687E8C716392E1C003C9EE6 /* StoreDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoreDataSource.m; path = PlayersOnLineDataSource/StoreDataSource.m; sourceTree = "<group>"; };
+		7689F5DB16B6A48E00D8AC5C /* ivHit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ivHit.png; sourceTree = "<group>"; };
+		7689F5DC16B6A48E00D8AC5C /* ivHit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ivHit@2x.png"; sourceTree = "<group>"; };
 		7692812A159DCAFD00E6CE41 /* IconDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconDownloader.h; sourceTree = "<group>"; };
 		7692812B159DCAFD00E6CE41 /* IconDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconDownloader.m; sourceTree = "<group>"; };
 		7692BC2E1574E36C00983264 /* DuelStartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DuelStartViewController.xib; path = Xib/DuelStartViewController.xib; sourceTree = "<group>"; };
@@ -2076,6 +2080,8 @@
 		BD81E63D169ED75300CE8278 /* ActiveDuel */ = {
 			isa = PBXGroup;
 			children = (
+				7689F5DB16B6A48E00D8AC5C /* ivHit.png */,
+				7689F5DC16B6A48E00D8AC5C /* ivHit@2x.png */,
 				BD3503A516AD370800956BB7 /* btnGun.png */,
 				BD3503A616AD370800956BB7 /* btnGun@2x.png */,
 				BD3503A716AD370800956BB7 /* ivBlood.png */,
@@ -2684,6 +2690,8 @@
 				BD3503C516AD370800956BB7 /* ivMan.png in Resources */,
 				BD3503C716AD370800956BB7 /* ivMan@2x.png in Resources */,
 				7686C21816B2C0F500D92555 /* django_unchained_concept_poster_by_punktx30-d5c7q97123.png in Resources */,
+				7689F5DD16B6A48E00D8AC5C /* ivHit.png in Resources */,
+				7689F5DE16B6A48E00D8AC5C /* ivHit@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
