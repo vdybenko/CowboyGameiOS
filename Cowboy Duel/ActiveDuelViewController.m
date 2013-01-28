@@ -56,6 +56,7 @@
     
     ActivityIndicatorView *activityIndicatorView;
     NSMutableArray *placesOfInterest;
+    int steadyScale;
 }
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *floatView;
@@ -70,7 +71,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *gunButton;
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *opStatsLabel;
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *userStatsLabel;
-
+@property (weak, nonatomic) IBOutlet UIImageView *titleSteadyFire;
+@property (weak, nonatomic) IBOutlet UIImageView *titleReady;
 
 
 
@@ -246,7 +248,18 @@
     self.oponentLiveImageView.frame = frame;
     self.opStatsLabel.text = [NSString stringWithFormat: @"A: +%d\rD: +%d",opAccount.accountWeapon.dDamage,opAccount.accountDefenseValue];
     self.userStatsLabel.text = [NSString stringWithFormat: @"A: +%d\nD: +%d",playerAccount.accountWeapon.dDamage,playerAccount.accountDefenseValue];
+    [self.titleReady setHidden:NO];
+    [self.titleSteadyFire setHidden:YES];
     
+    self.titleSteadyFire.transform = CGAffineTransformIdentity;
+    
+    frame=self.titleSteadyFire.bounds;
+    frame.origin = CGPointMake(80,80);
+    frame.size = CGSizeMake(159, 50);
+    self.titleSteadyFire.bounds = frame;
+    
+    [self.titleSteadyFire setImage:[UIImage imageNamed:@"dv_steady.png"]];
+    steadyScale = 1.0;
 
 }
 
@@ -280,6 +293,8 @@
     [self setGunButton:nil];
     [self setOpStatsLabel:nil];
     [self setUserStatsLabel:nil];
+    [self setTitleSteadyFire:nil];
+    [self setTitleReady:nil];
     [super viewDidUnload];
 }
 
@@ -327,6 +342,7 @@
     }
     switch (shotCountForSound) {
         case 1:
+            [self.titleSteadyFire setHidden:YES];
             [shotAudioPlayer1 stop];
             [shotAudioPlayer1 setCurrentTime:0.0];
             [shotAudioPlayer1 performSelectorInBackground:@selector(play) withObject:nil];
@@ -554,15 +570,18 @@
     {
         //[self hideHelpViewWithArm];
     }
+    [self.titleReady setHidden:YES];
+    [self.titleSteadyFire setHidden:NO];
 }
 
 
 -(void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
 {
+    [self setScale];
     rollingX = (acceleration.x * kFilteringFactor) + (rollingX * (1.0 - kFilteringFactor));
     rollingY = (acceleration.y * kFilteringFactor) + (rollingY * (1.0 - kFilteringFactor));
     rollingZ = (acceleration.z * kFilteringFactor) + (rollingZ * (1.0 - kFilteringFactor));
-    
+    [self setScale];
     //        Position for Shot
     if ((rollingY < 0.0) || (rollingX < -0.2) || (rollingX > 0.2)) accelerometerState = NO;
     
@@ -676,6 +695,13 @@
 -(void)vibrationStart;
 {
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    CGRect frame=self.titleSteadyFire.bounds;
+    frame.origin = CGPointMake(18, -50);
+    frame.size = CGSizeMake(270, 275);
+    self.titleSteadyFire.bounds = frame;
+    
+    [self.titleSteadyFire setImage:[UIImage imageNamed:@"dv_fire_label.png"]];
+
 }
 
 -(void)duelTimerEndFeedBack
@@ -712,6 +738,20 @@
     }];
 
 }
+
+-(void)setScale
+{
+    int scaleDelta;
+    if (steadyScale >= 1.3) scaleDelta = -0.03;
+    if (steadyScale <= 1.0) scaleDelta = 0.03;
+    steadyScale += scaleDelta;
+    if(duelIsStarted)
+        steadyScale = 1.0;
+    
+    CGAffineTransform steadyTransform = CGAffineTransformMakeScale( steadyScale, steadyScale);
+    self.titleSteadyFire.transform = steadyTransform;
+}
+
 
 #pragma mark - IBAction
 - (void)cancelHelpArmClick:(id)sender {
