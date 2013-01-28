@@ -66,7 +66,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *opponentBody;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *bloodImageView;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *bloodCImageView;
-@property (unsafe_unretained, nonatomic) IBOutlet UILabel *buletLabel;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *smokeImage;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *glassImageView;
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *oponentLiveImageView;
@@ -236,7 +235,6 @@
     firstAccel = YES;
     
     [self countUpBulets];
-    self.buletLabel.text=[NSString stringWithFormat:@"%d", shotCountBullet];
     [self updateOpponentViewToRamdomPosition];
     
     ARView *arView = (ARView *)self.view;
@@ -291,7 +289,6 @@
     [self setOpponentImage:nil];
     [self setBloodImageView:nil];
     [self setBloodCImageView:nil];
-    [self setBuletLabel:nil];
     [self setSmokeImage:nil];
     [self setGlassImageView:nil];
     [self setOponentLiveImageView:nil];
@@ -342,9 +339,7 @@
         [self.fireImageView stopAnimating];
     }
     //[self.fireImageView startAnimating];
-    
-    self.buletLabel.text=[NSString stringWithFormat:@"%d", shotCountBullet];
-    
+       
     if(delegate)
     {
         [delegate sendShot];
