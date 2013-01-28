@@ -799,8 +799,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                              [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
                              [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
                          }];
-        [self.navigationController popViewControllerAnimated:NO];
-        
+        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
     }
     [self releaseComponents];
     

@@ -65,7 +65,6 @@
     UIImageView_AttachedView *arrowImage;
     
     NSString *oldAccounId;
-    LoginAnimatedViewController *loginViewController;
     
     NSMutableDictionary *dicForRequests;
     BOOL modifierName;
@@ -120,7 +119,6 @@
 @property (nonatomic) BOOL internetActive;
 @property (nonatomic) BOOL hostActive;
 
-@property (strong) LoginAnimatedViewController *loginViewController;
 @property (strong, nonatomic) AdvertisingNewVersionViewController *advertisingNewVersionViewController;
 -(void)sendRequestWithDonateSum:(int)sum;
 - (NSString *)deviceType;
@@ -136,7 +134,7 @@
 
 @implementation StartViewController
 
-@synthesize gameCenterViewController, player, internetActive, hostActive, soundCheack, loginViewController;
+@synthesize gameCenterViewController, player, internetActive, hostActive, soundCheack;
 @synthesize feedbackButton, duelButton, profileButton, helpButton, mapButton, shareButton;
 @synthesize oldAccounId,feedBackViewVisible,showFeedAtFirst,topPlayersDataSource, advertisingNewVersionViewController,firstRun;
 @synthesize duelProductDownloaderController;
@@ -1535,13 +1533,13 @@ static StartViewController *sharedHelper = nil;
         loginViewControllerLocal.startViewController = self;
         [self.navigationController pushViewController:loginViewControllerLocal animated:YES];
         loginViewControllerLocal = nil;
-    }else {
-        if (firstRunLocal) {
-            firstRunLocal = NO;
-            animationCheck = NO;
-            [self profileFirstRunButtonClickWithOutAnimation];
-        }
-    }
+    }//else {
+//        if (firstRunLocal) {
+//            firstRunLocal = NO;
+//            animationCheck = NO;
+//            [self profileFirstRunButtonClickWithOutAnimation];
+//        }
+//    }
 }
 
 -(float)abs:(float)d

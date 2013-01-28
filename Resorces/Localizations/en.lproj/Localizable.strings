@@ -29,7 +29,7 @@
 
 // Start View
 
-"DUEL"="DUEL";
+"DUEL"="GET HIM";
 
 "PRAC"="PRACTICE";
 
@@ -51,7 +51,7 @@
 
 //FinalView
 
-"BACK"="BACK TO MENU";
+"BACK"="BACK";
 
 "CANCEL_DUEL"="RUN AWAY";
 
