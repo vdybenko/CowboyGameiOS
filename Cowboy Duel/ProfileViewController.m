@@ -141,6 +141,7 @@ static const CGFloat timeToStandartTitles = 1.8;
        ;
         
         [self initMainControls];
+        [self checkLocationOfViewForFBLogin];
     }
     return self;
 }
@@ -182,6 +183,37 @@ static const CGFloat timeToStandartTitles = 1.8;
                 
         [tfFBName setFont: [UIFont fontWithName: @"DecreeNarrow" size:30]];
         tfFBName.text = [NSString stringWithFormat:@"\"%@\"",playerAccount.accountName];
+        
+//avatar magic!
+        NSString *name = [[OGHelper sharedInstance ] getClearName:playerAccount.accountID];
+        if ([playerAccount.accountID rangeOfString:@"A"].location != NSNotFound){
+            iconDownloader = [[IconDownloader alloc] init];
+            iconDownloader.namePlayer=name;
+            iconDownloader.delegate = self;
+            [iconDownloader setAvatarURL:playerAccount.avatar];
+            [iconDownloader startDownloadSimpleIcon];
+        }
+        
+        if ([playerAccount.accountID rangeOfString:@"F"].location != NSNotFound) {
+            iconDownloader = [[IconDownloader alloc] init];
+            
+            iconDownloader.namePlayer=name;
+            iconDownloader.delegate = self;
+            if ([playerAccount.avatar isEqualToString:@""]) {
+                NSString *urlOponent=[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large",name];
+                [iconDownloader setAvatarURL:urlOponent];
+            }else {
+                [iconDownloader setAvatarURL:playerAccount.avatar];
+            }
+            [iconDownloader startDownloadSimpleIcon];
+        }else {
+            profilePictureViewDefault.image = [UIImage imageNamed:@"pv_photo_default.png"];
+            profilePictureViewDefault.transform = CGAffineTransformIdentity;
+            profilePictureViewDefault.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+            
+        }
+//        
+        
     }
     return self;
 }
@@ -236,6 +268,7 @@ static const CGFloat timeToStandartTitles = 1.8;
         [btnLeaderboardBig setTitleByLabel:@"LeaderboardTitle" withColor:buttonsTitleColor fontSize:24];
         [self initMainControls];
         lbDescription.hidden = NO;
+        [self checkLocationOfViewForFBLogin];
     }
     return self;
 }
@@ -259,7 +292,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     [profilePictureView setProfileID:playerAccount.facebookUser.id];
     lbPointsText.font = [UIFont fontWithName: @"MyriadPro-Semibold" size:12];
 
-    [self checkLocationOfViewForFBLogin];
 //    NSString *name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel];
 //    ivCurrentRank.image = [UIImage imageNamed:name];
     didDisappear=NO;
@@ -393,34 +425,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     [ivPointsLine setClipsToBounds:YES];
 
     [mainProfileView setDinamicHeightBackground];
-    NSString *name = [[OGHelper sharedInstance ] getClearName:playerAccount.accountID];
-    
-    if ([playerAccount.accountID rangeOfString:@"A"].location != NSNotFound){
-        iconDownloader = [[IconDownloader alloc] init];
-        iconDownloader.namePlayer=name;
-        iconDownloader.delegate = self;
-        [iconDownloader setAvatarURL:playerAccount.avatar];
-        [iconDownloader startDownloadSimpleIcon];
-    }
-    
-//    if ([playerAccount.accountID rangeOfString:@"F"].location != NSNotFound) {
-//        iconDownloader = [[IconDownloader alloc] init];
-//        
-//        iconDownloader.namePlayer=name;
-//        iconDownloader.delegate = self;
-//        if ([playerAccount.avatar isEqualToString:@""]) {
-//            NSString *urlOponent=[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large",name];
-//            [iconDownloader setAvatarURL:urlOponent];
-//        }else {
-//            [iconDownloader setAvatarURL:playerAccount.avatar];
-//        }
-//        [iconDownloader startDownloadSimpleIcon];
-//    }else {
-//        profilePictureViewDefault.image = [UIImage imageNamed:@"pv_photo_default.png"];
-//        profilePictureViewDefault.transform = CGAffineTransformIdentity;
-//        profilePictureViewDefault.transform = CGAffineTransformMakeScale(-1.0, 1.0);
-//        
-//    }
 
 }
 
