@@ -56,13 +56,14 @@
     
     ActivityIndicatorView *activityIndicatorView;
     NSMutableArray *placesOfInterest;
+    float steadyScale;
+    float scaleDelta;
 }
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *floatView;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *fireImageView;
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *opponentImage;
 @property (weak, nonatomic) IBOutlet UIImageView *opponentBody;
-@property (weak, nonatomic) IBOutlet UIImageView *ivSight;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *bloodImageView;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *bloodCImageView;
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *buletLabel;
@@ -72,7 +73,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *gunButton;
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *opStatsLabel;
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *userStatsLabel;
-
+@property (weak, nonatomic) IBOutlet UIImageView *titleSteadyFire;
+@property (weak, nonatomic) IBOutlet UIImageView *titleReady;
 
 
 
@@ -248,12 +250,23 @@
     self.oponentLiveImageView.frame = frame;
     self.opStatsLabel.text = [NSString stringWithFormat: @"A: +%d\rD: +%d",opAccount.accountWeapon.dDamage,opAccount.accountDefenseValue];
     self.userStatsLabel.text = [NSString stringWithFormat: @"A: +%d\nD: +%d",playerAccount.accountWeapon.dDamage,playerAccount.accountDefenseValue];
+    [self.titleReady setHidden:NO];
+    [self.titleSteadyFire setHidden:YES];
     
+    self.titleSteadyFire.transform = CGAffineTransformIdentity;
+    
+    frame=self.titleSteadyFire.bounds;
+    frame.origin = CGPointMake(80,80);
+    frame.size = CGSizeMake(159, 50);
+    self.titleSteadyFire.bounds = frame;
+    
+    [self.titleSteadyFire setImage:[UIImage imageNamed:@"dv_steady.png"]];
+    steadyScale = 1.0;
+
     for(UIView *subview in [self.opponentBody subviews])
     {
         [subview removeFromSuperview];
     }
-        
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -287,7 +300,8 @@
     [self setOpStatsLabel:nil];
     [self setUserStatsLabel:nil];
     [self setOpponentBody:nil];
-    [self setIvSight:nil];
+    [self setTitleSteadyFire:nil];
+    [self setTitleReady:nil];
     [super viewDidUnload];
 }
 
@@ -337,6 +351,7 @@
     }
     switch (shotCountForSound) {
         case 1:
+            [self.titleSteadyFire setHidden:YES];
             [shotAudioPlayer1 stop];
             [shotAudioPlayer1 setCurrentTime:0.0];
             [shotAudioPlayer1 performSelectorInBackground:@selector(play) withObject:nil];
@@ -570,15 +585,18 @@
     {
         //[self hideHelpViewWithArm];
     }
+    [self.titleReady setHidden:YES];
+    [self.titleSteadyFire setHidden:NO];
 }
 
 
 -(void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
 {
+    [self setScale];
     rollingX = (acceleration.x * kFilteringFactor) + (rollingX * (1.0 - kFilteringFactor));
     rollingY = (acceleration.y * kFilteringFactor) + (rollingY * (1.0 - kFilteringFactor));
     rollingZ = (acceleration.z * kFilteringFactor) + (rollingZ * (1.0 - kFilteringFactor));
-    
+    [self setScale];
     //        Position for Shot
     if ((rollingY < 0.0) || (rollingX < -0.2) || (rollingX > 0.2)) accelerometerState = NO;
     
@@ -692,6 +710,13 @@
 -(void)vibrationStart;
 {
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    CGRect frame=self.titleSteadyFire.bounds;
+    frame.origin = CGPointMake(18, -50);
+    frame.size = CGSizeMake(270, 275);
+    self.titleSteadyFire.bounds = frame;
+    
+    [self.titleSteadyFire setImage:[UIImage imageNamed:@"dv_fire_label.png"]];
+
 }
 
 -(void)duelTimerEndFeedBack
@@ -737,6 +762,26 @@
     ivHit.frame = frame;
     [self.opponentBody addSubview:ivHit];
     ivHit = nil;
+}
+
+-(void)setScale
+{
+    if (steadyScale >= 1.3) scaleDelta = -0.03;
+    if (steadyScale <= 1.0) scaleDelta = 0.03;
+    steadyScale += scaleDelta;
+    if(duelIsStarted){
+        [self performSelector:@selector(hideSteadyImage) withObject:nil afterDelay:2.0];
+    }
+    CGAffineTransform steadyTransform = CGAffineTransformMakeScale( steadyScale, steadyScale);
+    self.titleSteadyFire.transform = steadyTransform;
+}
+
+
+-(void)hideSteadyImage
+{
+    steadyScale = 1.0;
+    [self.titleReady setHidden:YES];
+    [self.titleSteadyFire setHidden:YES];
 }
 
 #pragma mark - IBAction

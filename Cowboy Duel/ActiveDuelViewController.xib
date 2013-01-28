@@ -216,7 +216,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{248, 27}, {20, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSNextKeyView" ref="513821458"/>
+						<reference key="NSNextKeyView" ref="324338450"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -315,6 +315,30 @@
 						<reference key="IBUIFont" ref="166828962"/>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 						<double key="preferredMaxLayoutWidth">45</double>
+					</object>
+					<object class="IBUIImageView" id="782354">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{86, 44}, {143, 50}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSNextKeyView" ref="513821458"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">dv_ready.png</string>
+						</object>
+					</object>
+					<object class="IBUIImageView" id="324338450">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">-2147483356</int>
+						<string key="NSFrame">{{80, 89}, {159, 50}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSNextKeyView" ref="782354"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</array>
 				<string key="NSFrameSize">{320, 480}</string>
@@ -436,19 +460,27 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">titleSteadyFire</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="324338450"/>
+					</object>
+					<int key="connectionID">60</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">titleReady</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="782354"/>
+					</object>
+					<int key="connectionID">61</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">opponentBody</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="1032930529"/>
 					</object>
-					<int key="connectionID">58</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">ivSight</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="128482717"/>
-					</object>
-					<int key="connectionID">59</int>
+					<int key="connectionID">62</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -483,6 +515,8 @@
 							<reference ref="226727912"/>
 							<reference ref="984249766"/>
 							<reference ref="602955860"/>
+							<reference ref="782354"/>
+							<reference ref="324338450"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -591,6 +625,18 @@
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">opStats</string>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">58</int>
+						<reference key="object" ref="782354"/>
+						<reference key="parent" ref="191373211"/>
+						<string key="objectName">imgReady</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">59</int>
+						<reference key="object" ref="324338450"/>
+						<reference key="parent" ref="191373211"/>
+						<string key="objectName">imgFire</string>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -616,12 +662,14 @@
 				<string key="41.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="53.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="54.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="58.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="59.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">59</int>
+			<int key="maxID">62</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
@@ -631,6 +679,7 @@
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="btnGun.png">{134, 65}</string>
 			<string key="dv_bullets_oval.png">{65, 35}</string>
+			<string key="dv_ready.png">{143, 50}</string>
 			<string key="ivBlood.png">{320, 480}</string>
 			<string key="ivCross.png">{50, 50}</string>
 			<string key="ivMan.png">{320, 487}</string>
