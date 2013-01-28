@@ -56,7 +56,8 @@
     
     ActivityIndicatorView *activityIndicatorView;
     NSMutableArray *placesOfInterest;
-    int steadyScale;
+    float steadyScale;
+    float scaleDelta;
 }
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *floatView;
@@ -741,17 +742,23 @@
 
 -(void)setScale
 {
-    int scaleDelta;
     if (steadyScale >= 1.3) scaleDelta = -0.03;
     if (steadyScale <= 1.0) scaleDelta = 0.03;
     steadyScale += scaleDelta;
-    if(duelIsStarted)
-        steadyScale = 1.0;
-    
+    if(duelIsStarted){
+        [self performSelector:@selector(hideSteadyImage) withObject:nil afterDelay:2.0];
+    }
     CGAffineTransform steadyTransform = CGAffineTransformMakeScale( steadyScale, steadyScale);
     self.titleSteadyFire.transform = steadyTransform;
 }
 
+
+-(void)hideSteadyImage
+{
+    steadyScale = 1.0;
+    [self.titleReady setHidden:YES];
+    [self.titleSteadyFire setHidden:YES];
+}
 
 #pragma mark - IBAction
 - (void)cancelHelpArmClick:(id)sender {
