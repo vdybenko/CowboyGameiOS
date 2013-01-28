@@ -1533,13 +1533,13 @@ static StartViewController *sharedHelper = nil;
         loginViewControllerLocal.startViewController = self;
         [self.navigationController pushViewController:loginViewControllerLocal animated:YES];
         loginViewControllerLocal = nil;
-    }else {
-        if (firstRunLocal) {
-            firstRunLocal = NO;
-            animationCheck = NO;
-            [self profileFirstRunButtonClickWithOutAnimation];
-        }
-    }
+    }//else {
+//        if (firstRunLocal) {
+//            firstRunLocal = NO;
+//            animationCheck = NO;
+//            [self profileFirstRunButtonClickWithOutAnimation];
+//        }
+//    }
 }
 
 -(float)abs:(float)d

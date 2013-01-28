@@ -248,7 +248,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
                                                           userInfo:nil];
         
         [self.player setVolume:0.0];
-        [[self navigationController] popViewControllerAnimated:YES];
+        [[StartViewController sharedInstance] profileFirstRunButtonClickWithOutAnimation];
     }
 }
 
