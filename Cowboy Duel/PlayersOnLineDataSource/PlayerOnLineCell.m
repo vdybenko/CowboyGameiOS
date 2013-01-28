@@ -69,8 +69,8 @@
 {    
     self.playerName.text=player.displayName;
     
-    double moneyExch  = [player.money intValue]< 10 ? 1: [player.money intValue] / 10.0;
-    self.gold.text = [NSString stringWithFormat:@"%f $",moneyExch];
+    int moneyExch  = [player.money intValue]< 10 ? 1: [player.money intValue] / 10.0;
+    self.gold.text = [NSString stringWithFormat:@"%d $",moneyExch];
   
     NSLog(@"%@", player.status);
     if([player.status isEqualToString: @"A"]){
