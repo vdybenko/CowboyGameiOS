@@ -35,8 +35,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     
     NSString *namePlayerSaved;
     
-    __weak IBOutlet UIImageView *_ivIconUser;
-    
     //Labels
     __weak IBOutlet UILabel *lbProfileMain;
     __weak IBOutlet UIView *mainProfileView;
@@ -318,7 +316,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     playerServer = nil;
     iconDownloader = nil;
     namePlayerSaved = nil;
-    _ivIconUser = nil;
     lbProfileMain = nil;
     mainProfileView = nil;
     tfFBName = nil;
@@ -363,7 +360,6 @@ static const CGFloat timeToStandartTitles = 1.8;
 //    UIFont *fontSimpleText=[UIFont fontWithName: @"MyriadPro-Semibold" size:13];
     UIColor *mainColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
     
-    _ivIconUser.clipsToBounds = YES;
     
     lbProfileMain.text = NSLocalizedString(@"ProfileTitle", @"");
     lbProfileMain.textColor = mainColor;
@@ -683,7 +679,6 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 {
     NSString *pathToImage=[[OGHelper sharedInstance] apiGraphGetImage:@"me"];
     UIImage *image=[UIImage loadImageFromDocumentDirectory:[pathToImage lastPathComponent]];
-    [_ivIconUser setImage:image];
 }
 
 -(void)setImageFromFacebookWithHideIndicator
@@ -775,6 +770,8 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     }];
 }
 
+#pragma mark - IBAction
+
 - (IBAction)backToMenu:(id)sender {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kReceiveImagefromFBNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kCheckfFBLoginSession object:nil];
@@ -802,7 +799,6 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     [self releaseComponents];
 
 }
-#pragma mark - IBAction
 
 - (IBAction)backToMenuFirstRun:(id)sender {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kReceiveImagefromFBNotification object:nil];
