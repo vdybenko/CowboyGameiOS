@@ -66,7 +66,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     __weak IBOutlet UILabel *lbBiggestWin;
     __weak IBOutlet UILabel *lbBiggestWinCount;
     __weak IBOutlet UILabel *lbLeaderboardTitle;
-    __weak IBOutlet UILabel *_lbMenuTitle;
     
     __weak IBOutlet UIView *userAtackView;
     __weak IBOutlet UIView *userDefenseView;
@@ -134,7 +133,6 @@ static const CGFloat timeToStandartTitles = 1.8;
                                                    object:nil];
         
         [self loadView];
-        _lbMenuTitle.text = NSLocalizedString(@"BACK", @"");
         UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
         [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:24];
         [btnLeaderboardBig setTitleByLabel:@"LeaderboardTitle" withColor:buttonsTitleColor fontSize:24];
@@ -159,7 +157,6 @@ static const CGFloat timeToStandartTitles = 1.8;
         [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
         
         [self loadView];
-        _lbMenuTitle.text = NSLocalizedString(@"BACK", @"");
         UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
         [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:24];
         [btnLeaderboardBig setTitleByLabel:@"LeaderboardTitle" withColor:buttonsTitleColor fontSize:24];
@@ -262,7 +259,6 @@ static const CGFloat timeToStandartTitles = 1.8;
         
         textIndex = 0;
         [self loadView];
-        _lbMenuTitle.text = NSLocalizedString(@"CONTINUE", @"");
         UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
         [btnBack setTitleByLabel:@"CONTINUE" withColor:buttonsTitleColor fontSize:24];
         [btnLeaderboardBig setTitleByLabel:@"LeaderboardTitle" withColor:buttonsTitleColor fontSize:24];
@@ -340,7 +336,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     lbBiggestWin = nil;
     lbBiggestWinCount = nil;
     lbLeaderboardTitle = nil;
-    _lbMenuTitle = nil;
     userAtackView = nil;
     userDefenseView = nil;
     userAtack = nil;
@@ -412,8 +407,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     [btnLogInFB addSubview:label1]; 
     label1 = nil;
     lbDuelsWonCount.font = CountFont;
-    
-    _lbMenuTitle.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
     
     lbUserTitle.font = [UIFont  systemFontOfSize:lbUserTitle.font.pointSize];;
     

@@ -422,14 +422,11 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     if ([fbUserId length] == 0)
         fbUserId = @"Anonymous"; 
     
-    if(![fbUserId isEqualToString:@"NoGC"]){
-    }
-    
 	NSString *page = [[notification userInfo] objectForKey:@"event"];
 	DLog(@"GA page %@",page);
 	if (page){
 //		if (![[GAI sharedInstance].defaultTracker trackView:page])			DLog(@" Can't track pageview");
-    [[GANTracker sharedTracker] trackPageview:page withError:nil];
+        [[GANTracker sharedTracker] trackPageview:page withError:nil];
 	}else DLog(@" Can't track pageview");
 //	[[GAI sharedInstance] dispatch];
   
