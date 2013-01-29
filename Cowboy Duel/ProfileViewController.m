@@ -269,6 +269,10 @@ static const CGFloat timeToStandartTitles = 1.8;
         [self initMainControls];
         lbDescription.hidden = NO;
         [self checkLocationOfViewForFBLogin];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                            object:self
+                                                          userInfo:[NSDictionary dictionaryWithObject:@"/profile_first_run" forKey:@"event"]];
+
     }
     return self;
 }
@@ -826,6 +830,10 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                      }];
     [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:1] animated:NO];
     [self releaseComponents];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+														object:self
+													  userInfo:[NSDictionary dictionaryWithObject:@"/first_profile_continue_click" forKey:@"event"]];
+    
 }
 
 
@@ -856,14 +864,23 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         DLog(@"Profile: Unable to delete file: %@", [error localizedDescription]);
 }
 
+- (IBAction)btnLeaderbordFirstRunClick:(id)sender {
+    TopPlayersViewController *topPlayersViewController =[[TopPlayersViewController alloc] initWithAccount:playerAccount];
+    [self.navigationController pushViewController:topPlayersViewController animated:YES];
+    topPlayersViewController = nil;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/first_profile_leaderBoard_click" forKey:@"event"]];
+}
+
 
 - (IBAction)btnLeaderbordClick:(id)sender {
     TopPlayersViewController *topPlayersViewController =[[TopPlayersViewController alloc] initWithAccount:playerAccount];
     [self.navigationController pushViewController:topPlayersViewController animated:YES];
     topPlayersViewController = nil;
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
-														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"/leaderBoard_click" forKey:@"event"]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/leaderBoard_click" forKey:@"event"]];
 }
 
 - (IBAction)duelButtonClick:(id)sender {
