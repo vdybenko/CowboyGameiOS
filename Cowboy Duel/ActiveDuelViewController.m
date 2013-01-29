@@ -14,6 +14,7 @@
 #import "FinalViewController.h"
 #import "ARView.h"
 #import "OponentCoordinateView.h"
+#import "StartViewController.h"
 
 #define kFilteringFactor 0.1
 #define targetHeight 260
@@ -114,6 +115,8 @@
         url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/brocken_glass.aif", [[NSBundle mainBundle] resourcePath]]];
         brockenGlassAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
         [brockenGlassAudioPlayer prepareToPlay];
+        
+        [StartViewController sharedInstance].playerStop;
 
     }
     return self;

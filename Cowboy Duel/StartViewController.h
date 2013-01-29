@@ -53,6 +53,7 @@
 + (StartViewController *)sharedInstance;
 -(id)init;     //must be login object!!!
 -(void)playerStop;
+-(void)playerStart;
 -(BOOL)connectedToWiFi;
 -(void)authorizationModifier:(BOOL)modifierName;
 -(void)modifierUser:(AccountDataSource *)playerTemp;
