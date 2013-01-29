@@ -312,6 +312,9 @@ static const CGFloat timeToStandartTitles = 1.8;
 
 -(void)releaseComponents
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReceiveImagefromFBNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kCheckfFBLoginSession object:nil];
+    
     playerAccount = nil;
     playerServer = nil;
     iconDownloader = nil;
@@ -796,7 +799,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                          }];
         [self.navigationController popViewControllerAnimated:YES];
     }
-    [self releaseComponents];
+//    [self releaseComponents];
 
 }
 
@@ -817,7 +820,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                          [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
                      }];
     [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:1] animated:NO];
-    [self releaseComponents];
+//    [self releaseComponents];
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/first_profile_continue_click" forKey:@"event"]];
