@@ -131,6 +131,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusSimple];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"FirstRun_v2.2"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    [StartViewController sharedInstance].playerStart;
 }
 
 -(void)viewDidDisappear:(BOOL)animated
