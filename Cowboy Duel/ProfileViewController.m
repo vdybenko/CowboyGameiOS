@@ -775,19 +775,16 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     }];
 }
 
-#pragma mark - IBAction
-
--(IBAction)backToMenu:(id)sender;
-{
+- (IBAction)backToMenu:(id)sender {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kReceiveImagefromFBNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kCheckfFBLoginSession object:nil];	
-
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kCheckfFBLoginSession object:nil];
+    
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"moneyForIPad"];
     
     CATransition* transition = [CATransition animation];
     transition.duration = 0.5;
     transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    transition.type = kCATransitionPush; 
+    transition.type = kCATransitionPush;
     
     if (duelButton.hidden) {
         transition.subtype = kCATransitionFromRight;
@@ -803,7 +800,9 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         [self.navigationController popViewControllerAnimated:YES];
     }
     [self releaseComponents];
+
 }
+#pragma mark - IBAction
 
 - (IBAction)backToMenuFirstRun:(id)sender {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kReceiveImagefromFBNotification object:nil];
