@@ -264,7 +264,7 @@ You can upgrade this game right now through <b>iTunes Store</b>
 //Rank Text
 "Intro" = "Ye know who bounty hunters are, boy? They chase criminals 'n get a reward for 'em, dead or alive. I'm one of the best out there, 'n I could do with some help. Seems yer tough enough for the job. Come with me, help me get'em bad guys, and ye'll get yer freedom. If yer good, yer gonna be a big bounty hunter, just like me.";
 "0RankText" = "";
-"1RankText" = "";
+"1RankText" = "SLAVE";
 "2RankText" = "No chains for ye any more, eh? But there're still a few outlaws between ye and yer freedom.";
 "3RankText" = "Yer gun got ye some freedom, boy! But don't ye relax, more folks out there 're waiting for justice.";
 "4RankText" = "Ye were born for this gun! Let’s go get more outlaws, gunfighter!";

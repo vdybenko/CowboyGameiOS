@@ -39,7 +39,6 @@
     CollectionAppViewController *collectionAppViewController;
     ListOfItemsViewController *listOfItemsViewController;
     ProfileViewController *profileViewController;
-    TopPlayersDataSource *topPlayersDataSource;
     
 //    BOOL firstRun;
     BOOL firstRunLocal;
@@ -1524,7 +1523,6 @@ static StartViewController *sharedHelper = nil;
 
 -(void)showProfileFirstRun
 {
-    
     NSString *LoginForIPad=[[NSUserDefaults standardUserDefaults] stringForKey:@"IPad"];
     if (LoginForIPad &&(![[OGHelper sharedInstance] isAuthorized])) {
         firstRunLocal = NO;
@@ -1533,13 +1531,7 @@ static StartViewController *sharedHelper = nil;
         loginViewControllerLocal.startViewController = self;
         [self.navigationController pushViewController:loginViewControllerLocal animated:YES];
         loginViewControllerLocal = nil;
-    }//else {
-//        if (firstRunLocal) {
-//            firstRunLocal = NO;
-//            animationCheck = NO;
-//            [self profileFirstRunButtonClickWithOutAnimation];
-//        }
-//    }
+    }
 }
 
 -(float)abs:(float)d

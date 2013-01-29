@@ -803,11 +803,31 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                              [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
                              [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
                          }];
-        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+        [self.navigationController popViewControllerAnimated:YES];
     }
     [self releaseComponents];
-    
 }
+
+- (IBAction)backToMenuFirstRun:(id)sender {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReceiveImagefromFBNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kCheckfFBLoginSession object:nil];
+    
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"moneyForIPad"];
+    
+    CATransition* transition = [CATransition animation];
+    transition.duration = 0.5;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionPush;
+    
+    [UIView animateWithDuration:0.75
+                     animations:^{
+                         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                         [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
+                     }];
+    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:1] animated:NO];
+    [self releaseComponents];
+}
+
 
 - (IBAction)btnSoundClick:(id)sender {
     StartViewController *startViewController=[[self.navigationController viewControllers] objectAtIndex:0];

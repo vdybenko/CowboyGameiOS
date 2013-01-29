@@ -68,6 +68,7 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
     
     tableView.delegate=self;
     tableView.dataSource=_playersTopDataSource;
+    [_playersTopDataSource reloadDataSource];
     
     saloonTitle.text = NSLocalizedString(@"LEAD", nil);
     saloonTitle.textColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
