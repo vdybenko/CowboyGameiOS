@@ -178,7 +178,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"/duel_teaching" forKey:@"event"]];
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/first_screen_teaching" forKey:@"event"]];
 }
 
 
