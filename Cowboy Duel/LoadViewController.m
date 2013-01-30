@@ -88,6 +88,8 @@ static const char *A_URL =  BASE_URL"api/authorization";
 
 - (void) viewDidLoad 
 {
+    /* gun animation commented
+     
     UIImageView *gunLeftImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Gun.png"]];
     [gunLeftImage setFrame:CGRectMake(32-gunLeftImage.frame.size.width, 
                                       self.view.frame.size.height, 
@@ -109,6 +111,8 @@ static const char *A_URL =  BASE_URL"api/authorization";
     [self animationWithGunsFirst:gunLeftImage andSecond:gunRightImage];
     gunLeftImage = nil;
     gunRightImage = nil;
+     
+    */
 }
 
 -(void)releaseComponents
