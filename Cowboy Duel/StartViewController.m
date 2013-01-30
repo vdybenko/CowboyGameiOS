@@ -365,7 +365,7 @@ static StartViewController *sharedHelper = nil;
     [lbShareButton setText:NSLocalizedString(@"Share", @"")];
     [lbShareButton setTextColor:buttonsTitleColor];
     [lbShareButton setFont:[UIFont fontWithName: @"MyriadPro-Semibold" size:15]];
-
+/*
     [duelButton setTitle:NSLocalizedString(@"Saloon", @"") forState:UIControlStateNormal];
     [duelButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
     duelButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
@@ -390,9 +390,9 @@ static StartViewController *sharedHelper = nil;
     [mapButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
     mapButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
     mapButton.titleLabel.textAlignment = UITextAlignmentCenter;
-    
+*/    
     UIColor *textColor = [UIColor whiteColor];
-    
+ 
     UIFont *textFont = [UIFont systemFontOfSize:16.0f];
         
     lbPostMessage.text = NSLocalizedString(@"SocialNetworksTitle", nil);
