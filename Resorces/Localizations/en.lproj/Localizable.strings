@@ -249,28 +249,23 @@ You can upgrade this game right now through <b>iTunes Store</b>
 
 
 //Titles for Users
-"0Rank" = "Guest";
-"1Rank" = "Slave"; 
-"2Rank" = "Refugee"; 
-"3Rank" = "Free Man"; 
-"4Rank" = "Gunfighter";
-"5Rank" = "Bounty Hunter Apprentice"; 
-"6Rank" = "Bounty Hunter"; 
-"7Rank" = "Lawman"; 
-"8Rank" = "Hero of Duels"; 
-"9Rank" = "Grave-digger"; 
-"10Rank" = "Angel of Death"; 
+"0Rank" = "Slave"; 
+"1Rank" = "Refugee";
+"2Rank" = "Free Man";
+"3Rank" = "Gunfighter";
+"4Rank" = "Bounty Hunter Apprentice";
+"5Rank" = "Bounty Hunter";
+"6Rank" = "Lawman";
 
 //Rank Text
 "Intro" = "Ye know who bounty hunters are, boy? They chase criminals 'n get a reward for 'em, dead or alive. I'm one of the best out there, 'n I could do with some help. Seems yer tough enough for the job. Come with me, help me get'em bad guys, and ye'll get yer freedom. If yer good, yer gonna be a big bounty hunter, just like me.";
-"0RankText" = "";
-"1RankText" = "SLAVE";
-"2RankText" = "No chains for ye any more, eh? But there're still a few outlaws between ye and yer freedom.";
-"3RankText" = "Yer gun got ye some freedom, boy! But don't ye relax, more folks out there 're waiting for justice.";
-"4RankText" = "Ye were born for this gun! Let’s go get more outlaws, gunfighter!";
-"5RankText" = "Yer a hell of a shooter, ain’t ye? Now yer my 'apprentice 'and I'll teach ye all I know.";
-"6RankText" = "Ye shoot like devil, boy! Looks like yer a real bounty hunter now! Let's go get more bad guys 'n more rewards.";
-"7RankText" = "Yer the toughest bounty hunter in the West! Now yer gonna guard the justice here.";
+"0RankText" = "SLAVE";
+"1RankText" = "No chains for ye any more, eh? But there're still a few outlaws between ye and yer freedom.";
+"2RankText" = "Yer gun got ye some freedom, boy! But don't ye relax, more folks out there 're waiting for justice.";
+"3RankText" = "Ye were born for this gun! Let’s go get more outlaws, gunfighter!";
+"4RankText" = "Yer a hell of a shooter, ain’t ye? Now yer my 'apprentice 'and I'll teach ye all I know.";
+"5RankText" = "Ye shoot like devil, boy! Looks like yer a real bounty hunter now! Let's go get more bad guys 'n more rewards.";
+"6RankText" = "Yer the toughest bounty hunter in the West! Now yer gonna guard the justice here.";
 
 //Win/Lose View
 "YouEarned" = "You earned:";

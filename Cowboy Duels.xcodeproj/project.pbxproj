@@ -108,8 +108,6 @@
 		3167BAD815CAA75F00AF2745 /* fin_img_5rank@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BAB615CAA75F00AF2745 /* fin_img_5rank@2x.png */; };
 		3167BAD915CAA75F00AF2745 /* fin_img_6rank.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BAB715CAA75F00AF2745 /* fin_img_6rank.png */; };
 		3167BADA15CAA75F00AF2745 /* fin_img_6rank@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BAB815CAA75F00AF2745 /* fin_img_6rank@2x.png */; };
-		3167BADB15CAA75F00AF2745 /* fin_img_7rank.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BAB915CAA75F00AF2745 /* fin_img_7rank.png */; };
-		3167BADC15CAA75F00AF2745 /* fin_img_7rank@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BABA15CAA75F00AF2745 /* fin_img_7rank@2x.png */; };
 		3167BAE515CAA75F00AF2745 /* fin_img_light_bckgr.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BAC315CAA75F00AF2745 /* fin_img_light_bckgr.png */; };
 		3167BAE615CAA75F00AF2745 /* fin_img_light_bckgr2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BAC415CAA75F00AF2745 /* fin_img_light_bckgr2.png */; };
 		3167BAE715CAA75F00AF2745 /* fin_img_light_bckgr2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BAC515CAA75F00AF2745 /* fin_img_light_bckgr2@2x.png */; };
@@ -214,6 +212,8 @@
 		768388E5157E249900377D88 /* CDCollectionAdvertisingApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388E2157E249900377D88 /* CDCollectionAdvertisingApp.m */; };
 		768388E8157E304400377D88 /* AdvertisingNewVersionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388E7157E304300377D88 /* AdvertisingNewVersionViewController.m */; };
 		76841B7B163EAE3800F3FD1A /* SoundDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 76841B7A163EAE3800F3FD1A /* SoundDownload.m */; };
+		7685ABAF16B94D7200FA898C /* fin_img_0rank.png in Resources */ = {isa = PBXBuildFile; fileRef = 7685ABAD16B94D7200FA898C /* fin_img_0rank.png */; };
+		7685ABB016B94D7200FA898C /* fin_img_0rank@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7685ABAE16B94D7200FA898C /* fin_img_0rank@2x.png */; };
 		76864B391626A0E80095BBEF /* TopPlayersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76864B381626A0E80095BBEF /* TopPlayersCell.xib */; };
 		76864B3B1626DAC30095BBEF /* OnLinePlayersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76864B3A1626DAC30095BBEF /* OnLinePlayersCell.xib */; };
 		768675BE1647FB2000682BCF /* st_cloud_new.png in Resources */ = {isa = PBXBuildFile; fileRef = 768675BC1647FB2000682BCF /* st_cloud_new.png */; };
@@ -619,8 +619,6 @@
 		BD83A50E16720DFE003EE4B3 /* fin_img_5rank@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BAB615CAA75F00AF2745 /* fin_img_5rank@2x.png */; };
 		BD83A50F16720DFE003EE4B3 /* fin_img_6rank.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BAB715CAA75F00AF2745 /* fin_img_6rank.png */; };
 		BD83A51016720DFE003EE4B3 /* fin_img_6rank@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BAB815CAA75F00AF2745 /* fin_img_6rank@2x.png */; };
-		BD83A51116720DFE003EE4B3 /* fin_img_7rank.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BAB915CAA75F00AF2745 /* fin_img_7rank.png */; };
-		BD83A51216720DFE003EE4B3 /* fin_img_7rank@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BABA15CAA75F00AF2745 /* fin_img_7rank@2x.png */; };
 		BD83A51716720DFE003EE4B3 /* fin_img_light_bckgr.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BAC315CAA75F00AF2745 /* fin_img_light_bckgr.png */; };
 		BD83A51816720DFE003EE4B3 /* fin_img_light_bckgr2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BAC415CAA75F00AF2745 /* fin_img_light_bckgr2.png */; };
 		BD83A51916720DFE003EE4B3 /* fin_img_light_bckgr2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BAC515CAA75F00AF2745 /* fin_img_light_bckgr2@2x.png */; };
@@ -888,8 +886,6 @@
 		3167BAB615CAA75F00AF2745 /* fin_img_5rank@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fin_img_5rank@2x.png"; sourceTree = "<group>"; };
 		3167BAB715CAA75F00AF2745 /* fin_img_6rank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fin_img_6rank.png; sourceTree = "<group>"; };
 		3167BAB815CAA75F00AF2745 /* fin_img_6rank@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fin_img_6rank@2x.png"; sourceTree = "<group>"; };
-		3167BAB915CAA75F00AF2745 /* fin_img_7rank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fin_img_7rank.png; sourceTree = "<group>"; };
-		3167BABA15CAA75F00AF2745 /* fin_img_7rank@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fin_img_7rank@2x.png"; sourceTree = "<group>"; };
 		3167BAC315CAA75F00AF2745 /* fin_img_light_bckgr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fin_img_light_bckgr.png; sourceTree = "<group>"; };
 		3167BAC415CAA75F00AF2745 /* fin_img_light_bckgr2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fin_img_light_bckgr2.png; sourceTree = "<group>"; };
 		3167BAC515CAA75F00AF2745 /* fin_img_light_bckgr2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fin_img_light_bckgr2@2x.png"; sourceTree = "<group>"; };
@@ -1029,6 +1025,8 @@
 		768388E7157E304300377D88 /* AdvertisingNewVersionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertisingNewVersionViewController.m; sourceTree = "<group>"; };
 		76841B79163EAE3800F3FD1A /* SoundDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundDownload.h; sourceTree = "<group>"; };
 		76841B7A163EAE3800F3FD1A /* SoundDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundDownload.m; sourceTree = "<group>"; };
+		7685ABAD16B94D7200FA898C /* fin_img_0rank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fin_img_0rank.png; sourceTree = "<group>"; };
+		7685ABAE16B94D7200FA898C /* fin_img_0rank@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fin_img_0rank@2x.png"; sourceTree = "<group>"; };
 		76864B381626A0E80095BBEF /* TopPlayersCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TopPlayersCell.xib; path = Xib/TopPlayersCell.xib; sourceTree = "<group>"; };
 		76864B3A1626DAC30095BBEF /* OnLinePlayersCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OnLinePlayersCell.xib; path = Xib/OnLinePlayersCell.xib; sourceTree = "<group>"; };
 		768675BC1647FB2000682BCF /* st_cloud_new.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = st_cloud_new.png; sourceTree = "<group>"; };
@@ -1664,6 +1662,8 @@
 		3167BAA615CAA75F00AF2745 /* Achievment */ = {
 			isa = PBXGroup;
 			children = (
+				7685ABAD16B94D7200FA898C /* fin_img_0rank.png */,
+				7685ABAE16B94D7200FA898C /* fin_img_0rank@2x.png */,
 				3167BAAD15CAA75F00AF2745 /* fin_img_1rank.png */,
 				3167BAAE15CAA75F00AF2745 /* fin_img_1rank@2x.png */,
 				3167BAAF15CAA75F00AF2745 /* fin_img_2rank.png */,
@@ -1676,8 +1676,6 @@
 				3167BAB615CAA75F00AF2745 /* fin_img_5rank@2x.png */,
 				3167BAB715CAA75F00AF2745 /* fin_img_6rank.png */,
 				3167BAB815CAA75F00AF2745 /* fin_img_6rank@2x.png */,
-				3167BAB915CAA75F00AF2745 /* fin_img_7rank.png */,
-				3167BABA15CAA75F00AF2745 /* fin_img_7rank@2x.png */,
 				3167BAC315CAA75F00AF2745 /* fin_img_light_bckgr.png */,
 				3167BAC415CAA75F00AF2745 /* fin_img_light_bckgr2.png */,
 				3167BAC515CAA75F00AF2745 /* fin_img_light_bckgr2@2x.png */,
@@ -2568,8 +2566,6 @@
 				3167BAD815CAA75F00AF2745 /* fin_img_5rank@2x.png in Resources */,
 				3167BAD915CAA75F00AF2745 /* fin_img_6rank.png in Resources */,
 				3167BADA15CAA75F00AF2745 /* fin_img_6rank@2x.png in Resources */,
-				3167BADB15CAA75F00AF2745 /* fin_img_7rank.png in Resources */,
-				3167BADC15CAA75F00AF2745 /* fin_img_7rank@2x.png in Resources */,
 				3167BAE515CAA75F00AF2745 /* fin_img_light_bckgr.png in Resources */,
 				3167BAE615CAA75F00AF2745 /* fin_img_light_bckgr2.png in Resources */,
 				3167BAE715CAA75F00AF2745 /* fin_img_light_bckgr2@2x.png in Resources */,
@@ -2692,6 +2688,8 @@
 				318F233D16B9437A0081BE5E /* Default.png in Resources */,
 				318F233F16B9437A0081BE5E /* Default@2x.png in Resources */,
 				318F234216B9484E0081BE5E /* Default-568h@2x.png in Resources */,
+				7685ABAF16B94D7200FA898C /* fin_img_0rank.png in Resources */,
+				7685ABB016B94D7200FA898C /* fin_img_0rank@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2826,8 +2824,6 @@
 				BD83A50E16720DFE003EE4B3 /* fin_img_5rank@2x.png in Resources */,
 				BD83A50F16720DFE003EE4B3 /* fin_img_6rank.png in Resources */,
 				BD83A51016720DFE003EE4B3 /* fin_img_6rank@2x.png in Resources */,
-				BD83A51116720DFE003EE4B3 /* fin_img_7rank.png in Resources */,
-				BD83A51216720DFE003EE4B3 /* fin_img_7rank@2x.png in Resources */,
 				BD83A51716720DFE003EE4B3 /* fin_img_light_bckgr.png in Resources */,
 				BD83A51816720DFE003EE4B3 /* fin_img_light_bckgr2.png in Resources */,
 				BD83A51916720DFE003EE4B3 /* fin_img_light_bckgr2@2x.png in Resources */,
@@ -3254,8 +3250,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Olexandr Bezpalchuk (6YGMCBWQGA)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Olexandr Bezpalchuk (6YGMCBWQGA)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3299,8 +3295,8 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Cowboy Duel";
-				PROVISIONING_PROFILE = "B7278DBA-8E4E-4C7B-AB49-F6F0E405F7F4";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B7278DBA-8E4E-4C7B-AB49-F6F0E405F7F4";
+				PROVISIONING_PROFILE = "DD33605C-602F-4EF7-A974-A0FBED085AC8";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DD33605C-602F-4EF7-A974-A0FBED085AC8";
 				REZ_SEARCH_PATHS = "$(inherited)";
 				SDKROOT = iphoneos6.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3349,8 +3345,8 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Olexandr Bezpalchuk (6YGMCBWQGA)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Olexandr Bezpalchuk (6YGMCBWQGA)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3392,8 +3388,8 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Cowboy Duel";
-				PROVISIONING_PROFILE = "B7278DBA-8E4E-4C7B-AB49-F6F0E405F7F4";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B7278DBA-8E4E-4C7B-AB49-F6F0E405F7F4";
+				PROVISIONING_PROFILE = "DD33605C-602F-4EF7-A974-A0FBED085AC8";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DD33605C-602F-4EF7-A974-A0FBED085AC8";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
@@ -3639,9 +3635,9 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Olexandr Bezpalchuk (6YGMCBWQGA)";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Olexandr Bezpalchuk (6YGMCBWQGA)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Olexandr Bezpalchuk (6YGMCBWQGA)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3684,9 +3680,9 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Cowboy Duel";
-				PROVISIONING_PROFILE = "B7278DBA-8E4E-4C7B-AB49-F6F0E405F7F4";
-				"PROVISIONING_PROFILE[sdk=*]" = "B7278DBA-8E4E-4C7B-AB49-F6F0E405F7F4";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B7278DBA-8E4E-4C7B-AB49-F6F0E405F7F4";
+				PROVISIONING_PROFILE = "DD33605C-602F-4EF7-A974-A0FBED085AC8";
+				"PROVISIONING_PROFILE[sdk=*]" = "DD33605C-602F-4EF7-A974-A0FBED085AC8";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DD33605C-602F-4EF7-A974-A0FBED085AC8";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",

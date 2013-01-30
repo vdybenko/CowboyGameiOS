@@ -953,7 +953,7 @@
 
     for ( NSNumber *pointMoney in _pointForEachLevels) {
         if (([pointMoney intValue]<=newL)&&([pointMoney intValue]>oldL)) {
-            int playerNewLevel=[_pointForEachLevels indexOfObject:pointMoney]+2;
+            int playerNewLevel=[_pointForEachLevels indexOfObject:pointMoney]+1;
             
             NSLog(@"playerNewLevel %d pointMoney %d",playerNewLevel,[pointMoney intValue]);
             playerAccount.accountLevel=playerNewLevel;
