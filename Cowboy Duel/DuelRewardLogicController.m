@@ -68,9 +68,6 @@
                     [NSNumber numberWithInt:150],//5
                     [NSNumber numberWithInt:300],//6
                     [NSNumber numberWithInt:500],//7
-                    [NSNumber numberWithInt:800],//8
-                    [NSNumber numberWithInt:1500],//9
-                    [NSNumber numberWithInt:5000],//10
                     nil];
     return array;
 }

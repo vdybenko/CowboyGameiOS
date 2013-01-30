@@ -800,7 +800,6 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         [self.navigationController popViewControllerAnimated:YES];
     }
 //    [self releaseComponents];
-
 }
 
 - (IBAction)backToMenuFirstRun:(id)sender {

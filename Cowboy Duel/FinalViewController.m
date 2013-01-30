@@ -953,8 +953,9 @@
 
     for ( NSNumber *pointMoney in _pointForEachLevels) {
         if (([pointMoney intValue]<=newL)&&([pointMoney intValue]>oldL)) {
-            int playerNewLevel=[_pointForEachLevels indexOfObject:pointMoney]+1;
+            int playerNewLevel=[_pointForEachLevels indexOfObject:pointMoney]+2;
             
+            NSLog(@"playerNewLevel %d pointMoney %d",playerNewLevel,[pointMoney intValue]);
             playerAccount.accountLevel=playerNewLevel;
             [playerAccount saveAccountLevel];
             
@@ -975,7 +976,6 @@
 -(void)showMessageOfNewLevel
 {
     LevelCongratViewController *lvlCongratulationViewController=[[LevelCongratViewController alloc] initForNewLevelPlayerAccount:playerAccount andController:self tryButtonEnable:tryButton.enabled];
-    playerAccount.accountLevel +=1;
     [self performSelector:@selector(showViewController:) withObject:lvlCongratulationViewController afterDelay:4.5];
 }
 
