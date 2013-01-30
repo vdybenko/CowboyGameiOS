@@ -88,31 +88,7 @@ static const char *A_URL =  BASE_URL"api/authorization";
 
 - (void) viewDidLoad 
 {
-    /* gun animation commented
-     
-    UIImageView *gunLeftImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Gun.png"]];
-    [gunLeftImage setFrame:CGRectMake(32-gunLeftImage.frame.size.width, 
-                                      self.view.frame.size.height, 
-                                      gunLeftImage.frame.size.width, 
-                                      gunLeftImage.frame.size.height)];
-    [imgBackground addSubview:gunLeftImage];
     
-   
-    UIImageView *gunRightImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Gun.png"]];
-    CGAffineTransform transform = CGAffineTransformScale(gunRightImage.transform, -1, 1);
-    gunRightImage.transform = transform;
-       
-    [gunRightImage setFrame:CGRectMake(imgBackground.frame.size.width-32, 
-                                      self.view.frame.size.height, 
-                                      gunLeftImage.frame.size.width, 
-                                      gunLeftImage.frame.size.height)];
-    [imgBackground addSubview:gunRightImage];
-    
-    [self animationWithGunsFirst:gunLeftImage andSecond:gunRightImage];
-    gunLeftImage = nil;
-    gunRightImage = nil;
-     
-    */
 }
 
 -(void)releaseComponents
@@ -122,31 +98,7 @@ static const char *A_URL =  BASE_URL"api/authorization";
     imgBackground = nil;
     receivedData = nil;
 }
-//animation of guns:
-- (void) animationWithGunsFirst:  (UIImageView *)imageLeft andSecond:(UIImageView *)imageRight
-{
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationBeginsFromCurrentState:YES]; 
-	[UIView setAnimationCurve:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction];
-    [UIView setAnimationDuration:1.2f];
-	[UIView setAnimationDelegate:self];
-   
-    
-    CGPoint centerPtLeft = CGPointMake(imageLeft.center.x, imageLeft.center.y);
-    centerPtLeft.x += imageLeft.frame.size.width; 
-    centerPtLeft.y -= imageLeft.frame.size.height;
-    imageLeft.center = centerPtLeft;
-   
-    CGPoint centerPtRight = CGPointMake(imageRight.center.x, imageRight.center.y);
-    centerPtRight.x -= imageLeft.frame.size.width;
-    centerPtRight.y -= imageLeft.frame.size.height;
-    
-    imageRight.center = centerPtRight; 
-    
-        
-    [UIView commitAnimations];    
-}
-//eof animation*/
+
 
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
