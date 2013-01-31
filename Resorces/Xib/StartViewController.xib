@@ -84,7 +84,7 @@
 					<object class="IBUIButton" id="245571226">
 						<reference key="NSNextResponder" ref="1048327278"/>
 						<int key="NSvFlags">296</int>
-						<string key="NSFrame">{{50, 91}, {226, 112}}</string>
+						<string key="NSFrame">{{50, 78}, {226, 134}}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="676481781"/>
@@ -124,7 +124,7 @@
 					<object class="IBUIButton" id="676481781">
 						<reference key="NSNextResponder" ref="1048327278"/>
 						<int key="NSvFlags">-2147483352</int>
-						<string key="NSFrame">{{50, 97}, {225, 79}}</string>
+						<string key="NSFrame">{{50, 88}, {225, 114}}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="273843970"/>
@@ -1685,7 +1685,7 @@
 			<string key="btnFeedBackBackgr.png">{100, 35}</string>
 			<string key="btn_big.png">{225, 79}</string>
 			<string key="btn_help.png">{225, 78}</string>
-			<string key="btn_play.png">{225, 112}</string>
+			<string key="btn_play.png">{225, 134}</string>
 			<string key="btn_profile.png">{225, 78}</string>
 			<string key="btn_store.png">{225, 78}</string>
 			<string key="fb_btn_facebook.png">{57, 57}</string>
