@@ -182,6 +182,7 @@ static const CGFloat timeToStandartTitles = 1.8;
 //avatar magic!
         NSString *name = [[OGHelper sharedInstance ] getClearName:playerAccount.accountID];
         if ([playerAccount.accountID rangeOfString:@"A"].location != NSNotFound){
+            profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
             iconDownloader = [[IconDownloader alloc] init];
             iconDownloader.namePlayer=name;
             iconDownloader.delegate = self;
@@ -191,6 +192,7 @@ static const CGFloat timeToStandartTitles = 1.8;
         
         if ([playerAccount.accountID rangeOfString:@"F"].location != NSNotFound) {
             iconDownloader = [[IconDownloader alloc] init];
+            profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
             
             iconDownloader.namePlayer=name;
             iconDownloader.delegate = self;
