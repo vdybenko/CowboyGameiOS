@@ -90,6 +90,9 @@ static const CGFloat timeToStandartTitles = 1.8;
     int textIndex;
     __weak IBOutlet UILabel *lbDescription;
     NSMutableArray *textsContainer;
+    
+    DuelStartViewController *duelStartViewController;
+    __weak IBOutlet UIActivityIndicatorView *activityIndicatorView;
 }
 -(void)setImageFromFacebook;
 -(IBAction)showStoreWeapon:(id)sender;
@@ -276,7 +279,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     CGRect liveChRect = ivPointsLine.frame;
     liveChRect.size.width=0;
     ivPointsLine.frame = liveChRect;
-    
+    if (duelStartViewController.waitTimer) [duelStartViewController.waitTimer invalidate];
     didDisappear=YES;
 }
 
@@ -866,20 +869,39 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         return;
     }
     
-    DuelStartViewController *duelStartViewController = [[DuelStartViewController alloc]initWithAccount:[AccountDataSource sharedInstance] andOpAccount:playerAccount opopnentAvailable:NO andServerType:NO andTryAgain:NO];
-    duelStartViewController.serverName = playerAccount.accountID;
+    duelStartViewController = [[DuelStartViewController alloc]initWithAccount:[AccountDataSource sharedInstance] andOpAccount:playerAccount opopnentAvailable:NO andServerType:NO andTryAgain:NO];
+    //duelStartViewController.serverName = playerAccount.accountID;
     
     GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
     duelStartViewController.delegate = gameCenterViewController;
     gameCenterViewController.duelStartViewController = duelStartViewController;
     
+    if (!playerAccount.bot) {
+        const char *name = [playerAccount.accountID cStringUsingEncoding:NSUTF8StringEncoding];
+        SSConnection *connection = [SSConnection sharedInstance];
+        [connection sendData:(void *)(name) packetID:NETWORK_SET_PAIR ofLength:sizeof(char) * [playerAccount.accountID length]];
+    }
+    else {
+        SSConnection *connection = [SSConnection sharedInstance];
+        [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
+        [self performSelector:@selector(startBotDuel) withObject:nil afterDelay:0.5];
+    }
+
+    [activityIndicatorView startAnimating];
+    [duelButton setEnabled:NO];
+    //duelStartViewController = nil;
+}
+
+-(void)startBotDuel
+{
+    int randomTime = arc4random() % 6;
+    ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:[AccountDataSource sharedInstance] oponentAccount:playerAccount];
     [UIView animateWithDuration:0.75
                      animations:^{
                          [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-                         [self.navigationController pushViewController:duelStartViewController animated:NO];
+                         [self.navigationController pushViewController:activeDuelViewController animated:NO];
                          [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
                      }];
-    duelStartViewController = nil;
 }
 
 -(IBAction)showStoreWeapon:(id)sender
@@ -916,5 +938,9 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 }
 
 - (void)dealloc {
+}
+- (void)viewDidUnload {
+    activityIndicatorView = nil;
+    [super viewDidUnload];
 }
 @end

@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ProfileViewController.m"
-         timestampString = "379872353.378233"
+         timestampString = "381080317.415967"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "634"
-         endingLineNumber = "634"
+         startingLineNumber = "637"
+         endingLineNumber = "637"
          landmarkName = "@implementation ProfileViewController"
          landmarkType = "3">
       </FileBreakpoint>
@@ -125,11 +125,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/DuelStartViewController.m"
-         timestampString = "380472225.223194"
+         timestampString = "381316517.336895"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "420"
-         endingLineNumber = "420"
+         startingLineNumber = "423"
+         endingLineNumber = "423"
          landmarkName = "-cancelDuel"
          landmarkType = "5">
       </FileBreakpoint>
@@ -138,11 +138,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ProfileViewController.m"
-         timestampString = "379872353.378233"
+         timestampString = "381080317.415967"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "345"
-         endingLineNumber = "345"
+         startingLineNumber = "348"
+         endingLineNumber = "348"
          landmarkName = "-initMainControls"
          landmarkType = "5">
       </FileBreakpoint>
@@ -216,11 +216,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ProfileViewController.m"
-         timestampString = "379872353.378233"
+         timestampString = "381080317.415967"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "378"
-         endingLineNumber = "378"
+         startingLineNumber = "381"
+         endingLineNumber = "381"
          landmarkName = "-initMainControls"
          landmarkType = "5">
       </FileBreakpoint>
@@ -260,19 +260,19 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1342"
          endingLineNumber = "1342"
-         landmarkName = "@implementation StartViewController"
-         landmarkType = "3">
+         landmarkName = "-modifierUser:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ProfileViewController.m"
-         timestampString = "379872353.378233"
+         timestampString = "381080317.415967"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "261"
-         endingLineNumber = "261"
+         startingLineNumber = "264"
+         endingLineNumber = "264"
          landmarkName = "-viewWillAppear:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -281,24 +281,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ProfileViewController.m"
-         timestampString = "379872353.378233"
+         timestampString = "381080317.415967"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "426"
-         endingLineNumber = "426"
+         startingLineNumber = "429"
+         endingLineNumber = "429"
          landmarkName = "@implementation ProfileViewController"
          landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ProfileViewController.m"
-         timestampString = "379872353.378233"
+         timestampString = "381080317.415967"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "474"
-         endingLineNumber = "474"
+         startingLineNumber = "477"
+         endingLineNumber = "477"
          landmarkName = "-changePointsLine:maxValue:animated:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -446,7 +446,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
@@ -468,8 +468,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1068"
          endingLineNumber = "1068"
-         landmarkName = "@implementation StartViewController"
-         landmarkType = "3">
+         landmarkName = "-connectionDidFinishLoading:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -484,10 +484,23 @@
          landmarkName = "-refreshDuelProducts"
          landmarkType = "5">
       </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Cowboy Duel/ProfileViewController.m"
+         timestampString = "381080497.639354"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "890"
+         endingLineNumber = "890"
+         landmarkName = "-duelButtonClick:"
+         landmarkType = "5">
+      </FileBreakpoint>
    </FileBreakpoints>
    <ExceptionBreakpoints>
       <ExceptionBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          scope = "0"
