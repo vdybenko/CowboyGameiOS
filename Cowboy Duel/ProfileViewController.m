@@ -169,12 +169,6 @@ static const CGFloat timeToStandartTitles = 1.8;
         needAnimation = YES;
         [self initMainControls];
         
-//        lbProfileMain.text = NSLocalizedString(@"WANTED", @"");
-//        [lbWantedTitle setFont: [UIFont fontWithName: @"DecreeNarrow" size:lbProfileMain.font.pointSize]];
-//        lbWantedTitle.text = NSLocalizedString(@"DOL", @"");
-//        [lbWantedText setFont: [UIFont fontWithName: @"DecreeNarrow" size:lbWantedText.font.pointSize]];
-//        lbWantedText.text = NSLocalizedString(@"ForBody", @"");
-
         [lbAward setFont: [UIFont fontWithName: @"MyriadPro-Bold" size:18]];//lbAward.font.pointSize]];
         lbAward.text = NSLocalizedString(@"AWARD", @"");
         
@@ -182,7 +176,6 @@ static const CGFloat timeToStandartTitles = 1.8;
         [lbGoldCount setFont: [UIFont fontWithName: @"MyriadPro-Bold" size:18]];
         int moneyExch  = playerAccount.money < 10 ? 1: playerAccount.money / 10.0;
         lbGoldCount.text = [NSString stringWithFormat:@"%d",moneyExch];
-//        [lbGoldCount setFont: [UIFont  systemFontOfSize:25.0f]];
         
         [tfFBName setFont: [UIFont fontWithName: @"MyriadPro-Bold" size:18]];
         tfFBName.text = [NSString stringWithFormat:@"%@",playerAccount.accountName];
@@ -428,8 +421,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     lbPlayerStats.font = CountFont;
    
     [ivPointsLine setClipsToBounds:YES];
-
-   // [mainProfileView setDinamicHeightBackground];
 
 }
 
