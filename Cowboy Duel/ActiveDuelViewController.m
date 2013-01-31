@@ -253,15 +253,6 @@
     self.opStatsLabel.text = [NSString stringWithFormat: @"A: +%d\rD: +%d",opAccount.accountWeapon.dDamage,opAccount.accountDefenseValue];
     self.userStatsLabel.text = [NSString stringWithFormat: @"A: +%d\nD: +%d",playerAccount.accountWeapon.dDamage,playerAccount.accountDefenseValue];
     [self.titleSteadyFire setHidden:YES];
-    
-    self.titleSteadyFire.transform = CGAffineTransformIdentity;
-    
-    frame=self.titleSteadyFire.bounds;
-    frame.origin = CGPointMake(80,80);
-    frame.size = CGSizeMake(159, 50);
-    self.titleSteadyFire.bounds = frame;
-    
-    [self.titleSteadyFire setImage:[UIImage imageNamed:@"dv_steady.png"]];
 
     gunDrumViewController= [[GunDrumViewController alloc] initWithNibName:Nil bundle:Nil];
     
