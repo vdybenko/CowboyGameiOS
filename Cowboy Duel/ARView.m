@@ -183,12 +183,13 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 	
 	captureLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:captureSession];
 	captureLayer.frame = captureView.bounds;
-	[captureLayer setOrientation:AVCaptureVideoOrientationPortrait];
+	[captureLayer.connection setVideoOrientation:AVCaptureVideoOrientationPortrait];
 	[captureLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+    [captureLayer.session setSessionPreset:AVCaptureSessionPresetMedium];
 	[captureView.layer addSublayer:captureLayer];
 	
 	// Start the session. This is done asychronously since -startRunning doesn't return until the session is running.
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 		[captureSession startRunning];
 	});
 }
