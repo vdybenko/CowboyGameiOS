@@ -76,7 +76,6 @@
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *opStatsLabel;
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *userStatsLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *titleSteadyFire;
-@property (weak, nonatomic) IBOutlet UIImageView *titleReady;
 
 
 
@@ -253,7 +252,6 @@
     self.oponentLiveImageView.frame = frame;
     self.opStatsLabel.text = [NSString stringWithFormat: @"A: +%d\rD: +%d",opAccount.accountWeapon.dDamage,opAccount.accountDefenseValue];
     self.userStatsLabel.text = [NSString stringWithFormat: @"A: +%d\nD: +%d",playerAccount.accountWeapon.dDamage,playerAccount.accountDefenseValue];
-    [self.titleReady setHidden:NO];
     [self.titleSteadyFire setHidden:YES];
     
     self.titleSteadyFire.transform = CGAffineTransformIdentity;
@@ -311,7 +309,6 @@
     [self setUserStatsLabel:nil];
     [self setOpponentBody:nil];
     [self setTitleSteadyFire:nil];
-    [self setTitleReady:nil];
     [super viewDidUnload];
 }
 
@@ -594,8 +591,6 @@
     {
         //[self hideHelpViewWithArm];
     }
-    [self.titleReady setHidden:YES];
-    [self.titleSteadyFire setHidden:NO];
     
     [gunDrumViewController openGun];
 }
@@ -721,11 +716,8 @@
 -(void)vibrationStart;
 {
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-    CGRect frame=self.titleSteadyFire.bounds;
-    frame.origin = CGPointMake(18, -50);
-    frame.size = CGSizeMake(270, 275);
-    self.titleSteadyFire.bounds = frame;
     
+    [self.titleSteadyFire setHidden:NO];
     [self.titleSteadyFire setImage:[UIImage imageNamed:@"dv_fire_label.png"]];
     [gunDrumViewController closeGun];
 }
@@ -791,7 +783,6 @@
 -(void)hideSteadyImage
 {
     steadyScale = 1.0;
-    [self.titleReady setHidden:YES];
     [self.titleSteadyFire setHidden:YES];
     
     [gunDrumViewController closeGun];
