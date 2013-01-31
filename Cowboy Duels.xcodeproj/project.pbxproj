@@ -245,6 +245,14 @@
 		768675BE1647FB2000682BCF /* st_cloud_new.png in Resources */ = {isa = PBXBuildFile; fileRef = 768675BC1647FB2000682BCF /* st_cloud_new.png */; };
 		768675BF1647FB2000682BCF /* st_cloud_new@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 768675BD1647FB2000682BCF /* st_cloud_new@2x.png */; };
 		7686C21816B2C0F500D92555 /* django_unchained_concept_poster_by_punktx30-d5c7q97123.png in Resources */ = {isa = PBXBuildFile; fileRef = 7686C21716B2C0F500D92555 /* django_unchained_concept_poster_by_punktx30-d5c7q97123.png */; };
+		7687667016BA7386003405F9 /* gd_drum.png in Resources */ = {isa = PBXBuildFile; fileRef = 7687666A16BA7386003405F9 /* gd_drum.png */; };
+		7687667116BA7386003405F9 /* gd_drum@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7687666B16BA7386003405F9 /* gd_drum@2x.png */; };
+		7687667216BA7386003405F9 /* gd_gun.png in Resources */ = {isa = PBXBuildFile; fileRef = 7687666C16BA7386003405F9 /* gd_gun.png */; };
+		7687667316BA7386003405F9 /* gd_gun@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7687666D16BA7386003405F9 /* gd_gun@2x.png */; };
+		7687667416BA7386003405F9 /* gd_sleeve.png in Resources */ = {isa = PBXBuildFile; fileRef = 7687666E16BA7386003405F9 /* gd_sleeve.png */; };
+		7687667516BA7386003405F9 /* gd_sleeve@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7687666F16BA7386003405F9 /* gd_sleeve@2x.png */; };
+		7687667916BA7543003405F9 /* GunDrumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7687667716BA7543003405F9 /* GunDrumViewController.m */; };
+		7687667A16BA7543003405F9 /* GunDrumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7687667816BA7543003405F9 /* GunDrumViewController.xib */; };
 		7687E8C016391A32003C9EE6 /* StoreProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7687E8BF16391A32003C9EE6 /* StoreProductCell.xib */; };
 		7687E8C3163920FE003C9EE6 /* StoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7687E8C2163920FE003C9EE6 /* StoreViewController.m */; };
 		7687E8C516392534003C9EE6 /* StoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7687E8C416392534003C9EE6 /* StoreViewController.xib */; };
@@ -1056,6 +1064,15 @@
 		768675BC1647FB2000682BCF /* st_cloud_new.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = st_cloud_new.png; sourceTree = "<group>"; };
 		768675BD1647FB2000682BCF /* st_cloud_new@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "st_cloud_new@2x.png"; sourceTree = "<group>"; };
 		7686C21716B2C0F500D92555 /* django_unchained_concept_poster_by_punktx30-d5c7q97123.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "django_unchained_concept_poster_by_punktx30-d5c7q97123.png"; sourceTree = "<group>"; };
+		7687666A16BA7386003405F9 /* gd_drum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gd_drum.png; sourceTree = "<group>"; };
+		7687666B16BA7386003405F9 /* gd_drum@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gd_drum@2x.png"; sourceTree = "<group>"; };
+		7687666C16BA7386003405F9 /* gd_gun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gd_gun.png; sourceTree = "<group>"; };
+		7687666D16BA7386003405F9 /* gd_gun@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gd_gun@2x.png"; sourceTree = "<group>"; };
+		7687666E16BA7386003405F9 /* gd_sleeve.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gd_sleeve.png; sourceTree = "<group>"; };
+		7687666F16BA7386003405F9 /* gd_sleeve@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gd_sleeve@2x.png"; sourceTree = "<group>"; };
+		7687667616BA7543003405F9 /* GunDrumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GunDrumViewController.h; sourceTree = "<group>"; };
+		7687667716BA7543003405F9 /* GunDrumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GunDrumViewController.m; sourceTree = "<group>"; };
+		7687667816BA7543003405F9 /* GunDrumViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GunDrumViewController.xib; path = "../Cowboy Duel/GunDrumViewController.xib"; sourceTree = "<group>"; };
 		7687E8BF16391A32003C9EE6 /* StoreProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreProductCell.xib; sourceTree = "<group>"; };
 		7687E8C1163920FE003C9EE6 /* StoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreViewController.h; sourceTree = "<group>"; };
 		7687E8C2163920FE003C9EE6 /* StoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreViewController.m; sourceTree = "<group>"; };
@@ -1420,6 +1437,7 @@
 		03285FAD159DD84000D16195 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7687666916BA7386003405F9 /* GunDrum */,
 				BD81E63D169ED75300CE8278 /* ActiveDuel */,
 				76A72D50163AA0B400C65D6D /* Shop */,
 				BD84DAA8164ABE1D00DEEE38 /* LoginViewAnimated */,
@@ -1938,6 +1956,7 @@
 		767FEF33156A652E0016B415 /* Xib */ = {
 			isa = PBXGroup;
 			children = (
+				7687667816BA7543003405F9 /* GunDrumViewController.xib */,
 				BD84DAA4164ABCA000DEEE38 /* LoginAnimatedViewController.xib */,
 				BD16BF961680934F00628CCC /* FunPageViewController.xib */,
 				3115FB4F15CACA5100C4D438 /* MoneyCongratViewController.xib */,
@@ -1977,6 +1996,8 @@
 				BDD07BAB141E1F170085E4FB /* TeachingViewController.m */,
 				768321DE1654E60D00E78A8C /* TeachingHelperViewController.h */,
 				768321DF1654E60D00E78A8C /* TeachingHelperViewController.m */,
+				7687667616BA7543003405F9 /* GunDrumViewController.h */,
+				7687667716BA7543003405F9 /* GunDrumViewController.m */,
 			);
 			name = Duel;
 			sourceTree = "<group>";
@@ -2009,6 +2030,19 @@
 			);
 			name = AdvertisingApp;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		7687666916BA7386003405F9 /* GunDrum */ = {
+			isa = PBXGroup;
+			children = (
+				7687666A16BA7386003405F9 /* gd_drum.png */,
+				7687666B16BA7386003405F9 /* gd_drum@2x.png */,
+				7687666C16BA7386003405F9 /* gd_gun.png */,
+				7687666D16BA7386003405F9 /* gd_gun@2x.png */,
+				7687666E16BA7386003405F9 /* gd_sleeve.png */,
+				7687666F16BA7386003405F9 /* gd_sleeve@2x.png */,
+			);
+			path = GunDrum;
 			sourceTree = "<group>";
 		};
 		7693419313DDB33700A962A4 /* Font */ = {
@@ -2730,6 +2764,13 @@
 				318F239516B972AB0081BE5E /* btn_profile@2x.png in Resources */,
 				318F239716B972AB0081BE5E /* btn_store.png in Resources */,
 				318F239916B972AB0081BE5E /* btn_store@2x.png in Resources */,
+				7687667016BA7386003405F9 /* gd_drum.png in Resources */,
+				7687667116BA7386003405F9 /* gd_drum@2x.png in Resources */,
+				7687667216BA7386003405F9 /* gd_gun.png in Resources */,
+				7687667316BA7386003405F9 /* gd_gun@2x.png in Resources */,
+				7687667416BA7386003405F9 /* gd_sleeve.png in Resources */,
+				7687667516BA7386003405F9 /* gd_sleeve@2x.png in Resources */,
+				7687667A16BA7543003405F9 /* GunDrumViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3134,6 +3175,7 @@
 				BD81E651169F0F1F00CE8278 /* UIImage+Sprite.m in Sources */,
 				BD243B0816A9765800D89E47 /* ARView.m in Sources */,
 				BD243B0B16A979BC00D89E47 /* OponentCoordinateView.m in Sources */,
+				7687667916BA7543003405F9 /* GunDrumViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

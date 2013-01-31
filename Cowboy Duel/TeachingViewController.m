@@ -58,7 +58,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    
     //[helpPracticeView setHidden:NO];
     if(!opAccount.bot && (mutchNumber == 0)){
              teachingHelperViewController = [[TeachingHelperViewController alloc] initWithOponentAccount:opAccount parentVC:self];
@@ -75,7 +74,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
     }
     [super viewWillAppear:animated];
 }
-
 
 -(void)viewDidAppear:(BOOL)animated
 {

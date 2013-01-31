@@ -15,6 +15,7 @@
 #import "ARView.h"
 #import "OponentCoordinateView.h"
 #import "StartViewController.h"
+#import "GunDrumViewController.h"
 
 #define kFilteringFactor 0.1
 #define targetHeight 260
@@ -55,6 +56,7 @@
     BOOL duelTimerEnd;
     BOOL duelEnd;
     
+    GunDrumViewController  *gunDrumViewController;
     ActivityIndicatorView *activityIndicatorView;
     NSMutableArray *placesOfInterest;
     float steadyScale;
@@ -262,8 +264,16 @@
     self.titleSteadyFire.bounds = frame;
     
     [self.titleSteadyFire setImage:[UIImage imageNamed:@"dv_steady.png"]];
-    steadyScale = 1.0;
 
+    gunDrumViewController= [[GunDrumViewController alloc] initWithNibName:Nil bundle:Nil];
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        UIWindow *mainWindow = [[UIApplication sharedApplication] keyWindow];
+        [mainWindow insertSubview:gunDrumViewController.view aboveSubview:mainWindow];
+    }];
+    
+    steadyScale = 1.0;
+    
     for(UIView *subview in [self.opponentBody subviews])
     {
         [subview removeFromSuperview];
@@ -350,6 +360,7 @@
     switch (shotCountForSound) {
         case 1:
             [self.titleSteadyFire setHidden:YES];
+            [gunDrumViewController closeGun];
             [shotAudioPlayer1 stop];
             [shotAudioPlayer1 setCurrentTime:0.0];
             [shotAudioPlayer1 performSelectorInBackground:@selector(play) withObject:nil];
@@ -585,6 +596,8 @@
     }
     [self.titleReady setHidden:YES];
     [self.titleSteadyFire setHidden:NO];
+    
+    [gunDrumViewController openGun];
 }
 
 
@@ -714,7 +727,7 @@
     self.titleSteadyFire.bounds = frame;
     
     [self.titleSteadyFire setImage:[UIImage imageNamed:@"dv_fire_label.png"]];
-
+    [gunDrumViewController closeGun];
 }
 
 -(void)duelTimerEndFeedBack
@@ -780,6 +793,8 @@
     steadyScale = 1.0;
     [self.titleReady setHidden:YES];
     [self.titleSteadyFire setHidden:YES];
+    
+    [gunDrumViewController closeGun];
 }
 
 #pragma mark - IBAction
