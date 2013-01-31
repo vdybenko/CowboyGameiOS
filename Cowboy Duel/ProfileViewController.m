@@ -140,6 +140,7 @@ static const CGFloat timeToStandartTitles = 1.8;
        ;
         
         [self initMainControls];
+        [mainProfileView setDinamicHeightBackground];
         [self checkLocationOfViewForFBLogin];
     }
     return self;
@@ -150,6 +151,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     self = [super initWithNibName:@"ProfileViewControllerWanted" bundle:[NSBundle mainBundle]];
     
     if (self) {
+        
         needAnimation = NO;
         needMoneyAnimation = NO;
         playerAccount=oponentAccount;
@@ -167,20 +169,23 @@ static const CGFloat timeToStandartTitles = 1.8;
         needAnimation = YES;
         [self initMainControls];
         
-        lbProfileMain.text = NSLocalizedString(@"WANTED", @"");
-        [lbWantedTitle setFont: [UIFont fontWithName: @"DecreeNarrow" size:lbProfileMain.font.pointSize]];
-        lbWantedTitle.text = NSLocalizedString(@"DOL", @"");
-        [lbAward setFont: [UIFont fontWithName: @"DecreeNarrow" size:lbAward.font.pointSize]];
+//        lbProfileMain.text = NSLocalizedString(@"WANTED", @"");
+//        [lbWantedTitle setFont: [UIFont fontWithName: @"DecreeNarrow" size:lbProfileMain.font.pointSize]];
+//        lbWantedTitle.text = NSLocalizedString(@"DOL", @"");
+//        [lbWantedText setFont: [UIFont fontWithName: @"DecreeNarrow" size:lbWantedText.font.pointSize]];
+//        lbWantedText.text = NSLocalizedString(@"ForBody", @"");
+
+        [lbAward setFont: [UIFont fontWithName: @"MyriadPro-Bold" size:18]];//lbAward.font.pointSize]];
         lbAward.text = NSLocalizedString(@"AWARD", @"");
-        [lbWantedText setFont: [UIFont fontWithName: @"DecreeNarrow" size:lbWantedText.font.pointSize]];
-        lbWantedText.text = NSLocalizedString(@"ForBody", @"");
         
+        
+        [lbGoldCount setFont: [UIFont fontWithName: @"MyriadPro-Bold" size:18]];
         int moneyExch  = playerAccount.money < 10 ? 1: playerAccount.money / 10.0;
-        lbGoldCount.text = [NSString stringWithFormat:@"%d$",moneyExch];
-        [lbGoldCount setFont: [UIFont  systemFontOfSize:25.0f]];
-                
-        [tfFBName setFont: [UIFont fontWithName: @"DecreeNarrow" size:30]];
-        tfFBName.text = [NSString stringWithFormat:@"\"%@\"",playerAccount.accountName];
+        lbGoldCount.text = [NSString stringWithFormat:@"%d",moneyExch];
+//        [lbGoldCount setFont: [UIFont  systemFontOfSize:25.0f]];
+        
+        [tfFBName setFont: [UIFont fontWithName: @"MyriadPro-Bold" size:18]];
+        tfFBName.text = [NSString stringWithFormat:@"%@",playerAccount.accountName];
         
 //avatar magic!
         NSString *name = [[OGHelper sharedInstance ] getClearName:playerAccount.accountID];
@@ -264,6 +269,7 @@ static const CGFloat timeToStandartTitles = 1.8;
         [btnBack setTitleByLabel:@"CONTINUE" withColor:buttonsTitleColor fontSize:24];
         [btnLeaderboardBig setTitleByLabel:@"LeaderboardTitle" withColor:buttonsTitleColor fontSize:24];
         [self initMainControls];
+        [mainProfileView setDinamicHeightBackground];
         lbDescription.hidden = NO;
         [self checkLocationOfViewForFBLogin];
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
@@ -423,7 +429,7 @@ static const CGFloat timeToStandartTitles = 1.8;
    
     [ivPointsLine setClipsToBounds:YES];
 
-    [mainProfileView setDinamicHeightBackground];
+   // [mainProfileView setDinamicHeightBackground];
 
 }
 
