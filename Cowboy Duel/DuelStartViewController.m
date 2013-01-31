@@ -44,6 +44,7 @@
 @synthesize oponentAtackView;
 @synthesize oponentDefenseView;
 @synthesize activityIndicatorView;
+@synthesize waitTimer;
 
 static const char *GC_URL =  BASE_URL"api/gc";
 
@@ -341,7 +342,9 @@ static const char *GC_URL =  BASE_URL"api/gc";
 
 -(IBAction)cancelButtonClick;
 {
-    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+    TestAppDelegate *testAppDelegate = (TestAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [testAppDelegate.navigationController popToViewController:[testAppDelegate.navigationController.viewControllers objectAtIndex:1] animated:YES];
+    //[self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
     
     [delegate duelCancel];
     [self releaseComponents];

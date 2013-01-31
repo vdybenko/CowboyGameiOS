@@ -105,6 +105,7 @@
 @property (strong, nonatomic) NSString *serverName;
 @property (nonatomic) BOOL oponentAvailable;
 @property (nonatomic) BOOL tryAgain;
+@property (nonatomic) NSTimer *waitTimer;
 
 -(id)initWithAccount:(AccountDataSource *)userAccount
         andOpAccount:(AccountDataSource *)opAccount

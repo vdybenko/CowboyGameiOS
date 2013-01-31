@@ -31,5 +31,6 @@
 
 -(void)checkValidBlackActivity;
 -(void)checkLocationOfViewForFBLogin;
+- (IBAction)duelButtonClick:(id)sender;
 
 @end

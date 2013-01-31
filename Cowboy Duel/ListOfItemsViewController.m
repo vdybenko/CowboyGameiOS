@@ -22,6 +22,8 @@
     GameCenterViewController *_gameCenterViewController;
     PlayersOnLineDataSource *_playersOnLineDataSource;
     StartViewController *startViewController;
+    AccountDataSource *oponentAccount;
+    DuelStartViewController *duelStartViewController;
     
     BOOL statusOnLine;
             
@@ -132,6 +134,7 @@
     [updateTimer invalidate];
     updateTimer = nil;
     [super viewWillDisappear:animated];
+    if (duelStartViewController.waitTimer) [duelStartViewController.waitTimer invalidate];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -179,11 +182,22 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //[self clickButton:indexPath];
+    [self showOponentViewForIndexPath:indexPath duelButtonClick:NO];
+}
+
+#pragma mark - Delegated methods
+
+-(void)clickButton:(NSIndexPath *)indexPath;
+{
+    [self showOponentViewForIndexPath:indexPath duelButtonClick:YES];
+}
+
+-(void)showOponentViewForIndexPath:(NSIndexPath *)indexPath duelButtonClick:(BOOL)duelButtonClick
+{
     SSServer *player;
     player=[_playersOnLineDataSource.serverObjects objectAtIndex:indexPath.row];
     
-    AccountDataSource *oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
+    oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
     [oponentAccount setAccountID:(player.serverName) ? [NSString stringWithString:player.serverName]:@""];
     [oponentAccount setAccountName:player.displayName];
     [oponentAccount setAccountLevel:[player.rank integerValue]];
@@ -192,7 +206,7 @@
     [oponentAccount setBot:player.bot];
     [oponentAccount setMoney:[player.money integerValue]];
     [oponentAccount setSessionID:(player.sessionId) ? [NSString stringWithString:player.sessionId]:@""];
-
+    
     
     if (player.bot) {
         if (player.weapon) [oponentAccount setCurentIdWeapon:player.weapon];
@@ -209,121 +223,18 @@
                          [self.navigationController pushViewController:profileViewController animated:NO];
                          [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
                      }];
+    
+    if (duelButtonClick) {
+        [profileViewController performSelector:@selector(duelButtonClick:) withObject:nil afterDelay:1.0];
+    }
     profileViewController = nil;
-    //    CATransition* transition = [CATransition animation];
-//    transition.duration = 0.5;
-//    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-//    transition.type = kCATransition;//, kCATransitionReveal, kCATransitionFade,kCATransitionMoveIn;
-//    transition.subtype =kCATransitionFromLeft;//kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom;
-//    [self.navigationController.view.layer addAnimation:transition forKey:nil];
-//    [self.navigationController pushViewController:profileViewController animated:NO];
-    
 }
 
-#pragma mark - Delegated methods
-
--(void)clickButton:(NSIndexPath *)indexPath;
+-(void)startBotDuel
 {
-    SSServer *player;
-    player=[_playersOnLineDataSource.serverObjects objectAtIndex:indexPath.row];
-
-    AccountDataSource *oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
-    [oponentAccount setAccountID:(player.serverName) ? [NSString stringWithString:player.serverName]:@""];
-    [oponentAccount setAccountName:player.displayName];
-    [oponentAccount setAccountLevel:[player.rank integerValue]];
-    [oponentAccount setAccountWins:[player.duelsWin intValue]];
-    [oponentAccount setAvatar:player.fbImageUrl];
-    [oponentAccount setBot:player.bot];
-    [oponentAccount setMoney:[player.money integerValue]];
-    [oponentAccount setSessionID:(player.sessionId) ? [NSString stringWithString:player.sessionId]:@""];
-    
-    if (player.bot) {
-        if (player.weapon) [oponentAccount setCurentIdWeapon:player.weapon];
-        else [oponentAccount setCurentIdWeapon:-1];
-        [oponentAccount loadAccountWeapon];
-        if (player.defense) [oponentAccount setAccountDefenseValue:player.defense];
-        else [oponentAccount setAccountDefenseValue:0];
-    }
-
-    if ([player.sessionId isEqualToString:@"-1"]) {
-        [_playerAccount.finalInfoTable removeAllObjects];
-        int randomTime = arc4random() % 6;
-        if (_playerAccount.activeDuel) {
-            ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:_playerAccount oponentAccount:oponentAccount];
-            [self.navigationController pushViewController:activeDuelViewController animated:YES];
-        }
-        else
-        {
-            TeachingViewController *teachingViewController = [[TeachingViewController alloc] initWithTime:randomTime andAccount:_playerAccount andOpAccount:oponentAccount];
-            [self.navigationController pushViewController:teachingViewController animated:YES];
-        }
-        SSConnection *connection = [SSConnection sharedInstance];
-        [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-                                                            object:self
-                                                          userInfo:[NSDictionary dictionaryWithObject:@"/duel_teaching" forKey:@"event"]];
-        return;
-    }
-
-    DuelStartViewController *duelStartViewController = [[DuelStartViewController alloc]initWithAccount:_playerAccount andOpAccount:oponentAccount opopnentAvailable:NO andServerType:NO andTryAgain:NO];
-    duelStartViewController.serverName = player.serverName;
-        
-    duelStartViewController.delegate = _gameCenterViewController;
-    _gameCenterViewController.duelStartViewController = duelStartViewController;
-    
-    [self.navigationController pushViewController:duelStartViewController animated:YES];
-    duelStartViewController = nil;
-    PlayerOnLineCell *cell = (PlayerOnLineCell *)[tableView cellForRowAtIndexPath:indexPath];
-    [cell hideIndicatorConnectin];
-    
-// Не удалять!!!
-//    _indexPath=indexPath;
-//    UIAlertView *baseAlert= [[UIAlertView alloc] initWithTitle:@"Message" message:NSLocalizedString(@"BotMText", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"BotMCANS", nil) otherButtonTitles:NSLocalizedString(@"BotMBtn", nil),nil];
-//    
-//    if ([baseAlert respondsToSelector:@selector(setAlertViewStyle:)]) {
-//        [baseAlert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-//        [baseAlert show];
-//    }else {
-//        OCPromptView *alert=[[OCPromptView alloc] initWithPrompt:@"Message" delegate:self cancelButtonTitle:NSLocalizedString(@"BotMCANS", nil) acceptButtonTitle:NSLocalizedString(@"BotMBtn", nil)];
-//        [alert show];
-//    }
-}
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex != alertView.cancelButtonIndex) {
-        CDPlayerOnLine *_player;    
-        _player=[_playersOnLineDataSource.arrItemsList objectAtIndex:_indexPath.row];
-        
-        AccountDataSource *oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
-        [oponentAccount setAccountName:@"TestName"];
-        DuelStartViewController *duelStartViewController = [[DuelStartViewController alloc]initWithAccount:_playerAccount andOpAccount:oponentAccount opopnentAvailable:NO andServerType:NO andTryAgain:NO];
-        [self.navigationController pushViewController:duelStartViewController animated:YES];
-        duelStartViewController.delegate = _gameCenterViewController;
-        _gameCenterViewController.duelStartViewController = duelStartViewController;
-        duelStartViewController = nil;
-
-        NSString *convertString=_player.dAuth;
-        NSUInteger bufferCount = sizeof(char) * ([convertString length] + 1);
-        char *utf8Buffer = malloc(bufferCount);
-        [convertString getCString:utf8Buffer 
-                        maxLength:bufferCount 
-                         encoding:NSUTF8StringEncoding];
-        char *_hostName = strdup(utf8Buffer);
-        
-        if ([alertView respondsToSelector:@selector(setAlertViewStyle:)]) {
-            [_gameCenterViewController startClientWithName:_hostName AndMessage:[[alertView textFieldAtIndex:0]text]]; 
-        }else {
-            NSString *entered = [(OCPromptView *)alertView enteredText];
-            [_gameCenterViewController startClientWithName:_hostName AndMessage:entered];
-        }
-        
-        
-    }
-    else
-    {
-        [alertView dismissWithClickedButtonIndex:alertView.cancelButtonIndex animated:YES];  
-    }
+    int randomTime = arc4random() % 6;
+    ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:_playerAccount oponentAccount:oponentAccount];
+    [self.navigationController pushViewController:activeDuelViewController animated:YES];
 }
 
 #pragma mark - Interface methods
