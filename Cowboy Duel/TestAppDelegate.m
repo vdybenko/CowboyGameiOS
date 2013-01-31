@@ -85,9 +85,8 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     CGRect frame = [[UIScreen mainScreen]bounds];
     window = [[UIWindow alloc]initWithFrame:frame];
     
-    UIImageView *background = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"dv_img_eath_new.png"]];
+    UIImageView *background = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"back.png"]];
     frame = background.frame;
-    frame.origin = CGPointMake(-150, -70);
     background.frame = frame;
     [window addSubview:background];
     
