@@ -188,6 +188,10 @@
 -(void)viewWillAppear:(BOOL)animated
 {    
     [activityIndicatorView hideView];
+    if([LoginAnimatedViewController sharedInstance].isDemoPractice){
+        [tryButton setHidden:YES];
+        [tryButton setEnabled:NO];
+    }
     
     if (firstRun) {
         firstRun = NO; 

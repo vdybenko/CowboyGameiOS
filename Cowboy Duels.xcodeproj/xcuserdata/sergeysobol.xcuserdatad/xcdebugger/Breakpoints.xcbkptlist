@@ -351,7 +351,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "411"
          endingLineNumber = "411"
-         landmarkName = "-cheackHitForShot:andTargetPoint:"
+         landmarkName = "-horizontalFlip"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
