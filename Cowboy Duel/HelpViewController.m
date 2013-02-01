@@ -13,6 +13,7 @@
 #import "UIView+Dinamic_BackGround.h"
 #import "HCYoutubeParser.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import "FunPageViewController.h"
 
 #define videoHelp @"http://www.youtube.com/watch?v=HZST2wcGAr4"
 @interface MyMovieViewController : MPMoviePlayerViewController
@@ -130,7 +131,9 @@ BOOL isSoundControl;
     mp = nil;
 }
 
-#pragma mark
+#pragma mark -
+#pragma mark IBActions:
+
 -(IBAction)backButtonClick
 {
     CATransition* transition = [CATransition animation];
@@ -169,8 +172,11 @@ BOOL isSoundControl;
 }
 
 -(IBAction)btnContactClicked{
-    NSURL *url=[NSURL URLWithString:URL_CONTACN_US];
-    [[UIApplication sharedApplication] openURL:url];
+    
+    FunPageViewController *funPageViewController = [[FunPageViewController alloc] initWithNibName:@"FunPageViewController" bundle:[NSBundle mainBundle]];
+    funPageViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentModalViewController:funPageViewController animated:YES];
+    
     if([startVC connectedToWiFi]) [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                                                     object:self
                                                                                   userInfo:[NSDictionary dictionaryWithObject:@"/help_contact_us" forKey:@"event"]];

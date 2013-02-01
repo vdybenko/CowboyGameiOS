@@ -177,6 +177,7 @@
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="378614022"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<reference key="IBUIBackgroundColor" ref="334419792"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>

@@ -12,7 +12,7 @@
 
 -(void)openGun;
 -(void)chargeBullets;
--(void)closeGun;
+-(void)closeDump;
 -(void)showGun;
 -(void)hideGun;
 -(void)closeController;
