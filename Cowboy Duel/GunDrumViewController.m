@@ -33,14 +33,16 @@ static const CGPoint pntViewHide = {0,480};
 static const CGFloat timeOpenGun = 0.4f;
 static const CGFloat timeOpenDump = 0.4f;
 static const CGFloat timeCloseGun = 0.2f;
-static const CGFloat timeChargeBullets = 0.5f;
-static const CGFloat timeSpinDump = 0.6f;
+static CGFloat timeChargeBullets = 0.5f;
+static CGFloat timeSpinDump = 0.6f;
 
 @implementation GunDrumViewController
 @synthesize colectionBullets;
 @synthesize drumBullets;
 @synthesize gun;
 @synthesize arrow;
+@synthesize chargeTime;
+@synthesize isCharging;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -48,6 +50,8 @@ static const CGFloat timeSpinDump = 0.6f;
     if (self) {
         [self loadView];
 
+        isCharging = NO;
+        
         pntGunOpen=gun.frame.origin;
         pntDumpOpen=drumBullets.center;
         
@@ -85,6 +89,7 @@ static const CGFloat timeSpinDump = 0.6f;
 #pragma mark
 -(void)openGun;
 {
+    isCharging = YES;
     [UIView animateWithDuration:timeOpenGun animations:^{
         arrow.hidden = YES;
         CGRect frame=gun.frame;
@@ -95,13 +100,15 @@ static const CGFloat timeSpinDump = 0.6f;
         
         drumBullets.center = pntDumpOpen;
     }completion:^(BOOL finished) {
-        [self chargeBullets];
+        CGFloat timeForCharge = chargeTime;
+        [self chargeBulletsForTime:timeForCharge];
     }];
 }
 
 -(void)closeDump;
 {
     runAnimationDump = NO;
+    isCharging = NO;
     arrow.hidden = NO;
     [UIView animateWithDuration:timeOpenDump animations:^{
         drumBullets.center= pntDumpClose;
@@ -118,18 +125,31 @@ static const CGFloat timeSpinDump = 0.6f;
     }];
 }
 
--(void)chargeBullets;
+-(void)chargeBulletsForTime:(CGFloat)time;
 {
+    if (time != 0) {
+        timeChargeBullets = time/[colectionBullets count];
+        timeSpinDump = time*0.17;
+    }
+    
     runAnimationDump = YES;
     arrow.hidden = YES;
     [self spinAnimation];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         for (UIImageView *bullet in colectionBullets) {
+            if (!isCharging){
+                break;
+            }
             dispatch_async(dispatch_get_main_queue(), ^{
                 bullet.hidden = NO;
             });
             [NSThread sleepForTimeInterval:timeChargeBullets];
+        }
+        if (isCharging) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self hideGun];
+            });
         }
     });
 }
@@ -187,6 +207,7 @@ static const CGFloat timeSpinDump = 0.6f;
 -(void)hideGun;
 {
     runAnimationDump = NO;
+    isCharging = NO;
     [UIView animateWithDuration:timeOpenDump animations:^{
         drumBullets.center= pntDumpClose;
     }completion:^(BOOL finished) {
