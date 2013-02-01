@@ -90,6 +90,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     
     DuelStartViewController *duelStartViewController;
     __weak IBOutlet UIActivityIndicatorView *activityIndicatorView;
+    __weak IBOutlet UIView *bgActivityIndicator;
 }
 -(void)setImageFromFacebook;
 -(IBAction)showStoreWeapon:(id)sender;
@@ -211,7 +212,20 @@ static const CGFloat timeToStandartTitles = 1.8;
             
         }
 //        
-        
+        userAtackView.hidden = NO;
+        userDefenseView.hidden = NO;
+        if (playerAccount.accountWeapon.dDamage!=0) {
+            userAtack.text = [NSString stringWithFormat:@"+%d",playerAccount.accountWeapon.dDamage];
+            
+        }else{
+            userAtack.text = @"+0";
+        }
+        if (playerAccount.accountDefenseValue!=0) {
+            userDefense.text = [NSString stringWithFormat:@"+%d",playerAccount.accountDefenseValue];
+        }else{
+            userDefense.text = @"+0";
+        }
+
     }
     return self;
 }
@@ -918,6 +932,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     }
 
     [activityIndicatorView startAnimating];
+    [bgActivityIndicator setHidden:NO];
     [duelButton setEnabled:NO];
     //duelStartViewController = nil;
 }
@@ -971,6 +986,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 }
 - (void)viewDidUnload {
     activityIndicatorView = nil;
+    bgActivityIndicator = nil;
     [super viewDidUnload];
 }
 @end
