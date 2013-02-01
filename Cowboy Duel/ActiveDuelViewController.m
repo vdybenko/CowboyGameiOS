@@ -211,6 +211,7 @@
     gunDrumViewController = [[GunDrumViewController alloc] initWithNibName:Nil bundle:Nil];
     [self.view addSubview:gunDrumViewController.view];
     [gunDrumViewController showGun];
+    self.gunButton.hidden = YES;
     
     activityIndicatorView = [[ActivityIndicatorView alloc] init];
     frame = activityIndicatorView.frame;
@@ -344,6 +345,8 @@
         case 1:
             [self.titleSteadyFire setHidden:YES];
             [gunDrumViewController hideGun];
+            self.gunButton.hidden = NO;
+            
             [shotAudioPlayer1 stop];
             [shotAudioPlayer1 setCurrentTime:0.0];
             [shotAudioPlayer1 performSelectorInBackground:@selector(play) withObject:nil];
@@ -686,7 +689,8 @@
     }
     
     [gunDrumViewController showGun];
-    [gunDrumViewController closeGun];
+    [gunDrumViewController closeDump];
+    self.gunButton.hidden = YES;
 }
 
 #pragma mark
@@ -712,6 +716,7 @@
     
     [self.titleSteadyFire setHidden:NO];
     [gunDrumViewController hideGun];
+    self.gunButton.hidden = NO;
 }
 
 -(void)duelTimerEndFeedBack
@@ -776,8 +781,6 @@
 {
     steadyScale = 1.0;
     [self.titleSteadyFire setHidden:YES];
-    
-//    [gunDrumViewController hideGun];
 }
 
 #pragma mark - IBAction

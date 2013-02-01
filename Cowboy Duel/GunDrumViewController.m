@@ -99,9 +99,10 @@ static const CGFloat timeSpinDump = 0.6f;
     }];
 }
 
--(void)closeGun;
+-(void)closeDump;
 {
     runAnimationDump = NO;
+    arrow.hidden = NO;
     [UIView animateWithDuration:timeOpenDump animations:^{
         drumBullets.center= pntDumpClose;
     }completion:^(BOOL finished) {
@@ -120,6 +121,7 @@ static const CGFloat timeSpinDump = 0.6f;
 -(void)chargeBullets;
 {
     runAnimationDump = YES;
+    arrow.hidden = YES;
     [self spinAnimation];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
