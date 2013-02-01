@@ -15,6 +15,7 @@
 #import "ARView.h"
 #import "OponentCoordinateView.h"
 #import "StartViewController.h"
+#import "GunDrumViewController.h"
 
 #define kFilteringFactor 0.1
 #define targetHeight 260
@@ -55,6 +56,7 @@
     BOOL duelTimerEnd;
     BOOL duelEnd;
     
+    GunDrumViewController  *gunDrumViewController;
     ActivityIndicatorView *activityIndicatorView;
     NSMutableArray *placesOfInterest;
     float steadyScale;
@@ -74,7 +76,6 @@
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *opStatsLabel;
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *userStatsLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *titleSteadyFire;
-@property (weak, nonatomic) IBOutlet UIImageView *titleReady;
 
 
 
@@ -251,19 +252,17 @@
     self.oponentLiveImageView.frame = frame;
     self.opStatsLabel.text = [NSString stringWithFormat: @"A: +%d\rD: +%d",opAccount.accountWeapon.dDamage,opAccount.accountDefenseValue];
     self.userStatsLabel.text = [NSString stringWithFormat: @"A: +%d\nD: +%d",playerAccount.accountWeapon.dDamage,playerAccount.accountDefenseValue];
-    [self.titleReady setHidden:NO];
     [self.titleSteadyFire setHidden:YES];
-    
-    self.titleSteadyFire.transform = CGAffineTransformIdentity;
-    
-    frame=self.titleSteadyFire.bounds;
-    frame.origin = CGPointMake(80,80);
-    frame.size = CGSizeMake(159, 50);
-    self.titleSteadyFire.bounds = frame;
-    
-    [self.titleSteadyFire setImage:[UIImage imageNamed:@"dv_steady.png"]];
-    steadyScale = 1.0;
 
+    gunDrumViewController= [[GunDrumViewController alloc] initWithNibName:Nil bundle:Nil];
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        UIWindow *mainWindow = [[UIApplication sharedApplication] keyWindow];
+        [mainWindow insertSubview:gunDrumViewController.view aboveSubview:mainWindow];
+    }];
+    
+    steadyScale = 1.0;
+    
     for(UIView *subview in [self.opponentBody subviews])
     {
         [subview removeFromSuperview];
@@ -301,7 +300,6 @@
     [self setUserStatsLabel:nil];
     [self setOpponentBody:nil];
     [self setTitleSteadyFire:nil];
-    [self setTitleReady:nil];
     [super viewDidUnload];
 }
 
@@ -350,6 +348,7 @@
     switch (shotCountForSound) {
         case 1:
             [self.titleSteadyFire setHidden:YES];
+            [gunDrumViewController closeGun];
             [shotAudioPlayer1 stop];
             [shotAudioPlayer1 setCurrentTime:0.0];
             [shotAudioPlayer1 performSelectorInBackground:@selector(play) withObject:nil];
@@ -583,8 +582,8 @@
     {
         //[self hideHelpViewWithArm];
     }
-    [self.titleReady setHidden:YES];
-    [self.titleSteadyFire setHidden:NO];
+    
+    [gunDrumViewController openGun];
 }
 
 
@@ -708,13 +707,10 @@
 -(void)vibrationStart;
 {
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-    CGRect frame=self.titleSteadyFire.bounds;
-    frame.origin = CGPointMake(18, -50);
-    frame.size = CGSizeMake(270, 275);
-    self.titleSteadyFire.bounds = frame;
     
+    [self.titleSteadyFire setHidden:NO];
     [self.titleSteadyFire setImage:[UIImage imageNamed:@"dv_fire_label.png"]];
-
+    [gunDrumViewController closeGun];
 }
 
 -(void)duelTimerEndFeedBack
@@ -778,8 +774,9 @@
 -(void)hideSteadyImage
 {
     steadyScale = 1.0;
-    [self.titleReady setHidden:YES];
     [self.titleSteadyFire setHidden:YES];
+    
+    [gunDrumViewController closeGun];
 }
 
 #pragma mark - IBAction
