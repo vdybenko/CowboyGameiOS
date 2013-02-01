@@ -159,7 +159,11 @@
     if ([AccountDataSource sharedInstance].accountLevel<product.dLevelLock) {
         lockLevelBackground.hidden = NO;
         buyProduct.enabled = NO;
-        lockLevelBackgroundTitle.text = [NSString stringWithFormat:@"Lock level %d",product.dLevelLock];
+        if (product.dLevelLock == 4.0) {
+            [lockLevelBackgroundTitle setFont:[UIFont boldSystemFontOfSize:13.0f]];
+        }
+        NSString *nameOfRank=[NSString stringWithFormat:@"%dRank",product.dLevelLock];
+        lockLevelBackgroundTitle.text = [NSString stringWithFormat:@"Available for %@",NSLocalizedString(nameOfRank, @"")];
     }else{
         lockLevelBackground.hidden = YES;
         buyProduct.enabled = YES;
