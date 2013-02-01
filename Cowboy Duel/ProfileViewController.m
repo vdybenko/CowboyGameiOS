@@ -50,8 +50,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     __weak IBOutlet UILabel *lbWantedTitle;
     __weak IBOutlet UILabel *lbAward;
     
-    __weak IBOutlet UIButton *btnLogInFB;
-    
     __weak IBOutlet UIButton *btnLeaderboard;
     __weak IBOutlet UIButton *btnLeaderboardBig;
     __weak IBOutlet UIButton *btnBack;
@@ -330,7 +328,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     lbGoldCount = nil;
     lbGoldIcon = nil;
     lbAward = nil;
-    btnLogInFB = nil;
     btnLeaderboard = nil;
     btnLeaderboardBig = nil;
     btnBack = nil;
@@ -397,20 +394,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     lbLeaderboardTitle.text = NSLocalizedString(@"LeaderboardTitle", @"");
     lbLeaderboardTitle.font = [UIFont fontWithName: @"DecreeNarrow" size:18];
 
-    CGRect frame=btnLogInFB.frame; 
-    frame.origin.x=33;
-    frame.origin.y=-1;
-    frame.size.width=frame.size.width-15;
-    UILabel *label1 = [[UILabel alloc] initWithFrame:frame];
-    [label1 setFont: [UIFont systemFontOfSize:9.0f]];
-    label1.textAlignment = UITextAlignmentLeft; 
-    [label1 setBackgroundColor:[UIColor clearColor]];
-    [label1 setTextColor:[UIColor whiteColor]];
-    [label1 setNumberOfLines:2];
-    [label1 setLineBreakMode:UILineBreakModeWordWrap];
-    [label1 setText:NSLocalizedString(@"LOGIN TO FACEBOOK", @"")];
-    [btnLogInFB addSubview:label1]; 
-    label1 = nil;
     lbDuelsWonCount.font = CountFont;
     
     lbUserTitle.font = [UIFont  systemFontOfSize:lbUserTitle.font.pointSize];;
@@ -433,13 +416,8 @@ static const CGFloat timeToStandartTitles = 1.8;
     [profilePictureView setHidden:NO];
     [profilePictureViewDefault setHidden:YES];
     profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
-    [btnLogInFB setHidden:YES];
     [btnLeaderboard setEnabled:YES];
     [self setImageFromFacebook];
-
-    if(!duelButton.isHidden){
-        [btnLogInFB setHidden:YES];
-    }
     
     NSString *name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel];
     ivCurrentRank.image = [UIImage imageNamed:name];
@@ -809,19 +787,6 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/first_profile_continue_click" forKey:@"event"]];
     
-}
-
-
-- (IBAction)btnSoundClick:(id)sender {
-    StartViewController *startViewController=[[self.navigationController viewControllers] objectAtIndex:0];
-    [startViewController soundOff];
-}
-
-- (IBAction)btnFBLoginClick:(id)sender {
-    [ivBlack setHidden:NO];
-    [playerAccount cleareWeaponAndDefense];
-    [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusSimple];
-    [loginViewController loginButtonClick:self];
 }
 
 - (IBAction)btnLeaderbordFirstRunClick:(id)sender {
