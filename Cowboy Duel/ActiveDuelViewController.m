@@ -439,12 +439,12 @@
                 DLog(@"Kill!!!");
                 DLog(@"Shot Time = %d.%d", (shotTime - time * 1000) / 1000, (shotTime - time * 1000));
                 int opponentTime;
-                if (!opAccount.bot) opponentTime=3000;
+                if (!opAccount.bot) opponentTime=7000;
                 else{
                     int countBullets = [DuelRewardLogicController countUpBuletsWithOponentLevel:[AccountDataSource sharedInstance].accountLevel defense:[AccountDataSource sharedInstance].accountDefenseValue playerAtack:opAccount.accountWeapon.dDamage];
                     
                     
-                    opponentTime = 600 + countBullets * (220 + rand() % 160);
+                    opponentTime = 2400 + countBullets * (220 + rand() % 160);
                     DLog(@"bot opponentTime %d", opponentTime);
                 }
                 

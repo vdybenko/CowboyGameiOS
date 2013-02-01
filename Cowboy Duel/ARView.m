@@ -251,7 +251,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
             CGPoint newPosition = CGPointMake(x*self.bounds.size.width, self.bounds.size.height-y*self.bounds.size.height);
             
             distance = powf(powf(currentPosition.x - newPosition.x, 2) + powf(currentPosition.y - newPosition.y, 2), 0.5);
-            printf("%0.2f\n", distance);
+            //printf("%0.2f\n", distance);
             if (v[2] < 0.0f) {
                 [UIView animateWithDuration:distance animations:^{
                     poi.view.center = CGPointMake(x*self.bounds.size.width, self.bounds.size.height - y*self.bounds.size.height);
@@ -375,7 +375,6 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 		
 		float x = (v[0] / v[3] + 1.0f) * 0.5f;
 		float y = (v[1] / v[3] + 1.0f) * 0.5f;
-        NSLog(@"men centre %f %f", x, y);
 		if (v[2] < 0.0f) {
             
             [UIView animateWithDuration:0.1 animations:^{
