@@ -203,18 +203,20 @@
     [cancelBtn addTarget:self action:@selector(cancelHelpArmClick:) forControlEvents:UIControlEventTouchUpInside];
     [helpPracticeView addSubview:cancelBtn];
     
-    [self hideHelpViewWithArm];
+    [self hideHelpViewOnStartDuel];
     
     [helpPracticeView setDinamicHeightBackground];
     [self.view addSubview:helpPracticeView];
+    
+    gunDrumViewController = [[GunDrumViewController alloc] initWithNibName:Nil bundle:Nil];
+    [self.view addSubview:gunDrumViewController.view];
+    [gunDrumViewController showGun];
     
     activityIndicatorView = [[ActivityIndicatorView alloc] init];
     frame = activityIndicatorView.frame;
     frame.origin = CGPointMake(0,0);
     activityIndicatorView.frame=frame;
     [self.view addSubview:activityIndicatorView];
-
-
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -231,7 +233,7 @@
     [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(3.0 / 60.0)];
     [[UIAccelerometer sharedAccelerometer] setDelegate:self];
     
-    [self showHelpViewWithArm];
+    [self showHelpViewOnStartDuel];
     
     userHitCount = 0;
     
@@ -253,13 +255,6 @@
     self.opStatsLabel.text = [NSString stringWithFormat: @"A: +%d\rD: +%d",opAccount.accountWeapon.dDamage,opAccount.accountDefenseValue];
     self.userStatsLabel.text = [NSString stringWithFormat: @"A: +%d\nD: +%d",playerAccount.accountWeapon.dDamage,playerAccount.accountDefenseValue];
     [self.titleSteadyFire setHidden:YES];
-
-    gunDrumViewController= [[GunDrumViewController alloc] initWithNibName:Nil bundle:Nil];
-    
-    [UIView animateWithDuration:0.5 animations:^{
-        UIWindow *mainWindow = [[UIApplication sharedApplication] keyWindow];
-        [mainWindow insertSubview:gunDrumViewController.view aboveSubview:mainWindow];
-    }];
     
     steadyScale = 1.0;
     
@@ -350,7 +345,7 @@
     switch (shotCountForSound) {
         case 1:
             [self.titleSteadyFire setHidden:YES];
-            [gunDrumViewController closeGun];
+            [gunDrumViewController hideGun];
             [shotAudioPlayer1 stop];
             [shotAudioPlayer1 setCurrentTime:0.0];
             [shotAudioPlayer1 performSelectorInBackground:@selector(play) withObject:nil];
@@ -579,7 +574,7 @@
     acelStatus = YES;
     shotTime = 0;
     
-    [self hideHelpViewWithArm];
+    [self hideHelpViewOnStartDuel];
     if (([[NSUserDefaults standardUserDefaults] integerForKey:@"FirstRunForPractice"] != 1)&&([[NSUserDefaults standardUserDefaults] integerForKey:@"FirstRunForPractice"] != 2))
     {
         //[self hideHelpViewWithArm];
@@ -645,7 +640,7 @@
     [timer invalidate];
     [player stop];
     [player setCurrentTime:0.0];
-    [self showHelpViewWithArm];
+    [self showHelpViewOnStartDuel];
 }
 
 -(void)shotTimer
@@ -677,20 +672,27 @@
     }
 }
 
--(void)hideHelpViewWithArm;
+#pragma mark
+
+-(void)hideHelpViewOnStartDuel;
 {
     [helpPracticeView setHidden:YES];
-    arrowAnimationContinue = NO;
+    arrowAnimationContinue = NO;    
 }
 
--(void)showHelpViewWithArm;
+-(void)showHelpViewOnStartDuel;
 {
     [helpPracticeView setHidden:NO];
     if (!arrowAnimationContinue) {
         arrowAnimationContinue = YES;
         [self scaleView:imvArrow];
     }
+    
+    [gunDrumViewController showGun];
+    [gunDrumViewController closeGun];
 }
+
+#pragma mark
 
 -(void)scaleView:(UIView *)viewForAnimation
 {
@@ -712,8 +714,7 @@
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     
     [self.titleSteadyFire setHidden:NO];
-    [self.titleSteadyFire setImage:[UIImage imageNamed:@"dv_fire_label.png"]];
-    [gunDrumViewController closeGun];
+    [gunDrumViewController hideGun];
 }
 
 -(void)duelTimerEndFeedBack
@@ -779,12 +780,12 @@
     steadyScale = 1.0;
     [self.titleSteadyFire setHidden:YES];
     
-    [gunDrumViewController closeGun];
+//    [gunDrumViewController hideGun];
 }
 
 #pragma mark - IBAction
 - (void)cancelHelpArmClick:(id)sender {
-    [self hideHelpViewWithArm];
+    [self hideHelpViewOnStartDuel];
 }
 
 -(void)shutDownTimer;

@@ -13,5 +13,7 @@
 -(void)openGun;
 -(void)chargeBullets;
 -(void)closeGun;
+-(void)showGun;
+-(void)hideGun;
 -(void)closeController;
 @end
