@@ -3,12 +3,12 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1536</int>
 		<string key="IBDocument.SystemVersion">11G63</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2843</string>
 		<string key="IBDocument.AppKitVersion">1138.51</string>
 		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1930</string>
+			<string key="NS.object.0">1929</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -276,30 +276,6 @@
 									<int key="NSfFlags">16</int>
 								</object>
 							</object>
-							<object class="IBUIButton" id="367041018">
-								<reference key="NSNextResponder" ref="933964600"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{22, 200}, {104, 33}}</string>
-								<reference key="NSSuperview" ref="933964600"/>
-								<reference key="NSNextKeyView" ref="1046405462"/>
-								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<bool key="IBUIOpaque">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<int key="IBUIContentHorizontalAlignment">0</int>
-								<int key="IBUIContentVerticalAlignment">0</int>
-								<reference key="IBUIHighlightedTitleColor" ref="407551026"/>
-								<object class="NSColor" key="IBUINormalTitleColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
-								</object>
-								<reference key="IBUINormalTitleShadowColor" ref="899530917"/>
-								<object class="NSCustomResource" key="IBUINormalImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">btn_fb_logout.png</string>
-								</object>
-								<reference key="IBUIFontDescription" ref="376536378"/>
-								<reference key="IBUIFont" ref="438048294"/>
-							</object>
 							<object class="IBUILabel" id="862291106">
 								<reference key="NSNextResponder" ref="933964600"/>
 								<int key="NSvFlags">292</int>
@@ -412,7 +388,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{135, 157}, {137, 21}}</string>
 								<reference key="NSSuperview" ref="933964600"/>
-								<reference key="NSNextKeyView" ref="367041018"/>
+								<reference key="NSNextKeyView" ref="1046405462"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -829,6 +805,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{11, 420}, {142, 33}}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -925,14 +902,6 @@
 						<reference key="destination" ref="955472221"/>
 					</object>
 					<int key="connectionID">164</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">btnLogOutFB</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="367041018"/>
-					</object>
-					<int key="connectionID">165</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -1226,7 +1195,6 @@
 							<reference ref="514135513"/>
 							<reference ref="491851528"/>
 							<reference ref="955472221"/>
-							<reference ref="367041018"/>
 							<reference ref="216755311"/>
 							<reference ref="979800274"/>
 							<reference ref="327593233"/>
@@ -1279,12 +1247,6 @@
 						<reference key="object" ref="491851528"/>
 						<reference key="parent" ref="933964600"/>
 						<string key="objectName">Leaderboard</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">144</int>
-						<reference key="object" ref="367041018"/>
-						<reference key="parent" ref="933964600"/>
-						<string key="objectName">LogOut</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">145</int>
@@ -1488,7 +1450,6 @@
 				<string key="141.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="142.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="143.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="144.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="145.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="146.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="147.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1535,7 +1496,6 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="btn_fb_login.png">{102, 33}</string>
-			<string key="btn_fb_logout.png">{104, 33}</string>
 			<string key="btn_leaderboard.png">{102, 34}</string>
 			<string key="btn_small.png">{142, 33}</string>
 			<string key="ds_attack.png">{45, 25}</string>
@@ -1547,6 +1507,6 @@
 			<string key="pv_gold_background.png">{136, 27}</string>
 			<string key="pv_photo_frame.png">{99, 124}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">1930</string>
+		<string key="IBCocoaTouchPluginVersion">1929</string>
 	</data>
 </archive>

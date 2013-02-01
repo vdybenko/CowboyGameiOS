@@ -51,7 +51,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     __weak IBOutlet UILabel *lbAward;
     
     __weak IBOutlet UIButton *btnLogInFB;
-    __weak IBOutlet UIButton *btnLogOutFB;
     
     __weak IBOutlet UIButton *btnLeaderboard;
     __weak IBOutlet UIButton *btnLeaderboardBig;
@@ -332,7 +331,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     lbGoldIcon = nil;
     lbAward = nil;
     btnLogInFB = nil;
-    btnLogOutFB = nil;
     btnLeaderboard = nil;
     btnLeaderboardBig = nil;
     btnBack = nil;
@@ -430,31 +428,16 @@ static const CGFloat timeToStandartTitles = 1.8;
 -(void)checkLocationOfViewForFBLogin;
 {
     [self refreshContentFromPlayerAccount];
-    NSUserDefaults *uDef=[NSUserDefaults standardUserDefaults];
     [profilePictureView setProfileID:nil];
     [profilePictureView setProfileID:playerAccount.facebookUser.id];
-    if (![uDef objectForKey:@"FBAccessTokenKey"]) {
-        [btnLogOutFB setHidden:YES];
-        [btnLogInFB setHidden:NO];
-        [btnLeaderboard setEnabled:NO];
-        [profilePictureView setHidden:YES];
-        profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
-        //profilePictureViewDefault.contentMode = UIViewContentModeBottomLeft;
-        profilePictureViewDefault.image = [UIImage imageNamed:@"pv_photo_default.png"];
-        [profilePictureViewDefault setHidden:NO];
-    }
-    else 
-    {
-        [profilePictureView setHidden:NO];
-        [profilePictureViewDefault setHidden:YES];
-        profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
-        [btnLogOutFB setHidden:NO];
-        [btnLogInFB setHidden:YES];
-        [btnLeaderboard setEnabled:YES];
-        [self setImageFromFacebook];
-    }
+    [profilePictureView setHidden:NO];
+    [profilePictureViewDefault setHidden:YES];
+    profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
+    [btnLogInFB setHidden:YES];
+    [btnLeaderboard setEnabled:YES];
+    [self setImageFromFacebook];
+
     if(!duelButton.isHidden){
-        [btnLogOutFB setHidden:YES];
         [btnLogInFB setHidden:YES];
     }
     
@@ -839,21 +822,6 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     [playerAccount cleareWeaponAndDefense];
     [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusSimple];
     [loginViewController loginButtonClick:self];
-}
-
-- (IBAction)btnFBLogOutClick:(id)sender {
-    [playerAccount cleareWeaponAndDefense];
-    [ivBlack setHidden:NO];
-    [loginViewController fbDidLogout];
-        
-    NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *FilePath = [NSString stringWithFormat:@"%@/me.png",docDir];
-    
-    NSFileManager *fileMgr = [NSFileManager defaultManager];
-    
-    NSError *error= nil;
-    if ([fileMgr removeItemAtPath:FilePath error:&error] != YES)
-        DLog(@"Profile: Unable to delete file: %@", [error localizedDescription]);
 }
 
 - (IBAction)btnLeaderbordFirstRunClick:(id)sender {
