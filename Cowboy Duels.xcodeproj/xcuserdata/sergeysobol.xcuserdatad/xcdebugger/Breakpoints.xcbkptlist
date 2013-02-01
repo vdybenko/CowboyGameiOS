@@ -351,7 +351,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "411"
          endingLineNumber = "411"
-         landmarkName = "-cheackHitForShot:andTargetPoint:"
+         landmarkName = "-horizontalFlip"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -372,11 +372,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ARView.m"
-         timestampString = "380710146.444961"
+         timestampString = "381340503.046791"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "355"
-         endingLineNumber = "355"
+         startingLineNumber = "356"
+         endingLineNumber = "356"
          landmarkName = "-onDisplayLink:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -385,7 +385,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ARView.m"
-         timestampString = "380710146.444961"
+         timestampString = "381342884.109112"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "457"
@@ -398,11 +398,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ARView.m"
-         timestampString = "380710146.444961"
+         timestampString = "381340503.046791"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "265"
-         endingLineNumber = "265"
+         startingLineNumber = "266"
+         endingLineNumber = "266"
          landmarkName = "-startDeviceMotion"
          landmarkType = "5">
       </FileBreakpoint>
@@ -411,11 +411,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ARView.m"
-         timestampString = "380710146.444961"
+         timestampString = "381340503.046791"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "254"
-         endingLineNumber = "254"
+         startingLineNumber = "255"
+         endingLineNumber = "255"
          landmarkName = "-startDeviceMotion"
          landmarkType = "5">
       </FileBreakpoint>
