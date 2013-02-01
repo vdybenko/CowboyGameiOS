@@ -96,9 +96,8 @@ static LoginAnimatedViewController *sharedHelper = nil;
     loginLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
     
     practiceLable.text = NSLocalizedString(@"PRACTICE", @"");
-    practiceLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
+    practiceLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];    
 }
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -132,6 +131,8 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"FirstRun_v2.2"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [StartViewController sharedInstance].playerStart;
+    
+    loginFBbutton.enabled = [startViewController connectedToWiFi];
 }
 
 -(void)viewDidDisappear:(BOOL)animated

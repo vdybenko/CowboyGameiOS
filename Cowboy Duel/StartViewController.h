@@ -55,6 +55,7 @@
 -(void)playerStop;
 -(void)playerStart;
 -(BOOL)connectedToWiFi;
+-(void)checkNetworkStatus:(NSNotification *)notice;
 -(void)authorizationModifier:(BOOL)modifierName;
 -(void)modifierUser:(AccountDataSource *)playerTemp;
 
