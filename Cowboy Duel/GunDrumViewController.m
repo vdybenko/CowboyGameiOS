@@ -22,15 +22,17 @@
 
 //points
 static CGPoint pntDumpOpen;
-static const CGPoint pntDumpClose = {131,111};
+static const CGPoint pntDumpClose = {198,178};
 static CGPoint pntGunOpen;
 static const CGPoint pntGunClose = {-34,123};
 static const CGPoint pntGunHide = {-34,480};
+static const CGPoint pntViewShow = {0,0};
+static const CGPoint pntViewHide = {0,480};
 
 //Time
 static const CGFloat timeOpenGun = 0.4f;
 static const CGFloat timeOpenDump = 0.4f;
-static const CGFloat timeCloseGun = 0.4f;
+static const CGFloat timeCloseGun = 0.2f;
 static const CGFloat timeChargeBullets = 0.5f;
 static const CGFloat timeSpinDump = 0.6f;
 
@@ -45,18 +47,19 @@ static const CGFloat timeSpinDump = 0.6f;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [self loadView];
-        runAnimationDump = YES;
-        
+
         pntGunOpen=gun.frame.origin;
-        pntDumpOpen=drumBullets.frame.origin;
+        pntDumpOpen=drumBullets.center;
         
         CGRect frame=gun.frame;
         frame.origin = pntGunClose;
         gun.frame = frame;
         
-        frame=drumBullets.frame;
-        frame.origin = pntDumpClose;
-        drumBullets.frame = frame;
+        drumBullets.center= pntDumpClose;
+        
+        frame=self.view.frame;
+        frame.origin = pntViewHide;
+        self.view.frame = frame;
     }
     return self;
 }
@@ -82,7 +85,6 @@ static const CGFloat timeSpinDump = 0.6f;
 #pragma mark
 -(void)openGun;
 {
-    
     [UIView animateWithDuration:timeOpenGun animations:^{
         arrow.hidden = YES;
         CGRect frame=gun.frame;
@@ -91,16 +93,33 @@ static const CGFloat timeSpinDump = 0.6f;
         
         drumBullets.hidden = NO;
         
-        frame=drumBullets.frame;
-        frame.origin = pntDumpOpen;
-        drumBullets.frame = frame;
+        drumBullets.center = pntDumpOpen;
     }completion:^(BOOL finished) {
         [self chargeBullets];
     }];
 }
 
+-(void)closeGun;
+{
+    runAnimationDump = NO;
+    [UIView animateWithDuration:timeOpenDump animations:^{
+        drumBullets.center= pntDumpClose;
+    }completion:^(BOOL finished) {
+        drumBullets.hidden = YES;
+        [self hideBullets];
+        [UIView animateWithDuration:timeCloseGun animations:^{
+            CGRect frame=gun.frame;
+            frame.origin = pntGunClose;
+            gun.frame = frame;
+        }completion:^(BOOL finished) {
+        
+        }];
+    }];
+}
+
 -(void)chargeBullets;
 {
+    runAnimationDump = YES;
     [self spinAnimation];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
@@ -145,28 +164,40 @@ static const CGFloat timeSpinDump = 0.6f;
                      }];
 }
 
--(void)closeGun;
+-(void)hideBullets
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        for (UIImageView *bullet in colectionBullets) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                bullet.hidden = YES;
+            });
+        }
+    });
+}
+
+-(void)showGun;
+{
+    CGRect frame=self.view.frame;
+    frame.origin = pntViewShow;
+    self.view.frame = frame;
+}
+
+-(void)hideGun;
 {
     runAnimationDump = NO;
     [UIView animateWithDuration:timeOpenDump animations:^{
-        CGRect frame=drumBullets.frame;
-        frame.origin = pntDumpClose;
-        drumBullets.frame = frame;
+        drumBullets.center= pntDumpClose;
     }completion:^(BOOL finished) {
         drumBullets.hidden = YES;
+        [self hideBullets];
         [UIView animateWithDuration:timeCloseGun animations:^{
             CGRect frame=gun.frame;
             frame.origin = pntGunClose;
             gun.frame = frame;
         }completion:^(BOOL finished) {
-            [UIView animateWithDuration:timeOpenGun animations:^{
-                CGRect frame=gun.frame;
-                frame.origin = pntGunHide;
-                gun.frame = frame;
-            } completion:^(BOOL finished) {
-                [self closeController];
-            }];
-                
+            CGRect frame=self.view.frame;
+            frame.origin = pntViewHide;
+            self.view.frame = frame;
         }];
     }];
 }
@@ -174,7 +205,6 @@ static const CGFloat timeSpinDump = 0.6f;
 -(void)closeController;
 {
     [self.view removeFromSuperview];
-    [self releaseComponents];
 }
 
 @end

@@ -375,7 +375,6 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 		
 		float x = (v[0] / v[3] + 1.0f) * 0.5f;
 		float y = (v[1] / v[3] + 1.0f) * 0.5f;
-        NSLog(@"men centre %f %f", x, y);
 		if (v[2] < 0.0f) {
             
             [UIView animateWithDuration:0.1 animations:^{

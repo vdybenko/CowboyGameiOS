@@ -83,7 +83,6 @@
     __weak IBOutlet UIImageView *backGroundfeedbackView;
     __weak IBOutlet UIActivityIndicatorView *indicatorfeedbackView;
   
-    
     __weak IBOutlet UILabel *lbFeedbackButton;
     __weak IBOutlet UILabel *lbShareButton;
   
