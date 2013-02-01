@@ -259,6 +259,8 @@
     
     steadyScale = 1.0;
     
+    [self.opponentImage setHidden:YES];
+    
     for(UIView *subview in [self.opponentBody subviews])
     {
         [subview removeFromSuperview];
@@ -663,6 +665,7 @@
         [self.gunButton setEnabled:YES];
         if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
         moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
+        [self.opponentImage setHidden:YES];
     }
     if ((shotTime * 0.001 >= 60.0) && (!duelTimerEnd) && (soundStart)) {
         if ([delegate respondsToSelector:@selector(duelTimerEnd)])
