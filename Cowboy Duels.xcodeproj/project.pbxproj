@@ -3384,8 +3384,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sergij Sobol (DF8EH42X59)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sergij Sobol (DF8EH42X59)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3429,8 +3429,8 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Cowboy Duel";
-				PROVISIONING_PROFILE = "DD33605C-602F-4EF7-A974-A0FBED085AC8";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DD33605C-602F-4EF7-A974-A0FBED085AC8";
+				PROVISIONING_PROFILE = "BC9B4A61-38C1-4A9C-9BEF-A2639E71170C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BC9B4A61-38C1-4A9C-9BEF-A2639E71170C";
 				REZ_SEARCH_PATHS = "$(inherited)";
 				SDKROOT = iphoneos6.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3479,7 +3479,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sergij Sobol (DF8EH42X59)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3522,7 +3522,7 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Cowboy Duel";
-				PROVISIONING_PROFILE = "DD33605C-602F-4EF7-A974-A0FBED085AC8";
+				PROVISIONING_PROFILE = "BC9B4A61-38C1-4A9C-9BEF-A2639E71170C";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DD33605C-602F-4EF7-A974-A0FBED085AC8";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3769,7 +3769,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sergij Sobol (DF8EH42X59)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				COPY_PHASE_STRIP = NO;
@@ -3814,7 +3814,7 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Cowboy Duel";
-				PROVISIONING_PROFILE = "DD33605C-602F-4EF7-A974-A0FBED085AC8";
+				PROVISIONING_PROFILE = "BC9B4A61-38C1-4A9C-9BEF-A2639E71170C";
 				"PROVISIONING_PROFILE[sdk=*]" = "DD33605C-602F-4EF7-A974-A0FBED085AC8";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DD33605C-602F-4EF7-A974-A0FBED085AC8";
 				REZ_SEARCH_PATHS = (
