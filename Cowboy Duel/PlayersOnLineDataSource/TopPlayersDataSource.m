@@ -27,8 +27,7 @@
 @synthesize tableView;
 
 //static const char *TOP_PLAYERS_URL =  BASE_URL"users/listview";
-static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json";
-
+static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top_board.json";
 
 
 #pragma mark - Instance initialization
