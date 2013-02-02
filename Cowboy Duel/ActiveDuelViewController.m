@@ -76,6 +76,7 @@
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *opStatsLabel;
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *userStatsLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *titleSteadyFire;
+@property (weak, nonatomic) IBOutlet FXLabel *lblBehold;
 
 
 
@@ -87,6 +88,7 @@
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
+        
         // Custom initialization
         playerAccount = userAccount;
         opAccount  = pOponentAccount;
@@ -131,7 +133,7 @@
     NSArray *arrayWithSprites = [spriteSheet spritesWithSpriteSheetImage:spriteSheet
                                                               spriteSize:CGSizeMake(64, 64)];
     [self.fireImageView setAnimationImages:arrayWithSprites];
-    float animationDuration = [self.fireImageView.animationImages count] * 0.0100; // 100ms per frame
+    float animationDuration = [self.fireImageView.animationImages count] * 0.0200; // 100ms per frame
     [self.fireImageView setAnimationRepeatCount:1];
     [self.fireImageView setAnimationDuration:animationDuration];
     
@@ -256,7 +258,14 @@
     self.opStatsLabel.text = [NSString stringWithFormat: @"A: +%d\rD: +%d",opAccount.accountWeapon.dDamage,opAccount.accountDefenseValue];
     self.userStatsLabel.text = [NSString stringWithFormat: @"A: +%d\nD: +%d",playerAccount.accountWeapon.dDamage,playerAccount.accountDefenseValue];
     [self.titleSteadyFire setHidden:YES];
+    [self.lblBehold setHidden:YES];
     
+
+    [self.lblBehold setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:45]];
+    self.lblBehold.text = NSLocalizedString(@"Behold!", @"");
+    self.lblBehold.gradientStartColor = [UIColor colorWithRed:255.0/255.0 green:181.0/255.0 blue:0.0/255.0 alpha:1.0];
+    self.lblBehold.gradientEndColor = [UIColor colorWithRed:255.0/255.0 green:140.0/255.0 blue:0.0/255.0 alpha:1.0];
+  
     steadyScale = 1.0;
     
     [self.opponentImage setHidden:YES];
@@ -298,6 +307,7 @@
     [self setUserStatsLabel:nil];
     [self setOpponentBody:nil];
     [self setTitleSteadyFire:nil];
+    [self setLblBehold:nil];
     [super viewDidUnload];
 }
 
@@ -337,15 +347,17 @@
     if ([self.fireImageView isAnimating]) {
         [self.fireImageView stopAnimating];
     }
-    //[self.fireImageView startAnimating];
+    [self.fireImageView startAnimating];
        
     if(delegate)
     {
         [delegate sendShot];
     }
+    
     switch (shotCountForSound) {
         case 1:
             [self.titleSteadyFire setHidden:YES];
+            [self.lblBehold setHidden:YES];
             [gunDrumViewController hideGun];
             self.gunButton.hidden = NO;
             
@@ -413,7 +425,7 @@
 -(void)cheackHitForShot:(CGPoint)shotPoint andTargetPoint:(CGPoint)targetPoint
 {
     if (([self abs:(shotPoint.x - targetPoint.x)] < targetWeidth / 2) && ([self abs:(shotPoint.y - targetPoint.y)] < targetHeight / 2)) {
-        //[self startRandomBloodAnimation];
+        
         shotCountBullet--;
         
         userHitCount++;
@@ -424,6 +436,7 @@
         
         
         if (CGRectContainsPoint(self.opponentBody.frame, shotPoint)) {
+            [self startRandomBloodAnimation];
             CGPoint point = [self.view convertPoint:shotPoint toView:self.opponentImage];
             [self hitTheOponentWithPoint:point];
         }
@@ -590,25 +603,19 @@
 
 -(void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
 {
-    [self setScale];
     rollingX = (acceleration.x * kFilteringFactor) + (rollingX * (1.0 - kFilteringFactor));
     rollingY = (acceleration.y * kFilteringFactor) + (rollingY * (1.0 - kFilteringFactor));
     rollingZ = (acceleration.z * kFilteringFactor) + (rollingZ * (1.0 - kFilteringFactor));
     [self setScale];
+    
     //        Position for Shot
-    if ((rollingY < 0.0) || (rollingX < -0.2) || (rollingX > 0.2)) accelerometerState = NO;
+    if ((acceleration.y < -0.4) || (rollingX < -0.3) || (rollingX > 0.3)) accelerometerState = NO;
     
     //       Position for STEADY
-    if ((rollingY > 0.0) && (rollingX > -0.2) && (rollingX < 0.2)) accelerometerState = YES;
+    if ((acceleration.y > -0.4) && (rollingX > -0.3) && (rollingX < 0.3)) accelerometerState = YES;
             
             
     
-//    if (duelIsStarted){
-//        if (!accelerometerState)
-////            _btnNab.enabled = YES;
-//        else
-////            _btnNab.enabled = NO;
-//    }
     
     if((accelerometerState)&& (!soundStart)){
         if (!accelerometerStateSend) {
@@ -704,6 +711,7 @@
     [UIView animateWithDuration:0.4 animations:^{
         viewForAnimation.transform = CGAffineTransformMakeScale(1.3, 1.3);
     } completion:^(BOOL complete) {
+        if(!arrowAnimationContinue) return;
         [UIView animateWithDuration:0.4 animations:^{
             viewForAnimation.transform = CGAffineTransformMakeScale(1.0, 1.0);
         }completion:^(BOOL complete){
@@ -719,7 +727,9 @@
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     
     [self.titleSteadyFire setHidden:NO];
+
 //    [gunDrumViewController hideGun];
+    [self.lblBehold setHidden:NO];
     self.gunButton.hidden = NO;
 }
 
@@ -770,14 +780,15 @@
 
 -(void)setScale
 {
-    if (steadyScale >= 1.3) scaleDelta = -0.03;
-    if (steadyScale <= 1.0) scaleDelta = 0.03;
+    if (steadyScale >= 1.3) scaleDelta = -0.01;
+    if (steadyScale <= 1.0) scaleDelta = 0.02;
     steadyScale += scaleDelta;
     if(duelIsStarted){
-        [self performSelector:@selector(hideSteadyImage) withObject:nil afterDelay:2.0];
+        [self performSelector:@selector(hideSteadyImage) withObject:nil afterDelay:2.5];
     }
     CGAffineTransform steadyTransform = CGAffineTransformMakeScale( steadyScale, steadyScale);
     self.titleSteadyFire.transform = steadyTransform;
+    self.lblBehold.transform = steadyTransform;
 }
 
 
@@ -785,6 +796,7 @@
 {
     steadyScale = 1.0;
     [self.titleSteadyFire setHidden:YES];
+    [self.lblBehold setHidden:YES];
 }
 
 #pragma mark - IBAction

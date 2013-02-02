@@ -123,6 +123,10 @@ p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font
 //Duel
 "LOWER" = "Hold your phone down to start";
 
+//Active Duel
+"Behold!" = "WATCH OUT!";
+"Load" = "LOAD YOUR GUN!";
+
 //Moremoney
 
 "MOREMONEY" = "More money";
