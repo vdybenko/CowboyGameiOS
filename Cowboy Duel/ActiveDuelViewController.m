@@ -131,7 +131,7 @@
     NSArray *arrayWithSprites = [spriteSheet spritesWithSpriteSheetImage:spriteSheet
                                                               spriteSize:CGSizeMake(64, 64)];
     [self.fireImageView setAnimationImages:arrayWithSprites];
-    float animationDuration = [self.fireImageView.animationImages count] * 0.0100; // 100ms per frame
+    float animationDuration = [self.fireImageView.animationImages count] * 0.0200; // 100ms per frame
     [self.fireImageView setAnimationRepeatCount:1];
     [self.fireImageView setAnimationDuration:animationDuration];
     
@@ -337,12 +337,13 @@
     if ([self.fireImageView isAnimating]) {
         [self.fireImageView stopAnimating];
     }
-    //[self.fireImageView startAnimating];
+    [self.fireImageView startAnimating];
        
     if(delegate)
     {
         [delegate sendShot];
     }
+    
     switch (shotCountForSound) {
         case 1:
             [self.titleSteadyFire setHidden:YES];
@@ -413,7 +414,7 @@
 -(void)cheackHitForShot:(CGPoint)shotPoint andTargetPoint:(CGPoint)targetPoint
 {
     if (([self abs:(shotPoint.x - targetPoint.x)] < targetWeidth / 2) && ([self abs:(shotPoint.y - targetPoint.y)] < targetHeight / 2)) {
-        //[self startRandomBloodAnimation];
+        
         shotCountBullet--;
         
         userHitCount++;
@@ -424,6 +425,7 @@
         
         
         if (CGRectContainsPoint(self.opponentBody.frame, shotPoint)) {
+            [self startRandomBloodAnimation];
             CGPoint point = [self.view convertPoint:shotPoint toView:self.opponentImage];
             [self hitTheOponentWithPoint:point];
         }
