@@ -191,7 +191,7 @@ static const CGFloat timeToStandartTitles = 1.8;
         
         if ([playerAccount.accountID rangeOfString:@"F"].location != NSNotFound) {
             iconDownloader = [[IconDownloader alloc] init];
-            profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
+            profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFill;
             
             iconDownloader.namePlayer=name;
             iconDownloader.delegate = self;
@@ -205,7 +205,7 @@ static const CGFloat timeToStandartTitles = 1.8;
         }else {
             profilePictureViewDefault.image = [UIImage imageNamed:@"pv_photo_default.png"];
             profilePictureViewDefault.transform = CGAffineTransformIdentity;
-            profilePictureViewDefault.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+//            profilePictureViewDefault.transform = CGAffineTransformMakeScale(-1.0, 1.0);
             
         }
 //        

@@ -79,8 +79,9 @@ static const char *A_URL =  BASE_URL"api/authorization";
         [self.view addSubview:versionLabel];
         versionLabel = nil;
         
-        if (!firstRun) {
-            [self performSelector:@selector(closeWindow) withObject:self afterDelay:3.0]; 
+        [startViewController checkNetworkStatus:Nil];
+        if (!firstRun || ![startViewController connectedToWiFi]) {
+            [self performSelector:@selector(closeWindow) withObject:self afterDelay:3.0];
         }
     }
     return self;

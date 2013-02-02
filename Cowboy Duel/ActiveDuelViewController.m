@@ -565,6 +565,7 @@
     NSLog(@"startDuel");
     soundStart = YES;
     startInterval = [NSDate timeIntervalSinceReferenceDate];
+    gunDrumViewController.chargeTime = time- 0.7;
     [player stop];
     [player setCurrentTime:0.0];
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Duel.mp3", [[NSBundle mainBundle] resourcePath]]];
@@ -713,7 +714,7 @@
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     
     [self.titleSteadyFire setHidden:NO];
-    [gunDrumViewController hideGun];
+//    [gunDrumViewController hideGun];
     self.gunButton.hidden = NO;
 }
 

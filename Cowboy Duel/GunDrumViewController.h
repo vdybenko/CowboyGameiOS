@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface GunDrumViewController : UIViewController<MemoryManagement>
+@property (nonatomic) CGFloat chargeTime;
+@property (nonatomic) BOOL isCharging;
 
 -(void)openGun;
--(void)chargeBullets;
+-(void)chargeBulletsForTime:(CGFloat)time;
 -(void)closeDump;
 -(void)showGun;
 -(void)hideGun;
