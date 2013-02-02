@@ -589,25 +589,19 @@
 
 -(void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
 {
-    [self setScale];
     rollingX = (acceleration.x * kFilteringFactor) + (rollingX * (1.0 - kFilteringFactor));
     rollingY = (acceleration.y * kFilteringFactor) + (rollingY * (1.0 - kFilteringFactor));
     rollingZ = (acceleration.z * kFilteringFactor) + (rollingZ * (1.0 - kFilteringFactor));
     [self setScale];
+    
     //        Position for Shot
-    if ((rollingY < 0.0) || (rollingX < -0.2) || (rollingX > 0.2)) accelerometerState = NO;
+    if ((acceleration.y < -0.4) || (rollingX < -0.3) || (rollingX > 0.3)) accelerometerState = NO;
     
     //       Position for STEADY
-    if ((rollingY > 0.0) && (rollingX > -0.2) && (rollingX < 0.2)) accelerometerState = YES;
+    if ((acceleration.y > -0.4) && (rollingX > -0.3) && (rollingX < 0.3)) accelerometerState = YES;
             
             
     
-//    if (duelIsStarted){
-//        if (!accelerometerState)
-////            _btnNab.enabled = YES;
-//        else
-////            _btnNab.enabled = NO;
-//    }
     
     if((accelerometerState)&& (!soundStart)){
         if (!accelerometerStateSend) {
@@ -703,6 +697,7 @@
     [UIView animateWithDuration:0.4 animations:^{
         viewForAnimation.transform = CGAffineTransformMakeScale(1.3, 1.3);
     } completion:^(BOOL complete) {
+        if(!arrowAnimationContinue) return;
         [UIView animateWithDuration:0.4 animations:^{
             viewForAnimation.transform = CGAffineTransformMakeScale(1.0, 1.0);
         }completion:^(BOOL complete){
