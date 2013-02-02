@@ -24,7 +24,7 @@
 
 //points
 static CGPoint pntDumpOpen;
-static const CGPoint pntDumpClose = {187,128};
+static const CGPoint pntDumpClose = {187,128};//center of image
 static CGPoint pntGunOpen;
 static const CGPoint pntGunClose = {-26,123};
 static const CGPoint pntGunHide = {-26,480};
@@ -71,8 +71,7 @@ static CGFloat timeSpinDump = 0.6f;
         self.view.frame = frame;
         
         lbLoadGun.text = NSLocalizedString(@"Load", @"");
-        ivLine.transform = CGAffineTransformIdentity;
-        ivLine.transform = CGAffineTransformMakeScale(1.0, -1.0);
+        
     }
     return self;
 }

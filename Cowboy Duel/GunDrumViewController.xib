@@ -589,11 +589,11 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="gd_arrow.png">{16, 16}</string>
-			<string key="gd_drum.png">{16, 16}</string>
-			<string key="gd_gun.png">{16, 16}</string>
-			<string key="gd_line.png">{16, 16}</string>
-			<string key="gd_sleeve.png">{16, 16}</string>
+			<string key="gd_arrow.png">{114, 60}</string>
+			<string key="gd_drum.png">{119, 119}</string>
+			<string key="gd_gun.png">{122, 308}</string>
+			<string key="gd_line.png">{286, 16}</string>
+			<string key="gd_sleeve.png">{31, 31}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1929</string>
 	</data>

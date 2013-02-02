@@ -30,5 +30,6 @@
 
 +(BOOL)isFileDownloadedForPath:(NSString*)path;
 
++(UIImage*) maskImage:(UIImage *)image withMask:(UIImage *)maskImage;
 
 @end
