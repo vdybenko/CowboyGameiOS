@@ -165,19 +165,13 @@
     
     ARView *arView = (ARView *)self.view;
 	
-	// Create array of hard-coded places-of-interest, in this case some famous parks
-    CLLocationCoordinate2D poiCoords[] = {{4.7711329, -7.9741874},
-        {37.7690400, -122.4835193},
-        {32.7343822, -117.1441227},
-        {51.5068670, -0.1708030},
-        {45.5126399, -73.6802448},
-        {40.4152519, -3.6887466}};
+    CLLocationCoordinate2D oponentCoords;
+    oponentCoords.latitude = (((float) rand()) / RAND_MAX) * 360 - 180;
+    oponentCoords.longitude = (((float) rand()) / RAND_MAX) * 360 - 180;
     
-    int numPois = sizeof(poiCoords) / sizeof(CLLocationCoordinate2D);
-    
-	placesOfInterest = [NSMutableArray arrayWithCapacity:numPois];
+	placesOfInterest = [NSMutableArray arrayWithCapacity:1];
 //	for (int i = 0; i < numPois; i++) {
-		OponentCoordinateView *poi = [OponentCoordinateView oponentCoordinateWithView:self.floatView at:[[CLLocation alloc] initWithLatitude:poiCoords[0].latitude longitude:poiCoords[0].longitude]];
+		OponentCoordinateView *poi = [OponentCoordinateView oponentCoordinateWithView:self.floatView at:[[CLLocation alloc] initWithLatitude:oponentCoords.latitude longitude:oponentCoords.longitude]];
 		[placesOfInterest insertObject:poi atIndex:0];
 //	}
 	[arView setPlacesOfInterest:placesOfInterest];
