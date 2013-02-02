@@ -1842,17 +1842,8 @@
 		60593A611379321700256204 = {
 			isa = PBXGroup;
 			children = (
-				BD68C49916A705D200A9B52A /* CoreMotion.framework */,
 				BD38523D169C3F420066419B /* DeprecatedHeaders */,
-				BD3851F6169C3BE70066419B /* FacebookSDK.framework */,
-				BD81FB421678847D00417076 /* Accounts.framework */,
-				BD83A3EF1671E7CB003EE4B3 /* GHUnitIOS.framework */,
 				763E6BB81664B18500FA4E86 /* GoogleAdMobAdsSdkiOS-6.2.1 */,
-				763E6BB61664B0F900FA4E86 /* Social.framework */,
-				313F4E76165CFDDC007EF4B1 /* libsqlite3.dylib */,
-				BDD8E24D163EF42F004F05A9 /* AdSupport.framework */,
-				BDD8E229163EEE2E004F05A9 /* CoreData.framework */,
-				767EF48215D5557100548A04 /* Twitter.framework */,
 				763F8A281578A3A900D8BB42 /* libxml2.2.dylib */,
 				313F4E71165CFDBC007EF4B1 /* GoogleAnalytics */,
 				767C0B1215652C9C0007E113 /* CrittercismSDK */,
@@ -1877,6 +1868,15 @@
 		60593A6F1379321700256204 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BD68C49916A705D200A9B52A /* CoreMotion.framework */,
+				BD3851F6169C3BE70066419B /* FacebookSDK.framework */,
+				BD81FB421678847D00417076 /* Accounts.framework */,
+				BD83A3EF1671E7CB003EE4B3 /* GHUnitIOS.framework */,
+				763E6BB61664B0F900FA4E86 /* Social.framework */,
+				313F4E76165CFDDC007EF4B1 /* libsqlite3.dylib */,
+				BDD8E24D163EF42F004F05A9 /* AdSupport.framework */,
+				BDD8E229163EEE2E004F05A9 /* CoreData.framework */,
+				767EF48215D5557100548A04 /* Twitter.framework */,
 				BD822AF21663ADB300D874F4 /* libCrittercism_v3_4_0.a */,
 				038366DE154925A100F3F63B /* CoreTelephony.framework */,
 				038366DC1549257700F3F63B /* MediaPlayer.framework */,
@@ -2824,15 +2824,12 @@
 				31B09EBF16BA9B1600F424F2 /* pv_wanted_coin@2x.png in Resources */,
 				31B09EC116BA9B1600F424F2 /* pv_wanted_photo_frame.png in Resources */,
 				31B09EC316BA9B1600F424F2 /* pv_wanted_photo_frame@2x.png in Resources */,
-<<<<<<< HEAD
 				7686E29516BD0E560017E426 /* gd_arrow.png in Resources */,
 				7686E29616BD0E560017E426 /* gd_arrow@2x.png in Resources */,
 				7686E29716BD0E560017E426 /* gd_line.png in Resources */,
 				7686E29816BD0E560017E426 /* gd_line@2x.png in Resources */,
-=======
 				BD4BAAB616BC064A00F88E82 /* men_low.png in Resources */,
 				BD4BAAB816BC064A00F88E82 /* men_low@2x.png in Resources */,
->>>>>>> 8d4fd58ae6783f70e50b459e155054b1908e3d84
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3409,8 +3406,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Sergij Sobol (DF8EH42X59)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sergij Sobol (DF8EH42X59)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3454,8 +3451,8 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Cowboy Duel";
-				PROVISIONING_PROFILE = "BC9B4A61-38C1-4A9C-9BEF-A2639E71170C";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BC9B4A61-38C1-4A9C-9BEF-A2639E71170C";
+				PROVISIONING_PROFILE = "DDFC4948-69D8-4790-A4AC-F5E2A42B5C6C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DDFC4948-69D8-4790-A4AC-F5E2A42B5C6C";
 				REZ_SEARCH_PATHS = "$(inherited)";
 				SDKROOT = iphoneos6.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3504,8 +3501,8 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Sergij Sobol (DF8EH42X59)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sergij Sobol (DF8EH42X59)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3547,8 +3544,8 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Cowboy Duel";
-				PROVISIONING_PROFILE = "BC9B4A61-38C1-4A9C-9BEF-A2639E71170C";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BC9B4A61-38C1-4A9C-9BEF-A2639E71170C";
+				PROVISIONING_PROFILE = "DDFC4948-69D8-4790-A4AC-F5E2A42B5C6C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DD33605C-602F-4EF7-A974-A0FBED085AC8";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
@@ -3794,9 +3791,9 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Sergij Sobol (DF8EH42X59)";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Sergij Sobol (DF8EH42X59)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sergij Sobol (DF8EH42X59)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3839,9 +3836,9 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Cowboy Duel";
-				PROVISIONING_PROFILE = "BC9B4A61-38C1-4A9C-9BEF-A2639E71170C";
-				"PROVISIONING_PROFILE[sdk=*]" = "BC9B4A61-38C1-4A9C-9BEF-A2639E71170C";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BC9B4A61-38C1-4A9C-9BEF-A2639E71170C";
+				PROVISIONING_PROFILE = "DDFC4948-69D8-4790-A4AC-F5E2A42B5C6C";
+				"PROVISIONING_PROFILE[sdk=*]" = "DDFC4948-69D8-4790-A4AC-F5E2A42B5C6C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DD33605C-602F-4EF7-A974-A0FBED085AC8";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",

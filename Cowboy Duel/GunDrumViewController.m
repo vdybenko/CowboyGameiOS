@@ -70,7 +70,7 @@ static CGFloat timeSpinDump = 0.6f;
         frame.origin = pntViewHide;
         self.view.frame = frame;
         
-        lbLoadGun.text = NSLocalizedString(@"text", @"");
+        lbLoadGun.text = NSLocalizedString(@"Load", @"");
         ivLine.transform = CGAffineTransformIdentity;
         ivLine.transform = CGAffineTransformMakeScale(1.0, -1.0);
     }
