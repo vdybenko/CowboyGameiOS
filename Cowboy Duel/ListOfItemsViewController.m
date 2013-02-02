@@ -91,7 +91,7 @@
     }];
     
     saloonTitle.text = NSLocalizedString(@"SALYN", nil);
-    if (_playerAccount.activeDuel) saloonTitle.text = NSLocalizedString(@"SALYN2", nil);
+    if (_playerAccount.activeDuel) saloonTitle.text = NSLocalizedString(@"SALYN", nil);
     
     saloonTitle.textColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
     saloonTitle.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
