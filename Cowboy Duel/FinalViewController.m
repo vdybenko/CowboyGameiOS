@@ -272,7 +272,7 @@
                 [playerAccount loadWeapon];
                 [self.navigationController presentViewController:duelProductWinViewController animated:YES completion:Nil];
             }else{
-                if ([StartViewController sharedInstance].firstRun && [LoginAnimatedViewController sharedInstance].isDemoPractice){
+                if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
                     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
                     [self releaseComponents];
                 }
@@ -282,7 +282,7 @@
                 }
             }
         }else{
-            if ([StartViewController sharedInstance].firstRun && [LoginAnimatedViewController sharedInstance].isDemoPractice){
+            if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
                 [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
                 [self releaseComponents];
             }
@@ -313,7 +313,7 @@
             
             
         }else{
-            if ([StartViewController sharedInstance].firstRun && [LoginAnimatedViewController sharedInstance].isDemoPractice){
+            if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
                 [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
                 [self releaseComponents];
             }
