@@ -201,114 +201,24 @@ static OGHelper *sharedHelper = nil;
 // */
 - (void)apiDialogFeedUser;
 {
-    currentAPICall = kDialogFeedUser;
-//    SBJSON *jsonWriter = [SBJSON new];
     
-//    // The action links to be shown with the post in the feed
-//    NSArray* actionLinks = [NSArray arrayWithObjects:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                                      @"Get Started",@"name",@"http://apps.facebook.com/bidon_duels/?fb_source=timeline_og&fb_action_ids=358930200845338&fb_action_types=bidon_duels%3Aget",@"link", nil], nil];
-//    NSString *actionLinksStr = [jsonWriter stringWithObject:actionLinks];
-    // Dialog parameters
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   kFacebookAppId, @"app_id",
-                                   @"Get Started", @"message",
+    NSMutableDictionary *params2 = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                   @"Get Started", @"description",
                                    URL_APP_ESTIMATE, @"link",
-                                   UIImagePNGRepresentation([UIImage imageNamed:@"icon@2x.png"]), @"picture",
-                                   
                                    nil];
-//    NSMutableDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-//     @"Get Started",@"name",@"http://apps.facebook.com/bidon_duels/?fb_source=timeline_og&fb_action_ids=358930200845338&fb_action_types=bidon_duels%3Aget",@"link", nil];
-//    
-//
-//    facebook.accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"FBAccessTokenKey"];
-//    [facebook dialog:@"feed"
-//           andParams:params
-//         andDelegate:self];
-    id<FBGraphObject> graphObject = (id<FBGraphObject>)[FBGraphObject graphObjectWrappingDictionary:params];
     
+    // Invoke the dialog
+    [FBSession activeSession];
+    Facebook *facebook2 = [[Facebook alloc]
+                     initWithAppId:FBSession.activeSession.appID
+                     andDelegate:nil];
     
-    [FBRequestConnection startForPostWithGraphPath:@"me/feed" graphObject:graphObject completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        DLog(@"%@ %@", result, error);
-        [[NSNotificationCenter defaultCenter] postNotificationName: kFBFeed
-                                                                         object:self
-                                                                       userInfo:nil];
-        
-        if (error)
-        {
-            //showing an alert for failure
-            UIAlertView *alertView = [[UIAlertView alloc]  initWithTitle:@"Facebook" message:error.localizedDescription                                                                                                delegate:nil   cancelButtonTitle:@"OK"              otherButtonTitles:nil];
-            [alertView show];
-        }
-        else
-        {
-            //showing an alert for success
-            UIAlertView *alertView = [[UIAlertView alloc]  initWithTitle:@"Facebook" message:@"Shared the photo successfully"                                                                                                delegate:nil   cancelButtonTitle:@"OK"              otherButtonTitles:nil];
-            [alertView show];
-        }
-    }];
+    // Store the Facebook session information
+    facebook2.accessToken = FBSession.activeSession.accessToken;
+    facebook2.expirationDate = FBSession.activeSession.expirationDate;
+    [facebook2 dialog:@"feed" andParams:params2 andDelegate:self];
     
-//    [FBSession.activeSession reauthorizeWithPublishPermissions:[NSArray arrayWithObject:@"publish_stream"]
-//                                               defaultAudience:FBSessionDefaultAudienceFriends
-//                                             completionHandler:^(FBSession *session, NSError *error)
-//     {
-//         // If permissions granted, publish the story
-//         NSData* imageData = UIImageJPEGRepresentation([UIImage imageNamed:@"icon.png"], 90);
-//         NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-//                                         @"This is my drawing!", @"message",
-//                                         imageData, @"source",
-//                                         nil];
-//         
-//         [FBRequestConnection startWithGraphPath:@"me/photos"
-//                                      parameters:params
-//                                      HTTPMethod:@"POST"
-//                               completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-//                                   
-//                               }];
-//
-//     }];
-//        // Second request retrieves photo information for just-created
-//    // photo so we can grab its source.
-////    FBRequest *request2 = [FBRequest
-////                           requestForGraphPath:@"{result=photopost:$.id}"];
-////    [FBRequestConnection addRequest:request2
-////         completionHandler:
-//    
-//     [FBRequestConnection startWithGraphPath:@"{result=photopost:$.id}"
-//                                  parameters:nil
-//                                  HTTPMethod:@"GET"
-//                           completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-//             if (!error && result) {
-//                 NSString *photoID = [result objectForKey:@"id"];
-//                 NSMutableDictionary *params = [NSMutableDictionary dictionary];
-//                 [params setObject:@"I'm totally posting on my own wall!" forKey:@"message"];
-//                 
-//                 if(photoID) {
-//                     [params setObject:photoID forKey:@"object_attachment"];
-//                 }
-//                 
-//                 [FBRequestConnection startForPostWithGraphPath:@"me/feed"
-//                                          graphObject:[NSDictionary dictionaryWithDictionary:params]
-//                                    completionHandler:
-//                  ^(FBRequestConnection *connection, id result, NSError *error) {
-//                      if (!error) {
-//                          [[[UIAlertView alloc] initWithTitle:@"Result"
-//                                                      message:@"Your update has been posted to Facebook!"
-//                                                     delegate:self
-//                                            cancelButtonTitle:@"Sweet!"
-//                                            otherButtonTitles:nil] show];
-//                      } else {
-//                          [[[UIAlertView alloc] initWithTitle:@"Error"
-//                                                      message:@"Yikes! Facebook had an error.  Please try again!"
-//                                                     delegate:nil 
-//                                            cancelButtonTitle:@"Ok" 
-//                                            otherButtonTitles:nil] show]; 
-//                      }
-//                  }
-//                  ];
-//             }
-//         }
-//     ];
-    
+    return;
 }
 
 
@@ -1370,8 +1280,35 @@ static OGHelper *sharedHelper = nil;
 ////        [self showMessage:[error debugDescription]];
 //}
 
+#pragma mark FBDialogDelegate
+- (void)dialogCompleteWithUrl:(NSURL *)url {
+    NSDictionary *params = [self parseURLParams:[url query]];
+    NSString *msg = [NSString stringWithFormat:
+                     @"Posted story, id: %@",
+                     [params valueForKey:@"post_id"]];
+    NSLog(@"%@", msg);
+    // Show the result in an alert
+    [[[UIAlertView alloc] initWithTitle:@"Result"
+                                message:msg
+                               delegate:nil
+                      cancelButtonTitle:@"OK!"
+                      otherButtonTitles:nil]
+     show];
+}
 
-
+- (NSDictionary*)parseURLParams:(NSString *)query {
+    NSArray *pairs = [query componentsSeparatedByString:@"&"];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    for (NSString *pair in pairs) {
+        NSArray *kv = [pair componentsSeparatedByString:@"="];
+        NSString *val =
+        [[kv objectAtIndex:1]
+         stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        
+        [params setObject:val forKey:[kv objectAtIndex:0]];
+    }
+    return params;
+}
 
 #pragma mark - Private metods
 
