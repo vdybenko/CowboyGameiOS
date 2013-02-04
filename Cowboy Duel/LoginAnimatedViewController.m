@@ -32,6 +32,10 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
     __weak IBOutlet UILabel *practiceLable;
     __weak IBOutlet UILabel *loginLable;
     
+    __weak IBOutlet UIView *textsBackground;
+    __weak IBOutlet UIScrollView *scrollTexts;
+    
+    
     BOOL tryAgain;
     CGRect guillBackUp;
     CGRect textBackUp;
@@ -96,7 +100,9 @@ static LoginAnimatedViewController *sharedHelper = nil;
     loginLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
     
     practiceLable.text = NSLocalizedString(@"PRACTICE", @"");
-    practiceLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];    
+    practiceLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
+    
+    [textsBackground setDinamicHeightBackground];
 }
 - (void)viewDidLoad
 {
@@ -118,7 +124,17 @@ static LoginAnimatedViewController *sharedHelper = nil;
                     NSLocalizedString(@"INTRO7", nil),  //"If yer good, yer gonna be a big bounty hunter,\njust like me.";
                     NSLocalizedString(@"INTRO8", nil),  //"Remember: their guns are fast.\nYe better be faster.";
                     nil];
+    
     self.textIndex = 0;
+    animetedText.text = [NSString stringWithFormat:@"%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n",
+                         NSLocalizedString(@"INTRO1", nil),
+                         NSLocalizedString(@"INTRO2", nil),
+                         NSLocalizedString(@"INTRO3", nil),
+                         NSLocalizedString(@"INTRO4", nil),
+                         NSLocalizedString(@"INTRO5", nil),
+                         NSLocalizedString(@"INTRO6", nil),
+                         NSLocalizedString(@"INTRO7", nil),
+                         NSLocalizedString(@"INTRO8", nil)];
     textBackUp = animetedText.frame;
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/kassa.aif", [[NSBundle mainBundle] resourcePath]]];
     NSError *error;
@@ -209,6 +225,25 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [LoginAnimatedViewController sharedInstance].isDemoPractice = NO;
     [[NSUserDefaults standardUserDefaults] synchronize];
 
+}
+
+
+#pragma mark Animations
+
+- (void)updateLabels
+{
+    if (animationPause) return;
+    
+    CGPoint bottomOffset = CGPointMake(0, scrollTexts.contentSize.height - scrollTexts.bounds.size.height);
+    [scrollTexts setContentOffset:bottomOffset animated:YES];
+    
+    NSString * text = (self.textIndex<=7)?[textsContainer objectAtIndex:self.textIndex]:@"";
+    [UIView animateWithDuration:1.0
+                     animations:^{
+                         animetedText.text = [animetedText.text stringByAppendingString:textsContainer];
+                     } completion:^(BOOL complete) {
+                         [self performSelector:@selector(lableScaleIn) withObject:nil afterDelay:1.0];
+                     }];
 }
 
 #pragma mark -
@@ -370,5 +405,10 @@ static LoginAnimatedViewController *sharedHelper = nil;
 
 -(void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     DLog(@"login Error %@",[error description]);
+}
+- (void)viewDidUnload {
+    textsBackground = nil;
+    scrollTexts = nil;
+    [super viewDidUnload];
 }
 @end
