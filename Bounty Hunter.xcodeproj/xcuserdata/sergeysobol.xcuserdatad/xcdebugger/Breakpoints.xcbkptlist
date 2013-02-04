@@ -320,11 +320,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ActiveDuelViewController.m"
-         timestampString = "381587170.03577"
+         timestampString = "381698175.33027"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "521"
-         endingLineNumber = "521"
+         startingLineNumber = "522"
+         endingLineNumber = "522"
          landmarkName = "-userLost"
          landmarkType = "5">
       </FileBreakpoint>

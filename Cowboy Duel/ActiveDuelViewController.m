@@ -436,6 +436,7 @@
             } 
             else
             {
+                DLog(@"try send shot time");
                 if ([delegate respondsToSelector:@selector(sendShotTime:)])
                     [delegate sendShotTime:(shotTime - time * 1000)];
             }

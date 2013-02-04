@@ -246,7 +246,7 @@ static NSString *getSavePathForDuelProduct()
     }
     
     product.dImageURL=[dic objectForKey:@"img"];
-    if (product.dImageURL) {
+    if (product.dImageURL && ![product.dImageURL isKindOfClass:[NSNull class]]) {
         product.dImageLocal = [UIImage saveImage:[product.dImageURL lastPathComponent] URL:product.dImageURL directory:[DuelProductDownloaderController getSavePathForDuelProduct]];
     }
     product.dPrice=[[dic objectForKey:@"golds"] integerValue];

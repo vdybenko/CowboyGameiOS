@@ -720,7 +720,8 @@ static GameCenterViewController *gameCenterViewController;
 			break; 
         case  NETWORK_SEND_SHOT_TIME:
         {
-            if (!endDuel) {
+            if (!endDuel)
+            {
                 gameInfo *gsReceive = (gameInfo *)&incomingPacket[4];
                 opShotTime = gsReceive->oponentShotTime;
                 DLog(@"NETWORK_SEND_SHOT_TIME : %d, our : %d", opShotTime, carShotTime);
@@ -901,7 +902,7 @@ static GameCenterViewController *gameCenterViewController;
     
     if (endDuel) return;
     
-    [self.connection sendData:(void *)(gsSend) packetID:NETWORK_SHOT ofLength:sizeof(gameInfo)];
+    //[self.connection sendData:(void *)(gsSend) packetID:NETWORK_SHOT ofLength:sizeof(gameInfo)];
 }
 
 @end
