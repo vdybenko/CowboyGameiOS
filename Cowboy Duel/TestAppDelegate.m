@@ -219,7 +219,7 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
                                   completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
                                       if(error)
                                       {
-                                          NSLog(@"Session error");
+                                          NSLog(@"Session error %@", error);
                                           if (ver_float >= 6.0) [self fbResync];
                                           [NSThread sleepForTimeInterval:1.5];   //half a second
                                           [self openSessionWithPermission:permissions];
