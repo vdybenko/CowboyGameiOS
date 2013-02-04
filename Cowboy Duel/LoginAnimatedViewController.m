@@ -406,6 +406,11 @@ static LoginAnimatedViewController *sharedHelper = nil;
     DLog(@"OGHelper fbSessionInvalidated");
 }
 
+-(void)failed
+{
+    [activityView setHidden:YES];
+}
+
 #pragma mark - UIWebViewDelegate
 
 -(BOOL) webView:(UIWebView *)inWeb shouldStartLoadWithRequest:(NSURLRequest *)inRequest navigationType:(UIWebViewNavigationType)inType {

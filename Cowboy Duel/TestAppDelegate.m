@@ -198,7 +198,7 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
         ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
         if (![accountStore accountsWithAccountType:accountType]){
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry", @"AlertView")
-                                                                message:NSLocalizedString(@"You can't connnect to Facebook right now, make sure  your device has an internet connection and you have at least one Facebook account setup", @"AlertView")
+                                                                message:NSLocalizedString(@"You can't connnect to Facebook right now, make sure  your device has an internet connection and you have at least one Facebook account setup. Go to Settings -> Facebook and set up it.", @"AlertView")
                                                                delegate:self
                                                       cancelButtonTitle:NSLocalizedString(@"Cancel", @"AlertView")
                                                       otherButtonTitles: nil];

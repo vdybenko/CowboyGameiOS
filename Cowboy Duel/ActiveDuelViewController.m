@@ -424,7 +424,7 @@
                     int countBullets = [DuelRewardLogicController countUpBuletsWithOponentLevel:[AccountDataSource sharedInstance].accountLevel defense:[AccountDataSource sharedInstance].accountDefenseValue playerAtack:opAccount.accountWeapon.dDamage];
                     
                     
-                    opponentTime = 2400 + countBullets * (220 + rand() % 160);
+                    opponentTime = 3000 + countBullets * (220 + rand() % 160);
                     DLog(@"bot opponentTime %d", opponentTime);
                 }
                 

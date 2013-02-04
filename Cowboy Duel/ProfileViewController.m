@@ -784,6 +784,8 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         
         if ([AccountDataSource sharedInstance].activeDuel) {
             ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:[AccountDataSource sharedInstance] oponentAccount:playerAccount];
+            GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+            activeDuelViewController.delegate = gameCenterViewController;
             [self.navigationController pushViewController:activeDuelViewController animated:YES];
         }
         else
