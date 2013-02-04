@@ -102,7 +102,6 @@ static GCHelper *sharedHelper = nil;
         }
         
         GC_ACH=[[NSArray alloc] initWithObjects:
-                @"com.webkate.cowboyduels.achievement.0",
                 @"grp.com.bidon.cowboychalenge.achievement.1", //Junior
                 @"grp.com.bidon.cowboychalenge.achievement.2",
                 @"grp.com.bidon.cowboychalenge.achievement.3",
@@ -329,8 +328,8 @@ static GCHelper *sharedHelper = nil;
 //--------------------------------------------------------  
 // Achievements  
 //--------------------------------------------------------  
-
-- (void)reportAchievementIdentifier:(NSString*)identifier percentComplete:(float)percent  
+#pragma mark Achievements
+- (void)reportAchievementIdentifier:(NSString*)identifier percentComplete:(float)percent
 {  
     if(!userAuthenticated)  
         return;  

@@ -482,9 +482,10 @@
 // added for GC
         if (![GCHelper sharedInstance].GClocalPlayer.isAuthenticated) {
           [[GCHelper sharedInstance] authenticateLocalUser];
+        }else{
+            [[GCHelper sharedInstance] reportScore:playerAccount.money forCategory:GC_LEADEBOARD_MONEY];
         }
 
-        [[GCHelper sharedInstance] reportScore:moneyExch forCategory:GC_LEADEBOARD_MONEY];
 // above
         oldMoney=playerAccount.money;
         
@@ -497,7 +498,7 @@
         transaction.trType = [NSNumber numberWithInt:1];
         transaction.trMoneyCh = [NSNumber numberWithInt:moneyExch];
         
-        [[GCHelper sharedInstance] reportScore:playerAccount.money forCategory:GC_LEADEBOARD_MONEY];
+        
 
         if (![[NSUserDefaults standardUserDefaults] boolForKey:@"dontShowFeedAtFirst"]) {
             [[StartViewController sharedInstance] setShowFeedAtFirst:YES];
@@ -967,9 +968,10 @@
           // added for GC
             if (![GCHelper sharedInstance].GClocalPlayer.isAuthenticated) {
               [[GCHelper sharedInstance] authenticateLocalUser];
+            }else{
+                [[GCHelper sharedInstance] reportAchievementIdentifier:[[GCHelper sharedInstance].GC_ACH objectAtIndex:playerAccount.accountLevel] percentComplete:100.0f];
             }
           // above
-            [[GCHelper sharedInstance] reportAchievementIdentifier:[[GCHelper sharedInstance].GC_ACH objectAtIndex:playerAccount.accountLevel] percentComplete:100.0f];
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
     }

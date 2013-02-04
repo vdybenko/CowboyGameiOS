@@ -114,13 +114,6 @@ static const CGFloat timeToStandartTitles = 1.8;
         numberFormatter = [[NSNumberFormatter alloc] init];
         [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
 
-        // added for GC
-        if (![GCHelper sharedInstance].GClocalPlayer.isAuthenticated && ![startViewController firstRun]) {
-          [[GCHelper sharedInstance] authenticateLocalUser];
-        
-
-          [[GCHelper sharedInstance] reportScore:playerAccount.money forCategory:GC_LEADEBOARD_MONEY];
-        }
         // above    
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(setImageFromFacebookWithHideIndicator)
@@ -242,13 +235,6 @@ static const CGFloat timeToStandartTitles = 1.8;
         numberFormatter = [[NSNumberFormatter alloc] init];
         [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
         
-        // added for GC
-        if (![GCHelper sharedInstance].GClocalPlayer.isAuthenticated && ![startViewController firstRun]) {
-            [[GCHelper sharedInstance] authenticateLocalUser];
-            
-            
-            [[GCHelper sharedInstance] reportScore:playerAccount.money forCategory:GC_LEADEBOARD_MONEY];
-        }
         // above
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(setImageFromFacebookWithHideIndicator)

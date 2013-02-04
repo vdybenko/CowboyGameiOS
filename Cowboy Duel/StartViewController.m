@@ -337,6 +337,10 @@ static StartViewController *sharedHelper = nil;
         hostReachable = [Reachability reachabilityWithHostName: @"www.apple.com"];
         [hostReachable startNotifier];
 
+        if (![GCHelper sharedInstance].GClocalPlayer.isAuthenticated && ![self firstRun]) {
+            [[GCHelper sharedInstance] authenticateLocalUser];
+        }
+        
         oldAccounId = @"";
         
         cloudX=460;
@@ -539,12 +543,6 @@ static StartViewController *sharedHelper = nil;
     [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
     
     gameCenterViewController.duelStartViewController = nil;
-    
-    if (![GCHelper sharedInstance].GClocalPlayer.isAuthenticated && ![self firstRun]) {
-        [[GCHelper sharedInstance] authenticateLocalUser];
-        
-        [[GCHelper sharedInstance] reportScore:playerAccount.money forCategory:GC_LEADEBOARD_MONEY];
-    }
     
     [self showProfileFirstRun];
     [self isAdvertisingOfNewVersionNeedShow];
@@ -794,6 +792,8 @@ static StartViewController *sharedHelper = nil;
 
 -(IBAction)showHelp:(id)sender
 {
+    [[GCHelper sharedInstance] reportAchievementIdentifier:[[GCHelper sharedInstance].GC_ACH objectAtIndex:playerAccount.accountLevel] percentComplete:100.0f];
+    return;
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/help_click" forKey:@"event"]];
@@ -1375,9 +1375,8 @@ static StartViewController *sharedHelper = nil;
     if ([playerAccount.accountName isEqualToString:@"Anonymous"]||[playerAccount.accountName isEqualToString:@""]||!playerAccount.accountName) {
         [playerAccount setAccountName:player1.alias];
     }
-    if (playerAccount.accountLevel>=kCountOfLevelsMinimal) {
-        [[GCHelper sharedInstance] reportAchievementIdentifier:[[GCHelper sharedInstance].GC_ACH objectAtIndex:1] percentComplete:100.0f];
-    }
+    [[GCHelper sharedInstance] reportAchievementIdentifier:[[GCHelper sharedInstance].GC_ACH objectAtIndex:playerAccount.accountLevel] percentComplete:100.0f];
+    [[GCHelper sharedInstance] reportScore:playerAccount.money forCategory:GC_LEADEBOARD_MONEY];
 }
 
 #pragma mark - AlertViewDelegate

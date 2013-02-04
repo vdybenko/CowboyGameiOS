@@ -261,8 +261,6 @@
 		7686C21816B2C0F500D92555 /* django_unchained_concept_poster_by_punktx30-d5c7q97123.png in Resources */ = {isa = PBXBuildFile; fileRef = 7686C21716B2C0F500D92555 /* django_unchained_concept_poster_by_punktx30-d5c7q97123.png */; };
 		7686E29516BD0E560017E426 /* gd_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7686E29116BD0E550017E426 /* gd_arrow.png */; };
 		7686E29616BD0E560017E426 /* gd_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7686E29216BD0E550017E426 /* gd_arrow@2x.png */; };
-		7686E29716BD0E560017E426 /* gd_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 7686E29316BD0E560017E426 /* gd_line.png */; };
-		7686E29816BD0E560017E426 /* gd_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7686E29416BD0E560017E426 /* gd_line@2x.png */; };
 		7687667016BA7386003405F9 /* gd_drum.png in Resources */ = {isa = PBXBuildFile; fileRef = 7687666A16BA7386003405F9 /* gd_drum.png */; };
 		7687667116BA7386003405F9 /* gd_drum@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7687666B16BA7386003405F9 /* gd_drum@2x.png */; };
 		7687667216BA7386003405F9 /* gd_gun.png in Resources */ = {isa = PBXBuildFile; fileRef = 7687666C16BA7386003405F9 /* gd_gun.png */; };
@@ -1098,8 +1096,6 @@
 		7686C21716B2C0F500D92555 /* django_unchained_concept_poster_by_punktx30-d5c7q97123.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "django_unchained_concept_poster_by_punktx30-d5c7q97123.png"; sourceTree = "<group>"; };
 		7686E29116BD0E550017E426 /* gd_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gd_arrow.png; sourceTree = "<group>"; };
 		7686E29216BD0E550017E426 /* gd_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gd_arrow@2x.png"; sourceTree = "<group>"; };
-		7686E29316BD0E560017E426 /* gd_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gd_line.png; sourceTree = "<group>"; };
-		7686E29416BD0E560017E426 /* gd_line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gd_line@2x.png"; sourceTree = "<group>"; };
 		7687666A16BA7386003405F9 /* gd_drum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gd_drum.png; sourceTree = "<group>"; };
 		7687666B16BA7386003405F9 /* gd_drum@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gd_drum@2x.png"; sourceTree = "<group>"; };
 		7687666C16BA7386003405F9 /* gd_gun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gd_gun.png; sourceTree = "<group>"; };
@@ -2095,8 +2091,6 @@
 				7687666F16BA7386003405F9 /* gd_sleeve@2x.png */,
 				7686E29116BD0E550017E426 /* gd_arrow.png */,
 				7686E29216BD0E550017E426 /* gd_arrow@2x.png */,
-				7686E29316BD0E560017E426 /* gd_line.png */,
-				7686E29416BD0E560017E426 /* gd_line@2x.png */,
 			);
 			path = GunDrum;
 			sourceTree = "<group>";
@@ -2838,8 +2832,6 @@
 				31B09EC316BA9B1600F424F2 /* pv_wanted_photo_frame@2x.png in Resources */,
 				7686E29516BD0E560017E426 /* gd_arrow.png in Resources */,
 				7686E29616BD0E560017E426 /* gd_arrow@2x.png in Resources */,
-				7686E29716BD0E560017E426 /* gd_line.png in Resources */,
-				7686E29816BD0E560017E426 /* gd_line@2x.png in Resources */,
 				BD4BAAB616BC064A00F88E82 /* men_low.png in Resources */,
 				BD4BAAB816BC064A00F88E82 /* men_low@2x.png in Resources */,
 				BDCB5C0E16BE91BE0056D28E /* gd_board@2x.png in Resources */,
@@ -3422,8 +3414,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3467,8 +3459,8 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Cowboy Duel";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "AA8B0E03-DB92-4598-AE9F-493103BDEF2F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA8B0E03-DB92-4598-AE9F-493103BDEF2F";
 				REZ_SEARCH_PATHS = "$(inherited)";
 				SDKROOT = iphoneos6.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3517,8 +3509,8 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3560,8 +3552,8 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Cowboy Duel";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "AA8B0E03-DB92-4598-AE9F-493103BDEF2F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA8B0E03-DB92-4598-AE9F-493103BDEF2F";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
@@ -3807,9 +3799,9 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3852,9 +3844,9 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Cowboy Duel";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=*]" = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "AA8B0E03-DB92-4598-AE9F-493103BDEF2F";
+				"PROVISIONING_PROFILE[sdk=*]" = "AA8B0E03-DB92-4598-AE9F-493103BDEF2F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA8B0E03-DB92-4598-AE9F-493103BDEF2F";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
