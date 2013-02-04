@@ -40,8 +40,8 @@
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIImageView" id="502389521">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{-67, -25}, {260, 402}}</string>
+						<int key="NSvFlags">264</int>
+						<string key="NSFrame">{{0, -34}, {243, 514}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="791574619"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -49,7 +49,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">django_unchained_concept_poster_by_punktx30-d5c7q97123.png</string>
+							<string key="NSResourceName">sl_shylc.png</string>
 						</object>
 					</object>
 					<object class="IBUIButton" id="411228171">
@@ -115,7 +115,6 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{168, 428}, {142, 33}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -438,7 +437,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="btn_small.png">{142, 33}</string>
-			<string key="django_unchained_concept_poster_by_punktx30-d5c7q97123.png">{370, 570}</string>
+			<string key="sl_shylc.png">{243, 514}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1929</string>
 	</data>

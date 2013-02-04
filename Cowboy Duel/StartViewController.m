@@ -792,8 +792,6 @@ static StartViewController *sharedHelper = nil;
 
 -(IBAction)showHelp:(id)sender
 {
-    [[GCHelper sharedInstance] reportAchievementIdentifier:[[GCHelper sharedInstance].GC_ACH objectAtIndex:playerAccount.accountLevel] percentComplete:100.0f];
-    return;
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/help_click" forKey:@"event"]];

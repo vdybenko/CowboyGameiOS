@@ -128,7 +128,6 @@ static const CGFloat timeToStandartTitles = 1.8;
         UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
         [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:24];
         [btnLeaderboardBig setTitleByLabel:@"LeaderboardTitle" withColor:buttonsTitleColor fontSize:24];
-       ;
         
         [self initMainControls];
         [mainProfileView setDinamicHeightBackground];
@@ -184,7 +183,7 @@ static const CGFloat timeToStandartTitles = 1.8;
         
         if ([playerAccount.accountID rangeOfString:@"F"].location != NSNotFound) {
             iconDownloader = [[IconDownloader alloc] init];
-            profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFill;
+            profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
             
             iconDownloader.namePlayer=name;
             iconDownloader.delegate = self;
