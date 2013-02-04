@@ -17,7 +17,7 @@
                BlueprintIdentifier = "BD83A40716720DFE003EE4B3"
                BuildableName = "Test.app"
                BlueprintName = "Test"
-               ReferencedContainer = "container:Cowboy Duels.xcodeproj">
+               ReferencedContainer = "container:Bounty Hunter.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
             BlueprintIdentifier = "BD83A40716720DFE003EE4B3"
             BuildableName = "Test.app"
             BlueprintName = "Test"
-            ReferencedContainer = "container:Cowboy Duels.xcodeproj">
+            ReferencedContainer = "container:Bounty Hunter.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -54,7 +54,7 @@
             BlueprintIdentifier = "BD83A40716720DFE003EE4B3"
             BuildableName = "Test.app"
             BlueprintName = "Test"
-            ReferencedContainer = "container:Cowboy Duels.xcodeproj">
+            ReferencedContainer = "container:Bounty Hunter.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -72,7 +72,7 @@
             BlueprintIdentifier = "BD83A40716720DFE003EE4B3"
             BuildableName = "Test.app"
             BlueprintName = "Test"
-            ReferencedContainer = "container:Cowboy Duels.xcodeproj">
+            ReferencedContainer = "container:Bounty Hunter.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

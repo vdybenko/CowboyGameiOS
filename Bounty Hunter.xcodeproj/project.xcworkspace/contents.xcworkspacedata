@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Cowboy Duels.xcodeproj">
+      location = "self:Bounty Hunter.xcodeproj">
    </FileRef>
 </Workspace>
