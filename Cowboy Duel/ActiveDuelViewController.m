@@ -90,7 +90,7 @@
         // Custom initialization
         playerAccount = userAccount;
         opAccount  = pOponentAccount;
-        time = randomTime;
+        time = randomTime + 5;
         
         NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/shot.aif", [[NSBundle mainBundle] resourcePath]]];
         
@@ -413,7 +413,7 @@
             
             [activityIndicatorView setText:@""];
             [activityIndicatorView showView];
-            
+            [self horizontalFlip];
             if(!delegate)
             {
                 DLog(@"Kill!!!");
@@ -494,14 +494,14 @@
 -(void)opponentShot
 {
     if (duelEnd) return;
-    duelEnd = YES;
+//    duelEnd = YES;
     if ([self.smokeImage isAnimating]) {
         [self.smokeImage stopAnimating];
     }
     [self.smokeImage startAnimating];
     //[oponentShotAudioPlayer setCurrentTime:0];
     //[oponentShotAudioPlayer play];
-    if (!shotCountBulletForOpponent) [self userLost];
+    //if (!shotCountBulletForOpponent) [self userLost];
     
     shotCountBulletForOpponent--;
 }

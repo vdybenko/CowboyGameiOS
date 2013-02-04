@@ -131,7 +131,7 @@ static GameCenterViewController *gameCenterViewController;
                                     
         }else{
             
-            activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:(5 + randomTime) Account:playerAccount oponentAccount:oponentAccount];
+            activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:(randomTime) Account:playerAccount oponentAccount:oponentAccount];
             [activeDuelViewController setDelegate:self];
             [self setDelegate:activeDuelViewController];
             
@@ -161,7 +161,7 @@ static GameCenterViewController *gameCenterViewController;
             btnStartClick = YES;
         }else{
             DLog(@"nextDuelStart btnStartClick = Yes");
-            activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:(5 + randomTime) Account:playerAccount oponentAccount:oponentAccount];
+            activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:(randomTime) Account:playerAccount oponentAccount:oponentAccount];
             [activeDuelViewController setDelegate:self];
             [self setDelegate:activeDuelViewController];
             
@@ -648,7 +648,7 @@ static GameCenterViewController *gameCenterViewController;
             opShotTime = 0;
             
             if(!start){
-                activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:(5 + randomTime) Account:playerAccount oponentAccount:oponentAccount];
+                activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:(randomTime) Account:playerAccount oponentAccount:oponentAccount];
                 [activeDuelViewController setDelegate:self];
                 [self setDelegate:activeDuelViewController];
                 if (btnStartClick) {
@@ -674,7 +674,7 @@ static GameCenterViewController *gameCenterViewController;
             accelState = YES;
             if ([[parentVC.navigationController visibleViewController] isKindOfClass:[ActiveDuelViewController class]]) return;
             
-            activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:(5 + randomTime) Account:playerAccount oponentAccount:oponentAccount];
+            activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:(randomTime) Account:playerAccount oponentAccount:oponentAccount];
             [activeDuelViewController setDelegate:self];
             [self setDelegate:activeDuelViewController];
             
