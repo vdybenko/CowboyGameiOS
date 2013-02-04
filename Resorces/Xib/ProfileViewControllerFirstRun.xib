@@ -41,11 +41,11 @@
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIImageView" id="1010274419">
 						<reference key="NSNextResponder" ref="1048327278"/>
-						<int key="NSvFlags">274</int>
-						<string key="NSFrameSize">{243, 480}</string>
+						<int key="NSvFlags">264</int>
+						<string key="NSFrame">{{0, -34}, {243, 514}}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="542892891"/>
+						<reference key="NSNextKeyView" ref="239260606"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -557,7 +557,7 @@
 								<string key="NSFrame">{{150, 220}, {20, 20}}</string>
 								<reference key="NSSuperview" ref="542892891"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="239260606"/>
+								<reference key="NSNextKeyView" ref="1010274419"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -581,7 +581,7 @@
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="1010274419"/>
+				<reference key="NSNextKeyView" ref="542892891"/>
 				<string key="NSReuseIdentifierKey">_NS:196</string>
 				<reference key="IBUIBackgroundColor" ref="920293836"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -1238,7 +1238,7 @@
 			<string key="pv_coint.png">{21, 21}</string>
 			<string key="pv_gold_background.png">{136, 27}</string>
 			<string key="pv_photo_frame.png">{99, 124}</string>
-			<string key="sl_shylc.png">{243, 480}</string>
+			<string key="sl_shylc.png">{243, 514}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1929</string>
 	</data>
