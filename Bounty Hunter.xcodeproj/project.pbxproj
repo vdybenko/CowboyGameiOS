@@ -997,7 +997,7 @@
 		6048940A137D195800F6CCB1 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		6048E44213A9F4E2005BA961 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		604AAC441394C9E200A73CAC /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		60593A6C1379321700256204 /* Cowboy Duel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cowboy Duel.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		60593A6C1379321700256204 /* Bounty Hunter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bounty Hunter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60593A701379321800256204 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		60593A721379321800256204 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		60593A741379321800256204 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1896,7 +1896,7 @@
 		60593A6D1379321700256204 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				60593A6C1379321700256204 /* Cowboy Duel.app */,
+				60593A6C1379321700256204 /* Bounty Hunter.app */,
 				BD83A5A816720DFE003EE4B3 /* Test.app */,
 			);
 			name = Products;
@@ -2549,9 +2549,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		60593A6B1379321700256204 /* Cowboy Duels */ = {
+		60593A6B1379321700256204 /* Bounty Hunter */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 60593A921379321800256204 /* Build configuration list for PBXNativeTarget "Cowboy Duels" */;
+			buildConfigurationList = 60593A921379321800256204 /* Build configuration list for PBXNativeTarget "Bounty Hunter" */;
 			buildPhases = (
 				60593A681379321700256204 /* Sources */,
 				60593A691379321700256204 /* Frameworks */,
@@ -2563,9 +2563,9 @@
 			);
 			dependencies = (
 			);
-			name = "Cowboy Duels";
+			name = "Bounty Hunter";
 			productName = Test;
-			productReference = 60593A6C1379321700256204 /* Cowboy Duel.app */;
+			productReference = 60593A6C1379321700256204 /* Bounty Hunter.app */;
 			productType = "com.apple.product-type.application";
 		};
 		BD83A40716720DFE003EE4B3 /* Test */ = {
@@ -2596,7 +2596,7 @@
 			attributes = {
 				LastUpgradeCheck = 0420;
 			};
-			buildConfigurationList = 60593A661379321700256204 /* Build configuration list for PBXProject "Cowboy Duels" */;
+			buildConfigurationList = 60593A661379321700256204 /* Build configuration list for PBXProject "Bounty Hunter" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -2620,7 +2620,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				60593A6B1379321700256204 /* Cowboy Duels */,
+				60593A6B1379321700256204 /* Bounty Hunter */,
 				BD83A40716720DFE003EE4B3 /* Test */,
 			);
 		};
@@ -3532,7 +3532,7 @@
 					"-weak_library",
 					/usr/lib/libSystem.B.dylib,
 				);
-				PRODUCT_NAME = "Cowboy Duel";
+				PRODUCT_NAME = "Bounty Hunter";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				REZ_SEARCH_PATHS = "$(inherited)";
@@ -3625,7 +3625,7 @@
 					"-weak_library",
 					/usr/lib/libSystem.B.dylib,
 				);
-				PRODUCT_NAME = "Cowboy Duel";
+				PRODUCT_NAME = "Bounty Hunter";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA8B0E03-DB92-4598-AE9F-493103BDEF2F";
 				REZ_SEARCH_PATHS = (
@@ -3917,7 +3917,7 @@
 					"-weak_library",
 					/usr/lib/libSystem.B.dylib,
 				);
-				PRODUCT_NAME = "Cowboy Duel";
+				PRODUCT_NAME = "Bounty Hunter";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=*]" = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA8B0E03-DB92-4598-AE9F-493103BDEF2F";
@@ -3937,7 +3937,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		60593A661379321700256204 /* Build configuration list for PBXProject "Cowboy Duels" */ = {
+		60593A661379321700256204 /* Build configuration list for PBXProject "Bounty Hunter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				60593A901379321800256204 /* Debug */,
@@ -3947,7 +3947,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		60593A921379321800256204 /* Build configuration list for PBXNativeTarget "Cowboy Duels" */ = {
+		60593A921379321800256204 /* Build configuration list for PBXNativeTarget "Bounty Hunter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				60593A931379321800256204 /* Debug */,
