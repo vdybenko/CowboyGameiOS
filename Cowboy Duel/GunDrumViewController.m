@@ -128,7 +128,6 @@ static CGFloat timeSpinDump = 0.6f;
 
 -(void)closeDump;
 {
-    runAnimationDump = NO;
     isCharging = NO;
     arrow.hidden = NO;
     vLoadGun.hidden = NO;
@@ -143,7 +142,7 @@ static CGFloat timeSpinDump = 0.6f;
             frame.origin = pntGunClose;
             gun.frame = frame;
         }completion:^(BOOL finished) {
-        
+            runAnimationDump = NO;
         }];
     }];
 }
@@ -184,11 +183,13 @@ static CGFloat timeSpinDump = 0.6f;
                           delay:0.0
                         options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction
                      animations:^{
-                         angle -= 1.25;
-                         CGAffineTransform transform = drumBullets.transform;
-                         CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
-                         transform = CGAffineTransformScale(rotateTransform, 1.0, 1.0);
-                         drumBullets.transform = transform;
+                         if (runAnimationDump){
+                             angle -= 1.25;
+                             CGAffineTransform transform = drumBullets.transform;
+                             CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
+                             transform = CGAffineTransformScale(rotateTransform, 1.0, 1.0);
+                             drumBullets.transform = transform;
+                         }
                      } completion:^(BOOL finished) {
                          if (runAnimationDump)[self spinSecondAnimation];
                      }];
@@ -200,11 +201,13 @@ static CGFloat timeSpinDump = 0.6f;
                           delay:0.0
                         options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction
                      animations:^{
-                         angle -= 1.25;
-                         CGAffineTransform transform = drumBullets.transform;
-                         CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
-                         transform = CGAffineTransformScale(rotateTransform, 1.0, 1.0);
-                         drumBullets.transform = transform;
+                         if (runAnimationDump){
+                             angle -= 1.25;
+                             CGAffineTransform transform = drumBullets.transform;
+                             CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
+                             transform = CGAffineTransformScale(rotateTransform, 1.0, 1.0);
+                             drumBullets.transform = transform;
+                         }
                      } completion:^(BOOL finished) {
                          if (runAnimationDump)[self spinAnimation];
                      }];

@@ -46,9 +46,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "60593A6B1379321700256204"
-            BuildableName = "Cowboy Duel.app"
-            BlueprintName = "Cowboy Duels"
-            ReferencedContainer = "container:Cowboy Duels.xcodeproj">
+            BuildableName = "Bounty Hunter.app"
+            BlueprintName = "Bounty Hunter"
+            ReferencedContainer = "container:Bounty Hunter.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -67,9 +67,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "60593A6B1379321700256204"
-            BuildableName = "Cowboy Duel.app"
-            BlueprintName = "Cowboy Duels"
-            ReferencedContainer = "container:Cowboy Duels.xcodeproj">
+            BuildableName = "Bounty Hunter.app"
+            BlueprintName = "Bounty Hunter"
+            ReferencedContainer = "container:Bounty Hunter.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>

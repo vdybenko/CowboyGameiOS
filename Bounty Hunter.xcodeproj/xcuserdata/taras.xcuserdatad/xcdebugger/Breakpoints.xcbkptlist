@@ -12,9 +12,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1394"
-         endingLineNumber = "1394"
-         landmarkName = "-dialogCompleteWithUrl:"
-         landmarkType = "5">
+         endingLineNumber = "1394">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -25,9 +23,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1409"
-         endingLineNumber = "1409"
-         landmarkName = "-parseURLParams:"
-         landmarkType = "5">
+         endingLineNumber = "1409">
       </FileBreakpoint>
    </FileBreakpoints>
    <ExceptionBreakpoints>
