@@ -32,6 +32,9 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
     __weak IBOutlet UILabel *practiceLable;
     __weak IBOutlet UILabel *loginLable;
     
+    __weak IBOutlet UIView *textsBackground;
+    
+    
     BOOL tryAgain;
     CGRect guillBackUp;
     CGRect textBackUp;
@@ -96,7 +99,9 @@ static LoginAnimatedViewController *sharedHelper = nil;
     loginLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
     
     practiceLable.text = NSLocalizedString(@"PRACTICE", @"");
-    practiceLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];    
+    practiceLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
+    
+    [textsBackground setDinamicHeightBackground];
 }
 - (void)viewDidLoad
 {
@@ -118,7 +123,19 @@ static LoginAnimatedViewController *sharedHelper = nil;
                     NSLocalizedString(@"INTRO7", nil),  //"If yer good, yer gonna be a big bounty hunter,\njust like me.";
                     NSLocalizedString(@"INTRO8", nil),  //"Remember: their guns are fast.\nYe better be faster.";
                     nil];
+    
     self.textIndex = 0;
+    /*
+    animetedText.text = [NSString stringWithFormat:@"%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n",
+                         NSLocalizedString(@"INTRO1", nil),
+                         NSLocalizedString(@"INTRO2", nil),
+                         NSLocalizedString(@"INTRO3", nil),
+                         NSLocalizedString(@"INTRO4", nil),
+                         NSLocalizedString(@"INTRO5", nil),
+                         NSLocalizedString(@"INTRO6", nil),
+                         NSLocalizedString(@"INTRO7", nil),
+                         NSLocalizedString(@"INTRO8", nil)];
+     */
     textBackUp = animetedText.frame;
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/kassa.aif", [[NSBundle mainBundle] resourcePath]]];
     NSError *error;
@@ -133,6 +150,8 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [StartViewController sharedInstance].playerStart;
     
     loginFBbutton.enabled = [startViewController connectedToWiFi];
+    [self updateLabelsWithString:[textsContainer objectAtIndex:self.textIndex]];
+    self.textIndex++;
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -209,6 +228,36 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [LoginAnimatedViewController sharedInstance].isDemoPractice = NO;
     [[NSUserDefaults standardUserDefaults] synchronize];
 
+}
+
+
+#pragma mark Animations
+
+- (void)updateLabelsWithString: (NSString *)text
+{
+    if (animationPause) return;
+
+    [animetedText setText:text];
+    
+    [UIView animateWithDuration:1.5f animations:^{
+        [animetedText setAlpha:1.0f];
+    } completion:^(BOOL finished){
+        
+        [UIView animateWithDuration:1.0f
+                delay:1.0f options:UIViewAnimationCurveLinear
+                         animations:^{
+                             [animetedText setAlpha:0.0f];
+                         } completion:^(BOOL finished) {
+                             if (self.textIndex<7) {
+                                 self.textIndex++;
+                                 NSString * text = [textsContainer objectAtIndex:self.textIndex];
+                                 [self performSelector:@selector(updateLabelsWithString:) withObject:text];
+                             }else{
+                                 [animetedText setAlpha:1.0f];
+                                 [animetedText setText:[textsContainer lastObject]];
+                             }
+        }];
+    }];
 }
 
 #pragma mark -
@@ -370,5 +419,9 @@ static LoginAnimatedViewController *sharedHelper = nil;
 
 -(void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     DLog(@"login Error %@",[error description]);
+}
+- (void)viewDidUnload {
+    textsBackground = nil;
+    [super viewDidUnload];
 }
 @end
