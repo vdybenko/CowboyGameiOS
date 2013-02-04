@@ -5,6 +5,7 @@
 #import "Utils.h"
 #import "UIView+Dinamic_BackGround.h"
 #import "SSServer.h"
+#import "DuelRewardLogicController.h"
 @interface PlayerOnLineCell(){
     NSNumberFormatter *numberFormatter;
 }
@@ -91,11 +92,11 @@
         [self.facebookAvatar setHidden:YES];
     }
     
-    userAtack.text = [NSString stringWithFormat:@"%d",player.weapon];
+    userAtack.text = [NSString stringWithFormat:@"%d",player.weapon + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[player.rank intValue]]];
     userAtack.hidden = NO;
     userAtack = nil;
     
-    userDefense.text = [NSString stringWithFormat:@"%d",player.defense];
+    userDefense.text = [NSString stringWithFormat:@"%d",player.defense + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[player.rank intValue]]];
     userDefense.hidden = NO;
     userDefense = nil;
 
