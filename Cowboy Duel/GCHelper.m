@@ -121,7 +121,7 @@ static GCHelper *sharedHelper = nil;
 
 #pragma mark Internal functions
 
-- (void)authenticationChanged {    
+- (void)authenticationChanged {
     if (GClocalPlayer.isAuthenticated && !userAuthenticated) {
         DLog(@"Authentication changed: player authenticated.");
         userAuthenticated = TRUE;
@@ -141,7 +141,15 @@ static GCHelper *sharedHelper = nil;
     
     DLog(@"Authenticating local user...");
     if (GClocalPlayer.authenticated == NO) {     
-        [GClocalPlayer authenticateWithCompletionHandler:nil];        
+        [GClocalPlayer authenticateWithCompletionHandler:^(NSError *error) {
+            // If there is an error, do not assume local player is not authenticated.
+            if (GClocalPlayer.isAuthenticated) {
+                userAuthenticated = YES;
+                [self authenticationChanged];
+            } else {
+                userAuthenticated = NO;
+            }
+        }];
     } else {
         DLog(@"Already authenticated!");
         [self acceptedInvite];
@@ -205,7 +213,7 @@ static GCHelper *sharedHelper = nil;
         if (error != nil)
         {
             // handle the reporting error
-            //            DLog(@"report false %@ ",error);
+            DLog(@"report false %@ ",error);
 //            [self saveScoreToDevice:scoreReporter];  
         }else{
             DLog(@"report good ");

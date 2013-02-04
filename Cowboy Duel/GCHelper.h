@@ -12,7 +12,7 @@
 //#import "NetworkManager.h"
 //#import "DuelDataSource.h"
 
-#define GC_LEADEBOARD_MONEY @"com.webkate.cowboyduels.leaderboard.gold"
+#define GC_LEADEBOARD_MONEY @"grp.com.bidon.cowboyduels.leaderboard.gold"
 
 @class AccountDataSource;
 

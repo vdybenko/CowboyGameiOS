@@ -540,6 +540,12 @@ static StartViewController *sharedHelper = nil;
     
     gameCenterViewController.duelStartViewController = nil;
     
+    if (![GCHelper sharedInstance].GClocalPlayer.isAuthenticated && ![self firstRun]) {
+        [[GCHelper sharedInstance] authenticateLocalUser];
+        
+        [[GCHelper sharedInstance] reportScore:playerAccount.money forCategory:GC_LEADEBOARD_MONEY];
+    }
+    
     [self showProfileFirstRun];
     [self isAdvertisingOfNewVersionNeedShow];
     [self estimateApp];    
