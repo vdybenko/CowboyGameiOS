@@ -7,6 +7,7 @@
 //
 
 #import "GunDrumViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface GunDrumViewController ()
 {
@@ -20,16 +21,20 @@
 @property (weak, nonatomic) IBOutlet UIView *drumBullets;
 @property (weak, nonatomic) IBOutlet UIImageView *arrow;
 @property (weak, nonatomic) IBOutlet UIView *gun;
+@property (weak, nonatomic) IBOutlet UIImageView *gunImage;
 @end
 
 //points
 static CGPoint pntDumpOpen;
 static const CGPoint pntDumpClose = {187,128};//center of image
 static CGPoint pntGunOpen;
-static const CGPoint pntGunClose = {-26,123};
-static const CGPoint pntGunHide = {-26,480};
+static const CGPoint pntGunClose = {-26,224};
+static const CGPoint pntGunHide = {-26,400};
 static const CGPoint pntViewShow = {0,0};
-static const CGPoint pntViewHide = {0,480};
+static const CGPoint pntViewHide = {0,400};
+
+//angle
+static const CGFloat gunRotationAngle = M_2_PI / 2;
 
 //Time
 static const CGFloat timeOpenGun = 0.4f;
@@ -37,6 +42,7 @@ static const CGFloat timeOpenDump = 0.4f;
 static const CGFloat timeCloseGun = 0.2f;
 static CGFloat timeChargeBullets = 0.5f;
 static CGFloat timeSpinDump = 0.6f;
+
 
 @implementation GunDrumViewController
 @synthesize colectionBullets;
@@ -48,6 +54,7 @@ static CGFloat timeSpinDump = 0.6f;
 @synthesize vLoadGun;
 @synthesize lbLoadGun;
 @synthesize ivLine;
+@synthesize gunImage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -64,6 +71,10 @@ static CGFloat timeSpinDump = 0.6f;
         frame.origin = pntGunClose;
         gun.frame = frame;
         
+        gunImage.layer.anchorPoint = CGPointMake(0.5, 1);
+        frame = gunImage.frame;
+        frame.origin.y += frame.size.height / 2;
+        gunImage.frame = frame;
         drumBullets.center= pntDumpClose;
         
         frame=self.view.frame;
@@ -89,6 +100,7 @@ static CGFloat timeSpinDump = 0.6f;
     [self setVLoadGun:nil];
     [self setLbLoadGun:nil];
     [self setIvLine:nil];
+    [self setGunImage:nil];
     [super viewDidUnload];
 }
 
@@ -104,10 +116,7 @@ static CGFloat timeSpinDump = 0.6f;
     [UIView animateWithDuration:timeOpenGun animations:^{
         arrow.hidden = YES;
         vLoadGun.hidden = YES;
-        CGRect frame=gun.frame;
-        frame.origin = pntGunOpen;
-        gun.frame = frame;
-        
+        gunImage.transform = CGAffineTransformMakeRotation(gunRotationAngle);
         drumBullets.hidden = NO;
         
         drumBullets.center = pntDumpOpen;
@@ -125,6 +134,7 @@ static CGFloat timeSpinDump = 0.6f;
     vLoadGun.hidden = NO;
     [UIView animateWithDuration:timeOpenDump animations:^{
         drumBullets.center= pntDumpClose;
+        gunImage.transform = CGAffineTransformMakeRotation(0);
     }completion:^(BOOL finished) {
         drumBullets.hidden = YES;
         [self hideBullets];
@@ -224,17 +234,16 @@ static CGFloat timeSpinDump = 0.6f;
     isCharging = NO;
     [UIView animateWithDuration:timeOpenDump animations:^{
         drumBullets.center= pntDumpClose;
+        gunImage.transform = CGAffineTransformMakeRotation(0);
     }completion:^(BOOL finished) {
         drumBullets.hidden = YES;
         [self hideBullets];
         [UIView animateWithDuration:timeCloseGun animations:^{
             CGRect frame=gun.frame;
-            frame.origin = pntGunClose;
+            frame.origin.y += 50;
             gun.frame = frame;
         }completion:^(BOOL finished) {
-            CGRect frame=self.view.frame;
-            frame.origin = pntViewHide;
-            self.view.frame = frame;
+
         }];
     }];
 }

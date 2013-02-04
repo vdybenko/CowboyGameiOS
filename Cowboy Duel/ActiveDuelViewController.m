@@ -48,8 +48,6 @@
     NSTimer *moveTimer;
     int time;
     
-    UIView  *helpPracticeView;
-    UIImageView *imvArrow;
     BOOL arrowAnimationContinue;
     
     BOOL foll;
@@ -165,56 +163,27 @@
     
     ARView *arView = (ARView *)self.view;
 	
-	// Create array of hard-coded places-of-interest, in this case some famous parks
-    CLLocationCoordinate2D poiCoords[] = {{4.7711329, -7.9741874},
-        {37.7690400, -122.4835193},
-        {32.7343822, -117.1441227},
-        {51.5068670, -0.1708030},
-        {45.5126399, -73.6802448},
-        {40.4152519, -3.6887466}};
+    CLLocationCoordinate2D oponentCoords;
+    oponentCoords.latitude = (((float) rand()) / RAND_MAX) * 360 - 180;
+    oponentCoords.longitude = (((float) rand()) / RAND_MAX) * 360 - 180;
     
-    int numPois = sizeof(poiCoords) / sizeof(CLLocationCoordinate2D);
-    
-	placesOfInterest = [NSMutableArray arrayWithCapacity:numPois];
+	placesOfInterest = [NSMutableArray arrayWithCapacity:1];
 //	for (int i = 0; i < numPois; i++) {
-		OponentCoordinateView *poi = [OponentCoordinateView oponentCoordinateWithView:self.floatView at:[[CLLocation alloc] initWithLatitude:poiCoords[0].latitude longitude:poiCoords[0].longitude]];
+		OponentCoordinateView *poi = [OponentCoordinateView oponentCoordinateWithView:self.floatView at:[[CLLocation alloc] initWithLatitude:oponentCoords.latitude longitude:oponentCoords.longitude]];
 		[placesOfInterest insertObject:poi atIndex:0];
 //	}
 	[arView setPlacesOfInterest:placesOfInterest];
 
-    helpPracticeView=[[UIView alloc] initWithFrame:CGRectMake(12, (([UIScreen mainScreen].bounds.size.height - 172)/2), 290, 172)];
-    
-    UIImageView *imvArm=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dv_arm.png"]];
-    CGRect frame = imvArm.frame;
-    frame.origin = CGPointMake(90, 12);
-    imvArm.frame = frame;
-    [helpPracticeView addSubview:imvArm];
-    
-    imvArrow=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dv_arm_arrow.png"]];
-    frame = imvArrow.frame;
-    frame.origin = CGPointMake(37, 24);
-    imvArrow.frame = frame;
-    [helpPracticeView addSubview:imvArrow];
-    
-    UIButton *cancelBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-    frame=cancelBtn.frame;
-    frame.origin=CGPointMake(248, 13);
-    frame.size=CGSizeMake(33, 33);
-    cancelBtn.frame=frame;
-    [cancelBtn setImage:[UIImage imageNamed:@"btn_adcolony.png"] forState:UIControlStateNormal];
-    [cancelBtn addTarget:self action:@selector(cancelHelpArmClick:) forControlEvents:UIControlEventTouchUpInside];
-    [helpPracticeView addSubview:cancelBtn];
-    
+        
     [self hideHelpViewOnStartDuel];
-    
-    [helpPracticeView setDinamicHeightBackground];
-    [self.view addSubview:helpPracticeView];
     
     gunDrumViewController = [[GunDrumViewController alloc] initWithNibName:Nil bundle:Nil];
     [self.view addSubview:gunDrumViewController.view];
+    [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 1) withSubviewAtIndex:([self.view.subviews count] - 2)];
     [gunDrumViewController showGun];
     self.gunButton.hidden = YES;
     
+    CGRect frame;
     activityIndicatorView = [[ActivityIndicatorView alloc] init];
     frame = activityIndicatorView.frame;
     frame.origin = CGPointMake(0,0);
@@ -358,7 +327,6 @@
         case 1:
             [self.titleSteadyFire setHidden:YES];
             [self.lblBehold setHidden:YES];
-            [gunDrumViewController hideGun];
             self.gunButton.hidden = NO;
             
             [shotAudioPlayer1 stop];
@@ -687,18 +655,11 @@
 
 -(void)hideHelpViewOnStartDuel;
 {
-    [helpPracticeView setHidden:YES];
     arrowAnimationContinue = NO;    
 }
 
 -(void)showHelpViewOnStartDuel;
 {
-    [helpPracticeView setHidden:NO];
-    if (!arrowAnimationContinue) {
-        arrowAnimationContinue = YES;
-        [self scaleView:imvArrow];
-    }
-    
     [gunDrumViewController showGun];
     [gunDrumViewController closeDump];
     self.gunButton.hidden = YES;
