@@ -184,7 +184,7 @@ static const CGFloat timeToStandartTitles = 1.8;
         
         if ([playerAccount.accountID rangeOfString:@"F"].location != NSNotFound) {
             iconDownloader = [[IconDownloader alloc] init];
-            profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFill;
+            profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
             
             iconDownloader.namePlayer=name;
             iconDownloader.delegate = self;
