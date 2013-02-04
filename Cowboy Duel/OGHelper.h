@@ -76,7 +76,7 @@ typedef enum typeOfFBImage {
     typeOfFBImageLarge
 } typeOfFBImage;
 
-@interface OGHelper : NSObject
+@interface OGHelper : NSObject<FBDialogDelegate>
 @property (strong,retain) id delegate;
 @property (strong,retain) AccountDataSource *playerAccount;
 @property (nonatomic, retain) NSMutableArray *savedAPIResult;

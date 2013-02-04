@@ -13,6 +13,7 @@
 #import "StartViewController.h"
 #import "TestAppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "Facebook.h"
 #import "ActiveDuelViewController.h"
 
 #define kFacebookAppId @"284932561559672"
