@@ -307,11 +307,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ActiveDuelViewController.m"
-         timestampString = "381492744.99762"
+         timestampString = "381587170.03577"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "364"
-         endingLineNumber = "364"
+         startingLineNumber = "338"
+         endingLineNumber = "338"
          landmarkName = "-shotButtonClick:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -333,11 +333,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ActiveDuelViewController.m"
-         timestampString = "381492744.99762"
+         timestampString = "381587170.03577"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "406"
-         endingLineNumber = "406"
+         startingLineNumber = "380"
+         endingLineNumber = "380"
          landmarkName = "-horizontalFlip"
          landmarkType = "5">
       </FileBreakpoint>
@@ -346,11 +346,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ActiveDuelViewController.m"
-         timestampString = "381492744.99762"
+         timestampString = "381587170.03577"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "547"
-         endingLineNumber = "547"
+         startingLineNumber = "521"
+         endingLineNumber = "521"
          landmarkName = "-userLost"
          landmarkType = "5">
       </FileBreakpoint>
@@ -411,11 +411,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ActiveDuelViewController.m"
-         timestampString = "381492744.99762"
+         timestampString = "381587170.03577"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "395"
-         endingLineNumber = "395"
+         startingLineNumber = "369"
+         endingLineNumber = "369"
          landmarkName = "-horizontalFlip"
          landmarkType = "5">
       </FileBreakpoint>
@@ -489,11 +489,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ActiveDuelViewController.m"
-         timestampString = "381493058.960521"
+         timestampString = "381501570.892345"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "172"
-         endingLineNumber = "172"
+         startingLineNumber = "170"
+         endingLineNumber = "170"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>

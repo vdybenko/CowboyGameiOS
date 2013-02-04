@@ -763,6 +763,10 @@
 		BD87D22A1648057500747ED8 /* AdvertisingNewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD87D2281648057400747ED8 /* AdvertisingNewViewController.xib */; };
 		BD87D22E1648151E00747ED8 /* AdvertisingOtherAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD87D22D1648151D00747ED8 /* AdvertisingOtherAppViewController.m */; };
 		BD9E890A16A41F5600323970 /* blood_c.png in Resources */ = {isa = PBXBuildFile; fileRef = BD9E890916A41F5600323970 /* blood_c.png */; };
+		BDCB5C0E16BE91BE0056D28E /* gd_board@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDCB5C0C16BE91BE0056D28E /* gd_board@2x.png */; };
+		BDCB5C0F16BE91BE0056D28E /* gd_board.png in Resources */ = {isa = PBXBuildFile; fileRef = BDCB5C0D16BE91BE0056D28E /* gd_board.png */; };
+		BDCB5C1216BE96920056D28E /* dv_arrows.png in Resources */ = {isa = PBXBuildFile; fileRef = BDCB5C1016BE968F0056D28E /* dv_arrows.png */; };
+		BDCB5C1316BE96920056D28E /* dv_arrows@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDCB5C1116BE96900056D28E /* dv_arrows@2x.png */; };
 		BDD07BB8141E1F170085E4FB /* AccelerometrDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B3C141E1F170085E4FB /* AccelerometrDataSource.m */; };
 		BDD07BB9141E1F170085E4FB /* AccountDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B3E141E1F170085E4FB /* AccountDataSource.m */; };
 		BDD07BBA141E1F170085E4FB /* ActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B40141E1F170085E4FB /* ActivityIndicatorView.m */; };
@@ -1273,7 +1277,7 @@
 		BD8000D5157755A600703AC8 /* OGHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OGHelper.m; sourceTree = "<group>"; };
 		BD81E635169EC4D100CE8278 /* ActiveDuelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveDuelViewController.h; sourceTree = "<group>"; };
 		BD81E636169EC4D100CE8278 /* ActiveDuelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActiveDuelViewController.m; sourceTree = "<group>"; };
-		BD81E637169EC4D100CE8278 /* ActiveDuelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActiveDuelViewController.xib; sourceTree = "<group>"; };
+		BD81E637169EC4D100CE8278 /* ActiveDuelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ActiveDuelViewController.xib; path = "../Cowboy Duel/ActiveDuelViewController.xib"; sourceTree = "<group>"; };
 		BD81E64F169F0F1F00CE8278 /* UIImage+Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Sprite.h"; sourceTree = "<group>"; };
 		BD81E650169F0F1F00CE8278 /* UIImage+Sprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Sprite.m"; sourceTree = "<group>"; };
 		BD81E653169F0F3600CE8278 /* explosion_4_39_128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explosion_4_39_128.png; sourceTree = "<group>"; };
@@ -1311,6 +1315,10 @@
 		BDA1B23B1648450E00FFF0A1 /* UIImage+Retina4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Retina4.h"; sourceTree = "<group>"; };
 		BDA1B23C1648450E00FFF0A1 /* UIImage+Retina4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Retina4.m"; sourceTree = "<group>"; };
 		BDC6D7BA147E48E90012CB34 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
+		BDCB5C0C16BE91BE0056D28E /* gd_board@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gd_board@2x.png"; sourceTree = "<group>"; };
+		BDCB5C0D16BE91BE0056D28E /* gd_board.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gd_board.png; sourceTree = "<group>"; };
+		BDCB5C1016BE968F0056D28E /* dv_arrows.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dv_arrows.png; sourceTree = "<group>"; };
+		BDCB5C1116BE96900056D28E /* dv_arrows@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dv_arrows@2x.png"; sourceTree = "<group>"; };
 		BDD07B3B141E1F170085E4FB /* AccelerometrDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccelerometrDataSource.h; sourceTree = "<group>"; };
 		BDD07B3C141E1F170085E4FB /* AccelerometrDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccelerometrDataSource.m; sourceTree = "<group>"; };
 		BDD07B3D141E1F170085E4FB /* AccountDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AccountDataSource.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -1998,6 +2006,7 @@
 			isa = PBXGroup;
 			children = (
 				7687667816BA7543003405F9 /* GunDrumViewController.xib */,
+				BD81E637169EC4D100CE8278 /* ActiveDuelViewController.xib */,
 				BD84DAA4164ABCA000DEEE38 /* LoginAnimatedViewController.xib */,
 				BD16BF961680934F00628CCC /* FunPageViewController.xib */,
 				3115FB4F15CACA5100C4D438 /* MoneyCongratViewController.xib */,
@@ -2076,6 +2085,8 @@
 		7687666916BA7386003405F9 /* GunDrum */ = {
 			isa = PBXGroup;
 			children = (
+				BDCB5C0C16BE91BE0056D28E /* gd_board@2x.png */,
+				BDCB5C0D16BE91BE0056D28E /* gd_board.png */,
 				7687666A16BA7386003405F9 /* gd_drum.png */,
 				7687666B16BA7386003405F9 /* gd_drum@2x.png */,
 				7687666C16BA7386003405F9 /* gd_gun.png */,
@@ -2189,6 +2200,8 @@
 		BD81E63D169ED75300CE8278 /* ActiveDuel */ = {
 			isa = PBXGroup;
 			children = (
+				BDCB5C1016BE968F0056D28E /* dv_arrows.png */,
+				BDCB5C1116BE96900056D28E /* dv_arrows@2x.png */,
 				7689F5DB16B6A48E00D8AC5C /* ivHit.png */,
 				7689F5DC16B6A48E00D8AC5C /* ivHit@2x.png */,
 				BD3503A516AD370800956BB7 /* btnGun.png */,
@@ -2453,7 +2466,6 @@
 				BD16BF951680934F00628CCC /* FunPageViewController.m */,
 				BD81E635169EC4D100CE8278 /* ActiveDuelViewController.h */,
 				BD81E636169EC4D100CE8278 /* ActiveDuelViewController.m */,
-				BD81E637169EC4D100CE8278 /* ActiveDuelViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -2830,6 +2842,10 @@
 				7686E29816BD0E560017E426 /* gd_line@2x.png in Resources */,
 				BD4BAAB616BC064A00F88E82 /* men_low.png in Resources */,
 				BD4BAAB816BC064A00F88E82 /* men_low@2x.png in Resources */,
+				BDCB5C0E16BE91BE0056D28E /* gd_board@2x.png in Resources */,
+				BDCB5C0F16BE91BE0056D28E /* gd_board.png in Resources */,
+				BDCB5C1216BE96920056D28E /* dv_arrows.png in Resources */,
+				BDCB5C1316BE96920056D28E /* dv_arrows@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3406,8 +3422,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3451,8 +3467,8 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Cowboy Duel";
-				PROVISIONING_PROFILE = "DDFC4948-69D8-4790-A4AC-F5E2A42B5C6C";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DDFC4948-69D8-4790-A4AC-F5E2A42B5C6C";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				REZ_SEARCH_PATHS = "$(inherited)";
 				SDKROOT = iphoneos6.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3501,8 +3517,8 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3544,8 +3560,8 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Cowboy Duel";
-				PROVISIONING_PROFILE = "DDFC4948-69D8-4790-A4AC-F5E2A42B5C6C";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DD33605C-602F-4EF7-A974-A0FBED085AC8";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
@@ -3791,9 +3807,9 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3836,9 +3852,9 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Cowboy Duel";
-				PROVISIONING_PROFILE = "DDFC4948-69D8-4790-A4AC-F5E2A42B5C6C";
-				"PROVISIONING_PROFILE[sdk=*]" = "DDFC4948-69D8-4790-A4AC-F5E2A42B5C6C";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DD33605C-602F-4EF7-A974-A0FBED085AC8";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=*]" = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",

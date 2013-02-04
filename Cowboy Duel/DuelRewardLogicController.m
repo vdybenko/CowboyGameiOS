@@ -42,13 +42,13 @@
                    [NSNumber numberWithInt:1],
                    [NSNumber numberWithInt:2],
                    [NSNumber numberWithInt:3],
-                   [NSNumber numberWithInt:5],
-                   [NSNumber numberWithInt:7],
-                   [NSNumber numberWithInt:10],
-                   [NSNumber numberWithInt:15],
-                   [NSNumber numberWithInt:20],
-                   [NSNumber numberWithInt:25],
-                   [NSNumber numberWithInt:30],
+                   [NSNumber numberWithInt:3],
+                   [NSNumber numberWithInt:3],
+                   [NSNumber numberWithInt:3],
+                   [NSNumber numberWithInt:3],
+                   [NSNumber numberWithInt:3],
+                   [NSNumber numberWithInt:3],
+                   [NSNumber numberWithInt:3],
                    nil];
     if (oponentlevel<kCountOfLevelsMinimal||oponentlevel>kCountOfLevels) {
         oponentlevel = kCountOfLevelsMinimal;
@@ -63,11 +63,11 @@
     NSArray *array=[[NSArray alloc] initWithObjects:
                     [NSNumber numberWithInt:1],//1
                     [NSNumber numberWithInt:20],//2
-                    [NSNumber numberWithInt:40],//3
-                    [NSNumber numberWithInt:80],//4
-                    [NSNumber numberWithInt:150],//5
-                    [NSNumber numberWithInt:300],//6
-                    [NSNumber numberWithInt:500],//7
+                    [NSNumber numberWithInt:60],//3
+                    [NSNumber numberWithInt:120],//4
+                    [NSNumber numberWithInt:240],//5
+                    [NSNumber numberWithInt:480],//6
+                    [NSNumber numberWithInt:960],//7
                     nil];
     return array;
 }
@@ -76,12 +76,12 @@
 {
     NSArray *array=[[NSArray alloc] initWithObjects:
                     [NSNumber numberWithInt:2],//0
-                    [NSNumber numberWithInt:2],//1
-                    [NSNumber numberWithInt:2],//2
-                    [NSNumber numberWithInt:3],//3
-                    [NSNumber numberWithInt:3],//4
-                    [NSNumber numberWithInt:4],//5
-                    [NSNumber numberWithInt:4],//6
+                    [NSNumber numberWithInt:3],//1
+                    [NSNumber numberWithInt:4],//2
+                    [NSNumber numberWithInt:5],//3
+                    [NSNumber numberWithInt:6],//4
+                    [NSNumber numberWithInt:7],//5
+                    [NSNumber numberWithInt:8],//6
                     [NSNumber numberWithInt:5],//7
                     [NSNumber numberWithInt:5],//8
                     [NSNumber numberWithInt:6],//9
