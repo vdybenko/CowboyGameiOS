@@ -351,12 +351,6 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "CHOOSE_DOLLAR_S" = "Pay for me $";
 
 //first screen Profile:
-"PROFILE_MESS_1_THANKS" = "Oh, many thanks.\n It was really terrible.";
-"PROFILE_MESS_2_NAME" = "What is your name?\nIs your name \"%@\"?";
-"PROFILE_MESS_3_NAME" = "No, you should have terrible nickname to win iPad mini.";
-"PROFILE_MESS_4_SALOON" = "I know Saloon where is iPad mini.";
-"PROFILE_MESS_5_LEAD" = "But win who has more gold then other.\nYou can check leaders in leaderbord.";
-"PROFILE_MESS_6_GOLD" = "You have only 200 gold.";
-"PROFILE_MESS_7_LETS" = "So, lets do it.";
+"PROFILE_MESS_2_NAME" = "What is your name?";
 
 "Follow" = "Cowboy Games community on Facebook";

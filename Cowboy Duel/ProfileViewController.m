@@ -83,7 +83,6 @@ static const CGFloat timeToStandartTitles = 1.8;
 //    First run
     int textIndex;
     __weak IBOutlet UILabel *lbDescription;
-    NSMutableArray *textsContainer;
     
     DuelStartViewController *duelStartViewController;
     __weak IBOutlet UIActivityIndicatorView *activityIndicatorView;
@@ -243,16 +242,6 @@ static const CGFloat timeToStandartTitles = 1.8;
                                                  selector:@selector(changeFBSesionAction)
                                                      name:SCSessionStateChangedNotification
                                                    object:nil];
-        
-        textsContainer = [NSMutableArray arrayWithObjects:
-                          NSLocalizedString(@"PROFILE_MESS_1_THANKS", nil),
-                          [NSString stringWithFormat:NSLocalizedString(@"PROFILE_MESS_2_NAME", nil),playerAccount.accountName],
-                          NSLocalizedString(@"PROFILE_MESS_3_NAME", nil),            
-                          NSLocalizedString(@"PROFILE_MESS_4_SALOON", nil),          
-                          NSLocalizedString(@"PROFILE_MESS_5_LEAD", nil),         
-                          NSLocalizedString(@"PROFILE_MESS_6_GOLD", nil),
-                          NSLocalizedString(@"PROFILE_MESS_7_LETS", nil),
-                          nil];
         
         textIndex = 0;
         [self loadView];
@@ -421,9 +410,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     NSString *name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel];
     ivCurrentRank.image = [UIImage imageNamed:name];
     tfFBName.text = playerAccount.accountName;
-    if([textsContainer count]){
-        [textsContainer replaceObjectAtIndex:1 withObject:[NSString stringWithFormat:NSLocalizedString(@"PROFILE_MESS_2_NAME", nil),playerAccount.accountName]];
-    }
+    
     SSConnection *connection = [SSConnection sharedInstance];
     [connection sendInfoPacket];
 }
@@ -667,18 +654,16 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 {
     NSString * text;
     if (textIndex==0) {
-        text = [textsContainer objectAtIndex:0];
+        text = NSLocalizedString(@"PROFILE_MESS_2_NAME", nil);
         lbDescription.transform = CGAffineTransformMakeScale(0.01, 0.01);
         lbDescription.text = text;
         [self performSelector:@selector(lableScaleIn) withObject:nil afterDelay:1.0];
     }else{
-        text = (textIndex<=6)?[textsContainer objectAtIndex:textIndex]:@"";
         [UIView animateWithDuration:1.0
                          animations:^{
                              [self lableScaleOut];
                          } completion:^(BOOL complete) {
-                             lbDescription.text = text;
-                             [self performSelector:@selector(lableScaleIn) withObject:nil afterDelay:1.0];
+                             
                          }];
     }
 }
@@ -689,7 +674,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                      animations:^{
                          lbDescription.transform = CGAffineTransformMakeScale(1.0, 1.0);
                     }completion:^(BOOL complete) {
-                        if (textIndex==2) {
+                        if (textIndex==0) {
                             [tfFBName becomeFirstResponder];
                             [UIView animateWithDuration:0.4
                                              animations:^{
@@ -698,24 +683,8 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                                                  mainProfileView.frame = frame;
                                                  textIndex++;
                                              } completion:nil];
-                        }else if(textIndex==4){
-                            [self scaleButton:btnLeaderboardBig];
-                            textIndex++;
-                            [self performSelector:@selector(updateLabels) withObject:nil afterDelay:timeToStandartTitles];
-                        }else if(textIndex==5){
-                            [self scaleButton:lbGoldCount];
-                            [self scaleButton:lbGoldIcon];
-                            textIndex++;
-                            [self performSelector:@selector(updateLabels) withObject:nil afterDelay:timeToStandartTitles];
-                        }else if(textIndex==6){
-                            [self scaleButton:btnBack];
-                            textIndex++;
-                            [self performSelector:@selector(updateLabels) withObject:nil afterDelay:timeToStandartTitles];
-                        }else if (textIndex<=6){
-                            [self performSelector:@selector(updateLabels) withObject:nil afterDelay:timeToStandartTitles];
-                            textIndex++;
                         }
-                     }];
+                    }];
 }
 
 -(void)lableScaleOut
