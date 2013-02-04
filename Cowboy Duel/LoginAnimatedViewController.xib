@@ -177,7 +177,7 @@
 							<object class="IBUILabel" id="639264680">
 								<reference key="NSNextResponder" ref="991899546"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{12, 56}, {274, 90}}</string>
+								<string key="NSFrame">{{30, 41}, {238, 97}}</string>
 								<reference key="NSSuperview" ref="991899546"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="263538558"/>
@@ -198,18 +198,18 @@
 								<int key="IBUITextAlignment">1</int>
 								<object class="IBUIFontDescription" key="IBUIFontDescription">
 									<int key="type">2</int>
-									<double key="pointSize">18</double>
+									<double key="pointSize">13</double>
 								</object>
 								<object class="NSFont" key="IBUIFont">
 									<string key="NSName">Helvetica-Bold</string>
-									<double key="NSSize">18</double>
+									<double key="NSSize">13</double>
 									<int key="NSfFlags">16</int>
 								</object>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
-								<double key="preferredMaxLayoutWidth">274</double>
+								<double key="preferredMaxLayoutWidth">238</double>
 							</object>
 						</array>
-						<string key="NSFrame">{{12, 213}, {297, 207}}</string>
+						<string key="NSFrame">{{12, 240}, {297, 180}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="639264680"/>
@@ -412,19 +412,6 @@
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">34</int>
-						<reference key="object" ref="791574619"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="486181951"/>
-						</array>
-						<reference key="parent" ref="191373211"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">35</int>
-						<reference key="object" ref="486181951"/>
-						<reference key="parent" ref="791574619"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">4</int>
 						<reference key="object" ref="502389521"/>
 						<reference key="parent" ref="191373211"/>
@@ -441,6 +428,19 @@
 						<int key="objectID">9</int>
 						<reference key="object" ref="639264680"/>
 						<reference key="parent" ref="991899546"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">34</int>
+						<reference key="object" ref="791574619"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="486181951"/>
+						</array>
+						<reference key="parent" ref="191373211"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">35</int>
+						<reference key="object" ref="486181951"/>
+						<reference key="parent" ref="791574619"/>
 					</object>
 				</array>
 			</object>
@@ -471,17 +471,20 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">LoginAnimatedViewController</string>
 					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">loginButtonClick:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">loginButtonClick:</string>
-						<object class="IBActionInfo" key="NS.object.0">
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="loginButtonClick:">id</string>
+						<string key="practiceButtonClick:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="loginButtonClick:">
 							<string key="name">loginButtonClick:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-					</object>
+						<object class="IBActionInfo" key="practiceButtonClick:">
+							<string key="name">practiceButtonClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="activityIndicatorView">UIActivityIndicatorView</string>
 						<string key="activityView">UIView</string>

@@ -273,6 +273,8 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "5RankText" = "Ye shoot like devil, boy! Looks like yer a real bounty hunter now! Let's go get more bad guys 'n more rewards.";
 "6RankText" = "Yer the toughest bounty hunter in the West! Now yer gonna guard the justice here.";
 
+"1stIntro" = "Ye know who bounty hunters are, boy? We chase criminals 'n get a reward for 'em, dead or alive. The harder to get these bastards are, the bigger’s the reward for their head.";
+"2ndIntro" = "Help me get'em bad guys, and ye'll get yer freedom and be a bounty hunter yerself.  But remember: their guns are fast. Ye better be faster.";
 //Win/Lose View
 "YouEarned" = "You earned:";
 "YouLost" = "You lost:";

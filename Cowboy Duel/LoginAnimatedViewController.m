@@ -150,7 +150,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [StartViewController sharedInstance].playerStart;
     
     loginFBbutton.enabled = [startViewController connectedToWiFi];
-    [self updateLabelsWithString:[textsContainer objectAtIndex:self.textIndex]];
+    [self updateLabelsWithString:NSLocalizedString(@"1stIntro", @"")];
     self.textIndex++;
 }
 
@@ -238,26 +238,32 @@ static LoginAnimatedViewController *sharedHelper = nil;
     if (animationPause) return;
 
     [animetedText setText:text];
-    
-    [UIView animateWithDuration:1.5f animations:^{
-        [animetedText setAlpha:1.0f];
-    } completion:^(BOOL finished){
-        
-        [UIView animateWithDuration:1.0f
-                delay:1.0f options:UIViewAnimationCurveLinear
-                         animations:^{
-                             [animetedText setAlpha:0.0f];
-                         } completion:^(BOOL finished) {
-                             if (self.textIndex<7) {
-                                 self.textIndex++;
-                                 NSString * text = [textsContainer objectAtIndex:self.textIndex];
-                                 [self performSelector:@selector(updateLabelsWithString:) withObject:text];
-                             }else{
-                                 [animetedText setAlpha:1.0f];
-                                 [animetedText setText:[textsContainer lastObject]];
-                             }
-        }];
-    }];
+    [animetedText setAlpha:0.0f];
+
+    [UIView animateWithDuration:1.0f
+                          delay:0.0f
+                        options:UIViewAnimationCurveLinear
+                     animations:^{
+                         [animetedText setAlpha:1.0f];
+                     } completion:^(BOOL finished) {
+                         [UIView animateWithDuration:1.0f
+                                               delay:2.0f
+                                             options:UIViewAnimationCurveLinear
+                                          animations:^{
+                                               [animetedText setAlpha:0.0f];
+                                          } completion:^(BOOL finished) {
+                                              [animetedText setText:NSLocalizedString(@"2ndIntro", @"")];
+                                              [UIView animateWithDuration:1.0f
+                                                                    delay:0.0f
+                                                                  options:UIViewAnimationCurveLinear animations:^{
+                                                                      [animetedText setAlpha:1.0f];
+                                                                  } completion:^(BOOL finished) {
+                                                                      
+                                                                  }];
+                                          }];
+
+                     }];
+
 }
 
 #pragma mark -
