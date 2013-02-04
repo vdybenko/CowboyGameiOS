@@ -73,11 +73,11 @@
     self.gold.text = [NSString stringWithFormat:@"%d $",moneyExch];
   
     if([player.status isEqualToString: @"A"]){
-        self.status.text = NSLocalizedString(@"Available", @"");
+        [btnDuel changeTitleByLabel:@"DUEL"];
         self.status.textColor = [UIColor blackColor];
         [self.btnDuel setEnabled:YES];
     }else {
-        self.status.text=NSLocalizedString(@"Busy", @"");
+        [btnDuel changeTitleByLabel:@"Busy"];
         self.status.textColor = [UIColor redColor];
         [self.btnDuel setEnabled:NO];
     }
@@ -91,11 +91,11 @@
         [self.facebookAvatar setHidden:YES];
     }
     
-    userAtack.text = [NSString stringWithFormat:@"+%d",player.weapon];
+    userAtack.text = [NSString stringWithFormat:@"%d",player.weapon];
     userAtack.hidden = NO;
     userAtack = nil;
     
-    userDefense.text = [NSString stringWithFormat:@"+%d",player.defense];
+    userDefense.text = [NSString stringWithFormat:@"%d",player.defense];
     userDefense.hidden = NO;
     userDefense = nil;
 
