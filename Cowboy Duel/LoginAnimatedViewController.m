@@ -33,7 +33,6 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
     __weak IBOutlet UILabel *loginLable;
     
     __weak IBOutlet UIView *textsBackground;
-    __weak IBOutlet UIScrollView *scrollTexts;
     
     
     BOOL tryAgain;
@@ -126,6 +125,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
                     nil];
     
     self.textIndex = 0;
+    /*
     animetedText.text = [NSString stringWithFormat:@"%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n",
                          NSLocalizedString(@"INTRO1", nil),
                          NSLocalizedString(@"INTRO2", nil),
@@ -135,6 +135,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
                          NSLocalizedString(@"INTRO6", nil),
                          NSLocalizedString(@"INTRO7", nil),
                          NSLocalizedString(@"INTRO8", nil)];
+     */
     textBackUp = animetedText.frame;
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/kassa.aif", [[NSBundle mainBundle] resourcePath]]];
     NSError *error;
@@ -149,6 +150,8 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [StartViewController sharedInstance].playerStart;
     
     loginFBbutton.enabled = [startViewController connectedToWiFi];
+    [self updateLabelsWithString:[textsContainer objectAtIndex:self.textIndex]];
+    self.textIndex++;
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -230,20 +233,31 @@ static LoginAnimatedViewController *sharedHelper = nil;
 
 #pragma mark Animations
 
-- (void)updateLabels
+- (void)updateLabelsWithString: (NSString *)text
 {
     if (animationPause) return;
+
+    [animetedText setText:text];
     
-    CGPoint bottomOffset = CGPointMake(0, scrollTexts.contentSize.height - scrollTexts.bounds.size.height);
-    [scrollTexts setContentOffset:bottomOffset animated:YES];
-    
-    NSString * text = (self.textIndex<=7)?[textsContainer objectAtIndex:self.textIndex]:@"";
-    [UIView animateWithDuration:1.0
-                     animations:^{
-                         animetedText.text = [animetedText.text stringByAppendingString:textsContainer];
-                     } completion:^(BOOL complete) {
-                         [self performSelector:@selector(lableScaleIn) withObject:nil afterDelay:1.0];
-                     }];
+    [UIView animateWithDuration:1.5f animations:^{
+        [animetedText setAlpha:1.0f];
+    } completion:^(BOOL finished){
+        
+        [UIView animateWithDuration:1.0f
+                delay:1.0f options:UIViewAnimationCurveLinear
+                         animations:^{
+                             [animetedText setAlpha:0.0f];
+                         } completion:^(BOOL finished) {
+                             if (self.textIndex<7) {
+                                 self.textIndex++;
+                                 NSString * text = [textsContainer objectAtIndex:self.textIndex];
+                                 [self performSelector:@selector(updateLabelsWithString:) withObject:text];
+                             }else{
+                                 [animetedText setAlpha:1.0f];
+                                 [animetedText setText:[textsContainer lastObject]];
+                             }
+        }];
+    }];
 }
 
 #pragma mark -
@@ -408,7 +422,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
 }
 - (void)viewDidUnload {
     textsBackground = nil;
-    scrollTexts = nil;
     [super viewDidUnload];
 }
 @end
