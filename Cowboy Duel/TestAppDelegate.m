@@ -116,7 +116,7 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     
     DLog(@"FBAccessTokenKey %@", [defaults objectForKey:@"FBAccessTokenKey"]);
     
-    
+    frame = [UIScreen mainScreen].bounds;
     if (frame.size.height > 480) {
         // Initialize the banner at the bottom of the screen.
         CGPoint origin = CGPointMake(0.0, frame.size.height - 50);
