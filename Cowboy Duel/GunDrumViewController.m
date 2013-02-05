@@ -121,7 +121,6 @@ static CGFloat timeSpinDump = 0.6f;
         
         drumBullets.center = pntDumpOpen;
     }completion:^(BOOL finished) {
-        NSLog(@"openGun");
         CGFloat timeForCharge = chargeTime;
         [self chargeBulletsForTime:timeForCharge];
     }];
@@ -136,7 +135,6 @@ static CGFloat timeSpinDump = 0.6f;
         drumBullets.center= pntDumpClose;
         gunImage.transform = CGAffineTransformMakeRotation(0);
     }completion:^(BOOL finished) {
-        NSLog(@"closeDump");
         drumBullets.hidden = YES;
         
         angle = 0;
@@ -188,7 +186,6 @@ static CGFloat timeSpinDump = 0.6f;
 
 -(void)spinAnimation
 {
-    NSLog(@"spinAnimation 1 timeSpinDump %f angle %f",timeSpinDump,angle);
     [UIView animateWithDuration:timeSpinDump
                           delay:0.0
                         options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction
@@ -207,7 +204,6 @@ static CGFloat timeSpinDump = 0.6f;
 
 -(void)spinSecondAnimation
 {
-    NSLog(@"spinAnimation 2 timeSpinDump %f angle %f",timeSpinDump,angle);
     [UIView animateWithDuration:timeSpinDump
                           delay:0.0
                         options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction
