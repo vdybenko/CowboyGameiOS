@@ -76,12 +76,13 @@
 @property (weak, nonatomic) IBOutlet UIImageView *titleSteadyFire;
 @property (weak, nonatomic) IBOutlet FXLabel *lblBehold;
 
-
-
 @end
 
 @implementation ActiveDuelViewController
 @synthesize delegate;
+
+static CGFloat oponentLiveImageViewStartWidth;
+
 -(id)initWithTime:(int)randomTime Account:(AccountDataSource *)userAccount oponentAccount:(AccountDataSource *)pOponentAccount
 {
     self = [super initWithNibName:nil bundle:nil];
@@ -224,6 +225,8 @@
     CGRect frame = self.oponentLiveImageView.frame;
     frame.size.width = 84;
     self.oponentLiveImageView.frame = frame;
+    oponentLiveImageViewStartWidth = self.oponentLiveImageView.frame.size.width;
+    
     self.opStatsLabel.text = [NSString stringWithFormat: @"A: +%d\rD: +%d",opAccount.accountWeapon.dDamage,opAccount.accountDefenseValue];
     self.userStatsLabel.text = [NSString stringWithFormat: @"A: +%d\nD: +%d",playerAccount.accountWeapon.dDamage,playerAccount.accountDefenseValue];
     [self.titleSteadyFire setHidden:YES];
@@ -399,7 +402,7 @@
         userHitCount++;
         
         CGRect frame = self.oponentLiveImageView.frame;
-        frame.size.width = ((float)(maxShotCount - userHitCount))/(float)maxShotCount * frame.size.width;
+        frame.size.width = (float)((maxShotCount - userHitCount)*oponentLiveImageViewStartWidth)/maxShotCount;
         self.oponentLiveImageView.frame = frame;
         
         
