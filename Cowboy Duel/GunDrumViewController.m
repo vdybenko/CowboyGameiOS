@@ -183,7 +183,7 @@ static CGFloat timeSpinDump = 0.6f;
                           delay:0.0
                         options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction
                      animations:^{
-                         if (runAnimationDump){
+                         if (!CGAffineTransformEqualToTransform(CGAffineTransformMakeRotation(0), gunImage.transform)){
                              angle -= 1.25;
                              CGAffineTransform transform = drumBullets.transform;
                              CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
@@ -191,7 +191,10 @@ static CGFloat timeSpinDump = 0.6f;
                              drumBullets.transform = transform;
                          }
                      } completion:^(BOOL finished) {
-                         if (runAnimationDump)[self spinSecondAnimation];
+                         NSLog(@"spinAnimation 1");
+//                         if (runAnimationDump)
+                         if (!CGAffineTransformEqualToTransform(CGAffineTransformMakeRotation(0), gunImage.transform))[self spinSecondAnimation];
+//                         frame.origin = pntGunClose;
                      }];
 }
 
@@ -201,7 +204,7 @@ static CGFloat timeSpinDump = 0.6f;
                           delay:0.0
                         options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction
                      animations:^{
-                         if (runAnimationDump){
+                         if (!CGAffineTransformEqualToTransform(CGAffineTransformMakeRotation(0), gunImage.transform)){
                              angle -= 1.25;
                              CGAffineTransform transform = drumBullets.transform;
                              CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
@@ -209,7 +212,8 @@ static CGFloat timeSpinDump = 0.6f;
                              drumBullets.transform = transform;
                          }
                      } completion:^(BOOL finished) {
-                         if (runAnimationDump)[self spinAnimation];
+                         NSLog(@"spinAnimation 2");
+                         if (!CGAffineTransformEqualToTransform(CGAffineTransformMakeRotation(0), gunImage.transform))[self spinAnimation];
                      }];
 }
 
