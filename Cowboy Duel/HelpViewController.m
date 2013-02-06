@@ -173,7 +173,8 @@ BOOL isSoundControl;
 
 -(IBAction)btnContactClicked{
     
-    FunPageViewController *funPageViewController = [[FunPageViewController alloc] initWithNibName:@"FunPageViewController" bundle:[NSBundle mainBundle]];
+    FunPageViewController *funPageViewController = [[FunPageViewController alloc] initWithAddress:URL_CONTACT_US];
+
     funPageViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [self presentModalViewController:funPageViewController animated:YES];
     

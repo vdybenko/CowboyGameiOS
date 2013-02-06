@@ -155,6 +155,15 @@ static const CGFloat timeToStandartTitles = 1.8;
         [duelButton setTitleByLabel:@"DUEL"];
         [duelButton changeColorOfTitleByLabel:buttonsTitleColor];
         
+        if ([playerServer.status isEqualToString:@"A"]) {
+            [duelButton changeTitleByLabel:@"DUEL"];
+            [duelButton setEnabled:YES];
+        }
+        else {
+            [duelButton changeTitleByLabel:@"Busy"];
+            [duelButton setEnabled:NO];
+        }
+        
         needAnimation = YES;
         [self initMainControls];
         
