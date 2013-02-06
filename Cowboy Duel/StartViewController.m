@@ -849,7 +849,8 @@ static StartViewController *sharedHelper = nil;
 //                 URL_FB_PAGE];
   
 //    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[URL_COMM_FB_PAGE stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
-    FunPageViewController *funPageViewController = [[FunPageViewController alloc] initWithNibName:@"FunPageViewController" bundle:[NSBundle mainBundle]];
+    FunPageViewController *funPageViewController = [[FunPageViewController alloc] initWithAddress:URL_COMM_FB_PAGE];
+
     
 //    CATransition* transition = [CATransition animation];
 //    transition.duration = 0.5;

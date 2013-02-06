@@ -10,4 +10,6 @@
 
 @interface FunPageViewController : UIViewController<MemoryManagement>
 
+- (id) initWithAddress: (NSString *)url;
+
 @end
