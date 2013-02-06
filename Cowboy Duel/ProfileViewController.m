@@ -16,7 +16,6 @@
 #import "LoginAnimatedViewController.h"
 #import "DuelRewardLogicController.h"
 #import "TopPlayersViewController.h"
-#import "SSServer.h"
 #import "DuelStartViewController.h"
 #import "StoreViewController.h"
 #import "ActiveDuelViewController.h"
@@ -135,11 +134,12 @@ static const CGFloat timeToStandartTitles = 1.8;
     return self;
 }
 
--(id)initForOponent:(AccountDataSource *)oponentAccount
+-(id)initForOponent:(AccountDataSource *)oponentAccount andOpponentServer:(SSServer *)server
 {
     self = [super initWithNibName:@"ProfileViewControllerWanted" bundle:[NSBundle mainBundle]];
     
     if (self) {
+        playerServer = server;
         
         needAnimation = NO;
         needMoneyAnimation = NO;
@@ -211,17 +211,15 @@ static const CGFloat timeToStandartTitles = 1.8;
 //        
         userAtackView.hidden = NO;
         userDefenseView.hidden = NO;
-        if (playerAccount.accountWeapon.dDamage!=0) {
-            userAtack.text = [NSString stringWithFormat:@"+%d",playerAccount.accountWeapon.dDamage];
-            
-        }else{
-            userAtack.text = @"+0";
-        }
-        if (playerAccount.accountDefenseValue!=0) {
-            userDefense.text = [NSString stringWithFormat:@"+%d",playerAccount.accountDefenseValue];
-        }else{
-            userDefense.text = @"+0";
-        }
+        
+        userAtack.text = [NSString stringWithFormat:@"%d",playerServer.weapon + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[playerServer.rank intValue]]];
+        userAtack.hidden = NO;
+        userAtack = nil;
+        
+        userDefense.text = [NSString stringWithFormat:@"%d",playerServer.defense + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[playerServer.rank intValue]]];
+        
+        userDefense.hidden = NO;
+        userDefense = nil;
 
     }
     return self;

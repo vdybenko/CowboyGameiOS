@@ -219,7 +219,7 @@
             [oponentAccount setAccountDefenseValue:0];
     }
     
-    ProfileViewController *profileViewController = [[ProfileViewController alloc] initForOponent:oponentAccount];
+    ProfileViewController *profileViewController = [[ProfileViewController alloc] initForOponent:oponentAccount andOpponentServer:player];
     [UIView animateWithDuration:0.75
                      animations:^{
                          [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
