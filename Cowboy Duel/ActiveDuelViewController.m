@@ -753,9 +753,10 @@ static CGFloat oponentLiveImageViewStartWidth;
     if(duelIsStarted){
         [self performSelector:@selector(hideSteadyImage) withObject:nil afterDelay:2.5];
     }
-    CGAffineTransform steadyTransform = CGAffineTransformMakeScale( steadyScale, steadyScale);
+    CGAffineTransform steadyTransform = CGAffineTransformMakeScale( steadyScale+scaleDelta*2, steadyScale+scaleDelta*2);
     self.titleSteadyFire.transform = steadyTransform;
-    self.lblBehold.transform = steadyTransform;
+    CGAffineTransform beholdTransform = CGAffineTransformMakeScale( steadyScale, steadyScale);
+    self.lblBehold.transform = beholdTransform;
 }
 
 
