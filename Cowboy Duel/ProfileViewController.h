@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AccountDataSource.h"
+#import "SSServer.h"
 
 @class LoginAnimatedViewController;
 @class StartViewController;
@@ -27,7 +28,7 @@
 
 -(id)initWithAccount:(AccountDataSource *)userAccount startViewController:(StartViewController *)startViewController;
 -(id)initFirstStartWithAccount:(AccountDataSource *)userAccount startViewController:(StartViewController *)startViewController;
--(id)initForOponent:(AccountDataSource *)oponentAccount;
+-(id)initForOponent:(AccountDataSource *)oponentAccount andOpponentServer:(SSServer *)server;
 
 -(void)checkValidBlackActivity;
 -(void)checkLocationOfViewForFBLogin;
