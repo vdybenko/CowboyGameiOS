@@ -124,7 +124,7 @@
 					<object class="IBUIImageView" id="513821458">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{97, 162}, {88, 88}}</string>
+						<string key="NSFrame">{{97, 142}, {88, 88}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="507109279"/>
@@ -135,7 +135,7 @@
 					<object class="IBUIImageView" id="507109279">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{114, 186}, {93, 93}}</string>
+						<string key="NSFrame">{{114, 166}, {93, 93}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="128482717"/>
@@ -146,7 +146,7 @@
 					<object class="IBUIImageView" id="909871371">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{137, 179}, {92, 92}}</string>
+						<string key="NSFrame">{{137, 159}, {92, 92}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="602955860"/>
@@ -157,7 +157,7 @@
 					<object class="IBUIImageView" id="128482717">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{135, 198}, {50, 50}}</string>
+						<string key="NSFrame">{{135, 178}, {50, 50}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="909871371"/>
@@ -463,6 +463,14 @@
 					<int key="connectionID">65</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">crossImageView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="128482717"/>
+					</object>
+					<int key="connectionID">66</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">shotButtonClick:</string>
 						<reference key="source" ref="675710864"/>
@@ -634,7 +642,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">65</int>
+			<int key="maxID">66</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -649,9 +657,24 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">ActiveDuelViewController</string>
 					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="backButtonClick:">id</string>
+						<string key="shotButtonClick:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="backButtonClick:">
+							<string key="name">backButtonClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="shotButtonClick:">
+							<string key="name">shotButtonClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="bloodCImageView">UIImageView</string>
 						<string key="bloodImageView">UIImageView</string>
+						<string key="crossImageView">UIImageView</string>
 						<string key="fireImageView">UIImageView</string>
 						<string key="floatView">UIView</string>
 						<string key="glassImageView">UIImageView</string>
@@ -672,6 +695,10 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="bloodImageView">
 							<string key="name">bloodImageView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="crossImageView">
+							<string key="name">crossImageView</string>
 							<string key="candidateClassName">UIImageView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="fireImageView">
