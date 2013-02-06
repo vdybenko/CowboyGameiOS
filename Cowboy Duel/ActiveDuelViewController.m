@@ -75,6 +75,7 @@
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *userStatsLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *titleSteadyFire;
 @property (weak, nonatomic) IBOutlet FXLabel *lblBehold;
+@property (weak, nonatomic) IBOutlet UIImageView *crossImageView;
 
 @end
 
@@ -280,6 +281,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     [self setOpponentBody:nil];
     [self setTitleSteadyFire:nil];
     [self setLblBehold:nil];
+    [self setCrossImageView:nil];
     [super viewDidUnload];
 }
 
@@ -361,8 +363,8 @@ static CGFloat oponentLiveImageViewStartWidth;
     targetPoint.y = self.opponentImage.center.y - (self.floatView.bounds.size.height / 2 - self.floatView.center.y);
     
     CGPoint centerOfScreanPoint;
-    centerOfScreanPoint.x = [UIScreen mainScreen].bounds.size.width / 2;
-    centerOfScreanPoint.y = [UIScreen mainScreen].bounds.size.height / 2;
+    centerOfScreanPoint.x = self.crossImageView.bounds.origin.x + self.crossImageView.center.x;
+    centerOfScreanPoint.y = self.crossImageView.bounds.origin.y + self.crossImageView.center.y;
    
     [self cheackHitForShot:centerOfScreanPoint andTargetPoint:targetPoint];
 }
