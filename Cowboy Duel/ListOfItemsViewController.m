@@ -208,11 +208,15 @@
     
     
     if (player.bot) {
-        if (player.weapon) [oponentAccount setCurentIdWeapon:player.weapon];
-        else [oponentAccount setCurentIdWeapon:-1];
+        if (player.weapon)
+            [oponentAccount setCurentIdWeapon:player.weapon];
+        else
+            [oponentAccount setCurentIdWeapon:-1];
         [oponentAccount loadAccountWeapon];
-        if (player.defense) [oponentAccount setAccountDefenseValue:player.defense];
-        else [oponentAccount setAccountDefenseValue:0];
+        if (player.defense)
+            [oponentAccount setAccountDefenseValue:player.defense];
+        else
+            [oponentAccount setAccountDefenseValue:0];
     }
     
     ProfileViewController *profileViewController = [[ProfileViewController alloc] initForOponent:oponentAccount];

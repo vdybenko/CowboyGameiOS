@@ -344,7 +344,6 @@ static const char *GC_URL =  BASE_URL"api/gc";
 {
     TestAppDelegate *testAppDelegate = (TestAppDelegate *)[[UIApplication sharedApplication] delegate];
     [testAppDelegate.navigationController popToViewController:[testAppDelegate.navigationController.viewControllers objectAtIndex:1] animated:YES];
-    //[self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
     
     [delegate duelCancel];
     [self releaseComponents];

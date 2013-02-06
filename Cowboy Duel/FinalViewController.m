@@ -1037,7 +1037,6 @@
 
 -(void)startBotDuelTryAgain
 {
-    DLog(@"Eshe Raz");
     [playerAccount.finalInfoTable removeAllObjects];
     DuelStartViewController  *tempVC=(DuelStartViewController*)[self.navigationController.viewControllers objectAtIndex:2] ;
     [tempVC setMessageTry];

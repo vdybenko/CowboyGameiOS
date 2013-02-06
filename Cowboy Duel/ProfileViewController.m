@@ -784,15 +784,9 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         
         if ([AccountDataSource sharedInstance].activeDuel) {
             ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:[AccountDataSource sharedInstance] oponentAccount:playerAccount];
-            GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
-            activeDuelViewController.delegate = gameCenterViewController;
             [self.navigationController pushViewController:activeDuelViewController animated:YES];
         }
-        else
-        {
-            TeachingViewController *teachingViewController = [[TeachingViewController alloc] initWithTime:randomTime andAccount:[AccountDataSource sharedInstance] andOpAccount:playerAccount];
-            [self.navigationController pushViewController:teachingViewController animated:YES];
-        }
+        
         SSConnection *connection = [SSConnection sharedInstance];
         [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
         
