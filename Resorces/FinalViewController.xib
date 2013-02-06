@@ -239,9 +239,9 @@
 									<object class="IBUILabel" id="528399721">
 										<reference key="NSNextResponder" ref="646306172"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{97, 73}, {197, 47}}</string>
+										<string key="NSFrame">{{97, 72}, {197, 47}}</string>
 										<reference key="NSSuperview" ref="646306172"/>
-										<reference key="NSNextKeyView" ref="635260887"/>
+										<reference key="NSNextKeyView" ref="139531641"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIClipsSubviews">YES</bool>
@@ -302,7 +302,7 @@
 										<int key="NSvFlags">292</int>
 										<string key="NSFrame">{{53, 117}, {190, 28}}</string>
 										<reference key="NSSuperview" ref="646306172"/>
-										<reference key="NSNextKeyView" ref="528399721"/>
+										<reference key="NSNextKeyView" ref="635260887"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -333,7 +333,7 @@
 										<int key="NSvFlags">292</int>
 										<string key="NSFrame">{{20, 117}, {28, 28}}</string>
 										<reference key="NSSuperview" ref="646306172"/>
-										<reference key="NSNextKeyView" ref="139531641"/>
+										<reference key="NSNextKeyView" ref="528399721"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -800,7 +800,6 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="945211138"/>
 							<reference ref="858207817"/>
-							<reference ref="528399721"/>
 							<reference ref="208220378"/>
 							<reference ref="975493477"/>
 							<reference ref="1056670173"/>
@@ -809,6 +808,7 @@
 							<reference ref="635260887"/>
 							<reference ref="139531641"/>
 							<reference ref="657060073"/>
+							<reference ref="528399721"/>
 						</array>
 						<reference key="parent" ref="330456425"/>
 					</object>

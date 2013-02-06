@@ -1063,45 +1063,45 @@
 
 -(void)animationWithLable:(UILabel *)lable andStartNumber:(int)startNumber andEndNumber:(int)endNumber
 {
-  float goldForGoldAnimation;
-  if (endNumber - startNumber < 200) {
-    goldForGoldAnimation = 1;
-  }else {
-    goldForGoldAnimation = (endNumber - startNumber)/200;
-  }
-  if (startNumber<endNumber)
-    dispatch_async(dispatch_queue_create([lable.text cStringUsingEncoding:NSUTF8StringEncoding], NULL), ^{
-      {
-        for (int i = startNumber; i <= endNumber; i += goldForGoldAnimation) {
-          dispatch_async(dispatch_get_main_queue(), ^{
-            
-            lable.text = [NSString stringWithFormat:@"%d", i];
-          });
-          
-          [NSThread sleepForTimeInterval:0.02];
-          
-          
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-          lable.text = [NSString stringWithFormat:@"%d", endNumber];
+    float goldForGoldAnimation;
+    if (abs(endNumber - startNumber) < 110) {
+        goldForGoldAnimation = 1;
+    }else {
+        goldForGoldAnimation = abs(endNumber - startNumber)/110;
+    }
+    if (startNumber<endNumber)
+        dispatch_async(dispatch_queue_create([lable.text cStringUsingEncoding:NSUTF8StringEncoding], NULL), ^{
+            {
+                for (int i = startNumber; i <= endNumber; i += goldForGoldAnimation) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        lable.text = [NSString stringWithFormat:@"%d", i];
+                    });
+                    
+                    [NSThread sleepForTimeInterval:0.02];
+                    
+                    
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    lable.text = [NSString stringWithFormat:@"%d", endNumber];
+                });
+                
+            }
         });
-        
-      }
-    });
-  else
-    dispatch_async(dispatch_queue_create([lable.text cStringUsingEncoding:NSUTF8StringEncoding], NULL), ^{
-      for (int i = startNumber; i >= endNumber; i -= goldForGoldAnimation) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-          
-          lable.text = [NSString stringWithFormat:@"%d", i];
+    else
+        dispatch_async(dispatch_queue_create([lable.text cStringUsingEncoding:NSUTF8StringEncoding], NULL), ^{
+            for (int i = startNumber; i >= endNumber; i -= goldForGoldAnimation) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    lable.text = [NSString stringWithFormat:@"%d", i];
+                });
+                
+                [NSThread sleepForTimeInterval:0.02];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                lable.text = [NSString stringWithFormat:@"%d", endNumber];
+            });
         });
-        
-        [NSThread sleepForTimeInterval:0.02];
-      }
-      dispatch_async(dispatch_get_main_queue(), ^{
-        lable.text = [NSString stringWithFormat:@"%d", endNumber];
-      });
-    });
 }
 
 -(void)changePointsLine:(int)points maxValue:(int) maxValue animated:(BOOL)animated;
