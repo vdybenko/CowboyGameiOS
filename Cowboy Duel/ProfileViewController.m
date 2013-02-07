@@ -19,6 +19,7 @@
 #import "DuelStartViewController.h"
 #import "StoreViewController.h"
 #import "ActiveDuelViewController.h"
+#import "FavouritesViewController.h"
 
 static const CGFloat changeYPointWhenKeyboard = 155;
 static const CGFloat timeToStandartTitles = 1.8;
@@ -421,6 +422,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     [profilePictureViewDefault setHidden:YES];
     profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
     [btnLeaderboard setEnabled:YES];
+    [btnFavourites setEnabled:YES];
     [self setImageFromFacebook];
     
     NSString *name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel];
@@ -835,6 +837,15 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     [duelButton setEnabled:NO];
     //duelStartViewController = nil;
 }
+
+- (IBAction)btnFavouritesClick:(id)sender {
+    
+    FavouritesViewController *favVC = [[FavouritesViewController alloc] initWithAccount:playerAccount];
+    [self.navigationController pushViewController:favVC animated:YES];
+
+}
+
+
 
 -(void)startBotDuel
 {

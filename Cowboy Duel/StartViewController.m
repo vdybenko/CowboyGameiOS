@@ -134,7 +134,7 @@
 
 @synthesize gameCenterViewController, player, internetActive, hostActive, soundCheack;
 @synthesize feedbackButton, duelButton, profileButton, helpButton, mapButton, shareButton;
-@synthesize oldAccounId,feedBackViewVisible,showFeedAtFirst,topPlayersDataSource, advertisingNewVersionViewController,firstRun;
+@synthesize oldAccounId,feedBackViewVisible,showFeedAtFirst,topPlayersDataSource, advertisingNewVersionViewController,firstRun, favsDataSource;
 @synthesize duelProductDownloaderController;
 
 static const char *REGISTRATION_URL =  BASE_URL"api/registration";
@@ -169,6 +169,7 @@ static StartViewController *sharedHelper = nil;
         showFeedAtFirst=NO;
         
         topPlayersDataSource = [[TopPlayersDataSource alloc] initWithTable:nil];
+        favsDataSource = [[FavouritesDataSource alloc] initWithTable:nil];
         
         firstDayWithOutAdvertising=YES;
         if(![uDef boolForKey:@"AlreadyRun"] )  
@@ -187,6 +188,7 @@ static StartViewController *sharedHelper = nil;
             firstRun = NO;
             firstRunLocal = NO;
             [topPlayersDataSource reloadDataSource];
+            [favsDataSource reloadDataSource];
             
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"moneyForIPad"];
         }
