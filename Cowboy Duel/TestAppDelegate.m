@@ -57,7 +57,7 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     
     [GAI sharedInstance].trackUncaughtExceptions = YES;
     [GAI sharedInstance].dispatchInterval = 20;
-    [GAI sharedInstance].debug = YES;
+    [GAI sharedInstance].debug = NO;
     tracker = [[GAI sharedInstance] trackerWithTrackingId:kGAAccountID];
 	
     [Crittercism initWithAppID:ID_CRIT_APP  andKey:ID_CRIT_KEY andSecret:ID_CRIT_SECRET];
