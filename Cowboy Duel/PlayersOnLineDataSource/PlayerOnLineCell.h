@@ -1,6 +1,5 @@
 
 #import <UIKit/UIKit.h>
-#import "CDPlayerOnLine.h"
 #import "SSServer.h"
 
 @interface PlayerOnLineCell : UITableViewCell {

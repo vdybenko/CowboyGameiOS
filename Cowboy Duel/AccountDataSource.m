@@ -65,7 +65,7 @@ static AccountDataSource *sharedHelper = nil;
         self.homeTown=@"";
         self.friends=0;
         self.facebookName=@"";
-        
+                
         transactions = [[NSMutableArray alloc] init];
         duels = [[NSMutableArray alloc] init];
         achivments = [[NSMutableArray alloc] init];

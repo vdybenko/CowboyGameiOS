@@ -22,6 +22,7 @@
 
 static const CGFloat changeYPointWhenKeyboard = 155;
 static const CGFloat timeToStandartTitles = 1.8;
+NSString  *const URL_ADD_FAVORITE = @BASE_URL"users/add_to_favorites";
 
 @interface ProfileViewController ()
 {
@@ -48,6 +49,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     __weak IBOutlet UILabel *lbWantedText;
     __weak IBOutlet UILabel *lbWantedTitle;
     __weak IBOutlet UILabel *lbAward;
+    __weak IBOutlet UIButton *btnFavorites;
     
     __weak IBOutlet UIButton *btnLeaderboard;
     __weak IBOutlet UIButton *btnLeaderboardBig;
@@ -655,6 +657,15 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         [ivBlack setHidden:YES];
     }
 }
+
+-(void)checkIsOpponentFavorite
+{
+    if (playerServer) {
+        btnFavorites.imageView.image = [UIImage imageNamed:@"topPlayerStar.png"];
+    }else{
+        btnFavorites.imageView.image = [UIImage imageNamed:@"topPlayerStarSelected.png"];
+    }
+}
 #pragma mark Animation description
 
 - (void)updateLabels
@@ -865,6 +876,49 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                      }];
     storeViewController = nil;
 }
+
+- (IBAction)favoritesBtnClick:(id)sender {
+    bgActivityIndicator.hidden = NO;
+    
+    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:URL_ADD_FAVORITE]
+                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                        timeoutInterval:kTimeOutSeconds];
+    [theRequest setHTTPMethod:@"POST"];
+    NSDictionary *dicBody=[NSDictionary dictionaryWithObjectsAndKeys:
+                           [AccountDataSource sharedInstance].accountID,@"user_authen",
+                           playerAccount.accountID,@"favorite_authen",
+                           [AccountDataSource sharedInstance].sessionID,@"session_id",
+                           nil];
+    
+    NSString *stBody=[Utils makeStringForPostRequest:dicBody];
+    [theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    [NSURLConnection
+     sendAsynchronousRequest:theRequest
+     queue:[[NSOperationQueue alloc] init]
+     completionHandler:^(NSURLResponse *response,
+                         NSData *data,
+                         NSError *error)
+     {
+         if ([data length] >0 && error == nil)
+         {
+             NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+             NSLog(@"jsonString %@",jsonString);
+         }
+         else if ([data length] == 0 && error == nil)
+         {
+             DLog(@"Nothing was downloaded.");
+         }
+         else if (error != nil){
+             DLog(@"DuelProductDownloaderController Connection failed! Error - %@ %@",
+                  [error localizedDescription],
+                  [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
+            }
+     }];
+
+    [self checkIsOpponentFavorite];
+}
+
 #pragma mark IconDownloaderDelegate
 - (void)appImageDidLoad:(NSIndexPath *)indexPath
 {
@@ -877,6 +931,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 - (void)viewDidUnload {
     activityIndicatorView = nil;
     bgActivityIndicator = nil;
+    btnFavorites = nil;
     [super viewDidUnload];
 }
 @end

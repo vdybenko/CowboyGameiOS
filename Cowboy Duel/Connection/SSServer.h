@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSNumber *money; //money - int
 @property (nonatomic, strong) NSNumber *rank;  //rank - int
 @property (nonatomic) BOOL bot;
+@property (nonatomic) BOOL favorite;
 @property (nonatomic, strong) NSNumber *duelsWin;
 @property (nonatomic, strong) NSNumber *duelsLost;
 @property (nonatomic, strong) NSString *sessionId;

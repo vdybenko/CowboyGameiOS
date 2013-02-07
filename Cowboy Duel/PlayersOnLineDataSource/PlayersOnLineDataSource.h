@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CDPlayerOnLine.h"
 #import "JSON.h"
 #import "ValidationUtils.h"
 #import "PlayerOnLineCell.h"

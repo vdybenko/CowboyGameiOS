@@ -250,7 +250,6 @@
 		768044C415AC68FD005ABD3A /* dv_arm.png in Resources */ = {isa = PBXBuildFile; fileRef = 768044C215AC68FD005ABD3A /* dv_arm.png */; };
 		768044C915AC697A005ABD3A /* dv_arm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 768044C815AC6979005ABD3A /* dv_arm@2x.png */; };
 		7682BDDF15AC5F22001C09EC /* HelpPracticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682BDDD15AC5F22001C09EC /* HelpPracticeView.m */; };
-		7682E363156BD22000A8F9A0 /* CDPlayerOnLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682E362156BD22000A8F9A0 /* CDPlayerOnLine.m */; };
 		768321D91654DDD000E78A8C /* TeachingHelperController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 768321D81654DDD000E78A8C /* TeachingHelperController.xib */; };
 		768321E01654E60D00E78A8C /* TeachingHelperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 768321DF1654E60D00E78A8C /* TeachingHelperViewController.m */; };
 		768388D3157DE37800377D88 /* UIButton+Image+Title.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388D2157DE37800377D88 /* UIButton+Image+Title.m */; };
@@ -476,7 +475,6 @@
 		BD83A42F16720DFE003EE4B3 /* RefreshContentDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7679D8C31563949E00BDE3A6 /* RefreshContentDataController.m */; };
 		BD83A43016720DFE003EE4B3 /* PlayersOnLineDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 767FEF28156A5AF80016B415 /* PlayersOnLineDataSource.m */; };
 		BD83A43116720DFE003EE4B3 /* ListOfItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767FEF2F156A64A40016B415 /* ListOfItemsViewController.m */; };
-		BD83A43216720DFE003EE4B3 /* CDPlayerOnLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682E362156BD22000A8F9A0 /* CDPlayerOnLine.m */; };
 		BD83A43316720DFE003EE4B3 /* OGHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8000D5157755A600703AC8 /* OGHelper.m */; };
 		BD83A43416720DFE003EE4B3 /* UIView+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 763F8A3B1578FC0900D8BB42 /* UIView+Hierarchy.m */; };
 		BD83A43516720DFE003EE4B3 /* UIButton+Image+Title.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388D2157DE37800377D88 /* UIButton+Image+Title.m */; };
@@ -1082,8 +1080,6 @@
 		768044C815AC6979005ABD3A /* dv_arm@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dv_arm@2x.png"; sourceTree = "<group>"; };
 		7682BDDD15AC5F22001C09EC /* HelpPracticeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpPracticeView.m; sourceTree = "<group>"; };
 		7682BDDE15AC5F22001C09EC /* HelpPracticeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpPracticeView.h; sourceTree = "<group>"; };
-		7682E361156BD22000A8F9A0 /* CDPlayerOnLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDPlayerOnLine.h; sourceTree = "<group>"; };
-		7682E362156BD22000A8F9A0 /* CDPlayerOnLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDPlayerOnLine.m; sourceTree = "<group>"; };
 		768321D81654DDD000E78A8C /* TeachingHelperController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TeachingHelperController.xib; path = Xib/TeachingHelperController.xib; sourceTree = "<group>"; };
 		768321DE1654E60D00E78A8C /* TeachingHelperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingHelperViewController.h; sourceTree = "<group>"; };
 		768321DF1654E60D00E78A8C /* TeachingHelperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingHelperViewController.m; sourceTree = "<group>"; };
@@ -2036,8 +2032,6 @@
 				762AA30F15B99C72001B65E2 /* TopPlayerCell.m */,
 				7679306F15BE8B60007F461F /* CDPlayerMain.h */,
 				7679307015BE8B60007F461F /* CDPlayerMain.m */,
-				7682E361156BD22000A8F9A0 /* CDPlayerOnLine.h */,
-				7682E362156BD22000A8F9A0 /* CDPlayerOnLine.m */,
 				7679307315BE8D64007F461F /* CDTopPlayer.h */,
 				7679307415BE8D64007F461F /* CDTopPlayer.m */,
 			);
@@ -3287,7 +3281,6 @@
 				7679D8C41563949E00BDE3A6 /* RefreshContentDataController.m in Sources */,
 				767FEF29156A5AF80016B415 /* PlayersOnLineDataSource.m in Sources */,
 				767FEF30156A64A50016B415 /* ListOfItemsViewController.m in Sources */,
-				7682E363156BD22000A8F9A0 /* CDPlayerOnLine.m in Sources */,
 				BD8000D6157755A600703AC8 /* OGHelper.m in Sources */,
 				763F8A3D1578FC0900D8BB42 /* UIView+Hierarchy.m in Sources */,
 				768388D3157DE37800377D88 /* UIButton+Image+Title.m in Sources */,
@@ -3391,7 +3384,6 @@
 				BD83A42F16720DFE003EE4B3 /* RefreshContentDataController.m in Sources */,
 				BD83A43016720DFE003EE4B3 /* PlayersOnLineDataSource.m in Sources */,
 				BD83A43116720DFE003EE4B3 /* ListOfItemsViewController.m in Sources */,
-				BD83A43216720DFE003EE4B3 /* CDPlayerOnLine.m in Sources */,
 				BD83A43316720DFE003EE4B3 /* OGHelper.m in Sources */,
 				BD83A43416720DFE003EE4B3 /* UIView+Hierarchy.m in Sources */,
 				BD83A43516720DFE003EE4B3 /* UIButton+Image+Title.m in Sources */,

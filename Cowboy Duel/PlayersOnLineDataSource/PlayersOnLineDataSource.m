@@ -7,7 +7,6 @@
 //
 
 #import "PlayersOnLineDataSource.h"
-#import "CDPlayerOnLine.h"
 #import "ListOfItemsViewController.h"
 #import "CustomNSURLConnection.h"
 #import "Utils.h"
