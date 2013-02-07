@@ -19,6 +19,7 @@
 #import "DuelStartViewController.h"
 #import "StoreViewController.h"
 #import "ActiveDuelViewController.h"
+#import "FavouritesViewController.h"
 
 static const CGFloat changeYPointWhenKeyboard = 155;
 static const CGFloat timeToStandartTitles = 1.8;
@@ -74,6 +75,12 @@ static const CGFloat timeToStandartTitles = 1.8;
     __weak IBOutlet UIImageView *ivCurrentRank;
     
     __weak IBOutlet UILabel *lbPointsText;
+    __weak IBOutlet UILabel *lbFavouritesTitle;
+    
+//  Favourites
+    
+    __weak IBOutlet UIButton *btnFavourites;
+    
     NSNumberFormatter *numberFormatter;
     
     BOOL didDisappear;
@@ -388,6 +395,9 @@ static const CGFloat timeToStandartTitles = 1.8;
     
     lbLeaderboardTitle.text = NSLocalizedString(@"LeaderboardTitle", @"");
     lbLeaderboardTitle.font = [UIFont fontWithName: @"DecreeNarrow" size:18];
+    
+    lbFavouritesTitle.text = NSLocalizedString(@"FavouritesTitle", @"");
+    lbFavouritesTitle.font = [UIFont fontWithName:@"DecreeNarrow" size:18];
 
     lbDuelsWonCount.font = CountFont;
     
@@ -412,6 +422,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     [profilePictureViewDefault setHidden:YES];
     profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
     [btnLeaderboard setEnabled:YES];
+    [btnFavourites setEnabled:YES];
     [self setImageFromFacebook];
     
     NSString *name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel];
@@ -827,6 +838,15 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     //duelStartViewController = nil;
 }
 
+- (IBAction)btnFavouritesClick:(id)sender {
+    
+    FavouritesViewController *favVC = [[FavouritesViewController alloc] initWithAccount:playerAccount];
+    [self.navigationController pushViewController:favVC animated:YES];
+
+}
+
+
+
 -(void)startBotDuel
 {
     int randomTime = arc4random() % 6;
@@ -877,6 +897,8 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 - (void)viewDidUnload {
     activityIndicatorView = nil;
     bgActivityIndicator = nil;
+    btnFavourites = nil;
+    lbFavouritesTitle = nil;
     [super viewDidUnload];
 }
 @end
