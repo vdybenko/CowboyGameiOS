@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import <Core>
 
 @interface GunDrumViewController : UIViewController<MemoryManagement>
 @property (nonatomic) CGFloat chargeTime;

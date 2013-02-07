@@ -17,7 +17,6 @@
 #import "StartViewController.h"
 #import "GunDrumViewController.h"
 
-#define kFilteringFactor 0.1
 #define targetHeight 260
 #define targetWeidth 100
 #define MOVE_DISTANCE 100
@@ -59,6 +58,8 @@
     NSMutableArray *placesOfInterest;
     float steadyScale;
     float scaleDelta;
+    BOOL oponnentFoll;
+    BOOL oponnentFollSend;
 }
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *floatView;
@@ -179,7 +180,7 @@
     
     gunDrumViewController = [[GunDrumViewController alloc] initWithNibName:Nil bundle:Nil];
     [self.view addSubview:gunDrumViewController.view];
-    [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 1) withSubviewAtIndex:([self.view.subviews count] - 2)];
+    [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 1) withSubviewAtIndex:([self.view.subviews count] - 3)];
     [gunDrumViewController showGun];
     self.gunButton.hidden = YES;
     
@@ -318,10 +319,6 @@
     }
     [self.fireImageView startAnimating];
        
-    if(delegate)
-    {
-        [delegate sendShot];
-    }
     
     switch (shotCountForSound) {
         case 1:
@@ -520,20 +517,10 @@
     
     [self.glassImageView setHidden:NO];
     [brockenGlassAudioPlayer play];
-    FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime - time * 1000) andOponentTime:1 andGameCenterController:self andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
-    
-    [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
     [timer invalidate];
     [moveTimer invalidate];
 
-    //[self endDuel];
 }
-
-//-(void)endDuel
-//{
-//    [shotTimer invalidate];
-//    [self performSelector:@selector(dismissController) withObject:nil afterDelay:2.0];
-//}
 
 - (void) dismissWithController:(UIViewController *)controller {
 
@@ -542,32 +529,32 @@
 
 
 
--(void)startDuel
-{
-    NSLog(@"startDuel");
-    soundStart = YES;
-    startInterval = [NSDate timeIntervalSinceReferenceDate];
-    gunDrumViewController.chargeTime = time - 0.7;
-    [player stop];
-    [player setCurrentTime:0.0];
-    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Duel.mp3", [[NSBundle mainBundle] resourcePath]]];
-    player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
-    [player play];
-    
-    timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(shotTimer) userInfo:nil repeats:YES];
-    duelIsStarted = NO;
-    fireSound = NO;
-    acelStatus = YES;
-    shotTime = 0;
-    
-    [self hideHelpViewOnStartDuel];
-    if (([[NSUserDefaults standardUserDefaults] integerForKey:@"FirstRunForPractice"] != 1)&&([[NSUserDefaults standardUserDefaults] integerForKey:@"FirstRunForPractice"] != 2))
-    {
-        //[self hideHelpViewWithArm];
-    }
-    
-    [gunDrumViewController openGun];
-}
+//-(void)startDuel
+//{
+//    NSLog(@"startDuel");
+//    soundStart = YES;
+//    startInterval = [NSDate timeIntervalSinceReferenceDate];
+//    gunDrumViewController.chargeTime = time - 0.7;
+//    [player stop];
+//    [player setCurrentTime:0.0];
+//    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Duel.mp3", [[NSBundle mainBundle] resourcePath]]];
+//    player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+//    [player play];
+//    
+//    timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(shotTimer) userInfo:nil repeats:YES];
+//    duelIsStarted = NO;
+//    fireSound = NO;
+//    acelStatus = YES;
+//    shotTime = 0;
+//    
+//    [self hideHelpViewOnStartDuel];
+//    if (([[NSUserDefaults standardUserDefaults] integerForKey:@"FirstRunForPractice"] != 1)&&([[NSUserDefaults standardUserDefaults] integerForKey:@"FirstRunForPractice"] != 2))
+//    {
+//        //[self hideHelpViewWithArm];
+//    }
+//    
+//    [gunDrumViewController openGun];
+//}
 
 
 -(void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
@@ -583,27 +570,39 @@
     //       Position for STEADY
     if ((acceleration.y > -0.4) && (rollingX > -0.3) && (rollingX < 0.3)) accelerometerState = YES;
             
-            
-    
     
     if((accelerometerState)&& (!soundStart)){
+        
+        if(oponnentFollSend){
+            oponnentFollSend = NO;
+            accelerometerStateSend = NO;
+            //[delegate follEnd];
+        }
+        
         if (!accelerometerStateSend) {
             if ([delegate respondsToSelector:@selector(setAccelStateTrue)])
                 [delegate setAccelStateTrue];
+            [self readyToStart];
             accelerometerStateSend = YES;
+            
         }else {
-            [self startDuel];
+            if(!delegate)[self startDuel];
         }
     }
     else {
         if ([delegate respondsToSelector:@selector(setAccelStateFalse)])
             [delegate setAccelStateFalse];
         accelerometerStateSend = NO;
-    }
+        }
     
     if ((!accelerometerState) && (soundStart) && (!duelIsStarted)) {
         if(!follAccelCheck){
             [self restartCountdown];
+            if(!oponnentFollSend){
+                oponnentFollSend = YES;
+                [delegate follStart];
+            }
+
         }
     }
 
@@ -629,21 +628,6 @@
     activityInterval = (nowInterval-startInterval) * 1000;
     shotTime = (int)activityInterval;
     
-    UIViewController *curentVC=[self.navigationController visibleViewController];
-    if ((shotTime * 0.001 >= time) && (!duelIsStarted) && (!foll)&&([curentVC isEqual:self])) {
-        DLog(@"FIRE !!!!!");
-        duelIsStarted = YES;
-        NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Fire.mp3", [[NSBundle mainBundle] resourcePath]]];
-        NSError *error;
-        [player stop];
-        player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-        [player play];
-        [self vibrationStart];
-        [self.gunButton setEnabled:YES];
-        if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
-        moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
-        [self.opponentImage setHidden:NO];
-    }
     if ((shotTime * 0.001 >= 60.0) && (!duelTimerEnd) && (soundStart)) {
         if ([delegate respondsToSelector:@selector(duelTimerEnd)])
             [delegate duelTimerEnd];
@@ -769,6 +753,73 @@
 -(void)shutDownTimer;
 {
     [timer invalidate];
+}
+
+-(void)oponnentFollStart
+{
+    follAccelCheck = NO;
+    //accelerometerState = NO;
+    soundStart = NO;
+    
+    [timer invalidate];
+    [player stop];
+    [player setCurrentTime:0.0];
+}
+
+-(void)oponnentFollEnd
+{
+    oponnentFoll = NO;
+    //if (accelerometerState) [self startDuel];
+}
+
+-(void)startDuel
+{
+    if (duelIsStarted) return;
+    
+    UIViewController *curentVC=[self.navigationController visibleViewController];
+    if ([curentVC isEqual:self]) {
+        DLog(@"FIRE !!!!!");
+        duelIsStarted = YES;
+        [gunDrumViewController hideGun];
+        NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Fire.mp3", [[NSBundle mainBundle] resourcePath]]];
+        NSError *error;
+        [player stop];
+        player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+        [player play];
+        [self vibrationStart];
+        [self.gunButton setEnabled:YES];
+        if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
+        moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
+        [self.opponentImage setHidden:NO];
+    }
+}
+
+-(void)readyToStart
+{
+    NSLog(@"startDuel");
+    soundStart = YES;
+    startInterval = [NSDate timeIntervalSinceReferenceDate];
+    gunDrumViewController.chargeTime = time - 0.7;
+    [player stop];
+    [player setCurrentTime:0.0];
+    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Duel.mp3", [[NSBundle mainBundle] resourcePath]]];
+    player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+    [player play];
+    
+    duelIsStarted = NO;
+    fireSound = NO;
+    acelStatus = YES;
+    shotTime = 0;
+    
+    [self hideHelpViewOnStartDuel];
+    
+    [gunDrumViewController openGun];
+}
+
+#pragma ActiveDuelViewControllerDelegate
+-(BOOL)accelerometerSendPositionSecond
+{
+    return accelerometerState;
 }
 
 @end

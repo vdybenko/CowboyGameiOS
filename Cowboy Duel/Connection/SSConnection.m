@@ -75,11 +75,7 @@ static SSConnection *connection;
                     len = [inputStream read:buffer maxLength:sizeof(buffer)];
                     if (len > 0) {
                         NSData *data = [[NSData alloc] initWithBytes:buffer length:len];
-                        //[self.delegate getData:data andLength:len];
-                        
-                        
                         [self getData:buffer andLength:len];
-                        
                     }
                 }
             }
@@ -93,8 +89,9 @@ static SSConnection *connection;
 		case NSStreamEventEndEncountered:
 			break;
             
-		default:{}
-			//NSLog(@"Unknown event");
+		default:{
+            //NSLog(@"Unknown event");
+        }
 	}
     
 }
@@ -103,7 +100,6 @@ static SSConnection *connection;
 
 -(void) sendData:(void *) data packetID:(int)packetID ofLength:(int)length
 {
-    //NSLog(@"Send data with packetId %d", packetID);
     static unsigned char networkPacket[1024];
     const unsigned int packetHeaderSize = sizeof(int); // we have two "ints" for our header
 	

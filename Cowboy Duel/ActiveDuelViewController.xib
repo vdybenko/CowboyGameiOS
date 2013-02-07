@@ -159,20 +159,6 @@
 							<string key="NSResourceName">ivCross.png</string>
 						</object>
 					</object>
-					<object class="IBUIImageView" id="226727912">
-						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrameSize">{320, 480}</string>
-						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSNextKeyView" ref="675710864"/>
-						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<object class="NSCustomResource" key="IBUIImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">ivBlood.png</string>
-						</object>
-					</object>
 					<object class="IBUILabel" id="984249766">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">-2147483356</int>
@@ -308,6 +294,20 @@
 							<string key="NSName">Helvetica-Bold</string>
 							<double key="NSSize">15</double>
 							<int key="NSfFlags">16</int>
+						</object>
+					</object>
+					<object class="IBUIImageView" id="226727912">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">-2147483356</int>
+						<string key="NSFrameSize">{320, 480}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSNextKeyView" ref="675710864"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">ivBlood.png</string>
 						</object>
 					</object>
 				</array>
@@ -471,11 +471,11 @@
 							<reference ref="909871371"/>
 							<reference ref="128482717"/>
 							<reference ref="513821458"/>
-							<reference ref="226727912"/>
 							<reference ref="984249766"/>
 							<reference ref="602955860"/>
 							<reference ref="884335737"/>
 							<reference ref="675710864"/>
+							<reference ref="226727912"/>
 							<reference ref="324338450"/>
 						</array>
 						<reference key="parent" ref="0"/>

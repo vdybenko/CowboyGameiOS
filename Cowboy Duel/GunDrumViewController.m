@@ -17,7 +17,6 @@
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *colectionBullets;
 @property (weak, nonatomic) IBOutlet UIView *vLoadGun;
 @property (weak, nonatomic) IBOutlet UILabel *lbLoadGun;
-@property (weak, nonatomic) IBOutlet UIImageView *ivLine;
 @property (weak, nonatomic) IBOutlet UIView *drumBullets;
 @property (weak, nonatomic) IBOutlet UIImageView *arrow;
 @property (weak, nonatomic) IBOutlet UIView *gun;
@@ -53,7 +52,6 @@ static CGFloat timeSpinDump = 0.6f;
 @synthesize isCharging;
 @synthesize vLoadGun;
 @synthesize lbLoadGun;
-@synthesize ivLine;
 @synthesize gunImage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -99,7 +97,6 @@ static CGFloat timeSpinDump = 0.6f;
     [self setArrow:nil];
     [self setVLoadGun:nil];
     [self setLbLoadGun:nil];
-    [self setIvLine:nil];
     [self setGunImage:nil];
     [super viewDidUnload];
 }
@@ -112,6 +109,7 @@ static CGFloat timeSpinDump = 0.6f;
 #pragma mark
 -(void)openGun;
 {
+    [self.view.layer removeAllAnimations];
     isCharging = YES;
     [UIView animateWithDuration:timeOpenGun animations:^{
         arrow.hidden = YES;
@@ -171,7 +169,7 @@ static CGFloat timeSpinDump = 0.6f;
         }
         if (isCharging) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self hideGun];
+                //[self hideGun];
             });
         }
     });
