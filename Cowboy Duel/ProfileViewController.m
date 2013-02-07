@@ -74,6 +74,12 @@ static const CGFloat timeToStandartTitles = 1.8;
     __weak IBOutlet UIImageView *ivCurrentRank;
     
     __weak IBOutlet UILabel *lbPointsText;
+    __weak IBOutlet UILabel *lbFavouritesTitle;
+    
+//  Favourites
+    
+    __weak IBOutlet UIButton *btnFavourites;
+    
     NSNumberFormatter *numberFormatter;
     
     BOOL didDisappear;
@@ -388,6 +394,9 @@ static const CGFloat timeToStandartTitles = 1.8;
     
     lbLeaderboardTitle.text = NSLocalizedString(@"LeaderboardTitle", @"");
     lbLeaderboardTitle.font = [UIFont fontWithName: @"DecreeNarrow" size:18];
+    
+    lbFavouritesTitle.text = NSLocalizedString(@"FavouritesTitle", @"");
+    lbFavouritesTitle.font = [UIFont fontWithName:@"DecreeNarrow" size:18];
 
     lbDuelsWonCount.font = CountFont;
     
@@ -877,6 +886,8 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 - (void)viewDidUnload {
     activityIndicatorView = nil;
     bgActivityIndicator = nil;
+    btnFavourites = nil;
+    lbFavouritesTitle = nil;
     [super viewDidUnload];
 }
 @end
