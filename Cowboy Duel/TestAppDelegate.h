@@ -11,11 +11,10 @@
 #import "LoadViewController.h"
 #import "LoginAnimatedViewController.h"
 #import "AccountDataSource.h"
-#import "GANTracker.h"
 #import "GADBannerView.h"
 
 
-@interface TestAppDelegate :  UIResponder <UIApplicationDelegate, GANTrackerDelegate>
+@interface TestAppDelegate :  UIResponder <UIApplicationDelegate>
 @property (nonatomic, readonly) UINavigationController *navigationController;
 @property  (strong) LoginAnimatedViewController *loginViewController;
 @property (nonatomic) GADBannerView *adBanner;
