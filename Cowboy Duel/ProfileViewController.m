@@ -19,6 +19,7 @@
 #import "DuelStartViewController.h"
 #import "StoreViewController.h"
 #import "ActiveDuelViewController.h"
+#import "FavouritesViewController.h"
 
 static const CGFloat changeYPointWhenKeyboard = 155;
 static const CGFloat timeToStandartTitles = 1.8;
@@ -49,7 +50,7 @@ NSString  *const URL_ADD_FAVORITE = @BASE_URL"users/add_to_favorites";
     __weak IBOutlet UILabel *lbWantedText;
     __weak IBOutlet UILabel *lbWantedTitle;
     __weak IBOutlet UILabel *lbAward;
-    __weak IBOutlet UIButton *btnFavorites;
+    __weak IBOutlet UIButton *btnAddToFavorites;
     
     __weak IBOutlet UIButton *btnLeaderboard;
     __weak IBOutlet UIButton *btnLeaderboardBig;
@@ -76,6 +77,12 @@ NSString  *const URL_ADD_FAVORITE = @BASE_URL"users/add_to_favorites";
     __weak IBOutlet UIImageView *ivCurrentRank;
     
     __weak IBOutlet UILabel *lbPointsText;
+    __weak IBOutlet UILabel *lbFavouritesTitle;
+    
+//  Favourites
+    
+    __weak IBOutlet UIButton *btnFavourites;
+    
     NSNumberFormatter *numberFormatter;
     
     BOOL didDisappear;
@@ -390,6 +397,9 @@ NSString  *const URL_ADD_FAVORITE = @BASE_URL"users/add_to_favorites";
     
     lbLeaderboardTitle.text = NSLocalizedString(@"LeaderboardTitle", @"");
     lbLeaderboardTitle.font = [UIFont fontWithName: @"DecreeNarrow" size:18];
+    
+    lbFavouritesTitle.text = NSLocalizedString(@"FavouritesTitle", @"");
+    lbFavouritesTitle.font = [UIFont fontWithName:@"DecreeNarrow" size:18];
 
     lbDuelsWonCount.font = CountFont;
     
@@ -414,6 +424,7 @@ NSString  *const URL_ADD_FAVORITE = @BASE_URL"users/add_to_favorites";
     [profilePictureViewDefault setHidden:YES];
     profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
     [btnLeaderboard setEnabled:YES];
+    [btnFavourites setEnabled:YES];
     [self setImageFromFacebook];
     
     NSString *name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel];
@@ -661,9 +672,9 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 -(void)checkIsOpponentFavorite
 {
     if (playerServer) {
-        btnFavorites.imageView.image = [UIImage imageNamed:@"topPlayerStar.png"];
+        btnAddToFavorites.imageView.image = [UIImage imageNamed:@"topPlayerStar.png"];
     }else{
-        btnFavorites.imageView.image = [UIImage imageNamed:@"topPlayerStarSelected.png"];
+        btnAddToFavorites.imageView.image = [UIImage imageNamed:@"topPlayerStarSelected.png"];
     }
 }
 #pragma mark Animation description
@@ -838,6 +849,15 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     //duelStartViewController = nil;
 }
 
+- (IBAction)btnFavouritesClick:(id)sender {
+    
+    FavouritesViewController *favVC = [[FavouritesViewController alloc] initWithAccount:playerAccount];
+    [self.navigationController pushViewController:favVC animated:YES];
+
+}
+
+
+
 -(void)startBotDuel
 {
     int randomTime = arc4random() % 6;
@@ -877,7 +897,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     storeViewController = nil;
 }
 
-- (IBAction)favoritesBtnClick:(id)sender {
+- (IBAction)btnAddToFavoritesClick:(id)sender {
     bgActivityIndicator.hidden = NO;
     
     NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:URL_ADD_FAVORITE]
@@ -931,7 +951,9 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 - (void)viewDidUnload {
     activityIndicatorView = nil;
     bgActivityIndicator = nil;
-    btnFavorites = nil;
+    btnAddToFavorites = nil;
+    btnFavourites = nil;
+    lbFavouritesTitle = nil;
     [super viewDidUnload];
 }
 @end

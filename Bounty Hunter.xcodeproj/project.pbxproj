@@ -113,6 +113,12 @@
 		3167BAE815CAA75F00AF2745 /* fin_img_light_bckgr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BAC615CAA75F00AF2745 /* fin_img_light_bckgr@2x.png */; };
 		3188979815CAD7FE002D52EA /* LevelCongratViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3188979615CAD7FE002D52EA /* LevelCongratViewController.m */; };
 		3188979915CAD7FE002D52EA /* LevelCongratViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3188979715CAD7FE002D52EA /* LevelCongratViewController.xib */; };
+		318D010716C3A2AD00BFA030 /* FavouritesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 318D010616C3A2AC00BFA030 /* FavouritesCell.m */; };
+		318D010F16C3B08D00BFA030 /* FavouritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 318D010D16C3B08D00BFA030 /* FavouritesViewController.m */; };
+		318D011016C3B08D00BFA030 /* FavouritesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 318D010E16C3B08D00BFA030 /* FavouritesViewController.xib */; };
+		318D011216C3C52700BFA030 /* FavouritesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 318D011116C3C52700BFA030 /* FavouritesCell.xib */; };
+		318D011516C3D5B100BFA030 /* FavouritesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 318D011416C3D5B000BFA030 /* FavouritesDataSource.m */; };
+		318D011816C3E19200BFA030 /* CDFavPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 318D011716C3E19100BFA030 /* CDFavPlayer.m */; };
 		318F233D16B9437A0081BE5E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 318F233916B9437A0081BE5E /* Default.png */; };
 		318F233E16B9437A0081BE5E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 318F233916B9437A0081BE5E /* Default.png */; };
 		318F233F16B9437A0081BE5E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 318F233A16B9437A0081BE5E /* Default@2x.png */; };
@@ -939,6 +945,16 @@
 		3188979515CAD7FE002D52EA /* LevelCongratViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LevelCongratViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		3188979615CAD7FE002D52EA /* LevelCongratViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LevelCongratViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		3188979715CAD7FE002D52EA /* LevelCongratViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LevelCongratViewController.xib; path = "../Cowboy Duel/LevelCongratViewController.xib"; sourceTree = "<group>"; };
+		318D010516C3A2AC00BFA030 /* FavouritesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouritesCell.h; sourceTree = "<group>"; };
+		318D010616C3A2AC00BFA030 /* FavouritesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouritesCell.m; sourceTree = "<group>"; };
+		318D010C16C3B08D00BFA030 /* FavouritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FavouritesViewController.h; path = ../Resorces/Xib/FavouritesViewController.h; sourceTree = "<group>"; };
+		318D010D16C3B08D00BFA030 /* FavouritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FavouritesViewController.m; path = ../Resorces/Xib/FavouritesViewController.m; sourceTree = "<group>"; };
+		318D010E16C3B08D00BFA030 /* FavouritesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FavouritesViewController.xib; path = Xib/FavouritesViewController.xib; sourceTree = "<group>"; };
+		318D011116C3C52700BFA030 /* FavouritesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FavouritesCell.xib; path = Xib/FavouritesCell.xib; sourceTree = "<group>"; };
+		318D011316C3D5AF00BFA030 /* FavouritesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouritesDataSource.h; sourceTree = "<group>"; };
+		318D011416C3D5B000BFA030 /* FavouritesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouritesDataSource.m; sourceTree = "<group>"; };
+		318D011616C3E19000BFA030 /* CDFavPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDFavPlayer.h; sourceTree = "<group>"; };
+		318D011716C3E19100BFA030 /* CDFavPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDFavPlayer.m; sourceTree = "<group>"; };
 		318F233916B9437A0081BE5E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		318F233A16B9437A0081BE5E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		318F234116B9484E0081BE5E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -1822,6 +1838,15 @@
 			path = Achievment;
 			sourceTree = "<group>";
 		};
+		318D010916C3AF4800BFA030 /* Favourites */ = {
+			isa = PBXGroup;
+			children = (
+				318D010E16C3B08D00BFA030 /* FavouritesViewController.xib */,
+				318D011116C3C52700BFA030 /* FavouritesCell.xib */,
+			);
+			name = Favourites;
+			sourceTree = "<group>";
+		};
 		31DA9EFB15BD331900492A9F /* ListOnLine */ = {
 			isa = PBXGroup;
 			children = (
@@ -2020,6 +2045,8 @@
 		767FEF26156A5AF70016B415 /* PlayersOnLineDataSource */ = {
 			isa = PBXGroup;
 			children = (
+				318D011316C3D5AF00BFA030 /* FavouritesDataSource.h */,
+				318D011416C3D5B000BFA030 /* FavouritesDataSource.m */,
 				760E675F15BD8276006F6832 /* TopPlayersDataSource.h */,
 				760E676015BD8277006F6832 /* TopPlayersDataSource.m */,
 				767FEF27156A5AF80016B415 /* PlayersOnLineDataSource.h */,
@@ -2030,10 +2057,14 @@
 				764B8926165FD0F70014E35B /* PracticeCell.m */,
 				762AA30E15B99C72001B65E2 /* TopPlayerCell.h */,
 				762AA30F15B99C72001B65E2 /* TopPlayerCell.m */,
+				318D010516C3A2AC00BFA030 /* FavouritesCell.h */,
+				318D010616C3A2AC00BFA030 /* FavouritesCell.m */,
 				7679306F15BE8B60007F461F /* CDPlayerMain.h */,
 				7679307015BE8B60007F461F /* CDPlayerMain.m */,
 				7679307315BE8D64007F461F /* CDTopPlayer.h */,
 				7679307415BE8D64007F461F /* CDTopPlayer.m */,
+				318D011616C3E19000BFA030 /* CDFavPlayer.h */,
+				318D011716C3E19100BFA030 /* CDFavPlayer.m */,
 			);
 			path = PlayersOnLineDataSource;
 			sourceTree = "<group>";
@@ -2041,6 +2072,7 @@
 		767FEF33156A652E0016B415 /* Xib */ = {
 			isa = PBXGroup;
 			children = (
+				318D010916C3AF4800BFA030 /* Favourites */,
 				7687667816BA7543003405F9 /* GunDrumViewController.xib */,
 				BD81E637169EC4D100CE8278 /* ActiveDuelViewController.xib */,
 				BD84DAA4164ABCA000DEEE38 /* LoginAnimatedViewController.xib */,
@@ -2524,6 +2556,8 @@
 				767FEF2F156A64A40016B415 /* ListOfItemsViewController.m */,
 				760E676415BD844B006F6832 /* TopPlayersViewController.h */,
 				760E676315BD844B006F6832 /* TopPlayersViewController.m */,
+				318D010C16C3B08D00BFA030 /* FavouritesViewController.h */,
+				318D010D16C3B08D00BFA030 /* FavouritesViewController.m */,
 				BDD07B7B141E1F170085E4FB /* HelpViewController.h */,
 				BDD07B7C141E1F170085E4FB /* HelpViewController.m */,
 				BDD07B8B141E1F170085E4FB /* LoadViewController.h */,
@@ -2922,6 +2956,8 @@
 				7606C23C16C3DA2F00B5EEB7 /* topPlayerStar@2x.png in Resources */,
 				76897D3F16C3DE18001E06DB /* topPlayerStarSelected.png in Resources */,
 				76897D4016C3DE18001E06DB /* topPlayerStarSelected@2x.png in Resources */,
+				318D011016C3B08D00BFA030 /* FavouritesViewController.xib in Resources */,
+				318D011216C3C52700BFA030 /* FavouritesCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3333,6 +3369,10 @@
 				BD243B0816A9765800D89E47 /* ARView.m in Sources */,
 				BD243B0B16A979BC00D89E47 /* OponentCoordinateView.m in Sources */,
 				7687667916BA7543003405F9 /* GunDrumViewController.m in Sources */,
+				318D010716C3A2AD00BFA030 /* FavouritesCell.m in Sources */,
+				318D010F16C3B08D00BFA030 /* FavouritesViewController.m in Sources */,
+				318D011516C3D5B100BFA030 /* FavouritesDataSource.m in Sources */,
+				318D011816C3E19200BFA030 /* CDFavPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
