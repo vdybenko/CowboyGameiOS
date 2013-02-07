@@ -16,7 +16,6 @@
 #import "LoginAnimatedViewController.h"
 #import "DuelRewardLogicController.h"
 #import "TopPlayersViewController.h"
-#import "SSServer.h"
 #import "DuelStartViewController.h"
 #import "StoreViewController.h"
 #import "ActiveDuelViewController.h"
@@ -135,11 +134,12 @@ static const CGFloat timeToStandartTitles = 1.8;
     return self;
 }
 
--(id)initForOponent:(AccountDataSource *)oponentAccount
+-(id)initForOponent:(AccountDataSource *)oponentAccount andOpponentServer:(SSServer *)server
 {
     self = [super initWithNibName:@"ProfileViewControllerWanted" bundle:[NSBundle mainBundle]];
     
     if (self) {
+        playerServer = server;
         
         needAnimation = NO;
         needMoneyAnimation = NO;
@@ -154,6 +154,15 @@ static const CGFloat timeToStandartTitles = 1.8;
         [btnLeaderboardBig setTitleByLabel:@"LeaderboardTitle" withColor:buttonsTitleColor fontSize:24];
         [duelButton setTitleByLabel:@"DUEL"];
         [duelButton changeColorOfTitleByLabel:buttonsTitleColor];
+        
+        if ([playerServer.status isEqualToString:@"A"]) {
+            [duelButton changeTitleByLabel:@"DUEL"];
+            [duelButton setEnabled:YES];
+        }
+        else {
+            [duelButton changeTitleByLabel:@"Busy"];
+            [duelButton setEnabled:NO];
+        }
         
         needAnimation = YES;
         [self initMainControls];
@@ -202,17 +211,15 @@ static const CGFloat timeToStandartTitles = 1.8;
 //        
         userAtackView.hidden = NO;
         userDefenseView.hidden = NO;
-        if (playerAccount.accountWeapon.dDamage!=0) {
-            userAtack.text = [NSString stringWithFormat:@"+%d",playerAccount.accountWeapon.dDamage];
-            
-        }else{
-            userAtack.text = @"+0";
-        }
-        if (playerAccount.accountDefenseValue!=0) {
-            userDefense.text = [NSString stringWithFormat:@"+%d",playerAccount.accountDefenseValue];
-        }else{
-            userDefense.text = @"+0";
-        }
+        
+        userAtack.text = [NSString stringWithFormat:@"%d",playerServer.weapon + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[playerServer.rank intValue]]];
+        userAtack.hidden = NO;
+        userAtack = nil;
+        
+        userDefense.text = [NSString stringWithFormat:@"%d",playerServer.defense + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[playerServer.rank intValue]]];
+        
+        userDefense.hidden = NO;
+        userDefense = nil;
 
     }
     return self;
@@ -784,15 +791,9 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         
         if ([AccountDataSource sharedInstance].activeDuel) {
             ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:[AccountDataSource sharedInstance] oponentAccount:playerAccount];
-            GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
-            activeDuelViewController.delegate = gameCenterViewController;
             [self.navigationController pushViewController:activeDuelViewController animated:YES];
         }
-        else
-        {
-            TeachingViewController *teachingViewController = [[TeachingViewController alloc] initWithTime:randomTime andAccount:[AccountDataSource sharedInstance] andOpAccount:playerAccount];
-            [self.navigationController pushViewController:teachingViewController animated:YES];
-        }
+        
         SSConnection *connection = [SSConnection sharedInstance];
         [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
         

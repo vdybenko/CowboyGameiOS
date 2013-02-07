@@ -76,13 +76,15 @@
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *userStatsLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *titleSteadyFire;
 @property (weak, nonatomic) IBOutlet FXLabel *lblBehold;
-
-
+@property (weak, nonatomic) IBOutlet UIImageView *crossImageView;
 
 @end
 
 @implementation ActiveDuelViewController
 @synthesize delegate;
+
+static CGFloat oponentLiveImageViewStartWidth;
+
 -(id)initWithTime:(int)randomTime Account:(AccountDataSource *)userAccount oponentAccount:(AccountDataSource *)pOponentAccount
 {
     self = [super initWithNibName:nil bundle:nil];
@@ -225,6 +227,8 @@
     CGRect frame = self.oponentLiveImageView.frame;
     frame.size.width = 84;
     self.oponentLiveImageView.frame = frame;
+    oponentLiveImageViewStartWidth = self.oponentLiveImageView.frame.size.width;
+    
     self.opStatsLabel.text = [NSString stringWithFormat: @"A: +%d\rD: +%d",opAccount.accountWeapon.dDamage,opAccount.accountDefenseValue];
     self.userStatsLabel.text = [NSString stringWithFormat: @"A: +%d\nD: +%d",playerAccount.accountWeapon.dDamage,playerAccount.accountDefenseValue];
     [self.titleSteadyFire setHidden:YES];
@@ -278,6 +282,7 @@
     [self setOpponentBody:nil];
     [self setTitleSteadyFire:nil];
     [self setLblBehold:nil];
+    [self setCrossImageView:nil];
     [super viewDidUnload];
 }
 
@@ -355,8 +360,8 @@
     targetPoint.y = self.opponentImage.center.y - (self.floatView.bounds.size.height / 2 - self.floatView.center.y);
     
     CGPoint centerOfScreanPoint;
-    centerOfScreanPoint.x = [UIScreen mainScreen].bounds.size.width / 2;
-    centerOfScreanPoint.y = [UIScreen mainScreen].bounds.size.height / 2;
+    centerOfScreanPoint.x = self.crossImageView.bounds.origin.x + self.crossImageView.center.x;
+    centerOfScreanPoint.y = self.crossImageView.bounds.origin.y + self.crossImageView.center.y;
    
     [self cheackHitForShot:centerOfScreanPoint andTargetPoint:targetPoint];
 }
@@ -396,7 +401,7 @@
         userHitCount++;
         
         CGRect frame = self.oponentLiveImageView.frame;
-        frame.size.width = ((float)(maxShotCount - userHitCount))/(float)maxShotCount * frame.size.width;
+        frame.size.width = (float)((maxShotCount - userHitCount)*oponentLiveImageViewStartWidth)/maxShotCount;
         self.oponentLiveImageView.frame = frame;
         
         
@@ -732,9 +737,10 @@
     if(duelIsStarted){
         [self performSelector:@selector(hideSteadyImage) withObject:nil afterDelay:2.5];
     }
-    CGAffineTransform steadyTransform = CGAffineTransformMakeScale( steadyScale, steadyScale);
+    CGAffineTransform steadyTransform = CGAffineTransformMakeScale( steadyScale+scaleDelta*2, steadyScale+scaleDelta*2);
     self.titleSteadyFire.transform = steadyTransform;
-    self.lblBehold.transform = steadyTransform;
+    CGAffineTransform beholdTransform = CGAffineTransformMakeScale( steadyScale, steadyScale);
+    self.lblBehold.transform = beholdTransform;
 }
 
 

@@ -29,7 +29,8 @@ static GameCenterViewController *gameCenterViewController;
 
 +(id)sharedInstance:(AccountDataSource *)userAccount andParentVC:(id)view
 {
-    if (gameCenterViewController) return gameCenterViewController;
+    if (gameCenterViewController)
+        return gameCenterViewController;
     else {
         gameCenterViewController = [[GameCenterViewController alloc] initWithAccount:userAccount andParentVC:view];
         return gameCenterViewController;
@@ -40,7 +41,7 @@ static GameCenterViewController *gameCenterViewController;
 
 -(id)initWithAccount:(AccountDataSource *)userAccount andParentVC:(id)view {
    
-    parentVC = view;    
+    parentVC = view;
     playerAccount = userAccount;    
     oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
     self.connection = [SSConnection sharedInstance];
@@ -270,8 +271,6 @@ static GameCenterViewController *gameCenterViewController;
     if ([[parentVC.navigationController visibleViewController] isKindOfClass:[DuelStartViewController class]]){
         gameInfo *gsSend = &gameStat;
         [self.connection sendData:(void *)(gsSend) packetID:NETWORK_START_DUEL_FALSE ofLength:sizeof(gameInfo)];
-
-        
     }else{
         [[gameCenter match]disconnect];}
     

@@ -15,13 +15,15 @@
 #import "Crittercism.h"
 #import "StartViewController.h"
 
+#import "GAI.h"
+
 #define kFacebookSettingsButtonIndex 1
 
 static const NSInteger kGANDispatchPeriod = 60;
 #ifdef DEBUG
 static NSString *kGAAccountID = @"UA-24007807-3";
 #else
-static NSString *kGAAccountID = @"UA-38210757-2";
+static NSString *kGAAccountID = @"UA-38210757-1";
 #endif
 NSString  *const ID_CRIT_APP   = @"4fb4f482c471a10fc5000092";
 NSString  *const ID_CRIT_KEY   = @"stjyktz620mziyf5rhi89ncaorab";
@@ -36,6 +38,8 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     LoginAnimatedViewController *loginViewController;
     
     AccountDataSource *playerAccount;
+    
+    id<GAITracker> tracker;
 }
 @property (nonatomic, strong) id<FBGraphUser> facebookUser;
 
@@ -50,21 +54,15 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [UIImage initialize];
-        
-   // [AdColony initAdColonyWithDelegate:self];
-    [[GANTracker sharedTracker] startTrackerWithAccountID:kGAAccountID
-                                           dispatchPeriod:kGANDispatchPeriod delegate:self];
+    
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    [GAI sharedInstance].dispatchInterval = 20;
+    [GAI sharedInstance].debug = NO;
+    tracker = [[GAI sharedInstance] trackerWithTrackingId:kGAAccountID];
 	
     [Crittercism initWithAppID:ID_CRIT_APP  andKey:ID_CRIT_KEY andSecret:ID_CRIT_SECRET];
-/*
-  [[GAI sharedInstance] trackerWithTrackingId:kGAAccountID];
-  
 
-//    [[GAI sharedInstance] startTrackerWithAccountID:kGAAccountID
-//                                           dispatchPeriod:kGANDispatchPeriod
-//                                                 delegate:nil];	
-  */  
-    [[NSNotificationCenter defaultCenter] addObserver:self 
+    [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(AnalyticsTrackEvent:)
 												 name:kAnalyticsTrackEventNotification object:nil];
     
@@ -411,39 +409,24 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     alert.tag = 1;
     [alert show];
 }
-
+#pragma mark GATrackEvent
 - (void)AnalyticsTrackEvent:(NSNotification *)notification {
-    
-    NSError	*err;
-	NSString *fbUserId;
-    fbUserId = [[NSUserDefaults standardUserDefaults] stringForKey:@"id"];
-    
-    if ([fbUserId length] == 0)
-        fbUserId = @"Anonymous"; 
-    
 	NSString *page = [[notification userInfo] objectForKey:@"event"];
-	DLog(@"GA page %@",page);
+    NSInteger demention = [[[notification userInfo] objectForKey:@"demention"] intValue];
+    NSString *value = [[notification userInfo] objectForKey:@"value"];
 	if (page){
-//		if (![[GAI sharedInstance].defaultTracker trackView:page])			DLog(@" Can't track pageview");
-        [[GANTracker sharedTracker] trackPageview:page withError:nil];
-	}else DLog(@" Can't track pageview");
-//	[[GAI sharedInstance] dispatch];
-  
+        if (demention && value) {
+            [tracker setCustom:demention dimension:value];
+        }
+        BOOL result = [tracker sendView:page];
+        if (result) {
+            DLog(@"GA page send %@",page);
+        }else{
+            DLog(@"GA page error %@",page);
+        }
+	}
+	[[GAI sharedInstance] dispatch];
 }
-#pragma mark -
-#pragma mark GANTrackerDelegate methods
-
-- (void)hitDispatched:(NSString *)hitString {
-  NSLog(@"Hit Dispatched: %@", hitString);
-}
-
-- (void)trackerDispatchDidComplete:(GANTracker *)tracker
-                  eventsDispatched:(NSUInteger)hitsDispatched
-              eventsFailedDispatch:(NSUInteger)hitsFailedDispatch {
-  NSLog(@"Dispatch completed (%u OK, %u failed)",
-        hitsDispatched, hitsFailedDispatch);
-}
-
 
 #pragma mark GADRequest generation
 

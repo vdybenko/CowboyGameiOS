@@ -20,6 +20,7 @@
 @implementation FunPageViewController
 @synthesize webView;
 @synthesize backButton;
+NSString *urlAddress;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,6 +28,16 @@
     if (self) {
         // Custom initialization
        
+    }
+    return self;
+}
+
+- (id) initWithAddress: (NSString *)url
+{
+    self = [super initWithNibName:@"FunPageViewController" bundle:[NSBundle mainBundle]];
+    if (self) {
+        // Custom initialization
+        urlAddress = url;
     }
     return self;
 }
@@ -40,7 +51,7 @@
     [self.backButton setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:24];
     self.backButton.titleLabel.textAlignment = UITextAlignmentCenter;
     
-    NSString *urlAddress = URL_COMM_FB_PAGE;
+//    NSString *urlAddress = URL_COMM_FB_PAGE;
     
     //Create a URL object.
     NSURL *url = [NSURL URLWithString:urlAddress];
