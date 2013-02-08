@@ -17,5 +17,8 @@
 
 @property (nonatomic) int dDefense;
 @property (nonatomic) int dAttack;
+@property (nonatomic) BOOL dBot;
+@property (nonatomic, strong) NSString *dSessionId;
+@property (nonatomic, strong) NSString *dStatus;
 
 @end

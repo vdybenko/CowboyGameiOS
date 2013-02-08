@@ -25,7 +25,8 @@
 
 @synthesize arrItemsList, tableView, delegate;
 
-static const char *FAV_PLAYERS_URL = BASE_URL"users/get_favorites";;
+static const char *FAV_PLAYERS_URL = BASE_URL"users/get_favorites";
+NSString  *const URL_ADD_FAVORITE = @BASE_URL"users/add_to_favorites";
 
 #pragma mark - Instance initialization
 
@@ -212,4 +213,27 @@ static const char *FAV_PLAYERS_URL = BASE_URL"users/get_favorites";;
     }
 }
 
+#pragma mark
++(void)addFavoriteId:(NSString*)favoriteId completionHandler:(void (^)(NSURLResponse*, NSData*, NSError*)) finishBlock;
+{
+    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:URL_ADD_FAVORITE]
+                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                        timeoutInterval:kTimeOutSeconds];
+    [theRequest setHTTPMethod:@"POST"];
+    NSDictionary *dicBody=[NSDictionary dictionaryWithObjectsAndKeys:
+                           [AccountDataSource sharedInstance].accountID,@"user_authen",
+                           favoriteId,@"favorite_authen",
+                           [AccountDataSource sharedInstance].sessionID,@"session_id",
+                           nil];
+    
+    NSString *stBody=[Utils makeStringForPostRequest:dicBody];
+    [theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    [NSURLConnection
+     sendAsynchronousRequest:theRequest
+     queue:[[NSOperationQueue alloc] init]
+     completionHandler:finishBlock];
+}
++(void)deleteFavoriteId:(NSString*)favoriteId completionHandler:(void (^)(NSURLResponse*, NSData*, NSError*)) finishBlock;
+{}
 @end
