@@ -48,17 +48,32 @@ NSString  *const URL_ADD_FAVORITE = @BASE_URL"users/add_to_favorites";
 {
     NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"favPlayers"];
     NSMutableArray *testArr= [NSKeyedUnarchiver unarchiveObjectWithData:data1];
-    if ([Utils isNextHourBegin]||([testArr count]==0)) {
-        
+    
+    if ([testArr count]==0)
+    {
+      
         NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:FAV_PLAYERS_URL encoding:NSUTF8StringEncoding]]
                                                                 cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                             timeoutInterval:kTimeOutSeconds];
         
+        [theRequest setHTTPMethod:@"POST"];
+        
+        NSDictionary *dicBody=[NSDictionary dictionaryWithObjectsAndKeys:
+                               [[AccountDataSource sharedInstance] accountID],@"authen",
+                               nil];
+        
+        NSString *stBody=[Utils makeStringForPostRequest:dicBody];
+        [theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]];
+
+        NSLog(@"\nFavs request : %@", stBody);
+        
         CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
+        
         if (theConnection) {
             //        [receivedData setLength:0];
             receivedData = [[NSMutableData alloc] init];
         } else {
+        
         }
     }else {
         arrItemsList = [NSKeyedUnarchiver unarchiveObjectWithData:data1];
@@ -157,7 +172,10 @@ NSString  *const URL_ADD_FAVORITE = @BASE_URL"users/add_to_favorites";
     
     connection1 = nil;
     NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-    DLog(@"PlayersOnLineDataSource jsonString %@",jsonString);
+    
+    DLog(@"\nFavs response : %@", jsonString);
+    
+    
     NSArray *responseObject = ValidateObject([jsonString JSONValue], [NSArray class]);
     [arrItemsList removeAllObjects];
     for (NSDictionary *dic in responseObject) {
@@ -167,10 +185,11 @@ NSString  *const URL_ADD_FAVORITE = @BASE_URL"users/add_to_favorites";
         player.dMoney=[[dic objectForKey:@"money"] intValue];
         player.dLevel=[[dic objectForKey:@"level"] intValue];
         player.dAvatar=[dic objectForKey:@"avatar"];
-        player.dDefense=[[dic objectForKey:@"defense"] intValue];
-        player.dAttack=[[dic objectForKey:@"attack"] intValue];
+//        player.dDefense=[[dic objectForKey:@"defense"] intValue];
+//        player.dAttack=[[dic objectForKey:@"attack"] intValue];
         [arrItemsList addObject: player];
     }
+
     NSData *data= [NSKeyedArchiver archivedDataWithRootObject:arrItemsList];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"favPlayers"];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"favPlayers"];

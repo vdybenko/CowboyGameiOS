@@ -34,13 +34,13 @@ UIColor * sandColor;
 +(FavouritesCell *)cell
 {
     @autoreleasepool {
-        NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"FavouritesCell" owner:nil options:nil];
+        NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"FavoritesCell" owner:nil options:nil];
         return [objects objectAtIndex:0];
     }
 }
 + (NSString *)cellID
 {
-    return @"FavouritesCell";
+    return @"FavoritesCell";
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
