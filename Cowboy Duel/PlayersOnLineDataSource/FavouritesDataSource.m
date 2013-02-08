@@ -48,7 +48,7 @@ static const char *FAV_PLAYERS_URL = BASE_URL"users/get_favorites";;
     NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"favPlayers"];
     NSMutableArray *testArr= [NSKeyedUnarchiver unarchiveObjectWithData:data1];
     
-    if ([Utils isNextHourBegin]||([testArr count]==0))
+    if ([testArr count]==0)
     {
       
         NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:FAV_PLAYERS_URL encoding:NSUTF8StringEncoding]]
