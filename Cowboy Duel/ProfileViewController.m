@@ -229,7 +229,8 @@ static const CGFloat timeToStandartTitles = 1.8;
         
         userDefense.hidden = NO;
         userDefense = nil;
-
+        
+        [self checkIsOpponentFavorite];
     }
     return self;
 }
@@ -903,7 +904,35 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     __weak ProfileViewController *bself = self;
     
     if (playerServer.favorite) {
-        
+        [FavouritesDataSource deleteFavoriteId:playerAccount.accountID completionHandler:^(NSURLResponse *response,
+                                                                                           NSData *data,
+                                                                                           NSError *error)
+         {
+             if ([data length] >0 && error == nil)
+             {
+                 NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                 NSLog(@"jsonString %@",jsonString);
+                 NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
+                 int errCode=[[responseObject objectForKey:@"err_code"] intValue];
+                 if (errCode == 1) {
+                     playerServer.favorite = NO;
+                     [FavouritesDataSource deleteFromDBFavoriteWithId:playerAccount.accountID];
+                 }
+             }
+             else if ([data length] == 0 && error == nil)
+             {
+                 DLog(@"Nothing was downloaded.");
+                 playerServer.favorite = YES;
+             }
+             else if (error != nil){
+                 DLog(@"DuelProductDownloaderController Connection failed! Error - %@ %@",
+                      [error localizedDescription],
+                      [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
+                 playerServer.favorite = YES;
+             }
+             bgActivityIndicator.hidden = YES;
+             [bself checkIsOpponentFavorite];
+         }];
     }else{
         [FavouritesDataSource addFavoriteId:playerAccount.accountID completionHandler:^(NSURLResponse *response,
                                                                                         NSData *data,
