@@ -236,4 +236,10 @@ NSString  *const URL_ADD_FAVORITE = @BASE_URL"users/add_to_favorites";
 }
 +(void)deleteFavoriteId:(NSString*)favoriteId completionHandler:(void (^)(NSURLResponse*, NSData*, NSError*)) finishBlock;
 {}
+
++(void)addToDBFavotitePlayer:(CDFavPlayer*)player;
+{}
++(void)deleteFromDBFavoriteWithId:(NSString*)playerID;
+{}
+
 @end
