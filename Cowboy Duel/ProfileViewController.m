@@ -673,9 +673,13 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 -(void)checkIsOpponentFavorite
 {
     if (playerServer.favorite) {
-        btnAddToFavorites.imageView.image = [UIImage imageNamed:@"topPlayerStarSelected.png"];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            btnAddToFavorites.imageView.image = [UIImage imageNamed:@"topPlayerStarSelected.png"];
+        });
     }else{
-        btnAddToFavorites.imageView.image = [UIImage imageNamed:@"topPlayerStar.png"];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            btnAddToFavorites.imageView.image = [UIImage imageNamed:@"topPlayerStar.png"];
+        });
     }
 }
 #pragma mark Animation description
@@ -930,7 +934,9 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                       [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
                  playerServer.favorite = YES;
              }
-             bgActivityIndicator.hidden = YES;
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 bgActivityIndicator.hidden = YES;
+             });
              [bself checkIsOpponentFavorite];
          }];
     }else{
@@ -972,7 +978,9 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                       [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
                  playerServer.favorite = NO;
              }
-             bgActivityIndicator.hidden = YES;
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 bgActivityIndicator.hidden = YES;
+             });
              [bself checkIsOpponentFavorite];
          }];
     }
