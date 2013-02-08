@@ -56,7 +56,7 @@
     
     tvFavTable.delegate=self;
     tvFavTable.dataSource=_favsDataSource;
-
+    [_favsDataSource reloadDataSource];
     
     lbFavsTitle.text = NSLocalizedString(@"FavouritesTitle", nil);
     lbFavsTitle.textColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];

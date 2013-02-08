@@ -29,4 +29,9 @@
 
 +(void)addToDBFavotitePlayer:(CDFavPlayer*)player;
 +(void)deleteFromDBFavoriteWithId:(NSString*)playerID;
+
+-(void)saveFavorites:(NSArray*)array;
+-(NSMutableArray*)loadFavoritesArray;
+
++(NSUInteger(^)(NSArray *, NSString *))findPlayerByID;
 @end

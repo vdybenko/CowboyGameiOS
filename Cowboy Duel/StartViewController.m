@@ -34,7 +34,6 @@
 @interface StartViewController ()
 {
     AccountDataSource *playerAccount;
-    AccountDataSource *oponentAccount;
     ActivityIndicatorView *activityIndicatorView;
     CollectionAppViewController *collectionAppViewController;
     ListOfItemsViewController *listOfItemsViewController;
@@ -163,13 +162,10 @@ static StartViewController *sharedHelper = nil;
     if (self) {
          NSUserDefaults *uDef = [NSUserDefaults standardUserDefaults];
         playerAccount = [AccountDataSource sharedInstance];
-        oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
-        oponentAccount.money = 1000;        
           
         showFeedAtFirst=NO;
         
         topPlayersDataSource = [[TopPlayersDataSource alloc] initWithTable:nil];
-        favsDataSource = [[FavouritesDataSource alloc] initWithTable:nil];
         
         firstDayWithOutAdvertising=YES;
         if(![uDef boolForKey:@"AlreadyRun"] )  
@@ -279,6 +275,8 @@ static StartViewController *sharedHelper = nil;
                     [playerAccount.achivments addObject:loc];
                 }
             }
+            
+            favsDataSource = [[FavouritesDataSource alloc] initWithTable:nil];
         }
         
         dicForRequests=[[NSMutableDictionary alloc] init];
@@ -1231,14 +1229,6 @@ static StartViewController *sharedHelper = nil;
         return;
     }
 
-    if([response objectForKey:@"nickname"]!=NULL){
-        oponentAccount.accountName=[response objectForKey:@"nickname"];
-        oponentAccount.money = ([[response objectForKey:@"money"] intValue] > 0)?[[response objectForKey:@"money"] intValue] : 0;
-        NSString *st=[[NSString alloc] initWithFormat:@"%@%@%@",NSLocalizedString(@"BotMTitle", nil),oponentAccount.accountName,NSLocalizedString(@"BotMTitle2", nil)];
-        UIAlertView *av = [[UIAlertView alloc] initWithTitle:st message:NSLocalizedString(@"BotMText", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"BotMCANS", nil) otherButtonTitles:NSLocalizedString(@"BotMBtn", nil),nil];
-        av.tag = BOT_DUEL_TAG;
-        [av show];
-    }
 }
 
 - (void)connection:(CustomNSURLConnection *)connection didReceiveData:(NSData *)data

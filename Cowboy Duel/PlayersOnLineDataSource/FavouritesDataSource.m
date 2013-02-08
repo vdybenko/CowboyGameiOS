@@ -29,6 +29,8 @@ static const char *FAV_PLAYERS_URL = BASE_URL"users/get_favorites";
 static NSString  *const URL_ADD_FAVORITE = @BASE_URL"users/add_to_favorites";
 static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
 
+#define FAVORITES_LIST @"FAVORITES_LIST"
+
 
 #pragma mark - Instance initialization
 
@@ -277,8 +279,36 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
 }
 
 +(void)addToDBFavotitePlayer:(CDFavPlayer*)player;
-{}
+{
+    
+}
 +(void)deleteFromDBFavoriteWithId:(NSString*)playerID;
 {}
+
++(void)saveFavorites:(NSArray*)array;
+{
+    NSData *data= [NSKeyedArchiver archivedDataWithRootObject:array];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:FAVORITES_LIST];
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:FAVORITES_LIST];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++(NSMutableArray*)loadFavoritesArray;
+{
+    NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:FAVORITES_LIST];
+    return [NSKeyedUnarchiver unarchiveObjectWithData:data1];
+}
+
++(NSUInteger(^)(NSArray *, NSString *))findPlayerByID {
+    return ^(NSArray * array, NSString *dAuthID) {
+        for (NSUInteger i = 0; i < [array count]; i++) {
+            CDPlayerMain *player = [array objectAtIndex:i];
+            if ([player.dAuth isEqualToString:dAuthID]) {
+                return i;
+            }
+        }
+        return (NSUInteger)NSNotFound;
+    };
+}
 
 @end
