@@ -58,7 +58,7 @@
     tvFavTable.dataSource=_favsDataSource;
 
     
-    lbFavsTitle.text = NSLocalizedString(@"FAVOURITES", nil);
+    lbFavsTitle.text = NSLocalizedString(@"FavouritesTitle", nil);
     lbFavsTitle.textColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
     lbFavsTitle.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
     
@@ -69,10 +69,10 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    if ([_favsDataSource.arrItemsList count]!=0) {
+//    if ([_favsDataSource.arrItemsList count]!=0) {
         [self.loadingView setHidden:YES];
         [self.activityIndicator stopAnimating];
-    }
+//    }
 }
 -(void)viewDidAppear:(BOOL)animated
 {

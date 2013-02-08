@@ -116,7 +116,7 @@
 		318D010716C3A2AD00BFA030 /* FavouritesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 318D010616C3A2AC00BFA030 /* FavouritesCell.m */; };
 		318D010F16C3B08D00BFA030 /* FavouritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 318D010D16C3B08D00BFA030 /* FavouritesViewController.m */; };
 		318D011016C3B08D00BFA030 /* FavouritesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 318D010E16C3B08D00BFA030 /* FavouritesViewController.xib */; };
-		318D011216C3C52700BFA030 /* FavouritesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 318D011116C3C52700BFA030 /* FavouritesCell.xib */; };
+		318D011216C3C52700BFA030 /* FavoritesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 318D011116C3C52700BFA030 /* FavoritesCell.xib */; };
 		318D011516C3D5B100BFA030 /* FavouritesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 318D011416C3D5B000BFA030 /* FavouritesDataSource.m */; };
 		318D011816C3E19200BFA030 /* CDFavPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 318D011716C3E19100BFA030 /* CDFavPlayer.m */; };
 		318F233D16B9437A0081BE5E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 318F233916B9437A0081BE5E /* Default.png */; };
@@ -952,7 +952,7 @@
 		318D010C16C3B08D00BFA030 /* FavouritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FavouritesViewController.h; path = ../Resorces/Xib/FavouritesViewController.h; sourceTree = "<group>"; };
 		318D010D16C3B08D00BFA030 /* FavouritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FavouritesViewController.m; path = ../Resorces/Xib/FavouritesViewController.m; sourceTree = "<group>"; };
 		318D010E16C3B08D00BFA030 /* FavouritesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FavouritesViewController.xib; path = Xib/FavouritesViewController.xib; sourceTree = "<group>"; };
-		318D011116C3C52700BFA030 /* FavouritesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FavouritesCell.xib; path = Xib/FavouritesCell.xib; sourceTree = "<group>"; };
+		318D011116C3C52700BFA030 /* FavoritesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FavoritesCell.xib; path = Xib/FavoritesCell.xib; sourceTree = "<group>"; };
 		318D011316C3D5AF00BFA030 /* FavouritesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouritesDataSource.h; sourceTree = "<group>"; };
 		318D011416C3D5B000BFA030 /* FavouritesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouritesDataSource.m; sourceTree = "<group>"; };
 		318D011616C3E19000BFA030 /* CDFavPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDFavPlayer.h; sourceTree = "<group>"; };
@@ -1846,7 +1846,7 @@
 			isa = PBXGroup;
 			children = (
 				318D010E16C3B08D00BFA030 /* FavouritesViewController.xib */,
-				318D011116C3C52700BFA030 /* FavouritesCell.xib */,
+				318D011116C3C52700BFA030 /* FavoritesCell.xib */,
 			);
 			name = Favourites;
 			sourceTree = "<group>";
@@ -2963,7 +2963,7 @@
 				76897D3F16C3DE18001E06DB /* topPlayerStarSelected.png in Resources */,
 				76897D4016C3DE18001E06DB /* topPlayerStarSelected@2x.png in Resources */,
 				318D011016C3B08D00BFA030 /* FavouritesViewController.xib in Resources */,
-				318D011216C3C52700BFA030 /* FavouritesCell.xib in Resources */,
+				318D011216C3C52700BFA030 /* FavoritesCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,7 +9,7 @@
 #import "CDFavPlayer.h"
 
 @implementation CDFavPlayer
-@synthesize dDefense,dAttack;
+//@synthesize dDefense,dAttack;
 - (id)init
 {
     self = [super init];
@@ -22,15 +22,15 @@
 -(void)encodeWithCoder:(NSCoder *)encoder
 {
     [super encodeWithCoder:encoder];
-    [encoder encodeObject:[NSString stringWithFormat:@"%d",self.dDefense] forKey:@"DEFENSE"];
-    [encoder encodeObject:[NSString stringWithFormat:@"%d",self.dAttack] forKey:@"ATTACK"];
+//    [encoder encodeObject:[NSString stringWithFormat:@"%d",self.dDefense] forKey:@"DEFENSE"];
+//    [encoder encodeObject:[NSString stringWithFormat:@"%d",self.dAttack] forKey:@"ATTACK"];
 }
 
 -(id)initWithCoder:(NSCoder *)decoder
 {
     self = [super initWithCoder:decoder];
-    self.dDefense = [[decoder decodeObjectForKey:@"DEFENSE"] intValue];
-    self.dAttack = [[decoder decodeObjectForKey:@"ATTACK"] intValue];
+//    self.dDefense = [[decoder decodeObjectForKey:@"DEFENSE"] intValue];
+//    self.dAttack = [[decoder decodeObjectForKey:@"ATTACK"] intValue];
     return self;
 }
 
