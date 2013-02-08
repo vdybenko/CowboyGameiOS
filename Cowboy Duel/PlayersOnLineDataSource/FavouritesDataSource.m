@@ -55,13 +55,11 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     
     if ([testArr count]==0)
     {
-      
         NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:FAV_PLAYERS_URL encoding:NSUTF8StringEncoding]]
                                                                 cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                             timeoutInterval:kTimeOutSeconds];
         
         [theRequest setHTTPMethod:@"POST"];
-        
         NSDictionary *dicBody=[NSDictionary dictionaryWithObjectsAndKeys:
                                [[AccountDataSource sharedInstance] accountID],@"authen",
                                nil];
@@ -278,14 +276,18 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
      completionHandler:finishBlock];
 }
 
-+(void)addToDBFavotitePlayer:(CDFavPlayer*)player;
+-(void)addToDBFavotitePlayer:(CDFavPlayer*)player;
 {
-    
+    [arrItemsList addObject:player];
+    [self saveFavorites:arrItemsList];
 }
-+(void)deleteFromDBFavoriteWithId:(NSString*)playerID;
-{}
+-(void)deleteFromDBFavoriteWithId:(NSString*)playerID;
+{
+    CDFavPlayer *player = [arrItemsList objectAtIndex:[FavouritesDataSource findPlayerByID](arrItemsList,playerID)];
+    [arrItemsList removeObject:player];
+}
 
-+(void)saveFavorites:(NSArray*)array;
+-(void)saveFavorites:(NSArray*)array;
 {
     NSData *data= [NSKeyedArchiver archivedDataWithRootObject:array];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:FAVORITES_LIST];
@@ -293,7 +295,7 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+(NSMutableArray*)loadFavoritesArray;
+-(NSMutableArray*)loadFavoritesArray;
 {
     NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:FAVORITES_LIST];
     return [NSKeyedUnarchiver unarchiveObjectWithData:data1];

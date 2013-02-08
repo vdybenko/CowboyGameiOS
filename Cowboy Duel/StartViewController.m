@@ -275,9 +275,8 @@ static StartViewController *sharedHelper = nil;
                     [playerAccount.achivments addObject:loc];
                 }
             }
-            
-            favsDataSource = [[FavouritesDataSource alloc] initWithTable:nil];
         }
+        favsDataSource = [[FavouritesDataSource alloc] initWithTable:nil];
         
         dicForRequests=[[NSMutableDictionary alloc] init];
         
@@ -1093,7 +1092,6 @@ static StartViewController *sharedHelper = nil;
         if ([DuelProductDownloaderController isRefreshEvailable:revisionProductListNumber]) {
             [duelProductDownloaderController refreshDuelProducts];
         }
-
         return;
     }       
     //avtorization

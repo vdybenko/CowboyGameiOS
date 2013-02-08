@@ -920,7 +920,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                  int errCode=[[responseObject objectForKey:@"err_code"] intValue];
                  if (errCode == 1) {
                      playerServer.favorite = NO;
-                     [FavouritesDataSource deleteFromDBFavoriteWithId:playerAccount.accountID];
+                     [[StartViewController sharedInstance].favsDataSource deleteFromDBFavoriteWithId:playerAccount.accountID];
                  }
              }
              else if ([data length] == 0 && error == nil)
@@ -964,7 +964,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                      favPlayer.dSessionId = playerServer.sessionId;
                      favPlayer.dStatus = playerServer.status;
                      
-                     [FavouritesDataSource addToDBFavotitePlayer:favPlayer];
+                     [[StartViewController sharedInstance].favsDataSource addToDBFavotitePlayer:favPlayer];
                  }
              }
              else if ([data length] == 0 && error == nil)

@@ -27,8 +27,8 @@
 +(void)addFavoriteId:(NSString*)favoriteId completionHandler:(void (^)(NSURLResponse*, NSData*, NSError*)) finishBlock;
 +(void)deleteFavoriteId:(NSString*)favoriteId completionHandler:(void (^)(NSURLResponse*, NSData*, NSError*)) finishBlock;
 
-+(void)addToDBFavotitePlayer:(CDFavPlayer*)player;
-+(void)deleteFromDBFavoriteWithId:(NSString*)playerID;
+-(void)addToDBFavotitePlayer:(CDFavPlayer*)player;
+-(void)deleteFromDBFavoriteWithId:(NSString*)playerID;
 
 -(void)saveFavorites:(NSArray*)array;
 -(NSMutableArray*)loadFavoritesArray;
