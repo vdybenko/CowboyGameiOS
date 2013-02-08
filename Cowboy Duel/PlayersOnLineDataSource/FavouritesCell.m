@@ -34,13 +34,13 @@ UIColor * sandColor;
 +(FavouritesCell *)cell
 {
     @autoreleasepool {
-        NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"FavouritesCell" owner:nil options:nil];
+        NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"FavoritesCell" owner:nil options:nil];
         return [objects objectAtIndex:0];
     }
 }
 + (NSString *)cellID
 {
-    return @"FavouritesCell";
+    return @"FavoritesCell";
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -70,6 +70,7 @@ UIColor * sandColor;
     _lbDefenseTitle.text = NSLocalizedString(@"Defense:", @"");
 
     [_btnGetHim setTitleByLabel:@"Poke"];
+    [_btnGetHim changeColorOfTitleByLabel:[UIColor colorWithRed:244.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f]];
     
     [_vBackGround setDinamicHeightBackground];
     
@@ -80,14 +81,13 @@ UIColor * sandColor;
 {
     _lbPlayerName.text=player.dNickName;
     
-    
-    NSString *formattedNumberString = [numberFormatter stringFromNumber:[NSNumber numberWithInt:( player.dMoney)]];
-    _lbGold.text=[NSString stringWithFormat:@"%@$",formattedNumberString];
+    _lbGold.text=[NSString stringWithFormat:@"%d$",player.dMoney];
     
     rankNumber.text=[NSString stringWithFormat:@"%d",indexPath.row+1];
     
     _lbDefense.text=[NSString stringWithFormat:@"%d",player.dDefense];
     
+    _lbAttack.text=[NSString stringWithFormat:@"%d",player.dAttack];
     
 //  style
     [_ivBackGroundSelected setHidden:YES];
@@ -95,6 +95,10 @@ UIColor * sandColor;
     rankNumber.textColor=brownColor;
     _lbPlayerName.textColor=brownColor;
     _lbGoldTitle.textColor=bronzeColor;
+    _lbAttackTitle.textColor=bronzeColor;
+    _lbDefenseTitle.textColor=bronzeColor;
+    _lbAttack.textColor=brownColor;
+    _lbDefense.textColor=brownColor;
     _lbGold.textColor=brownColor;
 //
    
