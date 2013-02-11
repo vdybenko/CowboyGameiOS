@@ -248,6 +248,10 @@ static CGFloat oponentLiveImageViewStartWidth;
     {
         [subview removeFromSuperview];
     }
+    
+    SSConnection *connection = [SSConnection sharedInstance];
+    [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -294,12 +298,6 @@ static CGFloat oponentLiveImageViewStartWidth;
 }
 
 #pragma mark
-
-- (IBAction)backButtonClick:(id)sender {
-    [self dismissModalViewControllerAnimated:NO];
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 -(void)countUpBulets;
 {
     int countBullets = [DuelRewardLogicController countUpBuletsWithOponentLevel:opAccount.accountLevel defense:opAccount.accountDefenseValue playerAtack:playerAccount.accountWeapon.dDamage];
