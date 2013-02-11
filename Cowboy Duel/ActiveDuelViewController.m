@@ -533,35 +533,6 @@ static CGFloat oponentLiveImageViewStartWidth;
 }
 
 
-
-//-(void)startDuel
-//{
-//    NSLog(@"startDuel");
-//    soundStart = YES;
-//    startInterval = [NSDate timeIntervalSinceReferenceDate];
-//    gunDrumViewController.chargeTime = time - 0.7;
-//    [player stop];
-//    [player setCurrentTime:0.0];
-//    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Duel.mp3", [[NSBundle mainBundle] resourcePath]]];
-//    player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
-//    [player play];
-//    
-//    timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(shotTimer) userInfo:nil repeats:YES];
-//    duelIsStarted = NO;
-//    fireSound = NO;
-//    acelStatus = YES;
-//    shotTime = 0;
-//    
-//    [self hideHelpViewOnStartDuel];
-//    if (([[NSUserDefaults standardUserDefaults] integerForKey:@"FirstRunForPractice"] != 1)&&([[NSUserDefaults standardUserDefaults] integerForKey:@"FirstRunForPractice"] != 2))
-//    {
-//        //[self hideHelpViewWithArm];
-//    }
-//    
-//    [gunDrumViewController openGun];
-//}
-
-
 -(void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
 {
     rollingX = (acceleration.x * kFilteringFactor) + (rollingX * (1.0 - kFilteringFactor));
@@ -581,7 +552,6 @@ static CGFloat oponentLiveImageViewStartWidth;
         if(oponnentFollSend){
             oponnentFollSend = NO;
             accelerometerStateSend = NO;
-            //[delegate follEnd];
         }
         
         if (!accelerometerStateSend) {
@@ -630,10 +600,24 @@ static CGFloat oponentLiveImageViewStartWidth;
 -(void)shotTimer
 {
     nowInterval = [NSDate timeIntervalSinceReferenceDate];
-    activityInterval = (nowInterval-startInterval) * 1000;
+    activityInterval = (nowInterval-startInterval)*1000;
     shotTime = (int)activityInterval;
     
-    if ((shotTime * 0.001 >= 60.0) && (!duelTimerEnd) && (soundStart)) {
+    UIViewController *curentVC=[self.navigationController visibleViewController];
+    if ((shotTime * 0.001 >= time) && (!duelIsStarted) && (!foll)&&([curentVC isEqual:self])) {
+        DLog(@"FIRE !!!!!");
+        duelIsStarted = YES;
+        [gunDrumViewController hideGun];
+        NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Fire.mp3", [[NSBundle mainBundle] resourcePath]]];
+        NSError *error;
+        [player stop];
+        player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+        [player play];
+        [self vibrationStart];
+        [self.gunButton setEnabled:YES];
+        [self.opponentImage setHidden:NO];
+    }
+    if ((shotTime * 0.001 >= 30.0) && (!duelTimerEnd) && (soundStart)) {
         if ([delegate respondsToSelector:@selector(duelTimerEnd)])
             [delegate duelTimerEnd];
         duelTimerEnd = YES;
@@ -679,7 +663,6 @@ static CGFloat oponentLiveImageViewStartWidth;
     
     [self.titleSteadyFire setHidden:NO];
 
-//    [gunDrumViewController hideGun];
     [self.lblBehold setHidden:NO];
     self.gunButton.hidden = NO;
 }
@@ -764,7 +747,6 @@ static CGFloat oponentLiveImageViewStartWidth;
 -(void)oponnentFollStart
 {
     follAccelCheck = NO;
-    //accelerometerState = NO;
     soundStart = NO;
     
     [timer invalidate];
@@ -775,7 +757,6 @@ static CGFloat oponentLiveImageViewStartWidth;
 -(void)oponnentFollEnd
 {
     oponnentFoll = NO;
-    //if (accelerometerState) [self startDuel];
 }
 
 -(void)startDuel
@@ -811,7 +792,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Duel.mp3", [[NSBundle mainBundle] resourcePath]]];
     player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
     [player play];
-    
+    if(!delegate) timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(shotTimer) userInfo:nil repeats:YES];
     duelIsStarted = NO;
     fireSound = NO;
     acelStatus = YES;

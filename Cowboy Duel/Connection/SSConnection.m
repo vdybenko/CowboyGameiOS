@@ -30,7 +30,6 @@ static SSConnection *connection;
 {
     if (!connection) {
         connection = [[SSConnection alloc] init];
-        //[connection networkCommunicationWithPort:@"8888" andIp:@"192.168.0.5"];
     }
     return connection;
 }
@@ -83,6 +82,9 @@ static SSConnection *connection;
             
 		case NSStreamEventErrorOccurred:
             connectionOpen = NO;
+            [self.inputStream close];
+            [self.outputStream close];
+            
 			NSLog(@"Can not connect to the host!");
 			break;
             
@@ -124,39 +126,47 @@ static SSConnection *connection;
     int rang = playerAccount.accountLevel;
     int *rangData = (int *)&networkPacket[sizeof(int)];
     rangData[0] = rang;
+    
+    int atack = playerAccount.accountWeapon.dDamage;
+    int *atackData = (int *)&networkPacket[sizeof(int) * 2];
+    atackData[0] = atack;
+    
+    int defence = playerAccount.accountDefenseValue;
+    int *defenceData = (int *)&networkPacket[sizeof(int) * 3];
+    defenceData[0] = defence;
 
     const char *serverDisplayName = [playerAccount.accountName cStringUsingEncoding:NSUTF8StringEncoding];
     int displayNameLen = strlen(serverDisplayName);
-    int *displayNameData = (int *)&networkPacket[sizeof(int) * 2];
+    int *displayNameData = (int *)&networkPacket[sizeof(int) * 4];
     displayNameData[0] = displayNameLen;
 
-    memcpy( &networkPacket[sizeof(int) * 3], (void *)serverDisplayName, sizeof(char) * displayNameLen);
+    memcpy( &networkPacket[sizeof(int) * 5], (void *)serverDisplayName, sizeof(char) * displayNameLen);
   
     int nameLen = [playerAccount.accountID length];
-    int *nameLenData = (int *)&networkPacket[sizeof(int) * 3+sizeof(char) * displayNameLen];
+    int *nameLenData = (int *)&networkPacket[sizeof(int) * 5+sizeof(char) * displayNameLen];
     nameLenData[0] = nameLen;
     
     const char *name = [playerAccount.accountID cStringUsingEncoding:NSUTF8StringEncoding];
     
-    memcpy( &networkPacket[sizeof(int) * 4 +sizeof(char) * displayNameLen],
+    memcpy( &networkPacket[sizeof(int) * 6 +sizeof(char) * displayNameLen],
            (void *)name,
            sizeof(char) * [playerAccount.accountID length]);
     
     NSString *someURL = playerAccount.avatar;
     const char *fbImageURL = [someURL cStringUsingEncoding:NSUTF8StringEncoding];
-    memcpy(&networkPacket[sizeof(int) * 4 + sizeof(char) * displayNameLen + sizeof(char) * [playerAccount.accountID length]],
+    memcpy(&networkPacket[sizeof(int) * 6 + sizeof(char) * displayNameLen + sizeof(char) * [playerAccount.accountID length]],
            (void *)fbImageURL,
            sizeof(char) * [someURL length]);
     
-    NSString *versionKey = @"ver2.2";
+    NSString *versionKey = @"ver3.1";
     const char *versionKeyChar = [versionKey cStringUsingEncoding:NSUTF8StringEncoding];
     
-    memcpy(&networkPacket[sizeof(int) * 4 + sizeof(char) * displayNameLen + sizeof(char) * [playerAccount.accountID length] + sizeof(char) * [someURL length]],
+    memcpy(&networkPacket[sizeof(int) * 6 + sizeof(char) * displayNameLen + sizeof(char) * [playerAccount.accountID length] + sizeof(char) * [someURL length]],
            (void *)versionKeyChar,
            sizeof(char) * [versionKey length]);
     
     
-    [self sendData:(void *)(networkPacket) packetID:NETWORK_POST_INFO ofLength:sizeof(int) * 4 + sizeof(char) * displayNameLen +sizeof(char) * [playerAccount.accountID length]+sizeof(char) * [someURL length] + sizeof(char) * [versionKey length]];
+    [self sendData:(void *)(networkPacket) packetID:NETWORK_POST_INFO ofLength:sizeof(int) * 6 + sizeof(char) * displayNameLen +sizeof(char) * [playerAccount.accountID length]+sizeof(char) * [someURL length] + sizeof(char) * [versionKey length]];
 }
 
 - (void)getData:(uint8_t[4096])message andLength:(int)length
