@@ -16,10 +16,18 @@
 #import "SSConnection.h"
 @protocol IconDownloaderDelegate;
 
+@protocol TableCellWithButton
+-(void)clickButton:(NSIndexPath *)indexPath;
+@optional
+-(void)didFinishLoadTable:(UITableView*)table;
+@end
+
 @interface FavouritesDataSource : NSObject <UITableViewDataSource,IconDownloaderDelegate,MemoryManagement, SSConnectionDelegate>
 @property(strong, readonly) NSMutableArray *arrItemsList;
 @property(weak, nonatomic) UITableView *tableView;
-@property(weak, nonatomic)id delegate;
+@property(weak, nonatomic)id<TableCellWithButton> delegate;
+
+@property (nonatomic, strong) NSMutableArray *serverObjects;
 
 -(void) reloadDataSource;
 -(id) initWithTable:(UITableView *)pTable;
@@ -34,4 +42,5 @@
 -(NSMutableArray*)loadFavoritesArray;
 
 -(NSUInteger(^)(NSArray *, NSString *))findPlayerByID;
+-(BOOL) isOnline:(CDFavPlayer *)fvPlayer;
 @end
