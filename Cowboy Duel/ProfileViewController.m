@@ -856,6 +856,8 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 
 - (IBAction)btnFavouritesClick:(id)sender {
     
+//    [[StartViewController sharedInstance].favsDataSource reloadDataSource];
+    
     FavouritesViewController *favVC = [[FavouritesViewController alloc] initWithAccount:playerAccount];
     [self.navigationController pushViewController:favVC animated:YES];
 

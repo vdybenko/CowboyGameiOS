@@ -11,6 +11,7 @@
 #import "UIButton+Image+Title.h"
 #import "CustomNSURLConnection.h"
 #import "StartViewController.h"
+#import "SSConnection.h"
 
 @interface FavouritesViewController ()
 {
@@ -51,9 +52,13 @@
     [_activityIndicator startAnimating];
     
     _favsDataSource = [[StartViewController sharedInstance] favsDataSource];
+//    [_favsDataSource reloadDataSource];
     _favsDataSource.tableView = tvFavTable;
     _favsDataSource.delegate=self;
     
+    SSConnection *conn = [SSConnection sharedInstance];
+    conn.delegate = _favsDataSource;
+//    
     tvFavTable.delegate=self;
     tvFavTable.dataSource=_favsDataSource;
     [_favsDataSource reloadDataSource];

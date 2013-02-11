@@ -13,10 +13,10 @@
 #import "ValidationUtils.h"
 #import "FavouritesCell.h"
 #import "Utils.h"
-
+#import "SSConnection.h"
 @protocol IconDownloaderDelegate;
 
-@interface FavouritesDataSource : NSObject <UITableViewDataSource,IconDownloaderDelegate,MemoryManagement>
+@interface FavouritesDataSource : NSObject <UITableViewDataSource,IconDownloaderDelegate,MemoryManagement, SSConnectionDelegate>
 @property(strong, readonly) NSMutableArray *arrItemsList;
 @property(weak, nonatomic) UITableView *tableView;
 @property(weak, nonatomic)id delegate;
@@ -33,5 +33,5 @@
 -(void)saveFavorites:(NSArray*)array;
 -(NSMutableArray*)loadFavoritesArray;
 
-+(NSUInteger(^)(NSArray *, NSString *))findPlayerByID;
+-(NSUInteger(^)(NSArray *, NSString *))findPlayerByID;
 @end
