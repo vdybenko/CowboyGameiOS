@@ -78,12 +78,11 @@
 	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
-		<string>armv6</string>
+		<string>armv7</string>
 		<string>wifi</string>
 		<string>accelerometer</string>
 		<string>peer-peer</string>
 		<string>location-services</string>
-		<string>gyroscope</string>
 	</array>
 	<key>UIStatusBarHidden</key>
 	<true/>

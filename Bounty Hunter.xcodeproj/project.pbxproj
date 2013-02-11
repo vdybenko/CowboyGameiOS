@@ -747,7 +747,6 @@
 		BD83A5AB16720E43003EE4B3 /* MyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD83A3FA167208DD003EE4B3 /* MyTest.m */; };
 		BD83A5AC16720E43003EE4B3 /* MyViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD83A3FB167208DD003EE4B3 /* MyViewTest.m */; };
 		BD83A5AD16720E43003EE4B3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BD83A3F11671F0C5003EE4B3 /* main.m */; };
-		BD83A5AE16720E74003EE4B3 /* Test-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD83A3D41671E721003EE4B3 /* Test-Info.plist */; };
 		BD83A5AF167212B5003EE4B3 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD83A3EF1671E7CB003EE4B3 /* GHUnitIOS.framework */; };
 		BD83A5B41672257C003EE4B3 /* MyViewTest-testIPadViewController-1-0-UIView.png in Resources */ = {isa = PBXBuildFile; fileRef = BD83A5B21672257C003EE4B3 /* MyViewTest-testIPadViewController-1-0-UIView.png */; };
 		BD846567164BD5840032A77B /* kassa.aif in Resources */ = {isa = PBXBuildFile; fileRef = BD846566164BD5460032A77B /* kassa.aif */; };
@@ -2086,6 +2085,8 @@
 				768321DF1654E60D00E78A8C /* TeachingHelperViewController.m */,
 				7687667616BA7543003405F9 /* GunDrumViewController.h */,
 				7687667716BA7543003405F9 /* GunDrumViewController.m */,
+				BD81E635169EC4D100CE8278 /* ActiveDuelViewController.h */,
+				BD81E636169EC4D100CE8278 /* ActiveDuelViewController.m */,
 			);
 			name = Duel;
 			sourceTree = "<group>";
@@ -2539,8 +2540,6 @@
 				BD84DAA3164ABC9F00DEEE38 /* LoginAnimatedViewController.m */,
 				BD16BF941680934F00628CCC /* FunPageViewController.h */,
 				BD16BF951680934F00628CCC /* FunPageViewController.m */,
-				BD81E635169EC4D100CE8278 /* ActiveDuelViewController.h */,
-				BD81E636169EC4D100CE8278 /* ActiveDuelViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -2602,7 +2601,7 @@
 		60593A631379321700256204 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0460;
 			};
 			buildConfigurationList = 60593A661379321700256204 /* Build configuration list for PBXProject "Bounty Hunter" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -2927,7 +2926,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD83A5AE16720E74003EE4B3 /* Test-Info.plist in Resources */,
 				BD83A48516720DFE003EE4B3 /* Back1cycled.mp3 in Resources */,
 				BD83A48616720DFE003EE4B3 /* Back1start.mp3 in Resources */,
 				BD83A48716720DFE003EE4B3 /* Back2.mp3 in Resources */,
@@ -3472,14 +3470,14 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				MACH_O_TYPE = mh_execute;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRELINK_LIBS = "";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos6.0;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/gt2/** $(PROJECT_DIR)/**";
 				VALID_ARCHS = "armv7s armv7";
@@ -3499,6 +3497,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEPLOYMENT_LOCATION = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -3544,7 +3543,7 @@
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				REZ_SEARCH_PATHS = "$(inherited)";
-				SDKROOT = iphoneos6.0;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "../../.. $(PROJECT_DIR)";
 				VALIDATE_PRODUCT = NO;
@@ -3567,14 +3566,14 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				MACH_O_TYPE = mh_execute;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRELINK_LIBS = "";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos6.0;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/gt2/** $(PROJECT_DIR)/**";
 				VALID_ARCHS = "armv7s armv7";
@@ -3591,9 +3590,10 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
+				DEPLOYMENT_LOCATION = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -3640,7 +3640,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
 				);
-				SDKROOT = iphoneos6.0;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "../../.. $(PROJECT_DIR)";
 				VALIDATE_PRODUCT = NO;
@@ -3655,8 +3655,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3700,10 +3700,10 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = Test;
-				PROVISIONING_PROFILE = "AA8B0E03-DB92-4598-AE9F-493103BDEF2F";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA8B0E03-DB92-4598-AE9F-493103BDEF2F";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				REZ_SEARCH_PATHS = "$(inherited)";
-				SDKROOT = iphoneos6.0;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "../../.. $(PROJECT_DIR)";
 				VALIDATE_PRODUCT = NO;
@@ -3718,7 +3718,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3761,13 +3761,13 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = Test;
-				PROVISIONING_PROFILE = "AA8B0E03-DB92-4598-AE9F-493103BDEF2F";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA8B0E03-DB92-4598-AE9F-493103BDEF2F";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
 				);
-				SDKROOT = iphoneos6.0;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "../../.. $(PROJECT_DIR)";
 				VALIDATE_PRODUCT = NO;
@@ -3782,7 +3782,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				COPY_PHASE_STRIP = NO;
@@ -3827,14 +3827,14 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = Test;
-				PROVISIONING_PROFILE = "AA8B0E03-DB92-4598-AE9F-493103BDEF2F";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=*]" = "AA8B0E03-DB92-4598-AE9F-493103BDEF2F";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA8B0E03-DB92-4598-AE9F-493103BDEF2F";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
 				);
-				SDKROOT = iphoneos6.0;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "../../.. $(PROJECT_DIR)";
 				VALIDATE_PRODUCT = NO;
@@ -3857,14 +3857,14 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				MACH_O_TYPE = mh_execute;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRELINK_LIBS = "";
 				PROVISIONING_PROFILE = "FC3CFCAE-2865-4B60-9333-B1EFF894DF55";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FC3CFCAE-2865-4B60-9333-B1EFF894DF55";
-				SDKROOT = iphoneos6.0;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/gt2/** $(PROJECT_DIR)/**";
 				VALID_ARCHS = "armv7s armv7";
@@ -3883,8 +3883,9 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEPLOYMENT_LOCATION = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -3928,12 +3929,12 @@
 				PRODUCT_NAME = "Bounty Hunter";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=*]" = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA8B0E03-DB92-4598-AE9F-493103BDEF2F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
 				);
-				SDKROOT = iphoneos6.0;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "../../.. $(PROJECT_DIR)";
 				VALIDATE_PRODUCT = NO;
