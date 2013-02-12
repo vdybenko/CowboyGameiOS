@@ -666,9 +666,14 @@
 
 -(void)winAnimation
 {
-    
+  int iPhone5Delta = [UIScreen mainScreen].bounds.size.height - 480;
     
   [lblGoldPlus setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:45]];
+  
+  CGRect deltaFrameI5 = lblGoldPlus.frame;
+  deltaFrameI5.origin.y += iPhone5Delta;
+  [lblGoldPlus setFrame:deltaFrameI5];
+  
   lblGold.hidden = YES;
   lblGold.text = [NSString stringWithFormat:@"%d",playerAccount.money];
   
@@ -686,7 +691,8 @@
   frame.origin.x -= 230;
   CGRect movePlus = lblGoldPlus.frame;
   movePlus.origin.x += 200;
-  int iPhone5Delta = [UIScreen mainScreen].bounds.size.height - 480;
+  
+
   CGRect moveGoldToCoin = winnerImg2.frame;
   moveGoldToCoin.origin.x = ivGoldCoin.frame.origin.x + goldPointBgView.frame.origin.x - 50;
   moveGoldToCoin.origin.y = ivGoldCoin.frame.origin.y + goldPointBgView.frame.origin.y + iPhone5Delta;
