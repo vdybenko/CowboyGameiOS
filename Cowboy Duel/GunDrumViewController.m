@@ -314,18 +314,13 @@ static CGFloat timeSpinDump = 0.6f;
 
 #pragma mark Responding to gestures
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    NSLog(@"gestureRecognizer ");
-    // Disallow recognition of tap gestures in the segmented control.
-    if (gestureRecognizer == self.tapRecognizer) {
-        return NO;
+    if ((gestureRecognizer == self.tapRecognizer)&&(!vLoadGun.isHidden)) {
+        return YES;
     }
-    return YES;
+    return NO;
 }
 - (IBAction)showGestureForTapRecognizer:(UITapGestureRecognizer *)sender {
-    CGPoint location = [sender locationInView:self.view];
-	NSLog(@"location %f",location.x);
     [self lableScaleInView:vLoadGun];
-    
 }
 
 @end
