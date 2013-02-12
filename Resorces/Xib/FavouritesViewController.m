@@ -11,11 +11,16 @@
 #import "UIButton+Image+Title.h"
 #import "CustomNSURLConnection.h"
 #import "StartViewController.h"
+#import "SSConnection.h"
+#import "DuelStartViewController.h"
+#import "GameCenterViewController.h"
 
 @interface FavouritesViewController ()
 {
-    AccountDataSource *_playerAccount;
-    FavouritesDataSource *_favsDataSource;
+    AccountDataSource *playerAccount;
+    AccountDataSource *oponentAccount;
+    FavouritesDataSource *favsDataSource;
+    DuelStartViewController *duelStartViewController;
 }
 @end
 
@@ -37,7 +42,7 @@
     self = [self initWithNibName:nil bundle:nil];
     
 	if (self) {
-//        _playerAccount = userAccount;
+//        playerAccount = userAccount;
 //        arrItemsListForFindMe=[[NSMutableArray alloc] init];
     }
     return self;
@@ -50,13 +55,17 @@
     [_loadingView setHidden:NO];
     [_activityIndicator startAnimating];
     
-    _favsDataSource = [[StartViewController sharedInstance] favsDataSource];
-    _favsDataSource.tableView = tvFavTable;
-    _favsDataSource.delegate=self;
+    favsDataSource = [[StartViewController sharedInstance] favsDataSource];
+//    [_favsDataSource reloadDataSource];
+    favsDataSource.tableView = tvFavTable;
+    favsDataSource.delegate=self;
     
+    SSConnection *conn = [SSConnection sharedInstance];
+    conn.delegate = favsDataSource;
+//    
     tvFavTable.delegate=self;
-    tvFavTable.dataSource=_favsDataSource;
-    [_favsDataSource reloadDataSource];
+    tvFavTable.dataSource=favsDataSource;
+    [favsDataSource reloadDataSource];
     
     lbFavsTitle.text = NSLocalizedString(@"FavouritesTitle", nil);
     lbFavsTitle.textColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
@@ -114,6 +123,7 @@
 
 #pragma mark - UITableViewDelegate
 
+
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 20;
@@ -140,10 +150,49 @@
     [self releaseComponents];
 }
 
+-(void)clickButton:(NSIndexPath *)indexPath;
+{
+    CDFavPlayer *player;
+    player = [favsDataSource.arrItemsList objectAtIndex:indexPath.row];
+    
+    oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
+    [oponentAccount setAccountID:player.dAuth];
+    [oponentAccount setAccountName:player.dNickName];
+    [oponentAccount setAccountLevel:player.dLevel];
+    [oponentAccount setAvatar:player.dAvatar];
+    [oponentAccount setBot:player.dBot];
+    [oponentAccount setMoney:player.dMoney];
+    [oponentAccount setSessionID:player.dSessionId];
+
+    NSLog(@"\n%@\n%@", oponentAccount.accountName, playerAccount.accountName);
+    
+    duelStartViewController = [[DuelStartViewController alloc]initWithAccount:[AccountDataSource sharedInstance] andOpAccount:oponentAccount opopnentAvailable:NO andServerType:NO andTryAgain:NO];
+    //duelStartViewController.serverName = playerAccount.accountID;
+    
+    GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+    duelStartViewController.delegate = gameCenterViewController;
+    gameCenterViewController.duelStartViewController = duelStartViewController;
+    
+    if (!oponentAccount.bot) {
+        const char *name = [playerAccount.accountID cStringUsingEncoding:NSUTF8StringEncoding];
+        SSConnection *connection = [SSConnection sharedInstance];
+        [connection sendData:(void *)(name) packetID:NETWORK_SET_PAIR ofLength:sizeof(char) * [playerAccount.accountID length]];
+    }
+    else {
+        SSConnection *connection = [SSConnection sharedInstance];
+        [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
+        int randomTime = arc4random() % 6;
+        ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:[AccountDataSource sharedInstance] oponentAccount:oponentAccount];
+        [self.navigationController pushViewController:activeDuelViewController animated:YES];
+    }
+
+}
+
+
 #pragma mark -
 -(void)startTableAnimation
 {
-    int countOfCells=[_favsDataSource.arrItemsList count];
+    int countOfCells=[favsDataSource.arrItemsList count];
     int maxIndex;
     if (countOfCells<5) {
         maxIndex=countOfCells;
