@@ -313,9 +313,9 @@ static CGFloat timeSpinDump = 0.6f;
 -(void)lableScaleInView:(UIView*)view
 {
     __weak GunDrumViewController *bself = self;
-    [UIView animateWithDuration:0.4
+    [UIView animateWithDuration:0.35
                      animations:^{
-                         view.transform = CGAffineTransformMakeScale(1.2, 1.2);
+                         view.transform = CGAffineTransformMakeScale(1.15, 1.15);
                      }completion:^(BOOL complete) {
                          [bself lableScaleOutView:view];
                     }];
@@ -323,7 +323,7 @@ static CGFloat timeSpinDump = 0.6f;
 
 -(void)lableScaleOutView:(UIView*)view
 {
-    [UIView animateWithDuration:0.4
+    [UIView animateWithDuration:0.35
                      animations:^{
                          view.transform = CGAffineTransformMakeScale(1.0, 1.0);
                      }completion:^(BOOL complete) {
