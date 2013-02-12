@@ -467,31 +467,11 @@ static StartViewController *sharedHelper = nil;
     
     CGAffineTransform transform = CGAffineTransformMakeScale(-1, 1);
     cloudView.transform = transform;
-    
 //    deltas for 5 iPhone
-    CGRect frame = soundButton.frame;
-    frame.origin.y += iPhone5Delta;
-    [soundButton setFrame:frame];
-    
-    frame = feedbackButton.frame;
-    frame.origin.y += iPhone5Delta;
-    [feedbackButton setFrame:frame];
-    
-    frame = lbFeedbackButton.frame;
-    frame.origin.y += iPhone5Delta;
-    [lbFeedbackButton setFrame:frame];
-    
-    frame = shareButton.frame;
-    frame.origin.y += iPhone5Delta;
-    [shareButton setFrame:frame];
-    
-    frame = lbShareButton.frame;
-    frame.origin.y += iPhone5Delta;
-    [lbShareButton setFrame:frame];
     if (iPhone5Delta>0) {
         iPhone5Delta = 25;
         
-        frame = duelButton.frame;
+        CGRect frame = duelButton.frame;
         frame.origin.y += iPhone5Delta;
         [duelButton setFrame:frame];
         

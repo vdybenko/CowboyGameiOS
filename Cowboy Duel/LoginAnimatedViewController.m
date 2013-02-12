@@ -101,13 +101,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
     
     practiceLable.text = NSLocalizedString(@"PRACTICE", @"");
     practiceLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
-    
-    int iPhone5Delta = [UIScreen mainScreen].bounds.size.height - 480;
-    
-    CGRect frame = textsBackground.frame;
-    frame.origin.y += iPhone5Delta;
-    textsBackground.frame = frame;
-    
+       
     [textsBackground setDinamicHeightBackground];
 }
 - (void)viewDidLoad
