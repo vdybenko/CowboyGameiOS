@@ -110,6 +110,8 @@
 		3167BAE615CAA75F00AF2745 /* fin_img_light_bckgr2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BAC415CAA75F00AF2745 /* fin_img_light_bckgr2.png */; };
 		3167BAE715CAA75F00AF2745 /* fin_img_light_bckgr2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BAC515CAA75F00AF2745 /* fin_img_light_bckgr2@2x.png */; };
 		3167BAE815CAA75F00AF2745 /* fin_img_light_bckgr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BAC615CAA75F00AF2745 /* fin_img_light_bckgr@2x.png */; };
+		3187725716CA833A00D90797 /* pv_wanted_back-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3187725516CA833A00D90797 /* pv_wanted_back-568h@2x.png */; };
+		3187725816CA833A00D90797 /* pv_wanted_photo_frame-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3187725616CA833A00D90797 /* pv_wanted_photo_frame-568h@2x.png */; };
 		3188979815CAD7FE002D52EA /* LevelCongratViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3188979615CAD7FE002D52EA /* LevelCongratViewController.m */; };
 		3188979915CAD7FE002D52EA /* LevelCongratViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3188979715CAD7FE002D52EA /* LevelCongratViewController.xib */; };
 		318F233D16B9437A0081BE5E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 318F233916B9437A0081BE5E /* Default.png */; };
@@ -932,6 +934,8 @@
 		3167BAC415CAA75F00AF2745 /* fin_img_light_bckgr2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fin_img_light_bckgr2.png; sourceTree = "<group>"; };
 		3167BAC515CAA75F00AF2745 /* fin_img_light_bckgr2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fin_img_light_bckgr2@2x.png"; sourceTree = "<group>"; };
 		3167BAC615CAA75F00AF2745 /* fin_img_light_bckgr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fin_img_light_bckgr@2x.png"; sourceTree = "<group>"; };
+		3187725516CA833A00D90797 /* pv_wanted_back-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pv_wanted_back-568h@2x.png"; sourceTree = "<group>"; };
+		3187725616CA833A00D90797 /* pv_wanted_photo_frame-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pv_wanted_photo_frame-568h@2x.png"; sourceTree = "<group>"; };
 		3188979515CAD7FE002D52EA /* LevelCongratViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LevelCongratViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		3188979615CAD7FE002D52EA /* LevelCongratViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LevelCongratViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		3188979715CAD7FE002D52EA /* LevelCongratViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LevelCongratViewController.xib; path = "../Cowboy Duel/LevelCongratViewController.xib"; sourceTree = "<group>"; };
@@ -1726,6 +1730,8 @@
 				31B09EB616BA9B1600F424F2 /* pv_wanted_coin@2x.png */,
 				31B09EB716BA9B1600F424F2 /* pv_wanted_photo_frame.png */,
 				31B09EB816BA9B1600F424F2 /* pv_wanted_photo_frame@2x.png */,
+				3187725516CA833A00D90797 /* pv_wanted_back-568h@2x.png */,
+				3187725616CA833A00D90797 /* pv_wanted_photo_frame-568h@2x.png */,
 			);
 			path = ProfileView;
 			sourceTree = "<group>";
@@ -2923,6 +2929,8 @@
 				314139F116C0357B000A4611 /* icon@2x.png in Resources */,
 				3192D65B16CA35EA00047BB7 /* Default-568h@2x.png in Resources */,
 				3192D65F16CA400000047BB7 /* back-568h@2x.png in Resources */,
+				3187725716CA833A00D90797 /* pv_wanted_back-568h@2x.png in Resources */,
+				3187725816CA833A00D90797 /* pv_wanted_photo_frame-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

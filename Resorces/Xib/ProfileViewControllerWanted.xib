@@ -60,7 +60,7 @@
 							</object>
 							<object class="IBUILabel" id="45736282">
 								<reference key="NSNextResponder" ref="933964600"/>
-								<int key="NSvFlags">-2147483356</int>
+								<int key="NSvFlags">-2147483388</int>
 								<string key="NSFrame">{{20, -7}, {250, 41}}</string>
 								<reference key="NSSuperview" ref="933964600"/>
 								<reference key="NSWindow"/>
@@ -156,7 +156,7 @@
 							</object>
 							<object class="IBUIView" id="678007752">
 								<reference key="NSNextResponder" ref="933964600"/>
-								<int key="NSvFlags">292</int>
+								<int key="NSvFlags">288</int>
 								<array class="NSMutableArray" key="NSSubviews">
 									<object class="IBUIImageView" id="882884710">
 										<reference key="NSNextResponder" ref="678007752"/>
@@ -335,7 +335,7 @@
 							</object>
 							<object class="IBUILabel" id="47572277">
 								<reference key="NSNextResponder" ref="933964600"/>
-								<int key="NSvFlags">288</int>
+								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{185, 282}, {62, 26}}</string>
 								<reference key="NSSuperview" ref="933964600"/>
 								<reference key="NSWindow"/>
@@ -366,7 +366,7 @@
 							</object>
 							<object class="IBUILabel" id="990853245">
 								<reference key="NSNextResponder" ref="933964600"/>
-								<int key="NSvFlags">288</int>
+								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{43, 282}, {122, 26}}</string>
 								<reference key="NSSuperview" ref="933964600"/>
 								<reference key="NSWindow"/>
@@ -413,7 +413,7 @@
 							</object>
 							<object class="IBUILabel" id="80938399">
 								<reference key="NSNextResponder" ref="933964600"/>
-								<int key="NSvFlags">-2147483356</int>
+								<int key="NSvFlags">-2147483380</int>
 								<string key="NSFrame">{{56, 0}, {244, 27}}</string>
 								<reference key="NSSuperview" ref="933964600"/>
 								<reference key="NSWindow"/>
@@ -686,6 +686,22 @@
 					<int key="connectionID">265</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">ivBackground</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="682455921"/>
+					</object>
+					<int key="connectionID">266</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">ivPhotoFrame</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="114935315"/>
+					</object>
+					<int key="connectionID">267</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">duelButtonClick:</string>
 						<reference key="source" ref="1046405462"/>
@@ -943,7 +959,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">265</int>
+			<int key="maxID">267</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -959,11 +975,26 @@
 					<string key="className">ProfileViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="backToMenu:">id</string>
+						<string key="btnLeaderbordClick:">id</string>
+						<string key="btnLeaderbordFirstRunClick:">id</string>
 						<string key="duelButtonClick:">id</string>
 						<string key="showStoreDefence:">id</string>
 						<string key="showStoreWeapon:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="backToMenu:">
+							<string key="name">backToMenu:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="btnLeaderbordClick:">
+							<string key="name">btnLeaderbordClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="btnLeaderbordFirstRunClick:">
+							<string key="name">btnLeaderbordFirstRunClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="duelButtonClick:">
 							<string key="name">duelButtonClick:</string>
 							<string key="candidateClassName">id</string>
@@ -984,8 +1015,10 @@
 						<string key="btnLeaderboard">UIButton</string>
 						<string key="btnLeaderboardBig">UIButton</string>
 						<string key="duelButton">UIButton</string>
+						<string key="ivBackground">UIImageView</string>
 						<string key="ivBlack">UIView</string>
 						<string key="ivCurrentRank">UIImageView</string>
+						<string key="ivPhotoFrame">UIImageView</string>
 						<string key="ivPointsLine">UIView</string>
 						<string key="lbAward">UILabel</string>
 						<string key="lbBiggestWin">UILabel</string>
@@ -1039,12 +1072,20 @@
 							<string key="name">duelButton</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="ivBackground">
+							<string key="name">ivBackground</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="ivBlack">
 							<string key="name">ivBlack</string>
 							<string key="candidateClassName">UIView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="ivCurrentRank">
 							<string key="name">ivCurrentRank</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="ivPhotoFrame">
+							<string key="name">ivPhotoFrame</string>
 							<string key="candidateClassName">UIImageView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="ivPointsLine">
