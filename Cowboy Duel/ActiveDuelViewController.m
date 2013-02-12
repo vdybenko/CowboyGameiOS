@@ -249,8 +249,8 @@ static CGFloat oponentLiveImageViewStartWidth;
         [subview removeFromSuperview];
     }
     
-    SSConnection *connection = [SSConnection sharedInstance];
-    [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
+//    SSConnection *connection = [SSConnection sharedInstance];
+//    [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
 
 }
 
