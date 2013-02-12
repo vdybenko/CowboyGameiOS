@@ -17,7 +17,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "60593A6B1379321700256204"
-            BuildableName = "BountyHunter.app"
+            BuildableName = "Bounty Hunter.app"
             BlueprintName = "Bounty Hunter"
             ReferencedContainer = "container:Bounty Hunter.xcodeproj">
          </BuildableReference>
@@ -36,7 +36,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "60593A6B1379321700256204"
-            BuildableName = "BountyHunter.app"
+            BuildableName = "Bounty Hunter.app"
             BlueprintName = "Bounty Hunter"
             ReferencedContainer = "container:Bounty Hunter.xcodeproj">
          </BuildableReference>
@@ -59,7 +59,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "60593A6B1379321700256204"
-            BuildableName = "BountyHunter.app"
+            BuildableName = "Bounty Hunter.app"
             BlueprintName = "Bounty Hunter"
             ReferencedContainer = "container:Bounty Hunter.xcodeproj">
          </BuildableReference>
@@ -69,7 +69,7 @@
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Distrbution"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
