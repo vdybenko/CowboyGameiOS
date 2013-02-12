@@ -114,7 +114,7 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     }
     
     DLog(@"FBAccessTokenKey %@", [defaults objectForKey:@"FBAccessTokenKey"]);
-    
+    /*
     frame = [UIScreen mainScreen].bounds;
     if (frame.size.height > 480) {
         // Initialize the banner at the bottom of the screen.
@@ -133,7 +133,7 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
         [self.adBanner loadRequest:[self createRequest]];
         [self.adBanner setHidden:YES];
     }
-    
+    */
     if([[OGHelper sharedInstance] isAuthorized]){
         [self openSessionWithAllowLoginUI:YES];
     }

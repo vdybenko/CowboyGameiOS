@@ -165,7 +165,12 @@ static CGFloat oponentLiveImageViewStartWidth;
     shotCountForSound = 1;
     
     ARView *arView = (ARView *)self.view;
-	
+    
+    int iPhone5Delta = [UIScreen mainScreen].bounds.size.height - 480;
+    CGRect deltaFrame = arView.frame;
+    deltaFrame.size.height += iPhone5Delta;
+    [arView setFrame:deltaFrame];
+    
     CLLocationCoordinate2D oponentCoords;
     oponentCoords.latitude = (((float) rand()) / RAND_MAX) * 360 - 180;
     oponentCoords.longitude = (((float) rand()) / RAND_MAX) * 360 - 180;
