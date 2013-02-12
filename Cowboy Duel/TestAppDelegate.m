@@ -393,7 +393,7 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     
     NSUserDefaults *usrDef = [NSUserDefaults standardUserDefaults];
     [usrDef setObject:newToken forKey:@"DeviceToken"];
-    [usrDef synchronize];
+    [usrDef synchronize];    
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
@@ -403,13 +403,14 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 
 - (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
 {
-	NSLog(@"Received notification: %@", userInfo);
+    NSDictionary *sInfo = [userInfo objectForKey:@"aps"];
+    NSString *message = [sInfo objectForKey:@"alert"];
     
-    NSDictionary *notificationDict = [userInfo objectForKey:@"aps"];
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Be ready!!!" message:[notificationDict objectForKey:@"alert"] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Go to Saloon", nil];
-    alert.tag = 1;
-    [alert show];
+    sInfo = [userInfo objectForKey:@"i"];
+    	
+	[[NSNotificationCenter defaultCenter] postNotificationName:kPushNotification
+														object:self
+                                                      userInfo:[NSDictionary dictionaryWithObjectsAndKeys:sInfo, @"messageId",message, @"message", nil]];
 }
 
 - (void)AnalyticsTrackEvent:(NSNotification *)notification {

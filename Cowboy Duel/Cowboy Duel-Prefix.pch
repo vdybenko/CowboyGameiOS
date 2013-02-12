@@ -42,6 +42,7 @@
 #define kCountOfLevels 6
 
 #define kAnalyticsTrackEventNotification @"AnalyticsTrackEventNotification"
+#define kPushNotification @"PushNotification"
 
 #define LOG_CHEACK YES
 

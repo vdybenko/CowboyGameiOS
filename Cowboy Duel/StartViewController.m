@@ -135,6 +135,7 @@
 @synthesize feedbackButton, duelButton, profileButton, helpButton, mapButton, shareButton;
 @synthesize oldAccounId,feedBackViewVisible,showFeedAtFirst,topPlayersDataSource, advertisingNewVersionViewController,firstRun, favsDataSource;
 @synthesize duelProductDownloaderController;
+@synthesize pushNotification;
 
 static const char *REGISTRATION_URL =  BASE_URL"api/registration";
 static const char *AUTORIZATION_URL =  BASE_URL"api/authorization";
@@ -311,6 +312,11 @@ static StartViewController *sharedHelper = nil;
                                                  selector:@selector(didFinishLaunching)
                                                      name:UIApplicationDidFinishLaunchingNotification
                                                    object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(newMessageRecived:)
+                                                     name:kPushNotification
+                                                   object:nil];
                 
         activityIndicatorView = [[ActivityIndicatorView alloc] initWithoutRotate];
         CGRect imgFrame = activityIndicatorView.frame;
@@ -464,6 +470,16 @@ static StartViewController *sharedHelper = nil;
     
     CGAffineTransform transform = CGAffineTransformMakeScale(-1, 1);
     cloudView.transform = transform;
+    
+    //Push  notifications
+    NSDictionary *sInfo = [pushNotification objectForKey:@"aps"];
+    NSString *message = [sInfo objectForKey:@"alert"];
+    
+    sInfo = [pushNotification objectForKey:@"i"];
+    
+	[[NSNotificationCenter defaultCenter] postNotificationName:kPushNotification
+														object:self
+                                                      userInfo:[NSDictionary dictionaryWithObjectsAndKeys:sInfo, @"messageId",message, @"message", nil]];
 }
 - (void)viewDidUnload {
     feedbackView = nil;
@@ -890,7 +906,43 @@ static StartViewController *sharedHelper = nil;
 
 }
 
-#pragma mark -
+#pragma mark - push notification
+
+- (void)newMessageRecived:(NSNotification *)notification {
+    
+    NSString *message;
+    int messageID;
+    NSDictionary *messageHeader;
+    
+    message = [[notification userInfo] objectForKey:@"message"];
+    messageHeader = [[notification userInfo] objectForKey:@"messageId"];
+    
+    messageID = [[messageHeader objectForKey:@"type"] intValue];
+    UIViewController *visibleViewController=[self.navigationController visibleViewController];
+    if ([visibleViewController isKindOfClass:[ProfileViewController class]] ||
+        [visibleViewController isKindOfClass:[StartViewController class]] ||
+        [visibleViewController isKindOfClass:[HelpViewController class]] ||
+        [visibleViewController isKindOfClass:[StoreViewController class]])
+    {
+        switch (messageID) {
+            case 1:{
+                
+            }
+                break;
+            case 2:{
+                
+            }
+                break;
+            case 3:{
+                
+            }
+                break;
+            default:
+                break;
+        }
+    }
+}
+
 #pragma mark - Share
 
 - (IBAction)shareButtonClick:(id)sender {

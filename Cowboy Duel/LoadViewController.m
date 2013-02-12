@@ -45,12 +45,7 @@ static const char *A_URL =  BASE_URL"api/authorization";
         [[GCHelper sharedInstance] setPresentingViewController:startViewController];
         [[GCHelper sharedInstance] setDelegate2:startViewController];
     
-        NSDictionary *remoteNotif =
-        [notification objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-        if (remoteNotif)
-            //[self application:[UIApplication sharedApplication] didReceiveRemoteNotification:remoteNotif];
-            [self openSaloon];
-        
+        startViewController.pushNotification = [notification copy];
 
         CGRect frame = [[UIScreen mainScreen]bounds];
         

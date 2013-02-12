@@ -50,6 +50,7 @@
 @property (strong, nonatomic) FavouritesDataSource *favsDataSource;
 @property (strong, nonatomic) DuelProductDownloaderController *duelProductDownloaderController;
 @property (nonatomic) BOOL firstRun;
+@property (strong,nonatomic)  NSDictionary *pushNotification;
 
 + (StartViewController *)sharedInstance;
 -(id)init;     //must be login object!!!
