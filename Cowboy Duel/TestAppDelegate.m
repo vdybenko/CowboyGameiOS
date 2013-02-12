@@ -14,6 +14,7 @@
 
 #import "Crittercism.h"
 #import "StartViewController.h"
+#import "AccountDataSource.h"
 
 #import "GAI.h"
 
@@ -280,7 +281,6 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
         default:
             break;
     }
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:SCSessionStateChangedNotification
                                                         object:session];
     

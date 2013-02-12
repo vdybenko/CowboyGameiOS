@@ -15,6 +15,9 @@
     int firstAnimationCount;
     int secondAnimationCount;
     double angle;
+    float steadyScale;
+    float scaleDelta;
+    NSTimer *scaleTimer;
 }
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapRecognizer;
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *colectionBullets;
@@ -84,6 +87,10 @@ static CGFloat timeSpinDump = 0.6f;
         self.view.frame = frame;
         
         lbLoadGun.text = NSLocalizedString(@"Load", @"");
+        steadyScale = 1.0;
+        scaleDelta = 0.0;
+        scaleTimer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(setScale) userInfo:nil repeats:YES];
+
         
     }
     return self;
@@ -289,6 +296,18 @@ static CGFloat timeSpinDump = 0.6f;
 -(void)closeController;
 {
     [self.view removeFromSuperview];
+    [scaleTimer invalidate];
+}
+
+-(void)setScale
+{
+    if (steadyScale >= 1.3) scaleDelta = -0.01;
+    if (steadyScale <= 1.0) scaleDelta = 0.02;
+    steadyScale += scaleDelta;
+    
+    CGAffineTransform steadyTransform = CGAffineTransformMakeScale( steadyScale+scaleDelta*2, steadyScale+scaleDelta*2);
+    self.arrow.transform = steadyTransform;
+    
 }
 
 -(void)lableScaleInView:(UIView*)view
