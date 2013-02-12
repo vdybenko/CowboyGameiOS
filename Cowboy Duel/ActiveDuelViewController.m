@@ -258,6 +258,7 @@ static CGFloat oponentLiveImageViewStartWidth;
 {
     [super viewWillDisappear:animated];
     [[UIAccelerometer sharedAccelerometer] setDelegate:nil];
+    [gunDrumViewController hideGun];
     [shotTimer invalidate];
     [moveTimer invalidate];
 }
@@ -526,7 +527,6 @@ static CGFloat oponentLiveImageViewStartWidth;
 }
 
 - (void) dismissWithController:(UIViewController *)controller {
-
     [self.navigationController pushViewController:controller animated:YES];
 }
 
