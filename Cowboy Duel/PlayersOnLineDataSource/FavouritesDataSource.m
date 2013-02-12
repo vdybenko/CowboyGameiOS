@@ -114,11 +114,12 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     CDFavPlayer *player;
     
     player=[arrItemsList objectAtIndex:indexPath.row];
-    [cell populateWithPlayer:player index:indexPath status: [self isOnline:player]];
+    BOOL statusOnline = [self isOnline:player];
+    [cell populateWithPlayer:player index:indexPath status: statusOnline];
     
     [cell setPlayerIcon:nil];
     
-    if ([self isOnline:player]) {
+    if (statusOnline) {
         [cell.btnGetHim addTarget:self action:@selector(invaiteWithMessage:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btnGetHim changeTitleByLabel:@"DUEL"];
     }else{
