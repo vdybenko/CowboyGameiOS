@@ -16,6 +16,7 @@
     int secondAnimationCount;
     double angle;
 }
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapRecognizer;
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *colectionBullets;
 @property (weak, nonatomic) IBOutlet UIView *vLoadGun;
 @property (weak, nonatomic) IBOutlet UILabel *lbLoadGun;
@@ -101,6 +102,7 @@ static CGFloat timeSpinDump = 0.6f;
     [self setVLoadGun:nil];
     [self setLbLoadGun:nil];
     [self setGunImage:nil];
+    [self setTapRecognizer:nil];
     [super viewDidUnload];
 }
 
@@ -287,6 +289,43 @@ static CGFloat timeSpinDump = 0.6f;
 -(void)closeController;
 {
     [self.view removeFromSuperview];
+}
+
+-(void)lableScaleInView:(UIView*)view
+{
+    __weak GunDrumViewController *bself = self;
+    [UIView animateWithDuration:0.4
+                     animations:^{
+                         view.transform = CGAffineTransformMakeScale(1.2, 1.2);
+                     }completion:^(BOOL complete) {
+                         [bself lableScaleOutView:view];
+                    }];
+}
+
+-(void)lableScaleOutView:(UIView*)view
+{
+    [UIView animateWithDuration:0.4
+                     animations:^{
+                         view.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                     }completion:^(BOOL complete) {
+                     }];
+    
+}
+
+#pragma mark Responding to gestures
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    NSLog(@"gestureRecognizer ");
+    // Disallow recognition of tap gestures in the segmented control.
+    if (gestureRecognizer == self.tapRecognizer) {
+        return NO;
+    }
+    return YES;
+}
+- (IBAction)showGestureForTapRecognizer:(UITapGestureRecognizer *)sender {
+    CGPoint location = [sender locationInView:self.view];
+	NSLog(@"location %f",location.x);
+    [self lableScaleInView:vLoadGun];
+    
 }
 
 @end
