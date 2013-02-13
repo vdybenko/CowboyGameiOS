@@ -917,7 +917,7 @@ static StartViewController *sharedHelper = nil;
     message = [[notification userInfo] objectForKey:@"message"];
     messageHeader = [[notification userInfo] objectForKey:@"messageId"];
     
-    messageID = [[messageHeader objectForKey:@"type"] intValue];
+    messageID = [[messageHeader objectForKey:@"t"] intValue];
     UIViewController *visibleViewController=[self.navigationController visibleViewController];
     if ([visibleViewController isKindOfClass:[ProfileViewController class]] ||
         [visibleViewController isKindOfClass:[StartViewController class]] ||
