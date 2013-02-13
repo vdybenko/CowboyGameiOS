@@ -68,16 +68,13 @@ UIColor * sandColor;
     _lbGoldTitle.text = NSLocalizedString(@"Gold:", @"");
     _lbAttackTitle.text = NSLocalizedString(@"Attack:", @"");
     _lbDefenseTitle.text = NSLocalizedString(@"Defense:", @"");
-
-    [_btnGetHim setTitleByLabel:@"Poke"];
-    [_btnGetHim changeColorOfTitleByLabel:[UIColor colorWithRed:244.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f]];
     
     [_vBackGround setDinamicHeightBackground];
     
     
 }
 
--(void)populateWithPlayer:(CDFavPlayer *) player index:(NSIndexPath *)indexPath;
+-(void)populateWithPlayer:(CDFavPlayer *) player index:(NSIndexPath *)indexPath status: (BOOL) isAvailable;
 {
     _lbPlayerName.text=player.dNickName;
     
@@ -88,6 +85,17 @@ UIColor * sandColor;
     _lbDefense.text=[NSString stringWithFormat:@"%d",player.dDefense];
     
     _lbAttack.text=[NSString stringWithFormat:@"%d",player.dAttack];
+    
+//    on/off line
+    
+    
+    if (isAvailable) {
+        [_btnGetHim setTitleByLabel:@"DUEL"];
+    }else
+        [_btnGetHim setTitleByLabel:@"Poke"];
+    
+    [_btnGetHim changeColorOfTitleByLabel:[UIColor colorWithRed:244.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f]];
+    
     
 //  style
     [_ivBackGroundSelected setHidden:YES];
@@ -150,7 +158,6 @@ UIColor * sandColor;
 #pragma mark IBActions:
 
 - (IBAction)btnGetHimClicked:(id)sender {
-    
 
 }
 

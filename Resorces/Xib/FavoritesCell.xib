@@ -458,15 +458,6 @@
 					</object>
 					<int key="connectionID">54</int>
 				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">btnGetHimClicked:</string>
-						<reference key="source" ref="736210916"/>
-						<reference key="destination" ref="886287858"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">38</int>
-				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -613,17 +604,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">FavouritesCell</string>
 					<string key="superclassName">UITableViewCell</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">btnGetHimClicked:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">btnGetHimClicked:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">btnGetHimClicked:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="btnGetHim">UIButton</string>
 						<string key="ivBackGroundSelected">UIImageView</string>

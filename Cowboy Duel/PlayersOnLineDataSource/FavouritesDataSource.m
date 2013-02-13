@@ -10,6 +10,7 @@
 #import "FavouritesViewController.h"
 #import "CustomNSURLConnection.h"
 #import "UIImage+Save.h"
+#import "UIButton+Image+Title.h"
 #import "IconDownloader.h"
 
 @interface FavouritesDataSource()
@@ -17,20 +18,20 @@
     NSMutableData *receivedData;
     
     NSMutableDictionary *imageDownloadsInProgress;
+    
+    SSConnection *connection;
 }
 @end
 
-
 @implementation FavouritesDataSource
 
-@synthesize arrItemsList, tableView, delegate;
+@synthesize arrItemsList, tableView, delegate, serverObjects;
 
 static const char *FAV_PLAYERS_URL = BASE_URL"users/get_favorites";
 static NSString  *const URL_ADD_FAVORITE = @BASE_URL"users/add_to_favorites";
 static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
 
 #define FAVORITES_LIST @"FAVORITES_LIST"
-
 
 #pragma mark - Instance initialization
 
@@ -43,7 +44,10 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
 	}
     arrItemsList=[[NSMutableArray alloc] init];
     imageDownloadsInProgress=[[NSMutableDictionary alloc] init];
-    
+
+    connection = [SSConnection sharedInstance];
+    connection.delegate = self;
+    self.serverObjects = [[NSMutableArray alloc] init];
     tableView=pTable;
 	return self;
 }
@@ -52,8 +56,9 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
 {
     NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"favPlayers"];
     NSMutableArray *testArr= [NSKeyedUnarchiver unarchiveObjectWithData:data1];
-    
-    if ([testArr count]==0)
+
+    //if ([testArr count]==0)
+    if (1==1)
     {
         NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:FAV_PLAYERS_URL encoding:NSUTF8StringEncoding]]
                                                                 cachePolicy:NSURLRequestUseProtocolCachePolicy
@@ -72,8 +77,9 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
         CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
         
         if (theConnection) {
-            //        [receivedData setLength:0];
             receivedData = [[NSMutableData alloc] init];
+            [connection sendData:@"" packetID:NETWORK_GET_LIST_ONLINE ofLength:sizeof(int)];
+            
         } else {
         
         }
@@ -106,9 +112,19 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     CDFavPlayer *player;
     
     player=[arrItemsList objectAtIndex:indexPath.row];
-    [cell populateWithPlayer:player index:indexPath];
+    BOOL statusOnline = [self isOnline:player];
+    [cell populateWithPlayer:player index:indexPath status: statusOnline];
     
     [cell setPlayerIcon:nil];
+    
+    if (statusOnline) {
+        [cell.btnGetHim addTarget:self action:@selector(invaiteWithMessage:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btnGetHim changeTitleByLabel:@"DUEL"];
+    }else{
+        [cell.btnGetHim removeTarget:self action:@selector(invaiteWithMessage:) forControlEvents:UIControlEventTouchUpInside ];
+        [cell.btnGetHim changeTitleByLabel:@"Poke"];
+    }
+    
     //  Set Image of user
     NSString *name=[[OGHelper sharedInstance ] getClearName:player.dAuth];
     NSString *path=[NSString stringWithFormat:@"%@/icon_%@.png",[[OGHelper sharedInstance] getSavePathForList],name];
@@ -174,10 +190,7 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     
     connection1 = nil;
     NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-    
-    DLog(@"\nFavs response : %@", jsonString);
-    
-    
+
     NSArray *responseObject = ValidateObject([jsonString JSONValue], [NSArray class]);
     [arrItemsList removeAllObjects];
     for (NSDictionary *dic in responseObject) {
@@ -192,6 +205,21 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
         [arrItemsList addObject: player];
     }
 
+    for (CDFavPlayer *fvPlayer in arrItemsList) {
+
+        for (SSServer *server in self.serverObjects) {
+
+            if ([server.serverName isEqualToString:fvPlayer.dAuth]) {
+                fvPlayer.dAttack = server.weapon;
+                fvPlayer.dDefense = server.defense;
+                fvPlayer.dBot = server.bot;
+                fvPlayer.dStatus = server.status;
+                fvPlayer.dSessionId = server.sessionId;
+                NSLog(@"\nfav %@ is online!",fvPlayer.dNickName );
+            }
+        }
+    }
+    
     NSData *data= [NSKeyedArchiver archivedDataWithRootObject:arrItemsList];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"favPlayers"];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"favPlayers"];
@@ -231,6 +259,37 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
         });
         [imageDownloadsInProgress removeObjectForKey:indexPath];
         iconDownloader = nil;
+    }
+}
+
+#pragma mark SSConnectionDelegate
+
+- (void) listOnlineResponse:(NSString *)jsonString
+{
+    BOOL isNeedReload = (!self.serverObjects)?YES:NO;
+   
+    NSError *jsonParseError;
+    [self.serverObjects removeAllObjects];
+    SBJSON *parser = [[SBJSON alloc] init];
+
+    NSArray *servers = [parser objectWithString:jsonString error:&jsonParseError];
+    
+    if (!servers) {
+        NSLog(@"\nfavs JSON parse error: %@", jsonParseError);
+        [self.serverObjects removeAllObjects];
+    }
+    else{
+        
+        for (NSDictionary *server in servers)
+        {
+            SSServer *serverObj = [[SSServer alloc] init];
+            [serverObj setValuesForKeysWithDictionary:server];
+            [self.serverObjects addObject:serverObj];
+        }
+    }
+
+    if (isNeedReload) {
+        [self reloadDataSource];
     }
 }
 
@@ -301,7 +360,7 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     return [NSKeyedUnarchiver unarchiveObjectWithData:data1];
 }
 
-+(NSUInteger(^)(NSArray *, NSString *))findPlayerByID {
+-(NSUInteger(^)(NSArray *, NSString *))findPlayerByID {
     return ^(NSArray * array, NSString *dAuthID) {
         for (NSUInteger i = 0; i < [array count]; i++) {
             CDPlayerMain *player = [array objectAtIndex:i];
@@ -313,4 +372,28 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     };
 }
 
+-(BOOL) isOnline:(CDFavPlayer *)fvPlayer;
+{
+    for (SSServer *server in self.serverObjects) {
+        if ([server.serverName isEqualToString:fvPlayer.dAuth]) {
+            fvPlayer.dAttack = server.weapon;
+            fvPlayer.dDefense = server.defense;
+            fvPlayer.dBot = server.bot;
+            fvPlayer.dStatus = server.status;
+            fvPlayer.dSessionId = server.sessionId;
+            NSLog(@"\nfav %@ is online!",fvPlayer.dNickName );
+            return YES;
+        }
+    }
+    NSLog(@"\nfav %@ is offline!",fvPlayer.dNickName );
+    return NO;
+}
+
+#pragma mark -
+-(void)invaiteWithMessage:(id __strong)sender;
+{
+    FavouritesCell *cell=(FavouritesCell *)[[sender superview] superview];
+    NSIndexPath *indexPath = [tableView indexPathForCell:cell];
+    [delegate clickButton:indexPath];
+}
 @end
