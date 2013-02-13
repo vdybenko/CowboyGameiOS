@@ -463,24 +463,34 @@ static NSString *getSavePathForDuelProduct()
 {
     NSMutableArray *arrayForSave = [NSMutableArray array];
     if (![self loadWeaponArray]) {
-        CDWeaponProduct *product=[[CDWeaponProduct alloc] init];
-        product.dID = -1;
-        product.dName=@"Pepperbox";
-        product.dDescription=@"Pepperbox";
-        product.dPrice=0;
-        product.dPurchaseUrl=nil;
-        product.dLevelLock=0;
-        product.dCountOfUse=1;
-        
+        CDWeaponProduct *product = [self pepperboxGun];
         [arrayForSave addObject:product];
+    }else{
+        CDWeaponProduct *product = [array objectAtIndex:0];
+        if (product.dID!=-1) {
+            CDWeaponProduct *product = [self pepperboxGun];
+            [arrayForSave insertObject:product atIndex:0];
+        }
     }
-    
     [arrayForSave addObjectsFromArray:array];
     
     NSData *data= [NSKeyedArchiver archivedDataWithRootObject:arrayForSave];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:DUEL_PRODUCTS_WEAPONS];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:DUEL_PRODUCTS_WEAPONS];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++(CDWeaponProduct*)pepperboxGun
+{
+    CDWeaponProduct *product=[[CDWeaponProduct alloc] init];
+    product.dID = -1;
+    product.dName=@"Pepperbox";
+    product.dDescription=@"Pepperbox";
+    product.dPrice=0;
+    product.dPurchaseUrl=nil;
+    product.dLevelLock=0;
+    product.dCountOfUse=1;
+    return product;
 }
 
 +(NSMutableArray*)loadWeaponArray;

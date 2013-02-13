@@ -19,6 +19,7 @@
 #import "LevelCongratViewController.h"
 #import "MoneyCongratViewController.h"
 #import "AdvertisingNewViewController.h"
+#import "TopPlayersViewController.h"
 
 #import "Social/Social.h"
 #import "accounts/Accounts.h"
@@ -923,12 +924,11 @@ static StartViewController *sharedHelper = nil;
     if ([visibleViewController isKindOfClass:[ProfileViewController class]] ||
         [visibleViewController isKindOfClass:[StartViewController class]] ||
         [visibleViewController isKindOfClass:[HelpViewController class]] ||
-        [visibleViewController isKindOfClass:[StoreViewController class]])
+        [visibleViewController isKindOfClass:[TopPlayersViewController class]])
     {
         switch (messageID) {
             case 1:{
 //                Фаворит викликає тебе на бій
-                
             }
                 break;
             case 2:{
@@ -937,11 +937,14 @@ static StartViewController *sharedHelper = nil;
             }
                 break;
             case 3:{
-                
+//                обновити внутрішній контент
+                RefreshContentDataController *refreshContentDataController=[[RefreshContentDataController alloc] init];
+                [refreshContentDataController refreshContent];
             }
                 break;
             case 4:{
-                
+//                обновити продукти.
+                [duelProductDownloaderController refreshDuelProducts];
             }
                 break;
             default:
