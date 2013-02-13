@@ -918,6 +918,7 @@ static StartViewController *sharedHelper = nil;
     messageHeader = [[notification userInfo] objectForKey:@"messageId"];
     
     messageID = [[messageHeader objectForKey:@"t"] intValue];
+    
     UIViewController *visibleViewController=[self.navigationController visibleViewController];
     if ([visibleViewController isKindOfClass:[ProfileViewController class]] ||
         [visibleViewController isKindOfClass:[StartViewController class]] ||
@@ -926,14 +927,20 @@ static StartViewController *sharedHelper = nil;
     {
         switch (messageID) {
             case 1:{
+//                Фаворит викликає тебе на бій
                 
             }
                 break;
             case 2:{
-                
+//                Фаворит зайшов онлайн.
+                [self startDuel];
             }
                 break;
             case 3:{
+                
+            }
+                break;
+            case 4:{
                 
             }
                 break;
@@ -1320,8 +1327,10 @@ static StartViewController *sharedHelper = nil;
     
     if ([playerAccount.accountID length] < 9) [playerAccount verifyAccountID];
     NSString *deviceToken; 
-    if ([[NSUserDefaults standardUserDefaults] stringForKey:@"DeviceToken"]) deviceToken = [[NSUserDefaults standardUserDefaults] stringForKey:@"DeviceToken"];
-    else deviceToken = @"";
+    if ([[NSUserDefaults standardUserDefaults] stringForKey:@"DeviceToken"])
+        deviceToken = [[NSUserDefaults standardUserDefaults] stringForKey:@"DeviceToken"];
+    else
+        deviceToken = @"";
     
     UIDevice *currentDevice = [UIDevice currentDevice];
     

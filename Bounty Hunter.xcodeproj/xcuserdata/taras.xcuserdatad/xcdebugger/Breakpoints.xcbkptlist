@@ -2,47 +2,6 @@
 <Bucket
    type = "1"
    version = "1.0">
-   <FileBreakpoints>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Cowboy Duel/TestAppDelegate.m"
-         timestampString = "382380280.29064"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "389"
-         endingLineNumber = "389"
-         landmarkName = "-application:didRegisterForRemoteNotificationsWithDeviceToken:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Cowboy Duel/TestAppDelegate.m"
-         timestampString = "382380979.283328"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "401"
-         endingLineNumber = "401"
-         landmarkName = "-application:didFailToRegisterForRemoteNotificationsWithError:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Cowboy Duel/TestAppDelegate.m"
-         timestampString = "382384236.5021"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "401"
-         endingLineNumber = "401"
-         landmarkName = "-application:didFailToRegisterForRemoteNotificationsWithError:"
-         landmarkType = "5">
-      </FileBreakpoint>
-   </FileBreakpoints>
    <ExceptionBreakpoints>
       <ExceptionBreakpoint
          shouldBeEnabled = "No"
