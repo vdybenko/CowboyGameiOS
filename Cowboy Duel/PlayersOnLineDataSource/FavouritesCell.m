@@ -90,12 +90,9 @@ UIColor * sandColor;
     
     
     if (isAvailable) {
-        [_btnGetHim setTitleByLabel:@"DUEL"];
+        [self.btnGetHim setTitleByLabel:@"DUEL" withColor:[UIColor colorWithRed:0.95 green:0.86 blue:0.68 alpha:1.0] fontSize:18];
     }else
-        [_btnGetHim setTitleByLabel:@"Poke"];
-    
-    [_btnGetHim changeColorOfTitleByLabel:[UIColor colorWithRed:244.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f]];
-    
+        [self.btnGetHim setTitleByLabel:@"Poke" withColor:[UIColor colorWithRed:0.95 green:0.86 blue:0.68 alpha:1.0] fontSize:18];
     
 //  style
     [_ivBackGroundSelected setHidden:YES];

@@ -41,6 +41,6 @@
 -(void)saveFavorites:(NSArray*)array;
 -(NSMutableArray*)loadFavoritesArray;
 
--(NSUInteger(^)(NSArray *, NSString *))findPlayerByID;
++(NSUInteger(^)(NSArray *, NSString *))findPlayerByID;
 -(BOOL) isOnline:(CDFavPlayer *)fvPlayer;
 @end
