@@ -172,9 +172,16 @@ static CGFloat oponentLiveImageViewStartWidth;
     [arView setFrame:deltaFrame];
     
     CLLocationCoordinate2D oponentCoords;
-    oponentCoords.latitude = (((float) rand()) / RAND_MAX) * 360 - 180;
-    oponentCoords.longitude = (((float) rand()) / RAND_MAX) * 360 - 180;
-    
+    if(!delegate && !opAccount.bot)
+    {
+        oponentCoords.latitude = 1;//(((float) rand()) / RAND_MAX) * 360 - 180;
+        oponentCoords.longitude = 1;// (((float) rand()) / RAND_MAX) * 360 - 180;
+    }else{
+        oponentCoords.latitude = (((float) rand()) / RAND_MAX) * 360 - 180;
+        oponentCoords.longitude = (((float) rand()) / RAND_MAX) * 360 - 180;
+        
+    }
+
 	placesOfInterest = [NSMutableArray arrayWithCapacity:1];
 //	for (int i = 0; i < numPois; i++) {
 		OponentCoordinateView *poi = [OponentCoordinateView oponentCoordinateWithView:self.floatView at:[[CLLocation alloc] initWithLatitude:oponentCoords.latitude longitude:oponentCoords.longitude]];
@@ -253,9 +260,6 @@ static CGFloat oponentLiveImageViewStartWidth;
     {
         [subview removeFromSuperview];
     }
-    
-//    SSConnection *connection = [SSConnection sharedInstance];
-//    [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
 
 }
 

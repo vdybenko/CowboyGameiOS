@@ -221,7 +221,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1290"
          endingLineNumber = "1290"
-         landmarkName = "-authorizationModifier:"
+         landmarkName = "-didFinishDownloadWithType:error:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -281,11 +281,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ActiveDuelViewController.m"
-         timestampString = "382276613.005104"
+         timestampString = "382443403.441026"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "333"
-         endingLineNumber = "333"
+         startingLineNumber = "337"
+         endingLineNumber = "337"
          landmarkName = "-shotButtonClick:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -307,11 +307,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ActiveDuelViewController.m"
-         timestampString = "382276613.005104"
+         timestampString = "382443403.441026"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "375"
-         endingLineNumber = "375"
+         startingLineNumber = "379"
+         endingLineNumber = "379"
          landmarkName = "-horizontalFlip"
          landmarkType = "5">
       </FileBreakpoint>
@@ -320,24 +320,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ARView.m"
-         timestampString = "381751036.510919"
+         timestampString = "382442359.243213"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "372"
-         endingLineNumber = "372"
-         landmarkName = "-onDisplayLink:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Cowboy Duel/ARView.m"
-         timestampString = "381751036.510919"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "475"
-         endingLineNumber = "475"
+         startingLineNumber = "473"
+         endingLineNumber = "473"
          landmarkName = "multiplyMatrixAndVector()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -346,24 +333,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ARView.m"
-         timestampString = "381751036.510919"
+         timestampString = "382440805.528823"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "282"
-         endingLineNumber = "282"
-         landmarkName = "-startDeviceMotion"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Cowboy Duel/ARView.m"
-         timestampString = "381751036.510919"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "271"
-         endingLineNumber = "271"
+         startingLineNumber = "281"
+         endingLineNumber = "281"
          landmarkName = "-startDeviceMotion"
          landmarkType = "5">
       </FileBreakpoint>
@@ -372,11 +346,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ActiveDuelViewController.m"
-         timestampString = "382276613.005104"
+         timestampString = "382443403.441026"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "364"
-         endingLineNumber = "364"
+         startingLineNumber = "368"
+         endingLineNumber = "368"
          landmarkName = "-shotButtonClick:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -390,7 +364,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1052"
          endingLineNumber = "1052"
-         landmarkName = "-login"
+         landmarkName = "-mailComposeController:didFinishWithResult:error:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -416,8 +390,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1068"
          endingLineNumber = "1068"
-         landmarkName = "@implementation StartViewController"
-         landmarkType = "3">
+         landmarkName = "-mailComposeController:didFinishWithResult:error:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
