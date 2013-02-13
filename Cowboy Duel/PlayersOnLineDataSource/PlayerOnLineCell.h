@@ -1,6 +1,5 @@
 
 #import <UIKit/UIKit.h>
-#import "CDPlayerOnLine.h"
 #import "SSServer.h"
 
 @interface PlayerOnLineCell : UITableViewCell {
@@ -17,7 +16,7 @@
 @property (weak,nonatomic) IBOutlet UIImageView * ribbon;
 @property (weak, nonatomic) IBOutlet UILabel *userAttackTitle;
 @property (weak, nonatomic) IBOutlet UILabel *userDefenseTitle;
-
+@property (weak, nonatomic) IBOutlet UIImageView *favoriteStart;
 
 @property (weak, nonatomic) IBOutlet UILabel *userAtack;
 @property (weak, nonatomic) IBOutlet UILabel *userDefense;

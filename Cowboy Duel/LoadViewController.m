@@ -31,6 +31,7 @@ static const char *A_URL =  BASE_URL"api/authorization";
         if(![[NSUserDefaults standardUserDefaults] boolForKey:@"AlreadyRun"] ) {
             firstRun = YES;
             [self login];
+//            [startViewController checkNetworkStatus:Nil];
         }else{
             firstRun = NO;
         }
@@ -79,7 +80,6 @@ static const char *A_URL =  BASE_URL"api/authorization";
         [self.view addSubview:versionLabel];
         versionLabel = nil;
         
-        [startViewController checkNetworkStatus:Nil];
         if (!firstRun || ![startViewController connectedToWiFi]) {
             [self performSelector:@selector(closeWindow) withObject:self afterDelay:3.0];
         }

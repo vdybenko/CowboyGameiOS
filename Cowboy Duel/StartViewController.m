@@ -34,7 +34,6 @@
 @interface StartViewController ()
 {
     AccountDataSource *playerAccount;
-    AccountDataSource *oponentAccount;
     ActivityIndicatorView *activityIndicatorView;
     CollectionAppViewController *collectionAppViewController;
     ListOfItemsViewController *listOfItemsViewController;
@@ -134,7 +133,7 @@
 
 @synthesize gameCenterViewController, player, internetActive, hostActive, soundCheack;
 @synthesize feedbackButton, duelButton, profileButton, helpButton, mapButton, shareButton;
-@synthesize oldAccounId,feedBackViewVisible,showFeedAtFirst,topPlayersDataSource, advertisingNewVersionViewController,firstRun;
+@synthesize oldAccounId,feedBackViewVisible,showFeedAtFirst,topPlayersDataSource, advertisingNewVersionViewController,firstRun, favsDataSource;
 @synthesize duelProductDownloaderController;
 
 static const char *REGISTRATION_URL =  BASE_URL"api/registration";
@@ -163,8 +162,6 @@ static StartViewController *sharedHelper = nil;
     if (self) {
          NSUserDefaults *uDef = [NSUserDefaults standardUserDefaults];
         playerAccount = [AccountDataSource sharedInstance];
-        oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
-        oponentAccount.money = 1000;        
           
         showFeedAtFirst=NO;
         
@@ -187,6 +184,7 @@ static StartViewController *sharedHelper = nil;
             firstRun = NO;
             firstRunLocal = NO;
             [topPlayersDataSource reloadDataSource];
+            [favsDataSource reloadDataSource];
             
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"moneyForIPad"];
         }
@@ -278,6 +276,7 @@ static StartViewController *sharedHelper = nil;
                 }
             }
         }
+        favsDataSource = [[FavouritesDataSource alloc] initWithTable:nil];
         
         dicForRequests=[[NSMutableDictionary alloc] init];
         
@@ -1120,7 +1119,6 @@ static StartViewController *sharedHelper = nil;
         if ([DuelProductDownloaderController isRefreshEvailable:revisionProductListNumber]) {
             [duelProductDownloaderController refreshDuelProducts];
         }
-
         return;
     }       
     //avtorization
@@ -1256,14 +1254,6 @@ static StartViewController *sharedHelper = nil;
         return;
     }
 
-    if([response objectForKey:@"nickname"]!=NULL){
-        oponentAccount.accountName=[response objectForKey:@"nickname"];
-        oponentAccount.money = ([[response objectForKey:@"money"] intValue] > 0)?[[response objectForKey:@"money"] intValue] : 0;
-        NSString *st=[[NSString alloc] initWithFormat:@"%@%@%@",NSLocalizedString(@"BotMTitle", nil),oponentAccount.accountName,NSLocalizedString(@"BotMTitle2", nil)];
-        UIAlertView *av = [[UIAlertView alloc] initWithTitle:st message:NSLocalizedString(@"BotMText", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"BotMCANS", nil) otherButtonTitles:NSLocalizedString(@"BotMBtn", nil),nil];
-        av.tag = BOT_DUEL_TAG;
-        [av show];
-    }
 }
 
 - (void)connection:(CustomNSURLConnection *)connection didReceiveData:(NSData *)data

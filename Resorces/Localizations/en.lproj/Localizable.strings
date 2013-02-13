@@ -246,6 +246,7 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "TheBiggestWinGold" = "The biggest win:";
 "TitleTitle" = "Rank:";
 "LeaderboardTitle" = "LEADERBOARD";
+"FavouritesTitle" = "FAVORITES";
 "SoundButton" = "Turn on/off sound effects";
 "CONTINUE" = "CONTINUE";
 
@@ -254,6 +255,7 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "ForBody" = "for the body of";
 "AWARD" = "AWARD";
 
+"Poke" = "POKE";
 
 //Titles for Users
 "0Rank" = "Slave"; 

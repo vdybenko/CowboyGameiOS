@@ -25,6 +25,7 @@
 @synthesize userAtack;
 @synthesize userDefenseTitle;
 @synthesize userDefense;
+@synthesize favoriteStart;
 
 +(PlayerOnLineCell*) cell {
     @autoreleasepool {
@@ -101,6 +102,12 @@
     userDefense = nil;
 
     [self hideIndicatorConnectin];
+    
+    if (player.favorite) {
+        favoriteStart.hidden = NO;
+    }else{
+        favoriteStart.hidden = YES;
+    }
 }
 
 -(void)setSelected:(BOOL)selected animated:(BOOL)animated;

@@ -19,6 +19,8 @@
 #import "DuelStartViewController.h"
 #import "StoreViewController.h"
 #import "ActiveDuelViewController.h"
+#import "FavouritesViewController.h"
+#import "FavouritesDataSource.h"
 
 static const CGFloat changeYPointWhenKeyboard = 155;
 static const CGFloat timeToStandartTitles = 1.8;
@@ -48,6 +50,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     __weak IBOutlet UILabel *lbWantedText;
     __weak IBOutlet UILabel *lbWantedTitle;
     __weak IBOutlet UILabel *lbAward;
+    __weak IBOutlet UIButton *btnAddToFavorites;
     
     __weak IBOutlet UIButton *btnLeaderboard;
     __weak IBOutlet UIButton *btnLeaderboardBig;
@@ -74,6 +77,12 @@ static const CGFloat timeToStandartTitles = 1.8;
     __weak IBOutlet UIImageView *ivCurrentRank;
     
     __weak IBOutlet UILabel *lbPointsText;
+    __weak IBOutlet UILabel *lbFavouritesTitle;
+    
+//  Favourites
+    
+    __weak IBOutlet UIButton *btnFavourites;
+    
     NSNumberFormatter *numberFormatter;
     
     BOOL didDisappear;
@@ -274,6 +283,8 @@ static const CGFloat timeToStandartTitles = 1.8;
             duelButton.frame = deltaFrame;
             
         }
+        
+        [self checkIsOpponentFavorite];
     }
     return self;
 }
@@ -441,6 +452,9 @@ static const CGFloat timeToStandartTitles = 1.8;
     
     lbLeaderboardTitle.text = NSLocalizedString(@"LeaderboardTitle", @"");
     lbLeaderboardTitle.font = [UIFont fontWithName: @"DecreeNarrow" size:18];
+    
+    lbFavouritesTitle.text = NSLocalizedString(@"FavouritesTitle", @"");
+    lbFavouritesTitle.font = [UIFont fontWithName:@"DecreeNarrow" size:18];
 
     lbDuelsWonCount.font = CountFont;
     
@@ -465,6 +479,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     [profilePictureViewDefault setHidden:YES];
     profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
     [btnLeaderboard setEnabled:YES];
+    [btnFavourites setEnabled:YES];
     [self setImageFromFacebook];
     
     NSString *name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel];
@@ -708,6 +723,19 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         [ivBlack setHidden:YES];
     }
 }
+
+-(void)checkIsOpponentFavorite
+{
+    if (playerServer.favorite) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            btnAddToFavorites.imageView.image = [UIImage imageNamed:@"topPlayerStarSelected.png"];
+        });
+    }else{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            btnAddToFavorites.imageView.image = [UIImage imageNamed:@"topPlayerStar.png"];
+        });
+    }
+}
 #pragma mark Animation description
 
 - (void)updateLabels
@@ -880,6 +908,17 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     //duelStartViewController = nil;
 }
 
+- (IBAction)btnFavouritesClick:(id)sender {
+    
+//    [[StartViewController sharedInstance].favsDataSource reloadDataSource];
+    
+    FavouritesViewController *favVC = [[FavouritesViewController alloc] initWithAccount:playerAccount];
+    [self.navigationController pushViewController:favVC animated:YES];
+
+}
+
+
+
 -(void)startBotDuel
 {
     int randomTime = arc4random() % 6;
@@ -918,6 +957,91 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                      }];
     storeViewController = nil;
 }
+
+- (IBAction)btnAddToFavoritesClick:(id)sender {
+    bgActivityIndicator.hidden = NO;
+    
+    __weak ProfileViewController *bself = self;
+    
+    if (playerServer.favorite) {
+        [FavouritesDataSource deleteFavoriteId:playerAccount.accountID completionHandler:^(NSURLResponse *response,
+                                                                                           NSData *data,
+                                                                                           NSError *error)
+         {
+             if ([data length] >0 && error == nil)
+             {
+                 NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                 NSLog(@"jsonString %@",jsonString);
+                 NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
+                 int errCode=[[responseObject objectForKey:@"err_code"] intValue];
+                 if (errCode == 1) {
+                     playerServer.favorite = NO;
+                     [[StartViewController sharedInstance].favsDataSource deleteFromDBFavoriteWithId:playerAccount.accountID];
+                 }
+             }
+             else if ([data length] == 0 && error == nil)
+             {
+                 DLog(@"Nothing was downloaded.");
+                 playerServer.favorite = YES;
+             }
+             else if (error != nil){
+                 DLog(@"DuelProductDownloaderController Connection failed! Error - %@ %@",
+                      [error localizedDescription],
+                      [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
+                 playerServer.favorite = YES;
+             }
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 bgActivityIndicator.hidden = YES;
+             });
+             [bself checkIsOpponentFavorite];
+         }];
+    }else{
+        [FavouritesDataSource addFavoriteId:playerAccount.accountID completionHandler:^(NSURLResponse *response,
+                                                                                        NSData *data,
+                                                                                        NSError *error)
+         {
+             if ([data length] >0 && error == nil)
+             {
+                 NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                 NSLog(@"jsonString %@",jsonString);
+                 NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
+                 int errCode=[[responseObject objectForKey:@"err_code"] intValue];
+                 if (errCode == 1) {
+                      playerServer.favorite = YES;
+                     CDFavPlayer *favPlayer = [[CDFavPlayer alloc] init];
+                     favPlayer.dNickName = playerServer.displayName;
+                     favPlayer.dAvatar = playerServer.fbImageUrl;
+                     favPlayer.dMoney = [playerServer.money intValue];
+                     favPlayer.dLevel = [playerServer.rank intValue];
+                     favPlayer.dAttack = playerServer.weapon;
+                     favPlayer.dDefense = playerServer.defense;
+                     favPlayer.dAuth = playerServer.serverName;
+                     favPlayer.dBot = playerServer.bot;
+                     favPlayer.dSessionId = playerServer.sessionId;
+                     favPlayer.dStatus = playerServer.status;
+                     
+                     [[StartViewController sharedInstance].favsDataSource addToDBFavotitePlayer:favPlayer];
+                 }
+             }
+             else if ([data length] == 0 && error == nil)
+             {
+                 DLog(@"Nothing was downloaded.");
+                 playerServer.favorite = NO; 
+             }
+             else if (error != nil){
+                 DLog(@"DuelProductDownloaderController Connection failed! Error - %@ %@",
+                      [error localizedDescription],
+                      [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
+                 playerServer.favorite = NO;
+             }
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 bgActivityIndicator.hidden = YES;
+             });
+             [bself checkIsOpponentFavorite];
+         }];
+    }
+}
+
 #pragma mark IconDownloaderDelegate
 - (void)appImageDidLoad:(NSIndexPath *)indexPath
 {
@@ -932,6 +1056,9 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     bgActivityIndicator = nil;
     ivBackground = nil;
     ivPhotoFrame = nil;
+    btnAddToFavorites = nil;
+    btnFavourites = nil;
+    lbFavouritesTitle = nil;
     [super viewDidUnload];
 }
 @end

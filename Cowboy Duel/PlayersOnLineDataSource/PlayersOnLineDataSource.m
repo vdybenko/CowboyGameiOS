@@ -7,7 +7,6 @@
 //
 
 #import "PlayersOnLineDataSource.h"
-#import "CDPlayerOnLine.h"
 #import "ListOfItemsViewController.h"
 #import "CustomNSURLConnection.h"
 #import "Utils.h"
@@ -89,6 +88,7 @@
         {
             SSServer *serverObj = [[SSServer alloc] init];
             [serverObj setValuesForKeysWithDictionary:server];
+            [self checkServerForFavorite:serverObj];
             [self.serverObjects addObject:serverObj];
         }
     }
@@ -249,4 +249,16 @@
     NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
     [delegate clickButton:indexPath];
 }
+
+-(void)checkServerForFavorite:(SSServer*)server
+{
+    NSUInteger index = [FavouritesDataSource findPlayerByID]([StartViewController sharedInstance].favsDataSource.arrItemsList ,server.serverName);
+    if (index == (NSUInteger)NSNotFound) {
+        server.favorite = NO;
+    }else{
+        server.favorite = YES;
+        
+    }
+}
+
 @end

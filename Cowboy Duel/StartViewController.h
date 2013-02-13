@@ -35,7 +35,7 @@
 #import "SSConnection.h"
 #import "TestAppDelegate.h"
 #import "DuelProductDownloaderController.h"
-
+#import "FavouritesDataSource.h"
 
 @class ListOfItemsViewController;
 @class GameCenterViewController;
@@ -47,6 +47,7 @@
 @property (nonatomic) BOOL soundCheack;
 @property (nonatomic) BOOL feedBackViewVisible;
 @property (strong, nonatomic) TopPlayersDataSource *topPlayersDataSource;
+@property (strong, nonatomic) FavouritesDataSource *favsDataSource;
 @property (strong, nonatomic) DuelProductDownloaderController *duelProductDownloaderController;
 @property (nonatomic) BOOL firstRun;
 

@@ -114,6 +114,12 @@
 		3187725816CA833A00D90797 /* pv_wanted_photo_frame-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3187725616CA833A00D90797 /* pv_wanted_photo_frame-568h@2x.png */; };
 		3188979815CAD7FE002D52EA /* LevelCongratViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3188979615CAD7FE002D52EA /* LevelCongratViewController.m */; };
 		3188979915CAD7FE002D52EA /* LevelCongratViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3188979715CAD7FE002D52EA /* LevelCongratViewController.xib */; };
+		318D010716C3A2AD00BFA030 /* FavouritesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 318D010616C3A2AC00BFA030 /* FavouritesCell.m */; };
+		318D010F16C3B08D00BFA030 /* FavouritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 318D010D16C3B08D00BFA030 /* FavouritesViewController.m */; };
+		318D011016C3B08D00BFA030 /* FavouritesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 318D010E16C3B08D00BFA030 /* FavouritesViewController.xib */; };
+		318D011216C3C52700BFA030 /* FavoritesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 318D011116C3C52700BFA030 /* FavoritesCell.xib */; };
+		318D011516C3D5B100BFA030 /* FavouritesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 318D011416C3D5B000BFA030 /* FavouritesDataSource.m */; };
+		318D011816C3E19200BFA030 /* CDFavPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 318D011716C3E19100BFA030 /* CDFavPlayer.m */; };
 		318F233D16B9437A0081BE5E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 318F233916B9437A0081BE5E /* Default.png */; };
 		318F233E16B9437A0081BE5E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 318F233916B9437A0081BE5E /* Default.png */; };
 		318F233F16B9437A0081BE5E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 318F233A16B9437A0081BE5E /* Default@2x.png */; };
@@ -214,6 +220,8 @@
 		76057DC41639937500735342 /* StoreProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76057DC31639937500735342 /* StoreProductCell.m */; };
 		7606C21E16C396D700B5EEB7 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7606C21C16C396D700B5EEB7 /* libGoogleAnalytics.a */; };
 		7606C21F16C3971900B5EEB7 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7606C21C16C396D700B5EEB7 /* libGoogleAnalytics.a */; };
+		7606C23B16C3DA2F00B5EEB7 /* topPlayerStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 7606C23916C3DA2F00B5EEB7 /* topPlayerStar.png */; };
+		7606C23C16C3DA2F00B5EEB7 /* topPlayerStar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7606C23A16C3DA2F00B5EEB7 /* topPlayerStar@2x.png */; };
 		760E676115BD8277006F6832 /* TopPlayersDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 760E676015BD8277006F6832 /* TopPlayersDataSource.m */; };
 		760E676515BD844B006F6832 /* TopPlayersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 760E676315BD844B006F6832 /* TopPlayersViewController.m */; };
 		760E676715BD84C6006F6832 /* TopPlayersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 760E676615BD84C6006F6832 /* TopPlayersViewController.xib */; };
@@ -252,7 +260,6 @@
 		768044C415AC68FD005ABD3A /* dv_arm.png in Resources */ = {isa = PBXBuildFile; fileRef = 768044C215AC68FD005ABD3A /* dv_arm.png */; };
 		768044C915AC697A005ABD3A /* dv_arm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 768044C815AC6979005ABD3A /* dv_arm@2x.png */; };
 		7682BDDF15AC5F22001C09EC /* HelpPracticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682BDDD15AC5F22001C09EC /* HelpPracticeView.m */; };
-		7682E363156BD22000A8F9A0 /* CDPlayerOnLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682E362156BD22000A8F9A0 /* CDPlayerOnLine.m */; };
 		768321D91654DDD000E78A8C /* TeachingHelperController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 768321D81654DDD000E78A8C /* TeachingHelperController.xib */; };
 		768321E01654E60D00E78A8C /* TeachingHelperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 768321DF1654E60D00E78A8C /* TeachingHelperViewController.m */; };
 		768388D3157DE37800377D88 /* UIButton+Image+Title.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388D2157DE37800377D88 /* UIButton+Image+Title.m */; };
@@ -279,6 +286,8 @@
 		7687E8C3163920FE003C9EE6 /* StoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7687E8C2163920FE003C9EE6 /* StoreViewController.m */; };
 		7687E8C516392534003C9EE6 /* StoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7687E8C416392534003C9EE6 /* StoreViewController.xib */; };
 		7687E8C816392E1C003C9EE6 /* StoreDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7687E8C716392E1C003C9EE6 /* StoreDataSource.m */; };
+		76897D3F16C3DE18001E06DB /* topPlayerStarSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 76897D3D16C3DE18001E06DB /* topPlayerStarSelected.png */; };
+		76897D4016C3DE18001E06DB /* topPlayerStarSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76897D3E16C3DE18001E06DB /* topPlayerStarSelected@2x.png */; };
 		7689F5DD16B6A48E00D8AC5C /* ivHit.png in Resources */ = {isa = PBXBuildFile; fileRef = 7689F5DB16B6A48E00D8AC5C /* ivHit.png */; };
 		7689F5DE16B6A48E00D8AC5C /* ivHit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7689F5DC16B6A48E00D8AC5C /* ivHit@2x.png */; };
 		7690DD9316BFFC2900731B51 /* sl_shylc.png in Resources */ = {isa = PBXBuildFile; fileRef = 7690DD9116BFFC2900731B51 /* sl_shylc.png */; };
@@ -476,7 +485,6 @@
 		BD83A42F16720DFE003EE4B3 /* RefreshContentDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7679D8C31563949E00BDE3A6 /* RefreshContentDataController.m */; };
 		BD83A43016720DFE003EE4B3 /* PlayersOnLineDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 767FEF28156A5AF80016B415 /* PlayersOnLineDataSource.m */; };
 		BD83A43116720DFE003EE4B3 /* ListOfItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767FEF2F156A64A40016B415 /* ListOfItemsViewController.m */; };
-		BD83A43216720DFE003EE4B3 /* CDPlayerOnLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682E362156BD22000A8F9A0 /* CDPlayerOnLine.m */; };
 		BD83A43316720DFE003EE4B3 /* OGHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8000D5157755A600703AC8 /* OGHelper.m */; };
 		BD83A43416720DFE003EE4B3 /* UIView+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 763F8A3B1578FC0900D8BB42 /* UIView+Hierarchy.m */; };
 		BD83A43516720DFE003EE4B3 /* UIButton+Image+Title.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388D2157DE37800377D88 /* UIButton+Image+Title.m */; };
@@ -939,6 +947,16 @@
 		3188979515CAD7FE002D52EA /* LevelCongratViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LevelCongratViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		3188979615CAD7FE002D52EA /* LevelCongratViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LevelCongratViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		3188979715CAD7FE002D52EA /* LevelCongratViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LevelCongratViewController.xib; path = "../Cowboy Duel/LevelCongratViewController.xib"; sourceTree = "<group>"; };
+		318D010516C3A2AC00BFA030 /* FavouritesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouritesCell.h; sourceTree = "<group>"; };
+		318D010616C3A2AC00BFA030 /* FavouritesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouritesCell.m; sourceTree = "<group>"; };
+		318D010C16C3B08D00BFA030 /* FavouritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FavouritesViewController.h; path = ../Resorces/Xib/FavouritesViewController.h; sourceTree = "<group>"; };
+		318D010D16C3B08D00BFA030 /* FavouritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FavouritesViewController.m; path = ../Resorces/Xib/FavouritesViewController.m; sourceTree = "<group>"; };
+		318D010E16C3B08D00BFA030 /* FavouritesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FavouritesViewController.xib; path = Xib/FavouritesViewController.xib; sourceTree = "<group>"; };
+		318D011116C3C52700BFA030 /* FavoritesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FavoritesCell.xib; path = Xib/FavoritesCell.xib; sourceTree = "<group>"; };
+		318D011316C3D5AF00BFA030 /* FavouritesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouritesDataSource.h; sourceTree = "<group>"; };
+		318D011416C3D5B000BFA030 /* FavouritesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouritesDataSource.m; sourceTree = "<group>"; };
+		318D011616C3E19000BFA030 /* CDFavPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDFavPlayer.h; sourceTree = "<group>"; };
+		318D011716C3E19100BFA030 /* CDFavPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDFavPlayer.m; sourceTree = "<group>"; };
 		318F233916B9437A0081BE5E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		318F233A16B9437A0081BE5E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		318F236516B95BC90081BE5E /* st_title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = st_title.png; sourceTree = "<group>"; };
@@ -1018,6 +1036,8 @@
 		7606C21916C396D700B5EEB7 /* GAITransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITransaction.h; sourceTree = "<group>"; };
 		7606C21A16C396D700B5EEB7 /* GAITransactionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITransactionItem.h; sourceTree = "<group>"; };
 		7606C21C16C396D700B5EEB7 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
+		7606C23916C3DA2F00B5EEB7 /* topPlayerStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topPlayerStar.png; sourceTree = "<group>"; };
+		7606C23A16C3DA2F00B5EEB7 /* topPlayerStar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "topPlayerStar@2x.png"; sourceTree = "<group>"; };
 		760E675F15BD8276006F6832 /* TopPlayersDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopPlayersDataSource.h; sourceTree = "<group>"; };
 		760E676015BD8277006F6832 /* TopPlayersDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopPlayersDataSource.m; sourceTree = "<group>"; };
 		760E676315BD844B006F6832 /* TopPlayersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopPlayersViewController.m; sourceTree = "<group>"; };
@@ -1085,8 +1105,6 @@
 		768044C815AC6979005ABD3A /* dv_arm@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dv_arm@2x.png"; sourceTree = "<group>"; };
 		7682BDDD15AC5F22001C09EC /* HelpPracticeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpPracticeView.m; sourceTree = "<group>"; };
 		7682BDDE15AC5F22001C09EC /* HelpPracticeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpPracticeView.h; sourceTree = "<group>"; };
-		7682E361156BD22000A8F9A0 /* CDPlayerOnLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDPlayerOnLine.h; sourceTree = "<group>"; };
-		7682E362156BD22000A8F9A0 /* CDPlayerOnLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDPlayerOnLine.m; sourceTree = "<group>"; };
 		768321D81654DDD000E78A8C /* TeachingHelperController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TeachingHelperController.xib; path = Xib/TeachingHelperController.xib; sourceTree = "<group>"; };
 		768321DE1654E60D00E78A8C /* TeachingHelperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingHelperViewController.h; sourceTree = "<group>"; };
 		768321DF1654E60D00E78A8C /* TeachingHelperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingHelperViewController.m; sourceTree = "<group>"; };
@@ -1121,6 +1139,8 @@
 		7687E8C416392534003C9EE6 /* StoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StoreViewController.xib; path = Xib/StoreViewController.xib; sourceTree = "<group>"; };
 		7687E8C616392E1C003C9EE6 /* StoreDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoreDataSource.h; path = PlayersOnLineDataSource/StoreDataSource.h; sourceTree = "<group>"; };
 		7687E8C716392E1C003C9EE6 /* StoreDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoreDataSource.m; path = PlayersOnLineDataSource/StoreDataSource.m; sourceTree = "<group>"; };
+		76897D3D16C3DE18001E06DB /* topPlayerStarSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topPlayerStarSelected.png; sourceTree = "<group>"; };
+		76897D3E16C3DE18001E06DB /* topPlayerStarSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "topPlayerStarSelected@2x.png"; sourceTree = "<group>"; };
 		7689F5DB16B6A48E00D8AC5C /* ivHit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ivHit.png; sourceTree = "<group>"; };
 		7689F5DC16B6A48E00D8AC5C /* ivHit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ivHit@2x.png"; sourceTree = "<group>"; };
 		7690DD9116BFFC2900731B51 /* sl_shylc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sl_shylc.png; sourceTree = "<group>"; };
@@ -1834,6 +1854,15 @@
 			path = Achievment;
 			sourceTree = "<group>";
 		};
+		318D010916C3AF4800BFA030 /* Favourites */ = {
+			isa = PBXGroup;
+			children = (
+				318D010E16C3B08D00BFA030 /* FavouritesViewController.xib */,
+				318D011116C3C52700BFA030 /* FavoritesCell.xib */,
+			);
+			name = Favourites;
+			sourceTree = "<group>";
+		};
 		31DA9EFB15BD331900492A9F /* ListOnLine */ = {
 			isa = PBXGroup;
 			children = (
@@ -1851,6 +1880,10 @@
 				76B94E6816528CEB00F372E9 /* shop_list_castel@2x.png */,
 				76B94E6916528CEB00F372E9 /* topPlayerCell_blue.png */,
 				76B94E6A16528CEB00F372E9 /* topPlayerCell_blue@2x.png */,
+				7606C23916C3DA2F00B5EEB7 /* topPlayerStar.png */,
+				7606C23A16C3DA2F00B5EEB7 /* topPlayerStar@2x.png */,
+				76897D3D16C3DE18001E06DB /* topPlayerStarSelected.png */,
+				76897D3E16C3DE18001E06DB /* topPlayerStarSelected@2x.png */,
 			);
 			path = ListOnLine;
 			sourceTree = "<group>";
@@ -2028,6 +2061,8 @@
 		767FEF26156A5AF70016B415 /* PlayersOnLineDataSource */ = {
 			isa = PBXGroup;
 			children = (
+				318D011316C3D5AF00BFA030 /* FavouritesDataSource.h */,
+				318D011416C3D5B000BFA030 /* FavouritesDataSource.m */,
 				760E675F15BD8276006F6832 /* TopPlayersDataSource.h */,
 				760E676015BD8277006F6832 /* TopPlayersDataSource.m */,
 				767FEF27156A5AF80016B415 /* PlayersOnLineDataSource.h */,
@@ -2038,12 +2073,14 @@
 				764B8926165FD0F70014E35B /* PracticeCell.m */,
 				762AA30E15B99C72001B65E2 /* TopPlayerCell.h */,
 				762AA30F15B99C72001B65E2 /* TopPlayerCell.m */,
+				318D010516C3A2AC00BFA030 /* FavouritesCell.h */,
+				318D010616C3A2AC00BFA030 /* FavouritesCell.m */,
 				7679306F15BE8B60007F461F /* CDPlayerMain.h */,
 				7679307015BE8B60007F461F /* CDPlayerMain.m */,
-				7682E361156BD22000A8F9A0 /* CDPlayerOnLine.h */,
-				7682E362156BD22000A8F9A0 /* CDPlayerOnLine.m */,
 				7679307315BE8D64007F461F /* CDTopPlayer.h */,
 				7679307415BE8D64007F461F /* CDTopPlayer.m */,
+				318D011616C3E19000BFA030 /* CDFavPlayer.h */,
+				318D011716C3E19100BFA030 /* CDFavPlayer.m */,
 			);
 			path = PlayersOnLineDataSource;
 			sourceTree = "<group>";
@@ -2051,6 +2088,7 @@
 		767FEF33156A652E0016B415 /* Xib */ = {
 			isa = PBXGroup;
 			children = (
+				318D010916C3AF4800BFA030 /* Favourites */,
 				7687667816BA7543003405F9 /* GunDrumViewController.xib */,
 				BD81E637169EC4D100CE8278 /* ActiveDuelViewController.xib */,
 				BD84DAA4164ABCA000DEEE38 /* LoginAnimatedViewController.xib */,
@@ -2536,6 +2574,8 @@
 				767FEF2F156A64A40016B415 /* ListOfItemsViewController.m */,
 				760E676415BD844B006F6832 /* TopPlayersViewController.h */,
 				760E676315BD844B006F6832 /* TopPlayersViewController.m */,
+				318D010C16C3B08D00BFA030 /* FavouritesViewController.h */,
+				318D010D16C3B08D00BFA030 /* FavouritesViewController.m */,
 				BDD07B7B141E1F170085E4FB /* HelpViewController.h */,
 				BDD07B7C141E1F170085E4FB /* HelpViewController.m */,
 				BDD07B8B141E1F170085E4FB /* LoadViewController.h */,
@@ -2931,6 +2971,12 @@
 				3192D65F16CA400000047BB7 /* back-568h@2x.png in Resources */,
 				3187725716CA833A00D90797 /* pv_wanted_back-568h@2x.png in Resources */,
 				3187725816CA833A00D90797 /* pv_wanted_photo_frame-568h@2x.png in Resources */,
+				7606C23B16C3DA2F00B5EEB7 /* topPlayerStar.png in Resources */,
+				7606C23C16C3DA2F00B5EEB7 /* topPlayerStar@2x.png in Resources */,
+				76897D3F16C3DE18001E06DB /* topPlayerStarSelected.png in Resources */,
+				76897D4016C3DE18001E06DB /* topPlayerStarSelected@2x.png in Resources */,
+				318D011016C3B08D00BFA030 /* FavouritesViewController.xib in Resources */,
+				318D011216C3C52700BFA030 /* FavoritesCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3289,7 +3335,6 @@
 				7679D8C41563949E00BDE3A6 /* RefreshContentDataController.m in Sources */,
 				767FEF29156A5AF80016B415 /* PlayersOnLineDataSource.m in Sources */,
 				767FEF30156A64A50016B415 /* ListOfItemsViewController.m in Sources */,
-				7682E363156BD22000A8F9A0 /* CDPlayerOnLine.m in Sources */,
 				BD8000D6157755A600703AC8 /* OGHelper.m in Sources */,
 				763F8A3D1578FC0900D8BB42 /* UIView+Hierarchy.m in Sources */,
 				768388D3157DE37800377D88 /* UIButton+Image+Title.m in Sources */,
@@ -3342,6 +3387,10 @@
 				BD243B0816A9765800D89E47 /* ARView.m in Sources */,
 				BD243B0B16A979BC00D89E47 /* OponentCoordinateView.m in Sources */,
 				7687667916BA7543003405F9 /* GunDrumViewController.m in Sources */,
+				318D010716C3A2AD00BFA030 /* FavouritesCell.m in Sources */,
+				318D010F16C3B08D00BFA030 /* FavouritesViewController.m in Sources */,
+				318D011516C3D5B100BFA030 /* FavouritesDataSource.m in Sources */,
+				318D011816C3E19200BFA030 /* CDFavPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3393,7 +3442,6 @@
 				BD83A42F16720DFE003EE4B3 /* RefreshContentDataController.m in Sources */,
 				BD83A43016720DFE003EE4B3 /* PlayersOnLineDataSource.m in Sources */,
 				BD83A43116720DFE003EE4B3 /* ListOfItemsViewController.m in Sources */,
-				BD83A43216720DFE003EE4B3 /* CDPlayerOnLine.m in Sources */,
 				BD83A43316720DFE003EE4B3 /* OGHelper.m in Sources */,
 				BD83A43416720DFE003EE4B3 /* UIView+Hierarchy.m in Sources */,
 				BD83A43516720DFE003EE4B3 /* UIButton+Image+Title.m in Sources */,
