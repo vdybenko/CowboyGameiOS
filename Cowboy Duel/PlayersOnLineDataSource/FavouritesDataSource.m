@@ -360,7 +360,7 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     return [NSKeyedUnarchiver unarchiveObjectWithData:data1];
 }
 
--(NSUInteger(^)(NSArray *, NSString *))findPlayerByID {
++(NSUInteger(^)(NSArray *, NSString *))findPlayerByID {
     return ^(NSArray * array, NSString *dAuthID) {
         for (NSUInteger i = 0; i < [array count]; i++) {
             CDPlayerMain *player = [array objectAtIndex:i];
