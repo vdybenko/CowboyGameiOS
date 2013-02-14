@@ -19,13 +19,12 @@
 
 @interface PlayersOnLineDataSource ()
 
-@property (nonatomic) SSConnection *connection;
 @property (nonatomic) BOOL startLoad;
 
 @end 
 
 @implementation PlayersOnLineDataSource
-@synthesize arrItemsList, delegate, statusOnLine, serverObjects, connection, startLoad;
+@synthesize arrItemsList, delegate, statusOnLine, serverObjects, startLoad;
 
 
 #pragma mark - Instance initialization
@@ -47,8 +46,7 @@
      
      topPlayersDataSource = [[StartViewController sharedInstance] topPlayersDataSource];
      [topPlayersDataSource reloadDataSource];
-     self.connection = [SSConnection sharedInstance];
-     self.connection.delegate = self;
+
      srand ([NSDate timeIntervalSinceReferenceDate]);
      //[self reloadRandomId];
 	return self;
@@ -59,7 +57,13 @@
 {
     [self addPracticeCell];
     if (statusOnLine) {
-        [self.connection sendData:@"" packetID:NETWORK_GET_LIST_ONLINE ofLength:sizeof(int)];
+        
+        [self refreshListOnline];
+        self.serverObjects = self.listOnline;
+        [self addPracticeCell];
+        ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
+        [listOfItemsViewController didRefreshController];
+        
         [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(connectionTimeout) userInfo:nil repeats:NO];
         self.startLoad = YES;
     }else{
@@ -67,34 +71,6 @@
         ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
         [listOfItemsViewController didRefreshController];
     }
-}
-
-- (void) listOnlineResponse:(NSString *)jsonString
-{
-    self.startLoad = NO;
-    NSError *jsonParseError;
-    [self.serverObjects removeAllObjects];
-    SBJSON *parser = [[SBJSON alloc] init];
-    NSLog(@"jsonString: %@", jsonString);
-    NSArray *servers = [parser objectWithString:jsonString error:&jsonParseError];
-    
-    if (!servers) {
-        NSLog(@"JSON parse error: %@", jsonParseError);
-        [self.serverObjects removeAllObjects];
-    }
-    else{
-        NSLog(@"servers: %@", servers);
-        for (NSDictionary *server in servers)
-        {
-            SSServer *serverObj = [[SSServer alloc] init];
-            [serverObj setValuesForKeysWithDictionary:server];
-            [self checkServerForFavorite:serverObj];
-            [self.serverObjects addObject:serverObj];
-        }
-    }
-    [self addPracticeCell];
-    ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
-    [listOfItemsViewController didRefreshController];
 }
 
 -(void)connectionTimeout

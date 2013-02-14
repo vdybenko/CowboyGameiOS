@@ -18,8 +18,6 @@
     NSMutableData *receivedData;
     
     NSMutableDictionary *imageDownloadsInProgress;
-    
-    SSConnection *connection;
 }
 @end
 
@@ -44,9 +42,7 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
 	}
     arrItemsList=[[NSMutableArray alloc] init];
     imageDownloadsInProgress=[[NSMutableDictionary alloc] init];
-
-    connection = [SSConnection sharedInstance];
-    connection.delegate = self;
+    
     self.serverObjects = [[NSMutableArray alloc] init];
     tableView=pTable;
 	return self;
@@ -78,7 +74,9 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
         
         if (theConnection) {
             receivedData = [[NSMutableData alloc] init];
-            [connection sendData:@"" packetID:NETWORK_GET_LIST_ONLINE ofLength:sizeof(int)];
+//            [connection sendData:@"" packetID:NETWORK_GET_LIST_ONLINE ofLength:sizeof(int)];
+            [self refreshListOnline];
+            self.serverObjects = self.listOnline;
             
         } else {
         
@@ -262,37 +260,6 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     }
 }
 
-#pragma mark SSConnectionDelegate
-
-- (void) listOnlineResponse:(NSString *)jsonString
-{
-    BOOL isNeedReload = (!self.serverObjects)?YES:NO;
-   
-    NSError *jsonParseError;
-    [self.serverObjects removeAllObjects];
-    SBJSON *parser = [[SBJSON alloc] init];
-
-    NSArray *servers = [parser objectWithString:jsonString error:&jsonParseError];
-    
-    if (!servers) {
-        NSLog(@"\nfavs JSON parse error: %@", jsonParseError);
-        [self.serverObjects removeAllObjects];
-    }
-    else{
-        
-        for (NSDictionary *server in servers)
-        {
-            SSServer *serverObj = [[SSServer alloc] init];
-            [serverObj setValuesForKeysWithDictionary:server];
-            [self.serverObjects addObject:serverObj];
-        }
-    }
-
-    if (isNeedReload) {
-        [self reloadDataSource];
-    }
-}
-
 #pragma mark
 +(void)addFavoriteId:(NSString*)favoriteId completionHandler:(void (^)(NSURLResponse*, NSData*, NSError*)) finishBlock;
 {
@@ -358,18 +325,6 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
 {
     NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:FAVORITES_LIST];
     return [NSKeyedUnarchiver unarchiveObjectWithData:data1];
-}
-
-+(NSUInteger(^)(NSArray *, NSString *))findPlayerByID {
-    return ^(NSArray * array, NSString *dAuthID) {
-        for (NSUInteger i = 0; i < [array count]; i++) {
-            CDPlayerMain *player = [array objectAtIndex:i];
-            if ([player.dAuth isEqualToString:dAuthID]) {
-                return i;
-            }
-        }
-        return (NSUInteger)NSNotFound;
-    };
 }
 
 -(BOOL) isOnline:(CDFavPlayer *)fvPlayer;
