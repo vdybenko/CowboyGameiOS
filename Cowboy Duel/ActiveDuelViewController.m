@@ -60,6 +60,8 @@
     float scaleDelta;
     BOOL oponnentFoll;
     BOOL oponnentFollSend;
+    
+    int opponentTime;
 }
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *floatView;
@@ -260,6 +262,18 @@ static CGFloat oponentLiveImageViewStartWidth;
     {
         [subview removeFromSuperview];
     }
+    if(!delegate)
+    {
+        if (!opAccount.bot) opponentTime=7000;
+        else{
+            int countBullets = [DuelRewardLogicController countUpBuletsWithOponentLevel:[AccountDataSource sharedInstance].accountLevel defense:[AccountDataSource sharedInstance].accountDefenseValue playerAtack:opAccount.accountWeapon.dDamage];
+            
+            
+            opponentTime = 3000 + countBullets * (220 + rand() % 160);
+            DLog(@"bot opponentTime %d", opponentTime);
+        }
+    }
+
 
 }
 
@@ -270,6 +284,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     [gunDrumViewController hideGun];
     [shotTimer invalidate];
     [moveTimer invalidate];
+    
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -420,7 +435,8 @@ static CGFloat oponentLiveImageViewStartWidth;
         }
         
         if(!shotCountBullet) {
-            
+            if (duelEnd) return;
+            duelEnd = YES;
             [activityIndicatorView setText:@""];
             [activityIndicatorView showView];
             [self horizontalFlip];
@@ -428,15 +444,6 @@ static CGFloat oponentLiveImageViewStartWidth;
             {
                 DLog(@"Kill!!!");
                 DLog(@"Shot Time = %d.%d", (shotTime - time * 1000) / 1000, (shotTime - time * 1000));
-                int opponentTime;
-                if (!opAccount.bot) opponentTime=7000;
-                else{
-                    int countBullets = [DuelRewardLogicController countUpBuletsWithOponentLevel:[AccountDataSource sharedInstance].accountLevel defense:[AccountDataSource sharedInstance].accountDefenseValue playerAtack:opAccount.accountWeapon.dDamage];
-                    
-                    
-                    opponentTime = 3000 + countBullets * (220 + rand() % 160);
-                    DLog(@"bot opponentTime %d", opponentTime);
-                }
                 
                 FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime - time * 1000) andOponentTime:opponentTime andGameCenterController:self andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
                 
@@ -629,6 +636,17 @@ static CGFloat oponentLiveImageViewStartWidth;
             [delegate duelTimerEnd];
         duelTimerEnd = YES;
         [timer invalidate];
+    }
+    
+    if (!delegate) {
+        if (shotTime - time * 1000 > opponentTime) {
+            [self userLost];
+            FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime - time * 1000) andOponentTime:opponentTime andGameCenterController:self andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
+            
+            [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
+            [timer invalidate];
+            [moveTimer invalidate];
+        }
     }
 }
 
