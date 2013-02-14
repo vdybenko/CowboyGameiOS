@@ -14,7 +14,7 @@
 @synthesize dImageGunURL;
 @synthesize dSoundLocal;
 @synthesize dSoundURL;
-
+@synthesize dFrequently;
 
 
 -(void)encodeWithCoder:(NSCoder *)encoder
@@ -25,6 +25,7 @@
     [encoder encodeObject:self.dImageGunURL forKey:@"IMAGE_GUN_URL"];
     [encoder encodeObject:self.dSoundLocal forKey:@"SOUND_LOCAL"];
     [encoder encodeObject:self.dSoundURL forKey:@"SOUND_URL"];
+    [encoder encodeFloat:self.dFrequently forKey:@"FREQUENTLY"];
 }
 
 -(id)initWithCoder:(NSCoder *)decoder
@@ -35,6 +36,7 @@
     self.dImageGunURL = [decoder decodeObjectForKey:@"IMAGE_GUN_URL"];
     self.dSoundLocal = [decoder decodeObjectForKey:@"SOUND_LOCAL"];
     self.dSoundURL = [decoder decodeObjectForKey:@"SOUND_URL"];
+    self.dFrequently = [decoder decodeFloatForKey:@"FREQUENTLY"];
     return self;
 }
 
@@ -42,6 +44,7 @@
 {
     self = [super init];
     self.dDamage = 0;
+    self.dFrequently = 0.f;
     self.dImageGunLocal = @"";
     self.dImageGunURL = @"";
     self.dSoundLocal = @"";

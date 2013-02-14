@@ -344,6 +344,8 @@ static NSString *getSavePathForDuelProduct()
         if (product.dPrice == 0) {
             [arrayIDProducts addObject:product.dPurchaseUrl];
         }
+        
+        product.dFrequently = [[dic objectForKey:@"freq"] floatValue];
         [arrItems addObject: product];
     }
     [DuelProductDownloaderController saveWeapon:arrItems];
@@ -490,6 +492,7 @@ static NSString *getSavePathForDuelProduct()
     product.dPurchaseUrl=nil;
     product.dLevelLock=0;
     product.dCountOfUse=1;
+    product.dFrequently = 3;
     return product;
 }
 
