@@ -929,6 +929,10 @@ static StartViewController *sharedHelper = nil;
         switch (messageID) {
             case 1:{
 //                Фаворит викликає тебе на бій
+                NSString *namePlayer = [messageHeader objectForKey:@"id"];
+                const char *name = [namePlayer cStringUsingEncoding:NSUTF8StringEncoding];
+                SSConnection *connection = [SSConnection sharedInstance];
+                [connection sendData:(void *)(name) packetID:NETWORK_SET_PAIR ofLength:sizeof(char) * [playerAccount.accountID length]];
             }
                 break;
             case 2:{
