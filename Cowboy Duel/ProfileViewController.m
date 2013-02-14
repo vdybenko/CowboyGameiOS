@@ -914,6 +914,9 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     
     FavouritesViewController *favVC = [[FavouritesViewController alloc] initWithAccount:playerAccount];
     [self.navigationController pushViewController:favVC animated:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/profile_favorites_click" forKey:@"event"]];
 
 }
 
