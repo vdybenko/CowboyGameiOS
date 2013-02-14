@@ -14,7 +14,6 @@
 @property (strong, nonatomic) SSConnection *connection;
 @property (strong, nonatomic) NSMutableArray *listOnline;
 
-//+ (NSMutableArray *)listOnlineResponse:(NSString *)jsonString;
 + (NSUInteger(^)(NSArray *, NSString *)) findPlayerByID;
 - (void) refreshListOnline;
 

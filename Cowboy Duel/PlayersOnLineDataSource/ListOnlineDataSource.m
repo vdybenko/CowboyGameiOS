@@ -32,9 +32,25 @@
     [connection sendData:@"" packetID:NETWORK_GET_LIST_ONLINE ofLength:sizeof(int)];
 }
 
-+ (NSMutableArray *)arrayListOnline:(NSString *)jsonString;
-{
++(NSUInteger(^)(NSArray *, NSString *))findPlayerByID {
+    return ^(NSArray * array, NSString *dAuthID) {
+        for (NSUInteger i = 0; i < [array count]; i++) {
+            CDPlayerMain *player = [array objectAtIndex:i];
+            if ([player.dAuth isEqualToString:dAuthID]) {
+                return i;
+            }
+        }
+        return (NSUInteger)NSNotFound;
+    };
+}
 
+#pragma mark SSConnection handlers:
+
+-(void) listOnlineResponse:(NSString *)jsonString
+{
+    
+    NSLog(@"\nrefresh response: %@", jsonString);
+    
     NSMutableArray *serverObjects = [[NSMutableArray alloc] init];
     NSError *jsonParseError;
     
@@ -56,26 +72,7 @@
             [serverObjects addObject:serverObj];
         }
     }
-    return serverObjects;
-}
-
-+(NSUInteger(^)(NSArray *, NSString *))findPlayerByID {
-    return ^(NSArray * array, NSString *dAuthID) {
-        for (NSUInteger i = 0; i < [array count]; i++) {
-            CDPlayerMain *player = [array objectAtIndex:i];
-            if ([player.dAuth isEqualToString:dAuthID]) {
-                return i;
-            }
-        }
-        return (NSUInteger)NSNotFound;
-    };
-}
-
-#pragma mark SSConnection handlers:
-
--(void) listOnlineResponse:(NSString *)jsonString
-{
-    self.listOnline = [ListOnlineDataSource arrayListOnline:jsonString];
+    self.listOnline = serverObjects;
 }
 
 @end
