@@ -59,6 +59,8 @@
     NSMutableArray *placesOfInterest;
     float steadyScale;
     float scaleDelta;
+    
+    BOOL isGunCanShotOfFrequently;
 }
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *floatView;
@@ -120,7 +122,6 @@ static CGFloat oponentLiveImageViewStartWidth;
         [brockenGlassAudioPlayer prepareToPlay];
         
         [StartViewController sharedInstance].playerStop;
-
     }
     return self;
 }
@@ -203,6 +204,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     follAccelCheck = NO;
     accelerometerState = NO;
     soundStart = NO;
+    isGunCanShotOfFrequently = YES;
     
     [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(3.0 / 60.0)];
     [[UIAccelerometer sharedAccelerometer] setDelegate:self];
@@ -318,55 +320,59 @@ static CGFloat oponentLiveImageViewStartWidth;
 }
 
 - (IBAction)shotButtonClick:(id)sender {
-    if ([self.fireImageView isAnimating]) {
-        [self.fireImageView stopAnimating];
-    }
-    [self.fireImageView startAnimating];
-       
-    if(delegate)
-    {
-        [delegate sendShot];
-    }
-    
-    switch (shotCountForSound) {
-        case 1:
-            [self.titleSteadyFire setHidden:YES];
-            [self.lblBehold setHidden:YES];
-            self.gunButton.hidden = NO;
-            
-            [shotAudioPlayer1 stop];
-            [shotAudioPlayer1 setCurrentTime:0.0];
-            [shotAudioPlayer1 performSelectorInBackground:@selector(play) withObject:nil];
-            
-            shotCountForSound = 2;
-            break;
-        case 2:
-            [shotAudioPlayer2 stop];
-            [shotAudioPlayer2 setCurrentTime:0.0];
-            [shotAudioPlayer2 performSelectorInBackground:@selector(play) withObject:nil];
-            
-            shotCountForSound = 3;
-            break;
-        case 3:
-            [shotAudioPlayer3 stop];
-            [shotAudioPlayer3 setCurrentTime:0.0];
-            [shotAudioPlayer3 performSelectorInBackground:@selector(play) withObject:nil];
+    if (isGunCanShotOfFrequently) {
+        [self startGunFrequentlyBlockTime];
+        
+        if ([self.fireImageView isAnimating]) {
+            [self.fireImageView stopAnimating];
+        }
+        [self.fireImageView startAnimating];
+        
+        if(delegate)
+        {
+            [delegate sendShot];
+        }
+        
+        switch (shotCountForSound) {
+            case 1:
+                [self.titleSteadyFire setHidden:YES];
+                [self.lblBehold setHidden:YES];
+                self.gunButton.hidden = NO;
+                
+                [shotAudioPlayer1 stop];
+                [shotAudioPlayer1 setCurrentTime:0.0];
+                [shotAudioPlayer1 performSelectorInBackground:@selector(play) withObject:nil];
+                
+                shotCountForSound = 2;
+                break;
+            case 2:
+                [shotAudioPlayer2 stop];
+                [shotAudioPlayer2 setCurrentTime:0.0];
+                [shotAudioPlayer2 performSelectorInBackground:@selector(play) withObject:nil];
+                
+                shotCountForSound = 3;
+                break;
+            case 3:
+                [shotAudioPlayer3 stop];
+                [shotAudioPlayer3 setCurrentTime:0.0];
+                [shotAudioPlayer3 performSelectorInBackground:@selector(play) withObject:nil];
 
-            shotCountForSound = 1;
-            break;
-        default:
-            break;
+                shotCountForSound = 1;
+                break;
+            default:
+                break;
+        }
+        
+        CGPoint targetPoint;
+        targetPoint.x = self.opponentImage.center.x - (self.floatView.bounds.size.width / 2 - self.floatView.center.x);
+        targetPoint.y = self.opponentImage.center.y - (self.floatView.bounds.size.height / 2 - self.floatView.center.y);
+        
+        CGPoint centerOfScreanPoint;
+        centerOfScreanPoint.x = self.crossImageView.bounds.origin.x + self.crossImageView.center.x;
+        centerOfScreanPoint.y = self.crossImageView.bounds.origin.y + self.crossImageView.center.y;
+       
+        [self cheackHitForShot:centerOfScreanPoint andTargetPoint:targetPoint];
     }
-    
-    CGPoint targetPoint;
-    targetPoint.x = self.opponentImage.center.x - (self.floatView.bounds.size.width / 2 - self.floatView.center.x);
-    targetPoint.y = self.opponentImage.center.y - (self.floatView.bounds.size.height / 2 - self.floatView.center.y);
-    
-    CGPoint centerOfScreanPoint;
-    centerOfScreanPoint.x = self.crossImageView.bounds.origin.x + self.crossImageView.center.x;
-    centerOfScreanPoint.y = self.crossImageView.bounds.origin.y + self.crossImageView.center.y;
-   
-    [self cheackHitForShot:centerOfScreanPoint andTargetPoint:targetPoint];
 }
 
 - (void)horizontalFlip{
@@ -765,6 +771,19 @@ static CGFloat oponentLiveImageViewStartWidth;
     steadyScale = 1.0;
     [self.titleSteadyFire setHidden:YES];
     [self.lblBehold setHidden:YES];
+}
+
+#pragma mark - Frequently of gun
+
+-(void)finishGunFrequentlyBlockTime
+{
+    isGunCanShotOfFrequently = YES;
+}
+
+-(void)startGunFrequentlyBlockTime
+{
+    isGunCanShotOfFrequently = NO;
+    [self performSelector:@selector(finishGunFrequentlyBlockTime) withObject:Nil afterDelay:playerAccount.accountWeapon.dFrequently];
 }
 
 #pragma mark - IBAction

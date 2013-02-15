@@ -685,7 +685,6 @@ static StartViewController *sharedHelper = nil;
     if (self.navigationController.visibleViewController != listOfItemsViewController) {
         [self.navigationController pushViewController:listOfItemsViewController animated:YES];
     }
-
 }
 
 - (IBAction)storeButtonClick:(id)sender {

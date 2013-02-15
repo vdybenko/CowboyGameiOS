@@ -492,7 +492,7 @@ static NSString *getSavePathForDuelProduct()
     product.dPurchaseUrl=nil;
     product.dLevelLock=0;
     product.dCountOfUse=1;
-    product.dFrequently = 3;
+    product.dFrequently = 3.5f;
     return product;
 }
 
