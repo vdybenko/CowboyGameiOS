@@ -52,8 +52,8 @@
 {
     [super viewDidLoad];
     
-    [_loadingView setHidden:NO];
-    [_activityIndicator startAnimating];
+    [self.loadingView setHidden:NO];
+    [self.activityIndicator startAnimating];
     
     favsDataSource = [[StartViewController sharedInstance] favsDataSource];
 //    [_favsDataSource reloadDataSource];
@@ -79,8 +79,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 //    if ([_favsDataSource.arrItemsList count]!=0) {
-        [self.loadingView setHidden:YES];
-        [self.activityIndicator stopAnimating];
+//        [self.loadingView setHidden:YES];
+//        [self.activityIndicator stopAnimating];
 //    }
 }
 -(void)viewDidAppear:(BOOL)animated
@@ -188,6 +188,12 @@
 
 }
 
+-(void)didRefreshController
+{
+    [self.loadingView setHidden:YES];
+    [self.activityIndicator stopAnimating];
+    [tvFavTable reloadData];
+}
 
 #pragma mark -
 -(void)startTableAnimation

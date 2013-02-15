@@ -15,6 +15,7 @@
 @property (strong, nonatomic) SSConnection *connection;
 @property (strong, nonatomic) NSMutableArray *serverObjects;
 @property BOOL isNeedFavCheck;
+@property BOOL isNeedPractice;
 
 + (NSUInteger(^)(NSArray *, NSString *)) findPlayerByID;
 - (void) refreshListOnline;

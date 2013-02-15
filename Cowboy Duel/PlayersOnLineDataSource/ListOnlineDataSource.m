@@ -11,12 +11,14 @@
 #import "SSConnection.h"
 #import "CDPlayerMain.h"
 #import "ListOfItemsViewController.h"
+#import "FavouritesViewController.h"
+#import "PlayersOnLineDataSource.h"
 
 ListOfItemsViewController *delegate;
 
 @implementation ListOnlineDataSource
 
-@synthesize connection,serverObjects,isNeedFavCheck;
+@synthesize connection,serverObjects,isNeedFavCheck,isNeedPractice;
 
 #pragma mark class methods:
 +(NSUInteger(^)(NSArray *, NSString *))findPlayerByID {
@@ -82,8 +84,17 @@ ListOfItemsViewController *delegate;
         }
     }
     NSLog(@"\n refresh Finished!");
-    ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
-    [listOfItemsViewController didRefreshController];
+    if (isNeedPractice) {
+        if ([self respondsToSelector:@selector(addPracticeCell)]) {
+            [self performSelector:@selector(addPracticeCell)];
+        }
+        ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
+        [listOfItemsViewController didRefreshController];
+    }else{
+
+        FavouritesViewController *favsVC = (FavouritesViewController *)delegate;
+        [favsVC didRefreshController];
+    }
 }
 
 -(void)checkServerForFavorite:(SSServer*)server

@@ -58,8 +58,9 @@
     [self addPracticeCell];
     if (statusOnLine) {
         self.isNeedFavCheck = YES;
-        [self addPracticeCell];
+        self.isNeedPractice = YES;
         [self refreshListOnline];       
+//        [self addPracticeCell];
         
         [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(connectionTimeout) userInfo:nil repeats:NO];
         self.startLoad = YES;
