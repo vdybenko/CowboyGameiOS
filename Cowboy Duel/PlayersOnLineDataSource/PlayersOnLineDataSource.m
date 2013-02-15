@@ -24,7 +24,7 @@
 @end 
 
 @implementation PlayersOnLineDataSource
-@synthesize arrItemsList, delegate, statusOnLine, serverObjects, startLoad;
+@synthesize arrItemsList, delegate, statusOnLine, startLoad;
 
 
 #pragma mark - Instance initialization
@@ -57,12 +57,9 @@
 {
     [self addPracticeCell];
     if (statusOnLine) {
-        
-        [self refreshListOnline];
-        self.serverObjects = self.listOnline;
+        self.isNeedFavCheck = YES;
         [self addPracticeCell];
-        ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
-        [listOfItemsViewController didRefreshController];
+        [self refreshListOnline];       
         
         [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(connectionTimeout) userInfo:nil repeats:NO];
         self.startLoad = YES;
@@ -107,6 +104,7 @@
         SSServer *player;
         
         player=[self.serverObjects objectAtIndex:indexPath.row];
+//        [self checkServerForFavorite:player];
         [cell populateWithPlayer:player];
         [cell setPlayerIcon:nil];
         
@@ -226,15 +224,5 @@
     [delegate clickButton:indexPath];
 }
 
--(void)checkServerForFavorite:(SSServer*)server
-{
-    NSUInteger index = [FavouritesDataSource findPlayerByID]([StartViewController sharedInstance].favsDataSource.arrItemsList ,server.serverName);
-    if (index == (NSUInteger)NSNotFound) {
-        server.favorite = NO;
-    }else{
-        server.favorite = YES;
-        
-    }
-}
 
 @end

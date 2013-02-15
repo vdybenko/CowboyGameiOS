@@ -30,8 +30,6 @@
 @property(weak, nonatomic) UITableView *tableView;
 @property(weak, nonatomic)id<TableCellWithButton> delegate;
 
-@property (nonatomic, strong) NSMutableArray *serverObjects;
-
 -(void) reloadDataSource;
 -(id) initWithTable:(UITableView *)pTable;
 

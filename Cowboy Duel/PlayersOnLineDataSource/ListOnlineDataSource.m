@@ -10,9 +10,27 @@
 #import "SSServer.h"
 #import "SSConnection.h"
 #import "CDPlayerMain.h"
+#import "ListOfItemsViewController.h"
+
+ListOfItemsViewController *delegate;
 
 @implementation ListOnlineDataSource
-@synthesize connection,listOnline;
+
+@synthesize connection,serverObjects,isNeedFavCheck;
+
+#pragma mark class methods:
++(NSUInteger(^)(NSArray *, NSString *))findPlayerByID {
+    return ^(NSArray * array, NSString *dAuthID) {
+        for (NSUInteger i = 0; i < [array count]; i++) {
+            CDPlayerMain *player = [array objectAtIndex:i];
+            if ([player.dAuth isEqualToString:dAuthID]) {
+                return i;
+            }
+        }
+        return (NSUInteger)NSNotFound;
+    };
+}
+#pragma mark -
 
 - (id)init{
     self = [super init];
@@ -32,18 +50,6 @@
     [connection sendData:@"" packetID:NETWORK_GET_LIST_ONLINE ofLength:sizeof(int)];
 }
 
-+(NSUInteger(^)(NSArray *, NSString *))findPlayerByID {
-    return ^(NSArray * array, NSString *dAuthID) {
-        for (NSUInteger i = 0; i < [array count]; i++) {
-            CDPlayerMain *player = [array objectAtIndex:i];
-            if ([player.dAuth isEqualToString:dAuthID]) {
-                return i;
-            }
-        }
-        return (NSUInteger)NSNotFound;
-    };
-}
-
 #pragma mark SSConnection handlers:
 
 -(void) listOnlineResponse:(NSString *)jsonString
@@ -51,17 +57,17 @@
     
     NSLog(@"\nrefresh response: %@", jsonString);
     
-    NSMutableArray *serverObjects = [[NSMutableArray alloc] init];
+//    NSMutableArray *serverObjects = [[NSMutableArray alloc] init];
     NSError *jsonParseError;
     
-    [serverObjects removeAllObjects];
+    [self.serverObjects removeAllObjects];
     SBJSON *parser = [[SBJSON alloc] init];
     
     NSArray *servers = [parser objectWithString:jsonString error:&jsonParseError];
     
     if (!servers) {
         NSLog(@"\nJSON parse error: %@", jsonParseError);
-        [serverObjects removeAllObjects];
+        [self.serverObjects removeAllObjects];
     }
     else{
         
@@ -69,10 +75,25 @@
         {
             SSServer *serverObj = [[SSServer alloc] init];
             [serverObj setValuesForKeysWithDictionary:server];
-            [serverObjects addObject:serverObj];
+            if (isNeedFavCheck) {
+                [self checkServerForFavorite:serverObj];
+            }
+            [self.serverObjects addObject:serverObj];
         }
     }
-    self.listOnline = serverObjects;
+    NSLog(@"\n refresh Finished!");
+    ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
+    [listOfItemsViewController didRefreshController];
 }
 
+-(void)checkServerForFavorite:(SSServer*)server
+{
+    NSUInteger index = [FavouritesDataSource findPlayerByID]([StartViewController sharedInstance].favsDataSource.arrItemsList ,server.serverName);
+    if (index == (NSUInteger)NSNotFound) {
+        server.favorite = NO;
+    }else{
+        server.favorite = YES;
+        
+    }
+}
 @end

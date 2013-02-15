@@ -23,7 +23,7 @@
 
 @implementation FavouritesDataSource
 
-@synthesize arrItemsList, tableView, delegate, serverObjects;
+@synthesize arrItemsList, tableView, delegate;
 
 static const char *FAV_PLAYERS_URL = BASE_URL"users/get_favorites";
 static NSString  *const URL_ADD_FAVORITE = @BASE_URL"users/add_to_favorites";
@@ -74,9 +74,7 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
         
         if (theConnection) {
             receivedData = [[NSMutableData alloc] init];
-//            [connection sendData:@"" packetID:NETWORK_GET_LIST_ONLINE ofLength:sizeof(int)];
             [self refreshListOnline];
-            self.serverObjects = self.listOnline;
             
         } else {
         
