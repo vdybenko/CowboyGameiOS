@@ -14,6 +14,9 @@
 #import "FavouritesCell.h"
 #import "Utils.h"
 #import "SSConnection.h"
+
+#import "ListOnlineDataSource.h"
+
 @protocol IconDownloaderDelegate;
 
 @protocol TableCellWithButton
@@ -22,12 +25,10 @@
 -(void)didFinishLoadTable:(UITableView*)table;
 @end
 
-@interface FavouritesDataSource : NSObject <UITableViewDataSource,IconDownloaderDelegate,MemoryManagement, SSConnectionDelegate>
+@interface FavouritesDataSource : ListOnlineDataSource <UITableViewDataSource,IconDownloaderDelegate,MemoryManagement>
 @property(strong, readonly) NSMutableArray *arrItemsList;
 @property(weak, nonatomic) UITableView *tableView;
 @property(weak, nonatomic)id<TableCellWithButton> delegate;
-
-@property (nonatomic, strong) NSMutableArray *serverObjects;
 
 -(void) reloadDataSource;
 -(id) initWithTable:(UITableView *)pTable;
@@ -41,6 +42,5 @@
 -(void)saveFavorites:(NSArray*)array;
 -(NSMutableArray*)loadFavoritesArray;
 
-+(NSUInteger(^)(NSArray *, NSString *))findPlayerByID;
 -(BOOL) isOnline:(CDFavPlayer *)fvPlayer;
 @end

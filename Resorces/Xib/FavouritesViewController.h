@@ -20,5 +20,6 @@
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 - (id)initWithAccount:(AccountDataSource *)userAccount;
+-(void) didRefreshController;
 
 @end
