@@ -115,10 +115,12 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     
     if (statusOnline) {
         [cell.btnGetHim addTarget:self action:@selector(invaiteWithMessage:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btnGetHim removeTarget:self action:@selector(stealGold:) forControlEvents:UIControlEventTouchUpInside ];
         [cell.btnGetHim changeTitleByLabel:@"DUEL"];
     }else{
         if ([self checkForSteal:player]) {
-            [cell.btnGetHim removeTarget:self action:@selector(stealGold:) forControlEvents:UIControlEventTouchUpInside ];
+            [cell.btnGetHim removeTarget:self action:@selector(invaiteWithMessage:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.btnGetHim addTarget:self action:@selector(stealGold:) forControlEvents:UIControlEventTouchUpInside ];
             [cell.btnGetHim changeTitleByLabel:@"Steal"];
         }else{
             [cell.btnGetHim changeTitleByLabel:@"Poke"];
@@ -349,7 +351,7 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
 -(BOOL)checkForSteal:(CDFavPlayer *)fvPlayer ;
 {
     //condition for steal gold should be here!
-    return NO;
+    return YES;
 }
 
 #pragma mark -
@@ -365,6 +367,5 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     FavouritesCell *cell=(FavouritesCell *)[[sender superview] superview];
     NSIndexPath *indexPath = [tableView indexPathForCell:cell];
     [delegate clickButtonSteal:indexPath];
-    //    [delegate ]
 }
 @end

@@ -22,6 +22,8 @@
     AccountDataSource *oponentAccount;
     FavouritesDataSource *favsDataSource;
     DuelStartViewController *duelStartViewController;
+    
+    UIView *vStolenDolars;
 }
 @end
 
@@ -206,12 +208,16 @@
     [oponentAccount setBot:player.dBot];
     [oponentAccount setMoney:player.dMoney];
     [oponentAccount setSessionID:player.dSessionId];
+
+    int moneyExch = (oponentAccount.money<10)?1:oponentAccount.money/10.0;
+    
+    [self performSelector:@selector(showMessageOfStolen:) withObject:[NSNumber numberWithInt:moneyExch]];
+    [self performSelector:@selector(hideMessageOfStolen) withObject:self afterDelay:3.8];
     
     NSLog(@"\n%@\n%@", oponentAccount.accountName, playerAccount.accountName);
     
     CDTransaction *transaction = [[CDTransaction alloc] init];
     
-    int moneyExch = (oponentAccount.money<10)?1:oponentAccount.money/10.0;
     transaction.trMoneyCh = [NSNumber numberWithInt:moneyExch];
     transaction.trType = [NSNumber numberWithInt:1];
     transaction.trDescription = [[NSString alloc] initWithFormat:@"Steal"];
@@ -231,12 +237,13 @@
     playerAccount.money += moneyExch;
     [playerAccount saveMoney];
     [userDef synchronize];
-
+    
     [playerAccount sendTransactions:playerAccount.transactions];
     if (oponentAccount.bot) [oponentAccount sendTransactions:oponentAccount.transactions];
 
     [[StartViewController sharedInstance] modifierUser:playerAccount];
     if(oponentAccount.bot) [[StartViewController sharedInstance] modifierUser:oponentAccount];
+    
 
 }
 
@@ -266,4 +273,44 @@
         [NSThread sleepForTimeInterval:0.1];
     }
 }
+
+-(void)showMessageOfStolen: (NSNumber *)money;
+{
+    vStolenDolars=[[UIView alloc] initWithFrame:CGRectMake(12, -40, 290, 40)];
+    
+    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(10, 10, 270, 20)];
+    [label setTextAlignment:UITextAlignmentCenter];
+    [label setFont:[UIFont systemFontOfSize:16.f]];
+    UIColor *brownColor=[UIColor colorWithRed:0.38 green:0.267 blue:0.133 alpha:1];
+    [label setTextColor:brownColor];
+    [label setBackgroundColor:[UIColor clearColor]];
+    NSString *message = [[NSString alloc] initWithFormat:@"%@: %@$",NSLocalizedString(@"StolenMess", @""),money];
+    [label setText:message];
+    [vStolenDolars addSubview:label];
+    
+    [self.view addSubview:vStolenDolars];
+    [vStolenDolars setDinamicHeightBackground];
+    
+    [UIView animateWithDuration:0.6f
+                     animations:^{
+                         CGRect frame=vStolenDolars.frame;
+                         frame.origin.y += frame.size.height+5;
+                         vStolenDolars.frame = frame;
+                     }];
+}
+
+-(void)hideMessageOfStolen;
+{
+    [UIView animateWithDuration:0.6f
+                     animations:^{
+                         CGRect frame=vStolenDolars.frame;
+                         frame.origin.y -= frame.size.height+5;
+                         vStolenDolars.frame = frame;
+                     }
+                     completion:^(BOOL finished) {
+						 [vStolenDolars removeFromSuperview];
+					 }];
+    
+}
+
 @end

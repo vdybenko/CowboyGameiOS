@@ -258,6 +258,8 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "Poke" = "POKE";
 "Steal" = "STEAL";
 
+"StolenMess"="You've stolen";
+
 //Titles for Users
 "0Rank" = "Slave"; 
 "1Rank" = "Refugee";
