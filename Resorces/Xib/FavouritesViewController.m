@@ -14,6 +14,7 @@
 #import "SSConnection.h"
 #import "DuelStartViewController.h"
 #import "GameCenterViewController.h"
+#import "CDTransaction.h"
 
 @interface FavouritesViewController ()
 {
@@ -150,6 +151,7 @@
     [self releaseComponents];
 }
 
+//call to duel:
 -(void)clickButton:(NSIndexPath *)indexPath;
 {
     CDFavPlayer *player;
@@ -185,6 +187,56 @@
         ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:[AccountDataSource sharedInstance] oponentAccount:oponentAccount];
         [self.navigationController pushViewController:activeDuelViewController animated:YES];
     }
+
+}
+
+//steal money:
+-(void)clickButtonSteal: (NSIndexPath *)indexPath;
+{
+    playerAccount = [AccountDataSource sharedInstance];
+    
+    CDFavPlayer *player;
+    player = [favsDataSource.arrItemsList objectAtIndex:indexPath.row];
+    NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+    oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
+    [oponentAccount setAccountID:player.dAuth];
+    [oponentAccount setAccountName:player.dNickName];
+    [oponentAccount setAccountLevel:player.dLevel];
+    [oponentAccount setAvatar:player.dAvatar];
+    [oponentAccount setBot:player.dBot];
+    [oponentAccount setMoney:player.dMoney];
+    [oponentAccount setSessionID:player.dSessionId];
+    
+    NSLog(@"\n%@\n%@", oponentAccount.accountName, playerAccount.accountName);
+    
+    CDTransaction *transaction = [[CDTransaction alloc] init];
+    
+    int moneyExch = (oponentAccount.money<10)?1:oponentAccount.money/10.0;
+    transaction.trMoneyCh = [NSNumber numberWithInt:moneyExch];
+    transaction.trType = [NSNumber numberWithInt:1];
+    transaction.trDescription = [[NSString alloc] initWithFormat:@"Steal"];
+    transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];       
+    transaction.trOpponentID = [NSString stringWithString:(oponentAccount.accountID) ? [NSString stringWithString:oponentAccount.accountID]:@""];
+    [playerAccount.transactions addObject:transaction];
+    
+    CDTransaction *opponentTransaction = [CDTransaction new];
+    [opponentTransaction setTrDescription:[NSString stringWithString:transaction.trDescription]];
+    [opponentTransaction setTrType:[NSNumber numberWithInt:-1]];
+    [opponentTransaction setTrMoneyCh:[NSNumber numberWithInt:-[transaction.trMoneyCh intValue]]];
+    opponentTransaction.trOpponentID = [NSString stringWithString:(playerAccount.accountID) ? [NSString stringWithString:playerAccount.accountID]:@""];
+    opponentTransaction.trLocalID = [NSNumber numberWithInt:-1];
+    [oponentAccount.transactions addObject:opponentTransaction];
+
+    [playerAccount saveTransaction];
+    playerAccount.money += moneyExch;
+    [playerAccount saveMoney];
+    [userDef synchronize];
+
+    [playerAccount sendTransactions:playerAccount.transactions];
+    if (oponentAccount.bot) [oponentAccount sendTransactions:oponentAccount.transactions];
+
+    [[StartViewController sharedInstance] modifierUser:playerAccount];
+    if(oponentAccount.bot) [[StartViewController sharedInstance] modifierUser:oponentAccount];
 
 }
 

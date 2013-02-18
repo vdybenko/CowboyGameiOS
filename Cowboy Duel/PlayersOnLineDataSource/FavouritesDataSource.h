@@ -23,6 +23,7 @@
 -(void)clickButton:(NSIndexPath *)indexPath;
 @optional
 -(void)didFinishLoadTable:(UITableView*)table;
+-(void)clickButtonSteal:(NSIndexPath *)indexPath;
 @end
 
 @interface FavouritesDataSource : ListOnlineDataSource <UITableViewDataSource,IconDownloaderDelegate,MemoryManagement>
