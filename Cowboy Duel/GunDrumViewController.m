@@ -12,12 +12,17 @@
 @interface GunDrumViewController ()
 {
     BOOL runAnimationDump;
+    int firstAnimationCount;
+    int secondAnimationCount;
     double angle;
+    float steadyScale;
+    float scaleDelta;
+    NSTimer *scaleTimer;
 }
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapRecognizer;
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *colectionBullets;
 @property (weak, nonatomic) IBOutlet UIView *vLoadGun;
 @property (weak, nonatomic) IBOutlet UILabel *lbLoadGun;
-@property (weak, nonatomic) IBOutlet UIImageView *ivLine;
 @property (weak, nonatomic) IBOutlet UIView *drumBullets;
 @property (weak, nonatomic) IBOutlet UIImageView *arrow;
 @property (weak, nonatomic) IBOutlet UIView *gun;
@@ -53,9 +58,9 @@ static CGFloat timeSpinDump = 0.6f;
 @synthesize isCharging;
 @synthesize vLoadGun;
 @synthesize lbLoadGun;
-@synthesize ivLine;
 @synthesize gunImage;
 
+#pragma mark
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -82,6 +87,10 @@ static CGFloat timeSpinDump = 0.6f;
         self.view.frame = frame;
         
         lbLoadGun.text = NSLocalizedString(@"Load", @"");
+        steadyScale = 1.0;
+        scaleDelta = 0.0;
+        scaleTimer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(setScale) userInfo:nil repeats:YES];
+
         
     }
     return self;
@@ -99,8 +108,8 @@ static CGFloat timeSpinDump = 0.6f;
     [self setArrow:nil];
     [self setVLoadGun:nil];
     [self setLbLoadGun:nil];
-    [self setIvLine:nil];
     [self setGunImage:nil];
+    [self setTapRecognizer:nil];
     [super viewDidUnload];
 }
 
@@ -112,10 +121,9 @@ static CGFloat timeSpinDump = 0.6f;
 #pragma mark
 -(void)openGun;
 {
-    isCharging = YES;
+    [self.view.layer removeAllAnimations];
     [UIView animateWithDuration:timeOpenGun animations:^{
         arrow.hidden = YES;
-        vLoadGun.hidden = YES;
         gunImage.transform = CGAffineTransformMakeRotation(gunRotationAngle);
         drumBullets.hidden = NO;
         
@@ -131,11 +139,13 @@ static CGFloat timeSpinDump = 0.6f;
     isCharging = NO;
     arrow.hidden = NO;
     vLoadGun.hidden = NO;
+    lbLoadGun.text = NSLocalizedString(@"Load", @"");
     [UIView animateWithDuration:timeOpenDump animations:^{
         drumBullets.center= pntDumpClose;
         gunImage.transform = CGAffineTransformMakeRotation(0);
+        runAnimationDump = NO;
     }completion:^(BOOL finished) {
-        drumBullets.hidden = YES;
+        [self hideBullets];
         
         angle = 0;
         CGAffineTransform transform = drumBullets.transform;
@@ -143,27 +153,29 @@ static CGFloat timeSpinDump = 0.6f;
         transform = CGAffineTransformScale(rotateTransform, 1.0, 1.0);
         drumBullets.transform = transform;
         
-        [self hideBullets];
         [UIView animateWithDuration:timeCloseGun animations:^{
             CGRect frame=gun.frame;
             frame.origin = pntGunClose;
             gun.frame = frame;
         }completion:^(BOOL finished) {
-            runAnimationDump = NO;
+            drumBullets.hidden = YES;
         }];
     }];
 }
 
 -(void)chargeBulletsForTime:(CGFloat)time;
 {
+    lbLoadGun.text = NSLocalizedString(@"Loading", @"");
+    vLoadGun.hidden = NO;
+    
     if (time != 0) {
         timeChargeBullets = time/[colectionBullets count];
         timeSpinDump = time*0.17;
     }
     
+    isCharging = YES;
     runAnimationDump = YES;
     arrow.hidden = YES;
-    vLoadGun.hidden = YES;
     [self spinAnimation];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
@@ -176,48 +188,60 @@ static CGFloat timeSpinDump = 0.6f;
             });
             [NSThread sleepForTimeInterval:timeChargeBullets];
         }
-        if (isCharging) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self hideGun];
-            });
-        }
     });
 }
 
 -(void)spinAnimation
 {
-    [UIView animateWithDuration:timeSpinDump
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction
-                     animations:^{
-                         if (!CGAffineTransformEqualToTransform(CGAffineTransformMakeRotation(0), gunImage.transform)){
-                             angle -= 1.25;
-                             CGAffineTransform transform = drumBullets.transform;
-                             CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
-                             transform = CGAffineTransformScale(rotateTransform, 1.0, 1.0);
-                             drumBullets.transform = transform;
-                         }
-                     } completion:^(BOOL finished) {
-                         if (!CGAffineTransformEqualToTransform(CGAffineTransformMakeRotation(0), gunImage.transform))[self spinSecondAnimation];
-                     }];
+    if ((runAnimationDump)&&(!CGAffineTransformEqualToTransform(CGAffineTransformMakeRotation(0), gunImage.transform))){
+        if (firstAnimationCount<1) {
+            firstAnimationCount++;
+            [UIView animateWithDuration:timeSpinDump
+                                  delay:0.0
+                                options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction
+                             animations:^{
+                                 drumBullets.hidden = NO;
+                                 angle -= 1.25;
+                                 CGAffineTransform transform = drumBullets.transform;
+                                 CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
+                                 transform = CGAffineTransformScale(rotateTransform, 1.0, 1.0);
+                                 drumBullets.transform = transform;
+                             } completion:^(BOOL finished) {
+                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                     firstAnimationCount--;
+                                     if ((runAnimationDump)&&(!CGAffineTransformEqualToTransform(CGAffineTransformMakeRotation(0), gunImage.transform)))
+                                         [self spinSecondAnimation];
+                                 });
+                             }];
+        }
+    }
 }
 
 -(void)spinSecondAnimation
 {
-    [UIView animateWithDuration:timeSpinDump
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction
-                     animations:^{
-                         if (!CGAffineTransformEqualToTransform(CGAffineTransformMakeRotation(0), gunImage.transform)){
-                             angle -= 1.25;
-                             CGAffineTransform transform = drumBullets.transform;
-                             CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
-                             transform = CGAffineTransformScale(rotateTransform, 1.0, 1.0);
-                             drumBullets.transform = transform;
-                         }
-                     } completion:^(BOOL finished) {
-                         if (!CGAffineTransformEqualToTransform(CGAffineTransformMakeRotation(0), gunImage.transform))[self spinAnimation];
-                     }];
+    if ((runAnimationDump)&&(!CGAffineTransformEqualToTransform(CGAffineTransformMakeRotation(0), gunImage.transform))){
+        if (secondAnimationCount<1) {
+            secondAnimationCount++;
+            [UIView animateWithDuration:timeSpinDump
+                                  delay:0.0
+                                options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction
+                             animations:^{
+                                 drumBullets.hidden = NO;
+                                 angle -= 1.25;
+                                 CGAffineTransform transform = drumBullets.transform;
+                                 CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
+                                 transform = CGAffineTransformScale(rotateTransform, 1.0, 1.0);
+                                 drumBullets.transform = transform;
+                             } completion:^(BOOL finished) {
+                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                     secondAnimationCount--;
+                                     if ((runAnimationDump)&&(!CGAffineTransformEqualToTransform(CGAffineTransformMakeRotation(0), gunImage.transform)))
+                                         [self spinAnimation];
+                                 });
+                             }];
+        }
+    
+    }
 }
 
 -(void)hideBullets
@@ -242,24 +266,24 @@ static CGFloat timeSpinDump = 0.6f;
 {
     isCharging = NO;
     [UIView animateWithDuration:timeOpenDump animations:^{
+        vLoadGun.hidden = YES;
         drumBullets.center= pntDumpClose;
         gunImage.transform = CGAffineTransformMakeRotation(0);
+        runAnimationDump = NO;
     }completion:^(BOOL finished) {
-        drumBullets.hidden = YES;
-        
+        [self hideBullets];
         angle = 0;
         CGAffineTransform transform = drumBullets.transform;
         CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
         transform = CGAffineTransformScale(rotateTransform, 1.0, 1.0);
         drumBullets.transform = transform;
-        
-        [self hideBullets];
+
         [UIView animateWithDuration:timeCloseGun animations:^{
             CGRect frame=gun.frame;
             frame.origin.y += 50;
             gun.frame = frame;
         }completion:^(BOOL finished) {
-            runAnimationDump = NO;
+            drumBullets.hidden = YES;
         }];
     }];
 }
@@ -267,6 +291,50 @@ static CGFloat timeSpinDump = 0.6f;
 -(void)closeController;
 {
     [self.view removeFromSuperview];
+    [scaleTimer invalidate];
+}
+
+-(void)setScale
+{
+    if (steadyScale >= 1.3) scaleDelta = -0.01;
+    if (steadyScale <= 1.0) scaleDelta = 0.02;
+    steadyScale += scaleDelta;
+    
+    CGAffineTransform steadyTransform = CGAffineTransformMakeScale( steadyScale+scaleDelta*2, steadyScale+scaleDelta*2);
+    self.arrow.transform = steadyTransform;
+    
+}
+
+-(void)lableScaleInView:(UIView*)view
+{
+    __weak GunDrumViewController *bself = self;
+    [UIView animateWithDuration:0.35
+                     animations:^{
+                         view.transform = CGAffineTransformMakeScale(1.15, 1.15);
+                     }completion:^(BOOL complete) {
+                         [bself lableScaleOutView:view];
+                    }];
+}
+
+-(void)lableScaleOutView:(UIView*)view
+{
+    [UIView animateWithDuration:0.35
+                     animations:^{
+                         view.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                     }completion:^(BOOL complete) {
+                     }];
+    
+}
+
+#pragma mark Responding to gestures
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if ((gestureRecognizer == self.tapRecognizer)&&(!vLoadGun.isHidden)) {
+        return YES;
+    }
+    return NO;
+}
+- (IBAction)showGestureForTapRecognizer:(UITapGestureRecognizer *)sender {
+    [self lableScaleInView:vLoadGun];
 }
 
 @end

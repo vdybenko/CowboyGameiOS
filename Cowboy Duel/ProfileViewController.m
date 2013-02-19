@@ -88,9 +88,13 @@ static const CGFloat timeToStandartTitles = 1.8;
     BOOL didDisappear;
     BOOL needMoneyAnimation;
     
+    
+    __weak IBOutlet UIImageView *ivBackground;
+    
 //    First run
     int textIndex;
     __weak IBOutlet UILabel *lbDescription;
+    __weak IBOutlet UIImageView *ivPhotoFrame;
     
     DuelStartViewController *duelStartViewController;
     __weak IBOutlet UIActivityIndicatorView *activityIndicatorView;
@@ -229,6 +233,56 @@ static const CGFloat timeToStandartTitles = 1.8;
         
         userDefense.hidden = NO;
         userDefense = nil;
+//  check iphone 5 delta
+        if ([UIScreen mainScreen].bounds.size.height > 480) {
+            [ivBackground setImage:[UIImage imageNamed:@"pv_wanted_back-568h@2x.png"]];
+            
+            CGRect deltaFrame =  mainProfileView.frame;
+            deltaFrame.size.height += 77;
+            mainProfileView.frame = deltaFrame;
+            ivBackground.frame = deltaFrame;
+            
+            deltaFrame = tfFBName.frame;
+            deltaFrame.origin.y += 30;
+            tfFBName.frame = deltaFrame;
+            
+            deltaFrame = profilePictureView.frame;
+            deltaFrame.origin.y += 27;
+            profilePictureView.frame = deltaFrame;
+            
+            deltaFrame = profilePictureViewDefault.frame;
+            deltaFrame.origin.y += 27;
+            profilePictureViewDefault.frame = deltaFrame;
+            
+            deltaFrame = userAtackView.frame;
+            deltaFrame.origin.y += 27;
+            userAtackView.frame = deltaFrame;
+            
+            deltaFrame = userDefenseView.frame;
+            deltaFrame.origin.y += 27;
+            userDefenseView.frame = deltaFrame;
+            
+            deltaFrame = ivPhotoFrame.frame;
+            deltaFrame.origin.y += 27;
+            ivPhotoFrame.frame = deltaFrame;
+            
+            deltaFrame = lbGoldCount.frame;
+            deltaFrame.origin.y += 27;
+            lbGoldCount.frame = deltaFrame;
+            
+            deltaFrame = lbAward.frame;
+            deltaFrame.origin.y += 27;
+            lbAward.frame = deltaFrame;
+            
+            deltaFrame = lbGoldIcon.frame;
+            deltaFrame.origin.y += 27;
+            lbGoldIcon.frame = deltaFrame;
+            
+            deltaFrame = duelButton.frame;
+            deltaFrame.origin.y += 47;
+            duelButton.frame = deltaFrame;
+            
+        }
         
         [self checkIsOpponentFavorite];
     }
@@ -1002,6 +1056,8 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 - (void)viewDidUnload {
     activityIndicatorView = nil;
     bgActivityIndicator = nil;
+    ivBackground = nil;
+    ivPhotoFrame = nil;
     btnAddToFavorites = nil;
     btnFavourites = nil;
     lbFavouritesTitle = nil;

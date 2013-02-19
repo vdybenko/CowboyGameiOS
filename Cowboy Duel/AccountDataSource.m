@@ -33,6 +33,10 @@ static AccountDataSource *sharedHelper = nil;
 + (AccountDataSource *) sharedInstance {
     if (!sharedHelper) {
         sharedHelper = [[AccountDataSource alloc] initWithLocalPlayer];
+        [[NSNotificationCenter defaultCenter] addObserver:sharedHelper
+                                                 selector:@selector(sessionStateChanged:)
+                                                     name:SCSessionStateChangedNotification
+                                                   object:nil];
     }
     return sharedHelper;
 }
@@ -71,10 +75,6 @@ static AccountDataSource *sharedHelper = nil;
         achivments = [[NSMutableArray alloc] init];
         dicForRequests=[[NSMutableDictionary alloc] init];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(sessionStateChanged:)
-                                                     name:SCSessionStateChangedNotification
-                                                   object:nil];
     }
     return self;
 }

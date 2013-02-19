@@ -14,6 +14,7 @@
 #import "SSConnection.h"
 #import "DuelStartViewController.h"
 #import "GameCenterViewController.h"
+#import "CDTransaction.h"
 
 @interface FavouritesViewController ()
 {
@@ -21,12 +22,14 @@
     AccountDataSource *oponentAccount;
     FavouritesDataSource *favsDataSource;
     DuelStartViewController *duelStartViewController;
+    
+    UIView *vStolenDolars;
 }
 @end
 
 @implementation FavouritesViewController
 
-@synthesize lbFavsTitle, btnBack, vOffLineBackGround, wvOffLineText, tvFavTable;
+@synthesize lbFavsTitle, btnBack, vOffLineBackGround, wvOffLineText, tvFavTable, btnOffLine, btnOnLine;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -52,12 +55,13 @@
 {
     [super viewDidLoad];
     
-    [_loadingView setHidden:NO];
-    [_activityIndicator startAnimating];
+    [self.loadingView setHidden:NO];
+    [self.activityIndicator startAnimating];
     
     favsDataSource = [[StartViewController sharedInstance] favsDataSource];
 //    [_favsDataSource reloadDataSource];
     favsDataSource.tableView = tvFavTable;
+    favsDataSource.typeOfTable = ONLINE;
     favsDataSource.delegate=self;
     
     SSConnection *conn = [SSConnection sharedInstance];
@@ -75,20 +79,27 @@
     
     [btnBack setTitleByLabel:@"BACK"];
     [btnBack changeColorOfTitleByLabel:btnColor];
+    
+    [btnOnLine setTitleByLabel:@"OnLine"];
+    [btnOnLine changeColorOfTitleByLabel:btnColor];
+    
+    [btnOffLine setTitleByLabel:@"OffLine"];
+    [btnOffLine changeColorOfTitleByLabel:btnColor];
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 //    if ([_favsDataSource.arrItemsList count]!=0) {
-        [self.loadingView setHidden:YES];
-        [self.activityIndicator stopAnimating];
+//        [self.loadingView setHidden:YES];
+//        [self.activityIndicator stopAnimating];
 //    }
 }
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         [self startTableAnimation];
-    });
+//    });
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -111,6 +122,8 @@
     [self setTvFavTable:nil];
     [self setLbFavsTitle:nil];
     [self setBtnBack:nil];
+    [self setBtnOnLine:nil];
+    [self setBtnOffLine:nil];
     [super viewDidUnload];
 }
 
@@ -150,6 +163,29 @@
     [self releaseComponents];
 }
 
+- (IBAction)btnOnlineClicked:(id)sender {
+    
+    if (favsDataSource.typeOfTable != ONLINE) {
+        favsDataSource.typeOfTable = ONLINE;
+        [favsDataSource reloadDataSource];
+        [favsDataSource setCellsHide:YES];
+        [tvFavTable reloadData];
+    }
+
+}
+
+- (IBAction)btnOfflineClicked:(id)sender {
+    if (favsDataSource.typeOfTable != OFFLINE) {
+        favsDataSource.typeOfTable = OFFLINE;
+        
+        [favsDataSource reloadDataSource];
+        [favsDataSource setCellsHide:YES];
+        
+        [tvFavTable reloadData];
+    }
+}
+
+//call to duel:
 -(void)clickButton:(NSIndexPath *)indexPath;
 {
     CDFavPlayer *player;
@@ -188,10 +224,112 @@
 
 }
 
+//steal money:
+-(void)clickButtonSteal: (NSIndexPath *)indexPath;
+{
+    playerAccount = [AccountDataSource sharedInstance];
+    
+    CDFavPlayer *player;
+    player = [favsDataSource.arrItemsList objectAtIndex:indexPath.row];
+    NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+    oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
+    [oponentAccount setAccountID:player.dAuth];
+    [oponentAccount setAccountName:player.dNickName];
+    [oponentAccount setAccountLevel:player.dLevel];
+    [oponentAccount setAvatar:player.dAvatar];
+    [oponentAccount setBot:player.dBot];
+    [oponentAccount setMoney:player.dMoney];
+    [oponentAccount setSessionID:player.dSessionId];
+
+    int moneyExch = (oponentAccount.money<10)?1:oponentAccount.money/10.0;
+    
+    [self performSelector:@selector(showMessageOfStolen:) withObject:[NSNumber numberWithInt:moneyExch]];
+    [self performSelector:@selector(hideMessageOfStolen) withObject:self afterDelay:3.8];
+    
+    NSLog(@"\n%@\n%@", oponentAccount.accountName, playerAccount.accountName);
+    
+    CDTransaction *transaction = [[CDTransaction alloc] init];
+    
+    transaction.trMoneyCh = [NSNumber numberWithInt:moneyExch];
+    transaction.trType = [NSNumber numberWithInt:1];
+    transaction.trDescription = [[NSString alloc] initWithFormat:@"Steal"];
+    transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];       
+    transaction.trOpponentID = [NSString stringWithString:(oponentAccount.accountID) ? [NSString stringWithString:oponentAccount.accountID]:@""];
+    [playerAccount.transactions addObject:transaction];
+    
+    CDTransaction *opponentTransaction = [CDTransaction new];
+    [opponentTransaction setTrDescription:[NSString stringWithString:transaction.trDescription]];
+    [opponentTransaction setTrType:[NSNumber numberWithInt:-1]];
+    [opponentTransaction setTrMoneyCh:[NSNumber numberWithInt:-[transaction.trMoneyCh intValue]]];
+    opponentTransaction.trOpponentID = [NSString stringWithString:(playerAccount.accountID) ? [NSString stringWithString:playerAccount.accountID]:@""];
+    opponentTransaction.trLocalID = [NSNumber numberWithInt:-1];
+    [oponentAccount.transactions addObject:opponentTransaction];
+
+    [playerAccount saveTransaction];
+    playerAccount.money += moneyExch;
+    [playerAccount saveMoney];
+    [userDef synchronize];
+    
+    [playerAccount sendTransactions:playerAccount.transactions];
+    if (oponentAccount.bot) [oponentAccount sendTransactions:oponentAccount.transactions];
+
+    [[StartViewController sharedInstance] modifierUser:playerAccount];
+    if(oponentAccount.bot) [[StartViewController sharedInstance] modifierUser:oponentAccount];
+    
+
+}
+
+-(void)didRefreshController
+{
+    [self.loadingView setHidden:YES];
+    [self.activityIndicator stopAnimating];
+    [tvFavTable reloadData];
+}
 
 #pragma mark -
 -(void)startTableAnimation
 {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        int countOfCells=[favsDataSource.arrItemsList count];
+        int maxIndex;
+        if (countOfCells<5) {
+            maxIndex=countOfCells;
+        }else {
+            maxIndex=5;
+        }
+        
+        for (int i=0; i<maxIndex; i++) {
+            NSIndexPath* rowToReload = [NSIndexPath indexPathForRow:i inSection:0];
+            NSArray* rowsToReload = [NSArray arrayWithObjects:rowToReload, nil];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if ([tvFavTable.visibleCells count]>i) {
+                    UITableViewCell *cell = [tvFavTable.visibleCells lastObject];
+                    [cell setHidden:YES];
+                    
+                    UITableViewRowAnimation type;
+                    if (favsDataSource.typeOfTable == ONLINE)
+                    {
+                        type = UITableViewRowAnimationRight;
+                    }else{
+                        type = UITableViewRowAnimationLeft;
+                    }
+                    
+                    [self.tvFavTable beginUpdates];
+                    
+                    [favsDataSource setCellsHide:NO];
+                    
+                    [tvFavTable reloadRowsAtIndexPaths:rowsToReload withRowAnimation:type];
+                    
+                    [self.tvFavTable endUpdates];
+                }
+            });
+            [NSThread sleepForTimeInterval:0.12];
+        }
+    });
+
+    
+    /*
     int countOfCells=[favsDataSource.arrItemsList count];
     int maxIndex;
     if (countOfCells<5) {
@@ -203,9 +341,51 @@
         NSIndexPath* rowToReload = [NSIndexPath indexPathForRow:i inSection:0];
         NSArray* rowsToReload = [NSArray arrayWithObjects:rowToReload, nil];
         dispatch_async(dispatch_get_main_queue(), ^{
+            [favsDataSource setCellsHide:NO];
             [tvFavTable reloadRowsAtIndexPaths:rowsToReload withRowAnimation:UITableViewRowAnimationBottom];
         });        
         [NSThread sleepForTimeInterval:0.1];
     }
+     */
 }
+
+-(void)showMessageOfStolen: (NSNumber *)money;
+{
+    vStolenDolars=[[UIView alloc] initWithFrame:CGRectMake(12, -40, 290, 40)];
+    
+    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(10, 10, 270, 20)];
+    [label setTextAlignment:UITextAlignmentCenter];
+    [label setFont:[UIFont systemFontOfSize:16.f]];
+    UIColor *brownColor=[UIColor colorWithRed:0.38 green:0.267 blue:0.133 alpha:1];
+    [label setTextColor:brownColor];
+    [label setBackgroundColor:[UIColor clearColor]];
+    NSString *message = [[NSString alloc] initWithFormat:@"%@: $%@",NSLocalizedString(@"StolenMess", @""),money];
+    [label setText:message];
+    [vStolenDolars addSubview:label];
+    
+    [self.view addSubview:vStolenDolars];
+    [vStolenDolars setDinamicHeightBackground];
+    
+    [UIView animateWithDuration:0.6f
+                     animations:^{
+                         CGRect frame=vStolenDolars.frame;
+                         frame.origin.y += frame.size.height+5;
+                         vStolenDolars.frame = frame;
+                     }];
+}
+
+-(void)hideMessageOfStolen;
+{
+    [UIView animateWithDuration:0.6f
+                     animations:^{
+                         CGRect frame=vStolenDolars.frame;
+                         frame.origin.y -= frame.size.height+5;
+                         vStolenDolars.frame = frame;
+                     }
+                     completion:^(BOOL finished) {
+						 [vStolenDolars removeFromSuperview];
+					 }];
+    
+}
+
 @end

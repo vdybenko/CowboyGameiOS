@@ -46,6 +46,12 @@
 
 -(void)opponentShot;
 -(void)sendShot;
+
+-(void)oponnentFollStart;
+-(void)oponnentFollEnd;
+
+-(void)readyToStart;
+
 @end
 
 @protocol DuelStartViewControllerDelegate <NSObject>
@@ -87,5 +93,5 @@
 @property(weak)id<ActiveDuelViewControllerDelegate> delegate;
 
 -(id)initWithTime:(int)randomTime Account:(AccountDataSource *)userAccount oponentAccount:(AccountDataSource *)pOponentAccount;
-
+-(void)userLost;
 @end

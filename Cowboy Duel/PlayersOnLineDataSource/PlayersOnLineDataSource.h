@@ -13,6 +13,8 @@
 #import "TopPlayersDataSource.h"
 #import "IconDownloader.h"
 
+#import "ListOnlineDataSource.h"
+
 @protocol TableCellWithButton
 
 -(void)clickButton:(NSIndexPath *)indexPath;
@@ -21,7 +23,7 @@
 
 @end
 
-@interface PlayersOnLineDataSource : NSObject <UITableViewDataSource,IconDownloaderDelegate> {
+@interface PlayersOnLineDataSource : ListOnlineDataSource <UITableViewDataSource,IconDownloaderDelegate> {
     NSMutableArray * arrItemsList;
     NSMutableData *receivedData;
     UITableView *_tableView;
@@ -36,7 +38,6 @@
 @property(strong, readonly)NSArray *arrItemsList;
 @property(strong, nonatomic)id<TableCellWithButton> delegate;
 @property(nonatomic) BOOL statusOnLine;
-@property (nonatomic, strong) NSMutableArray *serverObjects;
 
 -(void) reloadDataSource;
 -(id) initWithTable:(UITableView *)pTable;

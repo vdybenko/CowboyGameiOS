@@ -364,6 +364,8 @@ static StartViewController *sharedHelper = nil;
 
 - (void)viewDidLoad{
     [super viewDidLoad];
+    
+    int iPhone5Delta = [UIScreen mainScreen].bounds.size.height - 480;
   
     UIColor *buttonsTitleColor = [[UIColor alloc] initWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     
@@ -481,6 +483,31 @@ static StartViewController *sharedHelper = nil;
 	[[NSNotificationCenter defaultCenter] postNotificationName:kPushNotification
 														object:self
                                                       userInfo:[NSDictionary dictionaryWithObjectsAndKeys:sInfo, @"messageId",message, @"message", nil]];
+//    deltas for 5 iPhone
+    if (iPhone5Delta>0) {
+        iPhone5Delta = 25;
+        
+        CGRect frame = duelButton.frame;
+        frame.origin.y += iPhone5Delta;
+        [duelButton setFrame:frame];
+        
+        frame = saloon2Button.frame;
+        frame.origin.y += iPhone5Delta;
+        [saloon2Button setFrame:frame];
+        
+        frame = mapButton.frame;
+        frame.origin.y += iPhone5Delta;
+        [mapButton setFrame:frame];
+        
+        frame = profileButton.frame;
+        frame.origin.y += iPhone5Delta;
+        [profileButton setFrame:frame];
+        
+        frame = helpButton.frame;
+        frame.origin.y += iPhone5Delta;
+        [helpButton setFrame:frame];
+
+    }
 }
 - (void)viewDidUnload {
     feedbackView = nil;

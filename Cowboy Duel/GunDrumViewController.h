@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import <Core>
 
-@interface GunDrumViewController : UIViewController<MemoryManagement>
+@interface GunDrumViewController : UIViewController<MemoryManagement,UIGestureRecognizerDelegate>
 @property (nonatomic) CGFloat chargeTime;
 @property (nonatomic) BOOL isCharging;
 

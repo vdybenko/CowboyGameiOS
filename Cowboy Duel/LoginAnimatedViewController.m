@@ -101,7 +101,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
     
     practiceLable.text = NSLocalizedString(@"PRACTICE", @"");
     practiceLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
-    
+       
     [textsBackground setDinamicHeightBackground];
 }
 - (void)viewDidLoad
