@@ -248,9 +248,6 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
         }
     }
     
-    NSData *data= [NSKeyedArchiver archivedDataWithRootObject:arrItemsList];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"favPlayers"];
-    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"favPlayers"];
     [self saveFavorites:arrItemsList];
     
     [arrItemsList removeObjectsInArray:discardedItems];
