@@ -345,7 +345,7 @@ static NSString *getSavePathForDuelProduct()
             [arrayIDProducts addObject:product.dPurchaseUrl];
         }
         
-        product.dFrequently = [[dic objectForKey:@"freq"] floatValue];
+        product.dFrequently = [[dic objectForKey:@"frequently"] floatValue];
         [arrItems addObject: product];
     }
     [DuelProductDownloaderController saveWeapon:arrItems];

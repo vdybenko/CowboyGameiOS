@@ -14,8 +14,10 @@
     AVAudioPlayer *player;
     StartViewController  *startViewController;
     BOOL firstRun;
-    UIImageView *imgBackground;
     NSMutableData *receivedData;
+    __weak IBOutlet UILabel *versionLabel;
+    __weak IBOutlet UIImageView *imgBackground;
+    __weak IBOutlet UIActivityIndicatorView *activityIndicator;
 }
 @end
 
@@ -25,9 +27,11 @@ static const char *A_URL =  BASE_URL"api/authorization";
 
 -(id)initWithPush:(__weak NSDictionary *)notification
 {
-    self = [super init];
+    self = [super initWithNibName:@"LoadViewContoller" bundle:[NSBundle mainBundle]];
     if(self){
+        [self loadView];
         [AccountDataSource sharedInstance];
+        [activityIndicator stopAnimating];
         if(![[NSUserDefaults standardUserDefaults] boolForKey:@"AlreadyRun"] ) {
             firstRun = YES;
             [self login];
@@ -50,16 +54,15 @@ static const char *A_URL =  BASE_URL"api/authorization";
         if (remoteNotif){
             startViewController.pushNotification = remoteNotif;
         }
+        
         CGRect frame = [[UIScreen mainScreen]bounds];
         
         if (frame.size.height > 480) {
-            imgBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default-568h.png"]];
+            imgBackground.image = [UIImage imageNamed:@"Default-568h.png"];
         }
-        else
-            imgBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default.png"]];
-        
-        [self.view addSubview:imgBackground];
-        
+        else{
+            imgBackground.image = [UIImage imageNamed:@"Default.png"];
+        }
         NSString *version = @"Version ";
         if ([[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"] != nil) {
             version = [version stringByAppendingString:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]];
@@ -69,13 +72,11 @@ static const char *A_URL =  BASE_URL"api/authorization";
             version = @"";
         }
         
-        UILabel *versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, frame.size.height - 40, 150, 40)];
         [versionLabel setTextColor:[UIColor whiteColor]];
         [versionLabel setFont:[UIFont systemFontOfSize:10]];
         [versionLabel setBackgroundColor:[UIColor clearColor]];
         versionLabel.text = version;
         [versionLabel setHidden:NO];
-        [self.view addSubview:versionLabel];
         versionLabel = nil;
         
         if (!firstRun || ![startViewController connectedToWiFi]) {
@@ -85,11 +86,6 @@ static const char *A_URL =  BASE_URL"api/authorization";
     return self;
 }
 
-- (void) viewDidLoad 
-{
-    
-}
-
 -(void)releaseComponents
 {
     player = nil;
@@ -97,8 +93,6 @@ static const char *A_URL =  BASE_URL"api/authorization";
     imgBackground = nil;
     receivedData = nil;
 }
-
-
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -116,10 +110,12 @@ static const char *A_URL =  BASE_URL"api/authorization";
 }
 
 -(void)login
-{    
+{
+    [activityIndicator startAnimating];
+    activityIndicator.hidden = NO;
     NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:A_URL encoding:NSUTF8StringEncoding]]
                                                             cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                        timeoutInterval:10.0];
+                                                        timeoutInterval:5.0];
     
     [theRequest setHTTPMethod:@"POST"]; 
     
@@ -169,6 +165,8 @@ static const char *A_URL =  BASE_URL"api/authorization";
         [[AccountDataSource sharedInstance] setSessionID:sesion];
         DLog(@"get sesion %@",sesion);
     }
+    
+    [activityIndicator stopAnimating];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
@@ -179,6 +177,7 @@ static const char *A_URL =  BASE_URL"api/authorization";
 - (void)connection:(NSURLConnection *)connection
   didFailWithError:(NSError *)error
 {
+    [activityIndicator stopAnimating];
     [self closeWindow];
     DLog(@"Start Connection failed! Error - %@ %@",
           [error localizedDescription],
@@ -195,11 +194,19 @@ static const char *A_URL =  BASE_URL"api/authorization";
 
 -(void)finishRefresh;
 {
+    [activityIndicator stopAnimating];
     [self closeWindow];
 }
 -(void)finishWithError;
 {
+    [activityIndicator stopAnimating];
     [self closeWindow];
 }
 
+- (void)viewDidUnload {
+    versionLabel = nil;
+    imgBackground = nil;
+    activityIndicator = nil;
+    [super viewDidUnload];
+}
 @end
