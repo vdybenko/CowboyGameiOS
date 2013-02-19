@@ -22,6 +22,10 @@
     NSMutableData *receivedData;
     
     NSMutableDictionary *imageDownloadsInProgress;
+    
+    NSArray *arrDefense;
+    
+    NSArray *arrAttack;
 }
 @end
 
@@ -50,6 +54,8 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     self.serverObjects = [[NSMutableArray alloc] init];
     tableView=pTable;
     cellsHide = YES;
+    arrDefense = [DuelProductDownloaderController loadDefenseArray];
+    arrAttack = [DuelProductDownloaderController loadWeaponArray];
 	return self;
 }
 
@@ -192,8 +198,6 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     
     NSArray *responseObject = ValidateObject([jsonString JSONValue], [NSArray class]);
     [arrItemsList removeAllObjects];
-    NSArray *arrDefense = [DuelProductDownloaderController loadDefenseArray];
-    NSArray *arrAttack = [DuelProductDownloaderController loadWeaponArray];
     for (NSDictionary *dic in responseObject) {
         CDFavPlayer *player=[[CDFavPlayer alloc] init];
         player.dAuth=[dic objectForKey:@"authen"];
@@ -201,21 +205,20 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
         player.dMoney=[[dic objectForKey:@"money"] intValue];
         player.dLevel=[[dic objectForKey:@"level"] intValue];
         player.dAvatar=[dic objectForKey:@"avatar"];
-        int defId = ([[dic objectForKey:@"defenses"] respondsToSelector:@selector(objectForKey:)])
-                    ?[[[dic objectForKey:@"defenses"] objectForKey:@"id"] intValue]
-                    :-1;
+        
         player.dDefense=[DuelRewardLogicController countUpBuletsWithPlayerLevel:player.dLevel];
-        if (defId != -1) {
-            CDDefenseProduct *def = [arrDefense objectAtIndex:defId];
+        if([[dic objectForKey:@"defenses"] respondsToSelector:@selector(objectForKey:)]){
+            int defId = [[[dic objectForKey:@"defenses"] objectForKey:@"id"] intValue];
+            NSUInteger index=[[AccountDataSource sharedInstance] findObsByID](arrDefense,defId);
+            CDDefenseProduct *def = [arrDefense objectAtIndex:index];
             player.dDefense += def.dDefense;
         }
         
-        int attId = ([[dic objectForKey:@"weapons"] respondsToSelector:@selector(objectForKey:)])
-        ?[[[dic objectForKey:@"weapons"] objectForKey:@"id"] intValue]
-        :-1;
         player.dAttack=[DuelRewardLogicController countUpBuletsWithPlayerLevel:player.dLevel];
-        NSUInteger index=[[AccountDataSource sharedInstance] findObsByID](arrAttack,attId);
-        if (attId != -1) {
+
+        if([[dic objectForKey:@"weapons"] respondsToSelector:@selector(objectForKey:)]){
+            int attId = [[[dic objectForKey:@"weapons"] objectForKey:@"id"] intValue];
+            NSUInteger index=[[AccountDataSource sharedInstance] findObsByID](arrAttack,attId);
             CDWeaponProduct *att = [arrAttack objectAtIndex:index];
             player.dAttack += att.dDamage;
         }
@@ -244,11 +247,14 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
             }
         }
     }
-    [arrItemsList removeObjectsInArray:discardedItems];
-    [discardedItems removeAllObjects];
+    
     NSData *data= [NSKeyedArchiver archivedDataWithRootObject:arrItemsList];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"favPlayers"];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"favPlayers"];
+    [self saveFavorites:arrItemsList];
+    
+    [arrItemsList removeObjectsInArray:discardedItems];
+    [discardedItems removeAllObjects];
     
     FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
     [favsViewController.loadingView setHidden:YES];
