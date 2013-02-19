@@ -455,7 +455,6 @@
 		BD83A40F16720DFE003EE4B3 /* CDAchivment.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B59141E1F170085E4FB /* CDAchivment.m */; };
 		BD83A41016720DFE003EE4B3 /* CDDuel.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B5B141E1F170085E4FB /* CDDuel.m */; };
 		BD83A41116720DFE003EE4B3 /* CDTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B5D141E1F170085E4FB /* CDTransaction.m */; };
-		BD83A41216720DFE003EE4B3 /* DuelDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B62141E1F170085E4FB /* DuelDataSource.m */; };
 		BD83A41316720DFE003EE4B3 /* DuelStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B64141E1F170085E4FB /* DuelStartViewController.m */; };
 		BD83A41416720DFE003EE4B3 /* DuelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B66141E1F170085E4FB /* DuelViewController.m */; };
 		BD83A41516720DFE003EE4B3 /* FinalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B6A141E1F170085E4FB /* FinalViewController.m */; };
@@ -783,7 +782,6 @@
 		BDD07BC4141E1F170085E4FB /* CDAchivment.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B59141E1F170085E4FB /* CDAchivment.m */; };
 		BDD07BC5141E1F170085E4FB /* CDDuel.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B5B141E1F170085E4FB /* CDDuel.m */; };
 		BDD07BC6141E1F170085E4FB /* CDTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B5D141E1F170085E4FB /* CDTransaction.m */; };
-		BDD07BC8141E1F170085E4FB /* DuelDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B62141E1F170085E4FB /* DuelDataSource.m */; };
 		BDD07BC9141E1F170085E4FB /* DuelStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B64141E1F170085E4FB /* DuelStartViewController.m */; };
 		BDD07BCA141E1F170085E4FB /* DuelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B66141E1F170085E4FB /* DuelViewController.m */; };
 		BDD07BCC141E1F170085E4FB /* FinalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B6A141E1F170085E4FB /* FinalViewController.m */; };
@@ -1393,8 +1391,6 @@
 		BDD07B5C141E1F170085E4FB /* CDTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDTransaction.h; sourceTree = "<group>"; };
 		BDD07B5D141E1F170085E4FB /* CDTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDTransaction.m; sourceTree = "<group>"; };
 		BDD07B5E141E1F170085E4FB /* Cowboy Duel-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Cowboy Duel-Prefix.pch"; sourceTree = "<group>"; };
-		BDD07B61141E1F170085E4FB /* DuelDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DuelDataSource.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		BDD07B62141E1F170085E4FB /* DuelDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DuelDataSource.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BDD07B63141E1F170085E4FB /* DuelStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DuelStartViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		BDD07B64141E1F170085E4FB /* DuelStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DuelStartViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BDD07B65141E1F170085E4FB /* DuelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuelViewController.h; sourceTree = "<group>"; };
@@ -2546,8 +2542,6 @@
 				BDD07B5B141E1F170085E4FB /* CDDuel.m */,
 				BDD07B5C141E1F170085E4FB /* CDTransaction.h */,
 				BDD07B5D141E1F170085E4FB /* CDTransaction.m */,
-				BDD07B61141E1F170085E4FB /* DuelDataSource.h */,
-				BDD07B62141E1F170085E4FB /* DuelDataSource.m */,
 				BDD07B6B141E1F170085E4FB /* FintDataSource.h */,
 				BDD07B6C141E1F170085E4FB /* FintDataSource.m */,
 				BD8000D4157755A600703AC8 /* OGHelper.h */,
@@ -3308,7 +3302,6 @@
 				BDD07BC4141E1F170085E4FB /* CDAchivment.m in Sources */,
 				BDD07BC5141E1F170085E4FB /* CDDuel.m in Sources */,
 				BDD07BC6141E1F170085E4FB /* CDTransaction.m in Sources */,
-				BDD07BC8141E1F170085E4FB /* DuelDataSource.m in Sources */,
 				BDD07BC9141E1F170085E4FB /* DuelStartViewController.m in Sources */,
 				BDD07BCA141E1F170085E4FB /* DuelViewController.m in Sources */,
 				BDD07BCC141E1F170085E4FB /* FinalViewController.m in Sources */,
@@ -3417,7 +3410,6 @@
 				BD83A40F16720DFE003EE4B3 /* CDAchivment.m in Sources */,
 				BD83A41016720DFE003EE4B3 /* CDDuel.m in Sources */,
 				BD83A41116720DFE003EE4B3 /* CDTransaction.m in Sources */,
-				BD83A41216720DFE003EE4B3 /* DuelDataSource.m in Sources */,
 				BD83A41316720DFE003EE4B3 /* DuelStartViewController.m in Sources */,
 				BD83A41416720DFE003EE4B3 /* DuelViewController.m in Sources */,
 				BD83A41516720DFE003EE4B3 /* FinalViewController.m in Sources */,
