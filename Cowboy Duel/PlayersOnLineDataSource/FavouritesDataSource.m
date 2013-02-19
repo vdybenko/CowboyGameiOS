@@ -104,7 +104,7 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     
     [cell setPlayerIcon:nil];
     
-    if (typeOfTable == Online) {
+    if (typeOfTable == ONLINE) {
         [cell.btnGetHim addTarget:self action:@selector(invaiteWithMessage:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btnGetHim removeTarget:self action:@selector(stealGold:) forControlEvents:UIControlEventTouchUpInside ];
         [cell.btnGetHim changeTitleByLabel:@"DUEL"];
@@ -209,12 +209,12 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
                 fvPlayer.dBot = server.bot;
                 fvPlayer.dStatus = server.status;
                 fvPlayer.dSessionId = server.sessionId;
-                if (typeOfTable == Offline) {
+                if (typeOfTable == OFFLINE) {
                     [discardedItems addObject:fvPlayer];
                 }else
                     [discardedItems removeObject:fvPlayer];
             }else{
-                if (typeOfTable == Online) {
+                if (typeOfTable == ONLINE) {
                     [discardedItems addObject:fvPlayer];
                 }else
                     [discardedItems removeObject:fvPlayer];

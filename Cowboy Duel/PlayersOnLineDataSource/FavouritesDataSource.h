@@ -29,8 +29,8 @@
 @end
 
 typedef enum {
-    Offline,
-    Online
+    OFFLINE,
+    ONLINE
 } FavTableType;
 
 @interface FavouritesDataSource : ListOnlineDataSource <UITableViewDataSource,IconDownloaderDelegate,MemoryManagement>

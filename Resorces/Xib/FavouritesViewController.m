@@ -61,7 +61,7 @@
     favsDataSource = [[StartViewController sharedInstance] favsDataSource];
 //    [_favsDataSource reloadDataSource];
     favsDataSource.tableView = tvFavTable;
-    favsDataSource.typeOfTable = Online;
+    favsDataSource.typeOfTable = ONLINE;
     favsDataSource.delegate=self;
     
     SSConnection *conn = [SSConnection sharedInstance];
@@ -165,25 +165,23 @@
 
 - (IBAction)btnOnlineClicked:(id)sender {
     
-    if (favsDataSource.typeOfTable != Online) {
-        favsDataSource.typeOfTable = Online;
+    if (favsDataSource.typeOfTable != ONLINE) {
+        favsDataSource.typeOfTable = ONLINE;
         [favsDataSource reloadDataSource];
         [favsDataSource setCellsHide:YES];
         [tvFavTable reloadData];
-//        [self startTableAnimation];
     }
 
 }
 
 - (IBAction)btnOfflineClicked:(id)sender {
-    if (favsDataSource.typeOfTable != Offline) {
-        favsDataSource.typeOfTable = Offline;
+    if (favsDataSource.typeOfTable != OFFLINE) {
+        favsDataSource.typeOfTable = OFFLINE;
         
         [favsDataSource reloadDataSource];
         [favsDataSource setCellsHide:YES];
         
         [tvFavTable reloadData];
-//        [self startTableAnimation];
     }
 }
 
@@ -310,7 +308,7 @@
                     [cell setHidden:YES];
                     
                     UITableViewRowAnimation type;
-                    if (favsDataSource.typeOfTable == Online)
+                    if (favsDataSource.typeOfTable == ONLINE)
                     {
                         type = UITableViewRowAnimationRight;
                     }else{
