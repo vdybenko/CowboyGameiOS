@@ -23,7 +23,7 @@
 
 @implementation FavouritesDataSource
 
-@synthesize arrItemsList, tableView, delegate;
+@synthesize arrItemsList, tableView, delegate,typeOfTable,cellsHide;
 
 static const char *FAV_PLAYERS_URL = BASE_URL"users/get_favorites";
 static NSString  *const URL_ADD_FAVORITE = @BASE_URL"users/add_to_favorites";
@@ -45,45 +45,36 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     
     self.serverObjects = [[NSMutableArray alloc] init];
     tableView=pTable;
+    cellsHide = YES;
 	return self;
 }
 
 -(void) reloadDataSource;
 {
-    NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"favPlayers"];
-    NSMutableArray *testArr= [NSKeyedUnarchiver unarchiveObjectWithData:data1];
+    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:FAV_PLAYERS_URL encoding:NSUTF8StringEncoding]]
+                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                        timeoutInterval:kTimeOutSeconds];
+    
+    [theRequest setHTTPMethod:@"POST"];
+    NSDictionary *dicBody=[NSDictionary dictionaryWithObjectsAndKeys:
+                           [[AccountDataSource sharedInstance] accountID],@"authen",
+                           nil];
+    
+    NSString *stBody=[Utils makeStringForPostRequest:dicBody];
+    [theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]];
 
-    //if ([testArr count]==0)
-    if (1==1)
-    {
-        NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:FAV_PLAYERS_URL encoding:NSUTF8StringEncoding]]
-                                                                cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                            timeoutInterval:kTimeOutSeconds];
-        
-        [theRequest setHTTPMethod:@"POST"];
-        NSDictionary *dicBody=[NSDictionary dictionaryWithObjectsAndKeys:
-                               [[AccountDataSource sharedInstance] accountID],@"authen",
-                               nil];
-        
-        NSString *stBody=[Utils makeStringForPostRequest:dicBody];
-        [theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]];
-
-        NSLog(@"\nFavs request : %@", stBody);
-        
-        CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
-        
-        if (theConnection) {
-            receivedData = [[NSMutableData alloc] init];
-            [self refreshListOnline];
-            
-        } else {
-        
-        }
-    }else {
-        arrItemsList = [NSKeyedUnarchiver unarchiveObjectWithData:data1];
+    NSLog(@"\nFavs request : %@", stBody);
+    
+    CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
+    
+    if (theConnection) {
+        receivedData = [[NSMutableData alloc] init];
+        [self refreshListOnline];
         FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
-        [favsViewController.loadingView setHidden:YES];
-        [favsViewController.activityIndicator stopAnimating];
+        [favsViewController.loadingView setHidden:NO];
+        [favsViewController.activityIndicator startAnimating];
+    } else {
+    
     }
 }
 
@@ -108,12 +99,12 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     CDFavPlayer *player;
     
     player=[arrItemsList objectAtIndex:indexPath.row];
-    BOOL statusOnline = [self isOnline:player];
-    [cell populateWithPlayer:player index:indexPath status: statusOnline];
+    cell.hidden = cellsHide;
+    [cell populateWithPlayer:player index:indexPath];
     
     [cell setPlayerIcon:nil];
     
-    if (statusOnline) {
+    if (typeOfTable == Online) {
         [cell.btnGetHim addTarget:self action:@selector(invaiteWithMessage:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btnGetHim removeTarget:self action:@selector(stealGold:) forControlEvents:UIControlEventTouchUpInside ];
         [cell.btnGetHim changeTitleByLabel:@"DUEL"];
@@ -192,7 +183,9 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     
     connection1 = nil;
     NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-
+    
+    NSLog(@"\nfavs jso %@", jsonString);
+    
     NSArray *responseObject = ValidateObject([jsonString JSONValue], [NSArray class]);
     [arrItemsList removeAllObjects];
     for (NSDictionary *dic in responseObject) {
@@ -202,33 +195,44 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
         player.dMoney=[[dic objectForKey:@"money"] intValue];
         player.dLevel=[[dic objectForKey:@"level"] intValue];
         player.dAvatar=[dic objectForKey:@"avatar"];
-//        player.dDefense=[[dic objectForKey:@"defense"] intValue];
-//        player.dAttack=[[dic objectForKey:@"attack"] intValue];
+        player.dDefense=[[dic objectForKey:@"defense_value"] intValue];
+        player.dAttack=[[dic objectForKey:@"damage_value"] intValue];
         [arrItemsList addObject: player];
     }
+    NSMutableArray *discardedItems = [[NSMutableArray alloc] init];
 
     for (CDFavPlayer *fvPlayer in arrItemsList) {
-
         for (SSServer *server in self.serverObjects) {
-
             if ([server.serverName isEqualToString:fvPlayer.dAuth]) {
                 fvPlayer.dAttack = server.weapon;
                 fvPlayer.dDefense = server.defense;
                 fvPlayer.dBot = server.bot;
                 fvPlayer.dStatus = server.status;
                 fvPlayer.dSessionId = server.sessionId;
-                NSLog(@"\nfav %@ is online!",fvPlayer.dNickName );
+                if (typeOfTable == Offline) {
+                    [discardedItems addObject:fvPlayer];
+                }else
+                    [discardedItems removeObject:fvPlayer];
+            }else{
+                if (typeOfTable == Online) {
+                    [discardedItems addObject:fvPlayer];
+                }else
+                    [discardedItems removeObject:fvPlayer];
             }
         }
     }
-    
+    [arrItemsList removeObjectsInArray:discardedItems];
+    [discardedItems removeAllObjects];
     NSData *data= [NSKeyedArchiver archivedDataWithRootObject:arrItemsList];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"favPlayers"];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"favPlayers"];
     
     FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
     [favsViewController.loadingView setHidden:YES];
+    [self setCellsHide:NO];
+    [favsViewController startTableAnimation];
     [tableView reloadData];
+    
 }
 
 - (void)connection:(CustomNSURLConnection *)connection didReceiveData:(NSData *)data

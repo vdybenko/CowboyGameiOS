@@ -29,7 +29,7 @@
 
 @implementation FavouritesViewController
 
-@synthesize lbFavsTitle, btnBack, vOffLineBackGround, wvOffLineText, tvFavTable;
+@synthesize lbFavsTitle, btnBack, vOffLineBackGround, wvOffLineText, tvFavTable, btnOffLine, btnOnLine;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -61,6 +61,7 @@
     favsDataSource = [[StartViewController sharedInstance] favsDataSource];
 //    [_favsDataSource reloadDataSource];
     favsDataSource.tableView = tvFavTable;
+    favsDataSource.typeOfTable = Online;
     favsDataSource.delegate=self;
     
     SSConnection *conn = [SSConnection sharedInstance];
@@ -78,6 +79,13 @@
     
     [btnBack setTitleByLabel:@"BACK"];
     [btnBack changeColorOfTitleByLabel:btnColor];
+    
+    [btnOnLine setTitleByLabel:@"OnLine"];
+    [btnOnLine changeColorOfTitleByLabel:btnColor];
+    
+    [btnOffLine setTitleByLabel:@"OffLine"];
+    [btnOffLine changeColorOfTitleByLabel:btnColor];
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -89,9 +97,9 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         [self startTableAnimation];
-    });
+//    });
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -114,6 +122,8 @@
     [self setTvFavTable:nil];
     [self setLbFavsTitle:nil];
     [self setBtnBack:nil];
+    [self setBtnOnLine:nil];
+    [self setBtnOffLine:nil];
     [super viewDidUnload];
 }
 
@@ -151,6 +161,30 @@
 - (IBAction)btnBackClicked:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
     [self releaseComponents];
+}
+
+- (IBAction)btnOnlineClicked:(id)sender {
+    
+    if (favsDataSource.typeOfTable != Online) {
+        favsDataSource.typeOfTable = Online;
+        [favsDataSource reloadDataSource];
+        [favsDataSource setCellsHide:YES];
+        [tvFavTable reloadData];
+//        [self startTableAnimation];
+    }
+
+}
+
+- (IBAction)btnOfflineClicked:(id)sender {
+    if (favsDataSource.typeOfTable != Offline) {
+        favsDataSource.typeOfTable = Offline;
+        
+        [favsDataSource reloadDataSource];
+        [favsDataSource setCellsHide:YES];
+        
+        [tvFavTable reloadData];
+//        [self startTableAnimation];
+    }
 }
 
 //call to duel:
@@ -257,6 +291,47 @@
 #pragma mark -
 -(void)startTableAnimation
 {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        int countOfCells=[favsDataSource.arrItemsList count];
+        int maxIndex;
+        if (countOfCells<5) {
+            maxIndex=countOfCells;
+        }else {
+            maxIndex=5;
+        }
+        
+        for (int i=0; i<maxIndex; i++) {
+            NSIndexPath* rowToReload = [NSIndexPath indexPathForRow:i inSection:0];
+            NSArray* rowsToReload = [NSArray arrayWithObjects:rowToReload, nil];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if ([tvFavTable.visibleCells count]>i) {
+                    UITableViewCell *cell = [tvFavTable.visibleCells lastObject];
+                    [cell setHidden:YES];
+                    
+                    UITableViewRowAnimation type;
+                    if (favsDataSource.typeOfTable == Online)
+                    {
+                        type = UITableViewRowAnimationRight;
+                    }else{
+                        type = UITableViewRowAnimationLeft;
+                    }
+                    
+                    [self.tvFavTable beginUpdates];
+                    
+                    [favsDataSource setCellsHide:NO];
+                    
+                    [tvFavTable reloadRowsAtIndexPaths:rowsToReload withRowAnimation:type];
+                    
+                    [self.tvFavTable endUpdates];
+                }
+            });
+            [NSThread sleepForTimeInterval:0.12];
+        }
+    });
+
+    
+    /*
     int countOfCells=[favsDataSource.arrItemsList count];
     int maxIndex;
     if (countOfCells<5) {
@@ -268,10 +343,12 @@
         NSIndexPath* rowToReload = [NSIndexPath indexPathForRow:i inSection:0];
         NSArray* rowsToReload = [NSArray arrayWithObjects:rowToReload, nil];
         dispatch_async(dispatch_get_main_queue(), ^{
+            [favsDataSource setCellsHide:NO];
             [tvFavTable reloadRowsAtIndexPaths:rowsToReload withRowAnimation:UITableViewRowAnimationBottom];
         });        
         [NSThread sleepForTimeInterval:0.1];
     }
+     */
 }
 
 -(void)showMessageOfStolen: (NSNumber *)money;
@@ -284,7 +361,7 @@
     UIColor *brownColor=[UIColor colorWithRed:0.38 green:0.267 blue:0.133 alpha:1];
     [label setTextColor:brownColor];
     [label setBackgroundColor:[UIColor clearColor]];
-    NSString *message = [[NSString alloc] initWithFormat:@"%@: %@$",NSLocalizedString(@"StolenMess", @""),money];
+    NSString *message = [[NSString alloc] initWithFormat:@"%@: $%@",NSLocalizedString(@"StolenMess", @""),money];
     [label setText:message];
     [vStolenDolars addSubview:label];
     

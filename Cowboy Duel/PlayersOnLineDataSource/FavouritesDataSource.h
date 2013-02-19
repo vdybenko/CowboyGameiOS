@@ -17,6 +17,8 @@
 
 #import "ListOnlineDataSource.h"
 
+@class FavouritesViewController;
+
 @protocol IconDownloaderDelegate;
 
 @protocol TableCellWithButton
@@ -26,10 +28,17 @@
 -(void)clickButtonSteal:(NSIndexPath *)indexPath;
 @end
 
+typedef enum {
+    Offline,
+    Online
+} FavTableType;
+
 @interface FavouritesDataSource : ListOnlineDataSource <UITableViewDataSource,IconDownloaderDelegate,MemoryManagement>
 @property(strong, readonly) NSMutableArray *arrItemsList;
 @property(weak, nonatomic) UITableView *tableView;
 @property(weak, nonatomic)id<TableCellWithButton> delegate;
+@property(nonatomic)FavTableType typeOfTable;
+@property(nonatomic)BOOL cellsHide;
 
 -(void) reloadDataSource;
 -(id) initWithTable:(UITableView *)pTable;

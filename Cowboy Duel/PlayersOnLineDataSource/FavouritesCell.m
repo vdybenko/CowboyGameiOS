@@ -74,7 +74,7 @@ UIColor * sandColor;
     
 }
 
--(void)populateWithPlayer:(CDFavPlayer *) player index:(NSIndexPath *)indexPath status: (BOOL) isAvailable;
+-(void)populateWithPlayer:(CDFavPlayer *) player index:(NSIndexPath *)indexPath;
 {
     _lbPlayerName.text=player.dNickName;
     
@@ -86,14 +86,7 @@ UIColor * sandColor;
     
     _lbAttack.text=[NSString stringWithFormat:@"%d",player.dAttack];
     
-//    on/off line
-    
-    
-    if (isAvailable) {
-        [self.btnGetHim setTitleByLabel:@"DUEL" withColor:[UIColor colorWithRed:0.95 green:0.86 blue:0.68 alpha:1.0] fontSize:18];
-    }else
-        [self.btnGetHim setTitleByLabel:@"Poke" withColor:[UIColor colorWithRed:0.95 green:0.86 blue:0.68 alpha:1.0] fontSize:18];
-    
+    [self.btnGetHim setTitleByLabel:@"DUEL" withColor:[UIColor colorWithRed:0.95 green:0.86 blue:0.68 alpha:1.0] fontSize:18];
 //  style
     [_ivBackGroundSelected setHidden:YES];
     [_ivIcon setBackgroundColor:[UIColor clearColor]];
@@ -151,11 +144,5 @@ UIColor * sandColor;
     }
 }
 
-#pragma mark - 
-#pragma mark IBActions:
-
-- (IBAction)btnGetHimClicked:(id)sender {
-
-}
 
 @end
