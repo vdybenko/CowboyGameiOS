@@ -9,15 +9,23 @@
 #import "FavouritesDataSource.h"
 #import "FavouritesViewController.h"
 #import "CustomNSURLConnection.h"
+
+#import "AccountDataSource.h"
+
 #import "UIImage+Save.h"
 #import "UIButton+Image+Title.h"
 #import "IconDownloader.h"
+#import "DuelRewardLogicController.h"
 
 @interface FavouritesDataSource()
 {
     NSMutableData *receivedData;
     
     NSMutableDictionary *imageDownloadsInProgress;
+    
+    NSArray *arrDefense;
+    
+    NSArray *arrAttack;
 }
 @end
 
@@ -46,6 +54,8 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     self.serverObjects = [[NSMutableArray alloc] init];
     tableView=pTable;
     cellsHide = YES;
+    arrDefense = [DuelProductDownloaderController loadDefenseArray];
+    arrAttack = [DuelProductDownloaderController loadWeaponArray];
 	return self;
 }
 
@@ -195,8 +205,24 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
         player.dMoney=[[dic objectForKey:@"money"] intValue];
         player.dLevel=[[dic objectForKey:@"level"] intValue];
         player.dAvatar=[dic objectForKey:@"avatar"];
-        player.dDefense=[[dic objectForKey:@"defense_value"] intValue];
-        player.dAttack=[[dic objectForKey:@"damage_value"] intValue];
+        
+        player.dDefense=[DuelRewardLogicController countUpBuletsWithPlayerLevel:player.dLevel];
+        if([[dic objectForKey:@"defenses"] respondsToSelector:@selector(objectForKey:)]){
+            int defId = [[[dic objectForKey:@"defenses"] objectForKey:@"id"] intValue];
+            NSUInteger index=[[AccountDataSource sharedInstance] findObsByID](arrDefense,defId);
+            CDDefenseProduct *def = [arrDefense objectAtIndex:index];
+            player.dDefense += def.dDefense;
+        }
+        
+        player.dAttack=[DuelRewardLogicController countUpBuletsWithPlayerLevel:player.dLevel];
+
+        if([[dic objectForKey:@"weapons"] respondsToSelector:@selector(objectForKey:)]){
+            int attId = [[[dic objectForKey:@"weapons"] objectForKey:@"id"] intValue];
+            NSUInteger index=[[AccountDataSource sharedInstance] findObsByID](arrAttack,attId);
+            CDWeaponProduct *att = [arrAttack objectAtIndex:index];
+            player.dAttack += att.dDamage;
+        }
+        
         [arrItemsList addObject: player];
     }
     NSMutableArray *discardedItems = [[NSMutableArray alloc] init];
@@ -221,11 +247,11 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
             }
         }
     }
+    
+    [self saveFavorites:arrItemsList];
+    
     [arrItemsList removeObjectsInArray:discardedItems];
     [discardedItems removeAllObjects];
-    NSData *data= [NSKeyedArchiver archivedDataWithRootObject:arrItemsList];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"favPlayers"];
-    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"favPlayers"];
     
     FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
     [favsViewController.loadingView setHidden:YES];
