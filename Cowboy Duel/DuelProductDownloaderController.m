@@ -465,12 +465,12 @@ static NSString *getSavePathForDuelProduct()
 {
     NSMutableArray *arrayForSave = [NSMutableArray array];
     if (![self loadWeaponArray]) {
-        CDWeaponProduct *product = [self pepperboxGun];
+        CDWeaponProduct *product = [self defaultWeaponForPlayer];
         [arrayForSave addObject:product];
     }else{
         CDWeaponProduct *product = [array objectAtIndex:0];
         if (product.dID!=-1) {
-            CDWeaponProduct *product = [self pepperboxGun];
+            CDWeaponProduct *product = [self defaultWeaponForPlayer];
             [arrayForSave insertObject:product atIndex:0];
         }
     }
@@ -482,7 +482,7 @@ static NSString *getSavePathForDuelProduct()
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+(CDWeaponProduct*)pepperboxGun
++(CDWeaponProduct*)defaultWeaponForPlayer
 {
     CDWeaponProduct *product=[[CDWeaponProduct alloc] init];
     product.dID = -1;
@@ -492,7 +492,7 @@ static NSString *getSavePathForDuelProduct()
     product.dPurchaseUrl=nil;
     product.dLevelLock=0;
     product.dCountOfUse=1;
-    product.dFrequently = 3.5f;
+    product.dFrequently = 0.4f;
     return product;
 }
 

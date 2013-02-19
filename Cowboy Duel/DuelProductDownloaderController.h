@@ -41,6 +41,7 @@ typedef enum{
 +(NSMutableArray*)loadWeaponArray;
 +(void)saveDefense:(NSArray*)array;
 +(NSMutableArray*)loadDefenseArray;
++(CDWeaponProduct*)defaultWeaponForPlayer;
 
 -(BOOL)isListProductsAvailable;
 -(void)refreshUserDuelProducts;

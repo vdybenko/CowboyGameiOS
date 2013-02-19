@@ -59,9 +59,11 @@ static AccountDataSource *sharedHelper = nil;
         self.accountBigestWin=0;
         self.removeAds=0;
         self.accountDefenseValue = 0;
-        self.curentIdWeapon = -1;
+        
         self.glNumber = 0;
-        accountWeapon = [[CDWeaponProduct alloc] init];
+        self.accountWeapon = [DuelProductDownloaderController defaultWeaponForPlayer];
+        self.curentIdWeapon = self.accountWeapon.dID;
+        
         self.isTryingWeapon=NO;
         
         self.avatar=@"";
