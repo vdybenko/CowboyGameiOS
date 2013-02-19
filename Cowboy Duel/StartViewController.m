@@ -255,7 +255,6 @@ static StartViewController *sharedHelper = nil;
                 for( NSData *data in oldLocations2 )
                 {
                     CDDuel * loc = (CDDuel*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
-                    DLog(@"gps %d", [loc.dGps intValue]);
                     DLog(@"id %@", loc.dOpponentId);
                     DLog(@"fire %d", [loc.dRateFire intValue]);
                     DLog(@"date %@", loc.dDate);
