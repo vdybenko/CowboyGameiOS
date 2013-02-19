@@ -9,9 +9,13 @@
 #import "FavouritesDataSource.h"
 #import "FavouritesViewController.h"
 #import "CustomNSURLConnection.h"
+
+#import "AccountDataSource.h"
+
 #import "UIImage+Save.h"
 #import "UIButton+Image+Title.h"
 #import "IconDownloader.h"
+#import "DuelRewardLogicController.h"
 
 @interface FavouritesDataSource()
 {
@@ -188,6 +192,8 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     
     NSArray *responseObject = ValidateObject([jsonString JSONValue], [NSArray class]);
     [arrItemsList removeAllObjects];
+    NSArray *arrDefense = [DuelProductDownloaderController loadDefenseArray];
+    NSArray *arrAttack = [DuelProductDownloaderController loadWeaponArray];
     for (NSDictionary *dic in responseObject) {
         CDFavPlayer *player=[[CDFavPlayer alloc] init];
         player.dAuth=[dic objectForKey:@"authen"];
@@ -195,8 +201,25 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
         player.dMoney=[[dic objectForKey:@"money"] intValue];
         player.dLevel=[[dic objectForKey:@"level"] intValue];
         player.dAvatar=[dic objectForKey:@"avatar"];
-        player.dDefense=[[dic objectForKey:@"defense_value"] intValue];
-        player.dAttack=[[dic objectForKey:@"damage_value"] intValue];
+        int defId = ([[dic objectForKey:@"defenses"] respondsToSelector:@selector(objectForKey:)])
+                    ?[[[dic objectForKey:@"defenses"] objectForKey:@"id"] intValue]
+                    :-1;
+        player.dDefense=[DuelRewardLogicController countUpBuletsWithPlayerLevel:player.dLevel];
+        if (defId != -1) {
+            CDDefenseProduct *def = [arrDefense objectAtIndex:defId];
+            player.dDefense += def.dDefense;
+        }
+        
+        int attId = ([[dic objectForKey:@"weapons"] respondsToSelector:@selector(objectForKey:)])
+        ?[[[dic objectForKey:@"weapons"] objectForKey:@"id"] intValue]
+        :-1;
+        player.dAttack=[DuelRewardLogicController countUpBuletsWithPlayerLevel:player.dLevel];
+        NSUInteger index=[[AccountDataSource sharedInstance] findObsByID](arrAttack,attId);
+        if (attId != -1) {
+            CDWeaponProduct *att = [arrAttack objectAtIndex:index];
+            player.dAttack += att.dDamage;
+        }
+        
         [arrItemsList addObject: player];
     }
     NSMutableArray *discardedItems = [[NSMutableArray alloc] init];
