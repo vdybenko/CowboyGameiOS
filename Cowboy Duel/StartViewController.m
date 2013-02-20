@@ -19,6 +19,7 @@
 #import "LevelCongratViewController.h"
 #import "MoneyCongratViewController.h"
 #import "AdvertisingNewViewController.h"
+#import "TopPlayersViewController.h"
 
 #import "Social/Social.h"
 #import "accounts/Accounts.h"
@@ -135,6 +136,7 @@
 @synthesize feedbackButton, duelButton, profileButton, helpButton, mapButton, shareButton;
 @synthesize oldAccounId,feedBackViewVisible,showFeedAtFirst,topPlayersDataSource, advertisingNewVersionViewController,firstRun, favsDataSource;
 @synthesize duelProductDownloaderController;
+@synthesize pushNotification;
 
 static const char *REGISTRATION_URL =  BASE_URL"api/registration";
 static const char *AUTORIZATION_URL =  BASE_URL"api/authorization";
@@ -310,6 +312,11 @@ static StartViewController *sharedHelper = nil;
                                                  selector:@selector(didFinishLaunching)
                                                      name:UIApplicationDidFinishLaunchingNotification
                                                    object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(newMessageRecived:)
+                                                     name:kPushNotification
+                                                   object:nil];
                 
         activityIndicatorView = [[ActivityIndicatorView alloc] initWithoutRotate];
         CGRect imgFrame = activityIndicatorView.frame;
@@ -465,6 +472,16 @@ static StartViewController *sharedHelper = nil;
     
     CGAffineTransform transform = CGAffineTransformMakeScale(-1, 1);
     cloudView.transform = transform;
+    
+    //Push  notifications
+    NSDictionary *sInfo = [pushNotification objectForKey:@"aps"];
+    NSString *message = [sInfo objectForKey:@"alert"];
+    
+    sInfo = [pushNotification objectForKey:@"i"];
+    
+	[[NSNotificationCenter defaultCenter] postNotificationName:kPushNotification
+														object:self
+                                                      userInfo:[NSDictionary dictionaryWithObjectsAndKeys:sInfo, @"messageId",message, @"message", nil]];
 //    deltas for 5 iPhone
     if (iPhone5Delta>0) {
         iPhone5Delta = 25;
@@ -694,7 +711,6 @@ static StartViewController *sharedHelper = nil;
     if (self.navigationController.visibleViewController != listOfItemsViewController) {
         [self.navigationController pushViewController:listOfItemsViewController animated:YES];
     }
-
 }
 
 - (IBAction)storeButtonClick:(id)sender {
@@ -916,7 +932,58 @@ static StartViewController *sharedHelper = nil;
 
 }
 
-#pragma mark -
+#pragma mark - push notification
+
+- (void)newMessageRecived:(NSNotification *)notification {
+    
+    NSString *message;
+    int messageID;
+    NSDictionary *messageHeader;
+    
+    message = [[notification userInfo] objectForKey:@"message"];
+    messageHeader = [[notification userInfo] objectForKey:@"messageId"];
+    
+    messageID = [[messageHeader objectForKey:@"t"] intValue];
+    
+    UIViewController *visibleViewController=[self.navigationController visibleViewController];
+    if ([visibleViewController isKindOfClass:[ProfileViewController class]] ||
+        [visibleViewController isKindOfClass:[StartViewController class]] ||
+        [visibleViewController isKindOfClass:[HelpViewController class]] ||
+        [visibleViewController isKindOfClass:[TopPlayersViewController class]])
+    {
+        switch (messageID) {
+            case 1:{
+//                Фаворит викликає тебе на бій
+//                NSString *namePlayer = [messageHeader objectForKey:@"id"];
+//                const char *name = [namePlayer cStringUsingEncoding:NSUTF8StringEncoding];
+//                SSConnection *connection = [SSConnection sharedInstance];
+//                [connection sendData:(void *)(name) packetID:NETWORK_SET_PAIR ofLength:sizeof(char) * [playerAccount.accountID length]];
+            }
+                break;
+            case 2:{
+//                Фаворит зайшов онлайн.
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Be ready!!!" message:@"alert" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Go to Saloon", nil];
+                alert.tag = 1;
+                [alert show];
+            }
+                break;
+            case 3:{
+//                обновити внутрішній контент
+                RefreshContentDataController *refreshContentDataController=[[RefreshContentDataController alloc] init];
+                [refreshContentDataController refreshContent];
+            }
+                break;
+            case 4:{
+//                обновити продукти.
+                [duelProductDownloaderController refreshDuelProducts];
+            }
+                break;
+            default:
+                break;
+        }
+    }
+}
+
 #pragma mark - Share
 
 - (IBAction)shareButtonClick:(id)sender {
@@ -1294,8 +1361,10 @@ static StartViewController *sharedHelper = nil;
     
     if ([playerAccount.accountID length] < 9) [playerAccount verifyAccountID];
     NSString *deviceToken; 
-    if ([[NSUserDefaults standardUserDefaults] stringForKey:@"DeviceToken"]) deviceToken = [[NSUserDefaults standardUserDefaults] stringForKey:@"DeviceToken"];
-    else deviceToken = @"";
+    if ([[NSUserDefaults standardUserDefaults] stringForKey:@"DeviceToken"])
+        deviceToken = [[NSUserDefaults standardUserDefaults] stringForKey:@"DeviceToken"];
+    else
+        deviceToken = @"";
     
     UIDevice *currentDevice = [UIDevice currentDevice];
     

@@ -293,6 +293,7 @@
 		7689F5DE16B6A48E00D8AC5C /* ivHit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7689F5DC16B6A48E00D8AC5C /* ivHit@2x.png */; };
 		7690DD9316BFFC2900731B51 /* sl_shylc.png in Resources */ = {isa = PBXBuildFile; fileRef = 7690DD9116BFFC2900731B51 /* sl_shylc.png */; };
 		7690DD9416BFFC2900731B51 /* sl_shylc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7690DD9216BFFC2900731B51 /* sl_shylc@2x.png */; };
+		7691DD9416CE75B200AD25F5 /* LoadViewContoller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7691DD9316CE75B200AD25F5 /* LoadViewContoller.xib */; };
 		7692812C159DCAFD00E6CE41 /* IconDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7692812B159DCAFD00E6CE41 /* IconDownloader.m */; };
 		7692BC2F1574E36C00983264 /* DuelStartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7692BC2E1574E36C00983264 /* DuelStartViewController.xib */; };
 		7693419713DDBA5000A962A4 /* DecreeNarrow.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7693419613DDBA5000A962A4 /* DecreeNarrow.ttf */; };
@@ -1177,6 +1178,7 @@
 		7690DDBC16C0212300731B51 /* FBTestSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBTestSession.h; sourceTree = "<group>"; };
 		7690DDBD16C0212300731B51 /* FBUserSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBUserSettingsViewController.h; sourceTree = "<group>"; };
 		7690DDBE16C0212300731B51 /* FBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBViewController.h; sourceTree = "<group>"; };
+		7691DD9316CE75B200AD25F5 /* LoadViewContoller.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadViewContoller.xib; sourceTree = "<group>"; };
 		7692812A159DCAFD00E6CE41 /* IconDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconDownloader.h; sourceTree = "<group>"; };
 		7692812B159DCAFD00E6CE41 /* IconDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconDownloader.m; sourceTree = "<group>"; };
 		7692BC2E1574E36C00983264 /* DuelStartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DuelStartViewController.xib; path = Xib/DuelStartViewController.xib; sourceTree = "<group>"; };
@@ -2093,6 +2095,7 @@
 				7687667816BA7543003405F9 /* GunDrumViewController.xib */,
 				BD81E637169EC4D100CE8278 /* ActiveDuelViewController.xib */,
 				BD84DAA4164ABCA000DEEE38 /* LoginAnimatedViewController.xib */,
+				7691DD9316CE75B200AD25F5 /* LoadViewContoller.xib */,
 				BD16BF961680934F00628CCC /* FunPageViewController.xib */,
 				3115FB4F15CACA5100C4D438 /* MoneyCongratViewController.xib */,
 				3188979715CAD7FE002D52EA /* LevelCongratViewController.xib */,
@@ -2976,6 +2979,7 @@
 				76897D4016C3DE18001E06DB /* topPlayerStarSelected@2x.png in Resources */,
 				318D011016C3B08D00BFA030 /* FavouritesViewController.xib in Resources */,
 				318D011216C3C52700BFA030 /* FavoritesCell.xib in Resources */,
+				7691DD9416CE75B200AD25F5 /* LoadViewContoller.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3758,7 +3762,8 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = Test;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "487016A9-7921-4B61-B706-D0684B4D9782";
+
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				REZ_SEARCH_PATHS = "$(inherited)";
 				SDKROOT = iphoneos;
@@ -3819,8 +3824,9 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = Test;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA8B0E03-DB92-4598-AE9F-493103BDEF2F";
+				PROVISIONING_PROFILE = "487016A9-7921-4B61-B706-D0684B4D9782";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
@@ -3885,9 +3891,9 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = Test;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=*]" = "AA8B0E03-DB92-4598-AE9F-493103BDEF2F";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA8B0E03-DB92-4598-AE9F-493103BDEF2F";
+				PROVISIONING_PROFILE = "487016A9-7921-4B61-B706-D0684B4D9782";
+				"PROVISIONING_PROFILE[sdk=*]" = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",

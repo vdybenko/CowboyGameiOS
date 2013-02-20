@@ -480,7 +480,6 @@ if (shotCountBullet!=0) {
 {
     if (playerAccount.accountWeapon.dName && [playerAccount.accountWeapon.dName length]) {
         NSString *path=[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],playerAccount.accountWeapon.dImageGunLocal];
-        NSLog(@"path %@",path);
         
         if ([Utils isFileDownloadedForPath:path]) {
             _ivGun.image = [UIImage loadImageFullPath:path];

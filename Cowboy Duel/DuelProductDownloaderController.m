@@ -344,6 +344,8 @@ static NSString *getSavePathForDuelProduct()
         if (product.dPrice == 0) {
             [arrayIDProducts addObject:product.dPurchaseUrl];
         }
+        
+        product.dFrequently = [[dic objectForKey:@"frequently"] floatValue];
         [arrItems addObject: product];
     }
     [DuelProductDownloaderController saveWeapon:arrItems];
@@ -463,24 +465,35 @@ static NSString *getSavePathForDuelProduct()
 {
     NSMutableArray *arrayForSave = [NSMutableArray array];
     if (![self loadWeaponArray]) {
-        CDWeaponProduct *product=[[CDWeaponProduct alloc] init];
-        product.dID = -1;
-        product.dName=@"Pepperbox";
-        product.dDescription=@"Pepperbox";
-        product.dPrice=0;
-        product.dPurchaseUrl=nil;
-        product.dLevelLock=0;
-        product.dCountOfUse=1;
-        
+        CDWeaponProduct *product = [self defaultWeaponForPlayer];
         [arrayForSave addObject:product];
+    }else{
+        CDWeaponProduct *product = [array objectAtIndex:0];
+        if (product.dID!=-1) {
+            CDWeaponProduct *product = [self defaultWeaponForPlayer];
+            [arrayForSave insertObject:product atIndex:0];
+        }
     }
-    
     [arrayForSave addObjectsFromArray:array];
     
     NSData *data= [NSKeyedArchiver archivedDataWithRootObject:arrayForSave];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:DUEL_PRODUCTS_WEAPONS];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:DUEL_PRODUCTS_WEAPONS];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++(CDWeaponProduct*)defaultWeaponForPlayer
+{
+    CDWeaponProduct *product=[[CDWeaponProduct alloc] init];
+    product.dID = -1;
+    product.dName=@"Pepperbox";
+    product.dDescription=@"Pepperbox";
+    product.dPrice=0;
+    product.dPurchaseUrl=nil;
+    product.dLevelLock=0;
+    product.dCountOfUse=1;
+    product.dFrequently = 0.4f;
+    return product;
 }
 
 +(NSMutableArray*)loadWeaponArray;
