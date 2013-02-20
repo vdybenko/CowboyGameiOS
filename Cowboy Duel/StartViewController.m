@@ -1062,10 +1062,6 @@ static StartViewController *sharedHelper = nil;
     }else{
         if ([[OGHelper sharedInstance]isAuthorized]) {
             [[OGHelper sharedInstance] apiDialogFeedUser];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-                                                                object:self
-                                                              userInfo:[NSDictionary dictionaryWithObject:@"/share_Facebook_click" forKey:@"event"]];
         }else {
             [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusFeed];
             [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
@@ -1129,7 +1125,14 @@ static StartViewController *sharedHelper = nil;
         [self presentModalViewController:picker animated:YES];
       //    [picker release];
     }else{
-        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"EmailTitle", @"AlertView")
+                                                            message:NSLocalizedString(@"EmailText", @"AlertView")
+                                                           delegate:self
+                                                  cancelButtonTitle:NSLocalizedString(@"OK", @"AlertView")
+                                                  otherButtonTitles: nil];
+        alertView.tag = 0;
+        [alertView show];
+        alertView = nil;
     }
   
   [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification

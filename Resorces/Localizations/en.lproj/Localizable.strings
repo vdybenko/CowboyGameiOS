@@ -196,6 +196,10 @@ p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font
 "AdColonyText2" = "You can click Cancel and come back to play with real players tomorrow.";
 "AdColonyBtn" = "WATCH VIDEO";
 
+//Email advert View
+"EmailTitle" = "Sorry";
+"EmailText" = "You can't send a e-mail right now, make sure  your device has an internet connection and you have at least one e-mail account setup";
+
 //Internet required
 
 "InternetAlertTextListOnline" = "
