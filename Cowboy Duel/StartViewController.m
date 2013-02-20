@@ -1114,20 +1114,23 @@ static StartViewController *sharedHelper = nil;
 }
 
 - (IBAction)feedbackMailBtnClick:(id)sender {
-//    
-	MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
-	picker.mailComposeDelegate = self;
-	
-	[picker setSubject:NSLocalizedString(@"Awesome cowboy duel", @"")];
-	
-	// Fill out the email body text
-	NSString *emailBody = NSLocalizedString(@"Mes text", @"");
-    
-	[picker setMessageBody:emailBody isHTML:NO];
-	
-	[self presentModalViewController:picker animated:YES];
-  //    [picker release];
-  
+//
+    if ([MFMailComposeViewController canSendMail]) {
+        MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+        picker.mailComposeDelegate = self;
+        
+        [picker setSubject:NSLocalizedString(@"Awesome cowboy duel", @"")];
+        
+        // Fill out the email body text
+        NSString *emailBody = NSLocalizedString(@"Mes text", @"");
+        
+        [picker setMessageBody:emailBody isHTML:NO];
+        
+        [self presentModalViewController:picker animated:YES];
+      //    [picker release];
+    }else{
+        
+    }
   
   [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                       object:self
