@@ -203,11 +203,11 @@
 					</object>
 					<object class="IBUIView" id="791574619">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">-2147483338</int>
+						<int key="NSvFlags">-2147483374</int>
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUIActivityIndicatorView" id="486181951">
 								<reference key="NSNextResponder" ref="791574619"/>
-								<int key="NSvFlags">292</int>
+								<int key="NSvFlags">296</int>
 								<string key="NSFrame">{{151, 229}, {20, 20}}</string>
 								<reference key="NSSuperview" ref="791574619"/>
 								<reference key="NSNextKeyView" ref="991899546"/>

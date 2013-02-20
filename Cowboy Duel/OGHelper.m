@@ -1287,13 +1287,6 @@ static OGHelper *sharedHelper = nil;
                      @"Posted story, id: %@",
                      [params valueForKey:@"post_id"]];
     NSLog(@"%@", msg);
-    // Show the result in an alert
-    [[[UIAlertView alloc] initWithTitle:@"Result"
-                                message:msg
-                               delegate:nil
-                      cancelButtonTitle:@"OK!"
-                      otherButtonTitles:nil]
-     show];
 }
 
 - (NSDictionary*)parseURLParams:(NSString *)query {

@@ -52,7 +52,6 @@
 						<int key="NSvFlags">264</int>
 						<string key="NSFrame">{{10, 440}, {150, 40}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -82,7 +81,7 @@
 					</object>
 					<object class="IBUIActivityIndicatorView" id="483755407">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">-2147483356</int>
+						<int key="NSvFlags">-2147483384</int>
 						<string key="NSFrame">{{263, 423}, {37, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>

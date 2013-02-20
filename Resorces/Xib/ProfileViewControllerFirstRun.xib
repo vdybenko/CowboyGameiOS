@@ -528,7 +528,7 @@
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUIActivityIndicatorView" id="766688781">
 								<reference key="NSNextResponder" ref="542892891"/>
-								<int key="NSvFlags">292</int>
+								<int key="NSvFlags">296</int>
 								<string key="NSFrame">{{150, 220}, {20, 20}}</string>
 								<reference key="NSSuperview" ref="542892891"/>
 								<reference key="NSNextKeyView" ref="239260606"/>
