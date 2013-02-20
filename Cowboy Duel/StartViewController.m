@@ -58,6 +58,8 @@
     BOOL feedBackViewVisible;
     BOOL shareViewVisible;
     
+    BOOL isPushMessageShow;
+    
     Reachability* internetReachable;
     Reachability* hostReachable;
     
@@ -351,7 +353,8 @@ static StartViewController *sharedHelper = nil;
         cloudX=460;
         cloud2X=-20;
         
-        inBackground = NO;        
+        inBackground = NO;
+        isPushMessageShow = NO;
     }
     return self;
 }
@@ -625,6 +628,8 @@ static StartViewController *sharedHelper = nil;
       shareView.frame = frame;
       shareViewVisible = NO;
     }
+    
+    isPushMessageShow = NO;
 }
 
 -(void)didBecomeActive
@@ -958,10 +963,13 @@ static StartViewController *sharedHelper = nil;
                 break;
             case 2:{
 //                Фаворит зайшов онлайн.
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"BE_READY", @"") message:message delegate:self cancelButtonTitle:NSLocalizedString(@"CAN_SMALL", @"") otherButtonTitles:NSLocalizedString(@"Saloon2", @""), nil];
-                alert.tag = 1;
-                [alert show];
-                alert = nil;
+                if (!isPushMessageShow) {
+                    isPushMessageShow = YES;
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"BE_READY", @"") message:message delegate:self cancelButtonTitle:NSLocalizedString(@"CAN_SMALL", @"") otherButtonTitles:NSLocalizedString(@"Saloon2", @""), nil];
+                    alert.tag = 1;
+                    [alert show];
+                    alert = nil;
+                }
             }
                 break;
             case 3:{
@@ -1463,6 +1471,7 @@ static StartViewController *sharedHelper = nil;
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == 1) {
+        isPushMessageShow = NO;
         if (buttonIndex == 1)
         {
             [self startDuel];
