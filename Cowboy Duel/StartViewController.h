@@ -40,6 +40,13 @@
 @class ListOfItemsViewController;
 @class GameCenterViewController;
 
+typedef enum{
+    PUSH_NOTIFICATION_POKE,
+    PUSH_NOTIFICATION_FAV_ONLINE,
+    PUSH_NOTIFICATION_UPDATE_CONTENT,
+    PUSH_NOTIFICATION_UPDATE_PRODUCTS
+} TypeOfPushNotification;
+
 @interface StartViewController : UIViewController <MFMailComposeViewControllerDelegate,GCAuthenticateDelegate, UIAlertViewDelegate, FBRequestDelegate, GADBannerViewDelegate,DuelProductDownloaderControllerDelegate>
 
 @property (nonatomic) BOOL showFeedAtFirst;
@@ -60,6 +67,7 @@
 -(void)checkNetworkStatus:(NSNotification *)notice;
 -(void)authorizationModifier:(BOOL)modifierName;
 -(void)modifierUser:(AccountDataSource *)playerTemp;
+-(void)sendMessageForPush:(NSString *)message withType:(TypeOfPushNotification)type forPlayer:(NSString *)nick withId:(NSString *)playerId ;
 
 -(float)abs:(float)d;
 

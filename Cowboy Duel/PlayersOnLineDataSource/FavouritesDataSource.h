@@ -25,6 +25,7 @@
 -(void)clickButton:(NSIndexPath *)indexPath;
 @optional
 -(void)didFinishLoadTable:(UITableView*)table;
+-(void)clickButtonPoke:(NSIndexPath *)indexPath;
 -(void)clickButtonSteal:(NSIndexPath *)indexPath;
 @end
 
