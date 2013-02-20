@@ -1003,7 +1003,12 @@ static StartViewController *sharedHelper = nil;
     
     NSLog(@"\nPush request : %@", stBody);
     
-//    CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
+    [NSURLConnection sendAsynchronousRequest:theRequest
+                                       queue:[[NSOperationQueue alloc] init]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *err) {
+                               
+                           }];
+    
 }
 
 #pragma mark - Share
