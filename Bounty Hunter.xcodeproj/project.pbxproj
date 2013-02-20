@@ -198,7 +198,6 @@
 		31DA9F0715BD331900492A9F /* topPlayerCell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31DA9EFF15BD331900492A9F /* topPlayerCell@2x.png */; };
 		31DA9F0815BD331900492A9F /* topPlayerRibbon.png in Resources */ = {isa = PBXBuildFile; fileRef = 31DA9F0015BD331900492A9F /* topPlayerRibbon.png */; };
 		31DA9F0915BD331900492A9F /* topPlayerRibbon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31DA9F0115BD331900492A9F /* topPlayerRibbon@2x.png */; };
-		31E8783515ADC70300BFFD9A /* LeaderBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31E8783315ADC70200BFFD9A /* LeaderBoardViewController.xib */; };
 		31F6D53115AB034400C0F28D /* Gun.png in Resources */ = {isa = PBXBuildFile; fileRef = 31F6D52F15AB034400C0F28D /* Gun.png */; };
 		31F6D53215AB034400C0F28D /* Gun@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31F6D53015AB034400C0F28D /* Gun@2x.png */; };
 		603B269B137AA0EA00E9ED1D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 603B269A137AA0EA00E9ED1D /* AudioToolbox.framework */; };
@@ -651,7 +650,6 @@
 		BD83A4E616720DFE003EE4B3 /* st_bg_new@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03286024159DD84000D16195 /* st_bg_new@2x.png */; };
 		BD83A4ED16720DFE003EE4B3 /* Gun.png in Resources */ = {isa = PBXBuildFile; fileRef = 31F6D52F15AB034400C0F28D /* Gun.png */; };
 		BD83A4EE16720DFE003EE4B3 /* Gun@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31F6D53015AB034400C0F28D /* Gun@2x.png */; };
-		BD83A4F116720DFE003EE4B3 /* LeaderBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31E8783315ADC70200BFFD9A /* LeaderBoardViewController.xib */; };
 		BD83A4F216720DFE003EE4B3 /* dv_arm.png in Resources */ = {isa = PBXBuildFile; fileRef = 768044C215AC68FD005ABD3A /* dv_arm.png */; };
 		BD83A4F316720DFE003EE4B3 /* dv_arm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 768044C815AC6979005ABD3A /* dv_arm@2x.png */; };
 		BD83A4F416720DFE003EE4B3 /* ls_OnLine_frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 31DA9EFC15BD331900492A9F /* ls_OnLine_frame.png */; };
@@ -1009,7 +1007,6 @@
 		31DA9EFF15BD331900492A9F /* topPlayerCell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "topPlayerCell@2x.png"; sourceTree = "<group>"; };
 		31DA9F0015BD331900492A9F /* topPlayerRibbon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topPlayerRibbon.png; sourceTree = "<group>"; };
 		31DA9F0115BD331900492A9F /* topPlayerRibbon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "topPlayerRibbon@2x.png"; sourceTree = "<group>"; };
-		31E8783315ADC70200BFFD9A /* LeaderBoardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LeaderBoardViewController.xib; path = "../Cowboy Duel/LeaderBoardViewController.xib"; sourceTree = "<group>"; };
 		31F6D52F15AB034400C0F28D /* Gun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gun.png; sourceTree = "<group>"; };
 		31F6D53015AB034400C0F28D /* Gun@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Gun@2x.png"; sourceTree = "<group>"; };
 		603B269A137AA0EA00E9ED1D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -2108,7 +2105,6 @@
 				76BC8797165D08F3001F1472 /* ProfileViewControllerFirstRun.xib */,
 				761EFA4E1573BE91001670EB /* StartViewController.xib */,
 				761EFA471573BDDA001670EB /* CollectionAppViewController.xib */,
-				31E8783315ADC70200BFFD9A /* LeaderBoardViewController.xib */,
 				764B891D165FCC660014E35B /* ListOnLine */,
 				764B891C165FCC4E0014E35B /* TopPlayer */,
 				767BA5BD1589F8E300825EB1 /* FinalViewController.xib */,
@@ -2780,7 +2776,6 @@
 				03286090159DD84000D16195 /* st_bg_new@2x.png in Resources */,
 				31F6D53115AB034400C0F28D /* Gun.png in Resources */,
 				31F6D53215AB034400C0F28D /* Gun@2x.png in Resources */,
-				31E8783515ADC70300BFFD9A /* LeaderBoardViewController.xib in Resources */,
 				768044C415AC68FD005ABD3A /* dv_arm.png in Resources */,
 				768044C915AC697A005ABD3A /* dv_arm@2x.png in Resources */,
 				31DA9F0415BD331900492A9F /* ls_OnLine_frame.png in Resources */,
@@ -3078,7 +3073,6 @@
 				BD83A4E616720DFE003EE4B3 /* st_bg_new@2x.png in Resources */,
 				BD83A4ED16720DFE003EE4B3 /* Gun.png in Resources */,
 				BD83A4EE16720DFE003EE4B3 /* Gun@2x.png in Resources */,
-				BD83A4F116720DFE003EE4B3 /* LeaderBoardViewController.xib in Resources */,
 				BD83A4F216720DFE003EE4B3 /* dv_arm.png in Resources */,
 				BD83A4F316720DFE003EE4B3 /* dv_arm@2x.png in Resources */,
 				BD83A4F416720DFE003EE4B3 /* ls_OnLine_frame.png in Resources */,
