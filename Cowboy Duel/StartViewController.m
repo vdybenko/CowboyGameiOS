@@ -141,6 +141,7 @@
 static const char *REGISTRATION_URL =  BASE_URL"api/registration";
 static const char *AUTORIZATION_URL =  BASE_URL"api/authorization";
 static const char *MODIFIER_USER_URL =  BASE_URL"users/set_user_data";
+static const char *PUSH_NOTIF_URL = "";
 
 NSString *const URL_FB_PAGE=@"http://cowboyduel.mobi/";
 
@@ -952,7 +953,7 @@ static StartViewController *sharedHelper = nil;
         [visibleViewController isKindOfClass:[TopPlayersViewController class]])
     {
         switch (messageID) {
-            case 1:{
+            case PUSH_NOTIFICATION_POKE:{
 //                Фаворит викликає тебе на бій
 //                NSString *namePlayer = [messageHeader objectForKey:@"id"];
 //                const char *name = [namePlayer cStringUsingEncoding:NSUTF8StringEncoding];
@@ -960,20 +961,20 @@ static StartViewController *sharedHelper = nil;
 //                [connection sendData:(void *)(name) packetID:NETWORK_SET_PAIR ofLength:sizeof(char) * [playerAccount.accountID length]];
             }
                 break;
-            case 2:{
+            case PUSH_NOTIFICATION_FAV_ONLINE:{
 //                Фаворит зайшов онлайн.
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Be ready!!!" message:@"alert" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Go to Saloon", nil];
                 alert.tag = 1;
                 [alert show];
             }
                 break;
-            case 3:{
+            case PUSH_NOTIFICATION_UPDATE_CONTENT:{
 //                обновити внутрішній контент
                 RefreshContentDataController *refreshContentDataController=[[RefreshContentDataController alloc] init];
                 [refreshContentDataController refreshContent];
             }
                 break;
-            case 4:{
+            case PUSH_NOTIFICATION_UPDATE_PRODUCTS:{
 //                обновити продукти.
                 [duelProductDownloaderController refreshDuelProducts];
             }
@@ -982,6 +983,27 @@ static StartViewController *sharedHelper = nil;
                 break;
         }
     }
+}
+
+-(void)sendMessageForPush:(NSString *)message withType:(TypeOfPushNotification)type forPlayer:(NSString *)nick withId:(NSString *)playerId ;
+{
+    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:PUSH_NOTIF_URL encoding:NSUTF8StringEncoding]]
+                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                        timeoutInterval:kTimeOutSeconds];
+    
+    [theRequest setHTTPMethod:@"POST"];
+    NSDictionary *dicBody= [[NSMutableDictionary alloc] init];
+    [dicBody setValue:message forKey:@"message"];
+    [dicBody setValue:[NSNumber numberWithInt:type] forKey:@"type"];
+    [dicBody setValue:nick forKey:@"nick"];
+    [dicBody setValue:playerId forKey:@"id"];
+    
+    NSString *stBody=[Utils makeStringForPostRequest:dicBody];
+    [theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSLog(@"\nPush request : %@", stBody);
+    
+//    CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
 }
 
 #pragma mark - Share

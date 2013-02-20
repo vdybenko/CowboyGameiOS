@@ -23,7 +23,7 @@
     FavouritesDataSource *favsDataSource;
     DuelStartViewController *duelStartViewController;
     
-    UIView *vStolenDolars;
+    UIView *vMessage;
 }
 @end
 
@@ -224,6 +224,22 @@
 
 }
 
+//poke oponnent:
+-(void)clickButtonPoke:(NSIndexPath *)indexPath;
+{
+    CDFavPlayer *player;
+    player = [favsDataSource.arrItemsList objectAtIndex:indexPath.row];
+    [[StartViewController sharedInstance] sendMessageForPush:@"POKE"
+                                                    withType:PUSH_NOTIFICATION_POKE
+                                                   forPlayer:player.dNickName
+                                                      withId:player.dAuth
+                                                     ];
+    
+    NSString *message = [NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"PokenMessage", @""),player.dNickName];
+    [self performSelector:@selector(showMessage:) withObject:message];
+    [self performSelector:@selector(hideMessage) withObject:self afterDelay:3.8];
+    
+}
 //steal money:
 -(void)clickButtonSteal: (NSIndexPath *)indexPath;
 {
@@ -242,9 +258,10 @@
     [oponentAccount setSessionID:player.dSessionId];
 
     int moneyExch = (oponentAccount.money<10)?1:oponentAccount.money/10.0;
-    
-    [self performSelector:@selector(showMessageOfStolen:) withObject:[NSNumber numberWithInt:moneyExch]];
-    [self performSelector:@selector(hideMessageOfStolen) withObject:self afterDelay:3.8];
+    NSString *message = [[NSString alloc] initWithFormat:@"%@: $%d",NSLocalizedString(@"StolenMess", @""),moneyExch];
+
+    [self performSelector:@selector(showMessage:) withObject:message];
+    [self performSelector:@selector(hideMessage) withObject:self afterDelay:3.8];
     
     NSLog(@"\n%@\n%@", oponentAccount.accountName, playerAccount.accountName);
     
@@ -327,31 +344,11 @@
             [NSThread sleepForTimeInterval:0.12];
         }
     });
-
-    
-    /*
-    int countOfCells=[favsDataSource.arrItemsList count];
-    int maxIndex;
-    if (countOfCells<5) {
-        maxIndex=countOfCells;
-    }else {
-        maxIndex=5;
-    }
-    for (int i=0; i<maxIndex; i++) {
-        NSIndexPath* rowToReload = [NSIndexPath indexPathForRow:i inSection:0];
-        NSArray* rowsToReload = [NSArray arrayWithObjects:rowToReload, nil];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [favsDataSource setCellsHide:NO];
-            [tvFavTable reloadRowsAtIndexPaths:rowsToReload withRowAnimation:UITableViewRowAnimationBottom];
-        });        
-        [NSThread sleepForTimeInterval:0.1];
-    }
-     */
 }
 
--(void)showMessageOfStolen: (NSNumber *)money;
+-(void)showMessage: (NSString *)message;
 {
-    vStolenDolars=[[UIView alloc] initWithFrame:CGRectMake(12, -40, 290, 40)];
+    vMessage=[[UIView alloc] initWithFrame:CGRectMake(12, -40, 290, 40)];
     
     UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(10, 10, 270, 20)];
     [label setTextAlignment:UITextAlignmentCenter];
@@ -359,31 +356,32 @@
     UIColor *brownColor=[UIColor colorWithRed:0.38 green:0.267 blue:0.133 alpha:1];
     [label setTextColor:brownColor];
     [label setBackgroundColor:[UIColor clearColor]];
-    NSString *message = [[NSString alloc] initWithFormat:@"%@: $%@",NSLocalizedString(@"StolenMess", @""),money];
-    [label setText:message];
-    [vStolenDolars addSubview:label];
     
-    [self.view addSubview:vStolenDolars];
-    [vStolenDolars setDinamicHeightBackground];
+    
+    [label setText:message];
+    [vMessage addSubview:label];
+    
+    [self.view addSubview:vMessage];
+    [vMessage setDinamicHeightBackground];
     
     [UIView animateWithDuration:0.6f
                      animations:^{
-                         CGRect frame=vStolenDolars.frame;
+                         CGRect frame=vMessage.frame;
                          frame.origin.y += frame.size.height+5;
-                         vStolenDolars.frame = frame;
+                         vMessage.frame = frame;
                      }];
 }
 
--(void)hideMessageOfStolen;
+-(void)hideMessage;
 {
     [UIView animateWithDuration:0.6f
                      animations:^{
-                         CGRect frame=vStolenDolars.frame;
+                         CGRect frame=vMessage.frame;
                          frame.origin.y -= frame.size.height+5;
-                         vStolenDolars.frame = frame;
+                         vMessage.frame = frame;
                      }
                      completion:^(BOOL finished) {
-						 [vStolenDolars removeFromSuperview];
+						 [vMessage removeFromSuperview];
 					 }];
     
 }
