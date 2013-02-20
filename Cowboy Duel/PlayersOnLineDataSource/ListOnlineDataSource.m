@@ -99,7 +99,7 @@ ListOfItemsViewController *delegate;
 
 -(void)checkServerForFavorite:(SSServer*)server
 {
-    NSUInteger index = [FavouritesDataSource findPlayerByID]([StartViewController sharedInstance].favsDataSource.arrItemsList ,server.serverName);
+    NSUInteger index = [FavouritesDataSource findPlayerByID]([[StartViewController sharedInstance].favsDataSource loadFavoritesArray] ,server.serverName);
     if (index == (NSUInteger)NSNotFound) {
         server.favorite = NO;
     }else{

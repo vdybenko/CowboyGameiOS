@@ -180,10 +180,6 @@
 	return 1;
 }
 
-#pragma mark CustomNSURLConnection handlers
-
-
-
 #pragma mark IconDownloaderDelegate
 - (void)appImageDidLoad:(NSIndexPath *)indexPath
 {
