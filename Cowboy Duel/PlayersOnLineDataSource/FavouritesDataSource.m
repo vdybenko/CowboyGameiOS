@@ -232,23 +232,23 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     NSMutableArray *discardedItems = [[NSMutableArray alloc] init];
 
     for (CDFavPlayer *fvPlayer in arrItemsList) {
+        BOOL playerOnline = NO;
         for (SSServer *server in self.serverObjects) {
-            if ([server.serverName isEqualToString:fvPlayer.dAuth]) {
-                fvPlayer.dAttack = server.weapon;
-                fvPlayer.dDefense = server.defense;
-                fvPlayer.dBot = server.bot;
-                fvPlayer.dStatus = server.status;
-                fvPlayer.dSessionId = server.sessionId;
-                if (typeOfTable == OFFLINE) {
-                    [discardedItems addObject:fvPlayer];
-                }else
-                    [discardedItems removeObject:fvPlayer];
-            }else{
-                if (typeOfTable == ONLINE) {
-                    [discardedItems addObject:fvPlayer];
-                }else
-                    [discardedItems removeObject:fvPlayer];
+            if (!playerOnline) {
+                playerOnline = ([server.serverName isEqualToString:fvPlayer.dAuth]);
+                if (playerOnline) {
+                    fvPlayer.dAttack = server.weapon;
+                    fvPlayer.dDefense = server.defense;
+                    fvPlayer.dBot = server.bot;
+                    fvPlayer.dStatus = server.status;
+                    fvPlayer.dSessionId = server.sessionId;
+                }
             }
+        }
+        if (playerOnline && typeOfTable == OFFLINE) {
+            [discardedItems addObject:fvPlayer];
+        }else if (!playerOnline && typeOfTable == ONLINE){
+            [discardedItems addObject:fvPlayer];
         }
     }
     
