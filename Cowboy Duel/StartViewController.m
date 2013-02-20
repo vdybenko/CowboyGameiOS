@@ -955,15 +955,17 @@ static StartViewController *sharedHelper = nil;
         switch (messageID) {
             case 1:{
 //                Фаворит викликає тебе на бій
-                NSString *namePlayer = [messageHeader objectForKey:@"id"];
-                const char *name = [namePlayer cStringUsingEncoding:NSUTF8StringEncoding];
-                SSConnection *connection = [SSConnection sharedInstance];
-                [connection sendData:(void *)(name) packetID:NETWORK_SET_PAIR ofLength:sizeof(char) * [playerAccount.accountID length]];
+//                NSString *namePlayer = [messageHeader objectForKey:@"id"];
+//                const char *name = [namePlayer cStringUsingEncoding:NSUTF8StringEncoding];
+//                SSConnection *connection = [SSConnection sharedInstance];
+//                [connection sendData:(void *)(name) packetID:NETWORK_SET_PAIR ofLength:sizeof(char) * [playerAccount.accountID length]];
             }
                 break;
             case 2:{
 //                Фаворит зайшов онлайн.
-                [self startDuel];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Be ready!!!" message:@"alert" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Go to Saloon", nil];
+                alert.tag = 1;
+                [alert show];
             }
                 break;
             case 3:{
