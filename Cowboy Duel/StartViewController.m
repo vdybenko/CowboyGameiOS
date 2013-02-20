@@ -1063,8 +1063,6 @@ static StartViewController *sharedHelper = nil;
             
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[URL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
         }else {
-            
-            
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry", @"AlertView")
                     message:NSLocalizedString(@"You can't send a tweet right now, make sure  your device has an internet connection and you have at least one Twitter account setup", @"AlertView")
                     delegate:self
@@ -1074,7 +1072,6 @@ static StartViewController *sharedHelper = nil;
             [alertView show];
             alertView = nil;
         }
-        
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                     object:self
