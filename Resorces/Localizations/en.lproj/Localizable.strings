@@ -43,6 +43,8 @@
 
 "CAN"="CANCEL";
 
+"CAN_SMALL"="Cancel";
+
 "SALYN"="SALOON";
 
 "SHOP" = "STORE";
@@ -151,6 +153,7 @@ p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font
 "Share" = "Share";
 "HelpTitle" = "HELP";
 "MoreGames" = "MORE GAMES";
+"BE_READY" = "Be ready!!!";
 
 //LoginAnimatedViewController
 //First Start View

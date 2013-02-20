@@ -954,17 +954,14 @@ static StartViewController *sharedHelper = nil;
         switch (messageID) {
             case 1:{
 //                Фаворит викликає тебе на бій
-//                NSString *namePlayer = [messageHeader objectForKey:@"id"];
-//                const char *name = [namePlayer cStringUsingEncoding:NSUTF8StringEncoding];
-//                SSConnection *connection = [SSConnection sharedInstance];
-//                [connection sendData:(void *)(name) packetID:NETWORK_SET_PAIR ofLength:sizeof(char) * [playerAccount.accountID length]];
             }
                 break;
             case 2:{
 //                Фаворит зайшов онлайн.
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Be ready!!!" message:@"alert" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Go to Saloon", nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"BE_READY", @"") message:message delegate:self cancelButtonTitle:NSLocalizedString(@"CAN_SMALL", @"") otherButtonTitles:NSLocalizedString(@"Saloon2", @""), nil];
                 alert.tag = 1;
                 [alert show];
+                alert = nil;
             }
                 break;
             case 3:{
@@ -1073,8 +1070,9 @@ static StartViewController *sharedHelper = nil;
                     delegate:self
                     cancelButtonTitle:NSLocalizedString(@"Cancel", @"AlertView")
                     otherButtonTitles:NSLocalizedString(@"Open settings", @"AlertView"), nil];
+            alertView.tag = 2;
             [alertView show];
-            
+            alertView = nil;
         }
         
     }
@@ -1467,16 +1465,23 @@ static StartViewController *sharedHelper = nil;
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 1)
-    {
-        TWTweetComposeViewController *ctrl = [[TWTweetComposeViewController alloc] init];
-        if ([ctrl respondsToSelector:@selector(alertView:clickedButtonAtIndex:)]) {
-            // Manually invoke the alert view button handler
-            [(id <UIAlertViewDelegate>)ctrl alertView:nil
-                                 clickedButtonAtIndex:kTwitterSettingsButtonIndex];
+    if (alertView.tag == 1) {
+        if (buttonIndex == 1)
+        {
+            [self startDuel];
         }
-    }
-    
+    }else if (alertView.tag == 2){
+        if (buttonIndex == 1)
+        {
+            TWTweetComposeViewController *ctrl = [[TWTweetComposeViewController alloc] init];
+            if ([ctrl respondsToSelector:@selector(alertView:clickedButtonAtIndex:)]) {
+                // Manually invoke the alert view button handler
+                [(id <UIAlertViewDelegate>)ctrl alertView:nil
+                                     clickedButtonAtIndex:kTwitterSettingsButtonIndex];
+            }
+        }
+
+    }    
 }
 
 #pragma mark Notification

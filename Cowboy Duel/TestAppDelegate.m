@@ -443,44 +443,6 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     return request;
 }
 
-#pragma mark - AlertViewDelegate
-
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (alertView.tag == 1) {
-        if (buttonIndex == 1)
-        {
-            for (UIViewController *viewController in navigationController.viewControllers) {
-                
-                if ([viewController isKindOfClass:[StartViewController class]]) {
-                    startViewController = (StartViewController *)viewController;
-                    [startViewController startDuel];
-                    return;
-                }
-                
-            }
-        }
-    }
-    
-    if (buttonIndex == 0)
-    {
-        if ([[[navigationController viewControllers] lastObject] isKindOfClass:[LoginAnimatedViewController class]]) {
-            loginViewController = (LoginAnimatedViewController *)[[navigationController viewControllers] lastObject];
-        }
-        [loginViewController failed];
-        SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
-    
-        if ([controller respondsToSelector:@selector(alertView:clickedButtonAtIndex:)]) {
-            // Manually invoke the alert view button handler
-            [(id <UIAlertViewDelegate>)controller alertView:nil
-                                    clickedButtonAtIndex:kFacebookSettingsButtonIndex];
-        }
-
-    }
-    
-}
-
-
 #pragma mark GADBannerViewDelegate impl
 
 // We've received an ad successfully.
