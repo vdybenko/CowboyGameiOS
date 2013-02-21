@@ -83,7 +83,7 @@ ListOfItemsViewController *delegate;
             [self.serverObjects addObject:serverObj];
         }
     }
-    NSLog(@"\n refresh Finished!");
+ 
     if (isNeedPractice) {
         if ([self respondsToSelector:@selector(addPracticeCell)]) {
             [self performSelector:@selector(addPracticeCell)];
@@ -92,8 +92,8 @@ ListOfItemsViewController *delegate;
         [listOfItemsViewController didRefreshController];
     }else{
 
-        FavouritesViewController *favsVC = (FavouritesViewController *)delegate;
-        [favsVC didRefreshController];
+//        FavouritesViewController *favsVC = (FavouritesViewController *)delegate;
+//        [favsVC didRefreshController];
     }
 }
 

@@ -48,6 +48,7 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
 	if (!self) {
 		return nil;
 	}
+  
     arrItemsList=[[NSMutableArray alloc] init];
     imageDownloadsInProgress=[[NSMutableDictionary alloc] init];
     
@@ -56,11 +57,9 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     cellsHide = YES;
     arrDefense = [DuelProductDownloaderController loadDefenseArray];
     arrAttack = [DuelProductDownloaderController loadWeaponArray];
-	return self;
-}
+    
+//    update at init
 
--(void) reloadDataSource;
-{
     NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:FAV_PLAYERS_URL encoding:NSUTF8StringEncoding]]
                                                             cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                         timeoutInterval:kTimeOutSeconds];
@@ -72,20 +71,68 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     
     NSString *stBody=[Utils makeStringForPostRequest:dicBody];
     [theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]];
-
+    
     NSLog(@"\nFavs request : %@", stBody);
     
     CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
     
     if (theConnection) {
         receivedData = [[NSMutableData alloc] init];
-        [self refreshListOnline];
-        FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
-        [favsViewController.loadingView setHidden:NO];
-        [favsViewController.activityIndicator startAnimating];
+        [self refreshListOnline];        
+//        FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
+//        [favsViewController.loadingView setHidden:NO];
+//        [favsViewController.activityIndicator startAnimating];
     } else {
-    
+        
     }
+    
+	return self;
+}
+
+-(void) reloadDataSource;
+{
+    
+    arrItemsList = [self loadFavoritesArray];
+    
+    NSLog(@"\n reload started!");
+    NSLog(@"ON-LINE: ");
+    for (SSServer *serv in self.serverObjects) {
+        NSLog(@"%@", serv.displayName);
+    }
+    
+    NSMutableArray *discardedItems = [[NSMutableArray alloc] init];
+    
+    for (CDFavPlayer *fvPlayer in arrItemsList) {
+        BOOL playerOnline = NO;
+        for (SSServer *server in self.serverObjects) {
+            if (!playerOnline) {
+                playerOnline = ([server.serverName isEqualToString:fvPlayer.dAuth]);
+                if (playerOnline) {
+                    fvPlayer.dAttack = server.weapon;
+                    fvPlayer.dDefense = server.defense;
+                    fvPlayer.dBot = server.bot;
+                    fvPlayer.dStatus = server.status;
+                    fvPlayer.dSessionId = server.sessionId;
+                }
+            }
+        }
+        if (playerOnline && typeOfTable == OFFLINE) {
+            [discardedItems addObject:fvPlayer];
+        }else if (!playerOnline && typeOfTable == ONLINE){
+            [discardedItems addObject:fvPlayer];
+        }else if(playerOnline && typeOfTable == ONLINE)
+            NSLog(@"%@ ONLINE!",fvPlayer.dNickName);
+        else if(!playerOnline && typeOfTable == OFFLINE)
+            NSLog(@"%@ OFFLINE!",fvPlayer.dNickName);
+    }
+    [arrItemsList removeObjectsInArray:discardedItems];
+    [discardedItems removeAllObjects];
+    
+    FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
+    [favsViewController.loadingView setHidden:YES];
+//    [self setCellsHide:NO];
+    [favsViewController startTableAnimation];
+    [tableView reloadData];
 }
 
 -(void)releaseComponents
@@ -229,39 +276,15 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
         
         [arrItemsList addObject: player];
     }
-    NSMutableArray *discardedItems = [[NSMutableArray alloc] init];
-
-    for (CDFavPlayer *fvPlayer in arrItemsList) {
-        BOOL playerOnline = NO;
-        for (SSServer *server in self.serverObjects) {
-            if (!playerOnline) {
-                playerOnline = ([server.serverName isEqualToString:fvPlayer.dAuth]);
-                if (playerOnline) {
-                    fvPlayer.dAttack = server.weapon;
-                    fvPlayer.dDefense = server.defense;
-                    fvPlayer.dBot = server.bot;
-                    fvPlayer.dStatus = server.status;
-                    fvPlayer.dSessionId = server.sessionId;
-                }
-            }
-        }
-        if (playerOnline && typeOfTable == OFFLINE) {
-            [discardedItems addObject:fvPlayer];
-        }else if (!playerOnline && typeOfTable == ONLINE){
-            [discardedItems addObject:fvPlayer];
-        }
-    }
     
     [self saveFavorites:arrItemsList];
     
-    [arrItemsList removeObjectsInArray:discardedItems];
-    [discardedItems removeAllObjects];
-    
-    FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
-    [favsViewController.loadingView setHidden:YES];
-    [self setCellsHide:NO];
-    [favsViewController startTableAnimation];
-    [tableView reloadData];
+//    FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
+//    [favsViewController.loadingView setHidden:YES];
+//    [favsViewController.activityIndicator stopAnimating];
+//    [favsViewController startTableAnimation];
+//    cellsHide = NO;
+//    [tableView reloadData];
     
 }
 
@@ -296,6 +319,17 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
         [imageDownloadsInProgress removeObjectForKey:indexPath];
         iconDownloader = nil;
     }
+}
+
+#pragma mark ListOnlineDataSource
+-(void) listOnlineResponse:(NSString *)jsonString
+{
+    [super listOnlineResponse:jsonString];
+    [self reloadDataSource];
+    FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
+    [favsViewController.loadingView setHidden:YES];
+    [favsViewController.activityIndicator stopAnimating];
+    [favsViewController.tvFavTable reloadData];
 }
 
 #pragma mark

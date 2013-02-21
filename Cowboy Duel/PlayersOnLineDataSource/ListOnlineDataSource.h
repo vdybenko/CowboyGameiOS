@@ -20,5 +20,6 @@
 + (NSUInteger(^)(NSArray *, NSString *)) findPlayerByID;
 - (void) refreshListOnline;
 - (void) checkServerForFavorite:(SSServer*)server;
+- (void) listOnlineResponse:(NSString *)jsonString;
 
 @end
