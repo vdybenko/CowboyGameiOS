@@ -18,7 +18,7 @@ ListOfItemsViewController *delegate;
 
 @implementation ListOnlineDataSource
 
-@synthesize connection,serverObjects,isNeedFavCheck,isNeedPractice;
+@synthesize connection,serverObjects,isNeedFavCheck;
 
 #pragma mark class methods:
 +(NSUInteger(^)(NSArray *, NSString *))findPlayerByID {
@@ -59,7 +59,6 @@ ListOfItemsViewController *delegate;
     
     NSLog(@"\nrefresh response: %@", jsonString);
     
-//    NSMutableArray *serverObjects = [[NSMutableArray alloc] init];
     NSError *jsonParseError;
     
     [self.serverObjects removeAllObjects];
@@ -82,17 +81,6 @@ ListOfItemsViewController *delegate;
             }
             [self.serverObjects addObject:serverObj];
         }
-    }
-    NSLog(@"\n refresh Finished!");
-    if (isNeedPractice) {
-        if ([self respondsToSelector:@selector(addPracticeCell)]) {
-            [self performSelector:@selector(addPracticeCell)];
-        }
-        ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
-        [listOfItemsViewController didRefreshController];
-    }else{
-        FavouritesViewController *favsVC = (FavouritesViewController *)delegate;
-        [favsVC didRefreshController];
     }
 }
 

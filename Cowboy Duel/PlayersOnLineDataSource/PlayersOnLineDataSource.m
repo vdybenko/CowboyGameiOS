@@ -57,7 +57,6 @@
 {
     if ([[StartViewController sharedInstance] connectedToWiFi]) {
         self.isNeedFavCheck = YES;
-        self.isNeedPractice = YES;
         [self refreshListOnline];       
         
         [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(connectionTimeout) userInfo:nil repeats:NO];
@@ -178,6 +177,14 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return 1;
+}
+
+#pragma mark ListOnlineDataSource
+- (void)listOnlineResponse:(NSString *)jsonString{
+    [super listOnlineResponse:jsonString];
+    [self addPracticeCell];
+    ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
+    [listOfItemsViewController didRefreshController];
 }
 
 #pragma mark IconDownloaderDelegate

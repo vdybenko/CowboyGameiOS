@@ -59,7 +59,6 @@
     [self.activityIndicator startAnimating];
     
     favsDataSource = [[StartViewController sharedInstance] favsDataSource];
-//    [_favsDataSource reloadDataSource];
     favsDataSource.tableView = tvFavTable;
     favsDataSource.typeOfTable = ONLINE;
     favsDataSource.delegate=self;
@@ -69,7 +68,7 @@
 //    
     tvFavTable.delegate=self;
     tvFavTable.dataSource=favsDataSource;
-    [favsDataSource reloadDataSource];
+    [favsDataSource refreshListOnline];
     
     lbFavsTitle.text = NSLocalizedString(@"FavouritesTitle", nil);
     lbFavsTitle.textColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
@@ -97,9 +96,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        [self startTableAnimation];
-//    });
+//    [self startTableAnimation];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -167,7 +164,7 @@
     
     if (favsDataSource.typeOfTable != ONLINE) {
         favsDataSource.typeOfTable = ONLINE;
-        [favsDataSource reloadDataSource];
+        [favsDataSource refreshListOnline];
         [favsDataSource setCellsHide:YES];
         [tvFavTable reloadData];
     }
@@ -177,10 +174,8 @@
 - (IBAction)btnOfflineClicked:(id)sender {
     if (favsDataSource.typeOfTable != OFFLINE) {
         favsDataSource.typeOfTable = OFFLINE;
-        
-        [favsDataSource reloadDataSource];
+        [favsDataSource refreshListOnline];
         [favsDataSource setCellsHide:YES];
-        
         [tvFavTable reloadData];
     }
 }
@@ -300,6 +295,7 @@
 {
     [self.loadingView setHidden:YES];
     [self.activityIndicator stopAnimating];
+    [favsDataSource setCellsHide:NO];
     [tvFavTable reloadData];
 }
 
@@ -308,14 +304,8 @@
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         int countOfCells=[favsDataSource.arrItemsList count];
-        int maxIndex;
-        if (countOfCells<5) {
-            maxIndex=countOfCells;
-        }else {
-            maxIndex=5;
-        }
         
-        for (int i=0; i<maxIndex; i++) {
+        for (int i=0; i<countOfCells; i++) {
             NSIndexPath* rowToReload = [NSIndexPath indexPathForRow:i inSection:0];
             NSArray* rowsToReload = [NSArray arrayWithObjects:rowToReload, nil];
             
