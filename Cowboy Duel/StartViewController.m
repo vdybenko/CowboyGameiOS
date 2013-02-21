@@ -556,9 +556,6 @@ static StartViewController *sharedHelper = nil;
         return;
     }
     
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkNetworkStatus:) name:kReachabilityChangedNotification object:nil];
-    
     internetReachable = [Reachability reachabilityForInternetConnection];
     [internetReachable startNotifier];
     
@@ -839,6 +836,8 @@ static StartViewController *sharedHelper = nil;
 
 -(IBAction)showHelp:(id)sender
 {
+    [self checkNetworkStatus:nil];
+    return;
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/help_click" forKey:@"event"]];

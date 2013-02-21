@@ -204,7 +204,6 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
             alertView.tag = 1;
             [alertView show];
             return NO;
-
         }
     }
 

@@ -201,17 +201,7 @@ p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font
 "EmailText" = "You can't send a e-mail right now, make sure  your device has an internet connection and you have at least one e-mail account setup";
 
 //Internet required
-
-"InternetAlertTextListOnline" = "
-<head> 
-<meta charset=\"utf-8\" name=\"viewport\" initial-scale=1\"><link rel=\"stylesheet\" href=\"css/jquery.mobile.css\" />
-</head>
-<body style='background-color:transparent; text-align:center; color:rgb(97,68,34);'>
-<div style='font-size: 20px;padding-top:0px;'>
-You don't have internet connection.<br> Try to connect to Wi-Fi or use practice mode
-</div>
-</body>
-</html>";
+"Internet_down" = "You don't have internet connection";
 
 "AlertTextListOnlineIsEmpty" = "
 <head> 

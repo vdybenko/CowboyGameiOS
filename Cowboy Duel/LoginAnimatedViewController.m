@@ -150,7 +150,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [[NSUserDefaults standardUserDefaults] synchronize];
     [StartViewController sharedInstance].playerStart;
     
-    loginFBbutton.enabled = [startViewController connectedToWiFi];
     [self updateLabelsWithString:NSLocalizedString(@"1stIntro", @"")];
     self.textIndex++;
 }
@@ -205,28 +204,39 @@ static LoginAnimatedViewController *sharedHelper = nil;
 
 
 - (IBAction)loginButtonClick:(id)sender {
-    [activityView setHidden:NO];
-    [activityIndicatorView startAnimating];
-    animationPause = YES;
-    
-    TestAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    [appDelegate openSessionWithAllowLoginUI:YES];
-    
-    [self initFacebook];
-    
-    [playerAccount cleareWeaponAndDefense];
-    
-    DLog(@"fbLogIn");
-    
-    playerAccount.loginAnimatedViewController = self;
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"/login_FB" forKey:@"event"]];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IPad"];
-    [LoginAnimatedViewController sharedInstance].isDemoPractice = NO;
-    [[NSUserDefaults standardUserDefaults] synchronize];
-
+    [startViewController checkNetworkStatus:nil];
+    if ([startViewController connectedToWiFi]) {
+        [activityView setHidden:NO];
+        [activityIndicatorView startAnimating];
+        animationPause = YES;
+        
+        TestAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+        [appDelegate openSessionWithAllowLoginUI:YES];
+        
+        [self initFacebook];
+        
+        [playerAccount cleareWeaponAndDefense];
+        
+        DLog(@"fbLogIn");
+        
+        playerAccount.loginAnimatedViewController = self;
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                            object:self
+                                                          userInfo:[NSDictionary dictionaryWithObject:@"/login_FB" forKey:@"event"]];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IPad"];
+        [LoginAnimatedViewController sharedInstance].isDemoPractice = NO;
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }else{
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry", @"AlertView")
+                                                            message:NSLocalizedString(@"Internet_down", @"AlertView")
+                                                           delegate:self
+                                                  cancelButtonTitle:NSLocalizedString(@"Cancel", @"AlertView")
+                                                  otherButtonTitles: nil];
+        [alertView show];
+        alertView = nil;
+    }
 }
 
 
