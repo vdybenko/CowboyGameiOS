@@ -96,7 +96,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self startTableAnimation];
+//    [self startTableAnimation];
 }
 
 -(void)viewWillDisappear:(BOOL)animated

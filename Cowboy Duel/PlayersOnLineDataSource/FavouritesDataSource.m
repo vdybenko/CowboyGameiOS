@@ -108,8 +108,8 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
             if (!playerOnline) {
                 playerOnline = ([server.serverName isEqualToString:fvPlayer.dAuth]);
                 if (playerOnline) {
-                    fvPlayer.dAttack = server.weapon;
-                    fvPlayer.dDefense = server.defense;
+                    fvPlayer.dAttack = server.weapon + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[server.rank intValue]];
+                    fvPlayer.dDefense = server.defense + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[server.rank intValue]];
                     fvPlayer.dBot = server.bot;
                     fvPlayer.dStatus = server.status;
                     fvPlayer.dSessionId = server.sessionId;
