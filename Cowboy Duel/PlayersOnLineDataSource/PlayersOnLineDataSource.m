@@ -58,7 +58,6 @@
     [self addPracticeCell];
     if (statusOnLine) {
         self.isNeedFavCheck = YES;
-        self.isNeedPractice = YES;
         [self refreshListOnline];       
 //        [self addPracticeCell];
         
@@ -180,9 +179,13 @@
 	return 1;
 }
 
-#pragma mark CustomNSURLConnection handlers
-
-
+#pragma mark ListOnlineDataSource 
+- (void)listOnlineResponse:(NSString *)jsonString{
+    [super listOnlineResponse:jsonString];
+    [self addPracticeCell];
+    ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
+    [listOfItemsViewController didRefreshController];
+}
 
 #pragma mark IconDownloaderDelegate
 - (void)appImageDidLoad:(NSIndexPath *)indexPath
