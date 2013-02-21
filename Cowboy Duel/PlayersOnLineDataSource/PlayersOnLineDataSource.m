@@ -55,17 +55,17 @@
 
 -(void) reloadDataSource;
 {
-    [self addPracticeCell];
-    if (statusOnLine) {
+    if ([[StartViewController sharedInstance] connectedToWiFi]) {
         self.isNeedFavCheck = YES;
         self.isNeedPractice = YES;
         [self refreshListOnline];       
-//        [self addPracticeCell];
         
         [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(connectionTimeout) userInfo:nil repeats:NO];
         self.startLoad = YES;
     }else{
         self.startLoad = NO;
+        [self.serverObjects removeAllObjects];
+        [self addPracticeCell];
         ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
         [listOfItemsViewController didRefreshController];
     }

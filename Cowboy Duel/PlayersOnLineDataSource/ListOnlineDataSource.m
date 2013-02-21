@@ -91,7 +91,6 @@ ListOfItemsViewController *delegate;
         ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
         [listOfItemsViewController didRefreshController];
     }else{
-
         FavouritesViewController *favsVC = (FavouritesViewController *)delegate;
         [favsVC didRefreshController];
     }
