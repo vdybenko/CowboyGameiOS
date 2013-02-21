@@ -212,8 +212,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
     TestAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     [appDelegate openSessionWithAllowLoginUI:YES];
     
-    
-    
     [self initFacebook];
     
     [playerAccount cleareWeaponAndDefense];

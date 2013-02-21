@@ -201,6 +201,7 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
                                                                delegate:self
                                                       cancelButtonTitle:NSLocalizedString(@"Cancel", @"AlertView")
                                                       otherButtonTitles: nil];
+            alertView.tag = 1;
             [alertView show];
             return NO;
 
@@ -410,6 +411,7 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 														object:self
                                                       userInfo:[NSDictionary dictionaryWithObjectsAndKeys:sInfo, @"messageId",message, @"message", nil]];
 }
+
 #pragma mark GATrackEvent
 - (void)AnalyticsTrackEvent:(NSNotification *)notification {
 	NSString *page = [[notification userInfo] objectForKey:@"event"];
@@ -442,6 +444,30 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     
     return request;
 }
+
+#pragma mark AlertViewDelegate
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 1) {
+        if (buttonIndex == 0)
+        {
+            if ([[[navigationController viewControllers] lastObject] isKindOfClass:[LoginAnimatedViewController class]]) {
+                loginViewController = (LoginAnimatedViewController *)[[navigationController viewControllers] lastObject];
+            }
+            [loginViewController failed];
+            SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+            
+            if ([controller respondsToSelector:@selector(alertView:clickedButtonAtIndex:)]) {
+                // Manually invoke the alert view button handler
+                [(id <UIAlertViewDelegate>)controller alertView:nil
+                                           clickedButtonAtIndex:kFacebookSettingsButtonIndex];
+            }
+            
+        }
+    }
+}
+
 
 #pragma mark GADBannerViewDelegate impl
 
