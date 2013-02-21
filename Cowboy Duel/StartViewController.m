@@ -143,7 +143,7 @@
 static const char *REGISTRATION_URL =  BASE_URL"api/registration";
 static const char *AUTORIZATION_URL =  BASE_URL"api/authorization";
 static const char *MODIFIER_USER_URL =  BASE_URL"users/set_user_data";
-static const char *PUSH_NOTIF_URL = "";
+static const char *PUSH_NOTIF_URL = BASE_URL"api/push";
 
 NSString *const URL_FB_PAGE=@"http://cowboyduel.mobi/";
 
@@ -947,7 +947,7 @@ static StartViewController *sharedHelper = nil;
     messageHeader = [[notification userInfo] objectForKey:@"messageId"];
     
     messageID = [[messageHeader objectForKey:@"t"] intValue];
-    
+    NSLog(@"messageID %d",messageID);
     UIViewController *visibleViewController=[self.navigationController visibleViewController];
     if ([visibleViewController isKindOfClass:[ProfileViewController class]] ||
         [visibleViewController isKindOfClass:[StartViewController class]] ||
@@ -995,20 +995,20 @@ static StartViewController *sharedHelper = nil;
     
     [theRequest setHTTPMethod:@"POST"];
     NSDictionary *dicBody= [[NSMutableDictionary alloc] init];
+    [dicBody setValue:playerId forKey:@"authen"];
     [dicBody setValue:message forKey:@"message"];
     [dicBody setValue:[NSNumber numberWithInt:type] forKey:@"type"];
     [dicBody setValue:nick forKey:@"nick"];
-    [dicBody setValue:playerId forKey:@"id"];
+    [dicBody setValue:playerAccount.accountID forKey:@"id"];
     
     NSString *stBody=[Utils makeStringForPostRequest:dicBody];
     [theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    NSLog(@"\nPush request : %@", stBody);
-    
+        
     [NSURLConnection sendAsynchronousRequest:theRequest
                                        queue:[[NSOperationQueue alloc] init]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *err) {
-                               
+//                               NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//                               NSLog(@"jsonString %@",jsonString);
                            }];
     
 }

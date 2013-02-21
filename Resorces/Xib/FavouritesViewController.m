@@ -226,7 +226,7 @@
     player = [favsDataSource.arrItemsList objectAtIndex:indexPath.row];
     [[StartViewController sharedInstance] sendMessageForPush:@"POKE"
                                                     withType:PUSH_NOTIFICATION_POKE
-                                                   forPlayer:player.dNickName
+                                                   forPlayer:@"test"
                                                       withId:player.dAuth
                                                      ];
     
