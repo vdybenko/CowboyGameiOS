@@ -911,13 +911,21 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 - (IBAction)btnFavouritesClick:(id)sender {
     
 //    [[StartViewController sharedInstance].favsDataSource reloadDataSource];
-    
+    if ([[StartViewController sharedInstance] connectedToWiFi]) {
     FavouritesViewController *favVC = [[FavouritesViewController alloc] initWithAccount:playerAccount];
     [self.navigationController pushViewController:favVC animated:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
                                                       userInfo:[NSDictionary dictionaryWithObject:@"/profile_favorites_click" forKey:@"event"]];
-
+    }else{
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry", @"AlertView")
+                                                            message:NSLocalizedString(@"Internet_down", @"AlertView")
+                                                           delegate:self
+                                                  cancelButtonTitle:NSLocalizedString(@"Cancel", @"AlertView")
+                                                  otherButtonTitles: nil];
+        [alertView show];
+        alertView = nil;
+    }
 }
 
 
