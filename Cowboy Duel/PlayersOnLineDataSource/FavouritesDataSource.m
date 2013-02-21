@@ -79,11 +79,11 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     if (theConnection) {
         receivedData = [[NSMutableData alloc] init];
         [self refreshListOnline];        
-//        FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
-//        [favsViewController.loadingView setHidden:NO];
-//        [favsViewController.activityIndicator startAnimating];
+
     } else {
-        
+        FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
+        [favsViewController.loadingView setHidden:YES];
+        [favsViewController.activityIndicator stopAnimating];
     }
     
 	return self;
