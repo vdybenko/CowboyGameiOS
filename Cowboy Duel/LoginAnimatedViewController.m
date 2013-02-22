@@ -193,7 +193,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [LoginAnimatedViewController sharedInstance].isDemoPractice = YES;
     
     //creating ActiveDuelVC
-    int randomTime = arc4random() % 6+5;
+    int randomTime = (arc4random() % 3)-2;
     AccountDataSource *oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
     ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:playerAccount oponentAccount:oponentAccount];
     [self.navigationController pushViewController:activeDuelViewController animated:YES];
