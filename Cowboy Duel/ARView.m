@@ -514,6 +514,8 @@ void transformFromCMRotationMatrix(vec4f_t mout, const CMRotationMatrix *m)
 	mout[15] = 1.0f;
 }
 
+
+
 #pragma mark -
 #pragma mark Geodetic utilities definition
 

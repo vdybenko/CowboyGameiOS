@@ -12,7 +12,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "DuelRewardLogicController.h"
 #import "FinalViewController.h"
-#import "ARView.h"
+//#import "ARView.h"
 #import "OponentCoordinateView.h"
 #import "StartViewController.h"
 #import "GunDrumViewController.h"
@@ -55,7 +55,7 @@
     
     GunDrumViewController  *gunDrumViewController;
     ActivityIndicatorView *activityIndicatorView;
-    NSMutableArray *placesOfInterest;
+    NSMutableArray *oponentsViewCoordinates;
     float steadyScale;
     float scaleDelta;
     BOOL oponnentFoll;
@@ -166,12 +166,55 @@ static CGFloat oponentLiveImageViewStartWidth;
     
     shotCountForSound = 1;
     
-    ARView *arView = (ARView *)self.view;
+//    ARView *arView = (ARView *)self.view;
+//    
+//    int iPhone5Delta = [UIScreen mainScreen].bounds.size.height - 480;
+//    CGRect deltaFrame = arView.frame;
+//    deltaFrame.size.height += iPhone5Delta;
+//    [arView setFrame:deltaFrame];
+//    
+//    CLLocationCoordinate2D oponentCoords;
+//    if(!delegate && !opAccount.bot)
+//    {
+//        oponentCoords.latitude = 1;//(((float) rand()) / RAND_MAX) * 360 - 180;
+//        oponentCoords.longitude = 1;// (((float) rand()) / RAND_MAX) * 360 - 180;
+//    }else{
+//        oponentCoords.latitude = (((float) rand()) / RAND_MAX) * 360 - 180;
+//        oponentCoords.longitude = (((float) rand()) / RAND_MAX) * 360 - 180;
+//        
+//    }
+//
+//	placesOfInterest = [NSMutableArray arrayWithCapacity:1];
+////	for (int i = 0; i < numPois; i++) {
+//		OponentCoordinateView *poi = [OponentCoordinateView oponentCoordinateWithView:self.floatView at:[[CLLocation alloc] initWithLatitude:oponentCoords.latitude longitude:oponentCoords.longitude]];
+//		[placesOfInterest insertObject:poi atIndex:0];
+////	}
+//	[arView setPlacesOfInterest:placesOfInterest];
+
+    
+    plView = (PLView *)self.view;
+    
+    plView.camera.pitchRange = PLRangeMake (-180, 180);
+    plView.camera.rollRange = PLRangeMake (-180, 180);
+    plView.camera.yawRange = PLRangeMake (-180, 180);
+    //plView.menView = self.opponentImage;
+    
+    PLCubicPanorama *cubicPanorama = [PLCubicPanorama panorama];
+    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:@"pano_f" ofType:@"jpg"]]] face:PLCubeFaceOrientationFront];
+    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:@"pano_b" ofType:@"jpg"]]] face:PLCubeFaceOrientationBack];
+    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:@"pano_l" ofType:@"jpg"]]] face:PLCubeFaceOrientationLeft];
+    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:@"pano_r" ofType:@"jpg"]]] face:PLCubeFaceOrientationRight];
+    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:@"pano_u" ofType:@"jpg"]]] face:PLCubeFaceOrientationUp];
+    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:@"pano_d" ofType:@"jpg"]]] face:PLCubeFaceOrientationDown];
+    [plView setPanorama:cubicPanorama];
+    
+    [self hideHelpViewOnStartDuel];
+ 
     
     int iPhone5Delta = [UIScreen mainScreen].bounds.size.height - 480;
-    CGRect deltaFrame = arView.frame;
+    CGRect deltaFrame = plView.frame;
     deltaFrame.size.height += iPhone5Delta;
-    [arView setFrame:deltaFrame];
+    [plView setFrame:deltaFrame];
     
     CLLocationCoordinate2D oponentCoords;
     if(!delegate && !opAccount.bot)
@@ -183,16 +226,14 @@ static CGFloat oponentLiveImageViewStartWidth;
         oponentCoords.longitude = (((float) rand()) / RAND_MAX) * 360 - 180;
         
     }
+    
+	oponentsViewCoordinates = [NSMutableArray arrayWithCapacity:1];
+    //	for (int i = 0; i < numPois; i++) {
+    OponentCoordinateView *poi = [OponentCoordinateView oponentCoordinateWithView:self.floatView at:[[CLLocation alloc] initWithLatitude:oponentCoords.latitude longitude:oponentCoords.longitude]];
+    [oponentsViewCoordinates insertObject:poi atIndex:0];
+    //	}
+	[plView setOponentCoordinates:oponentsViewCoordinates];
 
-	placesOfInterest = [NSMutableArray arrayWithCapacity:1];
-//	for (int i = 0; i < numPois; i++) {
-		OponentCoordinateView *poi = [OponentCoordinateView oponentCoordinateWithView:self.floatView at:[[CLLocation alloc] initWithLatitude:oponentCoords.latitude longitude:oponentCoords.longitude]];
-		[placesOfInterest insertObject:poi atIndex:0];
-//	}
-	[arView setPlacesOfInterest:placesOfInterest];
-
-        
-    [self hideHelpViewOnStartDuel];
     
     gunDrumViewController = [[GunDrumViewController alloc] initWithNibName:Nil bundle:Nil];
     [self.view addSubview:gunDrumViewController.view];
@@ -232,8 +273,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     [self countUpBulets];
     [self updateOpponentViewToRamdomPosition];
     
-    ARView *arView = (ARView *)self.view;
-	[arView start];
+	[plView startAnimation];
     
     [activityIndicatorView hideView];
     [self.gunButton setEnabled:NO];
@@ -273,7 +313,7 @@ static CGFloat oponentLiveImageViewStartWidth;
             DLog(@"bot opponentTime %d", opponentTime);
         }
     }
-
+   [plView startSensorialRotation];
 
 }
 
@@ -284,14 +324,16 @@ static CGFloat oponentLiveImageViewStartWidth;
     [gunDrumViewController hideGun];
     [shotTimer invalidate];
     [moveTimer invalidate];
+    plView = (PLView *)self.view;
+    [plView stopSensorialRotation];
+    
     
 }
 
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    ARView *arView = (ARView *)self.view;
-	[arView stop];
+   
 }
 
 - (void)viewDidUnload {
@@ -342,11 +384,11 @@ static CGFloat oponentLiveImageViewStartWidth;
 }
 
 - (IBAction)shotButtonClick:(id)sender {
-    if ([self.fireImageView isAnimating]) {
-        [self.fireImageView stopAnimating];
-    }
-    [self.fireImageView startAnimating];
-       
+//    if ([self.fireImageView isAnimating]) {
+//        [self.fireImageView stopAnimating];
+//    }
+//    [self.fireImageView startAnimating];
+    
     
     switch (shotCountForSound) {
         case 1:
