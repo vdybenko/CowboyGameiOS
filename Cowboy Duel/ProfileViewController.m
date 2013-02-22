@@ -730,14 +730,21 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         btnAddToFavorites.hidden = YES;
     }else{
         if (playerServer.favorite) {
+            NSLog(@"server %@ YES",playerServer.displayName);
             dispatch_async(dispatch_get_main_queue(), ^{
-                btnAddToFavorites.imageView.image = [UIImage imageNamed:@"topPlayerStarSelected.png"];
+                [btnAddToFavorites setImage:[UIImage imageNamed:@"topPlayerStarSelected.png"] forState:UIControlStateNormal];
+                [btnAddToFavorites setImage:[UIImage imageNamed:@"topPlayerStarSelected.png"] forState:UIControlStateDisabled];
             });
         }else{
+            NSLog(@"server %@ NO",playerServer.displayName);
             dispatch_async(dispatch_get_main_queue(), ^{
-                btnAddToFavorites.imageView.image = [UIImage imageNamed:@"topPlayerStar.png"];
+                [btnAddToFavorites setImage:[UIImage imageNamed:@"topPlayerStar.png"] forState:UIControlStateNormal];
+                [btnAddToFavorites setImage:[UIImage imageNamed:@"topPlayerStar.png"] forState:UIControlStateDisabled];
             });
         }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            btnAddToFavorites.enabled = YES;
+        });
     }
 }
 
@@ -870,6 +877,8 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 }
 
 - (IBAction)duelButtonClick:(id)sender {
+    btnAddToFavorites.imageView.image = [UIImage imageNamed:@"topPlayerStarSelected.png"];
+    return;
     if ([self isPlayerForPractice]) {
         [playerAccount.finalInfoTable removeAllObjects];
         int randomTime = (arc4random() % 3)-2;
@@ -974,6 +983,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 - (IBAction)btnAddToFavoritesClick:(id)sender {
     bgActivityIndicator.hidden = NO;
     
+    btnAddToFavorites.enabled = NO;
     __weak ProfileViewController *bself = self;
     
     if (playerServer.favorite) {
@@ -984,12 +994,12 @@ if (playerAccount.accountLevel != kCountOfLevels) {
              if ([data length] >0 && error == nil)
              {
                  NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                 NSLog(@"jsonString %@",jsonString);
                  NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
                  int errCode=[[responseObject objectForKey:@"err_code"] intValue];
                  if (errCode == 1) {
                      playerServer.favorite = NO;
                      [[StartViewController sharedInstance].favsDataSource deleteFromDBFavoriteWithId:playerAccount.accountID];
+                     [[StartViewController sharedInstance].favsDataSource saveFavorites:[StartViewController sharedInstance].favsDataSource.arrItemsList];
                  }
              }
              else if ([data length] == 0 && error == nil)
@@ -1034,6 +1044,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                      favPlayer.dStatus = playerServer.status;
                      
                      [[StartViewController sharedInstance].favsDataSource addToDBFavotitePlayer:favPlayer];
+                     [[StartViewController sharedInstance].favsDataSource saveFavorites:[StartViewController sharedInstance].favsDataSource.arrItemsList];
                  }
              }
              else if ([data length] == 0 && error == nil)

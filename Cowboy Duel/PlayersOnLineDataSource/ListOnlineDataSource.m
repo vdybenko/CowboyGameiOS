@@ -91,7 +91,6 @@ ListOfItemsViewController *delegate;
         server.favorite = NO;
     }else{
         server.favorite = YES;
-        
     }
 }
 @end
