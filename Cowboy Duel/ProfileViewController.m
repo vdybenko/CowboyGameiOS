@@ -840,7 +840,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         
     if ([playerAccount.sessionID isEqualToString:@"-1"]) {
         [playerAccount.finalInfoTable removeAllObjects];
-        int randomTime = arc4random() % 6;
+        int randomTime = (arc4random() % 3)-2;
         
         if ([AccountDataSource sharedInstance].activeDuel) {
             ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:[AccountDataSource sharedInstance] oponentAccount:playerAccount];

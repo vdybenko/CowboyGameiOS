@@ -1282,18 +1282,6 @@ static OGHelper *sharedHelper = nil;
 
 #pragma mark FBDialogDelegate
 - (void)dialogCompleteWithUrl:(NSURL *)url {
-    NSDictionary *params = [self parseURLParams:[url query]];
-    NSString *msg = [NSString stringWithFormat:
-                     @"Posted story, id: %@",
-                     [params valueForKey:@"post_id"]];
-    NSLog(@"%@", msg);
-    // Show the result in an alert
-    [[[UIAlertView alloc] initWithTitle:@"Result"
-                                message:msg
-                               delegate:nil
-                      cancelButtonTitle:@"OK!"
-                      otherButtonTitles:nil]
-     show];
 }
 
 - (NSDictionary*)parseURLParams:(NSString *)query {
