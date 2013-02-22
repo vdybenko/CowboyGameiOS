@@ -7,19 +7,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Cowboy Duel/TestAppDelegate.m"
-         timestampString = "382353244.139768"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "242"
-         endingLineNumber = "242"
-         landmarkName = "-sessionStateChanged:state:error:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ProfileViewController.m"
          timestampString = "382457819.648309"
          startingColumnNumber = "9223372036854775807"
@@ -182,7 +169,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "300"
          endingLineNumber = "300"
-         landmarkName = "-bagButtonClick:"
+         landmarkName = "-defenseButtonClick:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -286,7 +273,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "337"
          endingLineNumber = "337"
-         landmarkName = "-shotButtonClick:"
+         landmarkName = "-countUpBulets"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -312,7 +299,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "379"
          endingLineNumber = "379"
-         landmarkName = "-horizontalFlip"
+         landmarkName = "-shotButtonClick:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
