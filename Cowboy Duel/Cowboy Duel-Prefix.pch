@@ -61,5 +61,5 @@
 #define URL_COMM_FB_PAGE @"https://m.facebook.com/CowboyGamesConnunityiOS"
 #define URL_CONTACT_US @"http://cowboyduel.com/"
 
-//#define MASTER_SERVER_IP @"192.168.1.35"
+//#define MASTER_SERVER_IP @"192.168.1.34"
 //#define MASTER_SERVER_PORT @"8888"
