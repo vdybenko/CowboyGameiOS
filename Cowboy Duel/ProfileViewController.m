@@ -628,13 +628,13 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     userAtackView.hidden = NO;
     userDefenseView.hidden = NO;
     if (playerAccount.accountWeapon.dDamage!=0) {
-        userAtack.text = [NSString stringWithFormat:@"+%d",playerAccount.accountWeapon.dDamage];
+        userAtack.text =[NSString stringWithFormat:@"%d",playerAccount.accountWeapon.dDamage + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[playerServer.rank intValue]]];// [NSString stringWithFormat:@"+%d",playerAccount.accountWeapon.dDamage];
        
     }else{
         userAtack.text = @"+0";
     }
     if (playerAccount.accountDefenseValue!=0) {
-        userDefense.text = [NSString stringWithFormat:@"+%d",playerAccount.accountDefenseValue];
+        userDefense.text = [NSString stringWithFormat:@"%d",playerAccount.accountDefenseValue + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[playerServer.rank intValue]]];//[NSString stringWithFormat:@"+%d",playerAccount.accountDefenseValue];
     }else{
         userDefense.text = @"+0";
     }
