@@ -15,6 +15,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "Facebook.h"
 #import "ActiveDuelViewController.h"
+#import "UIView+Dinamic_BackGround.h"
 
 #define kFacebookAppId @"284932561559672"
 NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/first/";
@@ -192,7 +193,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [LoginAnimatedViewController sharedInstance].isDemoPractice = YES;
     
     //creating ActiveDuelVC
-    int randomTime = arc4random() % 6+5;
+    int randomTime = (arc4random() % 3)-2;
     AccountDataSource *oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
     ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:playerAccount oponentAccount:oponentAccount];
     [self.navigationController pushViewController:activeDuelViewController animated:YES];

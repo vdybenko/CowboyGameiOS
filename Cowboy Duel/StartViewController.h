@@ -13,8 +13,6 @@
 
 #import "AccountDataSource.h"
 #import "ProfileViewController.h"
-#import "DuelViewController.h"
-#import "TeachingViewController.h"
 #import "HelpViewController.h"
 #import "GCHelper.h"
 #import "OGHelper.h"

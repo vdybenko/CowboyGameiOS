@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DuelViewController.h"
 #import "LoadViewController.h"
 #import "LoginAnimatedViewController.h"
 #import "AccountDataSource.h"

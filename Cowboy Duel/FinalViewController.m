@@ -7,7 +7,6 @@
 //
 
 #import "FinalViewController.h"
-#import "TeachingViewController.h"
 #import "GameCenterViewController.h"
 #import "StartViewController.h"
 #import "ProfileViewController.h"
@@ -82,17 +81,15 @@
         DLog(@"Time final %d  %d",userTime,oponentTime);
         stGA = [[NSString alloc] init];
         
-        if([delegateController isKindOfClass:[TeachingViewController class]]){
+        if(teaching){
             if (duelWithBotCheck) {
                 stGA = @"/duel_BOT/";
             }else{
                 stGA = @"/duel_teaching/";
             }
-            teachingViewController = delegateController;
-        }else if([delegateController isKindOfClass:[GameCenterViewController class]]){
-            stGA = @"/duel_GS/";
+        }else{
+            stGA = @"/duel/";
         }  
-        
         
         transaction = [[CDTransaction alloc] init];
         transaction.trMoneyCh = [NSNumber numberWithInt:10];
@@ -348,9 +345,6 @@
         }
 
         [playerAccount.finalInfoTable removeAllObjects];
-        teachingViewController.mutchNumber = 0;
-        teachingViewController.mutchNumberWin = 0;
-        teachingViewController.mutchNumberLose = 0;
         [self.navigationController popViewControllerAnimated:YES];
     }
     else

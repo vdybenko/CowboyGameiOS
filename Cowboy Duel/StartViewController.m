@@ -10,6 +10,7 @@
 #import "StartViewController.h"
 #import "UIView+Hierarchy.h"
 #import "UIButton+Image+Title.h"
+#import "UIView+Dinamic_BackGround.h"
 #import "AdvertisingNewVersionViewController.h"
 #import "AdvertisingAppearController.h"
 #import "ListOfItemsViewController.h"

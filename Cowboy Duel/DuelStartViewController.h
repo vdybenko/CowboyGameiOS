@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "AccountDataSource.h"
-#import "TeachingViewController.h"
 #import "GCHelper.h"
 #import <UIKit/UIKit.h>
 #import <GameKit/GameKit.h>
@@ -19,6 +18,7 @@
 #import "ProfileViewController.h"
 #import "StartViewController.h"
 #import "IconDownloader.h"
+#import "DuelViewControllerWithXib.h"
 
 @class GameCenterViewController;
 @interface DuelStartViewController : UIViewController<DuelStartViewControllerDelegate,FBRequestDelegate,IconDownloaderDelegate,MemoryManagement> {

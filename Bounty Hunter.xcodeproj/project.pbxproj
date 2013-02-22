@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		03285FA2159DD61900D16195 /* ListOfItemsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03285FA1159DD61900D16195 /* ListOfItemsViewController.xib */; };
-		03286029159DD84000D16195 /* adc_tv.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FAF159DD84000D16195 /* adc_tv.png */; };
-		0328602A159DD84000D16195 /* adc_tv@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FB0159DD84000D16195 /* adc_tv@2x.png */; };
 		0328602B159DD84000D16195 /* btn_adcolony.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FB2159DD84000D16195 /* btn_adcolony.png */; };
 		0328602C159DD84000D16195 /* btn_adcolony@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FB3159DD84000D16195 /* btn_adcolony@2x.png */; };
 		0328602F159DD84000D16195 /* btn_fb_login.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FB6159DD84000D16195 /* btn_fb_login.png */; };
@@ -26,14 +24,6 @@
 		03286040159DD84000D16195 /* ds_guns@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FC9159DD84000D16195 /* ds_guns@2x.png */; };
 		03286043159DD84000D16195 /* ds_table_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FCC159DD84000D16195 /* ds_table_line.png */; };
 		03286044159DD84000D16195 /* ds_table_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FCD159DD84000D16195 /* ds_table_line@2x.png */; };
-		0328604B159DD84000D16195 /* dv_bg_new.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FD5159DD84000D16195 /* dv_bg_new.png */; };
-		0328604C159DD84000D16195 /* dv_bg_new@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FD6159DD84000D16195 /* dv_bg_new@2x.png */; };
-		0328604D159DD84000D16195 /* dv_bullets.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FD7159DD84000D16195 /* dv_bullets.png */; };
-		0328604E159DD84000D16195 /* dv_bullets@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FD8159DD84000D16195 /* dv_bullets@2x.png */; };
-		0328604F159DD84000D16195 /* dv_img_eath_new.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FD9159DD84000D16195 /* dv_img_eath_new.png */; };
-		03286050159DD84000D16195 /* dv_img_eath_new@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FDA159DD84000D16195 /* dv_img_eath_new@2x.png */; };
-		03286051159DD84000D16195 /* dv_img_gun1.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FDB159DD84000D16195 /* dv_img_gun1.png */; };
-		03286052159DD84000D16195 /* dv_img_gun1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FDC159DD84000D16195 /* dv_img_gun1@2x.png */; };
 		03286053159DD84000D16195 /* fb_btn_facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FDE159DD84000D16195 /* fb_btn_facebook.png */; };
 		03286054159DD84000D16195 /* fb_btn_facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FDF159DD84000D16195 /* fb_btn_facebook@2x.png */; };
 		03286055159DD84000D16195 /* fb_btn_itunes.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FE0159DD84000D16195 /* fb_btn_itunes.png */; };
@@ -70,10 +60,6 @@
 		0328608A159DD84000D16195 /* pv_points@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0328601D159DD84000D16195 /* pv_points@2x.png */; };
 		0328608B159DD84000D16195 /* pv_points_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 0328601E159DD84000D16195 /* pv_points_background.png */; };
 		0328608C159DD84000D16195 /* pv_points_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0328601F159DD84000D16195 /* pv_points_background@2x.png */; };
-		0328608D159DD84000D16195 /* st_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 03286021159DD84000D16195 /* st_arrow.png */; };
-		0328608E159DD84000D16195 /* st_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03286022159DD84000D16195 /* st_arrow@2x.png */; };
-		0328608F159DD84000D16195 /* st_bg_new.png in Resources */ = {isa = PBXBuildFile; fileRef = 03286023159DD84000D16195 /* st_bg_new.png */; };
-		03286090159DD84000D16195 /* st_bg_new@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03286024159DD84000D16195 /* st_bg_new@2x.png */; };
 		037DF21E154BDBAC003FACDF /* CDCollectionApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 037DF217154BDBAC003FACDF /* CDCollectionApp.m */; };
 		037DF21F154BDBAC003FACDF /* CollectionAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 037DF219154BDBAC003FACDF /* CollectionAppViewController.m */; };
 		037DF220154BDBAC003FACDF /* CollectionAppWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 037DF21B154BDBAC003FACDF /* CollectionAppWrapper.m */; };
@@ -232,17 +218,13 @@
 		762AA31015B99C72001B65E2 /* TopPlayerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 762AA30F15B99C72001B65E2 /* TopPlayerCell.m */; };
 		763E6BB71664B0F900FA4E86 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 763E6BB61664B0F900FA4E86 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		763E6BC31664B1DF00FA4E86 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 763E6BC21664B18500FA4E86 /* libGoogleAdMobAds.a */; };
-		763F8A271578A1F800D8BB42 /* DuelViewControllerWithXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 763F8A261578A1F800D8BB42 /* DuelViewControllerWithXib.xib */; };
 		763F8A291578A3A900D8BB42 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 763F8A281578A3A900D8BB42 /* libxml2.2.dylib */; };
-		763F8A2A1578A55700D8BB42 /* DuelViewControllerWithXib.m in Sources */ = {isa = PBXBuildFile; fileRef = 765E351415765F1400CCB6F4 /* DuelViewControllerWithXib.m */; };
 		763F8A3D1578FC0900D8BB42 /* UIView+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 763F8A3B1578FC0900D8BB42 /* UIView+Hierarchy.m */; };
 		764B07211598A5B30050D4E4 /* UIView+Dinamic_BackGround.m in Sources */ = {isa = PBXBuildFile; fileRef = 764B07201598A5B30050D4E4 /* UIView+Dinamic_BackGround.m */; };
 		764B8919165FCBDC0014E35B /* list_online_practica_target.png in Resources */ = {isa = PBXBuildFile; fileRef = 764B8915165FCBDC0014E35B /* list_online_practica_target.png */; };
 		764B891A165FCBDC0014E35B /* list_online_practica_target@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 764B8916165FCBDC0014E35B /* list_online_practica_target@2x.png */; };
 		764B891F165FCCCE0014E35B /* PracticaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 764B891E165FCCCE0014E35B /* PracticaCell.xib */; };
 		764B8927165FD0F70014E35B /* PracticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 764B8926165FD0F70014E35B /* PracticeCell.m */; };
-		765A97AB166359EC0059390B /* dv_arm_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 765A97A9166359EC0059390B /* dv_arm_arrow.png */; };
-		765A97AC166359EC0059390B /* dv_arm_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 765A97AA166359EC0059390B /* dv_arm_arrow@2x.png */; };
 		766B7D3613FE790600377AA3 /* Fire.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 766B7D3513FE790600377AA3 /* Fire.mp3 */; };
 		7675CA8615A2E10C005A3BD3 /* DuelRewardLogicController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7675CA8515A2E10B005A3BD3 /* DuelRewardLogicController.m */; };
 		7679307115BE8B61007F461F /* CDPlayerMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 7679307015BE8B60007F461F /* CDPlayerMain.m */; };
@@ -257,11 +239,6 @@
 		767E1F73154BFBAF001FDDD5 /* OCPromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = 767E1F71154BFBAF001FDDD5 /* OCPromptView.m */; };
 		767FEF29156A5AF80016B415 /* PlayersOnLineDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 767FEF28156A5AF80016B415 /* PlayersOnLineDataSource.m */; };
 		767FEF30156A64A50016B415 /* ListOfItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767FEF2F156A64A40016B415 /* ListOfItemsViewController.m */; };
-		768044C415AC68FD005ABD3A /* dv_arm.png in Resources */ = {isa = PBXBuildFile; fileRef = 768044C215AC68FD005ABD3A /* dv_arm.png */; };
-		768044C915AC697A005ABD3A /* dv_arm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 768044C815AC6979005ABD3A /* dv_arm@2x.png */; };
-		7682BDDF15AC5F22001C09EC /* HelpPracticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682BDDD15AC5F22001C09EC /* HelpPracticeView.m */; };
-		768321D91654DDD000E78A8C /* TeachingHelperController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 768321D81654DDD000E78A8C /* TeachingHelperController.xib */; };
-		768321E01654E60D00E78A8C /* TeachingHelperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 768321DF1654E60D00E78A8C /* TeachingHelperViewController.m */; };
 		768388D3157DE37800377D88 /* UIButton+Image+Title.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388D2157DE37800377D88 /* UIButton+Image+Title.m */; };
 		768388E5157E249900377D88 /* CDCollectionAdvertisingApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388E2157E249900377D88 /* CDCollectionAdvertisingApp.m */; };
 		768388E8157E304400377D88 /* AdvertisingNewVersionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 768388E7157E304300377D88 /* AdvertisingNewVersionViewController.m */; };
@@ -308,18 +285,6 @@
 		76B65AC615DD28F4000E136C /* topPlayerGoldCell.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B65AC415DD28F4000E136C /* topPlayerGoldCell.png */; };
 		76B65AC715DD28F4000E136C /* topPlayerGoldCell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B65AC515DD28F4000E136C /* topPlayerGoldCell@2x.png */; };
 		76B65ACD15DD4A88000E136C /* FXLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 76B65ACB15DD4A88000E136C /* FXLabel.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		76B75ED215DE5B13000ED207 /* cheker_check.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B75ECC15DE5B13000ED207 /* cheker_check.png */; };
-		76B75ED315DE5B13000ED207 /* cheker_check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B75ECD15DE5B13000ED207 /* cheker_check@2x.png */; };
-		76B75ED415DE5B13000ED207 /* cheker_uncheck.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B75ECE15DE5B13000ED207 /* cheker_uncheck.png */; };
-		76B75ED515DE5B13000ED207 /* cheker_uncheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B75ECF15DE5B13000ED207 /* cheker_uncheck@2x.png */; };
-		76B75ED615DE5B13000ED207 /* view_dinamic_height_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B75ED015DE5B13000ED207 /* view_dinamic_height_arrow.png */; };
-		76B75ED715DE5B13000ED207 /* view_dinamic_height_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B75ED115DE5B13000ED207 /* view_dinamic_height_arrow@2x.png */; };
-		76B75EF015DE5B40000ED207 /* dv_fire_label.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B75EE415DE5B40000ED207 /* dv_fire_label.png */; };
-		76B75EF115DE5B40000ED207 /* dv_fire_label@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B75EE515DE5B40000ED207 /* dv_fire_label@2x.png */; };
-		76B784C015E272D9004EBBEC /* dv_ready.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B784BC15E272D8004EBBEC /* dv_ready.png */; };
-		76B784C115E272D9004EBBEC /* dv_ready@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B784BD15E272D9004EBBEC /* dv_ready@2x.png */; };
-		76B784C215E272D9004EBBEC /* dv_steady.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B784BE15E272D9004EBBEC /* dv_steady.png */; };
-		76B784C315E272D9004EBBEC /* dv_steady@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B784BF15E272D9004EBBEC /* dv_steady@2x.png */; };
 		76B94E6B16528CEB00F372E9 /* shop_list_castel.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B94E6716528CEB00F372E9 /* shop_list_castel.png */; };
 		76B94E6C16528CEB00F372E9 /* shop_list_castel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B94E6816528CEB00F372E9 /* shop_list_castel@2x.png */; };
 		76B94E6D16528CEB00F372E9 /* topPlayerCell_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B94E6916528CEB00F372E9 /* topPlayerCell_blue.png */; };
@@ -331,17 +296,11 @@
 		76BC8798165D08F3001F1472 /* ProfileViewControllerFirstRun.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76BC8797165D08F3001F1472 /* ProfileViewControllerFirstRun.xib */; };
 		76CAE7161421E97900CA39EA /* cry.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 76CAE7141421E97900CA39EA /* cry.mp3 */; };
 		76CB057013AB991B0011E768 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CB056F13AB991B0011E768 /* QuartzCore.framework */; };
-		76CDD0561655267A003F30BD /* dv_bullets_oval.png in Resources */ = {isa = PBXBuildFile; fileRef = 76CDD0521655267A003F30BD /* dv_bullets_oval.png */; };
-		76CDD0571655267A003F30BD /* dv_bullets_oval@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76CDD0531655267A003F30BD /* dv_bullets_oval@2x.png */; };
-		76CDD0581655267A003F30BD /* dv_fire_label_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 76CDD0541655267A003F30BD /* dv_fire_label_small.png */; };
-		76CDD0591655267A003F30BD /* dv_fire_label_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76CDD0551655267A003F30BD /* dv_fire_label_small@2x.png */; };
-		76CE0AE5163EF01D00B51B04 /* DuelProductWinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76CE0AE4163EF01D00B51B04 /* DuelProductWinViewController.xib */; };
 		76CE0AE8163EF45C00B51B04 /* shop_product_ribbon.png in Resources */ = {isa = PBXBuildFile; fileRef = 76CE0AE6163EF45C00B51B04 /* shop_product_ribbon.png */; };
 		76CE0AE9163EF45C00B51B04 /* shop_product_ribbon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76CE0AE7163EF45C00B51B04 /* shop_product_ribbon@2x.png */; };
 		76CE0AEC163EF62800B51B04 /* DuelProductWinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76CE0AEB163EF62800B51B04 /* DuelProductWinViewController.m */; };
 		76D12895159C9DE800E799AA /* PlayerOnLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D12893159C9DE800E799AA /* PlayerOnLineCell.m */; };
 		76D6284D163AC0ED00CA07D2 /* DuelProductAttensionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D6284B163AC0EC00CA07D2 /* DuelProductAttensionViewController.m */; };
-		76D6284E163AC0ED00CA07D2 /* DuelProductAttensionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76D6284C163AC0ED00CA07D2 /* DuelProductAttensionViewController.xib */; };
 		76D7D79C165126940072D420 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767EF48215D5557100548A04 /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		76E869C715CA8D870024ED08 /* pv_coint.png in Resources */ = {isa = PBXBuildFile; fileRef = 76E869C515CA8D870024ED08 /* pv_coint.png */; };
 		76E869C815CA8D870024ED08 /* pv_coint@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76E869C615CA8D870024ED08 /* pv_coint@2x.png */; };
@@ -510,7 +469,6 @@
 		BD4BAAB816BC064A00F88E82 /* men_low@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4BAAB516BC064900F88E82 /* men_low@2x.png */; };
 		BD4BAAB916BC064A00F88E82 /* men_low@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4BAAB516BC064900F88E82 /* men_low@2x.png */; };
 		BD68C49A16A705D200A9B52A /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD68C49916A705D200A9B52A /* CoreMotion.framework */; };
-		BD7E5EFB16404F92000D6897 /* st_bg_new-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD7E5EFA16404F92000D6897 /* st_bg_new-568h@2x.png */; };
 		BD7F252315E777DC00A3C2CA /* fin_img_coin.png in Resources */ = {isa = PBXBuildFile; fileRef = BD7F252115E777D800A3C2CA /* fin_img_coin.png */; };
 		BD7F252415E777DC00A3C2CA /* fin_img_coin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD7F252215E777DA00A3C2CA /* fin_img_coin@2x.png */; };
 		BD7F27CD147FECB700B1D6BC /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BDC6D7BA147E48E90012CB34 /* libz.1.2.5.dylib */; };
@@ -531,7 +489,6 @@
 		BD8342A7164C0CBE00E6363B /* BEAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8342A6164C0CBE00E6363B /* BEAnimationView.m */; };
 		BD83A40916720DFE003EE4B3 /* UIImage+Retina4.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA1B23C1648450E00FFF0A1 /* UIImage+Retina4.m */; };
 		BD83A40A16720DFE003EE4B3 /* NSString+isNumeric.m in Sources */ = {isa = PBXBuildFile; fileRef = 765EB4EB1580E3530059355B /* NSString+isNumeric.m */; };
-		BD83A40B16720DFE003EE4B3 /* DuelViewControllerWithXib.m in Sources */ = {isa = PBXBuildFile; fileRef = 765E351415765F1400CCB6F4 /* DuelViewControllerWithXib.m */; };
 		BD83A40C16720DFE003EE4B3 /* AccelerometrDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B3C141E1F170085E4FB /* AccelerometrDataSource.m */; };
 		BD83A40D16720DFE003EE4B3 /* AccountDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B3E141E1F170085E4FB /* AccountDataSource.m */; };
 		BD83A40E16720DFE003EE4B3 /* ActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B40141E1F170085E4FB /* ActivityIndicatorView.m */; };
@@ -539,7 +496,6 @@
 		BD83A41016720DFE003EE4B3 /* CDDuel.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B5B141E1F170085E4FB /* CDDuel.m */; };
 		BD83A41116720DFE003EE4B3 /* CDTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B5D141E1F170085E4FB /* CDTransaction.m */; };
 		BD83A41316720DFE003EE4B3 /* DuelStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B64141E1F170085E4FB /* DuelStartViewController.m */; };
-		BD83A41416720DFE003EE4B3 /* DuelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B66141E1F170085E4FB /* DuelViewController.m */; };
 		BD83A41516720DFE003EE4B3 /* FinalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B6A141E1F170085E4FB /* FinalViewController.m */; };
 		BD83A41616720DFE003EE4B3 /* FintDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B6C141E1F170085E4FB /* FintDataSource.m */; };
 		BD83A41716720DFE003EE4B3 /* GameCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B6E141E1F170085E4FB /* GameCenterViewController.m */; };
@@ -556,7 +512,6 @@
 		BD83A42316720DFE003EE4B3 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B9B141E1F170085E4FB /* Reachability.m */; };
 		BD83A42416720DFE003EE4B3 /* ResoultDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B9D141E1F170085E4FB /* ResoultDataSource.m */; };
 		BD83A42516720DFE003EE4B3 /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07BA5141E1F170085E4FB /* StartViewController.m */; };
-		BD83A42616720DFE003EE4B3 /* TeachingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07BAB141E1F170085E4FB /* TeachingViewController.m */; };
 		BD83A42716720DFE003EE4B3 /* TestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07BAE141E1F170085E4FB /* TestAppDelegate.m */; };
 		BD83A42816720DFE003EE4B3 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07BB5141E1F170085E4FB /* Utils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BD83A42916720DFE003EE4B3 /* ValidationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07BB7141E1F170085E4FB /* ValidationUtils.m */; };
@@ -581,7 +536,6 @@
 		BD83A43D16720DFE003EE4B3 /* IconDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7692812B159DCAFD00E6CE41 /* IconDownloader.m */; };
 		BD83A43E16720DFE003EE4B3 /* DuelRewardLogicController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7675CA8515A2E10B005A3BD3 /* DuelRewardLogicController.m */; };
 		BD83A43F16720DFE003EE4B3 /* HCYoutubeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3150C60B15A5A26E00AC8E17 /* HCYoutubeParser.m */; };
-		BD83A44016720DFE003EE4B3 /* HelpPracticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682BDDD15AC5F22001C09EC /* HelpPracticeView.m */; };
 		BD83A44616720DFE003EE4B3 /* CustomNSURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 767B56CE15AEDE2F00ECA0C4 /* CustomNSURLConnection.m */; };
 		BD83A44716720DFE003EE4B3 /* TopPlayerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 762AA30F15B99C72001B65E2 /* TopPlayerCell.m */; };
 		BD83A44816720DFE003EE4B3 /* TopPlayersDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 760E676015BD8277006F6832 /* TopPlayersDataSource.m */; };
@@ -610,7 +564,6 @@
 		BD83A45F16720DFE003EE4B3 /* MKStoreObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7F2AE81649647500D29263 /* MKStoreObserver.m */; };
 		BD83A46016720DFE003EE4B3 /* LoginAnimatedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD84DAA3164ABC9F00DEEE38 /* LoginAnimatedViewController.m */; };
 		BD83A46116720DFE003EE4B3 /* BEAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8342A6164C0CBE00E6363B /* BEAnimationView.m */; };
-		BD83A46216720DFE003EE4B3 /* TeachingHelperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 768321DF1654E60D00E78A8C /* TeachingHelperViewController.m */; };
 		BD83A46316720DFE003EE4B3 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F71903165A6AD700719D8A /* UIView+Frame.m */; };
 		BD83A46416720DFE003EE4B3 /* PracticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 764B8926165FD0F70014E35B /* PracticeCell.m */; };
 		BD83A46616720DFE003EE4B3 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 763E6BC21664B18500FA4E86 /* libGoogleAdMobAds.a */; };
@@ -662,11 +615,8 @@
 		BD83A49616720DFE003EE4B3 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761EFA4D1573BE91001670EB /* ProfileViewController.xib */; };
 		BD83A49716720DFE003EE4B3 /* StartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761EFA4E1573BE91001670EB /* StartViewController.xib */; };
 		BD83A49816720DFE003EE4B3 /* DuelStartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7692BC2E1574E36C00983264 /* DuelStartViewController.xib */; };
-		BD83A49916720DFE003EE4B3 /* DuelViewControllerWithXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 763F8A261578A1F800D8BB42 /* DuelViewControllerWithXib.xib */; };
 		BD83A49A16720DFE003EE4B3 /* FinalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767BA5BD1589F8E300825EB1 /* FinalViewController.xib */; };
 		BD83A49B16720DFE003EE4B3 /* ListOfItemsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03285FA1159DD61900D16195 /* ListOfItemsViewController.xib */; };
-		BD83A49C16720DFE003EE4B3 /* adc_tv.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FAF159DD84000D16195 /* adc_tv.png */; };
-		BD83A49D16720DFE003EE4B3 /* adc_tv@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FB0159DD84000D16195 /* adc_tv@2x.png */; };
 		BD83A49E16720DFE003EE4B3 /* btn_adcolony.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FB2159DD84000D16195 /* btn_adcolony.png */; };
 		BD83A49F16720DFE003EE4B3 /* btn_adcolony@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FB3159DD84000D16195 /* btn_adcolony@2x.png */; };
 		BD83A4A216720DFE003EE4B3 /* btn_fb_login.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FB6159DD84000D16195 /* btn_fb_login.png */; };
@@ -683,14 +633,6 @@
 		BD83A4AD16720DFE003EE4B3 /* ds_guns@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FC9159DD84000D16195 /* ds_guns@2x.png */; };
 		BD83A4AE16720DFE003EE4B3 /* ds_table_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FCC159DD84000D16195 /* ds_table_line.png */; };
 		BD83A4AF16720DFE003EE4B3 /* ds_table_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FCD159DD84000D16195 /* ds_table_line@2x.png */; };
-		BD83A4B016720DFE003EE4B3 /* dv_bg_new.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FD5159DD84000D16195 /* dv_bg_new.png */; };
-		BD83A4B116720DFE003EE4B3 /* dv_bg_new@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FD6159DD84000D16195 /* dv_bg_new@2x.png */; };
-		BD83A4B216720DFE003EE4B3 /* dv_bullets.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FD7159DD84000D16195 /* dv_bullets.png */; };
-		BD83A4B316720DFE003EE4B3 /* dv_bullets@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FD8159DD84000D16195 /* dv_bullets@2x.png */; };
-		BD83A4B416720DFE003EE4B3 /* dv_img_eath_new.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FD9159DD84000D16195 /* dv_img_eath_new.png */; };
-		BD83A4B516720DFE003EE4B3 /* dv_img_eath_new@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FDA159DD84000D16195 /* dv_img_eath_new@2x.png */; };
-		BD83A4B616720DFE003EE4B3 /* dv_img_gun1.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FDB159DD84000D16195 /* dv_img_gun1.png */; };
-		BD83A4B716720DFE003EE4B3 /* dv_img_gun1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FDC159DD84000D16195 /* dv_img_gun1@2x.png */; };
 		BD83A4B816720DFE003EE4B3 /* fb_btn_facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FDE159DD84000D16195 /* fb_btn_facebook.png */; };
 		BD83A4B916720DFE003EE4B3 /* fb_btn_facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FDF159DD84000D16195 /* fb_btn_facebook@2x.png */; };
 		BD83A4BA16720DFE003EE4B3 /* fb_btn_itunes.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FE0159DD84000D16195 /* fb_btn_itunes.png */; };
@@ -727,14 +669,8 @@
 		BD83A4E016720DFE003EE4B3 /* pv_points@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0328601D159DD84000D16195 /* pv_points@2x.png */; };
 		BD83A4E116720DFE003EE4B3 /* pv_points_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 0328601E159DD84000D16195 /* pv_points_background.png */; };
 		BD83A4E216720DFE003EE4B3 /* pv_points_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0328601F159DD84000D16195 /* pv_points_background@2x.png */; };
-		BD83A4E316720DFE003EE4B3 /* st_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 03286021159DD84000D16195 /* st_arrow.png */; };
-		BD83A4E416720DFE003EE4B3 /* st_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03286022159DD84000D16195 /* st_arrow@2x.png */; };
-		BD83A4E516720DFE003EE4B3 /* st_bg_new.png in Resources */ = {isa = PBXBuildFile; fileRef = 03286023159DD84000D16195 /* st_bg_new.png */; };
-		BD83A4E616720DFE003EE4B3 /* st_bg_new@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03286024159DD84000D16195 /* st_bg_new@2x.png */; };
 		BD83A4ED16720DFE003EE4B3 /* Gun.png in Resources */ = {isa = PBXBuildFile; fileRef = 31F6D52F15AB034400C0F28D /* Gun.png */; };
 		BD83A4EE16720DFE003EE4B3 /* Gun@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31F6D53015AB034400C0F28D /* Gun@2x.png */; };
-		BD83A4F216720DFE003EE4B3 /* dv_arm.png in Resources */ = {isa = PBXBuildFile; fileRef = 768044C215AC68FD005ABD3A /* dv_arm.png */; };
-		BD83A4F316720DFE003EE4B3 /* dv_arm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 768044C815AC6979005ABD3A /* dv_arm@2x.png */; };
 		BD83A4F416720DFE003EE4B3 /* ls_OnLine_frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 31DA9EFC15BD331900492A9F /* ls_OnLine_frame.png */; };
 		BD83A4F516720DFE003EE4B3 /* ls_OnLine_frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31DA9EFD15BD331900492A9F /* ls_OnLine_frame@2x.png */; };
 		BD83A4F616720DFE003EE4B3 /* topPlayerCell.png in Resources */ = {isa = PBXBuildFile; fileRef = 31DA9EFE15BD331900492A9F /* topPlayerCell.png */; };
@@ -766,18 +702,6 @@
 		BD83A51C16720DFE003EE4B3 /* LevelCongratViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3188979715CAD7FE002D52EA /* LevelCongratViewController.xib */; };
 		BD83A51F16720DFE003EE4B3 /* topPlayerGoldCell.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B65AC415DD28F4000E136C /* topPlayerGoldCell.png */; };
 		BD83A52016720DFE003EE4B3 /* topPlayerGoldCell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B65AC515DD28F4000E136C /* topPlayerGoldCell@2x.png */; };
-		BD83A52116720DFE003EE4B3 /* cheker_check.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B75ECC15DE5B13000ED207 /* cheker_check.png */; };
-		BD83A52216720DFE003EE4B3 /* cheker_check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B75ECD15DE5B13000ED207 /* cheker_check@2x.png */; };
-		BD83A52316720DFE003EE4B3 /* cheker_uncheck.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B75ECE15DE5B13000ED207 /* cheker_uncheck.png */; };
-		BD83A52416720DFE003EE4B3 /* cheker_uncheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B75ECF15DE5B13000ED207 /* cheker_uncheck@2x.png */; };
-		BD83A52516720DFE003EE4B3 /* view_dinamic_height_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B75ED015DE5B13000ED207 /* view_dinamic_height_arrow.png */; };
-		BD83A52616720DFE003EE4B3 /* view_dinamic_height_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B75ED115DE5B13000ED207 /* view_dinamic_height_arrow@2x.png */; };
-		BD83A52716720DFE003EE4B3 /* dv_fire_label.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B75EE415DE5B40000ED207 /* dv_fire_label.png */; };
-		BD83A52816720DFE003EE4B3 /* dv_fire_label@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B75EE515DE5B40000ED207 /* dv_fire_label@2x.png */; };
-		BD83A52916720DFE003EE4B3 /* dv_ready.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B784BC15E272D8004EBBEC /* dv_ready.png */; };
-		BD83A52A16720DFE003EE4B3 /* dv_ready@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B784BD15E272D9004EBBEC /* dv_ready@2x.png */; };
-		BD83A52B16720DFE003EE4B3 /* dv_steady.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B784BE15E272D9004EBBEC /* dv_steady.png */; };
-		BD83A52C16720DFE003EE4B3 /* dv_steady@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B784BF15E272D9004EBBEC /* dv_steady@2x.png */; };
 		BD83A52F16720DFE003EE4B3 /* fin_img_coin.png in Resources */ = {isa = PBXBuildFile; fileRef = BD7F252115E777D800A3C2CA /* fin_img_coin.png */; };
 		BD83A53016720DFE003EE4B3 /* fin_img_coin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD7F252215E777DA00A3C2CA /* fin_img_coin@2x.png */; };
 		BD83A53116720DFE003EE4B3 /* fin_img_achieve.png in Resources */ = {isa = PBXBuildFile; fileRef = 312B2F3915E7A24F006D2470 /* fin_img_achieve.png */; };
@@ -792,13 +716,10 @@
 		BD83A53A16720DFE003EE4B3 /* StoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7687E8C416392534003C9EE6 /* StoreViewController.xib */; };
 		BD83A53B16720DFE003EE4B3 /* shop_product_frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 76A72D51163AA0B400C65D6D /* shop_product_frame.png */; };
 		BD83A53C16720DFE003EE4B3 /* shop_product_frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76A72D52163AA0B400C65D6D /* shop_product_frame@2x.png */; };
-		BD83A53D16720DFE003EE4B3 /* DuelProductAttensionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76D6284C163AC0ED00CA07D2 /* DuelProductAttensionViewController.xib */; };
-		BD83A53E16720DFE003EE4B3 /* DuelProductWinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76CE0AE4163EF01D00B51B04 /* DuelProductWinViewController.xib */; };
 		BD83A53F16720DFE003EE4B3 /* shop_product_ribbon.png in Resources */ = {isa = PBXBuildFile; fileRef = 76CE0AE6163EF45C00B51B04 /* shop_product_ribbon.png */; };
 		BD83A54016720DFE003EE4B3 /* shop_product_ribbon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76CE0AE7163EF45C00B51B04 /* shop_product_ribbon@2x.png */; };
 		BD83A54316720DFE003EE4B3 /* st_cloud_new.png in Resources */ = {isa = PBXBuildFile; fileRef = 768675BC1647FB2000682BCF /* st_cloud_new.png */; };
 		BD83A54416720DFE003EE4B3 /* st_cloud_new@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 768675BD1647FB2000682BCF /* st_cloud_new@2x.png */; };
-		BD83A54616720DFE003EE4B3 /* st_bg_new-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD7E5EFA16404F92000D6897 /* st_bg_new-568h@2x.png */; };
 		BD83A54716720DFE003EE4B3 /* AdvertisingNewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD87D2281648057400747ED8 /* AdvertisingNewViewController.xib */; };
 		BD83A54816720DFE003EE4B3 /* fv_new_blue_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 319A98CF1649020A000D2A45 /* fv_new_blue_line.png */; };
 		BD83A54916720DFE003EE4B3 /* fv_new_blue_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 319A98D01649020B000D2A45 /* fv_new_blue_line@2x.png */; };
@@ -824,17 +745,10 @@
 		BD83A58516720DFE003EE4B3 /* ds_attack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B94E751652AF6300F372E9 /* ds_attack@2x.png */; };
 		BD83A58616720DFE003EE4B3 /* ds_defense.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B94E761652AF6300F372E9 /* ds_defense.png */; };
 		BD83A58716720DFE003EE4B3 /* ds_defense@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B94E771652AF6300F372E9 /* ds_defense@2x.png */; };
-		BD83A58816720DFE003EE4B3 /* TeachingHelperController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 768321D81654DDD000E78A8C /* TeachingHelperController.xib */; };
-		BD83A58916720DFE003EE4B3 /* dv_bullets_oval.png in Resources */ = {isa = PBXBuildFile; fileRef = 76CDD0521655267A003F30BD /* dv_bullets_oval.png */; };
-		BD83A58A16720DFE003EE4B3 /* dv_bullets_oval@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76CDD0531655267A003F30BD /* dv_bullets_oval@2x.png */; };
-		BD83A58B16720DFE003EE4B3 /* dv_fire_label_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 76CDD0541655267A003F30BD /* dv_fire_label_small.png */; };
-		BD83A58C16720DFE003EE4B3 /* dv_fire_label_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76CDD0551655267A003F30BD /* dv_fire_label_small@2x.png */; };
 		BD83A59A16720DFE003EE4B3 /* ProfileViewControllerFirstRun.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76BC8797165D08F3001F1472 /* ProfileViewControllerFirstRun.xib */; };
 		BD83A59B16720DFE003EE4B3 /* list_online_practica_target.png in Resources */ = {isa = PBXBuildFile; fileRef = 764B8915165FCBDC0014E35B /* list_online_practica_target.png */; };
 		BD83A59C16720DFE003EE4B3 /* list_online_practica_target@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 764B8916165FCBDC0014E35B /* list_online_practica_target@2x.png */; };
 		BD83A59D16720DFE003EE4B3 /* PracticaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 764B891E165FCCCE0014E35B /* PracticaCell.xib */; };
-		BD83A59E16720DFE003EE4B3 /* dv_arm_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 765A97A9166359EC0059390B /* dv_arm_arrow.png */; };
-		BD83A59F16720DFE003EE4B3 /* dv_arm_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 765A97AA166359EC0059390B /* dv_arm_arrow@2x.png */; };
 		BD83A5A016720DFE003EE4B3 /* iconGun@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD05E7CD1669192600F04140 /* iconGun@2x.png */; };
 		BD83A5A116720DFE003EE4B3 /* iconGun.png in Resources */ = {isa = PBXBuildFile; fileRef = BD05E7CE1669192600F04140 /* iconGun.png */; };
 		BD83A5AB16720E43003EE4B3 /* MyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD83A3FA167208DD003EE4B3 /* MyTest.m */; };
@@ -864,7 +778,6 @@
 		BDD07BC5141E1F170085E4FB /* CDDuel.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B5B141E1F170085E4FB /* CDDuel.m */; };
 		BDD07BC6141E1F170085E4FB /* CDTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B5D141E1F170085E4FB /* CDTransaction.m */; };
 		BDD07BC9141E1F170085E4FB /* DuelStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B64141E1F170085E4FB /* DuelStartViewController.m */; };
-		BDD07BCA141E1F170085E4FB /* DuelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B66141E1F170085E4FB /* DuelViewController.m */; };
 		BDD07BCC141E1F170085E4FB /* FinalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B6A141E1F170085E4FB /* FinalViewController.m */; };
 		BDD07BCD141E1F170085E4FB /* FintDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B6C141E1F170085E4FB /* FintDataSource.m */; };
 		BDD07BCE141E1F170085E4FB /* GameCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B6E141E1F170085E4FB /* GameCenterViewController.m */; };
@@ -882,7 +795,6 @@
 		BDD07BE2141E1F170085E4FB /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B9B141E1F170085E4FB /* Reachability.m */; };
 		BDD07BE3141E1F170085E4FB /* ResoultDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B9D141E1F170085E4FB /* ResoultDataSource.m */; };
 		BDD07BE7141E1F170085E4FB /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07BA5141E1F170085E4FB /* StartViewController.m */; };
-		BDD07BEA141E1F170085E4FB /* TeachingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07BAB141E1F170085E4FB /* TeachingViewController.m */; };
 		BDD07BEC141E1F170085E4FB /* TestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07BAE141E1F170085E4FB /* TestAppDelegate.m */; };
 		BDD07BEF141E1F170085E4FB /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07BB5141E1F170085E4FB /* Utils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BDD07BF0141E1F170085E4FB /* ValidationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07BB7141E1F170085E4FB /* ValidationUtils.m */; };
@@ -916,8 +828,6 @@
 
 /* Begin PBXFileReference section */
 		03285FA1159DD61900D16195 /* ListOfItemsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ListOfItemsViewController.xib; path = Xib/ListOfItemsViewController.xib; sourceTree = "<group>"; };
-		03285FAF159DD84000D16195 /* adc_tv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = adc_tv.png; sourceTree = "<group>"; };
-		03285FB0159DD84000D16195 /* adc_tv@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "adc_tv@2x.png"; sourceTree = "<group>"; };
 		03285FB2159DD84000D16195 /* btn_adcolony.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_adcolony.png; sourceTree = "<group>"; };
 		03285FB3159DD84000D16195 /* btn_adcolony@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_adcolony@2x.png"; sourceTree = "<group>"; };
 		03285FB6159DD84000D16195 /* btn_fb_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_fb_login.png; sourceTree = "<group>"; };
@@ -934,14 +844,6 @@
 		03285FC9159DD84000D16195 /* ds_guns@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ds_guns@2x.png"; sourceTree = "<group>"; };
 		03285FCC159DD84000D16195 /* ds_table_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ds_table_line.png; sourceTree = "<group>"; };
 		03285FCD159DD84000D16195 /* ds_table_line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ds_table_line@2x.png"; sourceTree = "<group>"; };
-		03285FD5159DD84000D16195 /* dv_bg_new.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dv_bg_new.png; sourceTree = "<group>"; };
-		03285FD6159DD84000D16195 /* dv_bg_new@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dv_bg_new@2x.png"; sourceTree = "<group>"; };
-		03285FD7159DD84000D16195 /* dv_bullets.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dv_bullets.png; sourceTree = "<group>"; };
-		03285FD8159DD84000D16195 /* dv_bullets@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dv_bullets@2x.png"; sourceTree = "<group>"; };
-		03285FD9159DD84000D16195 /* dv_img_eath_new.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dv_img_eath_new.png; sourceTree = "<group>"; };
-		03285FDA159DD84000D16195 /* dv_img_eath_new@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dv_img_eath_new@2x.png"; sourceTree = "<group>"; };
-		03285FDB159DD84000D16195 /* dv_img_gun1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dv_img_gun1.png; sourceTree = "<group>"; };
-		03285FDC159DD84000D16195 /* dv_img_gun1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dv_img_gun1@2x.png"; sourceTree = "<group>"; };
 		03285FDE159DD84000D16195 /* fb_btn_facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fb_btn_facebook.png; sourceTree = "<group>"; };
 		03285FDF159DD84000D16195 /* fb_btn_facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb_btn_facebook@2x.png"; sourceTree = "<group>"; };
 		03285FE0159DD84000D16195 /* fb_btn_itunes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fb_btn_itunes.png; sourceTree = "<group>"; };
@@ -978,10 +880,6 @@
 		0328601D159DD84000D16195 /* pv_points@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pv_points@2x.png"; sourceTree = "<group>"; };
 		0328601E159DD84000D16195 /* pv_points_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pv_points_background.png; sourceTree = "<group>"; };
 		0328601F159DD84000D16195 /* pv_points_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pv_points_background@2x.png"; sourceTree = "<group>"; };
-		03286021159DD84000D16195 /* st_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = st_arrow.png; sourceTree = "<group>"; };
-		03286022159DD84000D16195 /* st_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "st_arrow@2x.png"; sourceTree = "<group>"; };
-		03286023159DD84000D16195 /* st_bg_new.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = st_bg_new.png; sourceTree = "<group>"; };
-		03286024159DD84000D16195 /* st_bg_new@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "st_bg_new@2x.png"; sourceTree = "<group>"; };
 		037DF216154BDBAC003FACDF /* CDCollectionApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDCollectionApp.h; sourceTree = "<group>"; };
 		037DF217154BDBAC003FACDF /* CDCollectionApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDCollectionApp.m; sourceTree = "<group>"; };
 		037DF218154BDBAC003FACDF /* CollectionAppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionAppViewController.h; sourceTree = "<group>"; };
@@ -1141,7 +1039,6 @@
 		763E6BC01664B18500FA4E86 /* GADRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
 		763E6BC11664B18500FA4E86 /* GADRequestError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
 		763E6BC21664B18500FA4E86 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
-		763F8A261578A1F800D8BB42 /* DuelViewControllerWithXib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DuelViewControllerWithXib.xib; path = Xib/DuelViewControllerWithXib.xib; sourceTree = "<group>"; };
 		763F8A281578A3A900D8BB42 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		763F8A3B1578FC0900D8BB42 /* UIView+Hierarchy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Hierarchy.m"; sourceTree = "<group>"; };
 		763F8A3C1578FC0900D8BB42 /* UIView+Hierarchy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Hierarchy.h"; sourceTree = "<group>"; };
@@ -1152,10 +1049,6 @@
 		764B891E165FCCCE0014E35B /* PracticaCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PracticaCell.xib; path = Xib/PracticaCell.xib; sourceTree = "<group>"; };
 		764B8925165FD0F70014E35B /* PracticeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PracticeCell.h; sourceTree = "<group>"; };
 		764B8926165FD0F70014E35B /* PracticeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PracticeCell.m; sourceTree = "<group>"; };
-		765A97A9166359EC0059390B /* dv_arm_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dv_arm_arrow.png; sourceTree = "<group>"; };
-		765A97AA166359EC0059390B /* dv_arm_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dv_arm_arrow@2x.png"; sourceTree = "<group>"; };
-		765E351415765F1400CCB6F4 /* DuelViewControllerWithXib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DuelViewControllerWithXib.m; sourceTree = "<group>"; };
-		765E351515765F1400CCB6F4 /* DuelViewControllerWithXib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DuelViewControllerWithXib.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		765EB4EA1580E3530059355B /* NSString+isNumeric.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+isNumeric.h"; sourceTree = "<group>"; };
 		765EB4EB1580E3530059355B /* NSString+isNumeric.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+isNumeric.m"; sourceTree = "<group>"; };
 		766B7D3513FE790600377AA3 /* Fire.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Fire.mp3; sourceTree = "<group>"; };
@@ -1182,13 +1075,6 @@
 		767FEF28156A5AF80016B415 /* PlayersOnLineDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PlayersOnLineDataSource.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		767FEF2E156A64A40016B415 /* ListOfItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListOfItemsViewController.h; sourceTree = "<group>"; };
 		767FEF2F156A64A40016B415 /* ListOfItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListOfItemsViewController.m; sourceTree = "<group>"; };
-		768044C215AC68FD005ABD3A /* dv_arm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dv_arm.png; sourceTree = "<group>"; };
-		768044C815AC6979005ABD3A /* dv_arm@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dv_arm@2x.png"; sourceTree = "<group>"; };
-		7682BDDD15AC5F22001C09EC /* HelpPracticeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpPracticeView.m; sourceTree = "<group>"; };
-		7682BDDE15AC5F22001C09EC /* HelpPracticeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpPracticeView.h; sourceTree = "<group>"; };
-		768321D81654DDD000E78A8C /* TeachingHelperController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TeachingHelperController.xib; path = Xib/TeachingHelperController.xib; sourceTree = "<group>"; };
-		768321DE1654E60D00E78A8C /* TeachingHelperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingHelperViewController.h; sourceTree = "<group>"; };
-		768321DF1654E60D00E78A8C /* TeachingHelperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingHelperViewController.m; sourceTree = "<group>"; };
 		768388D1157DE37800377D88 /* UIButton+Image+Title.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Image+Title.h"; sourceTree = "<group>"; };
 		768388D2157DE37800377D88 /* UIButton+Image+Title.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Image+Title.m"; sourceTree = "<group>"; };
 		768388E1157E249900377D88 /* CDCollectionAdvertisingApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDCollectionAdvertisingApp.h; path = AdvertisingApp/CDCollectionAdvertisingApp.h; sourceTree = "<group>"; };
@@ -1222,6 +1108,7 @@
 		7687E8C716392E1C003C9EE6 /* StoreDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoreDataSource.m; path = PlayersOnLineDataSource/StoreDataSource.m; sourceTree = "<group>"; };
 		76897D3D16C3DE18001E06DB /* topPlayerStarSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topPlayerStarSelected.png; sourceTree = "<group>"; };
 		76897D3E16C3DE18001E06DB /* topPlayerStarSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "topPlayerStarSelected@2x.png"; sourceTree = "<group>"; };
+		7689AD4116D76C3F00588BA8 /* DuelViewControllerWithXib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuelViewControllerWithXib.h; sourceTree = "<group>"; };
 		7689F5DB16B6A48E00D8AC5C /* ivHit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ivHit.png; sourceTree = "<group>"; };
 		7689F5DC16B6A48E00D8AC5C /* ivHit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ivHit@2x.png"; sourceTree = "<group>"; };
 		7690DD9116BFFC2900731B51 /* sl_shylc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sl_shylc.png; sourceTree = "<group>"; };
@@ -1280,18 +1167,6 @@
 		76B65AC515DD28F4000E136C /* topPlayerGoldCell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "topPlayerGoldCell@2x.png"; sourceTree = "<group>"; };
 		76B65ACB15DD4A88000E136C /* FXLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXLabel.m; sourceTree = "<group>"; };
 		76B65ACC15DD4A88000E136C /* FXLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXLabel.h; sourceTree = "<group>"; };
-		76B75ECC15DE5B13000ED207 /* cheker_check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cheker_check.png; sourceTree = "<group>"; };
-		76B75ECD15DE5B13000ED207 /* cheker_check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cheker_check@2x.png"; sourceTree = "<group>"; };
-		76B75ECE15DE5B13000ED207 /* cheker_uncheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cheker_uncheck.png; sourceTree = "<group>"; };
-		76B75ECF15DE5B13000ED207 /* cheker_uncheck@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cheker_uncheck@2x.png"; sourceTree = "<group>"; };
-		76B75ED015DE5B13000ED207 /* view_dinamic_height_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view_dinamic_height_arrow.png; sourceTree = "<group>"; };
-		76B75ED115DE5B13000ED207 /* view_dinamic_height_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "view_dinamic_height_arrow@2x.png"; sourceTree = "<group>"; };
-		76B75EE415DE5B40000ED207 /* dv_fire_label.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dv_fire_label.png; sourceTree = "<group>"; };
-		76B75EE515DE5B40000ED207 /* dv_fire_label@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dv_fire_label@2x.png"; sourceTree = "<group>"; };
-		76B784BC15E272D8004EBBEC /* dv_ready.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dv_ready.png; sourceTree = "<group>"; };
-		76B784BD15E272D9004EBBEC /* dv_ready@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dv_ready@2x.png"; sourceTree = "<group>"; };
-		76B784BE15E272D9004EBBEC /* dv_steady.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dv_steady.png; sourceTree = "<group>"; };
-		76B784BF15E272D9004EBBEC /* dv_steady@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dv_steady@2x.png"; sourceTree = "<group>"; };
 		76B94E6716528CEB00F372E9 /* shop_list_castel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shop_list_castel.png; sourceTree = "<group>"; };
 		76B94E6816528CEB00F372E9 /* shop_list_castel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shop_list_castel@2x.png"; sourceTree = "<group>"; };
 		76B94E6916528CEB00F372E9 /* topPlayerCell_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topPlayerCell_blue.png; sourceTree = "<group>"; };
@@ -1303,11 +1178,6 @@
 		76BC8797165D08F3001F1472 /* ProfileViewControllerFirstRun.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProfileViewControllerFirstRun.xib; path = Xib/ProfileViewControllerFirstRun.xib; sourceTree = "<group>"; };
 		76CAE7141421E97900CA39EA /* cry.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cry.mp3; sourceTree = "<group>"; };
 		76CB056F13AB991B0011E768 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		76CDD0521655267A003F30BD /* dv_bullets_oval.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dv_bullets_oval.png; sourceTree = "<group>"; };
-		76CDD0531655267A003F30BD /* dv_bullets_oval@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dv_bullets_oval@2x.png"; sourceTree = "<group>"; };
-		76CDD0541655267A003F30BD /* dv_fire_label_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dv_fire_label_small.png; sourceTree = "<group>"; };
-		76CDD0551655267A003F30BD /* dv_fire_label_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dv_fire_label_small@2x.png"; sourceTree = "<group>"; };
-		76CE0AE4163EF01D00B51B04 /* DuelProductWinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DuelProductWinViewController.xib; path = Xib/DuelProductWinViewController.xib; sourceTree = "<group>"; };
 		76CE0AE6163EF45C00B51B04 /* shop_product_ribbon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shop_product_ribbon.png; sourceTree = "<group>"; };
 		76CE0AE7163EF45C00B51B04 /* shop_product_ribbon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shop_product_ribbon@2x.png"; sourceTree = "<group>"; };
 		76CE0AEA163EF62800B51B04 /* DuelProductWinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuelProductWinViewController.h; sourceTree = "<group>"; };
@@ -1316,7 +1186,6 @@
 		76D12894159C9DE800E799AA /* PlayerOnLineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerOnLineCell.h; sourceTree = "<group>"; };
 		76D6284A163AC0EC00CA07D2 /* DuelProductAttensionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuelProductAttensionViewController.h; sourceTree = "<group>"; };
 		76D6284B163AC0EC00CA07D2 /* DuelProductAttensionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DuelProductAttensionViewController.m; sourceTree = "<group>"; };
-		76D6284C163AC0ED00CA07D2 /* DuelProductAttensionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DuelProductAttensionViewController.xib; path = "../Cowboy Duel/DuelProductAttensionViewController.xib"; sourceTree = "<group>"; };
 		76E869C515CA8D870024ED08 /* pv_coint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pv_coint.png; sourceTree = "<group>"; };
 		76E869C615CA8D870024ED08 /* pv_coint@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pv_coint@2x.png"; sourceTree = "<group>"; };
 		76EB4DC11492662100A3A925 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -1508,7 +1377,6 @@
 		BD4BAAB416BC064900F88E82 /* men_low.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = men_low.png; sourceTree = "<group>"; };
 		BD4BAAB516BC064900F88E82 /* men_low@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "men_low@2x.png"; sourceTree = "<group>"; };
 		BD68C49916A705D200A9B52A /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		BD7E5EFA16404F92000D6897 /* st_bg_new-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "st_bg_new-568h@2x.png"; sourceTree = "<group>"; };
 		BD7F252115E777D800A3C2CA /* fin_img_coin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fin_img_coin.png; sourceTree = "<group>"; };
 		BD7F252215E777DA00A3C2CA /* fin_img_coin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fin_img_coin@2x.png"; sourceTree = "<group>"; };
 		BD7F2AE51649647500D29263 /* MKStoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKStoreManager.h; sourceTree = "<group>"; };
@@ -1574,8 +1442,6 @@
 		BDD07B5E141E1F170085E4FB /* Cowboy Duel-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Cowboy Duel-Prefix.pch"; sourceTree = "<group>"; };
 		BDD07B63141E1F170085E4FB /* DuelStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DuelStartViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		BDD07B64141E1F170085E4FB /* DuelStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DuelStartViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		BDD07B65141E1F170085E4FB /* DuelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuelViewController.h; sourceTree = "<group>"; };
-		BDD07B66141E1F170085E4FB /* DuelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DuelViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BDD07B69141E1F170085E4FB /* FinalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FinalViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		BDD07B6A141E1F170085E4FB /* FinalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FinalViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BDD07B6B141E1F170085E4FB /* FintDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FintDataSource.h; sourceTree = "<group>"; };
@@ -1611,8 +1477,6 @@
 		BDD07B9D141E1F170085E4FB /* ResoultDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResoultDataSource.m; sourceTree = "<group>"; };
 		BDD07BA4141E1F170085E4FB /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
 		BDD07BA5141E1F170085E4FB /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = StartViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		BDD07BAA141E1F170085E4FB /* TeachingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingViewController.h; sourceTree = "<group>"; };
-		BDD07BAB141E1F170085E4FB /* TeachingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TeachingViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BDD07BAC141E1F170085E4FB /* Test-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Test-Info.plist"; sourceTree = "<group>"; };
 		BDD07BAD141E1F170085E4FB /* TestAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestAppDelegate.h; sourceTree = "<group>"; };
 		BDD07BAE141E1F170085E4FB /* TestAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestAppDelegate.m; sourceTree = "<group>"; };
@@ -1723,7 +1587,6 @@
 				BD84DAA8164ABE1D00DEEE38 /* LoginViewAnimated */,
 				3167BAA615CAA75F00AF2745 /* Achievment */,
 				31DA9EFB15BD331900492A9F /* ListOnLine */,
-				03285FAE159DD84000D16195 /* Adcolony */,
 				03285FB1159DD84000D16195 /* Buttons */,
 				03285FC3159DD84000D16195 /* DuelStart */,
 				03285FD2159DD84000D16195 /* DuelView */,
@@ -1736,15 +1599,6 @@
 				03286020159DD84000D16195 /* StartView */,
 			);
 			path = Images;
-			sourceTree = "<group>";
-		};
-		03285FAE159DD84000D16195 /* Adcolony */ = {
-			isa = PBXGroup;
-			children = (
-				03285FAF159DD84000D16195 /* adc_tv.png */,
-				03285FB0159DD84000D16195 /* adc_tv@2x.png */,
-			);
-			path = Adcolony;
 			sourceTree = "<group>";
 		};
 		03285FB1159DD84000D16195 /* Buttons */ = {
@@ -1786,28 +1640,6 @@
 		03285FD2159DD84000D16195 /* DuelView */ = {
 			isa = PBXGroup;
 			children = (
-				76B784BC15E272D8004EBBEC /* dv_ready.png */,
-				76B784BD15E272D9004EBBEC /* dv_ready@2x.png */,
-				76B784BE15E272D9004EBBEC /* dv_steady.png */,
-				76B784BF15E272D9004EBBEC /* dv_steady@2x.png */,
-				76B75EE415DE5B40000ED207 /* dv_fire_label.png */,
-				76B75EE515DE5B40000ED207 /* dv_fire_label@2x.png */,
-				76CDD0521655267A003F30BD /* dv_bullets_oval.png */,
-				76CDD0531655267A003F30BD /* dv_bullets_oval@2x.png */,
-				76CDD0541655267A003F30BD /* dv_fire_label_small.png */,
-				76CDD0551655267A003F30BD /* dv_fire_label_small@2x.png */,
-				03285FD5159DD84000D16195 /* dv_bg_new.png */,
-				03285FD6159DD84000D16195 /* dv_bg_new@2x.png */,
-				03285FD7159DD84000D16195 /* dv_bullets.png */,
-				03285FD8159DD84000D16195 /* dv_bullets@2x.png */,
-				03285FD9159DD84000D16195 /* dv_img_eath_new.png */,
-				03285FDA159DD84000D16195 /* dv_img_eath_new@2x.png */,
-				03285FDB159DD84000D16195 /* dv_img_gun1.png */,
-				03285FDC159DD84000D16195 /* dv_img_gun1@2x.png */,
-				768044C215AC68FD005ABD3A /* dv_arm.png */,
-				768044C815AC6979005ABD3A /* dv_arm@2x.png */,
-				765A97A9166359EC0059390B /* dv_arm_arrow.png */,
-				765A97AA166359EC0059390B /* dv_arm_arrow@2x.png */,
 				BD05E7CD1669192600F04140 /* iconGun@2x.png */,
 				BD05E7CE1669192600F04140 /* iconGun.png */,
 			);
@@ -1890,12 +1722,6 @@
 		0328600C159DD84000D16195 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				76B75ECC15DE5B13000ED207 /* cheker_check.png */,
-				76B75ECD15DE5B13000ED207 /* cheker_check@2x.png */,
-				76B75ECE15DE5B13000ED207 /* cheker_uncheck.png */,
-				76B75ECF15DE5B13000ED207 /* cheker_uncheck@2x.png */,
-				76B75ED015DE5B13000ED207 /* view_dinamic_height_arrow.png */,
-				76B75ED115DE5B13000ED207 /* view_dinamic_height_arrow@2x.png */,
 				0328600D159DD84000D16195 /* view_dinamic_height.png */,
 				0328600E159DD84000D16195 /* view_dinamic_height@2x.png */,
 				0328600F159DD84000D16195 /* view_dinamic_height_bottom.png */,
@@ -1947,11 +1773,6 @@
 				318F237216B964370081BE5E /* btnFeedBackBackgr@2x.png */,
 				318F236516B95BC90081BE5E /* st_title.png */,
 				318F236616B95BCA0081BE5E /* st_title@2x.png */,
-				03286021159DD84000D16195 /* st_arrow.png */,
-				03286022159DD84000D16195 /* st_arrow@2x.png */,
-				03286023159DD84000D16195 /* st_bg_new.png */,
-				03286024159DD84000D16195 /* st_bg_new@2x.png */,
-				BD7E5EFA16404F92000D6897 /* st_bg_new-568h@2x.png */,
 				768675BC1647FB2000682BCF /* st_cloud_new.png */,
 				768675BD1647FB2000682BCF /* st_cloud_new@2x.png */,
 				318F238316B972100081BE5E /* btn_help.png */,
@@ -2280,9 +2101,7 @@
 				BD16BF961680934F00628CCC /* FunPageViewController.xib */,
 				3115FB4F15CACA5100C4D438 /* MoneyCongratViewController.xib */,
 				3188979715CAD7FE002D52EA /* LevelCongratViewController.xib */,
-				763F8A261578A1F800D8BB42 /* DuelViewControllerWithXib.xib */,
 				7692BC2E1574E36C00983264 /* DuelStartViewController.xib */,
-				768321D81654DDD000E78A8C /* TeachingHelperController.xib */,
 				761EFA4C1573BE91001670EB /* HelpViewController.xib */,
 				761EFA4D1573BE91001670EB /* ProfileViewController.xib */,
 				76F48C1716A987C5000123AC /* ProfileViewControllerWanted.xib */,
@@ -2302,18 +2121,11 @@
 			children = (
 				BDD07B63141E1F170085E4FB /* DuelStartViewController.h */,
 				BDD07B64141E1F170085E4FB /* DuelStartViewController.m */,
-				765E351515765F1400CCB6F4 /* DuelViewControllerWithXib.h */,
-				765E351415765F1400CCB6F4 /* DuelViewControllerWithXib.m */,
-				BDD07B65141E1F170085E4FB /* DuelViewController.h */,
-				BDD07B66141E1F170085E4FB /* DuelViewController.m */,
 				BDD07B69141E1F170085E4FB /* FinalViewController.h */,
 				BDD07B6A141E1F170085E4FB /* FinalViewController.m */,
+				7689AD4116D76C3F00588BA8 /* DuelViewControllerWithXib.h */,
 				BDD07B6D141E1F170085E4FB /* GameCenterViewController.h */,
 				BDD07B6E141E1F170085E4FB /* GameCenterViewController.m */,
-				BDD07BAA141E1F170085E4FB /* TeachingViewController.h */,
-				BDD07BAB141E1F170085E4FB /* TeachingViewController.m */,
-				768321DE1654E60D00E78A8C /* TeachingHelperViewController.h */,
-				768321DF1654E60D00E78A8C /* TeachingHelperViewController.m */,
 				7687667616BA7543003405F9 /* GunDrumViewController.h */,
 				7687667716BA7543003405F9 /* GunDrumViewController.m */,
 				BD81E635169EC4D100CE8278 /* ActiveDuelViewController.h */,
@@ -2327,8 +2139,6 @@
 			children = (
 				7687E8C416392534003C9EE6 /* StoreViewController.xib */,
 				7687E8BF16391A32003C9EE6 /* StoreProductCell.xib */,
-				76D6284C163AC0ED00CA07D2 /* DuelProductAttensionViewController.xib */,
-				76CE0AE4163EF01D00B51B04 /* DuelProductWinViewController.xib */,
 			);
 			name = Store;
 			sourceTree = "<group>";
@@ -2813,8 +2623,6 @@
 				BDD07B40141E1F170085E4FB /* ActivityIndicatorView.m */,
 				76A6F92D15878ED1009CE450 /* UIImageView+AttachedView.m */,
 				76A6F92E15878ED1009CE450 /* UIImageView+AttachedView.h */,
-				7682BDDE15AC5F22001C09EC /* HelpPracticeView.h */,
-				7682BDDD15AC5F22001C09EC /* HelpPracticeView.m */,
 				764B071F1598A5B30050D4E4 /* UIView+Dinamic_BackGround.h */,
 				764B07201598A5B30050D4E4 /* UIView+Dinamic_BackGround.m */,
 				76B65ACB15DD4A88000E136C /* FXLabel.m */,
@@ -3012,11 +2820,8 @@
 				761EFA511573BE91001670EB /* ProfileViewController.xib in Resources */,
 				761EFA521573BE91001670EB /* StartViewController.xib in Resources */,
 				7692BC2F1574E36C00983264 /* DuelStartViewController.xib in Resources */,
-				763F8A271578A1F800D8BB42 /* DuelViewControllerWithXib.xib in Resources */,
 				767BA5BE1589F8E300825EB1 /* FinalViewController.xib in Resources */,
 				03285FA2159DD61900D16195 /* ListOfItemsViewController.xib in Resources */,
-				03286029159DD84000D16195 /* adc_tv.png in Resources */,
-				0328602A159DD84000D16195 /* adc_tv@2x.png in Resources */,
 				0328602B159DD84000D16195 /* btn_adcolony.png in Resources */,
 				0328602C159DD84000D16195 /* btn_adcolony@2x.png in Resources */,
 				0328602F159DD84000D16195 /* btn_fb_login.png in Resources */,
@@ -3033,14 +2838,6 @@
 				03286040159DD84000D16195 /* ds_guns@2x.png in Resources */,
 				03286043159DD84000D16195 /* ds_table_line.png in Resources */,
 				03286044159DD84000D16195 /* ds_table_line@2x.png in Resources */,
-				0328604B159DD84000D16195 /* dv_bg_new.png in Resources */,
-				0328604C159DD84000D16195 /* dv_bg_new@2x.png in Resources */,
-				0328604D159DD84000D16195 /* dv_bullets.png in Resources */,
-				0328604E159DD84000D16195 /* dv_bullets@2x.png in Resources */,
-				0328604F159DD84000D16195 /* dv_img_eath_new.png in Resources */,
-				03286050159DD84000D16195 /* dv_img_eath_new@2x.png in Resources */,
-				03286051159DD84000D16195 /* dv_img_gun1.png in Resources */,
-				03286052159DD84000D16195 /* dv_img_gun1@2x.png in Resources */,
 				03286053159DD84000D16195 /* fb_btn_facebook.png in Resources */,
 				03286054159DD84000D16195 /* fb_btn_facebook@2x.png in Resources */,
 				03286055159DD84000D16195 /* fb_btn_itunes.png in Resources */,
@@ -3077,14 +2874,8 @@
 				0328608A159DD84000D16195 /* pv_points@2x.png in Resources */,
 				0328608B159DD84000D16195 /* pv_points_background.png in Resources */,
 				0328608C159DD84000D16195 /* pv_points_background@2x.png in Resources */,
-				0328608D159DD84000D16195 /* st_arrow.png in Resources */,
-				0328608E159DD84000D16195 /* st_arrow@2x.png in Resources */,
-				0328608F159DD84000D16195 /* st_bg_new.png in Resources */,
-				03286090159DD84000D16195 /* st_bg_new@2x.png in Resources */,
 				31F6D53115AB034400C0F28D /* Gun.png in Resources */,
 				31F6D53215AB034400C0F28D /* Gun@2x.png in Resources */,
-				768044C415AC68FD005ABD3A /* dv_arm.png in Resources */,
-				768044C915AC697A005ABD3A /* dv_arm@2x.png in Resources */,
 				31DA9F0415BD331900492A9F /* ls_OnLine_frame.png in Resources */,
 				31DA9F0515BD331900492A9F /* ls_OnLine_frame@2x.png in Resources */,
 				31DA9F0615BD331900492A9F /* topPlayerCell.png in Resources */,
@@ -3116,18 +2907,6 @@
 				3188979915CAD7FE002D52EA /* LevelCongratViewController.xib in Resources */,
 				76B65AC615DD28F4000E136C /* topPlayerGoldCell.png in Resources */,
 				76B65AC715DD28F4000E136C /* topPlayerGoldCell@2x.png in Resources */,
-				76B75ED215DE5B13000ED207 /* cheker_check.png in Resources */,
-				76B75ED315DE5B13000ED207 /* cheker_check@2x.png in Resources */,
-				76B75ED415DE5B13000ED207 /* cheker_uncheck.png in Resources */,
-				76B75ED515DE5B13000ED207 /* cheker_uncheck@2x.png in Resources */,
-				76B75ED615DE5B13000ED207 /* view_dinamic_height_arrow.png in Resources */,
-				76B75ED715DE5B13000ED207 /* view_dinamic_height_arrow@2x.png in Resources */,
-				76B75EF015DE5B40000ED207 /* dv_fire_label.png in Resources */,
-				76B75EF115DE5B40000ED207 /* dv_fire_label@2x.png in Resources */,
-				76B784C015E272D9004EBBEC /* dv_ready.png in Resources */,
-				76B784C115E272D9004EBBEC /* dv_ready@2x.png in Resources */,
-				76B784C215E272D9004EBBEC /* dv_steady.png in Resources */,
-				76B784C315E272D9004EBBEC /* dv_steady@2x.png in Resources */,
 				BD7F252315E777DC00A3C2CA /* fin_img_coin.png in Resources */,
 				BD7F252415E777DC00A3C2CA /* fin_img_coin@2x.png in Resources */,
 				312B2F3F15E7A24F006D2470 /* fin_img_achieve.png in Resources */,
@@ -3142,13 +2921,10 @@
 				7687E8C516392534003C9EE6 /* StoreViewController.xib in Resources */,
 				76A72D53163AA0B400C65D6D /* shop_product_frame.png in Resources */,
 				76A72D54163AA0B400C65D6D /* shop_product_frame@2x.png in Resources */,
-				76D6284E163AC0ED00CA07D2 /* DuelProductAttensionViewController.xib in Resources */,
-				76CE0AE5163EF01D00B51B04 /* DuelProductWinViewController.xib in Resources */,
 				76CE0AE8163EF45C00B51B04 /* shop_product_ribbon.png in Resources */,
 				76CE0AE9163EF45C00B51B04 /* shop_product_ribbon@2x.png in Resources */,
 				768675BE1647FB2000682BCF /* st_cloud_new.png in Resources */,
 				768675BF1647FB2000682BCF /* st_cloud_new@2x.png in Resources */,
-				BD7E5EFB16404F92000D6897 /* st_bg_new-568h@2x.png in Resources */,
 				BD87D22A1648057500747ED8 /* AdvertisingNewViewController.xib in Resources */,
 				319A98D91649020F000D2A45 /* fv_new_blue_line.png in Resources */,
 				319A98DA1649020F000D2A45 /* fv_new_blue_line@2x.png in Resources */,
@@ -3174,17 +2950,10 @@
 				76B94E791652AF6300F372E9 /* ds_attack@2x.png in Resources */,
 				76B94E7A1652AF6300F372E9 /* ds_defense.png in Resources */,
 				76B94E7B1652AF6300F372E9 /* ds_defense@2x.png in Resources */,
-				768321D91654DDD000E78A8C /* TeachingHelperController.xib in Resources */,
-				76CDD0561655267A003F30BD /* dv_bullets_oval.png in Resources */,
-				76CDD0571655267A003F30BD /* dv_bullets_oval@2x.png in Resources */,
-				76CDD0581655267A003F30BD /* dv_fire_label_small.png in Resources */,
-				76CDD0591655267A003F30BD /* dv_fire_label_small@2x.png in Resources */,
 				76BC8798165D08F3001F1472 /* ProfileViewControllerFirstRun.xib in Resources */,
 				764B8919165FCBDC0014E35B /* list_online_practica_target.png in Resources */,
 				764B891A165FCBDC0014E35B /* list_online_practica_target@2x.png in Resources */,
 				764B891F165FCCCE0014E35B /* PracticaCell.xib in Resources */,
-				765A97AB166359EC0059390B /* dv_arm_arrow.png in Resources */,
-				765A97AC166359EC0059390B /* dv_arm_arrow@2x.png in Resources */,
 				BD05E7CF1669192600F04140 /* iconGun@2x.png in Resources */,
 				BD05E7D01669192600F04140 /* iconGun.png in Resources */,
 				BD16BF981680934F00628CCC /* FunPageViewController.xib in Resources */,
@@ -3314,11 +3083,8 @@
 				BD83A49616720DFE003EE4B3 /* ProfileViewController.xib in Resources */,
 				BD83A49716720DFE003EE4B3 /* StartViewController.xib in Resources */,
 				BD83A49816720DFE003EE4B3 /* DuelStartViewController.xib in Resources */,
-				BD83A49916720DFE003EE4B3 /* DuelViewControllerWithXib.xib in Resources */,
 				BD83A49A16720DFE003EE4B3 /* FinalViewController.xib in Resources */,
 				BD83A49B16720DFE003EE4B3 /* ListOfItemsViewController.xib in Resources */,
-				BD83A49C16720DFE003EE4B3 /* adc_tv.png in Resources */,
-				BD83A49D16720DFE003EE4B3 /* adc_tv@2x.png in Resources */,
 				BD83A49E16720DFE003EE4B3 /* btn_adcolony.png in Resources */,
 				BD83A49F16720DFE003EE4B3 /* btn_adcolony@2x.png in Resources */,
 				BD83A4A216720DFE003EE4B3 /* btn_fb_login.png in Resources */,
@@ -3335,14 +3101,6 @@
 				BD83A4AD16720DFE003EE4B3 /* ds_guns@2x.png in Resources */,
 				BD83A4AE16720DFE003EE4B3 /* ds_table_line.png in Resources */,
 				BD83A4AF16720DFE003EE4B3 /* ds_table_line@2x.png in Resources */,
-				BD83A4B016720DFE003EE4B3 /* dv_bg_new.png in Resources */,
-				BD83A4B116720DFE003EE4B3 /* dv_bg_new@2x.png in Resources */,
-				BD83A4B216720DFE003EE4B3 /* dv_bullets.png in Resources */,
-				BD83A4B316720DFE003EE4B3 /* dv_bullets@2x.png in Resources */,
-				BD83A4B416720DFE003EE4B3 /* dv_img_eath_new.png in Resources */,
-				BD83A4B516720DFE003EE4B3 /* dv_img_eath_new@2x.png in Resources */,
-				BD83A4B616720DFE003EE4B3 /* dv_img_gun1.png in Resources */,
-				BD83A4B716720DFE003EE4B3 /* dv_img_gun1@2x.png in Resources */,
 				BD83A4B816720DFE003EE4B3 /* fb_btn_facebook.png in Resources */,
 				BD83A4B916720DFE003EE4B3 /* fb_btn_facebook@2x.png in Resources */,
 				BD83A4BA16720DFE003EE4B3 /* fb_btn_itunes.png in Resources */,
@@ -3379,14 +3137,8 @@
 				BD83A4E016720DFE003EE4B3 /* pv_points@2x.png in Resources */,
 				BD83A4E116720DFE003EE4B3 /* pv_points_background.png in Resources */,
 				BD83A4E216720DFE003EE4B3 /* pv_points_background@2x.png in Resources */,
-				BD83A4E316720DFE003EE4B3 /* st_arrow.png in Resources */,
-				BD83A4E416720DFE003EE4B3 /* st_arrow@2x.png in Resources */,
-				BD83A4E516720DFE003EE4B3 /* st_bg_new.png in Resources */,
-				BD83A4E616720DFE003EE4B3 /* st_bg_new@2x.png in Resources */,
 				BD83A4ED16720DFE003EE4B3 /* Gun.png in Resources */,
 				BD83A4EE16720DFE003EE4B3 /* Gun@2x.png in Resources */,
-				BD83A4F216720DFE003EE4B3 /* dv_arm.png in Resources */,
-				BD83A4F316720DFE003EE4B3 /* dv_arm@2x.png in Resources */,
 				BD83A4F416720DFE003EE4B3 /* ls_OnLine_frame.png in Resources */,
 				BD83A4F516720DFE003EE4B3 /* ls_OnLine_frame@2x.png in Resources */,
 				BD83A4F616720DFE003EE4B3 /* topPlayerCell.png in Resources */,
@@ -3418,18 +3170,6 @@
 				BD83A51C16720DFE003EE4B3 /* LevelCongratViewController.xib in Resources */,
 				BD83A51F16720DFE003EE4B3 /* topPlayerGoldCell.png in Resources */,
 				BD83A52016720DFE003EE4B3 /* topPlayerGoldCell@2x.png in Resources */,
-				BD83A52116720DFE003EE4B3 /* cheker_check.png in Resources */,
-				BD83A52216720DFE003EE4B3 /* cheker_check@2x.png in Resources */,
-				BD83A52316720DFE003EE4B3 /* cheker_uncheck.png in Resources */,
-				BD83A52416720DFE003EE4B3 /* cheker_uncheck@2x.png in Resources */,
-				BD83A52516720DFE003EE4B3 /* view_dinamic_height_arrow.png in Resources */,
-				BD83A52616720DFE003EE4B3 /* view_dinamic_height_arrow@2x.png in Resources */,
-				BD83A52716720DFE003EE4B3 /* dv_fire_label.png in Resources */,
-				BD83A52816720DFE003EE4B3 /* dv_fire_label@2x.png in Resources */,
-				BD83A52916720DFE003EE4B3 /* dv_ready.png in Resources */,
-				BD83A52A16720DFE003EE4B3 /* dv_ready@2x.png in Resources */,
-				BD83A52B16720DFE003EE4B3 /* dv_steady.png in Resources */,
-				BD83A52C16720DFE003EE4B3 /* dv_steady@2x.png in Resources */,
 				BD83A52F16720DFE003EE4B3 /* fin_img_coin.png in Resources */,
 				BD83A53016720DFE003EE4B3 /* fin_img_coin@2x.png in Resources */,
 				BD83A53116720DFE003EE4B3 /* fin_img_achieve.png in Resources */,
@@ -3444,13 +3184,10 @@
 				BD83A53A16720DFE003EE4B3 /* StoreViewController.xib in Resources */,
 				BD83A53B16720DFE003EE4B3 /* shop_product_frame.png in Resources */,
 				BD83A53C16720DFE003EE4B3 /* shop_product_frame@2x.png in Resources */,
-				BD83A53D16720DFE003EE4B3 /* DuelProductAttensionViewController.xib in Resources */,
-				BD83A53E16720DFE003EE4B3 /* DuelProductWinViewController.xib in Resources */,
 				BD83A53F16720DFE003EE4B3 /* shop_product_ribbon.png in Resources */,
 				BD83A54016720DFE003EE4B3 /* shop_product_ribbon@2x.png in Resources */,
 				BD83A54316720DFE003EE4B3 /* st_cloud_new.png in Resources */,
 				BD83A54416720DFE003EE4B3 /* st_cloud_new@2x.png in Resources */,
-				BD83A54616720DFE003EE4B3 /* st_bg_new-568h@2x.png in Resources */,
 				BD83A54716720DFE003EE4B3 /* AdvertisingNewViewController.xib in Resources */,
 				BD83A54816720DFE003EE4B3 /* fv_new_blue_line.png in Resources */,
 				BD83A54916720DFE003EE4B3 /* fv_new_blue_line@2x.png in Resources */,
@@ -3476,17 +3213,10 @@
 				BD83A58516720DFE003EE4B3 /* ds_attack@2x.png in Resources */,
 				BD83A58616720DFE003EE4B3 /* ds_defense.png in Resources */,
 				BD83A58716720DFE003EE4B3 /* ds_defense@2x.png in Resources */,
-				BD83A58816720DFE003EE4B3 /* TeachingHelperController.xib in Resources */,
-				BD83A58916720DFE003EE4B3 /* dv_bullets_oval.png in Resources */,
-				BD83A58A16720DFE003EE4B3 /* dv_bullets_oval@2x.png in Resources */,
-				BD83A58B16720DFE003EE4B3 /* dv_fire_label_small.png in Resources */,
-				BD83A58C16720DFE003EE4B3 /* dv_fire_label_small@2x.png in Resources */,
 				BD83A59A16720DFE003EE4B3 /* ProfileViewControllerFirstRun.xib in Resources */,
 				BD83A59B16720DFE003EE4B3 /* list_online_practica_target.png in Resources */,
 				BD83A59C16720DFE003EE4B3 /* list_online_practica_target@2x.png in Resources */,
 				BD83A59D16720DFE003EE4B3 /* PracticaCell.xib in Resources */,
-				BD83A59E16720DFE003EE4B3 /* dv_arm_arrow.png in Resources */,
-				BD83A59F16720DFE003EE4B3 /* dv_arm_arrow@2x.png in Resources */,
 				BD83A5A016720DFE003EE4B3 /* iconGun@2x.png in Resources */,
 				BD83A5A116720DFE003EE4B3 /* iconGun.png in Resources */,
 				BD83A5B41672257C003EE4B3 /* MyViewTest-testIPadViewController-1-0-UIView.png in Resources */,
@@ -3612,7 +3342,6 @@
 			files = (
 				BD7F2AD51649040C00D29263 /* UIImage+Retina4.m in Sources */,
 				7679308015BEBF6F007F461F /* NSString+isNumeric.m in Sources */,
-				763F8A2A1578A55700D8BB42 /* DuelViewControllerWithXib.m in Sources */,
 				BDD07BB8141E1F170085E4FB /* AccelerometrDataSource.m in Sources */,
 				BDD07BB9141E1F170085E4FB /* AccountDataSource.m in Sources */,
 				BDD07BBA141E1F170085E4FB /* ActivityIndicatorView.m in Sources */,
@@ -3620,7 +3349,6 @@
 				BDD07BC5141E1F170085E4FB /* CDDuel.m in Sources */,
 				BDD07BC6141E1F170085E4FB /* CDTransaction.m in Sources */,
 				BDD07BC9141E1F170085E4FB /* DuelStartViewController.m in Sources */,
-				BDD07BCA141E1F170085E4FB /* DuelViewController.m in Sources */,
 				BDD07BCC141E1F170085E4FB /* FinalViewController.m in Sources */,
 				BDD07BCD141E1F170085E4FB /* FintDataSource.m in Sources */,
 				BDD07BCE141E1F170085E4FB /* GameCenterViewController.m in Sources */,
@@ -3638,7 +3366,6 @@
 				BDD07BE2141E1F170085E4FB /* Reachability.m in Sources */,
 				BDD07BE3141E1F170085E4FB /* ResoultDataSource.m in Sources */,
 				BDD07BE7141E1F170085E4FB /* StartViewController.m in Sources */,
-				BDD07BEA141E1F170085E4FB /* TeachingViewController.m in Sources */,
 				BDD07BEC141E1F170085E4FB /* TestAppDelegate.m in Sources */,
 				BDD07BEF141E1F170085E4FB /* Utils.m in Sources */,
 				BDD07BF0141E1F170085E4FB /* ValidationUtils.m in Sources */,
@@ -3663,7 +3390,6 @@
 				7692812C159DCAFD00E6CE41 /* IconDownloader.m in Sources */,
 				7675CA8615A2E10C005A3BD3 /* DuelRewardLogicController.m in Sources */,
 				3150C60C15A5A26E00AC8E17 /* HCYoutubeParser.m in Sources */,
-				7682BDDF15AC5F22001C09EC /* HelpPracticeView.m in Sources */,
 				767B56CF15AEDE2F00ECA0C4 /* CustomNSURLConnection.m in Sources */,
 				762AA31015B99C72001B65E2 /* TopPlayerCell.m in Sources */,
 				760E676115BD8277006F6832 /* TopPlayersDataSource.m in Sources */,
@@ -3692,7 +3418,6 @@
 				BD7F2AEA1649647500D29263 /* MKStoreObserver.m in Sources */,
 				BD84DAA5164ABCA000DEEE38 /* LoginAnimatedViewController.m in Sources */,
 				BD8342A7164C0CBE00E6363B /* BEAnimationView.m in Sources */,
-				768321E01654E60D00E78A8C /* TeachingHelperViewController.m in Sources */,
 				76F71904165A6AD700719D8A /* UIView+Frame.m in Sources */,
 				764B8927165FD0F70014E35B /* PracticeCell.m in Sources */,
 				BD16BF971680934F00628CCC /* FunPageViewController.m in Sources */,
@@ -3754,7 +3479,6 @@
 				BD83A5AD16720E43003EE4B3 /* main.m in Sources */,
 				BD83A40916720DFE003EE4B3 /* UIImage+Retina4.m in Sources */,
 				BD83A40A16720DFE003EE4B3 /* NSString+isNumeric.m in Sources */,
-				BD83A40B16720DFE003EE4B3 /* DuelViewControllerWithXib.m in Sources */,
 				BD83A40C16720DFE003EE4B3 /* AccelerometrDataSource.m in Sources */,
 				BD83A40D16720DFE003EE4B3 /* AccountDataSource.m in Sources */,
 				BD83A40E16720DFE003EE4B3 /* ActivityIndicatorView.m in Sources */,
@@ -3762,7 +3486,6 @@
 				BD83A41016720DFE003EE4B3 /* CDDuel.m in Sources */,
 				BD83A41116720DFE003EE4B3 /* CDTransaction.m in Sources */,
 				BD83A41316720DFE003EE4B3 /* DuelStartViewController.m in Sources */,
-				BD83A41416720DFE003EE4B3 /* DuelViewController.m in Sources */,
 				BD83A41516720DFE003EE4B3 /* FinalViewController.m in Sources */,
 				BD83A41616720DFE003EE4B3 /* FintDataSource.m in Sources */,
 				BD83A41716720DFE003EE4B3 /* GameCenterViewController.m in Sources */,
@@ -3779,7 +3502,6 @@
 				BD83A42316720DFE003EE4B3 /* Reachability.m in Sources */,
 				BD83A42416720DFE003EE4B3 /* ResoultDataSource.m in Sources */,
 				BD83A42516720DFE003EE4B3 /* StartViewController.m in Sources */,
-				BD83A42616720DFE003EE4B3 /* TeachingViewController.m in Sources */,
 				BD83A42716720DFE003EE4B3 /* TestAppDelegate.m in Sources */,
 				BD83A42816720DFE003EE4B3 /* Utils.m in Sources */,
 				BD83A42916720DFE003EE4B3 /* ValidationUtils.m in Sources */,
@@ -3804,7 +3526,6 @@
 				BD83A43D16720DFE003EE4B3 /* IconDownloader.m in Sources */,
 				BD83A43E16720DFE003EE4B3 /* DuelRewardLogicController.m in Sources */,
 				BD83A43F16720DFE003EE4B3 /* HCYoutubeParser.m in Sources */,
-				BD83A44016720DFE003EE4B3 /* HelpPracticeView.m in Sources */,
 				BD83A44616720DFE003EE4B3 /* CustomNSURLConnection.m in Sources */,
 				BD83A44716720DFE003EE4B3 /* TopPlayerCell.m in Sources */,
 				BD83A44816720DFE003EE4B3 /* TopPlayersDataSource.m in Sources */,
@@ -3833,7 +3554,6 @@
 				BD83A45F16720DFE003EE4B3 /* MKStoreObserver.m in Sources */,
 				BD83A46016720DFE003EE4B3 /* LoginAnimatedViewController.m in Sources */,
 				BD83A46116720DFE003EE4B3 /* BEAnimationView.m in Sources */,
-				BD83A46216720DFE003EE4B3 /* TeachingHelperViewController.m in Sources */,
 				BD83A46316720DFE003EE4B3 /* UIView+Frame.m in Sources */,
 				BD83A46416720DFE003EE4B3 /* PracticeCell.m in Sources */,
 				BD017C0016724DBF005C5471 /* MyTestAsync.m in Sources */,

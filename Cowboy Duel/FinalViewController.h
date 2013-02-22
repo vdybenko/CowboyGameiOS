@@ -7,14 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DuelViewController.h"
 #import "DuelStartViewController.h"
 #import "AccountDataSource.h"
 #import "ValidationUtils.h"
 #import "CDTransaction.h"
 #import "CDDuel.h"
 #import "ActivityIndicatorView.h"
-#import "TeachingViewController.h"
 #import "SBJSON.h"
 #import "JSON.h"
 #import "StartViewController.h"
@@ -34,7 +32,6 @@
     AccountDataSource *playerAccount;
     AccountDataSource *oponentAccount;
         
-    TeachingViewController *teachingViewController;
     LoginAnimatedViewController *loginViewController;
     
     int oldMoney;
