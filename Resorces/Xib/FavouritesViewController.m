@@ -226,9 +226,9 @@
     player = [favsDataSource.arrItemsList objectAtIndex:indexPath.row];
     [[StartViewController sharedInstance] sendMessageForPush:@"POKE"
                                                     withType:PUSH_NOTIFICATION_POKE
-                                                   forPlayer:@"test"
+                                                   fromPlayer:player.dNickName
                                                       withId:player.dAuth
-                                                     ];
+                                                    ];
     
     NSString *message = [NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"PokenMessage", @""),player.dNickName];
     [self performSelector:@selector(showMessage:) withObject:message];

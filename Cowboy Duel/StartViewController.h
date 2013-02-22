@@ -67,7 +67,7 @@ typedef enum{
 -(void)checkNetworkStatus:(NSNotification *)notice;
 -(void)authorizationModifier:(BOOL)modifierName;
 -(void)modifierUser:(AccountDataSource *)playerTemp;
--(void)sendMessageForPush:(NSString *)message withType:(TypeOfPushNotification)type forPlayer:(NSString *)nick withId:(NSString *)playerId ;
+-(void)sendMessageForPush:(NSString *)message withType:(TypeOfPushNotification)type fromPlayer:(NSString *)nick withId:(NSString *)playerId ;
 
 -(float)abs:(float)d;
 

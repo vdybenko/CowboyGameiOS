@@ -987,7 +987,7 @@ static StartViewController *sharedHelper = nil;
     }
 }
 
--(void)sendMessageForPush:(NSString *)message withType:(TypeOfPushNotification)type forPlayer:(NSString *)nick withId:(NSString *)playerId ;
+-(void)sendMessageForPush:(NSString *)message withType:(TypeOfPushNotification)type fromPlayer:(NSString *)nick withId:(NSString *)playerId ;
 {
     NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:PUSH_NOTIF_URL encoding:NSUTF8StringEncoding]]
                                                             cachePolicy:NSURLRequestUseProtocolCachePolicy
@@ -1010,7 +1010,7 @@ static StartViewController *sharedHelper = nil;
 //                               NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 //                               NSLog(@"jsonString %@",jsonString);
                            }];
-    
+
 }
 
 #pragma mark - Share
