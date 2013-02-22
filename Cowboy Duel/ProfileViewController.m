@@ -282,6 +282,9 @@ static const CGFloat timeToStandartTitles = 1.8;
             deltaFrame.origin.y += 47;
             duelButton.frame = deltaFrame;
             
+            deltaFrame = bgActivityIndicator.frame;
+            deltaFrame.origin.y += 27;
+            bgActivityIndicator.frame = deltaFrame;
         }
         
         [self checkIsOpponentFavorite];

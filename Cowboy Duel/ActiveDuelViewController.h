@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "AccountDataSource.h"
 #import <AVFoundation/AVFoundation.h>
+#import "PLView.h"
+#import "PLJSONLoader.h"
 
 @protocol ActiveDuelViewControllerDelegate <NSObject>
 
@@ -87,6 +89,8 @@
     BOOL accelerometerStateSend;
     
     BOOL follAccelCheck;
+    
+    PLView *plView;
     
 }
 
