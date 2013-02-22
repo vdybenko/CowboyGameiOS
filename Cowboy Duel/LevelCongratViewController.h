@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "AccountDataSource.h"
-#import "DuelViewController.h"
 #import "ActivityIndicatorView.h"
 
 @interface LevelCongratViewController : UIViewController<MemoryManagement>

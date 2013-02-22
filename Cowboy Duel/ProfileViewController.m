@@ -21,6 +21,7 @@
 #import "ActiveDuelViewController.h"
 #import "FavouritesViewController.h"
 #import "FavouritesDataSource.h"
+#import "UIView+Dinamic_BackGround.h"
 
 static const CGFloat changeYPointWhenKeyboard = 155;
 static const CGFloat timeToStandartTitles = 1.8;

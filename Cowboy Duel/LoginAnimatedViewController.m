@@ -15,6 +15,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "Facebook.h"
 #import "ActiveDuelViewController.h"
+#import "UIView+Dinamic_BackGround.h"
 
 #define kFacebookAppId @"284932561559672"
 NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/first/";

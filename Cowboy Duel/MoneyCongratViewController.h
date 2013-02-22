@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "AccountDataSource.h"
-#import "DuelViewController.h"
 #import "ActivityIndicatorView.h"
 
 @interface MoneyCongratViewController : UIViewController<MemoryManagement>

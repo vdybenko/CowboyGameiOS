@@ -7,7 +7,6 @@
 //
 
 #import "DuelStartViewController.h"
-#import "DuelViewController.h"
 #import "GameCenterViewController.h"
 #import "UIButton+Image+Title.h"
 #import "DuelRewardLogicController.h"
