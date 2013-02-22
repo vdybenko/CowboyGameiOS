@@ -183,6 +183,8 @@
 //call to duel:
 -(void)clickButton:(NSIndexPath *)indexPath;
 {
+    playerAccount=[AccountDataSource sharedInstance];
+    
     CDFavPlayer *player;
     player = [favsDataSource.arrItemsList objectAtIndex:indexPath.row];
     
@@ -196,8 +198,8 @@
     [oponentAccount setSessionID:player.dSessionId];
 
     NSLog(@"\n%@\n%@", oponentAccount.accountName, playerAccount.accountName);
-    
-    duelStartViewController = [[DuelStartViewController alloc]initWithAccount:[AccountDataSource sharedInstance] andOpAccount:oponentAccount opopnentAvailable:NO andServerType:NO andTryAgain:NO];
+
+    duelStartViewController = [[DuelStartViewController alloc]initWithAccount:playerAccount andOpAccount:oponentAccount opopnentAvailable:NO andServerType:NO andTryAgain:NO];
     //duelStartViewController.serverName = playerAccount.accountID;
     
     GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
@@ -205,9 +207,9 @@
     gameCenterViewController.duelStartViewController = duelStartViewController;
     
     if (!oponentAccount.bot) {
-        const char *name = [playerAccount.accountID cStringUsingEncoding:NSUTF8StringEncoding];
+        const char *name = [oponentAccount.accountID cStringUsingEncoding:NSUTF8StringEncoding];
         SSConnection *connection = [SSConnection sharedInstance];
-        [connection sendData:(void *)(name) packetID:NETWORK_SET_PAIR ofLength:sizeof(char) * [playerAccount.accountID length]];
+        [connection sendData:(void *)(name) packetID:NETWORK_SET_PAIR ofLength:sizeof(char) * [oponentAccount.accountID length]];
     }
     else {
         SSConnection *connection = [SSConnection sharedInstance];
