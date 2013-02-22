@@ -872,7 +872,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 - (IBAction)duelButtonClick:(id)sender {
     if ([self isPlayerForPractice]) {
         [playerAccount.finalInfoTable removeAllObjects];
-        int randomTime = arc4random() % 6;
+        int randomTime = (arc4random() % 3)-2;
         
         if ([AccountDataSource sharedInstance].activeDuel) {
             ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:[AccountDataSource sharedInstance] oponentAccount:playerAccount];
