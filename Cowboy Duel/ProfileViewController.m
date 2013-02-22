@@ -420,8 +420,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     
 //    UIFont *fontSimpleText=[UIFont fontWithName: @"MyriadPro-Semibold" size:13];
     UIColor *mainColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
-    
-    
+
     lbProfileMain.text = NSLocalizedString(@"ProfileTitle", @"");
     lbProfileMain.textColor = mainColor;
     lbProfileMain.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
@@ -726,16 +725,21 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 
 -(void)checkIsOpponentFavorite
 {
-    if (playerServer.favorite) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            btnAddToFavorites.imageView.image = [UIImage imageNamed:@"topPlayerStarSelected.png"];
-        });
+    if ([self isPlayerForPractice]) {
+        btnAddToFavorites.hidden = YES;
     }else{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            btnAddToFavorites.imageView.image = [UIImage imageNamed:@"topPlayerStar.png"];
-        });
+        if (playerServer.favorite) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                btnAddToFavorites.imageView.image = [UIImage imageNamed:@"topPlayerStarSelected.png"];
+            });
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                btnAddToFavorites.imageView.image = [UIImage imageNamed:@"topPlayerStar.png"];
+            });
+        }
     }
 }
+
 #pragma mark Animation description
 
 - (void)updateLabels
@@ -822,6 +826,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 }
 
 - (IBAction)backToMenuFirstRun:(id)sender {
+    [tfFBName resignFirstResponder];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kReceiveImagefromFBNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kCheckfFBLoginSession object:nil];
     
@@ -842,7 +847,6 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/first_profile_continue_click" forKey:@"event"]];
-    
 }
 
 - (IBAction)btnLeaderbordFirstRunClick:(id)sender {
@@ -865,8 +869,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 }
 
 - (IBAction)duelButtonClick:(id)sender {
-        
-    if ([playerAccount.sessionID isEqualToString:@"-1"]) {
+    if ([self isPlayerForPractice]) {
         [playerAccount.finalInfoTable removeAllObjects];
         int randomTime = arc4random() % 6;
         
@@ -885,7 +888,6 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     }
     
     duelStartViewController = [[DuelStartViewController alloc]initWithAccount:[AccountDataSource sharedInstance] andOpAccount:playerAccount opopnentAvailable:NO andServerType:NO andTryAgain:NO];
-    //duelStartViewController.serverName = playerAccount.accountID;
     
     GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
     duelStartViewController.delegate = gameCenterViewController;
@@ -909,15 +911,22 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 }
 
 - (IBAction)btnFavouritesClick:(id)sender {
-    
 //    [[StartViewController sharedInstance].favsDataSource reloadDataSource];
-    
+    if ([[StartViewController sharedInstance] connectedToWiFi]) {
     FavouritesViewController *favVC = [[FavouritesViewController alloc] initWithAccount:playerAccount];
     [self.navigationController pushViewController:favVC animated:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
                                                       userInfo:[NSDictionary dictionaryWithObject:@"/profile_favorites_click" forKey:@"event"]];
-
+    }else{
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry", @"AlertView")
+                                                            message:NSLocalizedString(@"Internet_down", @"AlertView")
+                                                           delegate:self
+                                                  cancelButtonTitle:NSLocalizedString(@"Cancel", @"AlertView")
+                                                  otherButtonTitles: nil];
+        [alertView show];
+        alertView = nil;
+    }
 }
 
 
@@ -1052,6 +1061,11 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     profilePictureViewDefault.hidden = NO;
 }
 
+#pragma mark if
+-(BOOL)isPlayerForPractice{
+    return [playerAccount.sessionID isEqualToString:@"-1"]?YES:NO;
+}
+#pragma mark -
 - (void)dealloc {
 }
 - (void)viewDidUnload {

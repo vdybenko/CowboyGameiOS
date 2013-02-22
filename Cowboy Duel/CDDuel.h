@@ -11,14 +11,12 @@
 {
     NSNumber *dRateFire;
     NSString *dOpponentId;
-    NSNumber * dGps;
     NSString * dDate;
     
 }
 
 @property(nonatomic,strong) NSNumber *dRateFire;
 @property(nonatomic,strong) NSString *dOpponentId;
-@property(nonatomic, strong) NSNumber *dGps;
 @property(nonatomic, strong) NSString *dDate;
 
 @end

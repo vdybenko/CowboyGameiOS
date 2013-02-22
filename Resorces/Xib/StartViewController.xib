@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1536</int>
-		<string key="IBDocument.SystemVersion">11E53</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
-		<string key="IBDocument.AppKitVersion">1138.47</string>
+		<int key="IBDocument.SystemTarget">1552</int>
+		<string key="IBDocument.SystemVersion">11G63</string>
+		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
+		<string key="IBDocument.AppKitVersion">1138.51</string>
 		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1929</string>
+			<string key="NS.object.0">2083</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -654,7 +654,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{73, 260}, {176, 46}}</string>
 								<reference key="NSSuperview" ref="862881662"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -1476,217 +1475,12 @@
 			<nil key="sourceID"/>
 			<int key="maxID">183</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<object class="IBPartialClassDescription">
-					<string key="className">StartViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="feedbackButtonClick:">id</string>
-						<string key="feedbackCancelButtonClick:">id</string>
-						<string key="feedbackFacebookBtnClick:">id</string>
-						<string key="feedbackFollowFBClick:">id</string>
-						<string key="feedbackItuneskBtnClick:">id</string>
-						<string key="feedbackMailBtnClick:">id</string>
-						<string key="feedbackTweeterBtnClick:">id</string>
-						<string key="profileButtonClick">id</string>
-						<string key="shareButtonClick:">id</string>
-						<string key="shareCancelButtonClick:">id</string>
-						<string key="showHelp:">id</string>
-						<string key="soundButtonClick:">id</string>
-						<string key="startActiveDuel:">id</string>
-						<string key="startDuel">id</string>
-						<string key="storeButtonClick:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="feedbackButtonClick:">
-							<string key="name">feedbackButtonClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="feedbackCancelButtonClick:">
-							<string key="name">feedbackCancelButtonClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="feedbackFacebookBtnClick:">
-							<string key="name">feedbackFacebookBtnClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="feedbackFollowFBClick:">
-							<string key="name">feedbackFollowFBClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="feedbackItuneskBtnClick:">
-							<string key="name">feedbackItuneskBtnClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="feedbackMailBtnClick:">
-							<string key="name">feedbackMailBtnClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="feedbackTweeterBtnClick:">
-							<string key="name">feedbackTweeterBtnClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="profileButtonClick">
-							<string key="name">profileButtonClick</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="shareButtonClick:">
-							<string key="name">shareButtonClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="shareCancelButtonClick:">
-							<string key="name">shareCancelButtonClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="showHelp:">
-							<string key="name">showHelp:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="soundButtonClick:">
-							<string key="name">soundButtonClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="startActiveDuel:">
-							<string key="name">startActiveDuel:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="startDuel">
-							<string key="name">startDuel</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="storeButtonClick:">
-							<string key="name">storeButtonClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="backGroundfeedbackView">UIImageView</string>
-						<string key="cloudSecondView">UIImageView</string>
-						<string key="cloudView">UIImageView</string>
-						<string key="duelButton">UIButton</string>
-						<string key="feedbackButton">UIButton</string>
-						<string key="feedbackView">UIView</string>
-						<string key="helpButton">UIButton</string>
-						<string key="indicatorfeedbackView">UIActivityIndicatorView</string>
-						<string key="lbFeedbackButton">UILabel</string>
-						<string key="lbFeedbackCancelBtn">UILabel</string>
-						<string key="lbFollowFacebook">UILabel</string>
-						<string key="lbMailMessage">UILabel</string>
-						<string key="lbPostMessage">UILabel</string>
-						<string key="lbRateMessage">UILabel</string>
-						<string key="lbShareButton">UILabel</string>
-						<string key="lbShareCancelBtn">UILabel</string>
-						<string key="mapButton">UIButton</string>
-						<string key="profileButton">UIButton</string>
-						<string key="saloon2Button">UIButton</string>
-						<string key="shareButton">UIButton</string>
-						<string key="shareView">UIView</string>
-						<string key="soundButton">UIButton</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="backGroundfeedbackView">
-							<string key="name">backGroundfeedbackView</string>
-							<string key="candidateClassName">UIImageView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="cloudSecondView">
-							<string key="name">cloudSecondView</string>
-							<string key="candidateClassName">UIImageView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="cloudView">
-							<string key="name">cloudView</string>
-							<string key="candidateClassName">UIImageView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="duelButton">
-							<string key="name">duelButton</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="feedbackButton">
-							<string key="name">feedbackButton</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="feedbackView">
-							<string key="name">feedbackView</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="helpButton">
-							<string key="name">helpButton</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="indicatorfeedbackView">
-							<string key="name">indicatorfeedbackView</string>
-							<string key="candidateClassName">UIActivityIndicatorView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbFeedbackButton">
-							<string key="name">lbFeedbackButton</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbFeedbackCancelBtn">
-							<string key="name">lbFeedbackCancelBtn</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbFollowFacebook">
-							<string key="name">lbFollowFacebook</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbMailMessage">
-							<string key="name">lbMailMessage</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbPostMessage">
-							<string key="name">lbPostMessage</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbRateMessage">
-							<string key="name">lbRateMessage</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbShareButton">
-							<string key="name">lbShareButton</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbShareCancelBtn">
-							<string key="name">lbShareCancelBtn</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="mapButton">
-							<string key="name">mapButton</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="profileButton">
-							<string key="name">profileButton</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="saloon2Button">
-							<string key="name">saloon2Button</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="shareButton">
-							<string key="name">shareButton</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="shareView">
-							<string key="name">shareView</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="soundButton">
-							<string key="name">soundButton</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/StartViewController.h</string>
-					</object>
-				</object>
-			</array>
-		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
-			<real value="1536" key="NS.object.0"/>
+			<real value="1552" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
@@ -1707,6 +1501,6 @@
 			<string key="st_cloud_new.png">{480, 258}</string>
 			<string key="st_title.png">{320, 97}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">1929</string>
+		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
 </archive>

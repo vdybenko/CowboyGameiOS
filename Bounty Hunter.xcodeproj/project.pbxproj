@@ -155,6 +155,7 @@
 		3192D65B16CA35EA00047BB7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3192D65A16CA35EA00047BB7 /* Default-568h@2x.png */; };
 		3192D65F16CA400000047BB7 /* back-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3192D65E16CA400000047BB7 /* back-568h@2x.png */; };
 		3192D66016CA400000047BB7 /* back-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3192D65E16CA400000047BB7 /* back-568h@2x.png */; };
+		31935FDE16CCD25E0029544C /* ListOnlineDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 31935FDD16CCD25E0029544C /* ListOnlineDataSource.m */; };
 		319A98D91649020F000D2A45 /* fv_new_blue_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 319A98CF1649020A000D2A45 /* fv_new_blue_line.png */; };
 		319A98DA1649020F000D2A45 /* fv_new_blue_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 319A98D01649020B000D2A45 /* fv_new_blue_line@2x.png */; };
 		319A98DB1649020F000D2A45 /* fv_new_brown_bckgr.png in Resources */ = {isa = PBXBuildFile; fileRef = 319A98D11649020B000D2A45 /* fv_new_brown_bckgr.png */; };
@@ -197,7 +198,6 @@
 		31DA9F0715BD331900492A9F /* topPlayerCell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31DA9EFF15BD331900492A9F /* topPlayerCell@2x.png */; };
 		31DA9F0815BD331900492A9F /* topPlayerRibbon.png in Resources */ = {isa = PBXBuildFile; fileRef = 31DA9F0015BD331900492A9F /* topPlayerRibbon.png */; };
 		31DA9F0915BD331900492A9F /* topPlayerRibbon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31DA9F0115BD331900492A9F /* topPlayerRibbon@2x.png */; };
-		31E8783515ADC70300BFFD9A /* LeaderBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31E8783315ADC70200BFFD9A /* LeaderBoardViewController.xib */; };
 		31F6D53115AB034400C0F28D /* Gun.png in Resources */ = {isa = PBXBuildFile; fileRef = 31F6D52F15AB034400C0F28D /* Gun.png */; };
 		31F6D53215AB034400C0F28D /* Gun@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31F6D53015AB034400C0F28D /* Gun@2x.png */; };
 		603B269B137AA0EA00E9ED1D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 603B269A137AA0EA00E9ED1D /* AudioToolbox.framework */; };
@@ -292,6 +292,7 @@
 		7689F5DE16B6A48E00D8AC5C /* ivHit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7689F5DC16B6A48E00D8AC5C /* ivHit@2x.png */; };
 		7690DD9316BFFC2900731B51 /* sl_shylc.png in Resources */ = {isa = PBXBuildFile; fileRef = 7690DD9116BFFC2900731B51 /* sl_shylc.png */; };
 		7690DD9416BFFC2900731B51 /* sl_shylc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7690DD9216BFFC2900731B51 /* sl_shylc@2x.png */; };
+		7691DD9416CE75B200AD25F5 /* LoadViewContoller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7691DD9316CE75B200AD25F5 /* LoadViewContoller.xib */; };
 		7692812C159DCAFD00E6CE41 /* IconDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7692812B159DCAFD00E6CE41 /* IconDownloader.m */; };
 		7692BC2F1574E36C00983264 /* DuelStartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7692BC2E1574E36C00983264 /* DuelStartViewController.xib */; };
 		7693419713DDBA5000A962A4 /* DecreeNarrow.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7693419613DDBA5000A962A4 /* DecreeNarrow.ttf */; };
@@ -454,7 +455,6 @@
 		BD83A40F16720DFE003EE4B3 /* CDAchivment.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B59141E1F170085E4FB /* CDAchivment.m */; };
 		BD83A41016720DFE003EE4B3 /* CDDuel.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B5B141E1F170085E4FB /* CDDuel.m */; };
 		BD83A41116720DFE003EE4B3 /* CDTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B5D141E1F170085E4FB /* CDTransaction.m */; };
-		BD83A41216720DFE003EE4B3 /* DuelDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B62141E1F170085E4FB /* DuelDataSource.m */; };
 		BD83A41316720DFE003EE4B3 /* DuelStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B64141E1F170085E4FB /* DuelStartViewController.m */; };
 		BD83A41416720DFE003EE4B3 /* DuelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B66141E1F170085E4FB /* DuelViewController.m */; };
 		BD83A41516720DFE003EE4B3 /* FinalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B6A141E1F170085E4FB /* FinalViewController.m */; };
@@ -650,7 +650,6 @@
 		BD83A4E616720DFE003EE4B3 /* st_bg_new@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03286024159DD84000D16195 /* st_bg_new@2x.png */; };
 		BD83A4ED16720DFE003EE4B3 /* Gun.png in Resources */ = {isa = PBXBuildFile; fileRef = 31F6D52F15AB034400C0F28D /* Gun.png */; };
 		BD83A4EE16720DFE003EE4B3 /* Gun@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31F6D53015AB034400C0F28D /* Gun@2x.png */; };
-		BD83A4F116720DFE003EE4B3 /* LeaderBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31E8783315ADC70200BFFD9A /* LeaderBoardViewController.xib */; };
 		BD83A4F216720DFE003EE4B3 /* dv_arm.png in Resources */ = {isa = PBXBuildFile; fileRef = 768044C215AC68FD005ABD3A /* dv_arm.png */; };
 		BD83A4F316720DFE003EE4B3 /* dv_arm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 768044C815AC6979005ABD3A /* dv_arm@2x.png */; };
 		BD83A4F416720DFE003EE4B3 /* ls_OnLine_frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 31DA9EFC15BD331900492A9F /* ls_OnLine_frame.png */; };
@@ -782,7 +781,6 @@
 		BDD07BC4141E1F170085E4FB /* CDAchivment.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B59141E1F170085E4FB /* CDAchivment.m */; };
 		BDD07BC5141E1F170085E4FB /* CDDuel.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B5B141E1F170085E4FB /* CDDuel.m */; };
 		BDD07BC6141E1F170085E4FB /* CDTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B5D141E1F170085E4FB /* CDTransaction.m */; };
-		BDD07BC8141E1F170085E4FB /* DuelDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B62141E1F170085E4FB /* DuelDataSource.m */; };
 		BDD07BC9141E1F170085E4FB /* DuelStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B64141E1F170085E4FB /* DuelStartViewController.m */; };
 		BDD07BCA141E1F170085E4FB /* DuelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B66141E1F170085E4FB /* DuelViewController.m */; };
 		BDD07BCC141E1F170085E4FB /* FinalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B6A141E1F170085E4FB /* FinalViewController.m */; };
@@ -975,6 +973,8 @@
 		318F238A16B972880081BE5E /* btn_store@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_store@2x.png"; sourceTree = "<group>"; };
 		3192D65A16CA35EA00047BB7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3192D65E16CA400000047BB7 /* back-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-568h@2x.png"; sourceTree = "<group>"; };
+		31935FDC16CCD25E0029544C /* ListOnlineDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListOnlineDataSource.h; sourceTree = "<group>"; };
+		31935FDD16CCD25E0029544C /* ListOnlineDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListOnlineDataSource.m; sourceTree = "<group>"; };
 		319A98CF1649020A000D2A45 /* fv_new_blue_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fv_new_blue_line.png; sourceTree = "<group>"; };
 		319A98D01649020B000D2A45 /* fv_new_blue_line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fv_new_blue_line@2x.png"; sourceTree = "<group>"; };
 		319A98D11649020B000D2A45 /* fv_new_brown_bckgr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fv_new_brown_bckgr.png; sourceTree = "<group>"; };
@@ -1007,7 +1007,6 @@
 		31DA9EFF15BD331900492A9F /* topPlayerCell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "topPlayerCell@2x.png"; sourceTree = "<group>"; };
 		31DA9F0015BD331900492A9F /* topPlayerRibbon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topPlayerRibbon.png; sourceTree = "<group>"; };
 		31DA9F0115BD331900492A9F /* topPlayerRibbon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "topPlayerRibbon@2x.png"; sourceTree = "<group>"; };
-		31E8783315ADC70200BFFD9A /* LeaderBoardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LeaderBoardViewController.xib; path = "../Cowboy Duel/LeaderBoardViewController.xib"; sourceTree = "<group>"; };
 		31F6D52F15AB034400C0F28D /* Gun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gun.png; sourceTree = "<group>"; };
 		31F6D53015AB034400C0F28D /* Gun@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Gun@2x.png"; sourceTree = "<group>"; };
 		603B269A137AA0EA00E9ED1D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -1176,6 +1175,7 @@
 		7690DDBC16C0212300731B51 /* FBTestSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBTestSession.h; sourceTree = "<group>"; };
 		7690DDBD16C0212300731B51 /* FBUserSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBUserSettingsViewController.h; sourceTree = "<group>"; };
 		7690DDBE16C0212300731B51 /* FBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBViewController.h; sourceTree = "<group>"; };
+		7691DD9316CE75B200AD25F5 /* LoadViewContoller.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadViewContoller.xib; sourceTree = "<group>"; };
 		7692812A159DCAFD00E6CE41 /* IconDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconDownloader.h; sourceTree = "<group>"; };
 		7692812B159DCAFD00E6CE41 /* IconDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconDownloader.m; sourceTree = "<group>"; };
 		7692BC2E1574E36C00983264 /* DuelStartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DuelStartViewController.xib; path = Xib/DuelStartViewController.xib; sourceTree = "<group>"; };
@@ -1390,8 +1390,6 @@
 		BDD07B5C141E1F170085E4FB /* CDTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDTransaction.h; sourceTree = "<group>"; };
 		BDD07B5D141E1F170085E4FB /* CDTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDTransaction.m; sourceTree = "<group>"; };
 		BDD07B5E141E1F170085E4FB /* Cowboy Duel-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Cowboy Duel-Prefix.pch"; sourceTree = "<group>"; };
-		BDD07B61141E1F170085E4FB /* DuelDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DuelDataSource.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		BDD07B62141E1F170085E4FB /* DuelDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DuelDataSource.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BDD07B63141E1F170085E4FB /* DuelStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DuelStartViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		BDD07B64141E1F170085E4FB /* DuelStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DuelStartViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BDD07B65141E1F170085E4FB /* DuelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuelViewController.h; sourceTree = "<group>"; };
@@ -2081,6 +2079,8 @@
 				7679307415BE8D64007F461F /* CDTopPlayer.m */,
 				318D011616C3E19000BFA030 /* CDFavPlayer.h */,
 				318D011716C3E19100BFA030 /* CDFavPlayer.m */,
+				31935FDC16CCD25E0029544C /* ListOnlineDataSource.h */,
+				31935FDD16CCD25E0029544C /* ListOnlineDataSource.m */,
 			);
 			path = PlayersOnLineDataSource;
 			sourceTree = "<group>";
@@ -2092,6 +2092,7 @@
 				7687667816BA7543003405F9 /* GunDrumViewController.xib */,
 				BD81E637169EC4D100CE8278 /* ActiveDuelViewController.xib */,
 				BD84DAA4164ABCA000DEEE38 /* LoginAnimatedViewController.xib */,
+				7691DD9316CE75B200AD25F5 /* LoadViewContoller.xib */,
 				BD16BF961680934F00628CCC /* FunPageViewController.xib */,
 				3115FB4F15CACA5100C4D438 /* MoneyCongratViewController.xib */,
 				3188979715CAD7FE002D52EA /* LevelCongratViewController.xib */,
@@ -2104,7 +2105,6 @@
 				76BC8797165D08F3001F1472 /* ProfileViewControllerFirstRun.xib */,
 				761EFA4E1573BE91001670EB /* StartViewController.xib */,
 				761EFA471573BDDA001670EB /* CollectionAppViewController.xib */,
-				31E8783315ADC70200BFFD9A /* LeaderBoardViewController.xib */,
 				764B891D165FCC660014E35B /* ListOnLine */,
 				764B891C165FCC4E0014E35B /* TopPlayer */,
 				767BA5BD1589F8E300825EB1 /* FinalViewController.xib */,
@@ -2541,8 +2541,6 @@
 				BDD07B5B141E1F170085E4FB /* CDDuel.m */,
 				BDD07B5C141E1F170085E4FB /* CDTransaction.h */,
 				BDD07B5D141E1F170085E4FB /* CDTransaction.m */,
-				BDD07B61141E1F170085E4FB /* DuelDataSource.h */,
-				BDD07B62141E1F170085E4FB /* DuelDataSource.m */,
 				BDD07B6B141E1F170085E4FB /* FintDataSource.h */,
 				BDD07B6C141E1F170085E4FB /* FintDataSource.m */,
 				BD8000D4157755A600703AC8 /* OGHelper.h */,
@@ -2778,7 +2776,6 @@
 				03286090159DD84000D16195 /* st_bg_new@2x.png in Resources */,
 				31F6D53115AB034400C0F28D /* Gun.png in Resources */,
 				31F6D53215AB034400C0F28D /* Gun@2x.png in Resources */,
-				31E8783515ADC70300BFFD9A /* LeaderBoardViewController.xib in Resources */,
 				768044C415AC68FD005ABD3A /* dv_arm.png in Resources */,
 				768044C915AC697A005ABD3A /* dv_arm@2x.png in Resources */,
 				31DA9F0415BD331900492A9F /* ls_OnLine_frame.png in Resources */,
@@ -2977,6 +2974,7 @@
 				76897D4016C3DE18001E06DB /* topPlayerStarSelected@2x.png in Resources */,
 				318D011016C3B08D00BFA030 /* FavouritesViewController.xib in Resources */,
 				318D011216C3C52700BFA030 /* FavoritesCell.xib in Resources */,
+				7691DD9416CE75B200AD25F5 /* LoadViewContoller.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3075,7 +3073,6 @@
 				BD83A4E616720DFE003EE4B3 /* st_bg_new@2x.png in Resources */,
 				BD83A4ED16720DFE003EE4B3 /* Gun.png in Resources */,
 				BD83A4EE16720DFE003EE4B3 /* Gun@2x.png in Resources */,
-				BD83A4F116720DFE003EE4B3 /* LeaderBoardViewController.xib in Resources */,
 				BD83A4F216720DFE003EE4B3 /* dv_arm.png in Resources */,
 				BD83A4F316720DFE003EE4B3 /* dv_arm@2x.png in Resources */,
 				BD83A4F416720DFE003EE4B3 /* ls_OnLine_frame.png in Resources */,
@@ -3303,7 +3300,6 @@
 				BDD07BC4141E1F170085E4FB /* CDAchivment.m in Sources */,
 				BDD07BC5141E1F170085E4FB /* CDDuel.m in Sources */,
 				BDD07BC6141E1F170085E4FB /* CDTransaction.m in Sources */,
-				BDD07BC8141E1F170085E4FB /* DuelDataSource.m in Sources */,
 				BDD07BC9141E1F170085E4FB /* DuelStartViewController.m in Sources */,
 				BDD07BCA141E1F170085E4FB /* DuelViewController.m in Sources */,
 				BDD07BCC141E1F170085E4FB /* FinalViewController.m in Sources */,
@@ -3391,6 +3387,7 @@
 				318D010F16C3B08D00BFA030 /* FavouritesViewController.m in Sources */,
 				318D011516C3D5B100BFA030 /* FavouritesDataSource.m in Sources */,
 				318D011816C3E19200BFA030 /* CDFavPlayer.m in Sources */,
+				31935FDE16CCD25E0029544C /* ListOnlineDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3411,7 +3408,6 @@
 				BD83A40F16720DFE003EE4B3 /* CDAchivment.m in Sources */,
 				BD83A41016720DFE003EE4B3 /* CDDuel.m in Sources */,
 				BD83A41116720DFE003EE4B3 /* CDTransaction.m in Sources */,
-				BD83A41216720DFE003EE4B3 /* DuelDataSource.m in Sources */,
 				BD83A41316720DFE003EE4B3 /* DuelStartViewController.m in Sources */,
 				BD83A41416720DFE003EE4B3 /* DuelViewController.m in Sources */,
 				BD83A41516720DFE003EE4B3 /* FinalViewController.m in Sources */,
@@ -3650,7 +3646,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = NO;
@@ -3695,7 +3691,7 @@
 				);
 				PRODUCT_NAME = "Bounty Hunter";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8131AE32-3B8D-4690-885F-7EEF3B8CDCEE";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
@@ -3715,8 +3711,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3760,8 +3756,8 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = Test;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "8131AE32-3B8D-4690-885F-7EEF3B8CDCEE";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5B2C4BE5-DD93-4ED2-8516-F2ADC6D017CE";
 				REZ_SEARCH_PATHS = "$(inherited)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3778,7 +3774,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3821,8 +3817,8 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = Test;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA8B0E03-DB92-4598-AE9F-493103BDEF2F";
+				PROVISIONING_PROFILE = "8131AE32-3B8D-4690-885F-7EEF3B8CDCEE";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8131AE32-3B8D-4690-885F-7EEF3B8CDCEE";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
@@ -3842,7 +3838,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				COPY_PHASE_STRIP = NO;
@@ -3887,9 +3883,9 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = Test;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=*]" = "AA8B0E03-DB92-4598-AE9F-493103BDEF2F";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA8B0E03-DB92-4598-AE9F-493103BDEF2F";
+				PROVISIONING_PROFILE = "8131AE32-3B8D-4690-885F-7EEF3B8CDCEE";
+				"PROVISIONING_PROFILE[sdk=*]" = "5B2C4BE5-DD93-4ED2-8516-F2ADC6D017CE";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "487016A9-7921-4B61-B706-D0684B4D9782";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
@@ -3942,8 +3938,8 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3988,8 +3984,8 @@
 				);
 				PRODUCT_NAME = "Bounty Hunter";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=*]" = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				"PROVISIONING_PROFILE[sdk=*]" = "8131AE32-3B8D-4690-885F-7EEF3B8CDCEE";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8131AE32-3B8D-4690-885F-7EEF3B8CDCEE";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",

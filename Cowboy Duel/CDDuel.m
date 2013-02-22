@@ -8,7 +8,7 @@
 #import "CDDuel.h"
 
 @implementation CDDuel
-@synthesize dGps, dDate, dRateFire, dOpponentId;
+@synthesize dDate, dRateFire, dOpponentId;
 
 - (id)init
 {
@@ -22,7 +22,6 @@
 
 -(void)encodeWithCoder:(NSCoder *)encoder
 {
-    [encoder encodeObject:dGps forKey:@"GPS"];
     [encoder encodeObject:dDate forKey:@"DATE"];
     [encoder encodeObject:dRateFire forKey:@"RATEFIRE"];
     [encoder encodeObject:dOpponentId forKey:@"OPPONENTID"];
@@ -30,7 +29,6 @@
 
 -(id)initWithCoder:(NSCoder *)decoder
 {
-    dGps = [decoder decodeObjectForKey:@"GPS"];
     dDate = [decoder decodeObjectForKey:@"DATE"];
     dRateFire = [decoder decodeObjectForKey:@"RATEFIRE"];
     dOpponentId = [decoder decodeObjectForKey:@"OPPONENTID"];

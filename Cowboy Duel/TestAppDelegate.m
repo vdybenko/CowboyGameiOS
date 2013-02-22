@@ -201,9 +201,9 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
                                                                delegate:self
                                                       cancelButtonTitle:NSLocalizedString(@"Cancel", @"AlertView")
                                                       otherButtonTitles: nil];
+            alertView.tag = 1;
             [alertView show];
             return NO;
-
         }
     }
 
@@ -391,7 +391,7 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     
     NSUserDefaults *usrDef = [NSUserDefaults standardUserDefaults];
     [usrDef setObject:newToken forKey:@"DeviceToken"];
-    [usrDef synchronize];
+    [usrDef synchronize];    
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
@@ -401,14 +401,16 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 
 - (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
 {
-	NSLog(@"Received notification: %@", userInfo);
+    NSDictionary *sInfo = [userInfo objectForKey:@"aps"];
+    NSString *message = [sInfo objectForKey:@"alert"];
     
-    NSDictionary *notificationDict = [userInfo objectForKey:@"aps"];
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Be ready!!!" message:[notificationDict objectForKey:@"alert"] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Go to Saloon", nil];
-    alert.tag = 1;
-    [alert show];
+    sInfo = [userInfo objectForKey:@"i"];
+    	
+	[[NSNotificationCenter defaultCenter] postNotificationName:kPushNotification
+														object:self
+                                                      userInfo:[NSDictionary dictionaryWithObjectsAndKeys:sInfo, @"messageId",message, @"message", nil]];
 }
+
 #pragma mark GATrackEvent
 - (void)AnalyticsTrackEvent:(NSNotification *)notification {
 	NSString *page = [[notification userInfo] objectForKey:@"event"];
@@ -442,41 +444,27 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     return request;
 }
 
-#pragma mark - AlertViewDelegate
+#pragma mark AlertViewDelegate
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == 1) {
-        if (buttonIndex == 1)
+        if (buttonIndex == 0)
         {
-            for (UIViewController *viewController in navigationController.viewControllers) {
-                
-                if ([viewController isKindOfClass:[StartViewController class]]) {
-                    startViewController = (StartViewController *)viewController;
-                    [startViewController startDuel];
-                    return;
-                }
-                
+            if ([[[navigationController viewControllers] lastObject] isKindOfClass:[LoginAnimatedViewController class]]) {
+                loginViewController = (LoginAnimatedViewController *)[[navigationController viewControllers] lastObject];
             }
+            [loginViewController failed];
+            SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+            
+            if ([controller respondsToSelector:@selector(alertView:clickedButtonAtIndex:)]) {
+                // Manually invoke the alert view button handler
+                [(id <UIAlertViewDelegate>)controller alertView:nil
+                                           clickedButtonAtIndex:kFacebookSettingsButtonIndex];
+            }
+            
         }
     }
-    
-    if (buttonIndex == 0)
-    {
-        if ([[[navigationController viewControllers] lastObject] isKindOfClass:[LoginAnimatedViewController class]]) {
-            loginViewController = (LoginAnimatedViewController *)[[navigationController viewControllers] lastObject];
-        }
-        [loginViewController failed];
-        SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
-    
-        if ([controller respondsToSelector:@selector(alertView:clickedButtonAtIndex:)]) {
-            // Manually invoke the alert view button handler
-            [(id <UIAlertViewDelegate>)controller alertView:nil
-                                    clickedButtonAtIndex:kFacebookSettingsButtonIndex];
-        }
-
-    }
-    
 }
 
 

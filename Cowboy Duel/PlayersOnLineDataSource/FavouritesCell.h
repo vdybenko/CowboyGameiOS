@@ -35,7 +35,7 @@
 +(FavouritesCell*)cell;
 +(NSString*) cellID;
 
--(void)populateWithPlayer:(CDFavPlayer *) player index:(NSIndexPath *)indexPath status: (BOOL) isAvailable;
+-(void)populateWithPlayer:(CDFavPlayer *) player index:(NSIndexPath *)indexPath;
 -(void) setPlayerIcon:(UIImage*)iconImage;
 -(void) initMainControls;
 

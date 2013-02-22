@@ -19,6 +19,7 @@
 #import "LevelCongratViewController.h"
 #import "MoneyCongratViewController.h"
 #import "AdvertisingNewViewController.h"
+#import "TopPlayersViewController.h"
 
 #import "Social/Social.h"
 #import "accounts/Accounts.h"
@@ -56,6 +57,8 @@
     
     BOOL feedBackViewVisible;
     BOOL shareViewVisible;
+    
+    BOOL isPushMessageShow;
     
     Reachability* internetReachable;
     Reachability* hostReachable;
@@ -135,10 +138,12 @@
 @synthesize feedbackButton, duelButton, profileButton, helpButton, mapButton, shareButton;
 @synthesize oldAccounId,feedBackViewVisible,showFeedAtFirst,topPlayersDataSource, advertisingNewVersionViewController,firstRun, favsDataSource;
 @synthesize duelProductDownloaderController;
+@synthesize pushNotification;
 
 static const char *REGISTRATION_URL =  BASE_URL"api/registration";
 static const char *AUTORIZATION_URL =  BASE_URL"api/authorization";
 static const char *MODIFIER_USER_URL =  BASE_URL"users/set_user_data";
+static const char *PUSH_NOTIF_URL = BASE_URL"api/push";
 
 NSString *const URL_FB_PAGE=@"http://cowboyduel.mobi/";
 
@@ -255,7 +260,6 @@ static StartViewController *sharedHelper = nil;
                 for( NSData *data in oldLocations2 )
                 {
                     CDDuel * loc = (CDDuel*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
-                    DLog(@"gps %d", [loc.dGps intValue]);
                     DLog(@"id %@", loc.dOpponentId);
                     DLog(@"fire %d", [loc.dRateFire intValue]);
                     DLog(@"date %@", loc.dDate);
@@ -311,6 +315,11 @@ static StartViewController *sharedHelper = nil;
                                                  selector:@selector(didFinishLaunching)
                                                      name:UIApplicationDidFinishLaunchingNotification
                                                    object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(newMessageRecived:)
+                                                     name:kPushNotification
+                                                   object:nil];
                 
         activityIndicatorView = [[ActivityIndicatorView alloc] initWithoutRotate];
         CGRect imgFrame = activityIndicatorView.frame;
@@ -345,7 +354,8 @@ static StartViewController *sharedHelper = nil;
         cloudX=460;
         cloud2X=-20;
         
-        inBackground = NO;        
+        inBackground = NO;
+        isPushMessageShow = NO;
     }
     return self;
 }
@@ -466,6 +476,16 @@ static StartViewController *sharedHelper = nil;
     
     CGAffineTransform transform = CGAffineTransformMakeScale(-1, 1);
     cloudView.transform = transform;
+    
+    //Push  notifications
+    NSDictionary *sInfo = [pushNotification objectForKey:@"aps"];
+    NSString *message = [sInfo objectForKey:@"alert"];
+    
+    sInfo = [pushNotification objectForKey:@"i"];
+    
+	[[NSNotificationCenter defaultCenter] postNotificationName:kPushNotification
+														object:self
+                                                      userInfo:[NSDictionary dictionaryWithObjectsAndKeys:sInfo, @"messageId",message, @"message", nil]];
 //    deltas for 5 iPhone
     if (iPhone5Delta>0) {
         iPhone5Delta = 25;
@@ -535,9 +555,6 @@ static StartViewController *sharedHelper = nil;
         firstRun = NO;
         return;
     }
-    
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkNetworkStatus:) name:kReachabilityChangedNotification object:nil];
     
     internetReachable = [Reachability reachabilityForInternetConnection];
     [internetReachable startNotifier];
@@ -609,6 +626,8 @@ static StartViewController *sharedHelper = nil;
       shareView.frame = frame;
       shareViewVisible = NO;
     }
+    
+    isPushMessageShow = NO;
 }
 
 -(void)didBecomeActive
@@ -695,7 +714,6 @@ static StartViewController *sharedHelper = nil;
     if (self.navigationController.visibleViewController != listOfItemsViewController) {
         [self.navigationController pushViewController:listOfItemsViewController animated:YES];
     }
-
 }
 
 - (IBAction)storeButtonClick:(id)sender {
@@ -917,7 +935,84 @@ static StartViewController *sharedHelper = nil;
 
 }
 
-#pragma mark -
+#pragma mark - push notification
+
+- (void)newMessageRecived:(NSNotification *)notification {
+    
+    NSString *message;
+    int messageID;
+    NSDictionary *messageHeader;
+    
+    message = [[notification userInfo] objectForKey:@"message"];
+    messageHeader = [[notification userInfo] objectForKey:@"messageId"];
+    
+    messageID = [[messageHeader objectForKey:@"t"] intValue];
+    NSLog(@"messageID %d",messageID);
+    UIViewController *visibleViewController=[self.navigationController visibleViewController];
+    if ([visibleViewController isKindOfClass:[ProfileViewController class]] ||
+        [visibleViewController isKindOfClass:[StartViewController class]] ||
+        [visibleViewController isKindOfClass:[HelpViewController class]] ||
+        [visibleViewController isKindOfClass:[TopPlayersViewController class]])
+    {
+        switch (messageID) {
+            case PUSH_NOTIFICATION_POKE:{
+//                Фаворит викликає тебе на бій
+            }
+                break;
+            case PUSH_NOTIFICATION_FAV_ONLINE:{
+//                Фаворит зайшов онлайн.
+                if (!isPushMessageShow) {
+                    isPushMessageShow = YES;
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"BE_READY", @"") message:message delegate:self cancelButtonTitle:NSLocalizedString(@"CAN_SMALL", @"") otherButtonTitles:NSLocalizedString(@"Saloon2", @""), nil];
+                    alert.tag = 1;
+                    [alert show];
+                    alert = nil;
+                }
+            }
+                break;
+            case PUSH_NOTIFICATION_UPDATE_CONTENT:{
+//                обновити внутрішній контент
+                RefreshContentDataController *refreshContentDataController=[[RefreshContentDataController alloc] init];
+                [refreshContentDataController refreshContent];
+            }
+                break;
+            case PUSH_NOTIFICATION_UPDATE_PRODUCTS:{
+//                обновити продукти.
+                [duelProductDownloaderController refreshDuelProducts];
+            }
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+-(void)sendMessageForPush:(NSString *)message withType:(TypeOfPushNotification)type fromPlayer:(NSString *)nick withId:(NSString *)playerId ;
+{
+    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:PUSH_NOTIF_URL encoding:NSUTF8StringEncoding]]
+                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                        timeoutInterval:kTimeOutSeconds];
+    
+    [theRequest setHTTPMethod:@"POST"];
+    NSDictionary *dicBody= [[NSMutableDictionary alloc] init];
+    [dicBody setValue:playerId forKey:@"authen"];
+    [dicBody setValue:message forKey:@"message"];
+    [dicBody setValue:[NSNumber numberWithInt:type] forKey:@"type"];
+    [dicBody setValue:nick forKey:@"nick"];
+    [dicBody setValue:playerAccount.accountID forKey:@"id"];
+    
+    NSString *stBody=[Utils makeStringForPostRequest:dicBody];
+    [theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]];
+        
+    [NSURLConnection sendAsynchronousRequest:theRequest
+                                       queue:[[NSOperationQueue alloc] init]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *err) {
+//                               NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//                               NSLog(@"jsonString %@",jsonString);
+                           }];
+
+}
+
 #pragma mark - Share
 
 - (IBAction)shareButtonClick:(id)sender {
@@ -964,10 +1059,6 @@ static StartViewController *sharedHelper = nil;
     }else{
         if ([[OGHelper sharedInstance]isAuthorized]) {
             [[OGHelper sharedInstance] apiDialogFeedUser];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-                                                                object:self
-                                                              userInfo:[NSDictionary dictionaryWithObject:@"/share_Facebook_click" forKey:@"event"]];
         }else {
             [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusFeed];
             [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
@@ -1000,17 +1091,15 @@ static StartViewController *sharedHelper = nil;
             
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[URL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
         }else {
-            
-            
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry", @"AlertView")
                     message:NSLocalizedString(@"You can't send a tweet right now, make sure  your device has an internet connection and you have at least one Twitter account setup", @"AlertView")
                     delegate:self
                     cancelButtonTitle:NSLocalizedString(@"Cancel", @"AlertView")
                     otherButtonTitles:NSLocalizedString(@"Open settings", @"AlertView"), nil];
+            alertView.tag = 2;
             [alertView show];
-            
+            alertView = nil;
         }
-        
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                     object:self
@@ -1018,20 +1107,30 @@ static StartViewController *sharedHelper = nil;
 }
 
 - (IBAction)feedbackMailBtnClick:(id)sender {
-//    
-	MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
-	picker.mailComposeDelegate = self;
-	
-	[picker setSubject:NSLocalizedString(@"Awesome cowboy duel", @"")];
-	
-	// Fill out the email body text
-	NSString *emailBody = NSLocalizedString(@"Mes text", @"");
-    
-	[picker setMessageBody:emailBody isHTML:NO];
-	
-	[self presentModalViewController:picker animated:YES];
-  //    [picker release];
-  
+//
+    if ([MFMailComposeViewController canSendMail]) {
+        MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+        picker.mailComposeDelegate = self;
+        
+        [picker setSubject:NSLocalizedString(@"Awesome cowboy duel", @"")];
+        
+        // Fill out the email body text
+        NSString *emailBody = NSLocalizedString(@"Mes text", @"");
+        
+        [picker setMessageBody:emailBody isHTML:NO];
+        
+        [self presentModalViewController:picker animated:YES];
+      //    [picker release];
+    }else{
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"EmailTitle", @"AlertView")
+                                                            message:NSLocalizedString(@"EmailText", @"AlertView")
+                                                           delegate:self
+                                                  cancelButtonTitle:NSLocalizedString(@"OK", @"AlertView")
+                                                  otherButtonTitles: nil];
+        alertView.tag = 0;
+        [alertView show];
+        alertView = nil;
+    }
   
   [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                       object:self
@@ -1295,8 +1394,10 @@ static StartViewController *sharedHelper = nil;
     
     if ([playerAccount.accountID length] < 9) [playerAccount verifyAccountID];
     NSString *deviceToken; 
-    if ([[NSUserDefaults standardUserDefaults] stringForKey:@"DeviceToken"]) deviceToken = [[NSUserDefaults standardUserDefaults] stringForKey:@"DeviceToken"];
-    else deviceToken = @"";
+    if ([[NSUserDefaults standardUserDefaults] stringForKey:@"DeviceToken"])
+        deviceToken = [[NSUserDefaults standardUserDefaults] stringForKey:@"DeviceToken"];
+    else
+        deviceToken = @"";
     
     UIDevice *currentDevice = [UIDevice currentDevice];
     
@@ -1399,16 +1500,24 @@ static StartViewController *sharedHelper = nil;
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 1)
-    {
-        TWTweetComposeViewController *ctrl = [[TWTweetComposeViewController alloc] init];
-        if ([ctrl respondsToSelector:@selector(alertView:clickedButtonAtIndex:)]) {
-            // Manually invoke the alert view button handler
-            [(id <UIAlertViewDelegate>)ctrl alertView:nil
-                                 clickedButtonAtIndex:kTwitterSettingsButtonIndex];
+    if (alertView.tag == 1) {
+        isPushMessageShow = NO;
+        if (buttonIndex == 1)
+        {
+            [self startDuel];
         }
-    }
-    
+    }else if (alertView.tag == 2){
+        if (buttonIndex == 1)
+        {
+            TWTweetComposeViewController *ctrl = [[TWTweetComposeViewController alloc] init];
+            if ([ctrl respondsToSelector:@selector(alertView:clickedButtonAtIndex:)]) {
+                // Manually invoke the alert view button handler
+                [(id <UIAlertViewDelegate>)ctrl alertView:nil
+                                     clickedButtonAtIndex:kTwitterSettingsButtonIndex];
+            }
+        }
+
+    }    
 }
 
 #pragma mark Notification

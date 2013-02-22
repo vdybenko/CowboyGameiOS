@@ -43,6 +43,8 @@
 
 "CAN"="CANCEL";
 
+"CAN_SMALL"="Cancel";
+
 "SALYN"="SALOON";
 
 "SHOP" = "STORE";
@@ -104,7 +106,7 @@ h3{font-family: “Myriad Pro”, arial,sans-serif;color:4A3E25;font-size:12pt;f
 </body>
 </html>";
 
-"HV_TEXT_NEW" = "<p>&nbsp;&nbsp;&nbsp;You can quickly find a worthy rival due to the new search system.</p><ul><li>If you have the Internet connection, tap \"PLAY\" to play with strangers and friends.</li><li>If you <b>don&#039;t have the Internet</b> simply choose <b>\"PRACTICE\"</b></li></ul><p> </p><h3>Duel rules</h3><p>&nbsp;&nbsp;&nbsp;Tap \"START\" when the screen with two opponents appears. Take iPhone/iPod into your hand as a revolver (\"Home\" button has to be on the bottom and you have to see the screen).</p><p>&nbsp;&nbsp;&nbsp;Lower your gun to the arm-distance, and be ready to make a shot fast. Wait for the command \"FIRE!\", then raise your arm and shoot two-six times in a row. Number of hits differs depending on the level of the opponent. For example:</p><ul><li>Slave and Refugee or Runaway - two times in a row</li><li>Free Man and Gunfighter - three times in a row</li><li>Bounty Hunter Apprentice and Bounty Hunter - four times in a row</li><li>Lawman - five times in a row</li><li>Grave-digger and Angel of Death - six times in a row</li></ul><p>The one who shoots first becomes a winner in the first round. <br />&nbsp;&nbsp;&nbsp;A duel consists of single round, so you have one chance, don't loose it! To become a winner, you have to be faster then your opponent. The winner takes away 10% of the opponent's money.</p><p> </p><h3>Attention</h3><p>&nbsp;&nbsp;&nbsp;At “PRACTICE” mode, the money you have won isn&#039;t set off.</p><p>&nbsp;&nbsp;&nbsp;If you drop the iPhone/iPod at a shot, fix it by adhesive tape. It&#039;s a joke, but be careful anyway.</p>";
+"HV_TEXT_NEW"="<h3>Welcome to Bounty Hunter help!</h3><p>If you're online and want to start a new duel, tap \"PLAY\" and check who's online too. You can quickly find a worthy rival due to the new search system. You'll see the names of available rivals and the rewards for their heads. The bigger the reward, the harder it will be to get those guys. When you've picked a worthy rival, tap \"GET HIM\" to challenge them.<p>When the duel begins, put your  iPhone/iPod in horizontal position and wait for your gun to load. Then rise it, aim at your opponent, and shoot two-six times in a row with a trigger on your screen. The number of shots depends on the level of your rival and additional defense they have. You need to shoot your rival before they shoot you! You can get yourself a better gun or better defense in our \"STORE\" to increase your chances of victory.<p>When you win, you get a reward and eventually go up to the next level of the game.  If you lose - no offense, buddy, the winner takes your money!<p>If you feel like you need to train more, or don't have Internet connection, go to \"PRACTICE\" and train offline. But note that the money you win in practice mode isn't set off.<p>In your \"PROFILE\" you will see your nickname, the gold you have won, your level, gun, and defense.<p>Enjoy your bounty hunting adventure!";
 
 //Bottom messge
 
@@ -151,6 +153,7 @@ p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font
 "Share" = "Share";
 "HelpTitle" = "HELP";
 "MoreGames" = "MORE GAMES";
+"BE_READY" = "Be ready!!!";
 
 //LoginAnimatedViewController
 //First Start View
@@ -193,18 +196,12 @@ p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font
 "AdColonyText2" = "You can click Cancel and come back to play with real players tomorrow.";
 "AdColonyBtn" = "WATCH VIDEO";
 
-//Internet required
+//Email advert View
+"EmailTitle" = "Sorry";
+"EmailText" = "You can't send a e-mail right now, make sure  your device has an internet connection and you have at least one e-mail account setup";
 
-"InternetAlertTextListOnline" = "
-<head> 
-<meta charset=\"utf-8\" name=\"viewport\" initial-scale=1\"><link rel=\"stylesheet\" href=\"css/jquery.mobile.css\" />
-</head>
-<body style='background-color:transparent; text-align:center; color:rgb(97,68,34);'>
-<div style='font-size: 20px;padding-top:0px;'>
-You don't have internet connection.<br> Try to connect to Wi-Fi or use practice mode
-</div>
-</body>
-</html>";
+//Internet required
+"Internet_down" = "You don't have internet connection";
 
 "AlertTextListOnlineIsEmpty" = "
 <head> 
@@ -256,6 +253,10 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "AWARD" = "AWARD";
 
 "Poke" = "POKE";
+"Steal" = "STEAL";
+
+"StolenMess"="You've stolen";
+"PokenMessage"="You've succesfuly poked ";
 
 //Titles for Users
 "0Rank" = "Slave"; 

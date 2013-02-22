@@ -589,10 +589,7 @@
         else duel.dOpponentId = @"Anonymous";
         duel.dRateFire = [NSNumber  numberWithInt: userTime];
         duel.dDate = [playerAccount dateFormat];
-        duel.dGps = [NSNumber numberWithInt: -1];
-        
-        DLog(@"%@ %@ %@ %@", duel.dOpponentId, duel.dRateFire, duel.dDate, duel.dGps);
-        
+                
         [playerAccount.duels addObject:duel];
         
         

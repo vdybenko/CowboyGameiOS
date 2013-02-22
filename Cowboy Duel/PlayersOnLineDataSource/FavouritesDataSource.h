@@ -14,20 +14,32 @@
 #import "FavouritesCell.h"
 #import "Utils.h"
 #import "SSConnection.h"
+
+#import "ListOnlineDataSource.h"
+
+@class FavouritesViewController;
+
 @protocol IconDownloaderDelegate;
 
 @protocol TableCellWithButton
 -(void)clickButton:(NSIndexPath *)indexPath;
 @optional
 -(void)didFinishLoadTable:(UITableView*)table;
+-(void)clickButtonPoke:(NSIndexPath *)indexPath;
+-(void)clickButtonSteal:(NSIndexPath *)indexPath;
 @end
 
-@interface FavouritesDataSource : NSObject <UITableViewDataSource,IconDownloaderDelegate,MemoryManagement, SSConnectionDelegate>
+typedef enum {
+    OFFLINE,
+    ONLINE
+} FavTableType;
+
+@interface FavouritesDataSource : ListOnlineDataSource <UITableViewDataSource,IconDownloaderDelegate,MemoryManagement>
 @property(strong, readonly) NSMutableArray *arrItemsList;
 @property(weak, nonatomic) UITableView *tableView;
 @property(weak, nonatomic)id<TableCellWithButton> delegate;
-
-@property (nonatomic, strong) NSMutableArray *serverObjects;
+@property(nonatomic)FavTableType typeOfTable;
+@property(nonatomic)BOOL cellsHide;
 
 -(void) reloadDataSource;
 -(id) initWithTable:(UITableView *)pTable;
@@ -41,6 +53,5 @@
 -(void)saveFavorites:(NSArray*)array;
 -(NSMutableArray*)loadFavoritesArray;
 
-+(NSUInteger(^)(NSArray *, NSString *))findPlayerByID;
 -(BOOL) isOnline:(CDFavPlayer *)fvPlayer;
 @end

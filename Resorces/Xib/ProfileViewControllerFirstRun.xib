@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1536</int>
+		<int key="IBDocument.SystemTarget">1552</int>
 		<string key="IBDocument.SystemVersion">11G63</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2843</string>
+		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
 		<string key="IBDocument.AppKitVersion">1138.51</string>
 		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1929</string>
+			<string key="NS.object.0">2083</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -473,7 +473,6 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{166, 420}, {142, 33}}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -529,7 +528,7 @@
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUIActivityIndicatorView" id="766688781">
 								<reference key="NSNextResponder" ref="542892891"/>
-								<int key="NSvFlags">292</int>
+								<int key="NSvFlags">296</int>
 								<string key="NSFrame">{{150, 220}, {20, 20}}</string>
 								<reference key="NSSuperview" ref="542892891"/>
 								<reference key="NSNextKeyView" ref="239260606"/>
@@ -996,6 +995,6 @@
 			<string key="pv_photo_frame.png">{99, 124}</string>
 			<string key="sl_shylc.png">{243, 514}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">1929</string>
+		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
 </archive>

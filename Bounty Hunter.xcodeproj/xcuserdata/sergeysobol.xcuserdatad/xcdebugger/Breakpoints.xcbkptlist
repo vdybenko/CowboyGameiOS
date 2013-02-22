@@ -273,7 +273,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "337"
          endingLineNumber = "337"
-         landmarkName = "-shotButtonClick:"
+         landmarkName = "-countUpBulets"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -299,7 +299,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "379"
          endingLineNumber = "379"
-         landmarkName = "-horizontalFlip"
+         landmarkName = "-shotButtonClick:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint

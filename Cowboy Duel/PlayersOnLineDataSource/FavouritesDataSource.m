@@ -9,9 +9,13 @@
 #import "FavouritesDataSource.h"
 #import "FavouritesViewController.h"
 #import "CustomNSURLConnection.h"
+
+#import "AccountDataSource.h"
+
 #import "UIImage+Save.h"
 #import "UIButton+Image+Title.h"
 #import "IconDownloader.h"
+#import "DuelRewardLogicController.h"
 
 @interface FavouritesDataSource()
 {
@@ -19,13 +23,15 @@
     
     NSMutableDictionary *imageDownloadsInProgress;
     
-    SSConnection *connection;
+    NSArray *arrDefense;
+    
+    NSArray *arrAttack;
 }
 @end
 
 @implementation FavouritesDataSource
 
-@synthesize arrItemsList, tableView, delegate, serverObjects;
+@synthesize arrItemsList, tableView, delegate,typeOfTable,cellsHide;
 
 static const char *FAV_PLAYERS_URL = BASE_URL"users/get_favorites";
 static NSString  *const URL_ADD_FAVORITE = @BASE_URL"users/add_to_favorites";
@@ -42,53 +48,91 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
 	if (!self) {
 		return nil;
 	}
+  
     arrItemsList=[[NSMutableArray alloc] init];
     imageDownloadsInProgress=[[NSMutableDictionary alloc] init];
-
-    connection = [SSConnection sharedInstance];
-    connection.delegate = self;
+    
     self.serverObjects = [[NSMutableArray alloc] init];
     tableView=pTable;
+    cellsHide = YES;
+    arrDefense = [DuelProductDownloaderController loadDefenseArray];
+    arrAttack = [DuelProductDownloaderController loadWeaponArray];
+    
+//    update at init
+
+    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:FAV_PLAYERS_URL encoding:NSUTF8StringEncoding]]
+                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                        timeoutInterval:kTimeOutSeconds];
+    
+    [theRequest setHTTPMethod:@"POST"];
+    NSDictionary *dicBody=[NSDictionary dictionaryWithObjectsAndKeys:
+                           [[AccountDataSource sharedInstance] accountID],@"authen",
+                           nil];
+    
+    NSString *stBody=[Utils makeStringForPostRequest:dicBody];
+    [theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSLog(@"\nFavs request : %@", stBody);
+    
+    CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
+    
+    if (theConnection) {
+        receivedData = [[NSMutableData alloc] init];
+        [self refreshListOnline];        
+
+    } else {
+        FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
+        [favsViewController.loadingView setHidden:YES];
+        [favsViewController.activityIndicator stopAnimating];
+    }
+    
 	return self;
 }
 
 -(void) reloadDataSource;
 {
-    NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"favPlayers"];
-    NSMutableArray *testArr= [NSKeyedUnarchiver unarchiveObjectWithData:data1];
-
-    //if ([testArr count]==0)
-    if (1==1)
-    {
-        NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:FAV_PLAYERS_URL encoding:NSUTF8StringEncoding]]
-                                                                cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                            timeoutInterval:kTimeOutSeconds];
-        
-        [theRequest setHTTPMethod:@"POST"];
-        NSDictionary *dicBody=[NSDictionary dictionaryWithObjectsAndKeys:
-                               [[AccountDataSource sharedInstance] accountID],@"authen",
-                               nil];
-        
-        NSString *stBody=[Utils makeStringForPostRequest:dicBody];
-        [theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]];
-
-        NSLog(@"\nFavs request : %@", stBody);
-        
-        CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
-        
-        if (theConnection) {
-            receivedData = [[NSMutableData alloc] init];
-            [connection sendData:@"" packetID:NETWORK_GET_LIST_ONLINE ofLength:sizeof(int)];
-            
-        } else {
-        
-        }
-    }else {
-        arrItemsList = [NSKeyedUnarchiver unarchiveObjectWithData:data1];
-        FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
-        [favsViewController.loadingView setHidden:YES];
-        [favsViewController.activityIndicator stopAnimating];
+    
+    arrItemsList = [self loadFavoritesArray];
+    
+    NSLog(@"\n reload started!");
+    NSLog(@"ON-LINE: ");
+    for (SSServer *serv in self.serverObjects) {
+        NSLog(@"%@", serv.displayName);
     }
+    
+    NSMutableArray *discardedItems = [[NSMutableArray alloc] init];
+    
+    for (CDFavPlayer *fvPlayer in arrItemsList) {
+        BOOL playerOnline = NO;
+        for (SSServer *server in self.serverObjects) {
+            if (!playerOnline) {
+                playerOnline = ([server.serverName isEqualToString:fvPlayer.dAuth]);
+                if (playerOnline) {
+                    fvPlayer.dAttack = server.weapon + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[server.rank intValue]];
+                    fvPlayer.dDefense = server.defense + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[server.rank intValue]];
+                    fvPlayer.dBot = server.bot;
+                    fvPlayer.dStatus = server.status;
+                    fvPlayer.dSessionId = server.sessionId;
+                }
+            }
+        }
+        if (playerOnline && typeOfTable == OFFLINE) {
+            [discardedItems addObject:fvPlayer];
+        }else if (!playerOnline && typeOfTable == ONLINE){
+            [discardedItems addObject:fvPlayer];
+        }else if(playerOnline && typeOfTable == ONLINE)
+            NSLog(@"%@ ONLINE!",fvPlayer.dNickName);
+        else if(!playerOnline && typeOfTable == OFFLINE)
+            NSLog(@"%@ OFFLINE!",fvPlayer.dNickName);
+    }
+    [arrItemsList removeObjectsInArray:discardedItems];
+    [discardedItems removeAllObjects];
+    
+    FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
+    [favsViewController.loadingView setHidden:YES];
+//    [self setCellsHide:NO];
+    [favsViewController startTableAnimation];
+    [tableView reloadData];
 }
 
 -(void)releaseComponents
@@ -112,17 +156,27 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     CDFavPlayer *player;
     
     player=[arrItemsList objectAtIndex:indexPath.row];
-    BOOL statusOnline = [self isOnline:player];
-    [cell populateWithPlayer:player index:indexPath status: statusOnline];
+    cell.hidden = cellsHide;
+    [cell populateWithPlayer:player index:indexPath];
     
     [cell setPlayerIcon:nil];
     
-    if (statusOnline) {
+    if (typeOfTable == ONLINE) {
         [cell.btnGetHim addTarget:self action:@selector(invaiteWithMessage:) forControlEvents:UIControlEventTouchUpInside];
+        
+//        [cell.btnGetHim removeTarget:self action:@selector(stealGold:) forControlEvents:UIControlEventTouchUpInside ];
         [cell.btnGetHim changeTitleByLabel:@"DUEL"];
     }else{
-        [cell.btnGetHim removeTarget:self action:@selector(invaiteWithMessage:) forControlEvents:UIControlEventTouchUpInside ];
-        [cell.btnGetHim changeTitleByLabel:@"Poke"];
+        if ([self checkForSteal:player]) {
+            [cell.btnGetHim removeTarget:self action:@selector(invaiteWithMessage:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.btnGetHim addTarget:self action:@selector(stealGold:) forControlEvents:UIControlEventTouchUpInside ];
+            [cell.btnGetHim changeTitleByLabel:@"Steal"];
+        }else{
+            
+            [cell.btnGetHim removeTarget:self action:@selector(invaiteWithMessage:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.btnGetHim addTarget:self action:@selector(pokeHim:) forControlEvents:UIControlEventTouchUpInside ];
+            [cell.btnGetHim changeTitleByLabel:@"Poke"];
+        }
     }
     
     //  Set Image of user
@@ -190,7 +244,9 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     
     connection1 = nil;
     NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-
+    
+    NSLog(@"\nfavs jso %@", jsonString);
+    
     NSArray *responseObject = ValidateObject([jsonString JSONValue], [NSArray class]);
     [arrItemsList removeAllObjects];
     for (NSDictionary *dic in responseObject) {
@@ -200,33 +256,36 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
         player.dMoney=[[dic objectForKey:@"money"] intValue];
         player.dLevel=[[dic objectForKey:@"level"] intValue];
         player.dAvatar=[dic objectForKey:@"avatar"];
-//        player.dDefense=[[dic objectForKey:@"defense"] intValue];
-//        player.dAttack=[[dic objectForKey:@"attack"] intValue];
+        
+        player.dDefense=[DuelRewardLogicController countUpBuletsWithPlayerLevel:player.dLevel];
+        if([[dic objectForKey:@"defenses"] respondsToSelector:@selector(objectForKey:)]){
+            int defId = [[[dic objectForKey:@"defenses"] objectForKey:@"id"] intValue];
+            NSUInteger index=[[AccountDataSource sharedInstance] findObsByID](arrDefense,defId);
+            CDDefenseProduct *def = [arrDefense objectAtIndex:index];
+            player.dDefense += def.dDefense;
+        }
+        
+        player.dAttack=[DuelRewardLogicController countUpBuletsWithPlayerLevel:player.dLevel];
+
+        if([[dic objectForKey:@"weapons"] respondsToSelector:@selector(objectForKey:)]){
+            int attId = [[[dic objectForKey:@"weapons"] objectForKey:@"id"] intValue];
+            NSUInteger index=[[AccountDataSource sharedInstance] findObsByID](arrAttack,attId);
+            CDWeaponProduct *att = [arrAttack objectAtIndex:index];
+            player.dAttack += att.dDamage;
+        }
+        
         [arrItemsList addObject: player];
     }
-
-    for (CDFavPlayer *fvPlayer in arrItemsList) {
-
-        for (SSServer *server in self.serverObjects) {
-
-            if ([server.serverName isEqualToString:fvPlayer.dAuth]) {
-                fvPlayer.dAttack = server.weapon;
-                fvPlayer.dDefense = server.defense;
-                fvPlayer.dBot = server.bot;
-                fvPlayer.dStatus = server.status;
-                fvPlayer.dSessionId = server.sessionId;
-                NSLog(@"\nfav %@ is online!",fvPlayer.dNickName );
-            }
-        }
-    }
     
-    NSData *data= [NSKeyedArchiver archivedDataWithRootObject:arrItemsList];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"favPlayers"];
-    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"favPlayers"];
+    [self saveFavorites:arrItemsList];
     
-    FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
-    [favsViewController.loadingView setHidden:YES];
-    [tableView reloadData];
+//    FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
+//    [favsViewController.loadingView setHidden:YES];
+//    [favsViewController.activityIndicator stopAnimating];
+//    [favsViewController startTableAnimation];
+//    cellsHide = NO;
+//    [tableView reloadData];
+    
 }
 
 - (void)connection:(CustomNSURLConnection *)connection didReceiveData:(NSData *)data
@@ -262,35 +321,15 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     }
 }
 
-#pragma mark SSConnectionDelegate
-
-- (void) listOnlineResponse:(NSString *)jsonString
+#pragma mark ListOnlineDataSource
+-(void) listOnlineResponse:(NSString *)jsonString
 {
-    BOOL isNeedReload = (!self.serverObjects)?YES:NO;
-   
-    NSError *jsonParseError;
-    [self.serverObjects removeAllObjects];
-    SBJSON *parser = [[SBJSON alloc] init];
-
-    NSArray *servers = [parser objectWithString:jsonString error:&jsonParseError];
-    
-    if (!servers) {
-        NSLog(@"\nfavs JSON parse error: %@", jsonParseError);
-        [self.serverObjects removeAllObjects];
-    }
-    else{
-        
-        for (NSDictionary *server in servers)
-        {
-            SSServer *serverObj = [[SSServer alloc] init];
-            [serverObj setValuesForKeysWithDictionary:server];
-            [self.serverObjects addObject:serverObj];
-        }
-    }
-
-    if (isNeedReload) {
-        [self reloadDataSource];
-    }
+    [super listOnlineResponse:jsonString];
+    [self reloadDataSource];
+    FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
+    [favsViewController.loadingView setHidden:YES];
+    [favsViewController.activityIndicator stopAnimating];
+    [favsViewController.tvFavTable reloadData];
 }
 
 #pragma mark
@@ -360,18 +399,6 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     return [NSKeyedUnarchiver unarchiveObjectWithData:data1];
 }
 
-+(NSUInteger(^)(NSArray *, NSString *))findPlayerByID {
-    return ^(NSArray * array, NSString *dAuthID) {
-        for (NSUInteger i = 0; i < [array count]; i++) {
-            CDPlayerMain *player = [array objectAtIndex:i];
-            if ([player.dAuth isEqualToString:dAuthID]) {
-                return i;
-            }
-        }
-        return (NSUInteger)NSNotFound;
-    };
-}
-
 -(BOOL) isOnline:(CDFavPlayer *)fvPlayer;
 {
     for (SSServer *server in self.serverObjects) {
@@ -389,11 +416,31 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     return NO;
 }
 
+-(BOOL)checkForSteal:(CDFavPlayer *)fvPlayer ;
+{
+    //condition for steal gold should be here!
+    return NO;
+}
+
 #pragma mark -
 -(void)invaiteWithMessage:(id __strong)sender;
 {
     FavouritesCell *cell=(FavouritesCell *)[[sender superview] superview];
     NSIndexPath *indexPath = [tableView indexPathForCell:cell];
     [delegate clickButton:indexPath];
+}
+
+-(void)pokeHim:(id __strong)sender;
+{
+    FavouritesCell *cell=(FavouritesCell *)[[sender superview] superview];
+    NSIndexPath *indexPath = [tableView indexPathForCell:cell];
+    [delegate clickButtonPoke:indexPath];
+}
+
+-(void)stealGold:(id __strong)sender;
+{
+    FavouritesCell *cell=(FavouritesCell *)[[sender superview] superview];
+    NSIndexPath *indexPath = [tableView indexPathForCell:cell];
+    [delegate clickButtonSteal:indexPath];
 }
 @end

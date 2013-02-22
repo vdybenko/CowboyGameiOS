@@ -12,6 +12,7 @@
 
 @interface CDWeaponProduct : CDDuelProduct
 @property(nonatomic) NSInteger dDamage;
+@property(nonatomic) CGFloat dFrequently;
 @property(nonatomic, strong) NSString *dImageGunLocal;
 @property(nonatomic, strong) NSString *dImageGunURL;
 @property(nonatomic, strong) NSString *dSoundLocal;
