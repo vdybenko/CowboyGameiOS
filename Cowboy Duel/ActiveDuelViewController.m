@@ -365,24 +365,16 @@ static CGFloat oponentLiveImageViewStartWidth;
     if (isGunCanShotOfFrequently) {
         [self startGunFrequentlyBlockTime];
         
-//        if ([self.fireImageView isAnimating]) {
-//            [self.fireImageView stopAnimating];
-//        }
-//        [self.fireImageView startAnimating];
-//        
-//        if(delegate)
-//        {
-//            [delegate sendShot];
-//        }
+        if ([self.fireImageView isAnimating]) {
+            [self.fireImageView stopAnimating];
+        }
+        [self.fireImageView startAnimating];
         
-        CGPoint targetPoint;
-        targetPoint.x = self.opponentImage.center.x - (self.floatView.bounds.size.width / 2 - self.floatView.center.x);
-        targetPoint.y = self.opponentImage.center.y - (self.floatView.bounds.size.height / 2 - self.floatView.center.y);
-        
-        CGPoint centerOfScreanPoint;
-        centerOfScreanPoint.x = self.crossImageView.bounds.origin.x + self.crossImageView.center.x;
-        centerOfScreanPoint.y = self.crossImageView.bounds.origin.y + self.crossImageView.center.y;
-           
+        if(delegate)
+        {
+            [delegate sendShot];
+        }
+    
         switch (shotCountForSound) {
             case 1:
                 [self.titleSteadyFire setHidden:YES];
@@ -412,6 +404,16 @@ static CGFloat oponentLiveImageViewStartWidth;
             default:
                 break;
         }
+        
+        CGPoint targetPoint;
+        targetPoint.x = self.opponentImage.center.x - (self.floatView.bounds.size.width / 2 - self.floatView.center.x);
+        targetPoint.y = self.opponentImage.center.y - (self.floatView.bounds.size.height / 2 - self.floatView.center.y);
+        
+        CGPoint centerOfScreanPoint;
+        centerOfScreanPoint.x = self.crossImageView.bounds.origin.x + self.crossImageView.center.x;
+        centerOfScreanPoint.y = self.crossImageView.bounds.origin.y + self.crossImageView.center.y;
+        
+        [self cheackHitForShot:centerOfScreanPoint andTargetPoint:targetPoint];
     }
 }
 
