@@ -27,4 +27,5 @@
 -(void) didRefreshController;
 -(void) startTableAnimation;
 
+- (IBAction)btnOfflineClicked:(id)sender;
 @end
