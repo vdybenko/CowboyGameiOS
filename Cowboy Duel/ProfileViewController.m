@@ -475,6 +475,10 @@ static const CGFloat timeToStandartTitles = 1.8;
         deltaFrame = ivPhotoFrame.frame;
         deltaFrame.origin.y += 27;
         ivPhotoFrame.frame = deltaFrame;
+
+        deltaFrame = bgActivityIndicator.frame;
+        deltaFrame.origin.y += 27;
+        bgActivityIndicator.frame = deltaFrame;
         
         deltaFrame = lbGoldCount.frame;
         deltaFrame.origin.y += 27;

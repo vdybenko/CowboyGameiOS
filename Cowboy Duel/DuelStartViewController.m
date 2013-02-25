@@ -15,6 +15,7 @@
 #import "CustomNSURLConnection.h"
 #import "UIView+Dinamic_BackGround.h"
 #import "ActiveDuelViewController.h"
+#import "DuelRewardLogicController.h"
 
 @interface DuelStartViewController ()
 
@@ -146,15 +147,15 @@ static const char *GC_URL =  BASE_URL"api/gc";
     lbUserDuelsWin.text = NSLocalizedString(@"DuelsWonsTitle", nil);
     lbUserDuelsWin.font=fontSimpleText; 
     
-    lbUserRank.text = [NSString stringWithFormat:@"%d",playerAccount.accountWins];
+    lbUserRank.text = [NSString stringWithFormat:@" %d",playerAccount.accountWins];
     NSString *Rank=[NSString stringWithFormat:@"%dRank",playerAccount.accountLevel];
     lbUserRank.text = NSLocalizedString(Rank, @"");
     lbUserRank.font=fontSimpleText;
     
-    userAtack.text = [NSString stringWithFormat:@"+%d",playerAccount.accountWeapon.dDamage];
+    userAtack.text = [NSString stringWithFormat:@" %d",playerAccount.accountWeapon.dDamage+[DuelRewardLogicController countUpBuletsWithPlayerLevel:playerAccount.accountLevel]];
     userAtackView.hidden = NO;
 
-    userDefense.text = [NSString stringWithFormat:@"+%d",playerAccount.accountDefenseValue];
+    userDefense.text = [NSString stringWithFormat:@"%d",playerAccount.accountDefenseValue+[DuelRewardLogicController countUpBuletsWithPlayerLevel:playerAccount.accountLevel]];
     userDefenseView.hidden = NO;
     
     [self setAttackAndDefenseOfOponent:oponentAccount];
@@ -434,9 +435,9 @@ static const char *GC_URL =  BASE_URL"api/gc";
 
 -(void)setAttackAndDefenseOfOponent:(AccountDataSource*)oponent;
 {
-    oponentAtack.text = [NSString stringWithFormat:@"+%d",oponent.accountWeapon.dDamage];
+    oponentAtack.text = [NSString stringWithFormat:@" %d",oponent.accountWeapon.dDamage+[DuelRewardLogicController countUpBuletsWithPlayerLevel:oponent.accountLevel]];
     oponentAtackView.hidden = NO;
-    oponentDefense.text = [NSString stringWithFormat:@"+%d",oponent.accountDefenseValue];
+    oponentDefense.text = [NSString stringWithFormat:@" %d",oponent.accountDefenseValue+[DuelRewardLogicController countUpBuletsWithPlayerLevel:oponent.accountLevel]];
     oponentDefenseView.hidden = NO;
 }
 
