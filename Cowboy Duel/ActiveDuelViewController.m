@@ -73,7 +73,8 @@
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *bloodImageView;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *bloodCImageView;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *smokeImage;
-@property (unsafe_unretained, nonatomic) IBOutlet UIImageView *glassImageView;
+@property (unsafe_unretained, nonatomic) IBOutlet UIImageView *glassImageViewHeader;
+@property (unsafe_unretained, nonatomic) IBOutlet UIImageView *glassImageViewBottom;
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *oponentLiveImageView;
 @property (weak, nonatomic) IBOutlet UIButton *gunButton;
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *opStatsLabel;
@@ -241,7 +242,9 @@ static CGFloat oponentLiveImageViewStartWidth;
     
     userHitCount = 0;
     
-    [self.glassImageView setHidden:YES];
+    [self.glassImageViewHeader setHidden:YES];
+    [self.glassImageViewBottom setHidden:YES];
+    
     firstAccel = YES;
     
     [self countUpBulets];
@@ -318,7 +321,8 @@ static CGFloat oponentLiveImageViewStartWidth;
     [self setBloodImageView:nil];
     [self setBloodCImageView:nil];
     [self setSmokeImage:nil];
-    [self setGlassImageView:nil];
+    [self setGlassImageViewHeader:nil];
+    [self setGlassImageViewBottom:nil];
     [self setOponentLiveImageView:nil];
     [self setGunButton:nil];
     [self setGunButton:nil];
@@ -554,7 +558,8 @@ static CGFloat oponentLiveImageViewStartWidth;
     if (duelEnd) return;
     duelEnd = YES;
     
-    [self.glassImageView setHidden:NO];
+    [self.glassImageViewHeader setHidden:NO];
+    [self.glassImageViewBottom setHidden:NO];
     [brockenGlassAudioPlayer play];
     [timer invalidate];
     [moveTimer invalidate];
