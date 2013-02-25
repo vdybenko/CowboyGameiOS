@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1552</int>
-		<string key="IBDocument.SystemVersion">11E53</string>
+		<string key="IBDocument.SystemVersion">11G63</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1138.47</string>
+		<string key="IBDocument.AppKitVersion">1138.51</string>
 		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -500,7 +500,7 @@
 								<array class="NSMutableArray" key="NSSubviews">
 									<object class="IBUIActivityIndicatorView" id="444904664">
 										<reference key="NSNextResponder" ref="774262136"/>
-										<int key="NSvFlags">-2147483356</int>
+										<int key="NSvFlags">292</int>
 										<string key="NSFrame">{{32, 45}, {20, 20}}</string>
 										<reference key="NSSuperview" ref="774262136"/>
 										<reference key="NSWindow"/>
@@ -508,6 +508,7 @@
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+										<bool key="IBUIAnimating">YES</bool>
 									</object>
 								</array>
 								<string key="NSFrame">{{118, 157}, {84, 109}}</string>
@@ -538,6 +539,7 @@
 						<string key="NSFrame">{{11, 420}, {142, 33}}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -1007,37 +1009,12 @@
 					<string key="className">ProfileViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="backToMenu:">id</string>
-						<string key="backToMenuFirstRun:">id</string>
-						<string key="btnAddToFavoritesClick:">id</string>
-						<string key="btnFavouritesClick:">id</string>
-						<string key="btnLeaderbordClick:">id</string>
 						<string key="btnLeaderbordFirstRunClick:">id</string>
 						<string key="duelButtonClick:">id</string>
 						<string key="showStoreDefence:">id</string>
 						<string key="showStoreWeapon:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="backToMenu:">
-							<string key="name">backToMenu:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="backToMenuFirstRun:">
-							<string key="name">backToMenuFirstRun:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="btnAddToFavoritesClick:">
-							<string key="name">btnAddToFavoritesClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="btnFavouritesClick:">
-							<string key="name">btnFavouritesClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="btnLeaderbordClick:">
-							<string key="name">btnLeaderbordClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="btnLeaderbordFirstRunClick:">
 							<string key="name">btnLeaderbordFirstRunClick:</string>
 							<string key="candidateClassName">id</string>

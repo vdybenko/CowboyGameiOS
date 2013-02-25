@@ -192,16 +192,14 @@ static const CGFloat timeToStandartTitles = 1.8;
 
         [btnAddToFavorites setHidden:YES];
         [bgActivityIndicator setHidden:NO];
+        [activityIndicatorView startAnimating];
         
-            userAtack.text = [NSString stringWithFormat:@"%d",favPlayer.dAttack];
-            userAtack.hidden = NO;
-            userAtack = nil;
-            userDefense.text = [NSString stringWithFormat:@"%d",favPlayer.dDefense];
-            userDefense.hidden = NO;
-            userDefense = nil;
-            userAtackView.hidden = NO;
-            userDefenseView.hidden = NO;
-
+        userAtack.text = [NSString stringWithFormat:@"%d",favPlayer.dAttack];
+        userAtack.hidden = NO;
+        userDefense.text = [NSString stringWithFormat:@"%d",favPlayer.dDefense];
+        userDefense.hidden = NO;
+        userAtackView.hidden = NO;
+        userDefenseView.hidden = NO;
     }
     return self;
 }

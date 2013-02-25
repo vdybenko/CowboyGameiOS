@@ -206,7 +206,7 @@
                          [self.navigationController pushViewController:profileViewController animated:NO];
                          [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
                      } completion:^(BOOL finished) {
-                         [profileViewController.activityIndicatorView startAnimating];
+//                         [profileViewController.activityIndicatorView startAnimating];
                      }];
 
     duelStartViewController = [[DuelStartViewController alloc]initWithAccount:playerAccount andOpAccount:oponentAccount opopnentAvailable:NO andServerType:NO andTryAgain:NO];
