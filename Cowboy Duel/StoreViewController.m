@@ -179,6 +179,18 @@
 
 -(void)clickButton:(NSIndexPath *)indexPath;
 {
+    if (![[StartViewController sharedInstance] connectedToWiFi]) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry", @"AlertView")
+                                                            message:NSLocalizedString(@"Internet_down", @"AlertView")
+                                                           delegate:self
+                                                  cancelButtonTitle:NSLocalizedString(@"Cancel", @"AlertView")
+                                                  otherButtonTitles: nil];
+        alertView = 0;
+        [alertView show];
+        alertView = nil;
+        return;
+    }
+
     StoreProductCell *cell=(StoreProductCell*)[tableView cellForRowAtIndexPath:indexPath];
     cell.buyProduct.enabled = NO;
     
