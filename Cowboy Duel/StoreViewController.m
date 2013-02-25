@@ -143,7 +143,8 @@
             NSIndexPath* rowToReload = [NSIndexPath indexPathForRow:i inSection:0];
             NSArray* rowsToReload = [NSArray arrayWithObjects:rowToReload, nil];
             
-            dispatch_async(dispatch_get_main_queue(), ^{                
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [storeDataSource setCellsHide:NO];
                 if ([tableView.visibleCells count]>i) {
                     UITableViewCell *cell = [tableView.visibleCells lastObject];
                     [cell setHidden:YES];
@@ -158,8 +159,6 @@
                     
                     [self.tableView beginUpdates];
                     
-                    [storeDataSource setCellsHide:NO];
-                                        
                     [tableView reloadRowsAtIndexPaths:rowsToReload withRowAnimation:type];
                     
                     [self.tableView endUpdates];

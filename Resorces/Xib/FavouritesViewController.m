@@ -96,7 +96,6 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-//    [self startTableAnimation];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -165,8 +164,8 @@
     if (favsDataSource.typeOfTable != ONLINE) {
         favsDataSource.typeOfTable = ONLINE;
         [favsDataSource refreshListOnline];
-        [favsDataSource setCellsHide:YES];
-        [tvFavTable reloadData];
+//        [favsDataSource setCellsHide:YES];
+//        [tvFavTable reloadData];
     }
 
 }
@@ -175,8 +174,8 @@
     if (favsDataSource.typeOfTable != OFFLINE) {
         favsDataSource.typeOfTable = OFFLINE;
         [favsDataSource refreshListOnline];
-        [favsDataSource setCellsHide:YES];
-        [tvFavTable reloadData];
+//        [favsDataSource setCellsHide:YES];
+//        [tvFavTable reloadData];
     }
 }
 
@@ -312,6 +311,7 @@
             NSArray* rowsToReload = [NSArray arrayWithObjects:rowToReload, nil];
             
             dispatch_async(dispatch_get_main_queue(), ^{
+                [favsDataSource setCellsHide:NO];
                 if ([tvFavTable.visibleCells count]>i) {
                     UITableViewCell *cell = [tvFavTable.visibleCells lastObject];
                     [cell setHidden:YES];
@@ -325,8 +325,6 @@
                     }
                     
                     [self.tvFavTable beginUpdates];
-                    
-                    [favsDataSource setCellsHide:NO];
                     
                     [tvFavTable reloadRowsAtIndexPaths:rowsToReload withRowAnimation:type];
                     
