@@ -162,7 +162,13 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
         [cell.btnGetHim addTarget:self action:@selector(invaiteWithMessage:) forControlEvents:UIControlEventTouchUpInside];
         
 //        [cell.btnGetHim removeTarget:self action:@selector(stealGold:) forControlEvents:UIControlEventTouchUpInside ];
-        [cell.btnGetHim changeTitleByLabel:@"DUEL"];
+        if ([player.dStatus isEqualToString:@"A"]) {
+            cell.btnGetHim.enabled = YES ;
+            [cell.btnGetHim changeTitleByLabel:@"DUEL"];
+        }else{
+            cell.btnGetHim.enabled = NO ;
+            [cell.btnGetHim changeTitleByLabel:@"Busy"];
+        }
     }else{
         if ([self checkForSteal:player]) {
             [cell.btnGetHim removeTarget:self action:@selector(invaiteWithMessage:) forControlEvents:UIControlEventTouchUpInside];
