@@ -163,9 +163,9 @@
     
     if (favsDataSource.typeOfTable != ONLINE) {
         favsDataSource.typeOfTable = ONLINE;
+        [self.loadingView setHidden:NO];
+        [self.activityIndicator startAnimating];
         [favsDataSource refreshListOnline];
-//        [favsDataSource setCellsHide:YES];
-//        [tvFavTable reloadData];
     }
 
 }
@@ -173,9 +173,9 @@
 - (IBAction)btnOfflineClicked:(id)sender {
     if (favsDataSource.typeOfTable != OFFLINE) {
         favsDataSource.typeOfTable = OFFLINE;
+        [self.loadingView setHidden:NO];
+        [self.activityIndicator startAnimating];
         [favsDataSource refreshListOnline];
-//        [favsDataSource setCellsHide:YES];
-//        [tvFavTable reloadData];
     }
 }
 

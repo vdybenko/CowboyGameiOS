@@ -130,7 +130,6 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     [self setCellsHide:YES];
     [tableView reloadData];
     [favsViewController startTableAnimation];
-    
 }
 
 -(void)releaseComponents
