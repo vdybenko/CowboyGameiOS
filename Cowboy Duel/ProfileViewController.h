@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "AccountDataSource.h"
 #import "SSServer.h"
+#import "CDFavPlayer.h"
 
 @class LoginAnimatedViewController;
 @class StartViewController;
@@ -25,10 +26,14 @@
 @interface ProfileViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate,ProfileWithLoginDelegate,MemoryManagement>
 @property (nonatomic) BOOL needAnimation;
 @property (weak, nonatomic) IBOutlet UIView *ivBlack;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorView;
+
 
 -(id)initWithAccount:(AccountDataSource *)userAccount startViewController:(StartViewController *)startViewController;
 -(id)initFirstStartWithAccount:(AccountDataSource *)userAccount startViewController:(StartViewController *)startViewController;
 -(id)initForOponent:(AccountDataSource *)oponentAccount andOpponentServer:(SSServer *)server;
+-(id)initForFavourite:(CDFavPlayer *)favPlayer withAccount:(AccountDataSource *)oponentAccount;
+
 
 -(void)checkValidBlackActivity;
 -(void)checkLocationOfViewForFBLogin;
