@@ -872,8 +872,6 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 }
 
 - (IBAction)duelButtonClick:(id)sender {
-    btnAddToFavorites.imageView.image = [UIImage imageNamed:@"topPlayerStarSelected.png"];
-    return;
     if ([self isPlayerForPractice]) {
         [playerAccount.finalInfoTable removeAllObjects];
         int randomTime = (arc4random() % 3)-2;
