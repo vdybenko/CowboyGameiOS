@@ -216,6 +216,10 @@
 		761EFA511573BE91001670EB /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761EFA4D1573BE91001670EB /* ProfileViewController.xib */; };
 		761EFA521573BE91001670EB /* StartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761EFA4E1573BE91001670EB /* StartViewController.xib */; };
 		762AA31015B99C72001B65E2 /* TopPlayerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 762AA30F15B99C72001B65E2 /* TopPlayerCell.m */; };
+		762FA45A16DBA22400CA5E2F /* ivBloodBottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 762FA45616DBA22400CA5E2F /* ivBloodBottom.png */; };
+		762FA45B16DBA22400CA5E2F /* ivBloodBottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 762FA45716DBA22400CA5E2F /* ivBloodBottom@2x.png */; };
+		762FA45C16DBA22400CA5E2F /* ivBloodHeader.png in Resources */ = {isa = PBXBuildFile; fileRef = 762FA45816DBA22400CA5E2F /* ivBloodHeader.png */; };
+		762FA45D16DBA22400CA5E2F /* ivBloodHeader@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 762FA45916DBA22400CA5E2F /* ivBloodHeader@2x.png */; };
 		763E6BB71664B0F900FA4E86 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 763E6BB61664B0F900FA4E86 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		763E6BC31664B1DF00FA4E86 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 763E6BC21664B18500FA4E86 /* libGoogleAdMobAds.a */; };
 		763F8A291578A3A900D8BB42 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 763F8A281578A3A900D8BB42 /* libxml2.2.dylib */; };
@@ -440,10 +444,6 @@
 		BD3503B216AD370800956BB7 /* btnGun.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3503A516AD370800956BB7 /* btnGun.png */; };
 		BD3503B316AD370800956BB7 /* btnGun@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3503A616AD370800956BB7 /* btnGun@2x.png */; };
 		BD3503B416AD370800956BB7 /* btnGun@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3503A616AD370800956BB7 /* btnGun@2x.png */; };
-		BD3503B516AD370800956BB7 /* ivBlood.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3503A716AD370800956BB7 /* ivBlood.png */; };
-		BD3503B616AD370800956BB7 /* ivBlood.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3503A716AD370800956BB7 /* ivBlood.png */; };
-		BD3503B716AD370800956BB7 /* ivBlood@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3503A816AD370800956BB7 /* ivBlood@2x.png */; };
-		BD3503B816AD370800956BB7 /* ivBlood@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3503A816AD370800956BB7 /* ivBlood@2x.png */; };
 		BD3503B916AD370800956BB7 /* ivCross.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3503A916AD370800956BB7 /* ivCross.png */; };
 		BD3503BA16AD370800956BB7 /* ivCross.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3503A916AD370800956BB7 /* ivCross.png */; };
 		BD3503BB16AD370800956BB7 /* ivCross@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3503AA16AD370800956BB7 /* ivCross@2x.png */; };
@@ -1028,6 +1028,10 @@
 		761EFA4E1573BE91001670EB /* StartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StartViewController.xib; path = Xib/StartViewController.xib; sourceTree = "<group>"; };
 		762AA30E15B99C72001B65E2 /* TopPlayerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopPlayerCell.h; sourceTree = "<group>"; };
 		762AA30F15B99C72001B65E2 /* TopPlayerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopPlayerCell.m; sourceTree = "<group>"; };
+		762FA45616DBA22400CA5E2F /* ivBloodBottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ivBloodBottom.png; sourceTree = "<group>"; };
+		762FA45716DBA22400CA5E2F /* ivBloodBottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ivBloodBottom@2x.png"; sourceTree = "<group>"; };
+		762FA45816DBA22400CA5E2F /* ivBloodHeader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ivBloodHeader.png; sourceTree = "<group>"; };
+		762FA45916DBA22400CA5E2F /* ivBloodHeader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ivBloodHeader@2x.png"; sourceTree = "<group>"; };
 		763E6BB61664B0F900FA4E86 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		763E6BB91664B18500FA4E86 /* GADAdMobExtras.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GADAdMobExtras.h; sourceTree = "<group>"; };
 		763E6BBA1664B18500FA4E86 /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GADAdNetworkExtras.h; sourceTree = "<group>"; };
@@ -1332,8 +1336,6 @@
 		BD243B1916A9AAF600D89E47 /* cry.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = cry.aif; sourceTree = "<group>"; };
 		BD3503A516AD370800956BB7 /* btnGun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnGun.png; sourceTree = "<group>"; };
 		BD3503A616AD370800956BB7 /* btnGun@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btnGun@2x.png"; sourceTree = "<group>"; };
-		BD3503A716AD370800956BB7 /* ivBlood.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ivBlood.png; sourceTree = "<group>"; };
-		BD3503A816AD370800956BB7 /* ivBlood@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ivBlood@2x.png"; sourceTree = "<group>"; };
 		BD3503A916AD370800956BB7 /* ivCross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ivCross.png; sourceTree = "<group>"; };
 		BD3503AA16AD370800956BB7 /* ivCross@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ivCross@2x.png"; sourceTree = "<group>"; };
 		BD3503AB16AD370800956BB7 /* ivCrossThree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ivCrossThree.png; sourceTree = "<group>"; };
@@ -2450,14 +2452,16 @@
 				7689F5DC16B6A48E00D8AC5C /* ivHit@2x.png */,
 				BD3503A516AD370800956BB7 /* btnGun.png */,
 				BD3503A616AD370800956BB7 /* btnGun@2x.png */,
-				BD3503A716AD370800956BB7 /* ivBlood.png */,
-				BD3503A816AD370800956BB7 /* ivBlood@2x.png */,
 				BD3503A916AD370800956BB7 /* ivCross.png */,
 				BD3503AA16AD370800956BB7 /* ivCross@2x.png */,
 				BD3503AB16AD370800956BB7 /* ivCrossThree.png */,
 				BD3503AC16AD370800956BB7 /* ivCrossThree@2x.png */,
 				BD3503AD16AD370800956BB7 /* ivCrossTwo.png */,
 				BD3503AE16AD370800956BB7 /* ivCrossTwo@2x.png */,
+				762FA45616DBA22400CA5E2F /* ivBloodBottom.png */,
+				762FA45716DBA22400CA5E2F /* ivBloodBottom@2x.png */,
+				762FA45816DBA22400CA5E2F /* ivBloodHeader.png */,
+				762FA45916DBA22400CA5E2F /* ivBloodHeader@2x.png */,
 				BD4BAAB416BC064900F88E82 /* men_low.png */,
 				BD4BAAB516BC064900F88E82 /* men_low@2x.png */,
 				BD3503B016AD370800956BB7 /* ivMan@2x.png */,
@@ -2975,8 +2979,6 @@
 				BD01BE0E16AAAF550095DE16 /* live_red@2x.png in Resources */,
 				BD3503B116AD370800956BB7 /* btnGun.png in Resources */,
 				BD3503B316AD370800956BB7 /* btnGun@2x.png in Resources */,
-				BD3503B516AD370800956BB7 /* ivBlood.png in Resources */,
-				BD3503B716AD370800956BB7 /* ivBlood@2x.png in Resources */,
 				BD3503B916AD370800956BB7 /* ivCross.png in Resources */,
 				BD3503BB16AD370800956BB7 /* ivCross@2x.png in Resources */,
 				BD3503BD16AD370800956BB7 /* ivCrossThree.png in Resources */,
@@ -3056,6 +3058,10 @@
 				BD0DA10B16D386AB00419DC1 /* pano_l.jpg in Resources */,
 				BD0DA10D16D386AB00419DC1 /* pano_r.jpg in Resources */,
 				BD0DA10F16D386AB00419DC1 /* pano_u.jpg in Resources */,
+				762FA45A16DBA22400CA5E2F /* ivBloodBottom.png in Resources */,
+				762FA45B16DBA22400CA5E2F /* ivBloodBottom@2x.png in Resources */,
+				762FA45C16DBA22400CA5E2F /* ivBloodHeader.png in Resources */,
+				762FA45D16DBA22400CA5E2F /* ivBloodHeader@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3238,8 +3244,6 @@
 				BD01BE0F16AAAF550095DE16 /* live_red@2x.png in Resources */,
 				BD3503B216AD370800956BB7 /* btnGun.png in Resources */,
 				BD3503B416AD370800956BB7 /* btnGun@2x.png in Resources */,
-				BD3503B616AD370800956BB7 /* ivBlood.png in Resources */,
-				BD3503B816AD370800956BB7 /* ivBlood@2x.png in Resources */,
 				BD3503BA16AD370800956BB7 /* ivCross.png in Resources */,
 				BD3503BC16AD370800956BB7 /* ivCross@2x.png in Resources */,
 				BD3503BE16AD370800956BB7 /* ivCrossThree.png in Resources */,
