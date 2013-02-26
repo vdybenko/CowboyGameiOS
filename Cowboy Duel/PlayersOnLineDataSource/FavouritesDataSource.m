@@ -96,8 +96,6 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
         arrItemsList = arr;
     }
     
-    NSLog(@"FavouritesDataSource ");
-    
     NSMutableArray *discardedItems = [[NSMutableArray alloc] init];
     
     for (CDFavPlayer *fvPlayer in arrItemsList) {
