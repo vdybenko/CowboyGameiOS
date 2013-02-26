@@ -320,7 +320,6 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
 - (void)connectionTimeoutListOnline
 {
     FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
-    favsViewController.btnOnLine.enabled = NO;
     if (self.typeOfTable == ONLINE) {
         [favsViewController btnOfflineClicked:Nil];
     }

@@ -495,7 +495,6 @@ static const CGFloat timeToStandartTitles = 1.8;
         deltaFrame = duelButton.frame;
         deltaFrame.origin.y += 47;
         duelButton.frame = deltaFrame;
-        
     }
     
 }
