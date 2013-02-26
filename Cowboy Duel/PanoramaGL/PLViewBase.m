@@ -1053,7 +1053,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
         motionManager = [[CMMotionManager alloc] init];
         
         // Tell CoreMotion to show the compass calibration HUD when required to provide true north-referenced attitude
-        motionManager.showsDeviceMovementDisplay = YES;
+        motionManager.showsDeviceMovementDisplay = NO;
         
         
         motionManager.deviceMotionUpdateInterval = 4.0 / 60.0;
@@ -1090,7 +1090,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
             
             float x = (v[0] / v[3] + 1.0f) * 0.5f;
             float y = (v[1] / v[3] + 1.0f) * 0.5f;
-            DLog(@"x = %.2f y = %.2f", x, y);
+            //DLog(@"x = %.2f y = %.2f", x, y);
             float distance;
             OponentCoordinateView *oponentView;
             oponentView = [oponentCoordinateViews objectAtIndex:0];
@@ -1098,15 +1098,9 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
             CGPoint newPosition = CGPointMake(x*self.bounds.size.width, self.bounds.size.height-y*self.bounds.size.height);
              
             distance = powf(powf(currentPosition.x - newPosition.x, 2) + powf(currentPosition.y - newPosition.y, 2), 0.5);
+
+            oponentView.view.center = CGPointMake(x*self.bounds.size.width, self.bounds.size.height - y*self.bounds.size.height);
             
-            
-            if (v[2] < 0.0f) {
-            [UIView animateWithDuration:distance animations:^{
-                oponentView.view.center = CGPointMake(x*self.bounds.size.width, self.bounds.size.height - y*self.bounds.size.height);
-            }completion:^(BOOL complete){
-                
-            }];}
-                        
         }];
 
     }
