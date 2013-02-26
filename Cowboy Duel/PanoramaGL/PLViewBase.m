@@ -1053,7 +1053,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
         motionManager = [[CMMotionManager alloc] init];
         
         // Tell CoreMotion to show the compass calibration HUD when required to provide true north-referenced attitude
-        motionManager.showsDeviceMovementDisplay = YES;
+        motionManager.showsDeviceMovementDisplay = NO;
         
         
         motionManager.deviceMotionUpdateInterval = 4.0 / 60.0;
@@ -1101,15 +1101,10 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
                 distance = powf(powf(currentPosition.x - newPosition.x, 2) + powf(currentPosition.y - newPosition.y, 2), 0.5);
                 
                 
-                if (v[2] < 0.0f) {
-                    [UIView animateWithDuration:distance animations:^{
-                        oponentView.view.center = CGPointMake(x*self.bounds.size.width, self.bounds.size.height - y*self.bounds.size.height);
-                    }completion:^(BOOL complete){
-                        
-                    }];
-                }
+                oponentView.view.center = CGPointMake(x*self.bounds.size.width, self.bounds.size.height - y*self.bounds.size.height);
                 index++;
             }
+
         }];
         
 

@@ -381,15 +381,15 @@ static CGFloat oponentLiveImageViewStartWidth;
     if (isGunCanShotOfFrequently) {
         [self startGunFrequentlyBlockTime];
         
-        if ([self.fireImageView isAnimating]) {
-            [self.fireImageView stopAnimating];
-        }
-        [self.fireImageView startAnimating];
-        
-        if(delegate)
-        {
-            [delegate sendShot];
-        }
+//        if ([self.fireImageView isAnimating]) {
+//            [self.fireImageView stopAnimating];
+//        }
+//        [self.fireImageView startAnimating];
+//        
+//        if(delegate)
+//        {
+//            [delegate sendShot];
+//        }
     
         switch (shotCountForSound) {
             case 1:
@@ -592,7 +592,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     [brockenGlassAudioPlayer play];
     [timer invalidate];
     [moveTimer invalidate];
-
+    self.gunButton.hidden = YES;
 }
 
 - (void) dismissWithController:(UIViewController *)controller {
@@ -606,7 +606,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     rollingY = (acceleration.y * kFilteringFactor) + (rollingY * (1.0 - kFilteringFactor));
     rollingZ = (acceleration.z * kFilteringFactor) + (rollingZ * (1.0 - kFilteringFactor));
     [self setScale];
-    DLog(@"rollingX = %.2f rollingY = %.2f rollingZ = %.2f", rollingX, rollingY, rollingZ)
+    //DLog(@"rollingX = %.2f rollingY = %.2f rollingZ = %.2f", rollingX, rollingY, rollingZ)
     //        Position for Shot
     if (((rollingY< -0.4) || (rollingX < -0.3) || (rollingX > 0.3))) accelerometerState = NO;
     
