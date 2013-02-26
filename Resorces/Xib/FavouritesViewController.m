@@ -243,8 +243,6 @@
     
     NSString *message = [NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"PokenMessage", @""),player.dNickName];
     [self performSelector:@selector(showMessage:) withObject:message];
-    [self performSelector:@selector(hideMessage) withObject:self afterDelay:3.8];
-    
 }
 //steal money:
 -(void)clickButtonSteal: (NSIndexPath *)indexPath;
@@ -348,6 +346,10 @@
 
 -(void)showMessage: (NSString *)message;
 {
+    if (vMessage) {
+        [vMessage removeFromSuperview];
+        vMessage = nil;
+    }
     vMessage=[[UIView alloc] initWithFrame:CGRectMake(12, -40, 290, 40)];
     
     UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(10, 10, 270, 20)];
@@ -370,6 +372,7 @@
                          frame.origin.y += frame.size.height+5;
                          vMessage.frame = frame;
                      }];
+    [self performSelector:@selector(hideMessage) withObject:self afterDelay:3.0];
 }
 
 -(void)hideMessage;
@@ -382,6 +385,7 @@
                      }
                      completion:^(BOOL finished) {
 						 [vMessage removeFromSuperview];
+                         vMessage = nil;
 					 }];
     
 }
