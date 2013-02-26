@@ -15,6 +15,7 @@
 #import "CustomNSURLConnection.h"
 #import "UIView+Dinamic_BackGround.h"
 #import "ActiveDuelViewController.h"
+#import "DuelRewardLogicController.h"
 
 @interface DuelStartViewController ()
 
@@ -42,7 +43,6 @@
 @synthesize userDefenseView;
 @synthesize oponentAtackView;
 @synthesize oponentDefenseView;
-@synthesize activityIndicatorView;
 @synthesize waitTimer;
 
 static const char *GC_URL =  BASE_URL"api/gc";
@@ -119,13 +119,6 @@ static const char *GC_URL =  BASE_URL"api/gc";
     [player stop];
     [player setNumberOfLoops:999];
     [playerAccount.finalInfoTable removeAllObjects];
-    
-    
-    activityIndicatorView = [[ActivityIndicatorView alloc] init];
-    frame = activityIndicatorView.frame;
-    frame.origin = CGPointMake(0, 0);
-    activityIndicatorView.frame=frame;
-    [self.view  addSubview:activityIndicatorView];
             
     //title
     UIColor *mainColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
@@ -146,15 +139,15 @@ static const char *GC_URL =  BASE_URL"api/gc";
     lbUserDuelsWin.text = NSLocalizedString(@"DuelsWonsTitle", nil);
     lbUserDuelsWin.font=fontSimpleText; 
     
-    lbUserRank.text = [NSString stringWithFormat:@"%d",playerAccount.accountWins];
+    lbUserRank.text = [NSString stringWithFormat:@" %d",playerAccount.accountWins];
     NSString *Rank=[NSString stringWithFormat:@"%dRank",playerAccount.accountLevel];
     lbUserRank.text = NSLocalizedString(Rank, @"");
     lbUserRank.font=fontSimpleText;
     
-    userAtack.text = [NSString stringWithFormat:@"+%d",playerAccount.accountWeapon.dDamage];
+    userAtack.text = [NSString stringWithFormat:@" %d",playerAccount.accountWeapon.dDamage+[DuelRewardLogicController countUpBuletsWithPlayerLevel:playerAccount.accountLevel]];
     userAtackView.hidden = NO;
 
-    userDefense.text = [NSString stringWithFormat:@"+%d",playerAccount.accountDefenseValue];
+    userDefense.text = [NSString stringWithFormat:@"%d",playerAccount.accountDefenseValue+[DuelRewardLogicController countUpBuletsWithPlayerLevel:playerAccount.accountLevel]];
     userDefenseView.hidden = NO;
     
     [self setAttackAndDefenseOfOponent:oponentAccount];
@@ -226,15 +219,12 @@ static const char *GC_URL =  BASE_URL"api/gc";
 -(void)viewWillAppear:(BOOL)animated
 {
     [mainDuelView setDinamicHeightBackground];
-    [activityIndicatorView hideView];
+    _vWait.hidden = YES;
     [self setOponentImage];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    //[activityIndicatorView hideView];
-    
-    
     if (oponentAvailable) {
         [_btnStart setEnabled:YES];
         [_btnStart setHidden:NO];
@@ -271,7 +261,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
 {
     _ivOponent.image = nil;
     [_vWait setHidden:YES];
-    [activityIndicatorView hideView];
+    _vWait.hidden = YES;
 }
 
 -(void)releaseComponents
@@ -280,7 +270,6 @@ static const char *GC_URL =  BASE_URL"api/gc";
     oponentNameOnLine = nil;
     serverName = nil;
     _btnStart = nil;
-    activityIndicatorView  = nil;
     _ivPlayer = nil;
     _vBackground = nil;
     _lbNamePlayer = nil;
@@ -336,7 +325,8 @@ static const char *GC_URL =  BASE_URL"api/gc";
 {
     if (!serverType) waitTimer = [NSTimer scheduledTimerWithTimeInterval:7.0 target:self selector:@selector(waitTimerTick) userInfo:nil repeats:NO];
     [delegate btnClickStart];
-    [activityIndicatorView showView];
+    _btnStart.enabled = NO;
+    _vWait.hidden = NO;
 }
 
 -(IBAction)cancelButtonClick;
@@ -393,8 +383,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
 //    _ivOponent.transform = CGAffineTransformMakeScale(-1.0, 1.0);
 //    
 //    [self setOponentInfo];
-//    [self.view bringSubviewToFront:activityIndicatorView ];
-//    
+//
 //    _lbNameOponent.text = uil1;
 //    //_lbMoneyOponent.text =  [NSString stringWithFormat:@"%@%d",@"$",uil2];
 //    [_lbNameOponent setHidden:NO];
@@ -418,7 +407,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
 -(void)cancelDuel;
 {
 //   Выводитса сообщение NSLocalizedString(@"RanAway", @"")
-    [activityIndicatorView hideView];
+    _vWait.hidden = YES;
     [_btnStart setEnabled:NO];
 }
 
@@ -434,9 +423,9 @@ static const char *GC_URL =  BASE_URL"api/gc";
 
 -(void)setAttackAndDefenseOfOponent:(AccountDataSource*)oponent;
 {
-    oponentAtack.text = [NSString stringWithFormat:@"+%d",oponent.accountWeapon.dDamage];
+    oponentAtack.text = [NSString stringWithFormat:@" %d",oponent.accountWeapon.dDamage+[DuelRewardLogicController countUpBuletsWithPlayerLevel:oponent.accountLevel]];
     oponentAtackView.hidden = NO;
-    oponentDefense.text = [NSString stringWithFormat:@"+%d",oponent.accountDefenseValue];
+    oponentDefense.text = [NSString stringWithFormat:@" %d",oponent.accountDefenseValue+[DuelRewardLogicController countUpBuletsWithPlayerLevel:oponent.accountLevel]];
     oponentDefenseView.hidden = NO;
 }
 

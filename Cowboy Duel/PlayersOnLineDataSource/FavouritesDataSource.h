@@ -13,7 +13,6 @@
 #import "ValidationUtils.h"
 #import "FavouritesCell.h"
 #import "Utils.h"
-#import "SSConnection.h"
 
 #import "ListOnlineDataSource.h"
 

@@ -102,6 +102,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     __weak IBOutlet UIView *bgActivityIndicator;
 }
 -(void)setImageFromFacebook;
+-(void)initStatsWithAccount: (AccountDataSource *)oponentAccount;
 -(IBAction)showStoreWeapon:(id)sender;
 -(IBAction)showStoreDefence:(id)sender;
 @end
@@ -154,20 +155,8 @@ static const CGFloat timeToStandartTitles = 1.8;
     
     if (self) {
         playerServer = server;
-        
-        needAnimation = NO;
-        needMoneyAnimation = NO;
-        playerAccount=oponentAccount;
-        
-        numberFormatter = [[NSNumberFormatter alloc] init];
-        [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-        
-        [self loadView];
-        UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
-        [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:24];
-        [btnLeaderboardBig setTitleByLabel:@"LeaderboardTitle" withColor:buttonsTitleColor fontSize:24];
-        [duelButton setTitleByLabel:@"DUEL"];
-        [duelButton changeColorOfTitleByLabel:buttonsTitleColor];
+
+        [self initStatsWithAccount:oponentAccount];
         
         if ([playerServer.status isEqualToString:@"A"]) {
             [duelButton changeTitleByLabel:@"DUEL"];
@@ -177,52 +166,6 @@ static const CGFloat timeToStandartTitles = 1.8;
             [duelButton changeTitleByLabel:@"Busy"];
             [duelButton setEnabled:NO];
         }
-        
-        needAnimation = YES;
-        [self initMainControls];
-        
-        [lbAward setFont: [UIFont fontWithName: @"MyriadPro-Bold" size:18]];//lbAward.font.pointSize]];
-        lbAward.text = NSLocalizedString(@"AWARD", @"");
-        
-        
-        [lbGoldCount setFont: [UIFont fontWithName: @"MyriadPro-Bold" size:18]];
-        int moneyExch  = playerAccount.money < 10 ? 1: playerAccount.money / 10.0;
-        lbGoldCount.text = [NSString stringWithFormat:@"%d",moneyExch];
-        
-        [tfFBName setFont: [UIFont fontWithName: @"MyriadPro-Bold" size:18]];
-        tfFBName.text = [NSString stringWithFormat:@"%@",playerAccount.accountName];
-        
-//avatar magic!
-        NSString *name = [[OGHelper sharedInstance ] getClearName:playerAccount.accountID];
-        if ([playerAccount.accountID rangeOfString:@"A"].location != NSNotFound){
-            profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
-            iconDownloader = [[IconDownloader alloc] init];
-            iconDownloader.namePlayer=name;
-            iconDownloader.delegate = self;
-            [iconDownloader setAvatarURL:playerAccount.avatar];
-            [iconDownloader startDownloadSimpleIcon];
-        }
-        
-        if ([playerAccount.accountID rangeOfString:@"F"].location != NSNotFound) {
-            iconDownloader = [[IconDownloader alloc] init];
-            profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
-            
-            iconDownloader.namePlayer=name;
-            iconDownloader.delegate = self;
-            if ([playerAccount.avatar isEqualToString:@""]) {
-                NSString *urlOponent=[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large",name];
-                [iconDownloader setAvatarURL:urlOponent];
-            }else {
-                [iconDownloader setAvatarURL:playerAccount.avatar];
-            }
-            [iconDownloader startDownloadSimpleIcon];
-        }else {
-            profilePictureViewDefault.image = [UIImage imageNamed:@"pv_photo_default.png"];
-            profilePictureViewDefault.transform = CGAffineTransformIdentity;
-//            profilePictureViewDefault.transform = CGAffineTransformMakeScale(-1.0, 1.0);
-            
-        }
-//        
         userAtackView.hidden = NO;
         userDefenseView.hidden = NO;
         
@@ -233,62 +176,29 @@ static const CGFloat timeToStandartTitles = 1.8;
         userDefense.text = [NSString stringWithFormat:@"%d",playerServer.defense + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[playerServer.rank intValue]]];
         
         userDefense.hidden = NO;
-        userDefense = nil;
-//  check iphone 5 delta
-        if ([UIScreen mainScreen].bounds.size.height > 480) {
-            [ivBackground setImage:[UIImage imageNamed:@"pv_wanted_back-568h@2x.png"]];
-            
-            CGRect deltaFrame =  mainProfileView.frame;
-            deltaFrame.size.height += 77;
-            mainProfileView.frame = deltaFrame;
-            ivBackground.frame = deltaFrame;
-            
-            deltaFrame = tfFBName.frame;
-            deltaFrame.origin.y += 30;
-            tfFBName.frame = deltaFrame;
-            
-            deltaFrame = profilePictureView.frame;
-            deltaFrame.origin.y += 27;
-            profilePictureView.frame = deltaFrame;
-            
-            deltaFrame = profilePictureViewDefault.frame;
-            deltaFrame.origin.y += 27;
-            profilePictureViewDefault.frame = deltaFrame;
-            
-            deltaFrame = userAtackView.frame;
-            deltaFrame.origin.y += 27;
-            userAtackView.frame = deltaFrame;
-            
-            deltaFrame = userDefenseView.frame;
-            deltaFrame.origin.y += 27;
-            userDefenseView.frame = deltaFrame;
-            
-            deltaFrame = ivPhotoFrame.frame;
-            deltaFrame.origin.y += 27;
-            ivPhotoFrame.frame = deltaFrame;
-            
-            deltaFrame = lbGoldCount.frame;
-            deltaFrame.origin.y += 27;
-            lbGoldCount.frame = deltaFrame;
-            
-            deltaFrame = lbAward.frame;
-            deltaFrame.origin.y += 27;
-            lbAward.frame = deltaFrame;
-            
-            deltaFrame = lbGoldIcon.frame;
-            deltaFrame.origin.y += 27;
-            lbGoldIcon.frame = deltaFrame;
-            
-            deltaFrame = duelButton.frame;
-            deltaFrame.origin.y += 47;
-            duelButton.frame = deltaFrame;
-            
-            deltaFrame = bgActivityIndicator.frame;
-            deltaFrame.origin.y += 27;
-            bgActivityIndicator.frame = deltaFrame;
-        }
-        
+        userDefense = nil;        
         [self checkIsOpponentFavorite];
+    }
+    return self;
+}
+
+-(id)initForFavourite:(CDFavPlayer *)favPlayer withAccount:(AccountDataSource *)oponentAccount
+{
+    self = [super initWithNibName:@"ProfileViewControllerWanted" bundle:[NSBundle mainBundle]];
+    
+    if (self) {
+        [self initStatsWithAccount:oponentAccount];
+
+        [btnAddToFavorites setHidden:YES];
+        [bgActivityIndicator setHidden:NO];
+        [activityIndicatorView startAnimating];
+        
+        userAtack.text = [NSString stringWithFormat:@"%d",favPlayer.dAttack];
+        userAtack.hidden = NO;
+        userDefense.text = [NSString stringWithFormat:@"%d",favPlayer.dDefense];
+        userDefense.hidden = NO;
+        userAtackView.hidden = NO;
+        userDefenseView.hidden = NO;
     }
     return self;
 }
@@ -472,6 +382,123 @@ static const CGFloat timeToStandartTitles = 1.8;
 
 }
 
+-(void)initStatsWithAccount: (AccountDataSource *)oponentAccount;
+{
+    playerAccount=oponentAccount;
+
+    needAnimation = YES;
+    needMoneyAnimation = NO;
+
+    numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    
+    [self loadView];
+    UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
+    [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:24];
+    [btnLeaderboardBig setTitleByLabel:@"LeaderboardTitle" withColor:buttonsTitleColor fontSize:24];
+    [duelButton setTitleByLabel:@"DUEL"];
+    [duelButton setEnabled:NO];
+    [duelButton changeColorOfTitleByLabel:buttonsTitleColor];
+    
+    needAnimation = YES;
+    [self initMainControls];
+    
+    [lbAward setFont: [UIFont fontWithName: @"MyriadPro-Bold" size:18]];//lbAward.font.pointSize]];
+    lbAward.text = NSLocalizedString(@"AWARD", @"");
+    
+    [lbGoldCount setFont: [UIFont fontWithName: @"MyriadPro-Bold" size:18]];
+    int moneyExch  = playerAccount.money < 10 ? 1: playerAccount.money / 10.0;
+    lbGoldCount.text = [NSString stringWithFormat:@"%d",moneyExch];
+    
+    [tfFBName setFont: [UIFont fontWithName: @"MyriadPro-Bold" size:18]];
+    tfFBName.text = [NSString stringWithFormat:@"%@",playerAccount.accountName];
+    
+    //avatar magic!
+    NSString *name = [[OGHelper sharedInstance ] getClearName:playerAccount.accountID];
+    if ([playerAccount.accountID rangeOfString:@"A"].location != NSNotFound){
+        profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
+        iconDownloader = [[IconDownloader alloc] init];
+        iconDownloader.namePlayer=name;
+        iconDownloader.delegate = self;
+        [iconDownloader setAvatarURL:playerAccount.avatar];
+        [iconDownloader startDownloadSimpleIcon];
+    }
+    
+    if ([playerAccount.accountID rangeOfString:@"F"].location != NSNotFound) {
+        iconDownloader = [[IconDownloader alloc] init];
+        profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
+        
+        iconDownloader.namePlayer=name;
+        iconDownloader.delegate = self;
+        if ([playerAccount.avatar isEqualToString:@""]) {
+            NSString *urlOponent=[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large",name];
+            [iconDownloader setAvatarURL:urlOponent];
+        }else {
+            [iconDownloader setAvatarURL:playerAccount.avatar];
+        }
+        [iconDownloader startDownloadSimpleIcon];
+    }else {
+        profilePictureViewDefault.image = [UIImage imageNamed:@"pv_photo_default.png"];
+        profilePictureViewDefault.transform = CGAffineTransformIdentity;
+        
+    }
+    //
+    //  check iphone 5 delta
+    if ([UIScreen mainScreen].bounds.size.height > 480) {
+        [ivBackground setImage:[UIImage imageNamed:@"pv_wanted_back-568h@2x.png"]];
+        
+        CGRect deltaFrame =  mainProfileView.frame;
+        deltaFrame.size.height += 77;
+        mainProfileView.frame = deltaFrame;
+        ivBackground.frame = deltaFrame;
+        
+        deltaFrame = tfFBName.frame;
+        deltaFrame.origin.y += 30;
+        tfFBName.frame = deltaFrame;
+        
+        deltaFrame = profilePictureView.frame;
+        deltaFrame.origin.y += 27;
+        profilePictureView.frame = deltaFrame;
+        
+        deltaFrame = profilePictureViewDefault.frame;
+        deltaFrame.origin.y += 27;
+        profilePictureViewDefault.frame = deltaFrame;
+        
+        deltaFrame = userAtackView.frame;
+        deltaFrame.origin.y += 27;
+        userAtackView.frame = deltaFrame;
+        
+        deltaFrame = userDefenseView.frame;
+        deltaFrame.origin.y += 27;
+        userDefenseView.frame = deltaFrame;
+        
+        deltaFrame = ivPhotoFrame.frame;
+        deltaFrame.origin.y += 27;
+        ivPhotoFrame.frame = deltaFrame;
+
+        deltaFrame = bgActivityIndicator.frame;
+        deltaFrame.origin.y += 27;
+        bgActivityIndicator.frame = deltaFrame;
+        
+        deltaFrame = lbGoldCount.frame;
+        deltaFrame.origin.y += 27;
+        lbGoldCount.frame = deltaFrame;
+        
+        deltaFrame = lbAward.frame;
+        deltaFrame.origin.y += 27;
+        lbAward.frame = deltaFrame;
+        
+        deltaFrame = lbGoldIcon.frame;
+        deltaFrame.origin.y += 27;
+        lbGoldIcon.frame = deltaFrame;
+        
+        deltaFrame = duelButton.frame;
+        deltaFrame.origin.y += 47;
+        duelButton.frame = deltaFrame;
+        
+    }
+    
+}
 #pragma mark -
 -(void)checkLocationOfViewForFBLogin;
 {

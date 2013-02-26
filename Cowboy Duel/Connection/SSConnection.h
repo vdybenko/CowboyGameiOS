@@ -42,9 +42,8 @@ typedef enum {
 
 
 @protocol SSConnectionDelegate <NSObject>
-- (void) getData:(NSData *)message andLength:(int)length;
-- (void) lostConnection;
 - (void) listOnlineResponse:(NSString *)jsonString;
+- (void) connectionTimeoutListOnline;
 @end
 
 @interface SSConnection : NSObject <NSStreamDelegate>
@@ -54,6 +53,7 @@ typedef enum {
 + (id)sharedInstance;
 - (void)disconnect;
 -(void)sendInfoPacket;
+- (void) getListOnline;
 
 @property (nonatomic) id <SSConnectionDelegate> delegate;
 @property (nonatomic, strong) GameCenterViewController *gameCenterViewController;

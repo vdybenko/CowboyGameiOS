@@ -49,7 +49,8 @@ ListOfItemsViewController *delegate;
 
 - (void) refreshListOnline;
 {
-    [connection sendData:@"" packetID:NETWORK_GET_LIST_ONLINE ofLength:sizeof(int)];
+    [connection getListOnline];
+    connection.delegate = self;
 }
 
 #pragma mark SSConnection handlers:
@@ -83,6 +84,11 @@ ListOfItemsViewController *delegate;
         }
     }
 }
+
+-(void)connectionTimeoutListOnline
+{}
+
+#pragma mark
 
 -(void)checkServerForFavorite:(SSServer*)server
 {

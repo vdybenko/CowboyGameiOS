@@ -312,7 +312,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1052"
          endingLineNumber = "1052"
-         landmarkName = "-feedbackFacebookBtnClick:"
+         landmarkName = "-feedbackMailBtnClick:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -338,7 +338,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1068"
          endingLineNumber = "1068"
-         landmarkName = "-feedbackFacebookBtnClick:"
+         landmarkName = "-newMessageRecived:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint

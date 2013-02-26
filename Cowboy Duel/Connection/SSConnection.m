@@ -12,6 +12,9 @@
 
 
 @interface SSConnection ()
+{
+    BOOL blockResponceListOnLine;
+}
 @property (nonatomic, strong) NSInputStream *inputStream;
 @property (nonatomic, strong) NSOutputStream *outputStream;
 @property (nonatomic) NSTimer *pingTimer;
@@ -86,6 +89,7 @@ static SSConnection *connection;
             [self.outputStream close];
             
 			NSLog(@"Can not connect to the host!");
+            
 			break;
             
 		case NSStreamEventEndEncountered:
@@ -169,10 +173,22 @@ static SSConnection *connection;
     [self sendData:(void *)(networkPacket) packetID:NETWORK_POST_INFO ofLength:sizeof(int) * 6 + sizeof(char) * displayNameLen +sizeof(char) * [playerAccount.accountID length]+sizeof(char) * [someURL length] + sizeof(char) * [versionKey length]];
 }
 
+- (void) getListOnline;
+{
+    blockResponceListOnLine = NO;
+    [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(connectionTimeout) userInfo:nil repeats:NO];
+    [self sendData:@"" packetID:NETWORK_GET_LIST_ONLINE ofLength:sizeof(int)];
+}
+
 - (void)getData:(uint8_t[4096])message andLength:(int)length
 {
     NSLog(@"get data with packet id %d length %d", message[0], length);
     if(message[0] == NETWORK_GET_LIST_ONLINE) {
+        if (blockResponceListOnLine) {
+            return;
+        }
+        blockResponceListOnLine = YES;
+        
         char *tempBuffer = (char *)&message[1];
         NSData *data = [[NSData alloc] initWithBytes:tempBuffer length:length-1];
         
@@ -199,6 +215,17 @@ static SSConnection *connection;
     }else if (message[0] == NETWORK_DISCONNECT_PAIR) [self.gameCenterViewController lostConnection];
 }
 
+-(void)connectionTimeout
+{
+    if (blockResponceListOnLine) {
+        return;
+    }
+    DLog(@"connectionTimeoutListOnline");
+
+    blockResponceListOnLine = YES;
+    [self.delegate connectionTimeoutListOnline];
+}
+
 
 - (void)sendKeepAlive
 {
@@ -222,4 +249,6 @@ static SSConnection *connection;
     [self.inputStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     [self.outputStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
 }
+
+
 @end

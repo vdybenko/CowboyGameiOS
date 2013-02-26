@@ -96,9 +96,9 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     
     NSLog(@"\n reload started!");
     NSLog(@"ON-LINE: ");
-    for (SSServer *serv in self.serverObjects) {
-        NSLog(@"%@", serv.displayName);
-    }
+//    for (SSServer *serv in self.serverObjects) {
+//        NSLog(@"%@", serv.displayName);
+//    }
     
     NSMutableArray *discardedItems = [[NSMutableArray alloc] init];
     
@@ -120,19 +120,16 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
             [discardedItems addObject:fvPlayer];
         }else if (!playerOnline && typeOfTable == ONLINE){
             [discardedItems addObject:fvPlayer];
-        }else if(playerOnline && typeOfTable == ONLINE)
-            NSLog(@"%@ ONLINE!",fvPlayer.dNickName);
-        else if(!playerOnline && typeOfTable == OFFLINE)
-            NSLog(@"%@ OFFLINE!",fvPlayer.dNickName);
+        }
     }
     [arrItemsList removeObjectsInArray:discardedItems];
     [discardedItems removeAllObjects];
     
     FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
     [favsViewController.loadingView setHidden:YES];
-//    [self setCellsHide:NO];
-    [favsViewController startTableAnimation];
+    [self setCellsHide:YES];
     [tableView reloadData];
+    [favsViewController startTableAnimation];
 }
 
 -(void)releaseComponents
@@ -165,7 +162,13 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
         [cell.btnGetHim addTarget:self action:@selector(invaiteWithMessage:) forControlEvents:UIControlEventTouchUpInside];
         
 //        [cell.btnGetHim removeTarget:self action:@selector(stealGold:) forControlEvents:UIControlEventTouchUpInside ];
-        [cell.btnGetHim changeTitleByLabel:@"DUEL"];
+        if ([player.dStatus isEqualToString:@"A"]) {
+            cell.btnGetHim.enabled = YES ;
+            [cell.btnGetHim changeTitleByLabel:@"DUEL"];
+        }else{
+            cell.btnGetHim.enabled = NO ;
+            [cell.btnGetHim changeTitleByLabel:@"Busy"];
+        }
     }else{
         if ([self checkForSteal:player]) {
             [cell.btnGetHim removeTarget:self action:@selector(invaiteWithMessage:) forControlEvents:UIControlEventTouchUpInside];
@@ -278,14 +281,6 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     }
     
     [self saveFavorites:arrItemsList];
-    
-//    FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
-//    [favsViewController.loadingView setHidden:YES];
-//    [favsViewController.activityIndicator stopAnimating];
-//    [favsViewController startTableAnimation];
-//    cellsHide = NO;
-//    [tableView reloadData];
-    
 }
 
 - (void)connection:(CustomNSURLConnection *)connection didReceiveData:(NSData *)data
@@ -326,10 +321,17 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
 {
     [super listOnlineResponse:jsonString];
     [self reloadDataSource];
+}
+
+- (void)connectionTimeoutListOnline
+{
     FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
-    [favsViewController.loadingView setHidden:YES];
-    [favsViewController.activityIndicator stopAnimating];
-    [favsViewController.tvFavTable reloadData];
+    favsViewController.btnOnLine.enabled = NO;
+    if (self.typeOfTable == ONLINE) {
+        [favsViewController btnOfflineClicked:Nil];
+    }
+    [super connectionTimeoutListOnline];
+    [self reloadDataSource];
 }
 
 #pragma mark

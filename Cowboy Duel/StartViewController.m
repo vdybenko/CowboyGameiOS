@@ -889,24 +889,21 @@ static StartViewController *sharedHelper = nil;
 
 }
 - (IBAction)feedbackFollowFBClick:(id)sender {
-//  NSString *URL=[[NSString alloc]initWithFormat:@"https://twitter.com/intent/tweet?source=webclient&text=%@ %@",
-//                 @"I'm playing in Cowboy duels",
-//                 URL_FB_PAGE];
-  
-//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[URL_COMM_FB_PAGE stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
-    FunPageViewController *funPageViewController = [[FunPageViewController alloc] initWithAddress:URL_COMM_FB_PAGE];
-
-    
-//    CATransition* transition = [CATransition animation];
-//    transition.duration = 0.5;
-//    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
-//    transition.type = kCATransition;
-//    transition.subtype = kCATransitionFromBottom;
-//    [self.navigationController.view.layer addAnimation:transition forKey:nil];
-//    [self.navigationController pushViewController:funPageViewController animated:NO];
-    
-    funPageViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentModalViewController:funPageViewController animated:YES];
+    if ([self connectedToWiFi]) {
+        FunPageViewController *funPageViewController = [[FunPageViewController alloc] initWithAddress:URL_COMM_FB_PAGE];
+        
+        funPageViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        [self presentModalViewController:funPageViewController animated:YES];
+    }else{
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry", @"AlertView")
+                                                            message:NSLocalizedString(@"Internet_down", @"AlertView")
+                                                           delegate:self
+                                                  cancelButtonTitle:NSLocalizedString(@"Cancel", @"AlertView")
+                                                  otherButtonTitles: nil];
+        alertView = 0;
+        [alertView show];
+        alertView = nil;
+    }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                       object:self
@@ -933,83 +930,6 @@ static StartViewController *sharedHelper = nil;
     [indicatorfeedbackView sendToBack];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kFBFeed object:nil];	
-
-}
-
-#pragma mark - push notification
-
-- (void)newMessageRecived:(NSNotification *)notification {
-    
-    NSString *message;
-    int messageID;
-    NSDictionary *messageHeader;
-    
-    message = [[notification userInfo] objectForKey:@"message"];
-    messageHeader = [[notification userInfo] objectForKey:@"messageId"];
-    
-    messageID = [[messageHeader objectForKey:@"t"] intValue];
-    UIViewController *visibleViewController=[self.navigationController visibleViewController];
-    if ([visibleViewController isKindOfClass:[ProfileViewController class]] ||
-        [visibleViewController isKindOfClass:[StartViewController class]] ||
-        [visibleViewController isKindOfClass:[HelpViewController class]] ||
-        [visibleViewController isKindOfClass:[TopPlayersViewController class]])
-    {
-        switch (messageID) {
-            case PUSH_NOTIFICATION_POKE:{
-//                Фаворит викликає тебе на бій
-            }
-                break;
-            case PUSH_NOTIFICATION_FAV_ONLINE:{
-//                Фаворит зайшов онлайн.
-                if (!isPushMessageShow) {
-                    isPushMessageShow = YES;
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"BE_READY", @"") message:message delegate:self cancelButtonTitle:NSLocalizedString(@"CAN_SMALL", @"") otherButtonTitles:NSLocalizedString(@"Saloon2", @""), nil];
-                    alert.tag = 1;
-                    [alert show];
-                    alert = nil;
-                }
-            }
-                break;
-            case PUSH_NOTIFICATION_UPDATE_CONTENT:{
-//                обновити внутрішній контент
-                RefreshContentDataController *refreshContentDataController=[[RefreshContentDataController alloc] init];
-                [refreshContentDataController refreshContent];
-            }
-                break;
-            case PUSH_NOTIFICATION_UPDATE_PRODUCTS:{
-//                обновити продукти.
-                [duelProductDownloaderController refreshDuelProducts];
-            }
-                break;
-            default:
-                break;
-        }
-    }
-}
-
--(void)sendMessageForPush:(NSString *)message withType:(TypeOfPushNotification)type fromPlayer:(NSString *)nick withId:(NSString *)playerId ;
-{
-    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:PUSH_NOTIF_URL encoding:NSUTF8StringEncoding]]
-                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                        timeoutInterval:kTimeOutSeconds];
-    
-    [theRequest setHTTPMethod:@"POST"];
-    NSDictionary *dicBody= [[NSMutableDictionary alloc] init];
-    [dicBody setValue:playerId forKey:@"authen"];
-    [dicBody setValue:message forKey:@"message"];
-    [dicBody setValue:[NSNumber numberWithInt:type] forKey:@"type"];
-    [dicBody setValue:nick forKey:@"nick"];
-    [dicBody setValue:playerAccount.accountID forKey:@"id"];
-    
-    NSString *stBody=[Utils makeStringForPostRequest:dicBody];
-    [theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]];
-        
-    [NSURLConnection sendAsynchronousRequest:theRequest
-                                       queue:[[NSOperationQueue alloc] init]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *err) {
-//                               NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//                               NSLog(@"jsonString %@",jsonString);
-                           }];
 
 }
 
@@ -1136,6 +1056,84 @@ static StartViewController *sharedHelper = nil;
                                                       object:self
                                                     userInfo:[NSDictionary dictionaryWithObject:@"/share_Mail_click" forKey:@"event"]];
 }
+
+#pragma mark - push notification
+
+- (void)newMessageRecived:(NSNotification *)notification {
+    
+    NSString *message;
+    int messageID;
+    NSDictionary *messageHeader;
+    
+    message = [[notification userInfo] objectForKey:@"message"];
+    messageHeader = [[notification userInfo] objectForKey:@"messageId"];
+    
+    messageID = [[messageHeader objectForKey:@"t"] intValue];
+    UIViewController *visibleViewController=[self.navigationController visibleViewController];
+    if ([visibleViewController isKindOfClass:[ProfileViewController class]] ||
+        [visibleViewController isKindOfClass:[StartViewController class]] ||
+        [visibleViewController isKindOfClass:[HelpViewController class]] ||
+        [visibleViewController isKindOfClass:[TopPlayersViewController class]])
+    {
+        switch (messageID) {
+            case PUSH_NOTIFICATION_POKE:{
+                //                Фаворит викликає тебе на бій
+            }
+                break;
+            case PUSH_NOTIFICATION_FAV_ONLINE:{
+                //                Фаворит зайшов онлайн.
+                if (!isPushMessageShow) {
+                    isPushMessageShow = YES;
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"BE_READY", @"") message:message delegate:self cancelButtonTitle:NSLocalizedString(@"CAN_SMALL", @"") otherButtonTitles:NSLocalizedString(@"Saloon2", @""), nil];
+                    alert.tag = 1;
+                    [alert show];
+                    alert = nil;
+                }
+            }
+                break;
+            case PUSH_NOTIFICATION_UPDATE_CONTENT:{
+                //                обновити внутрішній контент
+                RefreshContentDataController *refreshContentDataController=[[RefreshContentDataController alloc] init];
+                [refreshContentDataController refreshContent];
+            }
+                break;
+            case PUSH_NOTIFICATION_UPDATE_PRODUCTS:{
+                //                обновити продукти.
+                [duelProductDownloaderController refreshDuelProducts];
+            }
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+-(void)sendMessageForPush:(NSString *)message withType:(TypeOfPushNotification)type fromPlayer:(NSString *)nick withId:(NSString *)playerId ;
+{
+    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:PUSH_NOTIF_URL encoding:NSUTF8StringEncoding]]
+                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                        timeoutInterval:kTimeOutSeconds];
+    
+    [theRequest setHTTPMethod:@"POST"];
+    NSDictionary *dicBody= [[NSMutableDictionary alloc] init];
+    [dicBody setValue:playerId forKey:@"authen"];
+    [dicBody setValue:message forKey:@"message"];
+    [dicBody setValue:[NSNumber numberWithInt:type] forKey:@"type"];
+    [dicBody setValue:nick forKey:@"nick"];
+    [dicBody setValue:playerAccount.accountID forKey:@"id"];
+    
+    NSString *stBody=[Utils makeStringForPostRequest:dicBody];
+    [theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    [NSURLConnection sendAsynchronousRequest:theRequest
+                                       queue:[[NSOperationQueue alloc] init]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *err) {
+                               //                               NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                               //                               NSLog(@"jsonString %@",jsonString);
+                           }];
+    
+}
+
 
 #pragma mark -
 #pragma mark Compose Mail

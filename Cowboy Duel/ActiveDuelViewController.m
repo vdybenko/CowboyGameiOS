@@ -72,7 +72,8 @@
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *bloodImageView;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *bloodCImageView;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *smokeImage;
-@property (unsafe_unretained, nonatomic) IBOutlet UIImageView *glassImageView;
+@property (unsafe_unretained, nonatomic) IBOutlet UIImageView *glassImageViewHeader;
+@property (unsafe_unretained, nonatomic) IBOutlet UIImageView *glassImageViewBottom;
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *oponentLiveImageView;
 @property (weak, nonatomic) IBOutlet UIButton *gunButton;
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *opStatsLabel;
@@ -258,7 +259,9 @@ static CGFloat oponentLiveImageViewStartWidth;
     
     userHitCount = 0;
     
-    [self.glassImageView setHidden:YES];
+    [self.glassImageViewHeader setHidden:YES];
+    [self.glassImageViewBottom setHidden:YES];
+    
     firstAccel = YES;
     
     [self countUpBulets];
@@ -334,7 +337,8 @@ static CGFloat oponentLiveImageViewStartWidth;
     [self setBloodImageView:nil];
     [self setBloodCImageView:nil];
     [self setSmokeImage:nil];
-    [self setGlassImageView:nil];
+    [self setGlassImageViewHeader:nil];
+    [self setGlassImageViewBottom:nil];
     [self setOponentLiveImageView:nil];
     [self setGunButton:nil];
     [self setGunButton:nil];
@@ -346,7 +350,6 @@ static CGFloat oponentLiveImageViewStartWidth;
     [self setCrossImageView:nil];
     [super viewDidUnload];
 }
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -377,24 +380,16 @@ static CGFloat oponentLiveImageViewStartWidth;
     if (isGunCanShotOfFrequently) {
         [self startGunFrequentlyBlockTime];
         
-//        if ([self.fireImageView isAnimating]) {
-//            [self.fireImageView stopAnimating];
-//        }
-//        [self.fireImageView startAnimating];
-//        
-//        if(delegate)
-//        {
-//            [delegate sendShot];
-//        }
+        if ([self.fireImageView isAnimating]) {
+            [self.fireImageView stopAnimating];
+        }
+        [self.fireImageView startAnimating];
         
-        CGPoint targetPoint;
-        targetPoint.x = self.opponentImage.center.x - (self.floatView.bounds.size.width / 2 - self.floatView.center.x);
-        targetPoint.y = self.opponentImage.center.y - (self.floatView.bounds.size.height / 2 - self.floatView.center.y);
-        
-        CGPoint centerOfScreanPoint;
-        centerOfScreanPoint.x = self.crossImageView.bounds.origin.x + self.crossImageView.center.x;
-        centerOfScreanPoint.y = self.crossImageView.bounds.origin.y + self.crossImageView.center.y;
-           
+        if(delegate)
+        {
+            [delegate sendShot];
+        }
+    
         switch (shotCountForSound) {
             case 1:
                 [self.titleSteadyFire setHidden:YES];
@@ -424,6 +419,15 @@ static CGFloat oponentLiveImageViewStartWidth;
             default:
                 break;
         }
+        
+        CGPoint targetPoint;
+        targetPoint.x = self.opponentImage.center.x - (self.floatView.bounds.size.width / 2 - self.floatView.center.x);
+        targetPoint.y = self.opponentImage.center.y - (self.floatView.bounds.size.height / 2 - self.floatView.center.y);
+        
+        CGPoint centerOfScreanPoint;
+        centerOfScreanPoint.x = self.crossImageView.bounds.origin.x + self.crossImageView.center.x;
+        centerOfScreanPoint.y = self.crossImageView.bounds.origin.y + self.crossImageView.center.y;
+        
         [self cheackHitForShot:centerOfScreanPoint andTargetPoint:targetPoint];
     }
 }
@@ -581,7 +585,9 @@ static CGFloat oponentLiveImageViewStartWidth;
     if (duelEnd) return;
     duelEnd = YES;
     self.gunButton.hidden = YES;
-    [self.glassImageView setHidden:NO];
+    
+    [self.glassImageViewHeader setHidden:NO];
+    [self.glassImageViewBottom setHidden:NO];
     [brockenGlassAudioPlayer play];
     [timer invalidate];
     [moveTimer invalidate];

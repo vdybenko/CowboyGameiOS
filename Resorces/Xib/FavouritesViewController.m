@@ -96,7 +96,6 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-//    [self startTableAnimation];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -164,9 +163,9 @@
     
     if (favsDataSource.typeOfTable != ONLINE) {
         favsDataSource.typeOfTable = ONLINE;
+        [self.loadingView setHidden:NO];
+        [self.activityIndicator startAnimating];
         [favsDataSource refreshListOnline];
-        [favsDataSource setCellsHide:YES];
-        [tvFavTable reloadData];
     }
 
 }
@@ -174,9 +173,9 @@
 - (IBAction)btnOfflineClicked:(id)sender {
     if (favsDataSource.typeOfTable != OFFLINE) {
         favsDataSource.typeOfTable = OFFLINE;
+        [self.loadingView setHidden:NO];
+        [self.activityIndicator startAnimating];
         [favsDataSource refreshListOnline];
-        [favsDataSource setCellsHide:YES];
-        [tvFavTable reloadData];
     }
 }
 
@@ -198,6 +197,16 @@
     [oponentAccount setSessionID:player.dSessionId];
 
     NSLog(@"\n%@\n%@", oponentAccount.accountName, playerAccount.accountName);
+
+    ProfileViewController *profileViewController = [[ProfileViewController alloc] initForFavourite:player withAccount:oponentAccount];
+    [UIView animateWithDuration:0.75
+                     animations:^{
+                         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                         [self.navigationController pushViewController:profileViewController animated:NO];
+                         [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
+                     } completion:^(BOOL finished) {
+//                         [profileViewController.activityIndicatorView startAnimating];
+                     }];
 
     duelStartViewController = [[DuelStartViewController alloc]initWithAccount:playerAccount andOpAccount:oponentAccount opopnentAvailable:NO andServerType:NO andTryAgain:NO];
     //duelStartViewController.serverName = playerAccount.accountID;
@@ -312,6 +321,7 @@
             NSArray* rowsToReload = [NSArray arrayWithObjects:rowToReload, nil];
             
             dispatch_async(dispatch_get_main_queue(), ^{
+                [favsDataSource setCellsHide:NO];
                 if ([tvFavTable.visibleCells count]>i) {
                     UITableViewCell *cell = [tvFavTable.visibleCells lastObject];
                     [cell setHidden:YES];
@@ -325,8 +335,6 @@
                     }
                     
                     [self.tvFavTable beginUpdates];
-                    
-                    [favsDataSource setCellsHide:NO];
                     
                     [tvFavTable reloadRowsAtIndexPaths:rowsToReload withRowAnimation:type];
                     

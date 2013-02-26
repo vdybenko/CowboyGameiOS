@@ -19,12 +19,10 @@
 
 @interface PlayersOnLineDataSource ()
 
-@property (nonatomic) BOOL startLoad;
-
 @end 
 
 @implementation PlayersOnLineDataSource
-@synthesize arrItemsList, delegate, statusOnLine, startLoad;
+@synthesize arrItemsList, delegate, statusOnLine;
 
 
 #pragma mark - Instance initialization
@@ -57,29 +55,13 @@
 {
     if ([[StartViewController sharedInstance] connectedToWiFi]) {
         self.isNeedFavCheck = YES;
-        [self refreshListOnline];       
-        
-        [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(connectionTimeout) userInfo:nil repeats:NO];
-        self.startLoad = YES;
+        [self refreshListOnline];
     }else{
-        self.startLoad = NO;
         [self.serverObjects removeAllObjects];
         [self addPracticeCell];
         ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
         [listOfItemsViewController didRefreshController];
     }
-}
-
--(void)connectionTimeout
-{
-    if (!self.startLoad)
-    {
-        
-        return;
-    }
-    
-    ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
-    [listOfItemsViewController didRefreshController];
 }
 
 #pragma mark - Delegated methods
@@ -183,6 +165,18 @@
 - (void)listOnlineResponse:(NSString *)jsonString{
     [super listOnlineResponse:jsonString];
     [self addPracticeCell];
+    ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
+    [listOfItemsViewController didRefreshController];
+}
+
+-(void)connectionTimeoutListOnline
+{
+    [super connectionTimeoutListOnline];
+    
+    if (![self.serverObjects count]) {
+        [self addPracticeCell];
+    }
+    
     ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
     [listOfItemsViewController didRefreshController];
 }
