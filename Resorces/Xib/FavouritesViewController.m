@@ -24,6 +24,8 @@
     DuelStartViewController *duelStartViewController;
     
     UIView *vMessage;
+    BOOL isMessageVisible;
+    FavouritesCell *currCell;
 }
 @end
 
@@ -242,7 +244,8 @@
                                                     ];
     
     NSString *message = [NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"PokenMessage", @""),player.dNickName];
-    [self performSelector:@selector(showMessage:) withObject:message];
+    if (!isMessageVisible)
+        [self showMessage:message forRow:indexPath];
 }
 //steal money:
 -(void)clickButtonSteal: (NSIndexPath *)indexPath;
@@ -264,8 +267,8 @@
     int moneyExch = (oponentAccount.money<10)?1:oponentAccount.money/10.0;
     NSString *message = [[NSString alloc] initWithFormat:@"%@: $%d",NSLocalizedString(@"StolenMess", @""),moneyExch];
 
-    [self performSelector:@selector(showMessage:) withObject:message];
-    [self performSelector:@selector(hideMessage) withObject:self afterDelay:3.8];
+    if (!isMessageVisible)
+        [self showMessage:message forRow:indexPath];
     
     NSLog(@"\n%@\n%@", oponentAccount.accountName, playerAccount.accountName);
     
@@ -344,13 +347,15 @@
     });
 }
 
--(void)showMessage: (NSString *)message;
+-(void)showMessage: (NSString *)message forRow:(NSIndexPath *)indexPath;
 {
-    if (vMessage) {
-        [vMessage removeFromSuperview];
-        vMessage = nil;
-    }
+    
+    isMessageVisible = YES;
+    
     vMessage=[[UIView alloc] initWithFrame:CGRectMake(12, -40, 290, 40)];
+    
+    currCell = [favsDataSource.tableView cellForRowAtIndexPath:indexPath];
+    [currCell.btnGetHim setEnabled:NO];
     
     UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(10, 10, 270, 20)];
     [label setTextAlignment:UITextAlignmentCenter];
@@ -385,6 +390,8 @@
                      }
                      completion:^(BOOL finished) {
 						 [vMessage removeFromSuperview];
+                         isMessageVisible = NO;
+                         [currCell.btnGetHim setEnabled:YES];
                          vMessage = nil;
 					 }];
     
