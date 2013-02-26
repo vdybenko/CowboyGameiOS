@@ -12,7 +12,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "DuelRewardLogicController.h"
 #import "FinalViewController.h"
-//#import "ARView.h"
 #import "OponentCoordinateView.h"
 #import "StartViewController.h"
 #import "GunDrumViewController.h"
@@ -201,12 +200,25 @@ static CGFloat oponentLiveImageViewStartWidth;
     }
     
 	oponentsViewCoordinates = [NSMutableArray arrayWithCapacity:1];
-    //	for (int i = 0; i < numPois; i++) {
+    
+    for (int i = 0; i < 5; i++) {
+        UIImageView *obstracleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bochka.png"]];
+        CGRect obstracleImageFrame = obstracleImage.frame;
+        obstracleImageFrame.origin.y = 240;
+        obstracleImageFrame.origin.x = (((float) rand()) / RAND_MAX) * 800;
+        obstracleImage.frame = obstracleImageFrame;
+        obstracleImage.tag = 1;
+        [self.floatView addSubview:obstracleImage];
+    }
+    
     OponentCoordinateView *poi = [OponentCoordinateView oponentCoordinateWithView:self.floatView at:[[CLLocation alloc] initWithLatitude:oponentCoords.latitude longitude:oponentCoords.longitude]];
-    [oponentsViewCoordinates insertObject:poi atIndex:0];
-    //	}
+    [oponentsViewCoordinates addObject:poi];
 	[plView setOponentCoordinates:oponentsViewCoordinates];
-
+    
+    int index = [self.view.subviews indexOfObject:self.glassImageView];
+    [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 1) withSubviewAtIndex:index];
+    index = [self.view.subviews indexOfObject:self.crossImageView];
+    [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 2) withSubviewAtIndex:index];
     
     gunDrumViewController = [[GunDrumViewController alloc] initWithNibName:Nil bundle:Nil];
     [self.view addSubview:gunDrumViewController.view];
@@ -214,11 +226,16 @@ static CGFloat oponentLiveImageViewStartWidth;
     [gunDrumViewController showGun];
     self.gunButton.hidden = YES;
     
+    index = [self.view.subviews indexOfObject:self.gunButton];
+    [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 1) withSubviewAtIndex:index];
+    
+    [self.view bringSubviewToFront:self.glassImageView];
+    
     CGRect frame;
     activityIndicatorView = [[ActivityIndicatorView alloc] init];
     frame = activityIndicatorView.frame;
     frame.origin = CGPointMake(0,0);
-    activityIndicatorView.frame=frame;
+    activityIndicatorView.frame = frame;
     [self.view addSubview:activityIndicatorView];
 }
 
@@ -278,7 +295,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     }
     if(!delegate)
     {
-        if (!opAccount.bot) opponentTime=7000;
+        if (!opAccount.bot) opponentTime = 7000;
         else{
             int countBullets = [DuelRewardLogicController countUpBuletsWithOponentLevel:[AccountDataSource sharedInstance].accountLevel defense:[AccountDataSource sharedInstance].accountDefenseValue playerAtack:opAccount.accountWeapon.dDamage];
             
@@ -288,7 +305,7 @@ static CGFloat oponentLiveImageViewStartWidth;
         }
     }
    [plView startSensorialRotation];
-
+    [self.floatView setHidden:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -307,7 +324,6 @@ static CGFloat oponentLiveImageViewStartWidth;
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-   
 }
 
 - (void)viewDidUnload {
@@ -383,7 +399,7 @@ static CGFloat oponentLiveImageViewStartWidth;
             case 1:
                 [self.titleSteadyFire setHidden:YES];
                 [self.lblBehold setHidden:YES];
-                self.gunButton.hidden = NO;
+                //self.gunButton.hidden = NO;
                 
                 [shotAudioPlayer1 stop];
                 [shotAudioPlayer1 setCurrentTime:0.0];
@@ -408,6 +424,7 @@ static CGFloat oponentLiveImageViewStartWidth;
             default:
                 break;
         }
+        [self cheackHitForShot:centerOfScreanPoint andTargetPoint:targetPoint];
     }
 }
 
@@ -439,6 +456,17 @@ static CGFloat oponentLiveImageViewStartWidth;
 
 -(void)cheackHitForShot:(CGPoint)shotPoint andTargetPoint:(CGPoint)targetPoint
 {
+    for (UIImageView *obstracle in self.floatView.subviews) {
+        if(obstracle.tag != 1) continue;
+        CGRect obstracleFrame = obstracle.frame;
+        obstracleFrame.origin.x = obstracle.frame.origin.x - (self.floatView.bounds.size.width / 2 - self.floatView.center.x);
+        obstracleFrame.origin.y = obstracle.frame.origin.y - (self.floatView.bounds.size.height / 2 - self.floatView.center.y);
+        if (CGRectContainsPoint(obstracleFrame, shotPoint)) {
+            return;
+        }
+        
+    }
+    
     if (([self abs:(shotPoint.x - targetPoint.x)] < targetWeidth / 2) && ([self abs:(shotPoint.y - targetPoint.y)] < targetHeight / 2)) {
         
         shotCountBullet--;
@@ -448,7 +476,6 @@ static CGFloat oponentLiveImageViewStartWidth;
         CGRect frame = self.oponentLiveImageView.frame;
         frame.size.width = (float)((maxShotCount - userHitCount)*oponentLiveImageViewStartWidth)/maxShotCount;
         self.oponentLiveImageView.frame = frame;
-        
         
         if (CGRectContainsPoint(self.opponentBody.frame, shotPoint)) {
             [self startRandomBloodAnimation];
@@ -553,7 +580,7 @@ static CGFloat oponentLiveImageViewStartWidth;
 {
     if (duelEnd) return;
     duelEnd = YES;
-    
+    self.gunButton.hidden = YES;
     [self.glassImageView setHidden:NO];
     [brockenGlassAudioPlayer play];
     [timer invalidate];
@@ -572,12 +599,12 @@ static CGFloat oponentLiveImageViewStartWidth;
     rollingY = (acceleration.y * kFilteringFactor) + (rollingY * (1.0 - kFilteringFactor));
     rollingZ = (acceleration.z * kFilteringFactor) + (rollingZ * (1.0 - kFilteringFactor));
     [self setScale];
-    
+    DLog(@"rollingX = %.2f rollingY = %.2f rollingZ = %.2f", rollingX, rollingY, rollingZ)
     //        Position for Shot
-    if ((acceleration.y < -0.4) || (rollingX < -0.3) || (rollingX > 0.3)) accelerometerState = NO;
+    if (((rollingY< -0.4) || (rollingX < -0.3) || (rollingX > 0.3))) accelerometerState = NO;
     
     //       Position for STEADY
-    if ((acceleration.y > -0.4) && (rollingX > -0.3) && (rollingX < 0.3)) accelerometerState = YES;
+    if (((rollingY > -0.4) && (rollingX > -0.3) && (rollingX < 0.3)) && rollingZ < 0) accelerometerState = YES;
             
     
     if((accelerometerState)&& (!soundStart)){
@@ -633,7 +660,7 @@ static CGFloat oponentLiveImageViewStartWidth;
 -(void)shotTimer
 {
     nowInterval = [NSDate timeIntervalSinceReferenceDate];
-    activityInterval = (nowInterval-startInterval)*1000;
+    activityInterval = (nowInterval-startInterval) * 1000;
     shotTime = (int)activityInterval;
     
     UIViewController *curentVC=[self.navigationController visibleViewController];
@@ -709,6 +736,8 @@ static CGFloat oponentLiveImageViewStartWidth;
 
     [self.lblBehold setHidden:NO];
     self.gunButton.hidden = NO;
+    [self.floatView setHidden:NO];
+    moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
 }
 
 -(void)duelTimerEndFeedBack

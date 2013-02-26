@@ -767,6 +767,8 @@
 		BD87D2291648057500747ED8 /* AdvertisingNewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD87D2271648057400747ED8 /* AdvertisingNewViewController.m */; };
 		BD87D22A1648057500747ED8 /* AdvertisingNewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD87D2281648057400747ED8 /* AdvertisingNewViewController.xib */; };
 		BD87D22E1648151E00747ED8 /* AdvertisingOtherAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD87D22D1648151D00747ED8 /* AdvertisingOtherAppViewController.m */; };
+		BD99091816DB85AE00C4BAB4 /* bochka.png in Resources */ = {isa = PBXBuildFile; fileRef = BD99091616DB85AE00C4BAB4 /* bochka.png */; };
+		BD99091916DB85AE00C4BAB4 /* bochka@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD99091716DB85AE00C4BAB4 /* bochka@2x.png */; };
 		BDCB5C0E16BE91BE0056D28E /* gd_board@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDCB5C0C16BE91BE0056D28E /* gd_board@2x.png */; };
 		BDCB5C0F16BE91BE0056D28E /* gd_board.png in Resources */ = {isa = PBXBuildFile; fileRef = BDCB5C0D16BE91BE0056D28E /* gd_board.png */; };
 		BDCB5C1216BE96920056D28E /* dv_arrows.png in Resources */ = {isa = PBXBuildFile; fileRef = BDCB5C1016BE968F0056D28E /* dv_arrows.png */; };
@@ -1420,6 +1422,8 @@
 		BD87D2281648057400747ED8 /* AdvertisingNewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdvertisingNewViewController.xib; sourceTree = "<group>"; };
 		BD87D22C1648151D00747ED8 /* AdvertisingOtherAppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvertisingOtherAppViewController.h; sourceTree = "<group>"; };
 		BD87D22D1648151D00747ED8 /* AdvertisingOtherAppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertisingOtherAppViewController.m; sourceTree = "<group>"; };
+		BD99091616DB85AE00C4BAB4 /* bochka.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bochka.png; sourceTree = "<group>"; };
+		BD99091716DB85AE00C4BAB4 /* bochka@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bochka@2x.png"; sourceTree = "<group>"; };
 		BDA1B23B1648450E00FFF0A1 /* UIImage+Retina4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Retina4.h"; sourceTree = "<group>"; };
 		BDA1B23C1648450E00FFF0A1 /* UIImage+Retina4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Retina4.m"; sourceTree = "<group>"; };
 		BDC6D7BA147E48E90012CB34 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
@@ -2438,6 +2442,8 @@
 		BD81E63D169ED75300CE8278 /* ActiveDuel */ = {
 			isa = PBXGroup;
 			children = (
+				BD99091616DB85AE00C4BAB4 /* bochka.png */,
+				BD99091716DB85AE00C4BAB4 /* bochka@2x.png */,
 				BD0DA0FF16D386AB00419DC1 /* pano_b.jpg */,
 				BD0DA10016D386AB00419DC1 /* pano_d.jpg */,
 				BD0DA10116D386AB00419DC1 /* pano_f.jpg */,
@@ -3056,6 +3062,8 @@
 				BD0DA10B16D386AB00419DC1 /* pano_l.jpg in Resources */,
 				BD0DA10D16D386AB00419DC1 /* pano_r.jpg in Resources */,
 				BD0DA10F16D386AB00419DC1 /* pano_u.jpg in Resources */,
+				BD99091816DB85AE00C4BAB4 /* bochka.png in Resources */,
+				BD99091916DB85AE00C4BAB4 /* bochka@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

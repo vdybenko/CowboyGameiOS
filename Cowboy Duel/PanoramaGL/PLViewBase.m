@@ -1081,33 +1081,37 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
             CMRotationMatrix r = motion.attitude.rotationMatrix;
             transformFromCMRotationMatrix(cameraTransform, &r);
             
-                       
-            mat4f_t projectionCameraTransform;
-            multiplyMatrixAndMatrix(projectionCameraTransform, projectionTransform, cameraTransform);
+            int index = 0;
             
-            vec4f_t v;
-            multiplyMatrixAndVector(v, projectionCameraTransform, oponentCoordinates[0]);
-            
-            float x = (v[0] / v[3] + 1.0f) * 0.5f;
-            float y = (v[1] / v[3] + 1.0f) * 0.5f;
-            DLog(@"x = %.2f y = %.2f", x, y);
-            float distance;
-            OponentCoordinateView *oponentView;
-            oponentView = [oponentCoordinateViews objectAtIndex:0];
-            CGPoint currentPosition = oponentView.view.center;
-            CGPoint newPosition = CGPointMake(x*self.bounds.size.width, self.bounds.size.height-y*self.bounds.size.height);
-             
-            distance = powf(powf(currentPosition.x - newPosition.x, 2) + powf(currentPosition.y - newPosition.y, 2), 0.5);
-            
-            
-            if (v[2] < 0.0f) {
-            [UIView animateWithDuration:distance animations:^{
-                oponentView.view.center = CGPointMake(x*self.bounds.size.width, self.bounds.size.height - y*self.bounds.size.height);
-            }completion:^(BOOL complete){
+            for (OponentCoordinateView *oponentView in oponentCoordinateViews) {
+                mat4f_t projectionCameraTransform;
+                multiplyMatrixAndMatrix(projectionCameraTransform, projectionTransform, cameraTransform);
                 
-            }];}
+                vec4f_t v;
+                multiplyMatrixAndVector(v, projectionCameraTransform, oponentCoordinates[index]);
+                
+                float x = (v[0] / v[3] + 1.0f) * 0.5f;
+                float y = (v[1] / v[3] + 1.0f) * 0.5f;
+                //DLog(@"x = %.2f y = %.2f", x, y);
+                float distance;
+                
+                CGPoint currentPosition = oponentView.view.center;
+                CGPoint newPosition = CGPointMake(x*self.bounds.size.width, self.bounds.size.height-y*self.bounds.size.height);
+                 
+                distance = powf(powf(currentPosition.x - newPosition.x, 2) + powf(currentPosition.y - newPosition.y, 2), 0.5);
+                
+                
+                if (v[2] < 0.0f) {
+                    [UIView animateWithDuration:distance animations:^{
+                        oponentView.view.center = CGPointMake(x*self.bounds.size.width, self.bounds.size.height - y*self.bounds.size.height);
+                    }completion:^(BOOL complete){
                         
+                    }];
+                }
+                index++;
+            }
         }];
+        
 
     }
 }
