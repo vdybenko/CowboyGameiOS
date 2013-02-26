@@ -228,7 +228,7 @@ static CGFloat oponentLiveImageViewStartWidth;
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    ignoreTimer = [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(userIgnorePunish) userInfo:nil repeats:YES];
+    ignoreTimer = [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(userIgnorePunish) userInfo:nil repeats:NO];
     foll = NO;
     duelTimerEnd = NO;
     duelEnd = NO;
