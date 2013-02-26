@@ -3670,8 +3670,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3716,8 +3716,8 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Bounty Hunter";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "A5532982-3D27-4791-A4D1-7E43C7C67DF6";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A5532982-3D27-4791-A4D1-7E43C7C67DF6";
 				REZ_SEARCH_PATHS = "$(inherited)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3766,7 +3766,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = NO;
@@ -3810,7 +3810,7 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Bounty Hunter";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "A5532982-3D27-4791-A4D1-7E43C7C67DF6";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8131AE32-3B8D-4690-885F-7EEF3B8CDCEE";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4057,7 +4057,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				COPY_PHASE_STRIP = NO;
@@ -4103,7 +4103,7 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Bounty Hunter";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "A5532982-3D27-4791-A4D1-7E43C7C67DF6";
 				"PROVISIONING_PROFILE[sdk=*]" = "8131AE32-3B8D-4690-885F-7EEF3B8CDCEE";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8131AE32-3B8D-4690-885F-7EEF3B8CDCEE";
 				REZ_SEARCH_PATHS = (

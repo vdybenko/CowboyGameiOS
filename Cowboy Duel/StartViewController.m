@@ -190,13 +190,10 @@ static StartViewController *sharedHelper = nil;
             firstRun = NO;
             firstRunLocal = NO;
             [topPlayersDataSource reloadDataSource];
-            [favsDataSource reloadDataSource];
             
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"moneyForIPad"];
         }
-        
-        if(firstRun)DLog(@"First ");
-        
+                
         if(firstRun){
             
             [uDef setBool:TRUE forKey:@"FirstRunForDuel"];
@@ -253,7 +250,7 @@ static StartViewController *sharedHelper = nil;
                     [playerAccount.transactions addObject:loc];
                 }
             }
-          DLog(@"Transactions count = %d", [playerAccount.transactions count]);
+            DLog(@"Transactions count = %d", [playerAccount.transactions count]);
             
             NSArray *oldLocations2 = [uDef arrayForKey:@"duels"];
             if( playerAccount.duels )
@@ -280,8 +277,9 @@ static StartViewController *sharedHelper = nil;
                     [playerAccount.achivments addObject:loc];
                 }
             }
+            
+            favsDataSource = [[FavouritesDataSource alloc] initWithTable:nil];
         }
-        favsDataSource = [[FavouritesDataSource alloc] initWithTable:nil];
         
         dicForRequests=[[NSMutableDictionary alloc] init];
         
@@ -1661,12 +1659,6 @@ static StartViewController *sharedHelper = nil;
     }
 }
 
--(float)abs:(float)d
-{
-    if (d<0) return -1.0 * d;
-    else return d;
-}
-
 #pragma mark CloudAnimation
 
 -(void)cloudAnimation;
@@ -1877,5 +1869,9 @@ static StartViewController *sharedHelper = nil;
     
 }
 
-
+#pragma Favorites
+-(void)favoritesDownloadListAfterAvtorization;
+{
+  favsDataSource = [[FavouritesDataSource alloc] initWithTable:nil];  
+}
 @end

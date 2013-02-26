@@ -495,7 +495,6 @@ static const CGFloat timeToStandartTitles = 1.8;
         deltaFrame = duelButton.frame;
         deltaFrame.origin.y += 47;
         duelButton.frame = deltaFrame;
-        
     }
     
 }
@@ -766,6 +765,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             btnAddToFavorites.enabled = YES;
+            duelButton.enabled = YES;
         });
     }
 }
@@ -857,6 +857,9 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 
 - (IBAction)backToMenuFirstRun:(id)sender {
     [tfFBName resignFirstResponder];
+    
+    [[StartViewController sharedInstance] favoritesDownloadListAfterAvtorization];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kReceiveImagefromFBNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kCheckfFBLoginSession object:nil];
     
@@ -937,6 +940,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     [activityIndicatorView startAnimating];
     [bgActivityIndicator setHidden:NO];
     [duelButton setEnabled:NO];
+    btnAddToFavorites.enabled = NO;
     //duelStartViewController = nil;
 }
 
@@ -1004,6 +1008,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     bgActivityIndicator.hidden = NO;
     
     btnAddToFavorites.enabled = NO;
+    duelButton.enabled = NO;
     __weak ProfileViewController *bself = self;
     
     if (playerServer.favorite) {
