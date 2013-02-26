@@ -135,7 +135,6 @@ static CGFloat oponentLiveImageViewStartWidth;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    ignoreTimer = [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(userIgnorePunish) userInfo:nil repeats:YES];
     // Do any additional setup after loading the view from its nib.
     UIImage *spriteSheet = [UIImage imageNamed:@"explosion_4_39_128"];
     NSArray *arrayWithSprites = [spriteSheet spritesWithSpriteSheetImage:spriteSheet
@@ -229,7 +228,7 @@ static CGFloat oponentLiveImageViewStartWidth;
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    ignoreTimer = [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(userIgnorePunish) userInfo:nil repeats:YES];
     foll = NO;
     duelTimerEnd = NO;
     duelEnd = NO;
