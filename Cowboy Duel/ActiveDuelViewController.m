@@ -45,6 +45,8 @@
     
     NSTimer *shotTimer;
     NSTimer *moveTimer;
+    NSTimer *ignoreTimer;
+    
     int time;
     
     BOOL arrowAnimationContinue;
@@ -226,7 +228,7 @@ static CGFloat oponentLiveImageViewStartWidth;
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    ignoreTimer = [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(userIgnorePunish) userInfo:nil repeats:NO];
     foll = NO;
     duelTimerEnd = NO;
     duelEnd = NO;
@@ -301,6 +303,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     [gunDrumViewController hideGun];
     [shotTimer invalidate];
     [moveTimer invalidate];
+    [ignoreTimer invalidate];
     plView = (PLView *)self.view;
     [plView stopSensorialRotation];
     
@@ -554,6 +557,20 @@ static CGFloat oponentLiveImageViewStartWidth;
     //[self endDuel];
 }
 
+-(void)userIgnorePunish
+{
+    if (duelIsStarted){
+        [ignoreTimer invalidate];
+        return;
+    }
+    
+    [self userLost];
+
+    if ([delegate respondsToSelector:@selector(lostConnection)]) {
+        [delegate performSelector:@selector( lostConnection )];
+    }
+}
+
 -(void)userLost
 {
     if (duelEnd) return;
@@ -564,6 +581,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     [brockenGlassAudioPlayer play];
     [timer invalidate];
     [moveTimer invalidate];
+    [ignoreTimer invalidate];
 
 }
 
@@ -585,7 +603,6 @@ static CGFloat oponentLiveImageViewStartWidth;
     //       Position for STEADY
     if ((acceleration.y > -0.4) && (rollingX > -0.3) && (rollingX < 0.3)) accelerometerState = YES;
             
-    
     if((accelerometerState)&& (!soundStart)){
         
         if(oponnentFollSend){
@@ -597,8 +614,9 @@ static CGFloat oponentLiveImageViewStartWidth;
             if ([delegate respondsToSelector:@selector(setAccelStateTrue)])
                 [delegate setAccelStateTrue];
             [self readyToStart];
+            [ignoreTimer invalidate];
             accelerometerStateSend = YES;
-            
+        
         }else {
             if(!delegate)[self startDuel];
         }
@@ -646,6 +664,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     if ((shotTime * 0.001 >= time) && (!duelIsStarted) && (!foll)&&([curentVC isEqual:self])) {
         DLog(@"FIRE !!!!!");
         duelIsStarted = YES;
+        [ignoreTimer invalidate];
         [gunDrumViewController hideGun];
         NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Fire.mp3", [[NSBundle mainBundle] resourcePath]]];
         NSError *error;
