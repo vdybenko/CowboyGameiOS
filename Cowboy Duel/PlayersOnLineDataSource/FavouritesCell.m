@@ -78,7 +78,7 @@ UIColor * sandColor;
 {
     _lbPlayerName.text=player.dNickName;
     
-    _lbGold.text=[NSString stringWithFormat:@"%d$",player.dMoney];
+    _lbGold.text=[NSString stringWithFormat:@"%d$",(player.dMoney>0)?player.dMoney:1];
     
     rankNumber.text=[NSString stringWithFormat:@"%d",indexPath.row+1];
     
