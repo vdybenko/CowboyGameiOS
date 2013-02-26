@@ -67,8 +67,6 @@ typedef enum{
 -(void)modifierUser:(AccountDataSource *)playerTemp;
 -(void)sendMessageForPush:(NSString *)message withType:(TypeOfPushNotification)type fromPlayer:(NSString *)nick withId:(NSString *)playerId ;
 
--(float)abs:(float)d;
-
 -(void)soundOff;
 
 -(void)duelButtonClick;
@@ -82,8 +80,8 @@ typedef enum{
 -(IBAction)feedbackMailBtnClick:(id)sender;
 -(IBAction)feedbackItuneskBtnClick:(id)sender;
 
-
 -(void)didBecomeActive;
 -(void)didEnterBackground;
 
+-(void)favoritesDownloadListAfterAvtorization;
 @end

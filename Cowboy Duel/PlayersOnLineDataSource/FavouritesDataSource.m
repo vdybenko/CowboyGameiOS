@@ -91,14 +91,12 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
 
 -(void) reloadDataSource;
 {
+    NSMutableArray *arr= [self loadFavoritesArray];
+    if (arr) {
+        arrItemsList = arr;
+    }
     
-    arrItemsList = [self loadFavoritesArray];
-    
-    NSLog(@"\n reload started!");
-    NSLog(@"ON-LINE: ");
-//    for (SSServer *serv in self.serverObjects) {
-//        NSLog(@"%@", serv.displayName);
-//    }
+    NSLog(@"FavouritesDataSource ");
     
     NSMutableArray *discardedItems = [[NSMutableArray alloc] init];
     
@@ -124,7 +122,7 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     }
     [arrItemsList removeObjectsInArray:discardedItems];
     [discardedItems removeAllObjects];
-    
+        
     FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
     [favsViewController.loadingView setHidden:YES];
     [self setCellsHide:YES];
@@ -247,8 +245,6 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     
     connection1 = nil;
     NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-    
-    NSLog(@"\nfavs jso %@", jsonString);
     
     NSArray *responseObject = ValidateObject([jsonString JSONValue], [NSArray class]);
     [arrItemsList removeAllObjects];
