@@ -367,21 +367,21 @@ static CGFloat oponentLiveImageViewStartWidth;
     if (isGunCanShotOfFrequently) {
         [self startGunFrequentlyBlockTime];
         
-        if ([self.fireImageView isAnimating]) {
-            [self.fireImageView stopAnimating];
-        }
-        [self.fireImageView startAnimating];
-        
-        if(delegate)
-        {
-            [delegate sendShot];
-        }
+//        if ([self.fireImageView isAnimating]) {
+//            [self.fireImageView stopAnimating];
+//        }
+//        [self.fireImageView startAnimating];
+//        
+//        if(delegate)
+//        {
+//            [delegate sendShot];
+//        }
     
         switch (shotCountForSound) {
             case 1:
                 [self.titleSteadyFire setHidden:YES];
                 [self.lblBehold setHidden:YES];
-                self.gunButton.hidden = NO;
+                //self.gunButton.hidden = NO;
                 
                 [shotAudioPlayer1 stop];
                 [shotAudioPlayer1 setCurrentTime:0.0];
@@ -581,8 +581,8 @@ static CGFloat oponentLiveImageViewStartWidth;
     [brockenGlassAudioPlayer play];
     [timer invalidate];
     [moveTimer invalidate];
+    self.gunButton.hidden = YES;
     [ignoreTimer invalidate];
-
 }
 
 - (void) dismissWithController:(UIViewController *)controller {
