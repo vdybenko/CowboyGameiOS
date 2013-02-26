@@ -216,9 +216,9 @@ static CGFloat oponentLiveImageViewStartWidth;
     [oponentsViewCoordinates addObject:poi];
 	[plView setOponentCoordinates:oponentsViewCoordinates];
     
-    int index = [self.view.subviews indexOfObject:self.glassImageView];
-    [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 1) withSubviewAtIndex:index];
-    index = [self.view.subviews indexOfObject:self.crossImageView];
+//    int index = [self.view.subviews indexOfObject:self.glassImageView];
+//    [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 1) withSubviewAtIndex:index];
+    int index = [self.view.subviews indexOfObject:self.crossImageView];
     [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 2) withSubviewAtIndex:index];
     
     gunDrumViewController = [[GunDrumViewController alloc] initWithNibName:Nil bundle:Nil];
@@ -230,7 +230,8 @@ static CGFloat oponentLiveImageViewStartWidth;
     index = [self.view.subviews indexOfObject:self.gunButton];
     [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 1) withSubviewAtIndex:index];
     
-    [self.view bringSubviewToFront:self.glassImageView];
+    [self.view bringSubviewToFront:self.glassImageViewBottom];
+    [self.view bringSubviewToFront:self.glassImageViewHeader];
     
     CGRect frame;
     activityIndicatorView = [[ActivityIndicatorView alloc] init];
