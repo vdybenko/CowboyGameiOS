@@ -273,7 +273,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "309"
          endingLineNumber = "309"
-         landmarkName = "-viewDidDisappear:"
+         landmarkName = "-viewWillDisappear:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -442,11 +442,11 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "751"
          endingLineNumber = "751"
-         landmarkName = "-hitTheOponentWithPoint:"
+         landmarkName = "-moveOponent"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/ActiveDuelViewController.m"

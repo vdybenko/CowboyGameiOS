@@ -857,6 +857,9 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 
 - (IBAction)backToMenuFirstRun:(id)sender {
     [tfFBName resignFirstResponder];
+    
+    [[StartViewController sharedInstance] favoritesDownloadListAfterAvtorization];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kReceiveImagefromFBNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kCheckfFBLoginSession object:nil];
     
