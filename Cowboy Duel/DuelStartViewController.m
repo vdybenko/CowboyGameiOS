@@ -43,7 +43,6 @@
 @synthesize userDefenseView;
 @synthesize oponentAtackView;
 @synthesize oponentDefenseView;
-@synthesize activityIndicatorView;
 @synthesize waitTimer;
 
 static const char *GC_URL =  BASE_URL"api/gc";
@@ -120,13 +119,6 @@ static const char *GC_URL =  BASE_URL"api/gc";
     [player stop];
     [player setNumberOfLoops:999];
     [playerAccount.finalInfoTable removeAllObjects];
-    
-    
-    activityIndicatorView = [[ActivityIndicatorView alloc] init];
-    frame = activityIndicatorView.frame;
-    frame.origin = CGPointMake(0, 0);
-    activityIndicatorView.frame=frame;
-    [self.view  addSubview:activityIndicatorView];
             
     //title
     UIColor *mainColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
@@ -227,15 +219,12 @@ static const char *GC_URL =  BASE_URL"api/gc";
 -(void)viewWillAppear:(BOOL)animated
 {
     [mainDuelView setDinamicHeightBackground];
-    [activityIndicatorView hideView];
+    _vWait.hidden = YES;
     [self setOponentImage];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    //[activityIndicatorView hideView];
-    
-    
     if (oponentAvailable) {
         [_btnStart setEnabled:YES];
         [_btnStart setHidden:NO];
@@ -272,7 +261,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
 {
     _ivOponent.image = nil;
     [_vWait setHidden:YES];
-    [activityIndicatorView hideView];
+    _vWait.hidden = YES;
 }
 
 -(void)releaseComponents
@@ -281,7 +270,6 @@ static const char *GC_URL =  BASE_URL"api/gc";
     oponentNameOnLine = nil;
     serverName = nil;
     _btnStart = nil;
-    activityIndicatorView  = nil;
     _ivPlayer = nil;
     _vBackground = nil;
     _lbNamePlayer = nil;
@@ -337,7 +325,8 @@ static const char *GC_URL =  BASE_URL"api/gc";
 {
     if (!serverType) waitTimer = [NSTimer scheduledTimerWithTimeInterval:7.0 target:self selector:@selector(waitTimerTick) userInfo:nil repeats:NO];
     [delegate btnClickStart];
-    [activityIndicatorView showView];
+    _btnStart.enabled = NO;
+    _vWait.hidden = NO;
 }
 
 -(IBAction)cancelButtonClick;
@@ -394,8 +383,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
 //    _ivOponent.transform = CGAffineTransformMakeScale(-1.0, 1.0);
 //    
 //    [self setOponentInfo];
-//    [self.view bringSubviewToFront:activityIndicatorView ];
-//    
+//
 //    _lbNameOponent.text = uil1;
 //    //_lbMoneyOponent.text =  [NSString stringWithFormat:@"%@%d",@"$",uil2];
 //    [_lbNameOponent setHidden:NO];
@@ -419,7 +407,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
 -(void)cancelDuel;
 {
 //   Выводитса сообщение NSLocalizedString(@"RanAway", @"")
-    [activityIndicatorView hideView];
+    _vWait.hidden = YES;
     [_btnStart setEnabled:NO];
 }
 

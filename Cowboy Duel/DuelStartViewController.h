@@ -13,7 +13,6 @@
 #import <GameKit/GameKit.h>
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
-#import "ActivityIndicatorView.h"
 #import "Utils.h"
 #import "ProfileViewController.h"
 #import "StartViewController.h"
@@ -87,7 +86,6 @@
     
        
 }
-@property (weak, nonatomic) IBOutlet ActivityIndicatorView *activityIndicatorView;
 @property (weak, nonatomic) IBOutlet UIImageView *_ivPlayer;
 @property (weak, nonatomic) IBOutlet UIImageView *_ivOponent;
 @property (weak, nonatomic) IBOutlet UILabel *_lbNamePlayer;

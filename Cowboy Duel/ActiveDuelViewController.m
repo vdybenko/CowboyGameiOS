@@ -335,7 +335,6 @@ static CGFloat oponentLiveImageViewStartWidth;
     [super viewDidUnload];
 }
 
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
