@@ -568,6 +568,11 @@ static CGFloat oponentLiveImageViewStartWidth;
 
     if ([delegate respondsToSelector:@selector(lostConnection)]) {
         [delegate performSelector:@selector( lostConnection )];
+    }else
+    {
+        FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:0 andOponentTime:10 andGameCenterController:self andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
+        
+        [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
     }
 }
 
