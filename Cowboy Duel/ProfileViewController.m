@@ -271,6 +271,9 @@ static const CGFloat timeToStandartTitles = 1.8;
     if (![lbDescription isHidden] && lbDescription) {
         [self updateLabels];
     }
+    if (![lbFavouritesTitle isHidden] && lbFavouritesTitle) {
+        [self refreshContentFromPlayerAccount];
+    }
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
