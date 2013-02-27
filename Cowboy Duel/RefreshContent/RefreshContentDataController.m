@@ -95,8 +95,6 @@ NSString  *const USER_DEFULTS_KEY_COLLECTION_APPS   = @"colectionApp";
     return pName;
 }
 
-
-
 #pragma mark NSURLConnection handlers
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection1 {

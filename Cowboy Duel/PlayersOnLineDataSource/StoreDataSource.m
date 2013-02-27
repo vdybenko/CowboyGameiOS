@@ -15,7 +15,6 @@
 @interface StoreDataSource()
 {
     __weak StoreViewController *storeViewController;
-    DuelProductDownloaderController *duelProductDownloaderController;
 }
 @end
 
@@ -36,7 +35,6 @@
      cellsHide = YES;
     typeOfTable = StoreDataSourceTypeTablesWeapons;
     arrItemsList=[[NSMutableArray alloc] init];
-    duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
      
     tableView=pTable;
     storeViewController = pStoreViewController;
@@ -68,7 +66,6 @@
 {
     arrItemsList = nil;
     tableView = nil;
-    duelProductDownloaderController = nil;
 }
 
 #pragma mark - Delegated methods
