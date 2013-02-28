@@ -856,7 +856,6 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                          }];
         [self.navigationController popViewControllerAnimated:YES];
     }
-//    [self releaseComponents];
 }
 
 - (IBAction)backToMenuFirstRun:(id)sender {
@@ -880,10 +879,15 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                          [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
                      }];
     [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:1] animated:NO];
-//    [self releaseComponents];
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/first_profile_continue_click" forKey:@"event"]];
+    [self releaseComponents];
+}
+
+- (IBAction)backToMenuWanted:(id)sender {
+    [self backToMenu:sender];
+    [self releaseComponents];
 }
 
 - (IBAction)btnLeaderbordFirstRunClick:(id)sender {
@@ -921,6 +925,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                             object:self
                                                           userInfo:[NSDictionary dictionaryWithObject:@"/duel_teaching" forKey:@"event"]];
+        [self releaseComponents];
         return;
     }
     
@@ -979,6 +984,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                          [self.navigationController pushViewController:activeDuelViewController animated:NO];
                          [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
                      }];
+    [self releaseComponents];
 }
 
 -(IBAction)showStoreWeapon:(id)sender
