@@ -917,6 +917,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         if ([AccountDataSource sharedInstance].activeDuel) {
             ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:[AccountDataSource sharedInstance] oponentAccount:playerAccount];
             [self.navigationController pushViewController:activeDuelViewController animated:YES];
+            activeDuelViewController = nil;
         }
         
         SSConnection *connection = [SSConnection sharedInstance];
@@ -977,12 +978,14 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 -(void)startBotDuel
 {
     int randomTime = arc4random() % 6;
-    ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:[AccountDataSource sharedInstance] oponentAccount:playerAccount];
+    ActiveDuelViewController __block *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:[AccountDataSource sharedInstance] oponentAccount:playerAccount];
     [UIView animateWithDuration:0.75
                      animations:^{
                          [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
                          [self.navigationController pushViewController:activeDuelViewController animated:NO];
                          [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
+                     } completion:^(BOOL complete){
+                         activeDuelViewController = nil;
                      }];
     [self releaseComponents];
 }

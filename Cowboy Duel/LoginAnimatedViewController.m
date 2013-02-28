@@ -197,10 +197,11 @@ static LoginAnimatedViewController *sharedHelper = nil;
     AccountDataSource *oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
     ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:playerAccount oponentAccount:oponentAccount];
     [self.navigationController pushViewController:activeDuelViewController animated:YES];
-    
+    activeDuelViewController = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
                                                       userInfo:[NSDictionary dictionaryWithObject:@"/first_screen_teaching" forKey:@"event"]];
+    [self releaseComponents];
 }
 
 

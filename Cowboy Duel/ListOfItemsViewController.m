@@ -232,13 +232,6 @@
     profileViewController = nil;
 }
 
--(void)startBotDuel
-{
-    int randomTime = arc4random() % 6;
-    ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:_playerAccount oponentAccount:oponentAccount];
-    [self.navigationController pushViewController:activeDuelViewController animated:YES];
-}
-
 #pragma mark - Interface methods
 
 -(IBAction)backToMenu:(id)sender;

@@ -228,6 +228,8 @@
         int randomTime = arc4random() % 6;
         ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:[AccountDataSource sharedInstance] oponentAccount:oponentAccount];
         [self.navigationController pushViewController:activeDuelViewController animated:YES];
+        activeDuelViewController = nil;
+        [self releaseComponents];
     }
 
 }
