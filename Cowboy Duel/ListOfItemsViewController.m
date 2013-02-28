@@ -7,7 +7,6 @@
 //
 
 #import "ListOfItemsViewController.h"
-#import "DuelStartViewController.h"
 #import "UIView+Dinamic_BackGround.h"
 #import "Reachability.h"
 #include <sys/socket.h>
@@ -133,7 +132,7 @@
     [updateTimer invalidate];
     updateTimer = nil;
     [super viewWillDisappear:animated];
-    if (duelStartViewController.waitTimer) [duelStartViewController.waitTimer invalidate];
+//    if (duelStartViewController.waitTimer) [duelStartViewController.waitTimer invalidate];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

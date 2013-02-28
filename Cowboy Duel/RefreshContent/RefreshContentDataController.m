@@ -63,7 +63,6 @@ NSString  *const USER_DEFULTS_KEY_COLLECTION_APPS   = @"colectionApp";
     NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:pUrl]
                                                             cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                         timeoutInterval:kTimeOutSeconds];
-    
     // create the connection with the request
     // and start loading the data
     NSURLConnection *theConnection=[NSURLConnection connectionWithRequest:theRequest delegate:self];

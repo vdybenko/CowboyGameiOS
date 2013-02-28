@@ -23,7 +23,7 @@
 @end
 
 @implementation GameCenterViewController
-@synthesize delegate, delegate2, duelStartViewController, parentVC, opponentEndMatch, userEndMatch,userCanceledMatch, typeGameWithMessage, connection;
+@synthesize delegate, duelStartViewController, parentVC, opponentEndMatch, userEndMatch,userCanceledMatch, typeGameWithMessage, connection;
 
 static GameCenterViewController *gameCenterViewController;
 
@@ -35,8 +35,6 @@ static GameCenterViewController *gameCenterViewController;
         gameCenterViewController = [[GameCenterViewController alloc] initWithAccount:userAccount andParentVC:view];
         return gameCenterViewController;
     }
-    
-    
 }
 
 -(id)initWithAccount:(AccountDataSource *)userAccount andParentVC:(id)view {
@@ -93,7 +91,6 @@ static GameCenterViewController *gameCenterViewController;
     userEndMatch = NO;
     opponentEndMatch = NO;
 
-    [self setDelegate2:duelStartViewController];
     duelStartViewController.delegate = self;
     
     [playerAccount.finalInfoTable removeAllObjects];
@@ -547,7 +544,6 @@ static GameCenterViewController *gameCenterViewController;
             if (!duelStartViewController) {
                 duelStartViewController = [[DuelStartViewController alloc] initWithAccount:playerAccount andOpAccount:oponentAccount  opopnentAvailable:YES andServerType:YES andTryAgain:NO];
                 
-                [self setDelegate2:duelStartViewController];
                 duelStartViewController.delegate = self;
                 [parentVC.navigationController pushViewController:duelStartViewController animated:YES];
             }else{
@@ -609,7 +605,6 @@ static GameCenterViewController *gameCenterViewController;
                 [duelStartViewController setAttackAndDefenseOfOponent:oponentAccount];
             }
             
-            [self setDelegate2:duelStartViewController];
             duelStartViewController.delegate = self;
             if ([duelStartViewController respondsToSelector:@selector(setOponent:Label1:Label1:)]){ 
                 
@@ -685,8 +680,8 @@ static GameCenterViewController *gameCenterViewController;
         {   
             DLog(@"NETWORK_START_DUEL_FALSE");
             if ([baseAlert isVisible]) [baseAlert dismissWithClickedButtonIndex:3 animated:YES];
-            if ([delegate2 respondsToSelector:@selector(cancelDuel)]) 
-                [delegate2 cancelDuel];
+            if ([duelStartViewController respondsToSelector:@selector(cancelDuel)])
+                [duelStartViewController cancelDuel];
             [self lostConnection];
         }
 			break;
@@ -823,7 +818,7 @@ static GameCenterViewController *gameCenterViewController;
             
         case  NETWORK_OPONTYPE_RESPONSE:
         {
-            DLog(@"NETWORK_OPONTYPE_RESPONSE %@", delegate2);
+            DLog(@"NETWORK_OPONTYPE_RESPONSE %@", duelStartViewController);
             endDuel = NO;
             server = YES;
             gameInfo *gsReceive = (gameInfo *)&incomingPacket[4];
@@ -836,7 +831,6 @@ static GameCenterViewController *gameCenterViewController;
             oponentAccount.accountDefenseValue = gsReceive->oponentDefense;
             oponentAccount.accountID = [[NSString alloc] initWithCString:gsReceive->oponentAuth encoding:NSUTF8StringEncoding];
             
-            [self setDelegate2:duelStartViewController];
             duelStartViewController.delegate = self;
             if ([duelStartViewController respondsToSelector:@selector(setOponent:Label1:Label1:)]){ 
                 
@@ -851,7 +845,7 @@ static GameCenterViewController *gameCenterViewController;
             break;
         case  NETWORK_OPONTYPE_RESPONSE_TRY:
         {
-            DLog(@"NETWORK_OPONTYPE_RESPONSE_TRY %@", delegate2);
+            DLog(@"NETWORK_OPONTYPE_RESPONSE_TRY %@", duelStartViewController);
             endDuel = NO;   
             server = YES;
             gameInfo *gsReceive = (gameInfo *)&incomingPacket[4];
@@ -869,7 +863,6 @@ static GameCenterViewController *gameCenterViewController;
             [duelStartViewController setAttackAndDefenseOfOponent:oponentAccount];
             
             duelStartViewController.tryAgain = YES;
-            [self setDelegate2:duelStartViewController];
             duelStartViewController.oponentAvailable  = NO;
             duelStartViewController.delegate = self;
             if ([parentVC.navigationController.viewControllers containsObject:duelStartViewController])

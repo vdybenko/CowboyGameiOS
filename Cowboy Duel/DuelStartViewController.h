@@ -98,7 +98,7 @@
 @property (weak, nonatomic) IBOutlet FBProfilePictureView *fbPlayerImage;
 @property (weak, nonatomic) IBOutlet FBProfilePictureView *fbOpponentImage;
 
-@property(strong)id<DuelViewControllerDelegate> delegate;
+@property(weak, nonatomic)id<DuelViewControllerDelegate> delegate;
 @property (weak, nonatomic) NSString *oponentNameOnLine;
 @property (strong, nonatomic) NSString *serverName;
 @property (nonatomic) BOOL oponentAvailable;

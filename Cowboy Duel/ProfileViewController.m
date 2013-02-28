@@ -327,6 +327,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     ivBlack = nil;
     lbPointsText = nil;
     numberFormatter  = nil;
+    duelStartViewController = nil;
 }
 
 -(void)initMainControls;
