@@ -176,13 +176,17 @@ static CGFloat oponentLiveImageViewStartWidth;
     plView.camera.rollRange = PLRangeMake (-180, 180);
     plView.camera.yawRange = PLRangeMake (-180, 180);
     
+    NSString *syfics = @"";
+    if ([Utils isiPhoneRetina]) {
+//        syfics = @"@2x";
+    }
     PLCubicPanorama *cubicPanorama = [PLCubicPanorama panorama];
-    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:@"pano_f" ofType:@"jpg"]]] face:PLCubeFaceOrientationFront];
-    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:@"pano_b" ofType:@"jpg"]]] face:PLCubeFaceOrientationBack];
-    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:@"pano_l" ofType:@"jpg"]]] face:PLCubeFaceOrientationLeft];
-    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:@"pano_r" ofType:@"jpg"]]] face:PLCubeFaceOrientationRight];
-    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:@"pano_u" ofType:@"jpg"]]] face:PLCubeFaceOrientationUp];
-    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:@"pano_d" ofType:@"jpg"]]] face:PLCubeFaceOrientationDown];
+    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_f%@",syfics] ofType:@"jpg"]]] face:PLCubeFaceOrientationFront];
+    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_b%@",syfics] ofType:@"jpg"]]] face:PLCubeFaceOrientationBack];
+    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_l%@",syfics] ofType:@"jpg"]]] face:PLCubeFaceOrientationLeft];
+    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_r%@",syfics] ofType:@"jpg"]]] face:PLCubeFaceOrientationRight];
+    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_u%@",syfics] ofType:@"jpg"]]] face:PLCubeFaceOrientationUp];
+    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_d%@",syfics] ofType:@"jpg"]]] face:PLCubeFaceOrientationDown];
     [plView setPanorama:cubicPanorama];
     
     [self hideHelpViewOnStartDuel];
