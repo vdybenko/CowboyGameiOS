@@ -356,6 +356,7 @@
 #pragma  mark -
 -(void)loseScene
 {
+    oldMoneyForAnimation = playerAccount.money;
     isDuelWinWatched = YES;
     lastDuel = YES;
     int moneyExch  = playerAccount.money < 10 ? 1: playerAccount.money / 10.0;
@@ -379,24 +380,24 @@
                                                       userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@%@",stGA,@"final"] forKey:@"event"]];
 //    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@%@",stGA,@"final"]];
 
-    oldMoneyForAnimation = playerAccount.money;
+    
     if (!teaching||(duelWithBotCheck)) {
         oponentAccount.money += moneyExch;
         
-        int difference=playerAccount.money-moneyExch;
-        
-        if(difference>0){
+        if(playerAccount.money>=moneyExch){
             playerAccount.money -= moneyExch;
             transaction.trType = [NSNumber numberWithInt:-1];
             transaction.trMoneyCh = [NSNumber numberWithInt:-moneyExch];
         }else{
-            transaction.trType = [NSNumber numberWithInt:-1];
-            transaction.trMoneyCh = [NSNumber numberWithInt:-playerAccount.money];
+            if (playerAccount.money > 0) {
+                transaction.trType = [NSNumber numberWithInt:-1];
+                transaction.trMoneyCh = [NSNumber numberWithInt:playerAccount.money-moneyExch];
+            }
             playerAccount.money=0;
         }
         
         [self increaseLoseCount];
-        
+
         DLog(@"Oponent Win - User money %d Oponent money %d", playerAccount.money, oponentAccount.money);
         
         pointsForMatch=[self getPointsForLose];        
@@ -490,9 +491,7 @@
 
         //transaction.trType = [NSNumber numberWithInt:moneyExch / abs(moneyExch)];                       //////////////////transactions
         transaction.trType = [NSNumber numberWithInt:1];
-        transaction.trMoneyCh = [NSNumber numberWithInt:moneyExch];
-        
-        
+        transaction.trMoneyCh = [NSNumber numberWithInt:moneyExch];       
 
         if (![[NSUserDefaults standardUserDefaults] boolForKey:@"dontShowFeedAtFirst"]) {
             [[StartViewController sharedInstance] setShowFeedAtFirst:YES];
@@ -573,7 +572,6 @@
         [oponentAccount.transactions addObject:opponentTransaction];
         
         NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
-        
         NSMutableArray *locationData = [[NSMutableArray alloc] init];
         [playerAccount saveTransaction];
         
@@ -600,7 +598,7 @@
         
         [playerAccount sendTransactions:playerAccount.transactions];
         if (oponentAccount.bot) [oponentAccount sendTransactions:oponentAccount.transactions];
-        if([playerAccount.duels count] > 10) 
+        if([playerAccount.duels count] > 10)
             [playerAccount sendDuels:playerAccount.duels];
         
         if (reachNewLevel) {
@@ -670,7 +668,7 @@
   
   [self coinCenter];
   lblGold.text = [NSString stringWithFormat:@"%d",oldMoneyForAnimation];
-  
+    
   CGRect goldCountCentered = lblGold.frame;
   goldCountCentered.origin.x = ivGoldCoin.frame.origin.x+ivGoldCoin.frame.size.width + 5;
   lblGold.frame = goldCountCentered;

@@ -103,6 +103,7 @@
     int cloud2X;
     BOOL animationCheck;
     BOOL inBackground;
+    BOOL isFixedMoney;
 }
 @property (weak, nonatomic) IBOutlet UIButton *duelButton;
 @property (weak, nonatomic) IBOutlet UIButton *mapButton;
@@ -1224,6 +1225,12 @@ static StartViewController *sharedHelper = nil;
         NSUserDefaults *uDef = [NSUserDefaults standardUserDefaults];
         if ([responseObject objectForKey:@"session_id"]) {
             playerAccount.sessionID=[responseObject objectForKey:@"session_id"];
+            if (!isFixedMoney && playerAccount.money < 0) {
+                playerAccount.money=0;
+                isFixedMoney = YES;
+                [playerAccount saveMoney];
+            }
+
         }
         
         if ([[responseObject objectForKey:@"level"] intValue]!=playerAccount.accountLevel) {
@@ -1298,7 +1305,18 @@ static StartViewController *sharedHelper = nil;
         
         int playerMoney=[[responseObject objectForKey:@"money"] intValue];
         if (playerMoney) {
-            playerAccount.money=(playerMoney > 0) ? playerMoney : 0;
+//            if (playerMoney < 0 && !isFixedMoney) {
+//                CDTransaction *transaction = [[CDTransaction alloc] init];
+//                transaction.trType = [NSNumber numberWithInt:1];
+//                transaction.trMoneyCh = [NSNumber numberWithInt:-playerMoney];
+//                transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
+//                playerAccount.money=0;
+//                transaction.trDescription = [[NSString alloc] initWithFormat:@"Balance"];
+//                [playerAccount.transactions addObject:transaction];
+//                [playerAccount saveTransaction];
+//            }else
+            playerAccount.money=(playerMoney >= 0)?playerMoney:0;
+            isFixedMoney = YES;
             [playerAccount saveMoney];
         }
         
