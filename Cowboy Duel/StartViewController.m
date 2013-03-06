@@ -780,7 +780,8 @@ static StartViewController *sharedHelper = nil;
     cloudSecondView.frame = frame;
     
     UIViewController *topController=[self.navigationController topViewController];
-    if (![topController isKindOfClass:[ProfileViewController class]]) {
+    if ([topController isKindOfClass:[LoginAnimatedViewController class]]) {
+        
         profileViewController = [[ProfileViewController alloc] initFirstStartWithAccount:playerAccount startViewController:self];
         [self.navigationController pushViewController:profileViewController animated:NO];
     }
