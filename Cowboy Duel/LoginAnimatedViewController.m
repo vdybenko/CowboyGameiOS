@@ -22,7 +22,6 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
 
 @interface LoginAnimatedViewController ()
 {
-    StartViewController * startViewController;
     AccountDataSource *playerAccount;
     NSMutableString *stDonate;
     __weak IBOutlet UIView *activityView;
@@ -51,7 +50,7 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
 @end
 
 @implementation LoginAnimatedViewController
-@synthesize startViewController, delegate ,loginFacebookStatus, payment;
+@synthesize delegate ,loginFacebookStatus, payment;
 @synthesize timer, textsContainer;
 @synthesize player;
 
@@ -59,7 +58,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
 + (LoginAnimatedViewController *) sharedInstance {
     if (!sharedHelper) {
         sharedHelper = [[LoginAnimatedViewController alloc] init];
-        
     }
     return sharedHelper;
 }
@@ -149,7 +147,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusSimple];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"FirstRun_v2.2"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [StartViewController sharedInstance].playerStart;
+    [[StartViewController sharedInstance] playerStart];
     
     [self updateLabelsWithString:NSLocalizedString(@"1stIntro", @"")];
     self.textIndex++;
@@ -166,23 +164,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
     // Dispose of any resources that can be recreated.
 }
 
--(void)releaseComponents
-{
-    startViewController = nil;
-    playerAccount = nil;
-    stDonate = nil;
-    activityView = nil;
-    activityIndicatorView = nil;
-    backgroundView = nil;
-    timer = nil;
-    textsContainer = nil;
-    player = nil;
-    practiceButton = nil;
-    animetedText = nil;
-    loginFBbutton = nil;
-    practiceLable = nil;
-    loginLable = nil;
-}
 #pragma mark -
 #pragma mark IBActions
 
@@ -204,8 +185,8 @@ static LoginAnimatedViewController *sharedHelper = nil;
 }
 
 - (IBAction)loginButtonClick:(id)sender {
-    [startViewController checkNetworkStatus:nil];
-    if ([startViewController connectedToWiFi]) {
+    [[StartViewController sharedInstance] checkNetworkStatus:nil];
+    if ([[StartViewController sharedInstance] connectedToWiFi]) {
         [activityView setHidden:NO];
         [activityIndicatorView startAnimating];
         animationPause = YES;
@@ -313,7 +294,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
         
         [self.player setVolume:0.0];
         [[StartViewController sharedInstance] profileFirstRunButtonClickWithOutAnimation];
-        [self releaseComponents];
     }
 }
 
@@ -326,10 +306,10 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [userDefaults setInteger:facebookLogIn forKey:@"facebookLogIn"];
     [userDefaults synchronize];
     
-    startViewController.oldAccounId=playerAccount.accountID;
+    [StartViewController sharedInstance].oldAccounId=playerAccount.accountID;
     [playerAccount makeLocalAccountID];
     [[NSUserDefaults standardUserDefaults] setObject:ValidateObject(playerAccount.accountID, [NSString class]) forKey:@"id"];
-    [startViewController authorizationModifier:NO];
+    [[StartViewController sharedInstance] authorizationModifier:NO];
 }
 
 -(void)fbDidNotLogin:(BOOL)cancelled
@@ -345,10 +325,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
 	
     
 	if ([result isKindOfClass:[NSDictionary class]]) {
-        
-        BOOL modifierUserInfo = YES;
-
-        startViewController.oldAccounId = [[NSString alloc] initWithFormat:@"%@",playerAccount.accountID];
+        [StartViewController sharedInstance].oldAccounId = [[NSString alloc] initWithFormat:@"%@",playerAccount.accountID];
         
 		NSString *userId = [NSString stringWithFormat:@"F:%@", ValidateObject([result objectForKey:@"id"], [NSString class])];
         playerAccount.accountID=userId;
@@ -380,7 +357,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
         
         [uDef synchronize];
         
-        [startViewController authorizationModifier:modifierUserInfo];
+        [[StartViewController sharedInstance] authorizationModifier:YES];
         payment = NO;
         [self.player stop];
         [self.player setVolume:0.0];

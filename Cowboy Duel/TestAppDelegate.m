@@ -71,7 +71,7 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     
     application.statusBarOrientation = UIInterfaceOrientationPortrait;
   
-    loginViewController = [[LoginAnimatedViewController alloc] init];
+    loginViewController = [LoginAnimatedViewController sharedInstance];
     navigationController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
     LoadViewController *loadViewController;
     

@@ -29,8 +29,8 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorView;
 
 
--(id)initWithAccount:(AccountDataSource *)userAccount startViewController:(StartViewController *)startViewController;
--(id)initFirstStartWithAccount:(AccountDataSource *)userAccount startViewController:(StartViewController *)startViewController;
+-(id)initWithAccount:(AccountDataSource *)userAccount;
+-(id)initFirstStartWithAccount:(AccountDataSource *)userAccount;
 -(id)initForOponent:(AccountDataSource *)oponentAccount andOpponentServer:(SSServer *)server;
 -(id)initForFavourite:(CDFavPlayer *)favPlayer withAccount:(AccountDataSource *)oponentAccount;
 
