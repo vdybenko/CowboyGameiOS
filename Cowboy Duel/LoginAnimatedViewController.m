@@ -301,9 +301,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
         NSInteger facebookLogIn = 1;
         [userDefaults setInteger:facebookLogIn forKey:@"facebookLogIn"];
         [userDefaults synchronize];
-        
-        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"birthday,id,name,picture,location",@"fields",nil];
-        
+                
         [FBRequestConnection startWithGraphPath:@"me" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
             [self request:nil didLoad:result];
             DLog(@"%@ %@", result, error);
