@@ -201,9 +201,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
                                                       userInfo:[NSDictionary dictionaryWithObject:@"/first_screen_teaching" forKey:@"event"]];
-    [self releaseComponents];
 }
-
 
 - (IBAction)loginButtonClick:(id)sender {
     [startViewController checkNetworkStatus:nil];
@@ -303,9 +301,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
         NSInteger facebookLogIn = 1;
         [userDefaults setInteger:facebookLogIn forKey:@"facebookLogIn"];
         [userDefaults synchronize];
-        
-        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"birthday,id,name,picture,location",@"fields",nil];
-        
+                
         [FBRequestConnection startWithGraphPath:@"me" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
             [self request:nil didLoad:result];
             DLog(@"%@ %@", result, error);
@@ -317,6 +313,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
         
         [self.player setVolume:0.0];
         [[StartViewController sharedInstance] profileFirstRunButtonClickWithOutAnimation];
+        [self releaseComponents];
     }
 }
 
