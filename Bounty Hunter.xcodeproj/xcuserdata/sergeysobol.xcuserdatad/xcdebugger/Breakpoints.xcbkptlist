@@ -299,8 +299,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "351"
          endingLineNumber = "351"
-         landmarkName = "-countUpBulets"
-         landmarkType = "5">
+         landmarkName = "@implementation ActiveDuelViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -338,8 +338,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "340"
          endingLineNumber = "340"
-         landmarkName = "@implementation ActiveDuelViewController"
-         landmarkType = "3">
+         landmarkName = "-viewDidUnload"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -411,11 +411,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/GameCenterViewController.m"
-         timestampString = "381932082.685373"
+         timestampString = "384269953.630531"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "712"
-         endingLineNumber = "712"
+         startingLineNumber = "32"
+         endingLineNumber = "32"
          landmarkName = "-receiveData:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -424,11 +424,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/GameCenterViewController.m"
-         timestampString = "381932084.116932"
+         timestampString = "384269953.630531"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "697"
-         endingLineNumber = "697"
+         startingLineNumber = "32"
+         endingLineNumber = "32"
          landmarkName = "-receiveData:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -442,7 +442,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "751"
          endingLineNumber = "751"
-         landmarkName = "-moveOponent"
+         landmarkName = "-duelTimerEndFeedBack"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
