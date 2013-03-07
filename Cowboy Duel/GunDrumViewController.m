@@ -316,7 +316,7 @@ static CGFloat timeSpinDump = 0.6f;
 -(void)helpAnimation{
 
     NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"ivIphoneImg1.png"],
-                         [UIImage imageNamed:@"ivIphoneImg3.png"],
+                         [UIImage imageNamed:@"ivIphoneImg2.png"],
                          nil];
     ivPhoneImg.animationImages = imgArray;
     ivPhoneImg.animationDuration = 2.0f;
