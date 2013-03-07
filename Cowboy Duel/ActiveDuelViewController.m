@@ -653,7 +653,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     [self setScale];
     
     //        Position for Shot
-    if ((acceleration.y < -0.4) || (rollingX < -0.3) || (rollingX > 0.3)) accelerometerState = NO;
+    if ((acceleration.y < -0.5) || (rollingX < -0.3) || (rollingX > 0.3)) accelerometerState = NO;
     
     //       Position for STEADY
     if ((acceleration.y > -0.4) && (rollingX > -0.3) && (rollingX < 0.3)) accelerometerState = YES;

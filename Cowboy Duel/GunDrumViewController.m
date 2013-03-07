@@ -19,6 +19,7 @@
     float steadyScale;
     float scaleDelta;
     NSTimer *scaleTimer;
+    BOOL labelAnimationStarted;
 }
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapRecognizer;
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *colectionBullets;
@@ -149,7 +150,7 @@ static CGFloat timeSpinDump = 0.6f;
         
         arrow.hidden = NO;
         lbLoadGun.text = NSLocalizedString(@"Load", @"");
-        
+        [self changeLableAnimation:vLoadGun endReverce:YES];
         angle = 0;
         CGAffineTransform transform = drumBullets.transform;
         CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
@@ -168,7 +169,7 @@ static CGFloat timeSpinDump = 0.6f;
 -(void)chargeBulletsForTime:(CGFloat)time;
 {
     lbLoadGun.text = NSLocalizedString(@"Loading", @"");
-    
+    [self changeLableAnimation:vLoadGun endReverce:NO];
     if (time != 0) {
         timeChargeBullets = time/[colectionBullets count];
         timeSpinDump = time*0.17;
@@ -327,6 +328,44 @@ static CGFloat timeSpinDump = 0.6f;
                      }completion:^(BOOL complete) {
                      }];
     
+}
+
+-(void)changeLableAnimation:(UIView*)view endReverce:(BOOL)reverce
+{
+    if(labelAnimationStarted) return;
+    labelAnimationStarted = YES;
+    CGRect startFrame = view.frame;
+    [UIView animateWithDuration:0.35
+                     animations:^{
+                         CGRect frame = view.frame;
+                         if (reverce) frame.origin.x = -400;
+                         else frame.origin.x = 400;
+                         view.frame = frame;
+                         [UIView animateWithDuration:0.17
+                                          animations:^{
+                                              view.transform = CGAffineTransformMakeScale(1.5, 1.5);
+                                          }completion:^(BOOL complete) {
+                                              [UIView animateWithDuration:0.17
+                                                               animations:^{
+                                                                   view.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                                                               }completion:^(BOOL complete) {
+                                                               }];
+                                          }];
+                         
+                     }completion:^(BOOL complete) {
+                         [view setHidden:YES];
+                         CGRect frame = view.frame;
+                         if (reverce) frame.origin.x = frame.size.width;
+                         else frame.origin.x = -frame.size.width;
+                         view.frame = frame;
+                         [view setHidden:NO];
+                         [UIView animateWithDuration:0.35
+                                          animations:^{
+                                              view.frame = startFrame;
+                                          }completion:^(BOOL complete) {
+                                              labelAnimationStarted = NO;
+                                          }];
+                     }];
 }
 
 #pragma mark Responding to gestures
