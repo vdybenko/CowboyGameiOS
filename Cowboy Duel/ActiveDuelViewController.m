@@ -487,6 +487,17 @@ static CGFloat oponentLiveImageViewStartWidth;
 
 -(void)cheackHitForShot:(CGPoint)shotPoint andTargetPoint:(CGPoint)targetPoint
 {
+    for (UIImageView *obstracle in self.floatView.subviews) {
+        if(obstracle.tag != 1) continue;
+        CGRect obstracleFrame = obstracle.frame;
+        obstracleFrame.origin.x = obstracle.frame.origin.x - (self.floatView.bounds.size.width / 2 - self.floatView.center.x);
+        obstracleFrame.origin.y = obstracle.frame.origin.y - (self.floatView.bounds.size.height / 2 - self.floatView.center.y);
+        if (CGRectContainsPoint(obstracleFrame, shotPoint)) {
+            return;
+        }
+        
+    }
+    
     if (([self abs:(shotPoint.x - targetPoint.x)] < targetWeidth / 2) && ([self abs:(shotPoint.y - targetPoint.y)] < targetHeight / 2)) {
         
         shotCountBullet--;
