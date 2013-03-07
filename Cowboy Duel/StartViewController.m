@@ -462,7 +462,6 @@ static StartViewController *sharedHelper = nil;
         [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
         
         LoginAnimatedViewController *loginViewControllerLocal = [LoginAnimatedViewController sharedInstance];
-        loginViewControllerLocal.startViewController = self;
         [loginViewControllerLocal setPayment:YES];
         [self.navigationController pushViewController:loginViewControllerLocal animated:YES];
         loginViewControllerLocal = nil;
@@ -728,7 +727,7 @@ static StartViewController *sharedHelper = nil;
 
 -(IBAction)profileButtonClick
 {
-    profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount startViewController:self];
+    profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount];
     [profileViewController setNeedAnimation:YES];
     CATransition* transition = [CATransition animation];
     transition.duration = 0.5;
@@ -756,7 +755,7 @@ static StartViewController *sharedHelper = nil;
 {   
     UIViewController *topController=[self.navigationController topViewController];
     if (![topController isKindOfClass:[ProfileViewController class]]) {
-        profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount startViewController:self];
+        profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount];
         [profileViewController.ivBlack setHidden:NO];
         [self.navigationController pushViewController:profileViewController animated:NO];
     }
@@ -781,8 +780,7 @@ static StartViewController *sharedHelper = nil;
     
     UIViewController *topController=[self.navigationController topViewController];
     if ([topController isKindOfClass:[LoginAnimatedViewController class]]) {
-        
-        profileViewController = [[ProfileViewController alloc] initFirstStartWithAccount:playerAccount startViewController:self];
+        profileViewController = [[ProfileViewController alloc] initFirstStartWithAccount:playerAccount];
         [self.navigationController pushViewController:profileViewController animated:NO];
     }
 }
@@ -1672,7 +1670,6 @@ static StartViewController *sharedHelper = nil;
         firstRunLocal = NO;
         animationCheck = NO;
         LoginAnimatedViewController *loginViewControllerLocal =[LoginAnimatedViewController sharedInstance];
-        loginViewControllerLocal.startViewController = self;
         [self.navigationController pushViewController:loginViewControllerLocal animated:YES];
         loginViewControllerLocal = nil;
     }

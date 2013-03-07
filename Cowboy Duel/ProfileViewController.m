@@ -29,7 +29,6 @@ static const CGFloat timeToStandartTitles = 1.8;
 @interface ProfileViewController ()
 {
     AccountDataSource *playerAccount;
-    LoginAnimatedViewController *loginViewController;
     
     SSServer *playerServer;
     
@@ -112,7 +111,7 @@ static const CGFloat timeToStandartTitles = 1.8;
 
 #pragma mark
 
--(id)initWithAccount:(AccountDataSource *)userAccount startViewController:(StartViewController *)startViewController;
+-(id)initWithAccount:(AccountDataSource *)userAccount;
 {
     self = [super initWithNibName:@"ProfileViewController" bundle:[NSBundle mainBundle]];
 
@@ -120,9 +119,6 @@ static const CGFloat timeToStandartTitles = 1.8;
         needAnimation = NO;
         needMoneyAnimation = YES;
         playerAccount=userAccount;
-         
-        loginViewController = [LoginAnimatedViewController sharedInstance]; 
-        loginViewController.startViewController = startViewController;
         
         numberFormatter = [[NSNumberFormatter alloc] init];
         [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
@@ -203,7 +199,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     return self;
 }
 
--(id)initFirstStartWithAccount:(AccountDataSource *)userAccount startViewController:(StartViewController *)startViewController;
+-(id)initFirstStartWithAccount:(AccountDataSource *)userAccount;
 {
     self = [super initWithNibName:@"ProfileViewControllerFirstRun" bundle:[NSBundle mainBundle]];
     
@@ -211,10 +207,7 @@ static const CGFloat timeToStandartTitles = 1.8;
         needAnimation = NO;
         needMoneyAnimation = YES;
         playerAccount=userAccount;
-        
-        loginViewController = [LoginAnimatedViewController sharedInstance];
-        loginViewController.startViewController = startViewController;
-        
+                
         numberFormatter = [[NSNumberFormatter alloc] init];
         [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
         
@@ -703,7 +696,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                              }];
         }
         if (![namePlayerSaved isEqualToString:textField.text]) {
-            [loginViewController.startViewController authorizationModifier:YES];
+            [[StartViewController sharedInstance] authorizationModifier:YES];
         }
     }
     return YES;
