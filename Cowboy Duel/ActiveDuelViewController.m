@@ -651,7 +651,8 @@ static CGFloat oponentLiveImageViewStartWidth;
 
 -(void)restartCountdown;
 {
-    NSLog(@"restartCountdown");
+//    To do
+//    NSLog(@"restartCountdown");
     
     follAccelCheck = NO;
     accelerometerState = NO;
@@ -874,7 +875,8 @@ static CGFloat oponentLiveImageViewStartWidth;
 
 -(void)readyToStart
 {
-    NSLog(@"startDuel");
+//    To do
+//    NSLog(@"startDuel");
     soundStart = YES;
     startInterval = [NSDate timeIntervalSinceReferenceDate];
     gunDrumViewController.chargeTime = time - 0.7;

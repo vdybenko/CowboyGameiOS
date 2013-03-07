@@ -14,6 +14,7 @@
     BOOL runAnimationDump;
     int firstAnimationCount;
     int secondAnimationCount;
+    int drumAnimationCount;
     double angle;
     float steadyScale;
     float scaleDelta;
@@ -122,10 +123,10 @@ static CGFloat timeSpinDump = 0.6f;
 -(void)openGun;
 {
     [self.view.layer removeAllAnimations];
+    [self hideBullets];
     [UIView animateWithDuration:timeOpenGun animations:^{
         arrow.hidden = YES;
         gunImage.transform = CGAffineTransformMakeRotation(gunRotationAngle);
-        drumBullets.hidden = NO;
         
         drumBullets.center = pntDumpOpen;
     }completion:^(BOOL finished) {
@@ -137,15 +138,17 @@ static CGFloat timeSpinDump = 0.6f;
 -(void)closeDump;
 {
     isCharging = NO;
-    arrow.hidden = NO;
-    vLoadGun.hidden = NO;
-    lbLoadGun.text = NSLocalizedString(@"Load", @"");
+    
     [UIView animateWithDuration:timeOpenDump animations:^{
         drumBullets.center= pntDumpClose;
         gunImage.transform = CGAffineTransformMakeRotation(0);
         runAnimationDump = NO;
     }completion:^(BOOL finished) {
+        isCharging = NO;
         [self hideBullets];
+        
+        arrow.hidden = NO;
+        lbLoadGun.text = NSLocalizedString(@"Load", @"");
         
         angle = 0;
         CGAffineTransform transform = drumBullets.transform;
@@ -158,7 +161,6 @@ static CGFloat timeSpinDump = 0.6f;
             frame.origin = pntGunClose;
             gun.frame = frame;
         }completion:^(BOOL finished) {
-            drumBullets.hidden = YES;
         }];
     }];
 }
@@ -166,7 +168,6 @@ static CGFloat timeSpinDump = 0.6f;
 -(void)chargeBulletsForTime:(CGFloat)time;
 {
     lbLoadGun.text = NSLocalizedString(@"Loading", @"");
-    vLoadGun.hidden = NO;
     
     if (time != 0) {
         timeChargeBullets = time/[colectionBullets count];
@@ -174,20 +175,25 @@ static CGFloat timeSpinDump = 0.6f;
     }
     
     isCharging = YES;
+    drumAnimationCount++;
     runAnimationDump = YES;
     arrow.hidden = YES;
     [self spinAnimation];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         for (UIImageView *bullet in colectionBullets) {
-            if (!isCharging){
+            if (!isCharging || (drumAnimationCount>=2)) {
                 break;
+                [self hideBullets];
             }
             dispatch_async(dispatch_get_main_queue(), ^{
-                bullet.hidden = NO;
+                if (isCharging){
+                    bullet.hidden = NO;
+                }
             });
             [NSThread sleepForTimeInterval:timeChargeBullets];
         }
+        drumAnimationCount--;
     });
 }
 
@@ -200,7 +206,6 @@ static CGFloat timeSpinDump = 0.6f;
                                   delay:0.0
                                 options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction
                              animations:^{
-                                 drumBullets.hidden = NO;
                                  angle -= 1.25;
                                  CGAffineTransform transform = drumBullets.transform;
                                  CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
@@ -226,7 +231,6 @@ static CGFloat timeSpinDump = 0.6f;
                                   delay:0.0
                                 options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction
                              animations:^{
-                                 drumBullets.hidden = NO;
                                  angle -= 1.25;
                                  CGAffineTransform transform = drumBullets.transform;
                                  CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
@@ -240,7 +244,6 @@ static CGFloat timeSpinDump = 0.6f;
                                  });
                              }];
         }
-    
     }
 }
 
@@ -264,13 +267,13 @@ static CGFloat timeSpinDump = 0.6f;
 
 -(void)hideGun;
 {
-    isCharging = NO;
     [UIView animateWithDuration:timeOpenDump animations:^{
         vLoadGun.hidden = YES;
         drumBullets.center= pntDumpClose;
         gunImage.transform = CGAffineTransformMakeRotation(0);
         runAnimationDump = NO;
     }completion:^(BOOL finished) {
+        isCharging = NO;
         [self hideBullets];
         angle = 0;
         CGAffineTransform transform = drumBullets.transform;
