@@ -13,7 +13,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "648"
          endingLineNumber = "648"
-         landmarkName = "-checkValidBlackActivity"
+         landmarkName = "-refreshContentFromPlayerAccount"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -130,7 +130,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "359"
          endingLineNumber = "359"
-         landmarkName = "-viewWillAppear:"
+         landmarkName = "-initMainControls"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -195,7 +195,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "392"
          endingLineNumber = "392"
-         landmarkName = "-releaseComponents"
+         landmarkName = "-initStatsWithAccount:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -234,7 +234,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "277"
          endingLineNumber = "277"
-         landmarkName = "-initForOponent:andOpponentServer:"
+         landmarkName = "-viewWillAppear:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -247,7 +247,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "440"
          endingLineNumber = "440"
-         landmarkName = "-initMainControls"
+         landmarkName = "-initStatsWithAccount:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -260,7 +260,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "488"
          endingLineNumber = "488"
-         landmarkName = "-checkLocationOfViewForFBLogin"
+         landmarkName = "-initStatsWithAccount:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -403,7 +403,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "903"
          endingLineNumber = "903"
-         landmarkName = "-duelButtonClick:"
+         landmarkName = "-btnLeaderbordClick:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -416,7 +416,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "32"
          endingLineNumber = "32"
-         landmarkName = "-receiveData:"
+         landmarkName = "+sharedInstance:andParentVC:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -429,20 +429,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "32"
          endingLineNumber = "32"
-         landmarkName = "-receiveData:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Cowboy Duel/ActiveDuelViewController.m"
-         timestampString = "383226490.861655"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "751"
-         endingLineNumber = "751"
-         landmarkName = "-duelTimerEndFeedBack"
+         landmarkName = "+sharedInstance:andParentVC:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
