@@ -636,17 +636,20 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">GunDrumViewController</string>
 					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">showGestureForTapRecognizer:</string>
-						<string key="NS.object.0">UITapGestureRecognizer</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">showGestureForTapRecognizer:</string>
-						<object class="IBActionInfo" key="NS.object.0">
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="showGestureForTapRecognizer:">UITapGestureRecognizer</string>
+						<string key="tapOnView:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="showGestureForTapRecognizer:">
 							<string key="name">showGestureForTapRecognizer:</string>
 							<string key="candidateClassName">UITapGestureRecognizer</string>
 						</object>
-					</object>
+						<object class="IBActionInfo" key="tapOnView:">
+							<string key="name">tapOnView:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="arrow">UIImageView</string>
 						<string key="drumBullets">UIView</string>
