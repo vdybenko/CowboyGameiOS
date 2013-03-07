@@ -93,9 +93,8 @@ static CGFloat timeSpinDump = 0.6f;
         lbLoadGun.text = NSLocalizedString(@"Load", @"");
         steadyScale = 1.0;
         scaleDelta = 0.0;
-     ///   scaleTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(setScale) userInfo:nil repeats:YES];
-      //  scaleTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(helpAnimation) userInfo:nil repeats:YES];
-    [self helpAnimation];
+        
+        [self helpAnimation];
         
     }
     return self;
@@ -310,50 +309,11 @@ static CGFloat timeSpinDump = 0.6f;
     if (steadyScale >= 1.3) scaleDelta = -0.01;
     if (steadyScale <= 1.0) scaleDelta = 0.02;
     steadyScale += scaleDelta;
-    
-    NSLog(@"ANIMATION STARTED");
-//    if (ivPhoneImg.isAnimating) {
-//            NSLog(@"ANIMATION SKIPPED!");
-//        return;
-//    }
-    
-    [UIImageView animateWithDuration:10.5
-                               delay:1.0
-                             options:UIViewAnimationCurveLinear
-                          animations:^{
-                              [ivPhoneImg setImage:[UIImage imageNamed:@"ivIphoneImg.png"]];
-                          } completion:^(BOOL finished) {
-                              
-                              [UIImageView animateWithDuration:10.5
-                                                         delay:1.0
-                                                       options:UIViewAnimationCurveLinear
-                                                    animations:^{
-                                                        [ivPhoneImg setImage:[UIImage imageNamed:@"ivIphoneImgLow.PNG"]];
-                                                    } completion:^(BOOL finished) {
-                                                        
-                                                        [UIImageView animateWithDuration:10.5
-                                                                                   delay:1.0
-                                                                                 options:UIViewAnimationCurveLinear
-                                                                              animations:^{
-                                                                                  [ivPhoneImg setImage:[UIImage imageNamed:@"ivIphoneImgHigh.PNG"]];
-                                                                              } completion:^(BOOL finished) {
-                                                                                  
-                                                                                  [ivPhoneImg setImage:[UIImage imageNamed:@"ivIphoneImg.png"]];
-                                                                                  NSLog(@"ANIMATION ENDED!");
-                                                                              }];
-                                                    }];
-                          }];
-    
-    
-//    CGAffineTransform steadyTransform = CGAffineTransformMakeScale( steadyScale+scaleDelta*2, steadyScale+scaleDelta*2);
-//    self.arrow.transform = steadyTransform;
-    
 }
 
 -(void)helpAnimation{
 
     NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"ivIphoneImg1.png"],
-                         [UIImage imageNamed:@"ivIphoneImg2.png"],
                          [UIImage imageNamed:@"ivIphoneImg3.png"],
                          nil];
     ivPhoneImg.animationImages = imgArray;
