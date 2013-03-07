@@ -186,8 +186,7 @@
 {    
     [activityIndicatorView hideView];
     if([LoginAnimatedViewController sharedInstance].isDemoPractice){
-        [tryButton setHidden:YES];
-        [tryButton setEnabled:NO];
+        [tryButton changeTitleByLabel:@"LOGIN"];
     }
     
     if (firstRun) {
@@ -334,6 +333,11 @@
 
 -(IBAction)tryButtonClick:(id)sender
 {
+    if([LoginAnimatedViewController sharedInstance].isDemoPractice){
+        [[LoginAnimatedViewController sharedInstance] loginButtonClick:sender];
+        return;
+    }
+    
     DLog(@"tryButtonClick");
     [activityIndicatorView showView];
     if(teaching)
