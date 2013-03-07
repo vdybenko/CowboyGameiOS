@@ -339,5 +339,8 @@ static CGFloat timeSpinDump = 0.6f;
 - (IBAction)showGestureForTapRecognizer:(UITapGestureRecognizer *)sender {
     [self lableScaleInView:vLoadGun];
 }
+- (IBAction)tapOnView:(id)sender {
+    [self lableScaleInView:vLoadGun];
+}
 
 @end
