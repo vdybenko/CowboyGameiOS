@@ -208,12 +208,24 @@ static CGFloat oponentLiveImageViewStartWidth;
     }
     
 	oponentsViewCoordinates = [NSMutableArray arrayWithCapacity:1];
-    //	for (int i = 0; i < numPois; i++) {
+    for (int i = 0; i < 5; i++) {
+        UIImageView *obstracleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bochka.png"]];
+        CGRect obstracleImageFrame = obstracleImage.frame;
+        obstracleImageFrame.origin.y = 240;
+        obstracleImageFrame.origin.x = (((float) rand()) / RAND_MAX) * 800;
+        obstracleImage.frame = obstracleImageFrame;
+        obstracleImage.tag = 1;
+        [self.floatView addSubview:obstracleImage];
+    }
+    
     OponentCoordinateView *poi = [OponentCoordinateView oponentCoordinateWithView:self.floatView at:[[CLLocation alloc] initWithLatitude:oponentCoords.latitude longitude:oponentCoords.longitude]];
-    [oponentsViewCoordinates insertObject:poi atIndex:0];
-    //	}
-	[plView setOponentCoordinates:oponentsViewCoordinates];
-
+    [oponentsViewCoordinates addObject:poi];
+    [plView setOponentCoordinates:oponentsViewCoordinates];
+    
+    //    int index = [self.view.subviews indexOfObject:self.glassImageView];
+    //    [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 1) withSubviewAtIndex:index];
+    int index = [self.view.subviews indexOfObject:self.crossImageView];
+    [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 2) withSubviewAtIndex:index];
     
     gunDrumViewController = [[GunDrumViewController alloc] initWithNibName:Nil bundle:Nil];
     [self.view addSubview:gunDrumViewController.view];
@@ -221,11 +233,17 @@ static CGFloat oponentLiveImageViewStartWidth;
     [gunDrumViewController showGun];
     self.gunButton.hidden = YES;
     
+    index = [self.view.subviews indexOfObject:self.gunButton];
+    [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 1) withSubviewAtIndex:index];
+    
+    [self.view bringSubviewToFront:self.glassImageViewBottom];
+    [self.view bringSubviewToFront:self.glassImageViewHeader];
+    
     CGRect frame;
     activityIndicatorView = [[ActivityIndicatorView alloc] init];
     frame = activityIndicatorView.frame;
     frame.origin = CGPointMake(0,0);
-    activityIndicatorView.frame=frame;
+    activityIndicatorView.frame = frame;
     [self.view addSubview:activityIndicatorView];
 }
 
