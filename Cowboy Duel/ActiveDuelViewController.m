@@ -135,6 +135,7 @@ static CGFloat oponentLiveImageViewStartWidth;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view from its nib.
     UIImage *spriteSheet = [UIImage imageNamed:@"explosion_4_39_128"];
     NSArray *arrayWithSprites = [spriteSheet spritesWithSpriteSheetImage:spriteSheet
@@ -508,10 +509,21 @@ static CGFloat oponentLiveImageViewStartWidth;
         frame.size.width = (float)((maxShotCount - userHitCount)*oponentLiveImageViewStartWidth)/maxShotCount;
         self.oponentLiveImageView.frame = frame;
         
-        if (CGRectContainsPoint(self.opponentBody.frame, shotPoint)) {
+        
+        
+        CGPoint targetPoint;
+        targetPoint.x = self.opponentImage.center.x - (self.floatView.bounds.size.width / 2 - self.floatView.center.x);
+        targetPoint.y = self.opponentImage.center.y - (self.floatView.bounds.size.height / 2 - self.floatView.center.y);
+        
+        CGPoint centerOfScreanPoint;
+        centerOfScreanPoint.x = self.crossImageView.bounds.origin.x + self.crossImageView.center.x;
+        centerOfScreanPoint.y = self.crossImageView.bounds.origin.y + self.crossImageView.center.y;
+        
+        CGRect opponentBodyFrame = [[self.opponentBody superview] convertRect:self.opponentBody.frame toView:self.view];
+            
+        if (CGRectContainsPoint(opponentBodyFrame, shotPoint)) {
             [self startRandomBloodAnimation];
-            CGPoint point = [self.view convertPoint:shotPoint toView:self.opponentImage];
-            [self hitTheOponentWithPoint:point];
+            [self hitTheOponentWithPoint:shotPoint];
         }
         
         if(!shotCountBullet) {
@@ -697,8 +709,7 @@ static CGFloat oponentLiveImageViewStartWidth;
 
 -(void)restartCountdown;
 {
-//    To do
-//    NSLog(@"restartCountdown");
+    NSLog(@"restartCountdown");
     
     follAccelCheck = NO;
     accelerometerState = NO;
@@ -828,9 +839,7 @@ static CGFloat oponentLiveImageViewStartWidth;
 -(void)hitTheOponentWithPoint:(CGPoint)hitPoint
 {
     UIImageView *ivHit = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ivHit.png"]];
-    CGRect frame = ivHit.frame;
-    frame.origin = [self.opponentImage convertPoint:hitPoint toView:self.opponentBody];
-    ivHit.frame = frame;
+    ivHit.center = [self.view convertPoint:hitPoint toView:self.opponentBody];
     [self.opponentBody addSubview:ivHit];
     ivHit = nil;
 }
@@ -920,8 +929,7 @@ static CGFloat oponentLiveImageViewStartWidth;
 
 -(void)readyToStart
 {
-//    To do
-//    NSLog(@"startDuel");
+    NSLog(@"startDuel");
     soundStart = YES;
     startInterval = [NSDate timeIntervalSinceReferenceDate];
     gunDrumViewController.chargeTime = time - 0.7;
