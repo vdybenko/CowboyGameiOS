@@ -214,7 +214,6 @@ static CGFloat oponentLiveImageViewStartWidth;
     //	}
 	[plView setOponentCoordinates:oponentsViewCoordinates];
 
-    
     gunDrumViewController = [[GunDrumViewController alloc] initWithNibName:Nil bundle:Nil];
     [self.view addSubview:gunDrumViewController.view];
     [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 1) withSubviewAtIndex:([self.view.subviews count] - 3)];
@@ -393,6 +392,8 @@ static CGFloat oponentLiveImageViewStartWidth;
                 [shotAudioPlayer1 performSelectorInBackground:@selector(play) withObject:nil];
                 
                 shotCountForSound = 2;
+                
+                [self hideSteadyImage];
                 break;
             case 2:
                 [shotAudioPlayer2 stop];
@@ -775,10 +776,8 @@ static CGFloat oponentLiveImageViewStartWidth;
                 self.opponentImage.frame = frame;
             }completion:^(BOOL complete){
             }];
-
         }];
     }];
-
 }
 
 -(void)hitTheOponentWithPoint:(CGPoint)hitPoint
