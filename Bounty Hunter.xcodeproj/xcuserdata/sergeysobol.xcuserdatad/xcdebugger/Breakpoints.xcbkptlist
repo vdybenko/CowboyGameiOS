@@ -273,7 +273,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "327"
          endingLineNumber = "327"
-         landmarkName = "-viewWillDisappear:"
+         landmarkName = "-viewWillAppear:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -299,8 +299,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "369"
          endingLineNumber = "369"
-         landmarkName = "@implementation ActiveDuelViewController"
-         landmarkType = "3">
+         landmarkName = "-viewDidUnload"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -442,7 +442,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "471"
          endingLineNumber = "471"
-         landmarkName = "-cheackHitForShot:andTargetPoint:"
+         landmarkName = "-horizontalFlip"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
