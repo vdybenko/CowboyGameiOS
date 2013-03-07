@@ -210,22 +210,23 @@ static CGFloat oponentLiveImageViewStartWidth;
 	oponentsViewCoordinates = [NSMutableArray arrayWithCapacity:1];
     for (int i = 0; i < 5; i++) {
         
-        NSString *fileName;
-        int randomNumber = arc4random() % 1;
+        UIImageView *obstracleImage;
+        CGRect obstracleImageFrame;
+        int randomNumber = arc4random() % 2;
         switch (randomNumber) {
             case 0:
-                fileName = @"bochka.png";
+                obstracleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bochka.png"]];
+                obstracleImageFrame = obstracleImage.frame;
+                obstracleImageFrame.origin.y = 240;
                 break;
             case 1:
-                fileName = @"bochka.png";
+                obstracleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cactus.png"]];
+                obstracleImageFrame = obstracleImage.frame;
+                obstracleImageFrame.origin.y = 175;
                 break;
             default:
                 break;
         }
-        
-        UIImageView *obstracleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:fileName]];
-        CGRect obstracleImageFrame = obstracleImage.frame;
-        obstracleImageFrame.origin.y = 240;
         obstracleImageFrame.origin.x = (((float) rand()) / RAND_MAX) * 800;
         obstracleImage.frame = obstracleImageFrame;
         obstracleImage.tag = 1;
