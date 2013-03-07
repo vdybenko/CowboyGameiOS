@@ -28,6 +28,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *arrow;
 @property (weak, nonatomic) IBOutlet UIView *gun;
 @property (weak, nonatomic) IBOutlet UIImageView *gunImage;
+@property (weak, nonatomic) IBOutlet UIImageView *ivPhoneImg;
+
 @end
 
 //points
@@ -60,6 +62,7 @@ static CGFloat timeSpinDump = 0.6f;
 @synthesize vLoadGun;
 @synthesize lbLoadGun;
 @synthesize gunImage;
+@synthesize ivPhoneImg;
 
 #pragma mark
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -90,8 +93,9 @@ static CGFloat timeSpinDump = 0.6f;
         lbLoadGun.text = NSLocalizedString(@"Load", @"");
         steadyScale = 1.0;
         scaleDelta = 0.0;
-        scaleTimer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(setScale) userInfo:nil repeats:YES];
-
+     ///   scaleTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(setScale) userInfo:nil repeats:YES];
+      //  scaleTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(helpAnimation) userInfo:nil repeats:YES];
+    [self helpAnimation];
         
     }
     return self;
@@ -111,6 +115,7 @@ static CGFloat timeSpinDump = 0.6f;
     [self setLbLoadGun:nil];
     [self setGunImage:nil];
     [self setTapRecognizer:nil];
+    [self setIvPhoneImg:nil];
     [super viewDidUnload];
 }
 
@@ -126,6 +131,7 @@ static CGFloat timeSpinDump = 0.6f;
     [self hideBullets];
     [UIView animateWithDuration:timeOpenGun animations:^{
         arrow.hidden = YES;
+        ivPhoneImg.hidden = YES;
         gunImage.transform = CGAffineTransformMakeRotation(gunRotationAngle);
         
         drumBullets.center = pntDumpOpen;
@@ -148,6 +154,7 @@ static CGFloat timeSpinDump = 0.6f;
         [self hideBullets];
         
         arrow.hidden = NO;
+        ivPhoneImg.hidden = NO;
         lbLoadGun.text = NSLocalizedString(@"Load", @"");
         
         angle = 0;
@@ -178,6 +185,7 @@ static CGFloat timeSpinDump = 0.6f;
     drumAnimationCount++;
     runAnimationDump = YES;
     arrow.hidden = YES;
+    ivPhoneImg.hidden = YES;
     [self spinAnimation];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
@@ -303,9 +311,56 @@ static CGFloat timeSpinDump = 0.6f;
     if (steadyScale <= 1.0) scaleDelta = 0.02;
     steadyScale += scaleDelta;
     
-    CGAffineTransform steadyTransform = CGAffineTransformMakeScale( steadyScale+scaleDelta*2, steadyScale+scaleDelta*2);
-    self.arrow.transform = steadyTransform;
+    NSLog(@"ANIMATION STARTED");
+//    if (ivPhoneImg.isAnimating) {
+//            NSLog(@"ANIMATION SKIPPED!");
+//        return;
+//    }
     
+    [UIImageView animateWithDuration:10.5
+                               delay:1.0
+                             options:UIViewAnimationCurveLinear
+                          animations:^{
+                              [ivPhoneImg setImage:[UIImage imageNamed:@"ivIphoneImg.png"]];
+                          } completion:^(BOOL finished) {
+                              
+                              [UIImageView animateWithDuration:10.5
+                                                         delay:1.0
+                                                       options:UIViewAnimationCurveLinear
+                                                    animations:^{
+                                                        [ivPhoneImg setImage:[UIImage imageNamed:@"ivIphoneImgLow.PNG"]];
+                                                    } completion:^(BOOL finished) {
+                                                        
+                                                        [UIImageView animateWithDuration:10.5
+                                                                                   delay:1.0
+                                                                                 options:UIViewAnimationCurveLinear
+                                                                              animations:^{
+                                                                                  [ivPhoneImg setImage:[UIImage imageNamed:@"ivIphoneImgHigh.PNG"]];
+                                                                              } completion:^(BOOL finished) {
+                                                                                  
+                                                                                  [ivPhoneImg setImage:[UIImage imageNamed:@"ivIphoneImg.png"]];
+                                                                                  NSLog(@"ANIMATION ENDED!");
+                                                                              }];
+                                                    }];
+                          }];
+    
+    
+//    CGAffineTransform steadyTransform = CGAffineTransformMakeScale( steadyScale+scaleDelta*2, steadyScale+scaleDelta*2);
+//    self.arrow.transform = steadyTransform;
+    
+}
+
+-(void)helpAnimation{
+
+    NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"ivIphoneImg1.png"],
+                         [UIImage imageNamed:@"ivIphoneImg2.png"],
+                         [UIImage imageNamed:@"ivIphoneImg3.png"],
+                         nil];
+    ivPhoneImg.animationImages = imgArray;
+    ivPhoneImg.animationDuration = 2.0f;
+    [ivPhoneImg setAnimationRepeatCount:0];
+    [ivPhoneImg startAnimating];
+   
 }
 
 -(void)lableScaleInView:(UIView*)view
