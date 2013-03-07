@@ -209,7 +209,21 @@ static CGFloat oponentLiveImageViewStartWidth;
     
 	oponentsViewCoordinates = [NSMutableArray arrayWithCapacity:1];
     for (int i = 0; i < 5; i++) {
-        UIImageView *obstracleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bochka.png"]];
+        
+        NSString *fileName;
+        int randomNumber = arc4random() % 1;
+        switch (randomNumber) {
+            case 0:
+                fileName = @"bochka.png";
+                break;
+            case 1:
+                fileName = @"bochka.png";
+                break;
+            default:
+                break;
+        }
+        
+        UIImageView *obstracleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:fileName]];
         CGRect obstracleImageFrame = obstracleImage.frame;
         obstracleImageFrame.origin.y = 240;
         obstracleImageFrame.origin.x = (((float) rand()) / RAND_MAX) * 800;
@@ -481,7 +495,6 @@ static CGFloat oponentLiveImageViewStartWidth;
         CGRect frame = self.oponentLiveImageView.frame;
         frame.size.width = (float)((maxShotCount - userHitCount)*oponentLiveImageViewStartWidth)/maxShotCount;
         self.oponentLiveImageView.frame = frame;
-        
         
         if (CGRectContainsPoint(self.opponentBody.frame, shotPoint)) {
             [self startRandomBloodAnimation];
