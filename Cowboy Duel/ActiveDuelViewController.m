@@ -220,6 +220,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 1) withSubviewAtIndex:([self.view.subviews count] - 3)];
     [gunDrumViewController showGun];
     self.gunButton.hidden = YES;
+    self.crossImageView.hidden = YES;
     
     CGRect frame;
     activityIndicatorView = [[ActivityIndicatorView alloc] init];
@@ -810,6 +811,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     steadyScale = 1.0;
     [self.titleSteadyFire setHidden:YES];
     [self.lblBehold setHidden:YES];
+    self.crossImageView.hidden = NO;
 }
 
 #pragma mark - Frequently of gun
