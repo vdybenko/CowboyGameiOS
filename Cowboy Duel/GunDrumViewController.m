@@ -130,8 +130,7 @@ static CGFloat timeSpinDump = 0.6f;
         
         drumBullets.center = pntDumpOpen;
     }completion:^(BOOL finished) {
-        CGFloat timeForCharge = chargeTime;
-        [self chargeBulletsForTime:timeForCharge];
+        [self chargeBulletsForTime:chargeTime];
     }];
 }
 
@@ -170,7 +169,8 @@ static CGFloat timeSpinDump = 0.6f;
     lbLoadGun.text = NSLocalizedString(@"Loading", @"");
     
     if (time != 0) {
-        timeChargeBullets = time/[colectionBullets count];
+        timeChargeBullets = time/([colectionBullets count]-1);
+        timeChargeBullets+=0.04;
         timeSpinDump = time*0.17;
     }
     
@@ -186,12 +186,14 @@ static CGFloat timeSpinDump = 0.6f;
                 break;
                 [self hideBullets];
             }
+            if ([colectionBullets indexOfObject:bullet]!=0) {
+                [NSThread sleepForTimeInterval:timeChargeBullets];
+            }
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (isCharging){
                     bullet.hidden = NO;
                 }
             });
-            [NSThread sleepForTimeInterval:timeChargeBullets];
         }
         drumAnimationCount--;
     });
