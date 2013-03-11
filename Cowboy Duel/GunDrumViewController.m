@@ -9,6 +9,7 @@
 #import "GunDrumViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AccountDataSource.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface GunDrumViewController ()
 {
@@ -21,6 +22,8 @@
     float scaleDelta;
     NSTimer *scaleTimer;
     BOOL labelAnimationStarted;
+    
+    AVAudioPlayer *putGunDownAudioPlayer;
 }
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapRecognizer;
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *colectionBullets;
@@ -96,6 +99,11 @@ static CGFloat timeSpinDump = 0.6f;
         steadyScale = 1.0;
         scaleDelta = 0.0;
         
+        NSError *error;
+        NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/follSound.aif", [[NSBundle mainBundle] resourcePath]]];
+        putGunDownAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+        [putGunDownAudioPlayer prepareToPlay];
+        
         [self helpAnimation];
         
     }
@@ -123,6 +131,7 @@ static CGFloat timeSpinDump = 0.6f;
 -(void)releaseComponents
 {
     [self viewDidUnload];
+    putGunDownAudioPlayer = nil;
 }
 
 #pragma mark
@@ -162,6 +171,9 @@ static CGFloat timeSpinDump = 0.6f;
         CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
         transform = CGAffineTransformScale(rotateTransform, 1.0, 1.0);
         drumBullets.transform = transform;
+        
+        [putGunDownAudioPlayer setCurrentTime:0.0];
+        [putGunDownAudioPlayer play];
         
         [UIView animateWithDuration:timeCloseGun animations:^{
             CGRect frame=gun.frame;

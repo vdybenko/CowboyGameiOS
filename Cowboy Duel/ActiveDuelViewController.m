@@ -345,8 +345,6 @@ static CGFloat oponentLiveImageViewStartWidth;
     [ignoreTimer invalidate];
     plView = (PLView *)self.view;
     [plView stopSensorialRotation];
-    
-    
 }
 
 -(void)viewDidDisappear:(BOOL)animated
