@@ -139,13 +139,6 @@ static CGFloat oponentLiveImageViewStartWidth;
     [super viewDidLoad];
     
     // Do any additional setup after loading the view from its nib.
-    UIImage *spriteSheet = [UIImage imageNamed:@"explosion_4_39_128"];
-    NSArray *arrayWithSprites = [spriteSheet spritesWithSpriteSheetImage:spriteSheet
-                                                              spriteSize:CGSizeMake(64, 64)];
-    [self.fireImageView setAnimationImages:arrayWithSprites];
-    float animationDuration = [self.fireImageView.animationImages count] * 0.0200; // 100ms per frame
-    [self.fireImageView setAnimationRepeatCount:1];
-    [self.fireImageView setAnimationDuration:animationDuration];
     
     UIImage *spriteSheetBlood = [UIImage imageNamed:@"blood_a"];
     NSArray *arrayWithSpritesBlood = [spriteSheetBlood spritesWithSpriteSheetImage:spriteSheetBlood
