@@ -1030,8 +1030,9 @@
     {
          playerAccount.accountWins++;
     }
-    [playerAccount accountWins];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [playerAccount saveAccountWins];
+//    [playerAccount accountWins];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #pragma mark -
