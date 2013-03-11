@@ -613,8 +613,6 @@ static CGFloat oponentLiveImageViewStartWidth;
 
 -(void)opponentLost
 {
-    //[self horizontalFlip];
-    //[self endDuel];
     self.opponentBody.image = [UIImage imageNamed:@"menLowDie.png"];
 }
 
