@@ -75,6 +75,7 @@
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *bloodImageView;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *bloodCImageView;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *smokeImage;
+@property (weak, nonatomic) IBOutlet UIView *glassImageViewAllBackground;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *glassImageViewHeader;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *glassImageViewBottom;
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *oponentLiveImageView;
@@ -89,6 +90,7 @@
 
 @implementation ActiveDuelViewController
 @synthesize delegate;
+@synthesize glassImageViewAllBackground;
 
 static CGFloat oponentLiveImageViewStartWidth;
 
@@ -137,13 +139,6 @@ static CGFloat oponentLiveImageViewStartWidth;
     [super viewDidLoad];
     
     // Do any additional setup after loading the view from its nib.
-    UIImage *spriteSheet = [UIImage imageNamed:@"explosion_4_39_128"];
-    NSArray *arrayWithSprites = [spriteSheet spritesWithSpriteSheetImage:spriteSheet
-                                                              spriteSize:CGSizeMake(64, 64)];
-    [self.fireImageView setAnimationImages:arrayWithSprites];
-    float animationDuration = [self.fireImageView.animationImages count] * 0.0200; // 100ms per frame
-    [self.fireImageView setAnimationRepeatCount:1];
-    [self.fireImageView setAnimationDuration:animationDuration];
     
     UIImage *spriteSheetBlood = [UIImage imageNamed:@"blood_a"];
     NSArray *arrayWithSpritesBlood = [spriteSheetBlood spritesWithSpriteSheetImage:spriteSheetBlood
@@ -253,6 +248,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     index = [self.view.subviews indexOfObject:self.gunButton];
     [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 1) withSubviewAtIndex:index];
     
+    [self.view bringSubviewToFront:glassImageViewAllBackground];
     [self.view bringSubviewToFront:self.glassImageViewBottom];
     [self.view bringSubviewToFront:self.glassImageViewHeader];
     
@@ -283,6 +279,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     
     userHitCount = 0;
     
+    [glassImageViewAllBackground setHidden:YES];
     [self.glassImageViewHeader setHidden:YES];
     [self.glassImageViewBottom setHidden:YES];
     
@@ -345,8 +342,6 @@ static CGFloat oponentLiveImageViewStartWidth;
     [ignoreTimer invalidate];
     plView = (PLView *)self.view;
     [plView stopSensorialRotation];
-    
-    
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -374,6 +369,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     [self setTitleSteadyFire:nil];
     [self setLblBehold:nil];
     [self setCrossImageView:nil];
+    [self setGlassImageViewAllBackground:nil];
     [super viewDidUnload];
 }
 
@@ -416,6 +412,8 @@ static CGFloat oponentLiveImageViewStartWidth;
 //            [delegate sendShot];
 //        }
     
+        [gunDrumViewController shotAnimation];
+        
         switch (shotCountForSound) {
             case 1:
                 [self.titleSteadyFire setHidden:YES];
@@ -643,6 +641,11 @@ static CGFloat oponentLiveImageViewStartWidth;
     if (duelEnd) return;
     duelEnd = YES;
     
+    glassImageViewAllBackground.alpha = 0.f;
+    [glassImageViewAllBackground setHidden:NO];
+    [UIView animateWithDuration:0.5 animations:^(){
+        glassImageViewAllBackground.alpha = 0.7;
+    }];
     [self.glassImageViewHeader setHidden:NO];
     [self.glassImageViewBottom setHidden:NO];
     [brockenGlassAudioPlayer play];

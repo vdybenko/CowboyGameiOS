@@ -744,7 +744,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 
 -(void)checkIsOpponentFavorite
 {
-    if ([self isPlayerForPractice]) {
+    if ([playerAccount isPlayerForPractice]) {
         btnAddToFavorites.hidden = YES;
     }else{
         if (playerServer.favorite) {
@@ -903,7 +903,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 }
 
 - (IBAction)duelButtonClick:(id)sender {
-    if ([self isPlayerForPractice]) {
+    if ([playerAccount isPlayerForPractice]) {
         [playerAccount.finalInfoTable removeAllObjects];
         int randomTime = (arc4random() % 3)-2;
         
@@ -1104,10 +1104,6 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     profilePictureViewDefault.hidden = NO;
 }
 
-#pragma mark if
--(BOOL)isPlayerForPractice{
-    return [playerAccount.sessionID isEqualToString:@"-1"]?YES:NO;
-}
 #pragma mark -
 - (void)dealloc {
 }

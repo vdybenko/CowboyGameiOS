@@ -8,6 +8,8 @@
 
 #import "GunDrumViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "AccountDataSource.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface GunDrumViewController ()
 {
@@ -20,6 +22,8 @@
     float scaleDelta;
     NSTimer *scaleTimer;
     BOOL labelAnimationStarted;
+    
+    AVAudioPlayer *putGunDownAudioPlayer;
 }
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapRecognizer;
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *colectionBullets;
@@ -30,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet UIView *gun;
 @property (weak, nonatomic) IBOutlet UIImageView *gunImage;
 @property (weak, nonatomic) IBOutlet UIImageView *ivPhoneImg;
+@property (weak, nonatomic) IBOutlet UIImageView *flash;
 
 @end
 
@@ -64,6 +69,7 @@ static CGFloat timeSpinDump = 0.6f;
 @synthesize lbLoadGun;
 @synthesize gunImage;
 @synthesize ivPhoneImg;
+@synthesize flash;
 
 #pragma mark
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -95,6 +101,11 @@ static CGFloat timeSpinDump = 0.6f;
         steadyScale = 1.0;
         scaleDelta = 0.0;
         
+        NSError *error;
+        NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/follSound.aif", [[NSBundle mainBundle] resourcePath]]];
+        putGunDownAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+        [putGunDownAudioPlayer prepareToPlay];
+        
         [self helpAnimation];
         
     }
@@ -116,12 +127,14 @@ static CGFloat timeSpinDump = 0.6f;
     [self setGunImage:nil];
     [self setTapRecognizer:nil];
     [self setIvPhoneImg:nil];
+    [self setFlash:nil];
     [super viewDidUnload];
 }
 
 -(void)releaseComponents
 {
     [self viewDidUnload];
+    putGunDownAudioPlayer = nil;
 }
 
 #pragma mark
@@ -162,6 +175,9 @@ static CGFloat timeSpinDump = 0.6f;
         transform = CGAffineTransformScale(rotateTransform, 1.0, 1.0);
         drumBullets.transform = transform;
         
+        [putGunDownAudioPlayer setCurrentTime:0.0];
+        [putGunDownAudioPlayer play];
+        
         [UIView animateWithDuration:timeCloseGun animations:^{
             CGRect frame=gun.frame;
             frame.origin = pntGunClose;
@@ -177,7 +193,11 @@ static CGFloat timeSpinDump = 0.6f;
     [self changeLableAnimation:vLoadGun endReverce:NO];
     if (time != 0) {
         timeChargeBullets = time/([colectionBullets count]-1);
-        timeChargeBullets+=0.04;
+        if ([[AccountDataSource sharedInstance] isPlayerForPractice]) {
+            timeChargeBullets+=0.04;
+        }else{
+            timeChargeBullets+=0.02;
+        }
         timeSpinDump = time*0.17;
     }
     
@@ -383,6 +403,33 @@ static CGFloat timeSpinDump = 0.6f;
                                               labelAnimationStarted = NO;
                                           }];
                      }];
+}
+
+-(void)shotAnimation;
+{
+    NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"gd_gun.png"],
+                         [UIImage imageNamed:@"gd_gunShot.png"],
+                         nil];
+    gunImage.animationImages = imgArray;
+    gunImage.animationDuration = 0.18f;
+    [gunImage setAnimationRepeatCount:1];
+    [gunImage startAnimating];
+    
+    [UIView animateWithDuration:0.13 delay:0.09 options:UIViewAnimationOptionTransitionNone animations:^{
+        gun.transform = CGAffineTransformMakeTranslation(0, 8);
+    } completion:^(BOOL complete) {
+        gun.transform = CGAffineTransformMakeTranslation(0, -8);
+    }];
+    
+    flash.alpha = 0.f;
+    flash.hidden = NO;
+    [UIView animateWithDuration:0.18 animations:^{
+        flash.alpha = 1.0;
+        flash.transform = CGAffineTransformMakeScale(1.5, 1.5);
+    } completion:^(BOOL complete) {
+        flash.hidden = YES;
+        flash.transform = CGAffineTransformMakeScale(1.0, 1.0);
+    }];
 }
 
 #pragma mark Responding to gestures

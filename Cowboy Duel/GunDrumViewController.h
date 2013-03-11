@@ -18,4 +18,5 @@
 -(void)showGun;
 -(void)hideGun;
 -(void)closeController;
+-(void)shotAnimation;
 @end

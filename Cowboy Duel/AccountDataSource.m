@@ -538,6 +538,10 @@ static AccountDataSource *sharedHelper = nil;
     }
 }
 
+-(BOOL)isPlayerForPractice{
+    return [self.sessionID isEqualToString:@"-1"]?YES:NO;
+}
+
 #pragma mark accountWeapon
 
 - (CDWeaponProduct*)loadAccountWeapon;
@@ -599,7 +603,6 @@ static AccountDataSource *sharedHelper = nil;
         return NO;
     }
 }
-
 
 #pragma mark - FBLoginViewDelegate
 

@@ -92,6 +92,7 @@
 - (int)increaseGlNumber;
 
 - (BOOL)isPlayerPlayDuel;
+- (BOOL)isPlayerForPractice;
 
 - (CDWeaponProduct*)loadAccountWeapon;
 -(NSUInteger(^)(NSArray *, NSInteger))findObsByID;

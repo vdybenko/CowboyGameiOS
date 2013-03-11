@@ -36,8 +36,8 @@
 #pragma mark -
 #pragma mark texture consts
 
-#define kTextureMaxWidth	512
-#define kTextureMaxHeight	512
+#define kTextureMaxWidth	1000
+#define kTextureMaxHeight	1000
 
 #pragma mark -
 #pragma mark cube consts
@@ -96,7 +96,7 @@
 #define kDefaultFovMinValue -0.2f
 #define kDefaultFovMaxValue  kFovMaxValue
 
-#define kDefaultFovFactorMinValue 0.8f
+#define kDefaultFovFactorMinValue 1.f
 #define kDefaultFovFactorMaxValue 1.20f
 
 #define kFovFactorOffsetValue			1.0f
