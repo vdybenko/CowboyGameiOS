@@ -34,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet UIView *gun;
 @property (weak, nonatomic) IBOutlet UIImageView *gunImage;
 @property (weak, nonatomic) IBOutlet UIImageView *ivPhoneImg;
+@property (weak, nonatomic) IBOutlet UIImageView *flash;
 
 @end
 
@@ -68,6 +69,7 @@ static CGFloat timeSpinDump = 0.6f;
 @synthesize lbLoadGun;
 @synthesize gunImage;
 @synthesize ivPhoneImg;
+@synthesize flash;
 
 #pragma mark
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -125,6 +127,7 @@ static CGFloat timeSpinDump = 0.6f;
     [self setGunImage:nil];
     [self setTapRecognizer:nil];
     [self setIvPhoneImg:nil];
+    [self setFlash:nil];
     [super viewDidUnload];
 }
 
@@ -400,6 +403,33 @@ static CGFloat timeSpinDump = 0.6f;
                                               labelAnimationStarted = NO;
                                           }];
                      }];
+}
+
+-(void)shotAnimation;
+{
+    NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"gd_gun.png"],
+                         [UIImage imageNamed:@"gd_gunShot.png"],
+                         nil];
+    gunImage.animationImages = imgArray;
+    gunImage.animationDuration = 0.18f;
+    [gunImage setAnimationRepeatCount:1];
+    [gunImage startAnimating];
+    
+    [UIView animateWithDuration:0.13 delay:0.09 options:UIViewAnimationOptionTransitionNone animations:^{
+        gun.transform = CGAffineTransformMakeTranslation(0, 8);
+    } completion:^(BOOL complete) {
+        gun.transform = CGAffineTransformMakeTranslation(0, -8);
+    }];
+    
+    flash.alpha = 0.f;
+    flash.hidden = NO;
+    [UIView animateWithDuration:0.18 animations:^{
+        flash.alpha = 1.0;
+        flash.transform = CGAffineTransformMakeScale(1.5, 1.5);
+    } completion:^(BOOL complete) {
+        flash.hidden = YES;
+        flash.transform = CGAffineTransformMakeScale(1.0, 1.0);
+    }];
 }
 
 #pragma mark Responding to gestures

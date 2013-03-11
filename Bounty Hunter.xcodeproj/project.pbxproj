@@ -283,6 +283,10 @@
 		76897D4016C3DE18001E06DB /* topPlayerStarSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76897D3E16C3DE18001E06DB /* topPlayerStarSelected@2x.png */; };
 		7689F5DD16B6A48E00D8AC5C /* ivHit.png in Resources */ = {isa = PBXBuildFile; fileRef = 7689F5DB16B6A48E00D8AC5C /* ivHit.png */; };
 		7689F5DE16B6A48E00D8AC5C /* ivHit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7689F5DC16B6A48E00D8AC5C /* ivHit@2x.png */; };
+		768B0E9616EDF03500D7EB99 /* gd_gunShot.png in Resources */ = {isa = PBXBuildFile; fileRef = 768B0E9416EDF03500D7EB99 /* gd_gunShot.png */; };
+		768B0E9716EDF03500D7EB99 /* gd_gunShot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 768B0E9516EDF03500D7EB99 /* gd_gunShot@2x.png */; };
+		768B0E9A16EE024B00D7EB99 /* flash.png in Resources */ = {isa = PBXBuildFile; fileRef = 768B0E9816EE024A00D7EB99 /* flash.png */; };
+		768B0E9B16EE024B00D7EB99 /* flash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 768B0E9916EE024B00D7EB99 /* flash@2x.png */; };
 		7690DD9316BFFC2900731B51 /* sl_shylc.png in Resources */ = {isa = PBXBuildFile; fileRef = 7690DD9116BFFC2900731B51 /* sl_shylc.png */; };
 		7690DD9416BFFC2900731B51 /* sl_shylc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7690DD9216BFFC2900731B51 /* sl_shylc@2x.png */; };
 		7691DD9416CE75B200AD25F5 /* LoadViewContoller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7691DD9316CE75B200AD25F5 /* LoadViewContoller.xib */; };
@@ -1131,6 +1135,10 @@
 		7689AD4116D76C3F00588BA8 /* DuelViewControllerWithXib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuelViewControllerWithXib.h; sourceTree = "<group>"; };
 		7689F5DB16B6A48E00D8AC5C /* ivHit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ivHit.png; sourceTree = "<group>"; };
 		7689F5DC16B6A48E00D8AC5C /* ivHit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ivHit@2x.png"; sourceTree = "<group>"; };
+		768B0E9416EDF03500D7EB99 /* gd_gunShot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gd_gunShot.png; sourceTree = "<group>"; };
+		768B0E9516EDF03500D7EB99 /* gd_gunShot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gd_gunShot@2x.png"; sourceTree = "<group>"; };
+		768B0E9816EE024A00D7EB99 /* flash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash.png; sourceTree = "<group>"; };
+		768B0E9916EE024B00D7EB99 /* flash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash@2x.png"; sourceTree = "<group>"; };
 		7690DD9116BFFC2900731B51 /* sl_shylc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sl_shylc.png; sourceTree = "<group>"; };
 		7690DD9216BFFC2900731B51 /* sl_shylc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sl_shylc@2x.png"; sourceTree = "<group>"; };
 		7690DDA016C0212300731B51 /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
@@ -2179,6 +2187,8 @@
 		7687666916BA7386003405F9 /* GunDrum */ = {
 			isa = PBXGroup;
 			children = (
+				768B0E9816EE024A00D7EB99 /* flash.png */,
+				768B0E9916EE024B00D7EB99 /* flash@2x.png */,
 				316F41EA16E8C3C200BD2E63 /* ivIphoneImg1.png */,
 				316F41EB16E8C3C200BD2E63 /* ivIphoneImg1@2x.png */,
 				316F41EC16E8C3C200BD2E63 /* ivIphoneImg2.png */,
@@ -2187,6 +2197,8 @@
 				BDCB5C0D16BE91BE0056D28E /* gd_board.png */,
 				7687666A16BA7386003405F9 /* gd_drum.png */,
 				7687666B16BA7386003405F9 /* gd_drum@2x.png */,
+				768B0E9416EDF03500D7EB99 /* gd_gunShot.png */,
+				768B0E9516EDF03500D7EB99 /* gd_gunShot@2x.png */,
 				7687666C16BA7386003405F9 /* gd_gun.png */,
 				7687666D16BA7386003405F9 /* gd_gun@2x.png */,
 				7687666E16BA7386003405F9 /* gd_sleeve.png */,
@@ -3090,6 +3102,10 @@
 				3136097616E8DA3A00D60AEF /* ivIphoneImg1@2x.png in Resources */,
 				3136097716E8DA3A00D60AEF /* ivIphoneImg2.png in Resources */,
 				3136097816E8DA3A00D60AEF /* ivIphoneImg2@2x.png in Resources */,
+				768B0E9616EDF03500D7EB99 /* gd_gunShot.png in Resources */,
+				768B0E9716EDF03500D7EB99 /* gd_gunShot@2x.png in Resources */,
+				768B0E9A16EE024B00D7EB99 /* flash.png in Resources */,
+				768B0E9B16EE024B00D7EB99 /* flash@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
