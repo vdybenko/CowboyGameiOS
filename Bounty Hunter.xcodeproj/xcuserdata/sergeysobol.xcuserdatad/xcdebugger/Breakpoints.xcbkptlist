@@ -338,8 +338,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "351"
          endingLineNumber = "351"
-         landmarkName = "-viewDidDisappear:"
-         landmarkType = "5">
+         landmarkName = "@implementation ActiveDuelViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -455,7 +455,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "830"
          endingLineNumber = "830"
-         landmarkName = "-hitTheOponentWithPoint:"
+         landmarkName = "-moveOponentInBackground"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
