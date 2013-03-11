@@ -176,6 +176,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
     //creating ActiveDuelVC
     int randomTime = (arc4random() % 3)-2;
     AccountDataSource *oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
+    playerAccount.sessionID = @"-1";
     ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:playerAccount oponentAccount:oponentAccount];
     [self.navigationController pushViewController:activeDuelViewController animated:YES];
     activeDuelViewController = nil;

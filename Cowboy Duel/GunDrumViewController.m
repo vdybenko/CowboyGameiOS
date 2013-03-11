@@ -8,6 +8,7 @@
 
 #import "GunDrumViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "AccountDataSource.h"
 
 @interface GunDrumViewController ()
 {
@@ -176,7 +177,11 @@ static CGFloat timeSpinDump = 0.6f;
     
     if (time != 0) {
         timeChargeBullets = time/([colectionBullets count]-1);
-        timeChargeBullets+=0.04;
+        if ([[AccountDataSource sharedInstance] isPlayerForPractice]) {
+            timeChargeBullets+=0.04;
+        }else{
+            timeChargeBullets+=0.02;
+        }
         timeSpinDump = time*0.17;
     }
     
