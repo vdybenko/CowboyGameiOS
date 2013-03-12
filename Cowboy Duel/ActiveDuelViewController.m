@@ -327,7 +327,7 @@ static CGFloat userLiveImageViewStartWidth;
   
     steadyScale = 1.0;
     
-    [self.opponentImage setHidden:YES];
+    [self.floatView setHidden:YES];
     
     for(UIView *subview in [self.opponentBody subviews])
     {
@@ -614,6 +614,7 @@ static CGFloat userLiveImageViewStartWidth;
     self.opponentImage.center = opponentCenter;
     
     [self.opponentImage setHidden:NO];
+    [self.floatView setHidden:NO];
 }
 
 -(void)opponentShot
@@ -774,9 +775,10 @@ static CGFloat userLiveImageViewStartWidth;
         [self vibrationStart];
         [self.gunButton setEnabled:YES];
         [self.opponentImage setHidden:NO];
+        [self.floatView setHidden:NO];
         [self.userLiveImageView setHidden:NO];
         
-        if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
+        if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
         moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
     }
     if ((shotTime * 0.001 >= 30.0) && (!duelTimerEnd) && (soundStart)) {
@@ -958,9 +960,10 @@ static CGFloat userLiveImageViewStartWidth;
         [player play];
         [self vibrationStart];
         [self.gunButton setEnabled:YES];
-        if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
+        if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
         moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
         [self.opponentImage setHidden:NO];
+        [self.floatView setHidden:NO];
     }
 }
 
