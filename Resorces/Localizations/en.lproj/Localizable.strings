@@ -130,8 +130,8 @@ p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font
 //Active Duel
 "Behold!" = "WATCH OUT!";
 "Load" = "LOAD YOUR GUN!";
-"Loading" = "LOADING, PLS WAIT!";
-
+"Loading" = "COME ON, LOAD QUICKER!";
+//C'MON
 //Moremoney
 
 "MOREMONEY" = "More money";
