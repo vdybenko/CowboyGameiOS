@@ -11,6 +11,7 @@
 @interface GunDrumViewController : UIViewController<MemoryManagement,UIGestureRecognizerDelegate>
 @property (nonatomic) CGFloat chargeTime;
 @property (nonatomic) BOOL isCharging;
+@property (weak, nonatomic) IBOutlet UIImageView *ivOponnentAvatar;
 
 -(void)openGun;
 -(void)chargeBulletsForTime:(CGFloat)time;

@@ -36,6 +36,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *ivPhoneImg;
 @property (weak, nonatomic) IBOutlet UIImageView *flash;
 @property (weak, nonatomic) IBOutlet UIView *hudView;
+@property (weak, nonatomic) IBOutlet UIView *vOponnentAvatarWithFrame;
+
 
 @end
 
@@ -72,6 +74,8 @@ static CGFloat timeSpinDump = 0.6f;
 @synthesize ivPhoneImg;
 @synthesize flash;
 @synthesize hudView;
+@synthesize ivOponnentAvatar;
+@synthesize vOponnentAvatarWithFrame;
 
 #pragma mark
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -83,6 +87,8 @@ static CGFloat timeSpinDump = 0.6f;
         isCharging = NO;
         
         hudView.hidden = NO;
+        
+        vOponnentAvatarWithFrame.hidden = NO;
         
         pntGunOpen=gun.frame.origin;
         pntDumpOpen=drumBullets.center;
@@ -133,6 +139,8 @@ static CGFloat timeSpinDump = 0.6f;
     [self setIvPhoneImg:nil];
     [self setFlash:nil];
     [self setHudView:nil];
+    [self setIvOponnentAvatar:nil];
+    [self setVOponnentAvatarWithFrame:nil];
     [super viewDidUnload];
 }
 
@@ -174,6 +182,7 @@ static CGFloat timeSpinDump = 0.6f;
         ivPhoneImg.hidden = NO;
         lbLoadGun.text = NSLocalizedString(@"Load", @"");
         hudView.hidden = NO;
+        vOponnentAvatarWithFrame.hidden = NO;
         [self changeLableAnimation:vLoadGun endReverce:YES];
         angle = 0;
         CGAffineTransform transform = drumBullets.transform;
@@ -197,6 +206,7 @@ static CGFloat timeSpinDump = 0.6f;
 {
     lbLoadGun.text = NSLocalizedString(@"Loading", @"");
     hudView.hidden = YES;
+    vOponnentAvatarWithFrame.hidden = YES;
     [self changeLableAnimation:vLoadGun endReverce:NO];
     if (time != 0) {
         timeChargeBullets = time/([colectionBullets count]-1);
