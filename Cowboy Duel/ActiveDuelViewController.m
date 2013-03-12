@@ -88,6 +88,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *titleSteadyFire;
 @property (weak, nonatomic) IBOutlet FXLabel *lblBehold;
 @property (weak, nonatomic) IBOutlet UIImageView *crossImageView;
+@property (weak, nonatomic) IBOutlet UIView *userLiveImageView;
 
 @end
 
@@ -96,6 +97,7 @@
 @synthesize glassImageViewAllBackground;
 
 static CGFloat oponentLiveImageViewStartWidth;
+static CGFloat userLiveImageViewStartWidth;
 
 -(id)initWithTime:(int)randomTime Account:(AccountDataSource *)userAccount oponentAccount:(AccountDataSource *)pOponentAccount
 {
@@ -294,6 +296,8 @@ static CGFloat oponentLiveImageViewStartWidth;
     [self.glassImageViewHeader setHidden:YES];
     [self.glassImageViewBottom setHidden:YES];
     
+    [self.userLiveImageView setHidden:YES];
+    
     firstAccel = YES;
     
     [self countUpBulets];
@@ -308,6 +312,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     frame.size.width = 84;
     self.oponentLiveImageView.frame = frame;
     oponentLiveImageViewStartWidth = self.oponentLiveImageView.frame.size.width;
+    userLiveImageViewStartWidth = self.userLiveImageView.frame.size.width;
     
     self.opStatsLabel.text = [NSString stringWithFormat: @"A: +%d\rD: +%d",opAccount.accountWeapon.dDamage,opAccount.accountDefenseValue];
     self.userStatsLabel.text = [NSString stringWithFormat: @"A: +%d\nD: +%d",playerAccount.accountWeapon.dDamage,playerAccount.accountDefenseValue];
@@ -381,6 +386,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     [self setLblBehold:nil];
     [self setCrossImageView:nil];
     [self setGlassImageViewAllBackground:nil];
+    [self setUserLiveImageView:nil];
     [super viewDidUnload];
 }
 
@@ -613,13 +619,27 @@ static CGFloat oponentLiveImageViewStartWidth;
 -(void)opponentShot
 {
     if (duelEnd) return;
-//    duelEnd = YES;
+    
     if ([self.smokeImage isAnimating]) {
         [self.smokeImage stopAnimating];
     }
     [self.smokeImage startAnimating];
     
+    CGRect frame = self.userLiveImageView.frame;
+    frame.size.width = (float)((shotCountBulletForOpponent)*userLiveImageViewStartWidth)/maxShotCountForOpponent;
+    self.userLiveImageView.frame = frame;
+    
+    if(!shotCountBulletForOpponent){
+        [self userLost];
+        FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime - time * 1000) andOponentTime:999999 andGameCenterController:self andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
+
+        [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:1.0];
+        [timer invalidate];
+        [moveTimer invalidate];
+    }
     shotCountBulletForOpponent--;
+    
+    
 }
 
 -(void)opponentLost
@@ -754,6 +774,10 @@ static CGFloat oponentLiveImageViewStartWidth;
         [self vibrationStart];
         [self.gunButton setEnabled:YES];
         [self.opponentImage setHidden:NO];
+        [self.userLiveImageView setHidden:NO];
+        
+        if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
+        moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
     }
     if ((shotTime * 0.001 >= 30.0) && (!duelTimerEnd) && (soundStart)) {
         if ([delegate respondsToSelector:@selector(duelTimerEnd)])
@@ -762,16 +786,16 @@ static CGFloat oponentLiveImageViewStartWidth;
         [timer invalidate];
     }
     
-    if (!delegate) {
-        if (shotTime - time * 1000 > opponentTime) {
-            [self userLost];
-            FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime - time * 1000) andOponentTime:opponentTime andGameCenterController:self andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
-            
-            [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
-            [timer invalidate];
-            [moveTimer invalidate];
-        }
-    }
+//    if (!delegate) {
+//        if (shotTime - time * 1000 > opponentTime) {
+//            [self userLost];
+//            FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime - time * 1000) andOponentTime:opponentTime andGameCenterController:self andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
+//            
+//            [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
+//            [timer invalidate];
+//            [moveTimer invalidate];
+//        }
+//    }
 }
 
 #pragma mark
