@@ -1090,19 +1090,17 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
                  vec4f_t v;
                  multiplyMatrixAndVector(v, projectionCameraTransform, oponentCoordinates[index]);
                  
-                 float x = (v[0] / v[3] + 1.0f) * 0.5f;
-                 float y = -motion.gravity.z;//(v[1] / v[3] + 1.0f) * 0.5f;
-//                 NSLog(@"x = %.2f y = %.2f", x, y);
-//                 NSLog(@"v[0] = %.2f v[1] = %.2f v[2] = %.2f v[3] = %.2f", v[0], v[1], v[2], v[3]);
+                 float x = (v[0] / v[3] + 1.0f) * 0.4f;
+                 float y = -motion.gravity.z;
                  float distance;
                  if(v[2] > 0){
                      CGPoint currentPosition = oponentView.view.center;
-                     CGPoint newPosition = CGPointMake(x*self.bounds.size.width, self.bounds.size.height-(y*self.bounds.size.height + 200));
+                     CGPoint newPosition = CGPointMake(x*self.bounds.size.width, self.bounds.size.height-(y*self.bounds.size.height + 220));
                      
                      distance = powf(powf(currentPosition.x - newPosition.x, 2) + powf(currentPosition.y - newPosition.y, 2), 0.5);
                      
                      
-                     oponentView.view.center = CGPointMake(x*self.bounds.size.width, self.bounds.size.height - (y*self.bounds.size.height + 200));
+                     oponentView.view.center = CGPointMake(x*self.bounds.size.width, self.bounds.size.height - (y*self.bounds.size.height + 220));
                      index++;
                  }
              }
