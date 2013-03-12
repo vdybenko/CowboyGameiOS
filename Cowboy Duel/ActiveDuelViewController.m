@@ -56,6 +56,7 @@
     BOOL duelEnd;
     
     GunDrumViewController  *gunDrumViewController;
+    ProfileViewController *profileViewController;
     ActivityIndicatorView *activityIndicatorView;
     NSMutableArray *oponentsViewCoordinates;
     float steadyScale;
@@ -241,32 +242,14 @@ static CGFloat oponentLiveImageViewStartWidth;
     [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 2) withSubviewAtIndex:index];
     
     gunDrumViewController = [[GunDrumViewController alloc] initWithNibName:Nil bundle:Nil];
-    //avatar magic!
-    NSString *name = [[OGHelper sharedInstance ] getClearName:opAccount.accountID];
-    if ([opAccount.accountID rangeOfString:@"A"].location != NSNotFound){
-        gunDrumViewController.ivOponnentAvatar.contentMode = UIViewContentModeScaleAspectFit;
-        iconDownloader = [[IconDownloader alloc] init];
-        iconDownloader.namePlayer=name;
-        iconDownloader.delegate = self;
-        [iconDownloader setAvatarURL:opAccount.avatar];
-        [iconDownloader startDownloadSimpleIcon];
+
+    if(![LoginAnimatedViewController sharedInstance].isDemoPractice){
+
+        NSUInteger arraySize = [self.navigationController.viewControllers count];
+        profileViewController = [self.navigationController.viewControllers objectAtIndex:arraySize-2];
+        [gunDrumViewController.ivOponnentAvatar setImage:profileViewController.profilePictureViewDefault.image];
     }
-    
-    if ([opAccount.accountID rangeOfString:@"F"].location != NSNotFound) {
-        iconDownloader = [[IconDownloader alloc] init];
-        gunDrumViewController.ivOponnentAvatar.contentMode = UIViewContentModeScaleAspectFit;
-        
-        iconDownloader.namePlayer=name;
-        iconDownloader.delegate = self;
-        if ([opAccount.avatar isEqualToString:@""]) {
-            NSString *urlOponent=[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large",name];
-            [iconDownloader setAvatarURL:urlOponent];
-        }else {
-            [iconDownloader setAvatarURL:opAccount.avatar];
-        }
-        [iconDownloader startDownloadSimpleIcon];
-    }
-    //
+
     [self.view addSubview:gunDrumViewController.view];
     [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 1) withSubviewAtIndex:([self.view.subviews count] - 3)];
     [gunDrumViewController showGun];
@@ -908,12 +891,6 @@ static CGFloat oponentLiveImageViewStartWidth;
 {
     isGunCanShotOfFrequently = NO;
     [self performSelector:@selector(finishGunFrequentlyBlockTime) withObject:Nil afterDelay:playerAccount.accountWeapon.dFrequently];
-}
-#pragma mark - IconDownloaderDelegate
-- (void)appImageDidLoad:(NSIndexPath *)indexPath
-{
-    gunDrumViewController.ivOponnentAvatar.image = iconDownloader.imageDownloaded;
-//    gunDrumViewController.ivOponnentAvatar.hidden = NO;
 }
 
 #pragma mark - IBAction

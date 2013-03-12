@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIView *ivBlack;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorView;
 
+@property IBOutlet UIImageView *profilePictureViewDefault;
 
 -(id)initWithAccount:(AccountDataSource *)userAccount;
 -(id)initFirstStartWithAccount:(AccountDataSource *)userAccount;

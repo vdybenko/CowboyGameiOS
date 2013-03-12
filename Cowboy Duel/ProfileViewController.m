@@ -70,7 +70,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     __weak IBOutlet UILabel *userDefense;
     __weak IBOutlet FBProfilePictureView *profilePictureView;
     
-    __weak IBOutlet UIImageView *profilePictureViewDefault;
     __weak IBOutlet UIButton *duelButton;
     
     __weak IBOutlet UILabel *lbPointsCountMain;
@@ -107,7 +106,7 @@ static const CGFloat timeToStandartTitles = 1.8;
 @end
 
 @implementation ProfileViewController
-@synthesize needAnimation, ivBlack;
+@synthesize needAnimation, ivBlack,profilePictureViewDefault;
 
 #pragma mark
 
@@ -919,7 +918,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                             object:self
                                                           userInfo:[NSDictionary dictionaryWithObject:@"/duel_teaching" forKey:@"event"]];
-        [self releaseComponents];
+//        [self releaseComponents];
         return;
     }
     
@@ -980,7 +979,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                      } completion:^(BOOL complete){
                          activeDuelViewController = nil;
                      }];
-    [self releaseComponents];
+//    [self releaseComponents];
 }
 
 -(IBAction)showStoreWeapon:(id)sender
