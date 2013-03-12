@@ -48,6 +48,7 @@
         p = nil;
     }
     arrAudioPlayers = nil;
+    imageMain = nil;
 }
 
 -(void)goLeft;
