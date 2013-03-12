@@ -161,7 +161,7 @@ static CGFloat userLiveImageViewStartWidth;
     [self.bloodCImageView setAnimationRepeatCount:1];
     [self.bloodCImageView setAnimationDuration:animationDurationBloodC];
     
-    UIImage *spriteSheetSmoke = [UIImage imageNamed:@"SmokeSpriteSheet"];
+    UIImage *spriteSheetSmoke = [UIImage imageNamed:@"smokeSpriteSheet"];
     NSArray *arrayWithSpritesSmoke = [spriteSheetSmoke spritesWithSpriteSheetImage:spriteSheetSmoke
                                                                           spriteSize:CGSizeMake(64, 64)];
     [self.smokeImage setAnimationImages:arrayWithSpritesSmoke];
