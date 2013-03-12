@@ -241,6 +241,10 @@
 		76673F1316DE727600867083 /* pano_r.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 76673F0D16DE727600867083 /* pano_r.jpg */; };
 		76673F1416DE727600867083 /* pano_u.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 76673F0E16DE727600867083 /* pano_u.jpg */; };
 		766B7D3613FE790600377AA3 /* Fire.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 766B7D3513FE790600377AA3 /* Fire.mp3 */; };
+		7674F72C16EF5D4A00E43061 /* scream1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7674F72B16EF5D4A00E43061 /* scream1.mp3 */; };
+		7674F73016EF6BF300E43061 /* scream4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7674F72D16EF6BF300E43061 /* scream4.mp3 */; };
+		7674F73116EF6BF300E43061 /* scream3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7674F72E16EF6BF300E43061 /* scream3.mp3 */; };
+		7674F73216EF6BF300E43061 /* scream2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7674F72F16EF6BF300E43061 /* scream2.mp3 */; };
 		7675CA8615A2E10C005A3BD3 /* DuelRewardLogicController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7675CA8515A2E10B005A3BD3 /* DuelRewardLogicController.m */; };
 		7679307115BE8B61007F461F /* CDPlayerMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 7679307015BE8B60007F461F /* CDPlayerMain.m */; };
 		7679307515BE8D64007F461F /* CDTopPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7679307415BE8D64007F461F /* CDTopPlayer.m */; };
@@ -292,6 +296,10 @@
 		768B0E9F16EE125600D7EB99 /* blood_c.png in Resources */ = {isa = PBXBuildFile; fileRef = 768B0E9D16EE125600D7EB99 /* blood_c.png */; };
 		768B0EA616EE1F7000D7EB99 /* menLowDie.png in Resources */ = {isa = PBXBuildFile; fileRef = 768B0EA416EE1F7000D7EB99 /* menLowDie.png */; };
 		768B0EA716EE1F7000D7EB99 /* menLowDie@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 768B0EA516EE1F7000D7EB99 /* menLowDie@2x.png */; };
+		768B9E2D16EF24C200278FCA /* woman.png in Resources */ = {isa = PBXBuildFile; fileRef = 768B9E2B16EF24C200278FCA /* woman.png */; };
+		768B9E2E16EF24C200278FCA /* woman@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 768B9E2C16EF24C200278FCA /* woman@2x.png */; };
+		768B9E3016EF28D200278FCA /* WomanShape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 768B9E2F16EF28D200278FCA /* WomanShape.xib */; };
+		768B9E3316EF29CD00278FCA /* WomanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 768B9E3216EF29CD00278FCA /* WomanShape.m */; };
 		7690DD9316BFFC2900731B51 /* sl_shylc.png in Resources */ = {isa = PBXBuildFile; fileRef = 7690DD9116BFFC2900731B51 /* sl_shylc.png */; };
 		7690DD9416BFFC2900731B51 /* sl_shylc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7690DD9216BFFC2900731B51 /* sl_shylc@2x.png */; };
 		7691DD9416CE75B200AD25F5 /* LoadViewContoller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7691DD9316CE75B200AD25F5 /* LoadViewContoller.xib */; };
@@ -1080,6 +1088,10 @@
 		76673F0D16DE727600867083 /* pano_r.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pano_r.jpg; sourceTree = "<group>"; };
 		76673F0E16DE727600867083 /* pano_u.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pano_u.jpg; sourceTree = "<group>"; };
 		766B7D3513FE790600377AA3 /* Fire.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Fire.mp3; sourceTree = "<group>"; };
+		7674F72B16EF5D4A00E43061 /* scream1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = scream1.mp3; sourceTree = "<group>"; };
+		7674F72D16EF6BF300E43061 /* scream4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = scream4.mp3; sourceTree = "<group>"; };
+		7674F72E16EF6BF300E43061 /* scream3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = scream3.mp3; sourceTree = "<group>"; };
+		7674F72F16EF6BF300E43061 /* scream2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = scream2.mp3; sourceTree = "<group>"; };
 		7675CA8415A2E10B005A3BD3 /* DuelRewardLogicController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuelRewardLogicController.h; sourceTree = "<group>"; };
 		7675CA8515A2E10B005A3BD3 /* DuelRewardLogicController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DuelRewardLogicController.m; sourceTree = "<group>"; };
 		7679306F15BE8B60007F461F /* CDPlayerMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDPlayerMain.h; sourceTree = "<group>"; };
@@ -1149,6 +1161,11 @@
 		768B0E9D16EE125600D7EB99 /* blood_c.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blood_c.png; sourceTree = "<group>"; };
 		768B0EA416EE1F7000D7EB99 /* menLowDie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menLowDie.png; sourceTree = "<group>"; };
 		768B0EA516EE1F7000D7EB99 /* menLowDie@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menLowDie@2x.png"; sourceTree = "<group>"; };
+		768B9E2B16EF24C200278FCA /* woman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = woman.png; sourceTree = "<group>"; };
+		768B9E2C16EF24C200278FCA /* woman@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "woman@2x.png"; sourceTree = "<group>"; };
+		768B9E2F16EF28D200278FCA /* WomanShape.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WomanShape.xib; path = Xib/WomanShape.xib; sourceTree = "<group>"; };
+		768B9E3116EF29CD00278FCA /* WomanShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WomanShape.h; sourceTree = "<group>"; };
+		768B9E3216EF29CD00278FCA /* WomanShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WomanShape.m; sourceTree = "<group>"; };
 		7690DD9116BFFC2900731B51 /* sl_shylc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sl_shylc.png; sourceTree = "<group>"; };
 		7690DD9216BFFC2900731B51 /* sl_shylc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sl_shylc@2x.png"; sourceTree = "<group>"; };
 		7690DDA016C0212300731B51 /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
@@ -1943,6 +1960,10 @@
 				6041D9B613A7BFBF0047A128 /* Back1start.mp3 */,
 				6041D9B713A7BFBF0047A128 /* Back2.mp3 */,
 				6041D9B913A7BFBF0047A128 /* Win.mp3 */,
+				7674F72D16EF6BF300E43061 /* scream4.mp3 */,
+				7674F72E16EF6BF300E43061 /* scream3.mp3 */,
+				7674F72F16EF6BF300E43061 /* scream2.mp3 */,
+				7674F72B16EF5D4A00E43061 /* scream1.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -2128,6 +2149,7 @@
 				318D010916C3AF4800BFA030 /* Favourites */,
 				7687667816BA7543003405F9 /* GunDrumViewController.xib */,
 				BD81E637169EC4D100CE8278 /* ActiveDuelViewController.xib */,
+				768B9E2F16EF28D200278FCA /* WomanShape.xib */,
 				BD84DAA4164ABCA000DEEE38 /* LoginAnimatedViewController.xib */,
 				7691DD9316CE75B200AD25F5 /* LoadViewContoller.xib */,
 				BD16BF961680934F00628CCC /* FunPageViewController.xib */,
@@ -2162,6 +2184,8 @@
 				7687667716BA7543003405F9 /* GunDrumViewController.m */,
 				BD81E635169EC4D100CE8278 /* ActiveDuelViewController.h */,
 				BD81E636169EC4D100CE8278 /* ActiveDuelViewController.m */,
+				768B9E3116EF29CD00278FCA /* WomanShape.h */,
+				768B9E3216EF29CD00278FCA /* WomanShape.m */,
 			);
 			name = Duel;
 			sourceTree = "<group>";
@@ -2506,6 +2530,8 @@
 				762FA45716DBA22400CA5E2F /* ivBloodBottom@2x.png */,
 				762FA45816DBA22400CA5E2F /* ivBloodHeader.png */,
 				762FA45916DBA22400CA5E2F /* ivBloodHeader@2x.png */,
+				768B9E2B16EF24C200278FCA /* woman.png */,
+				768B9E2C16EF24C200278FCA /* woman@2x.png */,
 				BD4BAAB416BC064900F88E82 /* men_low.png */,
 				BD4BAAB516BC064900F88E82 /* men_low@2x.png */,
 				768B0EA416EE1F7000D7EB99 /* menLowDie.png */,
@@ -3126,6 +3152,13 @@
 				768B0EA616EE1F7000D7EB99 /* menLowDie.png in Resources */,
 				768B0EA716EE1F7000D7EB99 /* menLowDie@2x.png in Resources */,
 				31FD628C16EF76B900E161FF /* smokeSpriteSheet.png in Resources */,
+				768B9E2D16EF24C200278FCA /* woman.png in Resources */,
+				768B9E2E16EF24C200278FCA /* woman@2x.png in Resources */,
+				768B9E3016EF28D200278FCA /* WomanShape.xib in Resources */,
+				7674F72C16EF5D4A00E43061 /* scream1.mp3 in Resources */,
+				7674F73016EF6BF300E43061 /* scream4.mp3 in Resources */,
+				7674F73116EF6BF300E43061 /* scream3.mp3 in Resources */,
+				7674F73216EF6BF300E43061 /* scream2.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3530,6 +3563,7 @@
 				BD0DA0F516D3727B00419DC1 /* PLVector3.m in Sources */,
 				BD0DA0F716D3727B00419DC1 /* PLView.m in Sources */,
 				BD0DA0F916D3727B00419DC1 /* PLViewBase.m in Sources */,
+				768B9E3316EF29CD00278FCA /* WomanShape.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

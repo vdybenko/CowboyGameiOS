@@ -16,6 +16,7 @@
 #import "OponentCoordinateView.h"
 #import "StartViewController.h"
 #import "GunDrumViewController.h"
+#import "WomanShape.h"
 
 #define targetHeight 260
 #define targetWeidth 100
@@ -68,6 +69,7 @@
     
     int opponentTime;
     
+    __weak IBOutlet WomanShape *woman;
     IconDownloader *iconDownloader;
 }
 
@@ -346,7 +348,6 @@ static CGFloat userLiveImageViewStartWidth;
         }
     }
    [plView startSensorialRotation];
-
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -388,6 +389,7 @@ static CGFloat userLiveImageViewStartWidth;
     [self setCrossImageView:nil];
     [self setGlassImageViewAllBackground:nil];
     [self setUserLiveImageView:nil];
+    woman = nil;
     [super viewDidUnload];
 }
 
@@ -504,6 +506,8 @@ static CGFloat userLiveImageViewStartWidth;
 
 -(void)cheackHitForShot:(CGPoint)shotPoint andTargetPoint:(CGPoint)targetPoint
 {
+    [woman shotInWomanWithPoint:shotPoint superViewOfPoint:self.view];
+    
     for (UIImageView *obstracle in self.floatView.subviews) {
         if(obstracle.tag != 1) continue;
         CGRect obstracleFrame = obstracle.frame;
