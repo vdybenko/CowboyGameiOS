@@ -200,8 +200,8 @@
 					</object>
 					<object class="IBUIView" id="161670681">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrameSize">{320, 480}</string>
+						<int key="NSvFlags">308</int>
+						<string key="NSFrameSize">{320, 960}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="732327535"/>
@@ -809,20 +809,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">GunDrumViewController</string>
 					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="showGestureForTapRecognizer:">UITapGestureRecognizer</string>
-						<string key="tapOnView:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="showGestureForTapRecognizer:">
-							<string key="name">showGestureForTapRecognizer:</string>
-							<string key="candidateClassName">UITapGestureRecognizer</string>
-						</object>
-						<object class="IBActionInfo" key="tapOnView:">
-							<string key="name">tapOnView:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="arrow">UIImageView</string>
 						<string key="drumBullets">UIView</string>
