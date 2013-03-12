@@ -51,7 +51,7 @@
 										<string key="NSFrame">{{70, 22}, {89, 161}}</string>
 										<reference key="NSSuperview" ref="943012689"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="226727912"/>
+										<reference key="NSNextKeyView" ref="52008312"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -107,7 +107,7 @@
 								<string key="NSFrame">{{0, 111}, {225, 213}}</string>
 								<reference key="NSSuperview" ref="370157639"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="675710864"/>
+								<reference key="NSNextKeyView" ref="586172221"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="IBUIBackgroundColor" ref="949355400"/>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -117,6 +117,17 @@
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="943012689"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<reference key="IBUIBackgroundColor" ref="949355400"/>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+					</object>
+					<object class="IBUIView" id="525867145">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{128, 120}, {89, 161}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="324338450"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="949355400"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -208,6 +219,7 @@
 						<string key="NSFrame">{{275, 445}, {45, 35}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -248,7 +260,7 @@
 						<string key="NSFrame">{{0, 136}, {320, 100}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="324338450"/>
+						<reference key="NSNextKeyView" ref="525867145"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -283,7 +295,7 @@
 						<string key="NSFrameSize">{320, 480}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="602955860"/>
+						<reference key="NSNextKeyView" ref="226727912"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -297,7 +309,7 @@
 						<string key="NSFrameSize">{320, 242}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="984249766"/>
+						<reference key="NSNextKeyView" ref="675710864"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -327,7 +339,7 @@
 						<string key="NSFrame">{{0, 2}, {320, 477}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="586172221"/>
+						<reference key="NSNextKeyView" ref="984249766"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -515,6 +527,14 @@
 					<int key="connectionID">72</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">woman</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="525867145"/>
+					</object>
+					<int key="connectionID">74</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">shotButtonClick:</string>
 						<reference key="source" ref="675710864"/>
@@ -549,6 +569,7 @@
 							<reference ref="970212667"/>
 							<reference ref="675710864"/>
 							<reference ref="52008312"/>
+							<reference ref="525867145"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -668,6 +689,12 @@
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">allRedBackground</string>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">73</int>
+						<reference key="object" ref="525867145"/>
+						<reference key="parent" ref="191373211"/>
+						<string key="objectName">Woman</string>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -696,12 +723,14 @@
 				<string key="64.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="67.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="71.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="73.CustomClassName">WomanShape</string>
+				<string key="73.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">72</int>
+			<int key="maxID">74</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -726,6 +755,7 @@
 						<string key="smokeImage">UIImageView</string>
 						<string key="titleSteadyFire">UIImageView</string>
 						<string key="userStatsLabel">UILabel</string>
+						<string key="woman">WomanShape</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="bloodCImageView">
@@ -796,6 +826,10 @@
 							<string key="name">userStatsLabel</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="woman">
+							<string key="name">woman</string>
+							<string key="candidateClassName">WomanShape</string>
+						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
@@ -824,6 +858,25 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/PLViewBase.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">WomanShape</string>
+					<string key="superclassName">UIView</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">imageMain</string>
+						<string key="NS.object.0">UIImageView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">imageMain</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">imageMain</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/WomanShape.h</string>
 					</object>
 				</object>
 			</array>
