@@ -161,10 +161,24 @@ static CGFloat userLiveImageViewStartWidth;
     [self.bloodCImageView setAnimationRepeatCount:1];
     [self.bloodCImageView setAnimationDuration:animationDurationBloodC];
     
-    UIImage *spriteSheetSmoke = [UIImage imageNamed:@"smoke"];
-    NSArray *arrayWithSpritesSmoke = [spriteSheetSmoke spritesWithSpriteSheetImage:spriteSheetSmoke
-                                                                          spriteSize:CGSizeMake(64, 64)];
-    [self.smokeImage setAnimationImages:arrayWithSpritesSmoke];
+//    UIImage *spriteSheetSmoke = [UIImage imageNamed:@"smoke"];
+//    NSArray *arrayWithSpritesSmoke = [spriteSheetSmoke spritesWithSpriteSheetImage:spriteSheetSmoke
+//                                                                          spriteSize:CGSizeMake(64, 64)];
+//    [self.smokeImage setAnimationImages:arrayWithSpritesSmoke];
+    
+    NSArray *arrayWithFramesSmoke = [NSArray arrayWithObjects:
+                                     [UIImage imageNamed:@"smoke_puff_0001.png"],
+                                     [UIImage imageNamed:@"smoke_puff_0002.png"],
+                                     [UIImage imageNamed:@"smoke_puff_0003.png"],
+                                     [UIImage imageNamed:@"smoke_puff_0004.png"],
+                                     [UIImage imageNamed:@"smoke_puff_0005.png"],
+                                     [UIImage imageNamed:@"smoke_puff_0006.png"],
+                                     [UIImage imageNamed:@"smoke_puff_0007.png"],
+                                     [UIImage imageNamed:@"smoke_puff_0008.png"],
+                                     [UIImage imageNamed:@"smoke_puff_0009.png"],
+                                     [UIImage imageNamed:@"smoke_puff_0010.png"],
+                                     nil];
+    [self.smokeImage setAnimationImages:arrayWithFramesSmoke];
     float animationDurationSmoke = [self.smokeImage.animationImages count] * 0.100; // 100ms per frame
     [self.smokeImage setAnimationRepeatCount:1];
     [self.smokeImage setAnimationDuration:animationDurationSmoke];
@@ -624,6 +638,10 @@ static CGFloat userLiveImageViewStartWidth;
         [self.smokeImage stopAnimating];
     }
     [self.smokeImage startAnimating];
+    
+    [oponentShotAudioPlayer stop];
+    [oponentShotAudioPlayer setCurrentTime:0.0];
+    [oponentShotAudioPlayer performSelectorInBackground:@selector(play) withObject:nil];
     
     CGRect frame = self.userLiveImageView.frame;
     frame.size.width = (float)((shotCountBulletForOpponent)*userLiveImageViewStartWidth)/maxShotCountForOpponent;
