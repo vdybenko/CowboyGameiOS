@@ -291,6 +291,8 @@
 		768B0E9F16EE125600D7EB99 /* blood_c.png in Resources */ = {isa = PBXBuildFile; fileRef = 768B0E9D16EE125600D7EB99 /* blood_c.png */; };
 		768B0EA616EE1F7000D7EB99 /* menLowDie.png in Resources */ = {isa = PBXBuildFile; fileRef = 768B0EA416EE1F7000D7EB99 /* menLowDie.png */; };
 		768B0EA716EE1F7000D7EB99 /* menLowDie@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 768B0EA516EE1F7000D7EB99 /* menLowDie@2x.png */; };
+		768B9E2D16EF24C200278FCA /* woman.png in Resources */ = {isa = PBXBuildFile; fileRef = 768B9E2B16EF24C200278FCA /* woman.png */; };
+		768B9E2E16EF24C200278FCA /* woman@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 768B9E2C16EF24C200278FCA /* woman@2x.png */; };
 		7690DD9316BFFC2900731B51 /* sl_shylc.png in Resources */ = {isa = PBXBuildFile; fileRef = 7690DD9116BFFC2900731B51 /* sl_shylc.png */; };
 		7690DD9416BFFC2900731B51 /* sl_shylc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7690DD9216BFFC2900731B51 /* sl_shylc@2x.png */; };
 		7691DD9416CE75B200AD25F5 /* LoadViewContoller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7691DD9316CE75B200AD25F5 /* LoadViewContoller.xib */; };
@@ -1147,6 +1149,8 @@
 		768B0E9D16EE125600D7EB99 /* blood_c.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blood_c.png; sourceTree = "<group>"; };
 		768B0EA416EE1F7000D7EB99 /* menLowDie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menLowDie.png; sourceTree = "<group>"; };
 		768B0EA516EE1F7000D7EB99 /* menLowDie@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menLowDie@2x.png"; sourceTree = "<group>"; };
+		768B9E2B16EF24C200278FCA /* woman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = woman.png; sourceTree = "<group>"; };
+		768B9E2C16EF24C200278FCA /* woman@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "woman@2x.png"; sourceTree = "<group>"; };
 		7690DD9116BFFC2900731B51 /* sl_shylc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sl_shylc.png; sourceTree = "<group>"; };
 		7690DD9216BFFC2900731B51 /* sl_shylc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sl_shylc@2x.png"; sourceTree = "<group>"; };
 		7690DDA016C0212300731B51 /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
@@ -2504,6 +2508,8 @@
 				762FA45716DBA22400CA5E2F /* ivBloodBottom@2x.png */,
 				762FA45816DBA22400CA5E2F /* ivBloodHeader.png */,
 				762FA45916DBA22400CA5E2F /* ivBloodHeader@2x.png */,
+				768B9E2B16EF24C200278FCA /* woman.png */,
+				768B9E2C16EF24C200278FCA /* woman@2x.png */,
 				BD4BAAB416BC064900F88E82 /* men_low.png */,
 				BD4BAAB516BC064900F88E82 /* men_low@2x.png */,
 				768B0EA416EE1F7000D7EB99 /* menLowDie.png */,
@@ -3122,6 +3128,8 @@
 				768B0E9F16EE125600D7EB99 /* blood_c.png in Resources */,
 				768B0EA616EE1F7000D7EB99 /* menLowDie.png in Resources */,
 				768B0EA716EE1F7000D7EB99 /* menLowDie@2x.png in Resources */,
+				768B9E2D16EF24C200278FCA /* woman.png in Resources */,
+				768B9E2E16EF24C200278FCA /* woman@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
