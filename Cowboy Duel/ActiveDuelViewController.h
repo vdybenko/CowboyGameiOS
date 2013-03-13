@@ -67,7 +67,7 @@
 @end
 
 
-@interface ActiveDuelViewController : UIViewController
+@interface ActiveDuelViewController : UIViewController <MemoryManagement>
 {
     BOOL duelIsStarted;
     BOOL fireSound;

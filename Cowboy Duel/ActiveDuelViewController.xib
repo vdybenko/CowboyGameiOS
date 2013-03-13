@@ -78,7 +78,10 @@
 								<reference key="NSSuperview" ref="370157639"/>
 								<reference key="NSNextKeyView" ref="52008312"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<reference key="IBUIBackgroundColor" ref="949355400"/>
+								<object class="NSColor" key="IBUIBackgroundColor" id="949355400">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MCAwAA</bytes>
+								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 							<object class="IBUIView" id="943012689">
@@ -374,6 +377,33 @@
 							<double key="NSSize">15</double>
 							<int key="NSfFlags">16</int>
 						</object>
+					</object>
+					<object class="IBUIView" id="557734904">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">292</int>
+						<array class="NSMutableArray" key="NSSubviews">
+							<object class="IBUIImageView" id="53060552">
+								<reference key="NSNextResponder" ref="557734904"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrameSize">{304, 24}</string>
+								<reference key="NSSuperview" ref="557734904"/>
+								<reference key="NSNextKeyView" ref="984249766"/>
+								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">fv_new_blue_line.png</string>
+								</object>
+							</object>
+						</array>
+						<string key="NSFrame">{{8, 8}, {304, 24}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSNextKeyView" ref="53060552"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<reference key="IBUIBackgroundColor" ref="949355400"/>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</array>
 				<string key="NSFrameSize">{320, 480}</string>
