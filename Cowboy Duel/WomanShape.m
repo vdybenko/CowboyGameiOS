@@ -11,7 +11,7 @@
 
 @interface WomanShape()
 {
-    NSMutableArray *arrAudioPlayers;
+    AVAudioPlayer *audioPlayer;
 }
 @end
 
@@ -28,26 +28,18 @@
             [self addSubview:nibView];
         }
         
-        arrAudioPlayers = [NSMutableArray array];
-        
-        for ( int i = 1; i < 5; i++ ) {
-            NSString *soundName = [NSString stringWithFormat:@"scream%d", i];
-            NSString *soundPath = [[NSBundle mainBundle] pathForResource:soundName ofType:@"mp3"];
-            NSURL *soundFile = [NSURL fileURLWithPath:soundPath];
-            AVAudioPlayer *p = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFile error:nil];
-            [arrAudioPlayers addObject:(id)p];
-            p = nil;
-        }
+        NSString *soundName = @"scream1";
+        NSString *soundPath = [[NSBundle mainBundle] pathForResource:soundName ofType:@"mp3"];
+        NSURL *soundFile = [NSURL fileURLWithPath:soundPath];
+        audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFile error:nil];
+        [audioPlayer prepareToPlay];
     }
     return self;
 }
 
 -(void)releaseComponents
 {
-    for (id __strong p in arrAudioPlayers) {
-        p = nil;
-    }
-    arrAudioPlayers = nil;
+    audioPlayer = nil;
     imageMain = nil;
 }
 
@@ -59,11 +51,7 @@
 {}
 
 -(void)scream;
-{
-    int numberOfAnimation = rand() % 4;
-    
-    AVAudioPlayer *audioPlayer = [arrAudioPlayers objectAtIndex:numberOfAnimation];
-    [audioPlayer prepareToPlay];
+{    
     [audioPlayer play];
 }
 
