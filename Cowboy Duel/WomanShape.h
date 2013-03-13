@@ -15,5 +15,6 @@
 -(void)goRight;
 -(void)stop;
 -(void)scream;
+-(void)randomPositionWithView:(UIView*)view;
 -(BOOL)shotInWomanWithPoint:(CGPoint)point superViewOfPoint:(UIView *)view;
 @end

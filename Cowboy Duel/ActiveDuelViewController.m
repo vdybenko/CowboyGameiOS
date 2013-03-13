@@ -301,6 +301,7 @@ static CGFloat userLiveImageViewStartWidth;
     
     [self countUpBulets];
     [self updateOpponentViewToRamdomPosition];
+    [woman randomPositionWithView:self.opponentImage];
     
 	[plView startAnimation];
     
@@ -328,10 +329,7 @@ static CGFloat userLiveImageViewStartWidth;
     
     self.opponentImage.hidden = YES;
     woman.hidden = YES;
-    for(UIView *subview in [self.opponentBody subviews])
-    {
-        [subview removeFromSuperview];
-    }
+    
     if(!delegate)
     {
         if (!opAccount.bot) opponentTime=7000;
@@ -361,6 +359,14 @@ static CGFloat userLiveImageViewStartWidth;
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    self.opponentBody.image = [UIImage imageNamed:@"men_low.png"];
+    for(UIView *subview in [self.opponentBody subviews])
+    {
+        [subview removeFromSuperview];
+    }
+    CGRect frame = self.userLiveImageView.frame;
+    frame.size.width = userLiveImageViewStartWidth;
+    self.userLiveImageView.frame = frame;
 }
 
 - (void)viewDidUnload {
@@ -684,7 +690,7 @@ static CGFloat userLiveImageViewStartWidth;
             
             [UIView animateWithDuration:0.5 animations:^{
             CGRect frame = blinkBottom.frame;
-            frame.origin.y = 171;
+            frame.origin.y = 151;
             blinkBottom.frame = frame;
             
             frame = blinkTop.frame;
