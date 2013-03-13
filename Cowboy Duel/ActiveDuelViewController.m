@@ -491,6 +491,7 @@ static CGFloat userLiveImageViewStartWidth;
 {
     BOOL result = [woman shotInWomanWithPoint:shotPoint superViewOfPoint:self.view];
     if (result) {
+        [self opponentShot];
         return;
     }
     
