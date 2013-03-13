@@ -85,8 +85,6 @@ static CGFloat timeSpinDump = 0.6f;
         [self loadView];
 
         isCharging = NO;
-                
-        vOponnentAvatarWithFrame.hidden = NO;
         
         pntGunOpen=gun.frame.origin;
         pntDumpOpen=drumBullets.center;
@@ -115,6 +113,7 @@ static CGFloat timeSpinDump = 0.6f;
         [putGunDownAudioPlayer prepareToPlay];
         
         [self helpAnimation];
+        vOponnentAvatarWithFrame.hidden = YES;
         
     }
     return self;
@@ -180,7 +179,7 @@ static CGFloat timeSpinDump = 0.6f;
         ivPhoneImg.hidden = NO;
         lbLoadGun.text = NSLocalizedString(@"Load", @"");
         hudView.alpha = 0.7f;
-        vOponnentAvatarWithFrame.hidden = NO;
+        vOponnentAvatarWithFrame.hidden = YES;
         [self changeLableAnimation:vLoadGun endReverce:YES];
         angle = 0;
         CGAffineTransform transform = drumBullets.transform;
@@ -203,7 +202,7 @@ static CGFloat timeSpinDump = 0.6f;
 -(void)chargeBulletsForTime:(CGFloat)time;
 {
     lbLoadGun.text = NSLocalizedString(@"Loading", @"");
-    vOponnentAvatarWithFrame.hidden = YES;
+    vOponnentAvatarWithFrame.hidden = NO;
     [self changeLableAnimation:vLoadGun endReverce:NO];
     if (time != 0) {
         timeChargeBullets = time/([colectionBullets count]-1);
@@ -294,6 +293,7 @@ static CGFloat timeSpinDump = 0.6f;
 
 -(void)hideBullets
 {
+    vOponnentAvatarWithFrame.hidden = YES;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         for (UIImageView *bullet in colectionBullets) {
             dispatch_async(dispatch_get_main_queue(), ^{
