@@ -73,7 +73,6 @@
     int randPosition = rand() % 100;
     int direction = rand() % 2?-1:1;
     body.x = (view.frame.origin.x + direction*randPosition);
-    NSLog(@"opponentCenter.x %f %d ",body.x,randPosition);
     self.center = body;
 }
 @end
