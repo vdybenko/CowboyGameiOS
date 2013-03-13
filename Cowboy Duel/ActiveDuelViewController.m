@@ -250,9 +250,6 @@ static CGFloat userLiveImageViewStartWidth;
 
     [self.view addSubview:gunDrumViewController.view];
     [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 1) withSubviewAtIndex:([self.view.subviews count] - 3)];
-    [gunDrumViewController showGun];
-    self.gunButton.hidden = YES;
-    self.crossImageView.hidden = YES;
     
     index = [self.view.subviews indexOfObject:self.gunButton];
     [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 1) withSubviewAtIndex:index];
@@ -283,6 +280,10 @@ static CGFloat userLiveImageViewStartWidth;
     
     [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(3.0 / 60.0)];
     [[UIAccelerometer sharedAccelerometer] setDelegate:self];
+    
+    [gunDrumViewController showGun];
+    self.gunButton.hidden = YES;
+    self.crossImageView.hidden = YES;
     
     [self showHelpViewOnStartDuel];
     
@@ -672,13 +673,13 @@ static CGFloat userLiveImageViewStartWidth;
     [self.navigationController pushViewController:controller animated:YES];
 }
 
+#pragma mark UIAccelerometer delegate
 
 -(void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
 {
     rollingX = (acceleration.x * kFilteringFactor) + (rollingX * (1.0 - kFilteringFactor));
     rollingY = (acceleration.y * kFilteringFactor) + (rollingY * (1.0 - kFilteringFactor));
     rollingZ = (acceleration.z * kFilteringFactor) + (rollingZ * (1.0 - kFilteringFactor));
-    [self setScale];
     
     //        Position for Shot
     if ((acceleration.y < -0.5) || (rollingX < -0.3) || (rollingX > 0.3)) accelerometerState = NO;
@@ -722,6 +723,8 @@ static CGFloat userLiveImageViewStartWidth;
     }
 
 }
+
+#pragma mark
 
 -(void)restartCountdown;
 {
@@ -822,6 +825,8 @@ static CGFloat userLiveImageViewStartWidth;
 
     [self.lblBehold setHidden:NO];
     self.gunButton.hidden = NO;
+        
+    [self setScale];
 }
 
 -(void)duelTimerEndFeedBack

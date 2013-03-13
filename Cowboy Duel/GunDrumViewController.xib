@@ -318,7 +318,6 @@
 										<string key="NSFrameSize">{80, 93}</string>
 										<reference key="NSSuperview" ref="483600761"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<int key="IBUIContentMode">4</int>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -859,6 +858,20 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">GunDrumViewController</string>
 					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="showGestureForTapRecognizer:">UITapGestureRecognizer</string>
+						<string key="tapOnView:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="showGestureForTapRecognizer:">
+							<string key="name">showGestureForTapRecognizer:</string>
+							<string key="candidateClassName">UITapGestureRecognizer</string>
+						</object>
+						<object class="IBActionInfo" key="tapOnView:">
+							<string key="name">tapOnView:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="arrow">UIImageView</string>
 						<string key="drumBullets">UIView</string>
