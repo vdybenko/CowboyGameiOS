@@ -365,37 +365,17 @@ static CGFloat userLiveImageViewStartWidth;
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-   
 }
 
 - (void)viewDidUnload {
-    [self setFloatView:nil];
-    [[UIAccelerometer sharedAccelerometer] setDelegate:nil];
-    [self setFireImageView:nil];
-    [self setOpponentImage:nil];
-    [self setBloodImageView:nil];
-    [self setBloodCImageView:nil];
-    [self setSmokeImage:nil];
-    [self setGlassImageViewHeader:nil];
-    [self setGlassImageViewBottom:nil];
-    [self setOponentLiveImageView:nil];
-    [self setGunButton:nil];
-    [self setGunButton:nil];
-    [self setOpStatsLabel:nil];
-    [self setUserStatsLabel:nil];
-    [self setOpponentBody:nil];
-    [self setTitleSteadyFire:nil];
-    [self setLblBehold:nil];
-    [self setCrossImageView:nil];
-    [self setGlassImageViewAllBackground:nil];
-    [self setUserLiveImageView:nil];
-    woman = nil;
+    [self releaseComponents];
     [super viewDidUnload];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    [self releaseComponents];
     // Dispose of any resources that can be recreated.
 }
 
@@ -1002,6 +982,33 @@ static CGFloat userLiveImageViewStartWidth;
 -(BOOL)accelerometerSendPositionSecond
 {
     return accelerometerState;
+}
+
+-(void)releaseComponents
+{
+    [self setFloatView:nil];
+    [[UIAccelerometer sharedAccelerometer] setDelegate:nil];
+    [self setFireImageView:nil];
+    [self setOpponentImage:nil];
+    [self setBloodImageView:nil];
+    [self setBloodCImageView:nil];
+    [self setSmokeImage:nil];
+    [self setGlassImageViewHeader:nil];
+    [self setGlassImageViewBottom:nil];
+    [self setOponentLiveImageView:nil];
+    [self setGunButton:nil];
+    [self setOpStatsLabel:nil];
+    [self setUserStatsLabel:nil];
+    [self setOpponentBody:nil];
+    [self setTitleSteadyFire:nil];
+    [self setLblBehold:nil];
+    [self setCrossImageView:nil];
+    [self setGlassImageViewAllBackground:nil];
+    [self setUserLiveImageView:nil];
+    woman = nil;
+    plView = nil;
+    [super viewDidUnload];
+
 }
 
 @end

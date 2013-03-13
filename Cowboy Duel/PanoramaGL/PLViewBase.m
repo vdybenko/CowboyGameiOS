@@ -1069,7 +1069,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
              }
              else {
                  float PI = 3.14159265;
-                 float yaw =currentAttitude.yaw * 180 / PI;
+                 float yaw = currentAttitude.yaw * 180 / PI;
                  float pitch = motion.gravity.z * 90;
                  float roll = currentAttitude.roll * 180 / PI;
                  
