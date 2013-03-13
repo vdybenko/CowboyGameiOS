@@ -241,10 +241,9 @@
 		76673F1316DE727600867083 /* pano_r.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 76673F0D16DE727600867083 /* pano_r.jpg */; };
 		76673F1416DE727600867083 /* pano_u.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 76673F0E16DE727600867083 /* pano_u.jpg */; };
 		766B7D3613FE790600377AA3 /* Fire.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 766B7D3513FE790600377AA3 /* Fire.mp3 */; };
+		766C608316F0B71800508128 /* blinkEye2.png in Resources */ = {isa = PBXBuildFile; fileRef = 766C608116F0B71800508128 /* blinkEye2.png */; };
+		766C608416F0B71800508128 /* blinkEye.png in Resources */ = {isa = PBXBuildFile; fileRef = 766C608216F0B71800508128 /* blinkEye.png */; };
 		7674F72C16EF5D4A00E43061 /* scream1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7674F72B16EF5D4A00E43061 /* scream1.mp3 */; };
-		7674F73016EF6BF300E43061 /* scream4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7674F72D16EF6BF300E43061 /* scream4.mp3 */; };
-		7674F73116EF6BF300E43061 /* scream3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7674F72E16EF6BF300E43061 /* scream3.mp3 */; };
-		7674F73216EF6BF300E43061 /* scream2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7674F72F16EF6BF300E43061 /* scream2.mp3 */; };
 		7675CA8615A2E10C005A3BD3 /* DuelRewardLogicController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7675CA8515A2E10B005A3BD3 /* DuelRewardLogicController.m */; };
 		7679307115BE8B61007F461F /* CDPlayerMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 7679307015BE8B60007F461F /* CDPlayerMain.m */; };
 		7679307515BE8D64007F461F /* CDTopPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7679307415BE8D64007F461F /* CDTopPlayer.m */; };
@@ -1088,10 +1087,9 @@
 		76673F0D16DE727600867083 /* pano_r.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pano_r.jpg; sourceTree = "<group>"; };
 		76673F0E16DE727600867083 /* pano_u.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pano_u.jpg; sourceTree = "<group>"; };
 		766B7D3513FE790600377AA3 /* Fire.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Fire.mp3; sourceTree = "<group>"; };
+		766C608116F0B71800508128 /* blinkEye2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blinkEye2.png; sourceTree = "<group>"; };
+		766C608216F0B71800508128 /* blinkEye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blinkEye.png; sourceTree = "<group>"; };
 		7674F72B16EF5D4A00E43061 /* scream1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = scream1.mp3; sourceTree = "<group>"; };
-		7674F72D16EF6BF300E43061 /* scream4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = scream4.mp3; sourceTree = "<group>"; };
-		7674F72E16EF6BF300E43061 /* scream3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = scream3.mp3; sourceTree = "<group>"; };
-		7674F72F16EF6BF300E43061 /* scream2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = scream2.mp3; sourceTree = "<group>"; };
 		7675CA8415A2E10B005A3BD3 /* DuelRewardLogicController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuelRewardLogicController.h; sourceTree = "<group>"; };
 		7675CA8515A2E10B005A3BD3 /* DuelRewardLogicController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DuelRewardLogicController.m; sourceTree = "<group>"; };
 		7679306F15BE8B60007F461F /* CDPlayerMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDPlayerMain.h; sourceTree = "<group>"; };
@@ -1960,9 +1958,6 @@
 				6041D9B613A7BFBF0047A128 /* Back1start.mp3 */,
 				6041D9B713A7BFBF0047A128 /* Back2.mp3 */,
 				6041D9B913A7BFBF0047A128 /* Win.mp3 */,
-				7674F72D16EF6BF300E43061 /* scream4.mp3 */,
-				7674F72E16EF6BF300E43061 /* scream3.mp3 */,
-				7674F72F16EF6BF300E43061 /* scream2.mp3 */,
 				7674F72B16EF5D4A00E43061 /* scream1.mp3 */,
 			);
 			path = Sounds;
@@ -2503,6 +2498,8 @@
 			isa = PBXGroup;
 			children = (
 				768B0E9C16EE125600D7EB99 /* blood_a.png */,
+				766C608116F0B71800508128 /* blinkEye2.png */,
+				766C608216F0B71800508128 /* blinkEye.png */,
 				768B0E9D16EE125600D7EB99 /* blood_c.png */,
 				7686FE6716E8BB6600837AF5 /* cactus.png */,
 				7686FE6816E8BB6600837AF5 /* cactus@2x.png */,
@@ -3156,9 +3153,8 @@
 				768B9E2E16EF24C200278FCA /* woman@2x.png in Resources */,
 				768B9E3016EF28D200278FCA /* WomanShape.xib in Resources */,
 				7674F72C16EF5D4A00E43061 /* scream1.mp3 in Resources */,
-				7674F73016EF6BF300E43061 /* scream4.mp3 in Resources */,
-				7674F73116EF6BF300E43061 /* scream3.mp3 in Resources */,
-				7674F73216EF6BF300E43061 /* scream2.mp3 in Resources */,
+				766C608316F0B71800508128 /* blinkEye2.png in Resources */,
+				766C608416F0B71800508128 /* blinkEye.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
