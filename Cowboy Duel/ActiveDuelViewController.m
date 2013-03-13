@@ -331,8 +331,8 @@ static CGFloat userLiveImageViewStartWidth;
   
     steadyScale = 1.0;
     
-    [self.floatView setHidden:YES];
-    
+    self.opponentImage.hidden = YES;
+    woman.hidden = YES;
     for(UIView *subview in [self.opponentBody subviews])
     {
         [subview removeFromSuperview];
@@ -480,14 +480,16 @@ static CGFloat userLiveImageViewStartWidth;
             finalAnimationStarted = NO;
             self.opponentImage.layer.transform = CATransform3DMakeScale(1, 1, 1);
         }];
-        
     }];
     
 }
 
 -(void)cheackHitForShot:(CGPoint)shotPoint andTargetPoint:(CGPoint)targetPoint
 {
-    [woman shotInWomanWithPoint:shotPoint superViewOfPoint:self.view];
+    BOOL result = [woman shotInWomanWithPoint:shotPoint superViewOfPoint:self.view];
+    if (result) {
+        return;
+    }
     
     for (UIImageView *obstracle in self.floatView.subviews) {
         if(obstracle.tag != 1) continue;
@@ -598,9 +600,6 @@ static CGFloat userLiveImageViewStartWidth;
     
     opponentCenter.x = randPosition;
     self.opponentImage.center = opponentCenter;
-    
-    [self.opponentImage setHidden:NO];
-    [self.floatView setHidden:NO];
 }
 
 -(void)opponentShot
@@ -766,9 +765,9 @@ static CGFloat userLiveImageViewStartWidth;
         [player play];
         [self vibrationStart];
         [self.gunButton setEnabled:YES];
-        [self.opponentImage setHidden:NO];
-        [self.floatView setHidden:NO];
         [self.userLiveImageView setHidden:NO];
+        self.opponentImage.hidden = NO;
+        woman.hidden = NO;
         
         if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
         moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
@@ -956,8 +955,8 @@ static CGFloat userLiveImageViewStartWidth;
         [self.gunButton setEnabled:YES];
         if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
         moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
-        [self.opponentImage setHidden:NO];
-        [self.floatView setHidden:NO];
+        self.opponentImage.hidden = NO;
+        woman.hidden = NO;
     }
 }
 

@@ -85,9 +85,7 @@ static CGFloat timeSpinDump = 0.6f;
         [self loadView];
 
         isCharging = NO;
-        
-        hudView.hidden = NO;
-        
+                
         vOponnentAvatarWithFrame.hidden = NO;
         
         pntGunOpen=gun.frame.origin;
@@ -181,7 +179,7 @@ static CGFloat timeSpinDump = 0.6f;
         arrow.hidden = NO;
         ivPhoneImg.hidden = NO;
         lbLoadGun.text = NSLocalizedString(@"Load", @"");
-        hudView.hidden = NO;
+        hudView.alpha = 0.7f;
         vOponnentAvatarWithFrame.hidden = NO;
         [self changeLableAnimation:vLoadGun endReverce:YES];
         angle = 0;
@@ -205,7 +203,6 @@ static CGFloat timeSpinDump = 0.6f;
 -(void)chargeBulletsForTime:(CGFloat)time;
 {
     lbLoadGun.text = NSLocalizedString(@"Loading", @"");
-    hudView.hidden = YES;
     vOponnentAvatarWithFrame.hidden = YES;
     [self changeLableAnimation:vLoadGun endReverce:NO];
     if (time != 0) {
@@ -224,6 +221,7 @@ static CGFloat timeSpinDump = 0.6f;
     arrow.hidden = YES;
     ivPhoneImg.hidden = YES;
     [self spinAnimation];
+    [self displayHubView];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         for (UIImageView *bullet in colectionBullets) {
@@ -307,6 +305,8 @@ static CGFloat timeSpinDump = 0.6f;
 
 -(void)showGun;
 {
+    hudView.alpha = 0.7f;
+    
     CGRect frame=self.view.frame;
     frame.origin = pntViewShow;
     self.view.frame = frame;
@@ -445,6 +445,15 @@ static CGFloat timeSpinDump = 0.6f;
     } completion:^(BOOL complete) {
         flash.hidden = YES;
         flash.transform = CGAffineTransformMakeScale(1.0, 1.0);
+    }];
+}
+
+-(void)displayHubView;
+{
+    [UIView animateWithDuration:chargeTime animations:^{
+        hudView.alpha = 0.0;
+    } completion:^(BOOL complete) {
+        
     }];
 }
 
