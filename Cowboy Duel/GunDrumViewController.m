@@ -333,7 +333,6 @@ static CGFloat timeSpinDump = 0.6f;
             frame.origin.y += 50;
             gun.frame = frame;
         }completion:^(BOOL finished) {
-            drumBullets.hidden = YES;
         }];
     }];
 }
