@@ -71,6 +71,8 @@
     
     __weak IBOutlet WomanShape *woman;
     IconDownloader *iconDownloader;
+    __weak IBOutlet UIImageView *blinkBottom;
+    __weak IBOutlet UIImageView *blinkTop;
 }
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *floatView;
@@ -254,10 +256,10 @@ static CGFloat userLiveImageViewStartWidth;
     index = [self.view.subviews indexOfObject:self.gunButton];
     [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 1) withSubviewAtIndex:index];
     
-    [self.view bringSubviewToFront:glassImageViewAllBackground];
     [self.view bringSubviewToFront:self.glassImageViewBottom];
     [self.view bringSubviewToFront:self.glassImageViewHeader];
-    
+    [self.view bringSubviewToFront:glassImageViewAllBackground];
+
     CGRect frame;
     activityIndicatorView = [[ActivityIndicatorView alloc] init];
     frame = activityIndicatorView.frame;
@@ -363,6 +365,8 @@ static CGFloat userLiveImageViewStartWidth;
 
 - (void)viewDidUnload {
     [self releaseComponents];
+    blinkBottom = nil;
+    blinkBottom = nil;
     [super viewDidUnload];
 }
 
@@ -654,16 +658,49 @@ static CGFloat userLiveImageViewStartWidth;
     if (duelEnd) return;
     duelEnd = YES;
     
-    glassImageViewAllBackground.alpha = 0.f;
-    [glassImageViewAllBackground setHidden:NO];
-    [UIView animateWithDuration:0.5 animations:^(){
-        glassImageViewAllBackground.alpha = 0.7;
-    }];
     [self.glassImageViewHeader setHidden:NO];
     [self.glassImageViewBottom setHidden:NO];
+    [glassImageViewAllBackground setHidden:NO];
+    
+    [UIView animateWithDuration:1.f animations:^{
+        CGRect frame = blinkBottom.frame;
+        frame.origin.y = 171;
+        blinkBottom.frame = frame;
+        
+        frame = blinkTop.frame;
+        frame.origin.y = 0;
+        blinkTop.frame = frame;
+        
+    }completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.5 animations:^{
+            CGRect frame = blinkBottom.frame;
+            frame.origin.y = 201;
+            blinkBottom.frame = frame;
+            
+            frame = blinkTop.frame;
+            frame.origin.y = -30;
+            blinkTop.frame = frame;
+        }completion:^(BOOL finished) {
+            
+            [UIView animateWithDuration:0.5 animations:^{
+            CGRect frame = blinkBottom.frame;
+            frame.origin.y = 171;
+            blinkBottom.frame = frame;
+            
+            frame = blinkTop.frame;
+            frame.origin.y = 0;
+            blinkTop.frame = frame;
+        }completion:^(BOOL finished) {
+        }];
+
+        }];
+    }];
+
+    
     [brockenGlassAudioPlayer play];
     [timer invalidate];
     [moveTimer invalidate];
+    
     self.gunButton.hidden = YES;
     [ignoreTimer invalidate];
 }
