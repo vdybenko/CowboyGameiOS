@@ -248,13 +248,6 @@ static CGFloat userLiveImageViewStartWidth;
     
     gunDrumViewController = [[GunDrumViewController alloc] initWithNibName:Nil bundle:Nil];
 
-    if(![LoginAnimatedViewController sharedInstance].isDemoPractice){
-
-        NSUInteger arraySize = [self.navigationController.viewControllers count];
-        profileViewController = [self.navigationController.viewControllers objectAtIndex:arraySize-2];
-        [gunDrumViewController.ivOponnentAvatar setImage:profileViewController.profilePictureViewDefault.image];
-    }
-
     [self.view addSubview:gunDrumViewController.view];
     [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 1) withSubviewAtIndex:([self.view.subviews count] - 3)];
     
