@@ -252,10 +252,22 @@ static LoginAnimatedViewController *sharedHelper = nil;
                                                                       
                                                                   }];
                                           }];
-
                      }];
 
 }
+
+-(void)scaleButton:(UIView *)button
+{
+    [UIView animateWithDuration:0.4 animations:^{
+        button.transform = CGAffineTransformMakeScale(1.3, 1.3);
+    } completion:^(BOOL complete) {
+        [UIView animateWithDuration:0.4 animations:^{
+            button.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        }completion:^(BOOL complete){
+        } ];
+    }];
+}
+
 
 #pragma mark -
 
