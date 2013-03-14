@@ -305,6 +305,10 @@
 		7692812C159DCAFD00E6CE41 /* IconDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7692812B159DCAFD00E6CE41 /* IconDownloader.m */; };
 		7692BC2F1574E36C00983264 /* DuelStartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7692BC2E1574E36C00983264 /* DuelStartViewController.xib */; };
 		7693419713DDBA5000A962A4 /* DecreeNarrow.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7693419613DDBA5000A962A4 /* DecreeNarrow.ttf */; };
+		7693D97216F1B4960096F61F /* oponent_step1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7693D97016F1B4960096F61F /* oponent_step1.png */; };
+		7693D97316F1B4960096F61F /* oponent_step2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7693D97116F1B4960096F61F /* oponent_step2.png */; };
+		7693D97516F1B7390096F61F /* OpponentShape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7693D97416F1B7390096F61F /* OpponentShape.xib */; };
+		7693D97816F1B7730096F61F /* OpponentShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 7693D97716F1B7730096F61F /* OpponentShape.m */; };
 		769CA78F14234458006EF248 /* shot.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 769CA78E14234458006EF248 /* shot.mp3 */; };
 		769F567E13AA6A9B006BFD46 /* Duel.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 769F567B13AA6A9B006BFD46 /* Duel.mp3 */; };
 		769F567F13AA6A9B006BFD46 /* Lose.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 769F567C13AA6A9B006BFD46 /* Lose.mp3 */; };
@@ -1202,6 +1206,11 @@
 		7692812B159DCAFD00E6CE41 /* IconDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconDownloader.m; sourceTree = "<group>"; };
 		7692BC2E1574E36C00983264 /* DuelStartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DuelStartViewController.xib; path = Xib/DuelStartViewController.xib; sourceTree = "<group>"; };
 		7693419613DDBA5000A962A4 /* DecreeNarrow.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = DecreeNarrow.ttf; path = Font/DecreeNarrow.ttf; sourceTree = "<group>"; };
+		7693D97016F1B4960096F61F /* oponent_step1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oponent_step1.png; sourceTree = "<group>"; };
+		7693D97116F1B4960096F61F /* oponent_step2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oponent_step2.png; sourceTree = "<group>"; };
+		7693D97416F1B7390096F61F /* OpponentShape.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OpponentShape.xib; sourceTree = "<group>"; };
+		7693D97616F1B7730096F61F /* OpponentShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpponentShape.h; sourceTree = "<group>"; };
+		7693D97716F1B7730096F61F /* OpponentShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpponentShape.m; sourceTree = "<group>"; };
 		76947EF413ACC4EA008BD146 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		769CA78E14234458006EF248 /* shot.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = shot.mp3; sourceTree = "<group>"; };
 		769F567B13AA6A9B006BFD46 /* Duel.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Duel.mp3; sourceTree = "<group>"; };
@@ -2145,6 +2154,7 @@
 				7687667816BA7543003405F9 /* GunDrumViewController.xib */,
 				BD81E637169EC4D100CE8278 /* ActiveDuelViewController.xib */,
 				768B9E2F16EF28D200278FCA /* WomanShape.xib */,
+				7693D97416F1B7390096F61F /* OpponentShape.xib */,
 				BD84DAA4164ABCA000DEEE38 /* LoginAnimatedViewController.xib */,
 				7691DD9316CE75B200AD25F5 /* LoadViewContoller.xib */,
 				BD16BF961680934F00628CCC /* FunPageViewController.xib */,
@@ -2181,6 +2191,8 @@
 				BD81E636169EC4D100CE8278 /* ActiveDuelViewController.m */,
 				768B9E3116EF29CD00278FCA /* WomanShape.h */,
 				768B9E3216EF29CD00278FCA /* WomanShape.m */,
+				7693D97616F1B7730096F61F /* OpponentShape.h */,
+				7693D97716F1B7730096F61F /* OpponentShape.m */,
 			);
 			name = Duel;
 			sourceTree = "<group>";
@@ -2533,6 +2545,8 @@
 				BD4BAAB516BC064900F88E82 /* men_low@2x.png */,
 				768B0EA416EE1F7000D7EB99 /* menLowDie.png */,
 				768B0EA516EE1F7000D7EB99 /* menLowDie@2x.png */,
+				7693D97016F1B4960096F61F /* oponent_step1.png */,
+				7693D97116F1B4960096F61F /* oponent_step2.png */,
 				BD3503B016AD370800956BB7 /* ivMan@2x.png */,
 				BD3503AF16AD370800956BB7 /* ivMan.png */,
 				BD01BDFE16AAAF550095DE16 /* bar_bg.png */,
@@ -3155,6 +3169,9 @@
 				7674F72C16EF5D4A00E43061 /* scream1.mp3 in Resources */,
 				766C608316F0B71800508128 /* blinkEye2.png in Resources */,
 				766C608416F0B71800508128 /* blinkEye.png in Resources */,
+				7693D97216F1B4960096F61F /* oponent_step1.png in Resources */,
+				7693D97316F1B4960096F61F /* oponent_step2.png in Resources */,
+				7693D97516F1B7390096F61F /* OpponentShape.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3560,6 +3577,7 @@
 				BD0DA0F716D3727B00419DC1 /* PLView.m in Sources */,
 				BD0DA0F916D3727B00419DC1 /* PLViewBase.m in Sources */,
 				768B9E3316EF29CD00278FCA /* WomanShape.m in Sources */,
+				7693D97816F1B7730096F61F /* OpponentShape.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3752,8 +3770,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3798,8 +3816,8 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Bounty Hunter";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "5B2C4BE5-DD93-4ED2-8516-F2ADC6D017CE";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5B2C4BE5-DD93-4ED2-8516-F2ADC6D017CE";
 				REZ_SEARCH_PATHS = "$(inherited)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3848,7 +3866,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = NO;
@@ -3892,7 +3910,7 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Bounty Hunter";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5B2C4BE5-DD93-4ED2-8516-F2ADC6D017CE";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4139,7 +4157,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -4185,7 +4203,7 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Bounty Hunter";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5B2C4BE5-DD93-4ED2-8516-F2ADC6D017CE";
 				"PROVISIONING_PROFILE[sdk=*]" = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				REZ_SEARCH_PATHS = (

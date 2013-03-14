@@ -17,6 +17,7 @@
 #import "StartViewController.h"
 #import "GunDrumViewController.h"
 #import "WomanShape.h"
+#import "OpponentShape.h"
 
 #define targetHeight 260
 #define targetWeidth 100
@@ -69,7 +70,8 @@
     
     int opponentTime;
     
-    __weak IBOutlet WomanShape *woman;
+    __weak IBOutlet WomanShape *womanShape;
+    __weak IBOutlet OpponentShape *opponentShape;
     IconDownloader *iconDownloader;
     __weak IBOutlet UIImageView *blinkBottom;
     __weak IBOutlet UIImageView *blinkTop;
@@ -306,7 +308,7 @@ static CGFloat blinkBottomOriginY;
     
     [self countUpBulets];
     [self updateOpponentViewToRamdomPosition];
-    [woman randomPositionWithView:self.opponentImage];
+    [womanShape randomPositionWithView:self.opponentImage];
     
 	[plView startAnimation];
     
@@ -333,7 +335,7 @@ static CGFloat blinkBottomOriginY;
     steadyScale = 1.0;
     
     self.opponentImage.hidden = YES;
-    woman.hidden = YES;
+    womanShape.hidden = YES;
     
     if(!delegate)
     {
@@ -378,6 +380,7 @@ static CGFloat blinkBottomOriginY;
     [self releaseComponents];
     blinkBottom = nil;
     blinkBottom = nil;
+    opponentShape = nil;
     [super viewDidUnload];
 }
 
@@ -494,7 +497,7 @@ static CGFloat blinkBottomOriginY;
 
 -(void)cheackHitForShot:(CGPoint)shotPoint andTargetPoint:(CGPoint)targetPoint
 {
-    BOOL result = [woman shotInWomanWithPoint:shotPoint superViewOfPoint:self.view];
+    BOOL result = [womanShape shotInWomanWithPoint:shotPoint superViewOfPoint:self.view];
     if (result) {
         [self opponentShot];
         return;
@@ -817,7 +820,7 @@ static CGFloat blinkBottomOriginY;
         [self.gunButton setEnabled:YES];
         [self.userLiveImageView setHidden:NO];
         self.opponentImage.hidden = NO;
-        woman.hidden = NO;
+        womanShape.hidden = NO;
         
         if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
         moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
@@ -1006,7 +1009,7 @@ static CGFloat blinkBottomOriginY;
         if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
         moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
         self.opponentImage.hidden = NO;
-        woman.hidden = NO;
+        womanShape.hidden = NO;
     }
 }
 
@@ -1059,7 +1062,7 @@ static CGFloat blinkBottomOriginY;
     [self setCrossImageView:nil];
     [self setGlassImageViewAllBackground:nil];
     [self setUserLiveImageView:nil];
-    woman = nil;
+    womanShape = nil;
     plView = nil;
     [super viewDidUnload];
 
