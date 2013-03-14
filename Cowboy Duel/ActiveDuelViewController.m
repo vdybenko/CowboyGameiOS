@@ -102,6 +102,8 @@
 
 static CGFloat oponentLiveImageViewStartWidth;
 static CGFloat userLiveImageViewStartWidth;
+static CGFloat blinkTopOriginY;
+static CGFloat blinkBottomOriginY;
 
 -(id)initWithTime:(int)randomTime Account:(AccountDataSource *)userAccount oponentAccount:(AccountDataSource *)pOponentAccount
 {
@@ -266,6 +268,9 @@ static CGFloat userLiveImageViewStartWidth;
     frame.origin = CGPointMake(0,0);
     activityIndicatorView.frame = frame;
     [self.view addSubview:activityIndicatorView];
+    
+    blinkTopOriginY = blinkTop.frame.origin.y;
+    blinkBottomOriginY = blinkBottom.frame.origin.y;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -665,13 +670,21 @@ static CGFloat userLiveImageViewStartWidth;
     if (duelEnd) return;
     duelEnd = YES;
     
+    CGRect frame = blinkTop.frame;
+    frame.origin.y = blinkTopOriginY;
+    blinkTop.frame = frame;
+    
+    frame = blinkBottom.frame;
+    frame.origin.y = blinkBottomOriginY;
+    blinkBottom.frame = frame;
+    
     [self.glassImageViewHeader setHidden:NO];
     [self.glassImageViewBottom setHidden:NO];
     [glassImageViewAllBackground setHidden:NO];
     
-    [UIView animateWithDuration:1.f animations:^{
+    [UIView animateWithDuration:0.3f animations:^{
         CGRect frame = blinkBottom.frame;
-        frame.origin.y = 171;
+        frame.origin.y = 151;
         blinkBottom.frame = frame;
         
         frame = blinkTop.frame;
@@ -679,7 +692,7 @@ static CGFloat userLiveImageViewStartWidth;
         blinkTop.frame = frame;
         
     }completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.5 animations:^{
+        [UIView animateWithDuration:0.3 animations:^{
             CGRect frame = blinkBottom.frame;
             frame.origin.y = 201;
             blinkBottom.frame = frame;
@@ -689,7 +702,7 @@ static CGFloat userLiveImageViewStartWidth;
             blinkTop.frame = frame;
         }completion:^(BOOL finished) {
             
-            [UIView animateWithDuration:0.5 animations:^{
+            [UIView animateWithDuration:0.2 animations:^{
             CGRect frame = blinkBottom.frame;
             frame.origin.y = 151;
             blinkBottom.frame = frame;

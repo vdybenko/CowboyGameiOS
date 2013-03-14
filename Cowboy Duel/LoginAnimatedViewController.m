@@ -252,7 +252,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
                                                                       
                                                                   }];
                                           }];
-
                      }];
 
 }
