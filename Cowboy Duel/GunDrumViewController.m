@@ -10,6 +10,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "AccountDataSource.h"
 #import <AVFoundation/AVFoundation.h>
+#import "UIView+Dinamic_BackGround.h"
+#import "LoginAnimatedViewController.h"
 
 @interface GunDrumViewController ()
 {
@@ -37,6 +39,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *flash;
 @property (weak, nonatomic) IBOutlet UIView *hudView;
 @property (weak, nonatomic) IBOutlet UIView *vOponnentAvatarWithFrame;
+@property (weak, nonatomic) IBOutlet UIView *textView;
+@property (weak, nonatomic) IBOutlet UILabel *textLabel;
 
 
 @end
@@ -115,6 +119,17 @@ static CGFloat timeSpinDump = 0.6f;
         [self helpAnimation];
         vOponnentAvatarWithFrame.hidden = YES;
         
+        
+        if([LoginAnimatedViewController sharedInstance].isDemoPractice){
+            [self.textView setDinamicHeightBackground];
+            [self.textLabel setText:NSLocalizedString(@"LoadPractice", @"")];
+            [self.textView setHidden:NO];
+            [self.textLabel setHidden:NO];
+            [self performSelector:@selector(textViewSetHidden) withObject:nil afterDelay:5.0];
+        }else
+        {
+            [self textViewSetHidden];
+        }
     }
     return self;
 }
@@ -138,6 +153,8 @@ static CGFloat timeSpinDump = 0.6f;
     [self setHudView:nil];
     [self setIvOponnentAvatar:nil];
     [self setVOponnentAvatarWithFrame:nil];
+    [self setTextView:nil];
+    [self setTextLabel:nil];
     [super viewDidUnload];
 }
 
@@ -177,10 +194,9 @@ static CGFloat timeSpinDump = 0.6f;
         
         arrow.hidden = NO;
         ivPhoneImg.hidden = NO;
-        lbLoadGun.text = NSLocalizedString(@"Load", @"");
         hudView.alpha = 0.7f;
         vOponnentAvatarWithFrame.hidden = YES;
-        [self changeLableAnimation:vLoadGun endReverce:YES];
+        [self changeLableAnimation:vLoadGun endReverce:YES toText:NSLocalizedString(@"Load", @"")];
         angle = 0;
         CGAffineTransform transform = drumBullets.transform;
         CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
@@ -201,9 +217,9 @@ static CGFloat timeSpinDump = 0.6f;
 
 -(void)chargeBulletsForTime:(CGFloat)time;
 {
-    lbLoadGun.text = NSLocalizedString(@"Loading", @"");
     vOponnentAvatarWithFrame.hidden = NO;
-    [self changeLableAnimation:vLoadGun endReverce:NO];
+    [self.textView setHidden:YES];
+    [self changeLableAnimation:vLoadGun endReverce:NO toText:NSLocalizedString(@"Loading", @"")];
     if (time != 0) {
         timeChargeBullets = time/([colectionBullets count]-1);
         if ([[AccountDataSource sharedInstance] isPlayerForPractice]) {
@@ -383,27 +399,31 @@ static CGFloat timeSpinDump = 0.6f;
     
 }
 
--(void)changeLableAnimation:(UIView*)view endReverce:(BOOL)reverce
+-(void)changeLableAnimation:(UIView*)view endReverce:(BOOL)reverce toText:(NSString *)text
 {
     if(labelAnimationStarted) return;
     labelAnimationStarted = YES;
     CGRect startFrame = view.frame;
-    [UIView animateWithDuration:0.35
+    float duration;
+    if (self.textView.isHidden) duration = 0.35;
+    else duration = 0;
+        
+    [UIView animateWithDuration:duration
                      animations:^{
                          CGRect frame = view.frame;
                          if (reverce) frame.origin.x = -400;
                          else frame.origin.x = 400;
                          view.frame = frame;
-                         [UIView animateWithDuration:0.17
-                                          animations:^{
-                                              view.transform = CGAffineTransformMakeScale(1.5, 1.5);
-                                          }completion:^(BOOL complete) {
-                                              [UIView animateWithDuration:0.17
-                                                               animations:^{
-                                                                   view.transform = CGAffineTransformMakeScale(1.0, 1.0);
-                                                               }completion:^(BOOL complete) {
-                                                               }];
-                                          }];
+//                         [UIView animateWithDuration:0.17
+//                                          animations:^{
+//                                              view.transform = CGAffineTransformMakeScale(1.5, 1.5);
+//                                          }completion:^(BOOL complete) {
+//                                              [UIView animateWithDuration:0.17
+//                                                               animations:^{
+//                                                                   view.transform = CGAffineTransformMakeScale(1.0, 1.0);
+//                                                               }completion:^(BOOL complete) {
+//                                                               }];
+//                                          }];
                          
                      }completion:^(BOOL complete) {
                          [view setHidden:YES];
@@ -412,13 +432,19 @@ static CGFloat timeSpinDump = 0.6f;
                          else frame.origin.x = -frame.size.width;
                          view.frame = frame;
                          [view setHidden:NO];
-                         [UIView animateWithDuration:0.35
+                         lbLoadGun.text = text;
+                         [UIView animateWithDuration:duration
                                           animations:^{
                                               view.frame = startFrame;
                                           }completion:^(BOOL complete) {
                                               labelAnimationStarted = NO;
                                           }];
                      }];
+}
+
+-(void)showLableWithText:(NSString *)text
+{
+    
 }
 
 -(void)shotAnimation;
@@ -455,6 +481,12 @@ static CGFloat timeSpinDump = 0.6f;
     } completion:^(BOOL complete) {
         
     }];
+}
+
+-(void)textViewSetHidden
+{
+    [self.textView setHidden:YES];
+    [self.textLabel setHidden:YES];
 }
 
 #pragma mark Responding to gestures

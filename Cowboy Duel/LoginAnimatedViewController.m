@@ -238,31 +238,32 @@ static LoginAnimatedViewController *sharedHelper = nil;
                          [animetedText setAlpha:1.0f];
                      } completion:^(BOOL finished) {
                          [UIView animateWithDuration:1.0f
-                                               delay:2.0f
+                                               delay:5.0f
                                              options:UIViewAnimationCurveLinear
                                           animations:^{
                                                [animetedText setAlpha:0.0f];
                                           } completion:^(BOOL finished) {
                                               [animetedText setText:NSLocalizedString(@"2ndIntro", @"")];
-                                              [UIView animateWithDuration:1.0f
+                                              [UIView animateWithDuration:5.0f
                                                                     delay:0.0f
                                                                   options:UIViewAnimationCurveLinear animations:^{
                                                                       [animetedText setAlpha:1.0f];
                                                                   } completion:^(BOOL finished) {
-                                                                      
+                                                                      [self performSelector:@selector(scaleView:) withObject:loginFBbutton  afterDelay:2.0];
+                                                                      [self performSelector:@selector(scaleView:) withObject:loginLable  afterDelay:2.0];
                                                                   }];
                                           }];
                      }];
 
 }
 
--(void)scaleButton:(UIView *)button
+-(void)scaleView:(UIView *)view
 {
-    [UIView animateWithDuration:0.4 animations:^{
-        button.transform = CGAffineTransformMakeScale(1.3, 1.3);
+    [UIView animateWithDuration:0.6 animations:^{
+        view.transform = CGAffineTransformMakeScale(1.2, 1.2);
     } completion:^(BOOL complete) {
-        [UIView animateWithDuration:0.4 animations:^{
-            button.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        [UIView animateWithDuration:0.6 animations:^{
+            view.transform = CGAffineTransformMakeScale(1.0, 1.0);
         }completion:^(BOOL complete){
         } ];
     }];
