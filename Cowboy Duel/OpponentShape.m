@@ -15,7 +15,6 @@
 {
     IBOutlet UIView *vContainer;
     AVAudioPlayer *oponentShotAudioPlayer;
-
 }
 @end
 
@@ -121,6 +120,23 @@ static CGFloat oponentLiveImageViewStartWidth;
     [oponentShotAudioPlayer performSelectorInBackground:@selector(play) withObject:nil];
 }
 
+-(void)reboundOnShot;
+{
+    CGPoint body = self.center;
+    
+    int randPosition = (rand() % 50) + 50;
+    int direction = rand() % 2?-1:1;
+    body.x = (body.x + direction*randPosition);
+    
+    [self moveAnimation];
+    float duraction = (randPosition * 0.5)/100;
+    [UIView animateWithDuration:duraction animations:^{
+        self.center = body;
+    }completion:^(BOOL complete){
+        [self stopMoveAnimation];
+    }];
+}
+
 -(void) changeLiveBarWithUserHitCount:(int)userHitCount maxShotCount:(int)maxShotCount;
 {
     CGRect frame = ivLifeBar.frame;
@@ -135,7 +151,6 @@ static CGFloat oponentLiveImageViewStartWidth;
     ivLifeBar.frame = frame;
 }
 
-
 -(void) setStatusBody:(OpponentShapeStatus)status;
 {
     switch (status) {
@@ -149,7 +164,6 @@ static CGFloat oponentLiveImageViewStartWidth;
         default:
             break;
     }
-    
 }
 -(void) hitTheOponentWithPoint:(CGPoint)hitPoint mainView:(UIView*)mainView;
 {
@@ -157,6 +171,8 @@ static CGFloat oponentLiveImageViewStartWidth;
     ivHit.center = [mainView convertPoint:hitPoint toView:imgBody];
     [imgBody addSubview:ivHit];
     ivHit = nil;
+    
+    [self reboundOnShot];
 }
 
 -(void) cleareDamage;
