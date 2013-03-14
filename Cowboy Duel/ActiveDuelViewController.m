@@ -319,7 +319,7 @@ static CGFloat userLiveImageViewStartWidth;
     [self.lblBehold setHidden:YES];
     
 
-    [self.lblBehold setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:45]];
+    [self.lblBehold setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:25]];
     self.lblBehold.text = NSLocalizedString(@"Behold!", @"");
     self.lblBehold.gradientStartColor = [UIColor colorWithRed:255.0/255.0 green:181.0/255.0 blue:0.0/255.0 alpha:1.0];
     self.lblBehold.gradientEndColor = [UIColor colorWithRed:255.0/255.0 green:140.0/255.0 blue:0.0/255.0 alpha:1.0];
@@ -373,7 +373,7 @@ static CGFloat userLiveImageViewStartWidth;
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    [self releaseComponents];
+    //[self releaseComponents];
     // Dispose of any resources that can be recreated.
 }
 
