@@ -9,10 +9,13 @@
 #import "OpponentShape.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UIImage+Sprite.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface OpponentShape ()
 {
     IBOutlet UIView *vContainer;
+    AVAudioPlayer *oponentShotAudioPlayer;
+
 }
 @end
 
@@ -44,6 +47,11 @@ static CGFloat oponentLiveImageViewStartWidth;
         [imgShot setAnimationDuration:animationDurationSmoke];
         
         oponentLiveImageViewStartWidth = ivLifeBar.frame.size.width;
+        
+        NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/oponent_shot.aif", [[NSBundle mainBundle] resourcePath]]];
+        NSError *error;
+        oponentShotAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+        [oponentShotAudioPlayer prepareToPlay];
 
     }
     return self;
@@ -102,6 +110,10 @@ static CGFloat oponentLiveImageViewStartWidth;
         [imgShot stopAnimating];
     }
     [imgShot startAnimating];
+    
+    [oponentShotAudioPlayer stop];
+    [oponentShotAudioPlayer setCurrentTime:0.0];
+    [oponentShotAudioPlayer performSelectorInBackground:@selector(play) withObject:nil];
 }
 
 -(void) changeLiveBarWithUserHitCount:(int)userHitCount maxShotCount:(int)maxShotCount;
@@ -112,7 +124,11 @@ static CGFloat oponentLiveImageViewStartWidth;
 }
 
 -(void) refreshLiveBar;
-{}
+{
+    CGRect frame = ivLifeBar.frame;
+    frame.size.width = oponentLiveImageViewStartWidth;
+    ivLifeBar.frame = frame;
+}
 
 
 -(void) setStatusBody:(OpponentShapeStatus)status;
