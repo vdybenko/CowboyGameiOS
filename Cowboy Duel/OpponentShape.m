@@ -96,13 +96,18 @@ static CGFloat oponentLiveImageViewStartWidth;
             }];
         }];
     }];
-    
-    [self moveAnimation];
+    if (randomDirection == 0) {
+        [self stopMoveAnimation];
+    }else{
+        [self moveAnimation];
+    }
+
 }
 
 -(void) stopMoveAnimation;
 {
     [imgBody stopAnimating];
+    [self setStatusBody:OpponentShapeStatusLive];
 }
 -(void) shot;
 {

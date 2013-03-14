@@ -406,6 +406,7 @@ static CGFloat blinkBottomOriginY;
         }
     
         [gunDrumViewController shotAnimation];
+        [self hideSteadyImage];
         
         switch (shotCountForSound) {
             case 1:
@@ -419,7 +420,6 @@ static CGFloat blinkBottomOriginY;
                 
                 shotCountForSound = 2;
                 
-                [self hideSteadyImage];
                 break;
             case 2:
                 [shotAudioPlayer2 stop];
