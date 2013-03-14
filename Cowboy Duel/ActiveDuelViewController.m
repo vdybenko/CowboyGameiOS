@@ -715,12 +715,12 @@ static CGFloat blinkBottomOriginY;
     rollingX = (acceleration.x * kFilteringFactor) + (rollingX * (1.0 - kFilteringFactor));
     rollingY = (acceleration.y * kFilteringFactor) + (rollingY * (1.0 - kFilteringFactor));
     rollingZ = (acceleration.z * kFilteringFactor) + (rollingZ * (1.0 - kFilteringFactor));
-    
+    NSLog(@"x = %.2f y = %.2f z = %.2f", rollingX, rollingY, rollingZ);
     //        Position for Shot
     if ((acceleration.y < -0.5) || (rollingX < -0.3) || (rollingX > 0.3)) accelerometerState = NO;
     
     //       Position for STEADY
-    if ((acceleration.y > -0.4) && (rollingX > -0.3) && (rollingX < 0.3)) accelerometerState = YES;
+    if (((acceleration.y > -0.4) && (rollingX > -0.3) && (rollingX < 0.3)) && rollingZ < 0) accelerometerState = YES;
             
     if((accelerometerState)&& (!soundStart)){
         

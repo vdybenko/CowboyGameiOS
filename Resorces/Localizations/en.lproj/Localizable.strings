@@ -128,9 +128,10 @@ p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font
 "LOWER" = "Hold your phone down to start";
 
 //Active Duel
-"Behold!" = "And here is your goal!";
-"Load" = "You have a gun discharged!";
+"Behold!" = "Get him!!!";
+"Load" = "Load your gun";
 "Loading" = "COME ON, LOAD QUICKER!";
+"LoadPractice" = "Ye can't get the bastard with yer gun unloaded! Load it!";
 //C'MON
 //Moremoney
 
