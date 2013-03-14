@@ -31,7 +31,8 @@
         NSString *soundName = @"scream1";
         NSString *soundPath = [[NSBundle mainBundle] pathForResource:soundName ofType:@"mp3"];
         NSURL *soundFile = [NSURL fileURLWithPath:soundPath];
-        audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFile error:nil];
+        NSError *error;
+        audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFile error:&error];
         [audioPlayer prepareToPlay];
     }
     return self;

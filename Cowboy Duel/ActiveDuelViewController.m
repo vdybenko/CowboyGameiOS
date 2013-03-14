@@ -17,6 +17,7 @@
 #import "StartViewController.h"
 #import "GunDrumViewController.h"
 #import "WomanShape.h"
+#import "OpponentShape.h"
 
 #define targetHeight 260
 #define targetWeidth 100
@@ -32,7 +33,6 @@
     AVAudioPlayer *shotAudioPlayer2;
     AVAudioPlayer *shotAudioPlayer3;
     AVAudioPlayer *hitAudioPlayer;
-    AVAudioPlayer *oponentShotAudioPlayer;
     AVAudioPlayer *brockenGlassAudioPlayer;
     int shotCountForSound;
     int shotCountBullet;
@@ -69,7 +69,8 @@
     
     int opponentTime;
     
-    __weak IBOutlet WomanShape *woman;
+    __weak IBOutlet WomanShape *womanShape;
+    __weak IBOutlet OpponentShape *opponentShape;
     IconDownloader *iconDownloader;
     __weak IBOutlet UIImageView *blinkBottom;
     __weak IBOutlet UIImageView *blinkTop;
@@ -77,15 +78,12 @@
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *floatView;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *fireImageView;
-@property (unsafe_unretained, nonatomic) IBOutlet UIView *opponentImage;
-@property (weak, nonatomic) IBOutlet UIImageView *opponentBody;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *bloodImageView;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *bloodCImageView;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *smokeImage;
 @property (weak, nonatomic) IBOutlet UIView *glassImageViewAllBackground;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *glassImageViewHeader;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *glassImageViewBottom;
-@property (unsafe_unretained, nonatomic) IBOutlet UIView *oponentLiveImageView;
 @property (weak, nonatomic) IBOutlet UIButton *gunButton;
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *opStatsLabel;
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *userStatsLabel;
@@ -100,7 +98,6 @@
 @synthesize delegate;
 @synthesize glassImageViewAllBackground;
 
-static CGFloat oponentLiveImageViewStartWidth;
 static CGFloat userLiveImageViewStartWidth;
 static CGFloat blinkTopOriginY;
 static CGFloat blinkBottomOriginY;
@@ -131,11 +128,7 @@ static CGFloat blinkBottomOriginY;
         hitAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
         [hitAudioPlayer prepareToPlay];
         
-        url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/oponent_shot.aif", [[NSBundle mainBundle] resourcePath]]];
         NSError *error;
-        oponentShotAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-        [oponentShotAudioPlayer prepareToPlay];
-        
         url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/brocken_glass.aif", [[NSBundle mainBundle] resourcePath]]];
         brockenGlassAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
         [brockenGlassAudioPlayer prepareToPlay];
@@ -167,14 +160,14 @@ static CGFloat blinkBottomOriginY;
     [self.bloodCImageView setAnimationRepeatCount:1];
     [self.bloodCImageView setAnimationDuration:animationDurationBloodC];
     
-    UIImage *spriteSheetSmoke = [UIImage imageNamed:@"smokeSpriteSheet"];
-    NSArray *arrayWithSpritesSmoke = [spriteSheetSmoke spritesWithSpriteSheetImage:spriteSheetSmoke
-                                                                          spriteSize:CGSizeMake(64, 64)];
-    [self.smokeImage setAnimationImages:arrayWithSpritesSmoke];
-    
-    float animationDurationSmoke = [self.smokeImage.animationImages count] * 0.100; // 100ms per frame
-    [self.smokeImage setAnimationRepeatCount:1];
-    [self.smokeImage setAnimationDuration:animationDurationSmoke];
+//    UIImage *spriteSheetSmoke = [UIImage imageNamed:@"smokeSpriteSheet"];
+//    NSArray *arrayWithSpritesSmoke = [spriteSheetSmoke spritesWithSpriteSheetImage:spriteSheetSmoke
+//                                                                          spriteSize:CGSizeMake(64, 64)];
+//    [self.smokeImage setAnimationImages:arrayWithSpritesSmoke];
+//    
+//    float animationDurationSmoke = [self.smokeImage.animationImages count] * 0.100; // 100ms per frame
+//    [self.smokeImage setAnimationRepeatCount:1];
+//    [self.smokeImage setAnimationDuration:animationDurationSmoke];
     
     shotCountForSound = 1;
 
@@ -306,17 +299,13 @@ static CGFloat blinkBottomOriginY;
     
     [self countUpBulets];
     [self updateOpponentViewToRamdomPosition];
-    [woman randomPositionWithView:self.opponentImage];
+    [womanShape randomPositionWithView:opponentShape];
     
 	[plView startAnimation];
     
     [activityIndicatorView hideView];
     [self.gunButton setEnabled:NO];
     
-    CGRect frame = self.oponentLiveImageView.frame;
-    frame.size.width = 84;
-    self.oponentLiveImageView.frame = frame;
-    oponentLiveImageViewStartWidth = self.oponentLiveImageView.frame.size.width;
     userLiveImageViewStartWidth = self.userLiveImageView.frame.size.width;
     
     self.opStatsLabel.text = [NSString stringWithFormat: @"A: +%d\rD: +%d",opAccount.accountWeapon.dDamage,opAccount.accountDefenseValue];
@@ -332,8 +321,8 @@ static CGFloat blinkBottomOriginY;
   
     steadyScale = 1.0;
     
-    self.opponentImage.hidden = YES;
-    woman.hidden = YES;
+    opponentShape.hidden = YES;
+    womanShape.hidden = YES;
     
     if(!delegate)
     {
@@ -364,11 +353,10 @@ static CGFloat blinkBottomOriginY;
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    self.opponentBody.image = [UIImage imageNamed:@"men_low.png"];
-    for(UIView *subview in [self.opponentBody subviews])
-    {
-        [subview removeFromSuperview];
-    }
+
+    [opponentShape setStatusBody:OpponentShapeStatusLive];
+    [opponentShape cleareDamage];
+    [opponentShape refreshLiveBar];
     CGRect frame = self.userLiveImageView.frame;
     frame.size.width = userLiveImageViewStartWidth;
     self.userLiveImageView.frame = frame;
@@ -378,6 +366,7 @@ static CGFloat blinkBottomOriginY;
     [self releaseComponents];
     blinkBottom = nil;
     blinkBottom = nil;
+    opponentShape = nil;
     [super viewDidUnload];
 }
 
@@ -411,17 +400,13 @@ static CGFloat blinkBottomOriginY;
     if (isGunCanShotOfFrequently) {
         [self startGunFrequentlyBlockTime];
         
-//        if ([self.fireImageView isAnimating]) {
-//            [self.fireImageView stopAnimating];
-//        }
-//        [self.fireImageView startAnimating];
-//        
-//        if(delegate)
-//        {
-//            [delegate sendShot];
-//        }
+        if(delegate)
+        {
+            [delegate sendShot];
+        }
     
         [gunDrumViewController shotAnimation];
+        [self hideSteadyImage];
         
         switch (shotCountForSound) {
             case 1:
@@ -435,7 +420,6 @@ static CGFloat blinkBottomOriginY;
                 
                 shotCountForSound = 2;
                 
-                [self hideSteadyImage];
                 break;
             case 2:
                 [shotAudioPlayer2 stop];
@@ -456,8 +440,8 @@ static CGFloat blinkBottomOriginY;
         }
         
         CGPoint targetPoint;
-        targetPoint.x = self.opponentImage.center.x - (self.floatView.bounds.size.width / 2 - self.floatView.center.x);
-        targetPoint.y = self.opponentImage.center.y - (self.floatView.bounds.size.height / 2 - self.floatView.center.y);
+        targetPoint.x = opponentShape.center.x - (self.floatView.bounds.size.width / 2 - self.floatView.center.x);
+        targetPoint.y = opponentShape.center.y - (self.floatView.bounds.size.height / 2 - self.floatView.center.y);
         
         CGPoint centerOfScreanPoint;
         centerOfScreanPoint.x = self.crossImageView.bounds.origin.x + self.crossImageView.center.x;
@@ -475,18 +459,18 @@ static CGFloat blinkBottomOriginY;
     if (finalAnimationStarted) return;
     else finalAnimationStarted = YES;
     
-    self.opponentImage.layer.transform = CATransform3DMakeTranslation(0.0, 0.0, 200.0);
+    opponentShape.layer.transform = CATransform3DMakeTranslation(0.0, 0.0, 200.0);
     
     [UIView animateWithDuration:0.5 animations:^{
-        self.opponentImage.layer.transform = CATransform3DMakeRotation(M_PI,0.0,1.0,0.0);
+        opponentShape.layer.transform = CATransform3DMakeRotation(M_PI,0.0,1.0,0.0);
     } completion:^(BOOL finished) {
-        self.opponentImage.layer.transform = CATransform3DMakeTranslation(0.0, 0.0, 200.0);
+        opponentShape.layer.transform = CATransform3DMakeTranslation(0.0, 0.0, 200.0);
         [UIView animateWithDuration:0.5 animations:^{
-            self.opponentImage.layer.transform = CATransform3DMakeScale(0, 0, 0);
+            opponentShape.layer.transform = CATransform3DMakeScale(0, 0, 0);
         } completion:^(BOOL finished) {
-            [self.opponentImage setHidden:YES];
+            [opponentShape setHidden:YES];
             finalAnimationStarted = NO;
-            self.opponentImage.layer.transform = CATransform3DMakeScale(1, 1, 1);
+            opponentShape.layer.transform = CATransform3DMakeScale(1, 1, 1);
         }];
     }];
     
@@ -494,7 +478,7 @@ static CGFloat blinkBottomOriginY;
 
 -(void)cheackHitForShot:(CGPoint)shotPoint andTargetPoint:(CGPoint)targetPoint
 {
-    BOOL result = [woman shotInWomanWithPoint:shotPoint superViewOfPoint:self.view];
+    BOOL result = [womanShape shotInWomanWithPoint:shotPoint superViewOfPoint:self.view];
     if (result) {
         [self opponentShot];
         return;
@@ -517,25 +501,21 @@ static CGFloat blinkBottomOriginY;
         
         userHitCount++;
         
-        CGRect frame = self.oponentLiveImageView.frame;
-        frame.size.width = (float)((maxShotCount - userHitCount)*oponentLiveImageViewStartWidth)/maxShotCount;
-        self.oponentLiveImageView.frame = frame;
-        
-        
+        [opponentShape changeLiveBarWithUserHitCount:userHitCount maxShotCount:maxShotCount];
         
         CGPoint targetPoint;
-        targetPoint.x = self.opponentImage.center.x - (self.floatView.bounds.size.width / 2 - self.floatView.center.x);
-        targetPoint.y = self.opponentImage.center.y - (self.floatView.bounds.size.height / 2 - self.floatView.center.y);
+        targetPoint.x = opponentShape.center.x - (self.floatView.bounds.size.width / 2 - self.floatView.center.x);
+        targetPoint.y = opponentShape.center.y - (self.floatView.bounds.size.height / 2 - self.floatView.center.y);
         
         CGPoint centerOfScreanPoint;
         centerOfScreanPoint.x = self.crossImageView.bounds.origin.x + self.crossImageView.center.x;
         centerOfScreanPoint.y = self.crossImageView.bounds.origin.y + self.crossImageView.center.y;
         
-        CGRect opponentBodyFrame = [[self.opponentBody superview] convertRect:self.opponentBody.frame toView:self.view];
+        CGRect opponentBodyFrame = [[opponentShape.imgBody superview] convertRect:opponentShape.imgBody.frame toView:self.view];
             
         if (CGRectContainsPoint(opponentBodyFrame, shotPoint)) {
             [self startRandomBloodAnimation];
-            [self hitTheOponentWithPoint:shotPoint];
+            [opponentShape hitTheOponentWithPoint:shotPoint mainView:self.view];
         }
         
         if(!shotCountBullet) {
@@ -603,26 +583,19 @@ static CGFloat blinkBottomOriginY;
 -(void)updateOpponentViewToRamdomPosition
 {
     CGSize winSize = [UIScreen mainScreen].bounds.size;
-    CGPoint opponentCenter = self.opponentImage.center;
-    int randPosition = rand() % ((int)(self.floatView.bounds.size.width - winSize.width - self.opponentImage.bounds.size.width));
-    randPosition = randPosition + winSize.width / 2 + self.opponentImage.bounds.size.width / 2;
+    CGPoint opponentCenter = opponentShape.center;
+    int randPosition = rand() % ((int)(self.floatView.bounds.size.width - winSize.width - opponentShape.bounds.size.width));
+    randPosition = randPosition + winSize.width / 2 + opponentShape.bounds.size.width / 2;
     
     opponentCenter.x = randPosition;
-    self.opponentImage.center = opponentCenter;
+    opponentShape.center = opponentCenter;
 }
 
 -(void)opponentShot
 {
     if (duelEnd) return;
-    
-    if ([self.smokeImage isAnimating]) {
-        [self.smokeImage stopAnimating];
-    }
-    [self.smokeImage startAnimating];
-    
-    [oponentShotAudioPlayer stop];
-    [oponentShotAudioPlayer setCurrentTime:0.0];
-    [oponentShotAudioPlayer performSelectorInBackground:@selector(play) withObject:nil];
+
+    [opponentShape shot];
     
     CGRect frame = self.userLiveImageView.frame;
     frame.size.width = (float)((shotCountBulletForOpponent)*userLiveImageViewStartWidth)/maxShotCountForOpponent;
@@ -643,7 +616,7 @@ static CGFloat blinkBottomOriginY;
 
 -(void)opponentLost
 {
-    self.opponentBody.image = [UIImage imageNamed:@"menLowDie.png"];
+    [opponentShape setStatusBody:OpponentShapeStatusDead];
 }
 
 -(void)userIgnorePunish
@@ -816,8 +789,8 @@ static CGFloat blinkBottomOriginY;
         [self vibrationStart];
         [self.gunButton setEnabled:YES];
         [self.userLiveImageView setHidden:NO];
-        self.opponentImage.hidden = NO;
-        woman.hidden = NO;
+        opponentShape.hidden = NO;
+        womanShape.hidden = NO;
         
         if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
         moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
@@ -892,38 +865,7 @@ static CGFloat blinkBottomOriginY;
 
 -(void)moveOponent
 {
-    [self performSelectorInBackground:@selector(moveOponentInBackground) withObject:nil];
-}
-
--(void)moveOponentInBackground
-{
-    int randomDirection = rand() % 3 - 1;
-    [UIView animateWithDuration:0.2 animations:^{
-        CGRect frame = self.opponentImage.frame;
-        frame.origin.x += randomDirection * 40;
-        self.opponentImage.frame = frame;
-    }completion:^(BOOL complete){
-        [UIView animateWithDuration:0.2 animations:^{
-            CGRect frame = self.opponentImage.frame;
-            frame.origin.x += randomDirection * 40;
-            self.opponentImage.frame = frame;
-        }completion:^(BOOL complete){
-            [UIView animateWithDuration:0.2 animations:^{
-                CGRect frame = self.opponentImage.frame;
-                frame.origin.x += randomDirection * 40;
-                self.opponentImage.frame = frame;
-            }completion:^(BOOL complete){
-            }];
-        }];
-    }];
-}
-
--(void)hitTheOponentWithPoint:(CGPoint)hitPoint
-{
-    UIImageView *ivHit = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ivHit.png"]];
-    ivHit.center = [self.view convertPoint:hitPoint toView:self.opponentBody];
-    [self.opponentBody addSubview:ivHit];
-    ivHit = nil;
+    [opponentShape performSelectorInBackground:@selector(moveOponentInBackground) withObject:nil];
 }
 
 -(void)setScale
@@ -1005,8 +947,8 @@ static CGFloat blinkBottomOriginY;
         [self.gunButton setEnabled:YES];
         if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
         moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
-        self.opponentImage.hidden = NO;
-        woman.hidden = NO;
+        opponentShape.hidden = NO;
+        womanShape.hidden = NO;
     }
 }
 
@@ -1043,23 +985,23 @@ static CGFloat blinkBottomOriginY;
     [self setFloatView:nil];
     [[UIAccelerometer sharedAccelerometer] setDelegate:nil];
     [self setFireImageView:nil];
-    [self setOpponentImage:nil];
     [self setBloodImageView:nil];
     [self setBloodCImageView:nil];
     [self setSmokeImage:nil];
     [self setGlassImageViewHeader:nil];
     [self setGlassImageViewBottom:nil];
-    [self setOponentLiveImageView:nil];
     [self setGunButton:nil];
     [self setOpStatsLabel:nil];
     [self setUserStatsLabel:nil];
-    [self setOpponentBody:nil];
     [self setTitleSteadyFire:nil];
     [self setLblBehold:nil];
     [self setCrossImageView:nil];
     [self setGlassImageViewAllBackground:nil];
     [self setUserLiveImageView:nil];
-    woman = nil;
+    [womanShape releaseComponents];
+    womanShape = nil;
+    [opponentShape releaseComponents];
+    opponentShape = nil;
     plView = nil;
     [super viewDidUnload];
 
