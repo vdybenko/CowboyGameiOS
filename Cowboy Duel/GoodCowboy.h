@@ -9,5 +9,9 @@
 #import "Shape.h"
 
 @interface GoodCowboy : Shape
+@property (weak, nonatomic) IBOutlet UIImageView *goodCowboyImg;
+
+-(void)moveGoodCowboy;
+-(void)goodCowboyAnimation;
 
 @end
