@@ -537,6 +537,7 @@ static CGFloat blinkBottomOriginY;
                 DLog(@"Kill!!!");
                 DLog(@"Shot Time = %d.%d", (shotTime - time * 1000) / 1000, (shotTime - time * 1000));
                 GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+                if (!self.delegate) gameCenterViewController = nil;
                 FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime - time * 1000) andOponentTime:opponentTime andGameCenterController:gameCenterViewController andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
                 
                 [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
@@ -614,6 +615,7 @@ static CGFloat blinkBottomOriginY;
     if(!shotCountBulletForOpponent){
         [self userLost];
         GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+        if (!self.delegate) gameCenterViewController = nil;
         FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime - time * 1000) andOponentTime:999999 andGameCenterController:gameCenterViewController andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
 
         [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:1.0];
@@ -644,6 +646,7 @@ static CGFloat blinkBottomOriginY;
     }else
     {
         GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+        if (!self.delegate) gameCenterViewController = nil;
         FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:0 andOponentTime:10 andGameCenterController:gameCenterViewController andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
         
         [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
