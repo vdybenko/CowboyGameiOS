@@ -532,24 +532,16 @@ static CGFloat blinkBottomOriginY;
             [activityIndicatorView setText:@""];
             [activityIndicatorView showView];
             [self horizontalFlip];
-//            if(!delegate)
-//            {
-                DLog(@"Kill!!!");
-                DLog(@"Shot Time = %d.%d", (shotTime - time * 1000) / 1000, (shotTime - time * 1000));
-                GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
-                if (!self.delegate) gameCenterViewController = nil;
-                FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime - time * 1000) andOponentTime:opponentTime andGameCenterController:gameCenterViewController andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
-                
-                [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
-                [timer invalidate];
-                [moveTimer invalidate];
-//            } 
-//            else
-//            {
-//                DLog(@"try send shot time");
-//                if ([delegate respondsToSelector:@selector(sendShotTime:)])
-//                    [delegate sendShotTime:(shotTime - time * 1000)];
-//            }
+            DLog(@"Kill!!!");
+            DLog(@"Shot Time = %d.%d", (shotTime - time * 1000) / 1000, (shotTime - time * 1000));
+            GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+            if (!self.delegate) gameCenterViewController = nil;
+            FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime - time * 1000) andOponentTime:opponentTime andGameCenterController:gameCenterViewController andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
+            
+            [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
+            [timer invalidate];
+            [moveTimer invalidate];
+            
             [self opponentLost];
         }
     }

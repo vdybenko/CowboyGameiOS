@@ -1073,7 +1073,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
                  float pitch = motion.gravity.z * 90;
                  float roll = currentAttitude.roll * 180 / PI;
                  
-                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                 dispatch_async(dispatch_get_main_queue(), ^{
                      [scene.currentCamera rotateWithPitch:pitch yaw:-yaw roll:-roll];
                  });
              }
@@ -1100,8 +1100,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
                      
                      distance = powf(powf(currentPosition.x - newPosition.x, 2) + powf(currentPosition.y - newPosition.y, 2), 0.5);
                      
-                     
-                     oponentView.view.center = CGPointMake(x*self.bounds.size.width, self.bounds.size.height - (y*self.bounds.size.height + 220));
+                     [oponentView.view setCenter:CGPointMake(x*self.bounds.size.width, self.bounds.size.height - (y*self.bounds.size.height + 220))];
                      index++;
                  }
                  else [oponentView.view setHidden:YES];
