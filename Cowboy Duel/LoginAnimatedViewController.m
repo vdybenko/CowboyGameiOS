@@ -232,20 +232,20 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [animetedText setText:text];
     [animetedText setAlpha:0.0f];
 
-    [UIView animateWithDuration:1.0f
+    [UIView animateWithDuration:0.3f
                           delay:0.0f
                         options:UIViewAnimationCurveLinear
                      animations:^{
                          [animetedText setAlpha:1.0f];
                      } completion:^(BOOL finished) {
-                         [UIView animateWithDuration:1.0f
+                         [UIView animateWithDuration:0.3f
                                                delay:6.0f
                                              options:UIViewAnimationCurveLinear
                                           animations:^{
                                                [animetedText setAlpha:0.0f];
                                           } completion:^(BOOL finished) {
                                               [animetedText setText:NSLocalizedString(@"2ndIntro", @"")];
-                                              [UIView animateWithDuration:6.0f
+                                              [UIView animateWithDuration:0.3f
                                                                     delay:0.0f
                                                                   options:UIViewAnimationCurveLinear animations:^{
                                                                       [animetedText setAlpha:1.0f];
