@@ -330,6 +330,7 @@ static CGFloat timeSpinDump = 0.6f;
 
 -(void)hideGun;
 {
+    [self.textView setHidden:YES];
     [UIView animateWithDuration:timeOpenDump animations:^{
         vLoadGun.hidden = YES;
         drumBullets.center= pntDumpClose;
