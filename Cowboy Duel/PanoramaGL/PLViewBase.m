@@ -1094,6 +1094,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
                  float y = -motion.gravity.z;
                  float distance;
                  if(v[2] > 0){
+                     [oponentView.view setHidden:NO];
                      CGPoint currentPosition = oponentView.view.center;
                      CGPoint newPosition = CGPointMake(x*self.bounds.size.width, self.bounds.size.height-(y*self.bounds.size.height + 220));
                      
@@ -1103,6 +1104,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
                      oponentView.view.center = CGPointMake(x*self.bounds.size.width, self.bounds.size.height - (y*self.bounds.size.height + 220));
                      index++;
                  }
+                 else [oponentView.view setHidden:YES];
              }
              
          }];

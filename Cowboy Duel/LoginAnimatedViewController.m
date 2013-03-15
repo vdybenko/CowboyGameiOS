@@ -178,7 +178,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
     AccountDataSource *oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
     playerAccount.sessionID = @"-1";
     ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:playerAccount oponentAccount:oponentAccount];
-    [self.navigationController pushViewController:activeDuelViewController animated:YES];
+    [self.navigationController pushViewController:activeDuelViewController animated:NO];
     activeDuelViewController = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
@@ -238,19 +238,19 @@ static LoginAnimatedViewController *sharedHelper = nil;
                          [animetedText setAlpha:1.0f];
                      } completion:^(BOOL finished) {
                          [UIView animateWithDuration:1.0f
-                                               delay:5.0f
+                                               delay:6.0f
                                              options:UIViewAnimationCurveLinear
                                           animations:^{
                                                [animetedText setAlpha:0.0f];
                                           } completion:^(BOOL finished) {
                                               [animetedText setText:NSLocalizedString(@"2ndIntro", @"")];
-                                              [UIView animateWithDuration:5.0f
+                                              [UIView animateWithDuration:6.0f
                                                                     delay:0.0f
                                                                   options:UIViewAnimationCurveLinear animations:^{
                                                                       [animetedText setAlpha:1.0f];
                                                                   } completion:^(BOOL finished) {
-                                                                      [self performSelector:@selector(scaleView:) withObject:loginFBbutton  afterDelay:2.0];
-                                                                      [self performSelector:@selector(scaleView:) withObject:loginLable  afterDelay:2.0];
+                                                                      [self performSelector:@selector(scaleView:) withObject:loginFBbutton  afterDelay:4.0];
+                                                                      [self performSelector:@selector(scaleView:) withObject:loginLable  afterDelay:4.0];
                                                                   }];
                                           }];
                      }];
