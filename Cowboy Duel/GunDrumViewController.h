@@ -14,7 +14,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *ivOponnentAvatar;
 
 -(void)openGun;
--(void)closeDump;
 -(void)showGun;
 -(void)hideGun;
 -(void)closeController;

@@ -15,10 +15,6 @@
 
 @interface GunDrumViewController ()
 {
-    BOOL runAnimationDump;
-    int firstAnimationCount;
-    int secondAnimationCount;
-    int drumAnimationCount;
     double angle;
     float steadyScale;
     float scaleDelta;
@@ -29,7 +25,6 @@
     
     AVAudioPlayer *putGunDownAudioPlayer;
 }
-@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapRecognizer;
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *colectionBullets;
 @property (weak, nonatomic) IBOutlet UIView *vLoadGun;
 @property (weak, nonatomic) IBOutlet UILabel *lbLoadGun;
@@ -149,7 +144,6 @@ static const CGFloat timeSpinDump = 0.3f;
     [self setVLoadGun:nil];
     [self setLbLoadGun:nil];
     [self setGunImage:nil];
-    [self setTapRecognizer:nil];
     [self setIvPhoneImg:nil];
     [self setFlash:nil];
     [self setHudView:nil];
@@ -178,41 +172,6 @@ static const CGFloat timeSpinDump = 0.3f;
         
         drumBullets.center = pntDumpOpen;
     }completion:^(BOOL finished) {
-    }];
-}
-
--(void)closeDump;
-{
-    isCharging = NO;
-    
-    [UIView animateWithDuration:timeOpenDump animations:^{
-        drumBullets.center= pntDumpClose;
-        gunImage.transform = CGAffineTransformMakeRotation(0);
-        runAnimationDump = NO;
-    }completion:^(BOOL finished) {
-        isCharging = NO;
-        [self hideBullets];
-        
-        arrow.hidden = NO;
-        ivPhoneImg.hidden = NO;
-        hudView.alpha = 0.7f;
-        vOponnentAvatarWithFrame.hidden = YES;
-        [self changeLableAnimation:vLoadGun endReverce:YES toText:NSLocalizedString(@"Load", @"")];
-        angle = 0;
-        CGAffineTransform transform = drumBullets.transform;
-        CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
-        transform = CGAffineTransformScale(rotateTransform, 1.0, 1.0);
-        drumBullets.transform = transform;
-        
-        [putGunDownAudioPlayer setCurrentTime:0.0];
-        [putGunDownAudioPlayer play];
-        
-        [UIView animateWithDuration:timeCloseGun animations:^{
-            CGRect frame=gun.frame;
-            frame.origin = pntGunClose;
-            gun.frame = frame;
-        }completion:^(BOOL finished) {
-        }];
     }];
 }
 
@@ -273,7 +232,6 @@ static const CGFloat timeSpinDump = 0.3f;
         vLoadGun.hidden = YES;
         drumBullets.center= pntDumpClose;
         gunImage.transform = CGAffineTransformMakeRotation(0);
-        runAnimationDump = NO;
     }completion:^(BOOL finished) {
         isCharging = NO;
         [self hideBullets];
@@ -407,20 +365,30 @@ static const CGFloat timeSpinDump = 0.3f;
     [self.textLabel setHidden:YES];
 }
 
+-(void)lableScaleInView:(UIView*)view
+{
+    __weak GunDrumViewController *bself = self;
+    [UIView animateWithDuration:0.35
+                     animations:^{
+                         view.transform = CGAffineTransformMakeScale(1.15, 1.15);
+                     }completion:^(BOOL complete) {
+                         [bself lableScaleOutView:view];
+                     }];
+}
+
 #pragma mark Responding to gestures
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    if ((gestureRecognizer == self.tapRecognizer)&&(!vLoadGun.isHidden)) {
-        return YES;
-    }
-    return NO;
-}
-- (IBAction)tapOnView:(id)sender {
     if (countOfBullets<7) {
         countOfBullets++;
         if (!isCharging) {
             [self chargeBullets];
         }
     }
+    return YES;
+}
+
+- (IBAction)tapOnView:(id)sender {
+    [self lableScaleInView:vLoadGun];
 }
 
 @end

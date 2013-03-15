@@ -820,7 +820,6 @@ static CGFloat blinkBottomOriginY;
 -(void)showHelpViewOnStartDuel;
 {
 //    [gunDrumViewController showGun];
-//    [gunDrumViewController closeDump];
     self.gunButton.hidden = YES;
 }
 
