@@ -915,6 +915,12 @@ static GameCenterViewController *gameCenterViewController;
     
 }
 
+-(void)sendShot
+{
+    gameInfo *gsSend = &gameStat;
+    [self.connection sendData:(void *)(gsSend) packetID:NETWORK_SHOT ofLength:sizeof(gameInfo)];
+}
+
 -(void)follStart
 {
     gameInfo *gsSend = &gameStat;

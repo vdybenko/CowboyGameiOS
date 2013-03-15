@@ -405,11 +405,7 @@ static CGFloat blinkBottomOriginY;
     if (isGunCanShotOfFrequently) {
         [self startGunFrequentlyBlockTime];
         
-        if(delegate)
-        {
-            [delegate sendShot];
-        }
-    
+            
         [gunDrumViewController shotAnimation];
         [self hideSteadyImage];
         
@@ -503,6 +499,12 @@ static CGFloat blinkBottomOriginY;
     
     if (([self abs:(shotPoint.x - targetPoint.x)] < targetWeidth / 2) && ([self abs:(shotPoint.y - targetPoint.y)] < targetHeight / 2)) {
         
+        if(delegate)
+        {
+            [delegate sendShot];
+        }
+
+        
         shotCountBullet--;
         
         userHitCount++;
@@ -530,23 +532,23 @@ static CGFloat blinkBottomOriginY;
             [activityIndicatorView setText:@""];
             [activityIndicatorView showView];
             [self horizontalFlip];
-            if(!delegate)
-            {
+//            if(!delegate)
+//            {
                 DLog(@"Kill!!!");
                 DLog(@"Shot Time = %d.%d", (shotTime - time * 1000) / 1000, (shotTime - time * 1000));
-                
-                FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime - time * 1000) andOponentTime:opponentTime andGameCenterController:self andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
+                GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+                FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime - time * 1000) andOponentTime:opponentTime andGameCenterController:gameCenterViewController andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
                 
                 [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
                 [timer invalidate];
                 [moveTimer invalidate];
-            } 
-            else
-            {
-                DLog(@"try send shot time");
-                if ([delegate respondsToSelector:@selector(sendShotTime:)])
-                    [delegate sendShotTime:(shotTime - time * 1000)];
-            }
+//            } 
+//            else
+//            {
+//                DLog(@"try send shot time");
+//                if ([delegate respondsToSelector:@selector(sendShotTime:)])
+//                    [delegate sendShotTime:(shotTime - time * 1000)];
+//            }
             [self opponentLost];
         }
     }
@@ -603,19 +605,22 @@ static CGFloat blinkBottomOriginY;
 
     [opponentShape shot];
     
+    shotCountBulletForOpponent--;
+    
     CGRect frame = self.userLiveImageView.frame;
     frame.size.width = (float)((shotCountBulletForOpponent)*userLiveImageViewStartWidth)/maxShotCountForOpponent;
     self.userLiveImageView.frame = frame;
     
     if(!shotCountBulletForOpponent){
         [self userLost];
-        FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime - time * 1000) andOponentTime:999999 andGameCenterController:self andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
+        GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+        FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime - time * 1000) andOponentTime:999999 andGameCenterController:gameCenterViewController andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
 
         [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:1.0];
         [timer invalidate];
         [moveTimer invalidate];
     }
-    shotCountBulletForOpponent--;
+    
     
     
 }
@@ -638,7 +643,8 @@ static CGFloat blinkBottomOriginY;
         [delegate performSelector:@selector( lostConnection )];
     }else
     {
-        FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:0 andOponentTime:10 andGameCenterController:self andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
+        GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+        FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:0 andOponentTime:10 andGameCenterController:gameCenterViewController andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
         
         [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
     }
@@ -809,16 +815,6 @@ static CGFloat blinkBottomOriginY;
         [timer invalidate];
     }
     
-//    if (!delegate) {
-//        if (shotTime - time * 1000 > opponentTime) {
-//            [self userLost];
-//            FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime - time * 1000) andOponentTime:opponentTime andGameCenterController:self andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
-//            
-//            [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
-//            [timer invalidate];
-//            [moveTimer invalidate];
-//        }
-//    }
 }
 
 #pragma mark
@@ -952,6 +948,8 @@ static CGFloat blinkBottomOriginY;
         [player play];
         [self vibrationStart];
         [self.gunButton setEnabled:YES];
+        [self.userLiveImageView setHidden:NO];
+
         if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
         moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
         opponentShape.hidden = NO;
