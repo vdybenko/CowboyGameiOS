@@ -346,7 +346,6 @@ static CGFloat blinkBottomOriginY;
 {
     [super viewWillDisappear:animated];
     [[UIAccelerometer sharedAccelerometer] setDelegate:nil];
-    [gunDrumViewController hideGun];
     [shotTimer invalidate];
     [moveTimer invalidate];
     [ignoreTimer invalidate];
@@ -406,7 +405,7 @@ static CGFloat blinkBottomOriginY;
         [self startGunFrequentlyBlockTime];
         
             
-        [gunDrumViewController shotAnimation];
+//        [gunDrumViewController shotAnimation];
         [self hideSteadyImage];
         
         switch (shotCountForSound) {
@@ -787,7 +786,6 @@ static CGFloat blinkBottomOriginY;
         DLog(@"FIRE !!!!!");
         duelIsStarted = YES;
         [ignoreTimer invalidate];
-        [gunDrumViewController hideGun];
         NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Fire.mp3", [[NSBundle mainBundle] resourcePath]]];
         NSError *error;
         [player stop];
@@ -821,8 +819,8 @@ static CGFloat blinkBottomOriginY;
 
 -(void)showHelpViewOnStartDuel;
 {
-    [gunDrumViewController showGun];
-    [gunDrumViewController closeDump];
+//    [gunDrumViewController showGun];
+//    [gunDrumViewController closeDump];
     self.gunButton.hidden = YES;
 }
 
@@ -937,7 +935,6 @@ static CGFloat blinkBottomOriginY;
     if ([curentVC isEqual:self]) {
         DLog(@"FIRE !!!!!");
         duelIsStarted = YES;
-        [gunDrumViewController hideGun];
         NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Fire.mp3", [[NSBundle mainBundle] resourcePath]]];
         NSError *error;
         [player stop];
@@ -960,7 +957,6 @@ static CGFloat blinkBottomOriginY;
     NSLog(@"startDuel");
     soundStart = YES;
     startInterval = [NSDate timeIntervalSinceReferenceDate];
-    gunDrumViewController.chargeTime = time - 0.7;
     [player stop];
     [player setCurrentTime:0.0];
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Duel.mp3", [[NSBundle mainBundle] resourcePath]]];

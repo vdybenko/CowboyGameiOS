@@ -9,12 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface GunDrumViewController : UIViewController<MemoryManagement,UIGestureRecognizerDelegate>
-@property (nonatomic) CGFloat chargeTime;
 @property (nonatomic) BOOL isCharging;
+@property (nonatomic) BOOL countOfBullets;
 @property (weak, nonatomic) IBOutlet UIImageView *ivOponnentAvatar;
 
 -(void)openGun;
--(void)chargeBulletsForTime:(CGFloat)time;
 -(void)closeDump;
 -(void)showGun;
 -(void)hideGun;
