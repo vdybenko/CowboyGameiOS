@@ -177,9 +177,10 @@ static LoginAnimatedViewController *sharedHelper = nil;
     int randomTime = (arc4random() % 3)-2;
     AccountDataSource *oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
     playerAccount.sessionID = @"-1";
+    UINavigationController *nav = ((TestAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController;
     ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:playerAccount oponentAccount:oponentAccount];
-    [self.navigationController pushViewController:activeDuelViewController animated:NO];
-    activeDuelViewController = nil;
+    [nav pushViewController:activeDuelViewController animated:YES];
+    //activeDuelViewController = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
                                                       userInfo:[NSDictionary dictionaryWithObject:@"/first_screen_teaching" forKey:@"event"]];
