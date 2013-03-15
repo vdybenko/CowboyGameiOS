@@ -22,6 +22,7 @@
 @synthesize imgBody;
 @synthesize imgShot;
 @synthesize ivLifeBar;
+@synthesize typeOfBody;
 
 static CGFloat oponentLiveImageViewStartWidth;
 
@@ -51,6 +52,7 @@ static CGFloat oponentLiveImageViewStartWidth;
         NSError *error;
         oponentShotAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
         [oponentShotAudioPlayer prepareToPlay];
+        self.typeOfBody = OpponentShapeTypeManLow;
 
     }
     return self;
@@ -159,12 +161,31 @@ static CGFloat oponentLiveImageViewStartWidth;
             imgBody.image = [UIImage imageNamed:@"menLowDie.png"];
             break;
         case OpponentShapeStatusLive:
-            imgBody.image = [UIImage imageNamed:@"men_low.png"];
+            [self setBodyType:self.typeOfBody];
             break;
         default:
             break;
     }
 }
+
+-(void)setBodyType:(OpponentShapeType)type;
+{
+    switch (type) {
+        case OpponentShapeTypeMan:
+            imgBody.image = [UIImage imageNamed:@"ivMan.png"];
+            break;
+        case OpponentShapeTypeManLow:
+            imgBody.image = [UIImage imageNamed:@"men_low.png"];
+            break;
+        case OpponentShapeTypeScarecrow:
+            imgBody.image = [UIImage imageNamed:@"scarecrow.png"];
+            break;
+        default:
+            break;
+    }
+    
+}
+
 -(void) hitTheOponentWithPoint:(CGPoint)hitPoint mainView:(UIView*)mainView;
 {
     UIImageView *ivHit = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ivHit.png"]];
