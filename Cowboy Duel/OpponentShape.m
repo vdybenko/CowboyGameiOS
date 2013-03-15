@@ -22,6 +22,7 @@
 @synthesize imgBody;
 @synthesize imgShot;
 @synthesize ivLifeBar;
+@synthesize opponentShapeStatus;
 
 static CGFloat oponentLiveImageViewStartWidth;
 
@@ -51,6 +52,8 @@ static CGFloat oponentLiveImageViewStartWidth;
         NSError *error;
         oponentShotAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
         [oponentShotAudioPlayer prepareToPlay];
+        
+        opponentShapeStatus = OpponentShapeStatusLive;
 
     }
     return self;
@@ -106,7 +109,9 @@ static CGFloat oponentLiveImageViewStartWidth;
 -(void) stopMoveAnimation;
 {
     [imgBody stopAnimating];
-    [self setStatusBody:OpponentShapeStatusLive];
+    if (opponentShapeStatus == OpponentShapeStatusLive) {
+        [self setStatusBody:OpponentShapeStatusLive];
+    }
 }
 -(void) shot;
 {
@@ -153,7 +158,8 @@ static CGFloat oponentLiveImageViewStartWidth;
 
 -(void) setStatusBody:(OpponentShapeStatus)status;
 {
-    switch (status) {
+    opponentShapeStatus = status;
+    switch (opponentShapeStatus) {
         case OpponentShapeStatusDead:
             [self stopMoveAnimation];
             imgBody.image = [UIImage imageNamed:@"menLowDie.png"];

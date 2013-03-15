@@ -219,7 +219,14 @@ static CGFloat timeSpinDump = 0.6f;
 {
     vOponnentAvatarWithFrame.hidden = NO;
     [self.textView setHidden:YES];
-    [self changeLableAnimation:vLoadGun endReverce:NO toText:NSLocalizedString(@"Loading", @"")];
+    
+    NSString *st;
+    if([LoginAnimatedViewController sharedInstance].isDemoPractice){
+        st = NSLocalizedString(@"Behold!", @"");
+    }else{
+        st = NSLocalizedString(@"Loading", @"");
+    }
+    [self changeLableAnimation:vLoadGun endReverce:NO toText:st];
     if (time != 0) {
         timeChargeBullets = time/([colectionBullets count]-1);
         if ([[AccountDataSource sharedInstance] isPlayerForPractice]) {
@@ -415,17 +422,6 @@ static CGFloat timeSpinDump = 0.6f;
                          if (reverce) frame.origin.x = -400;
                          else frame.origin.x = 400;
                          view.frame = frame;
-//                         [UIView animateWithDuration:0.17
-//                                          animations:^{
-//                                              view.transform = CGAffineTransformMakeScale(1.5, 1.5);
-//                                          }completion:^(BOOL complete) {
-//                                              [UIView animateWithDuration:0.17
-//                                                               animations:^{
-//                                                                   view.transform = CGAffineTransformMakeScale(1.0, 1.0);
-//                                                               }completion:^(BOOL complete) {
-//                                                               }];
-//                                          }];
-                         
                      }completion:^(BOOL complete) {
                          [view setHidden:YES];
                          CGRect frame = view.frame;
