@@ -872,6 +872,8 @@ static CGFloat blinkBottomOriginY;
 -(void)moveOponent
 {
     [opponentShape performSelectorInBackground:@selector(moveOponentInBackground) withObject:nil];
+    [womanShape moveWoman];
+    [goodCowboyShape moveGoodCowboy];
 }
 
 -(void)setScale

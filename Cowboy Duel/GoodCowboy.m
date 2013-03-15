@@ -15,6 +15,7 @@
 @end
 
 @implementation GoodCowboy
+@synthesize goodCowboyImg;
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     
@@ -46,9 +47,47 @@
 {
     if ([super shotInShapeWithPoint:point superViewOfPoint:view]) {
         [self scream];
+        [self goodCowboyAnimation];
         return YES;
     }else{
         return NO;
     }
 }
+-(void)moveGoodCowboy;
+{
+   
+    int randomDirection = rand() % 3 - 1;
+    [UIView animateWithDuration:0.4 animations:^{
+        CGRect frame = self.frame;
+        frame.origin.x += randomDirection * 40;
+        self.frame = frame;
+    }completion:^(BOOL complete){
+        [UIView animateWithDuration:0.4 animations:^{
+            CGRect frame = self.frame;
+            frame.origin.x += randomDirection * 40;
+            self.frame = frame;
+        }completion:^(BOOL complete){
+            [UIView animateWithDuration:0.4 animations:^{
+                CGRect frame = self.frame;
+                frame.origin.x += randomDirection * 40;
+                self.frame = frame;
+            }completion:^(BOOL complete){
+            }];
+        }];
+    }];
+    
+    
+    
+}
+-(void)goodCowboyAnimation;{
+
+    NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"goodCowboyScared.png"],
+                         [UIImage imageNamed:@"goodCowboy.png"],
+                         nil];
+    goodCowboyImg.animationImages = imgArray;
+    goodCowboyImg.animationDuration = 1.0f;
+    [goodCowboyImg setAnimationRepeatCount:1];
+    [goodCowboyImg startAnimating];
+}
+
 @end
