@@ -1,27 +1,26 @@
 //
-//  WomanShape.m
+//  GoodCowboy.m
 //  Bounty Hunter
 //
-//  Created by Taras on 12.03.13.
+//  Created by Taras on 14.03.13.
 //
 //
 
-#import "WomanShape.h"
+#import "GoodCowboy.h"
 #import <AVFoundation/AVFoundation.h>
-
-@interface WomanShape()
+@interface GoodCowboy()
 {
     AVAudioPlayer *audioPlayer;
 }
 @end
 
-@implementation WomanShape
+@implementation GoodCowboy
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
-   
-    self = [super initWithCoder:aDecoder subViewFromNibFileName:@"WomanShape"];
+    
+    self = [super initWithCoder:aDecoder subViewFromNibFileName:@"GoodCowboy"];
     if(self){
-        NSString *soundName = @"womanVoiceHelp";
+        NSString *soundName = @"goodCowboyVoice1";
         NSString *soundPath = [[NSBundle mainBundle] pathForResource:soundName ofType:@"mp3"];
         NSURL *soundFile = [NSURL fileURLWithPath:soundPath];
         NSError *error;
@@ -37,15 +36,9 @@
     audioPlayer = nil;
 }
 
--(void)goLeft;
-{}
--(void)goRight;
-{}
--(void)stop;
-{}
 
 -(void)scream;
-{    
+{
     [audioPlayer play];
 }
 

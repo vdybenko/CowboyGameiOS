@@ -7,14 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Shape.h"
 
-@interface WomanShape : UIView<MemoryManagement>
-@property (weak, nonatomic) IBOutlet UIImageView *imageMain;
+@interface WomanShape : Shape
 
 -(void)goLeft;
 -(void)goRight;
 -(void)stop;
 -(void)scream;
--(void)randomPositionWithView:(UIView*)view;
--(BOOL)shotInWomanWithPoint:(CGPoint)point superViewOfPoint:(UIView *)view;
+
 @end

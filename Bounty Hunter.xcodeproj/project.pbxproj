@@ -309,6 +309,13 @@
 		7693D97316F1B4960096F61F /* oponent_step2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7693D97116F1B4960096F61F /* oponent_step2.png */; };
 		7693D97516F1B7390096F61F /* OpponentShape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7693D97416F1B7390096F61F /* OpponentShape.xib */; };
 		7693D97816F1B7730096F61F /* OpponentShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 7693D97716F1B7730096F61F /* OpponentShape.m */; };
+		7693D97B16F213140096F61F /* goodCowboy.png in Resources */ = {isa = PBXBuildFile; fileRef = 7693D97916F213130096F61F /* goodCowboy.png */; };
+		7693D97C16F213140096F61F /* goodCowboy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7693D97A16F213140096F61F /* goodCowboy@2x.png */; };
+		7693D97F16F2157D0096F61F /* Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = 7693D97E16F2157D0096F61F /* Shape.m */; };
+		7693D98116F219BE0096F61F /* GoodCowboy.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7693D98016F219BD0096F61F /* GoodCowboy.xib */; };
+		7693D98716F21A640096F61F /* GoodCowboy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7693D98616F21A600096F61F /* GoodCowboy.m */; };
+		7693D98916F225800096F61F /* goodCowboyVoice1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7693D98816F225800096F61F /* goodCowboyVoice1.mp3 */; };
+		7693D98B16F226550096F61F /* womanVoiceHelp.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7693D98A16F226550096F61F /* womanVoiceHelp.mp3 */; };
 		769CA78F14234458006EF248 /* shot.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 769CA78E14234458006EF248 /* shot.mp3 */; };
 		769F567E13AA6A9B006BFD46 /* Duel.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 769F567B13AA6A9B006BFD46 /* Duel.mp3 */; };
 		769F567F13AA6A9B006BFD46 /* Lose.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 769F567C13AA6A9B006BFD46 /* Lose.mp3 */; };
@@ -1211,6 +1218,15 @@
 		7693D97416F1B7390096F61F /* OpponentShape.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OpponentShape.xib; sourceTree = "<group>"; };
 		7693D97616F1B7730096F61F /* OpponentShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpponentShape.h; sourceTree = "<group>"; };
 		7693D97716F1B7730096F61F /* OpponentShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpponentShape.m; sourceTree = "<group>"; };
+		7693D97916F213130096F61F /* goodCowboy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goodCowboy.png; sourceTree = "<group>"; };
+		7693D97A16F213140096F61F /* goodCowboy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "goodCowboy@2x.png"; sourceTree = "<group>"; };
+		7693D97D16F2157D0096F61F /* Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shape.h; sourceTree = "<group>"; };
+		7693D97E16F2157D0096F61F /* Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shape.m; sourceTree = "<group>"; };
+		7693D98016F219BD0096F61F /* GoodCowboy.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GoodCowboy.xib; path = Xib/GoodCowboy.xib; sourceTree = "<group>"; };
+		7693D98516F21A5E0096F61F /* GoodCowboy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodCowboy.h; sourceTree = "<group>"; };
+		7693D98616F21A600096F61F /* GoodCowboy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodCowboy.m; sourceTree = "<group>"; };
+		7693D98816F225800096F61F /* goodCowboyVoice1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = goodCowboyVoice1.mp3; sourceTree = "<group>"; };
+		7693D98A16F226550096F61F /* womanVoiceHelp.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = womanVoiceHelp.mp3; sourceTree = "<group>"; };
 		76947EF413ACC4EA008BD146 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		769CA78E14234458006EF248 /* shot.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = shot.mp3; sourceTree = "<group>"; };
 		769F567B13AA6A9B006BFD46 /* Duel.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Duel.mp3; sourceTree = "<group>"; };
@@ -1949,6 +1965,8 @@
 		604CA57413A0A80500E89C01 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				7693D98816F225800096F61F /* goodCowboyVoice1.mp3 */,
+				7693D98A16F226550096F61F /* womanVoiceHelp.mp3 */,
 				BD243B1916A9AAF600D89E47 /* cry.aif */,
 				BD243B1016A9AABE00D89E47 /* brocken_glass.aif */,
 				BD243B1116A9AABE00D89E47 /* follSound.aif */,
@@ -2154,6 +2172,7 @@
 				7687667816BA7543003405F9 /* GunDrumViewController.xib */,
 				BD81E637169EC4D100CE8278 /* ActiveDuelViewController.xib */,
 				768B9E2F16EF28D200278FCA /* WomanShape.xib */,
+				7693D98016F219BD0096F61F /* GoodCowboy.xib */,
 				7693D97416F1B7390096F61F /* OpponentShape.xib */,
 				BD84DAA4164ABCA000DEEE38 /* LoginAnimatedViewController.xib */,
 				7691DD9316CE75B200AD25F5 /* LoadViewContoller.xib */,
@@ -2189,8 +2208,12 @@
 				7687667716BA7543003405F9 /* GunDrumViewController.m */,
 				BD81E635169EC4D100CE8278 /* ActiveDuelViewController.h */,
 				BD81E636169EC4D100CE8278 /* ActiveDuelViewController.m */,
+				7693D97D16F2157D0096F61F /* Shape.h */,
+				7693D97E16F2157D0096F61F /* Shape.m */,
 				768B9E3116EF29CD00278FCA /* WomanShape.h */,
 				768B9E3216EF29CD00278FCA /* WomanShape.m */,
+				7693D98516F21A5E0096F61F /* GoodCowboy.h */,
+				7693D98616F21A600096F61F /* GoodCowboy.m */,
 				7693D97616F1B7730096F61F /* OpponentShape.h */,
 				7693D97716F1B7730096F61F /* OpponentShape.m */,
 			);
@@ -2541,6 +2564,8 @@
 				762FA45916DBA22400CA5E2F /* ivBloodHeader@2x.png */,
 				768B9E2B16EF24C200278FCA /* woman.png */,
 				768B9E2C16EF24C200278FCA /* woman@2x.png */,
+				7693D97916F213130096F61F /* goodCowboy.png */,
+				7693D97A16F213140096F61F /* goodCowboy@2x.png */,
 				BD4BAAB416BC064900F88E82 /* men_low.png */,
 				BD4BAAB516BC064900F88E82 /* men_low@2x.png */,
 				768B0EA416EE1F7000D7EB99 /* menLowDie.png */,
@@ -3172,6 +3197,11 @@
 				7693D97216F1B4960096F61F /* oponent_step1.png in Resources */,
 				7693D97316F1B4960096F61F /* oponent_step2.png in Resources */,
 				7693D97516F1B7390096F61F /* OpponentShape.xib in Resources */,
+				7693D97B16F213140096F61F /* goodCowboy.png in Resources */,
+				7693D97C16F213140096F61F /* goodCowboy@2x.png in Resources */,
+				7693D98116F219BE0096F61F /* GoodCowboy.xib in Resources */,
+				7693D98916F225800096F61F /* goodCowboyVoice1.mp3 in Resources */,
+				7693D98B16F226550096F61F /* womanVoiceHelp.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3578,6 +3608,8 @@
 				BD0DA0F916D3727B00419DC1 /* PLViewBase.m in Sources */,
 				768B9E3316EF29CD00278FCA /* WomanShape.m in Sources */,
 				7693D97816F1B7730096F61F /* OpponentShape.m in Sources */,
+				7693D97F16F2157D0096F61F /* Shape.m in Sources */,
+				7693D98716F21A640096F61F /* GoodCowboy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

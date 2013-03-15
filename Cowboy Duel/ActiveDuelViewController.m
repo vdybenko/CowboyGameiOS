@@ -18,6 +18,7 @@
 #import "GunDrumViewController.h"
 #import "WomanShape.h"
 #import "OpponentShape.h"
+#import "GoodCowboy.h"
 
 #define targetHeight 260
 #define targetWeidth 100
@@ -69,6 +70,7 @@
     
     int opponentTime;
     
+    __weak IBOutlet GoodCowboy *goodCowboyShape;
     __weak IBOutlet WomanShape *womanShape;
     __weak IBOutlet OpponentShape *opponentShape;
     IconDownloader *iconDownloader;
@@ -300,6 +302,7 @@ static CGFloat blinkBottomOriginY;
     [self countUpBulets];
     [self updateOpponentViewToRamdomPosition];
     [womanShape randomPositionWithView:opponentShape];
+    [goodCowboyShape randomPositionWithView:womanShape];
     
 	[plView startAnimation];
     
@@ -323,6 +326,7 @@ static CGFloat blinkBottomOriginY;
     
     opponentShape.hidden = YES;
     womanShape.hidden = YES;
+    goodCowboyShape.hidden = YES;
     
     if(!delegate)
     {
@@ -367,6 +371,7 @@ static CGFloat blinkBottomOriginY;
     blinkBottom = nil;
     blinkBottom = nil;
     opponentShape = nil;
+    goodCowboyShape = nil;
     [super viewDidUnload];
 }
 
@@ -478,8 +483,9 @@ static CGFloat blinkBottomOriginY;
 
 -(void)cheackHitForShot:(CGPoint)shotPoint andTargetPoint:(CGPoint)targetPoint
 {
-    BOOL result = [womanShape shotInWomanWithPoint:shotPoint superViewOfPoint:self.view];
-    if (result) {
+    BOOL resultWoman = [womanShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
+    BOOL resultGoodCowboy = [goodCowboyShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
+    if (resultWoman || resultGoodCowboy) {
         [self opponentShot];
         return;
     }
@@ -791,6 +797,7 @@ static CGFloat blinkBottomOriginY;
         [self.userLiveImageView setHidden:NO];
         opponentShape.hidden = NO;
         womanShape.hidden = NO;
+        goodCowboyShape.hidden = NO;
         
         if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
         moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
@@ -949,6 +956,7 @@ static CGFloat blinkBottomOriginY;
         moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
         opponentShape.hidden = NO;
         womanShape.hidden = NO;
+        goodCowboyShape.hidden = NO;
     }
 }
 
@@ -998,10 +1006,16 @@ static CGFloat blinkBottomOriginY;
     [self setCrossImageView:nil];
     [self setGlassImageViewAllBackground:nil];
     [self setUserLiveImageView:nil];
+    
+    [goodCowboyShape releaseComponents];
+    goodCowboyShape = nil;
+    
     [womanShape releaseComponents];
     womanShape = nil;
+    
     [opponentShape releaseComponents];
     opponentShape = nil;
+    
     plView = nil;
     [super viewDidUnload];
 

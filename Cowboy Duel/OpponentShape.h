@@ -23,6 +23,7 @@ typedef enum {
 -(void) stopMoveAnimation;
 
 -(void) shot;
+-(void)reboundOnShot;
 
 -(void) changeLiveBarWithUserHitCount:(int)userHitCount maxShotCount:(int)maxShotCount;
 -(void) refreshLiveBar;
