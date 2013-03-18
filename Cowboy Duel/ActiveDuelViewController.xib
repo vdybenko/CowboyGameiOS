@@ -173,7 +173,6 @@
 						<string key="NSFrame">{{275, 445}, {45, 35}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -295,7 +294,7 @@
 							<object class="IBUIImageView" id="8141288">
 								<reference key="NSNextResponder" ref="52008312"/>
 								<int key="NSvFlags">304</int>
-								<string key="NSFrame">{{0, -240}, {320, 280}}</string>
+								<string key="NSFrame">{{0, -240}, {320, 308}}</string>
 								<reference key="NSSuperview" ref="52008312"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1048445211"/>
@@ -707,11 +706,6 @@
 						<reference key="parent" ref="52008312"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">4</int>
-						<reference key="object" ref="675710864"/>
-						<reference key="parent" ref="191373211"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">87</int>
 						<reference key="object" ref="1072811500"/>
 						<reference key="parent" ref="370157639"/>
@@ -720,6 +714,11 @@
 						<int key="objectID">91</int>
 						<reference key="object" ref="710952961"/>
 						<reference key="parent" ref="370157639"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">4</int>
+						<reference key="object" ref="675710864"/>
+						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>
 			</object>
@@ -907,6 +906,7 @@
 					<string key="superclassName">UIView</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="imgBody">UIImageView</string>
+						<string key="imgDieOpponentAnimation">UIImageView</string>
 						<string key="imgShot">UIImageView</string>
 						<string key="ivLifeBar">UIView</string>
 						<string key="vContainer">UIView</string>
@@ -914,6 +914,10 @@
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="imgBody">
 							<string key="name">imgBody</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="imgDieOpponentAnimation">
+							<string key="name">imgDieOpponentAnimation</string>
 							<string key="candidateClassName">UIImageView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="imgShot">

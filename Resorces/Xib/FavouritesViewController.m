@@ -225,8 +225,7 @@
     else {
         SSConnection *connection = [SSConnection sharedInstance];
         [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
-        int randomTime = arc4random() % 6;
-        ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:[AccountDataSource sharedInstance] oponentAccount:oponentAccount];
+        ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:[AccountDataSource sharedInstance] oponentAccount:oponentAccount];
         [self.navigationController pushViewController:activeDuelViewController animated:YES];
         activeDuelViewController = nil;
         [self releaseComponents];
