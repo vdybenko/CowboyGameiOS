@@ -2065,6 +2065,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7606709316F7193700079F69 /* Duel Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				7693D97D16F2157D0096F61F /* Shape.h */,
+				7693D97E16F2157D0096F61F /* Shape.m */,
+				768B9E3116EF29CD00278FCA /* WomanShape.h */,
+				768B9E3216EF29CD00278FCA /* WomanShape.m */,
+				7693D98516F21A5E0096F61F /* GoodCowboy.h */,
+				7693D98616F21A600096F61F /* GoodCowboy.m */,
+				7693D97616F1B7730096F61F /* OpponentShape.h */,
+				7693D97716F1B7730096F61F /* OpponentShape.m */,
+			);
+			name = "Duel Shapes";
+			sourceTree = "<group>";
+		};
 		763BF411165694CD00D5C49C /* Store */ = {
 			isa = PBXGroup;
 			children = (
@@ -2203,14 +2218,6 @@
 				7687667716BA7543003405F9 /* GunDrumViewController.m */,
 				BD81E635169EC4D100CE8278 /* ActiveDuelViewController.h */,
 				BD81E636169EC4D100CE8278 /* ActiveDuelViewController.m */,
-				7693D97D16F2157D0096F61F /* Shape.h */,
-				7693D97E16F2157D0096F61F /* Shape.m */,
-				768B9E3116EF29CD00278FCA /* WomanShape.h */,
-				768B9E3216EF29CD00278FCA /* WomanShape.m */,
-				7693D98516F21A5E0096F61F /* GoodCowboy.h */,
-				7693D98616F21A600096F61F /* GoodCowboy.m */,
-				7693D97616F1B7730096F61F /* OpponentShape.h */,
-				7693D97716F1B7730096F61F /* OpponentShape.m */,
 			);
 			name = Duel;
 			sourceTree = "<group>";
@@ -2720,6 +2727,7 @@
 		BDD07C20141E29210085E4FB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7606709316F7193700079F69 /* Duel Shapes */,
 				BD81E64E169F0F1F00CE8278 /* UIImage+Sprite */,
 				BDD0D13816887D5B000755E9 /* BBCyclingLabel */,
 				76AFC7A015ED1B740009294B /* UIScrollView+AH3DPullRefresh.h */,
