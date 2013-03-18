@@ -164,6 +164,7 @@ static const CGFloat timeSpinDump = 0.3f;
 {
     [self viewDidUnload];
     putGunDownAudioPlayer = nil;
+    loadBulletAudioPlayer = nil;
 }
 
 #pragma mark
@@ -197,7 +198,11 @@ static const CGFloat timeSpinDump = 0.3f;
                          } completion:^(BOOL finished) {
                              UIImageView *bullet = [colectionBullets objectAtIndex:indexOfGargedBullet];
                              bullet.hidden = NO;
-                             [loadBulletAudioPlayer play];
+                             
+                             dispatch_async(dispatch_get_main_queue(), ^{
+                                 [loadBulletAudioPlayer setCurrentTime:0.f];
+                                [loadBulletAudioPlayer play];
+                             });
                              hudView.alpha -= 0.1;
                              
                              indexOfGargedBullet++;
