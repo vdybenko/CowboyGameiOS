@@ -276,10 +276,7 @@ static GameCenterViewController *gameCenterViewController;
     
 }
 
-
-
 #pragma mark DuelViewControllerDelegate Methods
-
 
 -(void)setAccelStateFalse
 {

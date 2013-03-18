@@ -277,9 +277,6 @@ static CGFloat blinkBottomOriginY;
     soundStart = NO;
     isGunCanShotOfFrequently = YES;
     
-    [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(3.0 / 60.0)];
-    [[UIAccelerometer sharedAccelerometer] setDelegate:self];
-    
     self.gunButton.hidden = YES;
     self.crossImageView.hidden = YES;
     
@@ -346,7 +343,6 @@ static CGFloat blinkBottomOriginY;
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [[UIAccelerometer sharedAccelerometer] setDelegate:nil];
     [shotTimer invalidate];
     [moveTimer invalidate];
     [ignoreTimer invalidate];
@@ -975,6 +971,7 @@ static CGFloat blinkBottomOriginY;
     BOOL __block fireSoundBlock = fireSound;
     BOOL __block acelStatusBlock = acelStatus;
     int __block shotTimeBlock = shotTime;
+    AVAudioPlayer __block *playerBlock = player;
     
     gunDrumViewController.didFinishBlock = ^(GunDrumViewController *controller){
         if(!delegateBlock) timerBlock = [NSTimer scheduledTimerWithTimeInterval:0.01 target:selfBlock selector:@selector(shotTimer) userInfo:nil repeats:YES];
@@ -982,6 +979,7 @@ static CGFloat blinkBottomOriginY;
         fireSoundBlock = NO;
         acelStatusBlock = YES;
         shotTimeBlock = 0;
+        [playerBlock stop];
     };
 }
 
@@ -994,7 +992,6 @@ static CGFloat blinkBottomOriginY;
 -(void)releaseComponents
 {
     [self setFloatView:nil];
-    [[UIAccelerometer sharedAccelerometer] setDelegate:nil];
     [self setFireImageView:nil];
     [self setBloodImageView:nil];
     [self setBloodCImageView:nil];
