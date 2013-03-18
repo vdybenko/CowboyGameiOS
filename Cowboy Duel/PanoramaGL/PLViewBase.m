@@ -21,6 +21,8 @@
 #import "PLLog.h"
 #import "OponentCoordinateView.h"
 
+#define ARC4RANDOM_MAX 0x100000000
+
 #define DEGREES_TO_RADIANS (M_PI/180.0)
 #define WGS84_A    (6378137.0)                // WGS 84 semi-major axis constant in meters
 #define WGS84_E (8.1819190842622e-2)    // WGS 84 eccentricity
@@ -35,6 +37,7 @@ typedef float vec4f_t[4];    // 4D vector
     vec4f_t *oponentCoordinates;
     NSArray *oponentCoordinateViews;
     CLLocation *location;
+    float startX;
 }
 -(void)doGyroUpdate;
 -(void)doSimulatedGyroUpdate;
@@ -1049,6 +1052,8 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 {
     if(!isSensorialRotationRunning)
     {
+        startX = 0;
+        float randomX = [self randFloatBetween:0.5 and:1.5];
         isSensorialRotationRunning = YES;
         motionManager = [[CMMotionManager alloc] init];
         
@@ -1068,10 +1073,9 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
                  return;
              }
              else {
-                 float PI = 3.14159265;
-                 float yaw = currentAttitude.yaw * 180 / PI;
+                 float yaw = currentAttitude.yaw * 180 / M_PI;
                  float pitch = motion.gravity.z * 90;
-                 float roll = currentAttitude.roll * 180 / PI;
+                 float roll = currentAttitude.roll * 180 / M_PI;
                  
                  dispatch_async(dispatch_get_main_queue(), ^{
                      [scene.currentCamera rotateWithPitch:pitch yaw:-yaw roll:-roll];
@@ -1091,16 +1095,17 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
                  multiplyMatrixAndVector(v, projectionCameraTransform, oponentCoordinates[index]);
                  
                  float x = (v[0] / v[3] + 1.0f) * 0.4f;
+                
                  float y = -motion.gravity.z;
-                 float distance;
+
                  if(v[2] > 0){
+                     if(!startX && (y <= 0.7)) startX = x + randomX;
+                     
                      [oponentView.view setHidden:NO];
-                     CGPoint currentPosition = oponentView.view.center;
-                     CGPoint newPosition = CGPointMake(x*self.bounds.size.width, self.bounds.size.height-(y*self.bounds.size.height + 220));
+                     x += startX;
+                     CGPoint newPosition = CGPointMake(x * self.bounds.size.width, self.bounds.size.height-(y * self.bounds.size.height + 220));
                      
-                     distance = powf(powf(currentPosition.x - newPosition.x, 2) + powf(currentPosition.y - newPosition.y, 2), 0.5);
-                     
-                     [oponentView.view setCenter:CGPointMake(x*self.bounds.size.width, self.bounds.size.height - (y*self.bounds.size.height + 220))];
+                     [oponentView.view setCenter:newPosition];
                      index++;
                  }
                  else [oponentView.view setHidden:YES];
@@ -1110,6 +1115,12 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
         
         
     }
+}
+
+-(float) randFloatBetween:(float)low and:(float)high
+{
+    float diff = high - low;
+    return (((double)arc4random() / ARC4RANDOM_MAX) * diff) + low;
 }
 
 // Creates a projection matrix using the given y-axis field-of-view, aspect ratio, and near and far clipping planes
