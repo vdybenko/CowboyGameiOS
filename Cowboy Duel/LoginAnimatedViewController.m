@@ -29,29 +29,24 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
     __weak IBOutlet UIImageView *backgroundView;
     __weak IBOutlet UIButton *practiceButton;
     __weak IBOutlet UILabel *animetedText;
+    __weak IBOutlet UILabel *animetedText2;
     __weak IBOutlet UIButton *loginFBbutton;
     __weak IBOutlet UILabel *practiceLable;
     __weak IBOutlet UILabel *loginLable;
     
     __weak IBOutlet UIView *textsBackground;
     
+    __weak IBOutlet UIScrollView *scroolView;
     
     BOOL tryAgain;
-    CGRect guillBackUp;
-    CGRect textBackUp;
-    CGRect hatBackUp;
     BOOL animationPause;
 }
-@property (nonatomic) int textIndex;
-@property (nonatomic) NSTimer *timer;
-@property (nonatomic) NSArray *textsContainer;
 @property (nonatomic) AVAudioPlayer *player;
 
 @end
 
 @implementation LoginAnimatedViewController
 @synthesize delegate ,loginFacebookStatus, payment;
-@synthesize timer, textsContainer;
 @synthesize player;
 
 static LoginAnimatedViewController *sharedHelper = nil;
@@ -102,6 +97,10 @@ static LoginAnimatedViewController *sharedHelper = nil;
     practiceLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
        
     [textsBackground setDinamicHeightBackground];
+    
+    animetedText.text = NSLocalizedString(@"1stIntro", @"");
+    animetedText2.text = NSLocalizedString(@"2ndIntro", @"");
+    scroolView.contentSize = (CGSize){2*scroolView.frame.size.width,scroolView.frame.size.height};
 }
 - (void)viewDidLoad
 {
@@ -112,31 +111,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-
-    textsContainer = [NSArray arrayWithObjects:
-                    NSLocalizedString(@"INTRO1", nil),  //"Ye know who bounty hunters are, boy?";
-                    NSLocalizedString(@"INTRO2", nil),  //"They chase criminals 'n get a reward for 'em,\ndead or alive";
-                    NSLocalizedString(@"INTRO3", nil),  //"The harder to get these bastards are,\nthe bigger’s the reward for their head.";
-                    NSLocalizedString(@"INTRO4", nil),  //"I'm one of the best hunters out there,\n 'n I could do with some help.";
-                    NSLocalizedString(@"INTRO5", nil),  //"Seems yer tough enough for the job.";
-                    NSLocalizedString(@"INTRO6", nil),  //"Come with me, help me get'em bad guys,\nand ye'll get yer freedom.";
-                    NSLocalizedString(@"INTRO7", nil),  //"If yer good, yer gonna be a big bounty hunter,\njust like me.";
-                    NSLocalizedString(@"INTRO8", nil),  //"Remember: their guns are fast.\nYe better be faster.";
-                    nil];
     
-    self.textIndex = 0;
-    /*
-    animetedText.text = [NSString stringWithFormat:@"%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n",
-                         NSLocalizedString(@"INTRO1", nil),
-                         NSLocalizedString(@"INTRO2", nil),
-                         NSLocalizedString(@"INTRO3", nil),
-                         NSLocalizedString(@"INTRO4", nil),
-                         NSLocalizedString(@"INTRO5", nil),
-                         NSLocalizedString(@"INTRO6", nil),
-                         NSLocalizedString(@"INTRO7", nil),
-                         NSLocalizedString(@"INTRO8", nil)];
-     */
-    textBackUp = animetedText.frame;
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/kassa.aif", [[NSBundle mainBundle] resourcePath]]];
     NSError *error;
     self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
@@ -149,8 +124,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [[NSUserDefaults standardUserDefaults] synchronize];
     [[StartViewController sharedInstance] playerStart];
     
-    [self updateLabelsWithString:NSLocalizedString(@"1stIntro", @"")];
-    self.textIndex++;
+    [self performSelector:@selector(scroolViewAnimation) withObject:Nil afterDelay:2.5f];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -224,39 +198,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
 
 #pragma mark Animations
 
-- (void)updateLabelsWithString: (NSString *)text
-{
-    if (animationPause) return;
-
-    [animetedText setText:text];
-    [animetedText setAlpha:0.0f];
-
-    [UIView animateWithDuration:0.3f
-                          delay:0.0f
-                        options:UIViewAnimationCurveLinear
-                     animations:^{
-                         [animetedText setAlpha:1.0f];
-                     } completion:^(BOOL finished) {
-                         [UIView animateWithDuration:0.3f
-                                               delay:6.0f
-                                             options:UIViewAnimationCurveLinear
-                                          animations:^{
-                                               [animetedText setAlpha:0.0f];
-                                          } completion:^(BOOL finished) {
-                                              [animetedText setText:NSLocalizedString(@"2ndIntro", @"")];
-                                              [UIView animateWithDuration:0.3f
-                                                                    delay:0.0f
-                                                                  options:UIViewAnimationCurveLinear animations:^{
-                                                                      [animetedText setAlpha:1.0f];
-                                                                  } completion:^(BOOL finished) {
-                                                                      [self performSelector:@selector(scaleView:) withObject:loginFBbutton  afterDelay:4.0];
-                                                                      [self performSelector:@selector(scaleView:) withObject:loginLable  afterDelay:4.0];
-                                                                  }];
-                                          }];
-                     }];
-
-}
-
 -(void)scaleView:(UIView *)view
 {
     [UIView animateWithDuration:0.6 animations:^{
@@ -269,7 +210,18 @@ static LoginAnimatedViewController *sharedHelper = nil;
     }];
 }
 
-
+-(void)scroolViewAnimation;
+{
+    if (animationPause) return;
+    
+    [UIView animateWithDuration:0.8 animations:^{
+        [scroolView setContentOffset:(CGPoint){animetedText.frame.size.width,0}];
+    }completion:^(BOOL complete){
+        [self performSelector:@selector(scaleView:) withObject:loginFBbutton  afterDelay:4.0];
+        [self performSelector:@selector(scaleView:) withObject:loginLable  afterDelay:4.0];
+    } ];
+    
+}
 #pragma mark -
 
 
@@ -432,6 +384,8 @@ static LoginAnimatedViewController *sharedHelper = nil;
 }
 - (void)viewDidUnload {
     textsBackground = nil;
+    animetedText2 = nil;
+    scroolView = nil;
     [super viewDidUnload];
 }
 @end
