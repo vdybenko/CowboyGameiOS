@@ -198,6 +198,7 @@ static const CGFloat timeSpinDump = 0.3f;
                              UIImageView *bullet = [colectionBullets objectAtIndex:indexOfGargedBullet];
                              bullet.hidden = NO;
                              [loadBulletAudioPlayer play];
+                             hudView.alpha -= 0.1;
                              
                              indexOfGargedBullet++;
                              if ((countOfBullets - indexOfGargedBullet)==0) {
@@ -254,6 +255,7 @@ static const CGFloat timeSpinDump = 0.3f;
             frame.origin.y += 50;
             gun.frame = frame;
         }completion:^(BOOL finished) {
+            hudView.alpha = 0.0;
             if (didFinishBlock) {
                 didFinishBlock(self);
             }
@@ -328,11 +330,6 @@ static const CGFloat timeSpinDump = 0.3f;
                                               labelAnimationStarted = NO;
                                           }];
                      }];
-}
-
--(void)showLableWithText:(NSString *)text
-{
-    
 }
 
 -(void)shotAnimation;
