@@ -40,6 +40,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{70, 22}, {89, 161}}</string>
 						<reference key="NSSuperview" ref="201225919"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -54,6 +55,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{62, 39}, {36, 37}}</string>
 						<reference key="NSSuperview" ref="201225919"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="697249932"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -68,18 +70,20 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrameSize">{84, 13}</string>
 								<reference key="NSSuperview" ref="312582573"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="941352939"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">live_blue.png</string>
+									<string key="NSResourceName">live_red.png</string>
 								</object>
 							</object>
 						</array>
 						<string key="NSFrame">{{68, 3}, {84, 12}}</string>
 						<reference key="NSSuperview" ref="201225919"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="235229605"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="334419792">
@@ -92,6 +96,7 @@
 				</array>
 				<string key="NSFrameSize">{225, 213}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="312582573"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<reference key="IBUIBackgroundColor" ref="334419792"/>
@@ -204,13 +209,48 @@
 			<nil key="sourceID"/>
 			<int key="maxID">90</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">OpponentShape</string>
+					<string key="superclassName">UIView</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="imgBody">UIImageView</string>
+						<string key="imgShot">UIImageView</string>
+						<string key="ivLifeBar">UIView</string>
+						<string key="vContainer">UIView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="imgBody">
+							<string key="name">imgBody</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="imgShot">
+							<string key="name">imgShot</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="ivLifeBar">
+							<string key="name">ivLifeBar</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="vContainer">
+							<string key="name">vContainer</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/OpponentShape.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="live_blue.png">{125, 18}</string>
+			<string key="live_red.png">{125, 18}</string>
 			<string key="men_low.png">{183, 355}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>

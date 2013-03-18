@@ -78,7 +78,7 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 						</array>
-						<string key="NSFrameSize">{320, 480}</string>
+						<string key="NSFrameSize">{500, 480}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1072811500"/>
@@ -886,6 +886,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">GoodCowboy</string>
 					<string key="superclassName">Shape</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">goodCowboyImg</string>
+						<string key="NS.object.0">UIImageView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">goodCowboyImg</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">goodCowboyImg</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/GoodCowboy.h</string>
@@ -961,6 +972,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">WomanShape</string>
 					<string key="superclassName">Shape</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">womanImg</string>
+						<string key="NS.object.0">UIImageView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">womanImg</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">womanImg</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/WomanShape.h</string>
