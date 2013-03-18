@@ -23,6 +23,7 @@
 @synthesize imgShot;
 @synthesize ivLifeBar;
 @synthesize opponentShapeStatus;
+@synthesize imgDieOpponentAnimation;
 
 static CGFloat oponentLiveImageViewStartWidth;
 
@@ -69,6 +70,7 @@ static CGFloat oponentLiveImageViewStartWidth;
 
 -(void) moveAnimation;
 {
+    
     NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"oponent_step1.png"],
                        [UIImage imageNamed:@"oponent_step2.png"],
                        nil];
@@ -161,8 +163,20 @@ static CGFloat oponentLiveImageViewStartWidth;
     opponentShapeStatus = status;
     switch (opponentShapeStatus) {
         case OpponentShapeStatusDead:
+        {
+            
             [self stopMoveAnimation];
-            imgBody.image = [UIImage imageNamed:@"menLowDie.png"];
+            //imgBody.image = [UIImage imageNamed:@"menLowDie.png"];
+            imgBody.hidden = YES;
+            UIImage *spriteSheetDie = [UIImage imageNamed:@"opponentSpritSeet"];
+            NSArray *arrayWithSpritesDie = [spriteSheetDie spritesWithSpriteSheetImage:spriteSheetDie
+                                                                                spriteSize:CGSizeMake(89, 161)];
+            [imgDieOpponentAnimation setAnimationImages:arrayWithSpritesDie];
+            [imgDieOpponentAnimation setAnimationRepeatCount:1];
+            [imgDieOpponentAnimation setAnimationDuration:2];
+            [imgDieOpponentAnimation startAnimating];
+           
+        }
             break;
         case OpponentShapeStatusLive:
             imgBody.image = [UIImage imageNamed:@"men_low.png"];

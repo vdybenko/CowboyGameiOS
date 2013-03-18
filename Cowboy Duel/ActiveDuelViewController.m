@@ -663,7 +663,7 @@ static CGFloat blinkBottomOriginY;
     
     [UIView animateWithDuration:0.3f animations:^{
         CGRect frame = blinkBottom.frame;
-        frame.origin.y = 151;
+        frame.origin.y = 120;
         blinkBottom.frame = frame;
         
         frame = blinkTop.frame;
@@ -683,7 +683,7 @@ static CGFloat blinkBottomOriginY;
             
             [UIView animateWithDuration:0.2 animations:^{
             CGRect frame = blinkBottom.frame;
-            frame.origin.y = 151;
+            frame.origin.y = 120;
             blinkBottom.frame = frame;
             
             frame = blinkTop.frame;

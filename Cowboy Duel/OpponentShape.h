@@ -17,6 +17,7 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UIImageView *imgBody;
 @property (weak, nonatomic) IBOutlet UIImageView *imgShot;
 @property (weak, nonatomic) IBOutlet UIView *ivLifeBar;
+@property (weak, nonatomic) IBOutlet UIImageView *imgDieOpponentAnimation;
 @property (nonatomic) OpponentShapeStatus opponentShapeStatus;
 
 
