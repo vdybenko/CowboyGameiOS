@@ -904,10 +904,9 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 - (IBAction)duelButtonClick:(id)sender {
     if ([playerAccount isPlayerForPractice]) {
         [playerAccount.finalInfoTable removeAllObjects];
-        int randomTime = (arc4random() % 3)-2;
         
         if ([AccountDataSource sharedInstance].activeDuel) {
-            ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:[AccountDataSource sharedInstance] oponentAccount:playerAccount];
+            ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:[AccountDataSource sharedInstance] oponentAccount:playerAccount];
             [self.navigationController pushViewController:activeDuelViewController animated:YES];
             activeDuelViewController = nil;
         }
@@ -969,8 +968,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 
 -(void)startBotDuel
 {
-    int randomTime = arc4random() % 6;
-    ActiveDuelViewController __block *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:[AccountDataSource sharedInstance] oponentAccount:playerAccount];
+    ActiveDuelViewController __block *activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:[AccountDataSource sharedInstance] oponentAccount:playerAccount];
     [UIView animateWithDuration:0.75
                      animations:^{
                          [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];

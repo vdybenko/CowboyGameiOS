@@ -480,8 +480,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
 
 -(void)startBotDuel
 {
-    int randomTime = arc4random() % 6;
-    ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:playerAccount oponentAccount:oponentAccount];
+    ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:playerAccount oponentAccount:oponentAccount];
     [self.navigationController pushViewController:activeDuelViewController animated:YES];
     activeDuelViewController = nil;
     [self releaseComponents];

@@ -48,9 +48,7 @@
     NSTimer *shotTimer;
     NSTimer *moveTimer;
     NSTimer *ignoreTimer;
-    
-    int time;
-    
+        
     BOOL arrowAnimationContinue;
     
     BOOL foll;
@@ -104,7 +102,7 @@ static CGFloat userLiveImageViewStartWidth;
 static CGFloat blinkTopOriginY;
 static CGFloat blinkBottomOriginY;
 
--(id)initWithTime:(int)randomTime Account:(AccountDataSource *)userAccount oponentAccount:(AccountDataSource *)pOponentAccount
+-(id)initWithAccount:(AccountDataSource *)userAccount oponentAccount:(AccountDataSource *)pOponentAccount
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
@@ -112,7 +110,6 @@ static CGFloat blinkBottomOriginY;
         // Custom initialization
         playerAccount = userAccount;
         opAccount  = pOponentAccount;
-        time = randomTime + 5;
         
         NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/shot.aif", [[NSBundle mainBundle] resourcePath]]];
         
@@ -283,7 +280,6 @@ static CGFloat blinkBottomOriginY;
     [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(3.0 / 60.0)];
     [[UIAccelerometer sharedAccelerometer] setDelegate:self];
     
-    [gunDrumViewController showGun];
     self.gunButton.hidden = YES;
     self.crossImageView.hidden = YES;
     
@@ -340,6 +336,11 @@ static CGFloat blinkBottomOriginY;
         }
     }
    [plView startSensorialRotation];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [self readyToStart];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -405,7 +406,7 @@ static CGFloat blinkBottomOriginY;
         [self startGunFrequentlyBlockTime];
         
             
-//        [gunDrumViewController shotAnimation];
+        [gunDrumViewController shotAnimation];
         [self hideSteadyImage];
         
         switch (shotCountForSound) {
@@ -532,10 +533,10 @@ static CGFloat blinkBottomOriginY;
             [activityIndicatorView showView];
             [self horizontalFlip];
             DLog(@"Kill!!!");
-            DLog(@"Shot Time = %d.%d", (shotTime - time * 1000) / 1000, (shotTime - time * 1000));
+            DLog(@"Shot Time = %d.%d", (shotTime) / 1000, (shotTime));
             GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
             if (!self.delegate) gameCenterViewController = nil;
-            FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime - time * 1000) andOponentTime:opponentTime andGameCenterController:gameCenterViewController andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
+            FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime) andOponentTime:opponentTime andGameCenterController:gameCenterViewController andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
             
             [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
             [timer invalidate];
@@ -607,7 +608,7 @@ static CGFloat blinkBottomOriginY;
         [self userLost];
         GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
         if (!self.delegate) gameCenterViewController = nil;
-        FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime - time * 1000) andOponentTime:999999 andGameCenterController:gameCenterViewController andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
+        FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime) andOponentTime:999999 andGameCenterController:gameCenterViewController andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
 
         [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:1.0];
         [timer invalidate];
@@ -695,7 +696,6 @@ static CGFloat blinkBottomOriginY;
         }];
     }];
 
-    
     [brockenGlassAudioPlayer play];
     [timer invalidate];
     [moveTimer invalidate];
@@ -712,6 +712,7 @@ static CGFloat blinkBottomOriginY;
 
 -(void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
 {
+    return;
     rollingX = (acceleration.x * kFilteringFactor) + (rollingX * (1.0 - kFilteringFactor));
     rollingY = (acceleration.y * kFilteringFactor) + (rollingY * (1.0 - kFilteringFactor));
     rollingZ = (acceleration.z * kFilteringFactor) + (rollingZ * (1.0 - kFilteringFactor));
@@ -782,7 +783,7 @@ static CGFloat blinkBottomOriginY;
     shotTime = (int)activityInterval;
     
     UIViewController *curentVC=[self.navigationController visibleViewController];
-    if ((shotTime * 0.001 >= time) && (!duelIsStarted) && (!foll)&&([curentVC isEqual:self])) {
+    if ((!duelIsStarted) && (!foll)&&([curentVC isEqual:self])) {
         DLog(@"FIRE !!!!!");
         duelIsStarted = YES;
         [ignoreTimer invalidate];
@@ -819,7 +820,7 @@ static CGFloat blinkBottomOriginY;
 
 -(void)showHelpViewOnStartDuel;
 {
-//    [gunDrumViewController showGun];
+    [gunDrumViewController showGun];
     self.gunButton.hidden = YES;
 }
 
@@ -957,19 +958,31 @@ static CGFloat blinkBottomOriginY;
     soundStart = YES;
     startInterval = [NSDate timeIntervalSinceReferenceDate];
     [player stop];
+    player.numberOfLoops = 999;
     [player setCurrentTime:0.0];
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Duel.mp3", [[NSBundle mainBundle] resourcePath]]];
     player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
     [player play];
-    if(!delegate) timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(shotTimer) userInfo:nil repeats:YES];
-    duelIsStarted = NO;
-    fireSound = NO;
-    acelStatus = YES;
-    shotTime = 0;
     
     [self hideHelpViewOnStartDuel];
     
     [gunDrumViewController openGun];
+    
+    id __block delegateBlock = delegate;
+    id __block selfBlock = self;
+    int __block timerBlock = timer;
+    BOOL __block duelIsStartedBlock = duelIsStarted;
+    BOOL __block fireSoundBlock = fireSound;
+    BOOL __block acelStatusBlock = acelStatus;
+    int __block shotTimeBlock = shotTime;
+    
+    gunDrumViewController.didFinishBlock = ^(GunDrumViewController *controller){
+        if(!delegateBlock) timerBlock = [NSTimer scheduledTimerWithTimeInterval:0.01 target:selfBlock selector:@selector(shotTimer) userInfo:nil repeats:YES];
+        duelIsStartedBlock = NO;
+        fireSoundBlock = NO;
+        acelStatusBlock = YES;
+        shotTimeBlock = 0;
+    };
 }
 
 #pragma ActiveDuelViewControllerDelegate
@@ -1007,6 +1020,9 @@ static CGFloat blinkBottomOriginY;
     opponentShape = nil;
     
     plView = nil;
+    
+    [gunDrumViewController releaseComponents];
+    gunDrumViewController = nil;
     [super viewDidUnload];
 
 }

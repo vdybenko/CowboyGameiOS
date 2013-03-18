@@ -209,6 +209,7 @@
 		605A7A5F138A377F00B4FB8E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 605A7A5E138A377F00B4FB8E /* MobileCoreServices.framework */; };
 		60CF1BB713A8C3CF00C302C0 /* follSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 60CF1BB613A8C3CF00C302C0 /* follSound.mp3 */; };
 		76057DC41639937500735342 /* StoreProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76057DC31639937500735342 /* StoreProductCell.m */; };
+		7606709216F7098F00079F69 /* loadBullet.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7606709116F7098F00079F69 /* loadBullet.mp3 */; };
 		7606C21E16C396D700B5EEB7 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7606C21C16C396D700B5EEB7 /* libGoogleAnalytics.a */; };
 		7606C21F16C3971900B5EEB7 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7606C21C16C396D700B5EEB7 /* libGoogleAnalytics.a */; };
 		7606C23B16C3DA2F00B5EEB7 /* topPlayerStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 7606C23916C3DA2F00B5EEB7 /* topPlayerStar.png */; };
@@ -1050,6 +1051,7 @@
 		60CF1BB613A8C3CF00C302C0 /* follSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = follSound.mp3; sourceTree = "<group>"; };
 		76057DC21639937500735342 /* StoreProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoreProductCell.h; path = PlayersOnLineDataSource/StoreProductCell.h; sourceTree = "<group>"; };
 		76057DC31639937500735342 /* StoreProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoreProductCell.m; path = PlayersOnLineDataSource/StoreProductCell.m; sourceTree = "<group>"; };
+		7606709116F7098F00079F69 /* loadBullet.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = loadBullet.mp3; sourceTree = "<group>"; };
 		7606C21616C396D700B5EEB7 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
 		7606C21716C396D700B5EEB7 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
 		7606C21816C396D700B5EEB7 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
@@ -1996,6 +1998,7 @@
 				6041D9B713A7BFBF0047A128 /* Back2.mp3 */,
 				6041D9B913A7BFBF0047A128 /* Win.mp3 */,
 				7674F72B16EF5D4A00E43061 /* scream1.mp3 */,
+				7606709116F7098F00079F69 /* loadBullet.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -3222,6 +3225,7 @@
 				768AAC3016F30E2A00FF8B99 /* womanScared.png in Resources */,
 				768AAC3116F30E2A00FF8B99 /* womanScared@2x.png in Resources */,
 				76899C1216F5F67D0092713B /* opponentSpritSeet.png in Resources */,
+				7606709216F7098F00079F69 /* loadBullet.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

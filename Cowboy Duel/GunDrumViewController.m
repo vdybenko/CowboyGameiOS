@@ -24,6 +24,7 @@
     int indexOfGargedBullet;
     
     AVAudioPlayer *putGunDownAudioPlayer;
+    AVAudioPlayer *loadBulletAudioPlayer;
 }
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *colectionBullets;
 @property (weak, nonatomic) IBOutlet UIView *vLoadGun;
@@ -77,6 +78,7 @@ static const CGFloat timeSpinDump = 0.3f;
 @synthesize ivOponnentAvatar;
 @synthesize vOponnentAvatarWithFrame;
 @synthesize countOfBullets;
+@synthesize didFinishBlock;
 
 #pragma mark
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -112,6 +114,10 @@ static const CGFloat timeSpinDump = 0.3f;
         NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/follSound.aif", [[NSBundle mainBundle] resourcePath]]];
         putGunDownAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
         [putGunDownAudioPlayer prepareToPlay];
+        
+        url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/loadBullet.mp3", [[NSBundle mainBundle] resourcePath]]];
+        loadBulletAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+        [loadBulletAudioPlayer prepareToPlay];
         
         [self helpAnimation];
         vOponnentAvatarWithFrame.hidden = YES;
@@ -191,6 +197,8 @@ static const CGFloat timeSpinDump = 0.3f;
                          } completion:^(BOOL finished) {
                              UIImageView *bullet = [colectionBullets objectAtIndex:indexOfGargedBullet];
                              bullet.hidden = NO;
+                             [loadBulletAudioPlayer play];
+                             
                              indexOfGargedBullet++;
                              if ((countOfBullets - indexOfGargedBullet)==0) {
                                  isCharging = NO;
@@ -246,6 +254,9 @@ static const CGFloat timeSpinDump = 0.3f;
             frame.origin.y += 50;
             gun.frame = frame;
         }completion:^(BOOL finished) {
+            if (didFinishBlock) {
+                didFinishBlock(self);
+            }
         }];
     }];
 }
@@ -376,15 +387,15 @@ static const CGFloat timeSpinDump = 0.3f;
                      }];
 }
 
-#pragma mark Responding to gestures
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+#pragma mark IBAction
+
+- (IBAction)DrumLoadClick:(id)sender {
     if (countOfBullets<7) {
         countOfBullets++;
         if (!isCharging) {
             [self chargeBullets];
         }
     }
-    return YES;
 }
 
 - (IBAction)tapOnView:(id)sender {
