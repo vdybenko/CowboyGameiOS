@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UILabel+FlyingPoint.h"
 
 @interface Shape : UIView<MemoryManagement>
 @property (weak, nonatomic) IBOutlet UIImageView *imageMain;

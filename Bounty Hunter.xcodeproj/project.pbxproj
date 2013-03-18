@@ -210,6 +210,7 @@
 		60CF1BB713A8C3CF00C302C0 /* follSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 60CF1BB613A8C3CF00C302C0 /* follSound.mp3 */; };
 		76057DC41639937500735342 /* StoreProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76057DC31639937500735342 /* StoreProductCell.m */; };
 		7606709216F7098F00079F69 /* loadBullet.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7606709116F7098F00079F69 /* loadBullet.mp3 */; };
+		7606709616F7324B00079F69 /* UILabel+FlyingPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 7606709516F7324B00079F69 /* UILabel+FlyingPoint.m */; };
 		7606C21E16C396D700B5EEB7 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7606C21C16C396D700B5EEB7 /* libGoogleAnalytics.a */; };
 		7606C21F16C3971900B5EEB7 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7606C21C16C396D700B5EEB7 /* libGoogleAnalytics.a */; };
 		7606C23B16C3DA2F00B5EEB7 /* topPlayerStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 7606C23916C3DA2F00B5EEB7 /* topPlayerStar.png */; };
@@ -1040,6 +1041,8 @@
 		76057DC21639937500735342 /* StoreProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoreProductCell.h; path = PlayersOnLineDataSource/StoreProductCell.h; sourceTree = "<group>"; };
 		76057DC31639937500735342 /* StoreProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoreProductCell.m; path = PlayersOnLineDataSource/StoreProductCell.m; sourceTree = "<group>"; };
 		7606709116F7098F00079F69 /* loadBullet.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = loadBullet.mp3; sourceTree = "<group>"; };
+		7606709416F7324B00079F69 /* UILabel+FlyingPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+FlyingPoint.h"; sourceTree = "<group>"; };
+		7606709516F7324B00079F69 /* UILabel+FlyingPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+FlyingPoint.m"; sourceTree = "<group>"; };
 		7606C21616C396D700B5EEB7 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
 		7606C21716C396D700B5EEB7 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
 		7606C21816C396D700B5EEB7 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
@@ -2744,6 +2747,8 @@
 				76B65ACC15DD4A88000E136C /* FXLabel.h */,
 				76057DC21639937500735342 /* StoreProductCell.h */,
 				76057DC31639937500735342 /* StoreProductCell.m */,
+				7606709416F7324B00079F69 /* UILabel+FlyingPoint.h */,
+				7606709516F7324B00079F69 /* UILabel+FlyingPoint.m */,
 				76F71902165A6AD700719D8A /* UIView+Frame.h */,
 				76F71903165A6AD700719D8A /* UIView+Frame.m */,
 			);
@@ -3606,6 +3611,7 @@
 				7693D97816F1B7730096F61F /* OpponentShape.m in Sources */,
 				7693D97F16F2157D0096F61F /* Shape.m in Sources */,
 				7693D98716F21A640096F61F /* GoodCowboy.m in Sources */,
+				7606709616F7324B00079F69 /* UILabel+FlyingPoint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3798,8 +3804,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3844,8 +3850,8 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Bounty Hunter";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "A5532982-3D27-4791-A4D1-7E43C7C67DF6";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A5532982-3D27-4791-A4D1-7E43C7C67DF6";
 				REZ_SEARCH_PATHS = "$(inherited)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3894,7 +3900,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = NO;
@@ -3938,7 +3944,7 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Bounty Hunter";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "A5532982-3D27-4791-A4D1-7E43C7C67DF6";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4185,7 +4191,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -4231,7 +4237,7 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Bounty Hunter";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "A5532982-3D27-4791-A4D1-7E43C7C67DF6";
 				"PROVISIONING_PROFILE[sdk=*]" = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				REZ_SEARCH_PATHS = (

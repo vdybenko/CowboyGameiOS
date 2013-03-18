@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UIImage+Sprite.h"
 #import <AVFoundation/AVFoundation.h>
+#import "UILabel+FlyingPoint.h"
 
 @interface OpponentShape ()
 {
@@ -187,10 +188,43 @@ static CGFloat oponentLiveImageViewStartWidth;
 }
 -(void) hitTheOponentWithPoint:(CGPoint)hitPoint mainView:(UIView*)mainView;
 {
+    
     UIImageView *ivHit = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ivHit.png"]];
-    ivHit.center = [mainView convertPoint:hitPoint toView:imgBody];
+    CGPoint convertPoint = [mainView convertPoint:hitPoint toView:imgBody];
+    ivHit.center = convertPoint;
     [imgBody addSubview:ivHit];
     ivHit = nil;
+
+    int result = [imgBody checkNumberOfShotsAreas:@[@"{{0, 0}, {89,43}}", @"{{0,43}, {89,65}}", @"{{0,108}, {89,53}}"] forPoint:convertPoint];
+    
+    UIColor *color = [UIColor greenColor];
+    UIFont *font = [UIFont boldSystemFontOfSize:22];
+    CGPoint p= (CGPoint){44,-5};
+    switch (result) {
+        case 0:
+            [imgBody addFlyingPointToView:mainView centerPoint:p
+                                                    text:@"-10"
+                                                   color:color
+                                                    font:font
+                                               direction:FlyingPointDirectionUp];
+            break;
+        case 1:
+            [imgBody addFlyingPointToView:mainView centerPoint:p
+                                            text:@"-10"
+                                           color:color
+                                            font:font
+                                       direction:FlyingPointDirectionUp];
+            break;
+        case 2:
+            [imgBody addFlyingPointToView:mainView centerPoint:p
+                                            text:@"-10"
+                                           color:color
+                                            font:font
+                                       direction:FlyingPointDirectionUp];
+            break;
+        default:
+            break;
+    }
     
     [self reboundOnShot];
 }
