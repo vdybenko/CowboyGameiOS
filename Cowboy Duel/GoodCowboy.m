@@ -34,7 +34,9 @@
 -(void)releaseComponents
 {
     [super releaseComponents];
+    [audioPlayer stop];
     audioPlayer = nil;
+    goodCowboyImg = nil;
 }
 
 

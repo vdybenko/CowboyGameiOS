@@ -35,7 +35,9 @@
 -(void)releaseComponents
 {
     [super releaseComponents];
+    [audioPlayer stop];
     audioPlayer = nil;
+    womanImg = nil;
 }
 -(void)moveWoman;
 {

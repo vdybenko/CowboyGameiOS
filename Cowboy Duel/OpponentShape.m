@@ -67,6 +67,9 @@ static CGFloat oponentLiveImageViewStartWidth;
     imgBody = nil;
     imgShot = nil;
     ivLifeBar = nil;
+    imgDieOpponentAnimation = nil;
+    [oponentShotAudioPlayer stop];
+    oponentShotAudioPlayer = nil;
 }
 
 -(void) moveAnimation;
