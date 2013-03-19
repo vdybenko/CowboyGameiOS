@@ -16,7 +16,6 @@
 @end
 
 @implementation WomanShape
-@synthesize womanImg;
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
    
@@ -37,7 +36,6 @@
     [super releaseComponents];
     [audioPlayer stop];
     audioPlayer = nil;
-    womanImg = nil;
 }
 -(void)moveWoman;
 {
@@ -124,9 +122,9 @@
     NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"womanScared.png"],
                          [UIImage imageNamed:@"woman.png"],
                          nil];
-    womanImg.animationImages = imgArray;
-    womanImg.animationDuration = 1.0f;
-    [womanImg setAnimationRepeatCount:1];
-    [womanImg startAnimating];
+    super.imageMain.animationImages = imgArray;
+    super.imageMain.animationDuration = 1.0f;
+    [super.imageMain setAnimationRepeatCount:1];
+    [super.imageMain startAnimating];
 }
 @end

@@ -15,7 +15,6 @@
 @end
 
 @implementation GoodCowboy
-@synthesize goodCowboyImg;
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     
@@ -36,7 +35,6 @@
     [super releaseComponents];
     [audioPlayer stop];
     audioPlayer = nil;
-    goodCowboyImg = nil;
 }
 
 
@@ -118,10 +116,10 @@
     NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"goodCowboyScared.png"],
                          [UIImage imageNamed:@"goodCowboy.png"],
                          nil];
-    goodCowboyImg.animationImages = imgArray;
-    goodCowboyImg.animationDuration = 1.0f;
-    [goodCowboyImg setAnimationRepeatCount:1];
-    [goodCowboyImg startAnimating];
+    super.imageMain.animationImages = imgArray;
+    super.imageMain.animationDuration = 1.0f;
+    [super.imageMain setAnimationRepeatCount:1];
+    [super.imageMain startAnimating];
 }
 
 @end
