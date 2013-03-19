@@ -177,6 +177,7 @@ static const CGFloat timeSpinDump = 0.3f;
 {
     [self.view.layer removeAllAnimations];
     [self hideBullets];
+    vLoadGun.hidden = NO;
     countOfBullets = 0;
     indexOfGargedBullet = 0;
     [UIView animateWithDuration:timeOpenGun animations:^{

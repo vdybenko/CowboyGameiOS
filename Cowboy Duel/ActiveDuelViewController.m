@@ -964,27 +964,14 @@ static CGFloat blinkBottomOriginY;
     
     [gunDrumViewController openGun];
     
-//    __block id delegateBlock = delegate;
     __block id  selfBlock = self;
-//    __block int  timerBlock = timer;
-//    __block BOOL  duelIsStartedBlock = duelIsStarted;
-//    __block BOOL  fireSoundBlock = fireSound;
-//    __block BOOL  acelStatusBlock = acelStatus;
-//    __block int  shotTimeBlock = shotTime;
-//    __block AVAudioPlayer  *playerBlock = player;
     
     gunDrumViewController.didFinishBlock = ^(){
-//        if(!delegateBlock) timerBlock = [NSTimer scheduledTimerWithTimeInterval:0.01 target:selfBlock selector:@selector(shotTimer) userInfo:nil repeats:YES];
-//        duelIsStartedBlock = NO;
-//        fireSoundBlock = NO;
-//        acelStatusBlock = YES;
-//        shotTimeBlock = 0;
-//        [playerBlock stop];
-        [selfBlock startTimer];
+        [selfBlock startTimerInBlock];
     };
 }
 
--(void)startTimer
+-(void)startTimerInBlock
 {
     if(!delegate) timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(shotTimer) userInfo:nil repeats:YES];
     duelIsStarted = NO;
