@@ -263,7 +263,7 @@ static CGFloat blinkBottomOriginY;
     isGunCanShotOfFrequently = YES;
     
     self.gunButton.hidden = YES;
-    
+    opponentShape.imgBody.hidden = NO;
     [self showHelpViewOnStartDuel];
     
     userHitCount = 0;
@@ -365,8 +365,15 @@ static CGFloat blinkBottomOriginY;
     
     shotCountBullet =  countBullets;
     maxShotCount = countBullets;
-    
-    int countBulletsForOpponent = [DuelRewardLogicController countUpBuletsWithOponentLevel:playerAccount.accountLevel defense:playerAccount.accountDefenseValue playerAtack:opAccount.accountWeapon.dDamage];
+    int countBulletsForOpponent;
+   
+    if ( [LoginAnimatedViewController sharedInstance].isDemoPractice == NO)
+    {
+        countBulletsForOpponent = [DuelRewardLogicController countUpBuletsWithOponentLevel:playerAccount.accountLevel defense:playerAccount.accountDefenseValue playerAtack:opAccount.accountWeapon.dDamage];
+        
+    }else{
+        countBulletsForOpponent = 4;
+   }
     shotCountBulletForOpponent =  countBulletsForOpponent;
     maxShotCountForOpponent = countBulletsForOpponent;
 }
@@ -744,7 +751,7 @@ static CGFloat blinkBottomOriginY;
         womanShape.hidden = NO;
         goodCowboyShape.hidden = NO;
         
-        if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
+        if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
         moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
     }
     if ((shotTime * 0.001 >= 60.0) && (!duelTimerEnd) && (soundStart)) {
