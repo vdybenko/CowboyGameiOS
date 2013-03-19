@@ -48,11 +48,15 @@
 
 -(void)opponentShot;
 -(void)sendShot;
+-(void)sendShotSelf;
+-(void)shotToOponent;
 
 -(void)oponnentFollStart;
 -(void)oponnentFollEnd;
 
 -(void)readyToStart;
+
+
 
 @end
 

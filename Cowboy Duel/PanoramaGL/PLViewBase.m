@@ -1053,7 +1053,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
     if(!isSensorialRotationRunning)
     {
         startX = 0;
-        float randomX = [self randFloatBetween:0.5 and:1.5];
+        float randomX = [self randFloatBetween:0.5 and:3.5];
         isSensorialRotationRunning = YES;
         motionManager = [[CMMotionManager alloc] init];
         

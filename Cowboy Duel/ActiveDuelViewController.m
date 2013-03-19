@@ -253,7 +253,7 @@ static CGFloat blinkBottomOriginY;
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    ignoreTimer = [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(userIgnorePunish) userInfo:nil repeats:NO];
+    ignoreTimer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(userIgnorePunish) userInfo:nil repeats:NO];
     foll = NO;
     duelTimerEnd = NO;
     duelEnd = NO;
@@ -465,6 +465,7 @@ static CGFloat blinkBottomOriginY;
     BOOL resultGoodCowboy = [goodCowboyShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
     if (resultWoman || resultGoodCowboy) {
         [self opponentShot];
+        if(delegate) [delegate sendShotSelf];
         return;
     }
     
@@ -485,13 +486,6 @@ static CGFloat blinkBottomOriginY;
         {
             [delegate sendShot];
         }
-
-        
-        shotCountBullet--;
-        
-        userHitCount++;
-        
-        [opponentShape changeLiveBarWithUserHitCount:userHitCount maxShotCount:maxShotCount];
         
         CGPoint targetPoint;
         targetPoint.x = opponentShape.center.x - (self.floatView.bounds.size.width / 2 - self.floatView.center.x);
@@ -502,30 +496,14 @@ static CGFloat blinkBottomOriginY;
         centerOfScreanPoint.y = self.crossImageView.bounds.origin.y + self.crossImageView.center.y;
         
         CGRect opponentBodyFrame = [[opponentShape.imgBody superview] convertRect:opponentShape.imgBody.frame toView:self.view];
-            
+        
         if (CGRectContainsPoint(opponentBodyFrame, shotPoint)) {
             [self startRandomBloodAnimation];
             [opponentShape hitTheOponentWithPoint:shotPoint mainView:self.view];
         }
+        [self shotToOponent];
+
         
-        if(!shotCountBullet) {
-            if (duelEnd) return;
-            duelEnd = YES;
-            [activityIndicatorView setText:@""];
-            [activityIndicatorView showView];
-            [self horizontalFlip];
-            DLog(@"Kill!!!");
-            DLog(@"Shot Time = %d.%d", (shotTime) / 1000, (shotTime));
-            GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
-            if (!self.delegate) gameCenterViewController = nil;
-            FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime) andOponentTime:opponentTime andGameCenterController:gameCenterViewController andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
-            
-            [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
-            [timer invalidate];
-            [moveTimer invalidate];
-            
-            [self opponentLost];
-        }
     }
 }
 
@@ -596,9 +574,37 @@ static CGFloat blinkBottomOriginY;
         [timer invalidate];
         [moveTimer invalidate];
     }
+}
+
+-(void)shotToOponent
+{
+ 
+    shotCountBullet--;
     
+    userHitCount++;
     
+    [opponentShape changeLiveBarWithUserHitCount:userHitCount maxShotCount:maxShotCount];
     
+        
+    if(!shotCountBullet) {
+        if (duelEnd) return;
+        duelEnd = YES;
+        [activityIndicatorView setText:@""];
+        [activityIndicatorView showView];
+        [self horizontalFlip];
+        DLog(@"Kill!!!");
+        DLog(@"Shot Time = %d.%d", (shotTime) / 1000, (shotTime));
+        GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+        if (!self.delegate) gameCenterViewController = nil;
+        FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime) andOponentTime:opponentTime andGameCenterController:gameCenterViewController andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
+        
+        [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
+        [timer invalidate];
+        [moveTimer invalidate];
+        
+        [self opponentLost];
+    }
+
 }
 
 -(void)opponentLost
