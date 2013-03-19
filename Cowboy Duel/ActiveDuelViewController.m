@@ -263,7 +263,6 @@ static CGFloat blinkBottomOriginY;
     isGunCanShotOfFrequently = YES;
     
     self.gunButton.hidden = YES;
-    self.crossImageView.hidden = YES;
     
     [self showHelpViewOnStartDuel];
     
@@ -829,7 +828,6 @@ static CGFloat blinkBottomOriginY;
     steadyScale = 1.0;
     [self.titleSteadyFire setHidden:YES];
     [self.lblBehold setHidden:YES];
-    self.crossImageView.hidden = NO;
 }
 
 #pragma mark - Frequently of gun
