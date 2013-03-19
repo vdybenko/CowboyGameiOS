@@ -334,6 +334,7 @@ static CGFloat blinkBottomOriginY;
     [timer invalidate];
     plView = (PLView *)self.view;
     [plView stopSensorialRotation];
+    [plView stopAnimation];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -566,7 +567,8 @@ static CGFloat blinkBottomOriginY;
     
     if(!shotCountBulletForOpponent){
         [self userLost];
-        GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+        GameCenterViewController *gameCenterViewController;
+        if (self.delegate) gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
         
         BOOL teaching = YES;
         if (!self.delegate) gameCenterViewController = nil;
@@ -597,7 +599,8 @@ static CGFloat blinkBottomOriginY;
         [self horizontalFlip];
         DLog(@"Kill!!!");
         DLog(@"Shot Time = %d.%d", (shotTime) / 1000, (shotTime));
-        GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+        GameCenterViewController *gameCenterViewController;
+        if (self.delegate) gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
         BOOL teaching = YES;
         if (!self.delegate) gameCenterViewController = nil;
         else teaching = NO;
@@ -630,7 +633,8 @@ static CGFloat blinkBottomOriginY;
         [delegate performSelector:@selector( lostConnection )];
     }else
     {
-        GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+        GameCenterViewController *gameCenterViewController;
+        if (self.delegate) gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
         BOOL teaching = YES;
         if (!self.delegate) gameCenterViewController = nil;
         else teaching = NO;
@@ -939,6 +943,7 @@ static CGFloat blinkBottomOriginY;
 
 -(void)releaseComponents
 {
+    [plView stopSensorialRotation];
     [self setFloatView:nil];
     [self setFireImageView:nil];
     [self setBloodImageView:nil];
@@ -968,8 +973,50 @@ static CGFloat blinkBottomOriginY;
     
     [gunDrumViewController releaseComponents];
     gunDrumViewController = nil;
-    [super viewDidUnload];
+    
+    shotAudioPlayer1 = nil;
+    
+    shotAudioPlayer2 = nil;
+    
+    shotAudioPlayer3 = nil;
+    
+    hitAudioPlayer = nil;    
+   
+    brockenGlassAudioPlayer = nil;
+    
+    opAccount = nil;
+    playerAccount = nil;
+    
+    shotTimer = nil;
+    moveTimer = nil;
+    ignoreTimer = nil;
+    
+    gunDrumViewController = nil;
+    profileViewController = nil;
+    activityIndicatorView = nil;
+    [oponentsViewCoordinates removeAllObjects];
+    oponentsViewCoordinates = nil;
+    
+    blinkBottom = nil;
+    blinkTop = nil;
 
+    self.floatView = nil;
+    self.fireImageView = nil;
+    self.bloodImageView = nil;
+    self.bloodCImageView = nil;
+    self.smokeImage = nil;
+    self.glassImageViewAllBackground = nil;
+    self.glassImageViewHeader = nil;
+    self.glassImageViewBottom = nil;
+    self.gunButton = nil;
+    self.opStatsLabel = nil;
+    self.userStatsLabel = nil;
+    self.titleSteadyFire = nil;
+    self.lblBehold = nil;
+    self.crossImageView = nil;
+    self.userLiveImageView = nil;
+    self.view = nil;
+    [super viewDidUnload];
 }
 
 @end

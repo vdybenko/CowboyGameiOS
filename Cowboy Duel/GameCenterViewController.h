@@ -31,7 +31,7 @@ typedef struct {
 
 @interface GameCenterViewController : UIViewController< UIAlertViewDelegate, GCHelperDelegate, ActiveDuelViewControllerDelegate, DuelStartViewControllerDelegate>
 {
-    ActiveDuelViewController *activeDuelViewController;
+    __weak ActiveDuelViewController *activeDuelViewController;
     DuelStartViewController *duelStartViewController;
     FinalViewController *finalViewController;
     AccountDataSource *playerAccount;
@@ -76,8 +76,8 @@ typedef struct {
     BOOL userEndMatch;
     BOOL isTryAgain;
 }
-@property(strong)id<ActiveDuelViewControllerDelegate> delegate;
-@property(strong)id<DuelStartViewControllerDelegate> delegate2;
+@property(weak)id<ActiveDuelViewControllerDelegate> delegate;
+@property(weak)id<DuelStartViewControllerDelegate> delegate2;
 @property(strong,nonatomic)DuelStartViewController *duelStartViewController;
 @property( weak, readwrite) UIViewController *parentVC;
 @property(nonatomic) BOOL opponentEndMatch;

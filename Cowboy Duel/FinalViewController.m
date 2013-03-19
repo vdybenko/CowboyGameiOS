@@ -241,6 +241,43 @@
     lblPoints = nil;
     goldPointBgView = nil;
     lblGoldTitle = nil;
+    
+    transaction = nil;
+    duel = nil;
+    
+    NSArray *_pointForEachLevels = nil;
+    NSArray *_pontsForWin = nil;
+    NSArray *_pontsForLose = nil;
+    
+    backButton = nil;
+    
+    
+    lblNamePlayer = nil;
+    lblNameOponnent = nil;
+    
+    
+    ivGoldCoin = nil;
+    ivBlueLine = nil;
+    ivCurrentRank = nil;
+    ivNextRank = nil;
+    lblGoldPlus = nil;
+    
+    viewLastSceneAnimation = nil;
+    
+    loserImg = nil;
+    loserSpiritImg = nil;
+    winnerImg1 = nil;
+    winnerImg2 = nil;
+    loserMoneyImg = nil;
+    
+    view = nil;
+    
+    lblGold = nil;
+    gameStatusLable = nil;
+    lblPoints = nil;
+    goldPointBgView = nil;
+    lblGoldTitle = nil;
+
 }
 #pragma mark -
 #pragma mark IBActions
@@ -269,6 +306,8 @@
                 if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
                     [self.navigationController popToViewController:[LoginAnimatedViewController sharedInstance] animated:YES];
                     [self releaseComponents];
+                    NSLog(@"%@", self.navigationController.viewControllers);
+                    
                 }
                 else{
                     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
@@ -276,13 +315,20 @@
                 }
             }
         }else{
+            UINavigationController *nav = ((TestAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController;
+            NSLog(@"%@", nav.viewControllers);
+            for (UIViewController *viewController in nav.viewControllers) {
+                if ([viewController isKindOfClass:[ActiveDuelViewController class]]) {
+                    [((ActiveDuelViewController *)viewController) releaseComponents];
+                }
+            }
+            [self releaseComponents];
             if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
-                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
-                [self releaseComponents];
+                [nav popToViewController:[nav.viewControllers objectAtIndex:2] animated:YES];
             }
             else{
-                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
-                [self releaseComponents];
+                [nav popToViewController:[nav.viewControllers objectAtIndex:1] animated:YES];
+                
             }
         }
 //        if ([self.delegate isKindOfClass:[BluetoothViewController class]]) [self.delegate duelCancel];
