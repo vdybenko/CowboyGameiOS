@@ -526,7 +526,8 @@ static const CGFloat timeToStandartTitles = 1.8;
 
     if (points <= 0) points = 0;
     int firstWidthOfLine=121;
-    float changeWidth=(points*firstWidthOfLine)/maxValue;
+    float changeWidth;
+    if (maxValue) changeWidth = (points*firstWidthOfLine)/maxValue;
     liveChRect.size.width = changeWidth;
     
     if (animated) {
@@ -721,8 +722,8 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 
 -(void)setImageFromFacebook
 {
-    NSString *pathToImage=[[OGHelper sharedInstance] apiGraphGetImage:@"me"];
-    UIImage *image=[UIImage loadImageFromDocumentDirectory:[pathToImage lastPathComponent]];
+//    NSString *pathToImage=[[OGHelper sharedInstance] apiGraphGetImage:@"me"];
+//    UIImage *image=[UIImage loadImageFromDocumentDirectory:[pathToImage lastPathComponent]];
 }
 
 -(void)setImageFromFacebookWithHideIndicator

@@ -731,9 +731,9 @@ static OGHelper *sharedHelper = nil;
 //    [delegate showActivityIndicator];
     currentAPICall = kAPIGraphAchivAPPCreate;
     
-    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                    achivmentURL, @"achievement",
-                                    nil];
+//    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+//                                    achivmentURL, @"achievement",
+//                                    nil];
    // facebook.accessToken = kFacebookAppToken;
 //    [facebook requestWithGraphPath:[NSString stringWithFormat:@"%@/achievements",kFacebookAppId] 
 //                         andParams:params 
@@ -759,9 +759,9 @@ static OGHelper *sharedHelper = nil;
 //    [delegate showActivityIndicator];
     currentAPICall = kAPIGraphAchivAPPDelete;
     
-    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                    achivmentURL, @"achievement",
-                                    nil];
+//    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+//                                    achivmentURL, @"achievement",
+//                                    nil];
 //    facebook.accessToken = kFacebookAppToken;
 //    [facebook requestWithGraphPath:[NSString stringWithFormat:@"%@/achievements",kFacebookAppId] 
 //                         andParams:params 
@@ -792,10 +792,10 @@ static OGHelper *sharedHelper = nil;
     
     NSString *name=[[OGHelper sharedInstance ] getClearName:playerAccount.accountID];
     NSString *requestSt=[NSString stringWithFormat:@"%@/achievements",name];
-    
-    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                    achivmentURL, @"achievement",
-                                    nil];
+//    
+//    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+//                                    achivmentURL, @"achievement",
+//                                    nil];
 //    facebook.accessToken = kFacebookAppToken;
 //    [facebook requestWithGraphPath:requestSt 
 //                         andParams:params 
@@ -858,11 +858,11 @@ static OGHelper *sharedHelper = nil;
     
     //    NSString *requestSt=[NSString stringWithFormat:@"%@/achievements",tfContent];
     //facebook.accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"FBAccessTokenKey"];
-    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                    @"TestTaras",@"title",
-                                    nil];
-//    
-//    [facebook requestWithGraphPath:objectID 
+//    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+//                                    @"TestTaras",@"title",
+//                                    nil];
+////    
+//    [facebook requestWithGraphPath:objectID
 //                         andParams:params 
 //                     andHttpMethod:@"POST" 
 //                       andDelegate:self];

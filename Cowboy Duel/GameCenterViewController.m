@@ -41,22 +41,25 @@ static GameCenterViewController *gameCenterViewController;
 
 -(id)initWithAccount:(AccountDataSource *)userAccount andParentVC:(id)view {
     
-    parentVC = view;
-    playerAccount = userAccount;
-    oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
-    self.connection = [SSConnection sharedInstance];
-    self.connection.gameCenterViewController = self;
-    runAway=NO;
-    
-    carShotTime = 0.0;
-    opShotTime = 0.0;
-    accelState = NO;
-    userCanceledMatch = NO;
-    
-    mutchNumber = 0;
-    mutchNumberWin = 0;
-    mutchNumberLose = 0;
-    
+    if (self = [super init]) {
+        parentVC = view;
+        playerAccount = userAccount;
+        oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
+        self.connection = [SSConnection sharedInstance];
+        self.connection.gameCenterViewController = self;
+        runAway=NO;
+        
+        carShotTime = 0.0;
+        opShotTime = 0.0;
+        accelState = NO;
+        userCanceledMatch = NO;
+        
+        mutchNumber = 0;
+        mutchNumberWin = 0;
+        mutchNumberLose = 0;
+
+    }
+        
     return self;
 }
 
@@ -903,6 +906,12 @@ static GameCenterViewController *gameCenterViewController;
         }
 			break;
             
+        case  NETWORK_SHOT_SELF:
+        {
+            DLog(@"NETWORK_SHOT");
+            [self.delegate shotToOponent];
+        }
+			break;
             
 		default:
 			// error
@@ -916,6 +925,12 @@ static GameCenterViewController *gameCenterViewController;
 {
     gameInfo *gsSend = &gameStat;
     [self.connection sendData:(void *)(gsSend) packetID:NETWORK_SHOT ofLength:sizeof(gameInfo)];
+}
+
+-(void)sendShotSelf
+{
+    gameInfo *gsSend = &gameStat;
+    [self.connection sendData:(void *)(gsSend) packetID:NETWORK_SHOT_SELF ofLength:sizeof(gameInfo)];
 }
 
 -(void)follStart

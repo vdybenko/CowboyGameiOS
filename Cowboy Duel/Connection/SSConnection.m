@@ -76,7 +76,7 @@ static SSConnection *connection;
                 while ([inputStream hasBytesAvailable]) {
                     len = [inputStream read:buffer maxLength:sizeof(buffer)];
                     if (len > 0) {
-                        NSData *data = [[NSData alloc] initWithBytes:buffer length:len];
+                        //NSData *data = [[NSData alloc] initWithBytes:buffer length:len];
                         [self getData:buffer andLength:len];
                     }
                 }
