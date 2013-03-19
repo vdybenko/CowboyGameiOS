@@ -307,15 +307,9 @@ static CGFloat blinkBottomOriginY;
     
     if(!delegate)
     {
-        if (!opAccount.bot) opponentTime=7000;
-        else{
-            int countBullets = [DuelRewardLogicController countUpBuletsWithOponentLevel:[AccountDataSource sharedInstance].accountLevel defense:[AccountDataSource sharedInstance].accountDefenseValue playerAtack:opAccount.accountWeapon.dDamage];
-            
-            
-            //opponentTime = 3000 + countBullets * (220 + rand() % 160);
-            DLog(@"bot opponentTime %d", opponentTime);
+        if (!opAccount.bot)
+            opponentTime=99999;
         }
-    }
    [plView startSensorialRotation];
 }
 
@@ -568,8 +562,11 @@ static CGFloat blinkBottomOriginY;
         GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
         
         BOOL teaching = YES;
-        if (!self.delegate) gameCenterViewController = nil;
-        else teaching = NO;
+        if (!self.delegate)
+            gameCenterViewController = nil;
+        else
+            teaching = NO;
+        
         FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime) andOponentTime:999999 andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
 
         [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:1.0];
@@ -598,8 +595,10 @@ static CGFloat blinkBottomOriginY;
         DLog(@"Shot Time = %d.%d", (shotTime) / 1000, (shotTime));
         GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
         BOOL teaching = YES;
-        if (!self.delegate) gameCenterViewController = nil;
-        else teaching = NO;
+        if (!self.delegate)
+            gameCenterViewController = nil;
+        else
+            teaching = NO;
         FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime) andOponentTime:opponentTime andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
         
         [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
