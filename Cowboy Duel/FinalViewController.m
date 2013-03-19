@@ -236,8 +236,6 @@
     winnerImg2 = nil;
     loserMoneyImg = nil;
     view = nil;
-    lbBack = nil;
-    lbTryAgain = nil;
     lblGold = nil;
     gameStatusLable = nil;
     lblPoints = nil;
@@ -653,9 +651,24 @@
     }
     [self.view bringSubviewToFront:activityIndicatorView];
     
+    if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
+        [self performSelector:@selector(scaleView:) withObject:tryButton  afterDelay:1.5];
+    }
 }
 
-#pragma mark -
+#pragma mark Animations
+
+-(void)scaleView:(UIView *)scaleView
+{
+    [UIView animateWithDuration:0.6 animations:^{
+        scaleView.transform = CGAffineTransformMakeScale(1.2, 1.2);
+    } completion:^(BOOL complete) {
+        [UIView animateWithDuration:0.6 animations:^{
+            scaleView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        }completion:^(BOOL complete){
+        } ];
+    }];
+}
 
 -(void)winAnimation
 {
@@ -1049,8 +1062,6 @@
 
 
 - (void)viewDidUnload {
-    lbBack = nil;
-    lbTryAgain = nil;
     lblGold = nil;
     gameStatusLable = nil;
     lblPoints = nil;

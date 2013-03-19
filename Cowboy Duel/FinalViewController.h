@@ -85,10 +85,6 @@
   
     __weak IBOutlet UIView *view;
     
-    __weak IBOutlet UILabel *lbBack;
-    __weak IBOutlet UILabel *lbTryAgain;
-    
-    
     __weak IBOutlet FXLabel *lblGold;
     __weak IBOutlet UILabel *gameStatusLable;
     __weak IBOutlet FXLabel *lblPoints;
