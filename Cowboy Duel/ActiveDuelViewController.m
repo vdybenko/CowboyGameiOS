@@ -159,15 +159,6 @@ static CGFloat blinkBottomOriginY;
     [self.bloodCImageView setAnimationRepeatCount:1];
     [self.bloodCImageView setAnimationDuration:animationDurationBloodC];
     
-//    UIImage *spriteSheetSmoke = [UIImage imageNamed:@"smokeSpriteSheet"];
-//    NSArray *arrayWithSpritesSmoke = [spriteSheetSmoke spritesWithSpriteSheetImage:spriteSheetSmoke
-//                                                                          spriteSize:CGSizeMake(64, 64)];
-//    [self.smokeImage setAnimationImages:arrayWithSpritesSmoke];
-//    
-//    float animationDurationSmoke = [self.smokeImage.animationImages count] * 0.100; // 100ms per frame
-//    [self.smokeImage setAnimationRepeatCount:1];
-//    [self.smokeImage setAnimationDuration:animationDurationSmoke];
-    
     shotCountForSound = 1;
 
     plView = (PLView *)self.view;
@@ -197,16 +188,10 @@ static CGFloat blinkBottomOriginY;
     [plView setFrame:deltaFrame];
     
     CLLocationCoordinate2D oponentCoords;
-    if(!delegate && !opAccount.bot)
-    {
-        oponentCoords.latitude = 1;//(((float) rand()) / RAND_MAX) * 360 - 180;
-        oponentCoords.longitude = 1;// (((float) rand()) / RAND_MAX) * 360 - 180;
-    }else{
-        oponentCoords.latitude = (((float) rand()) / RAND_MAX) * 360 - 180;
-        oponentCoords.longitude = (((float) rand()) / RAND_MAX) * 360 - 180;
-        
-    }
-    
+
+    oponentCoords.latitude = 1;//(((float) rand()) / RAND_MAX) * 360 - 180;
+    oponentCoords.longitude = 1;// (((float) rand()) / RAND_MAX) * 360 - 180;
+
 	oponentsViewCoordinates = [NSMutableArray arrayWithCapacity:1];
     for (int i = 0; i < 5; i++) {
         
@@ -268,7 +253,7 @@ static CGFloat blinkBottomOriginY;
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    ignoreTimer = [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(userIgnorePunish) userInfo:nil repeats:NO];
+    ignoreTimer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(userIgnorePunish) userInfo:nil repeats:NO];
     foll = NO;
     duelTimerEnd = NO;
     duelEnd = NO;
@@ -346,6 +331,7 @@ static CGFloat blinkBottomOriginY;
     [shotTimer invalidate];
     [moveTimer invalidate];
     [ignoreTimer invalidate];
+    [timer invalidate];
     plView = (PLView *)self.view;
     [plView stopSensorialRotation];
 }
@@ -490,6 +476,7 @@ static CGFloat blinkBottomOriginY;
     BOOL resultGoodCowboy = [goodCowboyShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
     if (resultWoman || resultGoodCowboy) {
         [self opponentShot];
+        if(delegate) [delegate sendShotSelf];
         return;
     }
     
@@ -499,13 +486,6 @@ static CGFloat blinkBottomOriginY;
         {
             [delegate sendShot];
         }
-
-        
-        shotCountBullet--;
-        
-        userHitCount++;
-        
-        [opponentShape changeLiveBarWithUserHitCount:userHitCount maxShotCount:maxShotCount];
         
         CGPoint targetPoint;
         targetPoint.x = opponentShape.center.x - (self.floatView.bounds.size.width / 2 - self.floatView.center.x);
@@ -516,30 +496,14 @@ static CGFloat blinkBottomOriginY;
         centerOfScreanPoint.y = self.crossImageView.bounds.origin.y + self.crossImageView.center.y;
         
         CGRect opponentBodyFrame = [[opponentShape.imgBody superview] convertRect:opponentShape.imgBody.frame toView:self.view];
-            
+        
         if (CGRectContainsPoint(opponentBodyFrame, shotPoint)) {
             [self startRandomBloodAnimation];
             [opponentShape hitTheOponentWithPoint:shotPoint mainView:self.view];
         }
+        [self shotToOponent];
+
         
-        if(!shotCountBullet) {
-            if (duelEnd) return;
-            duelEnd = YES;
-            [activityIndicatorView setText:@""];
-            [activityIndicatorView showView];
-            [self horizontalFlip];
-            DLog(@"Kill!!!");
-            DLog(@"Shot Time = %d.%d", (shotTime) / 1000, (shotTime));
-            GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
-            if (!self.delegate) gameCenterViewController = nil;
-            FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime) andOponentTime:opponentTime andGameCenterController:gameCenterViewController andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
-            
-            [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
-            [timer invalidate];
-            [moveTimer invalidate];
-            
-            [self opponentLost];
-        }
     }
 }
 
@@ -610,9 +574,37 @@ static CGFloat blinkBottomOriginY;
         [timer invalidate];
         [moveTimer invalidate];
     }
+}
+
+-(void)shotToOponent
+{
+ 
+    shotCountBullet--;
     
+    userHitCount++;
     
+    [opponentShape changeLiveBarWithUserHitCount:userHitCount maxShotCount:maxShotCount];
     
+        
+    if(!shotCountBullet) {
+        if (duelEnd) return;
+        duelEnd = YES;
+        [activityIndicatorView setText:@""];
+        [activityIndicatorView showView];
+        [self horizontalFlip];
+        DLog(@"Kill!!!");
+        DLog(@"Shot Time = %d.%d", (shotTime) / 1000, (shotTime));
+        GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+        if (!self.delegate) gameCenterViewController = nil;
+        FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime) andOponentTime:opponentTime andGameCenterController:gameCenterViewController andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
+        
+        [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
+        [timer invalidate];
+        [moveTimer invalidate];
+        
+        [self opponentLost];
+    }
+
 }
 
 -(void)opponentLost
@@ -775,7 +767,7 @@ static CGFloat blinkBottomOriginY;
 -(void)shotTimer
 {
     nowInterval = [NSDate timeIntervalSinceReferenceDate];
-    activityInterval = (nowInterval-startInterval)*1000;
+    activityInterval = (nowInterval-startInterval) * 1000;
     shotTime = (int)activityInterval;
     
     UIViewController *curentVC=[self.navigationController visibleViewController];
@@ -798,7 +790,7 @@ static CGFloat blinkBottomOriginY;
         if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
         moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
     }
-    if ((shotTime * 0.001 >= 30.0) && (!duelTimerEnd) && (soundStart)) {
+    if ((shotTime * 0.001 >= 60.0) && (!duelTimerEnd) && (soundStart)) {
         if ([delegate respondsToSelector:@selector(duelTimerEnd)])
             [delegate duelTimerEnd];
         duelTimerEnd = YES;
@@ -857,9 +849,9 @@ static CGFloat blinkBottomOriginY;
 
 -(void)moveOponent
 {
-    [opponentShape performSelectorInBackground:@selector(moveOponentInBackground) withObject:nil];
-   [womanShape moveWoman];
-   [goodCowboyShape moveGoodCowboy];
+    [opponentShape moveOponentInBackground];
+    [womanShape moveWoman];
+    [goodCowboyShape moveGoodCowboy];
 }
 
 -(void)setScale
@@ -974,12 +966,13 @@ static CGFloat blinkBottomOriginY;
     AVAudioPlayer __block *playerBlock = player;
     
     gunDrumViewController.didFinishBlock = ^(GunDrumViewController *controller){
-        if(!delegateBlock) timerBlock = [NSTimer scheduledTimerWithTimeInterval:0.01 target:selfBlock selector:@selector(shotTimer) userInfo:nil repeats:YES];
         duelIsStartedBlock = NO;
         fireSoundBlock = NO;
         acelStatusBlock = YES;
         shotTimeBlock = 0;
         [playerBlock stop];
+        //if(!delegateBlock)
+            timerBlock = [NSTimer scheduledTimerWithTimeInterval:0.01 target:selfBlock selector:@selector(shotTimer) userInfo:nil repeats:NO];
     };
 }
 

@@ -36,7 +36,8 @@ typedef enum {
     NETWORK_RUN_AWAY,                       //12
     NETWORK_RESPONSE,                       //13
     NETWORK_DUEL_CANSEL,                     //16
-    NETWORK_SHOT
+    NETWORK_SHOT,
+    NETWORK_SHOT_SELF
     
 } packetCodes;
 
