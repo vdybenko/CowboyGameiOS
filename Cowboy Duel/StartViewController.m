@@ -1662,8 +1662,7 @@ static StartViewController *sharedHelper = nil;
 
 -(void)showProfileFirstRun
 {
-    NSString *LoginForIPad=[[NSUserDefaults standardUserDefaults] stringForKey:@"IPad"];
-    if (LoginForIPad &&(![[OGHelper sharedInstance] isAuthorized])) {
+    if (![[OGHelper sharedInstance] isAuthorized]) {
         firstRunLocal = NO;
         animationCheck = NO;
         LoginAnimatedViewController *loginViewControllerLocal =[LoginAnimatedViewController sharedInstance];

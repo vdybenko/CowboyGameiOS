@@ -71,8 +71,8 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     
     application.statusBarOrientation = UIInterfaceOrientationPortrait;
   
-    loginViewController = [LoginAnimatedViewController sharedInstance];
-    navigationController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+//    loginViewController = [LoginAnimatedViewController sharedInstance];
+//    navigationController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
     LoadViewController *loadViewController;
     
     loadViewController= [[LoadViewController alloc] initWithPush:launchOptions];
@@ -188,7 +188,6 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 }
 
 - (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI {
-    
     NSArray *permissions =
     [NSArray arrayWithObjects:@"email", nil];
     float ver_float = [[[UIDevice currentDevice] systemVersion] floatValue];
