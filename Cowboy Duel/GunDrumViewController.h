@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class GunDrumViewController;
-typedef void (^GunDrumViewControllerResult)(GunDrumViewController *controller);
+typedef void (^GunDrumViewControllerResult)();
 
 
 @interface GunDrumViewController : UIViewController<MemoryManagement,UIGestureRecognizerDelegate>

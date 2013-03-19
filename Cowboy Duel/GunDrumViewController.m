@@ -25,6 +25,7 @@
     
     AVAudioPlayer *putGunDownAudioPlayer;
     AVAudioPlayer *loadBulletAudioPlayer;
+    __weak IBOutlet UIView *vBackLightDrum;
 }
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *colectionBullets;
 @property (weak, nonatomic) IBOutlet UIView *vLoadGun;
@@ -133,6 +134,9 @@ static const CGFloat timeSpinDump = 0.3f;
         {
             [self textViewSetHidden];
         }
+        
+        vBackLightDrum.clipsToBounds = YES;
+        vBackLightDrum.layer.cornerRadius = 60.f;
     }
     return self;
 }
@@ -157,6 +161,7 @@ static const CGFloat timeSpinDump = 0.3f;
     [self setVOponnentAvatarWithFrame:nil];
     [self setTextView:nil];
     [self setTextLabel:nil];
+    vBackLightDrum = nil;
     [super viewDidUnload];
 }
 
@@ -172,6 +177,8 @@ static const CGFloat timeSpinDump = 0.3f;
 {
     [self.view.layer removeAllAnimations];
     [self hideBullets];
+    countOfBullets = 0;
+    indexOfGargedBullet = 0;
     [UIView animateWithDuration:timeOpenGun animations:^{
         arrow.hidden = YES;
         ivPhoneImg.hidden = YES;
@@ -179,6 +186,8 @@ static const CGFloat timeSpinDump = 0.3f;
         
         drumBullets.center = pntDumpOpen;
     }completion:^(BOOL finished) {
+        vBackLightDrum.hidden = NO;
+        [self backLightDrumAnimation];
     }];
 }
 
@@ -186,6 +195,7 @@ static const CGFloat timeSpinDump = 0.3f;
 {
     if (indexOfGargedBullet<=6) {
         isCharging = YES;
+        vBackLightDrum.hidden = YES;
         [UIView animateWithDuration:timeSpinDump
                               delay:0.0
                             options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction
@@ -237,6 +247,14 @@ static const CGFloat timeSpinDump = 0.3f;
     CGRect frame=self.view.frame;
     frame.origin = pntViewShow;
     self.view.frame = frame;
+    
+    frame=gun.frame;
+    frame.origin = pntGunClose;
+    gun.frame = frame;
+
+//    frame=self.view.frame;
+//    frame.origin = pntViewHide;
+//    self.view.frame = frame;
 }
 
 -(void)hideGun;
@@ -262,7 +280,22 @@ static const CGFloat timeSpinDump = 0.3f;
         }completion:^(BOOL finished) {
             hudView.alpha = 0.0;
             if (didFinishBlock) {
-                didFinishBlock(self);
+                didFinishBlock();
+            }
+        }];
+    }];
+}
+
+-(void)backLightDrumAnimation
+{
+    [UIView animateWithDuration:0.6 animations:^{
+        vBackLightDrum.alpha = 0.15;
+    }completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.6 animations:^{
+            vBackLightDrum.alpha = 0.6;
+        }completion:^(BOOL finished) {
+            if (![vBackLightDrum isHidden]) {
+                [self backLightDrumAnimation];
             }
         }];
     }];

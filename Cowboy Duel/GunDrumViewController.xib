@@ -169,6 +169,7 @@
 								<int key="NSvFlags">-2147483356</int>
 								<string key="NSFrame">{{159, 33}, {50, 50}}</string>
 								<reference key="NSSuperview" ref="378614022"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -186,7 +187,7 @@
 										<int key="NSvFlags">292</int>
 										<string key="NSFrame">{{8, 8}, {119, 119}}</string>
 										<reference key="NSSuperview" ref="668366322"/>
-										<reference key="NSNextKeyView" ref="37360202"/>
+										<reference key="NSNextKeyView" ref="314327768"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -274,6 +275,20 @@
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 										<reference key="IBUIImage" ref="877730729"/>
+									</object>
+									<object class="IBUIView" id="314327768">
+										<reference key="NSNextResponder" ref="668366322"/>
+										<int key="NSvFlags">292</int>
+										<string key="NSFrame">{{8, 8}, {119, 119}}</string>
+										<reference key="NSSuperview" ref="668366322"/>
+										<reference key="NSNextKeyView" ref="37360202"/>
+										<string key="NSReuseIdentifierKey">_NS:9</string>
+										<object class="NSColor" key="IBUIBackgroundColor">
+											<int key="NSColorSpace">1</int>
+											<bytes key="NSRGB">MSAwLjgyMzUyOTQxMTggMAA</bytes>
+										</object>
+										<float key="IBUIAlpha">0.60000002384185791</float>
+										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 									</object>
 									<object class="IBUIButton" id="731314520">
 										<reference key="NSNextResponder" ref="668366322"/>
@@ -661,6 +676,14 @@
 					<int key="connectionID">83</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">vBackLightDrum</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="314327768"/>
+					</object>
+					<int key="connectionID">92</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">tapOnView:</string>
 						<reference key="source" ref="732327535"/>
@@ -742,6 +765,7 @@
 							<reference ref="37360202"/>
 							<reference ref="469737876"/>
 							<reference ref="731314520"/>
+							<reference ref="314327768"/>
 						</array>
 						<reference key="parent" ref="378614022"/>
 						<string key="objectName">DrumBullets</string>
@@ -896,6 +920,12 @@
 						<reference key="object" ref="731314520"/>
 						<reference key="parent" ref="668366322"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">90</int>
+						<reference key="object" ref="314327768"/>
+						<reference key="parent" ref="668366322"/>
+						<string key="objectName">backLightDrum</string>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -931,12 +961,13 @@
 				<string key="80.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="81.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="88.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="90.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">89</int>
+			<int key="maxID">92</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>

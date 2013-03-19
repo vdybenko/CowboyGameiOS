@@ -964,25 +964,35 @@ static CGFloat blinkBottomOriginY;
     
     [gunDrumViewController openGun];
     
-    id __block delegateBlock = delegate;
-    id __block selfBlock = self;
-    int __block timerBlock = timer;
-    BOOL __block duelIsStartedBlock = duelIsStarted;
-    BOOL __block fireSoundBlock = fireSound;
-    BOOL __block acelStatusBlock = acelStatus;
-    int __block shotTimeBlock = shotTime;
-    AVAudioPlayer __block *playerBlock = player;
+//    __block id delegateBlock = delegate;
+    __block id  selfBlock = self;
+//    __block int  timerBlock = timer;
+//    __block BOOL  duelIsStartedBlock = duelIsStarted;
+//    __block BOOL  fireSoundBlock = fireSound;
+//    __block BOOL  acelStatusBlock = acelStatus;
+//    __block int  shotTimeBlock = shotTime;
+//    __block AVAudioPlayer  *playerBlock = player;
     
-    gunDrumViewController.didFinishBlock = ^(GunDrumViewController *controller){
-        if(!delegateBlock) timerBlock = [NSTimer scheduledTimerWithTimeInterval:0.01 target:selfBlock selector:@selector(shotTimer) userInfo:nil repeats:YES];
-        duelIsStartedBlock = NO;
-        fireSoundBlock = NO;
-        acelStatusBlock = YES;
-        shotTimeBlock = 0;
-        [playerBlock stop];
+    gunDrumViewController.didFinishBlock = ^(){
+//        if(!delegateBlock) timerBlock = [NSTimer scheduledTimerWithTimeInterval:0.01 target:selfBlock selector:@selector(shotTimer) userInfo:nil repeats:YES];
+//        duelIsStartedBlock = NO;
+//        fireSoundBlock = NO;
+//        acelStatusBlock = YES;
+//        shotTimeBlock = 0;
+//        [playerBlock stop];
+        [selfBlock startTimer];
     };
 }
 
+-(void)startTimer
+{
+    if(!delegate) timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(shotTimer) userInfo:nil repeats:YES];
+    duelIsStarted = NO;
+    fireSound = NO;
+    acelStatus = YES;
+    shotTime = 0;
+    [player stop];
+}
 #pragma ActiveDuelViewControllerDelegate
 -(BOOL)accelerometerSendPositionSecond
 {
