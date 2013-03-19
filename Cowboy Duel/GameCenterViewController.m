@@ -41,22 +41,25 @@ static GameCenterViewController *gameCenterViewController;
 
 -(id)initWithAccount:(AccountDataSource *)userAccount andParentVC:(id)view {
     
-    parentVC = view;
-    playerAccount = userAccount;
-    oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
-    self.connection = [SSConnection sharedInstance];
-    self.connection.gameCenterViewController = self;
-    runAway=NO;
-    
-    carShotTime = 0.0;
-    opShotTime = 0.0;
-    accelState = NO;
-    userCanceledMatch = NO;
-    
-    mutchNumber = 0;
-    mutchNumberWin = 0;
-    mutchNumberLose = 0;
-    
+    if (self = [super init]) {
+        parentVC = view;
+        playerAccount = userAccount;
+        oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
+        self.connection = [SSConnection sharedInstance];
+        self.connection.gameCenterViewController = self;
+        runAway=NO;
+        
+        carShotTime = 0.0;
+        opShotTime = 0.0;
+        accelState = NO;
+        userCanceledMatch = NO;
+        
+        mutchNumber = 0;
+        mutchNumberWin = 0;
+        mutchNumberLose = 0;
+
+    }
+        
     return self;
 }
 

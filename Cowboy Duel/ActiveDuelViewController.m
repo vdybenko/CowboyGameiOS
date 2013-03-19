@@ -567,8 +567,11 @@ static CGFloat blinkBottomOriginY;
     if(!shotCountBulletForOpponent){
         [self userLost];
         GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+        
+        BOOL teaching = YES;
         if (!self.delegate) gameCenterViewController = nil;
-        FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime) andOponentTime:999999 andGameCenterController:gameCenterViewController andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
+        else teaching = NO;
+        FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime) andOponentTime:999999 andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
 
         [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:1.0];
         [timer invalidate];
@@ -595,8 +598,10 @@ static CGFloat blinkBottomOriginY;
         DLog(@"Kill!!!");
         DLog(@"Shot Time = %d.%d", (shotTime) / 1000, (shotTime));
         GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+        BOOL teaching = YES;
         if (!self.delegate) gameCenterViewController = nil;
-        FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime) andOponentTime:opponentTime andGameCenterController:gameCenterViewController andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
+        else teaching = NO;
+        FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime) andOponentTime:opponentTime andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
         
         [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
         [timer invalidate];
@@ -626,8 +631,10 @@ static CGFloat blinkBottomOriginY;
     }else
     {
         GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+        BOOL teaching = YES;
         if (!self.delegate) gameCenterViewController = nil;
-        FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:0 andOponentTime:10 andGameCenterController:gameCenterViewController andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
+        else teaching = NO;
+        FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:0 andOponentTime:10 andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
         
         [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
     }
@@ -694,58 +701,6 @@ static CGFloat blinkBottomOriginY;
 
 - (void) dismissWithController:(UIViewController *)controller {
     [self.navigationController pushViewController:controller animated:YES];
-}
-
-#pragma mark UIAccelerometer delegate
-
--(void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
-{
-    return;
-    rollingX = (acceleration.x * kFilteringFactor) + (rollingX * (1.0 - kFilteringFactor));
-    rollingY = (acceleration.y * kFilteringFactor) + (rollingY * (1.0 - kFilteringFactor));
-    rollingZ = (acceleration.z * kFilteringFactor) + (rollingZ * (1.0 - kFilteringFactor));
-
-    //        Position for Shot
-    if ((acceleration.y < -0.5) || (rollingX < -0.3) || (rollingX > 0.3)) accelerometerState = NO;
-    
-    //       Position for STEADY
-    if (((acceleration.y > -0.4) && (rollingX > -0.3) && (rollingX < 0.3)) && rollingZ < 0) accelerometerState = YES;
-            
-    if((accelerometerState)&& (!soundStart)){
-        
-        if(oponnentFollSend){
-            oponnentFollSend = NO;
-            accelerometerStateSend = NO;
-        }
-        
-        if (!accelerometerStateSend) {
-            if ([delegate respondsToSelector:@selector(setAccelStateTrue)])
-                [delegate setAccelStateTrue];
-            [self readyToStart];
-            [ignoreTimer invalidate];
-            accelerometerStateSend = YES;
-        
-        }else {
-            if(!delegate)[self startDuel];
-        }
-    }
-    else {
-        if ([delegate respondsToSelector:@selector(setAccelStateFalse)])
-            [delegate setAccelStateFalse];
-        accelerometerStateSend = NO;
-        }
-    
-    if ((!accelerometerState) && (soundStart) && (!duelIsStarted)) {
-        if(!follAccelCheck){
-            [self restartCountdown];
-            if(!oponnentFollSend){
-                oponnentFollSend = YES;
-                [delegate follStart];
-            }
-
-        }
-    }
-
 }
 
 #pragma mark
@@ -956,7 +911,7 @@ static CGFloat blinkBottomOriginY;
     
     [gunDrumViewController openGun];
     
-    id __block delegateBlock = delegate;
+    //id __block delegateBlock = delegate;
     id __block selfBlock = self;
     int __block timerBlock = timer;
     BOOL __block duelIsStartedBlock = duelIsStarted;
