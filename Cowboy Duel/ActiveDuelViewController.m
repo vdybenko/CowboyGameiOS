@@ -263,7 +263,6 @@ static CGFloat blinkBottomOriginY;
     isGunCanShotOfFrequently = YES;
     
     self.gunButton.hidden = YES;
-    self.crossImageView.hidden = YES;
     
     [self showHelpViewOnStartDuel];
     
@@ -833,7 +832,6 @@ static CGFloat blinkBottomOriginY;
     steadyScale = 1.0;
     [self.titleSteadyFire setHidden:YES];
     [self.lblBehold setHidden:YES];
-    self.crossImageView.hidden = NO;
 }
 
 #pragma mark - Frequently of gun
@@ -915,26 +913,22 @@ static CGFloat blinkBottomOriginY;
     
     [gunDrumViewController openGun];
     
-    //id __block delegateBlock = delegate;
-    id __block selfBlock = self;
-    int __block timerBlock = timer;
-    BOOL __block duelIsStartedBlock = duelIsStarted;
-    BOOL __block fireSoundBlock = fireSound;
-    BOOL __block acelStatusBlock = acelStatus;
-    int __block shotTimeBlock = shotTime;
-    AVAudioPlayer __block *playerBlock = player;
+    __block id  selfBlock = self;
     
-    gunDrumViewController.didFinishBlock = ^(GunDrumViewController *controller){
-        duelIsStartedBlock = NO;
-        fireSoundBlock = NO;
-        acelStatusBlock = YES;
-        shotTimeBlock = 0;
-        [playerBlock stop];
-        //if(!delegateBlock)
-            timerBlock = [NSTimer scheduledTimerWithTimeInterval:0.01 target:selfBlock selector:@selector(shotTimer) userInfo:nil repeats:NO];
+    gunDrumViewController.didFinishBlock = ^(){
+        [selfBlock startTimerInBlock];
     };
 }
 
+-(void)startTimerInBlock
+{
+    if(!delegate) timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(shotTimer) userInfo:nil repeats:YES];
+    duelIsStarted = NO;
+    fireSound = NO;
+    acelStatus = YES;
+    shotTime = 0;
+    [player stop];
+}
 #pragma ActiveDuelViewControllerDelegate
 -(BOOL)accelerometerSendPositionSecond
 {
