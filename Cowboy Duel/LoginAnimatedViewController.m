@@ -85,27 +85,28 @@ static LoginAnimatedViewController *sharedHelper = nil;
     return self;
 }
 
--(void)viewWillAppear:(BOOL)animated
+-(void)viewDidLoad
 {
-    [super viewWillAppear:animated];
-
+    [super viewDidLoad];
     animationPause = NO;
+
     loginLable.text = NSLocalizedString(@"LOGIN", @"");
     loginLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
     
     practiceLable.text = NSLocalizedString(@"PRACTICE", @"");
     practiceLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
-       
+    
     [textsBackground setDinamicHeightBackground];
     
     animetedText.text = NSLocalizedString(@"1stIntro", @"");
     animetedText2.text = NSLocalizedString(@"2ndIntro", @"");
+    
     scroolView.contentSize = (CGSize){2*scroolView.frame.size.width,scroolView.frame.size.height};
 }
-- (void)viewDidLoad
+
+-(void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [super viewWillAppear:animated];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -124,7 +125,14 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [[NSUserDefaults standardUserDefaults] synchronize];
     [[StartViewController sharedInstance] playerStart];
     
-    [self performSelector:@selector(scroolViewAnimation) withObject:Nil afterDelay:2.5f];
+    if (!animationPause) {
+        [self performSelector:@selector(scroolViewAnimation) withObject:Nil afterDelay:2.5f];
+        
+        [self performSelector:@selector(scaleView:) withObject:practiceLable  afterDelay:1.0];
+        [self performSelector:@selector(scaleView:) withObject:practiceButton  afterDelay:1.0];
+        [self performSelector:@selector(scaleView:) withObject:loginFBbutton  afterDelay:3.2];
+        [self performSelector:@selector(scaleView:) withObject:loginLable  afterDelay:3.2];
+    }
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -211,16 +219,11 @@ static LoginAnimatedViewController *sharedHelper = nil;
 }
 
 -(void)scroolViewAnimation;
-{
-    if (animationPause) return;
-    
+{    
     [UIView animateWithDuration:0.8 animations:^{
         [scroolView setContentOffset:(CGPoint){animetedText.frame.size.width,0}];
     }completion:^(BOOL complete){
-        [self performSelector:@selector(scaleView:) withObject:loginFBbutton  afterDelay:4.0];
-        [self performSelector:@selector(scaleView:) withObject:loginLable  afterDelay:4.0];
     } ];
-    
 }
 #pragma mark -
 
