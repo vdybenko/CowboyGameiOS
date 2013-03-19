@@ -911,30 +911,10 @@ static CGFloat blinkBottomOriginY;
     
     [gunDrumViewController openGun];
     
-<<<<<<< HEAD
     __block id  selfBlock = self;
     
     gunDrumViewController.didFinishBlock = ^(){
         [selfBlock startTimerInBlock];
-=======
-    //id __block delegateBlock = delegate;
-    id __block selfBlock = self;
-    int __block timerBlock = timer;
-    BOOL __block duelIsStartedBlock = duelIsStarted;
-    BOOL __block fireSoundBlock = fireSound;
-    BOOL __block acelStatusBlock = acelStatus;
-    int __block shotTimeBlock = shotTime;
-    AVAudioPlayer __block *playerBlock = player;
-    
-    gunDrumViewController.didFinishBlock = ^(GunDrumViewController *controller){
-        duelIsStartedBlock = NO;
-        fireSoundBlock = NO;
-        acelStatusBlock = YES;
-        shotTimeBlock = 0;
-        [playerBlock stop];
-        //if(!delegateBlock)
-            timerBlock = [NSTimer scheduledTimerWithTimeInterval:0.01 target:selfBlock selector:@selector(shotTimer) userInfo:nil repeats:NO];
->>>>>>> fd6da88fcc32b729197270266c91775afd895914
     };
 }
 
