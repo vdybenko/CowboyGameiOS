@@ -26,7 +26,8 @@
     frame.size = suggestedSize;
     label.frame = frame;
     
-    [view addSubview:label];
+    int maxIndex = [[view subviews]count];
+    [view insertSubview:label atIndex:(maxIndex-2)];
     
     UILabel __block *labelBlock = label;
     label = nil;
