@@ -188,7 +188,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                             object:self
                                                           userInfo:[NSDictionary dictionaryWithObject:@"/login_FB" forKey:@"event"]];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IPad"];
         [LoginAnimatedViewController sharedInstance].isDemoPractice = NO;
         [[NSUserDefaults standardUserDefaults] synchronize];
     }else{
@@ -330,7 +329,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
         payment = NO;
         [self.player stop];
         [self.player setVolume:0.0];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IPad"];
         [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"loginFirstShow"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
