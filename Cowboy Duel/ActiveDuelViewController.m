@@ -261,6 +261,7 @@ static CGFloat blinkBottomOriginY;
     accelerometerState = NO;
     soundStart = NO;
     isGunCanShotOfFrequently = YES;
+    self.crossImageView.hidden = YES;
     
     self.gunButton.hidden = YES;
     opponentShape.imgBody.hidden = NO;
@@ -738,6 +739,7 @@ static CGFloat blinkBottomOriginY;
     if ((!duelIsStarted) && (!foll)&&([curentVC isEqual:self])) {
         DLog(@"FIRE !!!!!");
         duelIsStarted = YES;
+        self.crossImageView.hidden = NO;
         [ignoreTimer invalidate];
         NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Fire.mp3", [[NSBundle mainBundle] resourcePath]]];
         NSError *error;

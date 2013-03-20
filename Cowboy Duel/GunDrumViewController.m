@@ -89,7 +89,7 @@ static const CGFloat timeSpinDump = 0.3f;
         [self loadView];
 
         isCharging = NO;
-        
+       
         pntGunOpen=gun.frame.origin;
         pntDumpOpen=drumBullets.center;
         
@@ -177,6 +177,8 @@ static const CGFloat timeSpinDump = 0.3f;
 {
     [self.view.layer removeAllAnimations];
     [self hideBullets];
+    hudView.alpha = 1;
+    hudView.hidden = NO;
     vLoadGun.hidden = NO;
     countOfBullets = 0;
     indexOfGargedBullet = 0;
@@ -243,7 +245,7 @@ static const CGFloat timeSpinDump = 0.3f;
 
 -(void)showGun;
 {
-    hudView.alpha = 0.7f;
+   
     
     CGRect frame=self.view.frame;
     frame.origin = pntViewShow;
