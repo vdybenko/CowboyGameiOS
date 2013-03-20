@@ -23,7 +23,6 @@
     
     int indexOfGargedBullet;
     
-    AVAudioPlayer *putGunDownAudioPlayer;
     AVAudioPlayer *loadBulletAudioPlayer;
     __weak IBOutlet UIView *vBackLightDrum;
 }
@@ -108,16 +107,11 @@ static const CGFloat timeSpinDump = 0.3f;
         scaleDelta = 0.0;
         
         NSError *error;
-        NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/follSound.aif", [[NSBundle mainBundle] resourcePath]]];
-        putGunDownAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-        [putGunDownAudioPlayer prepareToPlay];
-        
-        url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/loadBullet.mp3", [[NSBundle mainBundle] resourcePath]]];
+        NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/loadBullet.mp3", [[NSBundle mainBundle] resourcePath]]];
         loadBulletAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
         [loadBulletAudioPlayer prepareToPlay];
         
         vOponnentAvatarWithFrame.hidden = YES;
-        
         
         if([LoginAnimatedViewController sharedInstance].isDemoPractice){
             [self.textView setDinamicHeightBackground];
@@ -161,7 +155,6 @@ static const CGFloat timeSpinDump = 0.3f;
 -(void)releaseComponents
 {
     [self viewDidUnload];
-    putGunDownAudioPlayer = nil;
     loadBulletAudioPlayer = nil;
 }
 

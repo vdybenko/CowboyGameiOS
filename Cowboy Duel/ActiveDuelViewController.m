@@ -33,7 +33,6 @@
     AVAudioPlayer *shotAudioPlayer1;
     AVAudioPlayer *shotAudioPlayer2;
     AVAudioPlayer *shotAudioPlayer3;
-    AVAudioPlayer *hitAudioPlayer;
     AVAudioPlayer *brockenGlassAudioPlayer;
     int shotCountForSound;
     int shotCountBullet;
@@ -80,7 +79,6 @@
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *fireImageView;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *bloodImageView;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *bloodCImageView;
-@property (unsafe_unretained, nonatomic) IBOutlet UIImageView *smokeImage;
 @property (weak, nonatomic) IBOutlet UIView *glassImageViewAllBackground;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *glassImageViewHeader;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *glassImageViewBottom;
@@ -121,11 +119,6 @@ static CGFloat blinkBottomOriginY;
         
         shotAudioPlayer3 = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
         [shotAudioPlayer3 prepareToPlay];
-
-        url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/cry.mp3", [[NSBundle mainBundle] resourcePath]]];
-
-        hitAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
-        [hitAudioPlayer prepareToPlay];
         
         NSError *error;
         url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/brocken_glass.aif", [[NSBundle mainBundle] resourcePath]]];
@@ -951,7 +944,6 @@ static CGFloat blinkBottomOriginY;
     [self setFireImageView:nil];
     [self setBloodImageView:nil];
     [self setBloodCImageView:nil];
-    [self setSmokeImage:nil];
     [self setGlassImageViewHeader:nil];
     [self setGlassImageViewBottom:nil];
     [self setGunButton:nil];
@@ -983,8 +975,6 @@ static CGFloat blinkBottomOriginY;
     
     shotAudioPlayer3 = nil;
     
-    hitAudioPlayer = nil;    
-   
     brockenGlassAudioPlayer = nil;
     
     opAccount = nil;
@@ -1007,7 +997,6 @@ static CGFloat blinkBottomOriginY;
     self.fireImageView = nil;
     self.bloodImageView = nil;
     self.bloodCImageView = nil;
-    self.smokeImage = nil;
     self.glassImageViewAllBackground = nil;
     self.glassImageViewHeader = nil;
     self.glassImageViewBottom = nil;

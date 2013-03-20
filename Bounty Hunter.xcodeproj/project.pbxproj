@@ -470,8 +470,6 @@
 		BD243B0F16A9A86A00D89E47 /* oponent_shot.aif in Resources */ = {isa = PBXBuildFile; fileRef = BD243B0D16A9A86A00D89E47 /* oponent_shot.aif */; };
 		BD243B1316A9AABE00D89E47 /* brocken_glass.aif in Resources */ = {isa = PBXBuildFile; fileRef = BD243B1016A9AABE00D89E47 /* brocken_glass.aif */; };
 		BD243B1416A9AABE00D89E47 /* brocken_glass.aif in Resources */ = {isa = PBXBuildFile; fileRef = BD243B1016A9AABE00D89E47 /* brocken_glass.aif */; };
-		BD243B1516A9AABE00D89E47 /* follSound.aif in Resources */ = {isa = PBXBuildFile; fileRef = BD243B1116A9AABE00D89E47 /* follSound.aif */; };
-		BD243B1616A9AABE00D89E47 /* follSound.aif in Resources */ = {isa = PBXBuildFile; fileRef = BD243B1116A9AABE00D89E47 /* follSound.aif */; };
 		BD243B1716A9AABE00D89E47 /* shot.aif in Resources */ = {isa = PBXBuildFile; fileRef = BD243B1216A9AABE00D89E47 /* shot.aif */; };
 		BD243B1816A9AABE00D89E47 /* shot.aif in Resources */ = {isa = PBXBuildFile; fileRef = BD243B1216A9AABE00D89E47 /* shot.aif */; };
 		BD243B1A16A9AAF600D89E47 /* cry.aif in Resources */ = {isa = PBXBuildFile; fileRef = BD243B1916A9AAF600D89E47 /* cry.aif */; };
@@ -1406,7 +1404,6 @@
 		BD243B0A16A979BC00D89E47 /* OponentCoordinateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OponentCoordinateView.m; sourceTree = "<group>"; };
 		BD243B0D16A9A86A00D89E47 /* oponent_shot.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = oponent_shot.aif; sourceTree = "<group>"; };
 		BD243B1016A9AABE00D89E47 /* brocken_glass.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = brocken_glass.aif; sourceTree = "<group>"; };
-		BD243B1116A9AABE00D89E47 /* follSound.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = follSound.aif; sourceTree = "<group>"; };
 		BD243B1216A9AABE00D89E47 /* shot.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = shot.aif; sourceTree = "<group>"; };
 		BD243B1916A9AAF600D89E47 /* cry.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = cry.aif; sourceTree = "<group>"; };
 		BD3503A516AD370800956BB7 /* btnGun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnGun.png; sourceTree = "<group>"; };
@@ -1970,7 +1967,6 @@
 				7693D98A16F226550096F61F /* womanVoiceHelp.mp3 */,
 				BD243B1916A9AAF600D89E47 /* cry.aif */,
 				BD243B1016A9AABE00D89E47 /* brocken_glass.aif */,
-				BD243B1116A9AABE00D89E47 /* follSound.aif */,
 				BD243B1216A9AABE00D89E47 /* shot.aif */,
 				BD0E064516A588E1004E9EDA /* brocken_glass.mp3 */,
 				BD243B0D16A9A86A00D89E47 /* oponent_shot.aif */,
@@ -3090,7 +3086,6 @@
 				BD0E064616A588E1004E9EDA /* brocken_glass.mp3 in Resources */,
 				BD243B0E16A9A86A00D89E47 /* oponent_shot.aif in Resources */,
 				BD243B1316A9AABE00D89E47 /* brocken_glass.aif in Resources */,
-				BD243B1516A9AABE00D89E47 /* follSound.aif in Resources */,
 				BD243B1716A9AABE00D89E47 /* shot.aif in Resources */,
 				BD243B1A16A9AAF600D89E47 /* cry.aif in Resources */,
 				BD01BE0416AAAF550095DE16 /* bar_bg.png in Resources */,
@@ -3388,7 +3383,6 @@
 				BD0E064716A588E1004E9EDA /* brocken_glass.mp3 in Resources */,
 				BD243B0F16A9A86A00D89E47 /* oponent_shot.aif in Resources */,
 				BD243B1416A9AABE00D89E47 /* brocken_glass.aif in Resources */,
-				BD243B1616A9AABE00D89E47 /* follSound.aif in Resources */,
 				BD243B1816A9AABE00D89E47 /* shot.aif in Resources */,
 				BD243B1B16A9AAF600D89E47 /* cry.aif in Resources */,
 				BD01BE0516AAAF550095DE16 /* bar_bg.png in Resources */,
@@ -3909,7 +3903,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sergij Sobol (DF8EH42X59)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3953,7 +3947,7 @@
 				);
 				PRODUCT_NAME = "Bounty Hunter";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "911C80C2-3D0C-49A3-A14C-FE45C92F5926";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
@@ -4200,8 +4194,8 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Sergij Sobol (DF8EH42X59)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sergij Sobol (DF8EH42X59)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4246,8 +4240,8 @@
 				);
 				PRODUCT_NAME = "Bounty Hunter";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=*]" = "911C80C2-3D0C-49A3-A14C-FE45C92F5926";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "911C80C2-3D0C-49A3-A14C-FE45C92F5926";
+				"PROVISIONING_PROFILE[sdk=*]" = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
