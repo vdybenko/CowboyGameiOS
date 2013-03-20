@@ -19,6 +19,7 @@
 #import "WomanShape.h"
 #import "OpponentShape.h"
 #import "GoodCowboy.h"
+#import "ArrowToOpponent.h"
 
 #define targetHeight 260
 #define targetWeidth 100
@@ -73,6 +74,7 @@
     IconDownloader *iconDownloader;
     __weak IBOutlet UIImageView *blinkBottom;
     __weak IBOutlet UIImageView *blinkTop;
+    __weak IBOutlet ArrowToOpponent *arrowToOpponent;
 }
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *floatView;
@@ -298,6 +300,8 @@ static CGFloat blinkBottomOriginY;
     opponentShape.hidden = YES;
     womanShape.hidden = YES;
     goodCowboyShape.hidden = YES;
+    arrowToOpponent.hidden = YES;
+    [arrowToOpponent setDirection:ArrowToOpponentDirectionRight];
     
     if(!delegate)
     {
@@ -342,6 +346,7 @@ static CGFloat blinkBottomOriginY;
     blinkBottom = nil;
     opponentShape = nil;
     goodCowboyShape = nil;
+    arrowToOpponent = nil;
     [super viewDidUnload];
 }
 
@@ -748,6 +753,8 @@ static CGFloat blinkBottomOriginY;
         
         if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
         moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
+        
+        
     }
     if ((shotTime * 0.001 >= 60.0) && (!duelTimerEnd) && (soundStart)) {
         if ([delegate respondsToSelector:@selector(duelTimerEnd)])
@@ -756,6 +763,8 @@ static CGFloat blinkBottomOriginY;
         [timer invalidate];
     }
     
+    [arrowToOpponent updateRelateveToView:opponentShape.imgBody mainView:self.view];
+    arrowToOpponent.hidden = NO;
 }
 
 #pragma mark
