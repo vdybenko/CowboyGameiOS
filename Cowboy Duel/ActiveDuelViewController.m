@@ -930,7 +930,8 @@ static CGFloat blinkBottomOriginY;
 
 -(void)startTimerInBlock
 {
-    if(!delegate) timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(shotTimer) userInfo:nil repeats:YES];
+    //if(!delegate)
+    timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(shotTimer) userInfo:nil repeats:YES];
     duelIsStarted = NO;
     fireSound = NO;
     acelStatus = YES;
