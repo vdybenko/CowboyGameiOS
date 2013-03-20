@@ -126,12 +126,12 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [[StartViewController sharedInstance] playerStart];
     
     if (!animationPause) {
-        [self performSelector:@selector(scroolViewAnimation) withObject:Nil afterDelay:2.5f];
+        [self performSelector:@selector(scroolViewAnimation) withObject:Nil afterDelay:10.5f];
         
-        [self performSelector:@selector(scaleView:) withObject:practiceLable  afterDelay:1.0];
-        [self performSelector:@selector(scaleView:) withObject:practiceButton  afterDelay:1.0];
-        [self performSelector:@selector(scaleView:) withObject:loginFBbutton  afterDelay:3.2];
-        [self performSelector:@selector(scaleView:) withObject:loginLable  afterDelay:3.2];
+        [self performSelector:@selector(scaleView:) withObject:practiceLable  afterDelay:14.0];
+        [self performSelector:@selector(scaleView:) withObject:practiceButton  afterDelay:14.0];
+        [self performSelector:@selector(scaleView:) withObject:loginFBbutton  afterDelay:18.2];
+        [self performSelector:@selector(scaleView:) withObject:loginLable  afterDelay:18.2];
     }
 }
 
