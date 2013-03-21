@@ -13,6 +13,7 @@
     IBOutlet UIView *mainSubView;
     __weak IBOutlet UIImageView *leftArrow;
     __weak IBOutlet UIImageView *rightArrow;
+    __weak IBOutlet UIView *vBackIcon;
     
 }
 @end;
@@ -32,6 +33,21 @@
         
         CGAffineTransform transformMirror = CGAffineTransformMakeScale(-1.0, 1.0);
         leftArrow.transform = transformMirror;
+        
+        CGRect cropRect = CGRectMake(95, 0, 140, 140);
+        CGImageRef subImageRef = CGImageCreateWithImageInRect([[UIImage imageNamed:@"men_low.png"] CGImage], cropRect);
+        CGRect smallBounds = CGRectMake(cropRect.origin.x, cropRect.origin.y, CGImageGetWidth(subImageRef), CGImageGetHeight(subImageRef));
+        
+        UIGraphicsBeginImageContext(smallBounds.size);
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        CGContextDrawImage(context, smallBounds, subImageRef);
+        UIImage* smallImg = [UIImage imageWithCGImage:subImageRef];
+        UIGraphicsEndImageContext();
+        
+        [ivOpponent setImage:smallImg];
+        
+        vBackIcon.clipsToBounds = YES;
+        vBackIcon.layer.cornerRadius = ivOpponent.frame.size.width/2;
         
         ivOpponent.clipsToBounds = YES;
         ivOpponent.layer.cornerRadius = ivOpponent.frame.size.width/2;
