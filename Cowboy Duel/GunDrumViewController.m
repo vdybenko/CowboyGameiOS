@@ -23,7 +23,6 @@
     
     int indexOfGargedBullet;
     
-    AVAudioPlayer *putGunDownAudioPlayer;
     AVAudioPlayer *loadBulletAudioPlayer;
     __weak IBOutlet UIView *vBackLightDrum;
 }
@@ -31,10 +30,8 @@
 @property (weak, nonatomic) IBOutlet UIView *vLoadGun;
 @property (weak, nonatomic) IBOutlet UILabel *lbLoadGun;
 @property (weak, nonatomic) IBOutlet UIView *drumBullets;
-@property (weak, nonatomic) IBOutlet UIImageView *arrow;
 @property (weak, nonatomic) IBOutlet UIView *gun;
 @property (weak, nonatomic) IBOutlet UIImageView *gunImage;
-@property (weak, nonatomic) IBOutlet UIImageView *ivPhoneImg;
 @property (weak, nonatomic) IBOutlet UIImageView *flash;
 @property (weak, nonatomic) IBOutlet UIView *hudView;
 @property (weak, nonatomic) IBOutlet UIView *vOponnentAvatarWithFrame;
@@ -68,12 +65,10 @@ static const CGFloat timeSpinDump = 0.3f;
 @synthesize colectionBullets;
 @synthesize drumBullets;
 @synthesize gun;
-@synthesize arrow;
 @synthesize isCharging;
 @synthesize vLoadGun;
 @synthesize lbLoadGun;
 @synthesize gunImage;
-@synthesize ivPhoneImg;
 @synthesize flash;
 @synthesize hudView;
 @synthesize ivOponnentAvatar;
@@ -112,17 +107,11 @@ static const CGFloat timeSpinDump = 0.3f;
         scaleDelta = 0.0;
         
         NSError *error;
-        NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/follSound.aif", [[NSBundle mainBundle] resourcePath]]];
-        putGunDownAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-        [putGunDownAudioPlayer prepareToPlay];
-        
-        url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/loadBullet.mp3", [[NSBundle mainBundle] resourcePath]]];
+        NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/loadBullet.mp3", [[NSBundle mainBundle] resourcePath]]];
         loadBulletAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
         [loadBulletAudioPlayer prepareToPlay];
         
-        [self helpAnimation];
         vOponnentAvatarWithFrame.hidden = YES;
-        
         
         if([LoginAnimatedViewController sharedInstance].isDemoPractice){
             [self.textView setDinamicHeightBackground];
@@ -150,11 +139,9 @@ static const CGFloat timeSpinDump = 0.3f;
 - (void)viewDidUnload {
     [self setDrumBullets:nil];
     [self setColectionBullets:nil];
-    [self setArrow:nil];
     [self setVLoadGun:nil];
     [self setLbLoadGun:nil];
     [self setGunImage:nil];
-    [self setIvPhoneImg:nil];
     [self setFlash:nil];
     [self setHudView:nil];
     [self setIvOponnentAvatar:nil];
@@ -168,7 +155,6 @@ static const CGFloat timeSpinDump = 0.3f;
 -(void)releaseComponents
 {
     [self viewDidUnload];
-    putGunDownAudioPlayer = nil;
     loadBulletAudioPlayer = nil;
 }
 
@@ -183,8 +169,6 @@ static const CGFloat timeSpinDump = 0.3f;
     countOfBullets = 0;
     indexOfGargedBullet = 0;
     [UIView animateWithDuration:timeOpenGun animations:^{
-        arrow.hidden = YES;
-        ivPhoneImg.hidden = YES;
         gunImage.transform = CGAffineTransformMakeRotation(gunRotationAngle);
         
         drumBullets.center = pntDumpOpen;
@@ -317,18 +301,6 @@ static const CGFloat timeSpinDump = 0.3f;
     if (steadyScale >= 1.3) scaleDelta = -0.01;
     if (steadyScale <= 1.0) scaleDelta = 0.02;
     steadyScale += scaleDelta;
-}
-
--(void)helpAnimation{
-
-    NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"ivIphoneImg1.png"],
-                         [UIImage imageNamed:@"ivIphoneImg2.png"],
-                         nil];
-    ivPhoneImg.animationImages = imgArray;
-    ivPhoneImg.animationDuration = 2.0f;
-    [ivPhoneImg setAnimationRepeatCount:0];
-    [ivPhoneImg startAnimating];
-   
 }
 
 -(void)lableScaleOutView:(UIView*)view

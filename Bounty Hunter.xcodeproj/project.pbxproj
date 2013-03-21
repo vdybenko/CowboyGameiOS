@@ -306,6 +306,9 @@
 		768B9E2E16EF24C200278FCA /* woman@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 768B9E2C16EF24C200278FCA /* woman@2x.png */; };
 		768B9E3016EF28D200278FCA /* WomanShape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 768B9E2F16EF28D200278FCA /* WomanShape.xib */; };
 		768B9E3316EF29CD00278FCA /* WomanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 768B9E3216EF29CD00278FCA /* WomanShape.m */; };
+		768F011616FA0350001523A0 /* ArrowToOpponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 768F011516FA0350001523A0 /* ArrowToOpponent.xib */; };
+		768F011816FA0380001523A0 /* st_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 768F011716FA0380001523A0 /* st_arrow.png */; };
+		768F011B16FA055C001523A0 /* ArrowToOpponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 768F011A16FA055C001523A0 /* ArrowToOpponent.m */; };
 		7690DD9316BFFC2900731B51 /* sl_shylc.png in Resources */ = {isa = PBXBuildFile; fileRef = 7690DD9116BFFC2900731B51 /* sl_shylc.png */; };
 		7690DD9416BFFC2900731B51 /* sl_shylc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7690DD9216BFFC2900731B51 /* sl_shylc@2x.png */; };
 		7691DD9416CE75B200AD25F5 /* LoadViewContoller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7691DD9316CE75B200AD25F5 /* LoadViewContoller.xib */; };
@@ -470,8 +473,6 @@
 		BD243B0F16A9A86A00D89E47 /* oponent_shot.aif in Resources */ = {isa = PBXBuildFile; fileRef = BD243B0D16A9A86A00D89E47 /* oponent_shot.aif */; };
 		BD243B1316A9AABE00D89E47 /* brocken_glass.aif in Resources */ = {isa = PBXBuildFile; fileRef = BD243B1016A9AABE00D89E47 /* brocken_glass.aif */; };
 		BD243B1416A9AABE00D89E47 /* brocken_glass.aif in Resources */ = {isa = PBXBuildFile; fileRef = BD243B1016A9AABE00D89E47 /* brocken_glass.aif */; };
-		BD243B1516A9AABE00D89E47 /* follSound.aif in Resources */ = {isa = PBXBuildFile; fileRef = BD243B1116A9AABE00D89E47 /* follSound.aif */; };
-		BD243B1616A9AABE00D89E47 /* follSound.aif in Resources */ = {isa = PBXBuildFile; fileRef = BD243B1116A9AABE00D89E47 /* follSound.aif */; };
 		BD243B1716A9AABE00D89E47 /* shot.aif in Resources */ = {isa = PBXBuildFile; fileRef = BD243B1216A9AABE00D89E47 /* shot.aif */; };
 		BD243B1816A9AABE00D89E47 /* shot.aif in Resources */ = {isa = PBXBuildFile; fileRef = BD243B1216A9AABE00D89E47 /* shot.aif */; };
 		BD243B1A16A9AAF600D89E47 /* cry.aif in Resources */ = {isa = PBXBuildFile; fileRef = BD243B1916A9AAF600D89E47 /* cry.aif */; };
@@ -1180,6 +1181,10 @@
 		768B9E2F16EF28D200278FCA /* WomanShape.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WomanShape.xib; path = Xib/WomanShape.xib; sourceTree = "<group>"; };
 		768B9E3116EF29CD00278FCA /* WomanShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WomanShape.h; sourceTree = "<group>"; };
 		768B9E3216EF29CD00278FCA /* WomanShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WomanShape.m; sourceTree = "<group>"; };
+		768F011516FA0350001523A0 /* ArrowToOpponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ArrowToOpponent.xib; path = Xib/ArrowToOpponent.xib; sourceTree = "<group>"; };
+		768F011716FA0380001523A0 /* st_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = st_arrow.png; sourceTree = "<group>"; };
+		768F011916FA055C001523A0 /* ArrowToOpponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrowToOpponent.h; sourceTree = "<group>"; };
+		768F011A16FA055C001523A0 /* ArrowToOpponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrowToOpponent.m; sourceTree = "<group>"; };
 		7690DD9116BFFC2900731B51 /* sl_shylc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sl_shylc.png; sourceTree = "<group>"; };
 		7690DD9216BFFC2900731B51 /* sl_shylc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sl_shylc@2x.png"; sourceTree = "<group>"; };
 		7690DDA016C0212300731B51 /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
@@ -1406,7 +1411,6 @@
 		BD243B0A16A979BC00D89E47 /* OponentCoordinateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OponentCoordinateView.m; sourceTree = "<group>"; };
 		BD243B0D16A9A86A00D89E47 /* oponent_shot.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = oponent_shot.aif; sourceTree = "<group>"; };
 		BD243B1016A9AABE00D89E47 /* brocken_glass.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = brocken_glass.aif; sourceTree = "<group>"; };
-		BD243B1116A9AABE00D89E47 /* follSound.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = follSound.aif; sourceTree = "<group>"; };
 		BD243B1216A9AABE00D89E47 /* shot.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = shot.aif; sourceTree = "<group>"; };
 		BD243B1916A9AAF600D89E47 /* cry.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = cry.aif; sourceTree = "<group>"; };
 		BD3503A516AD370800956BB7 /* btnGun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnGun.png; sourceTree = "<group>"; };
@@ -1970,7 +1974,6 @@
 				7693D98A16F226550096F61F /* womanVoiceHelp.mp3 */,
 				BD243B1916A9AAF600D89E47 /* cry.aif */,
 				BD243B1016A9AABE00D89E47 /* brocken_glass.aif */,
-				BD243B1116A9AABE00D89E47 /* follSound.aif */,
 				BD243B1216A9AABE00D89E47 /* shot.aif */,
 				BD0E064516A588E1004E9EDA /* brocken_glass.mp3 */,
 				BD243B0D16A9A86A00D89E47 /* oponent_shot.aif */,
@@ -2083,6 +2086,8 @@
 				7693D98616F21A600096F61F /* GoodCowboy.m */,
 				7693D97616F1B7730096F61F /* OpponentShape.h */,
 				7693D97716F1B7730096F61F /* OpponentShape.m */,
+				768F011916FA055C001523A0 /* ArrowToOpponent.h */,
+				768F011A16FA055C001523A0 /* ArrowToOpponent.m */,
 			);
 			name = "Duel Shapes";
 			sourceTree = "<group>";
@@ -2191,6 +2196,7 @@
 				768B9E2F16EF28D200278FCA /* WomanShape.xib */,
 				7693D98016F219BD0096F61F /* GoodCowboy.xib */,
 				7693D97416F1B7390096F61F /* OpponentShape.xib */,
+				768F011516FA0350001523A0 /* ArrowToOpponent.xib */,
 				BD84DAA4164ABCA000DEEE38 /* LoginAnimatedViewController.xib */,
 				7691DD9316CE75B200AD25F5 /* LoadViewContoller.xib */,
 				BD16BF961680934F00628CCC /* FunPageViewController.xib */,
@@ -2575,6 +2581,7 @@
 				762FA45716DBA22400CA5E2F /* ivBloodBottom@2x.png */,
 				762FA45816DBA22400CA5E2F /* ivBloodHeader.png */,
 				762FA45916DBA22400CA5E2F /* ivBloodHeader@2x.png */,
+				768F011716FA0380001523A0 /* st_arrow.png */,
 				768B9E2B16EF24C200278FCA /* woman.png */,
 				768B9E2C16EF24C200278FCA /* woman@2x.png */,
 				7693D97A16F213140096F61F /* goodCowboy@2x.png */,
@@ -3090,7 +3097,6 @@
 				BD0E064616A588E1004E9EDA /* brocken_glass.mp3 in Resources */,
 				BD243B0E16A9A86A00D89E47 /* oponent_shot.aif in Resources */,
 				BD243B1316A9AABE00D89E47 /* brocken_glass.aif in Resources */,
-				BD243B1516A9AABE00D89E47 /* follSound.aif in Resources */,
 				BD243B1716A9AABE00D89E47 /* shot.aif in Resources */,
 				BD243B1A16A9AAF600D89E47 /* cry.aif in Resources */,
 				BD01BE0416AAAF550095DE16 /* bar_bg.png in Resources */,
@@ -3217,6 +3223,8 @@
 				7606709216F7098F00079F69 /* loadBullet.mp3 in Resources */,
 				313C0C9D16F8AF0300FCC1DD /* bloorOnBlackView.png in Resources */,
 				313C0C9E16F8AF0300FCC1DD /* bloorOnBlackView@2x.png in Resources */,
+				768F011616FA0350001523A0 /* ArrowToOpponent.xib in Resources */,
+				768F011816FA0380001523A0 /* st_arrow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3388,7 +3396,6 @@
 				BD0E064716A588E1004E9EDA /* brocken_glass.mp3 in Resources */,
 				BD243B0F16A9A86A00D89E47 /* oponent_shot.aif in Resources */,
 				BD243B1416A9AABE00D89E47 /* brocken_glass.aif in Resources */,
-				BD243B1616A9AABE00D89E47 /* follSound.aif in Resources */,
 				BD243B1816A9AABE00D89E47 /* shot.aif in Resources */,
 				BD243B1B16A9AAF600D89E47 /* cry.aif in Resources */,
 				BD01BE0516AAAF550095DE16 /* bar_bg.png in Resources */,
@@ -3620,6 +3627,7 @@
 				7693D97F16F2157D0096F61F /* Shape.m in Sources */,
 				7693D98716F21A640096F61F /* GoodCowboy.m in Sources */,
 				7606709616F7324B00079F69 /* UILabel+FlyingPoint.m in Sources */,
+				768F011B16FA055C001523A0 /* ArrowToOpponent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3908,8 +3916,8 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: SPE Dybenko Olga Viktorovna  (WebKate)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: SPE Dybenko Olga Viktorovna  (WebKate)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3952,8 +3960,9 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Bounty Hunter";
-				PROVISIONING_PROFILE = "C649E018-0E48-43E3-BD6D-F46E3A05B281";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C649E018-0E48-43E3-BD6D-F46E3A05B281";
+
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
