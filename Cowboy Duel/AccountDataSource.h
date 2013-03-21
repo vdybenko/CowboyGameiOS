@@ -19,7 +19,7 @@
 @property(nonatomic) NSInteger accountLevel; 
 @property(nonatomic) NSInteger accountPoints; 
 @property(nonatomic) NSInteger accountWins; 
-@property(nonatomic) NSInteger accountDraws; 
+@property(nonatomic) NSInteger accountDraws;  
 @property(nonatomic) NSInteger accountBigestWin; 
 @property(nonatomic) NSInteger removeAds;
 @property(nonatomic) BOOL activeDuel;
@@ -51,6 +51,9 @@
 
 @property (nonatomic, strong) id loginAnimatedViewController;
 @property (nonatomic, strong) id<FBGraphUser> facebookUser;
+
+//Visual view character
+@property(weak, nonatomic) NSString *visualViewHead;
 
 + (AccountDataSource *)sharedInstance;
 - (id)initWithLocalPlayer;
@@ -90,6 +93,9 @@
 - (void)saveTransaction;
 - (void)saveGlNumber;
 - (int)increaseGlNumber;
+- (void)saveVisualView;
+- (void)loadVisualView;
+
 
 - (BOOL)isPlayerPlayDuel;
 - (BOOL)isPlayerForPractice;

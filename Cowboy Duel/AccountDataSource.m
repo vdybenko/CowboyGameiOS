@@ -26,6 +26,7 @@ static const char *LIST_BOTS_URL = BASE_URL"users/get_user_data";
 @synthesize accountWeapon;
 @synthesize accountStore;
 @synthesize loginAnimatedViewController;
+@synthesize visualViewHead;
 
 #pragma mark
 
@@ -148,6 +149,8 @@ static AccountDataSource *sharedHelper = nil;
       [self.achivments addObject:loc];
     }
   }
+    
+    [self loadVisualView];
 }
 
 - (void)makeLocalAccountID{
@@ -528,6 +531,18 @@ static AccountDataSource *sharedHelper = nil;
     [self saveGlNumber];
     return glNumber;
 }
+
+- (void)saveVisualView;
+{
+    [[NSUserDefaults standardUserDefaults] setObject:self.visualViewHead forKey:@"VV_HEAD_VALUE"];
+}
+
+- (void)loadVisualView;
+{
+    self.visualViewHead = [[NSUserDefaults standardUserDefaults] objectForKey:@"VV_HEAD_VALUE"];
+}
+
+#pragma mark
 
 - (BOOL)isPlayerPlayDuel;
 {
