@@ -38,8 +38,8 @@
     arrayBody = nil;
 }
 
--(CGRect) getRectForPart:(VisualViewCharacter)part withIndex:(NSInteger)index;
+-(CGRect) getRectForPart:(VisualViewCharacterPart)part withIndex:(NSInteger)index;
 {}
--(CGRect) getRectForPart:(VisualViewCharacter)part withName:(NSString*)name;
+-(CGRect) getRectForPart:(VisualViewCharacterPart)part withName:(NSString*)name;
 {}
 @end

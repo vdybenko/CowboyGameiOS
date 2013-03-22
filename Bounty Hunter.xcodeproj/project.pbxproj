@@ -326,6 +326,8 @@
 		76934BDF16FC839800433E1C /* cap2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76934BD716FC839800433E1C /* cap2@2x.png */; };
 		76934BE016FC839800433E1C /* head1.png in Resources */ = {isa = PBXBuildFile; fileRef = 76934BD816FC839800433E1C /* head1.png */; };
 		76934BE116FC839800433E1C /* head1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76934BD916FC839800433E1C /* head1@2x.png */; };
+		76934BE316FC98C500433E1C /* VisualViewCharacter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76934BE216FC98C500433E1C /* VisualViewCharacter.xib */; };
+		76934BE616FC990900433E1C /* VisualViewCharacter.m in Sources */ = {isa = PBXBuildFile; fileRef = 76934BE516FC990900433E1C /* VisualViewCharacter.m */; };
 		7693D97216F1B4960096F61F /* oponent_step1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7693D97016F1B4960096F61F /* oponent_step1.png */; };
 		7693D97316F1B4960096F61F /* oponent_step2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7693D97116F1B4960096F61F /* oponent_step2.png */; };
 		7693D97516F1B7390096F61F /* OpponentShape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7693D97416F1B7390096F61F /* OpponentShape.xib */; };
@@ -1247,6 +1249,9 @@
 		76934BD716FC839800433E1C /* cap2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cap2@2x.png"; path = "ActiveDuel/cap2@2x.png"; sourceTree = "<group>"; };
 		76934BD816FC839800433E1C /* head1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = head1.png; path = ActiveDuel/head1.png; sourceTree = "<group>"; };
 		76934BD916FC839800433E1C /* head1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "head1@2x.png"; path = "ActiveDuel/head1@2x.png"; sourceTree = "<group>"; };
+		76934BE216FC98C500433E1C /* VisualViewCharacter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VisualViewCharacter.xib; sourceTree = "<group>"; };
+		76934BE416FC990900433E1C /* VisualViewCharacter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisualViewCharacter.h; sourceTree = "<group>"; };
+		76934BE516FC990900433E1C /* VisualViewCharacter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisualViewCharacter.m; sourceTree = "<group>"; };
 		7693D97016F1B4960096F61F /* oponent_step1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oponent_step1.png; sourceTree = "<group>"; };
 		7693D97116F1B4960096F61F /* oponent_step2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oponent_step2.png; sourceTree = "<group>"; };
 		7693D97416F1B7390096F61F /* OpponentShape.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OpponentShape.xib; sourceTree = "<group>"; };
@@ -2113,6 +2118,8 @@
 				7693D97716F1B7730096F61F /* OpponentShape.m */,
 				768F011916FA055C001523A0 /* ArrowToOpponent.h */,
 				768F011A16FA055C001523A0 /* ArrowToOpponent.m */,
+				76934BE416FC990900433E1C /* VisualViewCharacter.h */,
+				76934BE516FC990900433E1C /* VisualViewCharacter.m */,
 			);
 			name = "Duel Shapes";
 			sourceTree = "<group>";
@@ -2235,6 +2242,7 @@
 				761EFA4E1573BE91001670EB /* StartViewController.xib */,
 				761EFA471573BDDA001670EB /* CollectionAppViewController.xib */,
 				768BF6F816FB6D8000435394 /* VisualViewCharacterViewController.xib */,
+				76934BE216FC98C500433E1C /* VisualViewCharacter.xib */,
 				764B891D165FCC660014E35B /* ListOnLine */,
 				764B891C165FCC4E0014E35B /* TopPlayer */,
 				767BA5BD1589F8E300825EB1 /* FinalViewController.xib */,
@@ -3287,6 +3295,7 @@
 				76934BDF16FC839800433E1C /* cap2@2x.png in Resources */,
 				76934BE016FC839800433E1C /* head1.png in Resources */,
 				76934BE116FC839800433E1C /* head1@2x.png in Resources */,
+				76934BE316FC98C500433E1C /* VisualViewCharacter.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3692,6 +3701,7 @@
 				768F011B16FA055C001523A0 /* ArrowToOpponent.m in Sources */,
 				768BF6F416FB6A3700435394 /* VisualViewDataSource.m in Sources */,
 				768BF6F716FB6B0300435394 /* VisualViewCharacterViewController.m in Sources */,
+				76934BE616FC990900433E1C /* VisualViewCharacter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

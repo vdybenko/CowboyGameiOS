@@ -10,10 +10,10 @@
 #import "VisualViewCharacterViewController.h"
 
 typedef enum {
-    VisualViewCharacterHead,
-    VisualViewCharacterCap,
-    VisualViewCharacterBody
-} VisualViewCharacter;
+    VisualViewCharacterPartHead,
+    VisualViewCharacterPartCap,
+    VisualViewCharacterPartBody
+} VisualViewCharacterPart;
 
 typedef enum {
     VisualViewCharacterHeadList1
@@ -40,6 +40,6 @@ typedef enum {
 @property (weak,nonatomic) NSArray *arrayBody;
 
 -(id) init;
--(CGRect) getRectForPart:(VisualViewCharacter)part withIndex:(NSInteger)index;
--(CGRect) getRectForPart:(VisualViewCharacter)part withName:(NSString*)name;
+-(CGRect) getRectForPart:(VisualViewCharacterPart)part withIndex:(NSInteger)index;
+-(CGRect) getRectForPart:(VisualViewCharacterPart)part withName:(NSString*)name;
 @end
