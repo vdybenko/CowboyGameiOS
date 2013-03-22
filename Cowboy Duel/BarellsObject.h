@@ -12,11 +12,12 @@
 @interface BarellsObject : UIView <MemoryManagement>
 @property (weak, nonatomic) IBOutlet UIImageView *bonusImg;
 @property (weak, nonatomic) IBOutlet UIImageView *barellImg;
-@property (strong, nonatomic) IBOutlet UIView *barellView;
+@property (weak, nonatomic) IBOutlet UIView *barellView;
+@property (weak, nonatomic) IBOutlet UIImageView *barelAnimImg;
 
 
 
 -(void)explosionAnimation;
 -(BOOL)showBonus;
--(void)gettingShot;
+-(void)dropBarel;
 @end

@@ -21,6 +21,7 @@
 @synthesize barellImg;
 @synthesize bonusImg;
 @synthesize barellView;
+@synthesize barelAnimImg;
 
 
 - (id)initWithFrame:(CGRect)frame
@@ -49,20 +50,25 @@
 
 -(void)explosionAnimation;
 {
-    [explosinPlayer play];
-    UIImage *spriteSheetExp = [UIImage imageNamed:@"barelExp3"];
+  
+    //[explosinPlayer play];
+    CGRect Frame = barellImg.frame;
+    barelAnimImg.frame = Frame;
+    barellImg.hidden = YES;
+    UIImage *spriteSheetExp = [UIImage imageNamed:@"barelExp"];
     NSArray *arrayWithSpritesExp = [spriteSheetExp spritesWithSpriteSheetImage:spriteSheetExp
-                                                                    spriteSize:CGSizeMake(74, 75)];
-    [barellImg setAnimationImages:arrayWithSpritesExp];
-    [barellImg setAnimationRepeatCount:1];
-    [barellImg setAnimationDuration:1.5];
-    [barellImg startAnimating];
-    [self performSelector:@selector(hideObj) withObject:nil afterDelay:1.5f];
+                                                                    spriteSize:CGSizeMake(75, 75)];
+    [barelAnimImg setAnimationImages:arrayWithSpritesExp];
+    [barelAnimImg setAnimationRepeatCount:1];
+    [barelAnimImg setAnimationDuration:2];
+    [barelAnimImg startAnimating];
+   
+    [self performSelector:@selector(hideObj) withObject:nil afterDelay:1.9f];
 }
 -(void)hideObj{
-    [explosinPlayer stop];
-    [barellImg stopAnimating];
-    barellImg.hidden = YES;
+    //[explosinPlayer stop];
+    [barelAnimImg stopAnimating];
+    barelAnimImg.hidden = YES;
     [self showBonus];
 
 }
@@ -70,18 +76,42 @@
 {
     //int luck = arc4random()%2;
    // if (luck == 2) {
-        bonusImg.hidden = NO;
-    [UIView animateWithDuration:1 animations:^{
+    bonusImg.frame = barellImg.frame;
+    bonusImg.hidden = NO;
+    [UIView animateWithDuration:1.5 animations:^{
         bonusImg.alpha = 0;
+        CGRect Frame = bonusImg.frame;
+        Frame.origin.y -=100;
+        bonusImg.frame = Frame;
     }completion:^(BOOL complete){
         bonusImg.hidden = YES;
     }];
-    [self releaseComponents];
+   // [self releaseComponents];
     return YES;
     //}
 }
--(void)gettingShot;{
+-(void)dropBarel;{
+    [UIView animateWithDuration:0.2 animations:^{
+        CGRect Frame = barellImg.frame;
+        Frame.origin.y +=60;
+        barellImg.frame = Frame;
+    }completion:^(BOOL complete){
+        [UIView animateWithDuration:0.1f animations:^{
+            CGRect Frame = barellImg.frame;
+            Frame.origin.y -=10;
+            barellImg.frame = Frame;
+        }completion:^(BOOL complete){
+            [UIView animateWithDuration:0.1f animations:^{
+                CGRect Frame = barellImg.frame;
+                Frame.origin.y +=10;
+                barellImg.frame = Frame;
+            }completion:^(BOOL complete){
 
+            }];
+
+        }];
+
+    }];
 }
 -(void)releaseComponents
 {
