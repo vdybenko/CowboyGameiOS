@@ -23,8 +23,7 @@
         [self addSubview:mainSubView];
         
         CGRect frame = mainSubView.frame;
-        frame.size.width = self.frame.size.width;
-        frame.size.height = self.frame.size.height;
+        frame.size = self.frame.size;
         mainSubView.frame = frame;
     }
     return self;

@@ -34,12 +34,14 @@ typedef enum {
 
 #define VISUAL_VIEW_CHARACTER_BODY_ARRAY @[@"body1.png"];
 
-@interface VisualViewDataSource : NSObject<MemoryManagement>
+@interface VisualViewDataSource : NSObject<MemoryManagement,UICollectionViewDataSource>
 @property (weak,nonatomic) NSArray *arrayHead;
 @property (weak,nonatomic) NSArray *arrayCap;
 @property (weak,nonatomic) NSArray *arrayBody;
+@property (weak,nonatomic) NSArray *arrayMain;
+@property (nonatomic) VisualViewCharacterPart typeOfTable;
 
--(id) init;
+-(id) initWithCollectionView:(UICollectionView*)cv;
 -(CGRect) getRectForPart:(VisualViewCharacterPart)part withIndex:(NSInteger)index;
 -(CGRect) getRectForPart:(VisualViewCharacterPart)part withName:(NSString*)name;
 @end

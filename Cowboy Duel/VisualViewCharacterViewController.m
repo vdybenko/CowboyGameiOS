@@ -3,6 +3,7 @@
 #import "UIButton+Image+Title.h"
 #import "VisualViewDataSource.h"
 #import "VisualViewCharacter.h"
+#import "ScrollViewSwitcher.h"
 
 @interface VisualViewCharacterViewController ()
 {
@@ -11,6 +12,8 @@
 //    __weak IBOutlet UIView *activityView;
 //    __weak AccountDataSource *playerAccount;
     __weak IBOutlet VisualViewCharacter *visualViewCharacter;
+    __weak IBOutlet UICollectionView *collectionView;
+    __weak IBOutlet ScrollViewSwitcher *scrollViewSwitcher;
 }
 @end
 
@@ -32,8 +35,8 @@
 {
     [super viewDidLoad];
     
-//    visualViewDataSource = [[VisualViewDataSource alloc] init];
-    
+    visualViewDataSource = [[VisualViewDataSource alloc] initWithCollectionView:collectionView];
+    collectionView.dataSource = visualViewDataSource;
 //    title.text = NSLocalizedString(@"SHOP", @"");
 //    title.textColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
 //    title.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
@@ -57,6 +60,8 @@
 //    btnBack = nil;
 //    activityView = nil;
 //    visualViewCharacter = nil;
+    collectionView = nil;
+    scrollViewSwitcher = nil;
     [super viewDidUnload];
 }
 -(void)refreshController;

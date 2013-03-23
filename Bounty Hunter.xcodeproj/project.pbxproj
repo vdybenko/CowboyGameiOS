@@ -309,6 +309,7 @@
 		768BF6F416FB6A3700435394 /* VisualViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 768BF6F316FB6A3700435394 /* VisualViewDataSource.m */; };
 		768BF6F716FB6B0300435394 /* VisualViewCharacterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 768BF6F616FB6B0300435394 /* VisualViewCharacterViewController.m */; };
 		768BF6F916FB6D8000435394 /* VisualViewCharacterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 768BF6F816FB6D8000435394 /* VisualViewCharacterViewController.xib */; };
+		768D68CC16FDD95E00A628C6 /* ScrollViewSwitcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 768D68CB16FDD95E00A628C6 /* ScrollViewSwitcher.m */; };
 		768F011616FA0350001523A0 /* ArrowToOpponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 768F011516FA0350001523A0 /* ArrowToOpponent.xib */; };
 		768F011816FA0380001523A0 /* st_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 768F011716FA0380001523A0 /* st_arrow.png */; };
 		768F011B16FA055C001523A0 /* ArrowToOpponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 768F011A16FA055C001523A0 /* ArrowToOpponent.m */; };
@@ -1199,6 +1200,8 @@
 		768BF6F516FB6B0300435394 /* VisualViewCharacterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisualViewCharacterViewController.h; sourceTree = "<group>"; };
 		768BF6F616FB6B0300435394 /* VisualViewCharacterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisualViewCharacterViewController.m; sourceTree = "<group>"; };
 		768BF6F816FB6D8000435394 /* VisualViewCharacterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VisualViewCharacterViewController.xib; path = Xib/VisualViewCharacterViewController.xib; sourceTree = "<group>"; };
+		768D68CA16FDD95E00A628C6 /* ScrollViewSwitcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollViewSwitcher.h; sourceTree = "<group>"; };
+		768D68CB16FDD95E00A628C6 /* ScrollViewSwitcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollViewSwitcher.m; sourceTree = "<group>"; };
 		768F011516FA0350001523A0 /* ArrowToOpponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ArrowToOpponent.xib; path = Xib/ArrowToOpponent.xib; sourceTree = "<group>"; };
 		768F011716FA0380001523A0 /* st_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = st_arrow.png; sourceTree = "<group>"; };
 		768F011916FA055C001523A0 /* ArrowToOpponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrowToOpponent.h; sourceTree = "<group>"; };
@@ -2822,6 +2825,8 @@
 				7606709516F7324B00079F69 /* UILabel+FlyingPoint.m */,
 				76F71902165A6AD700719D8A /* UIView+Frame.h */,
 				76F71903165A6AD700719D8A /* UIView+Frame.m */,
+				768D68CA16FDD95E00A628C6 /* ScrollViewSwitcher.h */,
+				768D68CB16FDD95E00A628C6 /* ScrollViewSwitcher.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -3702,6 +3707,7 @@
 				768BF6F416FB6A3700435394 /* VisualViewDataSource.m in Sources */,
 				768BF6F716FB6B0300435394 /* VisualViewCharacterViewController.m in Sources */,
 				76934BE616FC990900433E1C /* VisualViewCharacter.m in Sources */,
+				768D68CC16FDD95E00A628C6 /* ScrollViewSwitcher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
