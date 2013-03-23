@@ -26,7 +26,7 @@ typedef enum {
     VisualViewCharacterCapList2
 } VisualViewCharacterCapList;
 
-#define VISUAL_VIEW_CHARACTER_CAP_ARRAY @[@"cap1.png",@"cap2.png"];
+#define VISUAL_VIEW_CHARACTER_CAP_ARRAY @[@"cap2.png",@"cap1.png",@"cap2.png"];
 
 typedef enum {
     VisualViewCharacterBodyList1
@@ -35,9 +35,9 @@ typedef enum {
 #define VISUAL_VIEW_CHARACTER_BODY_ARRAY @[@"body1.png"];
 
 @interface VisualViewDataSource : NSObject<MemoryManagement,UICollectionViewDataSource>
-@property (weak,nonatomic) NSArray *arrayHead;
-@property (weak,nonatomic) NSArray *arrayCap;
-@property (weak,nonatomic) NSArray *arrayBody;
+@property (strong,nonatomic) NSArray *arrayHead;
+@property (strong,nonatomic) NSArray *arrayCap;
+@property (strong,nonatomic) NSArray *arrayBody;
 @property (weak,nonatomic) NSArray *arrayMain;
 @property (nonatomic) VisualViewCharacterPart typeOfTable;
 

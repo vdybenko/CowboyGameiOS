@@ -17,6 +17,7 @@ typedef void (^ScrollViewSwitcherResult)(NSInteger curentIndex);
 @property (nonatomic) CGRect rectForObjetc;
 @property (nonatomic) NSInteger curentObject;
 
+-(void)setMainControls;
 -(void)switchObjectInDirection:(DirectionToAnimate)direction;
 -(void)setObjectsForIndex:(NSInteger)index;
 @end

@@ -37,6 +37,14 @@
     
     visualViewDataSource = [[VisualViewDataSource alloc] initWithCollectionView:collectionView];
     collectionView.dataSource = visualViewDataSource;
+    
+    scrollViewSwitcher.rectForObjetc = (CGRect){0,0,70,45};
+    scrollViewSwitcher.arraySwitchObjects = [visualViewDataSource arrayCap];
+    scrollViewSwitcher.curentObject = 0;
+    scrollViewSwitcher.didFinishBlock = ^(NSInteger curentIndex){
+        visualViewCharacter.cap.image = [UIImage imageNamed:[scrollViewSwitcher.arraySwitchObjects objectAtIndex:curentIndex]];
+    };
+    [scrollViewSwitcher setMainControls];
 //    title.text = NSLocalizedString(@"SHOP", @"");
 //    title.textColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
 //    title.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
