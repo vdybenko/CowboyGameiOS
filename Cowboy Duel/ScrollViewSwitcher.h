@@ -11,11 +11,12 @@
 
 typedef void (^ScrollViewSwitcherResult)(NSInteger curentIndex);
 
-@interface ScrollViewSwitcher : UIView
+@interface ScrollViewSwitcher : UIView<MemoryManagement>
 @property (copy) ScrollViewSwitcherResult didFinishBlock;
 @property (weak,nonatomic) NSArray *arraySwitchObjects;
 @property (nonatomic) CGRect rectForObjetc;
 @property (nonatomic) NSInteger curentObject;
 
 -(void)switchObjectInDirection:(DirectionToAnimate)direction;
+-(void)setObjectsForIndex:(NSInteger)index;
 @end
