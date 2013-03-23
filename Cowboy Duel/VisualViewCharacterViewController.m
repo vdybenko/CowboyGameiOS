@@ -12,8 +12,9 @@
 //    __weak IBOutlet UIView *activityView;
 //    __weak AccountDataSource *playerAccount;
     __weak IBOutlet VisualViewCharacter *visualViewCharacter;
-    __weak IBOutlet UICollectionView *collectionView;
-    __weak IBOutlet ScrollViewSwitcher *scrollViewSwitcher;
+    __weak IBOutlet ScrollViewSwitcher *scrollViewSwitcherCap;
+    __weak IBOutlet ScrollViewSwitcher *scrollViewSwitcherHead;
+    __weak IBOutlet ScrollViewSwitcher *scrollViewSwitcherBody;
 }
 @end
 
@@ -35,25 +36,31 @@
 {
     [super viewDidLoad];
     
-    visualViewDataSource = [[VisualViewDataSource alloc] initWithCollectionView:collectionView];
-    collectionView.dataSource = visualViewDataSource;
+    visualViewDataSource = [[VisualViewDataSource alloc] init];
     
-    scrollViewSwitcher.rectForObjetc = (CGRect){0,0,70,45};
-    scrollViewSwitcher.arraySwitchObjects = [visualViewDataSource arrayCap];
-    scrollViewSwitcher.curentObject = 0;
-    scrollViewSwitcher.didFinishBlock = ^(NSInteger curentIndex){
-        visualViewCharacter.cap.image = [UIImage imageNamed:[scrollViewSwitcher.arraySwitchObjects objectAtIndex:curentIndex]];
+    scrollViewSwitcherCap.rectForObjetc = (CGRect){0,0,70,45};
+    scrollViewSwitcherCap.arraySwitchObjects = [visualViewDataSource arrayCap];
+    scrollViewSwitcherCap.curentObject = 0;
+    scrollViewSwitcherCap.didFinishBlock = ^(NSInteger curentIndex){
+        visualViewCharacter.cap.image = [UIImage imageNamed:[scrollViewSwitcherCap.arraySwitchObjects objectAtIndex:curentIndex]];
     };
-    [scrollViewSwitcher setMainControls];
-//    title.text = NSLocalizedString(@"SHOP", @"");
-//    title.textColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
-//    title.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
+    [scrollViewSwitcherCap setMainControls];
     
-//    UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
+    scrollViewSwitcherHead.rectForObjetc = (CGRect){0,0,70,45};
+    scrollViewSwitcherHead.arraySwitchObjects = [visualViewDataSource arrayHead];
+    scrollViewSwitcherHead.curentObject = 0;
+    scrollViewSwitcherHead.didFinishBlock = ^(NSInteger curentIndex){
+        visualViewCharacter.head.image = [UIImage imageNamed:[scrollViewSwitcherHead.arraySwitchObjects objectAtIndex:curentIndex]];
+    };
+    [scrollViewSwitcherHead setMainControls];
     
-//    [btnBack setTitleByLabel:@"BACK"];
-//    [btnBack changeColorOfTitleByLabel:buttonsTitleColor];
-    
+    scrollViewSwitcherBody.rectForObjetc = (CGRect){0,0,183,312};
+    scrollViewSwitcherBody.arraySwitchObjects = [visualViewDataSource arrayBody];
+    scrollViewSwitcherBody.curentObject = 0;
+    scrollViewSwitcherBody.didFinishBlock = ^(NSInteger curentIndex){
+        visualViewCharacter.body.image = [UIImage imageNamed:[scrollViewSwitcherBody.arraySwitchObjects objectAtIndex:curentIndex]];
+    };
+    [scrollViewSwitcherBody setMainControls];
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,8 +75,10 @@
 //    btnBack = nil;
 //    activityView = nil;
 //    visualViewCharacter = nil;
-    collectionView = nil;
-    scrollViewSwitcher = nil;
+    [scrollViewSwitcherCap releaseComponents];
+    scrollViewSwitcherCap = nil;
+    scrollViewSwitcherHead = nil;
+    scrollViewSwitcherBody = nil;
     [super viewDidUnload];
 }
 -(void)refreshController;

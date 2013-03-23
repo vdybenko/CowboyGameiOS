@@ -12,8 +12,6 @@
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
-			<string>IBUICollectionView</string>
-			<string>IBUICollectionViewFlowLayout</string>
 			<string>IBUIView</string>
 		</array>
 		<array key="IBDocument.PluginDependencies">
@@ -36,38 +34,33 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUICollectionView" id="456849671">
+					<object class="IBUIView" id="318700495">
 						<reference key="NSNextResponder" ref="1048327278"/>
-						<int key="NSvFlags">1298</int>
-						<object class="NSPSMatrix" key="NSFrameMatrix"/>
-						<string key="NSFrame">{{0, 90}, {320, 45}}</string>
+						<int key="NSvFlags">274</int>
+						<string key="NSFrame">{{0, 55}, {320, 40}}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
-						<reference key="NSNextKeyView" ref="318700495"/>
+						<reference key="NSNextKeyView" ref="337284298"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="840484157">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
 						</object>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
-						<bool key="IBUIShowsVerticalScrollIndicator">NO</bool>
-						<float key="IBUIMinimumZoomScale">0.0</float>
-						<float key="IBUIMaximumZoomScale">0.0</float>
-						<object class="IBUICollectionViewFlowLayout" key="IBUICollectionViewLayout" id="31432144">
-							<reference key="IBUICollectionView" ref="456849671"/>
-							<string key="IBUIItemSize">{70, 50}</string>
-							<float key="IBUIMinimumLineSpacing">10</float>
-							<float key="IBUIMinimumInteritemSpacing">10</float>
-						</object>
-						<array key="IBUICells" id="0"/>
 					</object>
-					<object class="IBUIView" id="318700495">
+					<object class="IBUIView" id="337284298">
 						<reference key="NSNextResponder" ref="1048327278"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{0, 212}, {320, 45}}</string>
+						<string key="NSFrame">{{0, 95}, {320, 35}}</string>
+						<reference key="NSSuperview" ref="1048327278"/>
+						<reference key="NSNextKeyView" ref="718970681"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<reference key="IBUIBackgroundColor" ref="840484157"/>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+					</object>
+					<object class="IBUIView" id="718970681">
+						<reference key="NSNextResponder" ref="1048327278"/>
+						<int key="NSvFlags">274</int>
+						<string key="NSFrame">{{0, 130}, {320, 285}}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
 						<reference key="NSNextKeyView" ref="140821569"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -77,7 +70,7 @@
 					<object class="IBUIView" id="140821569">
 						<reference key="NSNextResponder" ref="1048327278"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{48, 38}, {224, 404}}</string>
+						<string key="NSFrame">{{69, 55}, {183, 360}}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
 						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -88,7 +81,7 @@
 				</array>
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSNextKeyView" ref="456849671"/>
+				<reference key="NSNextKeyView" ref="318700495"/>
 				<string key="NSReuseIdentifierKey">_NS:196</string>
 				<reference key="IBUIBackgroundColor" ref="840484157"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -106,22 +99,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">collectionView</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="456849671"/>
-					</object>
-					<int key="connectionID">96</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">scrollViewSwitcher</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="318700495"/>
-					</object>
-					<int key="connectionID">100</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">visualViewCharacter</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="140821569"/>
@@ -130,26 +107,34 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">delegate</string>
-						<reference key="source" ref="456849671"/>
-						<reference key="destination" ref="372490531"/>
+						<string key="label">scrollViewSwitcherCap</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="318700495"/>
 					</object>
-					<int key="connectionID">93</int>
+					<int key="connectionID">104</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">dataSource</string>
-						<reference key="source" ref="456849671"/>
-						<reference key="destination" ref="140821569"/>
+						<string key="label">scrollViewSwitcherHead</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="337284298"/>
 					</object>
-					<int key="connectionID">95</int>
+					<int key="connectionID">105</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">scrollViewSwitcherBody</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="718970681"/>
+					</object>
+					<int key="connectionID">106</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
 					<object class="IBObjectRecord">
 						<int key="objectID">0</int>
-						<reference key="object" ref="0"/>
+						<array key="object" id="0"/>
 						<reference key="children" ref="1000"/>
 						<nil key="parent"/>
 					</object>
@@ -168,35 +153,36 @@
 						<int key="objectID">11</int>
 						<reference key="object" ref="1048327278"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="456849671"/>
 							<reference ref="318700495"/>
 							<reference ref="140821569"/>
+							<reference ref="337284298"/>
+							<reference ref="718970681"/>
 						</array>
 						<reference key="parent" ref="0"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">91</int>
-						<reference key="object" ref="456849671"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="31432144"/>
-						</array>
-						<reference key="parent" ref="1048327278"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">98</int>
-						<reference key="object" ref="31432144"/>
-						<reference key="parent" ref="456849671"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">99</int>
 						<reference key="object" ref="318700495"/>
 						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="1048327278"/>
+						<string key="objectName">Scroll View Switcher Cap</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">89</int>
 						<reference key="object" ref="140821569"/>
 						<reference key="parent" ref="1048327278"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">102</int>
+						<reference key="object" ref="337284298"/>
+						<reference key="parent" ref="1048327278"/>
+						<string key="objectName">Scroll View Switcher Head</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">103</int>
+						<reference key="object" ref="718970681"/>
+						<reference key="parent" ref="1048327278"/>
+						<string key="objectName">Scroll View Switcher Body</string>
 					</object>
 				</array>
 			</object>
@@ -205,11 +191,13 @@
 				<string key="-1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="102.CustomClassName">ScrollViewSwitcher</string>
+				<string key="102.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="103.CustomClassName">ScrollViewSwitcher</string>
+				<string key="103.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="11.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="89.CustomClassName">VisualViewCharacter</string>
 				<string key="89.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="91.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="98.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="99.CustomClassName">ScrollViewSwitcher</string>
 				<string key="99.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
@@ -217,7 +205,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">100</int>
+			<int key="maxID">106</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>

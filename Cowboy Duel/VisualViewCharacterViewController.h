@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class VisualViewDataSource;
 
-@interface VisualViewCharacterViewController : UIViewController<MemoryManagement,UICollectionViewDelegate>
+@interface VisualViewCharacterViewController : UIViewController<MemoryManagement>
 
 @property (strong, nonatomic) VisualViewDataSource *visualViewDataSource;
 

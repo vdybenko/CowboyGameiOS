@@ -9,6 +9,8 @@
 #define time 0.6
 
 #import "ScrollViewSwitcher.h"
+#import <QuartzCore/QuartzCore.h>
+
 @interface ScrollViewSwitcher()
 {
     CGPoint startPoint;
@@ -35,7 +37,6 @@
         [self setUserInteractionEnabled:YES];
         
         curentObject = 0;
-        [self setAllElementsHide:YES];
     }
     return self;
 }
@@ -70,6 +71,7 @@
     centralImage.contentMode = UIViewContentModeScaleAspectFill;
     [self addSubview:centralImage];
     
+    [self setAllElementsHide:YES];
     [self setObjectsForIndex:curentObject];
 }
 
@@ -122,7 +124,6 @@
 -(void)switchToRight
 {
     if (curentObject) {
-        NSLog(@"right");
         [self setAllElementsHide:NO];
         [UIView animateWithDuration:time animations:^{
             CGRect frame = leftImage.frame;
@@ -147,7 +148,6 @@
 -(void)switchToLeft
 {
     if (curentObject<[arraySwitchObjects count]-1) {
-        NSLog(@"left");
         [self setAllElementsHide:NO];
         [UIView animateWithDuration:time animations:^{
             CGRect frame = rightImage.frame;
