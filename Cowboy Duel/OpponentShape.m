@@ -23,6 +23,7 @@
 @synthesize imgBody;
 @synthesize imgShot;
 @synthesize ivLifeBar;
+@synthesize lbLifeLeft;
 @synthesize opponentShapeStatus;
 @synthesize imgDieOpponentAnimation;
 
@@ -158,6 +159,8 @@ static CGFloat oponentLiveImageViewStartWidth;
     CGRect frame = ivLifeBar.frame;
     frame.size.width = (float)((maxShotCount - userHitCount)*oponentLiveImageViewStartWidth)/maxShotCount;
     ivLifeBar.frame = frame;
+    lbLifeLeft.textAlignment = UITextAlignmentLeft;
+    lbLifeLeft.text = [NSString stringWithFormat:@"%d%%",(int)frame.size.width];
 }
 
 -(void) refreshLiveBar;
@@ -165,6 +168,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     CGRect frame = ivLifeBar.frame;
     frame.size.width = oponentLiveImageViewStartWidth;
     ivLifeBar.frame = frame;
+    lbLifeLeft.text =[NSString stringWithFormat:@"100%%"];
 }
 
 -(void) setStatusBody:(OpponentShapeStatus)status;
