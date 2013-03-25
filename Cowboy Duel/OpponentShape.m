@@ -30,15 +30,8 @@ static CGFloat oponentLiveImageViewStartWidth;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
-    
-    self = [super initWithCoder:aDecoder];
+    self = [super initWithCoder:aDecoder subViewFromNibFileName:@"OpponentShape"];
     if(self){
-        @autoreleasepool {
-            NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"OpponentShape" owner:self options:nil];
-            UIView *nibView = [objects objectAtIndex:0];
-            [self addSubview:nibView];
-        }
-        
         UIImage *spriteSheetSmoke = [UIImage imageNamed:@"smokeSpriteSheet"];
         NSArray *arrayWithSpritesSmoke = [spriteSheetSmoke spritesWithSpriteSheetImage:spriteSheetSmoke
                                                                             spriteSize:CGSizeMake(64, 64)];
@@ -48,6 +41,15 @@ static CGFloat oponentLiveImageViewStartWidth;
         [imgShot setAnimationRepeatCount:1];
         [imgShot setAnimationDuration:animationDurationSmoke];
         
+        UIImage *spriteSheetDie = [UIImage imageNamed:@"opponentSpritSeet"];
+        NSArray *arrayWithSpritesDie = [spriteSheetDie spritesWithSpriteSheetImage:spriteSheetDie
+                                                                        spriteSize:CGSizeMake(89, 161)];
+        [imgDieOpponentAnimation setAnimationImages:arrayWithSpritesDie];
+        [imgDieOpponentAnimation setAnimationRepeatCount:1];
+        float animationDurationDie = [imgDieOpponentAnimation.animationImages count] * 0.100; 
+        [imgDieOpponentAnimation setAnimationDuration:animationDurationDie];
+        arrayWithSpritesDie = nil;
+        
         oponentLiveImageViewStartWidth = ivLifeBar.frame.size.width;
         
         NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/oponent_shot.aif", [[NSBundle mainBundle] resourcePath]]];
@@ -56,9 +58,9 @@ static CGFloat oponentLiveImageViewStartWidth;
         [oponentShotAudioPlayer prepareToPlay];
         
         opponentShapeStatus = OpponentShapeStatusLive;
-
     }
     return self;
+    
 }
 
 -(void)releaseComponents
@@ -67,9 +69,11 @@ static CGFloat oponentLiveImageViewStartWidth;
     imgBody = nil;
     imgShot = nil;
     ivLifeBar = nil;
+    [imgDieOpponentAnimation stopAnimating];
     imgDieOpponentAnimation = nil;
     [oponentShotAudioPlayer stop];
     oponentShotAudioPlayer = nil;
+    opponentShapeStatus = nil;
 }
 
 -(void) moveAnimation;
@@ -82,6 +86,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     imgBody.animationDuration = 0.6f;
     [imgBody setAnimationRepeatCount:0];
     [imgBody startAnimating];
+    imgArray = nil;
 }
 -(void)moveOponentInBackground
 {
@@ -172,14 +177,9 @@ static CGFloat oponentLiveImageViewStartWidth;
             [self stopMoveAnimation];
             //imgBody.image = [UIImage imageNamed:@"menLowDie.png"];
             imgBody.hidden = YES;
-            UIImage *spriteSheetDie = [UIImage imageNamed:@"opponentSpritSeet"];
-            NSArray *arrayWithSpritesDie = [spriteSheetDie spritesWithSpriteSheetImage:spriteSheetDie
-                                                                                spriteSize:CGSizeMake(89, 161)];
-            [imgDieOpponentAnimation setAnimationImages:arrayWithSpritesDie];
-            [imgDieOpponentAnimation setAnimationRepeatCount:1];
-            [imgDieOpponentAnimation setAnimationDuration:2];
+            
             [imgDieOpponentAnimation startAnimating];
-           
+            
         }
             break;
         case OpponentShapeStatusLive:

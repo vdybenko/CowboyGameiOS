@@ -26,8 +26,6 @@
 
 -(void)releaseComponents
 {
-    UIView *firstView = [self.subviews objectAtIndex:0];
-    firstView = nil;
     imageMain = nil;
 }
 

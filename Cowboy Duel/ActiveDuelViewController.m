@@ -12,7 +12,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "DuelRewardLogicController.h"
 #import "FinalViewController.h"
-//#import "ARView.h"
 #import "OponentCoordinateView.h"
 #import "StartViewController.h"
 #import "GunDrumViewController.h"
@@ -33,7 +32,6 @@
     AVAudioPlayer *shotAudioPlayer1;
     AVAudioPlayer *shotAudioPlayer2;
     AVAudioPlayer *shotAudioPlayer3;
-    AVAudioPlayer *hitAudioPlayer;
     AVAudioPlayer *brockenGlassAudioPlayer;
     int shotCountForSound;
     int shotCountBullet;
@@ -68,10 +66,9 @@
     
     int opponentTime;
     
-    __weak IBOutlet GoodCowboy *goodCowboyShape;
-    __weak IBOutlet WomanShape *womanShape;
-    __weak IBOutlet OpponentShape *opponentShape;
-    IconDownloader *iconDownloader;
+    GoodCowboy *goodCowboyShape;
+    WomanShape *womanShape;
+    OpponentShape *opponentShape;
     __weak IBOutlet UIImageView *blinkBottom;
     __weak IBOutlet UIImageView *blinkTop;
 }
@@ -80,7 +77,6 @@
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *fireImageView;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *bloodImageView;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *bloodCImageView;
-@property (unsafe_unretained, nonatomic) IBOutlet UIImageView *smokeImage;
 @property (weak, nonatomic) IBOutlet UIView *glassImageViewAllBackground;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *glassImageViewHeader;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *glassImageViewBottom;
@@ -121,18 +117,13 @@ static CGFloat blinkBottomOriginY;
         
         shotAudioPlayer3 = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
         [shotAudioPlayer3 prepareToPlay];
-
-        url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/cry.mp3", [[NSBundle mainBundle] resourcePath]]];
-
-        hitAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
-        [hitAudioPlayer prepareToPlay];
         
         NSError *error;
         url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/brocken_glass.aif", [[NSBundle mainBundle] resourcePath]]];
         brockenGlassAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
         [brockenGlassAudioPlayer prepareToPlay];
         
-        [StartViewController sharedInstance].playerStop;
+        //[StartViewController sharedInstance].playerStop;
     }
     return self;
 }
@@ -150,6 +141,8 @@ static CGFloat blinkBottomOriginY;
     float animationDurationBlood = [self.bloodImageView.animationImages count] * 0.100; // 100ms per frame
     [self.bloodImageView setAnimationRepeatCount:1];
     [self.bloodImageView setAnimationDuration:animationDurationBlood];
+    arrayWithSpritesBlood = nil;
+    spriteSheetBlood = nil;
     
     UIImage *spriteSheetBloodC = [UIImage imageNamed:@"blood_c"];
     NSArray *arrayWithSpritesBloodC = [spriteSheetBloodC spritesWithSpriteSheetImage:spriteSheetBloodC
@@ -158,6 +151,8 @@ static CGFloat blinkBottomOriginY;
     float animationDurationBloodC = [self.bloodCImageView.animationImages count] * 0.100; // 100ms per frame
     [self.bloodCImageView setAnimationRepeatCount:1];
     [self.bloodCImageView setAnimationDuration:animationDurationBloodC];
+    arrayWithSpritesBloodC = nil;
+    spriteSheetBloodC = nil;
     
     shotCountForSound = 1;
 
@@ -172,12 +167,12 @@ static CGFloat blinkBottomOriginY;
 //        syfics = @"@2x";
     }
     PLCubicPanorama *cubicPanorama = [PLCubicPanorama panorama];
-    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_f%@",syfics] ofType:@"jpg"]]] face:PLCubeFaceOrientationFront];
-    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_b%@",syfics] ofType:@"jpg"]]] face:PLCubeFaceOrientationBack];
-    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_l%@",syfics] ofType:@"jpg"]]] face:PLCubeFaceOrientationLeft];
-    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_r%@",syfics] ofType:@"jpg"]]] face:PLCubeFaceOrientationRight];
-    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_u%@",syfics] ofType:@"jpg"]]] face:PLCubeFaceOrientationUp];
-    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_d%@",syfics] ofType:@"jpg"]]] face:PLCubeFaceOrientationDown];
+    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_f%@",syfics] ofType:@"png"]]] face:PLCubeFaceOrientationFront];
+    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_b%@",syfics] ofType:@"png"]]] face:PLCubeFaceOrientationBack];
+    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_l%@",syfics] ofType:@"png"]]] face:PLCubeFaceOrientationLeft];
+    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_r%@",syfics] ofType:@"png"]]] face:PLCubeFaceOrientationRight];
+    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_u%@",syfics] ofType:@"png"]]] face:PLCubeFaceOrientationUp];
+    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_d%@",syfics] ofType:@"png"]]] face:PLCubeFaceOrientationDown];
     [plView setPanorama:cubicPanorama];
     
     [self hideHelpViewOnStartDuel];
@@ -193,7 +188,8 @@ static CGFloat blinkBottomOriginY;
     oponentCoords.longitude = 1;// (((float) rand()) / RAND_MAX) * 360 - 180;
 
 	oponentsViewCoordinates = [NSMutableArray arrayWithCapacity:1];
-    for (int i = 0; i < 5; i++) {
+    
+    for (int i = 0; i < 20; i++) {
         
         UIImageView *obstracleImage;
         CGRect obstracleImageFrame;
@@ -216,14 +212,13 @@ static CGFloat blinkBottomOriginY;
         obstracleImage.frame = obstracleImageFrame;
         obstracleImage.tag = 1;
         [self.floatView addSubview:obstracleImage];
+        obstracleImage = nil;
     }
     
     OponentCoordinateView *poi = [OponentCoordinateView oponentCoordinateWithView:self.floatView at:[[CLLocation alloc] initWithLatitude:oponentCoords.latitude longitude:oponentCoords.longitude]];
     [oponentsViewCoordinates addObject:poi];
     [plView setOponentCoordinates:oponentsViewCoordinates];
     
-    //    int index = [self.view.subviews indexOfObject:self.glassImageView];
-    //    [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 1) withSubviewAtIndex:index];
     int index = [self.view.subviews indexOfObject:self.crossImageView];
     [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 2) withSubviewAtIndex:index];
     
@@ -312,6 +307,10 @@ static CGFloat blinkBottomOriginY;
             opponentTime=99999;
         }
    [plView startSensorialRotation];
+    
+    [opponentShape setStatusBody:OpponentShapeStatusLive];
+    [opponentShape cleareDamage];
+    [opponentShape refreshLiveBar];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -335,9 +334,6 @@ static CGFloat blinkBottomOriginY;
 {
     [super viewDidDisappear:animated];
 
-    [opponentShape setStatusBody:OpponentShapeStatusLive];
-    [opponentShape cleareDamage];
-    [opponentShape refreshLiveBar];
     CGRect frame = self.userLiveImageView.frame;
     frame.size.width = userLiveImageViewStartWidth;
     self.userLiveImageView.frame = frame;
@@ -355,6 +351,7 @@ static CGFloat blinkBottomOriginY;
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    DLog(@"memory warning");
     //[self releaseComponents];
     // Dispose of any resources that can be recreated.
 }
@@ -401,7 +398,7 @@ static CGFloat blinkBottomOriginY;
                 
                 [shotAudioPlayer1 stop];
                 [shotAudioPlayer1 setCurrentTime:0.0];
-                [shotAudioPlayer1 performSelectorInBackground:@selector(play) withObject:nil];
+                [shotAudioPlayer1 play];
                 
                 shotCountForSound = 2;
                 
@@ -409,14 +406,14 @@ static CGFloat blinkBottomOriginY;
             case 2:
                 [shotAudioPlayer2 stop];
                 [shotAudioPlayer2 setCurrentTime:0.0];
-                [shotAudioPlayer2 performSelectorInBackground:@selector(play) withObject:nil];
+                [shotAudioPlayer2 play];
                 
                 shotCountForSound = 3;
                 break;
             case 3:
                 [shotAudioPlayer3 stop];
                 [shotAudioPlayer3 setCurrentTime:0.0];
-                [shotAudioPlayer3 performSelectorInBackground:@selector(play) withObject:nil];
+                [shotAudioPlayer3 play];
 
                 shotCountForSound = 1;
                 break;
@@ -600,7 +597,7 @@ static CGFloat blinkBottomOriginY;
         duelEnd = YES;
         [activityIndicatorView setText:@""];
         [activityIndicatorView showView];
-        [self horizontalFlip];
+        //[self horizontalFlip];
         DLog(@"Kill!!!");
         DLog(@"Shot Time = %d.%d", (shotTime) / 1000, (shotTime));
         GameCenterViewController *gameCenterViewController;
@@ -946,12 +943,12 @@ static CGFloat blinkBottomOriginY;
 
 -(void)releaseComponents
 {
+    [oponentsViewCoordinates removeAllObjects];
     [plView stopSensorialRotation];
     [self setFloatView:nil];
     [self setFireImageView:nil];
     [self setBloodImageView:nil];
     [self setBloodCImageView:nil];
-    [self setSmokeImage:nil];
     [self setGlassImageViewHeader:nil];
     [self setGlassImageViewBottom:nil];
     [self setGunButton:nil];
@@ -982,8 +979,6 @@ static CGFloat blinkBottomOriginY;
     shotAudioPlayer2 = nil;
     
     shotAudioPlayer3 = nil;
-    
-    hitAudioPlayer = nil;    
    
     brockenGlassAudioPlayer = nil;
     
@@ -997,7 +992,7 @@ static CGFloat blinkBottomOriginY;
     gunDrumViewController = nil;
     profileViewController = nil;
     activityIndicatorView = nil;
-    [oponentsViewCoordinates removeAllObjects];
+    
     oponentsViewCoordinates = nil;
     
     blinkBottom = nil;
@@ -1007,7 +1002,6 @@ static CGFloat blinkBottomOriginY;
     self.fireImageView = nil;
     self.bloodImageView = nil;
     self.bloodCImageView = nil;
-    self.smokeImage = nil;
     self.glassImageViewAllBackground = nil;
     self.glassImageViewHeader = nil;
     self.glassImageViewBottom = nil;
@@ -1018,8 +1012,6 @@ static CGFloat blinkBottomOriginY;
     self.lblBehold = nil;
     self.crossImageView = nil;
     self.userLiveImageView = nil;
-    self.view = nil;
-    [super viewDidUnload];
 }
 
 @end

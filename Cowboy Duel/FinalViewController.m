@@ -245,10 +245,6 @@
     transaction = nil;
     duel = nil;
     
-    NSArray *_pointForEachLevels = nil;
-    NSArray *_pontsForWin = nil;
-    NSArray *_pontsForLose = nil;
-    
     backButton = nil;
     
     
@@ -279,6 +275,7 @@
     lblGoldTitle = nil;
 
 }
+
 #pragma mark -
 #pragma mark IBActions
 
@@ -317,7 +314,7 @@
         }else{
             UINavigationController *nav = ((TestAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController;
             NSLog(@"%@", nav.viewControllers);
-            for (UIViewController *viewController in nav.viewControllers) {
+            for (__weak UIViewController *viewController in nav.viewControllers) {
                 if ([viewController isKindOfClass:[ActiveDuelViewController class]]) {
                     [((ActiveDuelViewController *)viewController) releaseComponents];
                 }
@@ -426,7 +423,6 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                         object:self
                                                       userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@%@",stGA,@"final"] forKey:@"event"]];
-//    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@%@",stGA,@"final"]];
 
     
     if (!teaching||(duelWithBotCheck)) {

@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Shape.h"
 
 typedef enum {
     OpponentShapeStatusLive,
     OpponentShapeStatusDead,
 } OpponentShapeStatus;
 
-@interface OpponentShape : UIView<MemoryManagement>
+@interface OpponentShape : Shape<MemoryManagement>
 @property (weak, nonatomic) IBOutlet UIImageView *imgBody;
 @property (weak, nonatomic) IBOutlet UIImageView *imgShot;
 @property (weak, nonatomic) IBOutlet UIView *ivLifeBar;

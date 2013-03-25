@@ -204,7 +204,7 @@ static const CGFloat timeSpinDump = 0.3f;
                             options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction
                          animations:^{
                              angle -= 1.25;
-                             CGAffineTransform transform = drumBullets.transform;
+                             CGAffineTransform transform;
                              CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
                              transform = CGAffineTransformScale(rotateTransform, 1.0, 1.0);
                              drumBullets.transform = transform;
@@ -271,7 +271,7 @@ static const CGFloat timeSpinDump = 0.3f;
         isCharging = NO;
         [self hideBullets];
         angle = 0;
-        CGAffineTransform transform = drumBullets.transform;
+        CGAffineTransform transform;
         CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
         transform = CGAffineTransformScale(rotateTransform, 1.0, 1.0);
         drumBullets.transform = transform;

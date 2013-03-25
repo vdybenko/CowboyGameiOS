@@ -213,7 +213,7 @@
                       options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction
                    animations:^{
                      angle += 5.0;
-                     CGAffineTransform transform = ivLightRays2.transform;
+                     CGAffineTransform transform;
                      CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
                      transform = CGAffineTransformScale(rotateTransform, 1.0, 1.0);
                      ivLightRays2.transform = transform;
@@ -229,7 +229,7 @@
                       options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction
                    animations:^{
                      angle += 5.0;
-                     CGAffineTransform transform = ivLightRays2.transform;
+                     CGAffineTransform transform;
                      CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
                      transform = CGAffineTransformScale(rotateTransform, 1.0, 1.0);
                      ivLightRays2.transform = transform;
