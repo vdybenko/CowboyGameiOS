@@ -100,17 +100,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
     animetedText2.text = NSLocalizedString(@"2ndIntro", @"");
     
     scroolView.contentSize = (CGSize){2*scroolView.frame.size.width,scroolView.frame.size.height};
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-  
+    
     stDonate = [NSMutableString string];
     [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusSimple];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"FirstRun_v2.2"];
@@ -125,6 +115,18 @@ static LoginAnimatedViewController *sharedHelper = nil;
         [self performSelector:@selector(scaleView:) withObject:loginFBbutton  afterDelay:18.2];
         [self performSelector:@selector(scaleView:) withObject:loginLable  afterDelay:18.2];
     }
+
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+  
 }
 
 -(void)viewDidDisappear:(BOOL)animated
