@@ -42,7 +42,7 @@ static CGFloat oponentLiveImageViewStartWidth;
         [imgShot setAnimationDuration:animationDurationSmoke];
         
         UIImage *spriteSheetDie = [UIImage imageNamed:@"opponentSpritSeet"];
-        NSArray *arrayWithSpritesDie = [spriteSheetDie spritesWithSpriteSheetImage:spriteSheetDie
+        NSArray *arrayWithSpritesDie = [spriteSheetDie spritesWithSpriteSheetImage:spriteSheetDie inRange:NSRangeFromString(@"{0,4}")
                                                                         spriteSize:CGSizeMake(89, 161)];
         [imgDieOpponentAnimation setAnimationImages:arrayWithSpritesDie];
         [imgDieOpponentAnimation setAnimationRepeatCount:1];
