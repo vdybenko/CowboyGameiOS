@@ -19,7 +19,9 @@
 #import "OpponentShape.h"
 #import "GoodCowboy.h"
 #import "ArrowToOpponent.h"
-
+#import "BarellsObject.h"
+#import "CactusObject.h"
+#import "AirBallon.h"
 #define targetHeight 260
 #define targetWeidth 100
 #define MOVE_DISTANCE 100
@@ -53,6 +55,20 @@
     BOOL foll;
     BOOL duelTimerEnd;
     BOOL duelEnd;
+
+    NSMutableArray *barellObjectArray;
+    NSMutableArray *cactusObjectArray;
+    
+    BarellsObject *barellObject;
+    BarellsObject *barellObjectNext;
+    CGRect barellPrevFrame;
+    CactusObject *cactusObject;
+    
+//depends on opponent stats:
+    int countOfBarrels;
+    int countOfCactuses;
+
+    AirBallon *airBallon;
     
     GunDrumViewController  *gunDrumViewController;
     ProfileViewController *profileViewController;
@@ -73,6 +89,8 @@
     __weak IBOutlet UIImageView *blinkBottom;
     __weak IBOutlet UIImageView *blinkTop;
     __weak IBOutlet ArrowToOpponent *arrowToOpponent;
+    
+    
 }
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *floatView;
@@ -134,8 +152,6 @@ static CGFloat blinkBottomOriginY;
 {
     [super viewDidLoad];
     
-    // Do any additional setup after loading the view from its nib.
-    
     UIImage *spriteSheetBlood = [UIImage imageNamed:@"blood_a"];
     NSArray *arrayWithSpritesBlood = [spriteSheetBlood spritesWithSpriteSheetImage:spriteSheetBlood
                                                               spriteSize:CGSizeMake(64, 64)];
@@ -162,6 +178,7 @@ static CGFloat blinkBottomOriginY;
     
     plView.camera.pitchRange = PLRangeMake (-180, 180);
     plView.camera.rollRange = PLRangeMake (-180, 180);
+    
     plView.camera.yawRange = PLRangeMake (-180, 180);
     
     NSString *syfics = @"";
@@ -188,34 +205,76 @@ static CGFloat blinkBottomOriginY;
 
     oponentCoords.latitude = 1;//(((float) rand()) / RAND_MAX) * 360 - 180;
     oponentCoords.longitude = 1;// (((float) rand()) / RAND_MAX) * 360 - 180;
-
 	oponentsViewCoordinates = [NSMutableArray arrayWithCapacity:1];
+
+    countOfBarrels = 5;
+    countOfCactuses = 5;
     
-    for (int i = 0; i < 20; i++) {
-        
-        UIImageView *obstracleImage;
-        CGRect obstracleImageFrame;
-        int randomNumber = arc4random() % 2;
-        switch (randomNumber) {
-            case 0:
-                obstracleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bochka.png"]];
-                obstracleImageFrame = obstracleImage.frame;
-                obstracleImageFrame.origin.y = 240;
-                break;
-            case 1:
-                obstracleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cactus.png"]];
-                obstracleImageFrame = obstracleImage.frame;
-                obstracleImageFrame.origin.y = 175;
-                break;
-            default:
-                break;
+    barellObjectArray = [[NSMutableArray alloc] initWithCapacity:countOfBarrels];
+    cactusObjectArray = [[NSMutableArray alloc] initWithCapacity:countOfCactuses];
+
+    CGRect barelFrame;
+    
+    barelFrame = barellObject.frame;
+    
+    for (int i = 0; i < countOfBarrels; i++){
+//check Ox
+        if (i>0){
+            if (i%2==0) {
+                barelFrame.origin.x = barellPrevFrame.origin.x + arc4random()% 120 + 80;
+            }
+        }else{
+            barelFrame.origin.x = opponentShape.frame.origin.x;
         }
-        obstracleImageFrame.origin.x = (((float) rand()) / RAND_MAX) * 800;
-        obstracleImage.frame = obstracleImageFrame;
-        obstracleImage.tag = 1;
-        [self.floatView addSubview:obstracleImage];
-        obstracleImage = nil;
+
+//check Oy
+        if (i%2!=0) {
+            barelFrame.origin.y = 180;
+        }
+        else
+            barelFrame.origin.y = 240;
+        
+        barellPrevFrame = barelFrame;        
+        barellObject = [[BarellsObject alloc] initWithFrame:barelFrame];
+        
+        [self.floatView addSubview:barellObject];
+        
+        barellObject.bonusImg.hidden = YES;
+        barellObject.barellImg.tag = 1;
+        barellObject.isTop = (i%2!=0);
+
+        [barellObjectArray addObject:barellObject];
+
     }
+    
+    for (int i=0; i<countOfCactuses; i++) {
+        CGRect cactusFrame;
+        cactusFrame = cactusObject.frame;
+        
+        if (i > 0) {
+            cactusObject = [cactusObjectArray objectAtIndex:i-1];
+            cactusFrame.origin.x = cactusObject.frame.origin.x + 80;
+            cactusFrame.origin.y = 175;
+            
+        }else{
+            cactusFrame.origin.x = 40 + opponentShape.frame.origin.x;
+            cactusFrame.origin.y = 175;
+            
+        }
+        cactusObject = [[CactusObject alloc] initWithFrame:cactusFrame];
+        
+        cactusObject.cactusImg.tag = 1;
+        
+        [self.floatView addSubview:cactusObject];
+        [cactusObjectArray addObject:cactusObject];
+    }
+
+    CGRect airBallonFrame;
+    airBallonFrame = airBallon.frame;
+    airBallonFrame.origin.x = 300;
+    airBallonFrame.origin.y = 0;
+    airBallon = [[AirBallon alloc] initWithFrame:airBallonFrame];
+    [self.floatView addSubview:airBallon];
     
     OponentCoordinateView *poi = [OponentCoordinateView oponentCoordinateWithView:self.floatView at:[[CLLocation alloc] initWithLatitude:oponentCoords.latitude longitude:oponentCoords.longitude]];
     [oponentsViewCoordinates addObject:poi];
@@ -245,6 +304,7 @@ static CGFloat blinkBottomOriginY;
     
     blinkTopOriginY = blinkTop.frame.origin.y;
     blinkBottomOriginY = blinkBottom.frame.origin.y;
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -278,7 +338,7 @@ static CGFloat blinkBottomOriginY;
     [self updateOpponentViewToRamdomPosition];
     [womanShape randomPositionWithView:opponentShape];
     [goodCowboyShape randomPositionWithView:womanShape];
-    
+      
 	[plView startAnimation];
     
     [activityIndicatorView hideView];
@@ -298,7 +358,7 @@ static CGFloat blinkBottomOriginY;
     self.lblBehold.gradientEndColor = [UIColor colorWithRed:255.0/255.0 green:140.0/255.0 blue:0.0/255.0 alpha:1.0];
   
     steadyScale = 1.0;
-    
+
     opponentShape.hidden = YES;
     womanShape.hidden = YES;
     goodCowboyShape.hidden = YES;
@@ -375,7 +435,7 @@ static CGFloat blinkBottomOriginY;
         countBulletsForOpponent = [DuelRewardLogicController countUpBuletsWithOponentLevel:playerAccount.accountLevel defense:playerAccount.accountDefenseValue playerAtack:opAccount.accountWeapon.dDamage];
         
     }else{
-        countBulletsForOpponent = 4;
+        countBulletsForOpponent = 4000;
    }
     shotCountBulletForOpponent =  countBulletsForOpponent;
     maxShotCountForOpponent = countBulletsForOpponent;
@@ -399,7 +459,7 @@ static CGFloat blinkBottomOriginY;
             case 1:
                 [self.titleSteadyFire setHidden:YES];
                 [self.lblBehold setHidden:YES];
-                //self.gunButton.hidden = NO;
+              
                 
                 [shotAudioPlayer1 stop];
                 [shotAudioPlayer1 setCurrentTime:0.0];
@@ -465,6 +525,8 @@ static CGFloat blinkBottomOriginY;
 
 -(void)cheackHitForShot:(CGPoint)shotPoint andTargetPoint:(CGPoint)targetPoint
 {
+
+    //Obstracles
     for (UIImageView *obstracle in self.floatView.subviews) {
         if(obstracle.tag != 1) continue;
         CGRect obstracleFrame = obstracle.frame;
@@ -476,12 +538,47 @@ static CGFloat blinkBottomOriginY;
         
     }
     
+    BOOL shotOnObstracle = NO;
+
+    for (CactusObject *cactus in cactusObjectArray) {
+
+        CGRect cactusFrame = [cactus convertRect:cactus.cactusImg.frame toView:self.view];
+        
+        if (CGRectContainsPoint(cactusFrame, shotPoint) && !cactus.cactusImg.hidden && !shotOnObstracle) {
+            [cactus explosionAnimation];
+            shotOnObstracle = YES;
+        }
+    }
+
+    for (BarellsObject *barell in barellObjectArray) {;
+        int i = [barellObjectArray indexOfObject:barell];
+        if (i < countOfBarrels-1) {
+            barellObjectNext = [barellObjectArray objectAtIndex:i+1];
+        }else
+            barellObjectNext = nil;
+        
+        CGRect barelFrame = [barell convertRect:barell.barellImg.frame toView:self.view];
+        
+
+        if (CGRectContainsPoint(barelFrame, shotPoint) && !barell.barellImg.hidden && !shotOnObstracle) {
+            [barell explosionAnimation];
+            shotOnObstracle = YES;
+            
+            if (barellObjectNext && barellObjectNext.isTop && !barellObjectNext.barellImg.hidden) {
+                [barellObjectNext dropBarel];
+            }
+        }        
+    }
+    
     BOOL resultWoman = [womanShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
     BOOL resultGoodCowboy = [goodCowboyShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
-    if (resultWoman || resultGoodCowboy) {
+    if (resultWoman || resultGoodCowboy || shotOnObstracle) {
         [self opponentShot];
         if(delegate) [delegate sendShotSelf];
         return;
+    }
+    if (shotOnObstracle == YES) {
+        return; 
     }
     
     if (([self abs:(shotPoint.x - targetPoint.x)] < targetWeidth / 2) && ([self abs:(shotPoint.y - targetPoint.y)] < targetHeight / 2)) {
@@ -754,6 +851,7 @@ static CGFloat blinkBottomOriginY;
         opponentShape.hidden = NO;
         womanShape.hidden = NO;
         goodCowboyShape.hidden = NO;
+        
         
         if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
         moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
