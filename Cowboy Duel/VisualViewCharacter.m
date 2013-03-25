@@ -13,6 +13,7 @@
 @synthesize body;
 @synthesize head;
 @synthesize cap;
+@synthesize visualViewDataSource;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -35,10 +36,22 @@
     body = nil;
     head = nil;
     cap = nil;
+    [visualViewDataSource releaseComponents];
+    visualViewDataSource = nil;
 }
 
--(void)refreshWithAccountPlayer:(AccountDataSource*)accauntPlayer;
+-(void)refreshWithAccountPlayer:(AccountDataSource*)accountPlayer;
 {
+    CDVisualViewCharacterPartCap *visualViewCharacterPartCap = [[visualViewDataSource arrayCap] objectAtIndex:accountPlayer.visualViewCap];
+    cap.image = [visualViewCharacterPartCap imageForObject];
+    visualViewCharacterPartCap = nil;
     
+    CDVisualViewCharacterPartHead *visualViewCharacterPartHead = [[visualViewDataSource arrayHead] objectAtIndex:accountPlayer.visualViewHead];
+    head.image = [visualViewCharacterPartHead imageForObject];
+    visualViewCharacterPartHead = nil;
+    
+    CDVisualViewCharacterPartBody *visualViewCharacterPartBody = [[visualViewDataSource arrayBody] objectAtIndex:accountPlayer.visualViewBody];
+    body.image = [visualViewCharacterPartBody imageForObject];
+    visualViewCharacterPartBody = nil;
 }
 @end

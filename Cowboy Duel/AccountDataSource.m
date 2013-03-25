@@ -26,7 +26,9 @@ static const char *LIST_BOTS_URL = BASE_URL"users/get_user_data";
 @synthesize accountWeapon;
 @synthesize accountStore;
 @synthesize loginAnimatedViewController;
+@synthesize visualViewCap;
 @synthesize visualViewHead;
+@synthesize visualViewBody;
 
 #pragma mark
 
@@ -78,6 +80,9 @@ static AccountDataSource *sharedHelper = nil;
         achivments = [[NSMutableArray alloc] init];
         dicForRequests=[[NSMutableDictionary alloc] init];
         
+        self.visualViewCap = 0;
+        self.visualViewHead = 0;
+        self.visualViewBody = 0;
     }
     return self;
 }
@@ -534,12 +539,16 @@ static AccountDataSource *sharedHelper = nil;
 
 - (void)saveVisualView;
 {
-    [[NSUserDefaults standardUserDefaults] setObject:self.visualViewHead forKey:@"VV_HEAD_VALUE"];
+    [[NSUserDefaults standardUserDefaults] setInteger:visualViewCap forKey:@"VV_CAP_VALUE"];
+    [[NSUserDefaults standardUserDefaults] setInteger:visualViewHead forKey:@"VV_HEAD_VALUE"];
+    [[NSUserDefaults standardUserDefaults] setInteger:visualViewBody forKey:@"VV_BODY_VALUE"];
 }
 
 - (void)loadVisualView;
 {
-    self.visualViewHead = [[NSUserDefaults standardUserDefaults] objectForKey:@"VV_HEAD_VALUE"];
+    self.visualViewCap = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_CAP_VALUE"];
+    self.visualViewHead = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_HEAD_VALUE"];
+    self.visualViewBody = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_BODY_VALUE"];
 }
 
 #pragma mark

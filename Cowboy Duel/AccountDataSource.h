@@ -53,7 +53,9 @@
 @property (nonatomic, strong) id<FBGraphUser> facebookUser;
 
 //Visual view character
-@property(weak, nonatomic) NSString *visualViewHead;
+@property(nonatomic) int visualViewCap;
+@property(nonatomic) int visualViewHead;
+@property(nonatomic) int visualViewBody;
 
 + (AccountDataSource *)sharedInstance;
 - (id)initWithLocalPlayer;
@@ -93,6 +95,7 @@
 - (void)saveTransaction;
 - (void)saveGlNumber;
 - (int)increaseGlNumber;
+
 - (void)saveVisualView;
 - (void)loadVisualView;
 

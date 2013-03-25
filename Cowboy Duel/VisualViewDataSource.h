@@ -19,7 +19,7 @@ typedef enum {
     VisualViewCharacterPartBody
 } VisualViewCharacterPart;
 
-#define VISUAL_VIEW_CHARACTER_HEAD_ARRAY @[@[@"head1.png",@1],@[@"head1.png",@2],@[@"head1.png",@3]];
+#define VISUAL_VIEW_CHARACTER_HEAD_ARRAY @[@[@"head1.png",@1],@[@"head2.png",@2],@[@"head3.png",@3],@[@"head4.png",@3]];
 
 #define VISUAL_VIEW_CHARACTER_CAP_ARRAY @[@[@"cap2.png",@1],@[@"cap1.png",@2],@[@"cap2.png",@3]];
 

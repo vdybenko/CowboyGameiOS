@@ -15,6 +15,7 @@
     __weak IBOutlet ScrollViewSwitcher *scrollViewSwitcherCap;
     __weak IBOutlet ScrollViewSwitcher *scrollViewSwitcherHead;
     __weak IBOutlet ScrollViewSwitcher *scrollViewSwitcherBody;
+    __weak IBOutlet UIButton *btnBack;
 }
 @end
 
@@ -36,11 +37,19 @@
 {
     [super viewDidLoad];
     
+    UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
+    
+    [btnBack setTitleByLabel:@"BACK"];
+    [btnBack changeColorOfTitleByLabel:buttonsTitleColor];
+    
     visualViewDataSource = [[VisualViewDataSource alloc] init];
+    
+    visualViewCharacter.visualViewDataSource = visualViewDataSource;
+    [visualViewCharacter refreshWithAccountPlayer:[AccountDataSource sharedInstance]];
     
     scrollViewSwitcherCap.rectForObjetc = (CGRect){0,0,70,45};
     scrollViewSwitcherCap.arraySwitchObjects = [visualViewDataSource arrayCap];
-    scrollViewSwitcherCap.curentObject = 0;
+    scrollViewSwitcherCap.curentObject = [AccountDataSource sharedInstance].visualViewCap;
     scrollViewSwitcherCap.didFinishBlock = ^(NSInteger curentIndex){
         CDVisualViewCharacterPartCap *visualViewCharacterPart = [scrollViewSwitcherCap.arraySwitchObjects objectAtIndex:curentIndex];
         visualViewCharacter.cap.image = [visualViewCharacterPart imageForObject];
@@ -77,14 +86,18 @@
 }
 
 - (void)viewDidUnload {
-//    title = nil;
-//    btnBack = nil;
-//    activityView = nil;
-//    visualViewCharacter = nil;
+
     [scrollViewSwitcherCap releaseComponents];
     scrollViewSwitcherCap = nil;
+    [scrollViewSwitcherHead releaseComponents];
     scrollViewSwitcherHead = nil;
+    [scrollViewSwitcherBody releaseComponents];
     scrollViewSwitcherBody = nil;
+    [visualViewCharacter releaseComponents];
+    visualViewCharacter = nil;
+    [visualViewDataSource releaseComponents];
+    visualViewDataSource = nil;
+    btnBack = nil;
     [super viewDidUnload];
 }
 -(void)refreshController;
@@ -95,15 +108,26 @@
 {
     [visualViewDataSource releaseComponents];
     visualViewDataSource = nil;
-//    title = nil;
-//    btnBack = nil;
-//    activityView = nil;
-//    playerAccount = nil;
+    [scrollViewSwitcherCap releaseComponents];
+    scrollViewSwitcherCap = nil;
+    [scrollViewSwitcherHead releaseComponents];
+    scrollViewSwitcherHead = nil;
+    [scrollViewSwitcherBody releaseComponents];
+    scrollViewSwitcherBody = nil;
+    [visualViewCharacter releaseComponents];
     visualViewCharacter = nil;
+    btnBack = nil;
 }
 
 #pragma mark IBAction
 
 - (IBAction)btnBackClick:(id)sender {
+    [UIView animateWithDuration:0.75
+                     animations:^{
+                         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                         [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
+                     }];
+    [self.navigationController popViewControllerAnimated:NO];
+    [self releaseComponents];
 }
 @end

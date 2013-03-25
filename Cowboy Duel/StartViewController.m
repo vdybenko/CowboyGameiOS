@@ -219,6 +219,7 @@ static StartViewController *sharedHelper = nil;
             [playerAccount saveDefense];
             [playerAccount saveTransaction];
             [playerAccount saveGlNumber];
+            [playerAccount saveVisualView];
             [uDef synchronize];
         }else{
             
