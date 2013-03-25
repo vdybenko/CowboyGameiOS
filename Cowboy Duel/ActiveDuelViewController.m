@@ -541,7 +541,7 @@ static CGFloat blinkBottomOriginY;
 
     for (CactusObject *cactus in cactusObjectArray) {
 
-        CGRect cactusFrame = [[cactus.cactusImg superview] convertRect:cactus.cactusImg.frame toView:self.view];
+        CGRect cactusFrame = [cactus convertRect:cactus.cactusImg.frame toView:self.view];
         
         if (CGRectContainsPoint(cactusFrame, shotPoint) && !cactus.cactusImg.hidden && !shotOnObstracle) {
             [cactus explosionAnimation];
@@ -556,7 +556,8 @@ static CGFloat blinkBottomOriginY;
         }else
             barellObjectNext = nil;
         
-        CGRect barelFrame = [[barell.barellImg superview] convertRect:barell.barellImg.frame toView:self.view];
+        CGRect barelFrame = [barell convertRect:barell.barellImg.frame toView:self.view];
+        
 
         if (CGRectContainsPoint(barelFrame, shotPoint) && !barell.barellImg.hidden && !shotOnObstracle) {
             [barell explosionAnimation];
