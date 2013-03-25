@@ -62,6 +62,7 @@
     
     BarellsObject *barellObject;
     BarellsObject *barellObjectNext;
+    BarellsObject *barellObjectPrev;
     CactusObject *cactusObject;
 //depends on opponent stats:
     int countOfBarrels;
@@ -216,9 +217,8 @@ static CGFloat blinkBottomOriginY;
     for (int i = 0; i < countOfBarrels; i++){
 //check Ox
         if (i>0){
-            BarellsObject *barrelPrev = [barellObjectArray objectAtIndex:i-1];
-            if (barrelPrev.isTop) {
-                barelFrame.origin.x = barrelPrev.frame.origin.x + arc4random()% 120 + 80;
+            if (barellObjectPrev.isTop) {
+                barelFrame.origin.x = barellObjectPrev.frame.origin.x + arc4random()% 120 + 80;
             }
         }else{
             barelFrame.origin.x = opponentShape.frame.origin.x;
@@ -240,6 +240,7 @@ static CGFloat blinkBottomOriginY;
         barellObject.isTop = (i%2!=0);
 
         [barellObjectArray addObject:barellObject];
+        barellObjectPrev = barellObject;
 
     }
     
@@ -248,7 +249,7 @@ static CGFloat blinkBottomOriginY;
         cactusFrame = cactusObject.frame;
         
         if (i > 0) {
-            CactusObject *cactusObject = [cactusObjectArray objectAtIndex:i-1];
+            cactusObject = [cactusObjectArray objectAtIndex:i-1];
             cactusFrame.origin.x = cactusObject.frame.origin.x + 80;
             cactusFrame.origin.y = 175;
             
@@ -535,12 +536,13 @@ static CGFloat blinkBottomOriginY;
     }
     
     BOOL shotOnObstracle = NO;
-    for (int i =0; i<countOfCactuses; i++) {
-        cactusObject = [cactusObjectArray objectAtIndex:i];
-        CGRect cactusFrame = [[cactusObject.cactusImg superview] convertRect:cactusObject.cactusImg.frame toView:self.view];
+
+    for (CactusObject *cactus in cactusObjectArray) {
+
+        CGRect cactusFrame = [[cactus.cactusImg superview] convertRect:cactus.cactusImg.frame toView:self.view];
         
-        if (CGRectContainsPoint(cactusFrame, shotPoint) && !cactusObject.cactusImg.hidden && !shotOnObstracle) {
-            [cactusObject explosionAnimation];
+        if (CGRectContainsPoint(cactusFrame, shotPoint) && !cactus.cactusImg.hidden && !shotOnObstracle) {
+            [cactus explosionAnimation];
             shotOnObstracle = YES;
         }
     }
