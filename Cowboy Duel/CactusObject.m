@@ -20,13 +20,9 @@
     
     self = [super initWithFrame:frame];
     if(self){
-        @autoreleasepool {
             NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"Cactus" owner:self options:nil];
             UIView *nibView = [objects objectAtIndex:0];
             [self addSubview:nibView];
-            
-            }
-        
         
     }
     return self;

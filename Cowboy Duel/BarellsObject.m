@@ -22,6 +22,7 @@
 @synthesize bonusImg;
 @synthesize barellView;
 @synthesize barelAnimImg;
+@synthesize isTop;
 
 
 - (id)initWithFrame:(CGRect)frame
@@ -29,7 +30,6 @@
     
     self = [super initWithFrame:frame];
     if(self){
-        @autoreleasepool {
             NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"Barrles" owner:self options:nil];
             UIView *nibView = [objects objectAtIndex:0];
             [self addSubview:nibView];
@@ -40,9 +40,6 @@
             NSError *error;
             explosinPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFile error:&error];
             [explosinPlayer prepareToPlay];
-
-        }
-        
                
     }
     return self;
@@ -52,18 +49,19 @@
 {
   
     //[explosinPlayer play];
-    CGRect Frame = barellImg.frame;
-    barelAnimImg.frame = Frame;
+    CGRect frame = barellImg.frame;
+    barelAnimImg.frame = frame;
     barellImg.hidden = YES;
     UIImage *spriteSheetExp = [UIImage imageNamed:@"barelExp"];
     NSArray *arrayWithSpritesExp = [spriteSheetExp spritesWithSpriteSheetImage:spriteSheetExp
                                                                     spriteSize:CGSizeMake(75, 75)];
     [barelAnimImg setAnimationImages:arrayWithSpritesExp];
     [barelAnimImg setAnimationRepeatCount:1];
-    [barelAnimImg setAnimationDuration:2];
+    [barelAnimImg setAnimationDuration:1];
     [barelAnimImg startAnimating];
    
-    [self performSelector:@selector(hideObj) withObject:nil afterDelay:1.9f];
+    [self performSelector:@selector(hideObj) withObject:nil afterDelay:0.7f];
+    
 }
 -(void)hideObj{
     //[explosinPlayer stop];
@@ -80,33 +78,33 @@
     bonusImg.hidden = NO;
     [UIView animateWithDuration:1.5 animations:^{
         bonusImg.alpha = 0;
-        CGRect Frame = bonusImg.frame;
-        Frame.origin.y -=100;
-        bonusImg.frame = Frame;
+        CGRect frame = bonusImg.frame;
+        frame.origin.y -=100;
+        bonusImg.frame = frame;
     }completion:^(BOOL complete){
         bonusImg.hidden = YES;
     }];
-   // [self releaseComponents];
     return YES;
     //}
 }
+
 -(void)dropBarel;{
     [UIView animateWithDuration:0.2 animations:^{
-        CGRect Frame = barellImg.frame;
-        Frame.origin.y +=60;
-        barellImg.frame = Frame;
+        CGRect frame = barellImg.frame;
+        frame.origin.y +=60;
+        barellImg.frame = frame;
     }completion:^(BOOL complete){
         [UIView animateWithDuration:0.1f animations:^{
-            CGRect Frame = barellImg.frame;
-            Frame.origin.y -=10;
-            barellImg.frame = Frame;
+            CGRect frame = barellImg.frame;
+            frame.origin.y -=10;
+            barellImg.frame = frame;
         }completion:^(BOOL complete){
             [UIView animateWithDuration:0.1f animations:^{
-                CGRect Frame = barellImg.frame;
-                Frame.origin.y +=10;
-                barellImg.frame = Frame;
+                CGRect frame = barellImg.frame;
+                frame.origin.y +=10;
+                barellImg.frame = frame;
             }completion:^(BOOL complete){
-
+                isTop = NO;
             }];
 
         }];
@@ -116,8 +114,9 @@
 -(void)releaseComponents
 {
     barellView = nil;
-  //  barellImg = nil;
-   //  bonusImg = nil;
+    barellImg = nil;
+    bonusImg = nil;
+    barelAnimImg = nil;
 }
 
 @end

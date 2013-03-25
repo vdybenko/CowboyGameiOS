@@ -56,10 +56,17 @@
     BOOL foll;
     BOOL duelTimerEnd;
     BOOL duelEnd;
+
+    NSMutableArray *barellObjectArray;
+    NSMutableArray *cactusObjectArray;
     
-    BarellsObject *barellObject[5];
-    BarellsObject *barellObjectTop[5];
-    CactusObject *cactusObject[5];
+    BarellsObject *barellObject;
+    BarellsObject *barellObjectNext;
+    CactusObject *cactusObject;
+//depends on opponent stats:
+    int countOfBarrels;
+    int countOfCactuses;
+
     AirBallon *airBallon;
     
     GunDrumViewController  *gunDrumViewController;
@@ -75,7 +82,6 @@
     
     int opponentTime;
     
-   
     __weak IBOutlet GoodCowboy *goodCowboyShape;
     __weak IBOutlet WomanShape *womanShape;
     __weak IBOutlet OpponentShape *opponentShape;
@@ -196,89 +202,76 @@ static CGFloat blinkBottomOriginY;
     oponentCoords.latitude = 1;//(((float) rand()) / RAND_MAX) * 360 - 180;
     oponentCoords.longitude = 1;// (((float) rand()) / RAND_MAX) * 360 - 180;
 	oponentsViewCoordinates = [NSMutableArray arrayWithCapacity:1];
+    
+    countOfBarrels = 5;
+    countOfCactuses = 5;
+    
+    barellObjectArray = [[NSMutableArray alloc] initWithCapacity:countOfBarrels];
+    cactusObjectArray = [[NSMutableArray alloc] initWithCapacity:countOfCactuses];
 
-    for (int i = 0; i < 5; i++){
-     
-        CGRect barelFrame;
-        CGRect barelFrameTop;
-        barelFrame = barellObject[i].frame;
-        barelFrameTop = barellObjectTop[i].frame;
-        if (i > 0) {
-            
-            barelFrame.origin.x = barellObject[i-1].frame.origin.x + 80;
-            barelFrame.origin.y = 240;
-            
+    CGRect barelFrame;
+    
+    barelFrame = barellObject.frame;
+    
+    for (int i = 0; i < countOfBarrels; i++){
+//check Ox
+        if (i>0){
+            BarellsObject *barrelPrev = [barellObjectArray objectAtIndex:i-1];
+            if (barrelPrev.isTop) {
+                barelFrame.origin.x = barrelPrev.frame.origin.x + arc4random()% 120 + 80;
+            }
         }else{
             barelFrame.origin.x = opponentShape.frame.origin.x;
+        }
+
+//check Oy
+        if (i%2!=0) {
+            barelFrame.origin.y = 180;
+        }
+        else
             barelFrame.origin.y = 240;
         
-        }
-        barelFrameTop = barelFrame;
-        barelFrameTop.origin.y = barelFrame.origin.y - 60;
-        barellObject[i] = [[BarellsObject alloc] initWithFrame:barelFrame];
-        barellObjectTop[i] = [[BarellsObject alloc] initWithFrame:barelFrameTop];
+        barellObject = [[BarellsObject alloc] initWithFrame:barelFrame];
         
-        [self.floatView addSubview:barellObject[i]];
-        [self.floatView addSubview:barellObjectTop[i]];
-        barellObject[i].bonusImg.hidden = YES;
-        barellObject[i].barellImg.tag = 1;
-        barellObjectTop[i].bonusImg.hidden = YES;
-        barellObjectTop[i].barellImg.tag = 1;
+        [self.floatView addSubview:barellObject];
+        
+        barellObject.bonusImg.hidden = YES;
+        barellObject.barellImg.tag = 1;
+        barellObject.isTop = (i%2!=0);
+
+        [barellObjectArray addObject:barellObject];
+
     }
-    for (int i = 0; i < 5; i++){
-        
+    
+    for (int i=0; i<countOfCactuses; i++) {
         CGRect cactusFrame;
-        cactusFrame = cactusObject[i].frame;
+        cactusFrame = cactusObject.frame;
+        
         if (i > 0) {
-            
-            cactusFrame.origin.x = cactusObject[i-1].frame.origin.x + 80;
+            CactusObject *cactusObject = [cactusObjectArray objectAtIndex:i-1];
+            cactusFrame.origin.x = cactusObject.frame.origin.x + 80;
             cactusFrame.origin.y = 175;
             
         }else{
-            cactusFrame.origin.x = 40 + opponentShape.frame.origin.x;;
+            cactusFrame.origin.x = 40 + opponentShape.frame.origin.x;
             cactusFrame.origin.y = 175;
             
         }
-        cactusObject[i] = [[CactusObject alloc] initWithFrame:cactusFrame];
-        [self.floatView addSubview:cactusObject[i]];
-        cactusObject[i].cactusImg.tag = 1;
+        cactusObject = [[CactusObject alloc] initWithFrame:cactusFrame];
+        
+        cactusObject.cactusImg.tag = 1;
+        
+        [self.floatView addSubview:cactusObject];
+        [cactusObjectArray addObject:cactusObject];
     }
+
     CGRect airBallonFrame;
     airBallonFrame = airBallon.frame;
     airBallonFrame.origin.x = 300;
     airBallonFrame.origin.y = 0;
     airBallon = [[AirBallon alloc] initWithFrame:airBallonFrame];
     [self.floatView addSubview:airBallon];
-  //  [airBallon airBallonMove];
-    /*
-    for (int i = 0; i < 5; i++) {
-        
-        UIImageView *obstracleImage;
-        CGRect obstracleImageFrame;
-        int randomNumber = arc4random() % 2;
-        switch (randomNumber) {
-            case 0:
-                //obstracleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bochka.png"]];
-                //obstracleImageFrame = obstracleImage.frame;
-                //obstracleImageFrame.origin.y = 240;
-                
-                break;
-            case 1:
-                obstracleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cactus.png"]];
-                obstracleImageFrame = obstracleImage.frame;
-                obstracleImageFrame.origin.y = 175;
-                break;
-            default:
-                break;
-        }
-        obstracleImageFrame.origin.x = (((float) rand()) / RAND_MAX) * 800;
-        obstracleImage.frame = obstracleImageFrame;
-        obstracleImage.tag = 1;
-      
-        
-        [self.floatView addSubview:obstracleImage];
-       
-    }*/
+    
     OponentCoordinateView *poi = [OponentCoordinateView oponentCoordinateWithView:self.floatView at:[[CLLocation alloc] initWithLatitude:oponentCoords.latitude longitude:oponentCoords.longitude]];
     [oponentsViewCoordinates addObject:poi];
     [plView setOponentCoordinates:oponentsViewCoordinates];
@@ -528,42 +521,8 @@ static CGFloat blinkBottomOriginY;
 
 -(void)cheackHitForShot:(CGPoint)shotPoint andTargetPoint:(CGPoint)targetPoint
 {
+
     //Obstracles
-    BOOL shotOnObstracle = NO;
-   for (int i = 0; i < 5; i++) {
-       CGRect barelFrame = [[barellObject[i].barellImg superview] convertRect:barellObject[i].barellImg.frame toView:self.view];
-       CGRect barelFrameTop = [[barellObjectTop[i].barellImg superview] convertRect:barellObjectTop[i].barellImg.frame toView:self.view];
-       CGRect cactusFrame = [[cactusObject[i].cactusImg superview] convertRect:cactusObject[i].cactusImg.frame toView:self.view];
-       
-       if (CGRectContainsPoint(barelFrameTop, shotPoint) && !barellObjectTop[i].barellImg.hidden) {
-           [barellObjectTop[i] explosionAnimation];
-           BOOL bonus = [barellObjectTop[i] showBonus];
-           if (bonus) {
-               NSLog(@"YRA BONUS!!!");
-           }
-           shotOnObstracle = YES;
-           
-       }
-        if (CGRectContainsPoint(barelFrame, shotPoint) && !barellObject[i].barellImg.hidden) {
-           [barellObject[i] explosionAnimation];
-            if (!barellObjectTop[i].barellImg.hidden) {
-                [barellObjectTop[i] dropBarel];
-            }
-            BOOL bonus = [barellObject[i] showBonus];
-            if (bonus) {
-                NSLog(@"YRA BONUS!!!");
-            }
-            shotOnObstracle = YES;
-            
-        }
-       if (CGRectContainsPoint(cactusFrame, shotPoint) && !cactusObject[i].cactusImg.hidden) {
-           [cactusObject[i] explosionAnimation];
-           shotOnObstracle = YES;
-       }
-        
-    }
-    //Obstracles
-    
     for (UIImageView *obstracle in self.floatView.subviews) {
         if(obstracle.tag != 1) continue;
         CGRect obstracleFrame = obstracle.frame;
@@ -573,6 +532,36 @@ static CGFloat blinkBottomOriginY;
             return;
         }
         
+    }
+    
+    BOOL shotOnObstracle = NO;
+    for (int i =0; i<countOfCactuses; i++) {
+        cactusObject = [cactusObjectArray objectAtIndex:i];
+        CGRect cactusFrame = [[cactusObject.cactusImg superview] convertRect:cactusObject.cactusImg.frame toView:self.view];
+        
+        if (CGRectContainsPoint(cactusFrame, shotPoint) && !cactusObject.cactusImg.hidden && !shotOnObstracle) {
+            [cactusObject explosionAnimation];
+            shotOnObstracle = YES;
+        }
+    }
+
+    for (int i = 0; i < countOfBarrels; i++) {
+        barellObject = [barellObjectArray objectAtIndex:i];
+        if (i < countOfBarrels-1) {
+            barellObjectNext = [barellObjectArray objectAtIndex:i+1];
+        }else
+            barellObjectNext = nil;
+        
+        CGRect barelFrame = [[barellObject.barellImg superview] convertRect:barellObject.barellImg.frame toView:self.view];
+
+        if (CGRectContainsPoint(barelFrame, shotPoint) && !barellObject.barellImg.hidden && !shotOnObstracle) {
+            [barellObject explosionAnimation];
+            shotOnObstracle = YES;
+            
+            if (barellObjectNext && barellObjectNext.isTop && !barellObjectNext.barellImg.hidden) {
+                [barellObjectNext dropBarel];
+            }
+        }        
     }
     
     BOOL resultWoman = [womanShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
