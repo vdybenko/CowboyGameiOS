@@ -287,6 +287,10 @@
 		7687E8C3163920FE003C9EE6 /* StoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7687E8C2163920FE003C9EE6 /* StoreViewController.m */; };
 		7687E8C516392534003C9EE6 /* StoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7687E8C416392534003C9EE6 /* StoreViewController.xib */; };
 		7687E8C816392E1C003C9EE6 /* StoreDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7687E8C716392E1C003C9EE6 /* StoreDataSource.m */; };
+		7688DC2E1700A59F00D14E5C /* CDVisualViewCharacterPart.m in Sources */ = {isa = PBXBuildFile; fileRef = 7688DC2D1700A59F00D14E5C /* CDVisualViewCharacterPart.m */; };
+		7688DC311700A5B700D14E5C /* CDVisualViewCharacterPartCap.m in Sources */ = {isa = PBXBuildFile; fileRef = 7688DC301700A5B700D14E5C /* CDVisualViewCharacterPartCap.m */; };
+		7688DC341700A5C700D14E5C /* CDVisualViewCharacterPartHead.m in Sources */ = {isa = PBXBuildFile; fileRef = 7688DC331700A5C700D14E5C /* CDVisualViewCharacterPartHead.m */; };
+		7688DC371700A5D700D14E5C /* CDVisualViewCharacterPartBody.m in Sources */ = {isa = PBXBuildFile; fileRef = 7688DC361700A5D700D14E5C /* CDVisualViewCharacterPartBody.m */; };
 		76897D3F16C3DE18001E06DB /* topPlayerStarSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 76897D3D16C3DE18001E06DB /* topPlayerStarSelected.png */; };
 		76897D4016C3DE18001E06DB /* topPlayerStarSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76897D3E16C3DE18001E06DB /* topPlayerStarSelected@2x.png */; };
 		76899C1216F5F67D0092713B /* opponentSpritSeet.png in Resources */ = {isa = PBXBuildFile; fileRef = 76899C1116F5F67D0092713B /* opponentSpritSeet.png */; };
@@ -1174,6 +1178,14 @@
 		7687E8C416392534003C9EE6 /* StoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StoreViewController.xib; path = Xib/StoreViewController.xib; sourceTree = "<group>"; };
 		7687E8C616392E1C003C9EE6 /* StoreDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoreDataSource.h; path = PlayersOnLineDataSource/StoreDataSource.h; sourceTree = "<group>"; };
 		7687E8C716392E1C003C9EE6 /* StoreDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoreDataSource.m; path = PlayersOnLineDataSource/StoreDataSource.m; sourceTree = "<group>"; };
+		7688DC2C1700A59F00D14E5C /* CDVisualViewCharacterPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDVisualViewCharacterPart.h; sourceTree = "<group>"; };
+		7688DC2D1700A59F00D14E5C /* CDVisualViewCharacterPart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVisualViewCharacterPart.m; sourceTree = "<group>"; };
+		7688DC2F1700A5B700D14E5C /* CDVisualViewCharacterPartCap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDVisualViewCharacterPartCap.h; sourceTree = "<group>"; };
+		7688DC301700A5B700D14E5C /* CDVisualViewCharacterPartCap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVisualViewCharacterPartCap.m; sourceTree = "<group>"; };
+		7688DC321700A5C700D14E5C /* CDVisualViewCharacterPartHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDVisualViewCharacterPartHead.h; sourceTree = "<group>"; };
+		7688DC331700A5C700D14E5C /* CDVisualViewCharacterPartHead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVisualViewCharacterPartHead.m; sourceTree = "<group>"; };
+		7688DC351700A5D700D14E5C /* CDVisualViewCharacterPartBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDVisualViewCharacterPartBody.h; sourceTree = "<group>"; };
+		7688DC361700A5D700D14E5C /* CDVisualViewCharacterPartBody.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVisualViewCharacterPartBody.m; sourceTree = "<group>"; };
 		76897D3D16C3DE18001E06DB /* topPlayerStarSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topPlayerStarSelected.png; sourceTree = "<group>"; };
 		76897D3E16C3DE18001E06DB /* topPlayerStarSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "topPlayerStarSelected@2x.png"; sourceTree = "<group>"; };
 		76899C1116F5F67D0092713B /* opponentSpritSeet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = opponentSpritSeet.png; sourceTree = "<group>"; };
@@ -2330,6 +2342,14 @@
 			children = (
 				768BF6F216FB6A3700435394 /* VisualViewDataSource.h */,
 				768BF6F316FB6A3700435394 /* VisualViewDataSource.m */,
+				7688DC2C1700A59F00D14E5C /* CDVisualViewCharacterPart.h */,
+				7688DC2D1700A59F00D14E5C /* CDVisualViewCharacterPart.m */,
+				7688DC2F1700A5B700D14E5C /* CDVisualViewCharacterPartCap.h */,
+				7688DC301700A5B700D14E5C /* CDVisualViewCharacterPartCap.m */,
+				7688DC321700A5C700D14E5C /* CDVisualViewCharacterPartHead.h */,
+				7688DC331700A5C700D14E5C /* CDVisualViewCharacterPartHead.m */,
+				7688DC351700A5D700D14E5C /* CDVisualViewCharacterPartBody.h */,
+				7688DC361700A5D700D14E5C /* CDVisualViewCharacterPartBody.m */,
 			);
 			name = VisualViewCharacter;
 			sourceTree = "<group>";
@@ -3708,6 +3728,10 @@
 				768BF6F716FB6B0300435394 /* VisualViewCharacterViewController.m in Sources */,
 				76934BE616FC990900433E1C /* VisualViewCharacter.m in Sources */,
 				768D68CC16FDD95E00A628C6 /* ScrollViewSwitcher.m in Sources */,
+				7688DC2E1700A59F00D14E5C /* CDVisualViewCharacterPart.m in Sources */,
+				7688DC311700A5B700D14E5C /* CDVisualViewCharacterPartCap.m in Sources */,
+				7688DC341700A5C700D14E5C /* CDVisualViewCharacterPartHead.m in Sources */,
+				7688DC371700A5D700D14E5C /* CDVisualViewCharacterPartBody.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3900,8 +3924,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3946,8 +3970,8 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Bounty Hunter";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "A5532982-3D27-4791-A4D1-7E43C7C67DF6";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A5532982-3D27-4791-A4D1-7E43C7C67DF6";
 				REZ_SEARCH_PATHS = "$(inherited)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3996,7 +4020,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = NO;
@@ -4040,7 +4064,7 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Bounty Hunter";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "A5532982-3D27-4791-A4D1-7E43C7C67DF6";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4287,9 +4311,9 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4333,9 +4357,9 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Bounty Hunter";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=*]" = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "A5532982-3D27-4791-A4D1-7E43C7C67DF6";
+				"PROVISIONING_PROFILE[sdk=*]" = "A5532982-3D27-4791-A4D1-7E43C7C67DF6";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A5532982-3D27-4791-A4D1-7E43C7C67DF6";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",

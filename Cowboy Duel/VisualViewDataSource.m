@@ -7,6 +7,7 @@
 //
 
 #import "VisualViewDataSource.h"
+
 @interface VisualViewDataSource()
 {
 }
@@ -16,7 +17,6 @@
 @synthesize arrayHead;
 @synthesize arrayCap;
 @synthesize arrayBody;
-@synthesize arrayMain;
 @synthesize typeOfTable;
 
 -(id) init
@@ -24,10 +24,30 @@
     self = [super init];
 	
 	if (self) {
-        arrayHead = VISUAL_VIEW_CHARACTER_HEAD_ARRAY;
-        arrayCap = VISUAL_VIEW_CHARACTER_CAP_ARRAY;
-        arrayBody = VISUAL_VIEW_CHARACTER_BODY_ARRAY;
-        arrayMain = arrayCap;
+        arrayHead = [NSMutableArray array];
+        arrayCap = [NSMutableArray array];
+        arrayBody = [NSMutableArray array];
+        
+        NSArray *arrayMainCap = VISUAL_VIEW_CHARACTER_CAP_ARRAY;
+        for (NSArray *array in arrayMainCap) {
+            CDVisualViewCharacterPartCap *cap=[[CDVisualViewCharacterPartCap alloc] initWithArray:array];
+            [arrayCap addObject:cap];
+        }
+        arrayMainCap = nil;
+    
+        NSArray *arrayMainHead = VISUAL_VIEW_CHARACTER_HEAD_ARRAY;
+        for (NSArray *array in arrayMainHead) {
+            CDVisualViewCharacterPartHead *head=[[CDVisualViewCharacterPartHead alloc] initWithArray:array];
+            [arrayHead addObject:head];
+        }
+        arrayMainHead = nil;
+        
+        NSArray *arrayMainBody = VISUAL_VIEW_CHARACTER_BODY_ARRAY;
+        for (NSArray *array in arrayMainBody) {
+            CDVisualViewCharacterPartBody *cap=[[CDVisualViewCharacterPartBody alloc] initWithArray:array];
+            [arrayBody addObject:cap];
+        }
+        arrayMainBody = nil;
     }
     
 	return self;

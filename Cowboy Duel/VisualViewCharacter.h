@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AccountDataSource.h"
 
 @interface VisualViewCharacter : UIView<MemoryManagement>
 @property (weak, nonatomic) IBOutlet UIView *mainSubView;
@@ -14,4 +15,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *head;
 @property (weak, nonatomic) IBOutlet UIImageView *cap;
 
+-(void)refreshWithAccountPlayer:(AccountDataSource*)accauntPlayer;
 @end

@@ -37,4 +37,8 @@
     cap = nil;
 }
 
+-(void)refreshWithAccountPlayer:(AccountDataSource*)accauntPlayer;
+{
+    
+}
 @end

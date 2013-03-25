@@ -10,6 +10,7 @@
 
 #import "ScrollViewSwitcher.h"
 #import <QuartzCore/QuartzCore.h>
+#import "CDVisualViewCharacterPart.h"
 
 @interface ScrollViewSwitcher()
 {
@@ -111,12 +112,15 @@
 -(void)setObjectsForIndex:(NSInteger)index;
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        centralImage.image = [UIImage imageNamed:[arraySwitchObjects objectAtIndex:index]];
+        CDVisualViewCharacterPart *visualViewCharacterPart = [arraySwitchObjects objectAtIndex:index];
+        centralImage.image = [visualViewCharacterPart imageForObject];
         if (index) {
-            leftImage.image = [UIImage imageNamed:[arraySwitchObjects objectAtIndex:index-1]];
+            CDVisualViewCharacterPart *visualViewCharacterPartLeft = [arraySwitchObjects objectAtIndex:index-1];
+            leftImage.image = [visualViewCharacterPartLeft imageForObject];
         }
         if (index<[arraySwitchObjects count]-1) {
-            rightImage.image = [UIImage imageNamed:[arraySwitchObjects objectAtIndex:index+1]];
+            CDVisualViewCharacterPart *visualViewCharacterPartRight = [arraySwitchObjects objectAtIndex:index+1];
+            rightImage.image = [visualViewCharacterPartRight imageForObject];
         }
     });
 }
@@ -194,5 +198,9 @@
 -(void)switchObjectInDirection:(DirectionToAnimate)direction;
 {}
 
-
+-(void)trimObjectsToView:(UIView*)view;
+{
+    CGPoint trimRect = [[view superview] convertPoint:view.frame.origin toView:self];
+    rectForObjetc.origin.y = trimRect.y;
+}
 @end

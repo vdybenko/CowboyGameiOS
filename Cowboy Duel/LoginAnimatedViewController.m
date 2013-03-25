@@ -16,7 +16,6 @@
 #import "Facebook.h"
 #import "ActiveDuelViewController.h"
 #import "UIView+Dinamic_BackGround.h"
-#import "VisualViewCharacterViewController.h"
 
 #define kFacebookAppId @"284932561559672"
 NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/first/";
@@ -150,9 +149,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
 #pragma mark -
 #pragma mark IBActions
 - (IBAction)practiceButtonClick:(id)sender {
-    VisualViewCharacterViewController *visualViewCharacterViewController = [[VisualViewCharacterViewController alloc] init];
-    [self.navigationController pushViewController:visualViewCharacterViewController animated:NO];
-    return;
     //stop animations
     animationPause = YES;
 

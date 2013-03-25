@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "VisualViewCharacterViewController.h"
+#import "CDVisualViewCharacterPart.h"
+#import "CDVisualViewCharacterPartCap.h"
+#import "CDVisualViewCharacterPartHead.h"
+#import "CDVisualViewCharacterPartBody.h"
 
 typedef enum {
     VisualViewCharacterPartHead,
@@ -15,30 +19,16 @@ typedef enum {
     VisualViewCharacterPartBody
 } VisualViewCharacterPart;
 
-typedef enum {
-    VisualViewCharacterHeadList1
-} VisualViewCharacterHeadList;
+#define VISUAL_VIEW_CHARACTER_HEAD_ARRAY @[@[@"head1.png",@1],@[@"head1.png",@2],@[@"head1.png",@3]];
 
-#define VISUAL_VIEW_CHARACTER_HEAD_ARRAY @[@"head1.png",@"head1.png",@"head1.png"];
+#define VISUAL_VIEW_CHARACTER_CAP_ARRAY @[@[@"cap2.png",@1],@[@"cap1.png",@2],@[@"cap2.png",@3]];
 
-typedef enum {
-    VisualViewCharacterCapList1,
-    VisualViewCharacterCapList2
-} VisualViewCharacterCapList;
-
-#define VISUAL_VIEW_CHARACTER_CAP_ARRAY @[@"cap2.png",@"cap1.png",@"cap2.png"];
-
-typedef enum {
-    VisualViewCharacterBodyList1
-} VisualViewCharacterBodyList;
-
-#define VISUAL_VIEW_CHARACTER_BODY_ARRAY @[@"body1.png",@"body1.png",@"body1.png"];
+#define VISUAL_VIEW_CHARACTER_BODY_ARRAY @[@[@"body1.png",@1],@[@"body1.png",@2],@[@"body1.png",@3]];
 
 @interface VisualViewDataSource : NSObject<MemoryManagement>
-@property (strong,nonatomic) NSArray *arrayHead;
-@property (strong,nonatomic) NSArray *arrayCap;
-@property (strong,nonatomic) NSArray *arrayBody;
-@property (weak,nonatomic) NSArray *arrayMain;
+@property (strong,nonatomic) NSMutableArray *arrayHead;
+@property (strong,nonatomic) NSMutableArray *arrayCap;
+@property (strong,nonatomic) NSMutableArray *arrayBody;
 @property (nonatomic) VisualViewCharacterPart typeOfTable;
 
 -(CGRect) getRectForPart:(VisualViewCharacterPart)part withIndex:(NSInteger)index;

@@ -42,24 +42,30 @@
     scrollViewSwitcherCap.arraySwitchObjects = [visualViewDataSource arrayCap];
     scrollViewSwitcherCap.curentObject = 0;
     scrollViewSwitcherCap.didFinishBlock = ^(NSInteger curentIndex){
-        visualViewCharacter.cap.image = [UIImage imageNamed:[scrollViewSwitcherCap.arraySwitchObjects objectAtIndex:curentIndex]];
+        CDVisualViewCharacterPartCap *visualViewCharacterPart = [scrollViewSwitcherCap.arraySwitchObjects objectAtIndex:curentIndex];
+        visualViewCharacter.cap.image = [visualViewCharacterPart imageForObject];
     };
+    [scrollViewSwitcherCap trimObjectsToView:visualViewCharacter.cap];
     [scrollViewSwitcherCap setMainControls];
     
     scrollViewSwitcherHead.rectForObjetc = (CGRect){0,0,70,45};
     scrollViewSwitcherHead.arraySwitchObjects = [visualViewDataSource arrayHead];
     scrollViewSwitcherHead.curentObject = 0;
     scrollViewSwitcherHead.didFinishBlock = ^(NSInteger curentIndex){
-        visualViewCharacter.head.image = [UIImage imageNamed:[scrollViewSwitcherHead.arraySwitchObjects objectAtIndex:curentIndex]];
+        CDVisualViewCharacterPartHead *visualViewCharacterPart = [scrollViewSwitcherHead.arraySwitchObjects objectAtIndex:curentIndex];
+        visualViewCharacter.head.image = [visualViewCharacterPart imageForObject];
     };
+    [scrollViewSwitcherHead trimObjectsToView:visualViewCharacter.head];
     [scrollViewSwitcherHead setMainControls];
-    
+
     scrollViewSwitcherBody.rectForObjetc = (CGRect){0,0,183,312};
     scrollViewSwitcherBody.arraySwitchObjects = [visualViewDataSource arrayBody];
     scrollViewSwitcherBody.curentObject = 0;
     scrollViewSwitcherBody.didFinishBlock = ^(NSInteger curentIndex){
-        visualViewCharacter.body.image = [UIImage imageNamed:[scrollViewSwitcherBody.arraySwitchObjects objectAtIndex:curentIndex]];
+        CDVisualViewCharacterPartBody *visualViewCharacterPart = [scrollViewSwitcherBody.arraySwitchObjects objectAtIndex:curentIndex];
+        visualViewCharacter.body.image = [visualViewCharacterPart imageForObject];
     };
+    [scrollViewSwitcherBody trimObjectsToView:visualViewCharacter.body];
     [scrollViewSwitcherBody setMainControls];
 }
 
