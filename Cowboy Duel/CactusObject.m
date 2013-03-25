@@ -30,7 +30,9 @@
 
 -(void)explosionAnimation;
 {
-    
+    if ([cactusImg isAnimating]) {
+        return;
+    }
     UIImage *spriteSheetExp = [UIImage imageNamed:@"cactusSpreetSeet3"];
     NSArray *arrayWithSpritesExp = [spriteSheetExp spritesWithSpriteSheetImage:spriteSheetExp
                                                                     spriteSize:CGSizeMake(90, 140)];

@@ -49,6 +49,9 @@
 {
   
     //[explosinPlayer play];
+    if ([barelAnimImg isAnimating]) {
+        return;
+    }
     CGRect frame = barellImg.frame;
     barelAnimImg.frame = frame;
     barellImg.hidden = YES;
