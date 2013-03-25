@@ -62,8 +62,9 @@
     
     BarellsObject *barellObject;
     BarellsObject *barellObjectNext;
-    BarellsObject *barellObjectPrev;
+    CGRect barellPrevFrame;
     CactusObject *cactusObject;
+    
 //depends on opponent stats:
     int countOfBarrels;
     int countOfCactuses;
@@ -217,8 +218,8 @@ static CGFloat blinkBottomOriginY;
     for (int i = 0; i < countOfBarrels; i++){
 //check Ox
         if (i>0){
-            if (barellObjectPrev.isTop) {
-                barelFrame.origin.x = barellObjectPrev.frame.origin.x + arc4random()% 120 + 80;
+            if (i%2==0) {
+                barelFrame.origin.x = barellPrevFrame.origin.x + arc4random()% 120 + 80;
             }
         }else{
             barelFrame.origin.x = opponentShape.frame.origin.x;
@@ -231,6 +232,7 @@ static CGFloat blinkBottomOriginY;
         else
             barelFrame.origin.y = 240;
         
+        barellPrevFrame = barelFrame;        
         barellObject = [[BarellsObject alloc] initWithFrame:barelFrame];
         
         [self.floatView addSubview:barellObject];
@@ -240,7 +242,7 @@ static CGFloat blinkBottomOriginY;
         barellObject.isTop = (i%2!=0);
 
         [barellObjectArray addObject:barellObject];
-        barellObjectPrev = barellObject;
+
 
     }
     
@@ -547,17 +549,17 @@ static CGFloat blinkBottomOriginY;
         }
     }
 
-    for (int i = 0; i < countOfBarrels; i++) {
-        barellObject = [barellObjectArray objectAtIndex:i];
+    for (BarellsObject *barell in barellObjectArray) {;
+        int i = [barellObjectArray indexOfObject:barell];
         if (i < countOfBarrels-1) {
             barellObjectNext = [barellObjectArray objectAtIndex:i+1];
         }else
             barellObjectNext = nil;
         
-        CGRect barelFrame = [[barellObject.barellImg superview] convertRect:barellObject.barellImg.frame toView:self.view];
+        CGRect barelFrame = [[barell.barellImg superview] convertRect:barell.barellImg.frame toView:self.view];
 
-        if (CGRectContainsPoint(barelFrame, shotPoint) && !barellObject.barellImg.hidden && !shotOnObstracle) {
-            [barellObject explosionAnimation];
+        if (CGRectContainsPoint(barelFrame, shotPoint) && !barell.barellImg.hidden && !shotOnObstracle) {
+            [barell explosionAnimation];
             shotOnObstracle = YES;
             
             if (barellObjectNext && barellObjectNext.isTop && !barellObjectNext.barellImg.hidden) {
