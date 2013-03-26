@@ -7,6 +7,7 @@
 //
 
 #define time 0.6
+#define kScrollViewSwitcherNotification @"ScrollViewSwitcherNotification"
 
 #import "ScrollViewSwitcher.h"
 #import <QuartzCore/QuartzCore.h>
@@ -22,6 +23,8 @@
     CGPoint ptLeftPosition;
     CGPoint ptCenterPosition;
     CGPoint ptRightPosition;
+    
+    UIImage *newColorizeImage;
 }
 @end
 @implementation ScrollViewSwitcher
@@ -29,6 +32,7 @@
 @synthesize arraySwitchObjects;
 @synthesize rectForObjetc;
 @synthesize curentObject;
+@synthesize colorizeImage;
 
 #pragma mark
 
@@ -38,6 +42,11 @@
         [self setUserInteractionEnabled:YES];
         
         curentObject = 0;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(endTouchViewNotification:)
+                                                     name:kScrollViewSwitcherNotification
+                                                   object:nil];
     }
     return self;
 }
@@ -49,6 +58,12 @@
     leftImage = nil;
     rightImage = nil;
     centralImage = nil;
+    newColorizeImage = nil;
+    colorizeImage = nil;
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:kScrollViewSwitcherNotification
+                                                  object:nil];
 }
 
 -(void)setMainControls;
@@ -74,15 +89,19 @@
     
     [self setAllElementsHide:YES];
     [self setObjectsForIndex:curentObject];
+    
+    newColorizeImage = [self colorizeImage:colorizeImage.image color:[UIColor yellowColor]];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     startPoint = [[touches anyObject] locationInView:self];
+    [self touchView];
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    [self endTouchView];
     CGPoint endPoint = [[touches anyObject] locationInView:self];
     
     if (abs(endPoint.x - startPoint.x) < 10){
@@ -103,8 +122,13 @@
     
     if (abs(endPoint.y - startPoint.y) < 5){
 //        Touch
+        
     }
-
+    
+    NSString *st = [NSString stringWithFormat:@"%f",self.frame.origin.y];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kScrollViewSwitcherNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:st forKey:@"objectOriginY"]];
 }
 
 #pragma mark
@@ -114,6 +138,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         CDVisualViewCharacterPart *visualViewCharacterPart = [arraySwitchObjects objectAtIndex:index];
         centralImage.image = [visualViewCharacterPart imageForObject];
+        newColorizeImage = [self colorizeImage:centralImage.image color:[UIColor yellowColor]];
         if (index) {
             CDVisualViewCharacterPart *visualViewCharacterPartLeft = [arraySwitchObjects objectAtIndex:index-1];
             leftImage.image = [visualViewCharacterPartLeft imageForObject];
@@ -203,4 +228,52 @@
     CGPoint trimRect = [[view superview] convertPoint:view.frame.origin toView:self];
     rectForObjetc.origin.y = trimRect.y;
 }
+
+-(void)touchView
+{
+    NSArray *imgArray = [NSArray arrayWithObjects:colorizeImage.image,
+                         newColorizeImage,
+                         nil];
+    colorizeImage.animationImages = imgArray;
+    colorizeImage.animationDuration = 0.6f;
+    [colorizeImage setAnimationRepeatCount:0];
+    [colorizeImage startAnimating];
+}
+
+-(void)endTouchView
+{
+    [colorizeImage stopAnimating];
+}
+
+-(void)endTouchViewNotification:(NSNotification *)notification
+{
+    NSString *objectOriginY = [[notification userInfo] objectForKey:@"objectOriginY"];
+    NSString *curentObjectOriginY = [NSString stringWithFormat:@"%f",self.frame.origin.y];
+    if (![curentObjectOriginY isEqualToString:objectOriginY]) {
+        [colorizeImage stopAnimating];
+    }
+}
+
+
+#pragma mark colorizeImage
+-(UIImage *)colorizeImage:(UIImage *)baseImage color:(UIColor *)theColor {
+    UIGraphicsBeginImageContext(baseImage.size);
+    
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    CGRect area = CGRectMake(0, 0, baseImage.size.width, baseImage.size.height);
+    
+    CGContextScaleCTM(ctx, 1, -1);
+    CGContextTranslateCTM(ctx, 0, -area.size.height);
+    CGContextSaveGState(ctx);
+    CGContextClipToMask(ctx, area, baseImage.CGImage);
+    [theColor set];
+    CGContextFillRect(ctx, area);
+    CGContextRestoreGState(ctx);
+    CGContextSetBlendMode(ctx, kCGBlendModeMultiply);
+    CGContextDrawImage(ctx, area, baseImage.CGImage);
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+#pragma mark
 @end

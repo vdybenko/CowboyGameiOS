@@ -54,6 +54,7 @@
         CDVisualViewCharacterPartCap *visualViewCharacterPart = [scrollViewSwitcherCap.arraySwitchObjects objectAtIndex:curentIndex];
         visualViewCharacter.cap.image = [visualViewCharacterPart imageForObject];
     };
+    scrollViewSwitcherCap.colorizeImage = visualViewCharacter.cap;
     [scrollViewSwitcherCap trimObjectsToView:visualViewCharacter.cap];
     [scrollViewSwitcherCap setMainControls];
     
@@ -64,6 +65,7 @@
         CDVisualViewCharacterPartHead *visualViewCharacterPart = [scrollViewSwitcherHead.arraySwitchObjects objectAtIndex:curentIndex];
         visualViewCharacter.head.image = [visualViewCharacterPart imageForObject];
     };
+    scrollViewSwitcherHead.colorizeImage = visualViewCharacter.head;
     [scrollViewSwitcherHead trimObjectsToView:visualViewCharacter.head];
     [scrollViewSwitcherHead setMainControls];
 
@@ -74,6 +76,7 @@
         CDVisualViewCharacterPartBody *visualViewCharacterPart = [scrollViewSwitcherBody.arraySwitchObjects objectAtIndex:curentIndex];
         visualViewCharacter.body.image = [visualViewCharacterPart imageForObject];
     };
+    scrollViewSwitcherBody.colorizeImage = visualViewCharacter.body;
     [scrollViewSwitcherBody trimObjectsToView:visualViewCharacter.body];
     [scrollViewSwitcherBody setMainControls];
 }

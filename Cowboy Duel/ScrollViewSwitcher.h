@@ -16,6 +16,7 @@ typedef void (^ScrollViewSwitcherResult)(NSInteger curentIndex);
 @property (weak,nonatomic) NSArray *arraySwitchObjects;
 @property (nonatomic) CGRect rectForObjetc;
 @property (nonatomic) NSInteger curentObject;
+@property (weak,nonatomic) UIImageView *colorizeImage;
 
 -(void)setMainControls;
 -(void)switchObjectInDirection:(DirectionToAnimate)direction;
