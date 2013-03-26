@@ -6,7 +6,7 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#define time 0.6
+#define time 0.4
 #define kScrollViewSwitcherNotification @"ScrollViewSwitcherNotification"
 
 #import "ScrollViewSwitcher.h"
@@ -25,6 +25,8 @@
     CGPoint ptRightPosition;
     
     UIImage *newColorizeImage;
+    UIImageView *arrowLeft;
+    UIImageView *arrowRight;
 }
 @end
 @implementation ScrollViewSwitcher
@@ -55,6 +57,8 @@
     centralImage = nil;
     newColorizeImage = nil;
     colorizeImage = nil;
+    arrowLeft = nil;
+    arrowRight = nil;
 }
 
 -(void)setMainControls;
@@ -80,6 +84,9 @@
     
     [self setAllElementsHide:YES];
     [self setObjectsForIndex:curentObject];
+    
+    arrowLeft = nil;
+    arrowRight = nil;
     
     newColorizeImage = [self colorizeImage:colorizeImage.image color:[UIColor yellowColor]];
 }
@@ -113,7 +120,6 @@
     
     if (abs(endPoint.y - startPoint.y) < 5){
 //        Touch
-        
     }
 }
 
@@ -230,6 +236,9 @@
 {
     [colorizeImage stopAnimating];
 }
+
+-(void)setArrowsHide:(BOOL)hide;
+{}
 
 #pragma mark colorizeImage
 -(UIImage *)colorizeImage:(UIImage *)baseImage color:(UIColor *)theColor {

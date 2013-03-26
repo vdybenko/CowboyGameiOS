@@ -53,6 +53,7 @@
     scrollViewSwitcherCap.didFinishBlock = ^(NSInteger curentIndex){
         CDVisualViewCharacterPartCap *visualViewCharacterPart = [scrollViewSwitcherCap.arraySwitchObjects objectAtIndex:curentIndex];
         visualViewCharacter.cap.image = [visualViewCharacterPart imageForObject];
+        [AccountDataSource sharedInstance].visualViewCap = curentIndex;
     };
     scrollViewSwitcherCap.colorizeImage = visualViewCharacter.cap;
     [scrollViewSwitcherCap trimObjectsToView:visualViewCharacter.cap];
@@ -64,6 +65,7 @@
     scrollViewSwitcherHead.didFinishBlock = ^(NSInteger curentIndex){
         CDVisualViewCharacterPartHead *visualViewCharacterPart = [scrollViewSwitcherHead.arraySwitchObjects objectAtIndex:curentIndex];
         visualViewCharacter.head.image = [visualViewCharacterPart imageForObject];
+        [AccountDataSource sharedInstance].visualViewHead = curentIndex;
     };
     scrollViewSwitcherHead.colorizeImage = visualViewCharacter.head;
     [scrollViewSwitcherHead trimObjectsToView:visualViewCharacter.head];
@@ -75,6 +77,7 @@
     scrollViewSwitcherBody.didFinishBlock = ^(NSInteger curentIndex){
         CDVisualViewCharacterPartBody *visualViewCharacterPart = [scrollViewSwitcherBody.arraySwitchObjects objectAtIndex:curentIndex];
         visualViewCharacter.body.image = [visualViewCharacterPart imageForObject];
+        [AccountDataSource sharedInstance].visualViewBody = curentIndex;
     };
     scrollViewSwitcherBody.colorizeImage = visualViewCharacter.body;
     [scrollViewSwitcherBody trimObjectsToView:visualViewCharacter.body];
@@ -131,6 +134,7 @@
                          [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
                      }];
     [self.navigationController popViewControllerAnimated:NO];
+    [[AccountDataSource sharedInstance] saveVisualView];
     [self releaseComponents];
 }
 @end
