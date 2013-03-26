@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *body;
 @property (weak, nonatomic) IBOutlet UIImageView *head;
 @property (weak, nonatomic) IBOutlet UIImageView *cap;
+@property (weak, nonatomic) IBOutlet UIImageView *length;
+@property (weak, nonatomic) IBOutlet UIImageView *shoose;
 @property (weak, nonatomic) VisualViewDataSource *visualViewDataSource;
 
 -(void)refreshWithAccountPlayer:(AccountDataSource*)accountPlayer;

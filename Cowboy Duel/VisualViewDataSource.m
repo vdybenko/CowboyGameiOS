@@ -18,6 +18,8 @@
 @synthesize arrayCap;
 @synthesize arrayBody;
 @synthesize typeOfTable;
+@synthesize arrayLegth;
+@synthesize arrayShoose;
 
 -(id) init
 {
@@ -48,6 +50,20 @@
             [arrayBody addObject:cap];
         }
         arrayMainBody = nil;
+        
+        NSArray *arrayMainLegth = VISUAL_VIEW_CHARACTER_LEGTH_ARRAY;
+        for (NSArray *array in arrayMainLegth) {
+            CDVisualViewCharacterPartLegth *cap=[[CDVisualViewCharacterPartLegth alloc] initWithArray:array];
+            [arrayLegth addObject:cap];
+        }
+        arrayMainLegth = nil;
+        
+        NSArray *arrayMainShoose = VISUAL_VIEW_CHARACTER_SHOOSE_ARRAY;
+        for (NSArray *array in arrayMainShoose) {
+            CDVisualViewCharacterPartShoose *cap=[[CDVisualViewCharacterPartShoose alloc] initWithArray:array];
+            [arrayShoose addObject:cap];
+        }
+        arrayMainShoose = nil;
     }
     
 	return self;
@@ -58,13 +74,8 @@
     arrayHead = nil;
     arrayCap = nil;
     arrayBody = nil;
+    arrayLegth = nil;
+    arrayShoose = nil;
 }
-
-#pragma mark
-
--(CGRect) getRectForPart:(VisualViewCharacterPart)part withIndex:(NSInteger)index;
-{}
--(CGRect) getRectForPart:(VisualViewCharacterPart)part withName:(NSString*)name;
-{}
 
 @end

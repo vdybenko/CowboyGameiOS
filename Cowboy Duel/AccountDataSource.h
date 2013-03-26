@@ -56,6 +56,8 @@
 @property(nonatomic) int visualViewCap;
 @property(nonatomic) int visualViewHead;
 @property(nonatomic) int visualViewBody;
+@property(nonatomic) int visualViewLegth;
+@property(nonatomic) int visualViewShoose;
 
 + (AccountDataSource *)sharedInstance;
 - (id)initWithLocalPlayer;

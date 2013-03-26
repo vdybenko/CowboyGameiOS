@@ -144,7 +144,7 @@
 
 -(void)switchToRight
 {
-    if (curentObject) {
+    if ((curentObject)&&([arraySwitchObjects count])) {
         [self setAllElementsHide:NO];
         [UIView animateWithDuration:time animations:^{
             CGRect frame = leftImage.frame;
@@ -168,7 +168,7 @@
 
 -(void)switchToLeft
 {
-    if (curentObject<[arraySwitchObjects count]-1) {
+    if ((curentObject<[arraySwitchObjects count]-1)&&([arraySwitchObjects count])) {
         [self setAllElementsHide:NO];
         [UIView animateWithDuration:time animations:^{
             CGRect frame = rightImage.frame;

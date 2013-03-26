@@ -12,6 +12,8 @@
 #import "CDVisualViewCharacterPartCap.h"
 #import "CDVisualViewCharacterPartHead.h"
 #import "CDVisualViewCharacterPartBody.h"
+#import "CDVisualViewCharacterPartLegth.h"
+#import "CDVisualViewCharacterPartShoose.h"
 
 typedef enum {
     VisualViewCharacterPartHead,
@@ -25,12 +27,17 @@ typedef enum {
 
 #define VISUAL_VIEW_CHARACTER_BODY_ARRAY @[@[@"body1.png",@1],@[@"body1.png",@2],@[@"body1.png",@3]];
 
+#define VISUAL_VIEW_CHARACTER_LEGTH_ARRAY @[@[@"legth1.png",@1]];
+
+#define VISUAL_VIEW_CHARACTER_SHOOSE_ARRAY @[@[@"shoose1.png",@1]];
+
+
 @interface VisualViewDataSource : NSObject<MemoryManagement>
 @property (strong,nonatomic) NSMutableArray *arrayHead;
 @property (strong,nonatomic) NSMutableArray *arrayCap;
 @property (strong,nonatomic) NSMutableArray *arrayBody;
-@property (nonatomic) VisualViewCharacterPart typeOfTable;
+@property (strong,nonatomic) NSMutableArray *arrayLegth;
+@property (strong,nonatomic) NSMutableArray *arrayShoose;
 
--(CGRect) getRectForPart:(VisualViewCharacterPart)part withIndex:(NSInteger)index;
--(CGRect) getRectForPart:(VisualViewCharacterPart)part withName:(NSString*)name;
+@property (nonatomic) VisualViewCharacterPart typeOfTable;
 @end

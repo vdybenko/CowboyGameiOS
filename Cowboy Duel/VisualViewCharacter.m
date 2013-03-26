@@ -13,6 +13,8 @@
 @synthesize body;
 @synthesize head;
 @synthesize cap;
+@synthesize length;
+@synthesize shoose;
 @synthesize visualViewDataSource;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -36,6 +38,8 @@
     body = nil;
     head = nil;
     cap = nil;
+    length = nil;
+    shoose = nil;
     [visualViewDataSource releaseComponents];
     visualViewDataSource = nil;
 }

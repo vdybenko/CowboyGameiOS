@@ -15,6 +15,8 @@
     __weak IBOutlet ScrollViewSwitcher *scrollViewSwitcherCap;
     __weak IBOutlet ScrollViewSwitcher *scrollViewSwitcherHead;
     __weak IBOutlet ScrollViewSwitcher *scrollViewSwitcherBody;
+    __weak IBOutlet ScrollViewSwitcher *scrollViewSwitcheLegth;
+    __weak IBOutlet ScrollViewSwitcher *scrollViewSwitcheShoose;
     __weak IBOutlet UIButton *btnBack;
 }
 @end
@@ -71,7 +73,7 @@
     [scrollViewSwitcherHead trimObjectsToView:visualViewCharacter.head];
     [scrollViewSwitcherHead setMainControls];
 
-    scrollViewSwitcherBody.rectForObjetc = (CGRect){0,0,183,312};
+    scrollViewSwitcherBody.rectForObjetc = (CGRect){0,0,200,155};
     scrollViewSwitcherBody.arraySwitchObjects = [visualViewDataSource arrayBody];
     scrollViewSwitcherBody.curentObject = 0;
     scrollViewSwitcherBody.didFinishBlock = ^(NSInteger curentIndex){
@@ -82,6 +84,30 @@
     scrollViewSwitcherBody.colorizeImage = visualViewCharacter.body;
     [scrollViewSwitcherBody trimObjectsToView:visualViewCharacter.body];
     [scrollViewSwitcherBody setMainControls];
+    
+    scrollViewSwitcheLegth.rectForObjetc = (CGRect){0,0,165,200};
+    scrollViewSwitcheLegth.arraySwitchObjects = [visualViewDataSource arrayLegth];
+    scrollViewSwitcheLegth.curentObject = 0;
+    scrollViewSwitcheLegth.didFinishBlock = ^(NSInteger curentIndex){
+        CDVisualViewCharacterPartLegth *visualViewCharacterPart = [scrollViewSwitcheLegth.arraySwitchObjects objectAtIndex:curentIndex];
+        visualViewCharacter.length.image = [visualViewCharacterPart imageForObject];
+        [AccountDataSource sharedInstance].visualViewLegth = curentIndex;
+    };
+    scrollViewSwitcheLegth.colorizeImage = visualViewCharacter.length;
+    [scrollViewSwitcheLegth trimObjectsToView:visualViewCharacter.length];
+    [scrollViewSwitcheLegth setMainControls];
+    
+    scrollViewSwitcheShoose.rectForObjetc = (CGRect){0,0,160,100};
+    scrollViewSwitcheShoose.arraySwitchObjects = [visualViewDataSource arrayShoose];
+    scrollViewSwitcheShoose.curentObject = 0;
+    scrollViewSwitcheShoose.didFinishBlock = ^(NSInteger curentIndex){
+        CDVisualViewCharacterPartShoose *visualViewCharacterPart = [scrollViewSwitcheShoose.arraySwitchObjects objectAtIndex:curentIndex];
+        visualViewCharacter.shoose.image = [visualViewCharacterPart imageForObject];
+        [AccountDataSource sharedInstance].visualViewShoose = curentIndex;
+    };
+    scrollViewSwitcheShoose.colorizeImage = visualViewCharacter.shoose;
+    [scrollViewSwitcheShoose trimObjectsToView:visualViewCharacter.shoose];
+    [scrollViewSwitcheShoose setMainControls];
 }
 
 - (void)didReceiveMemoryWarning
@@ -104,6 +130,8 @@
     [visualViewDataSource releaseComponents];
     visualViewDataSource = nil;
     btnBack = nil;
+    scrollViewSwitcheLegth = nil;
+    scrollViewSwitcheShoose = nil;
     [super viewDidUnload];
 }
 -(void)refreshController;
