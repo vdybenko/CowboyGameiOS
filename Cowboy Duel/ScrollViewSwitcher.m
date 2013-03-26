@@ -25,8 +25,6 @@
     CGPoint ptRightPosition;
     
     UIImage *newColorizeImage;
-    UIImageView *arrowLeft;
-    UIImageView *arrowRight;
 }
 @end
 @implementation ScrollViewSwitcher
@@ -57,8 +55,6 @@
     centralImage = nil;
     newColorizeImage = nil;
     colorizeImage = nil;
-    arrowLeft = nil;
-    arrowRight = nil;
 }
 
 -(void)setMainControls;
@@ -84,11 +80,6 @@
     
     [self setAllElementsHide:YES];
     [self setObjectsForIndex:curentObject];
-    
-    arrowLeft = nil;
-    arrowRight = nil;
-    
-    newColorizeImage = [self colorizeImage:colorizeImage.image color:[UIColor yellowColor]];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -130,7 +121,6 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         CDVisualViewCharacterPart *visualViewCharacterPart = [arraySwitchObjects objectAtIndex:index];
         centralImage.image = [visualViewCharacterPart imageForObject];
-        newColorizeImage = [self colorizeImage:centralImage.image color:[UIColor yellowColor]];
         if (index) {
             CDVisualViewCharacterPart *visualViewCharacterPartLeft = [arraySwitchObjects objectAtIndex:index-1];
             leftImage.image = [visualViewCharacterPartLeft imageForObject];
@@ -212,9 +202,6 @@
     rightImage.hidden = hide;
 }
 
--(void)switchObjectInDirection:(DirectionToAnimate)direction;
-{}
-
 -(void)trimObjectsToView:(UIView*)view;
 {
     CGPoint trimRect = [[view superview] convertPoint:view.frame.origin toView:self];
@@ -237,28 +224,4 @@
     [colorizeImage stopAnimating];
 }
 
--(void)setArrowsHide:(BOOL)hide;
-{}
-
-#pragma mark colorizeImage
--(UIImage *)colorizeImage:(UIImage *)baseImage color:(UIColor *)theColor {
-    UIGraphicsBeginImageContext(baseImage.size);
-    
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    CGRect area = CGRectMake(0, 0, baseImage.size.width, baseImage.size.height);
-    
-    CGContextScaleCTM(ctx, 1, -1);
-    CGContextTranslateCTM(ctx, 0, -area.size.height);
-    CGContextSaveGState(ctx);
-    CGContextClipToMask(ctx, area, baseImage.CGImage);
-    [theColor set];
-    CGContextFillRect(ctx, area);
-    CGContextRestoreGState(ctx);
-    CGContextSetBlendMode(ctx, kCGBlendModeMultiply);
-    CGContextDrawImage(ctx, area, baseImage.CGImage);
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
-}
-#pragma mark
 @end

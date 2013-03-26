@@ -51,6 +51,8 @@
 
 "REFRESH"="REFRESH";
 
+"ACCEPT"="ACCEPT";
+
 //FinalView
 
 "BACK"="BACK";

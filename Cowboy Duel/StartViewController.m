@@ -382,32 +382,7 @@ static StartViewController *sharedHelper = nil;
     [lbShareButton setText:NSLocalizedString(@"Share", @"")];
     [lbShareButton setTextColor:buttonsTitleColor];
     [lbShareButton setFont:[UIFont fontWithName: @"MyriadPro-Semibold" size:15]];
-/*
-    [duelButton setTitle:NSLocalizedString(@"Saloon", @"") forState:UIControlStateNormal];
-    [duelButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
-    duelButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
-    duelButton.titleLabel.textAlignment = UITextAlignmentCenter;
-    
-    [saloon2Button setTitle:NSLocalizedString(@"Saloon2", @"") forState:UIControlStateNormal];
-    [saloon2Button setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
-    saloon2Button.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
-    saloon2Button.titleLabel.textAlignment = UITextAlignmentCenter;
-    
-    [profileButton setTitle:NSLocalizedString(@"Profile", @"") forState:UIControlStateNormal];
-    [profileButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
-    profileButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
-    profileButton.titleLabel.textAlignment = UITextAlignmentCenter;
 
-    [helpButton setTitle:NSLocalizedString(@"HelpTitle", @"") forState:UIControlStateNormal];
-    [helpButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
-    helpButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
-    helpButton.titleLabel.textAlignment = UITextAlignmentCenter;
-    
-    [mapButton setTitle:NSLocalizedString(@"STORE", @"") forState:UIControlStateNormal];
-    [mapButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
-    mapButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
-    mapButton.titleLabel.textAlignment = UITextAlignmentCenter;
-*/    
     UIColor *textColor = [UIColor whiteColor];
  
     UIFont *textFont = [UIFont systemFontOfSize:16.0f];
@@ -511,7 +486,6 @@ static StartViewController *sharedHelper = nil;
         frame = helpButton.frame;
         frame.origin.y += iPhone5Delta;
         [helpButton setFrame:frame];
-
     }
 }
 - (void)viewDidUnload {

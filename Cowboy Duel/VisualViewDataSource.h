@@ -27,9 +27,9 @@ typedef enum {
 
 #define VISUAL_VIEW_CHARACTER_BODY_ARRAY @[@[@"body1.png",@1],@[@"body1.png",@2],@[@"body1.png",@3]];
 
-#define VISUAL_VIEW_CHARACTER_LEGTH_ARRAY @[@[@"legth1.png",@1]];
+#define VISUAL_VIEW_CHARACTER_LEGTH_ARRAY @[@[@"legth1.png",@1],@[@"legth1.png",@1]];
 
-#define VISUAL_VIEW_CHARACTER_SHOOSE_ARRAY @[@[@"shoose1.png",@1]];
+#define VISUAL_VIEW_CHARACTER_SHOOSE_ARRAY @[@[@"shoose1.png",@1],@[@"shoose1.png",@1]];
 
 
 @interface VisualViewDataSource : NSObject<MemoryManagement>

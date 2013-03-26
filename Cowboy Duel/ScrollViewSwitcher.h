@@ -19,8 +19,6 @@ typedef void (^ScrollViewSwitcherResult)(NSInteger curentIndex);
 @property (weak,nonatomic) UIImageView *colorizeImage;
 
 -(void)setMainControls;
--(void)switchObjectInDirection:(DirectionToAnimate)direction;
 -(void)setObjectsForIndex:(NSInteger)index;
 -(void)trimObjectsToView:(UIView*)view;
--(void)setArrowsHide:(BOOL)hide;
 @end
