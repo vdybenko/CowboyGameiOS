@@ -348,7 +348,7 @@ static CGFloat blinkBottomOriginY;
     [self.gunButton setEnabled:NO];
     
     userLiveImageViewStartWidth = self.userLiveImageView.frame.size.width;
-    lbUserLifeLeft = [NSString stringWithFormat:@"100%%"];
+    self.lbUserLifeLeft.text = [NSString stringWithFormat:@"100%%"];
     
     self.opStatsLabel.text = [NSString stringWithFormat: @"A: +%d\rD: +%d",opAccount.accountWeapon.dDamage,opAccount.accountDefenseValue];
     self.userStatsLabel.text = [NSString stringWithFormat: @"A: +%d\nD: +%d",playerAccount.accountWeapon.dDamage,playerAccount.accountDefenseValue];
@@ -440,7 +440,7 @@ static CGFloat blinkBottomOriginY;
         countBulletsForOpponent = [DuelRewardLogicController countUpBuletsWithOponentLevel:playerAccount.accountLevel defense:playerAccount.accountDefenseValue playerAtack:opAccount.accountWeapon.dDamage];
         
     }else{
-        countBulletsForOpponent = 4000;
+        countBulletsForOpponent = 4;
    }
     shotCountBulletForOpponent =  countBulletsForOpponent;
     maxShotCountForOpponent = countBulletsForOpponent;
@@ -669,10 +669,13 @@ static CGFloat blinkBottomOriginY;
     CGRect frame = self.userLiveImageView.frame;
     frame.size.width = (float)((shotCountBulletForOpponent)*userLiveImageViewStartWidth)/maxShotCountForOpponent;
     self.userLiveImageView.frame = frame;
-    lbUserLifeLeft = [NSString stringWithFormat:@"%d%%",(int)frame.size.width];
-    if (frame.size.width<60) {
-        self.lbUserLifeLeft.textAlignment = UITextAlignmentLeft;
-    }
+    
+    float x = self.userLiveImageView.frame.size.width*100/userLiveImageViewStartWidth;
+    self.lbUserLifeLeft.text = [NSString stringWithFormat:@"%d%%",(int)x];
+    
+    CGRect frameLife = self.lbUserLifeLeft.frame;
+    frameLife.size.width = frame.size.width;
+    self.lbUserLifeLeft.frame = frameLife;
     
     if(!shotCountBulletForOpponent){
         [self userLost];

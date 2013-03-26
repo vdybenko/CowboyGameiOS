@@ -159,8 +159,14 @@ static CGFloat oponentLiveImageViewStartWidth;
     CGRect frame = ivLifeBar.frame;
     frame.size.width = (float)((maxShotCount - userHitCount)*oponentLiveImageViewStartWidth)/maxShotCount;
     ivLifeBar.frame = frame;
-    lbLifeLeft.textAlignment = UITextAlignmentLeft;
-    lbLifeLeft.text = [NSString stringWithFormat:@"%d%%",(int)frame.size.width];
+
+    float x = ivLifeBar.frame.size.width*100/oponentLiveImageViewStartWidth;
+    lbLifeLeft.text = [NSString stringWithFormat:@"%d%%",(int)x];
+
+    CGRect frameLife = lbLifeLeft.frame;
+    frameLife.size.width = frame.size.width;
+    lbLifeLeft.frame = frameLife;
+    
 }
 
 -(void) refreshLiveBar;
