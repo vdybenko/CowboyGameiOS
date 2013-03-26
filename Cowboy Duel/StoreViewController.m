@@ -311,6 +311,17 @@
         [self startTableAnimation];
     }
 }
+- (IBAction)barrierButtonClick:(id)sender {
+    if (storeDataSource.typeOfTable != StoreDataSourceTypeTablesBarrier) {
+        
+        storeDataSource.typeOfTable = StoreDataSourceTypeTablesBarrier;
+        [storeDataSource reloadDataSource];
+        [storeDataSource setCellsHide:YES];
+        [tableView reloadData];
+        [self startTableAnimation];
+    }
+
+}
 
 - (IBAction)bagButtonClick:(id)sender {
     if (bagFlag) {
