@@ -11,7 +11,10 @@
 @interface AirBallon : UIView <MemoryManagement>
 @property (weak, nonatomic) IBOutlet UIView *airBalloonView;
 @property (weak, nonatomic) IBOutlet UIImageView *airBallonImg;
+@property (weak, nonatomic) IBOutlet UIImageView *bonusImg;
 
 -(void)airBallonMove;
--(void)airBallonPosition;
+-(void)explosionAnimation;
+-(BOOL) isShownBonus;
+
 @end

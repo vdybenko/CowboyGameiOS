@@ -18,6 +18,7 @@
 @property BOOL isTop;
 
 -(void)explosionAnimation;
--(BOOL)showBonus;
+-(void)showBonus;
 -(void)dropBarel;
+-(BOOL) isShownBonus;
 @end

@@ -22,6 +22,7 @@
 #import "BarellsObject.h"
 #import "CactusObject.h"
 #import "AirBallon.h"
+#import "HorseShape.h"
 #define targetHeight 260
 #define targetWeidth 100
 #define MOVE_DISTANCE 100
@@ -61,6 +62,7 @@
     
     BarellsObject *barellObject;
     BarellsObject *barellObjectNext;
+
     CGRect barellPrevFrame;
     CactusObject *cactusObject;
     
@@ -83,9 +85,11 @@
     
     int opponentTime;
     
+    HorseShape *horseShape;
     GoodCowboy *goodCowboyShape;
     WomanShape *womanShape;
     OpponentShape *opponentShape;
+  
     __weak IBOutlet UIImageView *blinkBottom;
     __weak IBOutlet UIImageView *blinkTop;
     __weak IBOutlet ArrowToOpponent *arrowToOpponent;
@@ -267,7 +271,6 @@ static CGFloat blinkBottomOriginY;
         cactusObject = [[CactusObject alloc] initWithFrame:cactusFrame];
         
         cactusObject.cactusImg.tag = 1;
-        
         [self.floatView addSubview:cactusObject];
         [cactusObjectArray addObject:cactusObject];
     }
@@ -275,8 +278,9 @@ static CGFloat blinkBottomOriginY;
     CGRect airBallonFrame;
     airBallonFrame = airBallon.frame;
     airBallonFrame.origin.x = 300;
-    airBallonFrame.origin.y = 0;
+    airBallonFrame.origin.y = -100;
     airBallon = [[AirBallon alloc] initWithFrame:airBallonFrame];
+     airBallon.airBallonImg.tag = 1;
     [self.floatView addSubview:airBallon];
     
     OponentCoordinateView *poi = [OponentCoordinateView oponentCoordinateWithView:self.floatView at:[[CLLocation alloc] initWithLatitude:oponentCoords.latitude longitude:oponentCoords.longitude]];
@@ -341,7 +345,8 @@ static CGFloat blinkBottomOriginY;
     [self updateOpponentViewToRamdomPosition];
     [womanShape randomPositionWithView:opponentShape];
     [goodCowboyShape randomPositionWithView:womanShape];
-      
+    [horseShape randomPositionWithView:goodCowboyShape];
+    
 	[plView startAnimation];
     
     [activityIndicatorView hideView];
@@ -365,6 +370,7 @@ static CGFloat blinkBottomOriginY;
 
     opponentShape.hidden = YES;
     womanShape.hidden = YES;
+    horseShape.hidden = YES;
     goodCowboyShape.hidden = YES;
     arrowToOpponent.hidden = YES;
     [arrowToOpponent setDirection:ArrowToOpponentDirectionRight];
@@ -415,6 +421,7 @@ static CGFloat blinkBottomOriginY;
     goodCowboyShape = nil;
     arrowToOpponent = nil;
     [self setLbUserLifeLeft:nil];
+    horseShape = nil;
     [super viewDidUnload];
 }
 
@@ -545,6 +552,13 @@ static CGFloat blinkBottomOriginY;
     
     BOOL shotOnObstracle = NO;
 
+    CGRect baloonFrame = [airBallon convertRect:airBallon.airBallonImg.frame toView:self.view];
+    
+    if (CGRectContainsPoint(baloonFrame, shotPoint) && !airBallon.airBallonImg.hidden && !shotOnObstracle) {
+        [airBallon explosionAnimation];
+        shotOnObstracle = YES;
+    }
+    
     for (CactusObject *cactus in cactusObjectArray) {
 
         CGRect cactusFrame = [cactus convertRect:cactus.cactusImg.frame toView:self.view];
@@ -574,7 +588,7 @@ static CGFloat blinkBottomOriginY;
             }
         }        
     }
-    
+    BOOL shotInHorse = [horseShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
     BOOL resultWoman = [womanShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
     BOOL resultGoodCowboy = [goodCowboyShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
     if (resultWoman || resultGoodCowboy || shotOnObstracle) {
@@ -863,6 +877,7 @@ static CGFloat blinkBottomOriginY;
         opponentShape.hidden = NO;
         womanShape.hidden = NO;
         goodCowboyShape.hidden = NO;
+        horseShape.hidden = NO;
         
         
         if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
@@ -1018,6 +1033,8 @@ static CGFloat blinkBottomOriginY;
         opponentShape.hidden = NO;
         womanShape.hidden = NO;
         goodCowboyShape.hidden = NO;
+        horseShape.hidden = NO;
+        
     }
 }
 
@@ -1078,12 +1095,16 @@ static CGFloat blinkBottomOriginY;
     [self setCrossImageView:nil];
     [self setGlassImageViewAllBackground:nil];
     [self setUserLiveImageView:nil];
+    [self setLbUserLifeLeft:nil];
     
     [goodCowboyShape releaseComponents];
     goodCowboyShape = nil;
     
     [womanShape releaseComponents];
     womanShape = nil;
+    
+    [horseShape releaseComponents];
+    horseShape = nil;
     
     [opponentShape releaseComponents];
     opponentShape = nil;

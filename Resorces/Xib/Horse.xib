@@ -35,40 +35,26 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">308</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUIImageView" id="873280689">
+					<object class="IBUIImageView" id="589425846">
 						<reference key="NSNextResponder" ref="59715378"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrameSize">{50, 75}</string>
+						<int key="NSvFlags">274</int>
+						<string key="NSFrameSize">{146, 125}</string>
 						<reference key="NSSuperview" ref="59715378"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="88517804"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">airBalloon.png</string>
-						</object>
-					</object>
-					<object class="IBUIImageView" id="88517804">
-						<reference key="NSNextResponder" ref="59715378"/>
-						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrame">{{0, 15}, {50, 50}}</string>
-						<reference key="NSSuperview" ref="59715378"/>
-						<reference key="NSWindow"/>
-						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<object class="NSCustomResource" key="IBUIImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">HelthBonus.png</string>
+							<string key="NSResourceName">horses_1.png</string>
 						</object>
 					</object>
 				</array>
-				<string key="NSFrameSize">{50, 75}</string>
+				<string key="NSFrameSize">{146, 125}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="873280689"/>
+				<reference key="NSNextKeyView" ref="589425846"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -85,27 +71,11 @@
 			<array class="NSMutableArray" key="connectionRecords">
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">airBalloonView</string>
+						<string key="label">imageMain</string>
 						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="59715378"/>
+						<reference key="destination" ref="589425846"/>
 					</object>
-					<int key="connectionID">74</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">airBallonImg</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="873280689"/>
-					</object>
-					<int key="connectionID">75</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">bonusImg</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="88517804"/>
-					</object>
-					<int key="connectionID">77</int>
+					<int key="connectionID">78</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -131,66 +101,59 @@
 						<int key="objectID">55</int>
 						<reference key="object" ref="59715378"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="873280689"/>
-							<reference ref="88517804"/>
+							<reference ref="589425846"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">63</int>
-						<reference key="object" ref="873280689"/>
-						<reference key="parent" ref="59715378"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">76</int>
-						<reference key="object" ref="88517804"/>
+						<int key="objectID">62</int>
+						<reference key="object" ref="589425846"/>
 						<reference key="parent" ref="59715378"/>
 					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
-				<string key="-1.CustomClassName">AirBallon</string>
+				<string key="-1.CustomClassName">HorseShape</string>
 				<string key="-1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="55.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<integer value="3" key="55.IBPropertyAccessControl"/>
-				<string key="63.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="76.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="62.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">77</int>
+			<int key="maxID">78</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
-					<string key="className">AirBallon</string>
-					<string key="superclassName">UIView</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="airBallonImg">UIImageView</string>
-						<string key="airBalloonView">UIView</string>
-						<string key="bonusImg">UIImageView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="airBallonImg">
-							<string key="name">airBallonImg</string>
-							<string key="candidateClassName">UIImageView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="airBalloonView">
-							<string key="name">airBalloonView</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="bonusImg">
-							<string key="name">bonusImg</string>
-							<string key="candidateClassName">UIImageView</string>
-						</object>
-					</dictionary>
+					<string key="className">HorseShape</string>
+					<string key="superclassName">Shape</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/AirBallon.h</string>
+						<string key="minorKey">./Classes/HorseShape.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">Shape</string>
+					<string key="superclassName">UIView</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">imageMain</string>
+						<string key="NS.object.0">UIImageView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">imageMain</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">imageMain</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/Shape.h</string>
 					</object>
 				</object>
 			</array>
@@ -199,10 +162,10 @@
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="HelthBonus.png">{75, 75}</string>
-			<string key="airBalloon.png">{50, 75}</string>
-		</dictionary>
+		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="NS.key.0">horses_1.png</string>
+			<string key="NS.object.0">{146, 125}</string>
+		</object>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
 </archive>

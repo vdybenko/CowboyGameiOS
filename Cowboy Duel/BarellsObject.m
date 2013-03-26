@@ -73,10 +73,8 @@
     [self showBonus];
 
 }
--(BOOL)showBonus;
+-(void)showBonus;
 {
-    //int luck = arc4random()%2;
-   // if (luck == 2) {
     bonusImg.frame = barellImg.frame;
     bonusImg.hidden = NO;
     [UIView animateWithDuration:1.5 animations:^{
@@ -87,8 +85,13 @@
     }completion:^(BOOL complete){
         bonusImg.hidden = YES;
     }];
+}
+
+-(BOOL) isShownBonus
+{
     return YES;
-    //}
+    //    int luck = arc4random()%2;
+    //    return (luck == 2);
 }
 
 -(void)dropBarel;{
