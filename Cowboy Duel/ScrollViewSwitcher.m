@@ -42,11 +42,6 @@
         [self setUserInteractionEnabled:YES];
         
         curentObject = 0;
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(endTouchViewNotification:)
-                                                     name:kScrollViewSwitcherNotification
-                                                   object:nil];
     }
     return self;
 }
@@ -60,10 +55,6 @@
     centralImage = nil;
     newColorizeImage = nil;
     colorizeImage = nil;
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:kScrollViewSwitcherNotification
-                                                  object:nil];
 }
 
 -(void)setMainControls;
@@ -124,11 +115,6 @@
 //        Touch
         
     }
-    
-    NSString *st = [NSString stringWithFormat:@"%f",self.frame.origin.y];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kScrollViewSwitcherNotification
-                                                        object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:st forKey:@"objectOriginY"]];
 }
 
 #pragma mark
@@ -244,16 +230,6 @@
 {
     [colorizeImage stopAnimating];
 }
-
--(void)endTouchViewNotification:(NSNotification *)notification
-{
-    NSString *objectOriginY = [[notification userInfo] objectForKey:@"objectOriginY"];
-    NSString *curentObjectOriginY = [NSString stringWithFormat:@"%f",self.frame.origin.y];
-    if (![curentObjectOriginY isEqualToString:objectOriginY]) {
-        [colorizeImage stopAnimating];
-    }
-}
-
 
 #pragma mark colorizeImage
 -(UIImage *)colorizeImage:(UIImage *)baseImage color:(UIColor *)theColor {
