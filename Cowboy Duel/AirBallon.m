@@ -22,6 +22,12 @@
             NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"AirBalloon" owner:self options:nil];
             UIView *nibView = [objects objectAtIndex:0];
             [self addSubview:nibView];
+            UIImage *spriteSheetExp = [UIImage imageNamed:@"explosionBarelSpriteSheet"];
+            NSArray *arrayWithSpritesExp = [spriteSheetExp spritesWithSpriteSheetImage:spriteSheetExp
+                                                                            spriteSize:CGSizeMake(75, 75)];
+            [airBallonImg setAnimationImages:arrayWithSpritesExp];
+            [airBallonImg setAnimationRepeatCount:1];
+            [airBallonImg setAnimationDuration:1];
             
     }
     return self;
@@ -48,12 +54,7 @@
     CGRect frame = airBallonImg.frame;
     airBallonImg.frame = frame;
 //    airBallonImg.hidden = YES;
-    UIImage *spriteSheetExp = [UIImage imageNamed:@"explosionBarelSpriteSheet"];
-    NSArray *arrayWithSpritesExp = [spriteSheetExp spritesWithSpriteSheetImage:spriteSheetExp
-                                                                    spriteSize:CGSizeMake(75, 75)];
-    [airBallonImg setAnimationImages:arrayWithSpritesExp];
-    [airBallonImg setAnimationRepeatCount:1];
-    [airBallonImg setAnimationDuration:1];
+
     [airBallonImg startAnimating];
     
     [self performSelector:@selector(hideObj) withObject:nil afterDelay:0.7f];
