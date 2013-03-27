@@ -62,6 +62,7 @@
     
     BarellsObject *barellObject;
     BarellsObject *barellObjectNext;
+    BarellsObject *barellObjectHighest;
 
     CGRect barellPrevFrame;
     CactusObject *cactusObject;
@@ -214,18 +215,46 @@ static CGFloat blinkBottomOriginY;
     oponentCoords.longitude = 1;// (((float) rand()) / RAND_MAX) * 360 - 180;
 	oponentsViewCoordinates = [NSMutableArray arrayWithCapacity:1];
 
-    countOfBarrels = 5;
+    countOfBarrels = 20;
     countOfCactuses = 5;
     
     barellObjectArray = [[NSMutableArray alloc] initWithCapacity:countOfBarrels];
     cactusObjectArray = [[NSMutableArray alloc] initWithCapacity:countOfCactuses];
 
     CGRect barelFrame;
-    
+    int indexBarrel = 0;
     barelFrame = barellObject.frame;
-    
+    barelFrame.origin.x = opponentShape.frame.origin.x;
+    barelFrame.origin.y = 240;
+
     for (int i = 0; i < countOfBarrels; i++){
 //check Ox
+        indexBarrel++;
+        barellObject = [[BarellsObject alloc] initWithFrame:barelFrame];
+        barellObject.bonusImg.hidden = YES;
+        barellObject.isBottom = YES;
+        if(i>0){
+            if (indexBarrel == 2) {
+                barellObject.isBottom = NO;
+                barellObject.isTop = YES;
+                barelFrame.origin.y = 180;
+                barellObject.frame = barelFrame;
+            }
+            if (indexBarrel == 3) {
+                barellObject.isBottom = NO;
+                barellObject.isHighest = YES;
+                barelFrame.origin.y = 120;
+                barellObject.frame = barelFrame;
+                barelFrame.origin.x = barelFrame.origin.x + 80;
+                barelFrame.origin.y = 240;
+                indexBarrel = 0;
+            }
+        
+        }
+        [barellObjectArray addObject:barellObject];
+        [self.floatView addSubview:barellObject];
+    }
+        /*
         if (i>0){
             if (i%2==0) {
                 barelFrame.origin.x = barellPrevFrame.origin.x + arc4random()% 120 + 80;
@@ -252,7 +281,7 @@ static CGFloat blinkBottomOriginY;
 
         [barellObjectArray addObject:barellObject];
 
-    }
+    }*/
     
     for (int i=0; i<countOfCactuses; i++) {
         CGRect cactusFrame;
@@ -451,7 +480,7 @@ static CGFloat blinkBottomOriginY;
         countBulletsForOpponent = [DuelRewardLogicController countUpBuletsWithOponentLevel:playerAccount.accountLevel defense:playerAccount.accountDefenseValue playerAtack:opAccount.accountWeapon.dDamage];
         
     }else{
-        countBulletsForOpponent = 4;
+        countBulletsForOpponent = 4000;
    }
     shotCountBulletForOpponent =  countBulletsForOpponent;
     maxShotCountForOpponent = countBulletsForOpponent;
@@ -572,7 +601,64 @@ static CGFloat blinkBottomOriginY;
             shotOnObstracle = YES;
         }
     }
+    
+    for (BarellsObject *barell in barellObjectArray) {
+        if (!barell.barellImg.hidden) {
+            int iTop = [barellObjectArray indexOfObject:barell] + 1;
+            int iHighest = [barellObjectArray indexOfObject:barell] + 2;
+            CGRect barelFrame = [barell convertRect:barell.barellImg.frame toView:self.view];
+            if (barell.isHighest && CGRectContainsPoint(barelFrame, shotPoint))
+            {
+                [barell explosionAnimation];
+                break;
+            }
+            if (barell.isTop && CGRectContainsPoint(barelFrame, shotPoint))
+            {
+                [barell explosionAnimation];
+                if (iTop < countOfBarrels)
+                {
+                     barellObjectNext = [barellObjectArray objectAtIndex:iTop];
+                if (!barellObjectNext.barellImg.hidden && barellObjectNext.isHighest)
+                {
+                    [barellObjectNext dropBarel];
+                    barellObjectNext.isTop = NO;
+                    barellObjectNext.isBottom = YES;
+                   }
+                }
+                 break;
+            }
+            if (barell.isBottom && CGRectContainsPoint(barelFrame, shotPoint))
+            {
+                [barell explosionAnimation];
+                if (iTop < countOfBarrels)
+                {
+            
+                    barellObjectNext = [barellObjectArray objectAtIndex:iTop];
+               
+                    if (!barellObjectNext.barellImg.hidden && barellObjectNext.isTop)
+                    {
+                        [barellObjectNext dropBarel];
+                        barellObjectNext.isTop = NO;
+                        barellObjectNext.isBottom = YES;
+                    }
+                }
+                if (iHighest < countOfBarrels) {
+                 barellObjectHighest = [barellObjectArray objectAtIndex:iHighest];
+                    if (!barellObjectHighest.barellImg.hidden && barellObjectHighest.isHighest)
+                    {
+                        [barellObjectHighest dropBarel];
+                        barellObjectHighest.isHighest = NO;
+                        barellObjectHighest.isTop = YES;
+                    }
+                }
+               
+                break;
+                
+            }
 
+        }
+           }
+/*
     for (BarellsObject *barell in barellObjectArray) {;
         int i = [barellObjectArray indexOfObject:barell];
         if (i < countOfBarrels-1) {
@@ -591,7 +677,7 @@ static CGFloat blinkBottomOriginY;
                 [barellObjectNext dropBarel];
             }
         }        
-    }
+    }*/
     BOOL shotInHorse = [horseShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
     BOOL resultWoman = [womanShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
     BOOL resultGoodCowboy = [goodCowboyShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view];

@@ -16,7 +16,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *barelAnimImg;
 
 @property BOOL isTop;
-
+@property BOOL isHighest;
+@property BOOL isBottom;
 -(void)explosionAnimation;
 -(void)showBonus;
 -(void)dropBarel;

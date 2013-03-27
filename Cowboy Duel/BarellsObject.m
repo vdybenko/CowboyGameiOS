@@ -23,6 +23,8 @@
 @synthesize barellView;
 @synthesize barelAnimImg;
 @synthesize isTop;
+@synthesize isHighest;
+@synthesize isBottom;
 
 
 - (id)initWithFrame:(CGRect)frame
@@ -71,6 +73,7 @@
     [barelAnimImg stopAnimating];
     barelAnimImg.hidden = YES;
     [self showBonus];
+    NSLog(@"Shot on barel");
 
 }
 -(void)showBonus;
@@ -95,6 +98,7 @@
 }
 
 -(void)dropBarel;{
+    
     [UIView animateWithDuration:0.2 animations:^{
         CGRect frame = barellImg.frame;
         frame.origin.y +=60;
@@ -110,7 +114,7 @@
                 frame.origin.y +=10;
                 barellImg.frame = frame;
             }completion:^(BOOL complete){
-                isTop = NO;
+                
             }];
 
         }];
