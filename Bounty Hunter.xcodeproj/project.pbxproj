@@ -808,6 +808,7 @@
 		BD87D2291648057500747ED8 /* AdvertisingNewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD87D2271648057400747ED8 /* AdvertisingNewViewController.m */; };
 		BD87D22A1648057500747ED8 /* AdvertisingNewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD87D2281648057400747ED8 /* AdvertisingNewViewController.xib */; };
 		BD87D22E1648151E00747ED8 /* AdvertisingOtherAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD87D22D1648151D00747ED8 /* AdvertisingOtherAppViewController.m */; };
+		BD9FED4D1701FD6D003B3156 /* CDBarrierDuelProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9FED4C1701FD6D003B3156 /* CDBarrierDuelProduct.m */; };
 		BDCB5C0E16BE91BE0056D28E /* gd_board@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDCB5C0C16BE91BE0056D28E /* gd_board@2x.png */; };
 		BDCB5C0F16BE91BE0056D28E /* gd_board.png in Resources */ = {isa = PBXBuildFile; fileRef = BDCB5C0D16BE91BE0056D28E /* gd_board.png */; };
 		BDCB5C1216BE96920056D28E /* dv_arrows.png in Resources */ = {isa = PBXBuildFile; fileRef = BDCB5C1016BE968F0056D28E /* dv_arrows.png */; };
@@ -1528,6 +1529,8 @@
 		BD87D2281648057400747ED8 /* AdvertisingNewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdvertisingNewViewController.xib; sourceTree = "<group>"; };
 		BD87D22C1648151D00747ED8 /* AdvertisingOtherAppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvertisingOtherAppViewController.h; sourceTree = "<group>"; };
 		BD87D22D1648151D00747ED8 /* AdvertisingOtherAppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertisingOtherAppViewController.m; sourceTree = "<group>"; };
+		BD9FED4B1701FD6D003B3156 /* CDBarrierDuelProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDBarrierDuelProduct.h; sourceTree = "<group>"; };
+		BD9FED4C1701FD6D003B3156 /* CDBarrierDuelProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDBarrierDuelProduct.m; sourceTree = "<group>"; };
 		BDA1B23B1648450E00FFF0A1 /* UIImage+Retina4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Retina4.h"; sourceTree = "<group>"; };
 		BDA1B23C1648450E00FFF0A1 /* UIImage+Retina4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Retina4.m"; sourceTree = "<group>"; };
 		BDC6D7BA147E48E90012CB34 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
@@ -2408,6 +2411,8 @@
 				76EC0ADD1638379E00481A26 /* CDDefenseProduct.m */,
 				76EC0ADF163837BB00481A26 /* CDWeaponProduct.h */,
 				76EC0AE0163837BB00481A26 /* CDWeaponProduct.m */,
+				BD9FED4B1701FD6D003B3156 /* CDBarrierDuelProduct.h */,
+				BD9FED4C1701FD6D003B3156 /* CDBarrierDuelProduct.m */,
 				76EC0AD9163808F100481A26 /* DuelProductDownloaderController.h */,
 				76EC0ADA163808F100481A26 /* DuelProductDownloaderController.m */,
 				7687E8C616392E1C003C9EE6 /* StoreDataSource.h */,
@@ -3690,6 +3695,7 @@
 				3197E9BA16FB6D490020D8C0 /* CactusObject.m in Sources */,
 				3192E30116FC9FF300698BD5 /* AirBallon.m in Sources */,
 				31A093561701C7DF00CDF4A9 /* HorseShape.m in Sources */,
+				BD9FED4D1701FD6D003B3156 /* CDBarrierDuelProduct.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

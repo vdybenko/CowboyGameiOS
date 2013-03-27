@@ -122,40 +122,68 @@
     curentGunBlueBackground.hidden = YES;
     
     name.text = product.dName;
-    if (cellType==StoreDataSourceTypeTablesDefenses) {
-        effectTitle.text=NSLocalizedString(@"defenses", @"");
-        effect.text =[NSString stringWithFormat:@"+%d",((CDDefenseProduct*)product).dDefense];
-        
-        buttonLabel.text = NSLocalizedString(@"BUYIT", @"");
-        
-        if (product.dCountOfUse == 0) {
-             countOfUse.hidden = YES;
-        }else{
-            [countOfUse setText:[NSString stringWithFormat:@"x%d",product.dCountOfUse] animated:YES];
-            countOfUse.hidden = NO;
-        }
-    }else{
-        effectTitle.text=NSLocalizedString(@"damage", @"");
-        effect.text =[NSString stringWithFormat:@"+%d",((CDWeaponProduct*)product).dDamage];
-        
-        countOfUse.hidden = YES;
-        
-        if (product.dCountOfUse == 0 && product.dID!=-1) {
+    
+    switch (cellType) {
+        case StoreDataSourceTypeTablesDefenses:{
+            effectTitle.text=NSLocalizedString(@"defenses", @"");
+            effect.text =[NSString stringWithFormat:@"+%d",((CDDefenseProduct*)product).dDefense];
+            
             buttonLabel.text = NSLocalizedString(@"BUYIT", @"");
-        }else{
-            if (product.dID == [AccountDataSource sharedInstance].curentIdWeapon) {
-                buyProduct.hidden = YES;
-                ribbonImage.hidden = NO;
-                ribbonLabel.text = NSLocalizedString(@"IN_HAND", @"");
-                curentGunBlueBackground.hidden = NO;
+            
+            if (product.dCountOfUse == 0) {
+                countOfUse.hidden = YES;
             }else{
-                buttonLabel.text = NSLocalizedString(@"USE", @"");
-                ribbonImage.hidden = NO;
-                ribbonLabel.text = NSLocalizedString(@"BOUGHT", @"");
+                [countOfUse setText:[NSString stringWithFormat:@"x%d",product.dCountOfUse] animated:YES];
+                countOfUse.hidden = NO;
             }
+
+            break;
         }
+        case StoreDataSourceTypeTablesWeapons:{
+            effectTitle.text=NSLocalizedString(@"damage", @"");
+            effect.text =[NSString stringWithFormat:@"+%d",((CDWeaponProduct*)product).dDamage];
+            
+            countOfUse.hidden = YES;
+            
+            if (product.dCountOfUse == 0 && product.dID!=-1) {
+                buttonLabel.text = NSLocalizedString(@"BUYIT", @"");
+            }else{
+                if (product.dID == [AccountDataSource sharedInstance].curentIdWeapon) {
+                    buyProduct.hidden = YES;
+                    ribbonImage.hidden = NO;
+                    ribbonLabel.text = NSLocalizedString(@"IN_HAND", @"");
+                    curentGunBlueBackground.hidden = NO;
+                }else{
+                    buttonLabel.text = NSLocalizedString(@"USE", @"");
+                    ribbonImage.hidden = NO;
+                    ribbonLabel.text = NSLocalizedString(@"BOUGHT", @"");
+                }
+            }
+            
+            break;
+        }
+        case StoreDataSourceTypeTablesBarrier:{
+            
+            effectTitle.text=NSLocalizedString(@"defenses", @"");
+            //effect.text =[NSString stringWithFormat:@"+%d",((CDDefenseProduct*)product).dDefense];
+            
+            buttonLabel.text = NSLocalizedString(@"BUYIT", @"");
+            
+            if (product.dCountOfUse == 0) {
+                countOfUse.hidden = YES;
+            }else{
+                [countOfUse setText:[NSString stringWithFormat:@"x%d",product.dCountOfUse] animated:YES];
+                countOfUse.hidden = NO;
+            }
+            
+            break;
+            
+        }
+        default:
+            break;
     }
     
+        
     if ([AccountDataSource sharedInstance].accountLevel<product.dLevelLock) {
         lockLevelBackground.hidden = NO;
         buyProduct.enabled = NO;
