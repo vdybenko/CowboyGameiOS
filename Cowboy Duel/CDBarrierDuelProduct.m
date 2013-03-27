@@ -26,7 +26,7 @@
 -(id)init
 {
     self = [super init];
-    self.dType = -1;
+    self.dType = BarrierDuelProductTypeNone;
     return self;
 }
 

@@ -27,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnBack;
 @property (weak, nonatomic) IBOutlet UIButton *btnBag;
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
+@property (weak, nonatomic) IBOutlet UIButton *btnBarriers;
 
 @end
 
@@ -39,6 +40,7 @@
 @synthesize btnBack;
 @synthesize btnWeapons;
 @synthesize btnDefenses;
+@synthesize btnBarriers;
 @synthesize btnBag;
 @synthesize loadingView, bagFlag;
 
@@ -74,10 +76,9 @@
     [btnBack changeColorOfTitleByLabel:buttonsTitleColor];
     [self.btnBag setTitleByLabel:@"BAG"];
     [self.btnBag changeColorOfTitleByLabel:buttonsTitleColor];
-    [btnWeapons setTitleByLabel:@"WEAPONS"];
-    [btnWeapons changeColorOfTitleByLabel:buttonsTitleColor];
-    [btnDefenses setTitleByLabel:@"DEFENSES"];
-    [btnDefenses changeColorOfTitleByLabel:buttonsTitleColor];
+    [btnWeapons setTitleByLabel:@"WEAPONS" withColor:buttonsTitleColor fontSize:20];
+    [btnBarriers setTitleByLabel:@"BARRIES" withColor:buttonsTitleColor fontSize:20];
+    [btnDefenses setTitleByLabel:@"DEFENSES" withColor:buttonsTitleColor fontSize:20];
     
     [storeDataSource reloadDataSource];
 }
@@ -119,6 +120,7 @@
     tableView = nil;
     btnWeapons = nil;
     btnDefenses = nil;
+    btnBarriers = nil;
     btnBack = nil;
     btnBag = nil;
     loadingView = nil;
@@ -481,5 +483,9 @@
 -(void)dealloc
 {
 
+}
+- (void)viewDidUnload {
+    [self setBtnBarriers:nil];
+    [super viewDidUnload];
 }
 @end

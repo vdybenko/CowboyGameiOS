@@ -7,7 +7,15 @@
 //
 
 #import "CDDuelProduct.h"
+typedef enum{
+    BarrierDuelProductTypeNone,
+    BarrierDuelProductTypeBarrel,
+    BarrierDuelProductTypeCactus,
+    BarrierDuelProductTypeMen,
+    BarrierDuelProductTypeWomen,
+    BarrierDuelProductTypeHorse
+}BarrierDuelProductType;
 
 @interface CDBarrierDuelProduct : CDDuelProduct
-@property(nonatomic) NSInteger dType;
+@property(nonatomic) BarrierDuelProductType dType;
 @end
