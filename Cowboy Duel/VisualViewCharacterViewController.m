@@ -33,11 +33,11 @@
     
     __weak IBOutlet UILabel *userMoney;
     
-    int visualViewCapSaved;
-    int visualViewHeadSaved;
-    int visualViewBodySaved;
-    int visualViewLegthSaved;
-    int visualViewShooseSaved;
+    int visualViewCapSelect;
+    int visualViewHeadSelect;
+    int visualViewBodySelect;
+    int visualViewLegthSelect;
+    int visualViewShooseSelect;
 }
 @end
 
@@ -59,11 +59,11 @@
 {
     [super viewDidLoad];
     playerAccount = [AccountDataSource sharedInstance];
-    visualViewCapSaved = playerAccount.visualViewCap;
-    visualViewHeadSaved = playerAccount.visualViewHead;
-    visualViewBodySaved = playerAccount.visualViewBody;
-    visualViewLegthSaved = playerAccount.visualViewLegth;
-    visualViewShooseSaved = playerAccount.visualViewShoose;
+    visualViewCapSelect = playerAccount.visualViewCap;
+    visualViewHeadSelect = playerAccount.visualViewHead;
+    visualViewBodySelect = playerAccount.visualViewBody;
+    visualViewLegthSelect = playerAccount.visualViewLegth;
+    visualViewShooseSelect = playerAccount.visualViewShoose;
     
     UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     
@@ -86,7 +86,7 @@
     scrollViewSwitcherCap.didFinishBlock = ^(NSInteger curentIndex){
         CDVisualViewCharacterPartCap *visualViewCharacterPart = [scrollViewSwitcherCap.arraySwitchObjects objectAtIndex:curentIndex];
         visualViewCharacter.cap.image = [visualViewCharacterPart imageForObject];
-        playerAccount.visualViewCap = curentIndex;
+        visualViewCapSelect = curentIndex;
         
         [self fillCap];
     };
@@ -100,7 +100,7 @@
     scrollViewSwitcherHead.didFinishBlock = ^(NSInteger curentIndex){
         CDVisualViewCharacterPartHead *visualViewCharacterPart = [scrollViewSwitcherHead.arraySwitchObjects objectAtIndex:curentIndex];
         visualViewCharacter.head.image = [visualViewCharacterPart imageForObject];
-        playerAccount.visualViewHead = curentIndex;
+        visualViewHeadSelect = curentIndex;
         
         [self fillHead];
     };
@@ -114,7 +114,7 @@
     scrollViewSwitcherBody.didFinishBlock = ^(NSInteger curentIndex){
         CDVisualViewCharacterPartBody *visualViewCharacterPart = [scrollViewSwitcherBody.arraySwitchObjects objectAtIndex:curentIndex];
         visualViewCharacter.body.image = [visualViewCharacterPart imageForObject];
-        playerAccount.visualViewBody = curentIndex;
+       visualViewBodySelect = curentIndex;
         
         [self fillBody];
     };
@@ -128,7 +128,7 @@
     scrollViewSwitcherLegth.didFinishBlock = ^(NSInteger curentIndex){
         CDVisualViewCharacterPartLegth *visualViewCharacterPart = [scrollViewSwitcherLegth.arraySwitchObjects objectAtIndex:curentIndex];
         visualViewCharacter.length.image = [visualViewCharacterPart imageForObject];
-        playerAccount.visualViewLegth = curentIndex;
+        visualViewLegthSelect = curentIndex;
         
         [self fillLegth];
     };
@@ -142,7 +142,7 @@
     scrollViewSwitcherShoose.didFinishBlock = ^(NSInteger curentIndex){
         CDVisualViewCharacterPartShoose *visualViewCharacterPart = [scrollViewSwitcherShoose.arraySwitchObjects objectAtIndex:curentIndex];
         visualViewCharacter.shoose.image = [visualViewCharacterPart imageForObject];
-        playerAccount.visualViewShoose = curentIndex;
+        visualViewShooseSelect = curentIndex;
         
         [self fillShoose];
     };
@@ -264,14 +264,14 @@
 #pragma mark
 -(void)fillCap
 {
-    CDVisualViewCharacterPartCap *visualViewCharacterPart = [scrollViewSwitcherCap.arraySwitchObjects objectAtIndex:playerAccount.visualViewCap];
+    CDVisualViewCharacterPartCap *visualViewCharacterPart = [scrollViewSwitcherCap.arraySwitchObjects objectAtIndex:visualViewCapSelect];
     lbMoneyCap.text = [NSString stringWithFormat:@"$%d",visualViewCharacterPart.money];
     lbActionCap.text = [NSString stringWithFormat:@"+%d %@",visualViewCharacterPart.action,NSLocalizedString(@"defence", @"")];
     UIColor *color;
-    if (playerAccount.visualViewCap==visualViewCapSaved) {
+    if (playerAccount.visualViewCap==visualViewCapSelect) {
         color = [UIColor blackColor];
     }else{
-        CDVisualViewCharacterPartCap *visualViewCharacterPartSaved = [scrollViewSwitcherCap.arraySwitchObjects objectAtIndex:visualViewCapSaved];
+        CDVisualViewCharacterPartCap *visualViewCharacterPartSaved = [scrollViewSwitcherCap.arraySwitchObjects objectAtIndex:playerAccount.visualViewCap];
         if (visualViewCharacterPart.action>visualViewCharacterPartSaved.action) {
             color = [UIColor greenColor];
         }else{
@@ -289,14 +289,14 @@
  
 -(void)fillBody
 {
-    CDVisualViewCharacterPartBody *visualViewCharacterPart = [scrollViewSwitcherBody.arraySwitchObjects objectAtIndex:playerAccount.visualViewBody];
+    CDVisualViewCharacterPartBody *visualViewCharacterPart = [scrollViewSwitcherBody.arraySwitchObjects objectAtIndex:visualViewBodySelect];
     lbMoneyBody.text = [NSString stringWithFormat:@"$%d",visualViewCharacterPart.money];
     lbActionBody.text = [NSString stringWithFormat:@"+%d %@",visualViewCharacterPart.action,NSLocalizedString(@"defence", @"")];
     UIColor *color;
-    if (playerAccount.visualViewBody==visualViewBodySaved) {
+    if (playerAccount.visualViewBody==visualViewBodySelect) {
         color = [UIColor blackColor];
     }else{
-        CDVisualViewCharacterPartBody *visualViewCharacterPartSaved = [scrollViewSwitcherBody.arraySwitchObjects objectAtIndex:visualViewBodySaved];
+        CDVisualViewCharacterPartBody *visualViewCharacterPartSaved = [scrollViewSwitcherBody.arraySwitchObjects objectAtIndex:playerAccount.visualViewBody];
         if (visualViewCharacterPart.action>visualViewCharacterPartSaved.action) {
             color = [UIColor greenColor];
         }else{
@@ -308,14 +308,14 @@
 
 -(void)fillLegth
 {
-    CDVisualViewCharacterPartLegth *visualViewCharacterPart = [scrollViewSwitcherLegth.arraySwitchObjects objectAtIndex:playerAccount.visualViewLegth];
+    CDVisualViewCharacterPartLegth *visualViewCharacterPart = [scrollViewSwitcherLegth.arraySwitchObjects objectAtIndex:visualViewLegthSelect];
     lbMoneyLegth.text = [NSString stringWithFormat:@"$%d",visualViewCharacterPart.money];
     lbActionLegth.text = [NSString stringWithFormat:@"+%d %@",visualViewCharacterPart.action,NSLocalizedString(@"defence", @"")];
     UIColor *color;
-    if (playerAccount.visualViewLegth==visualViewLegthSaved) {
+    if (playerAccount.visualViewLegth==visualViewLegthSelect) {
         color = [UIColor blackColor];
     }else{
-        CDVisualViewCharacterPartLegth *visualViewCharacterPartSaved = [scrollViewSwitcherLegth.arraySwitchObjects objectAtIndex:visualViewLegthSaved];
+        CDVisualViewCharacterPartLegth *visualViewCharacterPartSaved = [scrollViewSwitcherLegth.arraySwitchObjects objectAtIndex:playerAccount.visualViewLegth];
         if (visualViewCharacterPart.action>visualViewCharacterPartSaved.action) {
             color = [UIColor greenColor];
         }else{
@@ -327,14 +327,14 @@
 
 -(void)fillShoose
 {
-    CDVisualViewCharacterPartShoose *visualViewCharacterPart = [scrollViewSwitcherShoose.arraySwitchObjects objectAtIndex:playerAccount.visualViewShoose];
+    CDVisualViewCharacterPartShoose *visualViewCharacterPart = [scrollViewSwitcherShoose.arraySwitchObjects objectAtIndex:visualViewShooseSelect];
     lbMoneyShoose.text = [NSString stringWithFormat:@"$%d",visualViewCharacterPart.money];
     lbActionShoose.text = [NSString stringWithFormat:@"+%d %@",visualViewCharacterPart.action,NSLocalizedString(@"defence", @"")];
     UIColor *color;
-    if (playerAccount.visualViewShoose==visualViewShooseSaved) {
+    if (playerAccount.visualViewShoose==visualViewShooseSelect) {
         color = [UIColor blackColor];
     }else{
-        CDVisualViewCharacterPartShoose *visualViewCharacterPartSaved = [scrollViewSwitcherShoose.arraySwitchObjects objectAtIndex:visualViewShooseSaved];
+        CDVisualViewCharacterPartShoose *visualViewCharacterPartSaved = [scrollViewSwitcherShoose.arraySwitchObjects objectAtIndex:playerAccount.visualViewShoose];
         if (visualViewCharacterPart.action>visualViewCharacterPartSaved.action) {
             color = [UIColor greenColor];
         }else{
