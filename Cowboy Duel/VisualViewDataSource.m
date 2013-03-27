@@ -29,6 +29,8 @@
         arrayHead = [NSMutableArray array];
         arrayCap = [NSMutableArray array];
         arrayBody = [NSMutableArray array];
+        arrayLegth = [NSMutableArray array];
+        arrayShoose = [NSMutableArray array];
         
         NSArray *arrayMainCap = VISUAL_VIEW_CHARACTER_CAP_ARRAY;
         for (NSArray *array in arrayMainCap) {

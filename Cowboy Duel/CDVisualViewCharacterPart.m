@@ -11,13 +11,14 @@
 @implementation CDVisualViewCharacterPart
 @synthesize nameForImage;
 @synthesize rectForImage;
+@synthesize money;
 
 -(id)initWithArray:(NSArray*)arrayOfParametrs;
 {
     self = [super init];
     if (self) {
         nameForImage = [arrayOfParametrs objectAtIndex:0];
-//        rectForImage = CGRectFromString([[arrayOfParametrs objectAtIndex:1] string]);
+        money = [[arrayOfParametrs objectAtIndex:1] integerValue];
     }
     return self;
 }

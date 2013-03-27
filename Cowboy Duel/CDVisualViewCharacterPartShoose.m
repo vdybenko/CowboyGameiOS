@@ -9,5 +9,14 @@
 #import "CDVisualViewCharacterPartShoose.h"
 
 @implementation CDVisualViewCharacterPartShoose
+@synthesize action;
 
+-(id)initWithArray:(NSArray *)arrayOfParametrs
+{
+    self = [super initWithArray:arrayOfParametrs];
+    if (self) {
+        action = [[arrayOfParametrs objectAtIndex:2] integerValue];
+    }
+    return self;
+}
 @end

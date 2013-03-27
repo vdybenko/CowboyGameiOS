@@ -7,10 +7,7 @@
 
 @interface VisualViewCharacterViewController ()
 {
-//    __weak IBOutlet UILabel *title;
-//    __weak IBOutlet UIButton *btnBack;
-//    __weak IBOutlet UIView *activityView;
-//    __weak AccountDataSource *playerAccount;
+    __weak AccountDataSource *playerAccount;
     __weak IBOutlet VisualViewCharacter *visualViewCharacter;
     __weak IBOutlet ScrollViewSwitcher *scrollViewSwitcherCap;
     __weak IBOutlet ScrollViewSwitcher *scrollViewSwitcherHead;
@@ -19,8 +16,28 @@
     __weak IBOutlet ScrollViewSwitcher *scrollViewSwitcherShoose;
     __weak IBOutlet UIButton *btnBack;
     __weak IBOutlet UIButton *btnAccept;
+    
     __weak IBOutlet UIView *rightSideView;
     __weak IBOutlet UIView *leftSideView;
+    
+    __weak IBOutlet UILabel *lbMoneyCap;
+    __weak IBOutlet UILabel *lbActionCap;
+    __weak IBOutlet UILabel *lbMoneyHead;
+    __weak IBOutlet UILabel *lbActionHead;
+    __weak IBOutlet UILabel *lbMoneyBody;
+    __weak IBOutlet UILabel *lbActionBody;
+    __weak IBOutlet UILabel *lbMoneyLegth;
+    __weak IBOutlet UILabel *lbActionLegth;
+    __weak IBOutlet UILabel *lbMoneyShoose;
+    __weak IBOutlet UILabel *lbActionShoose;
+    
+    __weak IBOutlet UILabel *userMoney;
+    
+    int visualViewCapSaved;
+    int visualViewHeadSaved;
+    int visualViewBodySaved;
+    int visualViewLegthSaved;
+    int visualViewShooseSaved;
 }
 @end
 
@@ -41,6 +58,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    playerAccount = [AccountDataSource sharedInstance];
+    visualViewCapSaved = playerAccount.visualViewCap;
+    visualViewHeadSaved = playerAccount.visualViewHead;
+    visualViewBodySaved = playerAccount.visualViewBody;
+    visualViewLegthSaved = playerAccount.visualViewLegth;
+    visualViewShooseSaved = playerAccount.visualViewShoose;
     
     UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     
@@ -50,10 +73,12 @@
     [btnAccept setTitleByLabel:@"ACCEPT"];
     [btnAccept changeColorOfTitleByLabel:buttonsTitleColor];
     
-    visualViewDataSource = [[VisualViewDataSource alloc] init];
+    userMoney.text = [NSString stringWithFormat:@"%d",playerAccount.money];
+
     
+    visualViewDataSource = [[VisualViewDataSource alloc] init];    
     visualViewCharacter.visualViewDataSource = visualViewDataSource;
-    [visualViewCharacter refreshWithAccountPlayer:[AccountDataSource sharedInstance]];
+    [visualViewCharacter refreshWithAccountPlayer:playerAccount];
     
     scrollViewSwitcherCap.rectForObjetc = (CGRect){0,0,70,45};
     scrollViewSwitcherCap.arraySwitchObjects = [visualViewDataSource arrayCap];
@@ -61,7 +86,9 @@
     scrollViewSwitcherCap.didFinishBlock = ^(NSInteger curentIndex){
         CDVisualViewCharacterPartCap *visualViewCharacterPart = [scrollViewSwitcherCap.arraySwitchObjects objectAtIndex:curentIndex];
         visualViewCharacter.cap.image = [visualViewCharacterPart imageForObject];
-        [AccountDataSource sharedInstance].visualViewCap = curentIndex;
+        playerAccount.visualViewCap = curentIndex;
+        
+        [self fillCap];
     };
     scrollViewSwitcherCap.colorizeImage = visualViewCharacter.cap;
     [scrollViewSwitcherCap trimObjectsToView:visualViewCharacter.cap];
@@ -73,7 +100,9 @@
     scrollViewSwitcherHead.didFinishBlock = ^(NSInteger curentIndex){
         CDVisualViewCharacterPartHead *visualViewCharacterPart = [scrollViewSwitcherHead.arraySwitchObjects objectAtIndex:curentIndex];
         visualViewCharacter.head.image = [visualViewCharacterPart imageForObject];
-        [AccountDataSource sharedInstance].visualViewHead = curentIndex;
+        playerAccount.visualViewHead = curentIndex;
+        
+        [self fillHead];
     };
     scrollViewSwitcherHead.colorizeImage = visualViewCharacter.head;
     [scrollViewSwitcherHead trimObjectsToView:visualViewCharacter.head];
@@ -85,7 +114,9 @@
     scrollViewSwitcherBody.didFinishBlock = ^(NSInteger curentIndex){
         CDVisualViewCharacterPartBody *visualViewCharacterPart = [scrollViewSwitcherBody.arraySwitchObjects objectAtIndex:curentIndex];
         visualViewCharacter.body.image = [visualViewCharacterPart imageForObject];
-        [AccountDataSource sharedInstance].visualViewBody = curentIndex;
+        playerAccount.visualViewBody = curentIndex;
+        
+        [self fillBody];
     };
     scrollViewSwitcherBody.colorizeImage = visualViewCharacter.body;
     [scrollViewSwitcherBody trimObjectsToView:visualViewCharacter.body];
@@ -97,7 +128,9 @@
     scrollViewSwitcherLegth.didFinishBlock = ^(NSInteger curentIndex){
         CDVisualViewCharacterPartLegth *visualViewCharacterPart = [scrollViewSwitcherLegth.arraySwitchObjects objectAtIndex:curentIndex];
         visualViewCharacter.length.image = [visualViewCharacterPart imageForObject];
-        [AccountDataSource sharedInstance].visualViewLegth = curentIndex;
+        playerAccount.visualViewLegth = curentIndex;
+        
+        [self fillLegth];
     };
     scrollViewSwitcherLegth.colorizeImage = visualViewCharacter.length;
     [scrollViewSwitcherLegth trimObjectsToView:visualViewCharacter.length];
@@ -109,11 +142,19 @@
     scrollViewSwitcherShoose.didFinishBlock = ^(NSInteger curentIndex){
         CDVisualViewCharacterPartShoose *visualViewCharacterPart = [scrollViewSwitcherShoose.arraySwitchObjects objectAtIndex:curentIndex];
         visualViewCharacter.shoose.image = [visualViewCharacterPart imageForObject];
-        [AccountDataSource sharedInstance].visualViewShoose = curentIndex;
+        playerAccount.visualViewShoose = curentIndex;
+        
+        [self fillShoose];
     };
     scrollViewSwitcherShoose.colorizeImage = visualViewCharacter.shoose;
     [scrollViewSwitcherShoose trimObjectsToView:visualViewCharacter.shoose];
     [scrollViewSwitcherShoose setMainControls];
+    
+    [self fillCap];
+    [self fillHead];
+    [self fillBody];
+    [self fillLegth];
+    [self fillShoose];
     
     int iPhone5Delta = [UIScreen mainScreen].bounds.size.height - 480;
     //    deltas for 5 iPhone
@@ -131,6 +172,26 @@
         frame = visualViewCharacter.frame;
         frame.origin.y += iPhone5Delta;
         [visualViewCharacter setFrame:frame];
+        
+        frame = scrollViewSwitcherCap.frame;
+        frame.origin.y += iPhone5Delta;
+        [scrollViewSwitcherCap setFrame:frame];
+        
+        frame = scrollViewSwitcherHead.frame;
+        frame.origin.y += iPhone5Delta;
+        [scrollViewSwitcherHead setFrame:frame];
+        
+        frame = scrollViewSwitcherBody.frame;
+        frame.origin.y += iPhone5Delta;
+        [scrollViewSwitcherBody setFrame:frame];
+        
+        frame = scrollViewSwitcherLegth.frame;
+        frame.origin.y += iPhone5Delta;
+        [scrollViewSwitcherLegth setFrame:frame];
+        
+        frame = scrollViewSwitcherShoose.frame;
+        frame.origin.y += iPhone5Delta;
+        [scrollViewSwitcherShoose setFrame:frame];
     }
 }
 
@@ -163,6 +224,17 @@
     btnAccept = nil;
     rightSideView = nil;
     leftSideView = nil;
+    userMoney = nil;
+    lbMoneyCap = nil;
+    lbActionCap = nil;
+    lbMoneyHead = nil;
+    lbActionHead = nil;
+    lbMoneyBody = nil;
+    lbActionBody = nil;
+    lbMoneyLegth = nil;
+    lbActionLegth = nil;
+    lbMoneyShoose = nil;
+    lbActionShoose = nil;
     [super viewDidUnload];
 }
 -(void)refreshController;
@@ -171,17 +243,7 @@
 
 - (void)releaseComponents
 {
-    [visualViewDataSource releaseComponents];
-    visualViewDataSource = nil;
-    [scrollViewSwitcherCap releaseComponents];
-    scrollViewSwitcherCap = nil;
-    [scrollViewSwitcherHead releaseComponents];
-    scrollViewSwitcherHead = nil;
-    [scrollViewSwitcherBody releaseComponents];
-    scrollViewSwitcherBody = nil;
-    [visualViewCharacter releaseComponents];
-    visualViewCharacter = nil;
-    btnBack = nil;
+    [self viewDidUnload];
 }
 
 #pragma mark IBAction
@@ -198,4 +260,88 @@
     [[AccountDataSource sharedInstance] saveVisualView];
     [self releaseComponents];
 }
+
+#pragma mark
+-(void)fillCap
+{
+    CDVisualViewCharacterPartCap *visualViewCharacterPart = [scrollViewSwitcherCap.arraySwitchObjects objectAtIndex:playerAccount.visualViewCap];
+    lbMoneyCap.text = [NSString stringWithFormat:@"$%d",visualViewCharacterPart.money];
+    lbActionCap.text = [NSString stringWithFormat:@"+%d %@",visualViewCharacterPart.action,NSLocalizedString(@"defence", @"")];
+    UIColor *color;
+    if (playerAccount.visualViewCap==visualViewCapSaved) {
+        color = [UIColor blackColor];
+    }else{
+        CDVisualViewCharacterPartCap *visualViewCharacterPartSaved = [scrollViewSwitcherCap.arraySwitchObjects objectAtIndex:visualViewCapSaved];
+        if (visualViewCharacterPart.action>visualViewCharacterPartSaved.action) {
+            color = [UIColor greenColor];
+        }else{
+            color = [UIColor redColor];
+        }
+    }
+    lbActionCap.textColor = color;
+}
+
+-(void)fillHead
+{
+    CDVisualViewCharacterPartHead *visualViewCharacterPart = [scrollViewSwitcherHead.arraySwitchObjects objectAtIndex:playerAccount.visualViewHead];
+    lbMoneyHead.text = [NSString stringWithFormat:@"$%d",visualViewCharacterPart.money];
+}
+ 
+-(void)fillBody
+{
+    CDVisualViewCharacterPartBody *visualViewCharacterPart = [scrollViewSwitcherBody.arraySwitchObjects objectAtIndex:playerAccount.visualViewBody];
+    lbMoneyBody.text = [NSString stringWithFormat:@"$%d",visualViewCharacterPart.money];
+    lbActionBody.text = [NSString stringWithFormat:@"+%d %@",visualViewCharacterPart.action,NSLocalizedString(@"defence", @"")];
+    UIColor *color;
+    if (playerAccount.visualViewBody==visualViewBodySaved) {
+        color = [UIColor blackColor];
+    }else{
+        CDVisualViewCharacterPartBody *visualViewCharacterPartSaved = [scrollViewSwitcherBody.arraySwitchObjects objectAtIndex:visualViewBodySaved];
+        if (visualViewCharacterPart.action>visualViewCharacterPartSaved.action) {
+            color = [UIColor greenColor];
+        }else{
+            color = [UIColor redColor];
+        }
+    }
+    lbActionBody.textColor = color;
+}
+
+-(void)fillLegth
+{
+    CDVisualViewCharacterPartLegth *visualViewCharacterPart = [scrollViewSwitcherLegth.arraySwitchObjects objectAtIndex:playerAccount.visualViewLegth];
+    lbMoneyLegth.text = [NSString stringWithFormat:@"$%d",visualViewCharacterPart.money];
+    lbActionLegth.text = [NSString stringWithFormat:@"+%d %@",visualViewCharacterPart.action,NSLocalizedString(@"defence", @"")];
+    UIColor *color;
+    if (playerAccount.visualViewLegth==visualViewLegthSaved) {
+        color = [UIColor blackColor];
+    }else{
+        CDVisualViewCharacterPartLegth *visualViewCharacterPartSaved = [scrollViewSwitcherLegth.arraySwitchObjects objectAtIndex:visualViewLegthSaved];
+        if (visualViewCharacterPart.action>visualViewCharacterPartSaved.action) {
+            color = [UIColor greenColor];
+        }else{
+            color = [UIColor redColor];
+        }
+    }
+    lbActionLegth.textColor = color;
+}
+
+-(void)fillShoose
+{
+    CDVisualViewCharacterPartShoose *visualViewCharacterPart = [scrollViewSwitcherShoose.arraySwitchObjects objectAtIndex:playerAccount.visualViewShoose];
+    lbMoneyShoose.text = [NSString stringWithFormat:@"$%d",visualViewCharacterPart.money];
+    lbActionShoose.text = [NSString stringWithFormat:@"+%d %@",visualViewCharacterPart.action,NSLocalizedString(@"defence", @"")];
+    UIColor *color;
+    if (playerAccount.visualViewShoose==visualViewShooseSaved) {
+        color = [UIColor blackColor];
+    }else{
+        CDVisualViewCharacterPartShoose *visualViewCharacterPartSaved = [scrollViewSwitcherShoose.arraySwitchObjects objectAtIndex:visualViewShooseSaved];
+        if (visualViewCharacterPart.action>visualViewCharacterPartSaved.action) {
+            color = [UIColor greenColor];
+        }else{
+            color = [UIColor redColor];
+        }
+    }
+    lbActionShoose.textColor = color;
+}
+
 @end
