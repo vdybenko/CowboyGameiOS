@@ -41,7 +41,7 @@
             explosinPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFile error:&error];
             [explosinPlayer prepareToPlay];
         
-            UIImage *spriteSheetExp = [UIImage imageNamed:@"barelExp"];
+            UIImage *spriteSheetExp = [UIImage imageNamed:@"barelExpl"];
             NSArray *arrayWithSpritesExp = [spriteSheetExp spritesWithSpriteSheetImage:spriteSheetExp
                                                                             spriteSize:CGSizeMake(75, 75)];
             [barelAnimImg setAnimationImages:arrayWithSpritesExp];
