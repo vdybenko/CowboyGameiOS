@@ -370,7 +370,7 @@ static CGFloat blinkBottomOriginY;
     [self.gunButton setEnabled:NO];
     
     userLiveImageViewStartWidth = self.userLiveImageView.frame.size.width;
-    self.lbUserLifeLeft.text = [NSString stringWithFormat:@"100%%"];
+    self.lbUserLifeLeft.text = [NSString stringWithFormat:@"%d",shotCountBulletForOpponent*10];
     
     self.opStatsLabel.text = [NSString stringWithFormat: @"A: +%d\rD: +%d",opAccount.accountWeapon.dDamage,opAccount.accountDefenseValue];
     self.userStatsLabel.text = [NSString stringWithFormat: @"A: +%d\nD: +%d",playerAccount.accountWeapon.dDamage,playerAccount.accountDefenseValue];
@@ -401,7 +401,7 @@ static CGFloat blinkBottomOriginY;
     
     [opponentShape setStatusBody:OpponentShapeStatusLive];
     [opponentShape cleareDamage];
-    [opponentShape refreshLiveBar];
+    [opponentShape refreshLiveBarWithLives:maxShotCount];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -701,8 +701,7 @@ static CGFloat blinkBottomOriginY;
     frame.size.width = (float)((shotCountBulletForOpponent)*userLiveImageViewStartWidth)/maxShotCountForOpponent;
     self.userLiveImageView.frame = frame;
     
-    float x = self.userLiveImageView.frame.size.width*100/userLiveImageViewStartWidth;
-    self.lbUserLifeLeft.text = [NSString stringWithFormat:@"%d%%",(int)x];
+    self.lbUserLifeLeft.text = [NSString stringWithFormat:@"%d",shotCountBulletForOpponent*10];
     
     CGRect frameLife = self.lbUserLifeLeft.frame;
     frameLife.size.width = frame.size.width;

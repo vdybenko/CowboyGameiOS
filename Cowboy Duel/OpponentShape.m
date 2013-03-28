@@ -161,8 +161,8 @@ static CGFloat oponentLiveImageViewStartWidth;
     frame.size.width = (float)((maxShotCount - userHitCount)*oponentLiveImageViewStartWidth)/maxShotCount;
     ivLifeBar.frame = frame;
 
-    float x = ivLifeBar.frame.size.width*100/oponentLiveImageViewStartWidth;
-    lbLifeLeft.text = [NSString stringWithFormat:@"%d%%",(int)x];
+    int x = (maxShotCount - userHitCount)*10;
+    lbLifeLeft.text = [NSString stringWithFormat:@"%d",x];
 
     CGRect frameLife = lbLifeLeft.frame;
     frameLife.size.width = frame.size.width;
@@ -170,12 +170,12 @@ static CGFloat oponentLiveImageViewStartWidth;
     
 }
 
--(void) refreshLiveBar;
+-(void) refreshLiveBarWithLives: (int )lives;
 {
     CGRect frame = ivLifeBar.frame;
     frame.size.width = oponentLiveImageViewStartWidth;
     ivLifeBar.frame = frame;
-    lbLifeLeft.text =[NSString stringWithFormat:@"100%%"];
+    lbLifeLeft.text =[NSString stringWithFormat:@"%d", lives*10];
 }
 
 -(void) setStatusBody:(OpponentShapeStatus)status;

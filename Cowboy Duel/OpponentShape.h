@@ -31,7 +31,7 @@ typedef enum {
 -(void)reboundOnShot;
 
 -(void) changeLiveBarWithUserHitCount:(int)userHitCount maxShotCount:(int)maxShotCount;
--(void) refreshLiveBar;
+-(void) refreshLiveBarWithLives: (int )lives;
 
 -(void) setStatusBody:(OpponentShapeStatus)status;
 
