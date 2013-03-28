@@ -618,8 +618,6 @@ static GCHelper *sharedHelper = nil;
             if (error != nil)
             {
                 DLog(@"send data false  %@",[error description]);
-                UIAlertView *startAv = [[UIAlertView alloc] initWithTitle:@"send data false" message:@"send data false" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                [startAv show];
                 // handle the error
             }else{
                 DLog(@"send data good math %@ delege %@",match,match.delegate);
@@ -633,11 +631,6 @@ static GCHelper *sharedHelper = nil;
 
 // The match received data sent from the player.
 - (void)match:(GKMatch *)theMatch didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID {
-    
-    
-    
-//    UIAlertView* startAv = [[UIAlertView alloc] initWithTitle:@"GC helper" message:@"didReceiveData" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//    [startAv show];
     
     if (match != theMatch) return;
     

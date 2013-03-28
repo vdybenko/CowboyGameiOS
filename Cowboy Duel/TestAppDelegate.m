@@ -202,11 +202,17 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
                                                       otherButtonTitles: nil];
             alertView.tag = 1;
             [alertView show];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                                object:self
+                                                              userInfo:[NSDictionary dictionaryWithObject:@"/login_FB_no_account" forKey:@"event"]];
+            
             return NO;
         }
     }
 
     [self openSessionWithPermission:permissions];
+    return YES;
 }
 
 -(void)openSessionWithPermission:(NSArray *)permissions
@@ -285,13 +291,6 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     
     
     if (error) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Error: %@",
-                                                                     [TestAppDelegate FBErrorCodeDescription:error.code]]
-                                                            message:error.localizedDescription
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-        [alertView show];
     }
 }
 
