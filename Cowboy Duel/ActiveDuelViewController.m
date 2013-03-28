@@ -360,9 +360,9 @@ static CGFloat blinkBottomOriginY;
     [goodCowboyShape randomPositionWithView:womanShape];
     [horseShape randomPositionWithView:goodCowboyShape];
     
-    CGRect horseFrame = horseShape.frame;
-    horseFrame.origin.y = horseFrame.origin.y + 50;
-    horseShape.frame = horseFrame;
+    CGRect opponentFrame = opponentShape.frame;
+    opponentFrame.origin.y += 50;
+    horseShape.frame = opponentFrame;
     
 	[plView startAnimation];
     
