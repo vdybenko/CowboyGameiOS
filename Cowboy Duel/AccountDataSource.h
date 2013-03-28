@@ -7,6 +7,7 @@
 #import "ValidationUtils.h"
 #import "CDAchivment.h"
 #import "CDWeaponProduct.h"
+#import "GameSceneConfig.h"
 
 @class StartViewController;
 @interface AccountDataSource : NSObject <FBLoginViewDelegate>
@@ -20,7 +21,8 @@
 @property(nonatomic) NSInteger accountPoints; 
 @property(nonatomic) NSInteger accountWins; 
 @property(nonatomic) NSInteger accountDraws; 
-@property(nonatomic) NSInteger accountBigestWin; 
+@property(nonatomic) NSInteger accountBigestWin;
+@property(nonatomic) GameSceneConfig *accountSceneConfig;
 @property(nonatomic) NSInteger removeAds;
 @property(nonatomic) BOOL activeDuel;
 

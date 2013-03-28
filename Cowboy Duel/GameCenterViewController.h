@@ -24,6 +24,11 @@ typedef struct {
     int oponentShotTime;
     int oponentAtack;
     int oponentDefense;
+    int barrelsCount;
+    int cactusCount;
+    int horseCount;
+    int menCount;
+    int womenCount;
 } gameInfo;
 @class StartViewController;
 @class FinalViewController;
