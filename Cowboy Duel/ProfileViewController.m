@@ -918,7 +918,6 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                             object:self
                                                           userInfo:[NSDictionary dictionaryWithObject:@"/duel_teaching" forKey:@"event"]];
-//        [self releaseComponents];
         return;
     }
     
