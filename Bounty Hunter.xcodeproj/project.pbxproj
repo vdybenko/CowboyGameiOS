@@ -178,7 +178,6 @@
 		319A99171649022C000D2A45 /* fv_new_corpse@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 319A98FD1649022C000D2A45 /* fv_new_corpse@2x.png */; };
 		319A991A1649331B000D2A45 /* fv_new_money_dropped.png in Resources */ = {isa = PBXBuildFile; fileRef = 319A991816493319000D2A45 /* fv_new_money_dropped.png */; };
 		319A991B1649331B000D2A45 /* fv_new_money_dropped@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 319A991916493319000D2A45 /* fv_new_money_dropped@2x.png */; };
-		31A0934F1701C68100CDF4A9 /* horseAnimation.png in Resources */ = {isa = PBXBuildFile; fileRef = 31A0934E1701C68000CDF4A9 /* horseAnimation.png */; };
 		31A093511701C68E00CDF4A9 /* horses_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 31A093501701C68E00CDF4A9 /* horses_1.png */; };
 		31A093531701C6DE00CDF4A9 /* Horse.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31A093521701C6DE00CDF4A9 /* Horse.xib */; };
 		31A093561701C7DF00CDF4A9 /* HorseShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A093551701C7DF00CDF4A9 /* HorseShape.m */; };
@@ -1040,7 +1039,6 @@
 		319A98FD1649022C000D2A45 /* fv_new_corpse@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fv_new_corpse@2x.png"; sourceTree = "<group>"; };
 		319A991816493319000D2A45 /* fv_new_money_dropped.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fv_new_money_dropped.png; sourceTree = "<group>"; };
 		319A991916493319000D2A45 /* fv_new_money_dropped@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fv_new_money_dropped@2x.png"; sourceTree = "<group>"; };
-		31A0934E1701C68000CDF4A9 /* horseAnimation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = horseAnimation.png; sourceTree = "<group>"; };
 		31A093501701C68E00CDF4A9 /* horses_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = horses_1.png; sourceTree = "<group>"; };
 		31A093521701C6DE00CDF4A9 /* Horse.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Horse.xib; path = Xib/Horse.xib; sourceTree = "<group>"; };
 		31A093541701C7DE00CDF4A9 /* HorseShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorseShape.h; sourceTree = "<group>"; };
@@ -2621,7 +2619,6 @@
 				7693D97916F213130096F61F /* goodCowboy.png */,
 				31A093501701C68E00CDF4A9 /* horses_1.png */,
 				3136B20117049322004A273C /* barelExpl.png */,
-				31A0934E1701C68000CDF4A9 /* horseAnimation.png */,
 				7693D98D16F23C7F0096F61F /* goodCowboyScared@2x.png */,
 				768B0E9C16EE125600D7EB99 /* blood_a.png */,
 				766C608116F0B71800508128 /* blinkEye2.png */,
@@ -3300,7 +3297,6 @@
 				3192E2FC16FC9F4400698BD5 /* AirBalloon.xib in Resources */,
 				3192E2FE16FC9F9700698BD5 /* airBalloon.png in Resources */,
 				319025B417019FDF00956831 /* explosionBarelSpriteSheet.png in Resources */,
-				31A0934F1701C68100CDF4A9 /* horseAnimation.png in Resources */,
 				31A093511701C68E00CDF4A9 /* horses_1.png in Resources */,
 				31A093531701C6DE00CDF4A9 /* Horse.xib in Resources */,
 				3191B4C3170338DC008514A2 /* horseAnimation2.png in Resources */,
