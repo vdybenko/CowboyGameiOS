@@ -500,6 +500,8 @@
 		BD3503BB16AD370800956BB7 /* ivCross@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3503AA16AD370800956BB7 /* ivCross@2x.png */; };
 		BD3503BC16AD370800956BB7 /* ivCross@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3503AA16AD370800956BB7 /* ivCross@2x.png */; };
 		BD3503CA16AD7E2E00956BB7 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3851F6169C3BE70066419B /* FacebookSDK.framework */; };
+		BD357C921703504E0079F68A /* GameSceneConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = BD357C911703504D0079F68A /* GameSceneConfig.m */; };
+		BD357C931703504E0079F68A /* GameSceneConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = BD357C911703504D0079F68A /* GameSceneConfig.m */; };
 		BD3851F7169C3BE70066419B /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3851F6169C3BE70066419B /* FacebookSDK.framework */; };
 		BD3B88FA1689AC2100FB68F5 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD81FB421678847D00417076 /* Accounts.framework */; };
 		BD3B88FC1689AC5B00FB68F5 /* FunPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD16BF951680934F00628CCC /* FunPageViewController.m */; };
@@ -1450,6 +1452,8 @@
 		BD243B1916A9AAF600D89E47 /* cry.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = cry.aif; sourceTree = "<group>"; };
 		BD3503A916AD370800956BB7 /* ivCross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ivCross.png; sourceTree = "<group>"; };
 		BD3503AA16AD370800956BB7 /* ivCross@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ivCross@2x.png"; sourceTree = "<group>"; };
+		BD357C901703504D0079F68A /* GameSceneConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSceneConfig.h; sourceTree = "<group>"; };
+		BD357C911703504D0079F68A /* GameSceneConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameSceneConfig.m; sourceTree = "<group>"; };
 		BD3851F6169C3BE70066419B /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		BD38523E169C3F420066419B /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
 		BD38523F169C3F420066419B /* FacebookSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookSDK.h; sourceTree = "<group>"; };
@@ -2854,6 +2858,8 @@
 				767B56CE15AEDE2F00ECA0C4 /* CustomNSURLConnection.m */,
 				BDD07B3B141E1F170085E4FB /* AccelerometrDataSource.h */,
 				BDD07B3C141E1F170085E4FB /* AccelerometrDataSource.m */,
+				BD357C901703504D0079F68A /* GameSceneConfig.h */,
+				BD357C911703504D0079F68A /* GameSceneConfig.m */,
 				BD8342A5164C0CBE00E6363B /* BEAnimationView.h */,
 				BD8342A6164C0CBE00E6363B /* BEAnimationView.m */,
 				BD243B0916A979BC00D89E47 /* OponentCoordinateView.h */,
@@ -3696,6 +3702,7 @@
 				3192E30116FC9FF300698BD5 /* AirBallon.m in Sources */,
 				31A093561701C7DF00CDF4A9 /* HorseShape.m in Sources */,
 				BD9FED4D1701FD6D003B3156 /* CDBarrierDuelProduct.m in Sources */,
+				BD357C921703504E0079F68A /* GameSceneConfig.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3825,6 +3832,7 @@
 				BD0DA0F616D3727B00419DC1 /* PLVector3.m in Sources */,
 				BD0DA0F816D3727B00419DC1 /* PLView.m in Sources */,
 				BD0DA0FA16D3727B00419DC1 /* PLViewBase.m in Sources */,
+				BD357C931703504E0079F68A /* GameSceneConfig.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

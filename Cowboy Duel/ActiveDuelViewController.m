@@ -213,9 +213,22 @@ static CGFloat blinkBottomOriginY;
     oponentCoords.latitude = 1;//(((float) rand()) / RAND_MAX) * 360 - 180;
     oponentCoords.longitude = 1;// (((float) rand()) / RAND_MAX) * 360 - 180;
 	oponentsViewCoordinates = [NSMutableArray arrayWithCapacity:1];
-
-    countOfBarrels = 5;
-    countOfCactuses = 5;
+    
+    NSArray *barriersArray = [DuelProductDownloaderController loadBarrierArray];
+    
+    for (CDBarrierDuelProduct *barrierDuelProduct in barriersArray) {
+        switch (barrierDuelProduct.dType) {
+            case BarrierDuelProductTypeBarrel:
+                countOfBarrels = barrierDuelProduct.dCountOfUse;
+                break;
+            case BarrierDuelProductTypeCactus:
+                countOfCactuses = barrierDuelProduct.dCountOfUse;
+                break;
+            default:
+                break;
+        }
+    }
+    
     
     barellObjectArray = [[NSMutableArray alloc] initWithCapacity:countOfBarrels];
     cactusObjectArray = [[NSMutableArray alloc] initWithCapacity:countOfCactuses];
