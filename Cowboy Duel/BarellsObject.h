@@ -28,6 +28,5 @@ typedef enum {
 @property (nonatomic) BarellPosition barellPosition;
 -(void)explosionAnimation;
 -(void)showBonus;
--(void)dropBarel:(UIImageView *)barellImg;
 -(BOOL) isShownBonus;
 @end
