@@ -44,9 +44,9 @@
 //points
 static CGPoint pntDumpOpen;
 static const CGPoint pntDumpClose = {187,128};//center of image
-static CGPoint pntGunOpen;
-static const CGPoint pntGunClose = {-26,224};
-static const CGPoint pntGunHide = {-26,400};
+static const CGPoint pntGunCloseSimple = {-26,224};
+static const CGPoint pntGunCloseIphone5 = {-26,312};
+static CGPoint pntGunClose;
 static const CGPoint pntViewShow = {0,0};
 static const CGPoint pntViewHide = {0,400};
 
@@ -83,9 +83,15 @@ static const CGFloat timeSpinDump = 0.3f;
     if (self) {
         [self loadView];
 
+        int iPhone5Delta = [UIScreen mainScreen].bounds.size.height - 480;
+        if (iPhone5Delta>0) {
+            pntGunClose = pntGunCloseIphone5;
+        }else{
+            pntGunClose = pntGunCloseSimple;
+        }
+
         isCharging = NO;
        
-        pntGunOpen=gun.frame.origin;
         pntDumpOpen=drumBullets.center;
         
         CGRect frame=gun.frame;
@@ -188,9 +194,8 @@ static const CGFloat timeSpinDump = 0.3f;
                             options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction
                          animations:^{
                              angle -= 1.25;
-                             CGAffineTransform transform = drumBullets.transform;
                              CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
-                             transform = CGAffineTransformScale(rotateTransform, 1.0, 1.0);
+                             CGAffineTransform transform = CGAffineTransformScale(rotateTransform, 1.0, 1.0);
                              drumBullets.transform = transform;
                          } completion:^(BOOL finished) {
                              UIImageView *bullet = [colectionBullets objectAtIndex:indexOfGargedBullet];
@@ -229,8 +234,6 @@ static const CGFloat timeSpinDump = 0.3f;
 
 -(void)showGun;
 {
-   
-    
     CGRect frame=self.view.frame;
     frame.origin = pntViewShow;
     self.view.frame = frame;
@@ -238,10 +241,6 @@ static const CGFloat timeSpinDump = 0.3f;
     frame=gun.frame;
     frame.origin = pntGunClose;
     gun.frame = frame;
-
-//    frame=self.view.frame;
-//    frame.origin = pntViewHide;
-//    self.view.frame = frame;
 }
 
 -(void)hideGun;
@@ -255,9 +254,8 @@ static const CGFloat timeSpinDump = 0.3f;
         isCharging = NO;
         [self hideBullets];
         angle = 0;
-        CGAffineTransform transform = drumBullets.transform;
         CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
-        transform = CGAffineTransformScale(rotateTransform, 1.0, 1.0);
+        CGAffineTransform transform = CGAffineTransformScale(rotateTransform, 1.0, 1.0);
         drumBullets.transform = transform;
 
         [UIView animateWithDuration:timeCloseGun animations:^{
