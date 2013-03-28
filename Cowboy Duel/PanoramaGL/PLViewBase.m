@@ -1253,7 +1253,7 @@ void multiplyMatrixAndMatrix(mat4f_t c, const mat4f_t a, const mat4f_t b)
 {
     if(isSensorialRotationRunning)
     {
-        oponentCoordinateViews = nil;
+        //oponentCoordinateViews = nil;
         startPoint = endPoint = CGPointMake(0.0f, 0.0f);
         isSensorialRotationRunning = NO;
         sensorType = PLSensorTypeUnknow;
