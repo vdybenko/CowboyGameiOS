@@ -11,19 +11,19 @@
 #import <AVFoundation/AVFoundation.h>
 
 
+
 @interface BarellsObject ()
 {
     AVAudioPlayer *explosinPlayer;
+
 }
 @end
 
 @implementation BarellsObject
-@synthesize barellImg;
 @synthesize bonusImg;
 @synthesize barellView;
 @synthesize barelAnimImg;
-@synthesize isTop;
-
+@synthesize barellPosition;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -40,31 +40,64 @@
             NSError *error;
             explosinPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFile error:&error];
             [explosinPlayer prepareToPlay];
-               
+        
+            UIImage *spriteSheetExp = [UIImage imageNamed:@"barelExp"];
+            NSArray *arrayWithSpritesExp = [spriteSheetExp spritesWithSpriteSheetImage:spriteSheetExp
+                                                                            spriteSize:CGSizeMake(75, 75)];
+            [barelAnimImg setAnimationImages:arrayWithSpritesExp];
+            [barelAnimImg setAnimationRepeatCount:1];
+            [barelAnimImg setAnimationDuration:1];
+        
     }
     return self;
 }
 
 -(void)explosionAnimation;
 {
-  
-    //[explosinPlayer play];
     if ([barelAnimImg isAnimating]) {
-        return;
+        [barelAnimImg stopAnimating];
+        [barelAnimImg setHidden:YES];
+        
     }
-    CGRect frame = barellImg.frame;
-    barelAnimImg.frame = frame;
-    barellImg.hidden = YES;
-    UIImage *spriteSheetExp = [UIImage imageNamed:@"barelExp"];
-    NSArray *arrayWithSpritesExp = [spriteSheetExp spritesWithSpriteSheetImage:spriteSheetExp
-                                                                    spriteSize:CGSizeMake(75, 75)];
-    [barelAnimImg setAnimationImages:arrayWithSpritesExp];
-    [barelAnimImg setAnimationRepeatCount:1];
-    [barelAnimImg setAnimationDuration:1];
+    CGRect frame;
+    switch (self.barellPosition) {
+        case BarellPositionBottom:
+            frame = self.barellImgBottom.frame;
+            barelAnimImg.frame = frame;
+            self.barellImgBottom.hidden = YES;
+            if (!self.barellImgMiddle.hidden) {
+                [self dropBarel:self.barellImgMiddle];
+        }
+            
+            if (!self.barellImgHighest.hidden) {
+                [self dropBarel:self.barellImgHighest];
+            }
+            break;
+            
+        case BarellPositionMiddle:
+            frame = self.barellImgMiddle.frame;
+            barelAnimImg.frame = frame;
+            
+            self.barellImgMiddle.hidden = YES;
+            if (!self.barellImgHighest.hidden) {
+                [self dropBarel:self.barellImgHighest];
+            }
+            break;
+            
+        case BarellPositionHighest:
+            frame = self.barellImgHighest.frame;
+            barelAnimImg.frame = frame;
+            self.barellImgHighest.hidden = YES;
+            break;
+            
+        default:
+            break;
+    }
+    barelAnimImg.hidden = NO;
     [barelAnimImg startAnimating];
    
     [self performSelector:@selector(hideObj) withObject:nil afterDelay:0.7f];
-    
+
 }
 -(void)hideObj{
     //[explosinPlayer stop];
@@ -75,12 +108,13 @@
 }
 -(void)showBonus;
 {
-    bonusImg.frame = barellImg.frame;
+    bonusImg.frame = barelAnimImg.frame;
     bonusImg.hidden = NO;
-    [UIView animateWithDuration:1.5 animations:^{
+    bonusImg.alpha = 1;
+    [UIView animateWithDuration:0.7 animations:^{
         bonusImg.alpha = 0;
         CGRect frame = bonusImg.frame;
-        frame.origin.y -=100;
+        frame.origin.y -= 100;
         bonusImg.frame = frame;
     }completion:^(BOOL complete){
         bonusImg.hidden = YES;
@@ -94,7 +128,8 @@
     //    return (luck == 2);
 }
 
--(void)dropBarel;{
+-(void)dropBarel:(UIImageView *)barellImg;{
+    
     [UIView animateWithDuration:0.2 animations:^{
         CGRect frame = barellImg.frame;
         frame.origin.y +=60;
@@ -110,7 +145,7 @@
                 frame.origin.y +=10;
                 barellImg.frame = frame;
             }completion:^(BOOL complete){
-                isTop = NO;
+               
             }];
 
         }];
@@ -120,7 +155,6 @@
 -(void)releaseComponents
 {
     barellView = nil;
-    barellImg = nil;
     bonusImg = nil;
     barelAnimImg = nil;
 }
