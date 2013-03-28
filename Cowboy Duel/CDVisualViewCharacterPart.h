@@ -8,10 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+#define indexOfLastStaticValues 2
+
 @interface CDVisualViewCharacterPart : NSObject<MemoryManagement>
 @property (weak,nonatomic) NSString *nameForImage;
 @property (nonatomic) CGRect rectForImage;
 @property (nonatomic) int money;
+@property (nonatomic) NSInteger dId;
 
 -(id)initWithArray:(NSArray*)arrayOfParametrs;
 -(UIImage*) imageForObject;

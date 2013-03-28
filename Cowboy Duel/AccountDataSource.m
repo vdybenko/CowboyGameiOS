@@ -198,8 +198,7 @@ static AccountDataSource *sharedHelper = nil;
     [dicBody setValue:gcAlias forKey:@"authentification"];
     [dicBody setValue:resultStr forKey:@"transactions"];  
     NSString *stBody=[Utils makeStringForPostRequest:dicBody];
-    DLog(@"dicBody %@",dicBody);
-	[theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]]; 
+	[theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]];
     CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
     if (theConnection) {
         NSMutableData *receivedData = [[NSMutableData alloc] init];

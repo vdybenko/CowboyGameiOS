@@ -4,6 +4,7 @@
 #import "VisualViewDataSource.h"
 #import "VisualViewCharacter.h"
 #import "ScrollViewSwitcher.h"
+#import "DuelProductDownloaderController.h"
 
 @interface VisualViewCharacterViewController ()
 {
@@ -32,12 +33,18 @@
     __weak IBOutlet UILabel *lbActionShoose;
     
     __weak IBOutlet UILabel *userMoney;
+    __weak IBOutlet UIView *loadingView;
     
     int visualViewCapSelect;
     int visualViewHeadSelect;
     int visualViewBodySelect;
     int visualViewLegthSelect;
     int visualViewShooseSelect;
+    int sumToBuy;
+    NSMutableDictionary *dicOfProductsToSend;
+    
+    DuelProductDownloaderController *duelProductDownloaderController;
+    
 }
 @end
 
@@ -49,8 +56,9 @@
 {
     self = [super initWithNibName:@"VisualViewCharacterViewController" bundle:[NSBundle mainBundle]];
     if (self) {
-//        playerAccount = [AccountDataSource sharedInstance];
-        // Custom initialization
+        playerAccount = [AccountDataSource sharedInstance];
+        dicOfProductsToSend = [NSMutableDictionary dictionary];
+        sumToBuy = 0;
     }
     return self;
 }
@@ -58,7 +66,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    playerAccount = [AccountDataSource sharedInstance];
+    duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
+
     visualViewCapSelect = playerAccount.visualViewCap;
     visualViewHeadSelect = playerAccount.visualViewHead;
     visualViewBodySelect = playerAccount.visualViewBody;
@@ -72,9 +81,9 @@
     
     [btnAccept setTitleByLabel:@"ACCEPT"];
     [btnAccept changeColorOfTitleByLabel:buttonsTitleColor];
+    btnAccept.enabled = NO;
     
     userMoney.text = [NSString stringWithFormat:@"%d",playerAccount.money];
-
     
     visualViewDataSource = [[VisualViewDataSource alloc] init];    
     visualViewCharacter.visualViewDataSource = visualViewDataSource;
@@ -82,13 +91,13 @@
     
     scrollViewSwitcherCap.rectForObjetc = (CGRect){0,0,70,45};
     scrollViewSwitcherCap.arraySwitchObjects = [visualViewDataSource arrayCap];
-    scrollViewSwitcherCap.curentObject = [AccountDataSource sharedInstance].visualViewCap;
+    scrollViewSwitcherCap.curentObject = playerAccount.visualViewCap;
     scrollViewSwitcherCap.didFinishBlock = ^(NSInteger curentIndex){
         CDVisualViewCharacterPartCap *visualViewCharacterPart = [scrollViewSwitcherCap.arraySwitchObjects objectAtIndex:curentIndex];
         visualViewCharacter.cap.image = [visualViewCharacterPart imageForObject];
         visualViewCapSelect = curentIndex;
         
-        [self fillCap];
+        [self refreshController];
     };
     scrollViewSwitcherCap.colorizeImage = visualViewCharacter.cap;
     [scrollViewSwitcherCap trimObjectsToView:visualViewCharacter.cap];
@@ -96,13 +105,13 @@
     
     scrollViewSwitcherHead.rectForObjetc = (CGRect){0,0,70,45};
     scrollViewSwitcherHead.arraySwitchObjects = [visualViewDataSource arrayHead];
-    scrollViewSwitcherHead.curentObject = 0;
+    scrollViewSwitcherHead.curentObject = playerAccount.visualViewHead;
     scrollViewSwitcherHead.didFinishBlock = ^(NSInteger curentIndex){
         CDVisualViewCharacterPartHead *visualViewCharacterPart = [scrollViewSwitcherHead.arraySwitchObjects objectAtIndex:curentIndex];
         visualViewCharacter.head.image = [visualViewCharacterPart imageForObject];
         visualViewHeadSelect = curentIndex;
         
-        [self fillHead];
+        [self refreshController];
     };
     scrollViewSwitcherHead.colorizeImage = visualViewCharacter.head;
     [scrollViewSwitcherHead trimObjectsToView:visualViewCharacter.head];
@@ -110,13 +119,13 @@
 
     scrollViewSwitcherBody.rectForObjetc = (CGRect){0,0,200,155};
     scrollViewSwitcherBody.arraySwitchObjects = [visualViewDataSource arrayBody];
-    scrollViewSwitcherBody.curentObject = 0;
+    scrollViewSwitcherBody.curentObject = playerAccount.visualViewBody;
     scrollViewSwitcherBody.didFinishBlock = ^(NSInteger curentIndex){
         CDVisualViewCharacterPartBody *visualViewCharacterPart = [scrollViewSwitcherBody.arraySwitchObjects objectAtIndex:curentIndex];
         visualViewCharacter.body.image = [visualViewCharacterPart imageForObject];
        visualViewBodySelect = curentIndex;
         
-        [self fillBody];
+        [self refreshController];
     };
     scrollViewSwitcherBody.colorizeImage = visualViewCharacter.body;
     [scrollViewSwitcherBody trimObjectsToView:visualViewCharacter.body];
@@ -124,13 +133,13 @@
     
     scrollViewSwitcherLegth.rectForObjetc = (CGRect){0,0,165,200};
     scrollViewSwitcherLegth.arraySwitchObjects = [visualViewDataSource arrayLegth];
-    scrollViewSwitcherLegth.curentObject = 0;
+    scrollViewSwitcherLegth.curentObject = playerAccount.visualViewLegth;
     scrollViewSwitcherLegth.didFinishBlock = ^(NSInteger curentIndex){
         CDVisualViewCharacterPartLegth *visualViewCharacterPart = [scrollViewSwitcherLegth.arraySwitchObjects objectAtIndex:curentIndex];
         visualViewCharacter.length.image = [visualViewCharacterPart imageForObject];
         visualViewLegthSelect = curentIndex;
         
-        [self fillLegth];
+        [self refreshController];
     };
     scrollViewSwitcherLegth.colorizeImage = visualViewCharacter.length;
     [scrollViewSwitcherLegth trimObjectsToView:visualViewCharacter.length];
@@ -138,13 +147,13 @@
     
     scrollViewSwitcherShoose.rectForObjetc = (CGRect){0,0,160,100};
     scrollViewSwitcherShoose.arraySwitchObjects = [visualViewDataSource arrayShoose];
-    scrollViewSwitcherShoose.curentObject = 0;
+    scrollViewSwitcherShoose.curentObject = playerAccount.visualViewShoose;
     scrollViewSwitcherShoose.didFinishBlock = ^(NSInteger curentIndex){
         CDVisualViewCharacterPartShoose *visualViewCharacterPart = [scrollViewSwitcherShoose.arraySwitchObjects objectAtIndex:curentIndex];
         visualViewCharacter.shoose.image = [visualViewCharacterPart imageForObject];
         visualViewShooseSelect = curentIndex;
         
-        [self fillShoose];
+        [self refreshController];
     };
     scrollViewSwitcherShoose.colorizeImage = visualViewCharacter.shoose;
     [scrollViewSwitcherShoose trimObjectsToView:visualViewCharacter.shoose];
@@ -235,19 +244,64 @@
     lbActionLegth = nil;
     lbMoneyShoose = nil;
     lbActionShoose = nil;
+    loadingView = nil;
     [super viewDidUnload];
-}
--(void)refreshController;
-{
 }
 
 - (void)releaseComponents
 {
     [self viewDidUnload];
+    duelProductDownloaderController = nil;
+    [dicOfProductsToSend removeAllObjects];
+    dicOfProductsToSend = nil;
 }
 
 #pragma mark IBAction
 - (IBAction)btnAcceptClick:(id)sender {
+    
+    loadingView.hidden = NO;
+    [playerAccount increaseGlNumber];
+    for (int i=1; i<[dicOfProductsToSend count]-1; i++) {
+        int ID = [[[dicOfProductsToSend allValues] objectAtIndex:i] integerValue];
+        [duelProductDownloaderController buyProductID:ID transactionID:playerAccount.glNumber];
+    }
+    
+    int ID = [[[dicOfProductsToSend allValues] objectAtIndex:0] integerValue];
+    [duelProductDownloaderController buyProductID:ID transactionID:playerAccount.glNumber];
+    __block AccountDataSource *playerAccountBlock = playerAccount;
+    __block UIView *loadingViewBlock = loadingView;
+    duelProductDownloaderController.didFinishBlock = ^(NSError *error){
+        if (!error) {
+            CDTransaction *transaction = [[CDTransaction alloc] init];
+            transaction.trDescription = @"CharacterBuilder";
+            transaction.trType = [NSNumber numberWithInt:-1];
+            transaction.trMoneyCh = [NSNumber numberWithInt:sumToBuy];
+            transaction.trLocalID = [NSNumber numberWithInt:playerAccountBlock.glNumber];
+            transaction.trOpponentID = @"";
+            transaction.trGlobalID = [NSNumber numberWithInt:-1];
+            
+            [playerAccountBlock.transactions addObject:transaction];
+            [playerAccountBlock saveTransaction];
+            [playerAccountBlock sendTransactions:playerAccountBlock.transactions];
+            
+            playerAccountBlock.money -= sumToBuy;
+            [playerAccountBlock saveMoney];
+            
+            playerAccountBlock.visualViewCap = visualViewCapSelect;
+            playerAccountBlock.visualViewHead = visualViewHeadSelect;
+            playerAccountBlock.visualViewBody = visualViewBodySelect;
+            playerAccountBlock.visualViewLegth = visualViewLegthSelect;
+            playerAccountBlock.visualViewShoose = visualViewShooseSelect;
+            
+            [playerAccountBlock saveVisualView];
+            [self refreshController];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                loadingViewBlock.hidden = YES;
+            });
+            
+        }
+    };
 }
 
 - (IBAction)btnBackClick:(id)sender {
@@ -257,11 +311,31 @@
                          [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
                      }];
     [self.navigationController popViewControllerAnimated:NO];
-    [[AccountDataSource sharedInstance] saveVisualView];
     [self releaseComponents];
 }
 
 #pragma mark
+-(void)refreshController;
+{
+    sumToBuy = 0;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self fillCap];
+        [self fillHead];
+        [self fillBody];
+        [self fillLegth];
+        [self fillShoose];
+        if (sumToBuy && (sumToBuy<playerAccount.money)) {
+            
+            btnAccept.enabled = YES;
+        }else{
+            btnAccept.enabled = NO;
+        }
+        
+        userMoney.text = [NSString stringWithFormat:@"%d",playerAccount.money];
+    });
+}
+
+
 -(void)fillCap
 {
     CDVisualViewCharacterPartCap *visualViewCharacterPart = [scrollViewSwitcherCap.arraySwitchObjects objectAtIndex:visualViewCapSelect];
@@ -270,6 +344,7 @@
     UIColor *color;
     if (playerAccount.visualViewCap==visualViewCapSelect) {
         color = [UIColor blackColor];
+        [dicOfProductsToSend removeObjectForKey:@"cap"];
     }else{
         CDVisualViewCharacterPartCap *visualViewCharacterPartSaved = [scrollViewSwitcherCap.arraySwitchObjects objectAtIndex:playerAccount.visualViewCap];
         if (visualViewCharacterPart.action>visualViewCharacterPartSaved.action) {
@@ -277,14 +352,22 @@
         }else{
             color = [UIColor redColor];
         }
+        sumToBuy+=visualViewCharacterPart.money;
+        [dicOfProductsToSend setObject:[NSNumber numberWithInt:visualViewCharacterPart.dId] forKey:@"cap"];
     }
     lbActionCap.textColor = color;
 }
 
 -(void)fillHead
 {
-    CDVisualViewCharacterPartHead *visualViewCharacterPart = [scrollViewSwitcherHead.arraySwitchObjects objectAtIndex:playerAccount.visualViewHead];
+    CDVisualViewCharacterPartHead *visualViewCharacterPart = [scrollViewSwitcherHead.arraySwitchObjects objectAtIndex:visualViewHeadSelect];
     lbMoneyHead.text = [NSString stringWithFormat:@"$%d",visualViewCharacterPart.money];
+    if (playerAccount.visualViewHead==visualViewHeadSelect) {
+        [dicOfProductsToSend removeObjectForKey:@"head"];
+    }else{
+        sumToBuy+=visualViewCharacterPart.money;
+        [dicOfProductsToSend setObject:[NSNumber numberWithInt:visualViewCharacterPart.dId] forKey:@"head"];
+    }
 }
  
 -(void)fillBody
@@ -295,6 +378,7 @@
     UIColor *color;
     if (playerAccount.visualViewBody==visualViewBodySelect) {
         color = [UIColor blackColor];
+        [dicOfProductsToSend removeObjectForKey:@"body"];
     }else{
         CDVisualViewCharacterPartBody *visualViewCharacterPartSaved = [scrollViewSwitcherBody.arraySwitchObjects objectAtIndex:playerAccount.visualViewBody];
         if (visualViewCharacterPart.action>visualViewCharacterPartSaved.action) {
@@ -302,6 +386,8 @@
         }else{
             color = [UIColor redColor];
         }
+        sumToBuy+=visualViewCharacterPart.money;
+        [dicOfProductsToSend setObject:[NSNumber numberWithInt:visualViewCharacterPart.dId] forKey:@"body"];
     }
     lbActionBody.textColor = color;
 }
@@ -314,6 +400,7 @@
     UIColor *color;
     if (playerAccount.visualViewLegth==visualViewLegthSelect) {
         color = [UIColor blackColor];
+        [dicOfProductsToSend removeObjectForKey:@"legth"];
     }else{
         CDVisualViewCharacterPartLegth *visualViewCharacterPartSaved = [scrollViewSwitcherLegth.arraySwitchObjects objectAtIndex:playerAccount.visualViewLegth];
         if (visualViewCharacterPart.action>visualViewCharacterPartSaved.action) {
@@ -321,6 +408,8 @@
         }else{
             color = [UIColor redColor];
         }
+        sumToBuy+=visualViewCharacterPart.money;
+        [dicOfProductsToSend setObject:[NSNumber numberWithInt:visualViewCharacterPart.dId] forKey:@"legth"];
     }
     lbActionLegth.textColor = color;
 }
@@ -333,6 +422,7 @@
     UIColor *color;
     if (playerAccount.visualViewShoose==visualViewShooseSelect) {
         color = [UIColor blackColor];
+        [dicOfProductsToSend removeObjectForKey:@"shoose"];
     }else{
         CDVisualViewCharacterPartShoose *visualViewCharacterPartSaved = [scrollViewSwitcherShoose.arraySwitchObjects objectAtIndex:playerAccount.visualViewShoose];
         if (visualViewCharacterPart.action>visualViewCharacterPartSaved.action) {
@@ -340,6 +430,8 @@
         }else{
             color = [UIColor redColor];
         }
+        sumToBuy+=visualViewCharacterPart.money;
+        [dicOfProductsToSend setObject:[NSNumber numberWithInt:visualViewCharacterPart.dId] forKey:@"shoose"];
     }
     lbActionShoose.textColor = color;
 }

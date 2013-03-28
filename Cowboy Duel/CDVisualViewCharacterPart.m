@@ -12,6 +12,7 @@
 @synthesize nameForImage;
 @synthesize rectForImage;
 @synthesize money;
+@synthesize dId;
 
 -(id)initWithArray:(NSArray*)arrayOfParametrs;
 {
@@ -19,6 +20,7 @@
     if (self) {
         nameForImage = [arrayOfParametrs objectAtIndex:0];
         money = [[arrayOfParametrs objectAtIndex:1] integerValue];
+        dId = [[arrayOfParametrs objectAtIndex:2] integerValue];
     }
     return self;
 }

@@ -203,6 +203,7 @@
                 purchesingProductIndex = indexPath.row;
                 [[MKStoreManager sharedManager] buyFeature:product.dPurchaseUrl];
             }else{
+                [playerAccount increaseGlNumber];
                 [duelProductDownloaderController buyProductID:product.dID transactionID:playerAccount.glNumber];
                 duelProductDownloaderController.didFinishBlock = ^(NSError *error){
                     self.view.userInteractionEnabled = YES;
@@ -211,7 +212,7 @@
                         transaction.trDescription = @"BuyProductWeapon";
                         transaction.trType = [NSNumber numberWithInt:-1];
                         transaction.trMoneyCh = [NSNumber numberWithInt:-product.dPrice];
-                        transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
+                        transaction.trLocalID = [NSNumber numberWithInt:playerAccount.glNumber];
                         transaction.trOpponentID = @"";
                         transaction.trGlobalID = [NSNumber numberWithInt:-1];
                         
@@ -249,6 +250,7 @@
             purchesingProductIndex = indexPath.row;
             [[MKStoreManager sharedManager] buyFeature:product.dPurchaseUrl];
         }else{
+            [playerAccount increaseGlNumber];
             [duelProductDownloaderController buyProductID:product.dID transactionID:playerAccount.glNumber];
             duelProductDownloaderController.didFinishBlock = ^(NSError *error){
                 cell.buyProduct.enabled = YES;
@@ -257,7 +259,7 @@
                     transaction.trDescription = @"BuyProductWinDefense";
                     transaction.trType = [NSNumber numberWithInt:-1];
                     transaction.trMoneyCh = [NSNumber numberWithInt:-product.dPrice];
-                    transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
+                    transaction.trLocalID = [NSNumber numberWithInt:playerAccount.glNumber];
                     transaction.trOpponentID = @"";
                     transaction.trGlobalID = [NSNumber numberWithInt:-1];
                     

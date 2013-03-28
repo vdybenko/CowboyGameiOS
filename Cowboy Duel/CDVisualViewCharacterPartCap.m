@@ -15,7 +15,7 @@
 {
     self = [super initWithArray:arrayOfParametrs];
     if (self) {
-        action = [[arrayOfParametrs objectAtIndex:2] integerValue];
+        action = [[arrayOfParametrs objectAtIndex:indexOfLastStaticValues+1] integerValue];
     }
     return self;
 }
