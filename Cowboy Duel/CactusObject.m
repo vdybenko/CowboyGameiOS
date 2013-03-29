@@ -24,6 +24,15 @@
             UIView *nibView = [objects objectAtIndex:0];
             [self addSubview:nibView];
         
+        NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"cactusFraim1.png"],
+                             [UIImage imageNamed:@"cactusFraim2.png"], [UIImage imageNamed:@"cactusFraim3.png"],[UIImage imageNamed:@"cactusFraim4.png"], [UIImage imageNamed:@"cactusFraim5.png"],[UIImage imageNamed:@"cactusFraim6.png"],[UIImage imageNamed:@"cactusFraim7.png"],
+                             nil];
+        cactusImg.animationImages = imgArray;
+        cactusImg.animationDuration = 0.5f;
+        [cactusImg setAnimationRepeatCount:1];
+        imgArray = nil;
+
+        
     }
     return self;
 }
@@ -34,16 +43,8 @@
         return;
     }
 
-    UIImage *spriteSheetExp = [UIImage imageNamed:@"cactusSpreetSeet3"];
-    NSArray *arrayWithSpritesExp = [spriteSheetExp spritesWithSpriteSheetImage:spriteSheetExp
-                                                                    spriteSize:CGSizeMake(90, 140)];
-    [cactusImg setAnimationImages:arrayWithSpritesExp];
-    [cactusImg setAnimationRepeatCount:1];
-    [cactusImg setAnimationDuration:1];
-    [cactusImg startAnimating];
-
      [cactusImg startAnimating];
-    [self performSelector:@selector(hideObj) withObject:nil afterDelay:0.9f];
+    [self performSelector:@selector(hideObj) withObject:nil afterDelay:0.4f];
 }
 -(void)hideObj{
     
