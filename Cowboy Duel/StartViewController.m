@@ -581,9 +581,10 @@ static StartViewController *sharedHelper = nil;
     }
     inBackground = NO;
 
-    SSConnection *connection = [SSConnection sharedInstance];
-    [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
-    
+    if ([[OGHelper sharedInstance] isAuthorized]){
+        SSConnection *connection = [SSConnection sharedInstance];
+        [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
+    }
     gameCenterViewController.duelStartViewController = nil;
     
     [self showProfileFirstRun];
