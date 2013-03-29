@@ -42,14 +42,14 @@ static CGFloat oponentLiveImageViewStartWidth;
         [imgShot setAnimationRepeatCount:1];
         [imgShot setAnimationDuration:animationDurationSmoke];
         
-        UIImage *spriteSheetDie = [UIImage imageNamed:@"opponentSpritSeet"];
-        NSArray *arrayWithSpritesDie = [spriteSheetDie spritesWithSpriteSheetImage:spriteSheetDie inRange:NSRangeFromString(@"{0,4}")
-                                                                        spriteSize:CGSizeMake(89, 161)];
-        [imgDieOpponentAnimation setAnimationImages:arrayWithSpritesDie];
+        NSArray *imgDieArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"menDieFrame1.png"], [UIImage imageNamed:@"menDieFrame1.png"],[UIImage imageNamed:@"menDieFrame1.png"],
+                             [UIImage imageNamed:@"menDieFrame2.png"], [UIImage imageNamed:@"menDieFrame3.png"],[UIImage imageNamed:@"menDieFrame4.png"],[UIImage imageNamed:@"menDieFrame5.png"],[UIImage imageNamed:@"menDieFrame6.png"],[UIImage imageNamed:@"menDieFrame8.png"],
+                             nil];
+        
+        imgDieOpponentAnimation.animationImages = imgDieArray;
+        imgDieOpponentAnimation.animationDuration = 0.6f;
         [imgDieOpponentAnimation setAnimationRepeatCount:1];
-        float animationDurationDie = [imgDieOpponentAnimation.animationImages count] * 0.100; 
-        [imgDieOpponentAnimation setAnimationDuration:animationDurationDie];
-        arrayWithSpritesDie = nil;
+        imgDieArray = nil;
         
         oponentLiveImageViewStartWidth = ivLifeBar.frame.size.width;
         

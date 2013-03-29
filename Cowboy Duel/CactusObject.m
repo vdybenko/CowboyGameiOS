@@ -33,6 +33,7 @@
     if ([cactusImg isAnimating]) {
         return;
     }
+
     UIImage *spriteSheetExp = [UIImage imageNamed:@"cactusSpreetSeet3"];
     NSArray *arrayWithSpritesExp = [spriteSheetExp spritesWithSpriteSheetImage:spriteSheetExp
                                                                     spriteSize:CGSizeMake(90, 140)];
@@ -40,6 +41,8 @@
     [cactusImg setAnimationRepeatCount:1];
     [cactusImg setAnimationDuration:1];
     [cactusImg startAnimating];
+
+     [cactusImg startAnimating];
     [self performSelector:@selector(hideObj) withObject:nil afterDelay:0.9f];
 }
 -(void)hideObj{
