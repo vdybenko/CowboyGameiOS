@@ -186,11 +186,23 @@ static CGFloat oponentLiveImageViewStartWidth;
         {
             
             [self stopMoveAnimation];
-            //imgBody.image = [UIImage imageNamed:@"menLowDie.png"];
             imgBody.hidden = YES;
-            
             [imgDieOpponentAnimation startAnimating];
+            /*
+            UIImageView *dieImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"menLowDie.png"]];
+            [self addSubview:dieImg];
+            dieImg.frame = imgBody.frame;
             
+            [UIView animateWithDuration:1 animations:^{
+                CGRect frame = dieImg.frame;
+                frame.origin.y -= 100;
+                dieImg.frame = frame;
+                dieImg.alpha = 0;
+            }completion:^(BOOL complete){
+                 
+            }];*/
+      
+        
         }
             break;
         case OpponentShapeStatusLive:

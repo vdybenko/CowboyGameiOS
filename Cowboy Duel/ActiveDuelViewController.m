@@ -235,7 +235,7 @@ static CGFloat blinkBottomOriginY;
     barelFrame = barellObject.frame;
     barelFrame.origin.x = opponentShape.frame.origin.x;
     barelFrame.origin.y = 120;
- 
+    countOfBarrels = 5; 
     int randomBarrels = arc4random()%3 + 1;
     for (int i = 0; i < countOfBarrels; i++){
 
