@@ -430,6 +430,8 @@ static CGFloat blinkBottomOriginY;
     [opponentShape setStatusBody:OpponentShapeStatusLive];
     [opponentShape cleareDamage];
     [opponentShape refreshLiveBar];
+    
+//    [self performSelector:@selector(readyToStart) withObject:Nil afterDelay:1.0];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -510,7 +512,6 @@ static CGFloat blinkBottomOriginY;
 - (IBAction)shotButtonClick:(id)sender {
     if (isGunCanShotOfFrequently) {
         [self startGunFrequentlyBlockTime];
-        
             
         [gunDrumViewController shotAnimation];
         [self hideSteadyImage];
@@ -1108,7 +1109,7 @@ static CGFloat blinkBottomOriginY;
 
 -(void)readyToStart
 {
-    NSLog(@"startDuel");
+    NSLog(@"readyToStart");
     soundStart = YES;
     startInterval = [NSDate timeIntervalSinceReferenceDate];
     [player stop];

@@ -503,7 +503,7 @@ static GameCenterViewController *gameCenterViewController;
     userCanceledMatch = NO;
 }
 
--(void)userCancelNutch;
+-(void)userCancelMatch;
 {
     [self matchCanseled];
     userCanceledMatch = YES;
@@ -522,7 +522,6 @@ static GameCenterViewController *gameCenterViewController;
 
 - (void)receiveData:(NSData *)data
 {
-    DLog(@"receiveData");
     unsigned char *incomingPacket = (unsigned char *)[data bytes];
 	int *pIntData = (int *)&incomingPacket[0];
     

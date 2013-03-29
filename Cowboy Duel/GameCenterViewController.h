@@ -102,7 +102,7 @@ typedef struct {
 -(void)matchStartedSinxron;
 -(void)matchStarted;
 -(void)lostConnection;
--(void)userCancelNutch;
+-(void)userCancelMatch;
 -(void)matchCanseled;
 -(void)startClientWithHost:(NSString *)host;
 
