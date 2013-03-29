@@ -161,7 +161,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     frame.size.width = (float)((maxShotCount - userHitCount)*oponentLiveImageViewStartWidth)/maxShotCount;
     ivLifeBar.frame = frame;
 
-    int x = (maxShotCount - userHitCount)*10;
+    int x = (maxShotCount - userHitCount);
     lbLifeLeft.text = [NSString stringWithFormat:@"%d",x];
 
     CGRect frameLife = lbLifeLeft.frame;
@@ -175,7 +175,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     CGRect frame = ivLifeBar.frame;
     frame.size.width = oponentLiveImageViewStartWidth;
     ivLifeBar.frame = frame;
-    lbLifeLeft.text =[NSString stringWithFormat:@"%d", lives*10];
+    lbLifeLeft.text =[NSString stringWithFormat:@"%d", lives];
 }
 
 -(void) setStatusBody:(OpponentShapeStatus)status;
@@ -217,21 +217,21 @@ static CGFloat oponentLiveImageViewStartWidth;
     switch (result) {
         case 0:
             [imgBody addFlyingPointToView:mainView centerPoint:p
-                                                    text:@"-10"
+                                                    text:@"-1"
                                                    color:color
                                                     font:font
                                                direction:FlyingPointDirectionUp];
             break;
         case 1:
             [imgBody addFlyingPointToView:mainView centerPoint:p
-                                            text:@"-10"
+                                            text:@"-1"
                                            color:color
                                             font:font
                                        direction:FlyingPointDirectionUp];
             break;
         case 2:
             [imgBody addFlyingPointToView:mainView centerPoint:p
-                                            text:@"-10"
+                                            text:@"-1"
                                            color:color
                                             font:font
                                        direction:FlyingPointDirectionUp];
