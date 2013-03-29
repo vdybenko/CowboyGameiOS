@@ -41,13 +41,13 @@
             explosinPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFile error:&error];
             [explosinPlayer prepareToPlay];
         
-            UIImage *spriteSheetExp = [UIImage imageNamed:@"barelExpl"];
-            NSArray *arrayWithSpritesExp = [spriteSheetExp spritesWithSpriteSheetImage:spriteSheetExp
-                                                                            spriteSize:CGSizeMake(75, 75)];
-            [barelAnimImg setAnimationImages:arrayWithSpritesExp];
-            [barelAnimImg setAnimationRepeatCount:1];
-            [barelAnimImg setAnimationDuration:1];
-        
+        NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"barelExp1.png"],
+                                [UIImage imageNamed:@"barelExp2.png"], [UIImage imageNamed:@"barelExp4.png"],[UIImage imageNamed:@"barelExp6.png"],
+                                nil];
+        barelAnimImg.animationImages = imgArray;
+        barelAnimImg.animationDuration = 0.3f;
+        [barelAnimImg setAnimationRepeatCount:1];
+        imgArray = nil;
     }
     return self;
 }

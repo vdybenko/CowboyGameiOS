@@ -42,14 +42,14 @@ static CGFloat oponentLiveImageViewStartWidth;
         [imgShot setAnimationRepeatCount:1];
         [imgShot setAnimationDuration:animationDurationSmoke];
         
-        UIImage *spriteSheetDie = [UIImage imageNamed:@"opponentSpritSeet"];
-        NSArray *arrayWithSpritesDie = [spriteSheetDie spritesWithSpriteSheetImage:spriteSheetDie inRange:NSRangeFromString(@"{0,4}")
-                                                                        spriteSize:CGSizeMake(89, 161)];
-        [imgDieOpponentAnimation setAnimationImages:arrayWithSpritesDie];
+        NSArray *imgDieArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"menDieFrame1.png"], [UIImage imageNamed:@"menDieFrame1.png"],[UIImage imageNamed:@"menDieFrame1.png"],
+                             [UIImage imageNamed:@"menDieFrame2.png"], [UIImage imageNamed:@"menDieFrame3.png"],[UIImage imageNamed:@"menDieFrame4.png"],[UIImage imageNamed:@"menDieFrame5.png"],[UIImage imageNamed:@"menDieFrame6.png"],[UIImage imageNamed:@"menDieFrame8.png"],
+                             nil];
+        
+        imgDieOpponentAnimation.animationImages = imgDieArray;
+        imgDieOpponentAnimation.animationDuration = 0.6f;
         [imgDieOpponentAnimation setAnimationRepeatCount:1];
-        float animationDurationDie = [imgDieOpponentAnimation.animationImages count] * 0.100; 
-        [imgDieOpponentAnimation setAnimationDuration:animationDurationDie];
-        arrayWithSpritesDie = nil;
+        imgDieArray = nil;
         
         oponentLiveImageViewStartWidth = ivLifeBar.frame.size.width;
         
@@ -161,8 +161,8 @@ static CGFloat oponentLiveImageViewStartWidth;
     frame.size.width = (float)((maxShotCount - userHitCount)*oponentLiveImageViewStartWidth)/maxShotCount;
     ivLifeBar.frame = frame;
 
-    float x = ivLifeBar.frame.size.width*100/oponentLiveImageViewStartWidth;
-    lbLifeLeft.text = [NSString stringWithFormat:@"%d%%",(int)x];
+    int x = (maxShotCount - userHitCount);
+    lbLifeLeft.text = [NSString stringWithFormat:@"%d",x];
 
     CGRect frameLife = lbLifeLeft.frame;
     frameLife.size.width = frame.size.width;
@@ -170,12 +170,12 @@ static CGFloat oponentLiveImageViewStartWidth;
     
 }
 
--(void) refreshLiveBar;
+-(void) refreshLiveBarWithLives: (int )lives;
 {
     CGRect frame = ivLifeBar.frame;
     frame.size.width = oponentLiveImageViewStartWidth;
     ivLifeBar.frame = frame;
-    lbLifeLeft.text =[NSString stringWithFormat:@"100%%"];
+    lbLifeLeft.text =[NSString stringWithFormat:@"%d", lives];
 }
 
 -(void) setStatusBody:(OpponentShapeStatus)status;
@@ -186,11 +186,23 @@ static CGFloat oponentLiveImageViewStartWidth;
         {
             
             [self stopMoveAnimation];
-            //imgBody.image = [UIImage imageNamed:@"menLowDie.png"];
             imgBody.hidden = YES;
-            
             [imgDieOpponentAnimation startAnimating];
+            /*
+            UIImageView *dieImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"menLowDie.png"]];
+            [self addSubview:dieImg];
+            dieImg.frame = imgBody.frame;
             
+            [UIView animateWithDuration:1 animations:^{
+                CGRect frame = dieImg.frame;
+                frame.origin.y -= 100;
+                dieImg.frame = frame;
+                dieImg.alpha = 0;
+            }completion:^(BOOL complete){
+                 
+            }];*/
+      
+        
         }
             break;
         case OpponentShapeStatusLive:
@@ -217,21 +229,21 @@ static CGFloat oponentLiveImageViewStartWidth;
     switch (result) {
         case 0:
             [imgBody addFlyingPointToView:mainView centerPoint:p
-                                                    text:@"-10"
+                                                    text:@"-1"
                                                    color:color
                                                     font:font
                                                direction:FlyingPointDirectionUp];
             break;
         case 1:
             [imgBody addFlyingPointToView:mainView centerPoint:p
-                                            text:@"-10"
+                                            text:@"-1"
                                            color:color
                                             font:font
                                        direction:FlyingPointDirectionUp];
             break;
         case 2:
             [imgBody addFlyingPointToView:mainView centerPoint:p
-                                            text:@"-10"
+                                            text:@"-1"
                                            color:color
                                             font:font
                                        direction:FlyingPointDirectionUp];

@@ -234,10 +234,9 @@ static CGFloat blinkBottomOriginY;
     int indexBarrel = 0;
     barelFrame = barellObject.frame;
     barelFrame.origin.x = opponentShape.frame.origin.x;
-    barelFrame.origin.y = 180;
-    
+    barelFrame.origin.y = 120;
+    countOfBarrels = 5; 
     int randomBarrels = arc4random()%3 + 1;
-    
     for (int i = 0; i < countOfBarrels; i++){
 
         if (indexBarrel == 0) {
@@ -398,7 +397,7 @@ static CGFloat blinkBottomOriginY;
     [self.gunButton setEnabled:NO];
     
     userLiveImageViewStartWidth = self.userLiveImageView.frame.size.width;
-    self.lbUserLifeLeft.text = [NSString stringWithFormat:@"100%%"];
+    self.lbUserLifeLeft.text = [NSString stringWithFormat:@"%d",shotCountBulletForOpponent];
     
     self.opStatsLabel.text = [NSString stringWithFormat: @"A: +%d\rD: +%d",opAccount.accountWeapon.dDamage,opAccount.accountDefenseValue];
     self.userStatsLabel.text = [NSString stringWithFormat: @"A: +%d\nD: +%d",playerAccount.accountWeapon.dDamage,playerAccount.accountDefenseValue];
@@ -428,10 +427,8 @@ static CGFloat blinkBottomOriginY;
    [plView startSensorialRotation];
     
     [opponentShape setStatusBody:OpponentShapeStatusLive];
-    [opponentShape cleareDamage];
-    [opponentShape refreshLiveBar];
-    
-//    [self performSelector:@selector(readyToStart) withObject:Nil afterDelay:1.0];
+    [opponentShape cleareDamage];    
+    [opponentShape refreshLiveBarWithLives:maxShotCount];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -753,8 +750,7 @@ static CGFloat blinkBottomOriginY;
     frame.size.width = (float)((shotCountBulletForOpponent)*userLiveImageViewStartWidth)/maxShotCountForOpponent;
     self.userLiveImageView.frame = frame;
     
-    float x = self.userLiveImageView.frame.size.width*100/userLiveImageViewStartWidth;
-    self.lbUserLifeLeft.text = [NSString stringWithFormat:@"%d%%",(int)x];
+    self.lbUserLifeLeft.text = [NSString stringWithFormat:@"%d",shotCountBulletForOpponent];
     
     CGRect frameLife = self.lbUserLifeLeft.frame;
     frameLife.size.width = frame.size.width;

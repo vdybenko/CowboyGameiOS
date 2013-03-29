@@ -17,15 +17,14 @@
     
     self = [super initWithCoder:aDecoder subViewFromNibFileName:@"Horse"];
     if(self){
-        UIImage *spriteSheet = [UIImage imageNamed:@"horseAnimation2"];
-        NSArray *arrayWithSprites = [spriteSheet spritesWithSpriteSheetImage:spriteSheet inRange:NSRangeFromString(@"{0,8}")
-                                                                  spriteSize:super.imageMain.frame.size];
-        
-        NSMutableArray *imgArray =[NSMutableArray arrayWithArray: arrayWithSprites];
-        [imgArray addObject:[UIImage imageNamed:@"horses_1.png"]];
+          
+        NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"horses_1.png"],
+                             [UIImage imageNamed:@"horses_2.png"], [UIImage imageNamed:@"horses_3.png"],[UIImage imageNamed:@"horses_4.png"], [UIImage imageNamed:@"horses_5.png"],[UIImage imageNamed:@"horses_6.png"], [UIImage imageNamed:@"horses_7.png"],[UIImage imageNamed:@"horses_8.png"], [UIImage imageNamed:@"horses_9.png"], [UIImage imageNamed:@"horses_10.png"],
+                             nil];
         super.imageMain.animationImages = imgArray;
-        super.imageMain.animationDuration = 0.7;
+        super.imageMain.animationDuration = 0.8f;
         [super.imageMain setAnimationRepeatCount:1];
+        imgArray = nil;
     }
     return self;
 }
