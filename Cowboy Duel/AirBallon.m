@@ -19,16 +19,20 @@
     
     self = [super initWithFrame:frame];
     if(self){
-            NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"AirBalloon" owner:self options:nil];
-            UIView *nibView = [objects objectAtIndex:0];
-            [self addSubview:nibView];
-            UIImage *spriteSheetExp = [UIImage imageNamed:@"explosionBarelSpriteSheet"];
-            NSArray *arrayWithSpritesExp = [spriteSheetExp spritesWithSpriteSheetImage:spriteSheetExp
-                                                                            spriteSize:CGSizeMake(75, 75)];
-            [airBallonImg setAnimationImages:arrayWithSpritesExp];
-            [airBallonImg setAnimationRepeatCount:1];
-            [airBallonImg setAnimationDuration:1];
-            
+       
+        NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"AirBalloon" owner:self options:nil];
+        UIView *nibView = [objects objectAtIndex:0];
+        [self addSubview:nibView];
+        
+        NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"exp1.png"],
+                             [UIImage imageNamed:@"exp2.png"], [UIImage imageNamed:@"exp3.png"],[UIImage imageNamed:@"exp4.png"],[UIImage imageNamed:@"exp5.png"],[UIImage imageNamed:@"exp6.png"],[UIImage imageNamed:@"exp7.png"],
+                             nil];
+        airBallonImg.animationImages = imgArray;
+        airBallonImg.animationDuration = 0.5f;
+        [airBallonImg setAnimationRepeatCount:1];
+        imgArray = nil;
+        
+        
     }
     return self;
 }
@@ -61,14 +65,14 @@
 
 }
 -(void)hideObj{
-    //[explosinPlayer stop];
+ 
     [airBallonImg stopAnimating];
     airBallonImg.hidden = YES;
     [self showBonus];
 }
 -(void)showBonus;
 {
-//    bonusImg.frame = airBallonImg.frame;
+
     bonusImg.hidden = NO;
     [UIView animateWithDuration:1.5 animations:^{
         bonusImg.alpha = 0;
