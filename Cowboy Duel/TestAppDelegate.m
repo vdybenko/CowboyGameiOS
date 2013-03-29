@@ -195,19 +195,19 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
         ACAccountStore *accountStore = [[ACAccountStore alloc] init];
         ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
         if (![accountStore accountsWithAccountType:accountType]){
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry", @"AlertView")
-                                                                message:NSLocalizedString(@"You can't connnect to Facebook right now, make sure  your device has an internet connection and you have at least one Facebook account setup. Go to Settings -> Facebook and set up it.", @"AlertView")
-                                                               delegate:self
-                                                      cancelButtonTitle:NSLocalizedString(@"Cancel", @"AlertView")
-                                                      otherButtonTitles: nil];
-            alertView.tag = 1;
-            [alertView show];
+//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry", @"AlertView")
+//                                                                message:NSLocalizedString(@"You can't connnect to Facebook right now, make sure  your device has an internet connection and you have at least one Facebook account setup. Go to Settings -> Facebook and set up it.", @"AlertView")
+//                                                               delegate:self
+//                                                      cancelButtonTitle:NSLocalizedString(@"Cancel", @"AlertView")
+//                                                      otherButtonTitles: nil];
+//            alertView.tag = 1;
+//            [alertView show];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                                 object:self
                                                               userInfo:[NSDictionary dictionaryWithObject:@"/login_FB_no_account" forKey:@"event"]];
             
-            return NO;
+            //return NO;
         }
     }
 
@@ -324,6 +324,13 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     }
 }
 
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    // attempt to extract a token from the url
+    return [FBSession.activeSession handleOpenURL:url];
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
