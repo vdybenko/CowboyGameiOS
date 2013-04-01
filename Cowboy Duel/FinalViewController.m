@@ -21,6 +21,7 @@
     BOOL tryButtonEnabled;
     BOOL isDuelWinWatched;
     BOOL userWon;
+
 }
 -(void)winScene;
 -(void)loseScene;
@@ -291,6 +292,7 @@
                 [self.navigationController presentViewController:duelProductWinViewController animated:YES completion:Nil];
             }else{
                 if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
+                    
                     [self.navigationController popToViewController:[LoginAnimatedViewController sharedInstance] animated:YES];
                     [self releaseComponents];
                     NSLog(@"%@", self.navigationController.viewControllers);
@@ -311,6 +313,7 @@
             }
             [self releaseComponents];
             if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
+                
                 [nav popToViewController:[nav.viewControllers objectAtIndex:2] animated:YES];
             }
             else{
@@ -365,12 +368,19 @@
 -(IBAction)tryButtonClick:(id)sender
 {
     if([LoginAnimatedViewController sharedInstance].isDemoPractice){
+        activityIndicatorView = [[ActivityIndicatorView alloc] init];
+        
+        CGRect frame=activityIndicatorView.frame;
+        frame.origin=CGPointMake(0, 0);
+        activityIndicatorView.frame=frame;
+        
+        [self.view addSubview:activityIndicatorView];
+        
         [[LoginAnimatedViewController sharedInstance] loginButtonClick:sender];
         return;
     }
     
     DLog(@"tryButtonClick");
-    [activityIndicatorView showView];
     if(teaching)
     {
         NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
@@ -1104,6 +1114,7 @@
     ivCurrentRank = nil;
     ivNextRank = nil;
     lblGoldPlus = nil;
+
     [super viewDidUnload];
 }
 
