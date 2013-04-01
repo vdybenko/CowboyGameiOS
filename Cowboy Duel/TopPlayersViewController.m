@@ -185,6 +185,7 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
     DLog(@"TopPlayersViewController jsonString %@",jsonString);
     NSArray *responseObject = ValidateObject([jsonString JSONValue], [NSArray class]);
     jsonString = nil;
+    int rankInListForFindMe = 0;
     for (NSDictionary *dic in responseObject) {
         CDTopPlayer *player=[[CDTopPlayer alloc] init];
         player.dPositionInList=[[dic objectForKey:@"rank"] intValue];
@@ -196,36 +197,38 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
         [arrItemsListForFindMe addObject: player];
         
         if ([player.dAuth isEqualToString:[AccountDataSource sharedInstance].accountID]) {
-            [_playersTopDataSource setMyProfileIndex:player.dPositionInList-1];
+            rankInListForFindMe = player.dPositionInList;
         }
     }
     
     NSMutableArray *arrItemsList=[_playersTopDataSource arrItemsList];
   if ([arrItemsListForFindMe count]>0) {
-    CDTopPlayer *firstPlayerInList=[arrItemsListForFindMe objectAtIndex:0];
-    int rankOfFirstPlayer=firstPlayerInList.dPositionInList;
-    if (rankOfFirstPlayer>[arrItemsList count]) {
-        [arrItemsList addObjectsFromArray:arrItemsListForFindMe];
-    }else {
-        int limitIndex=rankOfFirstPlayer+[arrItemsListForFindMe count]-1;
-        int indexOfFirstElement=rankOfFirstPlayer-1;
-        if (limitIndex>=[arrItemsList count]) {
-            NSMutableIndexSet *indexes = [NSMutableIndexSet indexSetWithIndexesInRange:NSMakeRange(indexOfFirstElement, [arrItemsList count]-indexOfFirstElement)];
-            [arrItemsList removeObjectsAtIndexes:indexes];
+        CDTopPlayer *firstPlayerInList=[arrItemsListForFindMe objectAtIndex:0];
+        int rankOfFirstPlayer=firstPlayerInList.dPositionInList;
+        if (rankOfFirstPlayer>[arrItemsList count]) {
+            [_playersTopDataSource setMyProfileIndex:[arrItemsList count]+9];
             [arrItemsList addObjectsFromArray:arrItemsListForFindMe];
         }else {
-            [arrItemsList replaceObjectsInRange:NSMakeRange(indexOfFirstElement, [arrItemsListForFindMe count]) withObjectsFromArray:arrItemsListForFindMe];
+            int limitRank=rankOfFirstPlayer+[arrItemsListForFindMe count]-1;
+            int indexOfFirstElement=rankOfFirstPlayer-1;
+            if (limitRank>=[arrItemsList count]) {
+                NSMutableIndexSet *indexes = [NSMutableIndexSet indexSetWithIndexesInRange:NSMakeRange(indexOfFirstElement, [arrItemsList count]-rankOfFirstPlayer)];
+                [arrItemsList removeObjectsAtIndexes:indexes];
+                [arrItemsList addObjectsFromArray:arrItemsListForFindMe];
+            }else {
+                [arrItemsList replaceObjectsInRange:NSMakeRange(indexOfFirstElement, [arrItemsListForFindMe count]) withObjectsFromArray:arrItemsListForFindMe];
+            }
+            [_playersTopDataSource setMyProfileIndex:rankInListForFindMe-1];
         }
-    }
-    
-    NSData *data= [NSKeyedArchiver archivedDataWithRootObject:arrItemsList];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"topPlayers"];
-    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"topPlayers"];
-    
-    [tableView reloadData];
-    
-    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:_playersTopDataSource.myProfileIndex inSection:0];
-    [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+        
+        NSData *data= [NSKeyedArchiver archivedDataWithRootObject:arrItemsList];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"topPlayers"];
+        [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"topPlayers"];
+        
+        [tableView reloadData];
+        
+        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:_playersTopDataSource.myProfileIndex inSection:0];
+        [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
   }
     [btnFindMe setEnabled:YES];
     [loadingView setHidden:YES];
