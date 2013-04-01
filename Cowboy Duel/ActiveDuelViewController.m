@@ -148,7 +148,7 @@ static CGFloat blinkBottomOriginY;
         brockenGlassAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
         [brockenGlassAudioPlayer prepareToPlay];
         
-        //[StartViewController sharedInstance].playerStop;
+        [StartViewController sharedInstance].playerStop;
     }
     return self;
 }

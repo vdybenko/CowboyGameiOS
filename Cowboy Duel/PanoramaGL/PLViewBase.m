@@ -1105,10 +1105,11 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
                      x += startX;
                      CGPoint newPosition = CGPointMake(x * self.bounds.size.width, self.bounds.size.height-(y * self.bounds.size.height + 220));
                      dispatch_async(dispatch_get_main_queue(), ^{
+                         if([oponentView respondsToSelector:@selector(view)])
                          [oponentView.view setCenter:newPosition];
                      });
                  }
-                 else [oponentView.view setHidden:YES];
+                 else if([oponentView respondsToSelector:@selector(view)]) [oponentView.view setHidden:YES];
              }
              
          }];
