@@ -289,6 +289,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
     oponentNameOnLine = nil;
     player = nil;
     pathFile = nil;
+    [waitTimer invalidate];
     waitTimer = nil;    
     lineViews = nil;
     twoLineViews = nil;    
@@ -320,6 +321,11 @@ static const char *GC_URL =  BASE_URL"api/gc";
     
 }
 
+-(void)stopWaitTimer;
+{
+    [waitTimer invalidate];
+    waitTimer = nil;
+}
 
 -(IBAction)startButtonClick;
 {

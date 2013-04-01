@@ -503,6 +503,15 @@ static GameCenterViewController *gameCenterViewController;
     userCanceledMatch = NO;
 }
 
+-(BOOL)isLostConectionSend;
+{
+    if ((!opponentEndMatch)&&(userEndMatch)) {
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
 -(void)userCancelMatch;
 {
     [self matchCanseled];
@@ -682,7 +691,8 @@ static GameCenterViewController *gameCenterViewController;
             carShotTime = 0;
             opShotTime = 0;
             
-            if(!start){
+            BOOL isLostConnectionSend = [self isLostConectionSend];
+            if((!start)&&(!isLostConnectionSend)){
                 activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:playerAccount oponentAccount:oponentAccount];
                 [activeDuelViewController setDelegate:self];
                 [self setDelegate:activeDuelViewController];
@@ -696,6 +706,9 @@ static GameCenterViewController *gameCenterViewController;
                 }else{
                     btnStartClick = YES;
                     DLog(@"NETWORK_START_DUEL btnStartClick No");
+                }
+                if ([delegate2 respondsToSelector:@selector(stopWaitTimer)]) {
+                    [delegate2 performSelector:@selector(stopWaitTimer)];
                 }
             }
         }
@@ -714,6 +727,10 @@ static GameCenterViewController *gameCenterViewController;
             [self setDelegate:activeDuelViewController];
             
             [parentVC.navigationController pushViewController:activeDuelViewController animated:YES];
+            
+            if ([delegate2 respondsToSelector:@selector(stopWaitTimer)]) {
+                [delegate2 performSelector:@selector(stopWaitTimer)];
+            }
         }
 			break;
             

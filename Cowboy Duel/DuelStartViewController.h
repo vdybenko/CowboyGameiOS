@@ -23,7 +23,6 @@
 @interface DuelStartViewController : UIViewController<DuelStartViewControllerDelegate,FBRequestDelegate,IconDownloaderDelegate,MemoryManagement> {
     AccountDataSource *playerAccount;
     AccountDataSource *oponentAccount;
-    ProfileViewController *profileViewController;
     NSString *__weak oponentNameOnLine;
     
     GCHelper *gameCenter;
@@ -123,4 +122,5 @@
 
 -(void)duelBot:(BOOL)duelWithBot;
 
+-(void)stopWaitTimer;
 @end
