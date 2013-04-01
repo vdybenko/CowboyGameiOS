@@ -89,6 +89,9 @@
     __weak IBOutlet FXLabel *lblPoints;
     __weak IBOutlet UIView *goldPointBgView;
     __weak IBOutlet UILabel *lblGoldTitle;
+    
+    __weak IBOutlet UIView *hidView;
+    
 }
 @property(weak)id<ActiveDuelViewControllerDelegate> delegate;
 
