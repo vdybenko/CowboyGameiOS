@@ -207,7 +207,7 @@ static GameCenterViewController *gameCenterViewController;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"/duel_GS(try_again)" forKey:@"event"]];
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/GameCenterVC_try_again" forKey:@"page"]];
     
     
     [playerAccount.finalInfoTable removeAllObjects];
@@ -503,7 +503,16 @@ static GameCenterViewController *gameCenterViewController;
     userCanceledMatch = NO;
 }
 
--(void)userCancelNutch;
+-(BOOL)isLostConectionSend;
+{
+    if ((!opponentEndMatch)&&(userEndMatch)) {
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
+-(void)userCancelMatch;
 {
     [self matchCanseled];
     userCanceledMatch = YES;
@@ -522,7 +531,6 @@ static GameCenterViewController *gameCenterViewController;
 
 - (void)receiveData:(NSData *)data
 {
-    DLog(@"receiveData");
     unsigned char *incomingPacket = (unsigned char *)[data bytes];
 	int *pIntData = (int *)&incomingPacket[0];
     
@@ -608,10 +616,8 @@ static GameCenterViewController *gameCenterViewController;
             
             [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                                 object:self
-                                                              userInfo:[NSDictionary dictionaryWithObject:@"/duel_GS(try_again)" forKey:@"event"]];
-            //            [TestFlight passCheckpoint:@"/duel_GS_try_again"];
-            
-            
+                                                              userInfo:[NSDictionary dictionaryWithObject:@"/GameCenterVC_try_again" forKey:@"page"]];
+                        
             if (isTryAgain && server) return;
             
             [playerAccount.finalInfoTable removeAllObjects];
@@ -683,7 +689,8 @@ static GameCenterViewController *gameCenterViewController;
             carShotTime = 0;
             opShotTime = 0;
             
-            if(!start){
+            BOOL isLostConnectionSend = [self isLostConectionSend];
+            if((!start)&&(!isLostConnectionSend)){
                 activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:playerAccount oponentAccount:oponentAccount];
                 [activeDuelViewController setDelegate:self];
                 [self setDelegate:activeDuelViewController];
@@ -697,6 +704,9 @@ static GameCenterViewController *gameCenterViewController;
                 }else{
                     btnStartClick = YES;
                     DLog(@"NETWORK_START_DUEL btnStartClick No");
+                }
+                if ([delegate2 respondsToSelector:@selector(stopWaitTimer)]) {
+                    [delegate2 performSelector:@selector(stopWaitTimer)];
                 }
             }
         }
@@ -715,6 +725,10 @@ static GameCenterViewController *gameCenterViewController;
             [self setDelegate:activeDuelViewController];
             
             [parentVC.navigationController pushViewController:activeDuelViewController animated:YES];
+            
+            if ([delegate2 respondsToSelector:@selector(stopWaitTimer)]) {
+                [delegate2 performSelector:@selector(stopWaitTimer)];
+            }
         }
 			break;
             

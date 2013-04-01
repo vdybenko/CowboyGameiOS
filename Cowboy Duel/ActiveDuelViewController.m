@@ -427,13 +427,31 @@ static CGFloat blinkBottomOriginY;
    [plView startSensorialRotation];
     
     [opponentShape setStatusBody:OpponentShapeStatusLive];
-    [opponentShape cleareDamage];
+    [opponentShape cleareDamage];    
     [opponentShape refreshLiveBarWithLives:maxShotCount];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [self readyToStart];
+    
+    NSString *st=@"/ActiveDuelVC";
+    if ( [LoginAnimatedViewController sharedInstance].isDemoPractice == YES){
+        st=@"/ActiveDuelVC_first_duel";
+    }else{
+        if ([opAccount isPlayerForPractice]) {
+            st=@"/ActiveDuelVC_practice";
+        }else{
+            if (opAccount.bot){
+                st=@"/ActiveDuelVC_bot";
+            }else{
+                st=@"/ActiveDuelVC";
+            }
+        }
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:st forKey:@"page"]];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -509,7 +527,6 @@ static CGFloat blinkBottomOriginY;
 - (IBAction)shotButtonClick:(id)sender {
     if (isGunCanShotOfFrequently) {
         [self startGunFrequentlyBlockTime];
-        
             
         [gunDrumViewController shotAnimation];
         [self hideSteadyImage];
@@ -1106,7 +1123,7 @@ static CGFloat blinkBottomOriginY;
 
 -(void)readyToStart
 {
-    NSLog(@"startDuel");
+    NSLog(@"readyToStart");
     soundStart = YES;
     startInterval = [NSDate timeIntervalSinceReferenceDate];
     [player stop];

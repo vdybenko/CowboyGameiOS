@@ -161,13 +161,26 @@ static CGFloat oponentLiveImageViewStartWidth;
     frame.size.width = (float)((maxShotCount - userHitCount)*oponentLiveImageViewStartWidth)/maxShotCount;
     ivLifeBar.frame = frame;
 
-    int x = (maxShotCount - userHitCount);
+    int x = (maxShotCount - userHitCount)*3;
     lbLifeLeft.text = [NSString stringWithFormat:@"%d",x];
 
     CGRect frameLife = lbLifeLeft.frame;
     frameLife.size.width = frame.size.width;
     lbLifeLeft.frame = frameLife;
     
+    CGAffineTransform trf0 = lbLifeLeft.transform;
+    CGAffineTransform trf1 = CGAffineTransformMakeScale(1.3, 1.3);
+    
+    [UIView animateWithDuration:0.7
+                     animations:^{
+                         lbLifeLeft.transform = trf1;
+                     } completion:^(BOOL finished) {
+                        [UIView animateWithDuration:0.5
+                                         animations:^{
+                                             lbLifeLeft.transform = trf0;
+                                         } completion:^(BOOL finished) {
+                                         }];
+                     }];
 }
 
 -(void) refreshLiveBarWithLives: (int )lives;
@@ -175,7 +188,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     CGRect frame = ivLifeBar.frame;
     frame.size.width = oponentLiveImageViewStartWidth;
     ivLifeBar.frame = frame;
-    lbLifeLeft.text =[NSString stringWithFormat:@"%d", lives];
+    lbLifeLeft.text =[NSString stringWithFormat:@"%d", lives*3];
 }
 
 -(void) setStatusBody:(OpponentShapeStatus)status;
@@ -226,6 +239,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     UIColor *color = [UIColor greenColor];
     UIFont *font = [UIFont boldSystemFontOfSize:22];
     CGPoint p= (CGPoint){44,-5};
+    CGPoint p1 = (CGPoint){p.x, 8};
     switch (result) {
         case 0:
             [imgBody addFlyingPointToView:mainView centerPoint:p
@@ -233,6 +247,10 @@ static CGFloat oponentLiveImageViewStartWidth;
                                                    color:color
                                                     font:font
                                                direction:FlyingPointDirectionUp];
+            [imgBody addFlyingImageToView:mainView
+                              centerPoint:p1
+                                imageName:@"crossbones.png"
+                                direction:FlyingPointDirectionUp];
             break;
         case 1:
             [imgBody addFlyingPointToView:mainView centerPoint:p
@@ -240,6 +258,10 @@ static CGFloat oponentLiveImageViewStartWidth;
                                            color:color
                                             font:font
                                        direction:FlyingPointDirectionUp];
+            [imgBody addFlyingImageToView:mainView
+                              centerPoint:p1
+                                imageName:@"crossbones.png"
+                                direction:FlyingPointDirectionUp];            
             break;
         case 2:
             [imgBody addFlyingPointToView:mainView centerPoint:p
@@ -247,6 +269,10 @@ static CGFloat oponentLiveImageViewStartWidth;
                                            color:color
                                             font:font
                                        direction:FlyingPointDirectionUp];
+            [imgBody addFlyingImageToView:mainView
+                              centerPoint:p1
+                                imageName:@"crossbones.png"
+                                direction:FlyingPointDirectionUp];            
             break;
         default:
             break;

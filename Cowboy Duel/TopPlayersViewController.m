@@ -103,6 +103,10 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         [self startTableAnimation];
     });
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/TopPlayersVC" forKey:@"page"]];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -274,9 +278,10 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
         NSIndexPath *indexPath=[NSIndexPath indexPathForRow:_playersTopDataSource.myProfileIndex inSection:0];
         [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"/find_me" forKey:@"event"]];
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/TopPlayersVC_find_me" forKey:@"page"]];
     
 }
 
@@ -288,7 +293,7 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
     [_playersTopDataSource reloadDataSource];
   [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                       object:self
-                                                    userInfo:[NSDictionary dictionaryWithObject:@"/refresh_top_players" forKey:@"event"]];
+                                                    userInfo:[NSDictionary dictionaryWithObject:@"/TopPlayersVC_refresh" forKey:@"page"]];
   
 }
 

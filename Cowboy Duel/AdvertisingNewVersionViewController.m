@@ -48,14 +48,14 @@
     [self.webBody.scrollView setScrollEnabled:NO];
     [self.webBody setBackgroundColor:[UIColor clearColor]];
     [self.webBody loadHTMLString:NSLocalizedString(@"NewVersionMainText", @"") baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
-
-    
-    
-    
-    //[super setInformationAboutApp];
-
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/AdvertisingNewVersionVC" forKey:@"page"]];
+}
 -(void)loadView
 {
     [super loadView];
@@ -83,7 +83,7 @@
     [self dismissModalViewControllerAnimated:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"/skip_newVersion" forKey:@"event"]];
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/AdvertisingNewVersionVC_skip" forKey:@"page"]];
 }
 
 -(IBAction)btnAppStoreClick:(id)sender;
@@ -92,7 +92,7 @@
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
 														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"/new_Version_app" forKey:@"event"]];
+													  userInfo:[NSDictionary dictionaryWithObject:@"/AdvertisingNewVersionVC_app" forKey:@"page"]];
 }
 
 -(void)removeContent

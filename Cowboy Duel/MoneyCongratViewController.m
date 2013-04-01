@@ -136,6 +136,10 @@
     [self performSelector:@selector(scaleAnimation) withObject:self afterDelay:0.3];
     [self shineAnimation];
     [((FinalViewController *)delegate).view setHidden:NO];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+														object:self
+													  userInfo:[NSDictionary dictionaryWithObject:@"/MoneyCongratVC" forKey:@"page"]];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -258,9 +262,6 @@
         [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
     }
     [self dismissModalViewControllerAnimated:YES];
-  [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-                                                      object:self
-                                                    userInfo:[NSDictionary dictionaryWithObject:@"/achievement_posted_on_FB" forKey:@"event"]];
     [self releaseComponents];
 }
 #pragma mark  - Facebook methods
@@ -268,8 +269,5 @@
 +(void)achivmentMoney:(NSUInteger)money;
 {
     [[OGHelper sharedInstance] apiGraphScorePost:money];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
-														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"/congratulation_achivment" forKey:@"event"]];
 }
 @end

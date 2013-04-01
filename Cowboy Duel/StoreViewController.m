@@ -100,6 +100,9 @@
     }
     
     [self startTableAnimation];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/StoreVC" forKey:@"page"]];
 }
 
 -(void)refreshController;
@@ -450,14 +453,13 @@
     [storeDataSource reloadDataSource];
     [tableView reloadData];
     
-    purchesingProductIndex = -1;
     loadingView.hidden = YES;
     self.view.userInteractionEnabled = YES;
     
-    NSString *stringToGA = [NSString stringWithFormat:@"/buy_product_%d",purchesingProductIndex];
+    NSString *stringToGA = [NSString stringWithFormat:@"/StoreVC_buy_product_%d",purchesingProductIndex];
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:stringToGA forKey:@"event"]];
+                                                      userInfo:[NSDictionary dictionaryWithObject:stringToGA forKey:@"page"]];
 }
 
 - (void)productAPurchased
@@ -474,10 +476,10 @@
     loadingView.hidden = YES;
     self.view.userInteractionEnabled = YES;
     
-    NSString *stringToGA = [NSString stringWithFormat:@"/buy_product_fail_%d",purchesingProductIndex];
+    NSString *stringToGA = [NSString stringWithFormat:@"/StoreVC_buy_product_fail_%d",purchesingProductIndex];
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:stringToGA forKey:@"event"]];
+                                                      userInfo:[NSDictionary dictionaryWithObject:stringToGA forKey:@"page"]];
 }
 
 -(void)dealloc
