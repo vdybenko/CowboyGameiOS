@@ -935,27 +935,39 @@ static StartViewController *sharedHelper = nil;
         
     float ver_float = [[[UIDevice currentDevice] systemVersion] floatValue];
     if (ver_float >= 6.0) {
-        BOOL displayedNativeDialog =
-        [FBNativeDialogs
-         presentShareDialogModallyFrom:self
-         initialText:@"Get Started"
-         image:[UIImage imageNamed:@"Icon@2x.png"]
-         url:[NSURL URLWithString:URL_APP_ESTIMATE]
-         handler:^(FBNativeDialogResult result, NSError *error) {
-             if (error) {
-                 /* handle failure */
-             } else {
-                 if (result == FBNativeDialogResultSucceeded) {
-                     /* handle success */
-                 } else {
-                     /* handle user cancel */
-                 }
-             }
-         }];
-        if (!displayedNativeDialog) {
-            /* handle fallback to native dialog  */
-        }
+        ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+        ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
+        if ([accountStore accountsWithAccountType:accountType]){
 
+            BOOL displayedNativeDialog =
+            [FBNativeDialogs
+             presentShareDialogModallyFrom:self
+             initialText:@"Get Started"
+             image:[UIImage imageNamed:@"Icon@2x.png"]
+             url:[NSURL URLWithString:URL_APP_ESTIMATE]
+             handler:^(FBNativeDialogResult result, NSError *error) {
+                 if (error) {
+                     /* handle failure */
+                 } else {
+                     if (result == FBNativeDialogResultSucceeded) {
+                         /* handle success */
+                     } else {
+                         /* handle user cancel */
+                     }
+                 }
+             }];
+            if (!displayedNativeDialog) {
+                /* handle fallback to native dialog  */
+            }
+        }else
+        {
+            if ([[OGHelper sharedInstance]isAuthorized]) {
+                [[OGHelper sharedInstance] apiDialogFeedUser];
+            }else {
+                [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusFeed];
+                [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
+            }
+        }
     }else{
         if ([[OGHelper sharedInstance]isAuthorized]) {
             [[OGHelper sharedInstance] apiDialogFeedUser];
