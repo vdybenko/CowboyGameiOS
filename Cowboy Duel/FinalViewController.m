@@ -21,6 +21,7 @@
     BOOL tryButtonEnabled;
     BOOL isDuelWinWatched;
     BOOL userWon;
+
 }
 -(void)winScene;
 -(void)loseScene;
@@ -50,7 +51,6 @@
         NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/cry.mp3", [[NSBundle mainBundle] resourcePath]]];
         follPlayerFinal= [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
 // above
-        [hidView setHidden:YES];
         teaching = teach;
         playerAccount = userAccount;
         oponentAccount = opAccount;
@@ -368,7 +368,6 @@
 -(IBAction)tryButtonClick:(id)sender
 {
     if([LoginAnimatedViewController sharedInstance].isDemoPractice){
-        [hidView setHidden:NO];
         activityIndicatorView = [[ActivityIndicatorView alloc] init];
         
         CGRect frame=activityIndicatorView.frame;
@@ -1113,7 +1112,7 @@
     ivCurrentRank = nil;
     ivNextRank = nil;
     lblGoldPlus = nil;
-    hidView = nil;
+
     [super viewDidUnload];
 }
 
