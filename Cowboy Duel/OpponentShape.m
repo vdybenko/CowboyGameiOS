@@ -226,6 +226,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     UIColor *color = [UIColor greenColor];
     UIFont *font = [UIFont boldSystemFontOfSize:22];
     CGPoint p= (CGPoint){44,-5};
+    CGPoint p1 = (CGPoint){p.x, 8};
     switch (result) {
         case 0:
             [imgBody addFlyingPointToView:mainView centerPoint:p
@@ -233,6 +234,10 @@ static CGFloat oponentLiveImageViewStartWidth;
                                                    color:color
                                                     font:font
                                                direction:FlyingPointDirectionUp];
+            [imgBody addFlyingImageToView:mainView
+                              centerPoint:p1
+                                imageName:@"crossbones.png"
+                                direction:FlyingPointDirectionUp];
             break;
         case 1:
             [imgBody addFlyingPointToView:mainView centerPoint:p
@@ -240,6 +245,10 @@ static CGFloat oponentLiveImageViewStartWidth;
                                            color:color
                                             font:font
                                        direction:FlyingPointDirectionUp];
+            [imgBody addFlyingImageToView:mainView
+                              centerPoint:p1
+                                imageName:@"crossbones.png"
+                                direction:FlyingPointDirectionUp];            
             break;
         case 2:
             [imgBody addFlyingPointToView:mainView centerPoint:p
@@ -247,6 +256,10 @@ static CGFloat oponentLiveImageViewStartWidth;
                                            color:color
                                             font:font
                                        direction:FlyingPointDirectionUp];
+            [imgBody addFlyingImageToView:mainView
+                              centerPoint:p1
+                                imageName:@"crossbones.png"
+                                direction:FlyingPointDirectionUp];            
             break;
         default:
             break;
