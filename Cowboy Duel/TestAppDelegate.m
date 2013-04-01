@@ -23,6 +23,7 @@
 static const NSInteger kGANDispatchPeriod = 60;
 #ifdef DEBUG
 static NSString *kGAAccountID = @"UA-24007807-3";
+
 #else
 static NSString *kGAAccountID = @"UA-38210757-1";
 #endif
@@ -145,6 +146,11 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     //Sleep off
     application.idleTimerDisabled = YES;
     application.applicationIconBadgeNumber = 0;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/TestAppDelegate" forKey:@"page"]];
+    
     return YES;
 }
 
@@ -205,7 +211,7 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
             
             [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                                 object:self
-                                                              userInfo:[NSDictionary dictionaryWithObject:@"/login_FB_no_account" forKey:@"event"]];
+                                                              userInfo:[NSDictionary dictionaryWithObject:@"/TestAppDelegate_login_FB_no_account" forKey:@"page"]];
             
             //return NO;
         }
@@ -423,7 +429,7 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 
 #pragma mark GATrackEvent
 - (void)AnalyticsTrackEvent:(NSNotification *)notification {
-	NSString *page = [[notification userInfo] objectForKey:@"event"];
+	NSString *page = [[notification userInfo] objectForKey:@"page"];
     NSInteger demention = [[[notification userInfo] objectForKey:@"demention"] intValue];
     NSString *value = [[notification userInfo] objectForKey:@"value"];
 	if (page){

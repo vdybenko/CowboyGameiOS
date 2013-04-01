@@ -66,6 +66,8 @@ static AccountDataSource *sharedHelper = nil;
         
         self.isTryingWeapon=NO;
         
+        self.bot = NO;
+        
         self.avatar=@"";
         self.age=@"";
         self.homeTown=@"";

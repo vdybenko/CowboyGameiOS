@@ -434,6 +434,24 @@ static CGFloat blinkBottomOriginY;
 -(void)viewDidAppear:(BOOL)animated
 {
     [self readyToStart];
+    
+    NSString *st=@"/ActiveDuelVC";
+    if ( [LoginAnimatedViewController sharedInstance].isDemoPractice == YES){
+        st=@"/ActiveDuelVC_first_duel";
+    }else{
+        if ([opAccount isPlayerForPractice]) {
+            st=@"/ActiveDuelVC_practice";
+        }else{
+            if (opAccount.bot){
+                st=@"/ActiveDuelVC_bot";
+            }else{
+                st=@"/ActiveDuelVC";
+            }
+        }
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:st forKey:@"page"]];
 }
 
 -(void)viewWillDisappear:(BOOL)animated

@@ -126,6 +126,9 @@ static LoginAnimatedViewController *sharedHelper = nil;
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/LoginAnimatedVC" forKey:@"page"]];
   
 }
 
@@ -160,7 +163,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"/first_screen_teaching" forKey:@"event"]];
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/LoginAnimatedVC_practice" forKey:@"page"]];
 }
 
 - (IBAction)loginButtonClick:(id)sender {
@@ -183,7 +186,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                             object:self
-                                                          userInfo:[NSDictionary dictionaryWithObject:@"/login_FB" forKey:@"event"]];
+                                                          userInfo:[NSDictionary dictionaryWithObject:@"/LoginAnimatedVC_login_FB" forKey:@"page"]];
         [LoginAnimatedViewController sharedInstance].isDemoPractice = NO;
         [[NSUserDefaults standardUserDefaults] synchronize];
     }else{
@@ -228,9 +231,9 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [self initFacebook];
     [[FBSession activeSession] closeAndClearTokenInformation];
 	//[facebook logout:self];
-  [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-                                                      object:self
-                                                    userInfo:[NSDictionary dictionaryWithObject:@"/logOut_FB_click" forKey:@"event"]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/LoginAnimatedVC_logOut_FB" forKey:@"page"]];
 }
 
 

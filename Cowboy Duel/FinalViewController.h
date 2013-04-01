@@ -40,7 +40,6 @@
     int minUserTime;
     int userTime;
       
-    NSString *stGA;
     NSString *falseLabel;
     BOOL foll;
     

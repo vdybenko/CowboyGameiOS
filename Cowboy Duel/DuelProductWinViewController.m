@@ -110,6 +110,10 @@
 {
     [super viewDidAppear:animated];
     [MKStoreManager sharedManager].delegate = self;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/DuelProductWinVC" forKey:@"page"]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -210,7 +214,7 @@
         
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"/buy_product_win" forKey:@"event"]];
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/DuelProductWinVC_purchased" forKey:@"page"]];
     loadingView.hidden = YES;
 }
 
@@ -218,7 +222,7 @@
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"/buy_product_fail" forKey:@"event"]];
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/DuelProductWinVC_fail" forKey:@"page"]];
     loadingView.hidden = YES;
     buyItButton.enabled = YES;
 }

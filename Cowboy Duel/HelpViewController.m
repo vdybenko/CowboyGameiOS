@@ -99,6 +99,13 @@ BOOL isSoundControl;
     [mainView setDinamicHeightBackground];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/HelpVC" forKey:@"page"]];
+}
+
 - (void)viewDidUnload
 {
     lbBackBtn = nil;
@@ -168,7 +175,7 @@ BOOL isSoundControl;
     
     if([startVC connectedToWiFi]) [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                                                       object:self
-                                                                                    userInfo:[NSDictionary dictionaryWithObject:@"/help_video" forKey:@"event"]];
+                                                                                    userInfo:[NSDictionary dictionaryWithObject:@"/HelpVC_video" forKey:@"page"]];
 }
 
 -(IBAction)btnContactClicked{
@@ -180,7 +187,7 @@ BOOL isSoundControl;
     
     if([startVC connectedToWiFi]) [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                                                     object:self
-                                                                                  userInfo:[NSDictionary dictionaryWithObject:@"/help_contact_us" forKey:@"event"]];
+                                                                                  userInfo:[NSDictionary dictionaryWithObject:@"/HelpVC_contact_us" forKey:@"page"]];
   
 }
 

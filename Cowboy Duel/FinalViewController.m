@@ -79,18 +79,7 @@
         }
         
         DLog(@"Time final %d  %d",userTime,oponentTime);
-        stGA = [[NSString alloc] init];
-        
-        if(teaching){
-            if (duelWithBotCheck) {
-                stGA = @"/duel_BOT/";
-            }else{
-                stGA = @"/duel_teaching/";
-            }
-        }else{
-            stGA = @"/duel/";
-        }  
-        
+            
         transaction = [[CDTransaction alloc] init];
         transaction.trMoneyCh = [NSNumber numberWithInt:10];
         transaction.trDescription = [[NSString alloc] initWithFormat:@"Duel"];
@@ -196,7 +185,9 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {   
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/FinalVC" forKey:@"page"]];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -212,7 +203,6 @@
     activityIndicatorView = nil;
     playerAccount = nil;
     oponentAccount = nil;
-    stGA = nil;
     falseLabel = nil;
     player = nil;
     follPlayerFinal = nil;
@@ -346,7 +336,7 @@
                         
             [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                                 object:self
-                                                              userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@%@",stGA,@"run_away"] forKey:@"event"]];
+                                                              userInfo:[NSDictionary dictionaryWithObject:@"/FinalVC_run_away" forKey:@"page"]];
             
             
         }else{
@@ -397,6 +387,10 @@
         {
             [delegate matchStartedTry];
         }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/FinalVC_tryAgain" forKey:@"page"]];
 }
 #pragma  mark -
 -(void)loseScene
@@ -419,11 +413,6 @@
     
     lblGold.gradientStartColor = [UIColor colorWithRed:255.0/255.0 green:181.0/255.0 blue:0.0/255.0 alpha:1.0];
     lblGold.gradientEndColor = [UIColor colorWithRed:255.0/255.0 green:140.0/255.0 blue:0.0/255.0 alpha:1.0];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
-                                                        object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@%@",stGA,@"final"] forKey:@"event"]];
-
     
     if (!teaching||(duelWithBotCheck)) {
         oponentAccount.money += moneyExch;
@@ -515,7 +504,7 @@
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                         object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@%@",stGA,@"final"] forKey:@"event"]];
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/FinalVC_finaly" forKey:@"page"]];
     oldMoneyForAnimation = playerAccount.money;
     if(!teaching||(duelWithBotCheck)){
 // added for GC

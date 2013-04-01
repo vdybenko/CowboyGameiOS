@@ -247,6 +247,10 @@ static const char *GC_URL =  BASE_URL"api/gc";
     }
     [[self.navigationController.viewControllers objectAtIndex:1] performSelector:@selector(playerStop)];
     [player play];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/DuelStartVC" forKey:@"page"]];
 }
 
 
@@ -342,6 +346,10 @@ static const char *GC_URL =  BASE_URL"api/gc";
     
     [delegate duelCancel];
     [self releaseComponents];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/DuelStartVC_cancel" forKey:@"page"]];
 }
 
 #pragma mark FConnect Methods

@@ -207,7 +207,7 @@ static GameCenterViewController *gameCenterViewController;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"/duel_GS(try_again)" forKey:@"event"]];
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/GameCenterVC_try_again" forKey:@"page"]];
     
     
     [playerAccount.finalInfoTable removeAllObjects];
@@ -616,10 +616,8 @@ static GameCenterViewController *gameCenterViewController;
             
             [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                                 object:self
-                                                              userInfo:[NSDictionary dictionaryWithObject:@"/duel_GS(try_again)" forKey:@"event"]];
-            //            [TestFlight passCheckpoint:@"/duel_GS_try_again"];
-            
-            
+                                                              userInfo:[NSDictionary dictionaryWithObject:@"/GameCenterVC_try_again" forKey:@"page"]];
+                        
             if (isTryAgain && server) return;
             
             [playerAccount.finalInfoTable removeAllObjects];
