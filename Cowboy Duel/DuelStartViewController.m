@@ -322,6 +322,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
     [self cancelButtonClick];
     [waitTimer invalidate];
     waitTimer = nil;
+    DLog(@"waitTimerTick");
     
 }
 

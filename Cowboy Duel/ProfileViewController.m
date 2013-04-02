@@ -53,7 +53,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     __weak IBOutlet UIButton *btnAddToFavorites;
     
     __weak IBOutlet UIButton *btnLeaderboard;
-    __weak IBOutlet UIButton *btnLeaderboardBig;
     __weak IBOutlet UIButton *btnBack;
     __weak IBOutlet UILabel *lbPlayerStats;
     __weak IBOutlet UILabel *lbDuelsWon;
@@ -136,7 +135,6 @@ static const CGFloat timeToStandartTitles = 1.8;
         [self loadView];
         UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
         [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:24];
-        [btnLeaderboardBig setTitleByLabel:@"LeaderboardTitle" withColor:buttonsTitleColor fontSize:24];
         
         [self initMainControls];
         [mainProfileView setDinamicHeightBackground];
@@ -229,7 +227,6 @@ static const CGFloat timeToStandartTitles = 1.8;
         [self loadView];
         UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
         [btnBack setTitleByLabel:@"CONTINUE" withColor:buttonsTitleColor fontSize:24];
-        [btnLeaderboardBig setTitleByLabel:@"LeaderboardTitle" withColor:buttonsTitleColor fontSize:24];
         [self initMainControls];
         [mainProfileView setDinamicHeightBackground];
         lbDescription.hidden = NO;
@@ -322,7 +319,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     lbGoldIcon = nil;
     lbAward = nil;
     btnLeaderboard = nil;
-    btnLeaderboardBig = nil;
     btnBack = nil;
     lbPlayerStats = nil;
     lbDuelsWon = nil;
@@ -416,7 +412,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     [self loadView];
     UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:24];
-    [btnLeaderboardBig setTitleByLabel:@"LeaderboardTitle" withColor:buttonsTitleColor fontSize:24];
     [duelButton setTitleByLabel:@"DUEL"];
     [duelButton setEnabled:NO];
     [duelButton changeColorOfTitleByLabel:buttonsTitleColor];
@@ -901,19 +896,11 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 }
 
 - (IBAction)backToMenuWanted:(id)sender {
+    [duelStartViewController stopWaitTimer];
+    [duelStartViewController releaseComponents];
     [self backToMenu:sender];
     [self releaseComponents];
 }
-
-- (IBAction)btnLeaderbordFirstRunClick:(id)sender {
-    TopPlayersViewController *topPlayersViewController =[[TopPlayersViewController alloc] initWithAccount:playerAccount];
-    [self.navigationController pushViewController:topPlayersViewController animated:YES];
-    topPlayersViewController = nil;
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-                                                        object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"/ProfileVC_first_leaderBoard" forKey:@"page"]];
-}
-
 
 - (IBAction)btnLeaderbordClick:(id)sender {
     TopPlayersViewController *topPlayersViewController =[[TopPlayersViewController alloc] initWithAccount:playerAccount];

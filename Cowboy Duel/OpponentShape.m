@@ -240,7 +240,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     switch (result) {
         case 0:
             [imgBody addFlyingPointToView:mainView centerPoint:p
-                                                    text:@"-1"
+                                                    text:@"-3"
                                                    color:color
                                                     font:font
                                                direction:FlyingPointDirectionUp];
@@ -251,7 +251,7 @@ static CGFloat oponentLiveImageViewStartWidth;
             break;
         case 1:
             [imgBody addFlyingPointToView:mainView centerPoint:p
-                                            text:@"-1"
+                                            text:@"-3"
                                            color:color
                                             font:font
                                        direction:FlyingPointDirectionUp];
@@ -262,7 +262,7 @@ static CGFloat oponentLiveImageViewStartWidth;
             break;
         case 2:
             [imgBody addFlyingPointToView:mainView centerPoint:p
-                                            text:@"-1"
+                                            text:@"-3"
                                            color:color
                                             font:font
                                        direction:FlyingPointDirectionUp];
