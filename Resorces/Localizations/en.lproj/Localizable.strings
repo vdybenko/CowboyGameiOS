@@ -317,8 +317,8 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "Defense:"="Defense: ";
 
 //added for PlayersOnlineDataSource.m:
-"OnLine" = "OnLine";
-"OffLine" = "OffLine";
+"OnLine" = "ONLINE";
+"OffLine" = "OFFLINE";
 
 //Pull to refresh
 "PULL" = "Pull down to refresh";
