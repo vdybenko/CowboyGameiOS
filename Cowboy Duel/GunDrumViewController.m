@@ -24,6 +24,7 @@
     int indexOfGargedBullet;
     
     AVAudioPlayer *loadBulletAudioPlayer;
+    __weak IBOutlet UIButton *gunButton;
     __weak IBOutlet UIView *vBackLightDrum;
 }
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *colectionBullets;
@@ -155,6 +156,7 @@ static const CGFloat timeSpinDump = 0.3f;
     [self setTextView:nil];
     [self setTextLabel:nil];
     vBackLightDrum = nil;
+    gunButton = nil;
     [super viewDidUnload];
 }
 
@@ -169,6 +171,7 @@ static const CGFloat timeSpinDump = 0.3f;
 {
     [self.view.layer removeAllAnimations];
     [self hideBullets];
+    [gunButton setHidden:YES];
     hudView.alpha = 1;
     hudView.hidden = NO;
     vLoadGun.hidden = NO;
@@ -264,6 +267,7 @@ static const CGFloat timeSpinDump = 0.3f;
             gun.frame = frame;
         }completion:^(BOOL finished) {
             hudView.alpha = 0.0;
+            [gunButton setHidden:NO];
             if (didFinishBlock) {
                 didFinishBlock();
             }
