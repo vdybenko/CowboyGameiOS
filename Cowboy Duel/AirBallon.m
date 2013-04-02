@@ -28,7 +28,7 @@
                              [UIImage imageNamed:@"exp2.png"], [UIImage imageNamed:@"exp3.png"],[UIImage imageNamed:@"exp4.png"],[UIImage imageNamed:@"exp5.png"],[UIImage imageNamed:@"exp6.png"],[UIImage imageNamed:@"exp7.png"],
                              nil];
         airBallonImg.animationImages = imgArray;
-        airBallonImg.animationDuration = 0.5f;
+        airBallonImg.animationDuration = 0.6f;
         [airBallonImg setAnimationRepeatCount:1];
         imgArray = nil;
         
@@ -61,14 +61,14 @@
 
     [airBallonImg startAnimating];
     
-    [self performSelector:@selector(hideObj) withObject:nil afterDelay:0.7f];
+    [self performSelector:@selector(hideObj) withObject:nil afterDelay:0.5f];
 
 }
 -(void)hideObj{
  
     [airBallonImg stopAnimating];
     airBallonImg.hidden = YES;
-    [self showBonus];
+    //[self showBonus];
 }
 -(void)showBonus;
 {

@@ -235,7 +235,8 @@ static CGFloat blinkBottomOriginY;
     barelFrame = barellObject.frame;
     barelFrame.origin.x = opponentShape.frame.origin.x;
     barelFrame.origin.y = 120;
-    countOfBarrels = 5; 
+    countOfBarrels = 5;
+    countOfCactuses = 5;
     int randomBarrels = arc4random()%3 + 1;
     for (int i = 0; i < countOfBarrels; i++){
 
@@ -301,11 +302,11 @@ static CGFloat blinkBottomOriginY;
         if (i > 0) {
             cactusObject = [cactusObjectArray objectAtIndex:i-1];
             cactusFrame.origin.x = cactusObject.frame.origin.x + 80;
-            cactusFrame.origin.y = 175;
+            cactusFrame.origin.y = 150;
             
         }else{
             cactusFrame.origin.x = 40 + opponentShape.frame.origin.x;
-            cactusFrame.origin.y = 175;
+            cactusFrame.origin.y = 150;
             
         }
         cactusObject = [[CactusObject alloc] initWithFrame:cactusFrame];
