@@ -103,7 +103,7 @@
     //[explosinPlayer stop];
     [barelAnimImg stopAnimating];
     barelAnimImg.hidden = YES;
-    [self showBonus];
+//    [self showBonus];
 
 }
 -(void)showBonus;
@@ -123,7 +123,7 @@
 
 -(BOOL) isShownBonus
 {
-    return YES;
+    return NO;
     //    int luck = arc4random()%2;
     //    return (luck == 2);
 }
