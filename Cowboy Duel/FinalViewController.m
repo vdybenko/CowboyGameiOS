@@ -368,14 +368,16 @@
 -(IBAction)tryButtonClick:(id)sender
 {
     if([LoginAnimatedViewController sharedInstance].isDemoPractice){
-        activityIndicatorView = [[ActivityIndicatorView alloc] init];
-        
-        CGRect frame=activityIndicatorView.frame;
-        frame.origin=CGPointMake(0, 0);
-        activityIndicatorView.frame=frame;
-        
-        [self.view addSubview:activityIndicatorView];
-        
+        if ([[StartViewController sharedInstance] connectedToWiFi]) {
+
+            activityIndicatorView = [[ActivityIndicatorView alloc] init];
+            
+            CGRect frame=activityIndicatorView.frame;
+            frame.origin=CGPointMake(0, 0);
+            activityIndicatorView.frame=frame;
+            
+            [self.view addSubview:activityIndicatorView];
+        }
         [[LoginAnimatedViewController sharedInstance] loginButtonClick:sender];
         return;
     }

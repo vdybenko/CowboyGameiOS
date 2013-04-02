@@ -632,8 +632,11 @@ static StartViewController *sharedHelper = nil;
 -(void)didBecomeActive
 {
     DLog(@"did become active");
-    SSConnection *connection = [SSConnection sharedInstance];
-    [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
+    if ([[OGHelper sharedInstance] isAuthorized]){
+        SSConnection *connection = [SSConnection sharedInstance];
+        [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
+    }
+
     
     if (!firstRunLocal) {
         [self login];
