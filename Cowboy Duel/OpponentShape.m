@@ -163,7 +163,7 @@ static CGFloat oponentLiveImageViewStartWidth;
 
     int x = (maxShotCount - userHitCount)*3;
     lbLifeLeft.text = [NSString stringWithFormat:@"%d",x];
-   
+   /*
     CGAffineTransform trf0 = lbLifeLeft.transform;
     CGAffineTransform trf1 = CGAffineTransformMakeScale(1.5, 1.5);
     
@@ -177,6 +177,7 @@ static CGFloat oponentLiveImageViewStartWidth;
                                          } completion:^(BOOL finished) {
                                          }];
                      }];
+    */
 }
 
 -(void) refreshLiveBarWithLives: (int )lives;
@@ -185,7 +186,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     frame.size.width = oponentLiveImageViewStartWidth;
     ivLifeBar.frame = frame;
     lbLifeLeft.text =[NSString stringWithFormat:@"%d", lives*3];
-    lbLifeLeft.textAlignment = UITextAlignmentCenter;
+    lbLifeLeft.textAlignment = UITextAlignmentLeft;
 }
 
 -(void) setStatusBody:(OpponentShapeStatus)status;
