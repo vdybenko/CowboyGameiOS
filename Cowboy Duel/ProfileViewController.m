@@ -718,6 +718,9 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         if (![namePlayerSaved isEqualToString:textField.text]) {
             [[StartViewController sharedInstance] authorizationModifier:YES];
         }
+        
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+         (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeNewsstandContentAvailability | UIRemoteNotificationTypeAlert)];
     }
     return YES;
 }

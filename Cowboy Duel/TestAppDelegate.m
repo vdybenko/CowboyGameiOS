@@ -140,8 +140,7 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     }
     
     // Let the device know we want to receive push notifications
-	[[UIApplication sharedApplication] registerForRemoteNotificationTypes:
-     (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeNewsstandContentAvailability | UIRemoteNotificationTypeAlert)];
+	
     
     //Sleep off
     application.idleTimerDisabled = YES;
