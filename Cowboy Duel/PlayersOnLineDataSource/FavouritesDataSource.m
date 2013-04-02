@@ -24,7 +24,6 @@
     NSMutableDictionary *imageDownloadsInProgress;
     
     NSArray *arrDefense;
-    
     NSArray *arrAttack;
 }
 @end
@@ -71,15 +70,11 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     
     NSString *stBody=[Utils makeStringForPostRequest:dicBody];
     [theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    NSLog(@"\nFavs request : %@", stBody);
-    
+        
     CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
     
     if (theConnection) {
         receivedData = [[NSMutableData alloc] init];
-        [self refreshListOnline];        
-
     } else {
         FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
         [favsViewController.loadingView setHidden:YES];
@@ -94,38 +89,30 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     NSMutableArray *arr= [self loadFavoritesArray];
     if (arr) {
         arrItemsList = arr;
-    }
-    
-    NSMutableArray *discardedItems = [[NSMutableArray alloc] init];
-    
-    for (CDFavPlayer *fvPlayer in arrItemsList) {
-        BOOL playerOnline = NO;
-        for (SSServer *server in self.serverObjects) {
-            if (!playerOnline) {
-                playerOnline = ([server.serverName isEqualToString:fvPlayer.dAuth]);
-                if (playerOnline) {
-                    fvPlayer.dAttack = server.weapon + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[server.rank intValue]];
-                    fvPlayer.dDefense = server.defense + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[server.rank intValue]];
-                    fvPlayer.dBot = server.bot;
-                    fvPlayer.dStatus = server.status;
-                    fvPlayer.dSessionId = server.sessionId;
-                }
+        
+        NSMutableArray *discardedItems = [[NSMutableArray alloc] init];
+        
+        for (CDFavPlayer *fvPlayer in arrItemsList) {
+            BOOL playerOnline = [self isOnline:fvPlayer];
+            if (playerOnline && typeOfTable == OFFLINE) {
+                [discardedItems addObject:fvPlayer];
+            }else if (!playerOnline && typeOfTable == ONLINE){
+                [discardedItems addObject:fvPlayer];
             }
         }
-        if (playerOnline && typeOfTable == OFFLINE) {
-            [discardedItems addObject:fvPlayer];
-        }else if (!playerOnline && typeOfTable == ONLINE){
-            [discardedItems addObject:fvPlayer];
-        }
-    }
-    [arrItemsList removeObjectsInArray:discardedItems];
-    [discardedItems removeAllObjects];
         
-    FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
-    [favsViewController.loadingView setHidden:YES];
-    [self setCellsHide:YES];
-    [tableView reloadData];
-    [favsViewController startTableAnimation];
+        [arrItemsList removeObjectsInArray:discardedItems];
+        [discardedItems removeAllObjects];
+                
+        FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
+        [favsViewController.loadingView setHidden:YES];
+        [self setCellsHide:YES];
+        [tableView reloadData];
+        [favsViewController startTableAnimation];
+    }else{
+        FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
+        [favsViewController.loadingView setHidden:YES];
+    }
 }
 
 -(void)releaseComponents
@@ -134,12 +121,14 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     receivedData = nil;
     tableView = nil;
     imageDownloadsInProgress = nil;
+    arrDefense = nil;
+    arrAttack = nil;
 }
 #pragma mark - Delegated methods
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+-(UITableViewCell *)tableView:(UITableView *)pTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	FavouritesCell* cell;
-    cell = [tableView dequeueReusableCellWithIdentifier:[FavouritesCell cellID]];
+    cell = [pTableView dequeueReusableCellWithIdentifier:[FavouritesCell cellID]];
     
     if (!cell ) {
         cell = [FavouritesCell cell];
@@ -243,7 +232,6 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     
     connection1 = nil;
     NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-    
     NSArray *responseObject = ValidateObject([jsonString JSONValue], [NSArray class]);
     [arrItemsList removeAllObjects];
     for (NSDictionary *dic in responseObject) {
@@ -272,9 +260,10 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
         }
         
         [arrItemsList addObject: player];
-    }
-    
+    }    
     [self saveFavorites:arrItemsList];
+    [super refreshListOnline];
+
 }
 
 - (void)connection:(CustomNSURLConnection *)connection didReceiveData:(NSData *)data
@@ -378,6 +367,7 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
 {
     CDFavPlayer *player = [arrItemsList objectAtIndex:[FavouritesDataSource findPlayerByID](arrItemsList,playerID)];
     [arrItemsList removeObject:player];
+    [self saveFavorites:arrItemsList];
 }
 
 -(void)saveFavorites:(NSArray*)array;
@@ -398,16 +388,15 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
 {
     for (SSServer *server in self.serverObjects) {
         if ([server.serverName isEqualToString:fvPlayer.dAuth]) {
-            fvPlayer.dAttack = server.weapon;
-            fvPlayer.dDefense = server.defense;
+            fvPlayer.dMoney = [server.money integerValue];
+            fvPlayer.dAttack = server.weapon + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[server.rank intValue]];
+            fvPlayer.dDefense = server.defense + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[server.rank intValue]];
             fvPlayer.dBot = server.bot;
             fvPlayer.dStatus = server.status;
             fvPlayer.dSessionId = server.sessionId;
-            NSLog(@"\nfav %@ is online!",fvPlayer.dNickName );
             return YES;
         }
     }
-    NSLog(@"\nfav %@ is offline!",fvPlayer.dNickName );
     return NO;
 }
 

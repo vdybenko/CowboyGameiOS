@@ -58,7 +58,7 @@ ListOfItemsViewController *delegate;
 -(void) listOnlineResponse:(NSString *)jsonString
 {
     
-    NSLog(@"\nrefresh response: %@", jsonString);
+    DLog(@"\nrefresh response: %@", jsonString);
     
     NSError *jsonParseError;
     

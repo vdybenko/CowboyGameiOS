@@ -325,7 +325,7 @@
         if ([self.delegate isKindOfClass:[GameCenterViewController class]]) {
             [self.delegate performSelector:@selector(matchCanseled)];
         }
-        
+         
     }else{
         if (!teaching||duelWithBotCheck) {     
             [self loseScene];
