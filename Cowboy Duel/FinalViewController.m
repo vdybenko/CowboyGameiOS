@@ -436,7 +436,7 @@
         }else{
             if (playerAccount.money > 0) {
                 transaction.trType = [NSNumber numberWithInt:-1];
-                transaction.trMoneyCh = [NSNumber numberWithInt:playerAccount.money-moneyExch];
+                transaction.trMoneyCh = [NSNumber numberWithInt:playerAccount.money];
             }
             playerAccount.money=0;
         }
