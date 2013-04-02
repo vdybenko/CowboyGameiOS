@@ -24,6 +24,8 @@
             UIView *nibView = [objects objectAtIndex:0];
             [self addSubview:nibView];
         
+        [self choiceImg];
+        
         NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"cactusFraim1.png"],
                              [UIImage imageNamed:@"cactusFraim2.png"], [UIImage imageNamed:@"cactusFraim3.png"],[UIImage imageNamed:@"cactusFraim4.png"], [UIImage imageNamed:@"cactusFraim5.png"],[UIImage imageNamed:@"cactusFraim6.png"],[UIImage imageNamed:@"cactusFraim7.png"],
                              nil];
@@ -57,6 +59,19 @@
     cactusImg = nil;
     cactusView = nil;
 }
+-(void)choiceImg{
+    switch (arc4random()%2) {
+        case 0:
+              cactusImg.image = [UIImage imageNamed:@"cactusNew1.png"];
+        break;
 
+        case 1:
+             cactusImg.image = [UIImage imageNamed:@"cactusNew2.png"];
+        break;
+        default:
+            break;
+    }
+   
+}
 
 @end

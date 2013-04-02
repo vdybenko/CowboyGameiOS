@@ -44,9 +44,9 @@
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<object class="NSCustomResource" key="IBUIImage" id="578098267">
+						<object class="NSCustomResource" key="IBUIImage" id="773533299">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">bochka.png</string>
+							<string key="NSResourceName">barrelNew.png</string>
 						</object>
 					</object>
 					<object class="IBUIImageView" id="961390601">
@@ -58,7 +58,7 @@
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<reference key="IBUIImage" ref="578098267"/>
+						<reference key="IBUIImage" ref="773533299"/>
 					</object>
 					<object class="IBUIImageView" id="589425846">
 						<reference key="NSNextResponder" ref="59715378"/>
@@ -69,7 +69,7 @@
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<reference key="IBUIImage" ref="578098267"/>
+						<reference key="IBUIImage" ref="773533299"/>
 					</object>
 					<object class="IBUIImageView" id="873280689">
 						<reference key="NSNextResponder" ref="59715378"/>
@@ -245,7 +245,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="HelthBonus.png">{75, 75}</string>
-			<string key="bochka.png">{75, 75}</string>
+			<string key="barrelNew.png">{75, 75}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
