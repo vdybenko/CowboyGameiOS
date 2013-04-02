@@ -41,6 +41,7 @@ static SSConnection *connection;
     //if(self.outputStream && (self.outputStream.streamStatus != NSStreamStatusClosed)) return;
     if (connectionOpen) {
         [connection sendData:@"" packetID:NETWORK_SET_AVIBLE ofLength:sizeof(int)];
+        [self sendInfoPacket];
         return;
     }
     self.firstPing = YES;
