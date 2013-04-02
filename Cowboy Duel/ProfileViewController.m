@@ -1066,7 +1066,6 @@ if (playerAccount.accountLevel != kCountOfLevels) {
              if ([data length] >0 && error == nil)
              {
                  NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                 NSLog(@"jsonString %@",jsonString);
                  NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
                  int errCode=[[responseObject objectForKey:@"err_code"] intValue];
                  if (errCode == 1) {
@@ -1104,6 +1103,9 @@ if (playerAccount.accountLevel != kCountOfLevels) {
              [bself checkIsOpponentFavorite];
          }];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/ProfileVC_add_favorite" forKey:@"page"]];
 }
 
 #pragma mark IconDownloaderDelegate
