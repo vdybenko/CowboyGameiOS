@@ -680,19 +680,26 @@ static CGFloat blinkBottomOriginY;
         }
 
     }
+    if (shotOnObstracle == YES) {
+        return;
+    }
     
     BOOL shotInHorse = ([horseShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view] && !horseShape.hidden);
+    if (shotInHorse) {
+        
+        return;
+    }
     BOOL resultWoman = ([womanShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view] && !womanShape.hidden);
+    if (resultWoman) {
+        [self opponentShot];
+        if(delegate) [delegate sendShotSelf];        
+        return;
+    }
     BOOL resultGoodCowboy = ([goodCowboyShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view] && !goodCowboyShape.hidden);
-    if (resultWoman || resultGoodCowboy) {
+    if (resultGoodCowboy) {
         [self opponentShot];
         if(delegate) [delegate sendShotSelf];
         return;
-    }
-    if (shotInHorse)
-        return;
-    if (shotOnObstracle == YES) {
-        return; 
     }
     
     if (([self abs:(shotPoint.x - targetPoint.x)] < targetWeidth / 2) && ([self abs:(shotPoint.y - targetPoint.y)] < targetHeight / 2)) {
