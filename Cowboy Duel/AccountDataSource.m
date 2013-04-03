@@ -18,7 +18,7 @@ static const char *LIST_BOTS_URL = BASE_URL"users/get_user_data";
 @implementation AccountDataSource
 
 @synthesize money, accountName, teachingTimes, finalInfoTable, sessionID, accountID, accountDataSourceID, transactions, duels, achivments , glNumber,
- accountLevel,accountPoints,accountWins,accountDraws,accountBigestWin,removeAds,avatar,age,homeTown,friends,facebookName, bot, activeDuel;
+ accountLevel,accountPoints,accountWins,accountDraws,accountBigestWin,removeAds,avatar,age,homeTown,friends,facebookName, bot, activeDuel, accountSceneConfig;
 
 @synthesize accountDefenseValue;
 @synthesize curentIdWeapon;
@@ -71,12 +71,14 @@ static AccountDataSource *sharedHelper = nil;
         
         self.isTryingWeapon=NO;
         
+        self.bot = NO;
+        
         self.avatar=@"";
         self.age=@"";
         self.homeTown=@"";
         self.friends=0;
         self.facebookName=@"";
-                
+        self.accountSceneConfig = [[GameSceneConfig alloc] init];
         transactions = [[NSMutableArray alloc] init];
         duels = [[NSMutableArray alloc] init];
         achivments = [[NSMutableArray alloc] init];

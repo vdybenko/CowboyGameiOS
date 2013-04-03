@@ -98,6 +98,9 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/FavouritesVC" forKey:@"page"]];
 }
 
 -(void)viewWillDisappear:(BOOL)animated

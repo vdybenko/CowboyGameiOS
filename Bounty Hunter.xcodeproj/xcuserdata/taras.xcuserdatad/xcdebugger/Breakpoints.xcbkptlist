@@ -7,13 +7,26 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Cowboy Duel/AccountDataSource.m"
-         timestampString = "386149242.800798"
+         filePath = "Cowboy Duel/PlayersOnLineDataSource/FavouritesDataSource.m"
+         timestampString = "386596411.41785"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "378"
-         endingLineNumber = "378"
-         landmarkName = "-connectionDidFinishLoading:"
+         startingLineNumber = "369"
+         endingLineNumber = "369"
+         landmarkName = "-deleteFromDBFavoriteWithId:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Cowboy Duel/PlayersOnLineDataSource/FavouritesDataSource.m"
+         timestampString = "386595608.518542"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "92"
+         endingLineNumber = "92"
+         landmarkName = "-reloadDataSource"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

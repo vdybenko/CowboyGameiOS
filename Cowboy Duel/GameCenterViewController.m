@@ -113,6 +113,11 @@ static GameCenterViewController *gameCenterViewController;
     gsSend->oponentWins = playerAccount.accountWins;
     gsSend->oponentAtack = playerAccount.accountWeapon.dDamage;
     gsSend->oponentDefense = playerAccount.accountDefenseValue;
+    gsSend->barrelsCount = playerAccount.accountSceneConfig.barrelsCount;
+    gsSend->cactusCount = playerAccount.accountSceneConfig.cactusCount;
+    gsSend->horseCount = playerAccount.accountSceneConfig.horseCount;
+    gsSend->menCount = playerAccount.accountSceneConfig.menCount;
+    gsSend->womenCount = playerAccount.accountSceneConfig.womenCount;
     
     [self.connection sendData:(void *)(gsSend) packetID:NETWORK_TIME ofLength:sizeof(gameInfo)];
     
@@ -202,7 +207,7 @@ static GameCenterViewController *gameCenterViewController;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"/duel_GS(try_again)" forKey:@"event"]];
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/GameCenterVC_try_again" forKey:@"page"]];
     
     
     [playerAccount.finalInfoTable removeAllObjects];
@@ -216,6 +221,11 @@ static GameCenterViewController *gameCenterViewController;
     gsSend->oponentWins = playerAccount.accountWins;
     gsSend->oponentAtack = playerAccount.accountWeapon.dDamage;
     gsSend->oponentDefense = playerAccount.accountDefenseValue;
+    gsSend->barrelsCount = playerAccount.accountSceneConfig.barrelsCount;
+    gsSend->cactusCount = playerAccount.accountSceneConfig.cactusCount;
+    gsSend->horseCount = playerAccount.accountSceneConfig.horseCount;
+    gsSend->menCount = playerAccount.accountSceneConfig.menCount;
+    gsSend->womenCount = playerAccount.accountSceneConfig.womenCount;
     
     [self.connection sendData:(void *)(gsSend) packetID:NETWORK_TIME_TRY ofLength:sizeof(gameInfo)];
     runAway=YES;
@@ -236,8 +246,6 @@ static GameCenterViewController *gameCenterViewController;
     [self.connection sendData:(void *)(gsSend) packetID:NETWORK_START_DUEL_FALSE ofLength:sizeof(gameInfo)];
     
     [self lostConnection];
-    //old multiplayerClientViewController.isRunClient = NO;
-    //multiplayerServerViewController.isRunServer = NO;
 }
 
 -(void)duelRunAway
@@ -495,7 +503,16 @@ static GameCenterViewController *gameCenterViewController;
     userCanceledMatch = NO;
 }
 
--(void)userCancelNutch;
+-(BOOL)isLostConectionSend;
+{
+    if ((!opponentEndMatch)&&(userEndMatch)) {
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
+-(void)userCancelMatch;
 {
     [self matchCanseled];
     userCanceledMatch = YES;
@@ -514,7 +531,6 @@ static GameCenterViewController *gameCenterViewController;
 
 - (void)receiveData:(NSData *)data
 {
-    DLog(@"receiveData");
     unsigned char *incomingPacket = (unsigned char *)[data bytes];
 	int *pIntData = (int *)&incomingPacket[0];
     
@@ -534,6 +550,16 @@ static GameCenterViewController *gameCenterViewController;
             oponentAccount.accountDefenseValue = gsReceive->oponentDefense;
             oponentAccount.accountName = [[NSString alloc] initWithCString:gsReceive->oponentName encoding:NSUTF8StringEncoding];
             oponentAccount.accountID = [[NSString alloc] initWithCString:gsReceive->oponentAuth encoding:NSUTF8StringEncoding];
+            
+            GameSceneConfig *gameSceneConfig = [[GameSceneConfig alloc] init];
+            gameSceneConfig.barrelsCount = gsReceive->barrelsCount;
+            gameSceneConfig.cactusCount = gsReceive->cactusCount;
+            gameSceneConfig.horseCount = gsReceive->horseCount;
+            gameSceneConfig.menCount = gsReceive->menCount;
+            gameSceneConfig.womenCount = gsReceive->womenCount;
+            
+            [oponentAccount setAccountSceneConfig:gameSceneConfig];
+            
             randomTime = gsReceive->randomTime;
             if(!oponentAccount.accountName || [oponentAccount.accountName isEqualToString:@""]) {
                 [self lostConnection];
@@ -562,6 +588,11 @@ static GameCenterViewController *gameCenterViewController;
             gsSend->oponentWins = playerAccount.accountWins;
             gsSend->oponentAtack = playerAccount.accountWeapon.dDamage;
             gsSend->oponentDefense = playerAccount.accountDefenseValue;
+            gsSend->barrelsCount = playerAccount.accountSceneConfig.barrelsCount;
+            gsSend->cactusCount = playerAccount.accountSceneConfig.cactusCount;
+            gsSend->horseCount = playerAccount.accountSceneConfig.horseCount;
+            gsSend->menCount = playerAccount.accountSceneConfig.menCount;
+            gsSend->womenCount = playerAccount.accountSceneConfig.womenCount;
             
             [self.connection sendData:(void *)(gsSend) packetID:NETWORK_OPONTYPE_RESPONSE ofLength:sizeof(gameInfo)];
         }
@@ -585,10 +616,8 @@ static GameCenterViewController *gameCenterViewController;
             
             [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                                 object:self
-                                                              userInfo:[NSDictionary dictionaryWithObject:@"/duel_GS(try_again)" forKey:@"event"]];
-            //            [TestFlight passCheckpoint:@"/duel_GS_try_again"];
-            
-            
+                                                              userInfo:[NSDictionary dictionaryWithObject:@"/GameCenterVC_try_again" forKey:@"page"]];
+                        
             if (isTryAgain && server) return;
             
             [playerAccount.finalInfoTable removeAllObjects];
@@ -602,6 +631,16 @@ static GameCenterViewController *gameCenterViewController;
             oponentAccount.accountWeapon.dDamage = gsReceive->oponentAtack;
             oponentAccount.accountDefenseValue = gsReceive->oponentDefense;
             randomTime = gsReceive->randomTime;
+            
+            GameSceneConfig *gameSceneConfig = [[GameSceneConfig alloc] init];
+            gameSceneConfig.barrelsCount = gsReceive->barrelsCount;
+            gameSceneConfig.cactusCount = gsReceive->cactusCount;
+            gameSceneConfig.horseCount = gsReceive->horseCount;
+            gameSceneConfig.menCount = gsReceive->menCount;
+            gameSceneConfig.womenCount = gsReceive->womenCount;
+            
+            [oponentAccount setAccountSceneConfig:gameSceneConfig];
+
             
             if (!duelStartViewController){
                 duelStartViewController = [[DuelStartViewController alloc]initWithAccount:playerAccount andOpAccount:oponentAccount  opopnentAvailable:YES andServerType:YES andTryAgain:YES];
@@ -634,7 +673,11 @@ static GameCenterViewController *gameCenterViewController;
             gsSend->oponentWins = playerAccount.accountWins;
             gsSend->oponentAtack = playerAccount.accountWeapon.dDamage;
             gsSend->oponentDefense = playerAccount.accountDefenseValue;
-            
+            gsSend->barrelsCount = playerAccount.accountSceneConfig.barrelsCount;
+            gsSend->cactusCount = playerAccount.accountSceneConfig.cactusCount;
+            gsSend->horseCount = playerAccount.accountSceneConfig.horseCount;
+            gsSend->menCount = playerAccount.accountSceneConfig.menCount;
+            gsSend->womenCount = playerAccount.accountSceneConfig.womenCount;
             [self.connection sendData:(void *)(gsSend) packetID:NETWORK_OPONTYPE_RESPONSE_TRY ofLength:sizeof(gameInfo)];
             
         }
@@ -646,7 +689,8 @@ static GameCenterViewController *gameCenterViewController;
             carShotTime = 0;
             opShotTime = 0;
             
-            if(!start){
+            BOOL isLostConnectionSend = [self isLostConectionSend];
+            if((!start)&&(!isLostConnectionSend)){
                 activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:playerAccount oponentAccount:oponentAccount];
                 [activeDuelViewController setDelegate:self];
                 [self setDelegate:activeDuelViewController];
@@ -660,6 +704,9 @@ static GameCenterViewController *gameCenterViewController;
                 }else{
                     btnStartClick = YES;
                     DLog(@"NETWORK_START_DUEL btnStartClick No");
+                }
+                if ([delegate2 respondsToSelector:@selector(stopWaitTimer)]) {
+                    [delegate2 performSelector:@selector(stopWaitTimer)];
                 }
             }
         }
@@ -678,6 +725,10 @@ static GameCenterViewController *gameCenterViewController;
             [self setDelegate:activeDuelViewController];
             
             [parentVC.navigationController pushViewController:activeDuelViewController animated:YES];
+            
+            if ([delegate2 respondsToSelector:@selector(stopWaitTimer)]) {
+                [delegate2 performSelector:@selector(stopWaitTimer)];
+            }
         }
 			break;
             
@@ -836,6 +887,16 @@ static GameCenterViewController *gameCenterViewController;
             oponentAccount.accountDefenseValue = gsReceive->oponentDefense;
             oponentAccount.accountID = [[NSString alloc] initWithCString:gsReceive->oponentAuth encoding:NSUTF8StringEncoding];
             
+            GameSceneConfig *gameSceneConfig = [[GameSceneConfig alloc] init];
+            gameSceneConfig.barrelsCount = gsReceive->barrelsCount;
+            gameSceneConfig.cactusCount = gsReceive->cactusCount;
+            gameSceneConfig.horseCount = gsReceive->horseCount;
+            gameSceneConfig.menCount = gsReceive->menCount;
+            gameSceneConfig.womenCount = gsReceive->womenCount;
+            
+            [oponentAccount setAccountSceneConfig:gameSceneConfig];
+
+            
             [self setDelegate2:duelStartViewController];
             duelStartViewController.delegate = self;
             if ([duelStartViewController respondsToSelector:@selector(setOponent:Label1:Label1:)]){
@@ -863,6 +924,16 @@ static GameCenterViewController *gameCenterViewController;
             oponentAccount.accountWeapon.dDamage = gsReceive->oponentAtack;
             oponentAccount.accountDefenseValue = gsReceive->oponentDefense;
             oponentAccount.accountID = [[NSString alloc] initWithCString:gsReceive->oponentAuth encoding:NSUTF8StringEncoding];
+            
+            GameSceneConfig *gameSceneConfig = [[GameSceneConfig alloc] init];
+            gameSceneConfig.barrelsCount = gsReceive->barrelsCount;
+            gameSceneConfig.cactusCount = gsReceive->cactusCount;
+            gameSceneConfig.horseCount = gsReceive->horseCount;
+            gameSceneConfig.menCount = gsReceive->menCount;
+            gameSceneConfig.womenCount = gsReceive->womenCount;
+            
+            [oponentAccount setAccountSceneConfig:gameSceneConfig];
+
             
             duelStartViewController.lbOpponentDuelsWinCount=[NSString stringWithFormat:@"%d",oponentAccount.accountWins];
             [duelStartViewController setOponentMoney:oponentAccount.money];

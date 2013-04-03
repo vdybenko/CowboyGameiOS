@@ -17,6 +17,13 @@
 #define kFbUserNameKey @"fbUserName"
 #define kFbUserIdKey @"fbUserId"
 
+typedef enum {
+    ProfileViewControllerInitSimple,
+    ProfileViewControllerInitFirstStart,
+    ProfileViewControllerInitOpponent,
+    ProfileViewControllerInitFavorite
+} ProfileViewControllerInit;
+
 @protocol  ProfileWithLoginDelegate <NSObject>
 @optional
 -(void)skipLoginFB;

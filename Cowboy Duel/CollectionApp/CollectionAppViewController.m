@@ -63,7 +63,6 @@
 #pragma mark - UITableViewDelegate
 -(void) tableView:(UITableView *)pTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     CDCollectionApp *_app=[itemsDataSource.arrItemsList objectAtIndex:indexPath.row];
-    return;
     if (_app.cdInstalStatus!=AppStatusInstall) {
         [itemsDataSource.collectionAppWrapper runApp:_app];
     }else if (_app.cdInstalStatus==AppStatusNotInstall) {

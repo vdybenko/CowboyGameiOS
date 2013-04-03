@@ -17,6 +17,7 @@
 typedef enum {
     StoreDataSourceTypeTablesWeapons,
     StoreDataSourceTypeTablesDefenses,
+    StoreDataSourceTypeTablesBarrier
 } StoreDataSourceTypeTables;
 
 @interface StoreDataSource : NSObject <UITableViewDataSource,MemoryManagement> {

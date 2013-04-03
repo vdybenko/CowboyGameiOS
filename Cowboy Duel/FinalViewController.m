@@ -21,6 +21,7 @@
     BOOL tryButtonEnabled;
     BOOL isDuelWinWatched;
     BOOL userWon;
+
 }
 -(void)winScene;
 -(void)loseScene;
@@ -79,18 +80,7 @@
         }
         
         DLog(@"Time final %d  %d",userTime,oponentTime);
-        stGA = [[NSString alloc] init];
-        
-        if(teaching){
-            if (duelWithBotCheck) {
-                stGA = @"/duel_BOT/";
-            }else{
-                stGA = @"/duel_teaching/";
-            }
-        }else{
-            stGA = @"/duel/";
-        }  
-        
+            
         transaction = [[CDTransaction alloc] init];
         transaction.trMoneyCh = [NSNumber numberWithInt:10];
         transaction.trDescription = [[NSString alloc] initWithFormat:@"Duel"];
@@ -196,7 +186,9 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {   
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/FinalVC" forKey:@"page"]];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -212,7 +204,6 @@
     activityIndicatorView = nil;
     playerAccount = nil;
     oponentAccount = nil;
-    stGA = nil;
     falseLabel = nil;
     player = nil;
     follPlayerFinal = nil;
@@ -245,10 +236,6 @@
     transaction = nil;
     duel = nil;
     
-    NSArray *_pointForEachLevels = nil;
-    NSArray *_pontsForWin = nil;
-    NSArray *_pontsForLose = nil;
-    
     backButton = nil;
     
     
@@ -279,6 +266,7 @@
     lblGoldTitle = nil;
 
 }
+
 #pragma mark -
 #pragma mark IBActions
 
@@ -304,6 +292,7 @@
                 [self.navigationController presentViewController:duelProductWinViewController animated:YES completion:Nil];
             }else{
                 if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
+                    
                     [self.navigationController popToViewController:[LoginAnimatedViewController sharedInstance] animated:YES];
                     [self releaseComponents];
                     NSLog(@"%@", self.navigationController.viewControllers);
@@ -317,13 +306,14 @@
         }else{
             UINavigationController *nav = ((TestAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController;
             NSLog(@"%@", nav.viewControllers);
-            for (UIViewController *viewController in nav.viewControllers) {
+            for (__weak UIViewController *viewController in nav.viewControllers) {
                 if ([viewController isKindOfClass:[ActiveDuelViewController class]]) {
                     [((ActiveDuelViewController *)viewController) releaseComponents];
                 }
             }
             [self releaseComponents];
             if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
+                
                 [nav popToViewController:[nav.viewControllers objectAtIndex:2] animated:YES];
             }
             else{
@@ -335,7 +325,7 @@
         if ([self.delegate isKindOfClass:[GameCenterViewController class]]) {
             [self.delegate performSelector:@selector(matchCanseled)];
         }
-        
+         
     }else{
         if (!teaching||duelWithBotCheck) {     
             [self loseScene];
@@ -349,7 +339,7 @@
                         
             [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                                 object:self
-                                                              userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@%@",stGA,@"run_away"] forKey:@"event"]];
+                                                              userInfo:[NSDictionary dictionaryWithObject:@"/FinalVC_run_away" forKey:@"page"]];
             
             
         }else{
@@ -378,12 +368,21 @@
 -(IBAction)tryButtonClick:(id)sender
 {
     if([LoginAnimatedViewController sharedInstance].isDemoPractice){
+        if ([[StartViewController sharedInstance] connectedToWiFi]) {
+
+            activityIndicatorView = [[ActivityIndicatorView alloc] init];
+            
+            CGRect frame=activityIndicatorView.frame;
+            frame.origin=CGPointMake(0, 0);
+            activityIndicatorView.frame=frame;
+            
+            [self.view addSubview:activityIndicatorView];
+        }
         [[LoginAnimatedViewController sharedInstance] loginButtonClick:sender];
         return;
     }
     
     DLog(@"tryButtonClick");
-    [activityIndicatorView showView];
     if(teaching)
     {
         NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
@@ -400,6 +399,10 @@
         {
             [delegate matchStartedTry];
         }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/FinalVC_tryAgain" forKey:@"page"]];
 }
 #pragma  mark -
 -(void)loseScene
@@ -423,12 +426,6 @@
     lblGold.gradientStartColor = [UIColor colorWithRed:255.0/255.0 green:181.0/255.0 blue:0.0/255.0 alpha:1.0];
     lblGold.gradientEndColor = [UIColor colorWithRed:255.0/255.0 green:140.0/255.0 blue:0.0/255.0 alpha:1.0];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
-                                                        object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@%@",stGA,@"final"] forKey:@"event"]];
-//    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@%@",stGA,@"final"]];
-
-    
     if (!teaching||(duelWithBotCheck)) {
         oponentAccount.money += moneyExch;
         
@@ -439,7 +436,7 @@
         }else{
             if (playerAccount.money > 0) {
                 transaction.trType = [NSNumber numberWithInt:-1];
-                transaction.trMoneyCh = [NSNumber numberWithInt:playerAccount.money-moneyExch];
+                transaction.trMoneyCh = [NSNumber numberWithInt:playerAccount.money];
             }
             playerAccount.money=0;
         }
@@ -519,7 +516,7 @@
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                         object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@%@",stGA,@"final"] forKey:@"event"]];
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/FinalVC_finaly" forKey:@"page"]];
     oldMoneyForAnimation = playerAccount.money;
     if(!teaching||(duelWithBotCheck)){
 // added for GC
@@ -1019,7 +1016,9 @@
     for ( NSNumber *pointMoney in _pointForEachLevels) {
         if (([pointMoney intValue]<=newL)&&([pointMoney intValue]>oldL)) {
             int playerNewLevel=[_pointForEachLevels indexOfObject:pointMoney]+1;
-            
+            if (playerNewLevel < kCountOfLevelsMinimal || playerNewLevel > kCountOfLevels ){
+                playerNewLevel = kCountOfLevels;
+            }
             NSLog(@"playerNewLevel %d pointMoney %d",playerNewLevel,[pointMoney intValue]);
             playerAccount.accountLevel=playerNewLevel;
             [playerAccount saveAccountLevel];
@@ -1117,6 +1116,7 @@
     ivCurrentRank = nil;
     ivNextRank = nil;
     lblGoldPlus = nil;
+
     [super viewDidUnload];
 }
 

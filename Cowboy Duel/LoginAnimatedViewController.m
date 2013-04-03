@@ -41,13 +41,11 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
     BOOL tryAgain;
     BOOL animationPause;
 }
-@property (nonatomic) AVAudioPlayer *player;
 
 @end
 
 @implementation LoginAnimatedViewController
 @synthesize delegate ,loginFacebookStatus, payment;
-@synthesize player;
 
 static LoginAnimatedViewController *sharedHelper = nil;
 + (LoginAnimatedViewController *) sharedInstance {
@@ -102,23 +100,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
     animetedText2.text = NSLocalizedString(@"2ndIntro", @"");
     
     scroolView.contentSize = (CGSize){2*scroolView.frame.size.width,scroolView.frame.size.height};
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
     
-    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/kassa.aif", [[NSBundle mainBundle] resourcePath]]];
-    NSError *error;
-    self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-    [self.player setVolume:1.0];
-    [self.player prepareToPlay];
-  
     stDonate = [NSMutableString string];
     [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusSimple];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"FirstRun_v2.2"];
@@ -133,11 +115,27 @@ static LoginAnimatedViewController *sharedHelper = nil;
         [self performSelector:@selector(scaleView:) withObject:loginFBbutton  afterDelay:18.2];
         [self performSelector:@selector(scaleView:) withObject:loginLable  afterDelay:18.2];
     }
+
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/LoginAnimatedVC" forKey:@"page"]];
+  
 }
 
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    [[StartViewController sharedInstance] playerStop];
 }
 
 - (void)didReceiveMemoryWarning
@@ -160,10 +158,11 @@ static LoginAnimatedViewController *sharedHelper = nil;
     UINavigationController *nav = ((TestAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController;
     ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:playerAccount oponentAccount:oponentAccount];
     [nav pushViewController:activeDuelViewController animated:YES];
+    activeDuelViewController = nil;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"/first_screen_teaching" forKey:@"event"]];
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/LoginAnimatedVC_practice" forKey:@"page"]];
 }
 
 - (IBAction)loginButtonClick:(id)sender {
@@ -186,7 +185,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                             object:self
-                                                          userInfo:[NSDictionary dictionaryWithObject:@"/login_FB" forKey:@"event"]];
+                                                          userInfo:[NSDictionary dictionaryWithObject:@"/LoginAnimatedVC_login_FB" forKey:@"page"]];
         [LoginAnimatedViewController sharedInstance].isDemoPractice = NO;
         [[NSUserDefaults standardUserDefaults] synchronize];
     }else{
@@ -231,9 +230,9 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [self initFacebook];
     [[FBSession activeSession] closeAndClearTokenInformation];
 	//[facebook logout:self];
-  [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-                                                      object:self
-                                                    userInfo:[NSDictionary dictionaryWithObject:@"/logOut_FB_click" forKey:@"event"]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/LoginAnimatedVC_logOut_FB" forKey:@"page"]];
 }
 
 
@@ -259,7 +258,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
                                                             object:self
                                                           userInfo:nil];
         
-        [self.player setVolume:0.0];
         [[StartViewController sharedInstance] profileFirstRunButtonClickWithOutAnimation];
     }
 }
@@ -326,8 +324,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
         
         [[StartViewController sharedInstance] authorizationModifier:YES];
         payment = NO;
-        [self.player stop];
-        [self.player setVolume:0.0];
         [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"loginFirstShow"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         

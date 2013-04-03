@@ -108,7 +108,7 @@ h3{font-family: “Myriad Pro”, arial,sans-serif;color:4A3E25;font-size:12pt;f
 </body>
 </html>";
 
-"HV_TEXT_NEW"="<h3>Welcome to Bounty Hunter help!</h3><p>If you're online and want to start a new duel, tap \"PLAY\" and check who's online too. You can quickly find a worthy rival due to the new search system. You'll see the names of available rivals and the rewards for their heads. The bigger the reward, the harder it will be to get those guys. When you've picked a worthy rival, tap \"GET HIM\" to challenge them.<p>When the duel begins, put your  iPhone/iPod in horizontal position and wait for your gun to load. Then rise it, aim at your opponent, and shoot two-six times in a row with a trigger on your screen. The number of shots depends on the level of your rival and additional defense they have. You need to shoot your rival before they shoot you! You can get yourself a better gun or better defense in our \"STORE\" to increase your chances of victory.<p>When you win, you get a reward and eventually go up to the next level of the game.  If you lose - no offense, buddy, the winner takes your money!<p>If you feel like you need to train more, or don't have Internet connection, go to \"PRACTICE\" and train offline. But note that the money you win in practice mode isn't set off.<p>In your \"PROFILE\" you will see your nickname, the gold you have won, your level, gun, and defense.<p>Enjoy your bounty hunting adventure!";
+"HV_TEXT_NEW"="<h3>Welcome to Bounty Hunter help!</h3><p>If you're online and want to start a new duel, tap \"PLAY\" and check who's online too. You can quickly find a worthy rival due to the new search system. You'll see the names of available rivals and the rewards for their heads. The bigger the reward, the harder it will be to get those guys. When you've picked a worthy rival, tap \"GET HIM\" to challenge them.<p>When the duel begins, load your gun with 7 bullets by touching drum. Then aim it at your opponent, and shoot two-six times in a row by touching screen. The number of shots depends on the level of your rival and additional defense they have. You need to shoot your rival before they shoot you! You can get yourself a better gun or better defense in our \"STORE\" to increase your chances of victory.<p>When you win, you get a reward and eventually go up to the next level of the game.  If you lose - no offense, buddy, the winner takes your money!<p>If you feel like you need to train more, or don't have Internet connection, go to \"PRACTICE\" and train offline. But note that the money you win in practice mode isn't set off.<p>In your \"PROFILE\" you will see your nickname, the gold you have won, your level, gun, and defense.<p>Enjoy your bounty hunting adventure!";
 
 //Bottom messge
 
@@ -319,8 +319,8 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "Defense:"="Defense: ";
 
 //added for PlayersOnlineDataSource.m:
-"OnLine" = "OnLine";
-"OffLine" = "OffLine";
+"OnLine" = "ONLINE";
+"OffLine" = "OFFLINE";
 
 //Pull to refresh
 "PULL" = "Pull down to refresh";

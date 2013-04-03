@@ -291,12 +291,7 @@ static StartViewController *sharedHelper = nil;
         listOfItemsViewController=[[ListOfItemsViewController alloc]initWithGCVC:gameCenterViewController Account:playerAccount OnLine:self.hostActive];
         duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
         duelProductDownloaderController.delegate = self;
-        
-        //      GoogleAnalytics
-        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
-                                                            object:self
-                                                          userInfo:[NSDictionary dictionaryWithObject:@"/" forKey:@"event"]];
-                
+                        
         internetActive=YES;
         hostActive=YES;
         
@@ -558,14 +553,19 @@ static StartViewController *sharedHelper = nil;
     }
     inBackground = NO;
 
-    SSConnection *connection = [SSConnection sharedInstance];
-    [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
-    
+    if ([[OGHelper sharedInstance] isAuthorized]){
+        SSConnection *connection = [SSConnection sharedInstance];
+        [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
+    }
     gameCenterViewController.duelStartViewController = nil;
     
     [self showProfileFirstRun];
     [self isAdvertisingOfNewVersionNeedShow];
-    [self estimateApp];    
+    [self estimateApp];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/StartCV" forKey:@"page"]];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -609,8 +609,11 @@ static StartViewController *sharedHelper = nil;
 -(void)didBecomeActive
 {
     DLog(@"did become active");
-    SSConnection *connection = [SSConnection sharedInstance];
-    [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
+    if ([[OGHelper sharedInstance] isAuthorized]){
+        SSConnection *connection = [SSConnection sharedInstance];
+        [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
+    }
+
     
     if (!firstRunLocal) {
         [self login];
@@ -676,10 +679,6 @@ static StartViewController *sharedHelper = nil;
     if (![self isNeedBlockOnlineListForAdvertasingAppear]) {
         //play duel
         [self duelButtonClick];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-                                                            object:self
-                                                          userInfo:[NSDictionary dictionaryWithObject:@"/saloon_click" forKey:@"event"]];
     }
 }
 
@@ -695,10 +694,6 @@ static StartViewController *sharedHelper = nil;
 - (IBAction)storeButtonClick:(id)sender {
     StoreViewController *storeViewController=[[StoreViewController alloc] initWithAccount:playerAccount];
     [self.navigationController pushViewController:storeViewController animated:YES];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"/store" forKey:@"event"]];
     storeViewController = nil;
 }
 
@@ -713,9 +708,6 @@ static StartViewController *sharedHelper = nil;
     transition.subtype =kCATransitionFromLeft;//kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom;
     [self.navigationController.view.layer addAnimation:transition forKey:nil];
     [self.navigationController pushViewController:profileViewController animated:NO];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
-                                                        object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"/profile_click" forKey:@"event"]];
 }
 
 
@@ -852,7 +844,7 @@ static StartViewController *sharedHelper = nil;
   
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
 														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"/feedBack_click" forKey:@"event"]];
+													  userInfo:[NSDictionary dictionaryWithObject:@"/StartCV_feedBack" forKey:@"page"]];
 }
 
 - (IBAction)feedbackCancelButtonClick:(id)sender {
@@ -860,7 +852,7 @@ static StartViewController *sharedHelper = nil;
   feedBackViewVisible = NO;
   [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                       object:self
-                                                    userInfo:[NSDictionary dictionaryWithObject:@"/feedBack_cancel" forKey:@"event"]];
+                                                    userInfo:[NSDictionary dictionaryWithObject:@"/StartCV_feedBack_cancel" forKey:@"page"]];
 
 }
 - (IBAction)feedbackFollowFBClick:(id)sender {
@@ -882,7 +874,7 @@ static StartViewController *sharedHelper = nil;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                       object:self
-                                                    userInfo:[NSDictionary dictionaryWithObject:@"/feedBack_followFB_clicked" forKey:@"event"]];
+                                                    userInfo:[NSDictionary dictionaryWithObject:@"/StartCV_feedBack_followFB" forKey:@"page"]];
 }
 
 
@@ -895,7 +887,7 @@ static StartViewController *sharedHelper = nil;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
 														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"/feedBack_ITunes_click" forKey:@"event"]];
+													  userInfo:[NSDictionary dictionaryWithObject:@"/StartCV_feedBack_ITunes" forKey:@"page"]];
 }
 
 -(void)hideActivitiIndicatorViewFeedback;
@@ -915,14 +907,14 @@ static StartViewController *sharedHelper = nil;
   shareViewVisible = YES;
   [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                       object:self
-                                                    userInfo:[NSDictionary dictionaryWithObject:@"/share_click" forKey:@"event"]];
+                                                    userInfo:[NSDictionary dictionaryWithObject:@"/StartCV_share" forKey:@"page"]];
 }
 - (IBAction)shareCancelButtonClick:(id)sender {
   [self hideView:shareView];
   shareViewVisible = NO;
   [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                       object:self
-                                                    userInfo:[NSDictionary dictionaryWithObject:@"/share_cancel" forKey:@"event"]];
+                                                    userInfo:[NSDictionary dictionaryWithObject:@"/StartCV_share_cancel" forKey:@"page"]];
   
 }
 
@@ -930,27 +922,39 @@ static StartViewController *sharedHelper = nil;
         
     float ver_float = [[[UIDevice currentDevice] systemVersion] floatValue];
     if (ver_float >= 6.0) {
-        BOOL displayedNativeDialog =
-        [FBNativeDialogs
-         presentShareDialogModallyFrom:self
-         initialText:@"Get Started"
-         image:[UIImage imageNamed:@"Icon@2x.png"]
-         url:[NSURL URLWithString:URL_APP_ESTIMATE]
-         handler:^(FBNativeDialogResult result, NSError *error) {
-             if (error) {
-                 /* handle failure */
-             } else {
-                 if (result == FBNativeDialogResultSucceeded) {
-                     /* handle success */
-                 } else {
-                     /* handle user cancel */
-                 }
-             }
-         }];
-        if (!displayedNativeDialog) {
-            /* handle fallback to native dialog  */
-        }
+        ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+        ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
+        if ([accountStore accountsWithAccountType:accountType]){
 
+            BOOL displayedNativeDialog =
+            [FBNativeDialogs
+             presentShareDialogModallyFrom:self
+             initialText:@"Get Started"
+             image:[UIImage imageNamed:@"Icon@2x.png"]
+             url:[NSURL URLWithString:URL_APP_ESTIMATE]
+             handler:^(FBNativeDialogResult result, NSError *error) {
+                 if (error) {
+                     /* handle failure */
+                 } else {
+                     if (result == FBNativeDialogResultSucceeded) {
+                         /* handle success */
+                     } else {
+                         /* handle user cancel */
+                     }
+                 }
+             }];
+            if (!displayedNativeDialog) {
+                /* handle fallback to native dialog  */
+            }
+        }else
+        {
+            if ([[OGHelper sharedInstance]isAuthorized]) {
+                [[OGHelper sharedInstance] apiDialogFeedUser];
+            }else {
+                [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusFeed];
+                [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
+            }
+        }
     }else{
         if ([[OGHelper sharedInstance]isAuthorized]) {
             [[OGHelper sharedInstance] apiDialogFeedUser];
@@ -962,7 +966,7 @@ static StartViewController *sharedHelper = nil;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"/feedBack_Facebook_click" forKey:@"event"]];
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/StartCV_feedBack_Facebook" forKey:@"page"]];
 }
 
 - (IBAction)feedbackTweeterBtnClick:(id)sender {
@@ -998,7 +1002,7 @@ static StartViewController *sharedHelper = nil;
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                     object:self
-                                                  userInfo:[NSDictionary dictionaryWithObject:@"/share_Tweeter_click" forKey:@"event"]];
+                                                  userInfo:[NSDictionary dictionaryWithObject:@"/StartCV_share_Tweeter" forKey:@"page"]];
 }
 
 - (IBAction)feedbackMailBtnClick:(id)sender {
@@ -1029,7 +1033,7 @@ static StartViewController *sharedHelper = nil;
   
   [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                       object:self
-                                                    userInfo:[NSDictionary dictionaryWithObject:@"/share_Mail_click" forKey:@"event"]];
+                                                    userInfo:[NSDictionary dictionaryWithObject:@"/StartCV_share_Mail" forKey:@"page"]];
 }
 
 #pragma mark - push notification

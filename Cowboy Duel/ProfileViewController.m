@@ -53,7 +53,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     __weak IBOutlet UIButton *btnAddToFavorites;
     
     __weak IBOutlet UIButton *btnLeaderboard;
-    __weak IBOutlet UIButton *btnLeaderboardBig;
     __weak IBOutlet UIButton *btnBack;
     __weak IBOutlet UILabel *lbPlayerStats;
     __weak IBOutlet UILabel *lbDuelsWon;
@@ -86,7 +85,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     
     BOOL didDisappear;
     BOOL needMoneyAnimation;
-    
+    ProfileViewControllerInit controllerType;
     
     __weak IBOutlet UIImageView *ivBackground;
     
@@ -132,10 +131,10 @@ static const CGFloat timeToStandartTitles = 1.8;
                                                      name:SCSessionStateChangedNotification
                                                    object:nil];
         
+        controllerType = ProfileViewControllerInitSimple;
         [self loadView];
         UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
         [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:24];
-        [btnLeaderboardBig setTitleByLabel:@"LeaderboardTitle" withColor:buttonsTitleColor fontSize:24];
         
         [self initMainControls];
         [mainProfileView setDinamicHeightBackground];
@@ -151,6 +150,8 @@ static const CGFloat timeToStandartTitles = 1.8;
     if (self) {
         playerServer = server;
 
+        controllerType = ProfileViewControllerInitOpponent;
+        
         [self initStatsWithAccount:oponentAccount];
         
         if ([playerServer.status isEqualToString:@"A"]) {
@@ -182,6 +183,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     self = [super initWithNibName:@"ProfileViewControllerWanted" bundle:[NSBundle mainBundle]];
     
     if (self) {
+        controllerType = ProfileViewControllerInitFavorite;
         [self initStatsWithAccount:oponentAccount];
 
         [btnAddToFavorites setHidden:YES];
@@ -221,18 +223,14 @@ static const CGFloat timeToStandartTitles = 1.8;
                                                    object:nil];
         
         textIndex = 0;
+        controllerType = ProfileViewControllerInitFirstStart;
         [self loadView];
         UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
         [btnBack setTitleByLabel:@"CONTINUE" withColor:buttonsTitleColor fontSize:24];
-        [btnLeaderboardBig setTitleByLabel:@"LeaderboardTitle" withColor:buttonsTitleColor fontSize:24];
         [self initMainControls];
         [mainProfileView setDinamicHeightBackground];
         lbDescription.hidden = NO;
         [self checkLocationOfViewForFBLogin];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-                                                            object:self
-                                                          userInfo:[NSDictionary dictionaryWithObject:@"/profile_first_run" forKey:@"event"]];
-
     }
     return self;
 }
@@ -268,6 +266,30 @@ static const CGFloat timeToStandartTitles = 1.8;
     }
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    if (controllerType != ProfileViewControllerInitOpponent) {
+        NSString *st = @"";
+        switch (controllerType) {
+            case ProfileViewControllerInitSimple:
+                st = @"/ProfileVC";
+                break;
+            case ProfileViewControllerInitFirstStart:
+                st = @"/ProfileVC_schul";
+                break;
+            case ProfileViewControllerInitFavorite:
+                st = @"/ProfileVC_favorite";
+                break;
+                
+            default:
+                break;
+        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                            object:self
+                                                          userInfo:[NSDictionary dictionaryWithObject:st forKey:@"page"]];
+    }
+}
+
 -(void)viewDidDisappear:(BOOL)animated{
     
 //    lbGoldCount.text =[numberFormatter stringFromNumber:[NSNumber numberWithInt:(playerAccount.money/2)]];
@@ -297,7 +319,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     lbGoldIcon = nil;
     lbAward = nil;
     btnLeaderboard = nil;
-    btnLeaderboardBig = nil;
     btnBack = nil;
     lbPlayerStats = nil;
     lbDuelsWon = nil;
@@ -391,7 +412,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     [self loadView];
     UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:24];
-    [btnLeaderboardBig setTitleByLabel:@"LeaderboardTitle" withColor:buttonsTitleColor fontSize:24];
     [duelButton setTitleByLabel:@"DUEL"];
     [duelButton setEnabled:NO];
     [duelButton changeColorOfTitleByLabel:buttonsTitleColor];
@@ -698,6 +718,9 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         if (![namePlayerSaved isEqualToString:textField.text]) {
             [[StartViewController sharedInstance] authorizationModifier:YES];
         }
+        
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+         (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeNewsstandContentAvailability | UIRemoteNotificationTypeAlert)];
     }
     return YES;
 }
@@ -872,34 +895,20 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                          [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
                      }];
     [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:1] animated:NO];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"/first_profile_continue_click" forKey:@"event"]];
     [self releaseComponents];
 }
 
 - (IBAction)backToMenuWanted:(id)sender {
+    [duelStartViewController stopWaitTimer];
+    [duelStartViewController releaseComponents];
     [self backToMenu:sender];
     [self releaseComponents];
 }
-
-- (IBAction)btnLeaderbordFirstRunClick:(id)sender {
-    TopPlayersViewController *topPlayersViewController =[[TopPlayersViewController alloc] initWithAccount:playerAccount];
-    [self.navigationController pushViewController:topPlayersViewController animated:YES];
-    topPlayersViewController = nil;
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-                                                        object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"/first_profile_leaderBoard_click" forKey:@"event"]];
-}
-
 
 - (IBAction)btnLeaderbordClick:(id)sender {
     TopPlayersViewController *topPlayersViewController =[[TopPlayersViewController alloc] initWithAccount:playerAccount];
     [self.navigationController pushViewController:topPlayersViewController animated:YES];
     topPlayersViewController = nil;
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-                                                        object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"/leaderBoard_click" forKey:@"event"]];
 }
 
 - (IBAction)duelButtonClick:(id)sender {
@@ -914,11 +923,6 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         
         SSConnection *connection = [SSConnection sharedInstance];
         [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-                                                            object:self
-                                                          userInfo:[NSDictionary dictionaryWithObject:@"/duel_teaching" forKey:@"event"]];
-//        [self releaseComponents];
         return;
     }
     
@@ -949,11 +953,8 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 - (IBAction)btnFavouritesClick:(id)sender {
 //    [[StartViewController sharedInstance].favsDataSource reloadDataSource];
     if ([[StartViewController sharedInstance] connectedToWiFi]) {
-    FavouritesViewController *favVC = [[FavouritesViewController alloc] initWithAccount:playerAccount];
-    [self.navigationController pushViewController:favVC animated:YES];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-                                                        object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"/profile_favorites_click" forKey:@"event"]];
+        FavouritesViewController *favVC = [[FavouritesViewController alloc] initWithAccount:playerAccount];
+        [self.navigationController pushViewController:favVC animated:YES];
     }else{
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry", @"AlertView")
                                                             message:NSLocalizedString(@"Internet_down", @"AlertView")
@@ -1055,7 +1056,6 @@ if (playerAccount.accountLevel != kCountOfLevels) {
              if ([data length] >0 && error == nil)
              {
                  NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                 NSLog(@"jsonString %@",jsonString);
                  NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
                  int errCode=[[responseObject objectForKey:@"err_code"] intValue];
                  if (errCode == 1) {
@@ -1093,6 +1093,9 @@ if (playerAccount.accountLevel != kCountOfLevels) {
              [bself checkIsOpponentFavorite];
          }];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/ProfileVC_add_favorite" forKey:@"page"]];
 }
 
 #pragma mark IconDownloaderDelegate

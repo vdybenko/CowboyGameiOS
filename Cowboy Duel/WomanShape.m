@@ -89,21 +89,21 @@
         switch (result) {
             case 0:
                 [super.imageMain addFlyingPointToView:view centerPoint:CGPointMake(super.imageMain.center.x, 0)
-                                                  text:@"-10"
+                                                  text:@"-3"
                                                  color:color
                                                   font:font
                                              direction:FlyingPointDirectionUp];
                 break;
             case 1:
                 [super.imageMain addFlyingPointToView:view centerPoint:CGPointMake(super.imageMain.center.x, 0)
-                                                        text:@"-10"
+                                                        text:@"-3"
                                                        color:color
                                                         font:font
                                                    direction:FlyingPointDirectionUp];
                 break;
             case 2:
                 [super.imageMain addFlyingPointToView:view centerPoint:CGPointMake(super.imageMain.center.x, 0)
-                                                        text:@"-10"
+                                                        text:@"-3"
                                                        color:color
                                                         font:font
                                                    direction:FlyingPointDirectionUp];

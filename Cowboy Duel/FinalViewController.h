@@ -40,7 +40,6 @@
     int minUserTime;
     int userTime;
       
-    NSString *stGA;
     NSString *falseLabel;
     BOOL foll;
     
@@ -90,6 +89,8 @@
     __weak IBOutlet FXLabel *lblPoints;
     __weak IBOutlet UIView *goldPointBgView;
     __weak IBOutlet UILabel *lblGoldTitle;
+    
+    
 }
 @property(weak)id<ActiveDuelViewControllerDelegate> delegate;
 

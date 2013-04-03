@@ -197,6 +197,7 @@ typedef float vec4f_t[4];    // 4D vector
     //    }
     
     oponentCoordinateViews = pois;
+    pois = nil;
     [self updateOponentCoordinates];
 }
 
@@ -1085,14 +1086,13 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
              CMRotationMatrix r = motion.attitude.rotationMatrix;
              transformFromCMRotationMatrix(cameraTransform, &r);
              
-             int index = 0;
              
              for (OponentCoordinateView *oponentView in oponentCoordinateViews) {
                  mat4f_t projectionCameraTransform;
                  multiplyMatrixAndMatrix(projectionCameraTransform, projectionTransform, cameraTransform);
                  
                  vec4f_t v;
-                 multiplyMatrixAndVector(v, projectionCameraTransform, oponentCoordinates[index]);
+                 multiplyMatrixAndVector(v, projectionCameraTransform, oponentCoordinates[0]);
                  
                  float x = (v[0] / v[3] + 1.0f) * 0.4f;
                 
@@ -1104,11 +1104,12 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
                      [oponentView.view setHidden:NO];
                      x += startX;
                      CGPoint newPosition = CGPointMake(x * self.bounds.size.width, self.bounds.size.height-(y * self.bounds.size.height + 220));
-                     
-                     [oponentView.view setCenter:newPosition];
-                     index++;
+                     dispatch_async(dispatch_get_main_queue(), ^{
+                         if([oponentView respondsToSelector:@selector(view)])
+                         [oponentView.view setCenter:newPosition];
+                     });
                  }
-                 else [oponentView.view setHidden:YES];
+                 else if([oponentView respondsToSelector:@selector(view)]) [oponentView.view setHidden:YES];
              }
              
          }];
@@ -1253,6 +1254,7 @@ void multiplyMatrixAndMatrix(mat4f_t c, const mat4f_t a, const mat4f_t b)
 {
     if(isSensorialRotationRunning)
     {
+        //oponentCoordinateViews = nil;
         startPoint = endPoint = CGPointMake(0.0f, 0.0f);
         isSensorialRotationRunning = NO;
         sensorType = PLSensorTypeUnknow;

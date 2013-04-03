@@ -12,7 +12,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "DuelRewardLogicController.h"
 #import "FinalViewController.h"
-//#import "ARView.h"
 #import "OponentCoordinateView.h"
 #import "StartViewController.h"
 #import "GunDrumViewController.h"
@@ -20,7 +19,10 @@
 #import "OpponentShape.h"
 #import "GoodCowboy.h"
 #import "ArrowToOpponent.h"
-
+#import "BarellsObject.h"
+#import "CactusObject.h"
+#import "AirBallon.h"
+#import "HorseShape.h"
 #define targetHeight 260
 #define targetWeidth 100
 #define MOVE_DISTANCE 100
@@ -54,6 +56,19 @@
     BOOL foll;
     BOOL duelTimerEnd;
     BOOL duelEnd;
+
+    NSMutableArray *barellObjectArray;
+    NSMutableArray *cactusObjectArray;
+    
+    BarellsObject *barellObject;
+
+    CactusObject *cactusObject;
+    
+//depends on opponent stats:
+    int countOfBarrels;
+    int countOfCactuses;
+
+    AirBallon *airBallon;
     
     GunDrumViewController  *gunDrumViewController;
     ProfileViewController *profileViewController;
@@ -68,13 +83,16 @@
     
     int opponentTime;
     
-    __weak IBOutlet GoodCowboy *goodCowboyShape;
-    __weak IBOutlet WomanShape *womanShape;
-    __weak IBOutlet OpponentShape *opponentShape;
-    IconDownloader *iconDownloader;
+    HorseShape *horseShape;
+    GoodCowboy *goodCowboyShape;
+    WomanShape *womanShape;
+    OpponentShape *opponentShape;
+  
     __weak IBOutlet UIImageView *blinkBottom;
     __weak IBOutlet UIImageView *blinkTop;
     __weak IBOutlet ArrowToOpponent *arrowToOpponent;
+    
+    
 }
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *floatView;
@@ -91,12 +109,15 @@
 @property (weak, nonatomic) IBOutlet FXLabel *lblBehold;
 @property (weak, nonatomic) IBOutlet UIImageView *crossImageView;
 @property (weak, nonatomic) IBOutlet UIView *userLiveImageView;
+@property (weak, nonatomic) IBOutlet UILabel *lbUserLifeLeft;
+
 
 @end
 
 @implementation ActiveDuelViewController
 @synthesize delegate;
 @synthesize glassImageViewAllBackground;
+@synthesize lbUserLifeLeft;
 
 static CGFloat userLiveImageViewStartWidth;
 static CGFloat blinkTopOriginY;
@@ -136,8 +157,6 @@ static CGFloat blinkBottomOriginY;
 {
     [super viewDidLoad];
     
-    // Do any additional setup after loading the view from its nib.
-    
     UIImage *spriteSheetBlood = [UIImage imageNamed:@"blood_a"];
     NSArray *arrayWithSpritesBlood = [spriteSheetBlood spritesWithSpriteSheetImage:spriteSheetBlood
                                                               spriteSize:CGSizeMake(64, 64)];
@@ -145,6 +164,8 @@ static CGFloat blinkBottomOriginY;
     float animationDurationBlood = [self.bloodImageView.animationImages count] * 0.100; // 100ms per frame
     [self.bloodImageView setAnimationRepeatCount:1];
     [self.bloodImageView setAnimationDuration:animationDurationBlood];
+    arrayWithSpritesBlood = nil;
+    spriteSheetBlood = nil;
     
     UIImage *spriteSheetBloodC = [UIImage imageNamed:@"blood_c"];
     NSArray *arrayWithSpritesBloodC = [spriteSheetBloodC spritesWithSpriteSheetImage:spriteSheetBloodC
@@ -153,6 +174,8 @@ static CGFloat blinkBottomOriginY;
     float animationDurationBloodC = [self.bloodCImageView.animationImages count] * 0.100; // 100ms per frame
     [self.bloodCImageView setAnimationRepeatCount:1];
     [self.bloodCImageView setAnimationDuration:animationDurationBloodC];
+    arrayWithSpritesBloodC = nil;
+    spriteSheetBloodC = nil;
     
     shotCountForSound = 1;
 
@@ -160,6 +183,7 @@ static CGFloat blinkBottomOriginY;
     
     plView.camera.pitchRange = PLRangeMake (-180, 180);
     plView.camera.rollRange = PLRangeMake (-180, 180);
+    
     plView.camera.yawRange = PLRangeMake (-180, 180);
     
     NSString *syfics = @"";
@@ -167,12 +191,12 @@ static CGFloat blinkBottomOriginY;
 //        syfics = @"@2x";
     }
     PLCubicPanorama *cubicPanorama = [PLCubicPanorama panorama];
-    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_f%@",syfics] ofType:@"jpg"]]] face:PLCubeFaceOrientationFront];
-    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_b%@",syfics] ofType:@"jpg"]]] face:PLCubeFaceOrientationBack];
-    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_l%@",syfics] ofType:@"jpg"]]] face:PLCubeFaceOrientationLeft];
-    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_r%@",syfics] ofType:@"jpg"]]] face:PLCubeFaceOrientationRight];
-    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_u%@",syfics] ofType:@"jpg"]]] face:PLCubeFaceOrientationUp];
-    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_d%@",syfics] ofType:@"jpg"]]] face:PLCubeFaceOrientationDown];
+    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_f%@",syfics] ofType:@"png"]]] face:PLCubeFaceOrientationFront];
+    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_b%@",syfics] ofType:@"png"]]] face:PLCubeFaceOrientationBack];
+    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_l%@",syfics] ofType:@"png"]]] face:PLCubeFaceOrientationLeft];
+    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_r%@",syfics] ofType:@"png"]]] face:PLCubeFaceOrientationRight];
+    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_u%@",syfics] ofType:@"png"]]] face:PLCubeFaceOrientationUp];
+    [cubicPanorama setTexture:[PLTexture textureWithImage:[PLImage imageWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"pano_d%@",syfics] ofType:@"png"]]] face:PLCubeFaceOrientationDown];
     [plView setPanorama:cubicPanorama];
     
     [self hideHelpViewOnStartDuel];
@@ -186,39 +210,124 @@ static CGFloat blinkBottomOriginY;
 
     oponentCoords.latitude = 1;//(((float) rand()) / RAND_MAX) * 360 - 180;
     oponentCoords.longitude = 1;// (((float) rand()) / RAND_MAX) * 360 - 180;
-
 	oponentsViewCoordinates = [NSMutableArray arrayWithCapacity:1];
-    for (int i = 0; i < 5; i++) {
-        
-        UIImageView *obstracleImage;
-        CGRect obstracleImageFrame;
-        int randomNumber = arc4random() % 2;
-        switch (randomNumber) {
-            case 0:
-                obstracleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bochka.png"]];
-                obstracleImageFrame = obstracleImage.frame;
-                obstracleImageFrame.origin.y = 240;
+    
+    NSArray *barriersArray = [DuelProductDownloaderController loadBarrierArray];
+    
+    for (CDBarrierDuelProduct *barrierDuelProduct in barriersArray) {
+        switch (barrierDuelProduct.dType) {
+            case BarrierDuelProductTypeBarrel:
+                countOfBarrels = barrierDuelProduct.dCountOfUse;
                 break;
-            case 1:
-                obstracleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cactus.png"]];
-                obstracleImageFrame = obstracleImage.frame;
-                obstracleImageFrame.origin.y = 175;
+            case BarrierDuelProductTypeCactus:
+                countOfCactuses = barrierDuelProduct.dCountOfUse;
                 break;
             default:
                 break;
         }
-        obstracleImageFrame.origin.x = (((float) rand()) / RAND_MAX) * 800;
-        obstracleImage.frame = obstracleImageFrame;
-        obstracleImage.tag = 1;
-        [self.floatView addSubview:obstracleImage];
     }
+    
+    barellObjectArray = [[NSMutableArray alloc] initWithCapacity:countOfBarrels];
+    cactusObjectArray = [[NSMutableArray alloc] initWithCapacity:countOfCactuses];
+
+    CGRect barelFrame;
+    int indexBarrel = 0;
+    barelFrame = barellObject.frame;
+    barelFrame.origin.x = opponentShape.frame.origin.x;
+    barelFrame.origin.y = 120;
+    countOfBarrels = 5;
+    countOfCactuses = 5;
+    int randomBarrels = arc4random()%3 + 1;
+    for (int i = 0; i < countOfBarrels; i++){
+
+        if (indexBarrel == 0) {
+            barellObject = [[BarellsObject alloc] initWithFrame:barelFrame];
+            barellObject.bonusImg.hidden = YES;
+        }
+        indexBarrel++;
+        barellObject.barellImgMiddle.hidden = YES;
+        barellObject.barellImgBottom.hidden = YES;
+        barellObject.barellImgHighest.hidden = YES;
+                
+        if (indexBarrel <=3)
+        {
+            if (indexBarrel==1) {
+                barellObject.barellImgBottom.hidden = NO;
+                
+                if (countOfBarrels - i == 1 || randomBarrels == 1) {
+                    
+                    [barellObjectArray addObject:barellObject];
+                    barelFrame.origin.x = barelFrame.origin.x + 80;
+                    [self.floatView addSubview:barellObject];
+                    
+                    indexBarrel = 0;
+                    randomBarrels = arc4random()%3 + 1;
+                }
+                
+            }
+            if (indexBarrel==2) {
+                barellObject.barellImgBottom.hidden = NO;
+                barellObject.barellImgMiddle.hidden = NO;
+                
+                if (countOfBarrels - i == 2 || randomBarrels == 2) {
+                    
+                    [barellObjectArray addObject:barellObject];
+                    barelFrame.origin.x = barelFrame.origin.x + 80;
+                    [self.floatView addSubview:barellObject];
+                    
+                    indexBarrel = 0;
+                    randomBarrels = arc4random()%3 + 1;
+                }
+
+            }
+            if (indexBarrel==3) {
+                barellObject.barellImgMiddle.hidden = NO;
+                barellObject.barellImgBottom.hidden = NO;
+                barellObject.barellImgHighest.hidden = NO;
+                
+                [barellObjectArray addObject:barellObject];
+                barelFrame.origin.x = barelFrame.origin.x + 80;
+                [self.floatView addSubview:barellObject];
+
+                indexBarrel = 0;
+                randomBarrels = arc4random()%3 + 1;
+            }
+        }
+    }
+    
+    for (int i=0; i<countOfCactuses; i++) {
+        CGRect cactusFrame;
+        cactusFrame = cactusObject.frame;
+        
+        if (i > 0) {
+            cactusObject = [cactusObjectArray objectAtIndex:i-1];
+            cactusFrame.origin.x = cactusObject.frame.origin.x + 80;
+            cactusFrame.origin.y = 150;
+            
+        }else{
+            cactusFrame.origin.x = 40 + opponentShape.frame.origin.x;
+            cactusFrame.origin.y = 150;
+            
+        }
+        cactusObject = [[CactusObject alloc] initWithFrame:cactusFrame];
+        
+        cactusObject.cactusImg.tag = 1;
+        [self.floatView addSubview:cactusObject];
+        [cactusObjectArray addObject:cactusObject];
+    }
+
+    CGRect airBallonFrame;
+    airBallonFrame = airBallon.frame;
+    airBallonFrame.origin.x = 300;
+    airBallonFrame.origin.y = -100;
+    airBallon = [[AirBallon alloc] initWithFrame:airBallonFrame];
+     airBallon.airBallonImg.tag = 1;
+    [self.floatView addSubview:airBallon];
     
     OponentCoordinateView *poi = [OponentCoordinateView oponentCoordinateWithView:self.floatView at:[[CLLocation alloc] initWithLatitude:oponentCoords.latitude longitude:oponentCoords.longitude]];
     [oponentsViewCoordinates addObject:poi];
     [plView setOponentCoordinates:oponentsViewCoordinates];
     
-    //    int index = [self.view.subviews indexOfObject:self.glassImageView];
-    //    [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 1) withSubviewAtIndex:index];
     int index = [self.view.subviews indexOfObject:self.crossImageView];
     [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 2) withSubviewAtIndex:index];
     
@@ -243,6 +352,7 @@ static CGFloat blinkBottomOriginY;
     
     blinkTopOriginY = blinkTop.frame.origin.y;
     blinkBottomOriginY = blinkBottom.frame.origin.y;
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -276,6 +386,11 @@ static CGFloat blinkBottomOriginY;
     [self updateOpponentViewToRamdomPosition];
     [womanShape randomPositionWithView:opponentShape];
     [goodCowboyShape randomPositionWithView:womanShape];
+    [horseShape randomPositionWithView:goodCowboyShape];
+    
+    CGRect horseFrame = horseShape.frame;
+    horseFrame.origin.y = opponentShape.frame.origin.y + 65;
+    horseShape.frame = horseFrame;
     
 	[plView startAnimation];
     
@@ -283,6 +398,7 @@ static CGFloat blinkBottomOriginY;
     [self.gunButton setEnabled:NO];
     
     userLiveImageViewStartWidth = self.userLiveImageView.frame.size.width;
+    self.lbUserLifeLeft.text = [NSString stringWithFormat:@"%d",shotCountBulletForOpponent*3];
     
     self.opStatsLabel.text = [NSString stringWithFormat: @"A: +%d\rD: +%d",opAccount.accountWeapon.dDamage,opAccount.accountDefenseValue];
     self.userStatsLabel.text = [NSString stringWithFormat: @"A: +%d\nD: +%d",playerAccount.accountWeapon.dDamage,playerAccount.accountDefenseValue];
@@ -296,9 +412,10 @@ static CGFloat blinkBottomOriginY;
     self.lblBehold.gradientEndColor = [UIColor colorWithRed:255.0/255.0 green:140.0/255.0 blue:0.0/255.0 alpha:1.0];
   
     steadyScale = 1.0;
-    
+
     opponentShape.hidden = YES;
     womanShape.hidden = YES;
+    horseShape.hidden = YES;
     goodCowboyShape.hidden = YES;
     arrowToOpponent.hidden = YES;
     [arrowToOpponent setDirection:ArrowToOpponentDirectionRight];
@@ -309,11 +426,33 @@ static CGFloat blinkBottomOriginY;
             opponentTime=99999;
         }
    [plView startSensorialRotation];
+    
+    [opponentShape setStatusBody:OpponentShapeStatusLive];
+    [opponentShape cleareDamage];    
+    [opponentShape refreshLiveBarWithLives:maxShotCount];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [self readyToStart];
+    
+    NSString *st=@"/ActiveDuelVC";
+    if ( [LoginAnimatedViewController sharedInstance].isDemoPractice == YES){
+        st=@"/ActiveDuelVC_first_duel";
+    }else{
+        if ([opAccount isPlayerForPractice]) {
+            st=@"/ActiveDuelVC_practice";
+        }else{
+            if (opAccount.bot){
+                st=@"/ActiveDuelVC_bot";
+            }else{
+                st=@"/ActiveDuelVC";
+            }
+        }
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:st forKey:@"page"]];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -332,9 +471,6 @@ static CGFloat blinkBottomOriginY;
 {
     [super viewDidDisappear:animated];
 
-    [opponentShape setStatusBody:OpponentShapeStatusLive];
-    [opponentShape cleareDamage];
-    [opponentShape refreshLiveBar];
     CGRect frame = self.userLiveImageView.frame;
     frame.size.width = userLiveImageViewStartWidth;
     self.userLiveImageView.frame = frame;
@@ -347,12 +483,15 @@ static CGFloat blinkBottomOriginY;
     opponentShape = nil;
     goodCowboyShape = nil;
     arrowToOpponent = nil;
+    [self setLbUserLifeLeft:nil];
+    horseShape = nil;
     [super viewDidUnload];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    DLog(@"memory warning");
     //[self releaseComponents];
     // Dispose of any resources that can be recreated.
 }
@@ -368,10 +507,13 @@ static CGFloat blinkBottomOriginY;
    
     if ( [LoginAnimatedViewController sharedInstance].isDemoPractice == NO)
     {
-        countBulletsForOpponent = [DuelRewardLogicController countUpBuletsWithOponentLevel:playerAccount.accountLevel defense:playerAccount.accountDefenseValue playerAtack:opAccount.accountWeapon.dDamage];
-        
+        if ([opAccount isPlayerForPractice]) {
+            countBulletsForOpponent = 4;
+        }else{
+            countBulletsForOpponent = [DuelRewardLogicController countUpBuletsWithOponentLevel:playerAccount.accountLevel defense:playerAccount.accountDefenseValue playerAtack:opAccount.accountWeapon.dDamage];
+        }
     }else{
-        countBulletsForOpponent = 4;
+        countBulletsForOpponent = 5;
    }
     shotCountBulletForOpponent =  countBulletsForOpponent;
     maxShotCountForOpponent = countBulletsForOpponent;
@@ -386,7 +528,6 @@ static CGFloat blinkBottomOriginY;
 - (IBAction)shotButtonClick:(id)sender {
     if (isGunCanShotOfFrequently) {
         [self startGunFrequentlyBlockTime];
-        
             
         [gunDrumViewController shotAnimation];
         [self hideSteadyImage];
@@ -395,11 +536,11 @@ static CGFloat blinkBottomOriginY;
             case 1:
                 [self.titleSteadyFire setHidden:YES];
                 [self.lblBehold setHidden:YES];
-                //self.gunButton.hidden = NO;
+              
                 
                 [shotAudioPlayer1 stop];
                 [shotAudioPlayer1 setCurrentTime:0.0];
-                [shotAudioPlayer1 performSelectorInBackground:@selector(play) withObject:nil];
+                [shotAudioPlayer1 play];
                 
                 shotCountForSound = 2;
                 
@@ -407,14 +548,14 @@ static CGFloat blinkBottomOriginY;
             case 2:
                 [shotAudioPlayer2 stop];
                 [shotAudioPlayer2 setCurrentTime:0.0];
-                [shotAudioPlayer2 performSelectorInBackground:@selector(play) withObject:nil];
+                [shotAudioPlayer2 play];
                 
                 shotCountForSound = 3;
                 break;
             case 3:
                 [shotAudioPlayer3 stop];
                 [shotAudioPlayer3 setCurrentTime:0.0];
-                [shotAudioPlayer3 performSelectorInBackground:@selector(play) withObject:nil];
+                [shotAudioPlayer3 play];
 
                 shotCountForSound = 1;
                 break;
@@ -461,6 +602,8 @@ static CGFloat blinkBottomOriginY;
 
 -(void)cheackHitForShot:(CGPoint)shotPoint andTargetPoint:(CGPoint)targetPoint
 {
+
+    //Obstracles
     for (UIImageView *obstracle in self.floatView.subviews) {
         if(obstracle.tag != 1) continue;
         CGRect obstracleFrame = obstracle.frame;
@@ -472,12 +615,74 @@ static CGFloat blinkBottomOriginY;
         
     }
     
+    BOOL shotOnObstracle = NO;
+
+    CGRect baloonFrame = [airBallon convertRect:airBallon.airBallonImg.frame toView:self.view];
+    
+    if (CGRectContainsPoint(baloonFrame, shotPoint) && !airBallon.airBallonImg.hidden && !shotOnObstracle) {
+        [airBallon explosionAnimation];
+        shotOnObstracle = YES;
+    }
+    
+    for (CactusObject *cactus in cactusObjectArray) {
+
+        CGRect cactusFrame = [cactus convertRect:cactus.cactusImg.frame toView:self.view];
+        
+        if (CGRectContainsPoint(cactusFrame, shotPoint) && !cactus.cactusImg.hidden && !shotOnObstracle) {
+            [cactus explosionAnimation];
+            shotOnObstracle = YES;
+        }
+    }
+    for (BarellsObject *barell in barellObjectArray) {
+        //Global IF shot on Barrel
+        CGRect barelHighestFrame = [barell convertRect:barell.barellImgHighest.frame toView:self.view];
+        CGRect barelMiddleFrame = [barell convertRect:barell.barellImgMiddle.frame toView:self.view];
+        CGRect barelBottomFrame = [barell convertRect:barell.barellImgBottom.frame toView:self.view];
+        
+        if (!barell.barellImgHighest.hidden
+            && CGRectContainsPoint(barelHighestFrame, shotPoint)
+            && !shotOnObstracle)
+        {
+            barell.barellPosition = BarellPositionHighest;
+            [barell explosionAnimation];
+            shotOnObstracle = YES;
+           
+        }
+        
+        if (!barell.barellImgMiddle.hidden
+            && CGRectContainsPoint(barelMiddleFrame, shotPoint)
+            && !shotOnObstracle)
+        {
+            barell.barellPosition = BarellPositionMiddle;
+            [barell explosionAnimation];
+            shotOnObstracle = YES;
+        
+        }
+        
+        if (!barell.barellImgBottom.hidden
+            && CGRectContainsPoint(barelBottomFrame, shotPoint)
+            && !shotOnObstracle)
+        {
+            barell.barellPosition = BarellPositionBottom;
+            [barell explosionAnimation];
+            shotOnObstracle = YES;
+            
+        }
+
+    }
+    
+    BOOL shotInHorse = [horseShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
     BOOL resultWoman = [womanShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
     BOOL resultGoodCowboy = [goodCowboyShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
     if (resultWoman || resultGoodCowboy) {
         [self opponentShot];
         if(delegate) [delegate sendShotSelf];
         return;
+    }
+    if (shotInHorse)
+        return;
+    if (shotOnObstracle == YES) {
+        return; 
     }
     
     if (([self abs:(shotPoint.x - targetPoint.x)] < targetWeidth / 2) && ([self abs:(shotPoint.y - targetPoint.y)] < targetHeight / 2)) {
@@ -564,6 +769,12 @@ static CGFloat blinkBottomOriginY;
     frame.size.width = (float)((shotCountBulletForOpponent)*userLiveImageViewStartWidth)/maxShotCountForOpponent;
     self.userLiveImageView.frame = frame;
     
+    self.lbUserLifeLeft.text = [NSString stringWithFormat:@"%d",shotCountBulletForOpponent*3];
+    
+    CGRect frameLife = self.lbUserLifeLeft.frame;
+    frameLife.size.width = frame.size.width;
+    self.lbUserLifeLeft.frame = frameLife;
+    
     if(!shotCountBulletForOpponent){
         [self userLost];
         GameCenterViewController *gameCenterViewController;
@@ -598,7 +809,7 @@ static CGFloat blinkBottomOriginY;
         duelEnd = YES;
         [activityIndicatorView setText:@""];
         [activityIndicatorView showView];
-        [self horizontalFlip];
+        //[self horizontalFlip];
         DLog(@"Kill!!!");
         DLog(@"Shot Time = %d.%d", (shotTime) / 1000, (shotTime));
         GameCenterViewController *gameCenterViewController;
@@ -750,6 +961,8 @@ static CGFloat blinkBottomOriginY;
         opponentShape.hidden = NO;
         womanShape.hidden = NO;
         goodCowboyShape.hidden = NO;
+        horseShape.hidden = NO;
+        
         
         if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
         moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
@@ -904,12 +1117,14 @@ static CGFloat blinkBottomOriginY;
         opponentShape.hidden = NO;
         womanShape.hidden = NO;
         goodCowboyShape.hidden = NO;
+        horseShape.hidden = NO;
+        
     }
 }
 
 -(void)readyToStart
 {
-    NSLog(@"startDuel");
+    NSLog(@"readyToStart");
     soundStart = YES;
     startInterval = [NSDate timeIntervalSinceReferenceDate];
     [player stop];
@@ -948,6 +1163,7 @@ static CGFloat blinkBottomOriginY;
 
 -(void)releaseComponents
 {
+    [oponentsViewCoordinates removeAllObjects];
     [plView stopSensorialRotation];
     [self setFloatView:nil];
     [self setFireImageView:nil];
@@ -963,12 +1179,16 @@ static CGFloat blinkBottomOriginY;
     [self setCrossImageView:nil];
     [self setGlassImageViewAllBackground:nil];
     [self setUserLiveImageView:nil];
+    [self setLbUserLifeLeft:nil];
     
     [goodCowboyShape releaseComponents];
     goodCowboyShape = nil;
     
     [womanShape releaseComponents];
     womanShape = nil;
+    
+    [horseShape releaseComponents];
+    horseShape = nil;
     
     [opponentShape releaseComponents];
     opponentShape = nil;
@@ -983,7 +1203,7 @@ static CGFloat blinkBottomOriginY;
     shotAudioPlayer2 = nil;
     
     shotAudioPlayer3 = nil;
-    
+
     brockenGlassAudioPlayer = nil;
     
     opAccount = nil;
@@ -996,7 +1216,7 @@ static CGFloat blinkBottomOriginY;
     gunDrumViewController = nil;
     profileViewController = nil;
     activityIndicatorView = nil;
-    [oponentsViewCoordinates removeAllObjects];
+    
     oponentsViewCoordinates = nil;
     
     blinkBottom = nil;
@@ -1016,8 +1236,6 @@ static CGFloat blinkBottomOriginY;
     self.lblBehold = nil;
     self.crossImageView = nil;
     self.userLiveImageView = nil;
-    self.view = nil;
-    [super viewDidUnload];
 }
 
 @end

@@ -23,6 +23,7 @@
 static const NSInteger kGANDispatchPeriod = 60;
 #ifdef DEBUG
 static NSString *kGAAccountID = @"UA-24007807-3";
+
 #else
 static NSString *kGAAccountID = @"UA-38210757-1";
 #endif
@@ -61,7 +62,7 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     [GAI sharedInstance].debug = NO;
     tracker = [[GAI sharedInstance] trackerWithTrackingId:kGAAccountID];
 	
-    [Crittercism initWithAppID:ID_CRIT_APP  andKey:ID_CRIT_KEY andSecret:ID_CRIT_SECRET];
+    //[Crittercism initWithAppID:ID_CRIT_APP  andKey:ID_CRIT_KEY andSecret:ID_CRIT_SECRET];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(AnalyticsTrackEvent:)
@@ -139,12 +140,16 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     }
     
     // Let the device know we want to receive push notifications
-	[[UIApplication sharedApplication] registerForRemoteNotificationTypes:
-     (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeNewsstandContentAvailability | UIRemoteNotificationTypeAlert)];
+	
     
     //Sleep off
     application.idleTimerDisabled = YES;
     application.applicationIconBadgeNumber = 0;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/TestAppDelegate" forKey:@"page"]];
+    
     return YES;
 }
 
@@ -195,18 +200,24 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
         ACAccountStore *accountStore = [[ACAccountStore alloc] init];
         ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
         if (![accountStore accountsWithAccountType:accountType]){
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry", @"AlertView")
-                                                                message:NSLocalizedString(@"You can't connnect to Facebook right now, make sure  your device has an internet connection and you have at least one Facebook account setup. Go to Settings -> Facebook and set up it.", @"AlertView")
-                                                               delegate:self
-                                                      cancelButtonTitle:NSLocalizedString(@"Cancel", @"AlertView")
-                                                      otherButtonTitles: nil];
-            alertView.tag = 1;
-            [alertView show];
-            return NO;
+//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry", @"AlertView")
+//                                                                message:NSLocalizedString(@"You can't connnect to Facebook right now, make sure  your device has an internet connection and you have at least one Facebook account setup. Go to Settings -> Facebook and set up it.", @"AlertView")
+//                                                               delegate:self
+//                                                      cancelButtonTitle:NSLocalizedString(@"Cancel", @"AlertView")
+//                                                      otherButtonTitles: nil];
+//            alertView.tag = 1;
+//            [alertView show];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                                object:self
+                                                              userInfo:[NSDictionary dictionaryWithObject:@"/TestAppDelegate_login_FB_no_account" forKey:@"page"]];
+            
+            //return NO;
         }
     }
 
     [self openSessionWithPermission:permissions];
+    return YES;
 }
 
 -(void)openSessionWithPermission:(NSArray *)permissions
@@ -285,13 +296,6 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     
     
     if (error) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Error: %@",
-                                                                     [TestAppDelegate FBErrorCodeDescription:error.code]]
-                                                            message:error.localizedDescription
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-        [alertView show];
     }
 }
 
@@ -325,6 +329,13 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     }
 }
 
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    // attempt to extract a token from the url
+    return [FBSession.activeSession handleOpenURL:url];
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -410,9 +421,14 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
                                                       userInfo:[NSDictionary dictionaryWithObjectsAndKeys:sInfo, @"messageId",message, @"message", nil]];
 }
 
+-(void)applicationDidReceiveMemoryWarning:(UIApplication *)application
+{
+    NSLog(@"Get memory warning");
+}
+
 #pragma mark GATrackEvent
 - (void)AnalyticsTrackEvent:(NSNotification *)notification {
-	NSString *page = [[notification userInfo] objectForKey:@"event"];
+	NSString *page = [[notification userInfo] objectForKey:@"page"];
     NSInteger demention = [[[notification userInfo] objectForKey:@"demention"] intValue];
     NSString *value = [[notification userInfo] objectForKey:@"value"];
 	if (page){
