@@ -8,6 +8,7 @@
 
 #import "ActiveDuelViewController.h"
 #import "UIImage+Sprite.h"
+#import "UIButton+Image+Title.h"
 #import "math.h"
 #import <QuartzCore/QuartzCore.h>
 #import "DuelRewardLogicController.h"
@@ -111,6 +112,8 @@
 @property (weak, nonatomic) IBOutlet UIView *userLiveImageView;
 @property (weak, nonatomic) IBOutlet UILabel *lbUserLifeLeft;
 
+@property (weak, nonatomic) IBOutlet UIButton *btnSkip;
+
 
 @end
 
@@ -118,6 +121,7 @@
 @synthesize delegate;
 @synthesize glassImageViewAllBackground;
 @synthesize lbUserLifeLeft;
+@synthesize btnSkip;
 
 static CGFloat userLiveImageViewStartWidth;
 static CGFloat blinkTopOriginY;
@@ -483,6 +487,7 @@ static CGFloat blinkBottomOriginY;
     arrowToOpponent = nil;
     [self setLbUserLifeLeft:nil];
     horseShape = nil;
+    [self setBtnSkip:nil];
     [super viewDidUnload];
 }
 
@@ -971,10 +976,19 @@ static CGFloat blinkBottomOriginY;
         [self.gunButton setEnabled:YES];
         [self.userLiveImageView setHidden:NO];
         opponentShape.hidden = NO;
+        
         if (opponentShape.typeOfBody != OpponentShapeTypeScarecrow) {
             [self showGoodBodies];
-        }else
+        }else{
             [arrowToOpponent changeImgForPractice];
+       
+            UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
+            
+            [btnSkip setTitleByLabel:@"SKIP" withColor:buttonsTitleColor fontSize:24];
+            [self.btnSkip setEnabled:YES];
+            [self.btnSkip setHidden:NO];
+            [self.view bringSubviewToFront:btnSkip];
+        }
         
         if(!delegate && opponentShape.typeOfBody != OpponentShapeTypeScarecrow) shotTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
         moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
@@ -1096,6 +1110,20 @@ static CGFloat blinkBottomOriginY;
 }
 
 #pragma mark - IBAction
+
+- (IBAction)btnSkipClicked:(id)sender {
+    
+    if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
+        [self.navigationController popToViewController:[LoginAnimatedViewController sharedInstance] animated:YES];
+        [self releaseComponents];
+    }
+    else{
+        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+        [self releaseComponents];
+    }
+    
+}
+
 - (void)cancelHelpArmClick:(id)sender {
     [self hideHelpViewOnStartDuel];
 }
@@ -1135,6 +1163,7 @@ static CGFloat blinkBottomOriginY;
         [player play];
         [self vibrationStart];
         [self.gunButton setEnabled:YES];
+
         [self.userLiveImageView setHidden:NO];
 
         if(!delegate && opponentShape.typeOfBody != OpponentShapeTypeScarecrow){

@@ -185,6 +185,7 @@ p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font
 "LvlAchievText2" = "'. Your opponent has to shoot ";
 "LvlAchievText3" = " times in a row to kill you";
 
+"SKIP" = "SKIP";
 
 //Gold achievment View
 "GoldAchievText1" = "";
