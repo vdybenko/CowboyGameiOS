@@ -63,17 +63,17 @@
     ptCenterPosition = (CGPoint){self.center.x-(rectForObjetc.size.width/2),0+rectForObjetc.origin.y};
     ptRightPosition = (CGPoint){self.frame.size.width,0+rectForObjetc.origin.y};
     
-    leftImage = [[UIImageView alloc] initWithFrame:(CGRect){ptLeftPosition.x,ptLeftPosition.y,rectForObjetc.size.width,rectForObjetc.size.height}];
+    leftImage = [[UIImageView alloc] initWithFrame:CGRectMake(ptLeftPosition.x,ptLeftPosition.y,rectForObjetc.size.width,rectForObjetc.size.height)];
     leftImage.clipsToBounds = YES;
     leftImage.contentMode = UIViewContentModeScaleAspectFill;
     [self addSubview:leftImage];
     
-    rightImage = [[UIImageView alloc] initWithFrame:(CGRect){ptRightPosition.x,ptRightPosition.y,rectForObjetc.size.width,rectForObjetc.size.height}];
+    rightImage = [[UIImageView alloc] initWithFrame:CGRectMake(ptRightPosition.x,ptRightPosition.y,rectForObjetc.size.width,rectForObjetc.size.height)];
     rightImage.clipsToBounds = YES;
     rightImage.contentMode = UIViewContentModeScaleAspectFill;
     [self addSubview:rightImage];
     
-    centralImage = [[UIImageView alloc] initWithFrame:(CGRect){ptCenterPosition.x,ptCenterPosition.y,rectForObjetc.size.width,rectForObjetc.size.height}];
+    centralImage = [[UIImageView alloc] initWithFrame:CGRectMake(ptCenterPosition.x,ptCenterPosition.y,rectForObjetc.size.width,rectForObjetc.size.height)];
     centralImage.clipsToBounds = YES;
     centralImage.contentMode = UIViewContentModeScaleAspectFill;
     [self addSubview:centralImage];
@@ -88,13 +88,12 @@
     [self touchView];
 }
 
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;
 {
-    [self endTouchView];
     CGPoint endPoint = [[touches anyObject] locationInView:self];
     
     if (abs(endPoint.x - startPoint.x) < 10){
-//        Touch
+        //        Touch
     }
     else
     {
@@ -110,8 +109,35 @@
     }
     
     if (abs(endPoint.y - startPoint.y) < 5){
-//        Touch
+        //        Touch
     }
+
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self endTouchView];
+//    CGPoint endPoint = [[touches anyObject] locationInView:self];
+//    
+//    if (abs(endPoint.x - startPoint.x) < 10){
+////        Touch
+//    }
+//    else
+//    {
+//        if (endPoint.x > startPoint.x){
+//            //            right
+//            [self switchToRight];
+//        }
+//        
+//        if (endPoint.x < startPoint.x){
+//            //            left
+//            [self switchToLeft];
+//        }
+//    }
+//    
+//    if (abs(endPoint.y - startPoint.y) < 5){
+////        Touch
+//    }
 }
 
 #pragma mark
