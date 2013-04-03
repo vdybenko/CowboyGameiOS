@@ -45,12 +45,21 @@
 -(void) reloadDataSource;
 {
     __weak NSMutableArray *testArr;
-    if (typeOfTable == StoreDataSourceTypeTablesWeapons) {
-        testArr = [DuelProductDownloaderController loadWeaponArray];
-    }else{
-        testArr = [DuelProductDownloaderController loadDefenseArray];
+    
+    switch (typeOfTable) {
+        case StoreDataSourceTypeTablesWeapons:
+            testArr = [DuelProductDownloaderController loadWeaponArray];
+            break;
+        case StoreDataSourceTypeTablesDefenses:
+            testArr = [DuelProductDownloaderController loadDefenseArray];
+            break;
+        case StoreDataSourceTypeTablesBarrier:
+            testArr = [DuelProductDownloaderController loadBarrierArray];
+            break;
+        default:
+            break;
     }
-
+    
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.dCountOfUse > 0 || SELF.dID == -1"];
     if (self.bagFlag) [testArr filterUsingPredicate:predicate];
     

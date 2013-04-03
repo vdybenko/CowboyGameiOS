@@ -29,6 +29,7 @@ NSString  *const URL_PRODUCTS_BUY = @BASE_URL"store/bought";
     NSMutableArray *arrDefenseSaved;
     NSMutableArray *arrItems;
     NSMutableArray *arrWeaponSaved;
+    NSMutableArray *arrBarrierSaved;
 }
 @end
 
@@ -47,6 +48,8 @@ static int numberRevision;
     dicForRequests=[NSMutableDictionary dictionary];
     arrDefenseSaved = [NSMutableArray array];
     arrWeaponSaved = [NSMutableArray array];
+    arrBarrierSaved = [NSMutableArray array];
+
     arrItems = [NSMutableArray array];
 	return self;
 }
@@ -140,7 +143,7 @@ static NSString *getSavePathForDuelProduct()
 {
     arrDefenseSaved = [DuelProductDownloaderController loadDefenseArray];
     arrWeaponSaved = [DuelProductDownloaderController loadWeaponArray];
-    
+    arrBarrierSaved = [DuelProductDownloaderController loadBarrierArray];
     NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:URL_USER_PRODUCTS]
                                                             cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                         timeoutInterval:kTimeOutSeconds];
@@ -371,6 +374,27 @@ static NSString *getSavePathForDuelProduct()
     
     arrDefenseSaved = arrItems;
     
+    [arrItems removeAllObjects];
+    responseObjectOfProducts = [responseObject objectForKey:@"barrier"];
+    for (NSDictionary *dic in responseObjectOfProducts) {
+        CDBarrierDuelProduct *product=[[CDBarrierDuelProduct alloc] init];
+        [self parseDuelProduct:product productDic:dic];
+        product.dType=[[dic objectForKey:@"type"] integerValue];
+        
+        if ([arrBarrierSaved count]!=0) {
+            product.dCountOfUse = [self checkProductForUseWithID:product.dID inArray:arrBarrierSaved];
+        }
+        
+        if (product.dPrice == 0) {
+            [arrayIDProducts addObject:product.dPurchaseUrl];
+        }
+        [arrItems addObject: product];
+    }
+    [DuelProductDownloaderController saveBarrier:arrItems];
+    
+    arrBarrierSaved = arrItems;
+
+    
     if ([arrayIDProducts count]!=0) {
         [self requestProductDataWithNSSet:arrayIDProducts];
     }
@@ -513,6 +537,20 @@ static NSString *getSavePathForDuelProduct()
 +(NSMutableArray*)loadDefenseArray;
 {
     NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:DUEL_PRODUCTS_DEFENSES];
+    return [NSKeyedUnarchiver unarchiveObjectWithData:data1];
+}
+
++(void)saveBarrier:(NSArray*)array;
+{
+    NSData *data= [NSKeyedArchiver archivedDataWithRootObject:array];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:DUEL_PRODUCTS_BARRIER];
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:DUEL_PRODUCTS_BARRIER];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++(NSMutableArray*)loadBarrierArray;
+{
+    NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:DUEL_PRODUCTS_BARRIER];
     return [NSKeyedUnarchiver unarchiveObjectWithData:data1];
 }
 

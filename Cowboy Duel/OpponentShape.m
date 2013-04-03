@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UIImage+Sprite.h"
 #import <AVFoundation/AVFoundation.h>
+#import "UILabel+FlyingPoint.h"
 
 @interface OpponentShape ()
 {
@@ -23,20 +24,16 @@
 @synthesize imgShot;
 @synthesize ivLifeBar;
 @synthesize typeOfBody;
+@synthesize lbLifeLeft;
+@synthesize opponentShapeStatus;
+@synthesize imgDieOpponentAnimation;
 
 static CGFloat oponentLiveImageViewStartWidth;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
-    
-    self = [super initWithCoder:aDecoder];
+    self = [super initWithCoder:aDecoder subViewFromNibFileName:@"OpponentShape"];
     if(self){
-        @autoreleasepool {
-            NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"OpponentShape" owner:self options:nil];
-            UIView *nibView = [objects objectAtIndex:0];
-            [self addSubview:nibView];
-        }
-        
         UIImage *spriteSheetSmoke = [UIImage imageNamed:@"smokeSpriteSheet"];
         NSArray *arrayWithSpritesSmoke = [spriteSheetSmoke spritesWithSpriteSheetImage:spriteSheetSmoke
                                                                             spriteSize:CGSizeMake(64, 64)];
@@ -46,6 +43,15 @@ static CGFloat oponentLiveImageViewStartWidth;
         [imgShot setAnimationRepeatCount:1];
         [imgShot setAnimationDuration:animationDurationSmoke];
         
+        NSArray *imgDieArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"menDieFrame1.png"], [UIImage imageNamed:@"menDieFrame1.png"],[UIImage imageNamed:@"menDieFrame1.png"],
+                             [UIImage imageNamed:@"menDieFrame2.png"], [UIImage imageNamed:@"menDieFrame3.png"],[UIImage imageNamed:@"menDieFrame4.png"],[UIImage imageNamed:@"menDieFrame5.png"],[UIImage imageNamed:@"menDieFrame6.png"],[UIImage imageNamed:@"menDieFrame8.png"],
+                             nil];
+        
+        imgDieOpponentAnimation.animationImages = imgDieArray;
+        imgDieOpponentAnimation.animationDuration = 0.6f;
+        [imgDieOpponentAnimation setAnimationRepeatCount:1];
+        imgDieArray = nil;
+        
         oponentLiveImageViewStartWidth = ivLifeBar.frame.size.width;
         
         NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/oponent_shot.aif", [[NSBundle mainBundle] resourcePath]]];
@@ -53,9 +59,10 @@ static CGFloat oponentLiveImageViewStartWidth;
         oponentShotAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
         [oponentShotAudioPlayer prepareToPlay];
         self.typeOfBody = OpponentShapeTypeManLow;
-
+        opponentShapeStatus = OpponentShapeStatusLive;
     }
     return self;
+    
 }
 
 -(void)releaseComponents
@@ -64,10 +71,17 @@ static CGFloat oponentLiveImageViewStartWidth;
     imgBody = nil;
     imgShot = nil;
     ivLifeBar = nil;
+    [imgDieOpponentAnimation stopAnimating];
+    imgDieOpponentAnimation = nil;
+    [oponentShotAudioPlayer stop];
+    oponentShotAudioPlayer = nil;
+    opponentShapeStatus = nil;
+    lbLifeLeft = nil;
 }
 
 -(void) moveAnimation;
 {
+    
     NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"oponent_step1.png"],
                        [UIImage imageNamed:@"oponent_step2.png"],
                        nil];
@@ -75,6 +89,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     imgBody.animationDuration = 0.6f;
     [imgBody setAnimationRepeatCount:0];
     [imgBody startAnimating];
+    imgArray = nil;
 }
 -(void)moveOponentInBackground
 {
@@ -108,7 +123,9 @@ static CGFloat oponentLiveImageViewStartWidth;
 -(void) stopMoveAnimation;
 {
     [imgBody stopAnimating];
-    [self setStatusBody:OpponentShapeStatusLive];
+    if (opponentShapeStatus == OpponentShapeStatusLive) {
+        [self setStatusBody:OpponentShapeStatusLive];
+    }
 }
 -(void) shot;
 {
@@ -144,21 +161,61 @@ static CGFloat oponentLiveImageViewStartWidth;
     CGRect frame = ivLifeBar.frame;
     frame.size.width = (float)((maxShotCount - userHitCount)*oponentLiveImageViewStartWidth)/maxShotCount;
     ivLifeBar.frame = frame;
+
+    int x = (maxShotCount - userHitCount)*3;
+    lbLifeLeft.text = [NSString stringWithFormat:@"%d",x];
+   /*
+    CGAffineTransform trf0 = lbLifeLeft.transform;
+    CGAffineTransform trf1 = CGAffineTransformMakeScale(1.5, 1.5);
+    
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         lbLifeLeft.transform = trf1;
+                     } completion:^(BOOL finished) {
+                        [UIView animateWithDuration:0.3
+                                         animations:^{
+                                             lbLifeLeft.transform = trf0;
+                                         } completion:^(BOOL finished) {
+                                         }];
+                     }];
+    */
 }
 
--(void) refreshLiveBar;
+-(void) refreshLiveBarWithLives: (int )lives;
 {
     CGRect frame = ivLifeBar.frame;
     frame.size.width = oponentLiveImageViewStartWidth;
     ivLifeBar.frame = frame;
+    lbLifeLeft.text =[NSString stringWithFormat:@"%d", lives*3];
+    lbLifeLeft.textAlignment = UITextAlignmentLeft;
 }
 
 -(void) setStatusBody:(OpponentShapeStatus)status;
 {
-    switch (status) {
+    opponentShapeStatus = status;
+    switch (opponentShapeStatus) {
         case OpponentShapeStatusDead:
+        {
+            
             [self stopMoveAnimation];
-            imgBody.image = [UIImage imageNamed:@"menLowDie.png"];
+            imgBody.hidden = YES;
+            [imgDieOpponentAnimation startAnimating];
+            /*
+            UIImageView *dieImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"menLowDie.png"]];
+            [self addSubview:dieImg];
+            dieImg.frame = imgBody.frame;
+            
+            [UIView animateWithDuration:1 animations:^{
+                CGRect frame = dieImg.frame;
+                frame.origin.y -= 100;
+                dieImg.frame = frame;
+                dieImg.alpha = 0;
+            }completion:^(BOOL complete){
+                 
+            }];*/
+      
+        
+        }
             break;
         case OpponentShapeStatusLive:
             [self setBodyType:self.typeOfBody];
@@ -188,10 +245,56 @@ static CGFloat oponentLiveImageViewStartWidth;
 
 -(void) hitTheOponentWithPoint:(CGPoint)hitPoint mainView:(UIView*)mainView;
 {
+    
     UIImageView *ivHit = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ivHit.png"]];
-    ivHit.center = [mainView convertPoint:hitPoint toView:imgBody];
+    CGPoint convertPoint = [mainView convertPoint:hitPoint toView:imgBody];
+    ivHit.center = convertPoint;
     [imgBody addSubview:ivHit];
     ivHit = nil;
+
+    int result = [imgBody checkNumberOfShotsAreas:@[@"{{0, 0}, {89,43}}", @"{{0,43}, {89,65}}", @"{{0,108}, {89,53}}"] forPoint:convertPoint];
+    
+    UIColor *color = [UIColor greenColor];
+    UIFont *font = [UIFont boldSystemFontOfSize:22];
+    CGPoint p= (CGPoint){44,-5};
+    CGPoint p1 = (CGPoint){p.x, 8};
+    switch (result) {
+        case 0:
+            [imgBody addFlyingPointToView:mainView centerPoint:p
+                                                    text:@"-3"
+                                                   color:color
+                                                    font:font
+                                               direction:FlyingPointDirectionUp];
+            [imgBody addFlyingImageToView:mainView
+                              centerPoint:p1
+                                imageName:@"crossbones.png"
+                                direction:FlyingPointDirectionUp];
+            break;
+        case 1:
+            [imgBody addFlyingPointToView:mainView centerPoint:p
+                                            text:@"-3"
+                                           color:color
+                                            font:font
+                                       direction:FlyingPointDirectionUp];
+            [imgBody addFlyingImageToView:mainView
+                              centerPoint:p1
+                                imageName:@"crossbones.png"
+                                direction:FlyingPointDirectionUp];            
+            break;
+        case 2:
+            [imgBody addFlyingPointToView:mainView centerPoint:p
+                                            text:@"-3"
+                                           color:color
+                                            font:font
+                                       direction:FlyingPointDirectionUp];
+            [imgBody addFlyingImageToView:mainView
+                              centerPoint:p1
+                                imageName:@"crossbones.png"
+                                direction:FlyingPointDirectionUp];            
+            break;
+        default:
+            break;
+    }
     
     [self reboundOnShot];
 }

@@ -15,7 +15,6 @@
 @end
 
 @implementation GoodCowboy
-@synthesize goodCowboyImg;
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     
@@ -34,6 +33,7 @@
 -(void)releaseComponents
 {
     [super releaseComponents];
+    [audioPlayer stop];
     audioPlayer = nil;
 }
 
@@ -48,6 +48,38 @@
     if ([super shotInShapeWithPoint:point superViewOfPoint:view]) {
         [self scream];
         [self goodCowboyAnimation];
+        
+        CGPoint convertPoint =[view convertPoint:point toView:self.imageMain];
+        int result = [super.imageMain checkNumberOfShotsAreas:@[@"{{0, 0}, {89,43}}", @"{{0,43}, {89,65}}", @"{{0,108}, {89,53}}"] forPoint:convertPoint];
+        
+        UIColor *color = [UIColor redColor];
+        UIFont *font = [UIFont boldSystemFontOfSize:22];
+        switch (result) {
+            case 0:
+                [super.imageMain addFlyingPointToView:view centerPoint:CGPointMake(super.imageMain.center.x, -5)
+                                                        text:@"-3"
+                                                       color:color
+                                                        font:font
+                                                   direction:FlyingPointDirectionUp];
+                break;
+            case 1:
+                [super.imageMain addFlyingPointToView:view centerPoint:CGPointMake(super.imageMain.center.x, -5)
+                                                        text:@"-3"
+                                                       color:color
+                                                        font:font
+                                                   direction:FlyingPointDirectionUp];
+                break;
+            case 2:
+                [super.imageMain addFlyingPointToView:view centerPoint:CGPointMake(super.imageMain.center.x, -5)
+                                                        text:@"-3"
+                                                       color:color
+                                                        font:font
+                                                   direction:FlyingPointDirectionUp];
+                break;
+            default:
+                break;
+        }
+
         return YES;
     }else{
         return NO;
@@ -84,10 +116,10 @@
     NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"goodCowboyScared.png"],
                          [UIImage imageNamed:@"goodCowboy.png"],
                          nil];
-    goodCowboyImg.animationImages = imgArray;
-    goodCowboyImg.animationDuration = 1.0f;
-    [goodCowboyImg setAnimationRepeatCount:1];
-    [goodCowboyImg startAnimating];
+    super.imageMain.animationImages = imgArray;
+    super.imageMain.animationDuration = 1.0f;
+    [super.imageMain setAnimationRepeatCount:1];
+    [super.imageMain startAnimating];
 }
 
 @end

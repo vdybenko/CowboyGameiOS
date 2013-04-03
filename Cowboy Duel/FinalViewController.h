@@ -40,7 +40,6 @@
     int minUserTime;
     int userTime;
       
-    NSString *stGA;
     NSString *falseLabel;
     BOOL foll;
     
@@ -85,15 +84,13 @@
   
     __weak IBOutlet UIView *view;
     
-    __weak IBOutlet UILabel *lbBack;
-    __weak IBOutlet UILabel *lbTryAgain;
-    
-    
     __weak IBOutlet FXLabel *lblGold;
     __weak IBOutlet UILabel *gameStatusLable;
     __weak IBOutlet FXLabel *lblPoints;
     __weak IBOutlet UIView *goldPointBgView;
     __weak IBOutlet UILabel *lblGoldTitle;
+    
+    
 }
 @property(weak)id<ActiveDuelViewControllerDelegate> delegate;
 

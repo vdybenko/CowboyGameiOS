@@ -71,7 +71,7 @@ UIColor * sandColor;
     NSString *formattedNumberString = [numberFormatter stringFromNumber:[NSNumber numberWithInt:( player.dMoney)]];
     gold.text=[NSString stringWithFormat:@"money %@",formattedNumberString];
     
-    rankNumber.text=[NSString stringWithFormat:@"%d",indexPath.row+1];
+    rankNumber.text=[NSString stringWithFormat:@"%d",player.dPositionInList];
         
     if ((myProfileIndex!=-1)) {
         if (myProfileIndex==indexPath.row) {

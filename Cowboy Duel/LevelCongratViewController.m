@@ -141,6 +141,10 @@
     runAnimation = YES;
     [self performSelector:@selector(scaleAnimation) withObject:self afterDelay:0.3];
     [self shineAnimation];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+														object:self
+													  userInfo:[NSDictionary dictionaryWithObject:@"/LevelCongratVC" forKey:@"page"]];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -213,7 +217,7 @@
                       options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction
                    animations:^{
                      angle += 5.0;
-                     CGAffineTransform transform = ivLightRays2.transform;
+                     CGAffineTransform transform;
                      CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
                      transform = CGAffineTransformScale(rotateTransform, 1.0, 1.0);
                      ivLightRays2.transform = transform;
@@ -229,7 +233,7 @@
                       options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction
                    animations:^{
                      angle += 5.0;
-                     CGAffineTransform transform = ivLightRays2.transform;
+                     CGAffineTransform transform;
                      CGAffineTransform rotateTransform = CGAffineTransformMakeRotation(angle);
                      transform = CGAffineTransformScale(rotateTransform, 1.0, 1.0);
                      ivLightRays2.transform = transform;
@@ -280,8 +284,5 @@
 {
     NSString *URL=[[NSString alloc] initWithFormat:@"http://cowboyduel.org/achievment/got/%d",level];
     [[OGHelper sharedInstance ] apiGraphCustomActionPost:URL actionTypeName:@"get" objectTypeName:@"achievement"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"/congratulation_new_level" forKey:@"event"]];
 }
 @end

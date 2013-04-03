@@ -10,7 +10,6 @@
 #import "Shape.h"
 
 @interface WomanShape : Shape
-@property (weak, nonatomic) IBOutlet UIImageView *womanImg;
 
 -(void)goLeft;
 -(void)goRight;

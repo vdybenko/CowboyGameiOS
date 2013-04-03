@@ -247,6 +247,10 @@ static const char *GC_URL =  BASE_URL"api/gc";
     }
     [[self.navigationController.viewControllers objectAtIndex:1] performSelector:@selector(playerStop)];
     [player play];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/DuelStartVC" forKey:@"page"]];
 }
 
 
@@ -289,6 +293,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
     oponentNameOnLine = nil;
     player = nil;
     pathFile = nil;
+    [waitTimer invalidate];
     waitTimer = nil;    
     lineViews = nil;
     twoLineViews = nil;    
@@ -317,9 +322,15 @@ static const char *GC_URL =  BASE_URL"api/gc";
     [self cancelButtonClick];
     [waitTimer invalidate];
     waitTimer = nil;
+    DLog(@"waitTimerTick");
     
 }
 
+-(void)stopWaitTimer;
+{
+    [waitTimer invalidate];
+    waitTimer = nil;
+}
 
 -(IBAction)startButtonClick;
 {
@@ -336,6 +347,10 @@ static const char *GC_URL =  BASE_URL"api/gc";
     
     [delegate duelCancel];
     [self releaseComponents];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/DuelStartVC_cancel" forKey:@"page"]];
 }
 
 #pragma mark FConnect Methods
@@ -480,8 +495,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
 
 -(void)startBotDuel
 {
-    int randomTime = arc4random() % 6;
-    ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:playerAccount oponentAccount:oponentAccount];
+    ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:playerAccount oponentAccount:oponentAccount];
     [self.navigationController pushViewController:activeDuelViewController animated:YES];
     activeDuelViewController = nil;
     [self releaseComponents];

@@ -186,8 +186,8 @@ NSString  *const USER_DEFULTS_KEY_COLLECTION_APPS   = @"colectionApp";
     NSObject *elementToAddObject=[[elementToAdd alloc] init];
     
 //    Take array of elements on device
-    NSString *nameOfAppToAdd=[[NSString alloc] init];
-    NSString *versionOfAppToAdd=[[NSString alloc] init];
+    NSString *nameOfAppToAdd;
+    NSString *versionOfAppToAdd;
     
     NSDictionary *elementWithProperties=[elementOfArray valueForKey:keyOfElement];
     

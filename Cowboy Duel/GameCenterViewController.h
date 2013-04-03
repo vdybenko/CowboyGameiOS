@@ -24,6 +24,11 @@ typedef struct {
     int oponentShotTime;
     int oponentAtack;
     int oponentDefense;
+    int barrelsCount;
+    int cactusCount;
+    int horseCount;
+    int menCount;
+    int womenCount;
 } gameInfo;
 @class StartViewController;
 @class FinalViewController;
@@ -97,7 +102,7 @@ typedef struct {
 -(void)matchStartedSinxron;
 -(void)matchStarted;
 -(void)lostConnection;
--(void)userCancelNutch;
+-(void)userCancelMatch;
 -(void)matchCanseled;
 -(void)startClientWithHost:(NSString *)host;
 

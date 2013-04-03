@@ -541,10 +541,6 @@ static GCHelper *sharedHelper = nil;
     botDuel = NO;
     requestTime = [NSDate timeIntervalSinceReferenceDate] - requestTime;
     DLog(@"cancel invite");
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
-                                                        object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"/duel_GS(cancel)" forKey:@"event"]];
 }
 
 // Matchmaking has failed with an error
@@ -552,9 +548,6 @@ static GCHelper *sharedHelper = nil;
     [presentingViewController dismissModalViewControllerAnimated:YES];
     DLog(@"Error finding match: %@", error.localizedDescription); 
     botDuel = NO;
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
-                                                        object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"/duel_GS(error)" forKey:@"event"]];    
 }
 
 // A peer-to-peer match has been found, the game should start v
@@ -585,9 +578,6 @@ static GCHelper *sharedHelper = nil;
             [delegate matchStartedSinxron];
         }
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
-                                                            object:self
-                                                          userInfo:[NSDictionary dictionaryWithObject:@"/duel_GS(invait)" forKey:@"event"]];
         return;
     }          
 }
@@ -618,8 +608,6 @@ static GCHelper *sharedHelper = nil;
             if (error != nil)
             {
                 DLog(@"send data false  %@",[error description]);
-                UIAlertView *startAv = [[UIAlertView alloc] initWithTitle:@"send data false" message:@"send data false" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                [startAv show];
                 // handle the error
             }else{
                 DLog(@"send data good math %@ delege %@",match,match.delegate);
@@ -633,11 +621,6 @@ static GCHelper *sharedHelper = nil;
 
 // The match received data sent from the player.
 - (void)match:(GKMatch *)theMatch didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID {
-    
-    
-    
-//    UIAlertView* startAv = [[UIAlertView alloc] initWithTitle:@"GC helper" message:@"didReceiveData" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-//    [startAv show];
     
     if (match != theMatch) return;
     

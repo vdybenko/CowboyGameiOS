@@ -85,7 +85,7 @@
         [self refreshController];
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                             object:self
-                                                          userInfo:[NSDictionary dictionaryWithObject:@"/saloon_refresh_click" forKey:@"event"]];
+                                                          userInfo:[NSDictionary dictionaryWithObject:@"/ListOfItemsVC_refresh" forKey:@"page"]];
 
     }];
     
@@ -125,6 +125,10 @@
     [super viewDidAppear:animated];
     [self refreshController];
     updateTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:_playersOnLineDataSource selector:@selector(reloadDataSource) userInfo:nil repeats:YES];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/ListOfItemsVC" forKey:@"page"]];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -252,8 +256,8 @@
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"/invait_friends" forKey:@"event"]];
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/ListOfItemsVC_invait" forKey:@"page"]];
 }
 
 -(void)refreshController;

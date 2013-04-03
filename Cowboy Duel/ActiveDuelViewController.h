@@ -48,11 +48,15 @@
 
 -(void)opponentShot;
 -(void)sendShot;
+-(void)sendShotSelf;
+-(void)shotToOponent;
 
 -(void)oponnentFollStart;
 -(void)oponnentFollEnd;
 
 -(void)readyToStart;
+
+
 
 @end
 
@@ -96,6 +100,6 @@
 
 @property(weak)id<ActiveDuelViewControllerDelegate> delegate;
 
--(id)initWithTime:(int)randomTime Account:(AccountDataSource *)userAccount oponentAccount:(AccountDataSource *)pOponentAccount;
+-(id)initWithAccount:(AccountDataSource *)userAccount oponentAccount:(AccountDataSource *)pOponentAccount;
 -(void)userLost;
 @end

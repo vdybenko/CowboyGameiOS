@@ -7,15 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+@class GunDrumViewController;
+typedef void (^GunDrumViewControllerResult)();
+
 
 @interface GunDrumViewController : UIViewController<MemoryManagement,UIGestureRecognizerDelegate>
-@property (nonatomic) CGFloat chargeTime;
 @property (nonatomic) BOOL isCharging;
+@property (nonatomic) BOOL countOfBullets;
 @property (weak, nonatomic) IBOutlet UIImageView *ivOponnentAvatar;
+@property (copy) GunDrumViewControllerResult didFinishBlock;
 
 -(void)openGun;
--(void)chargeBulletsForTime:(CGFloat)time;
--(void)closeDump;
 -(void)showGun;
 -(void)hideGun;
 -(void)closeController;

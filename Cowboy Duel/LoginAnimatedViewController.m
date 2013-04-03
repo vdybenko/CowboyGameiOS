@@ -29,30 +29,23 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
     __weak IBOutlet UIImageView *backgroundView;
     __weak IBOutlet UIButton *practiceButton;
     __weak IBOutlet UILabel *animetedText;
+    __weak IBOutlet UILabel *animetedText2;
     __weak IBOutlet UIButton *loginFBbutton;
     __weak IBOutlet UILabel *practiceLable;
     __weak IBOutlet UILabel *loginLable;
     
     __weak IBOutlet UIView *textsBackground;
     
+    __weak IBOutlet UIScrollView *scroolView;
     
     BOOL tryAgain;
-    CGRect guillBackUp;
-    CGRect textBackUp;
-    CGRect hatBackUp;
     BOOL animationPause;
 }
-@property (nonatomic) int textIndex;
-@property (nonatomic) NSTimer *timer;
-@property (nonatomic) NSArray *textsContainer;
-@property (nonatomic) AVAudioPlayer *player;
 
 @end
 
 @implementation LoginAnimatedViewController
 @synthesize delegate ,loginFacebookStatus, payment;
-@synthesize timer, textsContainer;
-@synthesize player;
 
 static LoginAnimatedViewController *sharedHelper = nil;
 + (LoginAnimatedViewController *) sharedInstance {
@@ -90,72 +83,59 @@ static LoginAnimatedViewController *sharedHelper = nil;
     return self;
 }
 
--(void)viewWillAppear:(BOOL)animated
+-(void)viewDidLoad
 {
-    [super viewWillAppear:animated];
-
+    [super viewDidLoad];
     animationPause = NO;
+
     loginLable.text = NSLocalizedString(@"LOGIN", @"");
     loginLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
     
     practiceLable.text = NSLocalizedString(@"PRACTICE", @"");
     practiceLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
-       
-    [textsBackground setDinamicHeightBackground];
-}
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-
-    textsContainer = [NSArray arrayWithObjects:
-                    NSLocalizedString(@"INTRO1", nil),  //"Ye know who bounty hunters are, boy?";
-                    NSLocalizedString(@"INTRO2", nil),  //"They chase criminals 'n get a reward for 'em,\ndead or alive";
-                    NSLocalizedString(@"INTRO3", nil),  //"The harder to get these bastards are,\nthe bigger’s the reward for their head.";
-                    NSLocalizedString(@"INTRO4", nil),  //"I'm one of the best hunters out there,\n 'n I could do with some help.";
-                    NSLocalizedString(@"INTRO5", nil),  //"Seems yer tough enough for the job.";
-                    NSLocalizedString(@"INTRO6", nil),  //"Come with me, help me get'em bad guys,\nand ye'll get yer freedom.";
-                    NSLocalizedString(@"INTRO7", nil),  //"If yer good, yer gonna be a big bounty hunter,\njust like me.";
-                    NSLocalizedString(@"INTRO8", nil),  //"Remember: their guns are fast.\nYe better be faster.";
-                    nil];
     
-    self.textIndex = 0;
-    /*
-    animetedText.text = [NSString stringWithFormat:@"%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n",
-                         NSLocalizedString(@"INTRO1", nil),
-                         NSLocalizedString(@"INTRO2", nil),
-                         NSLocalizedString(@"INTRO3", nil),
-                         NSLocalizedString(@"INTRO4", nil),
-                         NSLocalizedString(@"INTRO5", nil),
-                         NSLocalizedString(@"INTRO6", nil),
-                         NSLocalizedString(@"INTRO7", nil),
-                         NSLocalizedString(@"INTRO8", nil)];
-     */
-    textBackUp = animetedText.frame;
-    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/kassa.aif", [[NSBundle mainBundle] resourcePath]]];
-    NSError *error;
-    self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-    [self.player setVolume:1.0];
-    [self.player prepareToPlay];
-  
+    [textsBackground setDinamicHeightBackground];
+    
+    animetedText.text = NSLocalizedString(@"1stIntro", @"");
+    animetedText2.text = NSLocalizedString(@"2ndIntro", @"");
+    
+    scroolView.contentSize = (CGSize){2*scroolView.frame.size.width,scroolView.frame.size.height};
+    
     stDonate = [NSMutableString string];
     [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusSimple];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"FirstRun_v2.2"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [[StartViewController sharedInstance] playerStart];
     
-    [self updateLabelsWithString:NSLocalizedString(@"1stIntro", @"")];
-    self.textIndex++;
+    if (!animationPause) {
+        [self performSelector:@selector(scroolViewAnimation) withObject:Nil afterDelay:10.5f];
+        
+        [self performSelector:@selector(scaleView:) withObject:practiceLable  afterDelay:14.0];
+        [self performSelector:@selector(scaleView:) withObject:practiceButton  afterDelay:14.0];
+        [self performSelector:@selector(scaleView:) withObject:loginFBbutton  afterDelay:18.2];
+        [self performSelector:@selector(scaleView:) withObject:loginLable  afterDelay:18.2];
+    }
+
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/LoginAnimatedVC" forKey:@"page"]];
+  
 }
 
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    [[StartViewController sharedInstance] playerStop];
 }
 
 - (void)didReceiveMemoryWarning
@@ -174,15 +154,16 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [LoginAnimatedViewController sharedInstance].isDemoPractice = YES;
     
     //creating ActiveDuelVC
-    int randomTime = (arc4random() % 3)-2;
     AccountDataSource *oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
     playerAccount.sessionID = @"-1";
-    ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:playerAccount oponentAccount:oponentAccount];
-    [self.navigationController pushViewController:activeDuelViewController animated:NO];
+    UINavigationController *nav = ((TestAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController;
+    ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:playerAccount oponentAccount:oponentAccount];
+    [nav pushViewController:activeDuelViewController animated:YES];
     activeDuelViewController = nil;
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"/first_screen_teaching" forKey:@"event"]];
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/LoginAnimatedVC_practice" forKey:@"page"]];
 }
 
 - (IBAction)loginButtonClick:(id)sender {
@@ -205,8 +186,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                             object:self
-                                                          userInfo:[NSDictionary dictionaryWithObject:@"/login_FB" forKey:@"event"]];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IPad"];
+                                                          userInfo:[NSDictionary dictionaryWithObject:@"/LoginAnimatedVC_login_FB" forKey:@"page"]];
         [LoginAnimatedViewController sharedInstance].isDemoPractice = NO;
         [[NSUserDefaults standardUserDefaults] synchronize];
     }else{
@@ -224,39 +204,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
 
 #pragma mark Animations
 
-- (void)updateLabelsWithString: (NSString *)text
-{
-    if (animationPause) return;
-
-    [animetedText setText:text];
-    [animetedText setAlpha:0.0f];
-
-    [UIView animateWithDuration:1.0f
-                          delay:0.0f
-                        options:UIViewAnimationCurveLinear
-                     animations:^{
-                         [animetedText setAlpha:1.0f];
-                     } completion:^(BOOL finished) {
-                         [UIView animateWithDuration:1.0f
-                                               delay:6.0f
-                                             options:UIViewAnimationCurveLinear
-                                          animations:^{
-                                               [animetedText setAlpha:0.0f];
-                                          } completion:^(BOOL finished) {
-                                              [animetedText setText:NSLocalizedString(@"2ndIntro", @"")];
-                                              [UIView animateWithDuration:6.0f
-                                                                    delay:0.0f
-                                                                  options:UIViewAnimationCurveLinear animations:^{
-                                                                      [animetedText setAlpha:1.0f];
-                                                                  } completion:^(BOOL finished) {
-                                                                      [self performSelector:@selector(scaleView:) withObject:loginFBbutton  afterDelay:4.0];
-                                                                      [self performSelector:@selector(scaleView:) withObject:loginLable  afterDelay:4.0];
-                                                                  }];
-                                          }];
-                     }];
-
-}
-
 -(void)scaleView:(UIView *)view
 {
     [UIView animateWithDuration:0.6 animations:^{
@@ -269,7 +216,13 @@ static LoginAnimatedViewController *sharedHelper = nil;
     }];
 }
 
-
+-(void)scroolViewAnimation;
+{    
+    [UIView animateWithDuration:0.8 animations:^{
+        [scroolView setContentOffset:(CGPoint){animetedText.frame.size.width,0}];
+    }completion:^(BOOL complete){
+    } ];
+}
 #pragma mark -
 
 
@@ -278,9 +231,9 @@ static LoginAnimatedViewController *sharedHelper = nil;
     [self initFacebook];
     [[FBSession activeSession] closeAndClearTokenInformation];
 	//[facebook logout:self];
-  [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-                                                      object:self
-                                                    userInfo:[NSDictionary dictionaryWithObject:@"/logOut_FB_click" forKey:@"event"]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/LoginAnimatedVC_logOut_FB" forKey:@"page"]];
 }
 
 
@@ -306,7 +259,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
                                                             object:self
                                                           userInfo:nil];
         
-        [self.player setVolume:0.0];
         [[StartViewController sharedInstance] profileFirstRunButtonClickWithOutAnimation];
     }
 }
@@ -373,9 +325,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
         
         [[StartViewController sharedInstance] authorizationModifier:YES];
         payment = NO;
-        [self.player stop];
-        [self.player setVolume:0.0];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IPad"];
         [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"loginFirstShow"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
@@ -432,6 +381,8 @@ static LoginAnimatedViewController *sharedHelper = nil;
 }
 - (void)viewDidUnload {
     textsBackground = nil;
+    animetedText2 = nil;
+    scroolView = nil;
     [super viewDidUnload];
 }
 @end
