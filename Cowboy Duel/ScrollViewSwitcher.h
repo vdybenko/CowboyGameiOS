@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "UIImageView+AttachedView.h"
+#import "GMGridView.h"
+#import "GMGridViewLayoutStrategies.h"
 
 typedef void (^ScrollViewSwitcherResult)(NSInteger curentIndex);
 
-@interface ScrollViewSwitcher : UIView<MemoryManagement>
+@interface ScrollViewSwitcher : UIView<MemoryManagement,GMGridViewDataSource>
 @property (copy) ScrollViewSwitcherResult didFinishBlock;
 @property (weak,nonatomic) NSArray *arraySwitchObjects;
 @property (nonatomic) CGRect rectForObjetc;

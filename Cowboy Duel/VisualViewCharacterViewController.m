@@ -92,72 +92,72 @@
     scrollViewSwitcherCap.rectForObjetc = (CGRect){0,0,70,45};
     scrollViewSwitcherCap.arraySwitchObjects = [visualViewDataSource arrayCap];
     scrollViewSwitcherCap.curentObject = playerAccount.visualViewCap;
-    scrollViewSwitcherCap.didFinishBlock = ^(NSInteger curentIndex){
-        CDVisualViewCharacterPartCap *visualViewCharacterPart = [scrollViewSwitcherCap.arraySwitchObjects objectAtIndex:curentIndex];
-        visualViewCharacter.cap.image = [visualViewCharacterPart imageForObject];
-        visualViewCapSelect = curentIndex;
-        
-        [self refreshController];
-    };
-    scrollViewSwitcherCap.colorizeImage = visualViewCharacter.cap;
-    [scrollViewSwitcherCap trimObjectsToView:visualViewCharacter.cap];
+//    scrollViewSwitcherCap.didFinishBlock = ^(NSInteger curentIndex){
+//        CDVisualViewCharacterPartCap *visualViewCharacterPart = [scrollViewSwitcherCap.arraySwitchObjects objectAtIndex:curentIndex];
+//        visualViewCharacter.cap.image = [visualViewCharacterPart imageForObject];
+//        visualViewCapSelect = curentIndex;
+//        
+//        [self refreshController];
+//    };
+//    scrollViewSwitcherCap.colorizeImage = visualViewCharacter.cap;
+//    [scrollViewSwitcherCap trimObjectsToView:visualViewCharacter.cap];
     [scrollViewSwitcherCap setMainControls];
     
-    scrollViewSwitcherHead.rectForObjetc = (CGRect){0,0,70,45};
-    scrollViewSwitcherHead.arraySwitchObjects = [visualViewDataSource arrayHead];
-    scrollViewSwitcherHead.curentObject = playerAccount.visualViewHead;
-    scrollViewSwitcherHead.didFinishBlock = ^(NSInteger curentIndex){
-        CDVisualViewCharacterPartHead *visualViewCharacterPart = [scrollViewSwitcherHead.arraySwitchObjects objectAtIndex:curentIndex];
-        visualViewCharacter.head.image = [visualViewCharacterPart imageForObject];
-        visualViewHeadSelect = curentIndex;
-        
-        [self refreshController];
-    };
-    scrollViewSwitcherHead.colorizeImage = visualViewCharacter.head;
-    [scrollViewSwitcherHead trimObjectsToView:visualViewCharacter.head];
-    [scrollViewSwitcherHead setMainControls];
-
-    scrollViewSwitcherBody.rectForObjetc = (CGRect){0,0,200,155};
-    scrollViewSwitcherBody.arraySwitchObjects = [visualViewDataSource arrayBody];
-    scrollViewSwitcherBody.curentObject = playerAccount.visualViewBody;
-    scrollViewSwitcherBody.didFinishBlock = ^(NSInteger curentIndex){
-        CDVisualViewCharacterPartBody *visualViewCharacterPart = [scrollViewSwitcherBody.arraySwitchObjects objectAtIndex:curentIndex];
-        visualViewCharacter.body.image = [visualViewCharacterPart imageForObject];
-       visualViewBodySelect = curentIndex;
-        
-        [self refreshController];
-    };
-    scrollViewSwitcherBody.colorizeImage = visualViewCharacter.body;
-    [scrollViewSwitcherBody trimObjectsToView:visualViewCharacter.body];
-    [scrollViewSwitcherBody setMainControls];
-    
-    scrollViewSwitcherLegth.rectForObjetc = (CGRect){0,0,165,200};
-    scrollViewSwitcherLegth.arraySwitchObjects = [visualViewDataSource arrayLegth];
-    scrollViewSwitcherLegth.curentObject = playerAccount.visualViewLegth;
-    scrollViewSwitcherLegth.didFinishBlock = ^(NSInteger curentIndex){
-        CDVisualViewCharacterPartLegth *visualViewCharacterPart = [scrollViewSwitcherLegth.arraySwitchObjects objectAtIndex:curentIndex];
-        visualViewCharacter.length.image = [visualViewCharacterPart imageForObject];
-        visualViewLegthSelect = curentIndex;
-        
-        [self refreshController];
-    };
-    scrollViewSwitcherLegth.colorizeImage = visualViewCharacter.length;
-    [scrollViewSwitcherLegth trimObjectsToView:visualViewCharacter.length];
-    [scrollViewSwitcherLegth setMainControls];
-    
-    scrollViewSwitcherShoose.rectForObjetc = (CGRect){0,0,160,100};
-    scrollViewSwitcherShoose.arraySwitchObjects = [visualViewDataSource arrayShoose];
-    scrollViewSwitcherShoose.curentObject = playerAccount.visualViewShoose;
-    scrollViewSwitcherShoose.didFinishBlock = ^(NSInteger curentIndex){
-        CDVisualViewCharacterPartShoose *visualViewCharacterPart = [scrollViewSwitcherShoose.arraySwitchObjects objectAtIndex:curentIndex];
-        visualViewCharacter.shoose.image = [visualViewCharacterPart imageForObject];
-        visualViewShooseSelect = curentIndex;
-        
-        [self refreshController];
-    };
-    scrollViewSwitcherShoose.colorizeImage = visualViewCharacter.shoose;
-    [scrollViewSwitcherShoose trimObjectsToView:visualViewCharacter.shoose];
-    [scrollViewSwitcherShoose setMainControls];
+//    scrollViewSwitcherHead.rectForObjetc = (CGRect){0,0,70,45};
+//    scrollViewSwitcherHead.arraySwitchObjects = [visualViewDataSource arrayHead];
+//    scrollViewSwitcherHead.curentObject = playerAccount.visualViewHead;
+//    scrollViewSwitcherHead.didFinishBlock = ^(NSInteger curentIndex){
+//        CDVisualViewCharacterPartHead *visualViewCharacterPart = [scrollViewSwitcherHead.arraySwitchObjects objectAtIndex:curentIndex];
+//        visualViewCharacter.head.image = [visualViewCharacterPart imageForObject];
+//        visualViewHeadSelect = curentIndex;
+//        
+//        [self refreshController];
+//    };
+//    scrollViewSwitcherHead.colorizeImage = visualViewCharacter.head;
+//    [scrollViewSwitcherHead trimObjectsToView:visualViewCharacter.head];
+//    [scrollViewSwitcherHead setMainControls];
+//
+//    scrollViewSwitcherBody.rectForObjetc = (CGRect){0,0,200,155};
+//    scrollViewSwitcherBody.arraySwitchObjects = [visualViewDataSource arrayBody];
+//    scrollViewSwitcherBody.curentObject = playerAccount.visualViewBody;
+//    scrollViewSwitcherBody.didFinishBlock = ^(NSInteger curentIndex){
+//        CDVisualViewCharacterPartBody *visualViewCharacterPart = [scrollViewSwitcherBody.arraySwitchObjects objectAtIndex:curentIndex];
+//        visualViewCharacter.body.image = [visualViewCharacterPart imageForObject];
+//       visualViewBodySelect = curentIndex;
+//        
+//        [self refreshController];
+//    };
+//    scrollViewSwitcherBody.colorizeImage = visualViewCharacter.body;
+//    [scrollViewSwitcherBody trimObjectsToView:visualViewCharacter.body];
+//    [scrollViewSwitcherBody setMainControls];
+//    
+//    scrollViewSwitcherLegth.rectForObjetc = (CGRect){0,0,165,200};
+//    scrollViewSwitcherLegth.arraySwitchObjects = [visualViewDataSource arrayLegth];
+//    scrollViewSwitcherLegth.curentObject = playerAccount.visualViewLegth;
+//    scrollViewSwitcherLegth.didFinishBlock = ^(NSInteger curentIndex){
+//        CDVisualViewCharacterPartLegth *visualViewCharacterPart = [scrollViewSwitcherLegth.arraySwitchObjects objectAtIndex:curentIndex];
+//        visualViewCharacter.length.image = [visualViewCharacterPart imageForObject];
+//        visualViewLegthSelect = curentIndex;
+//        
+//        [self refreshController];
+//    };
+//    scrollViewSwitcherLegth.colorizeImage = visualViewCharacter.length;
+//    [scrollViewSwitcherLegth trimObjectsToView:visualViewCharacter.length];
+//    [scrollViewSwitcherLegth setMainControls];
+//    
+//    scrollViewSwitcherShoose.rectForObjetc = (CGRect){0,0,160,100};
+//    scrollViewSwitcherShoose.arraySwitchObjects = [visualViewDataSource arrayShoose];
+//    scrollViewSwitcherShoose.curentObject = playerAccount.visualViewShoose;
+//    scrollViewSwitcherShoose.didFinishBlock = ^(NSInteger curentIndex){
+//        CDVisualViewCharacterPartShoose *visualViewCharacterPart = [scrollViewSwitcherShoose.arraySwitchObjects objectAtIndex:curentIndex];
+//        visualViewCharacter.shoose.image = [visualViewCharacterPart imageForObject];
+//        visualViewShooseSelect = curentIndex;
+//        
+//        [self refreshController];
+//    };
+//    scrollViewSwitcherShoose.colorizeImage = visualViewCharacter.shoose;
+//    [scrollViewSwitcherShoose trimObjectsToView:visualViewCharacter.shoose];
+//    [scrollViewSwitcherShoose setMainControls];
     
     [self fillCap];
     [self fillHead];

@@ -355,6 +355,11 @@
 		768B9E2E16EF24C200278FCA /* woman@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 768B9E2C16EF24C200278FCA /* woman@2x.png */; };
 		768B9E3016EF28D200278FCA /* WomanShape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 768B9E2F16EF28D200278FCA /* WomanShape.xib */; };
 		768B9E3316EF29CD00278FCA /* WomanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 768B9E3216EF29CD00278FCA /* WomanShape.m */; };
+		768BC7E5170C6F6B00DB63C3 /* GMGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 768BC7D8170C6F6A00DB63C3 /* GMGridView.m */; };
+		768BC7E6170C6F6B00DB63C3 /* GMGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 768BC7DE170C6F6B00DB63C3 /* GMGridViewCell.m */; };
+		768BC7E7170C6F6B00DB63C3 /* GMGridViewLayoutStrategies.m in Sources */ = {isa = PBXBuildFile; fileRef = 768BC7E0170C6F6B00DB63C3 /* GMGridViewLayoutStrategies.m */; };
+		768BC7E8170C6F6B00DB63C3 /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 768BC7E2170C6F6B00DB63C3 /* UIGestureRecognizer+GMGridViewAdditions.m */; };
+		768BC7E9170C6F6B00DB63C3 /* UIView+GMGridViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 768BC7E4170C6F6B00DB63C3 /* UIView+GMGridViewAdditions.m */; };
 		768BF6F416FB6A3700435394 /* VisualViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 768BF6F316FB6A3700435394 /* VisualViewDataSource.m */; };
 		768BF6F716FB6B0300435394 /* VisualViewCharacterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 768BF6F616FB6B0300435394 /* VisualViewCharacterViewController.m */; };
 		768BF6F916FB6D8000435394 /* VisualViewCharacterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 768BF6F816FB6D8000435394 /* VisualViewCharacterViewController.xib */; };
@@ -905,6 +910,16 @@
 		BDF1EF1F13D41C4E00C466DF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF1EF1E13D41C4E00C466DF /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		768BC7EB170C6F6B00DB63C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 768BC7D9170C6F6A00DB63C3 /* GMGridView.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 78509312149FAC2E000787E4;
+			remoteInfo = GMGridView;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		76E8C8E513C1FF84000F84AC /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -1309,6 +1324,19 @@
 		768B9E2F16EF28D200278FCA /* WomanShape.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WomanShape.xib; path = Xib/WomanShape.xib; sourceTree = "<group>"; };
 		768B9E3116EF29CD00278FCA /* WomanShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WomanShape.h; sourceTree = "<group>"; };
 		768B9E3216EF29CD00278FCA /* WomanShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WomanShape.m; sourceTree = "<group>"; };
+		768BC7D6170C6F6A00DB63C3 /* GMGridView-Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMGridView-Constants.h"; sourceTree = "<group>"; };
+		768BC7D7170C6F6A00DB63C3 /* GMGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMGridView.h; sourceTree = "<group>"; };
+		768BC7D8170C6F6A00DB63C3 /* GMGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMGridView.m; sourceTree = "<group>"; };
+		768BC7D9170C6F6A00DB63C3 /* GMGridView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = GMGridView.xcodeproj; sourceTree = "<group>"; };
+		768BC7DC170C6F6B00DB63C3 /* GMGridViewCell+Extended.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMGridViewCell+Extended.h"; sourceTree = "<group>"; };
+		768BC7DD170C6F6B00DB63C3 /* GMGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMGridViewCell.h; sourceTree = "<group>"; };
+		768BC7DE170C6F6B00DB63C3 /* GMGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMGridViewCell.m; sourceTree = "<group>"; };
+		768BC7DF170C6F6B00DB63C3 /* GMGridViewLayoutStrategies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMGridViewLayoutStrategies.h; sourceTree = "<group>"; };
+		768BC7E0170C6F6B00DB63C3 /* GMGridViewLayoutStrategies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMGridViewLayoutStrategies.m; sourceTree = "<group>"; };
+		768BC7E1170C6F6B00DB63C3 /* UIGestureRecognizer+GMGridViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIGestureRecognizer+GMGridViewAdditions.h"; sourceTree = "<group>"; };
+		768BC7E2170C6F6B00DB63C3 /* UIGestureRecognizer+GMGridViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+GMGridViewAdditions.m"; sourceTree = "<group>"; };
+		768BC7E3170C6F6B00DB63C3 /* UIView+GMGridViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+GMGridViewAdditions.h"; sourceTree = "<group>"; };
+		768BC7E4170C6F6B00DB63C3 /* UIView+GMGridViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GMGridViewAdditions.m"; sourceTree = "<group>"; };
 		768BF6F216FB6A3700435394 /* VisualViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisualViewDataSource.h; sourceTree = "<group>"; };
 		768BF6F316FB6A3700435394 /* VisualViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisualViewDataSource.m; sourceTree = "<group>"; };
 		768BF6F516FB6B0300435394 /* VisualViewCharacterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisualViewCharacterViewController.h; sourceTree = "<group>"; };
@@ -2258,6 +2286,7 @@
 				BD83A3D21671E721003EE4B3 /* Test */,
 				60593A6F1379321700256204 /* Frameworks */,
 				60593A6D1379321700256204 /* Products */,
+				768BC7D4170C6F4900DB63C3 /* SDK */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2532,6 +2561,42 @@
 				7687666F16BA7386003405F9 /* gd_sleeve@2x.png */,
 			);
 			path = GunDrum;
+			sourceTree = "<group>";
+		};
+		768BC7D4170C6F4900DB63C3 /* SDK */ = {
+			isa = PBXGroup;
+			children = (
+				768BC7D5170C6F6A00DB63C3 /* GMGridView */,
+			);
+			name = SDK;
+			sourceTree = "<group>";
+		};
+		768BC7D5170C6F6A00DB63C3 /* GMGridView */ = {
+			isa = PBXGroup;
+			children = (
+				768BC7D6170C6F6A00DB63C3 /* GMGridView-Constants.h */,
+				768BC7D7170C6F6A00DB63C3 /* GMGridView.h */,
+				768BC7D8170C6F6A00DB63C3 /* GMGridView.m */,
+				768BC7D9170C6F6A00DB63C3 /* GMGridView.xcodeproj */,
+				768BC7DC170C6F6B00DB63C3 /* GMGridViewCell+Extended.h */,
+				768BC7DD170C6F6B00DB63C3 /* GMGridViewCell.h */,
+				768BC7DE170C6F6B00DB63C3 /* GMGridViewCell.m */,
+				768BC7DF170C6F6B00DB63C3 /* GMGridViewLayoutStrategies.h */,
+				768BC7E0170C6F6B00DB63C3 /* GMGridViewLayoutStrategies.m */,
+				768BC7E1170C6F6B00DB63C3 /* UIGestureRecognizer+GMGridViewAdditions.h */,
+				768BC7E2170C6F6B00DB63C3 /* UIGestureRecognizer+GMGridViewAdditions.m */,
+				768BC7E3170C6F6B00DB63C3 /* UIView+GMGridViewAdditions.h */,
+				768BC7E4170C6F6B00DB63C3 /* UIView+GMGridViewAdditions.m */,
+			);
+			path = GMGridView;
+			sourceTree = "<group>";
+		};
+		768BC7DA170C6F6A00DB63C3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				768BC7EC170C6F6B00DB63C3 /* libGMGridView.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		768BF6F116FB69E400435394 /* VisualViewCharacter */ = {
@@ -3235,6 +3300,12 @@
 			mainGroup = 60593A611379321700256204;
 			productRefGroup = 60593A6D1379321700256204 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 768BC7DA170C6F6A00DB63C3 /* Products */;
+					ProjectRef = 768BC7D9170C6F6A00DB63C3 /* GMGridView.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				60593A6B1379321700256204 /* Bounty Hunter */,
@@ -3242,6 +3313,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		768BC7EC170C6F6B00DB63C3 /* libGMGridView.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libGMGridView.a;
+			remoteRef = 768BC7EB170C6F6B00DB63C3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		60593A6A1379321700256204 /* Resources */ = {
@@ -4014,6 +4095,11 @@
 				BD9FED4D1701FD6D003B3156 /* CDBarrierDuelProduct.m in Sources */,
 				BD357C921703504E0079F68A /* GameSceneConfig.m in Sources */,
 				76C13EA51709B2EE0093AE0D /* UIImage+Retina4.m in Sources */,
+				768BC7E5170C6F6B00DB63C3 /* GMGridView.m in Sources */,
+				768BC7E6170C6F6B00DB63C3 /* GMGridViewCell.m in Sources */,
+				768BC7E7170C6F6B00DB63C3 /* GMGridViewLayoutStrategies.m in Sources */,
+				768BC7E8170C6F6B00DB63C3 /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */,
+				768BC7E9170C6F6B00DB63C3 /* UIView+GMGridViewAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4225,7 +4311,10 @@
 					GSI_COMMON_DEBUG,
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/**";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/**",
+					SDKs/GMGridView,
+				);
 				INFOPLIST_FILE = "Cowboy Duel/Test-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -4258,7 +4347,7 @@
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
-				USER_HEADER_SEARCH_PATHS = "../../.. $(PROJECT_DIR)";
+				USER_HEADER_SEARCH_PATHS = "../../.. $(PROJECT_DIR) SDKs/GMGridView/**";
 				VALIDATE_PRODUCT = NO;
 				VALID_ARCHS = armv7;
 				WARNING_CFLAGS = "-Wall";
@@ -4322,7 +4411,10 @@
 					GSI_COMMON_DEBUG,
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/**";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/**",
+					SDKs/GMGridView,
+				);
 				INFOPLIST_FILE = "Cowboy Duel/Test-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -4357,7 +4449,7 @@
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
-				USER_HEADER_SEARCH_PATHS = "../../.. $(PROJECT_DIR)";
+				USER_HEADER_SEARCH_PATHS = "../../.. $(PROJECT_DIR) SDKs/GMGridView/**";
 				VALIDATE_PRODUCT = NO;
 				VALID_ARCHS = armv7;
 				WARNING_CFLAGS = "-Wall";
@@ -4616,7 +4708,10 @@
 					GSI_COMMON_DEBUG,
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/**";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/**",
+					SDKs/GMGridView,
+				);
 				INFOPLIST_FILE = "Cowboy Duel/Test-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -4653,7 +4748,7 @@
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
-				USER_HEADER_SEARCH_PATHS = "../../.. $(PROJECT_DIR)";
+				USER_HEADER_SEARCH_PATHS = "../../.. $(PROJECT_DIR) SDKs/GMGridView/**";
 				VALIDATE_PRODUCT = NO;
 				VALID_ARCHS = armv7;
 				WARNING_CFLAGS = "-Wall";
