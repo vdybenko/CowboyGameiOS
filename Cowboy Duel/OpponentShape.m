@@ -58,7 +58,6 @@ static CGFloat oponentLiveImageViewStartWidth;
         NSError *error;
         oponentShotAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
         [oponentShotAudioPlayer prepareToPlay];
-        self.typeOfBody = OpponentShapeTypeManLow;
         opponentShapeStatus = OpponentShapeStatusLive;
     }
     return self;
@@ -81,7 +80,9 @@ static CGFloat oponentLiveImageViewStartWidth;
 
 -(void) moveAnimation;
 {
-    
+    if (self.typeOfBody == OpponentShapeTypeScarecrow) {
+        return;
+    }
     NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"oponent_step1.png"],
                        [UIImage imageNamed:@"oponent_step2.png"],
                        nil];
@@ -93,6 +94,9 @@ static CGFloat oponentLiveImageViewStartWidth;
 }
 -(void)moveOponentInBackground
 {
+    if (self.typeOfBody == OpponentShapeTypeScarecrow) {
+        return;
+    }
     int randomDirection = rand() % 3 - 1;
     [UIView animateWithDuration:0.2 animations:^{
         CGRect frame = self.frame;
@@ -142,17 +146,46 @@ static CGFloat oponentLiveImageViewStartWidth;
 -(void)reboundOnShot;
 {
     CGPoint body = self.center;
-    
-    int randPosition = (rand() % 50) + 50;
     int direction = rand() % 2?-1:1;
-    body.x = (body.x + direction*randPosition);
+    int randPosition;
     
+    if ( self.typeOfBody == OpponentShapeTypeScarecrow ){
+        randPosition = (rand() % 50) + 500;
+        body.x = (body.x + direction*randPosition);
+        self.center = body;
+        [self setHidden:NO];
+        return;
+    }
+    else
+        randPosition = (rand() % 50) + 50;
+
+    body.x = (body.x + direction*randPosition);
+
     [self moveAnimation];
     float duraction = (randPosition * 0.5)/100;
     [UIView animateWithDuration:duraction animations:^{
         self.center = body;
     }completion:^(BOOL complete){
         [self stopMoveAnimation];
+    }];
+}
+
+-(void)flip
+{
+    self.layer.transform = CATransform3DMakeTranslation(0.0, 0.0, 200.0);
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.layer.transform = CATransform3DMakeRotation(M_PI,0.0,1.0,0.0);
+    } completion:^(BOOL finished) {
+        self.layer.transform = CATransform3DMakeTranslation(0.0, 0.0, 200.0);
+
+        [UIView animateWithDuration:0.5 animations:^{
+            self.layer.transform = CATransform3DMakeScale(0, 0, 0);
+        } completion:^(BOOL finished) {
+            [self setHidden:YES];
+            self.layer.transform = CATransform3DMakeScale(1, 1, 1);
+            [self reboundOnShot];
+        }];
     }];
 }
 
@@ -246,7 +279,13 @@ static CGFloat oponentLiveImageViewStartWidth;
 -(void) hitTheOponentWithPoint:(CGPoint)hitPoint mainView:(UIView*)mainView;
 {
     
-    UIImageView *ivHit = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ivHit.png"]];
+    UIImageView *ivHit;
+    if(self.typeOfBody == OpponentShapeTypeScarecrow){
+        ivHit= [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ivHitPractice.png"]];
+    } else{
+        ivHit= [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ivHit.png"]];  
+    }
+    
     CGPoint convertPoint = [mainView convertPoint:hitPoint toView:imgBody];
     ivHit.center = convertPoint;
     [imgBody addSubview:ivHit];
@@ -296,7 +335,10 @@ static CGFloat oponentLiveImageViewStartWidth;
             break;
     }
     
-    [self reboundOnShot];
+    if (self.typeOfBody == OpponentShapeTypeScarecrow) {
+        [self flip];
+    }else
+        [self reboundOnShot];
 }
 
 -(void) cleareDamage;

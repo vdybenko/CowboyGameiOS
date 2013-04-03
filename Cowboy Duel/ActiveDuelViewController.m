@@ -412,11 +412,9 @@ static CGFloat blinkBottomOriginY;
     self.lblBehold.gradientEndColor = [UIColor colorWithRed:255.0/255.0 green:140.0/255.0 blue:0.0/255.0 alpha:1.0];
   
     steadyScale = 1.0;
-
+    
+    [self hideGoodBodies];
     opponentShape.hidden = YES;
-    womanShape.hidden = YES;
-    horseShape.hidden = YES;
-    goodCowboyShape.hidden = YES;
     arrowToOpponent.hidden = YES;
     [arrowToOpponent setDirection:ArrowToOpponentDirectionRight];
     
@@ -509,11 +507,18 @@ static CGFloat blinkBottomOriginY;
     {
         if ([opAccount isPlayerForPractice]) {
             countBulletsForOpponent = 4;
+            opponentShape.typeOfBody = OpponentShapeTypeScarecrow;
+            shotCountBullet = 3;
+            maxShotCount = 3;
         }else{
             countBulletsForOpponent = [DuelRewardLogicController countUpBuletsWithOponentLevel:playerAccount.accountLevel defense:playerAccount.accountDefenseValue playerAtack:opAccount.accountWeapon.dDamage];
+            opponentShape.typeOfBody = OpponentShapeTypeManLow;
         }
     }else{
         countBulletsForOpponent = 5;
+        opponentShape.typeOfBody = OpponentShapeTypeScarecrow;
+        maxShotCount = 3;
+        shotCountBullet = 3;
    }
     shotCountBulletForOpponent =  countBulletsForOpponent;
     maxShotCountForOpponent = countBulletsForOpponent;
@@ -671,9 +676,9 @@ static CGFloat blinkBottomOriginY;
 
     }
     
-    BOOL shotInHorse = [horseShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
-    BOOL resultWoman = [womanShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
-    BOOL resultGoodCowboy = [goodCowboyShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
+    BOOL shotInHorse = ([horseShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view] && !horseShape.hidden);
+    BOOL resultWoman = ([womanShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view] && !womanShape.hidden);
+    BOOL resultGoodCowboy = ([goodCowboyShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view] && !goodCowboyShape.hidden);
     if (resultWoman || resultGoodCowboy) {
         [self opponentShot];
         if(delegate) [delegate sendShotSelf];
@@ -705,6 +710,9 @@ static CGFloat blinkBottomOriginY;
         if (CGRectContainsPoint(opponentBodyFrame, shotPoint)) {
             [self startRandomBloodAnimation];
             [opponentShape hitTheOponentWithPoint:shotPoint mainView:self.view];
+            if (horseShape.hidden && opponentShape.typeOfBody == OpponentShapeTypeScarecrow) {
+                [self showGoodBodies];
+            }
         }
         [self shotToOponent];
 
@@ -714,6 +722,9 @@ static CGFloat blinkBottomOriginY;
 
 -(void)startRandomBloodAnimation
 {
+    if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow)
+        return;
+        
     int numberOfAnimation = rand() % 5;
     switch (numberOfAnimation) {
         case 0:
@@ -744,6 +755,7 @@ static CGFloat blinkBottomOriginY;
         default:
             break;
     }
+   
 }
 
 -(void)updateOpponentViewToRamdomPosition
@@ -762,7 +774,7 @@ static CGFloat blinkBottomOriginY;
     if (duelEnd) return;
 
     [opponentShape shot];
-    
+
     shotCountBulletForOpponent--;
     
     CGRect frame = self.userLiveImageView.frame;
@@ -959,12 +971,12 @@ static CGFloat blinkBottomOriginY;
         [self.gunButton setEnabled:YES];
         [self.userLiveImageView setHidden:NO];
         opponentShape.hidden = NO;
-        womanShape.hidden = NO;
-        goodCowboyShape.hidden = NO;
-        horseShape.hidden = NO;
+        if (opponentShape.typeOfBody != OpponentShapeTypeScarecrow) {
+            [self showGoodBodies];
+        }else
+            [arrowToOpponent changeImgForPractice];
         
-        
-        if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
+        if(!delegate && opponentShape.typeOfBody != OpponentShapeTypeScarecrow) shotTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
         moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
         
         
@@ -1057,6 +1069,19 @@ static CGFloat blinkBottomOriginY;
     [self.lblBehold setHidden:YES];
 }
 
+-(void) showGoodBodies
+{
+    womanShape.hidden = NO;
+    goodCowboyShape.hidden = NO;
+    horseShape.hidden = NO;
+}
+
+-(void) hideGoodBodies
+{
+    womanShape.hidden = YES;
+    horseShape.hidden = YES;
+    goodCowboyShape.hidden = YES;
+}
 #pragma mark - Frequently of gun
 
 -(void)finishGunFrequentlyBlockTime
@@ -1112,13 +1137,12 @@ static CGFloat blinkBottomOriginY;
         [self.gunButton setEnabled:YES];
         [self.userLiveImageView setHidden:NO];
 
-        if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
-        moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
+        if(!delegate && opponentShape.typeOfBody != OpponentShapeTypeScarecrow){
+            shotTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
+            moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
+            [self showGoodBodies];
+        }
         opponentShape.hidden = NO;
-        womanShape.hidden = NO;
-        goodCowboyShape.hidden = NO;
-        horseShape.hidden = NO;
-        
     }
 }
 
