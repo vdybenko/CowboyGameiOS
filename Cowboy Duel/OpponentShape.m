@@ -172,20 +172,13 @@ static CGFloat oponentLiveImageViewStartWidth;
 
 -(void)flip
 {
-    self.layer.transform = CATransform3DMakeTranslation(0.0, 0.0, 200.0);
-    
-    [UIView animateWithDuration:0.5 animations:^{
-        self.layer.transform = CATransform3DMakeRotation(M_PI,0.0,1.0,0.0);
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationCurveEaseOut animations:^{
+        // Flip Down
+        self.layer.transform = CATransform3DMakeRotation(M_PI/2, 1, 0, 0);
+        
     } completion:^(BOOL finished) {
-        self.layer.transform = CATransform3DMakeTranslation(0.0, 0.0, 200.0);
-
-        [UIView animateWithDuration:0.5 animations:^{
-            self.layer.transform = CATransform3DMakeScale(0, 0, 0);
-        } completion:^(BOOL finished) {
-            [self setHidden:YES];
-            self.layer.transform = CATransform3DMakeScale(1, 1, 1);
-            [self reboundOnShot];
-        }];
+        self.layer.transform = CATransform3DMakeScale(1, 1, 1);
+        [self reboundOnShot];
     }];
 }
 
@@ -269,6 +262,10 @@ static CGFloat oponentLiveImageViewStartWidth;
             break;
         case OpponentShapeTypeScarecrow:
             imgBody.image = [UIImage imageNamed:@"scarecrow.png"];
+            CGRect frame = self.frame;
+            frame.origin.y *=2;
+            self.frame = frame;
+            self.layer.anchorPoint = CGPointMake(0.5, 1.0);
             break;
         default:
             break;

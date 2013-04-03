@@ -8,7 +8,6 @@
 
 #import "ArrowToOpponent.h"
 #import <QuartzCore/QuartzCore.h>
-#import "LoginAnimatedViewController.h"
 @interface ArrowToOpponent()
 {
     IBOutlet UIView *mainSubView;
