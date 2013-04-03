@@ -324,13 +324,11 @@
         [self fillBody];
         [self fillLegth];
         [self fillShoose];
-        if (sumToBuy && (sumToBuy<playerAccount.money)) {
-            
+        if (sumToBuy && (sumToBuy<=playerAccount.money)) {
             btnAccept.enabled = YES;
         }else{
             btnAccept.enabled = NO;
         }
-        
         userMoney.text = [NSString stringWithFormat:@"%d",playerAccount.money];
     });
 }
