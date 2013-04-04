@@ -22,7 +22,6 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UIImageView *imgDieOpponentAnimation;
 @property (nonatomic) OpponentShapeStatus opponentShapeStatus;
 
-
 -(void) moveAnimation;
 -(void)moveOponentInBackground;
 -(void) stopMoveAnimation;

@@ -33,6 +33,7 @@
     __weak IBOutlet UILabel *lbActionShoose;
     
     __weak IBOutlet UILabel *userMoney;
+    __weak IBOutlet UILabel *moneyForBuy;
     __weak IBOutlet UIView *loadingView;
     
     int visualViewCapSelect;
@@ -84,6 +85,7 @@
     btnAccept.enabled = NO;
     
     userMoney.text = [NSString stringWithFormat:@"%d",playerAccount.money];
+    moneyForBuy.text = [NSString stringWithFormat:@"%d",sumToBuy];
     
     visualViewDataSource = [[VisualViewDataSource alloc] init];    
     visualViewCharacter.visualViewDataSource = visualViewDataSource;
@@ -102,61 +104,57 @@
     [scrollViewSwitcherCap trimObjectsToView:visualViewCharacter.cap];
     [scrollViewSwitcherCap setMainControls];
     
-//    scrollViewSwitcherHead.rectForObjetc = (CGRect){0,0,70,45};
-//    scrollViewSwitcherHead.arraySwitchObjects = [visualViewDataSource arrayHead];
-//    scrollViewSwitcherHead.curentObject = playerAccount.visualViewHead;
-//    scrollViewSwitcherHead.didFinishBlock = ^(NSInteger curentIndex){
-//        CDVisualViewCharacterPartHead *visualViewCharacterPart = [scrollViewSwitcherHead.arraySwitchObjects objectAtIndex:curentIndex];
-//        visualViewCharacter.head.image = [visualViewCharacterPart imageForObject];
-//        visualViewHeadSelect = curentIndex;
-//        
-//        [self refreshController];
-//    };
-//    scrollViewSwitcherHead.colorizeImage = visualViewCharacter.head;
-//    [scrollViewSwitcherHead trimObjectsToView:visualViewCharacter.head];
-//    [scrollViewSwitcherHead setMainControls];
-//
-//    scrollViewSwitcherBody.rectForObjetc = (CGRect){0,0,200,155};
-//    scrollViewSwitcherBody.arraySwitchObjects = [visualViewDataSource arrayBody];
-//    scrollViewSwitcherBody.curentObject = playerAccount.visualViewBody;
-//    scrollViewSwitcherBody.didFinishBlock = ^(NSInteger curentIndex){
-//        CDVisualViewCharacterPartBody *visualViewCharacterPart = [scrollViewSwitcherBody.arraySwitchObjects objectAtIndex:curentIndex];
-//        visualViewCharacter.body.image = [visualViewCharacterPart imageForObject];
-//       visualViewBodySelect = curentIndex;
-//        
-//        [self refreshController];
-//    };
-//    scrollViewSwitcherBody.colorizeImage = visualViewCharacter.body;
-//    [scrollViewSwitcherBody trimObjectsToView:visualViewCharacter.body];
-//    [scrollViewSwitcherBody setMainControls];
-//    
-//    scrollViewSwitcherLegth.rectForObjetc = (CGRect){0,0,165,200};
-//    scrollViewSwitcherLegth.arraySwitchObjects = [visualViewDataSource arrayLegth];
-//    scrollViewSwitcherLegth.curentObject = playerAccount.visualViewLegth;
-//    scrollViewSwitcherLegth.didFinishBlock = ^(NSInteger curentIndex){
-//        CDVisualViewCharacterPartLegth *visualViewCharacterPart = [scrollViewSwitcherLegth.arraySwitchObjects objectAtIndex:curentIndex];
-//        visualViewCharacter.length.image = [visualViewCharacterPart imageForObject];
-//        visualViewLegthSelect = curentIndex;
-//        
-//        [self refreshController];
-//    };
-//    scrollViewSwitcherLegth.colorizeImage = visualViewCharacter.length;
-//    [scrollViewSwitcherLegth trimObjectsToView:visualViewCharacter.length];
-//    [scrollViewSwitcherLegth setMainControls];
-//    
-//    scrollViewSwitcherShoose.rectForObjetc = (CGRect){0,0,160,100};
-//    scrollViewSwitcherShoose.arraySwitchObjects = [visualViewDataSource arrayShoose];
-//    scrollViewSwitcherShoose.curentObject = playerAccount.visualViewShoose;
-//    scrollViewSwitcherShoose.didFinishBlock = ^(NSInteger curentIndex){
-//        CDVisualViewCharacterPartShoose *visualViewCharacterPart = [scrollViewSwitcherShoose.arraySwitchObjects objectAtIndex:curentIndex];
-//        visualViewCharacter.shoose.image = [visualViewCharacterPart imageForObject];
-//        visualViewShooseSelect = curentIndex;
-//        
-//        [self refreshController];
-//    };
-//    scrollViewSwitcherShoose.colorizeImage = visualViewCharacter.shoose;
-//    [scrollViewSwitcherShoose trimObjectsToView:visualViewCharacter.shoose];
-//    [scrollViewSwitcherShoose setMainControls];
+    scrollViewSwitcherHead.rectForObjetc = CGRectMake(0,0,70,45);
+    scrollViewSwitcherHead.arraySwitchObjects = [visualViewDataSource arrayHead];
+    scrollViewSwitcherHead.curentObject = playerAccount.visualViewHead;
+    scrollViewSwitcherHead.didFinishBlock = ^(NSInteger curentIndex){
+        CDVisualViewCharacterPartHead *visualViewCharacterPart = [scrollViewSwitcherHead.arraySwitchObjects objectAtIndex:curentIndex];
+        visualViewCharacter.head.image = [visualViewCharacterPart imageForObject];
+        visualViewHeadSelect = curentIndex;
+        
+        [self refreshController];
+    };
+    [scrollViewSwitcherHead trimObjectsToView:visualViewCharacter.head];
+    [scrollViewSwitcherHead setMainControls];
+
+    scrollViewSwitcherBody.rectForObjetc = CGRectMake(0,0,200,155);
+    scrollViewSwitcherBody.arraySwitchObjects = [visualViewDataSource arrayBody];
+    scrollViewSwitcherBody.curentObject = playerAccount.visualViewBody;
+    scrollViewSwitcherBody.didFinishBlock = ^(NSInteger curentIndex){
+        CDVisualViewCharacterPartBody *visualViewCharacterPart = [scrollViewSwitcherBody.arraySwitchObjects objectAtIndex:curentIndex];
+        visualViewCharacter.body.image = [visualViewCharacterPart imageForObject];
+       visualViewBodySelect = curentIndex;
+        
+        [self refreshController];
+    };
+    [scrollViewSwitcherBody trimObjectsToView:visualViewCharacter.body];
+    [scrollViewSwitcherBody setMainControls];
+    
+    scrollViewSwitcherLegth.rectForObjetc = CGRectMake(0,0,165,200);
+    scrollViewSwitcherLegth.arraySwitchObjects = [visualViewDataSource arrayLegth];
+    scrollViewSwitcherLegth.curentObject = playerAccount.visualViewLegth;
+    scrollViewSwitcherLegth.didFinishBlock = ^(NSInteger curentIndex){
+        CDVisualViewCharacterPartLegth *visualViewCharacterPart = [scrollViewSwitcherLegth.arraySwitchObjects objectAtIndex:curentIndex];
+        visualViewCharacter.length.image = [visualViewCharacterPart imageForObject];
+        visualViewLegthSelect = curentIndex;
+        
+        [self refreshController];
+    };
+    [scrollViewSwitcherLegth trimObjectsToView:visualViewCharacter.length];
+    [scrollViewSwitcherLegth setMainControls];
+    
+    scrollViewSwitcherShoose.rectForObjetc = CGRectMake(0,0,160,100);
+    scrollViewSwitcherShoose.arraySwitchObjects = [visualViewDataSource arrayShoose];
+    scrollViewSwitcherShoose.curentObject = playerAccount.visualViewShoose;
+    scrollViewSwitcherShoose.didFinishBlock = ^(NSInteger curentIndex){
+        CDVisualViewCharacterPartShoose *visualViewCharacterPart = [scrollViewSwitcherShoose.arraySwitchObjects objectAtIndex:curentIndex];
+        visualViewCharacter.shoose.image = [visualViewCharacterPart imageForObject];
+        visualViewShooseSelect = curentIndex;
+        
+        [self refreshController];
+    };
+    [scrollViewSwitcherShoose trimObjectsToView:visualViewCharacter.shoose];
+    [scrollViewSwitcherShoose setMainControls];
     
     [self fillCap];
     [self fillHead];
@@ -244,6 +242,7 @@
     lbMoneyShoose = nil;
     lbActionShoose = nil;
     loadingView = nil;
+    moneyForBuy = nil;
     [super viewDidUnload];
 }
 
@@ -310,6 +309,13 @@
                          [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
                      }];
     [self.navigationController popViewControllerAnimated:NO];
+    
+    playerAccount.visualViewCap = visualViewCapSelect;
+    playerAccount.visualViewHead = visualViewHeadSelect;
+    playerAccount.visualViewBody = visualViewBodySelect;
+    playerAccount.visualViewLegth = visualViewLegthSelect;
+    playerAccount.visualViewShoose = visualViewShooseSelect;
+    
     [self releaseComponents];
 }
 
@@ -329,6 +335,7 @@
             btnAccept.enabled = NO;
         }
         userMoney.text = [NSString stringWithFormat:@"%d",playerAccount.money];
+        moneyForBuy.text = [NSString stringWithFormat:@"%d",sumToBuy];
     });
 }
 

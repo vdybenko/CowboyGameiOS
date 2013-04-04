@@ -12,6 +12,7 @@
 #import "ScrollViewSwitcher.h"
 #import <QuartzCore/QuartzCore.h>
 #import "CDVisualViewCharacterPart.h"
+#import <math.h>
 
 @interface ScrollViewSwitcher()
 {
@@ -60,11 +61,19 @@
     CGFloat differenceX = (self.frame.size.width - rectForObjetc.size.width)/2 - rectForObjetc.origin.x;
     grid = [[GMGridView alloc] initWithFrame:CGRectMake(-differenceX, rectForObjetc.origin.y, self.frame.size.width, self.frame.size.height)];
     grid.layoutStrategy = [GMGridViewLayoutStrategyFactory strategyFromType:GMGridViewLayoutHorizontalPagedLTR];
-    grid.minEdgeInsets = UIEdgeInsetsMake(0,100,0,100);
-    grid.itemSpacing = 50.0;
+//    grid.minEdgeInsets = UIEdgeInsetsMake(0,(self.frame.size.width - rectForObjetc.size.width)/4,0,(self.frame.size.width - rectForObjetc.size.width)/4);
+//    grid.itemSpacing = (self.frame.size.width - rectForObjetc.size.width)/2;
+    grid.minEdgeInsets = UIEdgeInsetsMake(0,10,0,10);
+    grid.itemSpacing = 10;
+
     grid.backgroundColor = [UIColor clearColor];
+    grid.showsHorizontalScrollIndicator = NO;
+    grid.showsVerticalScrollIndicator = NO;
     grid.dataSource = self;
+    grid.delegate = self;
+    
     [self addSubview:grid];
+    [self setObjectsForIndex:curentObject];
 }
 
 #pragma mark GMGridViewDataSource
@@ -96,6 +105,7 @@
     
     UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, rectForObjetc.size.width, rectForObjetc.size.height)];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.backgroundColor = [UIColor redColor];
     [cell.contentView addSubview:imageView];
         
     CDVisualViewCharacterPart *visualViewCharacterPart = [arraySwitchObjects objectAtIndex:index];
@@ -104,99 +114,34 @@
     return cell;
 }
 
+#pragma mark UIScrollViewDelegate
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView;
+{
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView;
+{
+    NSInteger curentObjectIndexScrool = abs(scrollView.contentOffset.x/self.frame.size.width);
+    if (curentObject!=curentObjectIndexScrool) {
+        curentObject = curentObjectIndexScrool;
+        if (didFinishBlock) {
+            didFinishBlock(curentObject);
+        }
+    }
+}
+
 #pragma mark
-
--(void)setObjectsForIndex:(NSInteger)index;
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        CDVisualViewCharacterPart *visualViewCharacterPart = [arraySwitchObjects objectAtIndex:index];
-        centralImage.image = [visualViewCharacterPart imageForObject];
-        if (index) {
-            CDVisualViewCharacterPart *visualViewCharacterPartLeft = [arraySwitchObjects objectAtIndex:index-1];
-            leftImage.image = [visualViewCharacterPartLeft imageForObject];
-        }
-        if (index<[arraySwitchObjects count]-1) {
-            CDVisualViewCharacterPart *visualViewCharacterPartRight = [arraySwitchObjects objectAtIndex:index+1];
-            rightImage.image = [visualViewCharacterPartRight imageForObject];
-        }
-    });
-}
-
--(void)switchToRight
-{
-    if ((curentObject)&&([arraySwitchObjects count])) {
-        [self setAllElementsHide:NO];
-        [UIView animateWithDuration:time animations:^{
-            CGRect frame = leftImage.frame;
-            frame.origin = ptCenterPosition;
-            leftImage.frame = frame;
-            
-            frame = centralImage.frame;
-            frame.origin = ptRightPosition;
-            centralImage.frame = frame;
-        }completion:^(BOOL finished) {
-            [self setAllElementsHide:YES];
-            [self setStartPosition];
-            curentObject--;
-            [self setObjectsForIndex:curentObject];
-            if (didFinishBlock) {
-                didFinishBlock(curentObject);
-            }
-        }];
-    }
-}
-
--(void)switchToLeft
-{
-    if ((curentObject<[arraySwitchObjects count]-1)&&([arraySwitchObjects count])) {
-        [self setAllElementsHide:NO];
-        [UIView animateWithDuration:time animations:^{
-            CGRect frame = rightImage.frame;
-            frame.origin = ptCenterPosition;
-            rightImage.frame = frame;
-            
-            frame = centralImage.frame;
-            frame.origin = ptLeftPosition;
-            centralImage.frame = frame;
-        }completion:^(BOOL finished) {
-            [self setAllElementsHide:YES];
-            [self setStartPosition];
-            curentObject++;
-            [self setObjectsForIndex:curentObject];
-            if (didFinishBlock) {
-                didFinishBlock(curentObject);
-            }
-        }];
-    }
-}
-
--(void)setStartPosition
-{
-    CGRect frame = leftImage.frame;
-    frame.origin = ptLeftPosition;
-    leftImage.frame = frame;
-    
-    frame = centralImage.frame;
-    frame.origin = ptCenterPosition;
-    centralImage.frame = frame;
-
-    frame = rightImage.frame;
-    frame.origin = ptRightPosition;
-    rightImage.frame = frame;
-}
-
--(void)setAllElementsHide:(BOOL)hide
-{
-    leftImage.hidden = hide;
-    centralImage.hidden = hide;
-    rightImage.hidden = hide;
-}
 
 -(void)trimObjectsToView:(UIView*)view;
 {
     CGPoint trimRect = [[view superview] convertPoint:view.frame.origin toView:self];
     rectForObjetc.origin.x = trimRect.x;
     rectForObjetc.origin.y = trimRect.y;
+}
+
+-(void)setObjectsForIndex:(NSInteger)index;
+{
+   [grid scrollToObjectAtIndex:index atScrollPosition:GMGridViewScrollPositionNone animated:NO];
 }
 
 @end

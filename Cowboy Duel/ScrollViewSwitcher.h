@@ -13,13 +13,13 @@
 
 typedef void (^ScrollViewSwitcherResult)(NSInteger curentIndex);
 
-@interface ScrollViewSwitcher : UIView<MemoryManagement,GMGridViewDataSource>
+@interface ScrollViewSwitcher : UIView<MemoryManagement,GMGridViewDataSource,UIScrollViewDelegate>
 @property (copy) ScrollViewSwitcherResult didFinishBlock;
 @property (weak,nonatomic) NSArray *arraySwitchObjects;
 @property (nonatomic) CGRect rectForObjetc;
 @property (nonatomic) NSInteger curentObject;
 
--(void)setMainControls;
+-(void)setMainControls; 
 -(void)setObjectsForIndex:(NSInteger)index;
 -(void)trimObjectsToView:(UIView*)view;
 @end
