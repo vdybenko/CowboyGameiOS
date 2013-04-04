@@ -627,19 +627,13 @@ static CGFloat blinkBottomOriginY;
     }
     
     BOOL shotOnObstracle = NO;
-    CGPoint convertPoint;
-    UIColor *color;
     BOOL shotInShape;
     
     CGRect baloonFrame = [airBallon convertRect:airBallon.airBallonImg.frame toView:self.view];
     
     if (!shotOnObstracle && !airBallon.airBallonImg.hidden && CGRectContainsPoint(baloonFrame, shotPoint)) {
-        convertPoint = [self.view convertPoint:shotPoint toView:airBallon.airBalloonView];
-        color = [airBallon.airBalloonView colorOfPoint:convertPoint];
-        shotInShape = (color != [color colorWithAlphaComponent:0.0f]);
-        
+        shotInShape = [airBallon shotInObstracleWithPoint:shotPoint superViewOfPoint:self.view];
         if (shotInShape){
-
             [airBallon explosionAnimation];
             shotOnObstracle = YES;
         }
@@ -650,10 +644,8 @@ static CGFloat blinkBottomOriginY;
         CGRect cactusFrame = [cactus convertRect:cactus.cactusImg.frame toView:self.view];
         
         if (!shotOnObstracle && !cactus.cactusImg.hidden && CGRectContainsPoint(cactusFrame, shotPoint)) {
-            convertPoint = [self.view convertPoint:shotPoint toView:cactus.cactusView];
-            color = [cactus.cactusView colorOfPoint:convertPoint];
-            shotInShape = (color != [color colorWithAlphaComponent:0.0f]);
             
+            shotInShape = [cactus shotInObstracleWithPoint:shotPoint superViewOfPoint:self.view];
             if (shotInShape){
                 [cactus explosionAnimation];
                 shotOnObstracle = YES;
@@ -661,54 +653,33 @@ static CGFloat blinkBottomOriginY;
         }
     }
     for (BarellsObject *barell in barellObjectArray) {
-        //Global IF shot on Barrel
-        CGRect barelHighestFrame = [barell convertRect:barell.barellImgHighest.frame toView:self.view];
-        CGRect barelMiddleFrame = [barell convertRect:barell.barellImgMiddle.frame toView:self.view];
-        CGRect barelBottomFrame = [barell convertRect:barell.barellImgBottom.frame toView:self.view];
-        
-        if (!barell.barellImgHighest.hidden
-            && !shotOnObstracle
-            && CGRectContainsPoint(barelHighestFrame, shotPoint))
+        if (!barell.barellImgHighest.hidden && !shotOnObstracle && shotInShape)
         {
-            
-            convertPoint = [self.view convertPoint:shotPoint toView:barell.barellView];
-            color = [barell.barellView colorOfPoint:convertPoint];
-            shotInShape = (color != [color colorWithAlphaComponent:0.0f]);
-            
+            barell.barellPosition = BarellPositionHighest;
+            shotInShape = [barell shotInObstracleWithPoint:shotPoint superViewOfPoint:self.view];
+
             if (shotInShape){
-                barell.barellPosition = BarellPositionHighest;
                 [barell explosionAnimation];
                 shotOnObstracle = YES;
             }
            
         }
         
-        if (!barell.barellImgMiddle.hidden
-            && !shotOnObstracle
-            && CGRectContainsPoint(barelMiddleFrame, shotPoint))
+        if (!barell.barellImgMiddle.hidden && !shotOnObstracle)
         {
-            convertPoint = [self.view convertPoint:shotPoint toView:barell.barellView];
-            color = [barell.barellView colorOfPoint:convertPoint];
-            shotInShape = (color != [color colorWithAlphaComponent:0.0f]);
-            
+            barell.barellPosition = BarellPositionMiddle;
+            shotInShape = [barell shotInObstracleWithPoint:shotPoint superViewOfPoint:self.view];
             if (shotInShape){
-                barell.barellPosition = BarellPositionMiddle;
                 [barell explosionAnimation];
                 shotOnObstracle = YES;
             }
         }
         
-        if (!barell.barellImgBottom.hidden
-            && !shotOnObstracle
-            && CGRectContainsPoint(barelBottomFrame, shotPoint))
+        if (!barell.barellImgBottom.hidden && !shotOnObstracle)
         {
-            convertPoint = [self.view convertPoint:shotPoint toView:barell.barellView];
-            color = [barell.barellView colorOfPoint:convertPoint];
-            shotInShape = (color != [color colorWithAlphaComponent:0.0f]);
-            
+            barell.barellPosition = BarellPositionBottom;
+            shotInShape = [barell shotInObstracleWithPoint:shotPoint superViewOfPoint:self.view];
             if (shotInShape){
-            
-                barell.barellPosition = BarellPositionBottom;
                 [barell explosionAnimation];
                 shotOnObstracle = YES;
             }

@@ -16,5 +16,6 @@
 -(void)airBallonMove;
 -(void)explosionAnimation;
 -(BOOL) isShownBonus;
+-(BOOL)shotInObstracleWithPoint:(CGPoint)point superViewOfPoint:(UIView *)view;
 
 @end

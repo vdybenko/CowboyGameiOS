@@ -8,6 +8,7 @@
 
 #import "AirBallon.h"
 #import "UIImage+Sprite.h"
+#import "UIView+ColorOfPoint.h"
 
 @implementation AirBallon
 @synthesize airBallonImg;
@@ -64,6 +65,24 @@
     [self performSelector:@selector(hideObj) withObject:nil afterDelay:0.5f];
 
 }
+
+-(BOOL)shotInObstracleWithPoint:(CGPoint)point superViewOfPoint:(UIView *)view;
+{
+    CGRect convertBody;
+    convertBody = [[self.airBalloonView superview] convertRect:self.airBallonImg.frame toView:view];
+    if (!CGRectContainsPoint(convertBody, point)) {
+        return NO;
+    }
+    
+    BOOL shotInShape;
+    
+    CGPoint convertPoint = [view convertPoint:point toView:self.airBalloonView];
+    UIColor *color = [self.airBalloonView colorOfPoint:convertPoint];
+    shotInShape = (color != [color colorWithAlphaComponent:0.0f]);
+    
+    return shotInShape;
+}
+
 -(void)hideObj{
  
     [airBallonImg stopAnimating];
