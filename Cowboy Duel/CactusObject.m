@@ -8,6 +8,7 @@
 
 #import "CactusObject.h"
 #import "UIImage+Sprite.h"
+#import "UIView+ColorOfPoint.h"
 
 @implementation CactusObject
 
@@ -48,6 +49,24 @@
      [cactusImg startAnimating];
     [self performSelector:@selector(hideObj) withObject:nil afterDelay:0.4f];
 }
+
+-(BOOL)shotInObstracleWithPoint:(CGPoint)point superViewOfPoint:(UIView *)view;
+{
+    CGRect convertBody;
+    convertBody = [[self.cactusView superview] convertRect:self.cactusImg.frame toView:view];
+    if (!CGRectContainsPoint(convertBody, point)) {
+        return NO;
+    }
+    
+    BOOL shotInShape;
+    
+    CGPoint convertPoint = [view convertPoint:point toView:self.cactusView];
+    UIColor *color = [self.cactusView colorOfPoint:convertPoint];
+    shotInShape = (color != [color colorWithAlphaComponent:0.0f]);
+    
+    return shotInShape;
+}
+
 -(void)hideObj{
     
     [cactusImg stopAnimating];
