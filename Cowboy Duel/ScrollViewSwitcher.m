@@ -6,25 +6,12 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#define time 0.4
-#define kScrollViewSwitcherNotification @"ScrollViewSwitcherNotification"
-
 #import "ScrollViewSwitcher.h"
-#import <QuartzCore/QuartzCore.h>
 #import "CDVisualViewCharacterPart.h"
 #import <math.h>
 
 @interface ScrollViewSwitcher()
 {
-    CGPoint startPoint;
-    UIImageView *leftImage;
-    UIImageView *rightImage;
-    UIImageView *centralImage;
-    
-    CGPoint ptLeftPosition;
-    CGPoint ptCenterPosition;
-    CGPoint ptRightPosition;
-    
     GMGridView *grid;
 }
 @end
@@ -40,7 +27,6 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         [self setUserInteractionEnabled:YES];
-        
         curentObject = 0;
     }
     return self;
@@ -50,22 +36,17 @@
 {
     didFinishBlock = nil;
     arraySwitchObjects = nil;
-    leftImage = nil;
-    rightImage = nil;
-    centralImage = nil;
     grid = nil;
 }
 
 -(void)setMainControls;
 {
     CGFloat differenceX = (self.frame.size.width - rectForObjetc.size.width)/2 - rectForObjetc.origin.x;
-    grid = [[GMGridView alloc] initWithFrame:CGRectMake(-differenceX, rectForObjetc.origin.y, self.frame.size.width, self.frame.size.height)];
+    grid = [[GMGridView alloc] initWithFrame:CGRectMake(-differenceX, rectForObjetc.origin.y, self.frame.size.width,  rectForObjetc.size.height)];
     grid.layoutStrategy = [GMGridViewLayoutStrategyFactory strategyFromType:GMGridViewLayoutHorizontalPagedLTR];
-//    grid.minEdgeInsets = UIEdgeInsetsMake(0,(self.frame.size.width - rectForObjetc.size.width)/4,0,(self.frame.size.width - rectForObjetc.size.width)/4);
-//    grid.itemSpacing = (self.frame.size.width - rectForObjetc.size.width)/2;
-    grid.minEdgeInsets = UIEdgeInsetsMake(0,10,0,10);
-    grid.itemSpacing = 10;
-
+    grid.minEdgeInsets = UIEdgeInsetsMake(0,(self.frame.size.width - rectForObjetc.size.width)/4,0,(self.frame.size.width - rectForObjetc.size.width)/4);
+    grid.itemSpacing = (self.frame.size.width - rectForObjetc.size.width)/2;
+    
     grid.backgroundColor = [UIColor clearColor];
     grid.showsHorizontalScrollIndicator = NO;
     grid.showsVerticalScrollIndicator = NO;
@@ -92,20 +73,20 @@
 {
     GMGridViewCell * cell = nil;;
     cell = [gridView dequeueReusableCellWithIdentifier:@"object"];
-    
+
     if (cell == nil)
     {
         cell = [[GMGridViewCell alloc] init];
         
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, rectForObjetc.size.width, rectForObjetc.size.height)];
         cell.contentView = view;
+        [cell.contentView setUserInteractionEnabled:NO];
     }
     
     [[cell.contentView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, rectForObjetc.size.width, rectForObjetc.size.height)];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
-    imageView.backgroundColor = [UIColor redColor];
     [cell.contentView addSubview:imageView];
         
     CDVisualViewCharacterPart *visualViewCharacterPart = [arraySwitchObjects objectAtIndex:index];
@@ -115,9 +96,6 @@
 }
 
 #pragma mark UIScrollViewDelegate
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView;
-{
-}
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView;
 {

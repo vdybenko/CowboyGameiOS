@@ -310,12 +310,6 @@
                      }];
     [self.navigationController popViewControllerAnimated:NO];
     
-    playerAccount.visualViewCap = visualViewCapSelect;
-    playerAccount.visualViewHead = visualViewHeadSelect;
-    playerAccount.visualViewBody = visualViewBodySelect;
-    playerAccount.visualViewLegth = visualViewLegthSelect;
-    playerAccount.visualViewShoose = visualViewShooseSelect;
-    
     [self releaseComponents];
 }
 
