@@ -144,7 +144,7 @@ static const CGFloat timeSpinDump = 0.3f;
     frameView.origin.y -= 200;
     self.textView.frame = frameView;
     [self.textView setDinamicHeightBackground];
-    [self.textLabel setText:NSLocalizedString(@"explanePractice", @"")];
+    [self.textLabel setText:NSLocalizedString(@"ExplanePractice", @"")];
     [self.textView setHidden:NO];
     [self.textLabel setHidden:NO];
     
