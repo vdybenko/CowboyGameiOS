@@ -11,6 +11,7 @@
 #import "UIImage+Sprite.h"
 #import <AVFoundation/AVFoundation.h>
 #import "UILabel+FlyingPoint.h"
+#import "UIView+ColorOfPoint.h"
 
 @interface OpponentShape ()
 {
@@ -336,6 +337,24 @@ static CGFloat oponentLiveImageViewStartWidth;
         [self flip];
     }else
         [self reboundOnShot];
+}
+
+-(BOOL)shotInShapeWithPoint:(CGPoint)point superViewOfPoint:(UIView *)view;
+{
+    CGRect opponentBodyFrame = [[imgBody superview] convertRect:imgBody.frame toView:view];
+        
+    BOOL shotInFrame = (CGRectContainsPoint(opponentBodyFrame, point));
+    BOOL shotInShape;
+    
+    CGPoint convertPoint = [view convertPoint:point toView:imgBody];
+
+    UIColor *color = [imgBody colorOfPoint:convertPoint];
+
+    shotInShape = (color != [color colorWithAlphaComponent:0.0f]);
+    
+    NSLog(@"shotInShape: %@",(shotInShape)?@"YES":@"NO");
+    
+    return (shotInFrame && shotInShape);
 }
 
 -(void) cleareDamage;

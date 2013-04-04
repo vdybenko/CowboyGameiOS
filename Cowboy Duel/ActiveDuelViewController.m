@@ -702,13 +702,17 @@ static CGFloat blinkBottomOriginY;
         return;
     }
     
-    if (([self abs:(shotPoint.x - targetPoint.x)] < targetWeidth / 2) && ([self abs:(shotPoint.y - targetPoint.y)] < targetHeight / 2)) {
+    BOOL resultOpponent = [opponentShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
+
+    if (([self abs:(shotPoint.x - targetPoint.x)] < targetWeidth / 2)
+        && ([self abs:(shotPoint.y - targetPoint.y)] < targetHeight / 2)
+        && resultOpponent) {
         
         if(delegate)
         {
             [delegate sendShot];
         }
-        
+/*
         CGPoint targetPoint;
         targetPoint.x = opponentShape.center.x - (self.floatView.bounds.size.width / 2 - self.floatView.center.x);
         targetPoint.y = opponentShape.center.y - (self.floatView.bounds.size.height / 2 - self.floatView.center.y);
@@ -716,15 +720,12 @@ static CGFloat blinkBottomOriginY;
         CGPoint centerOfScreanPoint;
         centerOfScreanPoint.x = self.crossImageView.bounds.origin.x + self.crossImageView.center.x;
         centerOfScreanPoint.y = self.crossImageView.bounds.origin.y + self.crossImageView.center.y;
+ */
         
-        CGRect opponentBodyFrame = [[opponentShape.imgBody superview] convertRect:opponentShape.imgBody.frame toView:self.view];
-        
-        if (CGRectContainsPoint(opponentBodyFrame, shotPoint)) {
-            [self startRandomBloodAnimation];
-            [opponentShape hitTheOponentWithPoint:shotPoint mainView:self.view];
-            if (horseShape.hidden && opponentShape.typeOfBody == OpponentShapeTypeScarecrow) {
-                [self showGoodBodies];
-            }
+        [self startRandomBloodAnimation];
+        [opponentShape hitTheOponentWithPoint:shotPoint mainView:self.view];
+        if (horseShape.hidden && opponentShape.typeOfBody == OpponentShapeTypeScarecrow) {
+            [self showGoodBodies];
         }
         [self shotToOponent];
 
