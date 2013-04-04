@@ -736,12 +736,11 @@ static CGFloat blinkBottomOriginY;
         centerOfScreanPoint.y = self.crossImageView.bounds.origin.y + self.crossImageView.center.y;
         
         CGRect opponentBodyFrame = [[opponentShape.imgBody superview] convertRect:opponentShape.imgBody.frame toView:self.view];
-        
         if (CGRectContainsPoint(opponentBodyFrame, shotPoint)) {
             [self startRandomBloodAnimation];
             [opponentShape hitTheOponentWithPoint:shotPoint mainView:self.view];
             if (horseShape.hidden && opponentShape.typeOfBody == OpponentShapeTypeScarecrow) {
-                [self showGoodBodies];
+                [self performSelector:@selector(showGoodBodies) withObject:nil afterDelay:1.7f];
             }
         }
         [self shotToOponent];
@@ -752,9 +751,6 @@ static CGFloat blinkBottomOriginY;
 
 -(void)startRandomBloodAnimation
 {
-  //  if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow)
-   //     return;
-        
     int numberOfAnimation = rand() % 5;
     switch (numberOfAnimation) {
         case 0:

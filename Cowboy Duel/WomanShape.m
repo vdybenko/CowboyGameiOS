@@ -77,7 +77,7 @@
 
 -(BOOL)shotInShapeWithPoint:(CGPoint)point superViewOfPoint:(UIView *)view;
 {
-    if ([super shotInShapeWithPoint:point superViewOfPoint:view]) {
+    if ([super shotInShapeWithPoint:point superViewOfPoint:view] && self.hidden !=YES) {
         [self scream];
         [self womanAnimation];
         
