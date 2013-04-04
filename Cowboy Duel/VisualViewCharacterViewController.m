@@ -89,18 +89,17 @@
     visualViewCharacter.visualViewDataSource = visualViewDataSource;
     [visualViewCharacter refreshWithAccountPlayer:playerAccount];
     
-    scrollViewSwitcherCap.rectForObjetc = (CGRect){0,0,70,45};
+    scrollViewSwitcherCap.rectForObjetc = CGRectMake(0,0,70,45);
     scrollViewSwitcherCap.arraySwitchObjects = [visualViewDataSource arrayCap];
     scrollViewSwitcherCap.curentObject = playerAccount.visualViewCap;
-//    scrollViewSwitcherCap.didFinishBlock = ^(NSInteger curentIndex){
-//        CDVisualViewCharacterPartCap *visualViewCharacterPart = [scrollViewSwitcherCap.arraySwitchObjects objectAtIndex:curentIndex];
-//        visualViewCharacter.cap.image = [visualViewCharacterPart imageForObject];
-//        visualViewCapSelect = curentIndex;
-//        
-//        [self refreshController];
-//    };
-//    scrollViewSwitcherCap.colorizeImage = visualViewCharacter.cap;
-//    [scrollViewSwitcherCap trimObjectsToView:visualViewCharacter.cap];
+    scrollViewSwitcherCap.didFinishBlock = ^(NSInteger curentIndex){
+        CDVisualViewCharacterPartCap *visualViewCharacterPart = [scrollViewSwitcherCap.arraySwitchObjects objectAtIndex:curentIndex];
+        visualViewCharacter.cap.image = [visualViewCharacterPart imageForObject];
+        visualViewCapSelect = curentIndex;
+        
+        [self refreshController];
+    };
+    [scrollViewSwitcherCap trimObjectsToView:visualViewCharacter.cap];
     [scrollViewSwitcherCap setMainControls];
     
 //    scrollViewSwitcherHead.rectForObjetc = (CGRect){0,0,70,45};

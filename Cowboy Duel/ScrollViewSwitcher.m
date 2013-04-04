@@ -24,8 +24,6 @@
     CGPoint ptCenterPosition;
     CGPoint ptRightPosition;
     
-    UIImage *newColorizeImage;
-    
     GMGridView *grid;
 }
 @end
@@ -34,7 +32,6 @@
 @synthesize arraySwitchObjects;
 @synthesize rectForObjetc;
 @synthesize curentObject;
-@synthesize colorizeImage;
 
 #pragma mark
 
@@ -55,111 +52,26 @@
     leftImage = nil;
     rightImage = nil;
     centralImage = nil;
-    newColorizeImage = nil;
-    colorizeImage = nil;
     grid = nil;
 }
 
 -(void)setMainControls;
 {
-    grid = [[GMGridView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-//    grid = gridTemp;
-//    gridTemp = nil;
-    
+    CGFloat differenceX = (self.frame.size.width - rectForObjetc.size.width)/2 - rectForObjetc.origin.x;
+    grid = [[GMGridView alloc] initWithFrame:CGRectMake(-differenceX, rectForObjetc.origin.y, self.frame.size.width, self.frame.size.height)];
     grid.layoutStrategy = [GMGridViewLayoutStrategyFactory strategyFromType:GMGridViewLayoutHorizontalPagedLTR];
-    grid.minEdgeInsets = UIEdgeInsetsMake(0,7.5,0,7.5);
-    grid.itemSpacing = 0.0;
+    grid.minEdgeInsets = UIEdgeInsetsMake(0,100,0,100);
+    grid.itemSpacing = 50.0;
     grid.backgroundColor = [UIColor clearColor];
     grid.dataSource = self;
-
     [self addSubview:grid];
-    
-//    ptLeftPosition = (CGPoint){0-rectForObjetc.size.width,0+rectForObjetc.origin.y};
-//    ptCenterPosition = (CGPoint){self.center.x-(rectForObjetc.size.width/2),0+rectForObjetc.origin.y};
-//    ptRightPosition = (CGPoint){self.frame.size.width,0+rectForObjetc.origin.y};
-//    
-//    leftImage = [[UIImageView alloc] initWithFrame:CGRectMake(ptLeftPosition.x,ptLeftPosition.y,rectForObjetc.size.width,rectForObjetc.size.height)];
-//    leftImage.clipsToBounds = YES;
-//    leftImage.contentMode = UIViewContentModeScaleAspectFill;
-//    [self addSubview:leftImage];
-//    
-//    rightImage = [[UIImageView alloc] initWithFrame:CGRectMake(ptRightPosition.x,ptRightPosition.y,rectForObjetc.size.width,rectForObjetc.size.height)];
-//    rightImage.clipsToBounds = YES;
-//    rightImage.contentMode = UIViewContentModeScaleAspectFill;
-//    [self addSubview:rightImage];
-//    
-//    centralImage = [[UIImageView alloc] initWithFrame:CGRectMake(ptCenterPosition.x,ptCenterPosition.y,rectForObjetc.size.width,rectForObjetc.size.height)];
-//    centralImage.clipsToBounds = YES;
-//    centralImage.contentMode = UIViewContentModeScaleAspectFill;
-//    [self addSubview:centralImage];
-//    
-//    [self setAllElementsHide:YES];
-//    [self setObjectsForIndex:curentObject];
 }
-
-//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-//{
-//    startPoint = [[touches anyObject] locationInView:self];
-//    [self touchView];
-//}
-//
-//- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;
-//{
-//    CGPoint endPoint = [[touches anyObject] locationInView:self];
-//    
-//    if (abs(endPoint.x - startPoint.x) < 10){
-//        //        Touch
-//    }
-//    else
-//    {
-//        if (endPoint.x > startPoint.x){
-//            //            right
-//            [self switchToRight];
-//        }
-//        
-//        if (endPoint.x < startPoint.x){
-//            //            left
-//            [self switchToLeft];
-//        }
-//    }
-//    
-//    if (abs(endPoint.y - startPoint.y) < 5){
-//        //        Touch
-//    }
-//
-//}
-//
-//-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-//{
-//    [self endTouchView];
-////    CGPoint endPoint = [[touches anyObject] locationInView:self];
-////    
-////    if (abs(endPoint.x - startPoint.x) < 10){
-//////        Touch
-////    }
-////    else
-////    {
-////        if (endPoint.x > startPoint.x){
-////            //            right
-////            [self switchToRight];
-////        }
-////        
-////        if (endPoint.x < startPoint.x){
-////            //            left
-////            [self switchToLeft];
-////        }
-////    }
-////    
-////    if (abs(endPoint.y - startPoint.y) < 5){
-//////        Touch
-////    }
-//}
 
 #pragma mark GMGridViewDataSource
 
 - (NSInteger)numberOfItemsInGMGridView:(GMGridView *)gridView
 {
-    return 20;
+    return [arraySwitchObjects count];
 }
 
 - (CGSize)GMGridView:(GMGridView *)gridView sizeForItemsInInterfaceOrientation:(UIInterfaceOrientation)orientation
@@ -177,22 +89,17 @@
         cell = [[GMGridViewCell alloc] init];
         
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, rectForObjetc.size.width, rectForObjetc.size.height)];
-        view.layer.masksToBounds = NO;
-        view.layer.cornerRadius = 8;
-        
         cell.contentView = view;
     }
     
     [[cell.contentView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
-    UIImageView * imageView = [[UIImageView alloc] initWithFrame:cell.contentView.bounds];
-    imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, rectForObjetc.size.width, rectForObjetc.size.height)];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
     [cell.contentView addSubview:imageView];
-    
-    NSLog(@"inside photo grid cellforitematindex");
-    
-    imageView.backgroundColor = [UIColor redColor];
-//    [imageView setImageWithURL:[NSURL URLWithString:[_content.photoUrls objectAtIndex:index]] placeholderImage:[UIImage imageNamed:@"content_details_placeholder"]];
+        
+    CDVisualViewCharacterPart *visualViewCharacterPart = [arraySwitchObjects objectAtIndex:index];
+    imageView.image = [visualViewCharacterPart imageForObject];
     
     return cell;
 }
@@ -288,23 +195,8 @@
 -(void)trimObjectsToView:(UIView*)view;
 {
     CGPoint trimRect = [[view superview] convertPoint:view.frame.origin toView:self];
+    rectForObjetc.origin.x = trimRect.x;
     rectForObjetc.origin.y = trimRect.y;
-}
-
--(void)touchView
-{
-    NSArray *imgArray = [NSArray arrayWithObjects:colorizeImage.image,
-                         newColorizeImage,
-                         nil];
-    colorizeImage.animationImages = imgArray;
-    colorizeImage.animationDuration = 0.6f;
-    [colorizeImage setAnimationRepeatCount:0];
-    [colorizeImage startAnimating];
-}
-
--(void)endTouchView
-{
-    [colorizeImage stopAnimating];
 }
 
 @end
