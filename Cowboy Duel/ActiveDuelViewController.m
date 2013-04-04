@@ -630,7 +630,7 @@ static CGFloat blinkBottomOriginY;
 
 -(void)cheackHitForShot:(CGPoint)shotPoint andTargetPoint:(CGPoint)targetPoint
 {
-
+    [gunDrumViewController explanePracticeClean];
     //Obstracles
     for (UIImageView *obstracle in self.floatView.subviews) {
         if(obstracle.tag != 1) continue;
@@ -740,7 +740,7 @@ static CGFloat blinkBottomOriginY;
             [self startRandomBloodAnimation];
             [opponentShape hitTheOponentWithPoint:shotPoint mainView:self.view];
             if (horseShape.hidden && opponentShape.typeOfBody == OpponentShapeTypeScarecrow) {
-                [self performSelector:@selector(showGoodBodies) withObject:nil afterDelay:1.7f];
+                [self performSelector:@selector(showGoodBodies) withObject:nil afterDelay:1.0f];
             }
         }
         [self shotToOponent];
@@ -1106,6 +1106,7 @@ static CGFloat blinkBottomOriginY;
 
 -(void) showGoodBodies
 {
+    [gunDrumViewController explanePractice];
     womanShape.hidden = NO;
     goodCowboyShape.hidden = NO;
     horseShape.hidden = NO;
