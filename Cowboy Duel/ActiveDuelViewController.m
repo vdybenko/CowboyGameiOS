@@ -24,6 +24,7 @@
 #import "CactusObject.h"
 #import "AirBallon.h"
 #import "HorseShape.h"
+#import "UIView+ColorOfPoint.h"
 #define targetHeight 260
 #define targetWeidth 100
 #define MOVE_DISTANCE 100
@@ -626,21 +627,37 @@ static CGFloat blinkBottomOriginY;
     }
     
     BOOL shotOnObstracle = NO;
-
+    CGPoint convertPoint;
+    UIColor *color;
+    BOOL shotInShape;
+    
     CGRect baloonFrame = [airBallon convertRect:airBallon.airBallonImg.frame toView:self.view];
     
-    if (CGRectContainsPoint(baloonFrame, shotPoint) && !airBallon.airBallonImg.hidden && !shotOnObstracle) {
-        [airBallon explosionAnimation];
-        shotOnObstracle = YES;
+    if (!shotOnObstracle && !airBallon.airBallonImg.hidden && CGRectContainsPoint(baloonFrame, shotPoint)) {
+        convertPoint = [self.view convertPoint:shotPoint toView:airBallon.airBalloonView];
+        color = [airBallon.airBalloonView colorOfPoint:convertPoint];
+        shotInShape = (color != [color colorWithAlphaComponent:0.0f]);
+        
+        if (shotInShape){
+
+            [airBallon explosionAnimation];
+            shotOnObstracle = YES;
+        }
     }
     
     for (CactusObject *cactus in cactusObjectArray) {
 
         CGRect cactusFrame = [cactus convertRect:cactus.cactusImg.frame toView:self.view];
         
-        if (CGRectContainsPoint(cactusFrame, shotPoint) && !cactus.cactusImg.hidden && !shotOnObstracle) {
-            [cactus explosionAnimation];
-            shotOnObstracle = YES;
+        if (!shotOnObstracle && !cactus.cactusImg.hidden && CGRectContainsPoint(cactusFrame, shotPoint)) {
+            convertPoint = [self.view convertPoint:shotPoint toView:cactus.cactusView];
+            color = [cactus.cactusView colorOfPoint:convertPoint];
+            shotInShape = (color != [color colorWithAlphaComponent:0.0f]);
+            
+            if (shotInShape){
+                [cactus explosionAnimation];
+                shotOnObstracle = YES;
+            }
         }
     }
     for (BarellsObject *barell in barellObjectArray) {
@@ -650,33 +667,51 @@ static CGFloat blinkBottomOriginY;
         CGRect barelBottomFrame = [barell convertRect:barell.barellImgBottom.frame toView:self.view];
         
         if (!barell.barellImgHighest.hidden
-            && CGRectContainsPoint(barelHighestFrame, shotPoint)
-            && !shotOnObstracle)
+            && !shotOnObstracle
+            && CGRectContainsPoint(barelHighestFrame, shotPoint))
         {
-            barell.barellPosition = BarellPositionHighest;
-            [barell explosionAnimation];
-            shotOnObstracle = YES;
+            
+            convertPoint = [self.view convertPoint:shotPoint toView:barell.barellView];
+            color = [barell.barellView colorOfPoint:convertPoint];
+            shotInShape = (color != [color colorWithAlphaComponent:0.0f]);
+            
+            if (shotInShape){
+                barell.barellPosition = BarellPositionHighest;
+                [barell explosionAnimation];
+                shotOnObstracle = YES;
+            }
            
         }
         
         if (!barell.barellImgMiddle.hidden
-            && CGRectContainsPoint(barelMiddleFrame, shotPoint)
-            && !shotOnObstracle)
+            && !shotOnObstracle
+            && CGRectContainsPoint(barelMiddleFrame, shotPoint))
         {
-            barell.barellPosition = BarellPositionMiddle;
-            [barell explosionAnimation];
-            shotOnObstracle = YES;
-        
+            convertPoint = [self.view convertPoint:shotPoint toView:barell.barellView];
+            color = [barell.barellView colorOfPoint:convertPoint];
+            shotInShape = (color != [color colorWithAlphaComponent:0.0f]);
+            
+            if (shotInShape){
+                barell.barellPosition = BarellPositionMiddle;
+                [barell explosionAnimation];
+                shotOnObstracle = YES;
+            }
         }
         
         if (!barell.barellImgBottom.hidden
-            && CGRectContainsPoint(barelBottomFrame, shotPoint)
-            && !shotOnObstracle)
+            && !shotOnObstracle
+            && CGRectContainsPoint(barelBottomFrame, shotPoint))
         {
-            barell.barellPosition = BarellPositionBottom;
-            [barell explosionAnimation];
-            shotOnObstracle = YES;
+            convertPoint = [self.view convertPoint:shotPoint toView:barell.barellView];
+            color = [barell.barellView colorOfPoint:convertPoint];
+            shotInShape = (color != [color colorWithAlphaComponent:0.0f]);
             
+            if (shotInShape){
+            
+                barell.barellPosition = BarellPositionBottom;
+                [barell explosionAnimation];
+                shotOnObstracle = YES;
+            }
         }
 
     }
@@ -704,23 +739,12 @@ static CGFloat blinkBottomOriginY;
     
     BOOL resultOpponent = [opponentShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
 
-    if (([self abs:(shotPoint.x - targetPoint.x)] < targetWeidth / 2)
-        && ([self abs:(shotPoint.y - targetPoint.y)] < targetHeight / 2)
-        && resultOpponent) {
+    if (resultOpponent) {
         
         if(delegate)
         {
             [delegate sendShot];
         }
-/*
-        CGPoint targetPoint;
-        targetPoint.x = opponentShape.center.x - (self.floatView.bounds.size.width / 2 - self.floatView.center.x);
-        targetPoint.y = opponentShape.center.y - (self.floatView.bounds.size.height / 2 - self.floatView.center.y);
-        
-        CGPoint centerOfScreanPoint;
-        centerOfScreanPoint.x = self.crossImageView.bounds.origin.x + self.crossImageView.center.x;
-        centerOfScreanPoint.y = self.crossImageView.bounds.origin.y + self.crossImageView.center.y;
- */
         
         [self startRandomBloodAnimation];
         [opponentShape hitTheOponentWithPoint:shotPoint mainView:self.view];
