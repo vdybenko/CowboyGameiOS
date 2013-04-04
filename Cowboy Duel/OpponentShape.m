@@ -17,6 +17,7 @@
 {
     IBOutlet UIView *vContainer;
     AVAudioPlayer *oponentShotAudioPlayer;
+    CGPoint anchP;
 }
 @end
 
@@ -35,6 +36,7 @@ static CGFloat oponentLiveImageViewStartWidth;
 {
     self = [super initWithCoder:aDecoder subViewFromNibFileName:@"OpponentShape"];
     if(self){
+    
         UIImage *spriteSheetSmoke = [UIImage imageNamed:@"smokeSpriteSheet"];
         NSArray *arrayWithSpritesSmoke = [spriteSheetSmoke spritesWithSpriteSheetImage:spriteSheetSmoke
                                                                             spriteSize:CGSizeMake(64, 64)];
@@ -173,13 +175,33 @@ static CGFloat oponentLiveImageViewStartWidth;
 
 -(void)flip
 {
-    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationCurveEaseOut animations:^{
+    CGRect frame = self.frame;
+    int y = frame.origin.y;
+    frame.origin.y *=2;
+    anchP = self.layer.anchorPoint;
+    self.frame = frame;
+    self.layer.anchorPoint = CGPointMake(0.5, 1.0);
+    
+    [UIView animateWithDuration:0.7 delay:0.2 options:UIViewAnimationCurveEaseOut animations:^{
         // Flip Down
         self.layer.transform = CATransform3DMakeRotation(M_PI/2, 1, 0, 0);
-        
     } completion:^(BOOL finished) {
-        self.layer.transform = CATransform3DMakeScale(1, 1, 1);
+        [self cleareDamage];
         [self reboundOnShot];
+        [UIView animateWithDuration:0.7 delay:0.2 options:UIViewAnimationCurveEaseOut animations:^{
+            // Flip Up
+            self.layer.transform = CATransform3DMakeScale(1, 1, 1);
+            self.layer.anchorPoint = anchP;
+            CGRect frame = self.frame;
+            frame.origin.y = y;
+            self.frame = frame;
+            
+        } completion:^(BOOL finished) {
+           
+            
+        }];
+
+       
     }];
 }
 
@@ -263,10 +285,6 @@ static CGFloat oponentLiveImageViewStartWidth;
             break;
         case OpponentShapeTypeScarecrow:
             imgBody.image = [UIImage imageNamed:@"scarecrow.png"];
-            CGRect frame = self.frame;
-            frame.origin.y *=2;
-            self.frame = frame;
-            self.layer.anchorPoint = CGPointMake(0.5, 1.0);
             break;
         default:
             break;

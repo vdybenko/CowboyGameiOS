@@ -41,8 +41,8 @@
             explosinPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFile error:&error];
             [explosinPlayer prepareToPlay];
         
-        NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"barelExp1.png"],
-                                [UIImage imageNamed:@"barelExp2.png"], [UIImage imageNamed:@"barelExp4.png"],[UIImage imageNamed:@"barelExp6.png"],
+        NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"barrelFrame1.png"],
+                                [UIImage imageNamed:@"barrelFrame2.png"], [UIImage imageNamed:@"barrelFrame3.png"],[UIImage imageNamed:@"barrelFrame4.png"],[UIImage imageNamed:@"barrelFrame5.png"],
                                 nil];
         barelAnimImg.animationImages = imgArray;
         barelAnimImg.animationDuration = 0.3f;

@@ -160,27 +160,7 @@ static CGFloat blinkBottomOriginY;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    UIImage *spriteSheetBlood = [UIImage imageNamed:@"blood_a"];
-    NSArray *arrayWithSpritesBlood = [spriteSheetBlood spritesWithSpriteSheetImage:spriteSheetBlood
-                                                              spriteSize:CGSizeMake(64, 64)];
-    [self.bloodImageView setAnimationImages:arrayWithSpritesBlood];
-    float animationDurationBlood = [self.bloodImageView.animationImages count] * 0.100; // 100ms per frame
-    [self.bloodImageView setAnimationRepeatCount:1];
-    [self.bloodImageView setAnimationDuration:animationDurationBlood];
-    arrayWithSpritesBlood = nil;
-    spriteSheetBlood = nil;
-    
-    UIImage *spriteSheetBloodC = [UIImage imageNamed:@"blood_c"];
-    NSArray *arrayWithSpritesBloodC = [spriteSheetBloodC spritesWithSpriteSheetImage:spriteSheetBloodC
-                                                                        spriteSize:CGSizeMake(64, 64)];
-    [self.bloodCImageView setAnimationImages:arrayWithSpritesBloodC];
-    float animationDurationBloodC = [self.bloodCImageView.animationImages count] * 0.100; // 100ms per frame
-    [self.bloodCImageView setAnimationRepeatCount:1];
-    [self.bloodCImageView setAnimationDuration:animationDurationBloodC];
-    arrayWithSpritesBloodC = nil;
-    spriteSheetBloodC = nil;
-    
+       
     shotCountForSound = 1;
 
     plView = (PLView *)self.view;
@@ -358,7 +338,44 @@ static CGFloat blinkBottomOriginY;
     blinkBottomOriginY = blinkBottom.frame.origin.y;
     
 }
+-(void)preparationBloodAnimation{
 
+    UIImage *spriteSheetBlood;
+    UIImage *spriteSheetBloodC;
+    
+    if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow)
+    {
+        spriteSheetBlood = [UIImage imageNamed:@"blood_aScrCr"];
+        spriteSheetBloodC = [UIImage imageNamed:@"blood_cScrCr"];
+        
+    }
+    else
+    {
+        spriteSheetBlood = [UIImage imageNamed:@"blood_a"];
+        spriteSheetBloodC = [UIImage imageNamed:@"blood_c"];
+    }
+    
+    NSArray *arrayWithSpritesBlood = [spriteSheetBlood spritesWithSpriteSheetImage:spriteSheetBlood
+                                                                        spriteSize:CGSizeMake(64, 64)];
+    [self.bloodImageView setAnimationImages:arrayWithSpritesBlood];
+    float animationDurationBlood = [self.bloodImageView.animationImages count] * 0.100; // 100ms per frame
+    [self.bloodImageView setAnimationRepeatCount:1];
+    [self.bloodImageView setAnimationDuration:animationDurationBlood];
+    arrayWithSpritesBlood = nil;
+    spriteSheetBlood = nil;
+    
+    NSArray *arrayWithSpritesBloodC = [spriteSheetBloodC spritesWithSpriteSheetImage:spriteSheetBloodC
+                                                                          spriteSize:CGSizeMake(64, 64)];
+    [self.bloodCImageView setAnimationImages:arrayWithSpritesBloodC];
+    float animationDurationBloodC = [self.bloodCImageView.animationImages count] * 0.100; // 100ms per frame
+    [self.bloodCImageView setAnimationRepeatCount:1];
+    [self.bloodCImageView setAnimationDuration:animationDurationBloodC];
+    arrayWithSpritesBloodC = nil;
+    spriteSheetBloodC = nil;
+
+
+
+}
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -527,6 +544,7 @@ static CGFloat blinkBottomOriginY;
    }
     shotCountBulletForOpponent =  countBulletsForOpponent;
     maxShotCountForOpponent = countBulletsForOpponent;
+    [self preparationBloodAnimation];
 }
 
 -(float)abs:(float)d
@@ -612,7 +630,7 @@ static CGFloat blinkBottomOriginY;
 
 -(void)cheackHitForShot:(CGPoint)shotPoint andTargetPoint:(CGPoint)targetPoint
 {
-
+    [gunDrumViewController explanePracticeClean];
     //Obstracles
     for (UIImageView *obstracle in self.floatView.subviews) {
         if(obstracle.tag != 1) continue;
@@ -722,10 +740,13 @@ static CGFloat blinkBottomOriginY;
         centerOfScreanPoint.y = self.crossImageView.bounds.origin.y + self.crossImageView.center.y;
  */
         
-        [self startRandomBloodAnimation];
-        [opponentShape hitTheOponentWithPoint:shotPoint mainView:self.view];
-        if (horseShape.hidden && opponentShape.typeOfBody == OpponentShapeTypeScarecrow) {
-            [self showGoodBodies];
+        CGRect opponentBodyFrame = [[opponentShape.imgBody superview] convertRect:opponentShape.imgBody.frame toView:self.view];
+        if (CGRectContainsPoint(opponentBodyFrame, shotPoint)) {
+            [self startRandomBloodAnimation];
+            [opponentShape hitTheOponentWithPoint:shotPoint mainView:self.view];
+            if (horseShape.hidden && opponentShape.typeOfBody == OpponentShapeTypeScarecrow) {
+                [self performSelector:@selector(showGoodBodies) withObject:nil afterDelay:1.0f];
+            }
         }
         [self shotToOponent];
 
@@ -735,9 +756,6 @@ static CGFloat blinkBottomOriginY;
 
 -(void)startRandomBloodAnimation
 {
-    if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow)
-        return;
-        
     int numberOfAnimation = rand() % 5;
     switch (numberOfAnimation) {
         case 0:
@@ -1093,6 +1111,7 @@ static CGFloat blinkBottomOriginY;
 
 -(void) showGoodBodies
 {
+    [gunDrumViewController explanePractice];
     womanShape.hidden = NO;
     goodCowboyShape.hidden = NO;
     horseShape.hidden = NO;

@@ -22,4 +22,7 @@ typedef void (^GunDrumViewControllerResult)();
 -(void)hideGun;
 -(void)closeController;
 -(void)shotAnimation;
+-(void)explanePractice;
+-(void)explanePracticeClean;
+
 @end
