@@ -91,8 +91,8 @@ static CGFloat oponentLiveImageViewStartWidth;
 -(void) moveAnimation;
 {
     
-    
 }
+
 -(void)moveOponentInBackground
 {
     int randomDirection = rand() % 3 - 1;

@@ -22,6 +22,7 @@
 #import "FavouritesViewController.h"
 #import "FavouritesDataSource.h"
 #import "UIView+Dinamic_BackGround.h"
+#import "VisualViewCharacterViewController.h"
 
 static const CGFloat changeYPointWhenKeyboard = 155;
 static const CGFloat timeToStandartTitles = 1.8;
@@ -70,6 +71,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     __weak IBOutlet FBProfilePictureView *profilePictureView;
     
     __weak IBOutlet UIButton *duelButton;
+    __weak IBOutlet UIButton *builderButton;
     
     __weak IBOutlet UILabel *lbPointsCountMain;
     __weak IBOutlet UIImageView *ivCurrentRank;
@@ -1097,6 +1099,10 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                                                         object:self
                                                       userInfo:[NSDictionary dictionaryWithObject:@"/ProfileVC_add_favorite" forKey:@"page"]];
 }
+- (IBAction)btnBuilderClick:(id)sender {
+    VisualViewCharacterViewController *visualViewCharacterViewController = [[VisualViewCharacterViewController alloc] init];
+    [self.navigationController pushViewController:visualViewCharacterViewController animated:NO];
+}
 
 #pragma mark IconDownloaderDelegate
 - (void)appImageDidLoad:(NSIndexPath *)indexPath
@@ -1116,6 +1122,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     btnAddToFavorites = nil;
     btnFavourites = nil;
     lbFavouritesTitle = nil;
+    builderButton = nil;
     [super viewDidUnload];
 }
 @end

@@ -30,9 +30,6 @@
 
 #import "FunPageViewController.h"
 #import "ActiveDuelViewController.h"
-
-#import "VisualViewCharacterViewController.h"
-
 #define kTwitterSettingsButtonIndex 0
 
 @interface StartViewController ()
@@ -801,9 +798,6 @@ static StartViewController *sharedHelper = nil;
 
 -(IBAction)showHelp:(id)sender
 {
-    VisualViewCharacterViewController *visualViewCharacterViewController = [[VisualViewCharacterViewController alloc] init];
-    [self.navigationController pushViewController:visualViewCharacterViewController animated:NO];
-    return;
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/help_click" forKey:@"event"]];
