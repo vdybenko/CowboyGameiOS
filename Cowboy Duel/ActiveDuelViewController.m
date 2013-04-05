@@ -340,41 +340,45 @@ static CGFloat blinkBottomOriginY;
     
 }
 -(void)preparationBloodAnimation{
-
-    UIImage *spriteSheetBlood;
-    UIImage *spriteSheetBloodC;
     
     if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow)
     {
-        spriteSheetBlood = [UIImage imageNamed:@"blood_aScrCr"];
-        spriteSheetBloodC = [UIImage imageNamed:@"blood_cScrCr"];
+        NSArray *imgDieArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"blod_cFrame1Sc.png"], [UIImage imageNamed:@"blod_cFrame2Sc.png"],[UIImage imageNamed:@"blod_cFrame3Sc.png"],
+                                [UIImage imageNamed:@"blod_cFrame4Sc.png"], [UIImage imageNamed:@"blod_cFrame5Sc.png"],[UIImage imageNamed:@"blod_cFrame6Sc.png"], nil];
+        
+        self.bloodCImageView.animationImages = imgDieArray;
+        self.bloodCImageView.animationDuration = 0.6f;
+        [self.bloodCImageView setAnimationRepeatCount:1];
+        imgDieArray = nil;
+        
+        NSArray *imgDieArray2 = [NSArray arrayWithObjects:[UIImage imageNamed:@"blod_aFrame1Scr.png"], [UIImage imageNamed:@"blod_aFrame2Scr.png"],[UIImage imageNamed:@"blod_aFrame3Scr.png"],
+                                [UIImage imageNamed:@"blod_aFrame4Scr.png"], [UIImage imageNamed:@"blod_aFrame5Scr.png"],[UIImage imageNamed:@"blod_aFrame6Scr.png"], nil];
+        
+        self.bloodImageView.animationImages = imgDieArray2;
+        self.bloodImageView.animationDuration = 0.6f;
+        [self.bloodImageView setAnimationRepeatCount:1];
+        imgDieArray2 = nil;
+
         
     }
     else
     {
-        spriteSheetBlood = [UIImage imageNamed:@"blood_a"];
-        spriteSheetBloodC = [UIImage imageNamed:@"blood_c"];
+        NSArray *imgDieArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"blod_cFrame1Real.png"], [UIImage imageNamed:@"blod_cFrame2Real.png"],[UIImage imageNamed:@"blod_cFrame3Real.png"],
+                                [UIImage imageNamed:@"blod_cFrame4Real.png"], [UIImage imageNamed:@"blod_cFrame5Real.png"],[UIImage imageNamed:@"blod_cFrame6Real.png"], nil];
+        
+        self.bloodCImageView.animationImages = imgDieArray;
+        self.bloodCImageView.animationDuration = 0.6f;
+        [self.bloodCImageView setAnimationRepeatCount:1];
+        imgDieArray = nil;
+        
+        NSArray *imgDieArray2 = [NSArray arrayWithObjects:[UIImage imageNamed:@"blod_aFrame1Real.png"], [UIImage imageNamed:@"blod_aFrame2Real.png"],[UIImage imageNamed:@"blod_aFrame3Real.png"],
+                                 [UIImage imageNamed:@"blod_aFrame4Real.png"], [UIImage imageNamed:@"blod_aFrame5Real.png"],[UIImage imageNamed:@"blod_aFrame6Real.png"], nil];
+        
+        self.bloodImageView.animationImages = imgDieArray2;
+        self.bloodImageView.animationDuration = 0.6f;
+        [self.bloodImageView setAnimationRepeatCount:1];
+        imgDieArray = nil;
     }
-    
-    NSArray *arrayWithSpritesBlood = [spriteSheetBlood spritesWithSpriteSheetImage:spriteSheetBlood
-                                                                        spriteSize:CGSizeMake(64, 64)];
-    [self.bloodImageView setAnimationImages:arrayWithSpritesBlood];
-    float animationDurationBlood = [self.bloodImageView.animationImages count] * 0.100; // 100ms per frame
-    [self.bloodImageView setAnimationRepeatCount:1];
-    [self.bloodImageView setAnimationDuration:animationDurationBlood];
-    arrayWithSpritesBlood = nil;
-    spriteSheetBlood = nil;
-    
-    NSArray *arrayWithSpritesBloodC = [spriteSheetBloodC spritesWithSpriteSheetImage:spriteSheetBloodC
-                                                                          spriteSize:CGSizeMake(64, 64)];
-    [self.bloodCImageView setAnimationImages:arrayWithSpritesBloodC];
-    float animationDurationBloodC = [self.bloodCImageView.animationImages count] * 0.100; // 100ms per frame
-    [self.bloodCImageView setAnimationRepeatCount:1];
-    [self.bloodCImageView setAnimationDuration:animationDurationBloodC];
-    arrayWithSpritesBloodC = nil;
-    spriteSheetBloodC = nil;
-
-
 
 }
 -(void)viewWillAppear:(BOOL)animated
