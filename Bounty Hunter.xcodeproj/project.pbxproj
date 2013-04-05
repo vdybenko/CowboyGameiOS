@@ -101,6 +101,8 @@
 		3167BAE615CAA75F00AF2745 /* fin_img_light_bckgr2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BAC415CAA75F00AF2745 /* fin_img_light_bckgr2.png */; };
 		3167BAE715CAA75F00AF2745 /* fin_img_light_bckgr2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BAC515CAA75F00AF2745 /* fin_img_light_bckgr2@2x.png */; };
 		3167BAE815CAA75F00AF2745 /* fin_img_light_bckgr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BAC615CAA75F00AF2745 /* fin_img_light_bckgr@2x.png */; };
+		316BBFE3170EB412009C23BA /* FinalStatsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 316BBFE2170EB412009C23BA /* FinalStatsView.xib */; };
+		316BBFE6170EB60F009C23BA /* FinalStatsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 316BBFE5170EB60F009C23BA /* FinalStatsView.m */; };
 		317162B8170D5D6700F068A9 /* UIView+ColorOfPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 317162B7170D5D6700F068A9 /* UIView+ColorOfPoint.m */; };
 		3187725716CA833A00D90797 /* pv_wanted_back-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3187725516CA833A00D90797 /* pv_wanted_back-568h@2x.png */; };
 		3187725816CA833A00D90797 /* pv_wanted_photo_frame-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3187725616CA833A00D90797 /* pv_wanted_photo_frame-568h@2x.png */; };
@@ -1000,6 +1002,9 @@
 		3167BAC415CAA75F00AF2745 /* fin_img_light_bckgr2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fin_img_light_bckgr2.png; sourceTree = "<group>"; };
 		3167BAC515CAA75F00AF2745 /* fin_img_light_bckgr2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fin_img_light_bckgr2@2x.png"; sourceTree = "<group>"; };
 		3167BAC615CAA75F00AF2745 /* fin_img_light_bckgr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fin_img_light_bckgr@2x.png"; sourceTree = "<group>"; };
+		316BBFE2170EB412009C23BA /* FinalStatsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FinalStatsView.xib; path = Xib/FinalStatsView.xib; sourceTree = "<group>"; };
+		316BBFE4170EB60F009C23BA /* FinalStatsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinalStatsView.h; sourceTree = "<group>"; };
+		316BBFE5170EB60F009C23BA /* FinalStatsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinalStatsView.m; sourceTree = "<group>"; };
 		317162B6170D5D6700F068A9 /* UIView+ColorOfPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ColorOfPoint.h"; sourceTree = "<group>"; };
 		317162B7170D5D6700F068A9 /* UIView+ColorOfPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ColorOfPoint.m"; sourceTree = "<group>"; };
 		3187725516CA833A00D90797 /* pv_wanted_back-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pv_wanted_back-568h@2x.png"; sourceTree = "<group>"; };
@@ -2400,6 +2405,7 @@
 				764B891D165FCC660014E35B /* ListOnLine */,
 				764B891C165FCC4E0014E35B /* TopPlayer */,
 				767BA5BD1589F8E300825EB1 /* FinalViewController.xib */,
+				316BBFE2170EB412009C23BA /* FinalStatsView.xib */,
 				768321D71654DB2400E78A8C /* Store */,
 			);
 			name = Xib;
@@ -2968,6 +2974,8 @@
 				7606709516F7324B00079F69 /* UILabel+FlyingPoint.m */,
 				76F71902165A6AD700719D8A /* UIView+Frame.h */,
 				76F71903165A6AD700719D8A /* UIView+Frame.m */,
+				316BBFE4170EB60F009C23BA /* FinalStatsView.h */,
+				316BBFE5170EB60F009C23BA /* FinalStatsView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -3477,6 +3485,7 @@
 				46E3C4C6170D60DD00A59E98 /* cactusFrame6.png in Resources */,
 				46E3C4C9170D69CC00A59E98 /* blood_aScrCr.png in Resources */,
 				46E3C4CA170D69CC00A59E98 /* blood_cScrCr.png in Resources */,
+				316BBFE3170EB412009C23BA /* FinalStatsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3880,6 +3889,7 @@
 				BD357C921703504E0079F68A /* GameSceneConfig.m in Sources */,
 				76C13EA51709B2EE0093AE0D /* UIImage+Retina4.m in Sources */,
 				317162B8170D5D6700F068A9 /* UIView+ColorOfPoint.m in Sources */,
+				316BBFE6170EB60F009C23BA /* FinalStatsView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

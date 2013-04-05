@@ -25,6 +25,7 @@
 #import "AirBallon.h"
 #import "HorseShape.h"
 #import "UIView+ColorOfPoint.h"
+#import "FinalStatsView.h"
 #define targetHeight 260
 #define targetWeidth 100
 #define MOVE_DISTANCE 100
@@ -89,6 +90,8 @@
     GoodCowboy *goodCowboyShape;
     WomanShape *womanShape;
     OpponentShape *opponentShape;
+    
+    FinalStatsView *finalView;
   
     __weak IBOutlet UIImageView *blinkBottom;
     __weak IBOutlet UIImageView *blinkTop;
@@ -827,6 +830,8 @@ static CGFloat blinkBottomOriginY;
         FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime) andOponentTime:999999 andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
 
         [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:1.0];
+
+//        [self performSelector:@selector(showFinalView) withObject:nil afterDelay:1.0];
         [timer invalidate];
         [moveTimer invalidate];
     }
@@ -857,13 +862,16 @@ static CGFloat blinkBottomOriginY;
             gameCenterViewController = nil;
         else
             teaching = NO;
+
         FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime) andOponentTime:opponentTime andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
         
         [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
+//        [self performSelector:@selector(showFinalView) withObject:nil afterDelay:2.0];
         [timer invalidate];
         [moveTimer invalidate];
         
         [self opponentLost];
+        
     }
 
 }
@@ -891,9 +899,11 @@ static CGFloat blinkBottomOriginY;
         BOOL teaching = YES;
         if (!self.delegate) gameCenterViewController = nil;
         else teaching = NO;
+        
         FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:0 andOponentTime:10 andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
         
         [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
+//        [self performSelector:@selector(showFinalView) withObject:nil afterDelay:2.0];
     }
 }
 
@@ -958,6 +968,16 @@ static CGFloat blinkBottomOriginY;
 
 - (void) dismissWithController:(UIViewController *)controller {
     [self.navigationController pushViewController:controller animated:YES];
+}
+
+-(void)showFinalView;
+{   
+    CGRect finalFrame = CGRectMake(10, 90, 294, 165);
+
+    finalView = [[FinalStatsView alloc] initWithFrame:finalFrame andAccount:playerAccount];
+    [self.view addSubview:finalView];
+    [finalView startAnimationsWithDiffMoney:50 AndDiffPoints:50];
+
 }
 
 #pragma mark
