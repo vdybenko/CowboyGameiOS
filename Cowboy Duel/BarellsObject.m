@@ -10,7 +10,7 @@
 #import "UIImage+Sprite.h"
 #import <AVFoundation/AVFoundation.h>
 
-
+#import "UIView+ColorOfPoint.h"
 
 @interface BarellsObject ()
 {
@@ -41,8 +41,8 @@
             explosinPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFile error:&error];
             [explosinPlayer prepareToPlay];
         
-        NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"barelExp1.png"],
-                                [UIImage imageNamed:@"barelExp2.png"], [UIImage imageNamed:@"barelExp4.png"],[UIImage imageNamed:@"barelExp6.png"],
+        NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"barrelFrame1.png"],
+                                [UIImage imageNamed:@"barrelFrame2.png"], [UIImage imageNamed:@"barrelFrame3.png"],[UIImage imageNamed:@"barrelFrame4.png"],[UIImage imageNamed:@"barrelFrame5.png"],
                                 nil];
         barelAnimImg.animationImages = imgArray;
         barelAnimImg.animationDuration = 0.3f;
@@ -152,6 +152,42 @@
 
     }];
 }
+
+-(BOOL)shotInObstracleWithPoint:(CGPoint)point superViewOfPoint:(UIView *)view;
+{
+    CGRect convertBody;
+    switch (self.barellPosition) {
+        case BarellPositionHighest:
+            convertBody = [[self.barellView superview] convertRect:self.barellImgHighest.frame toView:view];
+            
+            break;
+            
+        case BarellPositionMiddle:
+            convertBody = [[self.barellView superview] convertRect:self.barellImgMiddle.frame toView:view];
+            
+            break;
+            
+        case BarellPositionBottom:
+            convertBody = [[self.barellView superview] convertRect:self.barellImgBottom.frame toView:view];
+
+            break;
+
+        default:
+            break;
+    }
+    if (!CGRectContainsPoint(convertBody, point)) {
+        return NO;
+    }
+    
+    BOOL shotInShape;
+    
+    CGPoint convertPoint = [view convertPoint:point toView:self.barellView];
+    UIColor *color = [self.barellView colorOfPoint:convertPoint];
+    shotInShape = (color != [color colorWithAlphaComponent:0.0f]);
+    
+    return shotInShape;
+}
+
 -(void)releaseComponents
 {
     barellView = nil;

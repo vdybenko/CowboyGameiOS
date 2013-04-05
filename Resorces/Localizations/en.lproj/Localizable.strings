@@ -185,6 +185,7 @@ p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font
 "LvlAchievText2" = "'. Your opponent has to shoot ";
 "LvlAchievText3" = " times in a row to kill you";
 
+"SKIP" = "SKIP";
 
 //Gold achievment View
 "GoldAchievText1" = "";
@@ -280,6 +281,9 @@ You can upgrade this game right now through <b>iTunes Store</b>
 
 "1stIntro" = "Ye know who bounty hunters are, boy? We chase criminals 'n get a reward for 'em, dead or alive. The harder to get these bastards are, the bigger’s the reward for their head.";
 "2ndIntro" = "Help me get'em bad guys, and ye'll get yer freedom and be a bounty hunter yerself.  But remember: their guns are fast. Ye better be faster.";
+
+"ExplanePractice" = "Shoot carefully, if you get into a civilian, you put yourself harm!";
+
 //Win/Lose View
 "YouEarned" = "You earned:";
 "YouLost" = "You lost:";

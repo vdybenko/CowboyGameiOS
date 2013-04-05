@@ -24,9 +24,10 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UIImageView *barellImgMiddle;
 
 
-
 @property (nonatomic) BarellPosition barellPosition;
 -(void)explosionAnimation;
 -(void)showBonus;
 -(BOOL) isShownBonus;
+-(BOOL)shotInObstracleWithPoint:(CGPoint)point superViewOfPoint:(UIView *)view;
+
 @end

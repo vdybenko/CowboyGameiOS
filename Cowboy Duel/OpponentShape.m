@@ -11,11 +11,13 @@
 #import "UIImage+Sprite.h"
 #import <AVFoundation/AVFoundation.h>
 #import "UILabel+FlyingPoint.h"
+#import "UIView+ColorOfPoint.h"
 
 @interface OpponentShape ()
 {
     IBOutlet UIView *vContainer;
     AVAudioPlayer *oponentShotAudioPlayer;
+    CGPoint anchP;
 }
 @end
 
@@ -23,6 +25,7 @@
 @synthesize imgBody;
 @synthesize imgShot;
 @synthesize ivLifeBar;
+@synthesize typeOfBody;
 @synthesize lbLifeLeft;
 @synthesize opponentShapeStatus;
 @synthesize imgDieOpponentAnimation;
@@ -33,6 +36,7 @@ static CGFloat oponentLiveImageViewStartWidth;
 {
     self = [super initWithCoder:aDecoder subViewFromNibFileName:@"OpponentShape"];
     if(self){
+    
         UIImage *spriteSheetSmoke = [UIImage imageNamed:@"smokeSpriteSheet"];
         NSArray *arrayWithSpritesSmoke = [spriteSheetSmoke spritesWithSpriteSheetImage:spriteSheetSmoke
                                                                             spriteSize:CGSizeMake(64, 64)];
@@ -57,7 +61,6 @@ static CGFloat oponentLiveImageViewStartWidth;
         NSError *error;
         oponentShotAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
         [oponentShotAudioPlayer prepareToPlay];
-        
         opponentShapeStatus = OpponentShapeStatusLive;
     }
     return self;
@@ -80,7 +83,9 @@ static CGFloat oponentLiveImageViewStartWidth;
 
 -(void) moveAnimation;
 {
-    
+    if (self.typeOfBody == OpponentShapeTypeScarecrow) {
+        return;
+    }
     NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"oponent_step1.png"],
                        [UIImage imageNamed:@"oponent_step2.png"],
                        nil];
@@ -92,6 +97,9 @@ static CGFloat oponentLiveImageViewStartWidth;
 }
 -(void)moveOponentInBackground
 {
+    if (self.typeOfBody == OpponentShapeTypeScarecrow) {
+        return;
+    }
     int randomDirection = rand() % 3 - 1;
     [UIView animateWithDuration:0.2 animations:^{
         CGRect frame = self.frame;
@@ -141,17 +149,59 @@ static CGFloat oponentLiveImageViewStartWidth;
 -(void)reboundOnShot;
 {
     CGPoint body = self.center;
-    
-    int randPosition = (rand() % 50) + 50;
     int direction = rand() % 2?-1:1;
-    body.x = (body.x + direction*randPosition);
+    int randPosition;
     
+    if ( self.typeOfBody == OpponentShapeTypeScarecrow ){
+        randPosition = (rand() % 50) + 500;
+        body.x = (body.x + direction*randPosition);
+        self.center = body;
+        [self setHidden:NO];
+        return;
+    }
+    else
+        randPosition = (rand() % 50) + 50;
+
+    body.x = (body.x + direction*randPosition);
+
     [self moveAnimation];
     float duraction = (randPosition * 0.5)/100;
     [UIView animateWithDuration:duraction animations:^{
         self.center = body;
     }completion:^(BOOL complete){
         [self stopMoveAnimation];
+    }];
+}
+
+-(void)flip
+{
+    CGRect frame = self.frame;
+    int y = frame.origin.y;
+    frame.origin.y *=2;
+    anchP = self.layer.anchorPoint;
+    self.frame = frame;
+    self.layer.anchorPoint = CGPointMake(0.5, 1.0);
+    
+    [UIView animateWithDuration:0.7 delay:0.2 options:UIViewAnimationCurveEaseOut animations:^{
+        // Flip Down
+        self.layer.transform = CATransform3DMakeRotation(M_PI/2, 1, 0, 0);
+    } completion:^(BOOL finished) {
+        [self cleareDamage];
+        [self reboundOnShot];
+        [UIView animateWithDuration:0.7 delay:0.2 options:UIViewAnimationCurveEaseOut animations:^{
+            // Flip Up
+            self.layer.transform = CATransform3DMakeScale(1, 1, 1);
+            self.layer.anchorPoint = anchP;
+            CGRect frame = self.frame;
+            frame.origin.y = y;
+            self.frame = frame;
+            
+        } completion:^(BOOL finished) {
+           
+            
+        }];
+
+       
     }];
 }
 
@@ -217,16 +267,41 @@ static CGFloat oponentLiveImageViewStartWidth;
         }
             break;
         case OpponentShapeStatusLive:
-            imgBody.image = [UIImage imageNamed:@"men_low.png"];
+            [self setBodyType:self.typeOfBody];
             break;
         default:
             break;
     }
 }
+
+-(void)setBodyType:(OpponentShapeType)type;
+{
+    switch (type) {
+        case OpponentShapeTypeMan:
+            imgBody.image = [UIImage imageNamed:@"ivMan.png"];
+            break;
+        case OpponentShapeTypeManLow:
+            imgBody.image = [UIImage imageNamed:@"men_low.png"];
+            break;
+        case OpponentShapeTypeScarecrow:
+            imgBody.image = [UIImage imageNamed:@"scarecrow.png"];
+            break;
+        default:
+            break;
+    }
+    
+}
+
 -(void) hitTheOponentWithPoint:(CGPoint)hitPoint mainView:(UIView*)mainView;
 {
     
-    UIImageView *ivHit = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ivHit.png"]];
+    UIImageView *ivHit;
+    if(self.typeOfBody == OpponentShapeTypeScarecrow){
+        ivHit= [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ivHitPractice.png"]];
+    } else{
+        ivHit= [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ivHit.png"]];  
+    }
+    
     CGPoint convertPoint = [mainView convertPoint:hitPoint toView:imgBody];
     ivHit.center = convertPoint;
     [imgBody addSubview:ivHit];
@@ -276,7 +351,28 @@ static CGFloat oponentLiveImageViewStartWidth;
             break;
     }
     
-    [self reboundOnShot];
+    if (self.typeOfBody == OpponentShapeTypeScarecrow) {
+        [self flip];
+    }else
+        [self reboundOnShot];
+}
+
+-(BOOL)shotInShapeWithPoint:(CGPoint)point superViewOfPoint:(UIView *)view;
+{
+    CGRect opponentBodyFrame = [[imgBody superview] convertRect:imgBody.frame toView:view];
+        
+    BOOL shotInFrame = (CGRectContainsPoint(opponentBodyFrame, point));
+    BOOL shotInShape;
+    
+    CGPoint convertPoint = [view convertPoint:point toView:imgBody];
+
+    UIColor *color = [imgBody colorOfPoint:convertPoint];
+
+    shotInShape = (color != [color colorWithAlphaComponent:0.0f]);
+    
+    NSLog(@"shotInShape: %@",(shotInShape)?@"YES":@"NO");
+    
+    return (shotInFrame && shotInShape);
 }
 
 -(void) cleareDamage;

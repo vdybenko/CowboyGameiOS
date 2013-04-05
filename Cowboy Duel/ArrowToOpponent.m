@@ -35,7 +35,9 @@
         leftArrow.transform = transformMirror;
         
         CGRect cropRect = CGRectMake(95, 0, 140, 140);
-        CGImageRef subImageRef = CGImageCreateWithImageInRect([[UIImage imageNamed:@"men_low.png"] CGImage], cropRect);
+        CGImageRef subImageRef;
+        subImageRef = CGImageCreateWithImageInRect([[UIImage imageNamed:@"men_low.png"] CGImage], cropRect);
+     
         CGRect smallBounds = CGRectMake(cropRect.origin.x, cropRect.origin.y, CGImageGetWidth(subImageRef), CGImageGetHeight(subImageRef));
         
         UIGraphicsBeginImageContext(smallBounds.size);
@@ -53,6 +55,20 @@
         ivOpponent.layer.cornerRadius = ivOpponent.frame.size.width/2;
     }
     return self;
+}
+
+-(void)changeImgForPractice;
+{
+    CGRect cropRect = CGRectMake(180, 0, 240, 240);
+    CGImageRef subImageRef = CGImageCreateWithImageInRect([[UIImage imageNamed:@"scarecrow.png"] CGImage], cropRect);
+    CGRect smallBounds = CGRectMake(cropRect.origin.x, cropRect.origin.y, CGImageGetWidth(subImageRef), CGImageGetHeight(subImageRef));
+    
+    UIGraphicsBeginImageContext(smallBounds.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextDrawImage(context, smallBounds, subImageRef);
+    UIImage* smallImg = [UIImage imageWithCGImage:subImageRef];
+    UIGraphicsEndImageContext();
+    [ivOpponent setImage:smallImg];
 }
 
 -(void)releaseComponents

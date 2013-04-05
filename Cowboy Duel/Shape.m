@@ -7,6 +7,7 @@
 //
 
 #import "Shape.h"
+#import "UIView+ColorOfPoint.h"
 
 @implementation Shape
 @synthesize imageMain;
@@ -32,7 +33,14 @@
 -(BOOL)shotInShapeWithPoint:(CGPoint)point superViewOfPoint:(UIView *)view;
 {
     CGRect convertBody = [[self.imageMain superview] convertRect:self.imageMain.frame toView:view];
-    if (CGRectContainsPoint(convertBody, point)) {
+    BOOL shotInShape;
+    
+    CGPoint convertPoint = [view convertPoint:point toView:self.imageMain];
+    
+    UIColor *color = [self.imageMain colorOfPoint:convertPoint];
+    
+    shotInShape = (color != [color colorWithAlphaComponent:0.0f]);
+    if (CGRectContainsPoint(convertBody, point) && shotInShape) {
         return YES;
     }else{
         return NO;

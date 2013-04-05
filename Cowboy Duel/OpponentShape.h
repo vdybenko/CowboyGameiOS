@@ -14,14 +14,21 @@ typedef enum {
     OpponentShapeStatusDead,
 } OpponentShapeStatus;
 
+typedef enum {
+    OpponentShapeTypeManLow,
+    OpponentShapeTypeMan,
+    OpponentShapeTypeScarecrow
+}OpponentShapeType;
+
 @interface OpponentShape : Shape<MemoryManagement>
+
 @property (weak, nonatomic) IBOutlet UIImageView *imgBody;
 @property (weak, nonatomic) IBOutlet UIImageView *imgShot;
 @property (weak, nonatomic) IBOutlet UIView *ivLifeBar;
 @property (weak, nonatomic) IBOutlet UILabel *lbLifeLeft;
 @property (weak, nonatomic) IBOutlet UIImageView *imgDieOpponentAnimation;
 @property (nonatomic) OpponentShapeStatus opponentShapeStatus;
-
+@property (nonatomic) OpponentShapeType typeOfBody;
 
 -(void) moveAnimation;
 -(void)moveOponentInBackground;
@@ -34,6 +41,7 @@ typedef enum {
 -(void) refreshLiveBarWithLives: (int )lives;
 
 -(void) setStatusBody:(OpponentShapeStatus)status;
+-(void) setBodyType:(OpponentShapeType)type;
 
 -(void) hitTheOponentWithPoint:(CGPoint)hitPoint mainView:(UIView*)mainView;
 -(void) cleareDamage;

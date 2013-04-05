@@ -8,6 +8,7 @@
 
 #import "CactusObject.h"
 #import "UIImage+Sprite.h"
+#import "UIView+ColorOfPoint.h"
 
 @implementation CactusObject
 
@@ -26,9 +27,9 @@
         
         [self choiceImg];
         
-        NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"cactusFraim1.png"],
-                             [UIImage imageNamed:@"cactusFraim2.png"], [UIImage imageNamed:@"cactusFraim3.png"],[UIImage imageNamed:@"cactusFraim4.png"], [UIImage imageNamed:@"cactusFraim5.png"],[UIImage imageNamed:@"cactusFraim6.png"],[UIImage imageNamed:@"cactusFraim7.png"],
-                             nil];
+        NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"cactusFrame1.png"],
+                             [UIImage imageNamed:@"cactusFrame2.png"], [UIImage imageNamed:@"cactusFrame3.png"],[UIImage imageNamed:@"cactusFrame4.png"], [UIImage imageNamed:@"cactusFrame5.png"],[UIImage imageNamed:@"cactusFrame6.png"],  nil];
+        
         cactusImg.animationImages = imgArray;
         cactusImg.animationDuration = 0.5f;
         [cactusImg setAnimationRepeatCount:1];
@@ -48,6 +49,24 @@
      [cactusImg startAnimating];
     [self performSelector:@selector(hideObj) withObject:nil afterDelay:0.4f];
 }
+
+-(BOOL)shotInObstracleWithPoint:(CGPoint)point superViewOfPoint:(UIView *)view;
+{
+    CGRect convertBody;
+    convertBody = [[self.cactusView superview] convertRect:self.cactusImg.frame toView:view];
+    if (!CGRectContainsPoint(convertBody, point)) {
+        return NO;
+    }
+    
+    BOOL shotInShape;
+    
+    CGPoint convertPoint = [view convertPoint:point toView:self.cactusView];
+    UIColor *color = [self.cactusView colorOfPoint:convertPoint];
+    shotInShape = (color != [color colorWithAlphaComponent:0.0f]);
+    
+    return shotInShape;
+}
+
 -(void)hideObj{
     
     [cactusImg stopAnimating];

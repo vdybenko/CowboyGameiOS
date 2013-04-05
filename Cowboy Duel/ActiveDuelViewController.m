@@ -8,6 +8,7 @@
 
 #import "ActiveDuelViewController.h"
 #import "UIImage+Sprite.h"
+#import "UIButton+Image+Title.h"
 #import "math.h"
 #import <QuartzCore/QuartzCore.h>
 #import "DuelRewardLogicController.h"
@@ -23,6 +24,7 @@
 #import "CactusObject.h"
 #import "AirBallon.h"
 #import "HorseShape.h"
+#import "UIView+ColorOfPoint.h"
 #define targetHeight 260
 #define targetWeidth 100
 #define MOVE_DISTANCE 100
@@ -111,6 +113,8 @@
 @property (weak, nonatomic) IBOutlet UIView *userLiveImageView;
 @property (weak, nonatomic) IBOutlet UILabel *lbUserLifeLeft;
 
+@property (weak, nonatomic) IBOutlet UIButton *btnSkip;
+
 
 @end
 
@@ -118,6 +122,7 @@
 @synthesize delegate;
 @synthesize glassImageViewAllBackground;
 @synthesize lbUserLifeLeft;
+@synthesize btnSkip;
 
 static CGFloat userLiveImageViewStartWidth;
 static CGFloat blinkTopOriginY;
@@ -156,27 +161,7 @@ static CGFloat blinkBottomOriginY;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    UIImage *spriteSheetBlood = [UIImage imageNamed:@"blood_a"];
-    NSArray *arrayWithSpritesBlood = [spriteSheetBlood spritesWithSpriteSheetImage:spriteSheetBlood
-                                                              spriteSize:CGSizeMake(64, 64)];
-    [self.bloodImageView setAnimationImages:arrayWithSpritesBlood];
-    float animationDurationBlood = [self.bloodImageView.animationImages count] * 0.100; // 100ms per frame
-    [self.bloodImageView setAnimationRepeatCount:1];
-    [self.bloodImageView setAnimationDuration:animationDurationBlood];
-    arrayWithSpritesBlood = nil;
-    spriteSheetBlood = nil;
-    
-    UIImage *spriteSheetBloodC = [UIImage imageNamed:@"blood_c"];
-    NSArray *arrayWithSpritesBloodC = [spriteSheetBloodC spritesWithSpriteSheetImage:spriteSheetBloodC
-                                                                        spriteSize:CGSizeMake(64, 64)];
-    [self.bloodCImageView setAnimationImages:arrayWithSpritesBloodC];
-    float animationDurationBloodC = [self.bloodCImageView.animationImages count] * 0.100; // 100ms per frame
-    [self.bloodCImageView setAnimationRepeatCount:1];
-    [self.bloodCImageView setAnimationDuration:animationDurationBloodC];
-    arrayWithSpritesBloodC = nil;
-    spriteSheetBloodC = nil;
-    
+       
     shotCountForSound = 1;
 
     plView = (PLView *)self.view;
@@ -354,7 +339,44 @@ static CGFloat blinkBottomOriginY;
     blinkBottomOriginY = blinkBottom.frame.origin.y;
     
 }
+-(void)preparationBloodAnimation{
 
+    UIImage *spriteSheetBlood;
+    UIImage *spriteSheetBloodC;
+    
+    if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow)
+    {
+        spriteSheetBlood = [UIImage imageNamed:@"blood_aScrCr"];
+        spriteSheetBloodC = [UIImage imageNamed:@"blood_cScrCr"];
+        
+    }
+    else
+    {
+        spriteSheetBlood = [UIImage imageNamed:@"blood_a"];
+        spriteSheetBloodC = [UIImage imageNamed:@"blood_c"];
+    }
+    
+    NSArray *arrayWithSpritesBlood = [spriteSheetBlood spritesWithSpriteSheetImage:spriteSheetBlood
+                                                                        spriteSize:CGSizeMake(64, 64)];
+    [self.bloodImageView setAnimationImages:arrayWithSpritesBlood];
+    float animationDurationBlood = [self.bloodImageView.animationImages count] * 0.100; // 100ms per frame
+    [self.bloodImageView setAnimationRepeatCount:1];
+    [self.bloodImageView setAnimationDuration:animationDurationBlood];
+    arrayWithSpritesBlood = nil;
+    spriteSheetBlood = nil;
+    
+    NSArray *arrayWithSpritesBloodC = [spriteSheetBloodC spritesWithSpriteSheetImage:spriteSheetBloodC
+                                                                          spriteSize:CGSizeMake(64, 64)];
+    [self.bloodCImageView setAnimationImages:arrayWithSpritesBloodC];
+    float animationDurationBloodC = [self.bloodCImageView.animationImages count] * 0.100; // 100ms per frame
+    [self.bloodCImageView setAnimationRepeatCount:1];
+    [self.bloodCImageView setAnimationDuration:animationDurationBloodC];
+    arrayWithSpritesBloodC = nil;
+    spriteSheetBloodC = nil;
+
+
+
+}
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -412,11 +434,9 @@ static CGFloat blinkBottomOriginY;
     self.lblBehold.gradientEndColor = [UIColor colorWithRed:255.0/255.0 green:140.0/255.0 blue:0.0/255.0 alpha:1.0];
   
     steadyScale = 1.0;
-
+    
+    [self hideGoodBodies];
     opponentShape.hidden = YES;
-    womanShape.hidden = YES;
-    horseShape.hidden = YES;
-    goodCowboyShape.hidden = YES;
     arrowToOpponent.hidden = YES;
     [arrowToOpponent setDirection:ArrowToOpponentDirectionRight];
     
@@ -485,6 +505,7 @@ static CGFloat blinkBottomOriginY;
     arrowToOpponent = nil;
     [self setLbUserLifeLeft:nil];
     horseShape = nil;
+    [self setBtnSkip:nil];
     [super viewDidUnload];
 }
 
@@ -509,14 +530,22 @@ static CGFloat blinkBottomOriginY;
     {
         if ([opAccount isPlayerForPractice]) {
             countBulletsForOpponent = 4;
+            opponentShape.typeOfBody = OpponentShapeTypeScarecrow;
+            shotCountBullet = 3;
+            maxShotCount = 3;
         }else{
             countBulletsForOpponent = [DuelRewardLogicController countUpBuletsWithOponentLevel:playerAccount.accountLevel defense:playerAccount.accountDefenseValue playerAtack:opAccount.accountWeapon.dDamage];
+            opponentShape.typeOfBody = OpponentShapeTypeManLow;
         }
     }else{
         countBulletsForOpponent = 5;
+        opponentShape.typeOfBody = OpponentShapeTypeScarecrow;
+        maxShotCount = 3;
+        shotCountBullet = 3;
    }
     shotCountBulletForOpponent =  countBulletsForOpponent;
     maxShotCountForOpponent = countBulletsForOpponent;
+    [self preparationBloodAnimation];
 }
 
 -(float)abs:(float)d
@@ -602,7 +631,7 @@ static CGFloat blinkBottomOriginY;
 
 -(void)cheackHitForShot:(CGPoint)shotPoint andTargetPoint:(CGPoint)targetPoint
 {
-
+    [gunDrumViewController explanePracticeClean];
     //Obstracles
     for (UIImageView *obstracle in self.floatView.subviews) {
         if(obstracle.tag != 1) continue;
@@ -616,95 +645,103 @@ static CGFloat blinkBottomOriginY;
     }
     
     BOOL shotOnObstracle = NO;
-
+    BOOL shotInShape;
+    
     CGRect baloonFrame = [airBallon convertRect:airBallon.airBallonImg.frame toView:self.view];
     
-    if (CGRectContainsPoint(baloonFrame, shotPoint) && !airBallon.airBallonImg.hidden && !shotOnObstracle) {
-        [airBallon explosionAnimation];
-        shotOnObstracle = YES;
+    if (!shotOnObstracle && !airBallon.airBallonImg.hidden && CGRectContainsPoint(baloonFrame, shotPoint)) {
+        shotInShape = [airBallon shotInObstracleWithPoint:shotPoint superViewOfPoint:self.view];
+        if (shotInShape){
+            [airBallon explosionAnimation];
+            shotOnObstracle = YES;
+        }
     }
     
     for (CactusObject *cactus in cactusObjectArray) {
 
         CGRect cactusFrame = [cactus convertRect:cactus.cactusImg.frame toView:self.view];
         
-        if (CGRectContainsPoint(cactusFrame, shotPoint) && !cactus.cactusImg.hidden && !shotOnObstracle) {
-            [cactus explosionAnimation];
-            shotOnObstracle = YES;
+        if (!shotOnObstracle && !cactus.cactusImg.hidden && CGRectContainsPoint(cactusFrame, shotPoint)) {
+            
+            shotInShape = [cactus shotInObstracleWithPoint:shotPoint superViewOfPoint:self.view];
+            if (shotInShape){
+                [cactus explosionAnimation];
+                shotOnObstracle = YES;
+            }
         }
     }
     for (BarellsObject *barell in barellObjectArray) {
-        //Global IF shot on Barrel
-        CGRect barelHighestFrame = [barell convertRect:barell.barellImgHighest.frame toView:self.view];
-        CGRect barelMiddleFrame = [barell convertRect:barell.barellImgMiddle.frame toView:self.view];
-        CGRect barelBottomFrame = [barell convertRect:barell.barellImgBottom.frame toView:self.view];
-        
-        if (!barell.barellImgHighest.hidden
-            && CGRectContainsPoint(barelHighestFrame, shotPoint)
-            && !shotOnObstracle)
+        if (!barell.barellImgHighest.hidden && !shotOnObstracle && shotInShape)
         {
             barell.barellPosition = BarellPositionHighest;
-            [barell explosionAnimation];
-            shotOnObstracle = YES;
+            shotInShape = [barell shotInObstracleWithPoint:shotPoint superViewOfPoint:self.view];
+
+            if (shotInShape){
+                [barell explosionAnimation];
+                shotOnObstracle = YES;
+            }
            
         }
         
-        if (!barell.barellImgMiddle.hidden
-            && CGRectContainsPoint(barelMiddleFrame, shotPoint)
-            && !shotOnObstracle)
+        if (!barell.barellImgMiddle.hidden && !shotOnObstracle)
         {
             barell.barellPosition = BarellPositionMiddle;
-            [barell explosionAnimation];
-            shotOnObstracle = YES;
-        
+            shotInShape = [barell shotInObstracleWithPoint:shotPoint superViewOfPoint:self.view];
+            if (shotInShape){
+                [barell explosionAnimation];
+                shotOnObstracle = YES;
+            }
         }
         
-        if (!barell.barellImgBottom.hidden
-            && CGRectContainsPoint(barelBottomFrame, shotPoint)
-            && !shotOnObstracle)
+        if (!barell.barellImgBottom.hidden && !shotOnObstracle)
         {
             barell.barellPosition = BarellPositionBottom;
-            [barell explosionAnimation];
-            shotOnObstracle = YES;
-            
+            shotInShape = [barell shotInObstracleWithPoint:shotPoint superViewOfPoint:self.view];
+            if (shotInShape){
+                [barell explosionAnimation];
+                shotOnObstracle = YES;
+            }
         }
 
     }
+    if (shotOnObstracle == YES) {
+        return;
+    }
     
-    BOOL shotInHorse = [horseShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
-    BOOL resultWoman = [womanShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
-    BOOL resultGoodCowboy = [goodCowboyShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
-    if (resultWoman || resultGoodCowboy) {
+    BOOL shotInHorse = ([horseShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view] && !horseShape.hidden);
+    if (shotInHorse) {
+        
+        return;
+    }
+    BOOL resultWoman = ([womanShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view] && !womanShape.hidden);
+    if (resultWoman) {
+        [self opponentShot];
+        if(delegate) [delegate sendShotSelf];        
+        return;
+    }
+    BOOL resultGoodCowboy = ([goodCowboyShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view] && !goodCowboyShape.hidden);
+    if (resultGoodCowboy) {
         [self opponentShot];
         if(delegate) [delegate sendShotSelf];
         return;
     }
-    if (shotInHorse)
-        return;
-    if (shotOnObstracle == YES) {
-        return; 
-    }
     
-    if (([self abs:(shotPoint.x - targetPoint.x)] < targetWeidth / 2) && ([self abs:(shotPoint.y - targetPoint.y)] < targetHeight / 2)) {
+    BOOL resultOpponent = [opponentShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
+
+    if (resultOpponent) {
         
         if(delegate)
         {
             [delegate sendShot];
         }
         
-        CGPoint targetPoint;
-        targetPoint.x = opponentShape.center.x - (self.floatView.bounds.size.width / 2 - self.floatView.center.x);
-        targetPoint.y = opponentShape.center.y - (self.floatView.bounds.size.height / 2 - self.floatView.center.y);
-        
-        CGPoint centerOfScreanPoint;
-        centerOfScreanPoint.x = self.crossImageView.bounds.origin.x + self.crossImageView.center.x;
-        centerOfScreanPoint.y = self.crossImageView.bounds.origin.y + self.crossImageView.center.y;
-        
         CGRect opponentBodyFrame = [[opponentShape.imgBody superview] convertRect:opponentShape.imgBody.frame toView:self.view];
-        
         if (CGRectContainsPoint(opponentBodyFrame, shotPoint)) {
             [self startRandomBloodAnimation];
             [opponentShape hitTheOponentWithPoint:shotPoint mainView:self.view];
+            if (horseShape.hidden && opponentShape.typeOfBody == OpponentShapeTypeScarecrow) {
+                [self performSelector:@selector(showGoodBodies) withObject:nil afterDelay:1.0f];
+            }
         }
         [self shotToOponent];
 
@@ -744,6 +781,7 @@ static CGFloat blinkBottomOriginY;
         default:
             break;
     }
+   
 }
 
 -(void)updateOpponentViewToRamdomPosition
@@ -762,7 +800,7 @@ static CGFloat blinkBottomOriginY;
     if (duelEnd) return;
 
     [opponentShape shot];
-    
+
     shotCountBulletForOpponent--;
     
     CGRect frame = self.userLiveImageView.frame;
@@ -959,12 +997,21 @@ static CGFloat blinkBottomOriginY;
         [self.gunButton setEnabled:YES];
         [self.userLiveImageView setHidden:NO];
         opponentShape.hidden = NO;
-        womanShape.hidden = NO;
-        goodCowboyShape.hidden = NO;
-        horseShape.hidden = NO;
         
+        if (opponentShape.typeOfBody != OpponentShapeTypeScarecrow) {
+            [self showGoodBodies];
+        }else{
+            [arrowToOpponent changeImgForPractice];
+       
+            UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
+            
+            [btnSkip setTitleByLabel:@"SKIP" withColor:buttonsTitleColor fontSize:24];
+            [self.btnSkip setEnabled:YES];
+            [self.btnSkip setHidden:NO];
+            [self.view bringSubviewToFront:btnSkip];
+        }
         
-        if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
+        if(!delegate && opponentShape.typeOfBody != OpponentShapeTypeScarecrow) shotTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
         moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
         
         
@@ -1057,6 +1104,20 @@ static CGFloat blinkBottomOriginY;
     [self.lblBehold setHidden:YES];
 }
 
+-(void) showGoodBodies
+{
+    [gunDrumViewController explanePractice];
+    womanShape.hidden = NO;
+    goodCowboyShape.hidden = NO;
+    horseShape.hidden = NO;
+}
+
+-(void) hideGoodBodies
+{
+    womanShape.hidden = YES;
+    horseShape.hidden = YES;
+    goodCowboyShape.hidden = YES;
+}
 #pragma mark - Frequently of gun
 
 -(void)finishGunFrequentlyBlockTime
@@ -1071,6 +1132,20 @@ static CGFloat blinkBottomOriginY;
 }
 
 #pragma mark - IBAction
+
+- (IBAction)btnSkipClicked:(id)sender {
+    
+    if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
+        [self.navigationController popToViewController:[LoginAnimatedViewController sharedInstance] animated:YES];
+        [self releaseComponents];
+    }
+    else{
+        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+        [self releaseComponents];
+    }
+    
+}
+
 - (void)cancelHelpArmClick:(id)sender {
     [self hideHelpViewOnStartDuel];
 }
@@ -1110,15 +1185,15 @@ static CGFloat blinkBottomOriginY;
         [player play];
         [self vibrationStart];
         [self.gunButton setEnabled:YES];
+
         [self.userLiveImageView setHidden:NO];
 
-        if(!delegate) shotTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
-        moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
+        if(!delegate && opponentShape.typeOfBody != OpponentShapeTypeScarecrow){
+            shotTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
+            moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
+            [self showGoodBodies];
+        }
         opponentShape.hidden = NO;
-        womanShape.hidden = NO;
-        goodCowboyShape.hidden = NO;
-        horseShape.hidden = NO;
-        
     }
 }
 

@@ -136,7 +136,66 @@ static const CGFloat timeSpinDump = 0.3f;
     }
     return self;
 }
+-(void)explanePractice;
+{
+    hudView.hidden = NO;
+    hudView.alpha = 1;
+    CGRect frameView = self.textView.frame;
+    frameView.origin.y -= 200;
+    self.textView.frame = frameView;
+    [self.textView setDinamicHeightBackground];
+    [self.textLabel setText:NSLocalizedString(@"ExplanePractice", @"")];
+    [self.textView setHidden:NO];
+    [self.textLabel setHidden:NO];
+    
+    
+    
+    [UIView animateWithDuration:0.5 animations:^{//step 1
+        CGRect frameView = self.textView.frame;
+        frameView.origin.y += 220;
+        self.textView.frame = frameView;
+    }completion:^(BOOL complete){ //sterp2
+        [UIView animateWithDuration:0.2 animations:^{
+            CGRect frameView = self.textView.frame;
+            frameView.origin.y -= 40;
+            self.textView.frame = frameView;
+        }completion:^(BOOL complete){//step3 
+            [UIView animateWithDuration:0.2 animations:^{
+                CGRect frameView = self.textView.frame;
+                frameView.origin.y += 20;
+                self.textView.frame = frameView;
+            }completion:^(BOOL complete){
+                 [self performSelector:@selector(explanePracticeClean) withObject:nil afterDelay:5.0];
+            }];
 
+        }];
+    }];
+
+    
+   
+}
+-(void)explanePracticeClean;
+{
+    [UIView animateWithDuration:0.4 animations:^{//step 1
+        CGRect frameView = self.textView.frame;
+        frameView.origin.y += 50;
+        self.textView.frame = frameView;
+        
+    }completion:^(BOOL complete){ //sterp2
+        [UIView animateWithDuration:0.5 animations:^{
+            CGRect frameView = self.textView.frame;
+            frameView.origin.y -= 400;
+            self.textView.frame = frameView;
+        }completion:^(BOOL complete){//step3
+            CGRect frameView = self.textView.frame;
+            frameView.origin.y += 350;
+            self.textView.frame = frameView;
+            [self.textView setHidden:YES];
+            [self.textLabel setHidden:YES];
+            hudView.hidden = YES; 
+        }];
+    }]; 
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

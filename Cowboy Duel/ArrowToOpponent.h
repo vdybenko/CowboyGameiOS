@@ -16,7 +16,9 @@ typedef enum {
 
 @interface ArrowToOpponent : UIView<MemoryManagement>
 @property (weak, nonatomic) IBOutlet UIImageView *ivOpponent;
+
 - (void) setDirection:(ArrowToOpponentDirection)direction;
 - (void) updateRelateveToView:(UIView*)view mainView:(UIView*)mainView;
+- (void) changeImgForPractice;
 
 @end
