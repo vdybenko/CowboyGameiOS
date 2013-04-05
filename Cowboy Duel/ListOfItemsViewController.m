@@ -210,8 +210,8 @@
     [oponentAccount setSessionID:(player.sessionId) ? [NSString stringWithString:player.sessionId]:@""];
     
 //    To do delete this
-    oponentAccount.visualViewCap = rand() % 4;
-    oponentAccount.visualViewHead = rand() % 3;
+    oponentAccount.visualViewCap = rand() % 3;
+    oponentAccount.visualViewHead = rand() % 4;
     oponentAccount.visualViewBody = rand() % 3;
     oponentAccount.visualViewLegs = rand() % 2;
     oponentAccount.visualViewShoose = rand() % 2;

@@ -20,12 +20,13 @@
 @end
 
 @implementation OpponentShape
-@synthesize imgBody;
 @synthesize imgShot;
 @synthesize ivLifeBar;
 @synthesize lbLifeLeft;
 @synthesize opponentShapeStatus;
 @synthesize imgDieOpponentAnimation;
+@synthesize playerAccount;
+@synthesize visualViewCharacter;
 
 static CGFloat oponentLiveImageViewStartWidth;
 
@@ -67,7 +68,6 @@ static CGFloat oponentLiveImageViewStartWidth;
 -(void)releaseComponents
 {
     vContainer = nil;
-    imgBody = nil;
     imgShot = nil;
     ivLifeBar = nil;
     [imgDieOpponentAnimation stopAnimating];
@@ -76,19 +76,22 @@ static CGFloat oponentLiveImageViewStartWidth;
     oponentShotAudioPlayer = nil;
     opponentShapeStatus = nil;
     lbLifeLeft = nil;
+    [visualViewCharacter releaseComponents];
+    visualViewCharacter = nil;
+}
+
+#pragma mark
+
+-(void)refreshWithAccountPlayer:(AccountDataSource*)player;
+{
+    playerAccount = player;
+    [visualViewCharacter refreshWithAccountPlayer:playerAccount];
 }
 
 -(void) moveAnimation;
 {
     
-    NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"oponent_step1.png"],
-                       [UIImage imageNamed:@"oponent_step2.png"],
-                       nil];
-    imgBody.animationImages = imgArray;
-    imgBody.animationDuration = 0.6f;
-    [imgBody setAnimationRepeatCount:0];
-    [imgBody startAnimating];
-    imgArray = nil;
+    
 }
 -(void)moveOponentInBackground
 {
@@ -116,12 +119,11 @@ static CGFloat oponentLiveImageViewStartWidth;
     }else{
         [self moveAnimation];
     }
-
+    
 }
 
 -(void) stopMoveAnimation;
 {
-    [imgBody stopAnimating];
     if (opponentShapeStatus == OpponentShapeStatusLive) {
         [self setStatusBody:OpponentShapeStatusLive];
     }
@@ -197,7 +199,7 @@ static CGFloat oponentLiveImageViewStartWidth;
         {
             
             [self stopMoveAnimation];
-            imgBody.hidden = YES;
+            visualViewCharacter.hidden = YES;
             [imgDieOpponentAnimation startAnimating];
             /*
             UIImageView *dieImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"menLowDie.png"]];
@@ -217,7 +219,7 @@ static CGFloat oponentLiveImageViewStartWidth;
         }
             break;
         case OpponentShapeStatusLive:
-            imgBody.image = [UIImage imageNamed:@"men_low.png"];
+            visualViewCharacter.hidden = NO;
             break;
         default:
             break;
@@ -227,12 +229,12 @@ static CGFloat oponentLiveImageViewStartWidth;
 {
     
     UIImageView *ivHit = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ivHit.png"]];
-    CGPoint convertPoint = [mainView convertPoint:hitPoint toView:imgBody];
+    CGPoint convertPoint = [mainView convertPoint:hitPoint toView:visualViewCharacter];
     ivHit.center = convertPoint;
-    [imgBody addSubview:ivHit];
+    [visualViewCharacter addSubview:ivHit];
     ivHit = nil;
 
-    int result = [imgBody checkNumberOfShotsAreas:@[@"{{0, 0}, {89,43}}", @"{{0,43}, {89,65}}", @"{{0,108}, {89,53}}"] forPoint:convertPoint];
+    int result = [visualViewCharacter checkNumberOfShotsAreas:@[@"{{0, 0}, {89,43}}", @"{{0,43}, {89,65}}", @"{{0,108}, {89,53}}"] forPoint:convertPoint];
     
     UIColor *color = [UIColor greenColor];
     UIFont *font = [UIFont boldSystemFontOfSize:22];
@@ -240,34 +242,34 @@ static CGFloat oponentLiveImageViewStartWidth;
     CGPoint p1 = (CGPoint){p.x, 8};
     switch (result) {
         case 0:
-            [imgBody addFlyingPointToView:mainView centerPoint:p
+            [visualViewCharacter addFlyingPointToView:mainView centerPoint:p
                                                     text:@"-3"
                                                    color:color
                                                     font:font
                                                direction:FlyingPointDirectionUp];
-            [imgBody addFlyingImageToView:mainView
+            [visualViewCharacter addFlyingImageToView:mainView
                               centerPoint:p1
                                 imageName:@"crossbones.png"
                                 direction:FlyingPointDirectionUp];
             break;
         case 1:
-            [imgBody addFlyingPointToView:mainView centerPoint:p
+            [visualViewCharacter addFlyingPointToView:mainView centerPoint:p
                                             text:@"-3"
                                            color:color
                                             font:font
                                        direction:FlyingPointDirectionUp];
-            [imgBody addFlyingImageToView:mainView
+            [visualViewCharacter addFlyingImageToView:mainView
                               centerPoint:p1
                                 imageName:@"crossbones.png"
                                 direction:FlyingPointDirectionUp];            
             break;
         case 2:
-            [imgBody addFlyingPointToView:mainView centerPoint:p
+            [visualViewCharacter addFlyingPointToView:mainView centerPoint:p
                                             text:@"-3"
                                            color:color
                                             font:font
                                        direction:FlyingPointDirectionUp];
-            [imgBody addFlyingImageToView:mainView
+            [visualViewCharacter addFlyingImageToView:mainView
                               centerPoint:p1
                                 imageName:@"crossbones.png"
                                 direction:FlyingPointDirectionUp];            
@@ -281,9 +283,6 @@ static CGFloat oponentLiveImageViewStartWidth;
 
 -(void) cleareDamage;
 {
-    for(UIView *subview in [imgBody subviews])
-    {
-        [subview removeFromSuperview];
-    }
+    [visualViewCharacter cleareView];
 }
 @end

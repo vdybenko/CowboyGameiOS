@@ -46,6 +46,10 @@
 
 -(void)refreshWithAccountPlayer:(AccountDataSource*)accountPlayer;
 {
+    if (!visualViewDataSource) {
+        visualViewDataSource = [[VisualViewDataSource alloc] init];
+        self.visualViewDataSource = visualViewDataSource;
+    }
     CDVisualViewCharacterPartCap *visualViewCharacterPartCap = [[visualViewDataSource arrayCap] objectAtIndex:accountPlayer.visualViewCap];
     cap.image = [visualViewCharacterPartCap imageForObject];
     visualViewCharacterPartCap = nil;
@@ -57,5 +61,15 @@
     CDVisualViewCharacterPartBody *visualViewCharacterPartBody = [[visualViewDataSource arrayBody] objectAtIndex:accountPlayer.visualViewBody];
     body.image = [visualViewCharacterPartBody imageForObject];
     visualViewCharacterPartBody = nil;
+}
+
+-(void)cleareView;
+{
+    for(UIView *subview in [self subviews])
+    {
+        if (subview.tag!=404) {
+            [subview removeFromSuperview];
+        }
+    }
 }
 @end

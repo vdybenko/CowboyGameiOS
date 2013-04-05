@@ -328,6 +328,8 @@ static CGFloat blinkBottomOriginY;
     [oponentsViewCoordinates addObject:poi];
     [plView setOponentCoordinates:oponentsViewCoordinates];
     
+    [opponentShape refreshWithAccountPlayer:opAccount];
+    
     int index = [self.view.subviews indexOfObject:self.crossImageView];
     [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 2) withSubviewAtIndex:index];
     
@@ -369,7 +371,7 @@ static CGFloat blinkBottomOriginY;
     self.crossImageView.hidden = YES;
     
     self.gunButton.hidden = YES;
-    opponentShape.imgBody.hidden = NO;
+    opponentShape.visualViewCharacter.hidden = NO;
     [self showHelpViewOnStartDuel];
     
     userHitCount = 0;
@@ -700,7 +702,7 @@ static CGFloat blinkBottomOriginY;
         centerOfScreanPoint.x = self.crossImageView.bounds.origin.x + self.crossImageView.center.x;
         centerOfScreanPoint.y = self.crossImageView.bounds.origin.y + self.crossImageView.center.y;
         
-        CGRect opponentBodyFrame = [[opponentShape.imgBody superview] convertRect:opponentShape.imgBody.frame toView:self.view];
+        CGRect opponentBodyFrame = [[opponentShape.visualViewCharacter superview] convertRect:opponentShape.visualViewCharacter.frame toView:self.view];
         
         if (CGRectContainsPoint(opponentBodyFrame, shotPoint)) {
             [self startRandomBloodAnimation];
@@ -976,7 +978,7 @@ static CGFloat blinkBottomOriginY;
         [timer invalidate];
     }
     
-    [arrowToOpponent updateRelateveToView:opponentShape.imgBody mainView:self.view];
+    [arrowToOpponent updateRelateveToView:opponentShape.visualViewCharacter mainView:self.view];
     arrowToOpponent.hidden = NO;
 }
 
