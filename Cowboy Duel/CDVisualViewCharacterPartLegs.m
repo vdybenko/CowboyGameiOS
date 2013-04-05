@@ -6,9 +6,9 @@
 //
 //
 
-#import "CDVisualViewCharacterPartLegth.h"
+#import "CDVisualViewCharacterPartLegs.h"
 
-@implementation CDVisualViewCharacterPartLegth
+@implementation CDVisualViewCharacterPartLegs
 @synthesize action;
 
 -(id)initWithArray:(NSArray *)arrayOfParametrs

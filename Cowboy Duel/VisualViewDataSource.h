@@ -12,7 +12,7 @@
 #import "CDVisualViewCharacterPartCap.h"
 #import "CDVisualViewCharacterPartHead.h"
 #import "CDVisualViewCharacterPartBody.h"
-#import "CDVisualViewCharacterPartLegth.h"
+#import "CDVisualViewCharacterPartLegs.h"
 #import "CDVisualViewCharacterPartShoose.h"
 
 typedef enum {
@@ -32,7 +32,7 @@ typedef enum {
 
 #define VISUAL_VIEW_CHARACTER_BODY_ARRAY @[@[@"body1.png",@100,@108,@3],@[@"body1.png",@200,@109,@1],@[@"body1.png",@300,@110,@2]];
 
-#define VISUAL_VIEW_CHARACTER_LEGTH_ARRAY @[@[@"legth1.png",@300,@111,@2],@[@"legth1.png",@100,@112,@1]];
+#define VISUAL_VIEW_CHARACTER_LEGS_ARRAY @[@[@"legth1.png",@300,@111,@2],@[@"legth1.png",@100,@112,@1]];
 
 #define VISUAL_VIEW_CHARACTER_SHOOSE_ARRAY @[@[@"shoose1.png",@200,@113,@3],@[@"shoose1.png",@10000,@114,@1]];
 
@@ -41,7 +41,7 @@ typedef enum {
 @property (strong,nonatomic) NSMutableArray *arrayHead;
 @property (strong,nonatomic) NSMutableArray *arrayCap;
 @property (strong,nonatomic) NSMutableArray *arrayBody;
-@property (strong,nonatomic) NSMutableArray *arrayLegth;
+@property (strong,nonatomic) NSMutableArray *arrayLegs;
 @property (strong,nonatomic) NSMutableArray *arrayShoose;
 
 @property (nonatomic) VisualViewCharacterPart typeOfTable;

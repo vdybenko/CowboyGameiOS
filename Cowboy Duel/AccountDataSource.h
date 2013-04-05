@@ -58,7 +58,7 @@
 @property(nonatomic) int visualViewCap;
 @property(nonatomic) int visualViewHead;
 @property(nonatomic) int visualViewBody;
-@property(nonatomic) int visualViewLegth;
+@property(nonatomic) int visualViewLegs;
 @property(nonatomic) int visualViewShoose;
 
 + (AccountDataSource *)sharedInstance;

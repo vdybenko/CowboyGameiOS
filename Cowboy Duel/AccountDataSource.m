@@ -29,7 +29,7 @@ static const char *LIST_BOTS_URL = BASE_URL"users/get_user_data";
 @synthesize visualViewCap;
 @synthesize visualViewHead;
 @synthesize visualViewBody;
-@synthesize visualViewLegth;
+@synthesize visualViewLegs;
 @synthesize visualViewShoose;
 
 #pragma mark
@@ -87,7 +87,7 @@ static AccountDataSource *sharedHelper = nil;
         self.visualViewCap = 0;
         self.visualViewHead = 0;
         self.visualViewBody = 0;
-        self.visualViewLegth = 0;
+        self.visualViewLegs = 0;
         self.visualViewShoose = 0;
     }
     return self;
@@ -547,7 +547,7 @@ static AccountDataSource *sharedHelper = nil;
     [[NSUserDefaults standardUserDefaults] setInteger:visualViewCap forKey:@"VV_CAP_VALUE"];
     [[NSUserDefaults standardUserDefaults] setInteger:visualViewHead forKey:@"VV_HEAD_VALUE"];
     [[NSUserDefaults standardUserDefaults] setInteger:visualViewBody forKey:@"VV_BODY_VALUE"];
-    [[NSUserDefaults standardUserDefaults] setInteger:visualViewLegth forKey:@"VV_LEGTH_VALUE"];
+    [[NSUserDefaults standardUserDefaults] setInteger:visualViewLegs forKey:@"VV_LEGS_VALUE"];
     [[NSUserDefaults standardUserDefaults] setInteger:visualViewShoose forKey:@"VV_SHOOSE_VALUE"];
 }
 
@@ -556,7 +556,7 @@ static AccountDataSource *sharedHelper = nil;
     self.visualViewCap = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_CAP_VALUE"];
     self.visualViewHead = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_HEAD_VALUE"];
     self.visualViewBody = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_BODY_VALUE"];
-    self.visualViewLegth = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_LEGTH_VALUE"];
+    self.visualViewLegs = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_LEGS_VALUE"];
     self.visualViewShoose = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_SHOOSE_VALUE"];
 }
 

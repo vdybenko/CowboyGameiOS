@@ -18,7 +18,7 @@
 @synthesize arrayCap;
 @synthesize arrayBody;
 @synthesize typeOfTable;
-@synthesize arrayLegth;
+@synthesize arrayLegs;
 @synthesize arrayShoose;
 
 -(id) init
@@ -29,7 +29,7 @@
         arrayHead = [NSMutableArray array];
         arrayCap = [NSMutableArray array];
         arrayBody = [NSMutableArray array];
-        arrayLegth = [NSMutableArray array];
+        arrayLegs = [NSMutableArray array];
         arrayShoose = [NSMutableArray array];
         
         NSArray *arrayMainCap = VISUAL_VIEW_CHARACTER_CAP_ARRAY;
@@ -53,12 +53,12 @@
         }
         arrayMainBody = nil;
         
-        NSArray *arrayMainLegth = VISUAL_VIEW_CHARACTER_LEGTH_ARRAY;
-        for (NSArray *array in arrayMainLegth) {
-            CDVisualViewCharacterPartLegth *cap=[[CDVisualViewCharacterPartLegth alloc] initWithArray:array];
-            [arrayLegth addObject:cap];
+        NSArray *arrayMainLegs = VISUAL_VIEW_CHARACTER_LEGS_ARRAY;
+        for (NSArray *array in arrayMainLegs) {
+            CDVisualViewCharacterPartLegs *cap=[[CDVisualViewCharacterPartLegs alloc] initWithArray:array];
+            [arrayLegs addObject:cap];
         }
-        arrayMainLegth = nil;
+        arrayMainLegs = nil;
         
         NSArray *arrayMainShoose = VISUAL_VIEW_CHARACTER_SHOOSE_ARRAY;
         for (NSArray *array in arrayMainShoose) {
@@ -76,7 +76,7 @@
     arrayHead = nil;
     arrayCap = nil;
     arrayBody = nil;
-    arrayLegth = nil;
+    arrayLegs = nil;
     arrayShoose = nil;
 }
 

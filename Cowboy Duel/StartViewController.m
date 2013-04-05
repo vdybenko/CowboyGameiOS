@@ -1294,7 +1294,7 @@ static StartViewController *sharedHelper = nil;
 //                transaction.trDescription = [[NSString alloc] initWithFormat:@"Balance"];
 //                [playerAccount.transactions addObject:transaction];
 //                [playerAccount saveTransaction];
-//            }else
+//            }
             playerAccount.money=(playerMoney >= 0)?playerMoney:0;
             isFixedMoney = YES;
             [playerAccount saveMoney];
@@ -1316,6 +1316,32 @@ static StartViewController *sharedHelper = nil;
         }
         [profileViewController checkLocationOfViewForFBLogin];
 
+        int indexCap=[[responseObject objectForKey:@"cap"] intValue];
+        if ((indexCap!=-1)&&(indexCap!=playerAccount.visualViewCap)) {
+            playerAccount.visualViewCap=indexCap;
+        }
+        
+        int indexHead=[[responseObject objectForKey:@"head"] intValue];
+        if ((indexHead!=-1)&&(indexHead!=playerAccount.visualViewHead)) {
+            playerAccount.visualViewHead=indexHead;
+        }
+        
+        int indexBody=[[responseObject objectForKey:@"body"] intValue];
+        if ((indexBody!=-1)&&(indexBody!=playerAccount.visualViewBody)) {
+            playerAccount.visualViewBody=indexBody;
+        }
+        
+        int indexLegs=[[responseObject objectForKey:@"legs"] intValue];
+        if ((indexLegs!=-1)&&(indexLegs!=playerAccount.visualViewLegs)) {
+            playerAccount.visualViewLegs=indexLegs;
+        }
+        
+        int indexShoose=[[responseObject objectForKey:@"shoose"] intValue];
+        if ((indexShoose!=-1)&&(indexShoose!=playerAccount.visualViewShoose)) {
+            playerAccount.visualViewShoose=indexShoose;
+        }
+        [playerAccount saveVisualView];
+        
         if (!modifierName) {
             [playerAccount sendTransactions:playerAccount.transactions];
         }
@@ -1435,6 +1461,12 @@ static StartViewController *sharedHelper = nil;
     [dicBody setValue:[playerAccount.homeTown stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] forKey:@"home_town"];
     [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.friends] forKey:@"friends"];
     [dicBody setValue:playerAccount.facebookName forKey:@"facebook_name"];
+    
+    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewCap] forKey:@"cap"];
+    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewHead] forKey:@"head"];
+    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewBody] forKey:@"body"];
+    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewLegs] forKey:@"legs"];
+    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewShoose] forKey:@"shoose"];
 
     NSString *stBody=[Utils makeStringForPostRequest:dicBody];
     DLog(@"stBody %@",dicBody);
@@ -1467,6 +1499,12 @@ static StartViewController *sharedHelper = nil;
     [dicBody setValue:[NSString stringWithFormat:@"%d",playerTemp.accountWins] forKey:@"duels_win"];
     [dicBody setValue:[NSString stringWithFormat:@"%d",playerTemp.accountDraws] forKey:@"duels_lost"];
     [dicBody setValue:[NSString stringWithFormat:@"%d",playerTemp.accountBigestWin] forKey:@"bigest_win"];
+    
+    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewCap] forKey:@"cap"];
+    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewHead] forKey:@"head"];
+    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewBody] forKey:@"body"];
+    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewLegs] forKey:@"legs"];
+    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewShoose] forKey:@"shoose"];
     
     NSString *stBody=[Utils makeStringForPostRequest:dicBody];
     DLog(@"modifierUser stBody %@",dicBody);
