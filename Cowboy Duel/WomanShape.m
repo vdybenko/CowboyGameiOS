@@ -75,9 +75,9 @@
     [audioPlayer play];
 }
 
--(BOOL)shotInShapeWithPoint:(CGPoint)point superViewOfPoint:(UIView *)view;
+-(int)damageForShotInShapeWithPoint:(CGPoint)point superViewOfPoint:(UIView *)view;
 {
-    if ([super shotInShapeWithPoint:point superViewOfPoint:view] && self.hidden !=YES) {
+    if ([super damageForShotInShapeWithPoint:point superViewOfPoint:view]!=NSNotFound && self.hidden !=YES) {
         [self scream];
         [self womanAnimation];
         
@@ -86,6 +86,7 @@
         
         UIColor *color = [UIColor redColor];
         UIFont *font = [UIFont boldSystemFontOfSize:22];
+        int damage = 3;
         switch (result) {
             case 0:
                 [super.imageMain addFlyingPointToView:view centerPoint:CGPointMake(super.imageMain.center.x, 0)
@@ -112,9 +113,9 @@
                 break;
         }
         
-        return YES;
+        return damage;
     }else{
-        return NO;
+        return NSNotFound;
     }
 }
 -(void)womanAnimation;

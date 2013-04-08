@@ -420,7 +420,7 @@ static CGFloat blinkBottomOriginY;
     [self.gunButton setEnabled:NO];
     
     userLiveImageViewStartWidth = self.userLiveImageView.frame.size.width;
-    self.lbUserLifeLeft.text = [NSString stringWithFormat:@"%d",shotCountBulletForOpponent*3];
+    self.lbUserLifeLeft.text = [NSString stringWithFormat:@"%d",shotCountBulletForOpponent];
     
     self.opStatsLabel.text = [NSString stringWithFormat: @"A: +%d\rD: +%d",opAccount.accountWeapon.dDamage,opAccount.accountDefenseValue];
     self.userStatsLabel.text = [NSString stringWithFormat: @"A: +%d\nD: +%d",playerAccount.accountWeapon.dDamage,playerAccount.accountDefenseValue];
@@ -542,10 +542,11 @@ static CGFloat blinkBottomOriginY;
         opponentShape.typeOfBody = OpponentShapeTypeScarecrow;
         maxShotCount = 3;
         shotCountBullet = 3;
-   }
+    }
     shotCountBulletForOpponent =  countBulletsForOpponent;
     maxShotCountForOpponent = countBulletsForOpponent;
     [self preparationBloodAnimation];
+    
 }
 
 -(float)abs:(float)d
@@ -708,44 +709,39 @@ static CGFloat blinkBottomOriginY;
         return;
     }
     
-    BOOL shotInHorse = ([horseShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view] && !horseShape.hidden);
-    if (shotInHorse) {
-        
+    int damageForShotInHorse = [horseShape damageForShotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
+    if (damageForShotInHorse!=NSNotFound && !horseShape.hidden) {
         return;
     }
-    BOOL resultWoman = ([womanShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view] && !womanShape.hidden);
-    if (resultWoman) {
-        [self opponentShot];
+    int damageForShotInWoman = [womanShape damageForShotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
+    if (damageForShotInWoman!=NSNotFound && !womanShape.hidden) {
+        [self opponentShotWithDamage:damageForShotInWoman];
         if(delegate) [delegate sendShotSelf];        
         return;
     }
-    BOOL resultGoodCowboy = ([goodCowboyShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view] && !goodCowboyShape.hidden);
-    if (resultGoodCowboy) {
-        [self opponentShot];
+    int damageForShotInGoodCowboy = [goodCowboyShape damageForShotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
+    if (damageForShotInGoodCowboy!=NSNotFound  && !goodCowboyShape.hidden ) {
+        [self opponentShotWithDamage:damageForShotInGoodCowboy];
         if(delegate) [delegate sendShotSelf];
         return;
     }
     
-    BOOL resultOpponent = [opponentShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
+    int resultOpponent = [opponentShape damageForShotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
 
-    if (resultOpponent) {
+    if (resultOpponent!=NSNotFound) {
+        
+        [self startRandomBloodAnimation];
+        int opponentDamage = [opponentShape damageForHitTheOponentWithPoint:shotPoint mainView:self.view];
         
         if(delegate)
         {
-            [delegate sendShot];
+            [delegate sendShotWithDamage:opponentDamage];
         }
         
-        CGRect opponentBodyFrame = [[opponentShape.imgBody superview] convertRect:opponentShape.imgBody.frame toView:self.view];
-        if (CGRectContainsPoint(opponentBodyFrame, shotPoint)) {
-            [self startRandomBloodAnimation];
-            [opponentShape hitTheOponentWithPoint:shotPoint mainView:self.view];
-            if (horseShape.hidden && opponentShape.typeOfBody == OpponentShapeTypeScarecrow) {
-                [self performSelector:@selector(showGoodBodies) withObject:nil afterDelay:1.0f];
-            }
+        if (horseShape.hidden && opponentShape.typeOfBody == OpponentShapeTypeScarecrow) {
+            [self performSelector:@selector(showGoodBodies) withObject:nil afterDelay:1.0f];
         }
-        [self shotToOponent];
-
-        
+        [self shotToOponentWithDamage:opponentDamage];
     }
 }
 
@@ -795,25 +791,35 @@ static CGFloat blinkBottomOriginY;
     opponentShape.center = opponentCenter;
 }
 
--(void)opponentShot
+-(void)opponentShotWithDamage:(int)pDamage
 {
     if (duelEnd) return;
 
+    int damage = pDamage;
+    if (!delegate) {
+        //        When opponent shots you i practice
+        damage = 2;
+    }
+    
     [opponentShape shot];
 
-    shotCountBulletForOpponent--;
+    shotCountBulletForOpponent-=damage;
+    
+    if (shotCountBulletForOpponent<0) {
+        shotCountBulletForOpponent = 0;
+    }
     
     CGRect frame = self.userLiveImageView.frame;
     frame.size.width = (float)((shotCountBulletForOpponent)*userLiveImageViewStartWidth)/maxShotCountForOpponent;
     self.userLiveImageView.frame = frame;
     
-    self.lbUserLifeLeft.text = [NSString stringWithFormat:@"%d",shotCountBulletForOpponent*3];
+    self.lbUserLifeLeft.text = [NSString stringWithFormat:@"%d",shotCountBulletForOpponent];
     
     CGRect frameLife = self.lbUserLifeLeft.frame;
     frameLife.size.width = frame.size.width;
     self.lbUserLifeLeft.frame = frameLife;
     
-    if(!shotCountBulletForOpponent){
+    if(shotCountBulletForOpponent<=0){
         [self userLost];
         GameCenterViewController *gameCenterViewController;
         if (self.delegate) gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
@@ -832,23 +838,25 @@ static CGFloat blinkBottomOriginY;
     }
 }
 
--(void)shotToOponent
+-(void)shotToOponentWithDamage:(int)pDamage;
 {
- 
-    shotCountBullet--;
+    int damage = pDamage;
+    if (damage==NSNotFound) {
+//    when you shot in peace inhabitants
+        damage = 2;
+    }
+    shotCountBullet-=damage;
     
-    userHitCount++;
+    userHitCount+=damage;
     
     [opponentShape changeLiveBarWithUserHitCount:userHitCount maxShotCount:maxShotCount];
     
-        
-    if(!shotCountBullet) {
+    if(shotCountBullet<=0) {
         if (duelEnd) return;
         duelEnd = YES;
         [activityIndicatorView setText:@""];
         [activityIndicatorView showView];
         //[self horizontalFlip];
-        DLog(@"Kill!!!");
         DLog(@"Shot Time = %d.%d", (shotTime) / 1000, (shotTime));
         GameCenterViewController *gameCenterViewController;
         if (self.delegate) gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
@@ -963,9 +971,7 @@ static CGFloat blinkBottomOriginY;
 #pragma mark
 
 -(void)restartCountdown;
-{
-    NSLog(@"restartCountdown");
-    
+{    
     follAccelCheck = NO;
     accelerometerState = NO;
     soundStart = NO;
@@ -1011,7 +1017,7 @@ static CGFloat blinkBottomOriginY;
             [self.view bringSubviewToFront:btnSkip];
         }
         
-        if(!delegate && opponentShape.typeOfBody != OpponentShapeTypeScarecrow) shotTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
+        if(!delegate && opponentShape.typeOfBody != OpponentShapeTypeScarecrow) shotTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(opponentShotWithDamage:) userInfo:nil repeats:YES];
         moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
         
         
@@ -1189,7 +1195,7 @@ static CGFloat blinkBottomOriginY;
         [self.userLiveImageView setHidden:NO];
 
         if(!delegate && opponentShape.typeOfBody != OpponentShapeTypeScarecrow){
-            shotTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(opponentShot) userInfo:nil repeats:YES];
+            shotTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(opponentShotWithDamage:) userInfo:nil repeats:YES];
             moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
             [self showGoodBodies];
         }
@@ -1199,7 +1205,6 @@ static CGFloat blinkBottomOriginY;
 
 -(void)readyToStart
 {
-    NSLog(@"readyToStart");
     soundStart = YES;
     startInterval = [NSDate timeIntervalSinceReferenceDate];
     [player stop];

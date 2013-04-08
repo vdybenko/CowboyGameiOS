@@ -973,28 +973,28 @@ static GameCenterViewController *gameCenterViewController;
         case  NETWORK_SHOT:
         {
             DLog(@"NETWORK_SHOT");
-            [self.delegate opponentShot];
+            gameInfo *gsReceive = (gameInfo *)&incomingPacket[4];
+            [self.delegate opponentShotWithDamage:gsReceive->damageCount];
         }
 			break;
             
         case  NETWORK_SHOT_SELF:
         {
             DLog(@"NETWORK_SHOT");
-            [self.delegate shotToOponent];
+            [self.delegate shotToOponentWithDamage:NSNotFound];
         }
 			break;
             
 		default:
 			// error
 			break;
-            
     }
-    
 }
 
--(void)sendShot
+-(void)sendShotWithDamage:(int)damage;
 {
     gameInfo *gsSend = &gameStat;
+    gsSend->damageCount = damage;
     [self.connection sendData:(void *)(gsSend) packetID:NETWORK_SHOT ofLength:sizeof(gameInfo)];
 }
 

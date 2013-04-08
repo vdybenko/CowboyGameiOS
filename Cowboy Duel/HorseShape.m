@@ -34,12 +34,12 @@
     [super.imageMain startAnimating];
 }
 
--(BOOL)shotInShapeWithPoint:(CGPoint)point superViewOfPoint:(UIView *)view{
-    if ([super shotInShapeWithPoint:point superViewOfPoint:view]) {
+-(int)damageForShotInShapeWithPoint:(CGPoint)point superViewOfPoint:(UIView *)view{
+    if ([super damageForShotInShapeWithPoint:point superViewOfPoint:view]!=NSNotFound) {
         [self horseAnimation];
-        return YES;
+        return 0;
     }
-    return NO;
+    return NSNotFound;
 }
 
 -(void)releaseComponents{

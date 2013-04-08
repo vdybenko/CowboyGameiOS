@@ -43,7 +43,7 @@ typedef enum {
 -(void) setStatusBody:(OpponentShapeStatus)status;
 -(void) setBodyType:(OpponentShapeType)type;
 
--(void) hitTheOponentWithPoint:(CGPoint)hitPoint mainView:(UIView*)mainView;
+-(int) damageForHitTheOponentWithPoint:(CGPoint)hitPoint mainView:(UIView*)mainView;
 -(void) cleareDamage;
 
 @end

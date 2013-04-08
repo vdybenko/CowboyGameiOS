@@ -207,11 +207,15 @@ static CGFloat oponentLiveImageViewStartWidth;
 
 -(void) changeLiveBarWithUserHitCount:(int)userHitCount maxShotCount:(int)maxShotCount;
 {
+    if (userHitCount>=maxShotCount) {
+        userHitCount = maxShotCount;
+    }
+    DLog(@"changeLiveBarWithUserHitCount %d %d",userHitCount,maxShotCount)
     CGRect frame = ivLifeBar.frame;
     frame.size.width = (float)((maxShotCount - userHitCount)*oponentLiveImageViewStartWidth)/maxShotCount;
     ivLifeBar.frame = frame;
 
-    int x = (maxShotCount - userHitCount)*3;
+    int x = (maxShotCount - userHitCount);
     lbLifeLeft.text = [NSString stringWithFormat:@"%d",x];
    /*
     CGAffineTransform trf0 = lbLifeLeft.transform;
@@ -232,10 +236,13 @@ static CGFloat oponentLiveImageViewStartWidth;
 
 -(void) refreshLiveBarWithLives: (int )lives;
 {
+    if (lives<0) {
+        lives = 0;
+    }
     CGRect frame = ivLifeBar.frame;
     frame.size.width = oponentLiveImageViewStartWidth;
     ivLifeBar.frame = frame;
-    lbLifeLeft.text =[NSString stringWithFormat:@"%d", lives*3];
+    lbLifeLeft.text =[NSString stringWithFormat:@"%d", lives];
     lbLifeLeft.textAlignment = UITextAlignmentLeft;
 }
 
@@ -292,7 +299,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     
 }
 
--(void) hitTheOponentWithPoint:(CGPoint)hitPoint mainView:(UIView*)mainView;
+-(int) damageForHitTheOponentWithPoint:(CGPoint)hitPoint mainView:(UIView*)mainView;
 {
     
     UIImageView *ivHit;
@@ -313,10 +320,12 @@ static CGFloat oponentLiveImageViewStartWidth;
     UIFont *font = [UIFont boldSystemFontOfSize:22];
     CGPoint p= (CGPoint){44,-5};
     CGPoint p1 = (CGPoint){p.x, 8};
+    int damageCount = 1;
     switch (result) {
         case 0:
+            damageCount = 3;
             [imgBody addFlyingPointToView:mainView centerPoint:p
-                                                    text:@"-3"
+                                                    text:[NSString stringWithFormat:@"-%d",damageCount]
                                                    color:color
                                                     font:font
                                                direction:FlyingPointDirectionUp];
@@ -326,26 +335,28 @@ static CGFloat oponentLiveImageViewStartWidth;
                                 direction:FlyingPointDirectionUp];
             break;
         case 1:
+            damageCount = 2;
             [imgBody addFlyingPointToView:mainView centerPoint:p
-                                            text:@"-3"
+                                            text:[NSString stringWithFormat:@"-%d",damageCount]
                                            color:color
                                             font:font
                                        direction:FlyingPointDirectionUp];
             [imgBody addFlyingImageToView:mainView
                               centerPoint:p1
                                 imageName:@"crossbones.png"
-                                direction:FlyingPointDirectionUp];            
+                                direction:FlyingPointDirectionUp];
             break;
         case 2:
+            damageCount = 1;
             [imgBody addFlyingPointToView:mainView centerPoint:p
-                                            text:@"-3"
+                                            text:[NSString stringWithFormat:@"-%d",damageCount]
                                            color:color
                                             font:font
                                        direction:FlyingPointDirectionUp];
             [imgBody addFlyingImageToView:mainView
                               centerPoint:p1
                                 imageName:@"crossbones.png"
-                                direction:FlyingPointDirectionUp];            
+                                direction:FlyingPointDirectionUp];
             break;
         default:
             break;
@@ -355,9 +366,11 @@ static CGFloat oponentLiveImageViewStartWidth;
         [self flip];
     }else
         [self reboundOnShot];
+    
+    return damageCount;
 }
 
--(BOOL)shotInShapeWithPoint:(CGPoint)point superViewOfPoint:(UIView *)view;
+-(int)damageForShotInShapeWithPoint:(CGPoint)point superViewOfPoint:(UIView *)view;
 {
     CGRect opponentBodyFrame = [[imgBody superview] convertRect:imgBody.frame toView:view];
         
@@ -370,9 +383,11 @@ static CGFloat oponentLiveImageViewStartWidth;
 
     shotInShape = (color != [color colorWithAlphaComponent:0.0f]);
     
-    NSLog(@"shotInShape: %@",(shotInShape)?@"YES":@"NO");
-    
-    return (shotInFrame && shotInShape);
+    if (shotInFrame && shotInShape) {
+        return 0;
+    }else{
+        return NSNotFound;
+    }
 }
 
 -(void) cleareDamage;

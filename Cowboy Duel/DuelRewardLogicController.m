@@ -75,17 +75,17 @@
 +(NSInteger)countUpBuletsWithPlayerLevel:(int)playerLevel;
 {
     NSArray *array=[[NSArray alloc] initWithObjects:
-                    [NSNumber numberWithInt:2],//0
-                    [NSNumber numberWithInt:3],//1
-                    [NSNumber numberWithInt:4],//2
-                    [NSNumber numberWithInt:5],//3
-                    [NSNumber numberWithInt:6],//4
-                    [NSNumber numberWithInt:7],//5
-                    [NSNumber numberWithInt:8],//6
-                    [NSNumber numberWithInt:5],//7
-                    [NSNumber numberWithInt:5],//8
-                    [NSNumber numberWithInt:6],//9
-                    [NSNumber numberWithInt:6],//10
+                    [NSNumber numberWithInt:5],//0
+                    [NSNumber numberWithInt:6],//1
+                    [NSNumber numberWithInt:7],//2
+                    [NSNumber numberWithInt:8],//3
+                    [NSNumber numberWithInt:9],//4
+                    [NSNumber numberWithInt:10],//5
+                    [NSNumber numberWithInt:11],//6
+                    [NSNumber numberWithInt:12],//7
+                    [NSNumber numberWithInt:13],//8
+                    [NSNumber numberWithInt:14],//9
+                    [NSNumber numberWithInt:15],//10
                     nil];
     if (playerLevel < kCountOfLevelsMinimal||playerLevel>kCountOfLevels) {
         playerLevel = kCountOfLevelsMinimal;
@@ -99,8 +99,8 @@
     int countBullets = [DuelRewardLogicController countUpBuletsWithPlayerLevel:playerLevel];
     countBullets += defense;
     countBullets -= atack;
-    if (countBullets<2) {
-        return 2;
+    if (countBullets<5) {
+        return 5;
     }else{
         return countBullets;
     }

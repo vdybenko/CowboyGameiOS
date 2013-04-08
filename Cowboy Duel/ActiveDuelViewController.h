@@ -46,10 +46,10 @@
 
 -(void)shutDownTimer;
 
--(void)opponentShot;
--(void)sendShot;
+-(void)opponentShotWithDamage:(int)damage;
+-(void)sendShotWithDamage:(int)damage;
 -(void)sendShotSelf;
--(void)shotToOponent;
+-(void)shotToOponentWithDamage:(int)damage;
 
 -(void)oponnentFollStart;
 -(void)oponnentFollEnd;

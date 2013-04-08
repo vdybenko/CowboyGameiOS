@@ -14,5 +14,5 @@
 
 -(id)initWithCoder:(NSCoder *)aDecoder subViewFromNibFileName:(NSString*)name;
 -(void)randomPositionWithView:(UIView*)view;
--(BOOL)shotInShapeWithPoint:(CGPoint)point superViewOfPoint:(UIView *)view;
+-(int)damageForShotInShapeWithPoint:(CGPoint)point superViewOfPoint:(UIView *)view;
 @end

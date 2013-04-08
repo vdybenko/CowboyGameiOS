@@ -29,7 +29,9 @@ typedef struct {
     int horseCount;
     int menCount;
     int womenCount;
+    int damageCount;
 } gameInfo;
+
 @class StartViewController;
 @class FinalViewController;
 @class DuelStartViewController;

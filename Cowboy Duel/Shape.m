@@ -30,7 +30,7 @@
     imageMain = nil;
 }
 
--(BOOL)shotInShapeWithPoint:(CGPoint)point superViewOfPoint:(UIView *)view;
+-(int)damageForShotInShapeWithPoint:(CGPoint)point superViewOfPoint:(UIView *)view;
 {
     CGRect convertBody = [[self.imageMain superview] convertRect:self.imageMain.frame toView:view];
     BOOL shotInShape;
@@ -41,9 +41,9 @@
     
     shotInShape = (color != [color colorWithAlphaComponent:0.0f]);
     if (CGRectContainsPoint(convertBody, point) && shotInShape) {
-        return YES;
+        return 0;
     }else{
-        return NO;
+        return NSNotFound;
     }
 }
 
