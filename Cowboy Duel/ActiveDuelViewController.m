@@ -59,6 +59,8 @@
     BOOL foll;
     BOOL duelTimerEnd;
     BOOL duelEnd;
+    
+    BOOL tryAgain;
 
     NSMutableArray *barellObjectArray;
     NSMutableArray *cactusObjectArray;
@@ -117,6 +119,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lbUserLifeLeft;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnSkip;
+@property (weak, nonatomic) IBOutlet UIButton *btnTry;
+@property (weak, nonatomic) IBOutlet UIButton *btnBack;
 
 
 @end
@@ -125,7 +129,7 @@
 @synthesize delegate;
 @synthesize glassImageViewAllBackground;
 @synthesize lbUserLifeLeft;
-@synthesize btnSkip;
+@synthesize btnSkip,btnTry,btnBack;
 
 static CGFloat userLiveImageViewStartWidth;
 static CGFloat blinkTopOriginY;
@@ -164,7 +168,7 @@ static CGFloat blinkBottomOriginY;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-       
+    
     shotCountForSound = 1;
 
     plView = (PLView *)self.view;
@@ -330,14 +334,14 @@ static CGFloat blinkBottomOriginY;
     [self.view bringSubviewToFront:self.glassImageViewBottom];
     [self.view bringSubviewToFront:self.glassImageViewHeader];
     [self.view bringSubviewToFront:glassImageViewAllBackground];
-
+/*
     CGRect frame;
     activityIndicatorView = [[ActivityIndicatorView alloc] init];
     frame = activityIndicatorView.frame;
     frame.origin = CGPointMake(0,0);
     activityIndicatorView.frame = frame;
     [self.view addSubview:activityIndicatorView];
-    
+*/  
     blinkTopOriginY = blinkTop.frame.origin.y;
     blinkBottomOriginY = blinkBottom.frame.origin.y;
     
@@ -382,7 +386,50 @@ static CGFloat blinkBottomOriginY;
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+//    [super viewWillAppear:animated];
+    [self reInitViewWillAppear:animated];
+}
+
+-(void)reInitViewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    if (tryAgain) {
+        for (BarellsObject *barell in barellObjectArray) {
+            switch (barell.barellPosition) {
+                case BarellPositionBottom:
+                    if (barell.barellImgBottom.hidden) {
+                        barell.barellImgBottom.hidden = NO;
+                    }
+                    break;
+                case BarellPositionMiddle:
+                    if (barell.barellImgMiddle.hidden) {
+                        barell.barellImgMiddle.hidden = NO;
+                    }
+                    break;
+                case BarellPositionHighest:
+                    if (barell.barellImgHighest.hidden) {
+                        barell.barellImgHighest.hidden = NO;
+                    }
+                    break;
+                    
+                default:
+                    break;
+            }
+            if (barell.hidden) {
+                barell.hidden = NO;
+            }
+        }
+        
+        for (CactusObject *cactus in cactusObjectArray) {
+            if (cactus.cactusImg.hidden) {
+                cactus.cactusImg.hidden = NO;
+            }
+        }
+        if (airBallon.airBallonImg.hidden) {
+            airBallon.airBallonImg.hidden = NO;
+        }
+    }
+    
     ignoreTimer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(userIgnorePunish) userInfo:nil repeats:NO];
     foll = NO;
     duelTimerEnd = NO;
@@ -453,6 +500,15 @@ static CGFloat blinkBottomOriginY;
     [opponentShape setStatusBody:OpponentShapeStatusLive];
     [opponentShape cleareDamage];    
     [opponentShape refreshLiveBarWithLives:maxShotCount];
+    
+    UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
+    
+    [btnTry setTitleByLabel:@"TRY" withColor:buttonsTitleColor fontSize:24];
+    [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:24];
+    if (tryAgain) {
+        [self readyToStart];
+    }
+
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -509,6 +565,8 @@ static CGFloat blinkBottomOriginY;
     [self setLbUserLifeLeft:nil];
     horseShape = nil;
     [self setBtnSkip:nil];
+    [self setBtnTry:nil];
+    [self setBtnBack:nil];
     [super viewDidUnload];
 }
 
@@ -795,7 +853,8 @@ static CGFloat blinkBottomOriginY;
     randPosition = randPosition + winSize.width / 2 + opponentShape.bounds.size.width / 2;
     
     opponentCenter.x = randPosition;
-    opponentShape.center = opponentCenter;
+    opponentShape.center = self.view.center;//opponentCenter;
+//    if (opponentShape.hidden) opponentShape.hidden = NO;
 }
 
 -(void)opponentShot
@@ -850,8 +909,8 @@ static CGFloat blinkBottomOriginY;
     if(!shotCountBullet) {
         if (duelEnd) return;
         duelEnd = YES;
-        [activityIndicatorView setText:@""];
-        [activityIndicatorView showView];
+//        [activityIndicatorView setText:@""];
+//        [activityIndicatorView showView];
         //[self horizontalFlip];
         DLog(@"Kill!!!");
         DLog(@"Shot Time = %d.%d", (shotTime) / 1000, (shotTime));
@@ -972,12 +1031,47 @@ static CGFloat blinkBottomOriginY;
 
 -(void)showFinalView;
 {   
-    CGRect finalFrame = CGRectMake(10, 90, 294, 165);
+    CGRect finalFrame = CGRectMake(12, 90, 294, 165);
 
     finalView = [[FinalStatsView alloc] initWithFrame:finalFrame andAccount:playerAccount];
+
+    finalView.center = self.crossImageView.center; //self.view.center;
+    
     [self.view addSubview:finalView];
     [finalView startAnimationsWithDiffMoney:50 AndDiffPoints:50];
+    
+    btnBack.hidden = NO;
+    btnTry.hidden = NO;
+    btnSkip.hidden = YES;
+    
+    [self.view bringSubviewToFront:btnBack];
+    [self.view bringSubviewToFront:btnTry];
+    
+    NSLog(@"%@", [self.view subviews]);
+    
+    btnBack.enabled = YES;
+    btnTry.enabled = YES;
+    btnSkip.enabled = NO;
+    
+    self.gunButton.hidden = YES;
+    self.gunButton.enabled = NO;
+}
 
+-(void)hideFinalView{
+    
+    finalView.hidden = YES;
+    finalView = nil;
+    
+    btnBack.hidden = YES;
+    btnTry.hidden = YES;
+    btnSkip.hidden = YES;
+    
+    btnBack.enabled = NO;
+    btnTry.enabled = NO;
+    btnSkip.enabled = NO;
+    
+    self.gunButton.hidden = NO;
+    self.gunButton.enabled = YES;
 }
 
 #pragma mark
@@ -1154,7 +1248,6 @@ static CGFloat blinkBottomOriginY;
 #pragma mark - IBAction
 
 - (IBAction)btnSkipClicked:(id)sender {
-    
     if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
         [self.navigationController popToViewController:[LoginAnimatedViewController sharedInstance] animated:YES];
         [self releaseComponents];
@@ -1165,6 +1258,128 @@ static CGFloat blinkBottomOriginY;
     }
     
 }
+
+-(IBAction)backButtonClick:(id)sender
+{
+    
+    //Transitions only!
+    NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+    if (([userDef integerForKey:@"FirstRunForPractice"] != 1)&&([userDef integerForKey:@"FirstRunForPractice"] != 2)) {
+        [userDef setInteger:1 forKey:@"FirstRunForPractice"];
+        [userDef synchronize];
+    }
+    
+/*    if (playerAccount.isTryingWeapon) {
+        playerAccount.isTryingWeapon = NO;
+        if (!isDuelWinWatched) {
+            isDuelWinWatched = YES;
+            DuelProductWinViewController *duelProductWinViewController=[[DuelProductWinViewController alloc] initWithAccount:playerAccount duelProduct:playerAccount.accountWeapon parentVC:self];
+            [playerAccount loadWeapon];
+            [self.navigationController presentViewController:duelProductWinViewController animated:YES completion:Nil];
+        }else{
+            if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
+                
+                [self.navigationController popToViewController:[LoginAnimatedViewController sharedInstance] animated:YES];
+                [self releaseComponents];
+                NSLog(@"%@", self.navigationController.viewControllers);
+                
+            }
+            else{
+                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+                [self releaseComponents];
+            }
+        }
+    }else{
+ */
+        UINavigationController *nav = ((TestAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController;
+        NSLog(@"%@", nav.viewControllers);
+        for (__weak UIViewController *viewController in nav.viewControllers) {
+            if ([viewController isKindOfClass:[ActiveDuelViewController class]]) {
+                [((ActiveDuelViewController *)viewController) releaseComponents];
+            }
+        }
+        [self releaseComponents];
+        if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
+            
+            [nav popToViewController:[nav.viewControllers objectAtIndex:2] animated:YES];
+        }
+        else{
+            [nav popToViewController:[nav.viewControllers objectAtIndex:1] animated:YES];
+            
+        }
+//    }
+    
+    GameCenterViewController *gameCenterViewController;
+    if (self.delegate){
+        gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+        [gameCenterViewController matchCanseled];
+    }    
+//    if ([self.delegate isKindOfClass:[GameCenterViewController class]]) {
+//        [self.delegate performSelector:@selector(matchCanseled)];
+//    }
+    
+    [self hideFinalView];
+    
+}
+
+-(IBAction)tryButtonClick:(id)sender
+{
+    if([LoginAnimatedViewController sharedInstance].isDemoPractice){
+        if ([[StartViewController sharedInstance] connectedToWiFi]) {
+            
+            activityIndicatorView = [[ActivityIndicatorView alloc] init];
+            
+            CGRect frame=activityIndicatorView.frame;
+            frame.origin=CGPointMake(0, 0);
+            activityIndicatorView.frame=frame;
+            
+            [self.view addSubview:activityIndicatorView];
+        }
+        [[LoginAnimatedViewController sharedInstance] loginButtonClick:sender];
+        return;
+    }
+    tryAgain = YES;
+    GameCenterViewController *gameCenterViewController;
+    if (self.delegate) gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+    
+    BOOL teaching = YES;
+    if (!self.delegate)
+        gameCenterViewController = nil;
+    else
+        teaching = NO;
+    
+//    [self releaseComponents];
+    
+    DLog(@"tryButtonClick");
+    
+    [self hideFinalView];
+
+    if(teaching)
+    {
+        NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+        if (([userDef integerForKey:@"FirstRunForPractice"] != 1)&&([userDef integerForKey:@"FirstRunForPractice"] != 2)) {
+            [userDef setInteger:1 forKey:@"FirstRunForPractice"];
+            [userDef synchronize];
+        }
+        
+        [playerAccount.finalInfoTable removeAllObjects];
+    }
+    else
+        if (gameCenterViewController)
+        {
+            [gameCenterViewController matchStartedTry];
+        }
+    
+    [self reInitViewWillAppear:YES];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/FinalVC_tryAgain" forKey:@"page"]];
+
+
+}
+
+#pragma mark -
 
 - (void)cancelHelpArmClick:(id)sender {
     [self hideHelpViewOnStartDuel];
