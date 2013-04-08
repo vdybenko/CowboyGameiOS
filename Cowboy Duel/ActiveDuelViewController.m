@@ -853,8 +853,8 @@ static CGFloat blinkBottomOriginY;
     randPosition = randPosition + winSize.width / 2 + opponentShape.bounds.size.width / 2;
     
     opponentCenter.x = randPosition;
-    opponentShape.center = self.view.center;//opponentCenter;
-//    if (opponentShape.hidden) opponentShape.hidden = NO;
+    opponentShape.center = opponentCenter;
+
 }
 
 -(void)opponentShot
@@ -888,11 +888,11 @@ static CGFloat blinkBottomOriginY;
         
         FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime) andOponentTime:999999 andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
 
-        [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:1.0];
+//        [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:1.0];
 
-//        [self performSelector:@selector(showFinalView) withObject:nil afterDelay:1.0];
-        [timer invalidate];
-        [moveTimer invalidate];
+        [self performSelector:@selector(showFinalView) withObject:nil afterDelay:1.0];
+//        [timer invalidate];
+//        [moveTimer invalidate];
     }
 }
 
@@ -924,8 +924,8 @@ static CGFloat blinkBottomOriginY;
 
         FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime) andOponentTime:opponentTime andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
         
-        [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
-//        [self performSelector:@selector(showFinalView) withObject:nil afterDelay:2.0];
+//        [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
+        [self performSelector:@selector(showFinalView) withObject:nil afterDelay:2.0];
         [timer invalidate];
         [moveTimer invalidate];
         
@@ -961,8 +961,8 @@ static CGFloat blinkBottomOriginY;
         
         FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:0 andOponentTime:10 andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
         
-        [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
-//        [self performSelector:@selector(showFinalView) withObject:nil afterDelay:2.0];
+//        [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
+        [self performSelector:@selector(showFinalView) withObject:nil afterDelay:2.0];
     }
 }
 
@@ -1012,6 +1012,8 @@ static CGFloat blinkBottomOriginY;
             frame.origin.y = 0;
             blinkTop.frame = frame;
         }completion:^(BOOL finished) {
+            blinkBottom.alpha = 0.88;
+            blinkTop.alpha = 0.88;
         }];
 
         }];
@@ -1055,6 +1057,12 @@ static CGFloat blinkBottomOriginY;
     
     self.gunButton.hidden = YES;
     self.gunButton.enabled = NO;
+    
+    [shotTimer invalidate];
+    [moveTimer invalidate];
+    [ignoreTimer invalidate];
+    [timer invalidate];
+    
 }
 
 -(void)hideFinalView{
