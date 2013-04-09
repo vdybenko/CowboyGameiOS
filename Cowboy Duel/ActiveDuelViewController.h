@@ -47,6 +47,7 @@
 -(void)shutDownTimer;
 
 -(void)opponentShotWithDamage:(int)damage;
+-(BOOL)playerGetDamage:(int)damage;
 -(void)sendShotWithDamage:(int)damage;
 -(void)sendShotSelf;
 -(void)shotToOponentWithDamage:(int)damage;

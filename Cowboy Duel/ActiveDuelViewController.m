@@ -80,6 +80,8 @@
     float scaleDelta;
     
     BOOL isGunCanShotOfFrequently;
+    BOOL isOpponentShotFrequency;
+    
     BOOL oponnentFoll;
     BOOL oponnentFollSend;
     
@@ -154,6 +156,8 @@ static CGFloat blinkBottomOriginY;
         [brockenGlassAudioPlayer prepareToPlay];
         
         [StartViewController sharedInstance].playerStop;
+        
+        isOpponentShotFrequency = YES;
     }
     return self;
 }
@@ -715,13 +719,13 @@ static CGFloat blinkBottomOriginY;
     }
     int damageForShotInWoman = [womanShape damageForShotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
     if (damageForShotInWoman!=NSNotFound && !womanShape.hidden) {
-        [self opponentShotWithDamage:damageForShotInWoman];
+        [self playerGetDamage:damageForShotInWoman];
         if(delegate) [delegate sendShotSelf];        
         return;
     }
     int damageForShotInGoodCowboy = [goodCowboyShape damageForShotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
     if (damageForShotInGoodCowboy!=NSNotFound  && !goodCowboyShape.hidden ) {
-        [self opponentShotWithDamage:damageForShotInGoodCowboy];
+        [self playerGetDamage:damageForShotInGoodCowboy];
         if(delegate) [delegate sendShotSelf];
         return;
     }
@@ -791,9 +795,20 @@ static CGFloat blinkBottomOriginY;
     opponentShape.center = opponentCenter;
 }
 
--(void)opponentShotWithDamage:(int)pDamage
+-(void)opponentShotWithDamage:(int)damage;
 {
     if (duelEnd) return;
+    [opponentShape shot];
+    BOOL result = [self playerGetDamage:damage];
+    if (!result && isOpponentShotFrequency) {
+        [self performSelector:@selector(opponentShotWithDamage:) withObject:nil afterDelay:frequencyOpponentShoting()];
+    }
+}
+
+-(BOOL)playerGetDamage:(int)pDamage
+{
+//    Yes when duel is finish
+    if (duelEnd) return YES;
 
     int damage = pDamage;
     if (!delegate) {
@@ -801,8 +816,6 @@ static CGFloat blinkBottomOriginY;
         damage = 2;
     }
     
-    [opponentShape shot];
-
     shotCountBulletForOpponent-=damage;
     
     if (shotCountBulletForOpponent<0) {
@@ -835,6 +848,9 @@ static CGFloat blinkBottomOriginY;
         [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:1.0];
         [timer invalidate];
         [moveTimer invalidate];
+        return YES;
+    }else{
+        return NO;
     }
 }
 
@@ -1017,7 +1033,9 @@ static CGFloat blinkBottomOriginY;
             [self.view bringSubviewToFront:btnSkip];
         }
         
-        if(!delegate && opponentShape.typeOfBody != OpponentShapeTypeScarecrow) shotTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(opponentShotWithDamage:) userInfo:nil repeats:YES];
+        if(!delegate && opponentShape.typeOfBody != OpponentShapeTypeScarecrow && isOpponentShotFrequency){
+            [self performSelector:@selector(opponentShotWithDamage:) withObject:nil afterDelay:frequencyOpponentShoting()];
+        } 
         moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
         
         
@@ -1137,6 +1155,14 @@ static CGFloat blinkBottomOriginY;
     [self performSelector:@selector(finishGunFrequentlyBlockTime) withObject:Nil afterDelay:playerAccount.accountWeapon.dFrequently];
 }
 
+#pragma mark - Frequently of opponent shoting
+
+float frequencyOpponentShoting()
+{
+    float f =(20 + arc4random() % 20) * 0.1f;
+    return f;
+}
+
 #pragma mark - IBAction
 
 - (IBAction)btnSkipClicked:(id)sender {
@@ -1194,8 +1220,8 @@ static CGFloat blinkBottomOriginY;
 
         [self.userLiveImageView setHidden:NO];
 
-        if(!delegate && opponentShape.typeOfBody != OpponentShapeTypeScarecrow){
-            shotTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(opponentShotWithDamage:) userInfo:nil repeats:YES];
+        if(!delegate && opponentShape.typeOfBody != OpponentShapeTypeScarecrow && isOpponentShotFrequency){
+            [self performSelector:@selector(opponentShotWithDamage:) withObject:nil afterDelay:frequencyOpponentShoting()];
             moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
             [self showGoodBodies];
         }
