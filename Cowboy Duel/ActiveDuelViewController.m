@@ -1025,16 +1025,15 @@ static CGFloat blinkBottomOriginY;
 {   
     CGRect finalFrame = CGRectMake(12, 90, 294, 165);
 
-    finalView = [[FinalStatsView alloc] initWithFrame:finalFrame andAccount:playerAccount];
-
-    finalView.center = self.crossImageView.center; //self.view.center;
+    finalView = [[FinalStatsView alloc] initWithFrame:finalFrame andDataSource:finalViewDataSource];
     
-    int diffMoney = finalViewDataSource.moneyExch;
-    int diffPoints = finalViewDataSource.pointsForMatch;
+    finalView.activeDuelViewController = self;
+    
+    finalView.center = self.crossImageView.center; 
     
     [self.view addSubview:finalView];
     
-    [finalView startAnimationsWithDiffMoney:diffMoney AndDiffPoints:diffPoints];
+    [finalView startAnimations];
     
     btnBack.hidden = NO;
     btnTry.hidden = NO;
@@ -1056,6 +1055,10 @@ static CGFloat blinkBottomOriginY;
     [moveTimer invalidate];
     [ignoreTimer invalidate];
     [timer invalidate];
+    if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
+        [self performSelector:@selector(scaleView:) withObject:btnTry  afterDelay:1.5];
+    }
+
     
     
 }

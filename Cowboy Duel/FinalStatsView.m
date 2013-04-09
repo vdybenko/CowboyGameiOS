@@ -9,8 +9,11 @@
 #import "FinalStatsView.h"
 #import "DuelRewardLogicController.h"
 #import "UIView+Dinamic_BackGround.h"
+#import "LevelCongratViewController.h"
+#import "MoneyCongratViewController.h"
 
 AccountDataSource *playerAccount;
+FinalViewDataSource *finalViewDataSource;
 
 int startMoney;
 int startPoints;
@@ -22,17 +25,20 @@ int endPoints;
 @synthesize lblGold, lblGoldTitle, lblPoints;
 @synthesize ivBlueLine, ivCurrentRank, ivNextRank, ivGoldCoin;
 @synthesize goldPointBgView;
+@synthesize activeDuelViewController;
+@synthesize isTryAgainEnabled;
 
-- (id)initWithFrame:(CGRect)frame andAccount:(AccountDataSource *)acc;
+- (id)initWithFrame:(CGRect)frame andDataSource:(FinalViewDataSource *)fvDataSource;// andAccount:(AccountDataSource *)acc;
 {
     self = [super initWithFrame:frame];
 
     if (self) {
         NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"FinalStatsView" owner:self options:nil];
         self = [subviewArray objectAtIndex:0];
-    
-        playerAccount = acc;
         
+        finalViewDataSource = fvDataSource;
+        playerAccount = finalViewDataSource.playerAccount;
+        isTryAgainEnabled = YES;
         [goldPointBgView setDinamicHeightBackground];
 //Labels:
         lblGold.shadowColor = [UIColor whiteColor];
@@ -74,18 +80,51 @@ int endPoints;
     return self;
 }
 
--(void)startAnimationsWithDiffMoney: (int)moneyExch AndDiffPoints:(int)pointsExch;
+-(void)startAnimations;//WithDiffMoney: (int)moneyExch AndDiffPoints:(int)pointsExch;
 {
     startMoney = playerAccount.money;
-    endMoney = playerAccount.money+moneyExch;
-    [self animationWithLable:lblGold andStartNumber:startMoney andEndNumber:endMoney];
+    endMoney = playerAccount.money+finalViewDataSource.moneyExch;
     
     startPoints = playerAccount.accountPoints;
-    endPoints = playerAccount.accountPoints+pointsExch;
+    endPoints = playerAccount.accountPoints+finalViewDataSource.pointsForMatch;
     ivBlueLine.hidden = NO;
-    [self changePointsLine:startPoints maxValue:endPoints animated:YES];
+
     lblPoints.text = [NSString stringWithFormat:@"%d",startPoints ];
-    [self animationWithLable:lblPoints andStartNumber:startPoints andEndNumber:endPoints];
+    
+    [UIView animateWithDuration:1.4f
+                     animations:^{
+                         [self animationWithLable:lblGold andStartNumber:startMoney andEndNumber:endMoney];
+                         
+                         [self changePointsLine:startPoints maxValue:endPoints animated:YES];                         
+                         [self animationWithLable:lblPoints andStartNumber:startPoints andEndNumber:endPoints];
+                         
+                     } completion:^(BOOL finished) {
+                         if (finalViewDataSource.reachNewLevel) {
+                             [self showMessageOfNewLevel];
+                             finalViewDataSource.reachNewLevel=NO;
+                         }
+                         
+                         if (finalViewDataSource.userWon) {
+                             if ((finalViewDataSource.oldMoney<500)&&(playerAccount.money>=500)&&(playerAccount.money<1000)) {
+                                 NSString *moneyText=[NSString stringWithFormat:@"%d",playerAccount.money];
+                                 [self showMessageOfMoreMoney:playerAccount.money withLabel:moneyText];
+                             }else {
+                                 int thousandOld=finalViewDataSource.oldMoney/1000;
+                                 int thousandNew=playerAccount.money/1000;
+                                 int thousandSecond=(playerAccount.money % 1000)/100;
+                                 if (thousandNew>thousandOld) {
+                                     if (thousandSecond==0) {
+                                         [self showMessageOfMoreMoney:playerAccount.money withLabel:[NSString stringWithFormat:@"+%dK",thousandNew]];
+                                     }else {
+                                         [self showMessageOfMoreMoney:playerAccount.money withLabel:[NSString stringWithFormat:@"+%d.%dK",thousandNew,thousandSecond]];
+                                     }
+                                 }
+                             }
+                             finalViewDataSource.oldMoney=0;
+                         }
+                     }];
+    
+
     
 }
 
@@ -169,6 +208,25 @@ int endPoints;
     } else {
         ivBlueLine.frame = temp;
     }
+}
+#pragma mark -
+
+-(void)showMessageOfNewLevel
+{
+    LevelCongratViewController *lvlCongratulationViewController=[[LevelCongratViewController alloc] initForNewLevelPlayerAccount:playerAccount andController:activeDuelViewController tryButtonEnable:isTryAgainEnabled];
+    [self performSelector:@selector(showViewController:) withObject:lvlCongratulationViewController afterDelay:4.5];
+}
+
+-(void)showMessageOfMoreMoney:(NSInteger)money withLabel:(NSString *)labelForCongratulation
+{
+    MoneyCongratViewController *moneyCongratulationViewController = [[MoneyCongratViewController alloc] initForAchivmentPlayerAccount:playerAccount withLabel:labelForCongratulation andController:activeDuelViewController tryButtonEnable:isTryAgainEnabled];
+    [self performSelector:@selector(showViewController:) withObject:moneyCongratulationViewController afterDelay:4.5];
+}
+
+-(void)showViewController:(UIViewController *)viewController
+{
+    [activeDuelViewController presentModalViewController:viewController animated:YES];
+    viewController = nil;
 }
 
 @end

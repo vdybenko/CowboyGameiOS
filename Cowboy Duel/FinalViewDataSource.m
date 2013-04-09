@@ -12,13 +12,15 @@
 @interface FinalViewDataSource()
 {
     BOOL isDuelWinWatched;
-    BOOL userWon;
 }
 @end
 
 @implementation FinalViewDataSource
 
-@synthesize pointsForMatch, moneyExch;
+@synthesize pointsForMatch, moneyExch, oldMoney,oldPoints;
+@synthesize playerAccount, oponentAccount;
+@synthesize reachNewLevel, userWon, tryButtonEnabled;
+
 
 -(id)initWithUserTime:(int)userTimePar
        andOponentTime:(int)oponentTime
@@ -31,12 +33,12 @@ andGameCenterController:(id)delegateController
     if (self){
         
         oldMoney = playerAccount.money;
-        
+        oldPoints = playerAccount.accountPoints;
         teaching = teach;
         userTime = userTimePar;
         playerAccount = userAccount;
         oponentAccount = opAccount;
-
+        tryButtonEnabled = YES;
         NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
 
         if (teaching) {
@@ -105,14 +107,26 @@ andGameCenterController:(id)delegateController
     return self;
 }
 
-#pragma  mark -
+#pragma mark -
+
+-(void)prepeareForWinScene;
+{
+    tryButtonEnabled = NO;
+    userWon = YES;
+}
+
+-(void)prepeareForLoseScene{
+    tryButtonEnabled = NO;
+    userWon = NO;
+}
+
 -(void)loseScene
 {
 
     isDuelWinWatched = YES;
     lastDuel = YES;
-    int moneyExch  = playerAccount.money < 10 ? 1: playerAccount.money / 10.0;
-    int pointsForMatch=0;
+    moneyExch  = playerAccount.money < 10 ? 1: playerAccount.money / 10.0;
+    pointsForMatch=0;
 
     if (!teaching||(duelWithBotCheck)) {
         oponentAccount.money += moneyExch;
@@ -231,54 +245,13 @@ andGameCenterController:(id)delegateController
         if([playerAccount.duels count] > 10)
             [playerAccount sendDuels:playerAccount.duels];
 
-        /*
-        if (reachNewLevel) {
-            [self showMessageOfNewLevel];
-            reachNewLevel=NO;
-        }
-        
-        if (userWon) {
-            if ((oldMoney<500)&&(playerAccount.money>=500)&&(playerAccount.money<1000)) {
-                NSString *moneyText=[NSString stringWithFormat:@"%d",playerAccount.money];
-                [self showMessageOfMoreMoney:playerAccount.money withLabel:moneyText];
-            }else {
-                int thousandOld=oldMoney/1000;
-                int thousandNew=playerAccount.money/1000;
-                int thousandSecond=(playerAccount.money % 1000)/100;
-                if (thousandNew>thousandOld) {
-                    if (thousandSecond==0) {
-                        [self showMessageOfMoreMoney:playerAccount.money withLabel:[NSString stringWithFormat:@"+%dK",thousandNew]];
-                    }else {
-                        [self showMessageOfMoreMoney:playerAccount.money withLabel:[NSString stringWithFormat:@"+%d.%dK",thousandNew,thousandSecond]];
-                    }
-                }
-            }
-            oldMoney=0;
-        }
-        */
+
         [[StartViewController sharedInstance] modifierUser:playerAccount];
         if(oponentAccount.bot) [[StartViewController sharedInstance] modifierUser:oponentAccount];
     }
     
-//    if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
-//        [self performSelector:@selector(scaleView:) withObject:tryButton  afterDelay:1.5];
-//    }
 }
 
-#pragma mark -
-/*
--(void)showMessageOfNewLevel
-{
-    LevelCongratViewController *lvlCongratulationViewController=[[LevelCongratViewController alloc] initForNewLevelPlayerAccount:playerAccount andController:self tryButtonEnable:tryButton.enabled];
-    [self performSelector:@selector(showViewController:) withObject:lvlCongratulationViewController afterDelay:4.5];
-}
-
--(void)showMessageOfMoreMoney:(NSInteger)money withLabel:(NSString *)labelForCongratulation
-{
-    MoneyCongratViewController *moneyCongratulationViewController  = [[MoneyCongratViewController alloc] initForAchivmentPlayerAccount:playerAccount withLabel:labelForCongratulation andController:self tryButtonEnable:tryButton.enabled];
-    [self performSelector:@selector(showViewController:) withObject:moneyCongratulationViewController afterDelay:4.5];
-}
-*/
 #pragma mark -
 
 -(void)checkMaxWin:(int)moneyExch;
@@ -318,8 +291,6 @@ andGameCenterController:(id)delegateController
         playerAccount.accountWins++;
     }
     [playerAccount saveAccountWins];
-    //    [playerAccount accountWins];
-    //    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 #pragma mark - check Level, Points change and other saved features
 

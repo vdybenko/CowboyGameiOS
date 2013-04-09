@@ -31,15 +31,11 @@
     BOOL teaching;
     BOOL firstRun;
     BOOL duelWithBotCheck;
-    BOOL reachNewLevel;
     BOOL lastDuel;
     BOOL runAway;
     BOOL runAwayGood;
-    
-    BOOL oldMoney;
-    
-    int minUserTime;
 
+    int minUserTime;
     int userTime;
     
 //    int moneyExch;
@@ -51,8 +47,17 @@
 }
 @property(weak)id<ActiveDuelViewControllerDelegate> delegate;
 
+@property (nonatomic) AccountDataSource* playerAccount;
+@property (nonatomic) AccountDataSource* oponentAccount;
+
 @property (nonatomic) int moneyExch;
 @property (nonatomic) int pointsForMatch;
+@property (nonatomic) int oldMoney;
+@property (nonatomic) int oldPoints;
+
+@property (nonatomic) BOOL reachNewLevel;
+@property (nonatomic) BOOL userWon;
+@property (nonatomic) BOOL tryButtonEnabled;
 
 -(id)initWithUserTime:(int)userTimePar
        andOponentTime:(int)oponentTime

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "FXLabel.h"
 #import "AccountDataSource.h"
+#import "FinalViewDataSource.h"
+#import "ActiveDuelViewController.h"
 
 @interface FinalStatsView : UIView
 @property (nonatomic,strong)     IBOutlet UIView *goldPointBgView;
@@ -20,9 +22,13 @@
 @property (nonatomic,strong) IBOutlet UILabel *lblPoints;
 @property (nonatomic,strong) IBOutlet UILabel *lblGoldTitle;
 
-- (id)initWithFrame:(CGRect)frame andAccount:(AccountDataSource *)acc;
+@property (nonatomic,strong) ActiveDuelViewController *activeDuelViewController;
 
-- (void)startAnimationsWithDiffMoney: (int)moneyExch AndDiffPoints:(int)pointsExch;
+@property (nonatomic) BOOL isTryAgainEnabled;
+
+- (id)initWithFrame:(CGRect)frame andDataSource: (FinalViewDataSource *)fvDataSource;
+
+- (void)startAnimations;
 
 
 @end

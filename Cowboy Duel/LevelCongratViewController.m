@@ -8,9 +8,9 @@
 
 #import "LevelCongratViewController.h"
 #import "OGHelper.h"
-#import "FinalViewController.h"
+//#import "FinalViewController.h"
 #import "DuelRewardLogicController.h"
-
+#import "ActiveDuelViewController.h"
 
 @interface LevelCongratViewController ()
 {
@@ -40,7 +40,8 @@
     __weak IBOutlet UIButton *btnPost;
     BOOL runAnimation;
 }
-@property(nonatomic, weak)id<DuelViewControllerDelegate> delegate;
+//@property(nonatomic, weak)id<DuelViewControllerDelegate> delegate;
+@property(nonatomic, weak)id<ActiveDuelViewControllerDelegate> delegate;
 @property (nonatomic, weak) IBOutlet UIImageView *ivLightRays2;
 @end
 
@@ -250,7 +251,7 @@
     [self dismissModalViewControllerAnimated:YES];
     if ([delegate respondsToSelector:@selector(backButtonClick:)])
     {
-        [(FinalViewController *)delegate backButtonClick:sender];
+        [(ActiveDuelViewController *)delegate backButtonClick:sender];
     }
     [self releaseComponents];
 }
@@ -262,7 +263,7 @@
     
     if ([delegate respondsToSelector:@selector(tryButtonClick:)]) 
     {
-       [(FinalViewController *)delegate tryButtonClick:sender];
+       [(ActiveDuelViewController *)delegate tryButtonClick:sender];
     }
     [self releaseComponents];
 }
