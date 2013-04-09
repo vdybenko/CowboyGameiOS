@@ -15,7 +15,11 @@
 @interface BarellsObject ()
 {
     AVAudioPlayer *explosinPlayer;
-
+    
+    BOOL exploded;
+    CGRect bupHighest;
+    CGRect bupMiddle;
+    CGRect bupBottom;
 }
 @end
 
@@ -24,6 +28,7 @@
 @synthesize barellView;
 @synthesize barelAnimImg;
 @synthesize barellPosition;
+@synthesize barellCount;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -48,6 +53,11 @@
         barelAnimImg.animationDuration = 0.3f;
         [barelAnimImg setAnimationRepeatCount:1];
         imgArray = nil;
+        exploded = NO;
+        bupBottom = self.barellImgBottom.frame;
+        bupMiddle = self.barellImgMiddle.frame;
+        bupHighest = self.barellImgHighest.frame;
+        
     }
     return self;
 }
@@ -59,15 +69,17 @@
         [barelAnimImg setHidden:YES];
         
     }
+    exploded = YES;
     CGRect frame;
     switch (self.barellPosition) {
         case BarellPositionBottom:
             frame = self.barellImgBottom.frame;
             barelAnimImg.frame = frame;
             self.barellImgBottom.hidden = YES;
+            
             if (!self.barellImgMiddle.hidden) {
                 [self dropBarel:self.barellImgMiddle];
-        }
+            }
             
             if (!self.barellImgHighest.hidden) {
                 [self dropBarel:self.barellImgHighest];
@@ -98,6 +110,32 @@
    
     [self performSelector:@selector(hideObj) withObject:nil afterDelay:0.7f];
 
+}
+
+-(void)showBarrels;
+{
+    if (exploded) {
+        self.barellImgHighest.frame = bupHighest;
+        self.barellImgBottom.frame = bupBottom;
+        self.barellImgMiddle.frame = bupMiddle;
+    }
+    
+    switch (barellCount) {
+        case 1:
+            self.barellImgBottom.hidden = NO;
+            break;
+        case 2:
+            self.barellImgBottom.hidden = NO;
+            self.barellImgMiddle.hidden = NO;
+            break;
+        case 3:
+            self.barellImgBottom.hidden = NO;
+            self.barellImgMiddle.hidden = NO;
+            self.barellImgHighest.hidden = NO;
+            break;
+        default:
+            break;
+    }
 }
 -(void)hideObj{
     //[explosinPlayer stop];

@@ -226,6 +226,7 @@ static CGFloat blinkBottomOriginY;
     int indexBarrel = 0;
     barelFrame = barellObject.frame;
     barelFrame.origin.x = opponentShape.frame.origin.x;
+    
     barelFrame.origin.y = 120;
     countOfBarrels = 5;
     countOfCactuses = 5;
@@ -244,8 +245,8 @@ static CGFloat blinkBottomOriginY;
         if (indexBarrel <=3)
         {
             if (indexBarrel==1) {
-                barellObject.barellImgBottom.hidden = NO;
-                
+                barellObject.barellCount = 1;
+                [barellObject showBarrels];
                 if (countOfBarrels - i == 1 || randomBarrels == 1) {
                     
                     [barellObjectArray addObject:barellObject];
@@ -258,11 +259,10 @@ static CGFloat blinkBottomOriginY;
                 
             }
             if (indexBarrel==2) {
-                barellObject.barellImgBottom.hidden = NO;
-                barellObject.barellImgMiddle.hidden = NO;
-                
+                barellObject.barellCount = 2;
+                [barellObject showBarrels];
+
                 if (countOfBarrels - i == 2 || randomBarrels == 2) {
-                    
                     [barellObjectArray addObject:barellObject];
                     barelFrame.origin.x = barelFrame.origin.x + 80;
                     [self.floatView addSubview:barellObject];
@@ -273,9 +273,9 @@ static CGFloat blinkBottomOriginY;
 
             }
             if (indexBarrel==3) {
-                barellObject.barellImgMiddle.hidden = NO;
-                barellObject.barellImgBottom.hidden = NO;
-                barellObject.barellImgHighest.hidden = NO;
+                barellObject.barellCount = 3;
+                
+                [barellObject showBarrels];
                 
                 [barellObjectArray addObject:barellObject];
                 barelFrame.origin.x = barelFrame.origin.x + 80;
@@ -285,6 +285,7 @@ static CGFloat blinkBottomOriginY;
                 randomBarrels = arc4random()%3 + 1;
             }
         }
+
     }
     
     for (int i=0; i<countOfCactuses; i++) {
@@ -395,26 +396,7 @@ static CGFloat blinkBottomOriginY;
     
     if (tryAgain) {
         for (BarellsObject *barell in barellObjectArray) {
-            switch (barell.barellPosition) {
-                case BarellPositionBottom:
-                    if (barell.barellImgBottom.hidden) {
-                        barell.barellImgBottom.hidden = NO;
-                    }
-                    break;
-                case BarellPositionMiddle:
-                    if (barell.barellImgMiddle.hidden) {
-                        barell.barellImgMiddle.hidden = NO;
-                    }
-                    break;
-                case BarellPositionHighest:
-                    if (barell.barellImgHighest.hidden) {
-                        barell.barellImgHighest.hidden = NO;
-                    }
-                    break;
-                    
-                default:
-                    break;
-            }
+            [barell showBarrels];
             if (barell.hidden) {
                 barell.hidden = NO;
             }
