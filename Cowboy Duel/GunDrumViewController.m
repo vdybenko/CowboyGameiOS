@@ -134,9 +134,10 @@ static const CGFloat timeSpinDump = 0.3f;
         {
             [self textViewSetHidden];
         }
-        noTarget1.hidden = YES;
-        noTarget2.hidden = YES;
-        targetPractice.hidden = YES;
+        noTarget1= nil;
+        noTarget2 = nil;
+        targetPractice = nil;
+        goodIco = nil;
         vBackLightDrum.clipsToBounds = YES;
         vBackLightDrum.layer.cornerRadius = 60.f;
         
@@ -335,6 +336,10 @@ static const CGFloat timeSpinDump = 0.3f;
 {
     [self viewDidUnload];
     loadBulletAudioPlayer = nil;
+    noTarget1 = nil;
+    noTarget2 = nil;
+    targetPractice = nil;
+    goodIco = nil;
     
 }
 

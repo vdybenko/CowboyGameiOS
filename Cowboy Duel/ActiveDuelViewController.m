@@ -834,6 +834,10 @@ static CGFloat blinkBottomOriginY;
     
     if(!shotCountBulletForOpponent){
         [self userLost];
+      
+        if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow) {
+            [self cleanPracticeHints];
+        }
         GameCenterViewController *gameCenterViewController;
         if (self.delegate) gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
         
@@ -886,6 +890,9 @@ static CGFloat blinkBottomOriginY;
         [moveTimer invalidate];
         
         [self opponentLost];
+        if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow) {
+            [self cleanPracticeHints];
+        }
     }
 
 }
@@ -1023,16 +1030,16 @@ static CGFloat blinkBottomOriginY;
         if (opponentShape.typeOfBody != OpponentShapeTypeScarecrow) {
             [self showGoodBodies];
         }else{
+             btnSkip.hidden = YES;
             [gunDrumViewController firstStepOnPractice];
-            btnSkip.hidden = YES;
             isOpenHint = YES;
             [arrowToOpponent changeImgForPractice];
        
             UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
             
             [btnSkip setTitleByLabel:@"SKIP" withColor:buttonsTitleColor fontSize:24];
-            [self.btnSkip setEnabled:YES];
-            [self.btnSkip setHidden:NO];
+          //  [self.btnSkip setEnabled:YES];
+          //  [self.btnSkip setHidden:NO];
             [self.view bringSubviewToFront:btnSkip];
         }
         
@@ -1056,6 +1063,7 @@ static CGFloat blinkBottomOriginY;
 -(void)cleanPracticeHints;
 {
     btnSkip.hidden = NO;
+    [self.btnSkip setEnabled:YES];
     isOpenHint = NO;
     [gunDrumViewController textPracticeClean];
 }
