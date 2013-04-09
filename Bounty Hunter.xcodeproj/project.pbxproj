@@ -66,6 +66,7 @@
 		037DF221154BDBAC003FACDF /* ItemsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 037DF21D154BDBAC003FACDF /* ItemsDataSource.m */; };
 		038366DD1549257700F3F63B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038366DC1549257700F3F63B /* MediaPlayer.framework */; };
 		038366DF154925A100F3F63B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038366DE154925A100F3F63B /* CoreTelephony.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		3115F80B171400550096CB3F /* FinalViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3115F80A171400550096CB3F /* FinalViewDataSource.m */; };
 		3115FB5015CACA5100C4D438 /* MoneyCongratViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3115FB4E15CACA5100C4D438 /* MoneyCongratViewController.m */; };
 		3115FB5115CACA5100C4D438 /* MoneyCongratViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3115FB4F15CACA5100C4D438 /* MoneyCongratViewController.xib */; };
 		312B2F3F15E7A24F006D2470 /* fin_img_achieve.png in Resources */ = {isa = PBXBuildFile; fileRef = 312B2F3915E7A24F006D2470 /* fin_img_achieve.png */; };
@@ -967,6 +968,8 @@
 		037DF21D154BDBAC003FACDF /* ItemsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemsDataSource.m; sourceTree = "<group>"; };
 		038366DC1549257700F3F63B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		038366DE154925A100F3F63B /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		3115F809171400550096CB3F /* FinalViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinalViewDataSource.h; sourceTree = "<group>"; };
+		3115F80A171400550096CB3F /* FinalViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinalViewDataSource.m; sourceTree = "<group>"; };
 		3115FB4D15CACA5100C4D438 /* MoneyCongratViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MoneyCongratViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		3115FB4E15CACA5100C4D438 /* MoneyCongratViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MoneyCongratViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		3115FB4F15CACA5100C4D438 /* MoneyCongratViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MoneyCongratViewController.xib; path = "../Cowboy Duel/MoneyCongratViewController.xib"; sourceTree = "<group>"; };
@@ -2989,6 +2992,8 @@
 				7679D8C11563949E00BDE3A6 /* RefreshContent */,
 				BDD07B9C141E1F170085E4FB /* ResoultDataSource.h */,
 				BDD07B9D141E1F170085E4FB /* ResoultDataSource.m */,
+				3115F809171400550096CB3F /* FinalViewDataSource.h */,
+				3115F80A171400550096CB3F /* FinalViewDataSource.m */,
 				7692812A159DCAFD00E6CE41 /* IconDownloader.h */,
 				7692812B159DCAFD00E6CE41 /* IconDownloader.m */,
 				7675CA8415A2E10B005A3BD3 /* DuelRewardLogicController.h */,
@@ -3890,6 +3895,7 @@
 				76C13EA51709B2EE0093AE0D /* UIImage+Retina4.m in Sources */,
 				317162B8170D5D6700F068A9 /* UIView+ColorOfPoint.m in Sources */,
 				316BBFE6170EB60F009C23BA /* FinalStatsView.m in Sources */,
+				3115F80B171400550096CB3F /* FinalViewDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
