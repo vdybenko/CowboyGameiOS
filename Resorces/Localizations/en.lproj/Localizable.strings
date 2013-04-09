@@ -261,6 +261,7 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "StolenMess"="You've stolen";
 "PokenMessage"="You've poked";
 
+"CHAR_BUILDER"="BUILDER";
 //Titles for Users
 "0Rank" = "Slave"; 
 "1Rank" = "Refugee";
