@@ -282,7 +282,11 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "1stIntro" = "Ye know who bounty hunters are, boy? We chase criminals 'n get a reward for 'em, dead or alive. The harder to get these bastards are, the bigger’s the reward for their head.";
 "2ndIntro" = "Help me get'em bad guys, and ye'll get yer freedom and be a bounty hunter yerself.  But remember: their guns are fast. Ye better be faster.";
 
-"ExplanePractice" = "Shoot carefully, if you get into a civilian, you put yourself harm!";
+"PracticeStep1" = "Find and shoot at target practice!!!";
+
+"PracticeStep2" = "If shot on civilian people, will be BOBO!!!";
+
+"PracticeStep3" = "GOOD JOB!!! NEXT STEP";
 
 //Win/Lose View
 "YouEarned" = "You earned:";

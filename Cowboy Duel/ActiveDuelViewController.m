@@ -30,6 +30,7 @@
 #define MOVE_DISTANCE 100
 @interface ActiveDuelViewController ()
 {
+    BOOL isOpenHint;
     float startPoint;
     BOOL firstAccel;
     UIAccelerationValue rollingX, rollingY, rollingZ;
@@ -542,7 +543,7 @@ static CGFloat blinkBottomOriginY;
             opponentShape.typeOfBody = OpponentShapeTypeManLow;
         }
     }else{
-        countBulletsForOpponent = 5;
+        countBulletsForOpponent = 4;
         opponentShape.typeOfBody = OpponentShapeTypeScarecrow;
         maxShotCount = 3;
         shotCountBullet = 3;
@@ -559,7 +560,9 @@ static CGFloat blinkBottomOriginY;
 }
 
 - (IBAction)shotButtonClick:(id)sender {
-    if (isGunCanShotOfFrequently) {
+    if (isOpenHint == YES) {
+        [self cleanPracticeHints];
+    }else if (isGunCanShotOfFrequently) {
         [self startGunFrequentlyBlockTime];
             
         [gunDrumViewController shotAnimation];
@@ -603,7 +606,6 @@ static CGFloat blinkBottomOriginY;
         CGPoint centerOfScreanPoint;
         centerOfScreanPoint.x = self.crossImageView.bounds.origin.x + self.crossImageView.center.x;
         centerOfScreanPoint.y = self.crossImageView.bounds.origin.y + self.crossImageView.center.y;
-        
         [self cheackHitForShot:centerOfScreanPoint andTargetPoint:targetPoint];
     }
 }
@@ -635,7 +637,7 @@ static CGFloat blinkBottomOriginY;
 
 -(void)cheackHitForShot:(CGPoint)shotPoint andTargetPoint:(CGPoint)targetPoint
 {
-    [gunDrumViewController explanePracticeClean];
+   // [gunDrumViewController textPracticeClean];
     //Obstracles
     for (UIImageView *obstracle in self.floatView.subviews) {
         if(obstracle.tag != 1) continue;
@@ -719,12 +721,25 @@ static CGFloat blinkBottomOriginY;
     }
     BOOL resultWoman = ([womanShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view] && !womanShape.hidden);
     if (resultWoman) {
+        
+        if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow) {
+            [gunDrumViewController shootOnCivil];
+            btnSkip.hidden = YES;
+            isOpenHint = YES;
+         
+        }
         [self opponentShot];
         if(delegate) [delegate sendShotSelf];        
         return;
     }
     BOOL resultGoodCowboy = ([goodCowboyShape shotInShapeWithPoint:shotPoint superViewOfPoint:self.view] && !goodCowboyShape.hidden);
     if (resultGoodCowboy) {
+       
+        if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow) {
+            [gunDrumViewController shootOnCivil];
+            btnSkip.hidden = YES;
+            isOpenHint = YES;
+        }
         [self opponentShot];
         if(delegate) [delegate sendShotSelf];
         return;
@@ -844,8 +859,11 @@ static CGFloat blinkBottomOriginY;
     userHitCount++;
     
     [opponentShape changeLiveBarWithUserHitCount:userHitCount maxShotCount:maxShotCount];
-    
-        
+    NSLog(@"shotCountBullet %d", shotCountBullet);
+    if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow && shotCountBullet == 1) {
+        [gunDrumViewController secondStepOnPractice];
+        isOpenHint = YES;
+    }
     if(!shotCountBullet) {
         if (duelEnd) return;
         duelEnd = YES;
@@ -1005,6 +1023,9 @@ static CGFloat blinkBottomOriginY;
         if (opponentShape.typeOfBody != OpponentShapeTypeScarecrow) {
             [self showGoodBodies];
         }else{
+            [gunDrumViewController firstStepOnPractice];
+            btnSkip.hidden = YES;
+            isOpenHint = YES;
             [arrowToOpponent changeImgForPractice];
        
             UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
@@ -1032,7 +1053,12 @@ static CGFloat blinkBottomOriginY;
 }
 
 #pragma mark
-
+-(void)cleanPracticeHints;
+{
+    btnSkip.hidden = NO;
+    isOpenHint = NO;
+    [gunDrumViewController textPracticeClean];
+}
 -(void)hideHelpViewOnStartDuel;
 {
     arrowAnimationContinue = NO;    
@@ -1110,7 +1136,13 @@ static CGFloat blinkBottomOriginY;
 
 -(void) showGoodBodies
 {
-    [gunDrumViewController explanePractice];
+    if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow)
+    {
+    [gunDrumViewController secondStepOnPractice];
+     btnSkip.hidden = YES;
+        isOpenHint = YES;
+    }
+    
     womanShape.hidden = NO;
     goodCowboyShape.hidden = NO;
     horseShape.hidden = NO;
