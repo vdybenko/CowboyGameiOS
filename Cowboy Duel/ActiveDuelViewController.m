@@ -1382,7 +1382,7 @@ static CGFloat blinkBottomOriginY;
             [gameCenterViewController matchStartedTry];
         }
     
-    [self reInitViewWillAppear:YES];
+//    [self reInitViewWillAppear:YES];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self

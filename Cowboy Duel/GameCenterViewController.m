@@ -516,6 +516,7 @@ static GameCenterViewController *gameCenterViewController;
             [finalViewDataSource prepeareForWinScene];
         }
         mutchNumber = 3;
+        finalViewDataSource.tryButtonEnabled = NO;
 
         if ([delegate respondsToSelector:@selector(showFinalView:)]) {
             [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
@@ -526,15 +527,10 @@ static GameCenterViewController *gameCenterViewController;
             finalViewController =(FinalViewController*) self.parentVC.navigationController.visibleViewController;
             finalViewController.tryButton.enabled = NO;
         }else{
-//            finalViewController = [[FinalViewController alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
-//            [finalViewController prepeareForWinScene];
+            finalViewController = [[FinalViewController alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+            [finalViewController prepeareForWinScene];
             mutchNumber = 3;
             [parentVC.navigationController pushViewController:finalViewController animated:YES];
-            finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
-            [finalViewDataSource prepeareForWinScene];
-            if ([delegate respondsToSelector:@selector(showFinalView:)]) {
-                [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
-            }
             [delegate shutDownTimer];
         }
     }else if ([self.parentVC.navigationController.visibleViewController isKindOfClass:([DuelStartViewController class])]){
