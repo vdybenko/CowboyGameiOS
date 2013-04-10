@@ -59,6 +59,8 @@
 @property (nonatomic) BOOL userWon;
 @property (nonatomic) BOOL tryButtonEnabled;
 @property (nonatomic) BOOL teaching;
+@property (nonatomic) BOOL isDuelWinWatched;
+
 
 -(id)initWithUserTime:(int)userTimePar
        andOponentTime:(int)oponentTime

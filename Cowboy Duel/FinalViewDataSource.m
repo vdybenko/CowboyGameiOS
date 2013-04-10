@@ -9,17 +9,11 @@
 #import "FinalViewDataSource.h"
 #import "DuelRewardLogicController.h"
 
-@interface FinalViewDataSource()
-{
-    BOOL isDuelWinWatched;
-}
-@end
-
 @implementation FinalViewDataSource
 
 @synthesize pointsForMatch, moneyExch, oldMoney,oldPoints;
 @synthesize playerAccount, oponentAccount;
-@synthesize reachNewLevel, userWon, tryButtonEnabled, teaching;
+@synthesize reachNewLevel, userWon, tryButtonEnabled, teaching, isDuelWinWatched;
 
 
 -(id)initWithUserTime:(int)userTimePar
@@ -52,8 +46,12 @@ andGameCenterController:(id)delegateController
         reachNewLevel = NO;
         lastDuel = NO;
         runAway = NO;
-
         
+        if (teaching&&(oponentAccount.bot)) {
+            duelWithBotCheck=YES;
+        }else{
+            duelWithBotCheck=NO;
+        }
 //        
         transaction = [[CDTransaction alloc] init];
         transaction.trMoneyCh = [NSNumber numberWithInt:10];
@@ -94,6 +92,8 @@ andGameCenterController:(id)delegateController
         {
             userWon = YES;
         }
+        
+        
         
         if (userWon)
             [self winScene];

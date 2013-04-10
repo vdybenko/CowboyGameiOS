@@ -27,6 +27,8 @@
 #import "UIView+ColorOfPoint.h"
 #import "FinalStatsView.h"
 #import "FinalViewDataSource.h"
+#import "DuelProductWinViewController.h"
+
 #define targetHeight 260
 #define targetWeidth 100
 #define MOVE_DISTANCE 100
@@ -452,8 +454,14 @@ static CGFloat blinkBottomOriginY;
     
     [activityIndicatorView hideView];
     [self.gunButton setEnabled:NO];
-    
-    userLiveImageViewStartWidth = self.userLiveImageView.frame.size.width;
+    NSLog(@"%f", userLiveImageViewStartWidth);
+    if (tryAgain) {
+        CGRect frame = self.userLiveImageView.frame;
+        frame.size.width = userLiveImageViewStartWidth;
+        self.userLiveImageView.frame = frame;
+    }else
+        userLiveImageViewStartWidth = self.userLiveImageView.frame.size.width;
+    NSLog(@"%f", userLiveImageViewStartWidth);
     self.lbUserLifeLeft.text = [NSString stringWithFormat:@"%d",shotCountBulletForOpponent*3];
     
     self.opStatsLabel.text = [NSString stringWithFormat: @"A: +%d\rD: +%d",opAccount.accountWeapon.dDamage,opAccount.accountDefenseValue];
@@ -1273,10 +1281,10 @@ static CGFloat blinkBottomOriginY;
         [userDef synchronize];
     }
     
-/*    if (playerAccount.isTryingWeapon) {
+    if (playerAccount.isTryingWeapon) {
         playerAccount.isTryingWeapon = NO;
-        if (!isDuelWinWatched) {
-            isDuelWinWatched = YES;
+        if (!finalViewDataSource.isDuelWinWatched) {
+            finalViewDataSource.isDuelWinWatched = YES;
             DuelProductWinViewController *duelProductWinViewController=[[DuelProductWinViewController alloc] initWithAccount:playerAccount duelProduct:playerAccount.accountWeapon parentVC:self];
             [playerAccount loadWeapon];
             [self.navigationController presentViewController:duelProductWinViewController animated:YES completion:Nil];
@@ -1294,7 +1302,7 @@ static CGFloat blinkBottomOriginY;
             }
         }
     }else{
- */
+ 
         UINavigationController *nav = ((TestAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController;
         NSLog(@"%@", nav.viewControllers);
         for (__weak UIViewController *viewController in nav.viewControllers) {
@@ -1311,7 +1319,7 @@ static CGFloat blinkBottomOriginY;
             [nav popToViewController:[nav.viewControllers objectAtIndex:1] animated:YES];
             
         }
-//    }
+    }
     
     GameCenterViewController *gameCenterViewController;
     if (self.delegate){
