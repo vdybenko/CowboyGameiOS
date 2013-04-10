@@ -401,7 +401,9 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     
     NSUserDefaults *usrDef = [NSUserDefaults standardUserDefaults];
     [usrDef setObject:newToken forKey:@"DeviceToken"];
-    [usrDef synchronize];    
+    [usrDef synchronize];
+    
+    [[StartViewController sharedInstance] authorizationModifier:YES];
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error

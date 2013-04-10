@@ -715,12 +715,17 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                                  [self updateLabels];
                              }];
         }
-        if (![namePlayerSaved isEqualToString:textField.text]) {
-            [[StartViewController sharedInstance] authorizationModifier:YES];
-        }
         
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
-         (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeNewsstandContentAvailability | UIRemoteNotificationTypeAlert)];
+        if (![namePlayerSaved isEqualToString:textField.text]) {
+            if (![[NSUserDefaults standardUserDefaults] stringForKey:@"DeviceToken"]){
+                [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+                 (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeNewsstandContentAvailability | UIRemoteNotificationTypeAlert)];
+            }else{
+                [[StartViewController sharedInstance] authorizationModifier:YES];
+            }
+        }else{
+            
+        }
     }
     return YES;
 }
