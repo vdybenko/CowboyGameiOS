@@ -12,7 +12,7 @@
 #import "math.h"
 #import <QuartzCore/QuartzCore.h>
 #import "DuelRewardLogicController.h"
-#import "FinalViewController.h"
+//#import "FinalViewController.h"
 #import "OponentCoordinateView.h"
 #import "StartViewController.h"
 #import "GunDrumViewController.h"
@@ -25,6 +25,10 @@
 #import "AirBallon.h"
 #import "HorseShape.h"
 #import "UIView+ColorOfPoint.h"
+#import "FinalStatsView.h"
+#import "FinalViewDataSource.h"
+#import "DuelProductWinViewController.h"
+
 #define targetHeight 260
 #define targetWeidth 100
 #define MOVE_DISTANCE 100
@@ -59,6 +63,8 @@
     BOOL foll;
     BOOL duelTimerEnd;
     BOOL duelEnd;
+    
+    BOOL tryAgain;
 
     NSMutableArray *barellObjectArray;
     NSMutableArray *cactusObjectArray;
@@ -92,6 +98,9 @@
     GoodCowboy *goodCowboyShape;
     WomanShape *womanShape;
     OpponentShape *opponentShape;
+    
+    FinalStatsView *finalView;
+    FinalViewDataSource *finalViewDataSource;
   
     __weak IBOutlet UIImageView *blinkBottom;
     __weak IBOutlet UIImageView *blinkTop;
@@ -117,6 +126,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lbUserLifeLeft;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnSkip;
+@property (weak, nonatomic) IBOutlet UIButton *btnTry;
+@property (weak, nonatomic) IBOutlet UIButton *btnBack;
 
 
 @end
@@ -125,7 +136,7 @@
 @synthesize delegate;
 @synthesize glassImageViewAllBackground;
 @synthesize lbUserLifeLeft;
-@synthesize btnSkip;
+@synthesize btnSkip,btnTry,btnBack;
 
 static CGFloat userLiveImageViewStartWidth;
 static CGFloat blinkTopOriginY;
@@ -166,7 +177,7 @@ static CGFloat blinkBottomOriginY;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-       
+    
     shotCountForSound = 1;
 
     plView = (PLView *)self.view;
@@ -224,6 +235,7 @@ static CGFloat blinkBottomOriginY;
     int indexBarrel = 0;
     barelFrame = barellObject.frame;
     barelFrame.origin.x = opponentShape.frame.origin.x;
+    
     barelFrame.origin.y = 120;
     countOfBarrels = 5;
     countOfCactuses = 5;
@@ -242,8 +254,8 @@ static CGFloat blinkBottomOriginY;
         if (indexBarrel <=3)
         {
             if (indexBarrel==1) {
-                barellObject.barellImgBottom.hidden = NO;
-                
+                barellObject.barellCount = 1;
+                [barellObject showBarrels];
                 if (countOfBarrels - i == 1 || randomBarrels == 1) {
                     
                     [barellObjectArray addObject:barellObject];
@@ -256,11 +268,10 @@ static CGFloat blinkBottomOriginY;
                 
             }
             if (indexBarrel==2) {
-                barellObject.barellImgBottom.hidden = NO;
-                barellObject.barellImgMiddle.hidden = NO;
-                
+                barellObject.barellCount = 2;
+                [barellObject showBarrels];
+
                 if (countOfBarrels - i == 2 || randomBarrels == 2) {
-                    
                     [barellObjectArray addObject:barellObject];
                     barelFrame.origin.x = barelFrame.origin.x + 80;
                     [self.floatView addSubview:barellObject];
@@ -271,9 +282,9 @@ static CGFloat blinkBottomOriginY;
 
             }
             if (indexBarrel==3) {
-                barellObject.barellImgMiddle.hidden = NO;
-                barellObject.barellImgBottom.hidden = NO;
-                barellObject.barellImgHighest.hidden = NO;
+                barellObject.barellCount = 3;
+                
+                [barellObject showBarrels];
                 
                 [barellObjectArray addObject:barellObject];
                 barelFrame.origin.x = barelFrame.origin.x + 80;
@@ -283,6 +294,7 @@ static CGFloat blinkBottomOriginY;
                 randomBarrels = arc4random()%3 + 1;
             }
         }
+
     }
     
     for (int i=0; i<countOfCactuses; i++) {
@@ -332,14 +344,14 @@ static CGFloat blinkBottomOriginY;
     [self.view bringSubviewToFront:self.glassImageViewBottom];
     [self.view bringSubviewToFront:self.glassImageViewHeader];
     [self.view bringSubviewToFront:glassImageViewAllBackground];
-
+/*
     CGRect frame;
     activityIndicatorView = [[ActivityIndicatorView alloc] init];
     frame = activityIndicatorView.frame;
     frame.origin = CGPointMake(0,0);
     activityIndicatorView.frame = frame;
     [self.view addSubview:activityIndicatorView];
-    
+*/  
     blinkTopOriginY = blinkTop.frame.origin.y;
     blinkBottomOriginY = blinkBottom.frame.origin.y;
     
@@ -388,7 +400,31 @@ static CGFloat blinkBottomOriginY;
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+//    [super viewWillAppear:animated];
+    [self reInitViewWillAppear:animated];
+}
+
+-(void)reInitViewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    if (tryAgain) {
+        for (BarellsObject *barell in barellObjectArray) {
+            [barell showBarrels];
+            if (barell.hidden) {
+                barell.hidden = NO;
+            }
+        }
+        
+        for (CactusObject *cactus in cactusObjectArray) {
+            if (cactus.cactusImg.hidden) {
+                cactus.cactusImg.hidden = NO;
+            }
+        }
+        if (airBallon.airBallonImg.hidden) {
+            airBallon.airBallonImg.hidden = NO;
+        }
+    }
+    
     ignoreTimer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(userIgnorePunish) userInfo:nil repeats:NO];
     foll = NO;
     duelTimerEnd = NO;
@@ -427,9 +463,15 @@ static CGFloat blinkBottomOriginY;
     
     [activityIndicatorView hideView];
     [self.gunButton setEnabled:NO];
-    
-    userLiveImageViewStartWidth = self.userLiveImageView.frame.size.width;
-    self.lbUserLifeLeft.text = [NSString stringWithFormat:@"%d",shotCountBulletForOpponent];
+    NSLog(@"%f", userLiveImageViewStartWidth);
+    if (tryAgain) {
+        CGRect frame = self.userLiveImageView.frame;
+        frame.size.width = userLiveImageViewStartWidth;
+        self.userLiveImageView.frame = frame;
+    }else
+        userLiveImageViewStartWidth = self.userLiveImageView.frame.size.width;
+    NSLog(@"%f", userLiveImageViewStartWidth);
+    self.lbUserLifeLeft.text = [NSString stringWithFormat:@"%d",shotCountBulletForOpponent*3];
     
     self.opStatsLabel.text = [NSString stringWithFormat: @"A: +%d\rD: +%d",opAccount.accountWeapon.dDamage,opAccount.accountDefenseValue];
     self.userStatsLabel.text = [NSString stringWithFormat: @"A: +%d\nD: +%d",playerAccount.accountWeapon.dDamage,playerAccount.accountDefenseValue];
@@ -459,6 +501,18 @@ static CGFloat blinkBottomOriginY;
     [opponentShape setStatusBody:OpponentShapeStatusLive];
     [opponentShape cleareDamage];    
     [opponentShape refreshLiveBarWithLives:maxShotCount];
+    
+    UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
+
+    [btnTry setTitleByLabel:@"TRY" withColor:buttonsTitleColor fontSize:24];
+    if([LoginAnimatedViewController sharedInstance].isDemoPractice){
+        [btnTry changeTitleByLabel:@"LOGIN"];
+    }
+    [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:24];
+    if (tryAgain) {
+        [self readyToStart];
+    }
+
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -515,6 +569,8 @@ static CGFloat blinkBottomOriginY;
     [self setLbUserLifeLeft:nil];
     horseShape = nil;
     [self setBtnSkip:nil];
+    [self setBtnTry:nil];
+    [self setBtnBack:nil];
     [super viewDidUnload];
 }
 
@@ -812,6 +868,7 @@ static CGFloat blinkBottomOriginY;
     
     opponentCenter.x = randPosition;
     opponentShape.center = opponentCenter;
+
 }
 
 -(void)opponentShotWithDamage:(int)damage;
@@ -866,9 +923,13 @@ static CGFloat blinkBottomOriginY;
         else
             teaching = NO;
         
-        FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime) andOponentTime:999999 andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
+//        FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime) andOponentTime:999999 andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
 
-        [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:1.0];
+
+//        [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:1.0];
+        
+        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:(shotTime) andOponentTime:999999 andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
+        [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:1.0];
         [timer invalidate];
         [moveTimer invalidate];
         return YES;
@@ -899,8 +960,8 @@ static CGFloat blinkBottomOriginY;
        
         if (duelEnd) return;
         duelEnd = YES;
-        [activityIndicatorView setText:@""];
-        [activityIndicatorView showView];
+//        [activityIndicatorView setText:@""];
+//        [activityIndicatorView showView];
         //[self horizontalFlip];
         DLog(@"Shot Time = %d.%d", (shotTime) / 1000, (shotTime));
         GameCenterViewController *gameCenterViewController;
@@ -910,13 +971,17 @@ static CGFloat blinkBottomOriginY;
             gameCenterViewController = nil;
         else
             teaching = NO;
-        FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime) andOponentTime:opponentTime andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
+
+//        FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime) andOponentTime:opponentTime andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
         
-        [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
+//        [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
+        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:(shotTime) andOponentTime:opponentTime andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
+        [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:2.0];
         [timer invalidate];
         [moveTimer invalidate];
         
         [self opponentLost];
+
         if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow) {
             [self cleanPracticeHints];
         }
@@ -947,9 +1012,12 @@ static CGFloat blinkBottomOriginY;
         BOOL teaching = YES;
         if (!self.delegate) gameCenterViewController = nil;
         else teaching = NO;
-        FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:0 andOponentTime:10 andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
         
-        [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
+//        FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:0 andOponentTime:10 andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
+        
+//        [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
+        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:0 andOponentTime:10 andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
+        [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:2.0];
     }
 }
 
@@ -999,6 +1067,8 @@ static CGFloat blinkBottomOriginY;
             frame.origin.y = 0;
             blinkTop.frame = frame;
         }completion:^(BOOL finished) {
+            blinkBottom.alpha = 0.88;
+            blinkTop.alpha = 0.88;
         }];
 
         }];
@@ -1014,6 +1084,63 @@ static CGFloat blinkBottomOriginY;
 
 - (void) dismissWithController:(UIViewController *)controller {
     [self.navigationController pushViewController:controller animated:YES];
+}
+
+-(void)showFinalView: (FinalViewDataSource *) fvDataSource;
+{   
+    CGRect finalFrame = CGRectMake(12, 90, 294, 165);
+    
+
+    finalView = [[FinalStatsView alloc] initWithFrame:finalFrame andDataSource:fvDataSource];
+    
+    finalView.activeDuelViewController = self;
+    
+    finalView.center = self.crossImageView.center; 
+    
+    [self.view addSubview:finalView];
+    
+    [finalView startAnimations];
+    
+    btnBack.hidden = NO;
+    btnTry.hidden = NO;
+    btnSkip.hidden = YES;
+    
+    [self.view bringSubviewToFront:btnBack];
+    [self.view bringSubviewToFront:btnTry];
+    
+    NSLog(@"%@", [self.view subviews]);
+    
+    btnBack.enabled = YES;
+    btnTry.enabled = YES;
+    btnSkip.enabled = NO;
+    
+    self.gunButton.hidden = YES;
+    self.gunButton.enabled = NO;
+    
+    [shotTimer invalidate];
+    [moveTimer invalidate];
+    [ignoreTimer invalidate];
+    [timer invalidate];
+    if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
+        [self performSelector:@selector(scaleView:) withObject:btnTry  afterDelay:1.5];
+    }  
+}
+
+-(void)hideFinalView{
+    
+    finalView.hidden = YES;
+    finalView = nil;
+    
+    btnBack.hidden = YES;
+    btnTry.hidden = YES;
+    btnSkip.hidden = YES;
+    
+    btnBack.enabled = NO;
+    btnTry.enabled = NO;
+    btnSkip.enabled = NO;
+    
+    self.gunButton.hidden = NO;
+    self.gunButton.enabled = YES;
 }
 
 #pragma mark
@@ -1213,7 +1340,6 @@ float frequencyOpponentShoting()
 #pragma mark - IBAction
 
 - (IBAction)btnSkipClicked:(id)sender {
-    
     if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
         [self.navigationController popToViewController:[LoginAnimatedViewController sharedInstance] animated:YES];
         [self releaseComponents];
@@ -1224,6 +1350,127 @@ float frequencyOpponentShoting()
     }
     
 }
+
+-(IBAction)backButtonClick:(id)sender
+{
+    
+    //Transitions only!
+    NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+    if (([userDef integerForKey:@"FirstRunForPractice"] != 1)&&([userDef integerForKey:@"FirstRunForPractice"] != 2)) {
+        [userDef setInteger:1 forKey:@"FirstRunForPractice"];
+        [userDef synchronize];
+    }
+    
+    if (playerAccount.isTryingWeapon) {
+        playerAccount.isTryingWeapon = NO;
+        if (!finalViewDataSource.isDuelWinWatched) {
+            finalViewDataSource.isDuelWinWatched = YES;
+            DuelProductWinViewController *duelProductWinViewController=[[DuelProductWinViewController alloc] initWithAccount:playerAccount duelProduct:playerAccount.accountWeapon parentVC:self];
+            [playerAccount loadWeapon];
+            [self.navigationController presentViewController:duelProductWinViewController animated:YES completion:Nil];
+        }else{
+            if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
+                
+                [self.navigationController popToViewController:[LoginAnimatedViewController sharedInstance] animated:YES];
+                [self releaseComponents];
+                NSLog(@"%@", self.navigationController.viewControllers);
+                
+            }
+            else{
+                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+                [self releaseComponents];
+            }
+        }
+    }else{
+ 
+        UINavigationController *nav = ((TestAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController;
+        NSLog(@"%@", nav.viewControllers);
+        for (__weak UIViewController *viewController in nav.viewControllers) {
+            if ([viewController isKindOfClass:[ActiveDuelViewController class]]) {
+                [((ActiveDuelViewController *)viewController) releaseComponents];
+            }
+        }
+        [self releaseComponents];
+        if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
+            
+            [nav popToViewController:[nav.viewControllers objectAtIndex:2] animated:YES];
+        }
+        else{
+            [nav popToViewController:[nav.viewControllers objectAtIndex:1] animated:YES];
+            
+        }
+    }
+    
+    GameCenterViewController *gameCenterViewController;
+    if (self.delegate){
+        gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+        [gameCenterViewController matchCanseled];
+    }    
+//    if ([self.delegate isKindOfClass:[GameCenterViewController class]]) {
+//        [self.delegate performSelector:@selector(matchCanseled)];
+//    }
+    
+    [self hideFinalView];
+    
+}
+
+-(IBAction)tryButtonClick:(id)sender
+{
+    if([LoginAnimatedViewController sharedInstance].isDemoPractice){
+        if ([[StartViewController sharedInstance] connectedToWiFi]) {
+            
+            activityIndicatorView = [[ActivityIndicatorView alloc] init];
+            
+            CGRect frame=activityIndicatorView.frame;
+            frame.origin=CGPointMake(0, 0);
+            activityIndicatorView.frame=frame;
+            
+            [self.view addSubview:activityIndicatorView];
+        }
+        [[LoginAnimatedViewController sharedInstance] loginButtonClick:sender];
+        return;
+    }
+    tryAgain = YES;
+    GameCenterViewController *gameCenterViewController;
+    if (self.delegate) gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+    
+    BOOL teaching = YES;
+    if (!self.delegate)
+        gameCenterViewController = nil;
+    else
+        teaching = NO;
+    
+//    [self releaseComponents];
+    
+    DLog(@"tryButtonClick");
+    
+    [self hideFinalView];
+
+    if(teaching)
+    {
+        NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+        if (([userDef integerForKey:@"FirstRunForPractice"] != 1)&&([userDef integerForKey:@"FirstRunForPractice"] != 2)) {
+            [userDef setInteger:1 forKey:@"FirstRunForPractice"];
+            [userDef synchronize];
+        }
+        
+        [playerAccount.finalInfoTable removeAllObjects];
+    }
+    else
+        if (gameCenterViewController)
+        {
+            [gameCenterViewController matchStartedTry];
+        }
+    
+//    [self reInitViewWillAppear:YES];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/FinalVC_tryAgain" forKey:@"page"]];
+
+}
+
+#pragma mark -
 
 - (void)cancelHelpArmClick:(id)sender {
     [self hideHelpViewOnStartDuel];

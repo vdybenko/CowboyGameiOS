@@ -11,7 +11,6 @@
 #import "GCHelper.h"
 #import "ActiveDuelViewController.h"
 
-
 #define MAX_LENGTH 50
 #define IMG_LENGTH 8
 typedef struct {
@@ -35,6 +34,7 @@ typedef struct {
 @class StartViewController;
 @class FinalViewController;
 @class DuelStartViewController;
+@class FinalViewDataSource;
 
 @interface GameCenterViewController : UIViewController< UIAlertViewDelegate, GCHelperDelegate, ActiveDuelViewControllerDelegate, DuelStartViewControllerDelegate>
 {
@@ -43,7 +43,7 @@ typedef struct {
     FinalViewController *finalViewController;
     AccountDataSource *playerAccount;
     AccountDataSource *oponentAccount;
-    
+    FinalViewDataSource *finalViewDataSource;
     StartViewController *startViewController;
     
     UIAlertView *baseAlert;

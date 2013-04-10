@@ -66,6 +66,7 @@
 		037DF221154BDBAC003FACDF /* ItemsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 037DF21D154BDBAC003FACDF /* ItemsDataSource.m */; };
 		038366DD1549257700F3F63B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038366DC1549257700F3F63B /* MediaPlayer.framework */; };
 		038366DF154925A100F3F63B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038366DE154925A100F3F63B /* CoreTelephony.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		3115F80B171400550096CB3F /* FinalViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3115F80A171400550096CB3F /* FinalViewDataSource.m */; };
 		3115FB5015CACA5100C4D438 /* MoneyCongratViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3115FB4E15CACA5100C4D438 /* MoneyCongratViewController.m */; };
 		3115FB5115CACA5100C4D438 /* MoneyCongratViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3115FB4F15CACA5100C4D438 /* MoneyCongratViewController.xib */; };
 		312B2F3F15E7A24F006D2470 /* fin_img_achieve.png in Resources */ = {isa = PBXBuildFile; fileRef = 312B2F3915E7A24F006D2470 /* fin_img_achieve.png */; };
@@ -100,6 +101,8 @@
 		3167BAE615CAA75F00AF2745 /* fin_img_light_bckgr2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BAC415CAA75F00AF2745 /* fin_img_light_bckgr2.png */; };
 		3167BAE715CAA75F00AF2745 /* fin_img_light_bckgr2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BAC515CAA75F00AF2745 /* fin_img_light_bckgr2@2x.png */; };
 		3167BAE815CAA75F00AF2745 /* fin_img_light_bckgr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3167BAC615CAA75F00AF2745 /* fin_img_light_bckgr@2x.png */; };
+		316BBFE3170EB412009C23BA /* FinalStatsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 316BBFE2170EB412009C23BA /* FinalStatsView.xib */; };
+		316BBFE6170EB60F009C23BA /* FinalStatsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 316BBFE5170EB60F009C23BA /* FinalStatsView.m */; };
 		317162B8170D5D6700F068A9 /* UIView+ColorOfPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 317162B7170D5D6700F068A9 /* UIView+ColorOfPoint.m */; };
 		3187725716CA833A00D90797 /* pv_wanted_back-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3187725516CA833A00D90797 /* pv_wanted_back-568h@2x.png */; };
 		3187725816CA833A00D90797 /* pv_wanted_photo_frame-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3187725616CA833A00D90797 /* pv_wanted_photo_frame-568h@2x.png */; };
@@ -984,6 +987,8 @@
 		037DF21D154BDBAC003FACDF /* ItemsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemsDataSource.m; sourceTree = "<group>"; };
 		038366DC1549257700F3F63B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		038366DE154925A100F3F63B /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		3115F809171400550096CB3F /* FinalViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinalViewDataSource.h; sourceTree = "<group>"; };
+		3115F80A171400550096CB3F /* FinalViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinalViewDataSource.m; sourceTree = "<group>"; };
 		3115FB4D15CACA5100C4D438 /* MoneyCongratViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MoneyCongratViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		3115FB4E15CACA5100C4D438 /* MoneyCongratViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MoneyCongratViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		3115FB4F15CACA5100C4D438 /* MoneyCongratViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MoneyCongratViewController.xib; path = "../Cowboy Duel/MoneyCongratViewController.xib"; sourceTree = "<group>"; };
@@ -1018,6 +1023,9 @@
 		3167BAC415CAA75F00AF2745 /* fin_img_light_bckgr2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fin_img_light_bckgr2.png; sourceTree = "<group>"; };
 		3167BAC515CAA75F00AF2745 /* fin_img_light_bckgr2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fin_img_light_bckgr2@2x.png"; sourceTree = "<group>"; };
 		3167BAC615CAA75F00AF2745 /* fin_img_light_bckgr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fin_img_light_bckgr@2x.png"; sourceTree = "<group>"; };
+		316BBFE2170EB412009C23BA /* FinalStatsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FinalStatsView.xib; path = Xib/FinalStatsView.xib; sourceTree = "<group>"; };
+		316BBFE4170EB60F009C23BA /* FinalStatsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinalStatsView.h; sourceTree = "<group>"; };
+		316BBFE5170EB60F009C23BA /* FinalStatsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinalStatsView.m; sourceTree = "<group>"; };
 		317162B6170D5D6700F068A9 /* UIView+ColorOfPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ColorOfPoint.h"; sourceTree = "<group>"; };
 		317162B7170D5D6700F068A9 /* UIView+ColorOfPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ColorOfPoint.m"; sourceTree = "<group>"; };
 		3187725516CA833A00D90797 /* pv_wanted_back-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pv_wanted_back-568h@2x.png"; sourceTree = "<group>"; };
@@ -2491,6 +2499,7 @@
 				764B891D165FCC660014E35B /* ListOnLine */,
 				764B891C165FCC4E0014E35B /* TopPlayer */,
 				767BA5BD1589F8E300825EB1 /* FinalViewController.xib */,
+				316BBFE2170EB412009C23BA /* FinalStatsView.xib */,
 				768321D71654DB2400E78A8C /* Store */,
 			);
 			name = Xib;
@@ -3057,6 +3066,8 @@
 				7606709516F7324B00079F69 /* UILabel+FlyingPoint.m */,
 				76F71902165A6AD700719D8A /* UIView+Frame.h */,
 				76F71903165A6AD700719D8A /* UIView+Frame.m */,
+				316BBFE4170EB60F009C23BA /* FinalStatsView.h */,
+				316BBFE5170EB60F009C23BA /* FinalStatsView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -3070,6 +3081,8 @@
 				7679D8C11563949E00BDE3A6 /* RefreshContent */,
 				BDD07B9C141E1F170085E4FB /* ResoultDataSource.h */,
 				BDD07B9D141E1F170085E4FB /* ResoultDataSource.m */,
+				3115F809171400550096CB3F /* FinalViewDataSource.h */,
+				3115F80A171400550096CB3F /* FinalViewDataSource.m */,
 				7692812A159DCAFD00E6CE41 /* IconDownloader.h */,
 				7692812B159DCAFD00E6CE41 /* IconDownloader.m */,
 				7675CA8415A2E10B005A3BD3 /* DuelRewardLogicController.h */,
@@ -3585,6 +3598,9 @@
 				46F0DD5F1712E24D00C7FF34 /* targetPractice.png in Resources */,
 				469CBAAB1713F5350086F8D6 /* goodIco.png in Resources */,
 				462C66751715879100692215 /* pv_photo_default_practice.png in Resources */,
+				46E3C4C9170D69CC00A59E98 /* blood_aScrCr.png in Resources */,
+				46E3C4CA170D69CC00A59E98 /* blood_cScrCr.png in Resources */,
+				316BBFE3170EB412009C23BA /* FinalStatsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3988,6 +4004,8 @@
 				BD357C921703504E0079F68A /* GameSceneConfig.m in Sources */,
 				76C13EA51709B2EE0093AE0D /* UIImage+Retina4.m in Sources */,
 				317162B8170D5D6700F068A9 /* UIView+ColorOfPoint.m in Sources */,
+				316BBFE6170EB60F009C23BA /* FinalStatsView.m in Sources */,
+				3115F80B171400550096CB3F /* FinalViewDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

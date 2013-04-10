@@ -9,7 +9,8 @@
 #import "MoneyCongratViewController.h"
 #import "OGHelper.h"
 #import "UIButton+Image+Title.h"
-#import "FinalViewController.h"
+//#import "FinalViewController.h"
+#import "ActiveDuelViewController.h"
 
 @interface MoneyCongratViewController ()
 {
@@ -39,7 +40,7 @@
     
     __weak IBOutlet UILabel *lbPostOnFB;
 }
-@property(nonatomic, weak)id<DuelViewControllerDelegate> delegate;
+@property(nonatomic, weak)id<ActiveDuelViewControllerDelegate> delegate;
 @property (nonatomic, weak) IBOutlet UIImageView *ivLight2;
 
 @end
@@ -135,7 +136,7 @@
     runAnimation = YES;
     [self performSelector:@selector(scaleAnimation) withObject:self afterDelay:0.3];
     [self shineAnimation];
-    [((FinalViewController *)delegate).view setHidden:NO];
+//    [((FinalViewController *)delegate).view setHidden:NO];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
@@ -237,7 +238,7 @@
     [self dismissModalViewControllerAnimated:YES];
     if ([delegate respondsToSelector:@selector(backButtonClick:)])
     {
-        [(FinalViewController *)delegate backButtonClick:sender];
+        [(ActiveDuelViewController *)delegate backButtonClick:sender];
     }
     [self releaseComponents];
 }
@@ -246,9 +247,9 @@
 {    
     [activityIndicatorView showView];
     [self dismissModalViewControllerAnimated:YES];
-    if ([(FinalViewController *)delegate respondsToSelector:@selector(tryButtonClick:)])
+    if ([(ActiveDuelViewController *)delegate respondsToSelector:@selector(tryButtonClick:)])
     {
-        [(FinalViewController *)delegate tryButtonClick:sender];
+        [(ActiveDuelViewController *)delegate tryButtonClick:sender];
     }
     [self releaseComponents];
 }
