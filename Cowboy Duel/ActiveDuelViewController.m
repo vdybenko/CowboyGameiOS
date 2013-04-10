@@ -30,6 +30,7 @@
 #define MOVE_DISTANCE 100
 @interface ActiveDuelViewController ()
 {
+    BOOL isOpenHint;
     float startPoint;
     BOOL firstAccel;
     UIAccelerationValue rollingX, rollingY, rollingZ;
@@ -344,41 +345,45 @@ static CGFloat blinkBottomOriginY;
     
 }
 -(void)preparationBloodAnimation{
-
-    UIImage *spriteSheetBlood;
-    UIImage *spriteSheetBloodC;
     
     if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow)
     {
-        spriteSheetBlood = [UIImage imageNamed:@"blood_aScrCr"];
-        spriteSheetBloodC = [UIImage imageNamed:@"blood_cScrCr"];
+        NSArray *imgDieArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"blod_cFrame1Sc.png"], [UIImage imageNamed:@"blod_cFrame2Sc.png"],[UIImage imageNamed:@"blod_cFrame3Sc.png"],
+                                [UIImage imageNamed:@"blod_cFrame4Sc.png"], [UIImage imageNamed:@"blod_cFrame5Sc.png"],[UIImage imageNamed:@"blod_cFrame6Sc.png"], nil];
+        
+        self.bloodCImageView.animationImages = imgDieArray;
+        self.bloodCImageView.animationDuration = 0.6f;
+        [self.bloodCImageView setAnimationRepeatCount:1];
+        imgDieArray = nil;
+        
+        NSArray *imgDieArray2 = [NSArray arrayWithObjects:[UIImage imageNamed:@"blod_aFrame1Scr.png"], [UIImage imageNamed:@"blod_aFrame2Scr.png"],[UIImage imageNamed:@"blod_aFrame3Scr.png"],
+                                [UIImage imageNamed:@"blod_aFrame4Scr.png"], [UIImage imageNamed:@"blod_aFrame5Scr.png"],[UIImage imageNamed:@"blod_aFrame6Scr.png"], nil];
+        
+        self.bloodImageView.animationImages = imgDieArray2;
+        self.bloodImageView.animationDuration = 0.6f;
+        [self.bloodImageView setAnimationRepeatCount:1];
+        imgDieArray2 = nil;
+
         
     }
     else
     {
-        spriteSheetBlood = [UIImage imageNamed:@"blood_a"];
-        spriteSheetBloodC = [UIImage imageNamed:@"blood_c"];
+        NSArray *imgDieArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"blod_cFrame1Real.png"], [UIImage imageNamed:@"blod_cFrame2Real.png"],[UIImage imageNamed:@"blod_cFrame3Real.png"],
+                                [UIImage imageNamed:@"blod_cFrame4Real.png"], [UIImage imageNamed:@"blod_cFrame5Real.png"],[UIImage imageNamed:@"blod_cFrame6Real.png"], nil];
+        
+        self.bloodCImageView.animationImages = imgDieArray;
+        self.bloodCImageView.animationDuration = 0.6f;
+        [self.bloodCImageView setAnimationRepeatCount:1];
+        imgDieArray = nil;
+        
+        NSArray *imgDieArray2 = [NSArray arrayWithObjects:[UIImage imageNamed:@"blod_aFrame1Real.png"], [UIImage imageNamed:@"blod_aFrame2Real.png"],[UIImage imageNamed:@"blod_aFrame3Real.png"],
+                                 [UIImage imageNamed:@"blod_aFrame4Real.png"], [UIImage imageNamed:@"blod_aFrame5Real.png"],[UIImage imageNamed:@"blod_aFrame6Real.png"], nil];
+        
+        self.bloodImageView.animationImages = imgDieArray2;
+        self.bloodImageView.animationDuration = 0.6f;
+        [self.bloodImageView setAnimationRepeatCount:1];
+        imgDieArray = nil;
     }
-    
-    NSArray *arrayWithSpritesBlood = [spriteSheetBlood spritesWithSpriteSheetImage:spriteSheetBlood
-                                                                        spriteSize:CGSizeMake(64, 64)];
-    [self.bloodImageView setAnimationImages:arrayWithSpritesBlood];
-    float animationDurationBlood = [self.bloodImageView.animationImages count] * 0.100; // 100ms per frame
-    [self.bloodImageView setAnimationRepeatCount:1];
-    [self.bloodImageView setAnimationDuration:animationDurationBlood];
-    arrayWithSpritesBlood = nil;
-    spriteSheetBlood = nil;
-    
-    NSArray *arrayWithSpritesBloodC = [spriteSheetBloodC spritesWithSpriteSheetImage:spriteSheetBloodC
-                                                                          spriteSize:CGSizeMake(64, 64)];
-    [self.bloodCImageView setAnimationImages:arrayWithSpritesBloodC];
-    float animationDurationBloodC = [self.bloodCImageView.animationImages count] * 0.100; // 100ms per frame
-    [self.bloodCImageView setAnimationRepeatCount:1];
-    [self.bloodCImageView setAnimationDuration:animationDurationBloodC];
-    arrayWithSpritesBloodC = nil;
-    spriteSheetBloodC = nil;
-
-
 
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -542,7 +547,7 @@ static CGFloat blinkBottomOriginY;
             opponentShape.typeOfBody = OpponentShapeTypeManLow;
         }
     }else{
-        countBulletsForOpponent = 5;
+        countBulletsForOpponent = 4;
         opponentShape.typeOfBody = OpponentShapeTypeScarecrow;
         maxShotCount = 3;
         shotCountBullet = 3;
@@ -550,7 +555,6 @@ static CGFloat blinkBottomOriginY;
     shotCountBulletForOpponent =  countBulletsForOpponent;
     maxShotCountForOpponent = countBulletsForOpponent;
     [self preparationBloodAnimation];
-    
 }
 
 -(float)abs:(float)d
@@ -560,7 +564,9 @@ static CGFloat blinkBottomOriginY;
 }
 
 - (IBAction)shotButtonClick:(id)sender {
-    if (isGunCanShotOfFrequently) {
+    if (isOpenHint == YES) {
+        [self cleanPracticeHints];
+    }else if (isGunCanShotOfFrequently) {
         [self startGunFrequentlyBlockTime];
             
         [gunDrumViewController shotAnimation];
@@ -604,7 +610,6 @@ static CGFloat blinkBottomOriginY;
         CGPoint centerOfScreanPoint;
         centerOfScreanPoint.x = self.crossImageView.bounds.origin.x + self.crossImageView.center.x;
         centerOfScreanPoint.y = self.crossImageView.bounds.origin.y + self.crossImageView.center.y;
-        
         [self cheackHitForShot:centerOfScreanPoint andTargetPoint:targetPoint];
     }
 }
@@ -636,7 +641,7 @@ static CGFloat blinkBottomOriginY;
 
 -(void)cheackHitForShot:(CGPoint)shotPoint andTargetPoint:(CGPoint)targetPoint
 {
-    [gunDrumViewController explanePracticeClean];
+   // [gunDrumViewController textPracticeClean];
     //Obstracles
     for (UIImageView *obstracle in self.floatView.subviews) {
         if(obstracle.tag != 1) continue;
@@ -719,13 +724,27 @@ static CGFloat blinkBottomOriginY;
     }
     int damageForShotInWoman = [womanShape damageForShotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
     if (damageForShotInWoman!=NSNotFound && !womanShape.hidden) {
-        [self playerGetDamage:damageForShotInWoman];
-        if(delegate) [delegate sendShotSelf];        
+        if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow) {
+            [gunDrumViewController shootOnCivil];
+            btnSkip.hidden = YES;
+            isOpenHint = YES;
+            
+        }
+        [self  playerGetDamage:damageForShotInWoman];
+        if(delegate) [delegate sendShotSelf];
         return;
     }
     int damageForShotInGoodCowboy = [goodCowboyShape damageForShotInShapeWithPoint:shotPoint superViewOfPoint:self.view];
+    
     if (damageForShotInGoodCowboy!=NSNotFound  && !goodCowboyShape.hidden ) {
+        if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow) {
+            [gunDrumViewController shootOnCivil];
+            btnSkip.hidden = YES;
+            isOpenHint = YES;
+        }
+
         [self playerGetDamage:damageForShotInGoodCowboy];
+        
         if(delegate) [delegate sendShotSelf];
         return;
     }
@@ -834,6 +853,10 @@ static CGFloat blinkBottomOriginY;
     
     if(shotCountBulletForOpponent<=0){
         [self userLost];
+      
+        if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow) {
+            [self cleanPracticeHints];
+        }
         GameCenterViewController *gameCenterViewController;
         if (self.delegate) gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
         
@@ -867,7 +890,13 @@ static CGFloat blinkBottomOriginY;
     
     [opponentShape changeLiveBarWithUserHitCount:userHitCount maxShotCount:maxShotCount];
     
+    NSLog(@"shotCountBullet %d", shotCountBullet);
+    if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow && shotCountBullet == 1) {
+        [gunDrumViewController secondStepOnPractice];
+        isOpenHint = YES;
+    }
     if(shotCountBullet<=0) {
+       
         if (duelEnd) return;
         duelEnd = YES;
         [activityIndicatorView setText:@""];
@@ -888,6 +917,9 @@ static CGFloat blinkBottomOriginY;
         [moveTimer invalidate];
         
         [self opponentLost];
+        if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow) {
+            [self cleanPracticeHints];
+        }
     }
 
 }
@@ -1023,13 +1055,16 @@ static CGFloat blinkBottomOriginY;
         if (opponentShape.typeOfBody != OpponentShapeTypeScarecrow) {
             [self showGoodBodies];
         }else{
+             btnSkip.hidden = YES;
+            [gunDrumViewController firstStepOnPractice];
+            isOpenHint = YES;
             [arrowToOpponent changeImgForPractice];
        
             UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
             
             [btnSkip setTitleByLabel:@"SKIP" withColor:buttonsTitleColor fontSize:24];
-            [self.btnSkip setEnabled:YES];
-            [self.btnSkip setHidden:NO];
+          //  [self.btnSkip setEnabled:YES];
+          //  [self.btnSkip setHidden:NO];
             [self.view bringSubviewToFront:btnSkip];
         }
         
@@ -1052,7 +1087,13 @@ static CGFloat blinkBottomOriginY;
 }
 
 #pragma mark
-
+-(void)cleanPracticeHints;
+{
+    btnSkip.hidden = NO;
+    [self.btnSkip setEnabled:YES];
+    isOpenHint = NO;
+    [gunDrumViewController textPracticeClean];
+}
 -(void)hideHelpViewOnStartDuel;
 {
     arrowAnimationContinue = NO;    
@@ -1130,7 +1171,13 @@ static CGFloat blinkBottomOriginY;
 
 -(void) showGoodBodies
 {
-    [gunDrumViewController explanePractice];
+    if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow)
+    {
+    [gunDrumViewController secondStepOnPractice];
+     btnSkip.hidden = YES;
+        isOpenHint = YES;
+    }
+    
     womanShape.hidden = NO;
     goodCowboyShape.hidden = NO;
     horseShape.hidden = NO;

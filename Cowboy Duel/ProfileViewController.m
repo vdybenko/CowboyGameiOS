@@ -456,8 +456,13 @@ static const CGFloat timeToStandartTitles = 1.8;
     }else {
         profilePictureViewDefault.image = [UIImage imageNamed:@"pv_photo_default.png"];
         profilePictureViewDefault.transform = CGAffineTransformIdentity;
+        if (playerAccount.isPlayerForPractice) {
+             profilePictureViewDefault.image = [UIImage imageNamed:@"pv_photo_default_practice.png"];
+        }
         
     }
+
+ 
     //
     //  check iphone 5 delta
     if ([UIScreen mainScreen].bounds.size.height > 480) {
