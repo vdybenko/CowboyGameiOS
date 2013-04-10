@@ -885,7 +885,7 @@ static CGFloat blinkBottomOriginY;
 
 //        [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:1.0];
         
-        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:(shotTime) andOponentTime:999999 andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
+        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:(shotTime) andOponentTime:999999 andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
         [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:1.0];
 //        [timer invalidate];
 //        [moveTimer invalidate];
@@ -921,7 +921,7 @@ static CGFloat blinkBottomOriginY;
 //        FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime) andOponentTime:opponentTime andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
         
 //        [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
-        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:(shotTime) andOponentTime:opponentTime andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
+        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:(shotTime) andOponentTime:opponentTime andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
         [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:2.0];
         [timer invalidate];
         [moveTimer invalidate];
@@ -959,7 +959,7 @@ static CGFloat blinkBottomOriginY;
 //        FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:0 andOponentTime:10 andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
         
 //        [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
-        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:0 andOponentTime:10 andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
+        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:0 andOponentTime:10 andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
         [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:2.0];
     }
 }

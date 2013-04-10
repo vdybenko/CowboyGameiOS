@@ -321,7 +321,7 @@ static GameCenterViewController *gameCenterViewController;
         
 //        finalViewController = [[FinalViewController alloc] initWithUserTime:999999 andOponentTime:999999 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
 //        [parentVC.navigationController pushViewController:finalViewController animated:YES];
-        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:999999 andOponentTime:999999 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:999999 andOponentTime:999999 andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
         if ([delegate respondsToSelector:@selector(showFinalView:)]) {
             [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
         }
@@ -340,7 +340,7 @@ static GameCenterViewController *gameCenterViewController;
         
 //        finalViewController = [[FinalViewController alloc] initWithUserTime:999999 andOponentTime:0 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
 //        [parentVC.navigationController pushViewController:finalViewController animated:YES];
-        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:999999 andOponentTime:0 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:999999 andOponentTime:0 andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
         if ([delegate respondsToSelector:@selector(showFinalView:)]) {
             [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
         }
@@ -358,7 +358,7 @@ static GameCenterViewController *gameCenterViewController;
         
 //        finalViewController = [[FinalViewController alloc] initWithUserTime:0 andOponentTime:999999 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
 //        [parentVC.navigationController pushViewController:finalViewController animated:YES];
-        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:0 andOponentTime:999999 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:0 andOponentTime:999999 andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
         if ([delegate respondsToSelector:@selector(showFinalView:)]) {
             [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
         }
@@ -376,7 +376,7 @@ static GameCenterViewController *gameCenterViewController;
         
 //        finalViewController = [[FinalViewController alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
 //        [parentVC.navigationController pushViewController:finalViewController animated:YES];
-        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
         if ([delegate respondsToSelector:@selector(showFinalView:)]) {
             [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
         }
@@ -398,7 +398,7 @@ static GameCenterViewController *gameCenterViewController;
         
 //        finalViewController = [[FinalViewController alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
 //        [parentVC.navigationController pushViewController:finalViewController animated:YES];
-        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
         if ([delegate respondsToSelector:@selector(showFinalView:)]) {
             [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
         }
@@ -410,7 +410,7 @@ static GameCenterViewController *gameCenterViewController;
         
 //        finalViewController = [[FinalViewController alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
 //        [parentVC.navigationController pushViewController:finalViewController animated:YES];
-        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
         if ([delegate respondsToSelector:@selector(showFinalView:)]) {
             [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
         }
@@ -509,7 +509,7 @@ static GameCenterViewController *gameCenterViewController;
 //        }
 //        mutchNumber = 3;
 //        [parentVC.navigationController pushViewController:finalViewController animated:YES];
-        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
         if (userCanceledMatch) {
             [finalViewDataSource prepeareForLoseScene];
         }else{
@@ -844,7 +844,7 @@ static GameCenterViewController *gameCenterViewController;
                     
 //                    finalViewController = [[FinalViewController alloc] initWithUserTime:999999 andOponentTime:999999 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
 //                    [self performSelector:@selector(loadViewController:) withObject:finalViewController afterDelay:2.0];
-                    finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:999999 andOponentTime:999999 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+                    finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:999999 andOponentTime:999999 andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
                     if ([delegate respondsToSelector:@selector(showFinalView:)]) {
                         [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
                     }
@@ -860,7 +860,7 @@ static GameCenterViewController *gameCenterViewController;
                         [delegate duelTimerEndFeedBack];
                     
 //                    finalViewController = [[FinalViewController alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
-                    finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:999999 andOponentTime:999999 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+                    finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:999999 andOponentTime:999999 andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
                     if ([delegate respondsToSelector:@selector(showFinalView:)]) {
                         [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
                     }
@@ -878,7 +878,7 @@ static GameCenterViewController *gameCenterViewController;
                     
 //                    finalViewController = [[FinalViewController alloc] initWithUserTime:999999 andOponentTime:0 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
 //                    [self performSelector:@selector(loadViewController:) withObject:finalViewController afterDelay:2.0];
-                    finalViewDataSource =  [[FinalViewDataSource alloc] initWithUserTime:999999 andOponentTime:0 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+                    finalViewDataSource =  [[FinalViewDataSource alloc] initWithUserTime:999999 andOponentTime:0 andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
                     if ([delegate respondsToSelector:@selector(showFinalView:)]) {
                         [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
                     }
@@ -897,7 +897,7 @@ static GameCenterViewController *gameCenterViewController;
                     
 //                    finalViewController = [[FinalViewController alloc] initWithUserTime:0 andOponentTime:999999 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
 //                    [self performSelector:@selector(loadViewController:) withObject:finalViewController afterDelay:2.0];
-                    finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:0 andOponentTime:999999 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+                    finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:0 andOponentTime:999999 andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
                     if ([delegate respondsToSelector:@selector(showFinalView:)]) {
                         [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
                     }
@@ -914,7 +914,7 @@ static GameCenterViewController *gameCenterViewController;
                     
 //                    finalViewController = [[FinalViewController alloc] initWithUserTime:0 andOponentTime:999999 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
 //                    [self performSelector:@selector(loadViewController:) withObject:finalViewController afterDelay:2.0];
-                    finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:0 andOponentTime:999999 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+                    finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:0 andOponentTime:999999 andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
                     if ([delegate respondsToSelector:@selector(showFinalView:)]) {
                         [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
                     }
