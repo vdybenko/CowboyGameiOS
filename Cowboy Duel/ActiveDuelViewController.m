@@ -12,7 +12,6 @@
 #import "math.h"
 #import <QuartzCore/QuartzCore.h>
 #import "DuelRewardLogicController.h"
-//#import "FinalViewController.h"
 #import "OponentCoordinateView.h"
 #import "StartViewController.h"
 #import "GunDrumViewController.h"
@@ -923,11 +922,6 @@ static CGFloat blinkBottomOriginY;
         else
             teaching = NO;
         
-//        FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime) andOponentTime:999999 andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
-
-
-//        [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:1.0];
-        
         finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:(shotTime) andOponentTime:999999 andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
         [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:1.0];
         [timer invalidate];
@@ -960,9 +954,7 @@ static CGFloat blinkBottomOriginY;
        
         if (duelEnd) return;
         duelEnd = YES;
-//        [activityIndicatorView setText:@""];
-//        [activityIndicatorView showView];
-        //[self horizontalFlip];
+
         DLog(@"Shot Time = %d.%d", (shotTime) / 1000, (shotTime));
         GameCenterViewController *gameCenterViewController;
         if (self.delegate) gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
@@ -972,9 +964,6 @@ static CGFloat blinkBottomOriginY;
         else
             teaching = NO;
 
-//        FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:(shotTime) andOponentTime:opponentTime andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
-        
-//        [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
         finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:(shotTime) andOponentTime:opponentTime andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
         [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:2.0];
         [timer invalidate];
@@ -1013,9 +1002,6 @@ static CGFloat blinkBottomOriginY;
         if (!self.delegate) gameCenterViewController = nil;
         else teaching = NO;
         
-//        FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:0 andOponentTime:10 andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
-        
-//        [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
         finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:0 andOponentTime:10 andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
         [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:2.0];
     }
@@ -1460,9 +1446,7 @@ float frequencyOpponentShoting()
         if (gameCenterViewController)
         {
             [gameCenterViewController matchStartedTry];
-        }
-    
-//    [self reInitViewWillAppear:YES];
+        }    
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self

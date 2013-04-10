@@ -9,7 +9,6 @@
 #import "MoneyCongratViewController.h"
 #import "OGHelper.h"
 #import "UIButton+Image+Title.h"
-//#import "FinalViewController.h"
 #import "ActiveDuelViewController.h"
 
 @interface MoneyCongratViewController ()
@@ -136,7 +135,6 @@
     runAnimation = YES;
     [self performSelector:@selector(scaleAnimation) withObject:self afterDelay:0.3];
     [self shineAnimation];
-//    [((FinalViewController *)delegate).view setHidden:NO];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self

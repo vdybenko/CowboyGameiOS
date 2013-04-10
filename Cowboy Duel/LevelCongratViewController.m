@@ -8,7 +8,6 @@
 
 #import "LevelCongratViewController.h"
 #import "OGHelper.h"
-//#import "FinalViewController.h"
 #import "DuelRewardLogicController.h"
 #import "ActiveDuelViewController.h"
 
