@@ -208,7 +208,7 @@ static const CGFloat timeSpinDump = 0.3f;
     self.textView.frame = frameView;
     
     [self.textView setDinamicHeightBackground];
-    [self.textLabel setText:NSLocalizedString(@"PracticeStep3", @"")];
+    [self.textLabel setText:NSLocalizedString(@"PracticeStep2", @"")];
     [self.textView setHidden:NO];
     [self.textLabel setHidden:NO];
     
@@ -234,7 +234,7 @@ static const CGFloat timeSpinDump = 0.3f;
     CGRect frame3 = self.textLabel.frame;
     frame3.origin = self.textView.frame.origin;
     frame3.origin.x = frame3.origin.x + (self.textView.frame.size.width/4);
-    frame3.origin.y = frame3.origin.y + 20;
+    frame3.origin.y = frame3.origin.y;
     frame3.size.width = 128;
     
     self.textLabel.frame = frame3;
@@ -245,7 +245,7 @@ static const CGFloat timeSpinDump = 0.3f;
     frameView.origin.y -= 200;
     self.textView.frame = frameView;
     [self.textView setDinamicHeightBackground];
-    [self.textLabel setText:NSLocalizedString(@"PracticeStep2", @"")];
+    [self.textLabel setText:NSLocalizedString(@"ShootOnCivil", @"")];
     [self.textView setHidden:NO];
     [self.textLabel setHidden:NO];
     
