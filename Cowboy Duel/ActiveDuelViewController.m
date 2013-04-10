@@ -555,7 +555,6 @@ static CGFloat blinkBottomOriginY;
     shotCountBulletForOpponent =  countBulletsForOpponent;
     maxShotCountForOpponent = countBulletsForOpponent;
     [self preparationBloodAnimation];
-    
 }
 
 -(float)abs:(float)d
