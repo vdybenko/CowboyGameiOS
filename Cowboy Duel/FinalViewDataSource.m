@@ -19,7 +19,7 @@
 
 @synthesize pointsForMatch, moneyExch, oldMoney,oldPoints;
 @synthesize playerAccount, oponentAccount;
-@synthesize reachNewLevel, userWon, tryButtonEnabled;
+@synthesize reachNewLevel, userWon, tryButtonEnabled, teaching;
 
 
 -(id)initWithUserTime:(int)userTimePar

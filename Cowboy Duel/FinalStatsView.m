@@ -80,22 +80,29 @@ int endPoints;
     return self;
 }
 
--(void)startAnimations;//WithDiffMoney: (int)moneyExch AndDiffPoints:(int)pointsExch;
+-(void)startAnimations;
 {
     startMoney = playerAccount.money;
-    endMoney = playerAccount.money+finalViewDataSource.moneyExch;
+    if (!finalViewDataSource.teaching) {
+        endMoney = playerAccount.money+finalViewDataSource.moneyExch;
+    }else
+        endMoney = playerAccount.money;
+
     
-    startPoints = playerAccount.accountPoints;
-    endPoints = playerAccount.accountPoints+finalViewDataSource.pointsForMatch;
+    startPoints = finalViewDataSource.oldPoints;
+    endPoints = playerAccount.accountPoints;
+
     ivBlueLine.hidden = NO;
 
     lblPoints.text = [NSString stringWithFormat:@"%d",startPoints ];
-    
+    NSArray *poi = [DuelRewardLogicController getStaticPointsForEachLevels];
+
+
     [UIView animateWithDuration:1.4f
                      animations:^{
                          [self animationWithLable:lblGold andStartNumber:startMoney andEndNumber:endMoney];
                          
-                         [self changePointsLine:startPoints maxValue:endPoints animated:YES];                         
+                         [self changePointsLine:endPoints maxValue:[poi objectAtIndex:(playerAccount.accountLevel+1)] animated:YES];
                          [self animationWithLable:lblPoints andStartNumber:startPoints andEndNumber:endPoints];
                          
                      } completion:^(BOOL finished) {
@@ -188,7 +195,7 @@ int endPoints;
         });
 }
 
--(void)changePointsLine:(int)points maxValue:(int) maxValue animated:(BOOL)animated;
+-(void)changePointsLine:(int)points maxValue:(NSNumber *) maxValue animated:(BOOL)animated;
 {
     CGRect backup = ivBlueLine.frame;
     CGRect temp = backup;
@@ -197,7 +204,7 @@ int endPoints;
     
     if (points <= 0) points = 0;
     int firstWidthOfLine=lblPoints.frame.size.width;
-    float changeWidth=(points*firstWidthOfLine)/maxValue;
+    float changeWidth=(points*firstWidthOfLine)/[maxValue intValue];
     
     temp.size.width = changeWidth;
     

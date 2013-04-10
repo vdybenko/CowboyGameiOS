@@ -102,6 +102,7 @@
 
 -(id)initWithAccount:(AccountDataSource *)userAccount oponentAccount:(AccountDataSource *)pOponentAccount;
 -(void)userLost;
+-(void)showFinalView;
 -(IBAction)backButtonClick:(id)sender;
 -(IBAction)tryButtonClick:(id)sender;
 

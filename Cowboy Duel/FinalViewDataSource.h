@@ -28,7 +28,7 @@
     NSArray *pontsForWin;
     NSArray *pontsForLose;
     
-    BOOL teaching;
+//    BOOL teaching;
     BOOL firstRun;
     BOOL duelWithBotCheck;
     BOOL lastDuel;
@@ -58,6 +58,7 @@
 @property (nonatomic) BOOL reachNewLevel;
 @property (nonatomic) BOOL userWon;
 @property (nonatomic) BOOL tryButtonEnabled;
+@property (nonatomic) BOOL teaching;
 
 -(id)initWithUserTime:(int)userTimePar
        andOponentTime:(int)oponentTime

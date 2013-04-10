@@ -878,7 +878,7 @@ static CGFloat blinkBottomOriginY;
 //        [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:1.0];
         
         finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:(shotTime) andOponentTime:999999 andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
-        [self performSelector:@selector(showFinalView) withObject:nil afterDelay:1.0];
+        [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:1.0];
 //        [timer invalidate];
 //        [moveTimer invalidate];
     }
@@ -914,7 +914,7 @@ static CGFloat blinkBottomOriginY;
         
 //        [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
         finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:(shotTime) andOponentTime:opponentTime andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
-        [self performSelector:@selector(showFinalView) withObject:nil afterDelay:2.0];
+        [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:2.0];
         [timer invalidate];
         [moveTimer invalidate];
         
@@ -952,7 +952,7 @@ static CGFloat blinkBottomOriginY;
         
 //        [self performSelector:@selector(dismissWithController:) withObject:finalViewController afterDelay:2.0];
         finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:0 andOponentTime:10 andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
-        [self performSelector:@selector(showFinalView) withObject:nil afterDelay:2.0];
+        [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:2.0];
     }
 }
 
@@ -1021,11 +1021,12 @@ static CGFloat blinkBottomOriginY;
     [self.navigationController pushViewController:controller animated:YES];
 }
 
--(void)showFinalView;
+-(void)showFinalView: (FinalViewDataSource *) fvDataSource;
 {   
     CGRect finalFrame = CGRectMake(12, 90, 294, 165);
+    
 
-    finalView = [[FinalStatsView alloc] initWithFrame:finalFrame andDataSource:finalViewDataSource];
+    finalView = [[FinalStatsView alloc] initWithFrame:finalFrame andDataSource:fvDataSource];
     
     finalView.activeDuelViewController = self;
     
@@ -1057,10 +1058,7 @@ static CGFloat blinkBottomOriginY;
     [timer invalidate];
     if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
         [self performSelector:@selector(scaleView:) withObject:btnTry  afterDelay:1.5];
-    }
-
-    
-    
+    }  
 }
 
 -(void)hideFinalView{
