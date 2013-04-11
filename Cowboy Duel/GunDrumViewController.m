@@ -157,156 +157,10 @@ static const CGFloat timeSpinDump = 0.3f;
         noTarget1.hidden = YES;
         noTarget2.hidden = YES;
         goodIco.hidden = YES;
+        
+        [self.view setUserInteractionEnabled:YES];
     }
     return self;
-}
--(void)firstStepOnPractice;
-{ 
-    targetPractice.hidden = NO;
-    hudView.hidden = NO;
-    hudView.alpha = 1;
-    CGRect frameView = self.textView.frame;
-    frameView.origin.y -= 200;
-    self.textView.frame = frameView;
-   
-    CGRect frame1 = targetPractice.frame;
-    frame1.origin.x = 100;
-    frame1.origin.y = 50;
-    targetPractice.frame = frame1;
-    CGRect frame3 = self.textLabel.frame; 
-    frame3.origin.y = -25;
-    frame3.origin.x = 20;
-    frame3.size.width = 257;
-    self.textLabel.frame = frame3;
-    
-    [self.textView setDinamicHeightBackground];
-    [self.textLabel setText:NSLocalizedString(@"PracticeStep1", @"")];
-    [self.textView setHidden:NO];
-    [self.textLabel setHidden:NO];
-    
-    [self textPracticeAnimation];
-    
-}
--(void)secondStepOnPractice;
-{
-    goodIco.hidden = NO;
-    CGRect icoFrame = goodIco.frame;
-    icoFrame.origin.x =  100;
-    icoFrame.origin.y =  50;
-    goodIco.frame = icoFrame;
-    
-    CGRect frame3 = self.textLabel.frame;
-    frame3.origin.y = -25;
-    frame3.origin.x = 20;
-    frame3.size.width = 257;
-    self.textLabel.frame = frame3;
-    
-    hudView.hidden = NO;
-    hudView.alpha = 1;
-    CGRect frameView = self.textView.frame;
-    frameView.origin.y -= 200;
-    self.textView.frame = frameView;
-    
-    [self.textView setDinamicHeightBackground];
-    [self.textLabel setText:NSLocalizedString(@"PracticeStep2", @"")];
-    [self.textView setHidden:NO];
-    [self.textLabel setHidden:NO];
-    
-    [self textPracticeAnimation];
-    
-}
--(void)shootOnCivil;
-{ 
-    noTarget1.hidden = NO;
-    noTarget2.hidden = NO;
-    
-    CGRect frame1 = noTarget1.frame;
-    frame1.origin.x =  20;
-    frame1.origin.y =  20;
-    noTarget1.frame = frame1;
-    
-    CGRect frame2 = noTarget2.frame;
-    frame2.origin.x = 220;
-    frame2.origin.y = 20;
-    noTarget2.frame = frame2;
-    
-    
-    CGRect frame3 = self.textLabel.frame;
-    frame3.origin = self.textView.frame.origin;
-    frame3.origin.x = frame3.origin.x + (self.textView.frame.size.width/4);
-    frame3.origin.y = frame3.origin.y;
-    frame3.size.width = 128;
-    
-    self.textLabel.frame = frame3;
-    
-    hudView.hidden = NO;
-    hudView.alpha = 1;
-    CGRect frameView = self.textView.frame;
-    frameView.origin.y -= 200;
-    self.textView.frame = frameView;
-    [self.textView setDinamicHeightBackground];
-    [self.textLabel setText:NSLocalizedString(@"ShootOnCivil", @"")];
-    [self.textView setHidden:NO];
-    [self.textLabel setHidden:NO];
-    
-    [self textPracticeAnimation];
-
-}
-
-
--(void)textPracticeAnimation;
-{
-
-    [UIView animateWithDuration:0.5 animations:^{//step 1
-        CGRect frameView = self.textView.frame;
-        frameView.origin.y += 220;
-        self.textView.frame = frameView;
-    }completion:^(BOOL complete){ //sterp2
-        [UIView animateWithDuration:0.2 animations:^{
-            CGRect frameView = self.textView.frame;
-            frameView.origin.y -= 40;
-            self.textView.frame = frameView;
-        }completion:^(BOOL complete){//step3 
-            [UIView animateWithDuration:0.2 animations:^{
-                CGRect frameView = self.textView.frame;
-                frameView.origin.y += 20;
-                self.textView.frame = frameView;
-            }completion:^(BOOL complete){
-                 
-            }];
-
-        }];
-    }];
-
-    
-   
-}
--(void)textPracticeClean;
-{
-    [UIView animateWithDuration:0.4 animations:^{//step 1
-        CGRect frameView = self.textView.frame;
-        frameView.origin.y += 50;
-        self.textView.frame = frameView;
-        
-    }completion:^(BOOL complete){ //sterp2
-        [UIView animateWithDuration:0.5 animations:^{
-            CGRect frameView = self.textView.frame;
-            frameView.origin.y -= 400;
-            self.textView.frame = frameView;
-        }completion:^(BOOL complete){//step3
-            targetPractice.hidden = YES;
-            noTarget1.hidden = YES;
-            noTarget2.hidden = YES;
-            goodIco.hidden = YES;
-            CGRect frameView = self.textView.frame;
-            frameView.origin.y += 350;
-            self.textView.frame = frameView;
-            hudView.hidden = YES;
-            [self.textView setHidden:YES];
-            [self.textLabel setHidden:YES];
-            
-        }];
-    }]; 
 }
 - (void)didReceiveMemoryWarning
 {
@@ -346,6 +200,7 @@ static const CGFloat timeSpinDump = 0.3f;
 #pragma mark
 -(void)openGun;
 {
+    [self.view setUserInteractionEnabled:YES];
     [self.view.layer removeAllAnimations];
     [self hideBullets];
     [gunButton setHidden:YES];
@@ -425,6 +280,7 @@ static const CGFloat timeSpinDump = 0.3f;
 
 -(void)hideGun;
 {
+    [self.view setUserInteractionEnabled:NO];
     [self.textView setHidden:YES];
     [UIView animateWithDuration:timeOpenDump animations:^{
         vLoadGun.hidden = YES;
@@ -575,6 +431,158 @@ static const CGFloat timeSpinDump = 0.3f;
                          [bself lableScaleOutView:view];
                      }];
 }
+
+#pragma mark Tutorial view
+
+-(void)firstStepOnPractice;
+{
+    targetPractice.hidden = NO;
+    hudView.hidden = NO;
+    hudView.alpha = 1;
+    CGRect frameView = self.textView.frame;
+    frameView.origin.y -= 200;
+    self.textView.frame = frameView;
+    
+    CGRect frame1 = targetPractice.frame;
+    frame1.origin.x = 100;
+    frame1.origin.y = 50;
+    targetPractice.frame = frame1;
+    CGRect frame3 = self.textLabel.frame;
+    frame3.origin.y = -25;
+    frame3.origin.x = 20;
+    frame3.size.width = 257;
+    self.textLabel.frame = frame3;
+    
+    [self.textView setDinamicHeightBackground];
+    [self.textLabel setText:NSLocalizedString(@"PracticeStep1", @"")];
+    [self.textView setHidden:NO];
+    [self.textLabel setHidden:NO];
+    
+    [self textPracticeAnimation];
+    
+}
+-(void)secondStepOnPractice;
+{
+    goodIco.hidden = NO;
+    CGRect icoFrame = goodIco.frame;
+    icoFrame.origin.x =  100;
+    icoFrame.origin.y =  50;
+    goodIco.frame = icoFrame;
+    
+    CGRect frame3 = self.textLabel.frame;
+    frame3.origin.y = -25;
+    frame3.origin.x = 20;
+    frame3.size.width = 257;
+    self.textLabel.frame = frame3;
+    
+    hudView.hidden = NO;
+    hudView.alpha = 1;
+    CGRect frameView = self.textView.frame;
+    frameView.origin.y -= 200;
+    self.textView.frame = frameView;
+    
+    [self.textView setDinamicHeightBackground];
+    [self.textLabel setText:NSLocalizedString(@"PracticeStep2", @"")];
+    [self.textView setHidden:NO];
+    [self.textLabel setHidden:NO];
+    
+    [self textPracticeAnimation];
+    
+}
+-(void)shootOnCivil;
+{
+    noTarget1.hidden = NO;
+    noTarget2.hidden = NO;
+    
+    CGRect frame1 = noTarget1.frame;
+    frame1.origin.x =  20;
+    frame1.origin.y =  20;
+    noTarget1.frame = frame1;
+    
+    CGRect frame2 = noTarget2.frame;
+    frame2.origin.x = 220;
+    frame2.origin.y = 20;
+    noTarget2.frame = frame2;
+    
+    
+    CGRect frame3 = self.textLabel.frame;
+    frame3.origin = self.textView.frame.origin;
+    frame3.origin.x = frame3.origin.x + (self.textView.frame.size.width/4);
+    frame3.origin.y = frame3.origin.y;
+    frame3.size.width = 128;
+    
+    self.textLabel.frame = frame3;
+    
+    hudView.hidden = NO;
+    hudView.alpha = 1;
+    CGRect frameView = self.textView.frame;
+    frameView.origin.y -= 200;
+    self.textView.frame = frameView;
+    [self.textView setDinamicHeightBackground];
+    [self.textLabel setText:NSLocalizedString(@"ShootOnCivil", @"")];
+    [self.textView setHidden:NO];
+    [self.textLabel setHidden:NO];
+    
+    [self textPracticeAnimation];
+    
+}
+
+
+-(void)textPracticeAnimation;
+{
+    
+    [UIView animateWithDuration:0.5 animations:^{//step 1
+        CGRect frameView = self.textView.frame;
+        frameView.origin.y += 220;
+        self.textView.frame = frameView;
+    }completion:^(BOOL complete){ //sterp2
+        [UIView animateWithDuration:0.2 animations:^{
+            CGRect frameView = self.textView.frame;
+            frameView.origin.y -= 40;
+            self.textView.frame = frameView;
+        }completion:^(BOOL complete){//step3
+            [UIView animateWithDuration:0.2 animations:^{
+                CGRect frameView = self.textView.frame;
+                frameView.origin.y += 20;
+                self.textView.frame = frameView;
+            }completion:^(BOOL complete){
+                
+            }];
+            
+        }];
+    }];
+    
+    
+    
+}
+-(void)textPracticeClean;
+{
+    [UIView animateWithDuration:0.4 animations:^{//step 1
+        CGRect frameView = self.textView.frame;
+        frameView.origin.y += 50;
+        self.textView.frame = frameView;
+        
+    }completion:^(BOOL complete){ //sterp2
+        [UIView animateWithDuration:0.5 animations:^{
+            CGRect frameView = self.textView.frame;
+            frameView.origin.y -= 400;
+            self.textView.frame = frameView;
+        }completion:^(BOOL complete){//step3
+            targetPractice.hidden = YES;
+            noTarget1.hidden = YES;
+            noTarget2.hidden = YES;
+            goodIco.hidden = YES;
+            CGRect frameView = self.textView.frame;
+            frameView.origin.y += 350;
+            self.textView.frame = frameView;
+            hudView.hidden = YES;
+            [self.textView setHidden:YES];
+            [self.textLabel setHidden:YES];
+            
+        }];
+    }]; 
+}
+
 
 #pragma mark IBAction
 
