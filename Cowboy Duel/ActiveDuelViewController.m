@@ -930,7 +930,7 @@ static CGFloat blinkBottomOriginY;
     int damage = pDamage;
     if (damage==NSNotFound) {
 //    when you shot in peace inhabitants
-        damage = 2;
+        damage = 3;
     }
     shotCountBullet-=damage;
     
@@ -938,17 +938,14 @@ static CGFloat blinkBottomOriginY;
     
     [opponentShape changeLiveBarWithUserHitCount:userHitCount maxShotCount:maxShotCount];
     
-    NSLog(@"shotCountBullet %d", shotCountBullet);
-    if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow && shotCountBullet == 1) {
-        [gunDrumViewController secondStepOnPractice];
-        isOpenHint = YES;
-    }
     if(shotCountBullet<=0) {
-       
         if (duelEnd) return;
         duelEnd = YES;
 
-        DLog(@"Shot Time = %d.%d", (shotTime) / 1000, (shotTime));
+        if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow) {
+            [self cleanPracticeHints];
+        }
+        
         GameCenterViewController *gameCenterViewController;
         if (self.delegate) gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
         BOOL teaching = YES;
@@ -963,9 +960,10 @@ static CGFloat blinkBottomOriginY;
         [moveTimer invalidate];
         
         [self opponentLost];
-
+    }else{
         if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow) {
-            [self cleanPracticeHints];
+            [gunDrumViewController secondStepOnPractice];
+            isOpenHint = YES;
         }
     }
 
@@ -1106,7 +1104,7 @@ static CGFloat blinkBottomOriginY;
 -(void)hideFinalView{
     
     finalView.hidden = YES;
-    finalView = nil;
+    [finalView removeFromSuperview];
     
     btnBack.hidden = YES;
     btnTry.hidden = YES;
@@ -1357,22 +1355,18 @@ float frequencyOpponentShoting()
             }
         }
     }else{
- 
+        [self hideFinalView];
+
         UINavigationController *nav = ((TestAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController;
-        for (__weak UIViewController *viewController in nav.viewControllers) {
-            if ([viewController isKindOfClass:[ActiveDuelViewController class]]) {
-                [((ActiveDuelViewController *)viewController) releaseComponents];
-            }
-        }
-        [self releaseComponents];
+        
         if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
-            
             [nav popToViewController:[nav.viewControllers objectAtIndex:2] animated:YES];
         }
         else{
             [nav popToViewController:[nav.viewControllers objectAtIndex:1] animated:YES];
-            
         }
+        
+        [self releaseComponents];
     }
     
     GameCenterViewController *gameCenterViewController;
@@ -1384,7 +1378,6 @@ float frequencyOpponentShoting()
 //        [self.delegate performSelector:@selector(matchCanseled)];
 //    }
     
-    [self hideFinalView];
     
 }
 
@@ -1429,6 +1422,7 @@ float frequencyOpponentShoting()
         }
         
         [playerAccount.finalInfoTable removeAllObjects];
+        [self reInitViewWillAppear:YES];
     }
     else
         if (gameCenterViewController)
@@ -1436,9 +1430,9 @@ float frequencyOpponentShoting()
             [gameCenterViewController matchStartedTry];
         }
     
-    if (finalViewDataSource.teaching && !opAccount.bot) {
-        [self reInitViewWillAppear:YES];
-    }
+//    if (finalViewDataSource.teaching && !opAccount.bot) {
+//        [self reInitViewWillAppear:YES];
+//    }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
@@ -1539,7 +1533,6 @@ float frequencyOpponentShoting()
 
 -(void)releaseComponents
 {
-    [oponentsViewCoordinates removeAllObjects];
     [plView stopSensorialRotation];
     [self setFloatView:nil];
     [self setFireImageView:nil];
@@ -1612,6 +1605,8 @@ float frequencyOpponentShoting()
     self.lblBehold = nil;
     self.crossImageView = nil;
     self.userLiveImageView = nil;
+    
+    [oponentsViewCoordinates removeAllObjects];
 }
 
 @end

@@ -273,11 +273,6 @@
 -(IBAction)backButtonClick:(id)sender
 {
     if (lastDuel) {
-        NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-        if (([userDef integerForKey:@"FirstRunForPractice"] != 1)&&([userDef integerForKey:@"FirstRunForPractice"] != 2)) {
-            [userDef setInteger:1 forKey:@"FirstRunForPractice"];
-            [userDef synchronize];
-        }
         
         if(playerAccount.money<0)
             playerAccount.money=0;
@@ -382,12 +377,6 @@
     DLog(@"tryButtonClick");
     if(teaching)
     {
-        NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-        if (([userDef integerForKey:@"FirstRunForPractice"] != 1)&&([userDef integerForKey:@"FirstRunForPractice"] != 2)) {
-            [userDef setInteger:1 forKey:@"FirstRunForPractice"];
-            [userDef synchronize];
-        }
-
         [playerAccount.finalInfoTable removeAllObjects];
         [self.navigationController popViewControllerAnimated:YES];
     }

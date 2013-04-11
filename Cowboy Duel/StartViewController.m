@@ -221,7 +221,6 @@ static StartViewController *sharedHelper = nil;
         }else{
             
             [uDef setBool:FALSE forKey:@"FirstRunForDuel"];
-            [uDef setInteger:2 forKey:@"FirstRunForPractice"];
             
             [playerAccount loadAllParametrs];
             

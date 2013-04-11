@@ -58,21 +58,21 @@
         switch (result) {
             case 0:
                 [super.imageMain addFlyingPointToView:view centerPoint:CGPointMake(super.imageMain.center.x, -5)
-                                                        text:@"-3"
+                                                        text:[NSString stringWithFormat:@"-%d",damage]
                                                        color:color
                                                         font:font
                                                    direction:FlyingPointDirectionUp];
                 break;
             case 1:
                 [super.imageMain addFlyingPointToView:view centerPoint:CGPointMake(super.imageMain.center.x, -5)
-                                                        text:@"-3"
+                                                        text:[NSString stringWithFormat:@"-%d",damage]
                                                        color:color
                                                         font:font
                                                    direction:FlyingPointDirectionUp];
                 break;
             case 2:
                 [super.imageMain addFlyingPointToView:view centerPoint:CGPointMake(super.imageMain.center.x, -5)
-                                                        text:@"-3"
+                                                        text:[NSString stringWithFormat:@"-%d",damage]
                                                        color:color
                                                         font:font
                                                    direction:FlyingPointDirectionUp];
