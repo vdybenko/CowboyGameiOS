@@ -346,14 +346,7 @@ static CGFloat blinkBottomOriginY;
     [self.view bringSubviewToFront:self.glassImageViewBottom];
     [self.view bringSubviewToFront:self.glassImageViewHeader];
     [self.view bringSubviewToFront:glassImageViewAllBackground];
-/*
-    CGRect frame;
-    activityIndicatorView = [[ActivityIndicatorView alloc] init];
-    frame = activityIndicatorView.frame;
-    frame.origin = CGPointMake(0,0);
-    activityIndicatorView.frame = frame;
-    [self.view addSubview:activityIndicatorView];
-*/  
+ 
     blinkTopOriginY = blinkTop.frame.origin.y;
     blinkBottomOriginY = blinkBottom.frame.origin.y;
     
@@ -403,6 +396,7 @@ static CGFloat blinkBottomOriginY;
 -(void)viewWillAppear:(BOOL)animated
 {
 //    [super viewWillAppear:animated];
+    tryAgain = NO;
     [self reInitViewWillAppear:animated];
 }
 
@@ -951,6 +945,8 @@ static CGFloat blinkBottomOriginY;
             teaching = NO;
         
         finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:(shotTime) andOponentTime:999999 andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
+        [plView stopSensorialRotation];
+        [plView stopAnimation];
         [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:1.0];
         [timer invalidate];
         [moveTimer invalidate];
@@ -993,7 +989,9 @@ static CGFloat blinkBottomOriginY;
             teaching = NO;
 
         finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:(shotTime) andOponentTime:opponentTime andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
-        [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:2.0];
+        [plView stopSensorialRotation];
+        [plView stopAnimation];
+        [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:1.0];
         [timer invalidate];
         [moveTimer invalidate];
         
@@ -1031,6 +1029,8 @@ static CGFloat blinkBottomOriginY;
         else teaching = NO;
         
         finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:0 andOponentTime:10 andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
+        [plView stopSensorialRotation];
+        [plView stopAnimation];
         [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:2.0];
     }
 }
@@ -1102,7 +1102,6 @@ static CGFloat blinkBottomOriginY;
 #pragma mark -
 -(void)showFinalView: (FinalViewDataSource *) fvDataSource;
 {
-    
     CGRect finalFrame = CGRectMake(12, 90, 294, 165);
 
     finalView = [[FinalStatsView alloc] initWithFrame:finalFrame andDataSource:fvDataSource];

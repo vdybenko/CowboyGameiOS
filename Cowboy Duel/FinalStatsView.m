@@ -21,6 +21,8 @@ int startPoints;
 int endMoney;
 int endPoints;
 
+FXLabel *lblGoldPlus;
+
 @implementation FinalStatsView
 @synthesize lblGold, lblGoldTitle, lblPoints;
 @synthesize ivBlueLine, ivCurrentRank, ivNextRank, ivGoldCoin;
@@ -54,6 +56,7 @@ int endPoints;
         
         lblGold.gradientStartColor = [UIColor colorWithRed:255.0/255.0 green:181.0/255.0 blue:0.0/255.0 alpha:1.0];
         lblGold.gradientEndColor = [UIColor colorWithRed:255.0/255.0 green:140.0/255.0 blue:0.0/255.0 alpha:1.0];
+        lblGold.alpha = 0;
         
         [self coinCenter];
         
@@ -61,7 +64,7 @@ int endPoints;
         goldCountCentered.origin.x = ivGoldCoin.frame.origin.x+ivGoldCoin.frame.size.width + 5;
         lblGold.frame = goldCountCentered;
         
-        lblPoints.text = [NSString stringWithFormat:@"%d", playerAccount.accountPoints];
+//        lblPoints.text = [NSString stringWithFormat:@"%d", playerAccount.accountPoints];
         
         ivBlueLine.hidden = YES;
         
@@ -88,16 +91,36 @@ int endPoints;
     }else
         endMoney = playerAccount.money;
 
-    
     startPoints = finalViewDataSource.oldPoints;
     endPoints = playerAccount.accountPoints;
 
-    ivBlueLine.hidden = NO;
+    ivBlueLine.hidden = YES;
 
     lblPoints.text = [NSString stringWithFormat:@"%d",startPoints ];
+    
+    lblGoldPlus = [[FXLabel alloc] initWithFrame:lblGold.frame];
+    lblGoldPlus.shadowColor = [UIColor whiteColor];
+    lblGoldPlus.shadowOffset=CGSizeMake(1.0, 1.0);
+    lblGoldPlus.innerShadowColor = [UIColor whiteColor];
+    lblGoldPlus.innerShadowOffset=CGSizeMake(1.0, 1.0);
+    lblGoldPlus.shadowBlur = 1.0;
+    [lblGoldPlus setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:45]];
+    lblGoldPlus.gradientStartColor = [UIColor colorWithRed:255.0/255.0 green:181.0/255.0 blue:0.0/255.0 alpha:1.0];
+    lblGoldPlus.gradientEndColor = [UIColor colorWithRed:255.0/255.0 green:140.0/255.0 blue:0.0/255.0 alpha:1.0];
+    lblGoldPlus.backgroundColor = [UIColor clearColor];
+    [self addSubview:lblGoldPlus];
+    
+    if (finalViewDataSource.userWon) {
+        [self winAnimation];
+    }
+    else
+    {
+        [self loseAnimation];
+    }
+}
+
+-(void)finalAnimation{
     NSArray *poi = [DuelRewardLogicController getStaticPointsForEachLevels];
-
-
     [UIView animateWithDuration:1.4f
                      animations:^{
                          [self animationWithLable:lblGold andStartNumber:startMoney andEndNumber:endMoney];
@@ -152,6 +175,81 @@ int endPoints;
 
 #pragma mark animations
 
+-(void)winAnimation
+{
+    lblGold.alpha = 0.3;
+    lblGoldPlus.text = [NSString stringWithFormat:@"+%d", finalViewDataSource.moneyExch];
+    
+    CGRect moveGolds = lblGoldPlus.frame;
+    moveGolds.origin = ivGoldCoin.frame.origin;
+    
+    CGAffineTransform goldPlusZoomIn = CGAffineTransformScale(lblGoldPlus.transform, 1.5, 1.5);
+    CGAffineTransform goldPlusZoomOut = CGAffineTransformScale(lblGoldPlus.transform, 1, 1);
+    CGAffineTransform goldCoinZoomIn = CGAffineTransformScale(ivGoldCoin.transform, 2, 2);
+    CGAffineTransform goldCoinZoomOut = CGAffineTransformScale(ivGoldCoin.transform, 1, 1);
+    
+    [UIView animateWithDuration:1.5
+                     animations:^{
+                         lblGoldPlus.transform = goldPlusZoomIn;
+                     } completion:^(BOOL finished) {
+                         [UIView animateWithDuration:0.5
+                                          animations:^{
+                                              ivGoldCoin.transform = goldCoinZoomIn;
+                                              lblGoldPlus.transform = goldPlusZoomOut;
+                                              lblGoldPlus.frame = moveGolds;
+                                          }completion:^(BOOL finished) {
+                                              [UIView animateWithDuration:0.7
+                                                               animations:^{
+                                                                   ivGoldCoin.transform = goldCoinZoomOut;
+                                                                   lblGoldPlus.alpha = 0;
+                                                                   lblGold.alpha = 1;
+                                                               } completion:^(BOOL finished) {
+                                                                   [self finalAnimation];
+                                                               }];
+                                          } ];
+                     }];
+    
+}
+
+-(void)loseAnimation
+{
+    lblGold.alpha = 0.3;
+    lblGoldPlus.text = [NSString stringWithFormat:@"-%d", finalViewDataSource.moneyExch];
+    
+    CGRect coinFrame = lblGoldPlus.frame;
+    coinFrame.origin = ivGoldCoin.frame.origin;
+    lblGoldPlus.frame = coinFrame;
+    
+    CGRect moveGolds = lblGold.frame;
+    
+    CGAffineTransform goldPlusZoomIn = CGAffineTransformScale(lblGoldPlus.transform, 1.5, 1.5);
+    CGAffineTransform goldPlusZoomOut = CGAffineTransformScale(lblGoldPlus.transform, 1, 1);
+    CGAffineTransform goldCoinZoomIn = CGAffineTransformScale(ivGoldCoin.transform, 2, 2);
+    CGAffineTransform goldCoinZoomOut = CGAffineTransformScale(ivGoldCoin.transform, 1, 1);
+    
+    [UIView animateWithDuration:1.5
+                     animations:^{
+                         lblGoldPlus.transform = goldPlusZoomIn;
+                     } completion:^(BOOL finished) {
+                         [UIView animateWithDuration:0.5
+                                          animations:^{
+                                              ivGoldCoin.transform = goldCoinZoomIn;
+                                              lblGoldPlus.transform = goldPlusZoomOut;
+                                              lblGoldPlus.frame = moveGolds;
+                                          }completion:^(BOOL finished) {
+                                              [UIView animateWithDuration:0.5
+                                                               animations:^{
+                                                                   ivGoldCoin.transform = goldCoinZoomOut;
+                                                                   lblGoldPlus.alpha = 0;
+                                                                   lblGold.alpha = 1;
+                                                               } completion:^(BOOL finished) {
+                                                                   [self finalAnimation];
+                                                               }];
+                                          } ];
+                     }];
+
+}
+
 -(void)animationWithLable:(UILabel *)lable andStartNumber:(int)startNumber andEndNumber:(int)endNumber
 {
     float goldForGoldAnimation;
@@ -201,7 +299,7 @@ int endPoints;
     CGRect temp = backup;
     temp.size.width = 0;
     ivBlueLine.frame = temp;
-    
+    ivBlueLine.hidden = NO;
     if (points <= 0) points = 0;
     int firstWidthOfLine=lblPoints.frame.size.width;
     float changeWidth=(points*firstWidthOfLine)/[maxValue intValue];
