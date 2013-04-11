@@ -206,16 +206,19 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
         CDTopPlayer *firstPlayerInList=[arrItemsListForFindMe objectAtIndex:0];
         int rankOfFirstPlayer=firstPlayerInList.dPositionInList;
         if (rankOfFirstPlayer>[arrItemsList count]) {
+//            When palyer index more than about 110
             [_playersTopDataSource setMyProfileIndex:[arrItemsList count]+9];
             [arrItemsList addObjectsFromArray:arrItemsListForFindMe];
         }else {
             int limitRank=rankOfFirstPlayer+[arrItemsListForFindMe count]-1;
             int indexOfFirstElement=rankOfFirstPlayer-1;
             if (limitRank>=[arrItemsList count]) {
-                NSMutableIndexSet *indexes = [NSMutableIndexSet indexSetWithIndexesInRange:NSMakeRange(indexOfFirstElement, [arrItemsList count]-rankOfFirstPlayer)];
+//                Player index 100<index<110
+                NSMutableIndexSet *indexes = [NSMutableIndexSet indexSetWithIndexesInRange:NSMakeRange(indexOfFirstElement, [arrItemsList count]-indexOfFirstElement)];
                 [arrItemsList removeObjectsAtIndexes:indexes];
                 [arrItemsList addObjectsFromArray:arrItemsListForFindMe];
             }else {
+//                Player Index in old list
                 [arrItemsList replaceObjectsInRange:NSMakeRange(indexOfFirstElement, [arrItemsListForFindMe count]) withObjectsFromArray:arrItemsListForFindMe];
             }
             [_playersTopDataSource setMyProfileIndex:rankInListForFindMe-1];
@@ -224,9 +227,9 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
         NSData *data= [NSKeyedArchiver archivedDataWithRootObject:arrItemsList];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"topPlayers"];
         [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"topPlayers"];
-        
+      
         [tableView reloadData];
-        
+//        
         NSIndexPath *indexPath=[NSIndexPath indexPathForRow:_playersTopDataSource.myProfileIndex inSection:0];
         [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
   }
