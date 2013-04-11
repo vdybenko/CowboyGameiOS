@@ -54,14 +54,10 @@
     
     rankLevelCode = nil;
     self.goldTitle.text = NSLocalizedString(@"Award:", "");
-    self.goldTitle = nil;
     
     self.userAttackTitle.text = NSLocalizedString(@"Attack:", "");
-    self.userAttackTitle = nil;
     
     self.userDefenseTitle.text = NSLocalizedString(@"Defense:", "");
-    self.userDefenseTitle = nil;
-    
     
     [btnDuel setTitleByLabel:@"DUEL" withColor:[UIColor colorWithRed:0.95 green:0.86 blue:0.68 alpha:1.0] fontSize:18];
     [backGround setDinamicHeightBackground];
@@ -95,12 +91,10 @@
     
     userAtack.text = [NSString stringWithFormat:@"%d",player.weapon + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[player.rank intValue]]];
     userAtack.hidden = NO;
-    userAtack = nil;
-    
+        
     userDefense.text = [NSString stringWithFormat:@"%d",player.defense + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[player.rank intValue]]];
     userDefense.hidden = NO;
-    userDefense = nil;
-
+    
     [self hideIndicatorConnectin];
     
     if (player.favorite) {

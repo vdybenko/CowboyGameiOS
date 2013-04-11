@@ -167,12 +167,10 @@ static const CGFloat timeToStandartTitles = 1.8;
         
         userAtack.text = [NSString stringWithFormat:@"%d",playerServer.weapon + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[playerServer.rank intValue]]];
         userAtack.hidden = NO;
-        userAtack = nil;
         
         userDefense.text = [NSString stringWithFormat:@"%d",playerServer.defense + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[playerServer.rank intValue]]];
-        
+
         userDefense.hidden = NO;
-        userDefense = nil;        
         [self checkIsOpponentFavorite];
     }
     return self;

@@ -26,6 +26,7 @@
     [label1 setTextColor:[UIColor colorWithRed:0.95 green:0.86 blue:0.68 alpha:1.0]];
     [label1 setText:NSLocalizedString(@"PRAC",@"")];
     [btnDuel addSubview:label1];
+    label1 = nil;
 }
 
 @end
