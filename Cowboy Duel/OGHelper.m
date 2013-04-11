@@ -1282,11 +1282,10 @@ static OGHelper *sharedHelper = nil;
 
 #pragma mark FBDialogDelegate
 - (void)dialogCompleteWithUrl:(NSURL *)url {
-    NSDictionary *params = [self parseURLParams:[url query]];
-    NSString *msg = [NSString stringWithFormat:
-                     @"Posted story, id: %@",
-                     [params valueForKey:@"post_id"]];
-    NSLog(@"%@", msg);
+//    NSDictionary *params = [self parseURLParams:[url query]];
+//    NSString *msg = [NSString stringWithFormat:
+//                     @"Posted story, id: %@",
+//                     [params valueForKey:@"post_id"]];
 }
 
 - (NSDictionary*)parseURLParams:(NSString *)query {

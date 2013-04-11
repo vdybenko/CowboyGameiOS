@@ -92,7 +92,6 @@
         
         NSString *name=[[OGHelper sharedInstance ] getClearName:player.serverName];
         NSString *path=[NSString stringWithFormat:@"%@/icon_%@.png",[[OGHelper sharedInstance] getSavePathForList],name];
-        DLog(@"Icon cache file name %@", path);
         if([[NSFileManager defaultManager] fileExistsAtPath:path]){  
             UIImage *image=[UIImage loadImageFullPath:path];
             [cell setPlayerIcon:image];

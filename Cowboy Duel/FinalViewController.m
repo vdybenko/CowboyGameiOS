@@ -295,8 +295,6 @@
                     
                     [self.navigationController popToViewController:[LoginAnimatedViewController sharedInstance] animated:YES];
                     [self releaseComponents];
-                    NSLog(@"%@", self.navigationController.viewControllers);
-                    
                 }
                 else{
                     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
@@ -305,7 +303,6 @@
             }
         }else{
             UINavigationController *nav = ((TestAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController;
-            NSLog(@"%@", nav.viewControllers);
             for (__weak UIViewController *viewController in nav.viewControllers) {
                 if ([viewController isKindOfClass:[ActiveDuelViewController class]]) {
                     [((ActiveDuelViewController *)viewController) releaseComponents];

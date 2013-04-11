@@ -343,14 +343,7 @@ static CGFloat blinkBottomOriginY;
     [self.view bringSubviewToFront:self.glassImageViewBottom];
     [self.view bringSubviewToFront:self.glassImageViewHeader];
     [self.view bringSubviewToFront:glassImageViewAllBackground];
-/*
-    CGRect frame;
-    activityIndicatorView = [[ActivityIndicatorView alloc] init];
-    frame = activityIndicatorView.frame;
-    frame.origin = CGPointMake(0,0);
-    activityIndicatorView.frame = frame;
-    [self.view addSubview:activityIndicatorView];
-*/  
+
     blinkTopOriginY = blinkTop.frame.origin.y;
     blinkBottomOriginY = blinkBottom.frame.origin.y;
     
@@ -1094,8 +1087,6 @@ static CGFloat blinkBottomOriginY;
     [self.view bringSubviewToFront:btnBack];
     [self.view bringSubviewToFront:btnTry];
     
-    NSLog(@"%@", [self.view subviews]);
-    
     btnBack.enabled = YES;
     btnTry.enabled = YES;
     btnSkip.enabled = NO;
@@ -1359,8 +1350,6 @@ float frequencyOpponentShoting()
                 
                 [self.navigationController popToViewController:[LoginAnimatedViewController sharedInstance] animated:YES];
                 [self releaseComponents];
-                NSLog(@"%@", self.navigationController.viewControllers);
-                
             }
             else{
                 [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
@@ -1370,7 +1359,6 @@ float frequencyOpponentShoting()
     }else{
  
         UINavigationController *nav = ((TestAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController;
-        NSLog(@"%@", nav.viewControllers);
         for (__weak UIViewController *viewController in nav.viewControllers) {
             if ([viewController isKindOfClass:[ActiveDuelViewController class]]) {
                 [((ActiveDuelViewController *)viewController) releaseComponents];
