@@ -538,7 +538,6 @@ static CGFloat blinkBottomOriginY;
     [ignoreTimer invalidate];
     [timer invalidate];
     plView = (PLView *)self.view;
-    [plView stopSensorialRotation];
     [plView stopAnimation];
 }
 
@@ -1063,11 +1062,14 @@ static CGFloat blinkBottomOriginY;
     [self.navigationController pushViewController:controller animated:YES];
 }
 
+#pragma mark FinalVC
+
 -(void)showFinalView: (FinalViewDataSource *) fvDataSource;
-{   
+{
+    [plView stopSensorialRotation];
+    
     CGRect finalFrame = CGRectMake(12, 90, 294, 165);
     
-
     finalView = [[FinalStatsView alloc] initWithFrame:finalFrame andDataSource:fvDataSource];
     
     finalView.activeDuelViewController = self;
@@ -1533,7 +1535,6 @@ float frequencyOpponentShoting()
 
 -(void)releaseComponents
 {
-    [plView stopSensorialRotation];
     [self setFloatView:nil];
     [self setFireImageView:nil];
     [self setBloodImageView:nil];
