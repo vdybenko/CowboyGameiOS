@@ -894,7 +894,7 @@ static CGFloat blinkBottomOriginY;
     
     opponentCenter.x = randPosition;
     opponentShape.center = opponentCenter;
-    opponentShape.center = self.view.center;
+//    opponentShape.center = self.view.center;
 
 }
 
@@ -1155,8 +1155,24 @@ static CGFloat blinkBottomOriginY;
         gameStatusLable.hidden = NO;
         finalStatusBack.hidden = NO;
         
-        gameStatusLable.text = (finalViewDataSource.userWon)?@"You win":@"You lost";
-        
+        if (finalViewDataSource.userWon) {
+            gameStatusLable.text = @"You win";
+            NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Win.mp3", [[NSBundle mainBundle] resourcePath]]];
+            NSError *error;
+            [player stop];
+            player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+            [player play];
+
+
+        }else{
+            gameStatusLable.text = @"You lost";
+            NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Lose.mp3", [[NSBundle mainBundle] resourcePath]]];
+            NSError *error;
+            [player stop];
+            player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+            [player play];
+
+        }
         //
         [UIView animateWithDuration:0.5 animations:^{
             CGPoint pointDown = self.view.center;
@@ -1211,6 +1227,8 @@ static CGFloat blinkBottomOriginY;
     blurredBack.hidden = YES;
     finalStatusBack.hidden = YES;
     gameStatusLable.hidden = YES;
+    
+    [player stop];
 }
 
 #pragma mark

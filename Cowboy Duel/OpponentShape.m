@@ -148,6 +148,7 @@ static CGFloat oponentLiveImageViewStartWidth;
 
 -(void)reboundOnShot;
 {
+//    return;
     CGPoint body = self.center;
     int direction = rand() % 2?-1:1;
     int randPosition;
