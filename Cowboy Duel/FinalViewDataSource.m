@@ -18,7 +18,6 @@
 
 -(id)initWithUserTime:(int)userTimePar
        andOponentTime:(int)oponentTime
-andGameCenterController:(id)delegateController
           andTeaching:(BOOL)teach
            andAccount:(AccountDataSource *)userAccount
          andOpAccount:(AccountDataSource *)opAccount
@@ -33,19 +32,8 @@ andGameCenterController:(id)delegateController
         playerAccount = userAccount;
         oponentAccount = opAccount;
         tryButtonEnabled = YES;
-        NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-
-        if (teaching) {
-            firstRun = ![userDef boolForKey:@"FirstRunForFinal"];
-        }else{
-            firstRun = NO;
-        }
-        [userDef setBool:YES forKey:@"FirstRunForFinal"];
-        [userDef synchronize];
         
         reachNewLevel = NO;
-        lastDuel = NO;
-        runAway = NO;
         
         if (teaching&&(oponentAccount.bot)) {
             duelWithBotCheck=YES;
@@ -59,9 +47,7 @@ andGameCenterController:(id)delegateController
         
         duel = [[CDDuel alloc] init];
         duel.dOpponentId = [[NSString alloc] initWithFormat:@""];
-//        
-        self.delegate = delegateController;
-        
+//                
         DLog(@"U %d O %d", userTime, oponentTime);
         
         if ((userTime != 0)&& (userTime != 999999) && (userTime < oponentTime)&& (oponentTime != 999999)) {
@@ -124,7 +110,6 @@ andGameCenterController:(id)delegateController
 {
 
     isDuelWinWatched = YES;
-    lastDuel = YES;
     moneyExch  = playerAccount.money < 10 ? 1: playerAccount.money / 10.0;
     pointsForMatch=0;
 
@@ -155,7 +140,6 @@ andGameCenterController:(id)delegateController
 -(void)winScene
 {
     isDuelWinWatched = NO;
-    lastDuel = YES;
     moneyExch  = oponentAccount.money < 10 ? 1: oponentAccount.money / 10.0;
     pointsForMatch=0;
     
@@ -254,15 +238,15 @@ andGameCenterController:(id)delegateController
 
 #pragma mark -
 
--(void)checkMaxWin:(int)moneyExch;
+-(void)checkMaxWin:(int)pMoneyExch;
 {
     if (playerAccount.accountBigestWin==0){
-        playerAccount.accountBigestWin=moneyExch;
+        playerAccount.accountBigestWin=pMoneyExch;
     }
     else
     {
-        if (moneyExch>playerAccount.accountBigestWin) {
-            playerAccount.accountBigestWin=moneyExch;
+        if (pMoneyExch>playerAccount.accountBigestWin) {
+            playerAccount.accountBigestWin=pMoneyExch;
         }
     }
     [playerAccount saveAccountBigestWin];

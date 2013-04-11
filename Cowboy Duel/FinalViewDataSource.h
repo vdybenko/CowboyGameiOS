@@ -15,8 +15,6 @@
 #import "SBJSON.h"
 #import "JSON.h"
 
-#import "LevelCongratViewController.h"
-#import "MoneyCongratViewController.h"
 #import "DuelStartViewController.h"
 
 @interface FinalViewDataSource : NSObject
@@ -29,24 +27,13 @@
     NSArray *pontsForLose;
     
 //    BOOL teaching;
-    BOOL firstRun;
     BOOL duelWithBotCheck;
-    BOOL lastDuel;
-    BOOL runAway;
-    BOOL runAwayGood;
 
-    int minUserTime;
     int userTime;
-    
-//    int moneyExch;
-//    int pointsForMatch;
     
     AccountDataSource* playerAccount;
     AccountDataSource* oponentAccount;
-    
 }
-@property(weak)id<ActiveDuelViewControllerDelegate> delegate;
-
 @property (nonatomic) AccountDataSource* playerAccount;
 @property (nonatomic) AccountDataSource* oponentAccount;
 
@@ -64,7 +51,6 @@
 
 -(id)initWithUserTime:(int)userTimePar
        andOponentTime:(int)oponentTime
-        andGameCenterController:(id)delegateController
           andTeaching:(BOOL)teach
            andAccount:(AccountDataSource *)userAccount
          andOpAccount:(AccountDataSource *)opAccount;

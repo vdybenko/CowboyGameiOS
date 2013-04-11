@@ -319,7 +319,7 @@ static GameCenterViewController *gameCenterViewController;
         if ([delegate respondsToSelector:@selector(duelTimerEndFeedBack)])
             [delegate duelTimerEndFeedBack];
         
-        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:999999 andOponentTime:999999 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:999999 andOponentTime:999999 andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
         if ([delegate respondsToSelector:@selector(showFinalView:)]) {
             [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
         }
@@ -336,7 +336,7 @@ static GameCenterViewController *gameCenterViewController;
         if ([delegate respondsToSelector:@selector(duelTimerEndFeedBack)])
             [delegate duelTimerEndFeedBack];
         
-        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:999999 andOponentTime:0 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:999999 andOponentTime:0 andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
         if ([delegate respondsToSelector:@selector(showFinalView:)]) {
             [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
         }
@@ -352,7 +352,7 @@ static GameCenterViewController *gameCenterViewController;
         if ([delegate respondsToSelector:@selector(duelTimerEndFeedBack)])
             [delegate duelTimerEndFeedBack];
         
-        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:0 andOponentTime:999999 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:0 andOponentTime:999999 andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
         if ([delegate respondsToSelector:@selector(showFinalView:)]) {
             [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
         }
@@ -368,7 +368,7 @@ static GameCenterViewController *gameCenterViewController;
         if ([delegate respondsToSelector:@selector(duelTimerEndFeedBack)])
             [delegate duelTimerEndFeedBack];
         
-        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
         if ([delegate respondsToSelector:@selector(showFinalView:)]) {
             [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
         }
@@ -388,7 +388,7 @@ static GameCenterViewController *gameCenterViewController;
     if ((carShotTime == 0)&&(opShotTime == 0)) {
         DLog(@"Duel timer end %d %d true", carShotTime, opShotTime);
         
-        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
         if ([delegate respondsToSelector:@selector(showFinalView:)]) {
             [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
         }
@@ -398,7 +398,7 @@ static GameCenterViewController *gameCenterViewController;
         DLog(@"Duel timer end %d %d false", carShotTime, opShotTime);
         
         
-        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
         if ([delegate respondsToSelector:@selector(showFinalView:)]) {
             [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
         }
@@ -489,7 +489,7 @@ static GameCenterViewController *gameCenterViewController;
     [self.connection sendData:@"" packetID:NETWORK_DISCONNECT_PAIR ofLength:sizeof(@"")];
     
     if ([self.parentVC.navigationController.visibleViewController isKindOfClass:([ActiveDuelViewController class])]) {
-        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
         if (userCanceledMatch) {
             [finalViewDataSource prepeareForLoseScene];
         }else{
@@ -822,7 +822,7 @@ static GameCenterViewController *gameCenterViewController;
                     if ([delegate respondsToSelector:@selector(duelTimerEndFeedBack)])
                         [delegate duelTimerEndFeedBack];
                     
-                    finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:999999 andOponentTime:999999 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+                    finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:999999 andOponentTime:999999 andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
                     if ([delegate respondsToSelector:@selector(showFinalView:)]) {
                         [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
                     }
@@ -837,7 +837,7 @@ static GameCenterViewController *gameCenterViewController;
                     if ([delegate respondsToSelector:@selector(duelTimerEndFeedBack)])
                         [delegate duelTimerEndFeedBack];
                     
-                    finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:999999 andOponentTime:999999 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+                    finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:999999 andOponentTime:999999 andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
                     if ([delegate respondsToSelector:@selector(showFinalView:)]) {
                         [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
                     }
@@ -852,7 +852,7 @@ static GameCenterViewController *gameCenterViewController;
                     if ([delegate respondsToSelector:@selector(duelTimerEndFeedBack)])
                         [delegate duelTimerEndFeedBack];
                     
-                    finalViewDataSource =  [[FinalViewDataSource alloc] initWithUserTime:999999 andOponentTime:0 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+                    finalViewDataSource =  [[FinalViewDataSource alloc] initWithUserTime:999999 andOponentTime:0 andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
                     if ([delegate respondsToSelector:@selector(showFinalView:)]) {
                         [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
                     }
@@ -869,7 +869,7 @@ static GameCenterViewController *gameCenterViewController;
                     if ([delegate respondsToSelector:@selector(duelTimerEndFeedBack)])
                         [delegate duelTimerEndFeedBack];
                     
-                    finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:0 andOponentTime:999999 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+                    finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:0 andOponentTime:999999 andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
                     if ([delegate respondsToSelector:@selector(showFinalView:)]) {
                         [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
                     }
@@ -884,7 +884,7 @@ static GameCenterViewController *gameCenterViewController;
                     if ([delegate respondsToSelector:@selector(duelTimerEndFeedBack)])
                         [delegate duelTimerEndFeedBack];
                     
-                    finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:0 andOponentTime:999999 andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
+                    finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:0 andOponentTime:999999 andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
                     if ([delegate respondsToSelector:@selector(showFinalView:)]) {
                         [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
                     }

@@ -922,7 +922,7 @@ static CGFloat blinkBottomOriginY;
         else
             teaching = NO;
         
-        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:(shotTime) andOponentTime:999999 andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
+        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:(shotTime) andOponentTime:999999 andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
         [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:1.0];
         [timer invalidate];
         [moveTimer invalidate];
@@ -964,7 +964,7 @@ static CGFloat blinkBottomOriginY;
         else
             teaching = NO;
 
-        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:(shotTime) andOponentTime:opponentTime andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
+        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:(shotTime) andOponentTime:opponentTime andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
         [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:2.0];
         [timer invalidate];
         [moveTimer invalidate];
@@ -1002,7 +1002,7 @@ static CGFloat blinkBottomOriginY;
         if (!self.delegate) gameCenterViewController = nil;
         else teaching = NO;
         
-        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:0 andOponentTime:10 andGameCenterController:gameCenterViewController andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
+        finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:0 andOponentTime:10 andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
         [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:2.0];
     }
 }
@@ -1446,7 +1446,11 @@ float frequencyOpponentShoting()
         if (gameCenterViewController)
         {
             [gameCenterViewController matchStartedTry];
-        }    
+        }
+    
+    if (finalViewDataSource.teaching && !opAccount.bot) {
+        [self reInitViewWillAppear:YES];
+    }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
