@@ -100,6 +100,9 @@
     
     FinalStatsView *finalView;
     FinalViewDataSource *finalViewDataSource;
+    UIImageView *blurredBack;
+    UIImageView *finalStatusBack;
+    UILabel *gameStatusLable;
   
     __weak IBOutlet UIImageView *blinkBottom;
     __weak IBOutlet UIImageView *blinkTop;
@@ -393,6 +396,7 @@ static CGFloat blinkBottomOriginY;
 -(void)viewWillAppear:(BOOL)animated
 {
 //    [super viewWillAppear:animated];
+    tryAgain = NO;
     [self reInitViewWillAppear:animated];
 }
 
@@ -415,6 +419,30 @@ static CGFloat blinkBottomOriginY;
         if (airBallon.airBallonImg.hidden) {
             airBallon.airBallonImg.hidden = NO;
         }
+    }
+    else
+    {
+        blurredBack = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bloorOnBlackView.png"]];
+        blurredBack.hidden = YES;
+        [self.view addSubview:blurredBack];
+        
+        finalStatusBack = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lg_title_view.png"]];
+        finalStatusBack.frame = CGRectMake(0.0, 0.0, 320, 72);
+        finalStatusBack.backgroundColor = [UIColor clearColor];
+        
+        CGRect frame = finalStatusBack.frame;
+        frame.origin.y += 5;
+        gameStatusLable = [[UILabel alloc] initWithFrame:frame];
+        gameStatusLable.textAlignment = UITextAlignmentCenter;
+        gameStatusLable.textColor = [UIColor whiteColor];
+        gameStatusLable.backgroundColor = [UIColor clearColor];
+        [gameStatusLable setFont:[UIFont fontWithName: @"DecreeNarrow" size:30]];
+        
+        finalStatusBack.hidden = YES;
+        gameStatusLable.hidden = YES;
+        
+        [self.view addSubview:finalStatusBack];
+        [self.view addSubview:gameStatusLable];
     }
     
     ignoreTimer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(userIgnorePunish) userInfo:nil repeats:NO];
@@ -856,6 +884,7 @@ static CGFloat blinkBottomOriginY;
     
     opponentCenter.x = randPosition;
     opponentShape.center = opponentCenter;
+//    opponentShape.center = self.view.center;
 
 }
 
@@ -912,6 +941,8 @@ static CGFloat blinkBottomOriginY;
             teaching = NO;
         
         finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:(shotTime) andOponentTime:999999 andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
+        [plView stopSensorialRotation];
+        [plView stopAnimation];
         [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:1.0];
         [timer invalidate];
         [moveTimer invalidate];
@@ -951,7 +982,9 @@ static CGFloat blinkBottomOriginY;
             teaching = NO;
 
         finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:(shotTime) andOponentTime:opponentTime andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
-        [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:2.0];
+        [plView stopSensorialRotation];
+        [plView stopAnimation];
+        [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:1.0];
         [timer invalidate];
         [moveTimer invalidate];
         
@@ -989,6 +1022,8 @@ static CGFloat blinkBottomOriginY;
         else teaching = NO;
         
         finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:0 andOponentTime:10 andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
+        [plView stopSensorialRotation];
+        [plView stopAnimation];
         [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:2.0];
     }
 }
@@ -1058,24 +1093,24 @@ static CGFloat blinkBottomOriginY;
     [self.navigationController pushViewController:controller animated:YES];
 }
 
-#pragma mark FinalVC
 
+#pragma mark FinalVC
 -(void)showFinalView: (FinalViewDataSource *) fvDataSource;
 {
-    [plView stopSensorialRotation];
+    self.userLiveImageView.hidden = YES;
+    self.lbUserLifeLeft.hidden = YES;
     
     CGRect finalFrame = CGRectMake(12, 90, 294, 165);
-    
+
     finalView = [[FinalStatsView alloc] initWithFrame:finalFrame andDataSource:fvDataSource];
     
     finalView.activeDuelViewController = self;
     
-    finalView.center = self.crossImageView.center; 
+    finalView.center = self.crossImageView.center;
+    finalView.hidden = YES;
     
-    [self.view addSubview:finalView];
-    
-    [finalView startAnimations];
-    
+    blurredBack.hidden = NO;
+
     btnBack.hidden = NO;
     btnTry.hidden = NO;
     btnSkip.hidden = YES;
@@ -1086,6 +1121,8 @@ static CGFloat blinkBottomOriginY;
     btnBack.enabled = YES;
     btnTry.enabled = YES;
     btnSkip.enabled = NO;
+    
+    [self revealFinalView:YES];
     
     self.gunButton.hidden = YES;
     self.gunButton.enabled = NO;
@@ -1098,6 +1135,75 @@ static CGFloat blinkBottomOriginY;
         [self performSelector:@selector(scaleView:) withObject:btnTry  afterDelay:1.5];
     }  
 }
+
+-(void)revealFinalView: (BOOL )animated
+{
+    [self.view addSubview:finalView];
+    
+    if (animated){
+        //preparations:
+        CGRect frameBefore = CGRectMake(11, -190, finalView.frame.size.width, finalView.frame.size.height);
+        finalView.frame = frameBefore;
+        finalView.hidden = NO;
+        btnTry.alpha = 0;
+        btnBack.alpha = 0;
+        gameStatusLable.alpha = 0;
+        finalStatusBack.alpha = 0;
+        gameStatusLable.hidden = NO;
+        finalStatusBack.hidden = NO;
+        
+        if (finalViewDataSource.userWon) {
+            gameStatusLable.text = @"You win";
+            NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Win.mp3", [[NSBundle mainBundle] resourcePath]]];
+            NSError *error;
+            [player stop];
+            player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+            [player play];
+
+
+        }else{
+            gameStatusLable.text = @"You lost";
+            NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Lose.mp3", [[NSBundle mainBundle] resourcePath]]];
+            NSError *error;
+            [player stop];
+            player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+            [player play];
+
+        }
+        //
+        [UIView animateWithDuration:0.5 animations:^{
+            CGPoint pointDown = self.view.center;
+            pointDown.y += 20;
+            finalView.center = pointDown;
+            
+        }completion:^(BOOL complete){
+            [UIView animateWithDuration:0.2 animations:^{
+                CGPoint pointUp = finalView.center;
+                pointUp.y -= 40;
+                finalView.center = pointUp;
+                btnBack.alpha = 1;
+                btnTry.alpha = 1;
+                gameStatusLable.alpha = 1;
+                finalStatusBack.alpha = 1;
+                
+            }completion:^(BOOL complete){
+                [UIView animateWithDuration:0.2 animations:^{
+                    CGPoint pointView = finalView.center;
+                    pointView.y += 20;
+                    finalView.center = pointView;
+
+                    
+                }completion:^(BOOL complete){
+                    
+                    [finalView startAnimations];
+
+                }];
+            }];
+        }];
+    }else
+        finalView.hidden = NO;
+}
+
 
 -(void)hideFinalView{
     
@@ -1114,6 +1220,14 @@ static CGFloat blinkBottomOriginY;
     
     self.gunButton.hidden = NO;
     self.gunButton.enabled = YES;
+    
+    blurredBack.hidden = YES;
+    finalStatusBack.hidden = YES;
+    gameStatusLable.hidden = YES;
+    self.userLiveImageView.hidden = NO;
+    self.lbUserLifeLeft.hidden = NO;
+
+    [player stop];
 }
 
 #pragma mark
@@ -1587,6 +1701,10 @@ float frequencyOpponentShoting()
     
     blinkBottom = nil;
     blinkTop = nil;
+    
+    blurredBack = nil;
+    gameStatusLable = nil;
+    finalStatusBack = nil;
 
     self.floatView = nil;
     self.fireImageView = nil;
