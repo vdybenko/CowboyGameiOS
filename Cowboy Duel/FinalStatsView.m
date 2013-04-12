@@ -101,10 +101,7 @@ int endPoints;
     [UIView animateWithDuration:1.4f
                      animations:^{
                          [self animationWithLable:lblGold andStartNumber:startMoney andEndNumber:endMoney];
-                         
-                         if (![LoginAnimatedViewController sharedInstance].isDemoPractice) {
-                             [self changePointsLine:endPoints maxValue:[poi objectAtIndex:(playerAccount.accountLevel+1)] animated:YES];
-                         }
+                         [self changePointsLine:endPoints maxValue:[poi objectAtIndex:(playerAccount.accountLevel+1)] animated:YES];
                          [self animationWithLable:lblPoints andStartNumber:startPoints andEndNumber:endPoints];
                          
                      } completion:^(BOOL finished) {
@@ -199,12 +196,16 @@ int endPoints;
 
 -(void)changePointsLine:(int)points maxValue:(NSNumber *) maxValue animated:(BOOL)animated;
 {
+    if (points <= 0) {
+        ivBlueLine.hidden = YES;
+        return;
+    }
+    
     CGRect backup = ivBlueLine.frame;
     CGRect temp = backup;
     temp.size.width = 0;
     ivBlueLine.frame = temp;
     
-    if (points <= 0) points = 0;
     int firstWidthOfLine=lblPoints.frame.size.width;
     float changeWidth=(points*firstWidthOfLine)/[maxValue intValue];
     

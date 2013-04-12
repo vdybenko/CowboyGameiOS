@@ -808,9 +808,6 @@ static CGFloat blinkBottomOriginY;
             [delegate sendShotWithDamage:opponentDamage];
         }
         
-        if (horseShape.hidden && opponentShape.typeOfBody == OpponentShapeTypeScarecrow) {
-            [self performSelector:@selector(showGoodBodies) withObject:nil afterDelay:1.0f];
-        }
         [self shotToOponentWithDamage:opponentDamage];
     }
 }
@@ -940,7 +937,7 @@ static CGFloat blinkBottomOriginY;
     if(shotCountBullet<=0) {
         if (duelEnd) return;
         duelEnd = YES;
-
+        
         if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow) {
             [self cleanPracticeHints];
         }
@@ -961,8 +958,7 @@ static CGFloat blinkBottomOriginY;
         [self opponentLost];
     }else{
         if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow) {
-            [gunDrumViewController secondStepOnPractice];
-            isOpenHint = YES;
+            [self performSelector:@selector(showGoodBodies) withObject:nil afterDelay:0.5f];
         }
     }
 
@@ -1277,8 +1273,8 @@ static CGFloat blinkBottomOriginY;
 {
     if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow)
     {
-    [gunDrumViewController secondStepOnPractice];
-     btnSkip.hidden = YES;
+        [gunDrumViewController secondStepOnPractice];
+        btnSkip.hidden = YES;
         isOpenHint = YES;
     }
     
