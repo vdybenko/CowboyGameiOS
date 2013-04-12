@@ -11,16 +11,17 @@
 #import "UIView+Dinamic_BackGround.h"
 #import "LevelCongratViewController.h"
 #import "MoneyCongratViewController.h"
-
+#define kCountOfLevelsMinimal 0
+#define kCountOfLevels 6
 AccountDataSource *playerAccount;
 FinalViewDataSource *finalViewDataSource;
 
 int startMoney;
 int startPoints;
-
+int lbStartPoints;
 int endMoney;
 int endPoints;
-
+int lbEndPoints;
 FXLabel *lblGoldPlus;
 
 @implementation FinalStatsView
@@ -42,6 +43,35 @@ FXLabel *lblGoldPlus;
         playerAccount = finalViewDataSource.playerAccount;
         isTryAgainEnabled = YES;
         [goldPointBgView setDinamicHeightBackground];
+        
+        startMoney = finalViewDataSource.oldMoney;
+        endMoney = playerAccount.money;
+        NSLog(@"%d %d", startMoney, endMoney);
+        
+        NSArray *array=[DuelRewardLogicController getStaticPointsForEachLevels];
+        NSInteger num = playerAccount.accountLevel;
+        int  moneyForNextLevel=(playerAccount.accountLevel != kCountOfLevels)? [[array objectAtIndex:num] intValue]:playerAccount.accountPoints+1000;
+        
+        int moneyForPrewLevel;
+        if (playerAccount.accountLevel==kCountOfLevelsMinimal) {
+            moneyForPrewLevel = 0;
+        }else
+            if (playerAccount.accountLevel == kCountOfLevels) {
+                moneyForPrewLevel = playerAccount.accountPoints;
+            }
+            else
+            {
+                moneyForPrewLevel=[[array objectAtIndex:(playerAccount.accountLevel-1)] intValue];
+            }
+        
+        
+        startPoints=(playerAccount.accountPoints-moneyForPrewLevel);
+        endPoints=(moneyForNextLevel-moneyForPrewLevel);
+
+        
+        lbStartPoints = finalViewDataSource.oldPoints;
+        lbEndPoints = playerAccount.accountPoints;
+        
 //Labels:
         lblGold.shadowColor = [UIColor whiteColor];
         lblGold.shadowOffset=CGSizeMake(1.0, 1.0);
@@ -49,14 +79,14 @@ FXLabel *lblGoldPlus;
         lblGold.innerShadowOffset=CGSizeMake(1.0, 1.0);
         lblGold.shadowBlur = 1.0;
         
-        lblGold.text = [NSString stringWithFormat:@"%d",playerAccount.money];
+        lblGold.text = [NSString stringWithFormat:@"%d",startMoney];
         
         [lblGold setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:45]];
         [lblGoldTitle setFont:[UIFont fontWithName: @"DecreeNarrow" size:30]];
         
         lblGold.gradientStartColor = [UIColor colorWithRed:255.0/255.0 green:181.0/255.0 blue:0.0/255.0 alpha:1.0];
         lblGold.gradientEndColor = [UIColor colorWithRed:255.0/255.0 green:140.0/255.0 blue:0.0/255.0 alpha:1.0];
-        lblGold.alpha = 0;
+        lblGold.alpha = 0.3;
         
         [self coinCenter];
         
@@ -85,14 +115,6 @@ FXLabel *lblGoldPlus;
 
 -(void)startAnimations;
 {
-    startMoney = playerAccount.money;
-    if (!finalViewDataSource.teaching) {
-        endMoney = playerAccount.money+finalViewDataSource.moneyExch;
-    }else
-        endMoney = playerAccount.money;
-
-    startPoints = finalViewDataSource.oldPoints;
-    endPoints = playerAccount.accountPoints;
 
     ivBlueLine.hidden = YES;
 
@@ -117,45 +139,6 @@ FXLabel *lblGoldPlus;
     {
         [self loseAnimation];
     }
-}
-
--(void)finalAnimation{
-    NSArray *poi = [DuelRewardLogicController getStaticPointsForEachLevels];
-    [UIView animateWithDuration:1.4f
-                     animations:^{
-                         [self animationWithLable:lblGold andStartNumber:startMoney andEndNumber:endMoney];
-                         
-                         [self changePointsLine:endPoints maxValue:[poi objectAtIndex:(playerAccount.accountLevel+1)] animated:YES];
-                         [self animationWithLable:lblPoints andStartNumber:startPoints andEndNumber:endPoints];
-                         
-                     } completion:^(BOOL finished) {
-                         if (finalViewDataSource.reachNewLevel) {
-                             [self showMessageOfNewLevel];
-                             finalViewDataSource.reachNewLevel=NO;
-                         }
-                         
-                         if (finalViewDataSource.userWon) {
-                             if ((finalViewDataSource.oldMoney<500)&&(playerAccount.money>=500)&&(playerAccount.money<1000)) {
-                                 NSString *moneyText=[NSString stringWithFormat:@"%d",playerAccount.money];
-                                 [self showMessageOfMoreMoney:playerAccount.money withLabel:moneyText];
-                             }else {
-                                 int thousandOld=finalViewDataSource.oldMoney/1000;
-                                 int thousandNew=playerAccount.money/1000;
-                                 int thousandSecond=(playerAccount.money % 1000)/100;
-                                 if (thousandNew>thousandOld) {
-                                     if (thousandSecond==0) {
-                                         [self showMessageOfMoreMoney:playerAccount.money withLabel:[NSString stringWithFormat:@"+%dK",thousandNew]];
-                                     }else {
-                                         [self showMessageOfMoreMoney:playerAccount.money withLabel:[NSString stringWithFormat:@"+%d.%dK",thousandNew,thousandSecond]];
-                                     }
-                                 }
-                             }
-                             finalViewDataSource.oldMoney=0;
-                         }
-                     }];
-    
-
-    
 }
 
 -(void)coinCenter
@@ -250,6 +233,41 @@ FXLabel *lblGoldPlus;
 
 }
 
+-(void)finalAnimation{
+    [UIView animateWithDuration:1.4f
+                     animations:^{
+                         [self animationWithLable:lblGold andStartNumber:startMoney andEndNumber:endMoney];
+                         
+                         [self changePointsLine:startPoints maxValue:endPoints animated:YES];
+                         [self animationWithLable:lblPoints andStartNumber:lbStartPoints andEndNumber:lbEndPoints];
+                         
+                     } completion:^(BOOL finished) {
+                         if (finalViewDataSource.reachNewLevel) {
+                             [self showMessageOfNewLevel];
+                             finalViewDataSource.reachNewLevel=NO;
+                         }
+                         
+                         if (finalViewDataSource.userWon) {
+                             if ((finalViewDataSource.oldMoney<500)&&(playerAccount.money>=500)&&(playerAccount.money<1000)) {
+                                 NSString *moneyText=[NSString stringWithFormat:@"%d",playerAccount.money];
+                                 [self showMessageOfMoreMoney:playerAccount.money withLabel:moneyText];
+                             }else {
+                                 int thousandOld=finalViewDataSource.oldMoney/1000;
+                                 int thousandNew=playerAccount.money/1000;
+                                 int thousandSecond=(playerAccount.money % 1000)/100;
+                                 if (thousandNew>thousandOld) {
+                                     if (thousandSecond==0) {
+                                         [self showMessageOfMoreMoney:playerAccount.money withLabel:[NSString stringWithFormat:@"+%dK",thousandNew]];
+                                     }else {
+                                         [self showMessageOfMoreMoney:playerAccount.money withLabel:[NSString stringWithFormat:@"+%d.%dK",thousandNew,thousandSecond]];
+                                     }
+                                 }
+                             }
+                             finalViewDataSource.oldMoney=0;
+                         }
+                     }];
+}
+
 -(void)animationWithLable:(UILabel *)lable andStartNumber:(int)startNumber andEndNumber:(int)endNumber
 {
     float goldForGoldAnimation;
@@ -293,16 +311,16 @@ FXLabel *lblGoldPlus;
         });
 }
 
--(void)changePointsLine:(int)points maxValue:(NSNumber *) maxValue animated:(BOOL)animated;
+-(void)changePointsLine:(int)points maxValue:(int ) maxValue animated:(BOOL)animated;
 {
     CGRect backup = ivBlueLine.frame;
     CGRect temp = backup;
     temp.size.width = 0;
     ivBlueLine.frame = temp;
-    ivBlueLine.hidden = NO;
     if (points <= 0) points = 0;
+    else ivBlueLine.hidden = NO;
     int firstWidthOfLine=lblPoints.frame.size.width;
-    float changeWidth=(points*firstWidthOfLine)/[maxValue intValue];
+    float changeWidth=(points*firstWidthOfLine)/maxValue;
     
     temp.size.width = changeWidth;
     

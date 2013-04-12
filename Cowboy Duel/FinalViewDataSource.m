@@ -25,14 +25,15 @@
     self = [super init];
     if (self){
         
-        oldMoney = playerAccount.money;
-        oldPoints = playerAccount.accountPoints;
+
         teaching = teach;
         userTime = userTimePar;
         playerAccount = userAccount;
         oponentAccount = opAccount;
         tryButtonEnabled = YES;
         
+        oldMoney = playerAccount.money;
+        oldPoints = playerAccount.accountPoints;
         reachNewLevel = NO;
         
         if (teaching&&(oponentAccount.bot)) {

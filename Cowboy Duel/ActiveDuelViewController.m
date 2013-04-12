@@ -1102,6 +1102,9 @@ static CGFloat blinkBottomOriginY;
 #pragma mark -
 -(void)showFinalView: (FinalViewDataSource *) fvDataSource;
 {
+    self.userLiveImageView.hidden = YES;
+    self.lbUserLifeLeft.hidden = YES;
+    
     CGRect finalFrame = CGRectMake(12, 90, 294, 165);
 
     finalView = [[FinalStatsView alloc] initWithFrame:finalFrame andDataSource:fvDataSource];
@@ -1226,7 +1229,9 @@ static CGFloat blinkBottomOriginY;
     blurredBack.hidden = YES;
     finalStatusBack.hidden = YES;
     gameStatusLable.hidden = YES;
-    
+    self.userLiveImageView.hidden = NO;
+    self.lbUserLifeLeft.hidden = NO;
+
     [player stop];
 }
 
@@ -1326,7 +1331,7 @@ static CGFloat blinkBottomOriginY;
     [UIView animateWithDuration:0.4 animations:^{
         viewForAnimation.transform = CGAffineTransformMakeScale(1.3, 1.3);
     } completion:^(BOOL complete) {
-        if(!arrowAnimationContinue) return;
+//        if(!arrowAnimationContinue) return;
         [UIView animateWithDuration:0.4 animations:^{
             viewForAnimation.transform = CGAffineTransformMakeScale(1.0, 1.0);
         }completion:^(BOOL complete){
