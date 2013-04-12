@@ -99,8 +99,8 @@ FXLabel *lblGoldPlus;
         ivBlueLine.hidden = YES;
         
 //Images of ranks:
-        if (playerAccount.accountLevel == kCountOfLevels){
-            NSString *name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel];
+        if (playerAccount.accountLevel >= kCountOfLevels){
+            NSString *name = [NSString stringWithFormat:@"fin_img_%drank.png", kCountOfLevels];
             ivCurrentRank.image = [UIImage imageNamed:name];
         }
         else{
