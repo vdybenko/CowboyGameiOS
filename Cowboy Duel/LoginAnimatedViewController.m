@@ -198,6 +198,10 @@ static LoginAnimatedViewController *sharedHelper = nil;
                                                   otherButtonTitles: nil];
         [alertView show];
         alertView = nil;
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                            object:self
+                                                          userInfo:[NSDictionary dictionaryWithObject:@"/LoginAnimatedVC_Internet_down" forKey:@"page"]];
     }
 }
 

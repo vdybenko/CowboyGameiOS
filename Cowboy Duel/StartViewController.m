@@ -587,7 +587,7 @@ static StartViewController *sharedHelper = nil;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"/StartCV" forKey:@"page"]];
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/StartVC" forKey:@"page"]];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -859,7 +859,7 @@ static StartViewController *sharedHelper = nil;
   
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
 														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"/StartCV_feedBack" forKey:@"page"]];
+													  userInfo:[NSDictionary dictionaryWithObject:@"/StartVC_feedBack" forKey:@"page"]];
 }
 
 - (IBAction)feedbackCancelButtonClick:(id)sender {
@@ -867,7 +867,7 @@ static StartViewController *sharedHelper = nil;
   feedBackViewVisible = NO;
   [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                       object:self
-                                                    userInfo:[NSDictionary dictionaryWithObject:@"/StartCV_feedBack_cancel" forKey:@"page"]];
+                                                    userInfo:[NSDictionary dictionaryWithObject:@"/StartVC_feedBack_cancel" forKey:@"page"]];
 
 }
 - (IBAction)feedbackFollowFBClick:(id)sender {
@@ -885,14 +885,16 @@ static StartViewController *sharedHelper = nil;
         alertView = 0;
         [alertView show];
         alertView = nil;
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                            object:self
+                                                          userInfo:[NSDictionary dictionaryWithObject:@"/StartVC_Internet_down" forKey:@"page"]];
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                       object:self
-                                                    userInfo:[NSDictionary dictionaryWithObject:@"/StartCV_feedBack_followFB" forKey:@"page"]];
+                                                    userInfo:[NSDictionary dictionaryWithObject:@"/StartVC_feedBack_followFB" forKey:@"page"]];
 }
-
-
 
 - (IBAction)feedbackItuneskBtnClick:(id)sender {
     
@@ -902,7 +904,7 @@ static StartViewController *sharedHelper = nil;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
 														object:self
-													  userInfo:[NSDictionary dictionaryWithObject:@"/StartCV_feedBack_ITunes" forKey:@"page"]];
+													  userInfo:[NSDictionary dictionaryWithObject:@"/StartVC_feedBack_ITunes" forKey:@"page"]];
 }
 
 -(void)hideActivitiIndicatorViewFeedback;
@@ -922,14 +924,14 @@ static StartViewController *sharedHelper = nil;
   shareViewVisible = YES;
   [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                       object:self
-                                                    userInfo:[NSDictionary dictionaryWithObject:@"/StartCV_share" forKey:@"page"]];
+                                                    userInfo:[NSDictionary dictionaryWithObject:@"/StartVC_share" forKey:@"page"]];
 }
 - (IBAction)shareCancelButtonClick:(id)sender {
   [self hideView:shareView];
   shareViewVisible = NO;
   [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                       object:self
-                                                    userInfo:[NSDictionary dictionaryWithObject:@"/StartCV_share_cancel" forKey:@"page"]];
+                                                    userInfo:[NSDictionary dictionaryWithObject:@"/StartVC_share_cancel" forKey:@"page"]];
   
 }
 
@@ -981,7 +983,7 @@ static StartViewController *sharedHelper = nil;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"/StartCV_feedBack_Facebook" forKey:@"page"]];
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/StartVC_feedBack_Facebook" forKey:@"page"]];
 }
 
 - (IBAction)feedbackTweeterBtnClick:(id)sender {
@@ -1017,7 +1019,7 @@ static StartViewController *sharedHelper = nil;
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification 
                                                     object:self
-                                                  userInfo:[NSDictionary dictionaryWithObject:@"/StartCV_share_Tweeter" forKey:@"page"]];
+                                                  userInfo:[NSDictionary dictionaryWithObject:@"/StartVC_share_Tweeter" forKey:@"page"]];
 }
 
 - (IBAction)feedbackMailBtnClick:(id)sender {
@@ -1048,7 +1050,7 @@ static StartViewController *sharedHelper = nil;
   
   [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                       object:self
-                                                    userInfo:[NSDictionary dictionaryWithObject:@"/StartCV_share_Mail" forKey:@"page"]];
+                                                    userInfo:[NSDictionary dictionaryWithObject:@"/StartVC_share_Mail" forKey:@"page"]];
 }
 
 #pragma mark - push notification

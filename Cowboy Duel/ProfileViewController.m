@@ -971,6 +971,10 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                                                   otherButtonTitles: nil];
         [alertView show];
         alertView = nil;
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                            object:self
+                                                          userInfo:[NSDictionary dictionaryWithObject:@"/ProfileVC_Internet_down" forKey:@"page"]];
     }
 }
 
