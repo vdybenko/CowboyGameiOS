@@ -84,10 +84,14 @@ static int oponentMustShot;
            //last gun
         }else{
             NSUInteger index=[playerAccount findObsByID](arrItemsList,playerAccount.curentIdWeapon);
-            CDWeaponProduct *currentProd = [arrItemsList objectAtIndex:index];
-            CDWeaponProduct *tempProduct = [arrItemsList objectAtIndex:++index];
-            if(currentProd.dDamage > tempProduct.dDamage) [frameView setHidden:YES];
-            else prod = tempProduct;
+            if (index!=NSNotFound) {
+                CDWeaponProduct *currentProd = [arrItemsList objectAtIndex:index];
+                CDWeaponProduct *tempProduct = [arrItemsList objectAtIndex:++index];
+                if(currentProd.dDamage > tempProduct.dDamage)
+                    [frameView setHidden:YES];
+                else
+                    prod = tempProduct;
+            }
             //help for gun
         }
 //    }

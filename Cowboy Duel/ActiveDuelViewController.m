@@ -1216,13 +1216,13 @@ static CGFloat blinkBottomOriginY;
     [UIView animateWithDuration:0.4 animations:^{
         viewForAnimation.transform = CGAffineTransformMakeScale(1.3, 1.3);
     } completion:^(BOOL complete) {
-        if(!arrowAnimationContinue) return;
+//        if(!arrowAnimationContinue) return;
         [UIView animateWithDuration:0.4 animations:^{
             viewForAnimation.transform = CGAffineTransformMakeScale(1.0, 1.0);
         }completion:^(BOOL complete){
-            if(arrowAnimationContinue){
-                [self scaleView:viewForAnimation];
-            }
+//            if(arrowAnimationContinue){
+//                [self scaleView:viewForAnimation];
+//            }
         }];
     }];
 }

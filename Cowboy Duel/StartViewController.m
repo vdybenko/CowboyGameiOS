@@ -882,7 +882,6 @@ static StartViewController *sharedHelper = nil;
                                                            delegate:self
                                                   cancelButtonTitle:NSLocalizedString(@"Cancel", @"AlertView")
                                                   otherButtonTitles: nil];
-        alertView = 0;
         [alertView show];
         alertView = nil;
         

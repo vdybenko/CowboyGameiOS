@@ -190,14 +190,12 @@
                                                            delegate:self
                                                   cancelButtonTitle:NSLocalizedString(@"Cancel", @"AlertView")
                                                   otherButtonTitles: nil];
-        alertView = 0;
         [alertView show];
         alertView = nil;
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                             object:self
                                                           userInfo:[NSDictionary dictionaryWithObject:@"/StoreVC_Internet_down" forKey:@"page"]];
-        
         return;
     }
 

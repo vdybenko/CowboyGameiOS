@@ -102,7 +102,9 @@ int endPoints;
                      animations:^{
                          [self animationWithLable:lblGold andStartNumber:startMoney andEndNumber:endMoney];
                          
-                         [self changePointsLine:endPoints maxValue:[poi objectAtIndex:(playerAccount.accountLevel+1)] animated:YES];
+                         if (![LoginAnimatedViewController sharedInstance].isDemoPractice) {
+                             [self changePointsLine:endPoints maxValue:[poi objectAtIndex:(playerAccount.accountLevel+1)] animated:YES];
+                         }
                          [self animationWithLable:lblPoints andStartNumber:startPoints andEndNumber:endPoints];
                          
                      } completion:^(BOOL finished) {
