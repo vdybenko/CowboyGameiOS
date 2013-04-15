@@ -466,6 +466,7 @@ static CGFloat blinkBottomOriginY;
     [self.glassImageViewBottom setHidden:YES];
     
     [self.userLiveImageView setHidden:YES];
+    [self.lbUserLifeLeft setHidden:YES];
     
     firstAccel = YES;
     
@@ -488,11 +489,11 @@ static CGFloat blinkBottomOriginY;
         CGRect frame = self.userLiveImageView.frame;
         frame.size.width = userLiveImageViewStartWidth;
         self.userLiveImageView.frame = frame;
+        [self.view bringSubviewToFront:self.lbUserLifeLeft];
     }else
         userLiveImageViewStartWidth = self.userLiveImageView.frame.size.width;
     NSLog(@"%f", userLiveImageViewStartWidth);
     self.lbUserLifeLeft.text = [NSString stringWithFormat:@"%d",shotCountBulletForOpponent*3];
-    NSLog(@"%@ %@",self.lbUserLifeLeft.text, (lbUserLifeLeft.hidden)?@"hidden":@"not hidden");
     
     self.opStatsLabel.text = [NSString stringWithFormat: @"A: +%d\rD: +%d",opAccount.accountWeapon.dDamage,opAccount.accountDefenseValue];
     self.userStatsLabel.text = [NSString stringWithFormat: @"A: +%d\nD: +%d",playerAccount.accountWeapon.dDamage,playerAccount.accountDefenseValue];
@@ -1095,7 +1096,7 @@ static CGFloat blinkBottomOriginY;
 }
 
 
-#pragma mark FinalVC
+#pragma mark - FinalVC
 -(void)showFinalView: (FinalViewDataSource *) fvDataSource;
 {
     self.userLiveImageView.hidden = YES;
@@ -1226,8 +1227,18 @@ static CGFloat blinkBottomOriginY;
     finalStatusBack.hidden = YES;
     gameStatusLable.hidden = YES;
     self.userLiveImageView.hidden = NO;
+    
+    self.lbUserLifeLeft.text = [NSString stringWithFormat:@"%d",maxShotCountForOpponent*3];
+    [self.view bringSubviewToFront:self.lbUserLifeLeft];
     self.lbUserLifeLeft.hidden = NO;
 
+    [self.glassImageViewHeader setHidden:YES];
+    [self.glassImageViewBottom setHidden:YES];
+    [glassImageViewAllBackground setHidden:YES];
+    
+    [blinkBottom setHidden:YES];
+    [blinkTop setHidden:YES];
+    
     [player stop];
 }
 
@@ -1271,6 +1282,13 @@ static CGFloat blinkBottomOriginY;
         [self vibrationStart];
         [self.gunButton setEnabled:YES];
         [self.userLiveImageView setHidden:NO];
+        
+        [self.lbUserLifeLeft setHidden:NO];
+        self.lbUserLifeLeft.text = [NSString stringWithFormat:@"%d",shotCountBulletForOpponent*3];
+        self.lbUserLifeLeft.textAlignment = UITextAlignmentCenter;
+        [self.view bringSubviewToFront:self.lbUserLifeLeft];
+        self.lbUserLifeLeft.frame = CGRectMake(0, 0, self.userLiveImageView.frame.size.width, self.userLiveImageView.frame.size.height);
+        
         opponentShape.hidden = NO;
         
         if (opponentShape.typeOfBody != OpponentShapeTypeScarecrow) {
@@ -1602,7 +1620,7 @@ float frequencyOpponentShoting()
         [self.gunButton setEnabled:YES];
 
         [self.userLiveImageView setHidden:NO];
-
+        [self.lbUserLifeLeft setHidden:NO];
         if(!delegate && opponentShape.typeOfBody != OpponentShapeTypeScarecrow && isOpponentShotFrequency){
             [self performSelector:@selector(opponentShotWithDamage:) withObject:nil afterDelay:frequencyOpponentShoting()];
             moveTimer = [NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(moveOponent) userInfo:nil repeats:YES];
@@ -1727,6 +1745,7 @@ float frequencyOpponentShoting()
     self.lblBehold = nil;
     self.crossImageView = nil;
     self.userLiveImageView = nil;
+    self.lbUserLifeLeft = nil;
     
     [oponentsViewCoordinates removeAllObjects];
 }
