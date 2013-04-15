@@ -489,7 +489,6 @@ static CGFloat blinkBottomOriginY;
         CGRect frame = self.userLiveImageView.frame;
         frame.size.width = userLiveImageViewStartWidth;
         self.userLiveImageView.frame = frame;
-        [self.view bringSubviewToFront:self.lbUserLifeLeft];
     }else
         userLiveImageViewStartWidth = self.userLiveImageView.frame.size.width;
     NSLog(@"%f", userLiveImageViewStartWidth);
@@ -1229,7 +1228,7 @@ static CGFloat blinkBottomOriginY;
     self.userLiveImageView.hidden = NO;
     
     self.lbUserLifeLeft.text = [NSString stringWithFormat:@"%d",maxShotCountForOpponent*3];
-    [self.view bringSubviewToFront:self.lbUserLifeLeft];
+
     self.lbUserLifeLeft.hidden = NO;
 
     [self.glassImageViewHeader setHidden:YES];
@@ -1286,7 +1285,6 @@ static CGFloat blinkBottomOriginY;
         [self.lbUserLifeLeft setHidden:NO];
         self.lbUserLifeLeft.text = [NSString stringWithFormat:@"%d",shotCountBulletForOpponent*3];
         self.lbUserLifeLeft.textAlignment = UITextAlignmentCenter;
-        [self.view bringSubviewToFront:self.lbUserLifeLeft];
         self.lbUserLifeLeft.frame = CGRectMake(0, 0, self.userLiveImageView.frame.size.width, self.userLiveImageView.frame.size.height);
         
         opponentShape.hidden = NO;
