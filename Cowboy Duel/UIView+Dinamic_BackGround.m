@@ -25,21 +25,33 @@
     
     UIImage *cropped = [UIImage imageWithCGImage:imageRef];
     UIImageView *ivBody=[[UIImageView alloc] initWithImage:cropped];
-    CGRect frame=CGRectMake(0, 0, imageBackGround.size.width, mainFrame.size.height);
+    [ivBody setContentMode:UIViewContentModeScaleToFill];
+    CGRect frame=CGRectMake(0, 0, mainFrame.size.width, mainFrame.size.height);
     [ivBody setFrame:frame];
+    
+    
     
     [self insertSubview:ivBody atIndex:0];
     CGImageRelease(imageRef);
     
+    
+    
     if (mainFrame.size.height<=imageBackGround.size.height) {
-        ivBody.layer.cornerRadius = 20.0;
+        ivBody.layer.cornerRadius = 35.0;
         ivBody.layer.masksToBounds = YES;
         
         UIImageView *ivBottom=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"view_dinamic_height_bottom.png"]];
         CGRect frameBottom=ivBottom.frame;
         frameBottom.origin.y=mainFrame.size.height-frameBottom.size.height;
-        [ivBottom setFrame:frameBottom];
+        
+        [ivBottom setContentMode:UIViewContentModeScaleToFill];
+        CGRect frame=CGRectMake(0, frameBottom.origin.y, mainFrame.size.width, frameBottom.size.height);
+        [ivBottom setFrame:frame];
+
+        
         [self insertSubview:ivBottom aboveSubview:ivBody];
+        
+        
         ivBottom = nil;
     }
     ivBody = nil;

@@ -89,12 +89,16 @@ static LoginAnimatedViewController *sharedHelper = nil;
     animationPause = NO;
 
     loginLable.text = NSLocalizedString(@"LOGIN", @"");
-    loginLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
+    loginLable.font = [UIFont fontWithName: @"DecreeNarrow" size:36];
     
     practiceLable.text = NSLocalizedString(@"PRACTICE", @"");
-    practiceLable.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
+    practiceLable.font = [UIFont fontWithName: @"DecreeNarrow" size:36];
     
     [textsBackground setDinamicHeightBackground];
+    
+   // CGRect backFrame = textsBackground.bounds;
+   // backFrame.size.width = backFrame.size.width * 3;
+   // textsBackground.bounds = backFrame;
     
     animetedText.text = NSLocalizedString(@"1stIntro", @"");
     animetedText2.text = NSLocalizedString(@"2ndIntro", @"");
