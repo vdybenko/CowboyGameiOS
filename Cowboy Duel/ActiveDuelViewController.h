@@ -103,7 +103,9 @@
 
 -(id)initWithAccount:(AccountDataSource *)userAccount oponentAccount:(AccountDataSource *)pOponentAccount;
 -(void)userLost;
+-(void)showViewController:(UIViewController *)viewController;
 
+@property (weak, nonatomic) IBOutlet UIButton *btnTry;
 -(IBAction)backButtonClick:(id)sender;
 -(IBAction)tryButtonClick:(id)sender;
 

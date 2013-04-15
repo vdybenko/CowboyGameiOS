@@ -128,7 +128,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lbUserLifeLeft;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnSkip;
-@property (weak, nonatomic) IBOutlet UIButton *btnTry;
+//@property (weak, nonatomic) IBOutlet UIButton *btnTry;
 @property (weak, nonatomic) IBOutlet UIButton *btnBack;
 
 
@@ -492,6 +492,7 @@ static CGFloat blinkBottomOriginY;
         userLiveImageViewStartWidth = self.userLiveImageView.frame.size.width;
     NSLog(@"%f", userLiveImageViewStartWidth);
     self.lbUserLifeLeft.text = [NSString stringWithFormat:@"%d",shotCountBulletForOpponent*3];
+    NSLog(@"%@ %@",self.lbUserLifeLeft.text, (lbUserLifeLeft.hidden)?@"hidden":@"not hidden");
     
     self.opStatsLabel.text = [NSString stringWithFormat: @"A: +%d\rD: +%d",opAccount.accountWeapon.dDamage,opAccount.accountDefenseValue];
     self.userStatsLabel.text = [NSString stringWithFormat: @"A: +%d\nD: +%d",playerAccount.accountWeapon.dDamage,playerAccount.accountDefenseValue];
@@ -585,7 +586,7 @@ static CGFloat blinkBottomOriginY;
     opponentShape = nil;
     goodCowboyShape = nil;
     arrowToOpponent = nil;
-    [self setLbUserLifeLeft:nil];
+//    [self setLbUserLifeLeft:nil];
     horseShape = nil;
     [self setBtnSkip:nil];
     [self setBtnTry:nil];
@@ -919,7 +920,7 @@ static CGFloat blinkBottomOriginY;
     frame.size.width = (float)((shotCountBulletForOpponent)*userLiveImageViewStartWidth)/maxShotCountForOpponent;
     self.userLiveImageView.frame = frame;
     
-    self.lbUserLifeLeft.text = [NSString stringWithFormat:@"%d",shotCountBulletForOpponent];
+    self.lbUserLifeLeft.text = [NSString stringWithFormat:@"%d",shotCountBulletForOpponent*3];
     
     CGRect frameLife = self.lbUserLifeLeft.frame;
     frameLife.size.width = frame.size.width;
@@ -1230,6 +1231,12 @@ static CGFloat blinkBottomOriginY;
     [player stop];
 }
 
+-(void)showViewController:(UIViewController *)viewController
+{
+    [self hideFinalView];
+    [self presentModalViewController:viewController animated:YES];
+    viewController = nil;
+}
 #pragma mark
 
 -(void)restartCountdown;

@@ -132,7 +132,29 @@ FXLabel *lblGoldPlus;
     lblGoldPlus.backgroundColor = [UIColor clearColor];
     [self addSubview:lblGoldPlus];
     
+    if (finalViewDataSource.reachNewLevel) {
+        [self showMessageOfNewLevel];
+        finalViewDataSource.reachNewLevel=NO;
+    }
     if (finalViewDataSource.userWon) {
+
+        if ((finalViewDataSource.oldMoney<500)&&(playerAccount.money>=500)&&(playerAccount.money<1000)) {
+            NSString *moneyText=[NSString stringWithFormat:@"%d",playerAccount.money];
+            [self showMessageOfMoreMoney:playerAccount.money withLabel:moneyText];
+        }else {
+            int thousandOld=finalViewDataSource.oldMoney/1000;
+            int thousandNew=playerAccount.money/1000;
+            int thousandSecond=(playerAccount.money % 1000)/100;
+            if (thousandNew>thousandOld) {
+                if (thousandSecond==0) {
+                    [self showMessageOfMoreMoney:playerAccount.money withLabel:[NSString stringWithFormat:@"+%dK",thousandNew]];
+                }else {
+                    [self showMessageOfMoreMoney:playerAccount.money withLabel:[NSString stringWithFormat:@"+%d.%dK",thousandNew,thousandSecond]];
+                }
+            }
+        }
+        
+        finalViewDataSource.oldMoney=0;
         [self winAnimation];
     }
     else
@@ -242,29 +264,7 @@ FXLabel *lblGoldPlus;
                          [self animationWithLable:lblPoints andStartNumber:lbStartPoints andEndNumber:lbEndPoints];
                          
                      } completion:^(BOOL finished) {
-                         if (finalViewDataSource.reachNewLevel) {
-                             [self showMessageOfNewLevel];
-                             finalViewDataSource.reachNewLevel=NO;
-                         }
                          
-                         if (finalViewDataSource.userWon) {
-                             if ((finalViewDataSource.oldMoney<500)&&(playerAccount.money>=500)&&(playerAccount.money<1000)) {
-                                 NSString *moneyText=[NSString stringWithFormat:@"%d",playerAccount.money];
-                                 [self showMessageOfMoreMoney:playerAccount.money withLabel:moneyText];
-                             }else {
-                                 int thousandOld=finalViewDataSource.oldMoney/1000;
-                                 int thousandNew=playerAccount.money/1000;
-                                 int thousandSecond=(playerAccount.money % 1000)/100;
-                                 if (thousandNew>thousandOld) {
-                                     if (thousandSecond==0) {
-                                         [self showMessageOfMoreMoney:playerAccount.money withLabel:[NSString stringWithFormat:@"+%dK",thousandNew]];
-                                     }else {
-                                         [self showMessageOfMoreMoney:playerAccount.money withLabel:[NSString stringWithFormat:@"+%d.%dK",thousandNew,thousandSecond]];
-                                     }
-                                 }
-                             }
-                             finalViewDataSource.oldMoney=0;
-                         }
                      }];
 }
 
@@ -341,20 +341,16 @@ FXLabel *lblGoldPlus;
 
 -(void)showMessageOfNewLevel
 {
+    [activeDuelViewController.btnTry setEnabled:NO];
     LevelCongratViewController *lvlCongratulationViewController=[[LevelCongratViewController alloc] initForNewLevelPlayerAccount:playerAccount andController:activeDuelViewController tryButtonEnable:isTryAgainEnabled];
-    [self performSelector:@selector(showViewController:) withObject:lvlCongratulationViewController afterDelay:4.5];
+    [activeDuelViewController performSelector:@selector(showViewController:) withObject:lvlCongratulationViewController afterDelay:4.5];
 }
 
 -(void)showMessageOfMoreMoney:(NSInteger)money withLabel:(NSString *)labelForCongratulation
 {
+    [activeDuelViewController.btnTry setEnabled:NO];
     MoneyCongratViewController *moneyCongratulationViewController = [[MoneyCongratViewController alloc] initForAchivmentPlayerAccount:playerAccount withLabel:labelForCongratulation andController:activeDuelViewController tryButtonEnable:isTryAgainEnabled];
-    [self performSelector:@selector(showViewController:) withObject:moneyCongratulationViewController afterDelay:4.5];
-}
-
--(void)showViewController:(UIViewController *)viewController
-{
-    [activeDuelViewController presentModalViewController:viewController animated:YES];
-    viewController = nil;
+    [activeDuelViewController performSelector:@selector(showViewController:) withObject:moneyCongratulationViewController afterDelay:4.5];
 }
 
 @end
