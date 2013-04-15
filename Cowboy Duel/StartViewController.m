@@ -1192,7 +1192,7 @@ static StartViewController *sharedHelper = nil;
         return;
     }       
     //avtorization
-    if ((playerAccount.accountID != nil) && [[currentParseString lastPathComponent] isEqualToString:@"registration"]) {
+    if ((playerAccount.accountID != nil) && [[currentParseString lastPathComponent] isEqualToString:@"registration"]&&[responseObject objectForKey:@"avatar"]) {
         
         DLog(@"avtorization /n %@",responseObject);
         
@@ -1460,7 +1460,7 @@ static StartViewController *sharedHelper = nil;
     [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewHead] forKey:@"head"];
     [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewBody] forKey:@"body"];
     [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewLegs] forKey:@"legs"];
-    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewShoose] forKey:@"shoose"];
+    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewShoose] forKey:@"shoes"];
 
     NSString *stBody=[Utils makeStringForPostRequest:dicBody];
     DLog(@"stBody %@",dicBody);
@@ -1498,7 +1498,7 @@ static StartViewController *sharedHelper = nil;
     [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewHead] forKey:@"head"];
     [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewBody] forKey:@"body"];
     [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewLegs] forKey:@"legs"];
-    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewShoose] forKey:@"shoose"];
+    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewShoose] forKey:@"shoes"];
     
     NSString *stBody=[Utils makeStringForPostRequest:dicBody];
     DLog(@"modifierUser stBody %@",dicBody);

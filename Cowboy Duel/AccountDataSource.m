@@ -84,11 +84,11 @@ static AccountDataSource *sharedHelper = nil;
         achivments = [[NSMutableArray alloc] init];
         dicForRequests=[[NSMutableDictionary alloc] init];
         
-        self.visualViewCap = 0;
-        self.visualViewHead = 0;
-        self.visualViewBody = 0;
-        self.visualViewLegs = 0;
-        self.visualViewShoose = 0;
+        self.visualViewCap = -1;
+        self.visualViewHead = -1;
+        self.visualViewBody = -1;
+        self.visualViewLegs = -1;
+        self.visualViewShoose = -1;
     }
     return self;
 }
