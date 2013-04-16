@@ -21,4 +21,5 @@
 
 -(void)refreshWithAccountPlayer:(AccountDataSource*)accountPlayer;
 -(void)cleareView;
+-(UIImage*)imageFromCharacter;
 @end

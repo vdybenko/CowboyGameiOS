@@ -20,5 +20,5 @@ typedef enum {
 - (void) setDirection:(ArrowToOpponentDirection)direction;
 - (void) updateRelateveToView:(UIView*)view mainView:(UIView*)mainView;
 - (void) changeImgForPractice;
-
+- (void) changeImg:(UIImage*)image;
 @end

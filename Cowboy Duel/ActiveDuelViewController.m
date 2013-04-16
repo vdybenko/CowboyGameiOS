@@ -628,6 +628,8 @@ static CGFloat blinkBottomOriginY;
         }else{
             countBulletsForOpponent = [DuelRewardLogicController countUpBuletsWithOponentLevel:playerAccount.accountLevel defense:playerAccount.accountDefenseValue playerAtack:opAccount.accountWeapon.dDamage];
             opponentShape.typeOfBody = OpponentShapeTypeManLow;
+            UIImage *image = [opponentShape.visualViewCharacter imageFromCharacter];
+            [arrowToOpponent changeImg:image];
         }
     }else{
         countBulletsForOpponent = 4;

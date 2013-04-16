@@ -7,6 +7,7 @@
 //
 
 #import "VisualViewCharacter.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation VisualViewCharacter
 @synthesize mainSubView;
@@ -71,5 +72,14 @@
             [subview removeFromSuperview];
         }
     }
+}
+
+-(UIImage*)imageFromCharacter;
+{
+    UIGraphicsBeginImageContext(mainSubView.bounds.size);
+    [mainSubView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
 }
 @end

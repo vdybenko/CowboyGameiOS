@@ -35,25 +35,8 @@
         CGAffineTransform transformMirror = CGAffineTransformMakeScale(-1.0, 1.0);
         leftArrow.transform = transformMirror;
         
-        CGRect cropRect = CGRectMake(95, 0, 140, 140);
-        CGImageRef subImageRef;
-        subImageRef = CGImageCreateWithImageInRect([[UIImage imageNamed:@"men_low.png"] CGImage], cropRect);
-     
-        CGRect smallBounds = CGRectMake(cropRect.origin.x, cropRect.origin.y, CGImageGetWidth(subImageRef), CGImageGetHeight(subImageRef));
-        
-        UIGraphicsBeginImageContext(smallBounds.size);
-        CGContextRef context = UIGraphicsGetCurrentContext();
-        CGContextDrawImage(context, smallBounds, subImageRef);
-        UIImage* smallImg = [UIImage imageWithCGImage:subImageRef];
-        UIGraphicsEndImageContext();
-        
-        [ivOpponent setImage:smallImg];
-        
         vBackIcon.clipsToBounds = YES;
         vBackIcon.layer.cornerRadius = ivOpponent.frame.size.width/2;
-        
-        ivOpponent.clipsToBounds = YES;
-        ivOpponent.layer.cornerRadius = ivOpponent.frame.size.width/2;
     }
     return self;
 }
@@ -75,13 +58,35 @@
     CGContextDrawImage(context, smallBounds, subImageRef);
     UIImage* smallImg = [UIImage imageWithCGImage:subImageRef];
     UIGraphicsEndImageContext();
+    CGImageRelease(subImageRef);
     [ivOpponent setImage:smallImg];
+    ivOpponent.clipsToBounds = YES;
+    ivOpponent.layer.cornerRadius = ivOpponent.frame.size.width/2;
+}
+
+- (void) changeImg:(UIImage*)image;
+{
+    CGRect cropRect = CGRectMake((image.size.width*45)/183, 0, (image.size.width*70)/183, (image.size.width*70)/183);
+
+    CGImageRef subImageRef;
+    subImageRef = CGImageCreateWithImageInRect([image CGImage], cropRect);
+    
+    CGRect smallBounds = CGRectMake(cropRect.origin.x, cropRect.origin.y, CGImageGetWidth(subImageRef), CGImageGetHeight(subImageRef));
+    
+    UIGraphicsBeginImageContext(smallBounds.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextDrawImage(context, smallBounds, subImageRef);
+    UIImage* smallImg = [UIImage imageWithCGImage:subImageRef];
+    CGImageRelease(subImageRef);
+    UIGraphicsEndImageContext();
+    [ivOpponent setImage:smallImg];
+
+    ivOpponent.clipsToBounds = YES;
+    ivOpponent.layer.cornerRadius = ivOpponent.frame.size.width/2;
 }
 
 -(void)releaseComponents
 {
-    UIView *firstView = [self.subviews objectAtIndex:0];
-    firstView = nil;
     mainSubView = nil;
     leftArrow = nil;
     rightArrow = nil;
