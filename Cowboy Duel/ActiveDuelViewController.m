@@ -967,13 +967,10 @@ static CGFloat blinkBottomOriginY;
             gameCenterViewController = nil;
         else
             teaching = NO;
+        [self stopDuel];
         
         finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:(shotTime) andOponentTime:999999 andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
-        [plView stopSensorialRotation];
-        [plView stopAnimation];
         [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:1.0];
-        [timer invalidate];
-        [moveTimer invalidate];
         return YES;
     }else{
         return NO;
@@ -1009,13 +1006,10 @@ static CGFloat blinkBottomOriginY;
         else
             teaching = NO;
 
+        [self stopDuel];
+
         finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:(shotTime) andOponentTime:opponentTime andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
-        [plView stopSensorialRotation];
-        [plView stopAnimation];
         [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:1.0];
-        [timer invalidate];
-        [moveTimer invalidate];
-        
         [self opponentLost];
     }else{
         if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow) {
@@ -1049,11 +1043,20 @@ static CGFloat blinkBottomOriginY;
         if (!self.delegate) gameCenterViewController = nil;
         else teaching = NO;
         
+        [self stopDuel];
+        
         finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:0 andOponentTime:10 andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
-        [plView stopSensorialRotation];
-        [plView stopAnimation];
         [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:2.0];
     }
+}
+
+-(void)stopDuel;
+{
+    [plView stopSensorialRotation];
+    [plView stopAnimation];
+    [timer invalidate];
+    [moveTimer invalidate];
+    [self.gunButton setEnabled:NO];
 }
 
 -(void)userLost
