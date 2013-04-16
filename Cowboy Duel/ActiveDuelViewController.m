@@ -967,7 +967,6 @@ static CGFloat blinkBottomOriginY;
             gameCenterViewController = nil;
         else
             teaching = NO;
-        [self stopDuel];
         
         finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:(shotTime) andOponentTime:999999 andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
         [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:1.0];
@@ -1006,8 +1005,6 @@ static CGFloat blinkBottomOriginY;
         else
             teaching = NO;
 
-        [self stopDuel];
-
         finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:(shotTime) andOponentTime:opponentTime andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
         [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:1.0];
         [self opponentLost];
@@ -1042,8 +1039,6 @@ static CGFloat blinkBottomOriginY;
         BOOL teaching = YES;
         if (!self.delegate) gameCenterViewController = nil;
         else teaching = NO;
-        
-        [self stopDuel];
         
         finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:0 andOponentTime:10 andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
         [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:2.0];
@@ -1128,6 +1123,8 @@ static CGFloat blinkBottomOriginY;
 #pragma mark - FinalVC
 -(void)showFinalView: (FinalViewDataSource *) fvDataSource;
 {
+    [self stopDuel];
+    
     self.userLiveImageView.hidden = YES;
     self.lbUserLifeLeft.hidden = YES;
     
@@ -1164,7 +1161,7 @@ static CGFloat blinkBottomOriginY;
     [timer invalidate];
     if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
         [self performSelector:@selector(scaleView:) withObject:btnTry  afterDelay:1.5];
-    }  
+    }
 }
 
 -(void)revealFinalView: (BOOL )animated

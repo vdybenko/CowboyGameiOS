@@ -80,16 +80,6 @@
             userWon = YES;
         }
         
-        
-        
-        if (userWon)
-            [self winScene];
-        else
-            [self loseScene];
-        
-        [self lastScene];
-
-        
     }
     return self;
 }
@@ -107,7 +97,7 @@
     userWon = NO;
 }
 
--(void)loseScene
+-(void)loseScene;
 {
 
     isDuelWinWatched = YES;
@@ -138,7 +128,7 @@
     
 }
 
--(void)winScene
+-(void)winScene;
 {
     isDuelWinWatched = NO;
     moneyExch  = oponentAccount.money < 10 ? 1: oponentAccount.money / 10.0;
@@ -180,7 +170,7 @@
 }
 
 
--(void)lastScene
+-(void)lastScene;
 {
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"DUEL_VIEW_NOT_FIRST"];
     

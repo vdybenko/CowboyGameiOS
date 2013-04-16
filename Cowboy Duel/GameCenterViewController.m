@@ -321,7 +321,6 @@ static GameCenterViewController *gameCenterViewController;
         
         finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:999999 andOponentTime:999999 andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
         if ([delegate respondsToSelector:@selector(showFinalView:)]) {
-            [delegate performSelector:@selector(stopDuel)];
             [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
         }
         [delegate shutDownTimer];
@@ -339,7 +338,6 @@ static GameCenterViewController *gameCenterViewController;
         
         finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:999999 andOponentTime:0 andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
         if ([delegate respondsToSelector:@selector(showFinalView:)]) {
-            [delegate performSelector:@selector(stopDuel)];
             [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
         }
         [delegate shutDownTimer];
@@ -356,7 +354,6 @@ static GameCenterViewController *gameCenterViewController;
         
         finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:0 andOponentTime:999999 andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
         if ([delegate respondsToSelector:@selector(showFinalView:)]) {
-            [delegate performSelector:@selector(stopDuel)];
             [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
         }
         [delegate shutDownTimer];
@@ -373,7 +370,6 @@ static GameCenterViewController *gameCenterViewController;
         
         finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
         if ([delegate respondsToSelector:@selector(showFinalView:)]) {
-            [delegate performSelector:@selector(stopDuel)];
             [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
         }
         [delegate shutDownTimer];
@@ -394,7 +390,6 @@ static GameCenterViewController *gameCenterViewController;
         
         finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
         if ([delegate respondsToSelector:@selector(showFinalView:)]) {
-            [delegate performSelector:@selector(stopDuel)];
             [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
         }
         [delegate shutDownTimer];
@@ -405,7 +400,6 @@ static GameCenterViewController *gameCenterViewController;
         
         finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
         if ([delegate respondsToSelector:@selector(showFinalView:)]) {
-            [delegate performSelector:@selector(stopDuel)];
             [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
         }
         [delegate shutDownTimer];
@@ -505,7 +499,6 @@ static GameCenterViewController *gameCenterViewController;
         finalViewDataSource.tryButtonEnabled = NO;
 
         if ([delegate respondsToSelector:@selector(showFinalView:)]) {
-            [delegate performSelector:@selector(stopDuel)];
             [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
         }
         [delegate shutDownTimer];
@@ -831,7 +824,6 @@ static GameCenterViewController *gameCenterViewController;
                     
                     finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:999999 andOponentTime:999999 andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
                     if ([delegate respondsToSelector:@selector(showFinalView:)]) {
-                        [delegate performSelector:@selector(stopDuel)];
                         [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
                     }
                     [delegate shutDownTimer];
@@ -847,7 +839,6 @@ static GameCenterViewController *gameCenterViewController;
                     
                     finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:999999 andOponentTime:999999 andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
                     if ([delegate respondsToSelector:@selector(showFinalView:)]) {
-                        [delegate performSelector:@selector(stopDuel)];
                         [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
                     }
                     [delegate shutDownTimer];
@@ -863,7 +854,6 @@ static GameCenterViewController *gameCenterViewController;
                     
                     finalViewDataSource =  [[FinalViewDataSource alloc] initWithUserTime:999999 andOponentTime:0 andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
                     if ([delegate respondsToSelector:@selector(showFinalView:)]) {
-                        [delegate performSelector:@selector(stopDuel)];
                         [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
                     }
                     
@@ -881,7 +871,6 @@ static GameCenterViewController *gameCenterViewController;
                     
                     finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:0 andOponentTime:999999 andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
                     if ([delegate respondsToSelector:@selector(showFinalView:)]) {
-                        [delegate performSelector:@selector(stopDuel)];
                         [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
                     }
 
@@ -897,7 +886,6 @@ static GameCenterViewController *gameCenterViewController;
                     
                     finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:0 andOponentTime:999999 andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
                     if ([delegate respondsToSelector:@selector(showFinalView:)]) {
-                        [delegate performSelector:@selector(stopDuel)];
                         [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
                     }
 
