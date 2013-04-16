@@ -57,6 +57,10 @@
 
 +(NSArray *)getStaticPointsForEachLevels;
 
+-(void)winScene;
+-(void)loseScene;
+-(void)lastScene;
+
 -(void)prepeareForWinScene;
 -(void)prepeareForLoseScene;
 

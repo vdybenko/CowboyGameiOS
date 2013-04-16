@@ -109,7 +109,18 @@ FXLabel *lblGoldPlus;
             name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel+1];
             ivNextRank.image = [UIImage imageNamed:name];
         }
+        
+        if (finalViewDataSource.userWon) {
+            [finalViewDataSource winScene];
+        }
+        else
+        {
+            [finalViewDataSource loseScene];
+        }
+        [finalViewDataSource lastScene];
+        
     }
+    
     return self;
 }
 
@@ -136,6 +147,8 @@ FXLabel *lblGoldPlus;
         [self showMessageOfNewLevel];
         finalViewDataSource.reachNewLevel=NO;
     }
+    
+
     if (finalViewDataSource.userWon) {
 
         if ((finalViewDataSource.oldMoney<500)&&(playerAccount.money>=500)&&(playerAccount.money<1000)) {
@@ -264,7 +277,7 @@ FXLabel *lblGoldPlus;
                          [self animationWithLable:lblPoints andStartNumber:lbStartPoints andEndNumber:lbEndPoints];
                          
                      } completion:^(BOOL finished) {
-                         
+
                      }];
 }
 
