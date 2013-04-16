@@ -252,30 +252,12 @@ static StartViewController *sharedHelper = nil;
             }
             DLog(@"Transactions count = %d", [playerAccount.transactions count]);
             
-            NSArray *oldLocations2 = [uDef arrayForKey:@"duels"];
-            if( playerAccount.duels )
-            {
-                for( NSData *data in oldLocations2 )
-                {
-                    CDDuel * loc = (CDDuel*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
-                    DLog(@"id %@", loc.dOpponentId);
-                    DLog(@"fire %d", [loc.dRateFire intValue]);
-                    DLog(@"date %@", loc.dDate);
-                    [playerAccount.duels addObject:loc];
-                }
-            }
-            DLog(@"Duels count = %d", [playerAccount.duels count]);
-            
             NSArray *oldLocations3 = [uDef arrayForKey:@"achivments"];
-            if( playerAccount.duels )
+            for( NSData *data in oldLocations3 )
             {
-                //DLog(@"locations is not nil");
-                for( NSData *data in oldLocations3 )
-                {
-                    CDAchivment * loc = (CDAchivment*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
-                    DLog(@"achivments %@", loc.aAchivmentId);
-                    [playerAccount.achivments addObject:loc];
-                }
+                CDAchivment * loc = (CDAchivment*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
+                DLog(@"achivments %@", loc.aAchivmentId);
+                [playerAccount.achivments addObject:loc];
             }
             
             favsDataSource = [[FavouritesDataSource alloc] initWithTable:nil];

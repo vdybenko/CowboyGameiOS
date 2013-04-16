@@ -85,9 +85,6 @@
         transaction.trMoneyCh = [NSNumber numberWithInt:10];
         transaction.trDescription = [[NSString alloc] initWithFormat:@"Duel"];
         
-        duel = [[CDDuel alloc] init];
-        duel.dOpponentId = [[NSString alloc] initWithFormat:@""];
-        
         self.delegate = delegateController;
         
         DLog(@"U %d O %d", userTime, oponentTime);
@@ -208,7 +205,6 @@
     player = nil;
     follPlayerFinal = nil;
     transaction = nil;
-    duel = nil;
     _pointForEachLevels = nil;
     _pontsForWin = nil;
     _pontsForLose = nil;
@@ -234,7 +230,6 @@
     lblGoldTitle = nil;
     
     transaction = nil;
-    duel = nil;
     
     backButton = nil;
     
@@ -604,30 +599,13 @@
         [playerAccount saveTransaction];
         
         [def synchronize];
-        
-        if (oponentAccount.accountID != nil) duel.dOpponentId = [NSString stringWithString:oponentAccount.accountID];  /////////////////////////////// save duels
-        else duel.dOpponentId = @"Anonymous";
-        duel.dRateFire = [NSNumber  numberWithInt: userTime];
-        duel.dDate = [playerAccount dateFormat];
-                
-        [playerAccount.duels addObject:duel];
-        
-        
-        NSMutableArray *locationDataDuel = [[NSMutableArray alloc] init];
-        for( CDDuel *loc in playerAccount.duels)
-        {
-            [locationData addObject: [NSKeyedArchiver archivedDataWithRootObject:loc]];
-        }
-        [def setObject:locationDataDuel forKey:@"duels"];
-        
+    
         [playerAccount saveMoney];
         
         [def synchronize];
         
         [playerAccount sendTransactions:playerAccount.transactions];
         if (oponentAccount.bot) [oponentAccount sendTransactions:oponentAccount.transactions];
-        if([playerAccount.duels count] > 10)
-            [playerAccount sendDuels:playerAccount.duels];
         
         if (reachNewLevel) {
             [self showMessageOfNewLevel];

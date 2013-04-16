@@ -202,34 +202,16 @@
         [oponentAccount.transactions addObject:opponentTransaction];
         
         NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
-        NSMutableArray *locationData = [[NSMutableArray alloc] init];
         [playerAccount saveTransaction];
         
         [def synchronize];
-        
-        if (oponentAccount.accountID != nil) duel.dOpponentId = [NSString stringWithString:oponentAccount.accountID];  /////////////////////////////// save duels
-        else duel.dOpponentId = @"Anonymous";
-        duel.dRateFire = [NSNumber  numberWithInt: userTime];
-        duel.dDate = [playerAccount dateFormat];
-        
-        [playerAccount.duels addObject:duel];
-        
-        NSMutableArray *locationDataDuel = [[NSMutableArray alloc] init];
-        for( CDDuel *loc in playerAccount.duels)
-        {
-            [locationData addObject: [NSKeyedArchiver archivedDataWithRootObject:loc]];
-        }
-        [def setObject:locationDataDuel forKey:@"duels"];
-        
+            
         [playerAccount saveMoney];
         
         [def synchronize];
         
         [playerAccount sendTransactions:playerAccount.transactions];
         if (oponentAccount.bot) [oponentAccount sendTransactions:oponentAccount.transactions];
-        if([playerAccount.duels count] > 10)
-            [playerAccount sendDuels:playerAccount.duels];
-
 
         [[StartViewController sharedInstance] modifierUser:playerAccount];
         if(oponentAccount.bot) [[StartViewController sharedInstance] modifierUser:oponentAccount];

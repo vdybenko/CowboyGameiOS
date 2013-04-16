@@ -17,7 +17,7 @@ static const char *LIST_BOTS_URL = BASE_URL"users/get_user_data";
 
 @implementation AccountDataSource
 
-@synthesize money, accountName, teachingTimes, finalInfoTable, sessionID, accountID, accountDataSourceID, transactions, duels, achivments , glNumber,
+@synthesize money, accountName, teachingTimes, finalInfoTable, sessionID, accountID, accountDataSourceID, transactions, achivments , glNumber,
  accountLevel,accountPoints,accountWins,accountDraws,accountBigestWin,removeAds,avatar,age,homeTown,friends,facebookName, bot, activeDuel, accountSceneConfig;
 
 @synthesize accountDefenseValue;
@@ -80,15 +80,14 @@ static AccountDataSource *sharedHelper = nil;
         self.facebookName=@"";
         self.accountSceneConfig = [[GameSceneConfig alloc] init];
         transactions = [[NSMutableArray alloc] init];
-        duels = [[NSMutableArray alloc] init];
         achivments = [[NSMutableArray alloc] init];
         dicForRequests=[[NSMutableDictionary alloc] init];
         
-        self.visualViewCap = -1;
-        self.visualViewHead = -1;
-        self.visualViewBody = -1;
-        self.visualViewLegs = -1;
-        self.visualViewShoose = -1;
+        self.visualViewCap = 0;
+        self.visualViewHead = 0;
+        self.visualViewBody = 0;
+        self.visualViewLegs = 0;
+        self.visualViewShoose = 0;
     }
     return self;
 }
@@ -140,27 +139,14 @@ static AccountDataSource *sharedHelper = nil;
     }
   }
   
-  NSArray *oldLocations2 = [uDef arrayForKey:@"duels"];
-  if( self.duels )
-  {
-    for( NSData *data in oldLocations2 )
-    {
-      CDDuel * loc = (CDDuel*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
-      [self.duels addObject:loc];
-    }
-  }
-  
   NSArray *oldLocations3 = [uDef arrayForKey:@"achivments"];
-  if( self.duels )
-  {
     for( NSData *data in oldLocations3 )
     {
       CDAchivment * loc = (CDAchivment*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
       NSLog(@"achivments %@", loc.aAchivmentId);
       [self.achivments addObject:loc];
     }
-  }
-    
+
     [self loadVisualView];
 }
 
@@ -224,69 +210,6 @@ static AccountDataSource *sharedHelper = nil;
         [reason setObject:transaction.trDescription forKey:@"description"];
         [reason setObject:transaction.trLocalID forKey:@"local_id"];
         [result addObject:[NSDictionary dictionaryWithObject:reason forKey:@"transaction"]];
-    }
-    return result;
-}
-
-
-- (void)sendDuels:(NSMutableArray *)duels1 {
-    
-    SBJSON *jsonWriter = [SBJSON new];
-    
-    NSDictionary *resultObj = [NSDictionary dictionaryWithObject:[self fetchDuelArray:duels1] forKey:@"duels"];
-    
-    NSString *resultStr = [jsonWriter stringWithObject:resultObj];
-    
-    DLog(@"AccountDataSource: New duels: %@", resultStr);
-	
-    NSString *gcAlias = accountID;
-    if ([gcAlias length] == 0)
-        gcAlias = @"Anonymous";
-    
-    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithCString:POST_DUEL_URL encoding:NSUTF8StringEncoding]]
-                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                        timeoutInterval:kTimeOutSeconds];
-    
-    [theRequest setHTTPMethod:@"POST"]; 
-    
-    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-    UIDevice *currentDevice = [UIDevice currentDevice];
-    
-    NSMutableDictionary *dicBody = [[NSMutableDictionary alloc] init];
-    [dicBody setValue:version forKey:@"app_ver"];
-    [dicBody setValue:currentDevice.systemName forKey:@"system_name"];
-    [dicBody setValue:currentDevice.systemVersion forKey:@"system_version"];
-    [dicBody setValue:gcAlias forKey:@"authentification"];
-                                 
-    [dicBody setValue:resultStr forKey:@"duels"];
-    [dicBody setValue:sessionID forKey:@"session_id"];  
-    [dicBody setValue:[[NSUserDefaults standardUserDefaults] stringForKey:@"deviceType"] forKey:@"device_name"];
-    
-    NSString *stBody=[Utils makeStringForPostRequest:dicBody];
-    
-	[theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]]; 
-    CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
-    if (theConnection) {
-        NSMutableData *receivedData = [[NSMutableData alloc] init];
-        [dicForRequests setObject:receivedData forKey:[theConnection.requestURL lastPathComponent]];
-    } else {
-    }
-}
-
-- (NSArray *)fetchDuelArray:(NSMutableArray *)array {
-    
-    int n = [array count];
-    
-    NSMutableArray *result = [NSMutableArray arrayWithCapacity:n];
-    
-    for (int i = 0; i < n; i++) {
-        NSMutableDictionary *reason = [NSMutableDictionary dictionary];
-        CDDuel *duel = [array objectAtIndex:i];
-        
-        [reason setObject:duel.dRateFire forKey:@"rate_fire"];
-        [reason setObject:duel.dOpponentId forKey:@"opponent"];
-        [reason setObject:duel.dDate forKey:@"date"];
-        [result addObject:[NSDictionary dictionaryWithObject:reason forKey:@"duel"]];
     }
     return result;
 }
@@ -359,7 +282,7 @@ static AccountDataSource *sharedHelper = nil;
     [dicForRequests removeObjectForKey:[currentParseString lastPathComponent]];
     NSDictionary *responseObject = ValidateObject([jsonString JSONValue], [NSDictionary class]);
     
-    DLog(@"AccountDataSource jsonValues %@", jsonString);
+    DLog(@"AccountDataSource jsonValues %@ \n %@", jsonString,currentParseString);
     
     DLog(@"err_des %@", ValidateObject([responseObject objectForKey:@"err_desc"], [NSString class]));
     
@@ -369,14 +292,7 @@ static AccountDataSource *sharedHelper = nil;
                                                             object:self
                                                           userInfo:nil];
         return;
-    }
-//    duels
-    if (errCode==1) {
-        NSUserDefaults *usrDef = [NSUserDefaults standardUserDefaults];
-        [usrDef removeObjectForKey:@"duels"];
-        [usrDef synchronize];
-        return;
-    }   
+    }  
 //    transaction
     if([responseObject objectForKey:@"money"] && [[responseObject objectForKey:@"user_id"] isEqualToString:accountID])
     {

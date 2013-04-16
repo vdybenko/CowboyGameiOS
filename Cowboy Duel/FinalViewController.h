@@ -55,7 +55,6 @@
     AVAudioPlayer *player;
     AVAudioPlayer *follPlayerFinal;
     CDTransaction *transaction;
-    CDDuel *duel;
     
     NSArray *_pointForEachLevels;
     NSArray *_pontsForWin;

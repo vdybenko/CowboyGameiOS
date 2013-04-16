@@ -18,10 +18,13 @@
     IBOutlet UIView *vContainer;
     AVAudioPlayer *oponentShotAudioPlayer;
     CGPoint anchP;
+    
+    UIView *mainViewOfBody;
 }
 @end
 
 @implementation OpponentShape
+@synthesize imgBody;
 @synthesize imgShot;
 @synthesize ivLifeBar;
 @synthesize typeOfBody;
@@ -32,6 +35,8 @@
 @synthesize visualViewCharacter;
 
 static CGFloat oponentLiveImageViewStartWidth;
+
+#pragma mark
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -81,6 +86,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     lbLifeLeft = nil;
     [visualViewCharacter releaseComponents];
     visualViewCharacter = nil;
+    imgBody = nil;
 }
 
 #pragma mark
@@ -263,29 +269,12 @@ static CGFloat oponentLiveImageViewStartWidth;
     switch (opponentShapeStatus) {
         case OpponentShapeStatusDead:
         {
-            
             [self stopMoveAnimation];
             visualViewCharacter.hidden = YES;
             [imgDieOpponentAnimation startAnimating];
-            /*
-            UIImageView *dieImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"menLowDie.png"]];
-            [self addSubview:dieImg];
-            dieImg.frame = imgBody.frame;
-            
-            [UIView animateWithDuration:1 animations:^{
-                CGRect frame = dieImg.frame;
-                frame.origin.y -= 100;
-                dieImg.frame = frame;
-                dieImg.alpha = 0;
-            }completion:^(BOOL complete){
-                 
-            }];*/
-      
-        
         }
             break;
         case OpponentShapeStatusLive:
-            visualViewCharacter.hidden = NO;
             [self setBodyType:self.typeOfBody];
             break;
         default:
@@ -296,14 +285,16 @@ static CGFloat oponentLiveImageViewStartWidth;
 -(void)setBodyType:(OpponentShapeType)type;
 {
     switch (type) {
-        case OpponentShapeTypeMan:
-            imgBody.image = [UIImage imageNamed:@"ivMan.png"];
-            break;
         case OpponentShapeTypeManLow:
-            imgBody.image = [UIImage imageNamed:@"men_low.png"];
+            visualViewCharacter.hidden = NO;
+            imgBody.hidden = YES;
+            mainViewOfBody = visualViewCharacter;
             break;
         case OpponentShapeTypeScarecrow:
             imgBody.image = [UIImage imageNamed:@"scarecrow.png"];
+            visualViewCharacter.hidden = YES;
+            imgBody.hidden = NO;
+            mainViewOfBody = imgBody;
             break;
         default:
             break;
@@ -319,9 +310,9 @@ static CGFloat oponentLiveImageViewStartWidth;
         ivHit= [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ivHit.png"]];  
     }
     
-    CGPoint convertPoint = [mainView convertPoint:hitPoint toView:imgBody];
+    CGPoint convertPoint = [mainView convertPoint:hitPoint toView:mainViewOfBody];
     ivHit.center = convertPoint;
-    [visualViewCharacter addSubview:ivHit];
+    [mainViewOfBody addSubview:ivHit];
     ivHit = nil;
 
     int result = [visualViewCharacter checkNumberOfShotsAreas:@[@"{{0, 0}, {89,43}}", @"{{0,43}, {89,65}}", @"{{0,108}, {89,53}}"] forPoint:convertPoint];
@@ -334,36 +325,36 @@ static CGFloat oponentLiveImageViewStartWidth;
     switch (result) {
         case 0:
             damageCount = 3;
-            [imgBody addFlyingPointToView:mainView centerPoint:p
+            [mainViewOfBody addFlyingPointToView:mainView centerPoint:p
                                                     text:[NSString stringWithFormat:@"-%d",damageCount]
                                                    color:color
                                                     font:font
                                                direction:FlyingPointDirectionUp];
-            [visualViewCharacter addFlyingImageToView:mainView
+            [mainViewOfBody addFlyingImageToView:mainView
                               centerPoint:p1
                                 imageName:@"crossbones.png"
                                 direction:FlyingPointDirectionUp];
             break;
         case 1:
             damageCount = 2;
-            [imgBody addFlyingPointToView:mainView centerPoint:p
+            [mainViewOfBody addFlyingPointToView:mainView centerPoint:p
                                             text:[NSString stringWithFormat:@"-%d",damageCount]
                                            color:color
                                             font:font
                                        direction:FlyingPointDirectionUp];
-            [visualViewCharacter addFlyingImageToView:mainView
+            [mainViewOfBody addFlyingImageToView:mainView
                               centerPoint:p1
                                 imageName:@"crossbones.png"
                                 direction:FlyingPointDirectionUp];
             break;
         case 2:
             damageCount = 1;
-            [imgBody addFlyingPointToView:mainView centerPoint:p
+            [mainViewOfBody addFlyingPointToView:mainView centerPoint:p
                                             text:[NSString stringWithFormat:@"-%d",damageCount]
                                            color:color
                                             font:font
                                        direction:FlyingPointDirectionUp];
-            [visualViewCharacter addFlyingImageToView:mainView
+            [mainViewOfBody addFlyingImageToView:mainView
                               centerPoint:p1
                                 imageName:@"crossbones.png"
                                 direction:FlyingPointDirectionUp];
@@ -382,14 +373,14 @@ static CGFloat oponentLiveImageViewStartWidth;
 
 -(int)damageForShotInShapeWithPoint:(CGPoint)point superViewOfPoint:(UIView *)view;
 {
-    CGRect opponentBodyFrame = [[imgBody superview] convertRect:imgBody.frame toView:view];
+    CGRect opponentBodyFrame = [[mainViewOfBody superview] convertRect:mainViewOfBody.frame toView:view];
         
     BOOL shotInFrame = (CGRectContainsPoint(opponentBodyFrame, point));
     BOOL shotInShape;
     
-    CGPoint convertPoint = [view convertPoint:point toView:imgBody];
+    CGPoint convertPoint = [view convertPoint:point toView:mainViewOfBody];
 
-    UIColor *color = [imgBody colorOfPoint:convertPoint];
+    UIColor *color = [mainViewOfBody colorOfPoint:convertPoint];
 
     shotInShape = (color != [color colorWithAlphaComponent:0.0f]);
     
@@ -402,6 +393,12 @@ static CGFloat oponentLiveImageViewStartWidth;
 
 -(void) cleareDamage;
 {
-    [visualViewCharacter cleareView];
+    if (self.typeOfBody == OpponentShapeTypeScarecrow) {
+        for(UIView *subview in [imgBody subviews])
+        {
+            [subview removeFromSuperview];
+        }
+    }else
+        [visualViewCharacter cleareView];
 }
 @end

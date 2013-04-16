@@ -624,6 +624,7 @@ static CGFloat blinkBottomOriginY;
             opponentShape.typeOfBody = OpponentShapeTypeScarecrow;
             shotCountBullet = 3;
             maxShotCount = 3;
+            [arrowToOpponent changeImgForPractice];
         }else{
             countBulletsForOpponent = [DuelRewardLogicController countUpBuletsWithOponentLevel:playerAccount.accountLevel defense:playerAccount.accountDefenseValue playerAtack:opAccount.accountWeapon.dDamage];
             opponentShape.typeOfBody = OpponentShapeTypeManLow;
@@ -633,6 +634,7 @@ static CGFloat blinkBottomOriginY;
         opponentShape.typeOfBody = OpponentShapeTypeScarecrow;
         maxShotCount = 3;
         shotCountBullet = 3;
+        [arrowToOpponent changeImgForPractice];
     }
     shotCountBulletForOpponent =  countBulletsForOpponent;
     maxShotCountForOpponent = countBulletsForOpponent;
@@ -1320,7 +1322,6 @@ static CGFloat blinkBottomOriginY;
              btnSkip.hidden = YES;
             [gunDrumViewController firstStepOnPractice];
             isOpenHint = YES;
-            [arrowToOpponent changeImgForPractice];
        
             UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
             

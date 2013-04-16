@@ -18,7 +18,6 @@ typedef enum {
 
 typedef enum {
     OpponentShapeTypeManLow,
-    OpponentShapeTypeMan,
     OpponentShapeTypeScarecrow
 }OpponentShapeType;
 

@@ -3,7 +3,6 @@
 #import "SBJSON.h"
 #import "JSON.h"
 #import "CDTransaction.h"
-#import "CDDuel.h"
 #import "ValidationUtils.h"
 #import "CDAchivment.h"
 #import "CDWeaponProduct.h"
@@ -39,7 +38,6 @@
 @property(strong, nonatomic) NSString *facebookName;
 
 @property(strong,nonatomic) NSMutableArray *transactions;
-@property(strong,nonatomic) NSMutableArray *duels;
 @property(nonatomic) int glNumber;
 @property(strong,nonatomic) NSMutableArray *achivments;
 
@@ -66,8 +64,6 @@
 - (void)loadAllParametrs;
 - (NSArray *)fetchArray:(NSMutableArray *)array;
 - (void)sendTransactions:(NSMutableArray *)transactions;
-- (void)sendDuels:(NSMutableArray *)duels;
-- (NSArray *)fetchDuelArray:(NSMutableArray *)array;
 
 - (NSString *)dateFormatDay;
 - (NSString *)dateFormat;

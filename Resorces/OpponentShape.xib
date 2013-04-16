@@ -41,12 +41,22 @@
 						<int key="NSvFlags">256</int>
 						<string key="NSFrame">{{70, 22}, {89, 161}}</string>
 						<reference key="NSSuperview" ref="201225919"/>
-						<reference key="NSNextKeyView" ref="626598710"/>
+						<reference key="NSNextKeyView" ref="950755404"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="334419792">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
 						</object>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+					</object>
+					<object class="IBUIImageView" id="950755404">
+						<reference key="NSNextResponder" ref="201225919"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{70, 23}, {89, 161}}</string>
+						<reference key="NSSuperview" ref="201225919"/>
+						<reference key="NSNextKeyView" ref="626598710"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
@@ -189,6 +199,14 @@
 					</object>
 					<int key="connectionID">97</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">imgBody</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="950755404"/>
+					</object>
+					<int key="connectionID">99</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -217,6 +235,7 @@
 							<reference ref="941352939"/>
 							<reference ref="626598710"/>
 							<reference ref="211551512"/>
+							<reference ref="950755404"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -254,6 +273,12 @@
 						<reference key="object" ref="211551512"/>
 						<reference key="parent" ref="201225919"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">98</int>
+						<reference key="object" ref="950755404"/>
+						<reference key="parent" ref="201225919"/>
+						<string key="objectName">BodyForScarecrow</string>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -269,12 +294,13 @@
 				<string key="93.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="95.CustomClassName">VisualViewCharacter</string>
 				<string key="95.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="98.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">97</int>
+			<int key="maxID">99</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>

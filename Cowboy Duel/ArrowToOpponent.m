@@ -8,6 +8,7 @@
 
 #import "ArrowToOpponent.h"
 #import <QuartzCore/QuartzCore.h>
+#import "Utils.h"
 @interface ArrowToOpponent()
 {
     IBOutlet UIView *mainSubView;
@@ -59,7 +60,13 @@
 
 -(void)changeImgForPractice;
 {
-    CGRect cropRect = CGRectMake(180, 0, 240, 240);
+    CGRect cropRect;
+    if([Utils isiPhoneRetina]){
+        cropRect = CGRectMake(180, 0, 260, 240);
+    }else{
+        cropRect = CGRectMake(85, 0, 140, 130);
+    }
+    
     CGImageRef subImageRef = CGImageCreateWithImageInRect([[UIImage imageNamed:@"scarecrow.png"] CGImage], cropRect);
     CGRect smallBounds = CGRectMake(cropRect.origin.x, cropRect.origin.y, CGImageGetWidth(subImageRef), CGImageGetHeight(subImageRef));
     
