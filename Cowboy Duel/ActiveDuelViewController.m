@@ -201,11 +201,11 @@ static CGFloat blinkBottomOriginY;
     
     [self hideHelpViewOnStartDuel];
     
-    int iPhone5Delta = [UIScreen mainScreen].bounds.size.height - 480;
+   /* int iPhone5Delta = [UIScreen mainScreen].bounds.size.height - 480;
     CGRect deltaFrame = plView.frame;
     deltaFrame.size.height += iPhone5Delta;
     [plView setFrame:deltaFrame];
-    
+    */
     CLLocationCoordinate2D oponentCoords;
 
     oponentCoords.latitude = 1;//(((float) rand()) / RAND_MAX) * 360 - 180;
@@ -319,7 +319,7 @@ static CGFloat blinkBottomOriginY;
     CGRect airBallonFrame;
     airBallonFrame = airBallon.frame;
     airBallonFrame.origin.x = 300;
-    airBallonFrame.origin.y = -100;
+    airBallonFrame.origin.y = -400;
     airBallon = [[AirBallon alloc] initWithFrame:airBallonFrame];
      airBallon.airBallonImg.tag = 1;
     [self.floatView addSubview:airBallon];
@@ -328,12 +328,13 @@ static CGFloat blinkBottomOriginY;
     [oponentsViewCoordinates addObject:poi];
     [plView setOponentCoordinates:oponentsViewCoordinates];
     
+    gunDrumViewController = [[GunDrumViewController alloc] initWithNibName:Nil bundle:Nil];
+    [self.view addSubview:gunDrumViewController.view];
+    
     int index = [self.view.subviews indexOfObject:self.crossImageView];
     [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 2) withSubviewAtIndex:index];
     
-    gunDrumViewController = [[GunDrumViewController alloc] initWithNibName:Nil bundle:Nil];
-
-    [self.view addSubview:gunDrumViewController.view];
+      
     [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 1) withSubviewAtIndex:([self.view.subviews count] - 3)];
     
     index = [self.view.subviews indexOfObject:self.gunButton];
@@ -352,6 +353,9 @@ static CGFloat blinkBottomOriginY;
     
     blinkTopOriginY = blinkTop.frame.origin.y;
     blinkBottomOriginY = blinkBottom.frame.origin.y;
+    
+    
+
     
 }
 
@@ -703,6 +707,9 @@ static CGFloat blinkBottomOriginY;
         CGRect opponentBodyFrame = [[opponentShape.imgBody superview] convertRect:opponentShape.imgBody.frame toView:self.view];
         
         if (CGRectContainsPoint(opponentBodyFrame, shotPoint)) {
+            CGRect frame = self.bloodImageView.frame;
+            frame.origin = shotPoint;
+            self.bloodImageView.frame = frame;
             [self startRandomBloodAnimation];
             [opponentShape hitTheOponentWithPoint:shotPoint mainView:self.view];
         }

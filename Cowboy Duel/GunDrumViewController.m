@@ -45,9 +45,9 @@
 //points
 static CGPoint pntDumpOpen;
 static const CGPoint pntDumpClose = {187,128};//center of image
-static const CGPoint pntGunCloseSimple = {-26,224};
+static const CGPoint pntGunCloseSimple = {200, 612};
 static const CGPoint pntGunCloseIphone5 = {-26,312};
-static CGPoint pntGunClose;
+static CGPoint pntGunClose = {169,512};
 static const CGPoint pntViewShow = {0,0};
 static const CGPoint pntViewHide = {0,400};
 
@@ -84,26 +84,26 @@ static const CGFloat timeSpinDump = 0.3f;
     if (self) {
         [self loadView];
 
-        int iPhone5Delta = [UIScreen mainScreen].bounds.size.height - 480;
-        if (iPhone5Delta>0) {
-            pntGunClose = pntGunCloseIphone5;
-        }else{
-            pntGunClose = pntGunCloseSimple;
-        }
+        //int iPhone5Delta = [UIScreen mainScreen].bounds.size.height - 480;
+       // if (iPhone5Delta>0) {
+      //      pntGunClose = pntGunCloseIphone5;
+      //  }else{
+        pntGunClose = pntGunCloseSimple;
+      //  }
 
         isCharging = NO;
        
-        pntDumpOpen=drumBullets.center;
+       pntDumpOpen=drumBullets.center;
+       
+       CGRect frame=gun.frame;
+       frame.origin = pntGunClose;
+       gun.frame = frame;
         
-        CGRect frame=gun.frame;
-        frame.origin = pntGunClose;
-        gun.frame = frame;
-        
-        gunImage.layer.anchorPoint = CGPointMake(0.5, 1);
-        frame = gunImage.frame;
-        frame.origin.y += frame.size.height / 2;
-        gunImage.frame = frame;
-        drumBullets.center= pntDumpClose;
+       gunImage.layer.anchorPoint = CGPointMake(0.5, 1);
+       frame = gunImage.frame;
+       frame.origin.y += frame.size.height / 2;
+       gunImage.frame = frame;
+       drumBullets.center= pntDumpClose;
         
         frame=self.view.frame;
         frame.origin = pntViewHide;
@@ -132,7 +132,7 @@ static const CGFloat timeSpinDump = 0.3f;
         }
         
         vBackLightDrum.clipsToBounds = YES;
-        vBackLightDrum.layer.cornerRadius = 60.f;
+        vBackLightDrum.layer.cornerRadius = 120.f;
     }
     return self;
 }
@@ -180,7 +180,7 @@ static const CGFloat timeSpinDump = 0.3f;
     [UIView animateWithDuration:timeOpenGun animations:^{
         gunImage.transform = CGAffineTransformMakeRotation(gunRotationAngle);
         
-        drumBullets.center = pntDumpOpen;
+        //drumBullets.center = pntDumpOpen;
     }completion:^(BOOL finished) {
         vBackLightDrum.hidden = NO;
         [self backLightDrumAnimation];

@@ -413,12 +413,12 @@
     int moneyExch  = playerAccount.money < 10 ? 1: playerAccount.money / 10.0;
     int pointsForMatch=0;
     gameStatusLable.text = @"You lost";
-    [gameStatusLable setFont:[UIFont fontWithName: @"DecreeNarrow" size:30]];
+    [gameStatusLable setFont:[UIFont fontWithName: @"DecreeNarrow" size:65]];
     
-    [lblGold setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:45]];
-    [lblGoldTitle setFont:[UIFont fontWithName: @"DecreeNarrow" size:30]];
+    [lblGold setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:55]];
+    [lblGoldTitle setFont:[UIFont fontWithName: @"DecreeNarrow" size:55]];
     
-    [lblGoldPlus setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:45]];
+    [lblGoldPlus setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:55]];
     lblGoldPlus.text = [NSString stringWithFormat:@"-%d",moneyExch];
     lblGoldPlus.gradientStartColor = [UIColor colorWithRed:255.0/255.0 green:181.0/255.0 blue:0.0/255.0 alpha:1.0];
     lblGoldPlus.gradientEndColor = [UIColor colorWithRed:255.0/255.0 green:140.0/255.0 blue:0.0/255.0 alpha:1.0];
@@ -479,8 +479,8 @@
     [loserMoneyImg setHidden:YES];
     
     frame = lblGoldPlus.frame;
-    frame.origin.y = 40;
-    frame.origin.x = 0;
+    frame.origin.y = winnerImg1.frame.origin.y;
+    frame.origin.x = winnerImg1.frame.origin.x;
     lblGoldPlus.frame = frame;
     [viewLastSceneAnimation addSubview:lblGoldPlus];
     [lblGoldPlus setHidden:YES];   
@@ -499,13 +499,13 @@
     int moneyExch  = oponentAccount.money < 10 ? 1: oponentAccount.money / 10.0;
     int pointsForMatch=0;
     gameStatusLable.text = @"You win";
-    [gameStatusLable setFont:[UIFont fontWithName: @"DecreeNarrow" size:30]];
+    [gameStatusLable setFont:[UIFont fontWithName: @"DecreeNarrow" size:65]];
     
    lblGoldPlus.text = [NSString stringWithFormat:@"+%d",moneyExch];
    
     [lblGold setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:45]];
-    [lblGoldPlus setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:45]];
-    [lblGoldTitle setFont:[UIFont fontWithName: @"DecreeNarrow" size:30]];
+    [lblGoldPlus setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:55]];
+    [lblGoldTitle setFont:[UIFont fontWithName: @"DecreeNarrow" size:55]];
     
     lblGoldPlus.hidden = NO;
     lblGoldPlus.gradientStartColor = [UIColor colorWithRed:255.0/255.0 green:181.0/255.0 blue:0.0/255.0 alpha:1.0];
@@ -548,7 +548,7 @@
         [self increaseWinCount];
         
        pointsForMatch=[self getPointsForWin];
-    }            
+    }
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Win.mp3", [[NSBundle mainBundle] resourcePath]]];
     NSError *error;
     player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
@@ -560,8 +560,8 @@
     
     winnerImg1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fin_img_money.png"]];
     CGRect frame = winnerImg1.frame;
-    frame.origin.y = 230  + iPhone5Delta;
-    frame.origin.x = -150 + iPhone5DeltaX;
+    frame.origin.y = 712;
+    frame.origin.x = 84;
     winnerImg1.frame = frame;
     [viewLastSceneAnimation addSubview:winnerImg1];
     
@@ -573,7 +573,8 @@
     [viewLastSceneAnimation addSubview:winnerImg2];
 
     frame = lblGoldPlus.frame;
-    frame.origin.x -= 200;
+    frame.origin.x = winnerImg1.frame.origin.x - 55;
+    frame.origin.y = winnerImg1.frame.origin.y - 25;
     lblGoldPlus.frame = frame;
     [viewLastSceneAnimation addSubview:lblGoldPlus];
     
@@ -715,9 +716,9 @@
 
 -(void)winAnimation
 {
-  int iPhone5Delta = [UIScreen mainScreen].bounds.size.height - 480;
+  int iPhone5Delta = [UIScreen mainScreen].bounds.size.height - 900;
     
-  [lblGoldPlus setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:45]];
+  [lblGoldPlus setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:50]];
   
   CGRect deltaFrameI5 = lblGoldPlus.frame;
   deltaFrameI5.origin.y += iPhone5Delta;
