@@ -694,6 +694,15 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     namePlayerSaved=[[NSString alloc] initWithString:textField.text];
+    if (![lbDescription isHidden] && lbDescription) {
+        [UIView animateWithDuration:0.4
+                         animations:^{
+                             CGRect frame = mainProfileView.frame;
+                             frame.origin.y -=changeYPointWhenKeyboard;
+                             mainProfileView.frame = frame;
+                             textIndex++;
+                         } completion:nil];
+    }
     return YES;
 }
 
@@ -821,13 +830,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                     }completion:^(BOOL complete) {
                         if (textIndex==0) {
                             [tfFBName becomeFirstResponder];
-                            [UIView animateWithDuration:0.4
-                                             animations:^{
-                                                 CGRect frame = mainProfileView.frame;
-                                                 frame.origin.y -=changeYPointWhenKeyboard;
-                                                 mainProfileView.frame = frame;
-                                                 textIndex++;
-                                             } completion:nil];
+                            textIndex++;
                         }
                     }];
 }
