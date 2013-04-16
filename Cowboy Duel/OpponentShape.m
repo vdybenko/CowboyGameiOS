@@ -22,13 +22,14 @@
 @end
 
 @implementation OpponentShape
-@synthesize imgBody;
 @synthesize imgShot;
 @synthesize ivLifeBar;
 @synthesize typeOfBody;
 @synthesize lbLifeLeft;
 @synthesize opponentShapeStatus;
 @synthesize imgDieOpponentAnimation;
+@synthesize playerAccount;
+@synthesize visualViewCharacter;
 
 static CGFloat oponentLiveImageViewStartWidth;
 
@@ -70,7 +71,6 @@ static CGFloat oponentLiveImageViewStartWidth;
 -(void)releaseComponents
 {
     vContainer = nil;
-    imgBody = nil;
     imgShot = nil;
     ivLifeBar = nil;
     [imgDieOpponentAnimation stopAnimating];
@@ -79,22 +79,33 @@ static CGFloat oponentLiveImageViewStartWidth;
     oponentShotAudioPlayer = nil;
     opponentShapeStatus = nil;
     lbLifeLeft = nil;
+    [visualViewCharacter releaseComponents];
+    visualViewCharacter = nil;
+}
+
+#pragma mark
+
+-(void)refreshWithAccountPlayer:(AccountDataSource*)player;
+{
+    playerAccount = player;
+    [visualViewCharacter refreshWithAccountPlayer:playerAccount];
 }
 
 -(void) moveAnimation;
 {
-    if (self.typeOfBody == OpponentShapeTypeScarecrow) {
-        return;
-    }
-    NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"oponent_step1.png"],
-                       [UIImage imageNamed:@"oponent_step2.png"],
-                       nil];
-    imgBody.animationImages = imgArray;
-    imgBody.animationDuration = 0.6f;
-    [imgBody setAnimationRepeatCount:0];
-    [imgBody startAnimating];
-    imgArray = nil;
+//    if (self.typeOfBody == OpponentShapeTypeScarecrow) {
+//        return;
+//    }
+//    NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"oponent_step1.png"],
+//                       [UIImage imageNamed:@"oponent_step2.png"],
+//                       nil];
+//    imgBody.animationImages = imgArray;
+//    imgBody.animationDuration = 0.6f;
+//    [imgBody setAnimationRepeatCount:0];
+//    [imgBody startAnimating];
+//    imgArray = nil;
 }
+
 -(void)moveOponentInBackground
 {
     if (self.typeOfBody == OpponentShapeTypeScarecrow) {
@@ -124,12 +135,11 @@ static CGFloat oponentLiveImageViewStartWidth;
     }else{
         [self moveAnimation];
     }
-
+    
 }
 
 -(void) stopMoveAnimation;
 {
-    [imgBody stopAnimating];
     if (opponentShapeStatus == OpponentShapeStatusLive) {
         [self setStatusBody:OpponentShapeStatusLive];
     }
@@ -255,7 +265,7 @@ static CGFloat oponentLiveImageViewStartWidth;
         {
             
             [self stopMoveAnimation];
-            imgBody.hidden = YES;
+            visualViewCharacter.hidden = YES;
             [imgDieOpponentAnimation startAnimating];
             /*
             UIImageView *dieImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"menLowDie.png"]];
@@ -275,6 +285,7 @@ static CGFloat oponentLiveImageViewStartWidth;
         }
             break;
         case OpponentShapeStatusLive:
+            visualViewCharacter.hidden = NO;
             [self setBodyType:self.typeOfBody];
             break;
         default:
@@ -297,12 +308,10 @@ static CGFloat oponentLiveImageViewStartWidth;
         default:
             break;
     }
-    
 }
 
 -(int) damageForHitTheOponentWithPoint:(CGPoint)hitPoint mainView:(UIView*)mainView;
 {
-    
     UIImageView *ivHit;
     if(self.typeOfBody == OpponentShapeTypeScarecrow){
         ivHit= [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ivHitPractice.png"]];
@@ -312,10 +321,10 @@ static CGFloat oponentLiveImageViewStartWidth;
     
     CGPoint convertPoint = [mainView convertPoint:hitPoint toView:imgBody];
     ivHit.center = convertPoint;
-    [imgBody addSubview:ivHit];
+    [visualViewCharacter addSubview:ivHit];
     ivHit = nil;
 
-    int result = [imgBody checkNumberOfShotsAreas:@[@"{{0, 0}, {89,43}}", @"{{0,43}, {89,65}}", @"{{0,108}, {89,53}}"] forPoint:convertPoint];
+    int result = [visualViewCharacter checkNumberOfShotsAreas:@[@"{{0, 0}, {89,43}}", @"{{0,43}, {89,65}}", @"{{0,108}, {89,53}}"] forPoint:convertPoint];
     
     UIColor *color = [UIColor greenColor];
     UIFont *font = [UIFont boldSystemFontOfSize:22];
@@ -330,7 +339,7 @@ static CGFloat oponentLiveImageViewStartWidth;
                                                    color:color
                                                     font:font
                                                direction:FlyingPointDirectionUp];
-            [imgBody addFlyingImageToView:mainView
+            [visualViewCharacter addFlyingImageToView:mainView
                               centerPoint:p1
                                 imageName:@"crossbones.png"
                                 direction:FlyingPointDirectionUp];
@@ -342,7 +351,7 @@ static CGFloat oponentLiveImageViewStartWidth;
                                            color:color
                                             font:font
                                        direction:FlyingPointDirectionUp];
-            [imgBody addFlyingImageToView:mainView
+            [visualViewCharacter addFlyingImageToView:mainView
                               centerPoint:p1
                                 imageName:@"crossbones.png"
                                 direction:FlyingPointDirectionUp];
@@ -354,7 +363,7 @@ static CGFloat oponentLiveImageViewStartWidth;
                                            color:color
                                             font:font
                                        direction:FlyingPointDirectionUp];
-            [imgBody addFlyingImageToView:mainView
+            [visualViewCharacter addFlyingImageToView:mainView
                               centerPoint:p1
                                 imageName:@"crossbones.png"
                                 direction:FlyingPointDirectionUp];
@@ -393,9 +402,6 @@ static CGFloat oponentLiveImageViewStartWidth;
 
 -(void) cleareDamage;
 {
-    for(UIView *subview in [imgBody subviews])
-    {
-        [subview removeFromSuperview];
-    }
+    [visualViewCharacter cleareView];
 }
 @end

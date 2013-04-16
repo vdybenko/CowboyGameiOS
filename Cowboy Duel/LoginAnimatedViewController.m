@@ -146,7 +146,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
 
 #pragma mark -
 #pragma mark IBActions
-
 - (IBAction)practiceButtonClick:(id)sender {
     //stop animations
     animationPause = YES;

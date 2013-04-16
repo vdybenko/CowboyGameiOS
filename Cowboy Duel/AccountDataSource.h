@@ -54,6 +54,13 @@
 @property (nonatomic, strong) id loginAnimatedViewController;
 @property (nonatomic, strong) id<FBGraphUser> facebookUser;
 
+//Visual view character
+@property(nonatomic) int visualViewCap;
+@property(nonatomic) int visualViewHead;
+@property(nonatomic) int visualViewBody;
+@property(nonatomic) int visualViewLegs;
+@property(nonatomic) int visualViewShoose;
+
 + (AccountDataSource *)sharedInstance;
 - (id)initWithLocalPlayer;
 - (void)loadAllParametrs;
@@ -92,6 +99,10 @@
 - (void)saveTransaction;
 - (void)saveGlNumber;
 - (int)increaseGlNumber;
+
+- (void)saveVisualView;
+- (void)loadVisualView;
+
 
 - (BOOL)isPlayerPlayDuel;
 - (BOOL)isPlayerForPractice;

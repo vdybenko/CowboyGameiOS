@@ -26,6 +26,11 @@ static const char *LIST_BOTS_URL = BASE_URL"users/get_user_data";
 @synthesize accountWeapon;
 @synthesize accountStore;
 @synthesize loginAnimatedViewController;
+@synthesize visualViewCap;
+@synthesize visualViewHead;
+@synthesize visualViewBody;
+@synthesize visualViewLegs;
+@synthesize visualViewShoose;
 
 #pragma mark
 
@@ -79,6 +84,11 @@ static AccountDataSource *sharedHelper = nil;
         achivments = [[NSMutableArray alloc] init];
         dicForRequests=[[NSMutableDictionary alloc] init];
         
+        self.visualViewCap = -1;
+        self.visualViewHead = -1;
+        self.visualViewBody = -1;
+        self.visualViewLegs = -1;
+        self.visualViewShoose = -1;
     }
     return self;
 }
@@ -150,6 +160,8 @@ static AccountDataSource *sharedHelper = nil;
       [self.achivments addObject:loc];
     }
   }
+    
+    [self loadVisualView];
 }
 
 - (void)makeLocalAccountID{
@@ -188,8 +200,7 @@ static AccountDataSource *sharedHelper = nil;
     [dicBody setValue:gcAlias forKey:@"authentification"];
     [dicBody setValue:resultStr forKey:@"transactions"];  
     NSString *stBody=[Utils makeStringForPostRequest:dicBody];
-    DLog(@"dicBody %@",dicBody);
-	[theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]]; 
+	[theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]];
     CustomNSURLConnection *theConnection=[[CustomNSURLConnection alloc] initWithRequest:theRequest delegate:self];
     if (theConnection) {
         NSMutableData *receivedData = [[NSMutableData alloc] init];
@@ -530,6 +541,26 @@ static AccountDataSource *sharedHelper = nil;
     [self saveGlNumber];
     return glNumber;
 }
+
+- (void)saveVisualView;
+{
+    [[NSUserDefaults standardUserDefaults] setInteger:visualViewCap forKey:@"VV_CAP_VALUE"];
+    [[NSUserDefaults standardUserDefaults] setInteger:visualViewHead forKey:@"VV_HEAD_VALUE"];
+    [[NSUserDefaults standardUserDefaults] setInteger:visualViewBody forKey:@"VV_BODY_VALUE"];
+    [[NSUserDefaults standardUserDefaults] setInteger:visualViewLegs forKey:@"VV_LEGS_VALUE"];
+    [[NSUserDefaults standardUserDefaults] setInteger:visualViewShoose forKey:@"VV_SHOOSE_VALUE"];
+}
+
+- (void)loadVisualView;
+{
+    self.visualViewCap = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_CAP_VALUE"];
+    self.visualViewHead = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_HEAD_VALUE"];
+    self.visualViewBody = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_BODY_VALUE"];
+    self.visualViewLegs = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_LEGS_VALUE"];
+    self.visualViewShoose = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_SHOOSE_VALUE"];
+}
+
+#pragma mark
 
 - (BOOL)isPlayerPlayDuel;
 {

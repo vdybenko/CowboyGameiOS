@@ -51,6 +51,8 @@
 
 "REFRESH"="REFRESH";
 
+"ACCEPT"="ACCEPT";
+
 //FinalView
 
 "BACK"="BACK";
@@ -260,6 +262,7 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "StolenMess"="You've stolen";
 "PokenMessage"="You've poked";
 
+"CHAR_BUILDER"="BUILDER";
 //Titles for Users
 "0Rank" = "Slave"; 
 "1Rank" = "Refugee";
@@ -369,3 +372,6 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "PROFILE_MESS_2_NAME" = "What is your name?";
 
 "Follow" = "Cowboy Games community on Facebook";
+
+//character builder
+"defence" = "defence";

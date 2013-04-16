@@ -30,7 +30,6 @@
 
 #import "FunPageViewController.h"
 #import "ActiveDuelViewController.h"
-
 #define kTwitterSettingsButtonIndex 0
 
 @interface StartViewController ()
@@ -217,6 +216,7 @@ static StartViewController *sharedHelper = nil;
             [playerAccount saveDefense];
             [playerAccount saveTransaction];
             [playerAccount saveGlNumber];
+            [playerAccount saveVisualView];
             [uDef synchronize];
         }else{
             
@@ -373,32 +373,7 @@ static StartViewController *sharedHelper = nil;
     [lbShareButton setText:NSLocalizedString(@"Share", @"")];
     [lbShareButton setTextColor:buttonsTitleColor];
     [lbShareButton setFont:[UIFont fontWithName: @"MyriadPro-Semibold" size:15]];
-/*
-    [duelButton setTitle:NSLocalizedString(@"Saloon", @"") forState:UIControlStateNormal];
-    [duelButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
-    duelButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
-    duelButton.titleLabel.textAlignment = UITextAlignmentCenter;
-    
-    [saloon2Button setTitle:NSLocalizedString(@"Saloon2", @"") forState:UIControlStateNormal];
-    [saloon2Button setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
-    saloon2Button.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
-    saloon2Button.titleLabel.textAlignment = UITextAlignmentCenter;
-    
-    [profileButton setTitle:NSLocalizedString(@"Profile", @"") forState:UIControlStateNormal];
-    [profileButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
-    profileButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
-    profileButton.titleLabel.textAlignment = UITextAlignmentCenter;
 
-    [helpButton setTitle:NSLocalizedString(@"HelpTitle", @"") forState:UIControlStateNormal];
-    [helpButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
-    helpButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
-    helpButton.titleLabel.textAlignment = UITextAlignmentCenter;
-    
-    [mapButton setTitle:NSLocalizedString(@"STORE", @"") forState:UIControlStateNormal];
-    [mapButton setTitleColor:buttonsTitleColor forState:UIControlStateNormal];
-    mapButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
-    mapButton.titleLabel.textAlignment = UITextAlignmentCenter;
-*/    
     UIColor *textColor = [UIColor whiteColor];
  
     UIFont *textFont = [UIFont systemFontOfSize:16.0f];
@@ -502,7 +477,6 @@ static StartViewController *sharedHelper = nil;
         frame = helpButton.frame;
         frame.origin.y += iPhone5Delta;
         [helpButton setFrame:frame];
-
     }
 }
 - (void)viewDidUnload {
@@ -823,6 +797,10 @@ static StartViewController *sharedHelper = nil;
 
 -(IBAction)showHelp:(id)sender
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+														object:self
+													  userInfo:[NSDictionary dictionaryWithObject:@"/help_click" forKey:@"event"]];
+    
     HelpViewController *helpViewController = [[HelpViewController alloc] initWithStartVC:self];
     
     CATransition* transition = [CATransition animation];
@@ -1214,7 +1192,7 @@ static StartViewController *sharedHelper = nil;
         return;
     }       
     //avtorization
-    if ((playerAccount.accountID != nil) && [[currentParseString lastPathComponent] isEqualToString:@"registration"]) {
+    if ((playerAccount.accountID != nil) && [[currentParseString lastPathComponent] isEqualToString:@"registration"]&&[responseObject objectForKey:@"avatar"]) {
         
         DLog(@"avtorization /n %@",responseObject);
         
@@ -1310,7 +1288,7 @@ static StartViewController *sharedHelper = nil;
 //                transaction.trDescription = [[NSString alloc] initWithFormat:@"Balance"];
 //                [playerAccount.transactions addObject:transaction];
 //                [playerAccount saveTransaction];
-//            }else
+//            }
             playerAccount.money=(playerMoney >= 0)?playerMoney:0;
             isFixedMoney = YES;
             [playerAccount saveMoney];
@@ -1332,6 +1310,32 @@ static StartViewController *sharedHelper = nil;
         }
         [profileViewController checkLocationOfViewForFBLogin];
 
+        int indexCap=[[responseObject objectForKey:@"cap"] intValue];
+        if ((indexCap!=-1)&&(indexCap!=playerAccount.visualViewCap)) {
+            playerAccount.visualViewCap=indexCap;
+        }
+        
+        int indexHead=[[responseObject objectForKey:@"head"] intValue];
+        if ((indexHead!=-1)&&(indexHead!=playerAccount.visualViewHead)) {
+            playerAccount.visualViewHead=indexHead;
+        }
+        
+        int indexBody=[[responseObject objectForKey:@"body"] intValue];
+        if ((indexBody!=-1)&&(indexBody!=playerAccount.visualViewBody)) {
+            playerAccount.visualViewBody=indexBody;
+        }
+        
+        int indexLegs=[[responseObject objectForKey:@"legs"] intValue];
+        if ((indexLegs!=-1)&&(indexLegs!=playerAccount.visualViewLegs)) {
+            playerAccount.visualViewLegs=indexLegs;
+        }
+        
+        int indexShoose=[[responseObject objectForKey:@"shoose"] intValue];
+        if ((indexShoose!=-1)&&(indexShoose!=playerAccount.visualViewShoose)) {
+            playerAccount.visualViewShoose=indexShoose;
+        }
+        [playerAccount saveVisualView];
+        
         if (!modifierName) {
             [playerAccount sendTransactions:playerAccount.transactions];
         }
@@ -1451,6 +1455,12 @@ static StartViewController *sharedHelper = nil;
     [dicBody setValue:[playerAccount.homeTown stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] forKey:@"home_town"];
     [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.friends] forKey:@"friends"];
     [dicBody setValue:playerAccount.facebookName forKey:@"facebook_name"];
+    
+    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewCap] forKey:@"cap"];
+    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewHead] forKey:@"head"];
+    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewBody] forKey:@"body"];
+    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewLegs] forKey:@"legs"];
+    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewShoose] forKey:@"shoes"];
 
     NSString *stBody=[Utils makeStringForPostRequest:dicBody];
     DLog(@"stBody %@",dicBody);
@@ -1483,6 +1493,12 @@ static StartViewController *sharedHelper = nil;
     [dicBody setValue:[NSString stringWithFormat:@"%d",playerTemp.accountWins] forKey:@"duels_win"];
     [dicBody setValue:[NSString stringWithFormat:@"%d",playerTemp.accountDraws] forKey:@"duels_lost"];
     [dicBody setValue:[NSString stringWithFormat:@"%d",playerTemp.accountBigestWin] forKey:@"bigest_win"];
+    
+    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewCap] forKey:@"cap"];
+    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewHead] forKey:@"head"];
+    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewBody] forKey:@"body"];
+    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewLegs] forKey:@"legs"];
+    [dicBody setValue:[NSString stringWithFormat:@"%d",playerAccount.visualViewShoose] forKey:@"shoes"];
     
     NSString *stBody=[Utils makeStringForPostRequest:dicBody];
     DLog(@"modifierUser stBody %@",dicBody);

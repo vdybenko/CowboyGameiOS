@@ -332,6 +332,8 @@ static CGFloat blinkBottomOriginY;
     [oponentsViewCoordinates addObject:poi];
     [plView setOponentCoordinates:oponentsViewCoordinates];
     
+    [opponentShape refreshWithAccountPlayer:opAccount];
+    
     int index = [self.view.subviews indexOfObject:self.crossImageView];
     [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 2) withSubviewAtIndex:index];
     
@@ -460,7 +462,7 @@ static CGFloat blinkBottomOriginY;
     self.crossImageView.hidden = YES;
     
     self.gunButton.hidden = YES;
-    opponentShape.imgBody.hidden = NO;
+    opponentShape.visualViewCharacter.hidden = NO;
     [self showHelpViewOnStartDuel];
     
     userHitCount = 0;
@@ -842,6 +844,25 @@ static CGFloat blinkBottomOriginY;
         }
         
         [self shotToOponentWithDamage:opponentDamage];
+//=======
+//        CGPoint targetPoint;
+//        targetPoint.x = opponentShape.center.x - (self.floatView.bounds.size.width / 2 - self.floatView.center.x);
+//        targetPoint.y = opponentShape.center.y - (self.floatView.bounds.size.height / 2 - self.floatView.center.y);
+//        
+//        CGPoint centerOfScreanPoint;
+//        centerOfScreanPoint.x = self.crossImageView.bounds.origin.x + self.crossImageView.center.x;
+//        centerOfScreanPoint.y = self.crossImageView.bounds.origin.y + self.crossImageView.center.y;
+//        
+//        CGRect opponentBodyFrame = [[opponentShape.visualViewCharacter superview] convertRect:opponentShape.visualViewCharacter.frame toView:self.view];
+//        
+//        if (CGRectContainsPoint(opponentBodyFrame, shotPoint)) {
+//            [self startRandomBloodAnimation];
+//            [opponentShape hitTheOponentWithPoint:shotPoint mainView:self.view];
+//        }
+//        [self shotToOponent];
+//
+//        
+//>>>>>>> changeGameImage
     }
 }
 
@@ -1323,7 +1344,7 @@ static CGFloat blinkBottomOriginY;
         [timer invalidate];
     }
     
-    [arrowToOpponent updateRelateveToView:opponentShape.imgBody mainView:self.view];
+    [arrowToOpponent updateRelateveToView:opponentShape.visualViewCharacter mainView:self.view];
     arrowToOpponent.hidden = NO;
 }
 

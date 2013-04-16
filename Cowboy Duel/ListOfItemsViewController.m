@@ -209,7 +209,13 @@
     [oponentAccount setMoney:[player.money integerValue]];
     [oponentAccount setSessionID:(player.sessionId) ? [NSString stringWithString:player.sessionId]:@""];
     
-    
+//    To do delete this
+    oponentAccount.visualViewCap = rand() % 3;
+    oponentAccount.visualViewHead = rand() % 4;
+    oponentAccount.visualViewBody = rand() % 3;
+    oponentAccount.visualViewLegs = rand() % 2;
+    oponentAccount.visualViewShoose = rand() % 2;
+//    
     if (player.bot) {
         if (player.weapon)
             [oponentAccount setCurentIdWeapon:player.weapon];
