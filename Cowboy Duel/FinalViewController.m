@@ -671,7 +671,8 @@
         }
         
         [[StartViewController sharedInstance] modifierUser:playerAccount];
-        if(oponentAccount.bot) [[StartViewController sharedInstance] modifierUser:oponentAccount];
+        if(oponentAccount.bot)
+            [[StartViewController sharedInstance] modifierUser:oponentAccount];
     }
     
     if (playerAccount.accountLevel == kCountOfLevels){
