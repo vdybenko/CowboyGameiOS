@@ -86,6 +86,13 @@ static const char *A_URL =  BASE_URL"api/authorization";
     return self;
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/LoadVC" forKey:@"page"]];
+}
+
 -(void)releaseComponents
 {
     player = nil;
