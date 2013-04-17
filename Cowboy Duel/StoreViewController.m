@@ -68,17 +68,15 @@
     [tableView setDataSource:storeDataSource];
     title.text = NSLocalizedString(@"SHOP", @"");
     title.textColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
-    title.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
+    title.font = [UIFont fontWithName: @"DecreeNarrow" size:70];
     
     UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
 
-    [btnBack setTitleByLabel:@"BACK"];
-    [btnBack changeColorOfTitleByLabel:buttonsTitleColor];
-    [self.btnBag setTitleByLabel:@"BAG"];
-    [self.btnBag changeColorOfTitleByLabel:buttonsTitleColor];
-    [btnWeapons setTitleByLabel:@"WEAPONS" withColor:buttonsTitleColor fontSize:20];
-    [btnBarriers setTitleByLabel:@"BARRIES" withColor:buttonsTitleColor fontSize:20];
-    [btnDefenses setTitleByLabel:@"DEFENSES" withColor:buttonsTitleColor fontSize:20];
+    [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:40];
+    [btnBag setTitleByLabel:@"BAG" withColor:buttonsTitleColor fontSize:40];
+    [btnWeapons setTitleByLabel:@"WEAPONS" withColor:buttonsTitleColor fontSize:40];
+    [btnBarriers setTitleByLabel:@"BARRIES" withColor:buttonsTitleColor fontSize:40];
+    [btnDefenses setTitleByLabel:@"DEFENSES" withColor:buttonsTitleColor fontSize:40];
     
     [storeDataSource reloadDataSource];
 }

@@ -512,12 +512,12 @@ static CGFloat blinkBottomOriginY;
     if ( [LoginAnimatedViewController sharedInstance].isDemoPractice == NO)
     {
         if ([opAccount isPlayerForPractice]) {
-            countBulletsForOpponent = 4000;
+            countBulletsForOpponent = 4;
         }else{
             countBulletsForOpponent = [DuelRewardLogicController countUpBuletsWithOponentLevel:playerAccount.accountLevel defense:playerAccount.accountDefenseValue playerAtack:opAccount.accountWeapon.dDamage];
         }
     }else{
-        countBulletsForOpponent = 5000;
+        countBulletsForOpponent = 5;
    }
     shotCountBulletForOpponent =  countBulletsForOpponent;
     maxShotCountForOpponent = countBulletsForOpponent;
