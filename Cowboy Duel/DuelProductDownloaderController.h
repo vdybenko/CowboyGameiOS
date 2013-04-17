@@ -36,7 +36,9 @@ typedef enum{
 @property (nonatomic) id<DuelProductDownloaderControllerDelegate> delegate;
 
 +(BOOL) isRefreshEvailable:(int)serverRevision;
++(int) getDeviceRevision;
 -(void) refreshDuelProducts;
+
 +(NSString *)getSavePathForDuelProduct;
 
 +(void)saveWeapon:(NSArray*)array;

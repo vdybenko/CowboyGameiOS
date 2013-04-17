@@ -23,6 +23,8 @@ NSString  *const URL_PRODUCT_FILE_RETINEA   = @BASE_S3_URL"list_of_store_items_r
 NSString  *const URL_USER_PRODUCTS = @BASE_URL"store/get_buy_items_user";
 NSString  *const URL_PRODUCTS_BUY = @BASE_URL"store/bought";
 
+static BOOL isRefreshingNow;
+
 @interface DuelProductDownloaderController()
 {
     NSMutableDictionary *dicForRequests;
@@ -67,14 +69,15 @@ static NSString *getSavePathForDuelProduct()
 
 +(BOOL) isRefreshEvailable:(int)serverRevision;
 {
-    NSUserDefaults *userDef=[NSUserDefaults standardUserDefaults];
-    if (![userDef objectForKey:@"SERVER_REVISION_DUEL_PRODUCT"]) {
-        numberRevision=NUMBER_REVISION_DUEL_PRODUCT_DEFAULT;
+    if (serverRevision == NSNotFound && !isRefreshingNow) {
+        return YES;
     }else {
-        numberRevision=[userDef integerForKey:@"SERVER_REVISION_DUEL_PRODUCT"];
+        return NO;
     }
+
+    numberRevision = [DuelProductDownloaderController getDeviceRevision];
     
-    if (serverRevision>numberRevision){
+    if (serverRevision>numberRevision && !isRefreshingNow){
         numberRevision=serverRevision;
         return YES;
     }else {
@@ -82,10 +85,25 @@ static NSString *getSavePathForDuelProduct()
     }
 }
 
++(int) getDeviceRevision;
+{
+    int number;
+    NSUserDefaults *userDef=[NSUserDefaults standardUserDefaults];
+    if (![userDef objectForKey:@"SERVER_REVISION_DUEL_PRODUCT"]) {
+        number=NUMBER_REVISION_DUEL_PRODUCT_DEFAULT;
+    }else {
+        number=[userDef integerForKey:@"SERVER_REVISION_DUEL_PRODUCT"];
+    }
+    
+    return number;
+}
+
 #pragma mark user products
 
 -(void) refreshDuelProducts;
 {
+    isRefreshingNow = YES;
+    
     NSString *URL;
     if ([Utils isiPhoneRetina]) {
         URL = URL_PRODUCT_FILE_RETINEA;
@@ -125,13 +143,15 @@ static NSString *getSavePathForDuelProduct()
              if (delegate) {
                  [delegate didFinishDownloadWithType:type error:error];
              }
+             
+             isRefreshingNow = NO;
          }
      }];
 }
 
 -(BOOL)isListProductsAvailable;
 {
-    arrWeaponSaved = [DuelProductDownloaderController loadWeaponArray];
+    arrWeaponSaved = [DuelProductDownloaderController loadDefenseArray];
     if ([arrWeaponSaved count]) {
         return YES;
     }else{
@@ -181,8 +201,9 @@ static NSString *getSavePathForDuelProduct()
              if (delegate) {
                  [delegate didFinishDownloadWithType:type error:error];
              }
+             
+             isRefreshingNow = NO;
          }
-         
      }];
 }
 
@@ -229,6 +250,8 @@ static NSString *getSavePathForDuelProduct()
              if (delegate) {
                  [delegate didFinishDownloadWithType:type error:error];
              }
+             
+             isRefreshingNow = NO;
          }
          
      }];
@@ -316,6 +339,8 @@ static NSString *getSavePathForDuelProduct()
     if (delegate) {
         [delegate didFinishDownloadWithType:type error:error];
     }
+    
+    isRefreshingNow = NO;
 }
 
 #pragma mark Parsing Result
@@ -399,17 +424,8 @@ static NSString *getSavePathForDuelProduct()
         [self requestProductDataWithNSSet:arrayIDProducts];
     }
     
-    [[NSUserDefaults standardUserDefaults] setInteger:numberRevision forKey:@"SERVER_REVISION_DUEL_PRODUCT"];
-    
-    NSError *error;
-    if (didFinishBlock) {
-        didFinishBlock(error);
-    }
-    
-    didFinishBlock = nil;
-    if (delegate) {
-        [delegate didFinishDownloadWithType:DuelProductDownloaderTypeDuelProduct error:error];
-    } 
+    [self refreshUserDuelProducts];
+
 }
 
 -(void)parsingResultUserProduct:(NSString *)jsonString;
@@ -467,7 +483,9 @@ static NSString *getSavePathForDuelProduct()
     if (delegate) {
         [delegate didFinishDownloadWithType:DuelProductDownloaderTypeUserProduct error:error];
     }
+    isRefreshingNow = NO;
     
+    [[NSUserDefaults standardUserDefaults] setInteger:numberRevision forKey:@"SERVER_REVISION_DUEL_PRODUCT"];
     DLog(@"parsingResultUserProduct refresh complite");
 }
 
@@ -481,6 +499,8 @@ static NSString *getSavePathForDuelProduct()
     if (delegate) {
         [delegate didFinishDownloadWithType:DuelProductDownloaderTypeBuyProduct error:error];
     }
+    
+    isRefreshingNow = NO;
 }
 
 #pragma mark

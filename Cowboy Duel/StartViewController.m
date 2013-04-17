@@ -1371,15 +1371,15 @@ static StartViewController *sharedHelper = nil;
 
 -(void)didFinishDownloadWithType:(DuelProductDownloaderType)type error:(NSError *)error;
 {
-    if (!error) {
-        if (type == DuelProductDownloaderTypeDuelProduct) {
-            [duelProductDownloaderController refreshUserDuelProducts];
-        }else if (type == DuelProductDownloaderTypeUserProduct) {
-            if ([[self.navigationController visibleViewController] isKindOfClass:[StoreViewController class]]) {
-                [(StoreViewController*)[self.navigationController visibleViewController] refreshController];
-            }
-        }
-    }
+//    if (!error) {
+//        if (type == DuelProductDownloaderTypeDuelProduct) {
+//            [duelProductDownloaderController refreshUserDuelProducts];
+//        }else if (type == DuelProductDownloaderTypeUserProduct) {
+//            if ([[self.navigationController visibleViewController] isKindOfClass:[StoreViewController class]]) {
+//                [(StoreViewController*)[self.navigationController visibleViewController] refreshController];
+//            }
+//        }
+//    }
 }
 
 #pragma mark - Authorization
@@ -1455,10 +1455,6 @@ static StartViewController *sharedHelper = nil;
     
     oldAccounId=@"";
     gameCenterViewController = [GameCenterViewController sharedInstance:playerAccount andParentVC:self];
-    
-    if ([duelProductDownloaderController isListProductsAvailable]) {
-        [duelProductDownloaderController refreshUserDuelProducts];
-    }
 }
 
 -(void)modifierUser:(AccountDataSource *)playerTemp;

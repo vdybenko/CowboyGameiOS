@@ -21,5 +21,10 @@
 -(id)initWithAccount:(AccountDataSource *)userAccount;
 - (IBAction)backButtonClick:(id)sender;
 - (IBAction)bagButtonClick:(id)sender;
--(void)refreshController;
+- (void)refreshController;
+
+-(void)startTableAnimation;
+
+- (void)activityShow;
+- (void)activityHide;
 @end

@@ -43,32 +43,63 @@
 }
 
 -(void) reloadDataSource;
-{
-    __weak NSMutableArray *testArr;
-    
-    switch (typeOfTable) {
-        case StoreDataSourceTypeTablesWeapons:
-            testArr = [DuelProductDownloaderController loadWeaponArray];
-            break;
-        case StoreDataSourceTypeTablesDefenses:
-            testArr = [DuelProductDownloaderController loadDefenseArray];
-            break;
-        case StoreDataSourceTypeTablesBarrier:
-            testArr = [DuelProductDownloaderController loadBarrierArray];
-            break;
-        default:
-            break;
-    }
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.dCountOfUse > 0 || SELF.dID == -1"];
-    if (self.bagFlag) [testArr filterUsingPredicate:predicate];
-    
-    if ([testArr count]==0) {
-        arrItemsList = testArr;
+{    
+    if (![[StartViewController sharedInstance].duelProductDownloaderController isListProductsAvailable]) {
+        [storeViewController activityShow];
+        if ([DuelProductDownloaderController isRefreshEvailable:NSNotFound]) {
+            [[StartViewController sharedInstance].duelProductDownloaderController refreshDuelProducts];
+            __block id selfBlock = self;
+            __block id tableViewBlock = tableView;
+            [StartViewController sharedInstance].duelProductDownloaderController.didFinishBlock = ^(NSError *error){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if(error){
+                        [storeViewController activityHide];
+                    }
+                    [selfBlock reloadDataSource];
+                    [selfBlock setCellsHide:YES];
+                    [tableViewBlock reloadData];
+                    [storeViewController startTableAnimation];
+                });
+            };
+        }else{
+            if (![StartViewController sharedInstance].duelProductDownloaderController.didFinishBlock) {
+                 __block id selfBlock = self;
+                __block id tableViewBlock = tableView;
+                [StartViewController sharedInstance].duelProductDownloaderController.didFinishBlock = ^(NSError *error){
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if(error){
+                            [storeViewController activityHide];
+                        }
+                        [selfBlock reloadDataSource];
+                        [selfBlock setCellsHide:YES];
+                        [tableViewBlock reloadData];
+                        [storeViewController startTableAnimation];
+                    });
+                };
+            }
+        }
     }else {
-        arrItemsList = testArr;
+        switch (typeOfTable) {
+            case StoreDataSourceTypeTablesWeapons:
+                arrItemsList = [DuelProductDownloaderController loadWeaponArray];
+                break;
+            case StoreDataSourceTypeTablesDefenses:
+                arrItemsList = [DuelProductDownloaderController loadDefenseArray];
+                break;
+            case StoreDataSourceTypeTablesBarrier:
+                arrItemsList = [DuelProductDownloaderController loadBarrierArray];
+                break;
+            default:
+                break;
+        }
+        
+        if (self.bagFlag){
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.dCountOfUse > 0 || SELF.dID == -1"];
+            [arrItemsList filterUsingPredicate:predicate];
+        }
+        
+        [storeViewController activityHide];
     }
-    testArr = nil;
 }
 
 -(void)releaseComponents
