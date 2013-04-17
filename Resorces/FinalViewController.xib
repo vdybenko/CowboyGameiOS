@@ -201,7 +201,7 @@
 									<object class="IBUILabel" id="945211138">
 										<reference key="NSNextResponder" ref="646306172"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{199, 20}, {278, 77}}</string>
+										<string key="NSFrame">{{199, 16}, {278, 77}}</string>
 										<reference key="NSSuperview" ref="646306172"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="975493477"/>
@@ -233,7 +233,7 @@
 									<object class="IBUIImageView" id="208220378">
 										<reference key="NSNextResponder" ref="646306172"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{139, 80}, {385, 26}}</string>
+										<string key="NSFrame">{{139, 92}, {385, 26}}</string>
 										<reference key="NSSuperview" ref="646306172"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="945211138"/>
@@ -248,7 +248,7 @@
 									<object class="IBUILabel" id="528399721">
 										<reference key="NSNextResponder" ref="646306172"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{211, 139}, {253, 50}}</string>
+										<string key="NSFrame">{{211, 150}, {253, 50}}</string>
 										<reference key="NSSuperview" ref="646306172"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="611574819"/>
@@ -282,7 +282,7 @@
 									<object class="IBUIImageView" id="975493477">
 										<reference key="NSNextResponder" ref="646306172"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{170, 142}, {30, 30}}</string>
+										<string key="NSFrame">{{170, 161}, {30, 30}}</string>
 										<reference key="NSSuperview" ref="646306172"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="528399721"/>
@@ -297,7 +297,7 @@
 									<object class="IBUIImageView" id="1056670173">
 										<reference key="NSNextResponder" ref="646306172"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{523, 200}, {50, 50}}</string>
+										<string key="NSFrame">{{523, 217}, {50, 50}}</string>
 										<reference key="NSSuperview" ref="646306172"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="657060073"/>
@@ -312,7 +312,7 @@
 									<object class="IBUIImageView" id="29204695">
 										<reference key="NSNextResponder" ref="646306172"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{151, 200}, {364, 48}}</string>
+										<string key="NSFrame">{{151, 220}, {364, 48}}</string>
 										<reference key="NSSuperview" ref="646306172"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="635260887"/>
@@ -327,7 +327,7 @@
 									<object class="IBUIImageView" id="635260887">
 										<reference key="NSNextResponder" ref="646306172"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{160, 200}, {342, 48}}</string>
+										<string key="NSFrame">{{160, 220}, {342, 48}}</string>
 										<reference key="NSSuperview" ref="646306172"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="858207817"/>
@@ -345,7 +345,7 @@
 									<object class="IBUIImageView" id="611574819">
 										<reference key="NSNextResponder" ref="646306172"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{97, 200}, {50, 50}}</string>
+										<string key="NSFrame">{{97, 220}, {50, 50}}</string>
 										<reference key="NSSuperview" ref="646306172"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="139531641"/>
@@ -357,7 +357,7 @@
 									<object class="IBUILabel" id="858207817">
 										<reference key="NSNextResponder" ref="646306172"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{241, 211}, {180, 26}}</string>
+										<string key="NSFrame">{{241, 231}, {180, 26}}</string>
 										<reference key="NSSuperview" ref="646306172"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="1056670173"/>
@@ -389,7 +389,7 @@
 									<object class="IBUIImageView" id="139531641">
 										<reference key="NSNextResponder" ref="646306172"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{99, 200}, {48, 48}}</string>
+										<string key="NSFrame">{{99, 220}, {48, 48}}</string>
 										<reference key="NSSuperview" ref="646306172"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="29204695"/>
@@ -400,7 +400,7 @@
 									<object class="IBUIImageView" id="657060073">
 										<reference key="NSNextResponder" ref="646306172"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{525, 200}, {48, 48}}</string>
+										<string key="NSFrame">{{525, 220}, {48, 48}}</string>
 										<reference key="NSSuperview" ref="646306172"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="226881699"/>
@@ -409,7 +409,7 @@
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 									</object>
 								</array>
-								<string key="NSFrame">{{60, 260}, {654, 386}}</string>
+								<string key="NSFrame">{{60, 259}, {654, 386}}</string>
 								<reference key="NSSuperview" ref="330456425"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="208220378"/>
@@ -420,7 +420,7 @@
 							<object class="IBUILabel" id="226881699">
 								<reference key="NSNextResponder" ref="330456425"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{224, 412.5}, {320, 75}}</string>
+								<string key="NSFrame">{{224, 440.5}, {320, 75}}</string>
 								<reference key="NSSuperview" ref="330456425"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="397066163"/>

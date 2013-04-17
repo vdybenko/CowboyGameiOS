@@ -415,7 +415,7 @@
     gameStatusLable.text = @"You lost";
     [gameStatusLable setFont:[UIFont fontWithName: @"DecreeNarrow" size:65]];
     
-    [lblGold setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:55]];
+    [lblGold setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:45]];
     [lblGoldTitle setFont:[UIFont fontWithName: @"DecreeNarrow" size:55]];
     
     [lblGoldPlus setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:55]];
@@ -456,16 +456,16 @@
     
     loserImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fv_new_corpse.png"]];
     CGRect frame = loserImg.frame;
-    frame.origin.y = 60;
-    frame.origin.x = 0;
+    frame.origin.y = 800;
+    frame.origin.x = 300;
     loserImg.frame = frame;
     
     [viewLastSceneAnimation addSubview:loserImg];
     
     loserSpiritImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fv_new_corpse_shadow.png"]];
     frame = loserSpiritImg.frame;
-    frame.origin.y = 280;
-    frame.origin.x = 0;
+    frame.origin.y = 800;
+    frame.origin.x = 300;
     loserSpiritImg.frame = frame;
     [viewLastSceneAnimation addSubview:loserSpiritImg];
     [loserSpiritImg setHidden:YES];
@@ -833,16 +833,15 @@
 
 -(void)loseAnimation
 {
-    int iPhone5Delta = [UIScreen mainScreen].bounds.size.height - 480;
-    int iPhone5DeltaX = [UIScreen mainScreen].bounds.size.width - 320;
+    int iPhone5Delta = 200;//[UIScreen mainScreen].bounds.size.height - 480;
     
   loserImg.hidden = NO;
 //  if (teaching && !(duelWithBotCheck))oldMoneyForAnimation = [AccountDataSource sharedInstance].money;
   lblGold.text = [NSString stringWithFormat:@"%d",oldMoneyForAnimation];
   
   CGRect frameL = loserMoneyImg.frame;
-  frameL.origin.x = 20;
-  frameL.origin.y = ivGoldCoin.frame.origin.y + goldPointBgView.frame.origin.y;
+  frameL.origin.x = 300;
+  frameL.origin.y = 500;//ivGoldCoin.frame.origin.y + goldPointBgView.frame.origin.y;
   loserMoneyImg.frame = frameL;
   loserMoneyImg.hidden = YES;
   
@@ -852,7 +851,7 @@
   CGAffineTransform goldDroppedZoomIn = CGAffineTransformScale(loserMoneyImg.transform, 0.1, 0.1);
   CGAffineTransform goldDroppedZoomOut = CGAffineTransformScale(loserMoneyImg.transform, 1.0, 1.0);
   
-  CGAffineTransform goldMove = CGAffineTransformTranslate(goldDroppedZoomOut, +100, +195 + iPhone5Delta);
+  CGAffineTransform goldMove = CGAffineTransformTranslate(goldDroppedZoomOut, +230, +280 + iPhone5Delta);
   lblGoldPlus.hidden = NO;
 
   CGRect temp = ivBlueLine.frame;
@@ -860,19 +859,19 @@
   ivBlueLine.frame = temp;
   
   CGRect frame = loserImg.frame;
-  frame.origin.x = -200 + iPhone5DeltaX;
-  frame.origin.y += 230 + iPhone5Delta;
+  frame.origin.x = 300;
+  frame.origin.y = 800;
   loserImg.frame = frame;
   
   CGRect moveLoserToScreen = frame;
-  moveLoserToScreen.origin.x = 0;
+  moveLoserToScreen.origin.x = 250;
   
   frame = lblGoldPlus.frame;
   frame.origin.x = 320;
-  frame.origin.y = loserImg.frame.origin.y;
+  frame.origin.y = loserImg.frame.origin.y - 50;
   lblGoldPlus.frame = frame;
   CGRect moveMinusToScreen = lblGoldPlus.frame;
-  moveMinusToScreen.origin.x = 0;
+  moveMinusToScreen.origin.x = 300;
   
   CGRect moneyDropBup = loserMoneyImg.frame;
   moneyDropBup.origin.x = ivGoldCoin.frame.origin.x - loserMoneyImg.frame.size.width/2;// + goldPointBgView.frame.origin.x;
@@ -886,7 +885,7 @@
   
   lblGold.hidden = YES;
   CGRect goldCountCentered = lblGold.frame;
-  goldCountCentered.origin.x = ivGoldCoin.frame.origin.x+ivGoldCoin.frame.size.width + 5;
+    goldCountCentered.origin.x = ivGoldCoin.frame.origin.x+ivGoldCoin.frame.size.width + 5;
   lblGold.frame = goldCountCentered;
   lblGold.hidden = NO;
   
