@@ -74,7 +74,7 @@
     
     lbFavsTitle.text = NSLocalizedString(@"FavouritesTitle", nil);
     lbFavsTitle.textColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
-    lbFavsTitle.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
+    lbFavsTitle.font = [UIFont fontWithName: @"DecreeNarrow" size:55];
     
     UIColor *btnColor = [UIColor colorWithRed:244.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     
