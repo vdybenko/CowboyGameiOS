@@ -82,7 +82,7 @@
         [buyProduct addSubview:buttonLabel];
         
         ribbonLabel=[[UILabel alloc] initWithFrame:CGRectMake(2, 42, 80 , 26)];
-        ribbonLabel.font = [UIFont systemFontOfSize:11.0f];
+        ribbonLabel.font = [UIFont systemFontOfSize:22.0f];
         ribbonLabel.backgroundColor = [UIColor clearColor];
         ribbonLabel.textColor=[UIColor whiteColor];
         [ribbonLabel setTextAlignment:UITextAlignmentCenter];
@@ -94,12 +94,11 @@
     }
     
     lockLevelBackground.clipsToBounds = YES;
-    lockLevelBackground.layer.cornerRadius = 13.f;
+    lockLevelBackground.layer.cornerRadius = 25.f;
     
     countOfUse.clipsToBounds = YES;
     countOfUse.layer.cornerRadius = 1.f;
     countOfUse.font = [UIFont systemFontOfSize:26];
-    //countOfUse.transitionEffect = BBCyclingLabelTransitionEffectScrollUp;
     countOfUse.transitionDuration = 1.0;
     countOfUse.textColor = [UIColor colorWithWhite:1 alpha:1];
     countOfUse.transitionEffect = BBCyclingLabelTransitionEffectScrollUp;
@@ -120,6 +119,7 @@
     buyProduct.hidden = NO;
     ribbonImage.hidden = YES;
     curentGunBlueBackground.hidden = YES;
+    backGround.hidden = NO;
     
     name.text = product.dName;
     
@@ -153,6 +153,7 @@
                     ribbonImage.hidden = NO;
                     ribbonLabel.text = NSLocalizedString(@"IN_HAND", @"");
                     curentGunBlueBackground.hidden = NO;
+                    backGround.hidden = YES;
                 }else{
                     buttonLabel.text = NSLocalizedString(@"USE", @"");
                     ribbonImage.hidden = NO;
