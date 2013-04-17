@@ -23,6 +23,8 @@ NSString  *const URL_PRODUCT_FILE_RETINEA   = @BASE_S3_URL"list_of_store_items_r
 NSString  *const URL_USER_PRODUCTS = @BASE_URL"store/get_buy_items_user";
 NSString  *const URL_PRODUCTS_BUY = @BASE_URL"store/bought";
 
+static BOOL isRefreshingNow;
+
 @interface DuelProductDownloaderController()
 {
     NSMutableDictionary *dicForRequests;
@@ -41,17 +43,17 @@ static int numberRevision;
 
 -(id)init{
     self = [super init];
-	
-	if (!self) {
-		return nil;
-	}
+    
+    if (!self) {
+        return nil;
+    }
     dicForRequests=[NSMutableDictionary dictionary];
     arrDefenseSaved = [NSMutableArray array];
     arrWeaponSaved = [NSMutableArray array];
     arrBarrierSaved = [NSMutableArray array];
-
+    
     arrItems = [NSMutableArray array];
-	return self;
+    return self;
 }
 
 +(NSString *)getSavePathForDuelProduct{
@@ -67,14 +69,15 @@ static NSString *getSavePathForDuelProduct()
 
 +(BOOL) isRefreshEvailable:(int)serverRevision;
 {
-    NSUserDefaults *userDef=[NSUserDefaults standardUserDefaults];
-    if (![userDef objectForKey:@"SERVER_REVISION_DUEL_PRODUCT"]) {
-        numberRevision=NUMBER_REVISION_DUEL_PRODUCT_DEFAULT;
+    if (serverRevision == NSNotFound && !isRefreshingNow) {
+        return YES;
     }else {
-        numberRevision=[userDef integerForKey:@"SERVER_REVISION_DUEL_PRODUCT"];
+        return NO;
     }
     
-    if (serverRevision>numberRevision){
+    numberRevision = [DuelProductDownloaderController getDeviceRevision];
+    
+    if (serverRevision>numberRevision && !isRefreshingNow){
         numberRevision=serverRevision;
         return YES;
     }else {
@@ -82,10 +85,25 @@ static NSString *getSavePathForDuelProduct()
     }
 }
 
++(int) getDeviceRevision;
+{
+    int number;
+    NSUserDefaults *userDef=[NSUserDefaults standardUserDefaults];
+    if (![userDef objectForKey:@"SERVER_REVISION_DUEL_PRODUCT"]) {
+        number=NUMBER_REVISION_DUEL_PRODUCT_DEFAULT;
+    }else {
+        number=[userDef integerForKey:@"SERVER_REVISION_DUEL_PRODUCT"];
+    }
+    
+    return number;
+}
+
 #pragma mark user products
 
 -(void) refreshDuelProducts;
 {
+    isRefreshingNow = YES;
+    
     NSString *URL;
     if ([Utils isiPhoneRetina]) {
         URL = URL_PRODUCT_FILE_RETINEA;
@@ -107,7 +125,7 @@ static NSString *getSavePathForDuelProduct()
          {
              NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
              [self parsingResultDuelProduct:jsonString];
-        }
+         }
          else if ([data length] == 0 && error == nil)
          {
              DLog(@"Nothing was downloaded.");
@@ -120,18 +138,20 @@ static NSString *getSavePathForDuelProduct()
                  didFinishBlock(error);
              }
              
-            DuelProductDownloaderType type = DuelProductDownloaderTypeDuelProduct;
-                          
+             DuelProductDownloaderType type = DuelProductDownloaderTypeDuelProduct;
+             
              if (delegate) {
                  [delegate didFinishDownloadWithType:type error:error];
              }
+             
+             isRefreshingNow = NO;
          }
      }];
 }
 
 -(BOOL)isListProductsAvailable;
 {
-    arrWeaponSaved = [DuelProductDownloaderController loadWeaponArray];
+    arrWeaponSaved = [DuelProductDownloaderController loadDefenseArray];
     if ([arrWeaponSaved count]) {
         return YES;
     }else{
@@ -165,7 +185,7 @@ static NSString *getSavePathForDuelProduct()
          {
              NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
              [self parsingResultUserProduct:jsonString];
-        }
+         }
          else if ([data length] == 0 && error == nil)
          {
              NSLog(@"Nothing was downloaded.");
@@ -181,8 +201,9 @@ static NSString *getSavePathForDuelProduct()
              if (delegate) {
                  [delegate didFinishDownloadWithType:type error:error];
              }
+             
+             isRefreshingNow = NO;
          }
-         
      }];
 }
 
@@ -210,7 +231,7 @@ static NSString *getSavePathForDuelProduct()
      {
          if ([data length] >0 && error == nil)
          {
-            [self parsingResultBuyProduct];
+             [self parsingResultBuyProduct];
          }
          else if ([data length] == 0 && error == nil)
          {
@@ -229,10 +250,12 @@ static NSString *getSavePathForDuelProduct()
              if (delegate) {
                  [delegate didFinishDownloadWithType:type error:error];
              }
+             
+             isRefreshingNow = NO;
          }
          
      }];
-
+    
 }
 
 #pragma mark
@@ -271,13 +294,13 @@ static NSString *getSavePathForDuelProduct()
         DLog(@"DuelProductDownloaderController jsonString %@",jsonString);
         
         if ([dictionaryKey isEqualToString:[URL_PRODUCT_FILE lastPathComponent]] || [dictionaryKey isEqualToString:[URL_PRODUCT_FILE_RETINEA lastPathComponent]]) {
-//URL_PRODUCT_FILE
+            //URL_PRODUCT_FILE
             [self parsingResultDuelProduct:jsonString];
         }else if ([dictionaryKey isEqualToString:[URL_USER_PRODUCTS lastPathComponent]]){
-//URL_USER_PRODUCTS
+            //URL_USER_PRODUCTS
             [self parsingResultUserProduct:jsonString];
         }else if ([dictionaryKey isEqualToString:[URL_PRODUCTS_BUY lastPathComponent]]){
-//URL_PRODUCTS_BUY
+            //URL_PRODUCTS_BUY
             [self parsingResultBuyProduct];
         }
         
@@ -308,14 +331,16 @@ static NSString *getSavePathForDuelProduct()
     if ([dictionaryKey isEqualToString:[URL_PRODUCT_FILE lastPathComponent]] || [dictionaryKey isEqualToString:[URL_PRODUCT_FILE_RETINEA lastPathComponent]]) {
         type = DuelProductDownloaderTypeDuelProduct;
     }else if ([dictionaryKey isEqualToString:[URL_USER_PRODUCTS lastPathComponent]]){
-        type = DuelProductDownloaderTypeUserProduct;        
+        type = DuelProductDownloaderTypeUserProduct;
     }else if ([dictionaryKey isEqualToString:[URL_PRODUCTS_BUY lastPathComponent]]){
         type = DuelProductDownloaderTypeBuyProduct;
     }
-
+    
     if (delegate) {
         [delegate didFinishDownloadWithType:type error:error];
     }
+    
+    isRefreshingNow = NO;
 }
 
 #pragma mark Parsing Result
@@ -393,23 +418,14 @@ static NSString *getSavePathForDuelProduct()
     [DuelProductDownloaderController saveBarrier:arrItems];
     
     arrBarrierSaved = arrItems;
-
+    
     
     if ([arrayIDProducts count]!=0) {
         [self requestProductDataWithNSSet:arrayIDProducts];
     }
     
-    [[NSUserDefaults standardUserDefaults] setInteger:numberRevision forKey:@"SERVER_REVISION_DUEL_PRODUCT"];
+    [self refreshUserDuelProducts];
     
-    NSError *error;
-    if (didFinishBlock) {
-        didFinishBlock(error);
-    }
-    
-    didFinishBlock = nil;
-    if (delegate) {
-        [delegate didFinishDownloadWithType:DuelProductDownloaderTypeDuelProduct error:error];
-    } 
 }
 
 -(void)parsingResultUserProduct:(NSString *)jsonString;
@@ -467,7 +483,9 @@ static NSString *getSavePathForDuelProduct()
     if (delegate) {
         [delegate didFinishDownloadWithType:DuelProductDownloaderTypeUserProduct error:error];
     }
+    isRefreshingNow = NO;
     
+    [[NSUserDefaults standardUserDefaults] setInteger:numberRevision forKey:@"SERVER_REVISION_DUEL_PRODUCT"];
     DLog(@"parsingResultUserProduct refresh complite");
 }
 
@@ -481,6 +499,8 @@ static NSString *getSavePathForDuelProduct()
     if (delegate) {
         [delegate didFinishDownloadWithType:DuelProductDownloaderTypeBuyProduct error:error];
     }
+    
+    isRefreshingNow = NO;
 }
 
 #pragma mark
@@ -528,7 +548,7 @@ static NSString *getSavePathForDuelProduct()
 
 +(void)saveDefense:(NSArray*)array;
 {
-    NSData *data= [NSKeyedArchiver archivedDataWithRootObject:array];    
+    NSData *data= [NSKeyedArchiver archivedDataWithRootObject:array];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:DUEL_PRODUCTS_DEFENSES];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:DUEL_PRODUCTS_DEFENSES];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -571,9 +591,9 @@ static NSString *getSavePathForDuelProduct()
 #pragma mark SKProductsRequestDelegate
 - (void) requestProductDataWithNSSet:(NSMutableArray*)arrayProducts
 {
-	SKProductsRequest *request= [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithArray:arrayProducts]];
-	request.delegate = self;
-	[request start];
+    SKProductsRequest *request= [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithArray:arrayProducts]];
+    request.delegate = self;
+    [request start];
 }
 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response

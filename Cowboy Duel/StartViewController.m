@@ -1385,15 +1385,15 @@ static StartViewController *sharedHelper = nil;
 
 -(void)didFinishDownloadWithType:(DuelProductDownloaderType)type error:(NSError *)error;
 {
-    if (!error) {
-        if (type == DuelProductDownloaderTypeDuelProduct) {
-            [duelProductDownloaderController refreshUserDuelProducts];
-        }else if (type == DuelProductDownloaderTypeUserProduct) {
-            if ([[self.navigationController visibleViewController] isKindOfClass:[StoreViewController class]]) {
-                [(StoreViewController*)[self.navigationController visibleViewController] refreshController];
-            }
-        }
-    }
+//    if (!error) {
+//        if (type == DuelProductDownloaderTypeDuelProduct) {
+//            [duelProductDownloaderController refreshUserDuelProducts];
+//        }else if (type == DuelProductDownloaderTypeUserProduct) {
+//            if ([[self.navigationController visibleViewController] isKindOfClass:[StoreViewController class]]) {
+//                [(StoreViewController*)[self.navigationController visibleViewController] refreshController];
+//            }
+//        }
+//    }
 }
 
 #pragma mark - Authorization
