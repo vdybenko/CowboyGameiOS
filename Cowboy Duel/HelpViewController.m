@@ -70,19 +70,19 @@ BOOL isSoundControl;
     
     lbTitleHelp.text = NSLocalizedString(@"HelpTitle", @"");
     lbTitleHelp.textColor = mainColor;
-    lbTitleHelp.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
+    lbTitleHelp.font = [UIFont fontWithName: @"DecreeNarrow" size:70];
     
     UIColor *btnColor = [UIColor colorWithRed:244.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     
     lbBackBtn.text = NSLocalizedString(@"BACK", nil);
     lbBackBtn.textColor = btnColor;
-    lbBackBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
+    lbBackBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:48];
     lbVideoBtn.text = NSLocalizedString(@"manual", nil);
     lbVideoBtn.textColor = btnColor;
-    lbVideoBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
+    lbVideoBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:48];
     lbContactButton.text = NSLocalizedString(@"ContactUs", nil);
     lbContactButton.textColor = btnColor;
-    lbContactButton.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
+    lbContactButton.font = [UIFont fontWithName: @"DecreeNarrow" size:48];
 
     
     [_webViewMessage setOpaque:NO];
