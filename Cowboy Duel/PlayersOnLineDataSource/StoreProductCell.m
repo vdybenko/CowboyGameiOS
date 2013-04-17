@@ -75,13 +75,13 @@
     frame.size.width=frame.size.width-10;
     @autoreleasepool {
         buttonLabel = [[UILabel alloc] initWithFrame:frame];
-        [buttonLabel setFont: [UIFont fontWithName: @"DecreeNarrow" size:20]];
+        [buttonLabel setFont: [UIFont fontWithName: @"DecreeNarrow" size:40]];
         buttonLabel.textAlignment = UITextAlignmentCenter;
         [buttonLabel setBackgroundColor:[UIColor clearColor]];
         [buttonLabel setTextColor:buttonsTitleColor];
         [buyProduct addSubview:buttonLabel];
         
-        ribbonLabel=[[UILabel alloc] initWithFrame:CGRectMake(1, 21, 40 , 13)];
+        ribbonLabel=[[UILabel alloc] initWithFrame:CGRectMake(2, 42, 80 , 26)];
         ribbonLabel.font = [UIFont systemFontOfSize:11.0f];
         ribbonLabel.backgroundColor = [UIColor clearColor];
         ribbonLabel.textColor=[UIColor whiteColor];
@@ -98,7 +98,7 @@
     
     countOfUse.clipsToBounds = YES;
     countOfUse.layer.cornerRadius = 1.f;
-    countOfUse.font = [UIFont systemFontOfSize:13];
+    countOfUse.font = [UIFont systemFontOfSize:26];
     //countOfUse.transitionEffect = BBCyclingLabelTransitionEffectScrollUp;
     countOfUse.transitionDuration = 1.0;
     countOfUse.textColor = [UIColor colorWithWhite:1 alpha:1];
@@ -188,7 +188,7 @@
         lockLevelBackground.hidden = NO;
         buyProduct.enabled = NO;
         if (product.dLevelLock == 4.0) {
-            [lockLevelBackgroundTitle setFont:[UIFont boldSystemFontOfSize:13.0f]];
+            [lockLevelBackgroundTitle setFont:[UIFont boldSystemFontOfSize:26.0f]];
         }
         NSString *nameOfRank=[NSString stringWithFormat:@"%dRank",product.dLevelLock];
         lockLevelBackgroundTitle.text = [NSString stringWithFormat:@"Available for %@",NSLocalizedString(nameOfRank, @"")];
