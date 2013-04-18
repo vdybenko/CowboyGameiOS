@@ -134,7 +134,7 @@ static const CGFloat timeToStandartTitles = 1.8;
         controllerType = ProfileViewControllerInitSimple;
         [self loadView];
         UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
-        [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:24];
+        [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:40];
         
         [self initMainControls];
         [mainProfileView setDinamicHeightBackground];
@@ -226,7 +226,7 @@ static const CGFloat timeToStandartTitles = 1.8;
         controllerType = ProfileViewControllerInitFirstStart;
         [self loadView];
         UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
-        [btnBack setTitleByLabel:@"CONTINUE" withColor:buttonsTitleColor fontSize:24];
+        [btnBack setTitleByLabel:@"CONTINUE" withColor:buttonsTitleColor fontSize:40];
         [self initMainControls];
         [mainProfileView setDinamicHeightBackground];
         lbDescription.hidden = NO;
@@ -252,7 +252,7 @@ static const CGFloat timeToStandartTitles = 1.8;
 -(void)viewWillAppear:(BOOL)animated {
     [profilePictureView setProfileID:nil];
     [profilePictureView setProfileID:playerAccount.facebookUser.id];
-    lbPointsText.font = [UIFont fontWithName: @"MyriadPro-Semibold" size:12];
+    lbPointsText.font = [UIFont fontWithName: @"MyriadPro-Semibold" size:24];
 
 //    NSString *name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel];
 //    ivCurrentRank.image = [UIImage imageNamed:name];
@@ -345,9 +345,9 @@ static const CGFloat timeToStandartTitles = 1.8;
 
 -(void)initMainControls;
 {    
-    UIFont *titlesFont = [UIFont systemFontOfSize:25.0f];
-    UIFont *NameFont = [UIFont  systemFontOfSize:25.0f];
-    UIFont *CountFont = [UIFont systemFontOfSize:25.0f];
+    UIFont *titlesFont = [UIFont systemFontOfSize:40.0f];
+    UIFont *NameFont = [UIFont  systemFontOfSize:40.0f];
+    UIFont *CountFont = [UIFont systemFontOfSize:40.0f];
     
 //    UIFont *fontSimpleText=[UIFont fontWithName: @"MyriadPro-Semibold" size:13];
     UIColor *mainColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
@@ -375,7 +375,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     lbBiggestWin.text = NSLocalizedString(@"TheBiggestWinGold", @"");
     lbBiggestWin.font = titlesFont;
     
-    lbPointsCountMain.font = [UIFont fontWithName: @"MyriadPro-Bold" size:15];
+    lbPointsCountMain.font = [UIFont fontWithName: @"MyriadPro-Bold" size:30];
     
     lbBiggestWinCount.font = CountFont;
 //    [lbBiggestWinCount dinamicAttachToView:lbBiggestWin withDirection:DirectionToAnimateRight ];
@@ -411,7 +411,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     
     [self loadView];
     UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
-    [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:24];
+    [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:40];
     [duelButton setTitleByLabel:@"DUEL"];
     [duelButton setEnabled:NO];
     [duelButton changeColorOfTitleByLabel:buttonsTitleColor];
@@ -419,14 +419,14 @@ static const CGFloat timeToStandartTitles = 1.8;
     needAnimation = YES;
     [self initMainControls];
     
-    [lbAward setFont: [UIFont fontWithName: @"MyriadPro-Bold" size:18]];//lbAward.font.pointSize]];
+    [lbAward setFont: [UIFont fontWithName: @"MyriadPro-Bold" size:50]];//lbAward.font.pointSize]];
     lbAward.text = NSLocalizedString(@"AWARD", @"");
     
-    [lbGoldCount setFont: [UIFont fontWithName: @"MyriadPro-Bold" size:18]];
+    [lbGoldCount setFont: [UIFont fontWithName: @"MyriadPro-Bold" size:35]];
     int moneyExch  = playerAccount.money < 10 ? 1: playerAccount.money / 10.0;
     lbGoldCount.text = [NSString stringWithFormat:@"%d",moneyExch];
     
-    [tfFBName setFont: [UIFont fontWithName: @"MyriadPro-Bold" size:18]];
+    [tfFBName setFont: [UIFont fontWithName: @"MyriadPro-Bold" size:30]];
     tfFBName.text = [NSString stringWithFormat:@"%@",playerAccount.accountName];
     
     //avatar magic!
@@ -460,59 +460,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     }
     //
     //  check iphone 5 delta
-    if ([UIScreen mainScreen].bounds.size.height > 480) {
-        [ivBackground setImage:[UIImage imageNamed:@"pv_wanted_back-568h@2x.png"]];
         
-        CGRect deltaFrame =  mainProfileView.frame;
-        deltaFrame.size.height += 77;
-        mainProfileView.frame = deltaFrame;
-        ivBackground.frame = deltaFrame;
-        
-        deltaFrame = tfFBName.frame;
-        deltaFrame.origin.y += 30;
-        tfFBName.frame = deltaFrame;
-        
-        deltaFrame = profilePictureView.frame;
-        deltaFrame.origin.y += 27;
-        profilePictureView.frame = deltaFrame;
-        
-        deltaFrame = profilePictureViewDefault.frame;
-        deltaFrame.origin.y += 27;
-        profilePictureViewDefault.frame = deltaFrame;
-        
-        deltaFrame = userAtackView.frame;
-        deltaFrame.origin.y += 27;
-        userAtackView.frame = deltaFrame;
-        
-        deltaFrame = userDefenseView.frame;
-        deltaFrame.origin.y += 27;
-        userDefenseView.frame = deltaFrame;
-        
-        deltaFrame = ivPhotoFrame.frame;
-        deltaFrame.origin.y += 27;
-        ivPhotoFrame.frame = deltaFrame;
-
-        deltaFrame = bgActivityIndicator.frame;
-        deltaFrame.origin.y += 27;
-        bgActivityIndicator.frame = deltaFrame;
-        
-        deltaFrame = lbGoldCount.frame;
-        deltaFrame.origin.y += 27;
-        lbGoldCount.frame = deltaFrame;
-        
-        deltaFrame = lbAward.frame;
-        deltaFrame.origin.y += 27;
-        lbAward.frame = deltaFrame;
-        
-        deltaFrame = lbGoldIcon.frame;
-        deltaFrame.origin.y += 27;
-        lbGoldIcon.frame = deltaFrame;
-        
-        deltaFrame = duelButton.frame;
-        deltaFrame.origin.y += 47;
-        duelButton.frame = deltaFrame;
-    }
-    
 }
 #pragma mark -
 -(void)checkLocationOfViewForFBLogin;
