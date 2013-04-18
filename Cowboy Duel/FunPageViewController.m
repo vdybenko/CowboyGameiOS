@@ -48,8 +48,7 @@ NSString *urlAddress;
     // Do any additional setup after loading the view from its nib.
     UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     
-    [self.backButton setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:24];
-    self.backButton.titleLabel.textAlignment = UITextAlignmentCenter;
+    [self.backButton setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:40];
     
 //    NSString *urlAddress = URL_COMM_FB_PAGE;
     
