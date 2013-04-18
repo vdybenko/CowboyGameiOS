@@ -175,7 +175,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 82.f;
+    return 168.f;
 }
 
 #pragma mark - TableCellWithButton methods
