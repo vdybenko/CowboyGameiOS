@@ -96,11 +96,11 @@
     
     lbBackBtn.text = NSLocalizedString(@"BACK", nil);
     lbBackBtn.textColor = btnColor;
-    lbBackBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:30];
+    lbBackBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:40];
     
     lbInviteBtn.text = NSLocalizedString(@"INVITE", nil);
     lbInviteBtn.textColor = btnColor;
-    lbInviteBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:30];
+    lbInviteBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:40];
 }
 
 - (void)viewDidUnload
