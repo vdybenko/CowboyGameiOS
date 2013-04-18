@@ -96,11 +96,11 @@
     
     lbBackBtn.text = NSLocalizedString(@"BACK", nil);
     lbBackBtn.textColor = btnColor;
-    lbBackBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
+    lbBackBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:30];
     
     lbInviteBtn.text = NSLocalizedString(@"INVITE", nil);
     lbInviteBtn.textColor = btnColor;
-    lbInviteBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
+    lbInviteBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:30];
 }
 
 - (void)viewDidUnload
@@ -177,7 +177,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 82.f;
+    return 168.f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

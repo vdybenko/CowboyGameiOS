@@ -20,7 +20,7 @@
     frame.origin.y=0;
     frame.size.width=frame.size.width-14;
     UILabel *label1 = [[UILabel alloc] initWithFrame:frame];
-    [label1 setFont: [UIFont fontWithName: @"DecreeNarrow" size:18]];
+    [label1 setFont: [UIFont fontWithName: @"DecreeNarrow" size:25]];
     label1.textAlignment = UITextAlignmentCenter;
     [label1 setBackgroundColor:[UIColor clearColor]];
     [label1 setTextColor:[UIColor colorWithRed:0.95 green:0.86 blue:0.68 alpha:1.0]];
