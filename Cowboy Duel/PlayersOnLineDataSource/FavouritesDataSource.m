@@ -246,8 +246,10 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
         if([[dic objectForKey:@"defenses"] respondsToSelector:@selector(objectForKey:)]){
             int defId = [[[dic objectForKey:@"defenses"] objectForKey:@"id"] intValue];
             NSUInteger index=[[AccountDataSource sharedInstance] findObsByID](arrDefense,defId);
-            CDDefenseProduct *def = [arrDefense objectAtIndex:index];
-            player.dDefense += def.dDefense;
+            if (index!=NSNotFound) {
+                CDDefenseProduct *def = [arrDefense objectAtIndex:index];
+                player.dDefense += def.dDefense;
+            }
         }
         
         player.dAttack=[DuelRewardLogicController countUpBuletsWithPlayerLevel:player.dLevel];
@@ -255,8 +257,10 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
         if([[dic objectForKey:@"weapons"] respondsToSelector:@selector(objectForKey:)]){
             int attId = [[[dic objectForKey:@"weapons"] objectForKey:@"id"] intValue];
             NSUInteger index=[[AccountDataSource sharedInstance] findObsByID](arrAttack,attId);
-            CDWeaponProduct *att = [arrAttack objectAtIndex:index];
-            player.dAttack += att.dDamage;
+            if (index!=NSNotFound) {
+                CDWeaponProduct *att = [arrAttack objectAtIndex:index];
+                player.dAttack += att.dDamage;
+            }
         }
         
         [arrItemsList addObject: player];

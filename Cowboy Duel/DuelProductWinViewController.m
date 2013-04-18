@@ -177,8 +177,10 @@
                     duelProduct.dCountOfUse =1;
                     NSMutableArray *arrWeapon = [DuelProductDownloaderController loadWeaponArray];
                     NSUInteger index=[playerAccount findObsByID](arrWeapon,playerAccount.curentIdWeapon);
-                    [arrWeapon replaceObjectAtIndex:index withObject:duelProduct];
-                    [DuelProductDownloaderController saveWeapon:arrWeapon];
+                    if (index!=NSNotFound) {
+                        [arrWeapon replaceObjectAtIndex:index withObject:duelProduct];
+                        [DuelProductDownloaderController saveWeapon:arrWeapon];
+                    }
                 }
             };
         }
@@ -207,11 +209,14 @@
     
     NSMutableArray *arrWeapon = [DuelProductDownloaderController loadWeaponArray];
     NSUInteger index=[playerAccount findObsByID](arrWeapon,playerAccount.curentIdWeapon);
-    [arrWeapon replaceObjectAtIndex:index withObject:duelProduct];
-    [DuelProductDownloaderController saveWeapon:arrWeapon];
     
-    [duelProductDownloaderController buyProductID:duelProduct.dID transactionID:-1];
+    if (index!=NSNotFound) {
+        [arrWeapon replaceObjectAtIndex:index withObject:duelProduct];
+        [DuelProductDownloaderController saveWeapon:arrWeapon];
         
+        [duelProductDownloaderController buyProductID:duelProduct.dID transactionID:-1];
+    }
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
                                                       userInfo:[NSDictionary dictionaryWithObject:@"/DuelProductWinVC_purchased" forKey:@"page"]];
