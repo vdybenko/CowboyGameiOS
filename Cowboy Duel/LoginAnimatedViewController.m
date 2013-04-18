@@ -16,6 +16,7 @@
 #import "Facebook.h"
 #import "ActiveDuelViewController.h"
 #import "UIView+Dinamic_BackGround.h"
+#import "UIButton+Image+Title.h"
 
 #define kFacebookAppId @"284932561559672"
 NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/first/";
@@ -31,9 +32,7 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
     __weak IBOutlet UILabel *animetedText;
     __weak IBOutlet UILabel *animetedText2;
     __weak IBOutlet UIButton *loginFBbutton;
-    __weak IBOutlet UILabel *practiceLable;
-    __weak IBOutlet UILabel *loginLable;
-    
+
     __weak IBOutlet UIView *textsBackground;
     
     __weak IBOutlet UIScrollView *scroolView;
@@ -87,12 +86,11 @@ static LoginAnimatedViewController *sharedHelper = nil;
 {
     [super viewDidLoad];
     animationPause = NO;
-
-    loginLable.text = NSLocalizedString(@"LOGIN", @"");
-    loginLable.font = [UIFont fontWithName: @"DecreeNarrow" size:36];
     
-    practiceLable.text = NSLocalizedString(@"PRACTICE", @"");
-    practiceLable.font = [UIFont fontWithName: @"DecreeNarrow" size:36];
+    UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
+
+    [practiceButton setTitleByLabel:@"PRACTICE" withColor:buttonsTitleColor fontSize:40];
+    [loginFBbutton setTitleByLabel:@"LOGIN" withColor:buttonsTitleColor fontSize:40];
     
     [textsBackground setDinamicHeightBackground];
     
@@ -114,10 +112,8 @@ static LoginAnimatedViewController *sharedHelper = nil;
     if (!animationPause) {
         [self performSelector:@selector(scroolViewAnimation) withObject:Nil afterDelay:10.5f];
         
-        [self performSelector:@selector(scaleView:) withObject:practiceLable  afterDelay:14.0];
         [self performSelector:@selector(scaleView:) withObject:practiceButton  afterDelay:14.0];
         [self performSelector:@selector(scaleView:) withObject:loginFBbutton  afterDelay:18.2];
-        [self performSelector:@selector(scaleView:) withObject:loginLable  afterDelay:18.2];
     }
 
 }
