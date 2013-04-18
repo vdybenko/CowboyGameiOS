@@ -31,8 +31,6 @@
     __weak IBOutlet UILabel *lbTitleRankAchieve;
     
     __weak IBOutlet UILabel *lbCongLvlMainText;
-    __weak IBOutlet UILabel *lbAgain;
-    __weak IBOutlet UILabel *lbMenu;
     __weak IBOutlet UILabel *lbPostOnFB;
     //buttons:
     __weak IBOutlet UIButton *btnAgain;
@@ -92,20 +90,12 @@
     
 
     lbTitleRankAchieve.textColor = mainColor;
-    lbTitleRankAchieve.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
+    lbTitleRankAchieve.font = [UIFont fontWithName: @"DecreeNarrow" size:70];
     
     [lbCongLvlMainText setTextColor:congColor];
-    [lbCongLvlMainText setFont: [UIFont systemFontOfSize:18.0f]];
-    
-    lbAgain.text = NSLocalizedString(@"TRY", nil);
-    lbAgain.textColor = btnColor;
-    lbAgain.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
-    
-    lbMenu.text = NSLocalizedString(@"BACK", nil); 
-    lbMenu.textColor = btnColor;
-    lbMenu.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
+    [lbCongLvlMainText setFont: [UIFont systemFontOfSize:36.0f]];
 
-    lbPostOnFB.font = [UIFont systemFontOfSize:9.0f];
+    lbPostOnFB.font = [UIFont systemFontOfSize:18.0f];
     lbPostOnFB.textColor = [UIColor whiteColor];
     lbPostOnFB.numberOfLines = 2;
     lbPostOnFB.lineBreakMode = UILineBreakModeCharacterWrap;
@@ -120,8 +110,6 @@
     btnMenu = nil;
     btnPost = nil;
     lbTitleRankAchieve = nil;
-    lbAgain = nil;
-    lbMenu = nil;
     lbPostOnFB = nil;
     ivLightRays = nil;
     ivLightRays2 = nil;
@@ -166,8 +154,6 @@
     ivLevelCoint = nil;
     lbTitleRankAchieve = nil;
     lbCongLvlMainText = nil;
-    lbAgain = nil;
-    lbMenu = nil;
     lbPostOnFB = nil;
     
     btnAgain = nil;

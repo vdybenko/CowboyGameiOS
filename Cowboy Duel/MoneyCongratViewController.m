@@ -79,30 +79,28 @@
     
     lbTitleCongratulation.text = NSLocalizedString(@"AchievTitle", nil);
     lbTitleCongratulation.textColor = mainColor;
-    lbTitleCongratulation.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
+    lbTitleCongratulation.font = [UIFont fontWithName: @"DecreeNarrow" size:70
+                                  ];
     lbTitleCongratulation.hidden=NO;
     
     lbPlusMoney.text = moneyLabel;
     [lbPlusMoney setAdjustsFontSizeToFitWidth:YES];
     [lbPlusMoney setBaselineAdjustment:UIBaselineAdjustmentAlignCenters];
     lbPlusMoney.textColor = mainColor;
-    lbPlusMoney.font = [UIFont fontWithName: @"DecreeNarrow" size:45];
+    lbPlusMoney.font = [UIFont fontWithName: @"DecreeNarrow" size:90];
     
     [lbCongMainText setTextColor:congColor];
-    [lbCongMainText setFont: [UIFont systemFontOfSize:18.0f]];
+    [lbCongMainText setFont: [UIFont systemFontOfSize:36.0f]];
     lbCongMainText.text = [NSString stringWithFormat:@"%@%@%d%@%@", NSLocalizedString(@"GoldAchievText1", nil),
                            NSLocalizedString(@"GoldAchievText2", nil),
                            playerAccount.money,
                            NSLocalizedString(@"GoldAchievText3", nil),
                            NSLocalizedString(@"GoldAchievText4", nil)];
 
-    [btnTryAgain setTitleByLabel:@"TRY"];
-    [btnTryAgain changeColorOfTitleByLabel:btnColor];
+    [btnTryAgain setTitleByLabel:@"TRY" withColor:btnColor fontSize:40];    
+    [btnBack setTitleByLabel:@"BACK" withColor:btnColor fontSize:40];
     
-    [btnBack setTitleByLabel:@"BACK"];
-    [btnBack changeColorOfTitleByLabel:btnColor];
-    
-    lbPostOnFB.font = [UIFont systemFontOfSize:9.0f];
+    lbPostOnFB.font = [UIFont systemFontOfSize:18.0f];
     lbPostOnFB.textColor = [UIColor whiteColor];
     lbPostOnFB.numberOfLines = 2;
     lbPostOnFB.lineBreakMode = UILineBreakModeCharacterWrap;

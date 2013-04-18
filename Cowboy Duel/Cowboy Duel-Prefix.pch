@@ -54,7 +54,7 @@
 
 #define MASTER_SERVER_URL @"http://cowboyduel.net/"
 //#define MASTER_SERVER_IP @"176.34.226.109"
-#define MASTER_SERVER_IP @"54.241.25.87"
+//#define MASTER_SERVER_IP @"54.241.25.87" 1
 #define MASTER_SERVER_PORT @"8888"
 
 #define SCSessionStateChangedNotification  @"com.facebook.Scrumptious:SCSessionStateChangedNotification"
@@ -62,5 +62,5 @@
 #define URL_COMM_FB_PAGE @"https://m.facebook.com/CowboyGamesConnunityiOS"
 #define URL_CONTACT_US @"http://cowboyduel.com/"
 
-//#define MASTER_SERVER_IP @"192.168.1.41"
+#define MASTER_SERVER_IP @"192.168.1.41"
 //#define MASTER_SERVER_PORT @"8888"
