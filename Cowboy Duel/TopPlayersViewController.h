@@ -22,9 +22,6 @@
 @property (strong, nonatomic) IBOutlet UIView *loadingView;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
-@property (strong, nonatomic) IBOutlet UIView *offLineBackGround;
-@property (strong, nonatomic) IBOutlet UIWebView *offLineText;
-
 - (id)initWithAccount:(AccountDataSource *)userAccount;
 -(IBAction)findMe:(id)sender;
 

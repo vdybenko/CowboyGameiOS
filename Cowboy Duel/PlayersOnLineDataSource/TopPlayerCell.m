@@ -112,6 +112,7 @@ UIColor * sandColor;
     status=pStatus;
     switch (pStatus) {
         case TopPlayerCellStatusSimple:
+            backGround.hidden = NO;
             [backGroundSelected setHidden:YES];
             [icon setBackgroundColor:[UIColor clearColor]];
             rankNumber.textColor=brownColor;
@@ -120,6 +121,7 @@ UIColor * sandColor;
             gold.textColor=brownColor;
             break;
         case TopPlayerCellStatusRed:
+            backGround.hidden = YES;
             [backGroundSelected setImage:[UIImage imageNamed:@"topPlayerCell.png"]];
             [backGroundSelected setHidden:NO];
             [icon setBackgroundColor:[UIColor whiteColor]];
@@ -129,6 +131,7 @@ UIColor * sandColor;
             gold.textColor=[UIColor whiteColor];
             break;
         case TopPlayerCellStatusGold:
+            backGround.hidden = YES;
             [backGroundSelected setImage:[UIImage imageNamed:@"topPlayerGoldCell.png"]];
             [backGroundSelected setHidden:NO];
             rankNumber.textColor=brownColor;
@@ -148,7 +151,7 @@ UIColor * sandColor;
         [rankNumber setShadowColor:[UIColor colorWithRed:1.f green:253.f/255.f blue:178.f/255.f alpha:1]];
         [rankNumber setShadowOffset:CGSizeMake(0, 0)];
         rankNumber.shadowBlur=2.f;
-        rankNumber.font = [UIFont fontWithName: @"MyriadPro-Bold" size:40];
+        rankNumber.font = [UIFont fontWithName: @"MyriadPro-Bold" size:80];
         [rankNumber setGradientEndColor:[UIColor colorWithRed:1.0f green:140.f/255.f blue:0 alpha:1.0]];
         [rankNumber setGradientStartColor:[UIColor colorWithRed:1.0f green:181.f/255.f blue:0 alpha:1.0]];
         rankNumber.shadowOffset = CGSizeZero;
@@ -159,7 +162,7 @@ UIColor * sandColor;
         [rankNumber setShadowColor:[UIColor clearColor]];
         rankNumber.innerShadowColor = rankNumber.shadowColor;
         [rankNumber setBaselineAdjustment:UIBaselineAdjustmentAlignCenters];
-        rankNumber.font = [UIFont fontWithName: @"MyriadPro-Bold" size:20];
+        rankNumber.font = [UIFont fontWithName: @"MyriadPro-Bold" size:40];
         
         switch (status) {
             case TopPlayerCellStatusSimple:

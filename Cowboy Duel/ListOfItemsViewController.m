@@ -36,8 +36,6 @@
     NSTimer *updateTimer;
 }
 
--(NSString *) convertToJSParametr:(NSString *) pValue;
--(NSString *) HTMLImage:(NSString *) pValue;
 @end
 
 @implementation ListOfItemsViewController

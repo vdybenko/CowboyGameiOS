@@ -23,12 +23,10 @@
     NSMutableArray * arrItemsListForFindMe;
 }
 
--(NSString *) convertToJSParametr:(NSString *) pValue;
--(NSString *) HTMLImage:(NSString *) pValue;
 @end
 
 @implementation TopPlayersViewController
-@synthesize tableView, btnFindMe, btnBack, activityIndicator, loadingView,offLineBackGround,offLineText,saloonTitle;
+@synthesize tableView, btnFindMe, btnBack, activityIndicator, loadingView,saloonTitle;
 
 static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
 
@@ -72,15 +70,12 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
     
     saloonTitle.text = NSLocalizedString(@"LEAD", nil);
     saloonTitle.textColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
-    saloonTitle.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
+    saloonTitle.font = [UIFont fontWithName: @"DecreeNarrow" size:70];
 
     UIColor *btnColor = [UIColor colorWithRed:244.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     
-    [btnBack setTitleByLabel:@"BACK"];
-    [btnBack changeColorOfTitleByLabel:btnColor];
-    
-    [btnFindMe setTitleByLabel:@"FIND ME"];
-    [btnFindMe changeColorOfTitleByLabel:btnColor];
+    [btnBack setTitleByLabel:@"BACK" withColor:btnColor fontSize:40];
+    [btnFindMe setTitleByLabel:@"FIND ME" withColor:btnColor fontSize:40];
 }
 
 - (void)viewDidUnload
@@ -126,8 +121,6 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
     btnBack = nil;
     activityIndicator = nil;
     loadingView = nil;
-    offLineBackGround = nil;
-    offLineText = nil;
     saloonTitle = nil;
     _playerAccount = nil;
     _playersTopDataSource = nil;
@@ -139,7 +132,7 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 20;
+    return 40;
 }
 
 -(UIView *) tableView:(UITableView *)pTableView viewForHeaderInSection:(NSInteger)section
@@ -152,7 +145,7 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 82.f;
+    return 168.f;
 }
 
 #pragma mark - Private methods
