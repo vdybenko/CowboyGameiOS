@@ -781,11 +781,11 @@ static StartViewController *sharedHelper = nil;
 	[UIView setAnimationCurve:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction];
     [UIView setAnimationDuration:0.5f];
 	[UIView setAnimationDelegate:self];
-    CGRect frame = feedbackView.frame;
-    int delta = 0;
-    if ([[UIScreen mainScreen] bounds].size.height > 480) delta = 50;
-    frame.origin.y = [[UIScreen mainScreen] bounds].size.height - feedbackView.frame.size.height - delta;
-    feedbackView.frame = frame;
+//    CGRect frame = feedbackView.frame;
+//    int delta = 0;
+//    if ([[UIScreen mainScreen] bounds].size.height > 480) delta = 50;
+//    frame.origin.y = [[UIScreen mainScreen] bounds].size.height - feedbackView.frame.size.height - delta;
+//    feedbackView.frame = frame;
     
     [UIView commitAnimations];
     
