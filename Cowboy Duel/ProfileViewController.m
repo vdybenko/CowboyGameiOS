@@ -134,7 +134,7 @@ static const CGFloat timeToStandartTitles = 1.8;
         controllerType = ProfileViewControllerInitSimple;
         [self loadView];
         UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
-        [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:24];
+        [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:40];
         
         [self initMainControls];
         [mainProfileView setDinamicHeightBackground];
@@ -252,7 +252,7 @@ static const CGFloat timeToStandartTitles = 1.8;
 -(void)viewWillAppear:(BOOL)animated {
     [profilePictureView setProfileID:nil];
     [profilePictureView setProfileID:playerAccount.facebookUser.id];
-    lbPointsText.font = [UIFont fontWithName: @"MyriadPro-Semibold" size:12];
+    lbPointsText.font = [UIFont fontWithName: @"MyriadPro-Semibold" size:24];
 
 //    NSString *name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel];
 //    ivCurrentRank.image = [UIImage imageNamed:name];
@@ -345,9 +345,9 @@ static const CGFloat timeToStandartTitles = 1.8;
 
 -(void)initMainControls;
 {    
-    UIFont *titlesFont = [UIFont systemFontOfSize:25.0f];
-    UIFont *NameFont = [UIFont  systemFontOfSize:25.0f];
-    UIFont *CountFont = [UIFont systemFontOfSize:25.0f];
+    UIFont *titlesFont = [UIFont systemFontOfSize:40.0f];
+    UIFont *NameFont = [UIFont  systemFontOfSize:40.0f];
+    UIFont *CountFont = [UIFont systemFontOfSize:40.0f];
     
 //    UIFont *fontSimpleText=[UIFont fontWithName: @"MyriadPro-Semibold" size:13];
     UIColor *mainColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
@@ -411,21 +411,20 @@ static const CGFloat timeToStandartTitles = 1.8;
     [self loadView];
     UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:40];
-    [btnBack setTitleByLabel:@"DUEL" withColor:buttonsTitleColor fontSize:40];
-    [duelButton setTitleByLabel:@"DUEL"];
+    [duelButton setTitleByLabel:@"DUEL" withColor:buttonsTitleColor fontSize:40];
     [duelButton setEnabled:NO];
     
     needAnimation = YES;
     [self initMainControls];
     
-    [lbAward setFont: [UIFont fontWithName: @"MyriadPro-Bold" size:36]];//lbAward.font.pointSize]];
+    [lbAward setFont: [UIFont fontWithName: @"MyriadPro-Bold" size:50]];//lbAward.font.pointSize]];
     lbAward.text = NSLocalizedString(@"AWARD", @"");
     
-    [lbGoldCount setFont: [UIFont fontWithName: @"MyriadPro-Bold" size:36]];
+    [lbGoldCount setFont: [UIFont fontWithName: @"MyriadPro-Bold" size:35]];
     int moneyExch  = playerAccount.money < 10 ? 1: playerAccount.money / 10.0;
     lbGoldCount.text = [NSString stringWithFormat:@"%d",moneyExch];
     
-    [tfFBName setFont: [UIFont fontWithName: @"MyriadPro-Bold" size:36]];
+    [tfFBName setFont: [UIFont fontWithName: @"MyriadPro-Bold" size:30]];
     tfFBName.text = [NSString stringWithFormat:@"%@",playerAccount.accountName];
     
     //avatar magic!
