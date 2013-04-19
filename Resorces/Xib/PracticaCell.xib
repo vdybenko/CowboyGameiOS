@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1536</int>
-		<string key="IBDocument.SystemVersion">12C60</string>
-		<string key="IBDocument.InterfaceBuilderVersion">3081</string>
-		<string key="IBDocument.AppKitVersion">1187.34</string>
-		<string key="IBDocument.HIToolboxVersion">625.00</string>
+		<int key="IBDocument.SystemTarget">1552</int>
+		<string key="IBDocument.SystemVersion">11G63</string>
+		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
+		<string key="IBDocument.AppKitVersion">1138.51</string>
+		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">2080</string>
+			<string key="NS.object.0">2083</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -43,7 +43,7 @@
 							<object class="IBUIImageView" id="20704325">
 								<reference key="NSNextResponder" ref="643975086"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{13, 3}, {586, 156}}</string>
+								<string key="NSFrame">{{27, 4}, {586, 156}}</string>
 								<reference key="NSSuperview" ref="643975086"/>
 								<reference key="NSNextKeyView" ref="995158912"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -57,9 +57,8 @@
 							<object class="IBUIButton" id="321017174">
 								<reference key="NSNextResponder" ref="643975086"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{429, 41}, {142, 62}}</string>
+								<string key="NSFrame">{{443, 42}, {142, 62}}</string>
 								<reference key="NSSuperview" ref="643975086"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -95,7 +94,7 @@
 							<object class="IBUIImageView" id="995158912">
 								<reference key="NSNextResponder" ref="643975086"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{37, 17}, {370, 126}}</string>
+								<string key="NSFrame">{{51, 18}, {370, 126}}</string>
 								<reference key="NSSuperview" ref="643975086"/>
 								<reference key="NSNextKeyView" ref="321017174"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -165,8 +164,8 @@
 						<int key="objectID">2</int>
 						<reference key="object" ref="886287858"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="321017174"/>
 							<reference ref="20704325"/>
+							<reference ref="321017174"/>
 							<reference ref="995158912"/>
 						</array>
 						<reference key="parent" ref="0"/>
@@ -216,6 +215,6 @@
 			<string key="salon_duel.png">{75, 33}</string>
 			<string key="topPlayerCell_blue.png">{293, 78}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">2080</string>
+		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
 </archive>

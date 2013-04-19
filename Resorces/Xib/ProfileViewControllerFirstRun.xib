@@ -488,7 +488,7 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 						</array>
-						<string key="NSFrame">{{94, 563}, {580, 324}}</string>
+						<string key="NSFrame">{{94, 563}, {586, 324}}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
 						<reference key="NSNextKeyView" ref="365286863"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>

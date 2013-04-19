@@ -1783,11 +1783,11 @@ static StartViewController *sharedHelper = nil;
 
 -(void)showMessage10Dolars;
 {
-    v10DolarsForDay=[[UIView alloc] initWithFrame:CGRectMake(12, -40, 290, 40)];
+    v10DolarsForDay=[[UIView alloc] initWithFrame:CGRectMake(91, -40, 586, 60)];
     
-    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(10, 10, 270, 20)];
+    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(10, 10, 566, 40)];
     [label setTextAlignment:UITextAlignmentCenter];
-    [label setFont:[UIFont systemFontOfSize:18.f]];
+    [label setFont:[UIFont systemFontOfSize:36.f]];
     UIColor *brownColor=[UIColor colorWithRed:0.38 green:0.267 blue:0.133 alpha:1];
     [label setTextColor:brownColor];
     [label setBackgroundColor:[UIColor clearColor]];
