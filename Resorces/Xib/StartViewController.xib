@@ -42,7 +42,7 @@
 					<object class="IBUIImageView" id="638093522">
 						<reference key="NSNextResponder" ref="1048327278"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{460, -68}, {960, 516}}</string>
+						<string key="NSFrame">{{940, -68}, {960, 515}}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
 						<reference key="NSNextKeyView" ref="559891747"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -56,7 +56,7 @@
 					<object class="IBUIImageView" id="951009143">
 						<reference key="NSNextResponder" ref="1048327278"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{-20, -68}, {960, 516}}</string>
+						<string key="NSFrame">{{-20, -68}, {960, 515}}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
 						<reference key="NSNextKeyView" ref="343128217"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -668,6 +668,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{296, 260}, {176, 46}}</string>
 								<reference key="NSSuperview" ref="862881662"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -1490,7 +1491,7 @@
 			<string key="fb_view_down_new.png">{5, 7}</string>
 			<string key="fb_view_top.png">{320, 8}</string>
 			<string key="pv_btn_music_on.png">{33, 35}</string>
-			<string key="st_cloud_new.png">{480, 258}</string>
+			<string key="st_cloud_new.png">{960, 515}</string>
 			<string key="st_title.png">{320, 97}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>

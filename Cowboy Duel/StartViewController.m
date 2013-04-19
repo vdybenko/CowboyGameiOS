@@ -602,7 +602,7 @@ static StartViewController *sharedHelper = nil;
     cloudSecondView.hidden = YES;
     animationCheck = NO;
     
-    cloudX=460;
+    cloudX=940;
     cloud2X=-20;
     
     CGRect frame = cloudView.frame;
