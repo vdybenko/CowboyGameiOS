@@ -17,7 +17,7 @@
     CGRect mainFrame=self.frame;
     CGRect frameToCrop;
     if ([Utils isiPhoneRetina]) {
-        frameToCrop=CGRectMake(0, 0, 2*imageBackGround.size.width, 2*mainFrame.size.height);
+        frameToCrop=CGRectMake(0, 0, 2*imageBackGround.size.width, mainFrame.size.height);
     }else {
         frameToCrop=CGRectMake(0, 0, imageBackGround.size.width, mainFrame.size.height);
     }
@@ -25,32 +25,26 @@
     
     UIImage *cropped = [UIImage imageWithCGImage:imageRef];
     UIImageView *ivBody=[[UIImageView alloc] initWithImage:cropped];
-    [ivBody setContentMode:UIViewContentModeScaleToFill];
-    CGRect frame=CGRectMake(0, 0, mainFrame.size.width, mainFrame.size.height);
-    [ivBody setFrame:frame];
-    
-    
+    [ivBody setContentMode:UIViewContentModeScaleAspectFit];
     
     [self insertSubview:ivBody atIndex:0];
     CGImageRelease(imageRef);
     
-    
-    
-    if (mainFrame.size.height<=imageBackGround.size.height) {
-        ivBody.layer.cornerRadius = 35.0;
+    if (mainFrame.size.height<imageBackGround.size.height) {
+        ivBody.layer.cornerRadius = 40.0;
         ivBody.layer.masksToBounds = YES;
         
         UIImageView *ivBottom=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"view_dinamic_height_bottom.png"]];
         CGRect frameBottom=ivBottom.frame;
+        if ([Utils isiPhoneRetina]) {
+            frameBottom.size = CGSizeMake(frameToCrop.size.width, 2*frameBottom.size.height);
+        }else {
+            frameBottom.size = CGSizeMake(frameToCrop.size.width, frameBottom.size.height);
+        }
         frameBottom.origin.y=mainFrame.size.height-frameBottom.size.height;
-        
-        [ivBottom setContentMode:UIViewContentModeScaleToFill];
-        CGRect frame=CGRectMake(0, frameBottom.origin.y, mainFrame.size.width, frameBottom.size.height);
-        [ivBottom setFrame:frame];
-
-        
+        [ivBottom setFrame:frameBottom];
+        [ivBottom setContentMode:UIViewContentModeScaleAspectFit];
         [self insertSubview:ivBottom aboveSubview:ivBody];
-        
         
         ivBottom = nil;
     }
