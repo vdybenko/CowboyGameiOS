@@ -1676,11 +1676,11 @@ static StartViewController *sharedHelper = nil;
 -(void)cloudAnimation;
 {
     if (animationCheck) {
-        [UIView animateWithDuration:0.7f animations:^{
+        [UIView animateWithDuration:0.2f animations:^{
             CGRect frame = cloudView.frame;
             frame.origin.x = cloudX;
             cloudView.frame = frame;
-            cloudX-=10;
+            cloudX-=1;
         }completion:^(BOOL finished) {
             [self cloudRevAnimation];
         }];
@@ -1697,7 +1697,7 @@ static StartViewController *sharedHelper = nil;
         [self cloudSecondAnimation];
     }
     
-    if(cloudX==-1000){
+    if(cloudX==-960){
         [cloudView setHidden:YES];
         CGRect frame = cloudView.frame;
         frame.origin.x = 940;
@@ -1711,11 +1711,11 @@ static StartViewController *sharedHelper = nil;
 -(void)cloudSecondAnimation
 {
     if (animationCheck) {
-        [UIView animateWithDuration:0.7f animations:^{
+        [UIView animateWithDuration:0.2f animations:^{
             CGRect frame = cloudSecondView.frame;
             frame.origin.x = cloud2X;
             cloudSecondView.frame = frame;
-            cloud2X-=10;
+            cloud2X-=1;
         }completion:^(BOOL finished) {
             [self cloudSecondRevAnimation];
         }];
@@ -1730,7 +1730,7 @@ static StartViewController *sharedHelper = nil;
     if(cloud2X==-20){
         [self cloudAnimation];
     }
-    if(cloud2X==-1000){
+    if(cloud2X==-960){
         [cloudSecondView setHidden:YES];
         CGRect frame = cloudSecondView.frame;
         frame.origin.x = 940;

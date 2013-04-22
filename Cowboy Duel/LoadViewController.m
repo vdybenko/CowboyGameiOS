@@ -54,13 +54,6 @@ static const char *A_URL =  BASE_URL"api/authorization";
         if (remoteNotif){
             startViewController.pushNotification = remoteNotif;
         }
-
-       /* imgBackground.image = [UIImage imageNamed:@"Default-568h.png"];
-        CGRect frame = imgBackground.frame;
-        frame.size.width = 768;
-        frame.size.height = 1024;
-        imgBackground.frame = frame;*/
-       
         NSString *version = @"Version ";
         if ([[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"] != nil) {
             version = [version stringByAppendingString:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]];
