@@ -107,7 +107,7 @@
 								<bool key="IBUIDetectsPhoneNumbers">YES</bool>
 							</object>
 						</array>
-						<string key="NSFrame">{{90, 192}, {594, 640}}</string>
+						<string key="NSFrame">{{91, 193}, {586, 638}}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="961354183"/>
@@ -423,7 +423,6 @@
 						<int key="objectID">11</int>
 						<reference key="object" ref="1048327278"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="583059957"/>
 							<reference ref="1051110668"/>
 							<reference ref="618784880"/>
 							<reference ref="1053221490"/>
@@ -432,6 +431,7 @@
 							<reference ref="474818476"/>
 							<reference ref="219769812"/>
 							<reference ref="298494590"/>
+							<reference ref="583059957"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>

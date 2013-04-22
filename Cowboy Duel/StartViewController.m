@@ -346,7 +346,7 @@ static StartViewController *sharedHelper = nil;
         
         oldAccounId = @"";
         
-        cloudX=460;
+        cloudX=940;
         cloud2X=-20;
         
         inBackground = NO;
@@ -602,7 +602,7 @@ static StartViewController *sharedHelper = nil;
     cloudSecondView.hidden = YES;
     animationCheck = NO;
     
-    cloudX=460;
+    cloudX=940;
     cloud2X=-20;
     
     CGRect frame = cloudView.frame;
@@ -663,7 +663,7 @@ static StartViewController *sharedHelper = nil;
     animationCheck = NO;
     inBackground = YES;
     
-    cloudX=460;
+    cloudX=940;
     cloud2X=-20;
     
     CGRect frame = cloudView.frame;
@@ -759,7 +759,7 @@ static StartViewController *sharedHelper = nil;
     [[NSUserDefaults standardUserDefaults] synchronize];
     animationCheck = NO;
     
-    cloudX=460;
+    cloudX=940;
     cloud2X=-20;
     
     CGRect frame = cloudView.frame;
@@ -781,11 +781,11 @@ static StartViewController *sharedHelper = nil;
 	[UIView setAnimationCurve:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction];
     [UIView setAnimationDuration:0.5f];
 	[UIView setAnimationDelegate:self];
-    CGRect frame = feedbackView.frame;
-    int delta = 0;
-    if ([[UIScreen mainScreen] bounds].size.height > 480) delta = 50;
-    frame.origin.y = [[UIScreen mainScreen] bounds].size.height - feedbackView.frame.size.height - delta;
-    feedbackView.frame = frame;
+//    CGRect frame = feedbackView.frame;
+//    int delta = 0;
+//    if ([[UIScreen mainScreen] bounds].size.height > 480) delta = 50;
+//    frame.origin.y = [[UIScreen mainScreen] bounds].size.height - feedbackView.frame.size.height - delta;
+//    feedbackView.frame = frame;
     
     [UIView commitAnimations];
     
@@ -1676,25 +1676,20 @@ static StartViewController *sharedHelper = nil;
 -(void)cloudAnimation;
 {
     if (animationCheck) {
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationBeginsFromCurrentState:YES];
-        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-        [UIView setAnimationDuration:0.7f];
-        [UIView setAnimationDelegate:self];
-        
-        CGRect frame = cloudView.frame;
-        frame.origin.x = cloudX;
-        cloudView.frame = frame;
-        cloudX-=10;
-        
-        [UIView setAnimationDidStopSelector:@selector(cloudRevAnimation)];
-        [UIView commitAnimations];
+        [UIView animateWithDuration:0.7f animations:^{
+            CGRect frame = cloudView.frame;
+            frame.origin.x = cloudX;
+            cloudView.frame = frame;
+            cloudX-=10;
+        }completion:^(BOOL finished) {
+            [self cloudRevAnimation];
+        }];
     }
 }
 
 -(void)cloudRevAnimation
 {
-    if(cloudX == 440){
+    if(cloudX == 920){
         [cloudView setHidden:NO];
     }
     
@@ -1702,12 +1697,12 @@ static StartViewController *sharedHelper = nil;
         [self cloudSecondAnimation];
     }
     
-    if(cloudX==-520){
+    if(cloudX==-1000){
         [cloudView setHidden:YES];
         CGRect frame = cloudView.frame;
-        frame.origin.x = 460;
+        frame.origin.x = 940;
         cloudView.frame = frame;
-        cloudX=460;
+        cloudX=940;
     }else{
         [self cloudAnimation];
     }
@@ -1716,36 +1711,31 @@ static StartViewController *sharedHelper = nil;
 -(void)cloudSecondAnimation
 {
     if (animationCheck) {
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationBeginsFromCurrentState:YES];
-        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-        [UIView setAnimationDuration:0.7f];
-        [UIView setAnimationDelegate:self];
-        
-        CGRect frame = cloudSecondView.frame;
-        frame.origin.x = cloud2X;
-        cloudSecondView.frame = frame;
-        cloud2X-=10;
-        
-        [UIView setAnimationDidStopSelector:@selector(cloudSecondRevAnimation)];
-        [UIView commitAnimations];
+        [UIView animateWithDuration:0.7f animations:^{
+            CGRect frame = cloudSecondView.frame;
+            frame.origin.x = cloud2X;
+            cloudSecondView.frame = frame;
+            cloud2X-=10;
+        }completion:^(BOOL finished) {
+            [self cloudSecondRevAnimation];
+        }];
     }
 }
 
 -(void)cloudSecondRevAnimation
 {
-    if(cloud2X ==440){
+    if(cloud2X ==920){
         [cloudSecondView setHidden:NO];
     }
     if(cloud2X==-20){
         [self cloudAnimation];
     }
-    if(cloud2X==-520){
+    if(cloud2X==-1000){
         [cloudSecondView setHidden:YES];
         CGRect frame = cloudSecondView.frame;
-        frame.origin.x = 460;
+        frame.origin.x = 940;
         cloudSecondView.frame = frame;
-        cloud2X=460;
+        cloud2X=940;
     }else{
         [self cloudSecondAnimation];
     }
@@ -1783,11 +1773,11 @@ static StartViewController *sharedHelper = nil;
 
 -(void)showMessage10Dolars;
 {
-    v10DolarsForDay=[[UIView alloc] initWithFrame:CGRectMake(12, -40, 290, 40)];
+    v10DolarsForDay=[[UIView alloc] initWithFrame:CGRectMake(91, -40, 586, 60)];
     
-    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(10, 10, 270, 20)];
+    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(10, 10, 566, 40)];
     [label setTextAlignment:UITextAlignmentCenter];
-    [label setFont:[UIFont systemFontOfSize:18.f]];
+    [label setFont:[UIFont systemFontOfSize:36.f]];
     UIColor *brownColor=[UIColor colorWithRed:0.38 green:0.267 blue:0.133 alpha:1];
     [label setTextColor:brownColor];
     [label setBackgroundColor:[UIColor clearColor]];

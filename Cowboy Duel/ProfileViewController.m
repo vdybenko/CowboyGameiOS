@@ -354,7 +354,7 @@ static const CGFloat timeToStandartTitles = 1.8;
 
     lbProfileMain.text = NSLocalizedString(@"ProfileTitle", @"");
     lbProfileMain.textColor = mainColor;
-    lbProfileMain.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
+    lbProfileMain.font = [UIFont fontWithName: @"DecreeNarrow" size:70];
     
     lbGoldCount.font = NameFont;
     lbGoldCount.text =[numberFormatter stringFromNumber:[NSNumber numberWithInt:(playerAccount.money/2)]];
@@ -396,7 +396,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     lbPlayerStats.font = CountFont;
    
     [ivPointsLine setClipsToBounds:YES];
-
 }
 
 -(void)initStatsWithAccount: (AccountDataSource *)oponentAccount;
@@ -412,9 +411,8 @@ static const CGFloat timeToStandartTitles = 1.8;
     [self loadView];
     UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:40];
-    [duelButton setTitleByLabel:@"DUEL"];
+    [duelButton setTitleByLabel:@"DUEL" withColor:buttonsTitleColor fontSize:40];
     [duelButton setEnabled:NO];
-    [duelButton changeColorOfTitleByLabel:buttonsTitleColor];
     
     needAnimation = YES;
     [self initMainControls];
@@ -458,9 +456,6 @@ static const CGFloat timeToStandartTitles = 1.8;
         profilePictureViewDefault.transform = CGAffineTransformIdentity;
         
     }
-    //
-    //  check iphone 5 delta
-        
 }
 #pragma mark -
 -(void)checkLocationOfViewForFBLogin;

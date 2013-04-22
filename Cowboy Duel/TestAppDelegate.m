@@ -92,7 +92,7 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     
     clouds = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"st_cloud_new.png"]];
     frame = clouds.frame;
-    frame.origin = CGPointMake(-20, -68);
+    frame.origin = CGPointMake(-20, 0);
     clouds.frame = frame;
     [window addSubview:clouds];
     
