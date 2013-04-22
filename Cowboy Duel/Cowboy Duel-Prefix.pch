@@ -54,11 +54,7 @@
 
 #define MASTER_SERVER_URL @"http://cowboyduel.net/"
 //#define MASTER_SERVER_IP @"176.34.226.109"
-<<<<<<< HEAD
-#define MASTER_SERVER_IP @"54.241.25.87" 
-=======
-#define MASTER_SERVER_IP @"54.241.25.87" //1
->>>>>>> 3b21ba94f19b75b55ecf4ae0b8612c27cb682d16
+#define MASTER_SERVER_IP @"54.241.25.87"
 
 #define MASTER_SERVER_PORT @"8888"
 

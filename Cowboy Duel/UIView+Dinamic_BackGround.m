@@ -16,10 +16,13 @@
     UIImage *imageBackGround=[UIImage imageNamed:@"view_dinamic_height.png"];
     CGRect mainFrame=self.frame;
     CGRect frameToCrop;
+    CGFloat heightSize;
     if ([Utils isiPhoneRetina]) {
         frameToCrop=CGRectMake(0, 0, 2*imageBackGround.size.width, mainFrame.size.height);
+        heightSize = 2*imageBackGround.size.height;
     }else {
         frameToCrop=CGRectMake(0, 0, imageBackGround.size.width, mainFrame.size.height);
+        heightSize = imageBackGround.size.height;
     }
     CGImageRef imageRef = CGImageCreateWithImageInRect([imageBackGround CGImage], frameToCrop);
     
@@ -30,7 +33,7 @@
     [self insertSubview:ivBody atIndex:0];
     CGImageRelease(imageRef);
     
-    if (mainFrame.size.height<imageBackGround.size.height) {
+    if (mainFrame.size.height<heightSize) {
         ivBody.layer.cornerRadius = 40.0;
         ivBody.layer.masksToBounds = YES;
         
