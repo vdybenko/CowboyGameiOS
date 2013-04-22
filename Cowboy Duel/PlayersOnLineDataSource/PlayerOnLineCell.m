@@ -63,7 +63,7 @@
     self.userDefenseTitle = nil;
     
     
-    [btnDuel setTitleByLabel:@"DUEL" withColor:[UIColor colorWithRed:0.95 green:0.86 blue:0.68 alpha:1.0] fontSize:40];
+    [btnDuel setTitleByLabel:@"DUEL" withColor:[UIColor colorWithRed:0.95 green:0.86 blue:0.68 alpha:1.0] fontSize:35];
     [backGround setDinamicHeightBackground];
 }
 
