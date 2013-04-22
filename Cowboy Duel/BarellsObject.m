@@ -41,8 +41,8 @@
             explosinPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFile error:&error];
             [explosinPlayer prepareToPlay];
         
-        NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"barelExp1.png"],
-                                [UIImage imageNamed:@"barelExp2.png"], [UIImage imageNamed:@"barelExp4.png"],[UIImage imageNamed:@"barelExp6.png"],
+        NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"barrelFrame1.png"],
+                                [UIImage imageNamed:@"barrelFrame2.png"], [UIImage imageNamed:@"barrelFrame3.png"],[UIImage imageNamed:@"barrelFrame4.png"],
                                 nil];
         barelAnimImg.animationImages = imgArray;
         barelAnimImg.animationDuration = 0.3f;
@@ -129,20 +129,20 @@
 }
 
 -(void)dropBarel:(UIImageView *)barellImg;{
-    
+ 
     [UIView animateWithDuration:0.2 animations:^{
         CGRect frame = barellImg.frame;
-        frame.origin.y +=60;
+        frame.origin.y +=frame.size.height;
         barellImg.frame = frame;
     }completion:^(BOOL complete){
         [UIView animateWithDuration:0.1f animations:^{
             CGRect frame = barellImg.frame;
-            frame.origin.y -=10;
+            frame.origin.y -=30;
             barellImg.frame = frame;
         }completion:^(BOOL complete){
             [UIView animateWithDuration:0.1f animations:^{
                 CGRect frame = barellImg.frame;
-                frame.origin.y +=10;
+                frame.origin.y +=30;
                 barellImg.frame = frame;
             }completion:^(BOOL complete){
                

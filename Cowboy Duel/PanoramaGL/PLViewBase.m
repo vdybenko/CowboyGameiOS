@@ -1062,7 +1062,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
         motionManager.showsDeviceMovementDisplay = NO;
         
         
-        motionManager.deviceMotionUpdateInterval = 5.0 / 60.0;
+        motionManager.deviceMotionUpdateInterval = 7.0 / 60.0;
         motionManager.accelerometerUpdateInterval = 7.0 / 60.0;
         [motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *motion, NSError *error)
          {
