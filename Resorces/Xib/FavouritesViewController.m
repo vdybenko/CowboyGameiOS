@@ -153,7 +153,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 82.f;
+    return 164.f;
 }
 
 #pragma mark -
@@ -363,7 +363,7 @@
     
     UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(10, 10, 270, 20)];
     [label setTextAlignment:UITextAlignmentCenter];
-    [label setFont:[UIFont systemFontOfSize:16.f]];
+    [label setFont:[UIFont systemFontOfSize:32.f]];
     UIColor *brownColor=[UIColor colorWithRed:0.38 green:0.267 blue:0.133 alpha:1];
     [label setTextColor:brownColor];
     [label setBackgroundColor:[UIColor clearColor]];

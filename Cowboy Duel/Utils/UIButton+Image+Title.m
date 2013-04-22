@@ -17,7 +17,7 @@
 
 -(void)setTitleByLabel:(NSString *)pTitle;
 {    
-    [self setTitleByLabel:pTitle withColor:[UIColor colorWithRed:0.243 green:0.2 blue:0.142 alpha:1] fontSize:24];
+    [self setTitleByLabel:pTitle withColor:[UIColor colorWithRed:0.243 green:0.2 blue:0.142 alpha:1] fontSize:40];
 }
 
 -(void)setTitleByLabel:(NSString *)pTitle withColor:(UIColor*)color fontSize:(CGFloat)size;
