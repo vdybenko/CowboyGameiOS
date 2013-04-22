@@ -129,20 +129,20 @@
 }
 
 -(void)dropBarel:(UIImageView *)barellImg;{
-    
+ 
     [UIView animateWithDuration:0.2 animations:^{
         CGRect frame = barellImg.frame;
-        frame.origin.y +=60;
+        frame.origin.y +=frame.size.height;
         barellImg.frame = frame;
     }completion:^(BOOL complete){
         [UIView animateWithDuration:0.1f animations:^{
             CGRect frame = barellImg.frame;
-            frame.origin.y -=10;
+            frame.origin.y -=30;
             barellImg.frame = frame;
         }completion:^(BOOL complete){
             [UIView animateWithDuration:0.1f animations:^{
                 CGRect frame = barellImg.frame;
-                frame.origin.y +=10;
+                frame.origin.y +=30;
                 barellImg.frame = frame;
             }completion:^(BOOL complete){
                

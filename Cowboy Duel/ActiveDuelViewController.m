@@ -234,8 +234,8 @@ static CGFloat blinkBottomOriginY;
     int indexBarrel = 0;
     barelFrame = barellObject.frame;
     barelFrame.origin.x = opponentShape.frame.origin.x;
-    barelFrame.origin.y = 120;
-    countOfBarrels = 5;
+    barelFrame.origin.y = 140;
+    countOfBarrels = 15;
     countOfCactuses = 5;
     int randomBarrels = arc4random()%3 + 1;
     for (int i = 0; i < countOfBarrels; i++){
@@ -257,7 +257,7 @@ static CGFloat blinkBottomOriginY;
                 if (countOfBarrels - i == 1 || randomBarrels == 1) {
                     
                     [barellObjectArray addObject:barellObject];
-                    barelFrame.origin.x = barelFrame.origin.x + 80;
+                    barelFrame.origin.x = barelFrame.origin.x + 96;
                     [self.floatView addSubview:barellObject];
                     
                     indexBarrel = 0;
@@ -272,7 +272,7 @@ static CGFloat blinkBottomOriginY;
                 if (countOfBarrels - i == 2 || randomBarrels == 2) {
                     
                     [barellObjectArray addObject:barellObject];
-                    barelFrame.origin.x = barelFrame.origin.x + 80;
+                    barelFrame.origin.x = barelFrame.origin.x + 96;
                     [self.floatView addSubview:barellObject];
                     
                     indexBarrel = 0;
@@ -286,7 +286,7 @@ static CGFloat blinkBottomOriginY;
                 barellObject.barellImgHighest.hidden = NO;
                 
                 [barellObjectArray addObject:barellObject];
-                barelFrame.origin.x = barelFrame.origin.x + 80;
+                barelFrame.origin.x = barelFrame.origin.x + 96;
                 [self.floatView addSubview:barellObject];
 
                 indexBarrel = 0;
@@ -301,11 +301,11 @@ static CGFloat blinkBottomOriginY;
         
         if (i > 0) {
             cactusObject = [cactusObjectArray objectAtIndex:i-1];
-            cactusFrame.origin.x = cactusObject.frame.origin.x + 80;
+            cactusFrame.origin.x = cactusObject.frame.origin.x + 160;
             cactusFrame.origin.y = 150;
             
         }else{
-            cactusFrame.origin.x = 40 + opponentShape.frame.origin.x;
+            cactusFrame.origin.x = 80 + opponentShape.frame.origin.x;
             cactusFrame.origin.y = 150;
             
         }
@@ -760,8 +760,11 @@ static CGFloat blinkBottomOriginY;
     int randPosition = rand() % ((int)(self.floatView.bounds.size.width - winSize.width - opponentShape.bounds.size.width));
     randPosition = randPosition + winSize.width / 2 + opponentShape.bounds.size.width / 2;
     
+    CGRect frame = opponentShape.frame;
     opponentCenter.x = randPosition;
     opponentShape.center = opponentCenter;
+    frame.origin.y = frame.origin.y;
+    opponentShape.frame = frame;
 }
 
 -(void)opponentShot
