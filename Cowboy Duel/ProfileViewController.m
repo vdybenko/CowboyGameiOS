@@ -346,8 +346,8 @@ static const CGFloat timeToStandartTitles = 1.8;
 -(void)initMainControls;
 {    
     UIFont *titlesFont = [UIFont systemFontOfSize:40.0f];
-    UIFont *NameFont = [UIFont  systemFontOfSize:40.0f];
-    UIFont *CountFont = [UIFont systemFontOfSize:40.0f];
+    UIFont *NameFont = [UIFont  systemFontOfSize:35.0f];
+    UIFont *CountFont = [UIFont systemFontOfSize:30.0f];
     
 //    UIFont *fontSimpleText=[UIFont fontWithName: @"MyriadPro-Semibold" size:13];
     UIColor *mainColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
@@ -378,13 +378,13 @@ static const CGFloat timeToStandartTitles = 1.8;
     lbPointsCountMain.font = [UIFont fontWithName: @"MyriadPro-Bold" size:30];
     
     lbBiggestWinCount.font = CountFont;
-//    [lbBiggestWinCount dinamicAttachToView:lbBiggestWin withDirection:DirectionToAnimateRight ];
+    [lbBiggestWinCount dinamicAttachToView:lbBiggestWin withDirection:DirectionToAnimateRight ];
     
     lbLeaderboardTitle.text = NSLocalizedString(@"LeaderboardTitle", @"");
-    lbLeaderboardTitle.font = [UIFont fontWithName: @"DecreeNarrow" size:25];
+    lbLeaderboardTitle.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
     
     lbFavouritesTitle.text = NSLocalizedString(@"FavouritesTitle", @"");
-    lbFavouritesTitle.font = [UIFont fontWithName:@"DecreeNarrow" size:25];
+    lbFavouritesTitle.font = [UIFont fontWithName:@"DecreeNarrow" size:35];
 
     lbDuelsWonCount.font = CountFont;
     
