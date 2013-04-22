@@ -86,7 +86,7 @@ UIColor * sandColor;
     
     _lbAttack.text=[NSString stringWithFormat:@"%d",player.dAttack];
     
-    [self.btnGetHim setTitleByLabel:@"DUEL" withColor:[UIColor colorWithRed:0.95 green:0.86 blue:0.68 alpha:1.0] fontSize:18];
+    [self.btnGetHim setTitleByLabel:@"DUEL" withColor:[UIColor colorWithRed:0.95 green:0.86 blue:0.68 alpha:1.0] fontSize:35];
 //  style
     [_ivBackGroundSelected setHidden:YES];
     [_ivIcon setBackgroundColor:[UIColor clearColor]];
@@ -126,7 +126,7 @@ UIColor * sandColor;
         [rankNumber setShadowColor:[UIColor colorWithRed:1.f green:253.f/255.f blue:178.f/255.f alpha:1]];
         [rankNumber setShadowOffset:CGSizeMake(0, 0)];
         rankNumber.shadowBlur=2.f;
-        rankNumber.font = [UIFont fontWithName: @"MyriadPro-Bold" size:40];
+        rankNumber.font = [UIFont fontWithName: @"MyriadPro-Bold" size:24];
         [rankNumber setGradientEndColor:[UIColor colorWithRed:1.0f green:140.f/255.f blue:0 alpha:1.0]];
         [rankNumber setGradientStartColor:[UIColor colorWithRed:1.0f green:181.f/255.f blue:0 alpha:1.0]];
         rankNumber.shadowOffset = CGSizeZero;
@@ -137,7 +137,7 @@ UIColor * sandColor;
         [rankNumber setShadowColor:[UIColor clearColor]];
         rankNumber.innerShadowColor = rankNumber.shadowColor;
         [rankNumber setBaselineAdjustment:UIBaselineAdjustmentAlignCenters];
-        rankNumber.font = [UIFont fontWithName: @"MyriadPro-Bold" size:20];
+        rankNumber.font = [UIFont fontWithName: @"MyriadPro-Bold" size:24];
         rankNumber.textColor=brownColor;
         [rankNumber setGradientStartColor:rankNumber.textColor];
         [rankNumber setGradientEndColor:rankNumber.textColor];

@@ -54,8 +54,6 @@
 
 #define MASTER_SERVER_URL @"http://cowboyduel.net/"
 //#define MASTER_SERVER_IP @"176.34.226.109"
-
-
 #define MASTER_SERVER_IP @"54.241.25.87" //1
 
 
