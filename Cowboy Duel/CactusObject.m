@@ -27,7 +27,7 @@
         [self choiceImg];
         
         NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"cactusFrame1.png"],
-                             [UIImage imageNamed:@"cactusFrame2.png"], [UIImage imageNamed:@"cactusFrame3.png"],[UIImage imageNamed:@"cactusFrame4.png"], [UIImage imageNamed:@"cactusFraim5.png"],[UIImage imageNamed:@"cactusFrame6.png"], nil];
+                             [UIImage imageNamed:@"cactusFrame2.png"], [UIImage imageNamed:@"cactusFrame3.png"],[UIImage imageNamed:@"cactusFrame4.png"], [UIImage imageNamed:@"cactusFrame5.png"],[UIImage imageNamed:@"cactusFrame6.png"], nil];
         cactusImg.animationImages = imgArray;
         cactusImg.animationDuration = 0.5f;
         [cactusImg setAnimationRepeatCount:1];
