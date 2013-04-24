@@ -74,6 +74,11 @@
             [LevelCongratViewController newLevelNumber:playerAccount.accountLevel];
         }
         btnAgain.enabled = tryButtonEnable;
+    UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
+    [btnAgain setTitleByLabel:@"TRY AGAIN" withColor:buttonsTitleColor fontSize:40];
+        
+       
+        [btnMenu setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:40];
     }
     return self;
 }
