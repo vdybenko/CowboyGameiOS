@@ -200,12 +200,7 @@ static CGFloat blinkBottomOriginY;
     [plView setPanorama:cubicPanorama];
     
     [self hideHelpViewOnStartDuel];
-    
-   /* int iPhone5Delta = [UIScreen mainScreen].bounds.size.height - 480;
-    CGRect deltaFrame = plView.frame;
-    deltaFrame.size.height += iPhone5Delta;
-    [plView setFrame:deltaFrame];
-    */
+
     CLLocationCoordinate2D oponentCoords;
 
     oponentCoords.latitude = 1;//(((float) rand()) / RAND_MAX) * 360 - 180;
@@ -722,29 +717,40 @@ static CGFloat blinkBottomOriginY;
 -(void)startRandomBloodAnimation
 {
     int numberOfAnimation = rand() % 5;
+
     switch (numberOfAnimation) {
         case 0:
             {
+                CGRect frame = self.bloodImageView.frame;
+                frame.origin = opponentShape.frame.origin;
                 [self.bloodImageView startAnimating];
             }
             break;
         case 1:
             {
+                CGRect frame = self.bloodCImageView.frame;
+                frame.origin = opponentShape.frame.origin;
                 [self.bloodCImageView startAnimating];
             }
             break;
         case 2:
             {
+                CGRect frame = self.bloodImageView.frame;
+                frame.origin = opponentShape.frame.origin;
                 [self.bloodImageView startAnimating];
             }
             break;
         case 3:
             {
+                CGRect frame = self.bloodCImageView.frame;
+                frame.origin = opponentShape.frame.origin;
                 [self.bloodCImageView startAnimating];
             }
             break;
         case 4:
             {
+                CGRect frame = self.bloodImageView.frame;
+                frame.origin = opponentShape.frame.origin;
                 [self.bloodImageView startAnimating];
             }
             break;
