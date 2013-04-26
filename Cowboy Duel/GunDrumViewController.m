@@ -123,6 +123,7 @@ static const CGFloat timeSpinDump = 0.3f;
         if([LoginAnimatedViewController sharedInstance].isDemoPractice){
             [self.textView setDinamicHeightBackground];
             [self.textLabel setText:NSLocalizedString(@"LoadPractice", @"")];
+           // [self.textLabel setFont:<#(UIFont *)#>];
             [self.textView setHidden:NO];
             [self.textLabel setHidden:NO];
             [self performSelector:@selector(textViewSetHidden) withObject:nil afterDelay:5.0];

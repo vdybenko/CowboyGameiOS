@@ -29,7 +29,7 @@
     [self insertSubview:ivBody atIndex:0];
     CGImageRelease(imageRef);
     
-    if (mainFrame.size.height<heightSize) {
+   if (mainFrame.size.height<heightSize) {
         ivBody.layer.cornerRadius = 40.0;
         ivBody.layer.masksToBounds = YES;
         
