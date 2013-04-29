@@ -101,8 +101,8 @@ static const char *GC_URL =  BASE_URL"api/gc";
     [_btnStart setTitleByLabel:@"START"];
     [_btnStart changeColorOfTitleByLabel:buttonsTitleColor];
 
-    UIFont *fontNames=[UIFont fontWithName: @"MyriadPro-Semibold" size:16];
-    UIFont *fontSimpleText=[UIFont fontWithName: @"MyriadPro-Semibold" size:13];
+    UIFont *fontNames=[UIFont fontWithName: @"MyriadPro-Semibold" size:35];
+    UIFont *fontSimpleText=[UIFont fontWithName: @"MyriadPro-Semibold" size:35];
     
     if (playerAccount.accountName != nil)
         _lbNamePlayer.text = playerAccount.accountName;
@@ -403,7 +403,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
 //    //_lbMoneyOponent.text =  [NSString stringWithFormat:@"%@%d",@"$",uil2];
 //    [_lbNameOponent setHidden:NO];
 //    //[_lbMoneyOponent setHidden:NO];
-//    
+//
 //    [_btnStart setEnabled:YES];
     
 }
@@ -456,7 +456,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
     
     CGRect frame=lbGoldCount.frame;
 
-    lbGoldCount.font=[UIFont fontWithName: @"MyriadPro-Semibold" size:13];;
+    lbGoldCount.font=[UIFont fontWithName: @"MyriadPro-Semibold" size:30];;
     CGSize size=[lbGoldCount fitSizeToText:lbGoldCount];
     frame.size.width=size.width;
     [lbGoldCount setFrame:frame];
