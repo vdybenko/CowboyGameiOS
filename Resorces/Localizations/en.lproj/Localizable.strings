@@ -90,11 +90,11 @@
 <style>
 body{font-family: Neue Helvetica, 'HelveticaNeue', serif; background-color:transparent; padding-top:0px;}
 ul{ list-style-type: filledcircle;  margin:0; padding-left:1em;}
-p,li{font-family: “Myriad Pro”, arial,sans-serif;color:4A3E25;font-size:10pt;font-weight: 700; letter-spacing: -0.01em;word-spacing: 0.0em;text-align: left;font-stretch: wider;
-    line-height: 15px;}
+p,li{font-family: “Myriad Pro”, arial,sans-serif;color:4A3E25;font-size:14pt;font-weight: 700; letter-spacing: 0.02em;word-spacing: 0.0em;text-align: left;font-stretch: wider;
+    line-height: 20px;}
 
-h3{font-family: “Myriad Pro”, arial,sans-serif;color:4A3E25;font-size:12pt;font-weight: 700; letter-spacing: -0.01em;word-spacing: 0.0em;text-align: center;font-stretch: wider;
-    line-height: 0px;}
+h3{font-family: “Myriad Pro”, arial,sans-serif;color:4A3E25;font-size:16pt;font-weight: 700; letter-spacing: 0.02em;word-spacing: 0.0em;text-align: center;font-stretch: wider;
+    line-height: 10px;}
 
 </style>
 </head>
