@@ -62,8 +62,7 @@ static OGHelper *sharedHelper = nil;
 
 - (id)initWithAccount:(AccountDataSource *)userAccount
 {
-    self = [super init];
-    if (self) {   
+    if (self == [super init]) {   
         [self createControllsWithAccount:userAccount];
     }
     return self;
@@ -569,17 +568,44 @@ static OGHelper *sharedHelper = nil;
         return path;
     }else{
         if ([self isAuthorized]&&currentAPICall!=kAPIGraphPictureGet) {
-            [self apiGraphGetImage:URL
-                    didFinishBlock:^(UIImage *image){
-                        NSString *path = [NSString stringWithFormat:@"%@/%@.png",getOpenGraphSavePath(),URL];
-                        
-                        [UIImagePNGRepresentation(image) writeToFile:path atomically:YES];
-                        
-                        [[NSNotificationCenter defaultCenter] postNotificationName: kReceiveImagefromFBNotification
+            currentAPICall = kAPIGraphPictureGet;
+            
+            NSString *requestSt=[NSString stringWithFormat:@"%@/picture",URL];
+            NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                            @"normal",@"type",
+                                            nil];
+//            
+//            [facebook requestWithGraphPath:requestSt 
+//                                 andParams:params 
+//                               andDelegate:self];
+            FBProfilePictureView *profilePic = [[FBProfilePictureView alloc] init];
+            profilePic.profileID = playerAccount.facebookUser.id;
+            
+            
+            
+            NSMutableString *tfContent = [profilePic.profileID mutableCopy];
+//            NSRange rng=NSMakeRange (0,27);
+//            [tfContent deleteCharactersInRange:rng];
+//            rng=NSMakeRange ([tfContent length]-8,8);
+//            [tfContent deleteCharactersInRange:rng];
+
+            NSString *path = [NSString stringWithFormat:@"%@/%@.png",getOpenGraphSavePath(),tfContent];
+        
+            UIGraphicsBeginImageContext(profilePic.frame.size);
+            [profilePic drawRect:profilePic.frame];
+            UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            
+            NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
+            [imageData writeToFile:path atomically:YES];
+    
+            [[NSNotificationCenter defaultCenter] postNotificationName: kReceiveImagefromFBNotification
                                                                             object:self
                                                                           userInfo:nil];
-                    }
-                         imageType:typeOfFBImageNormal];
+
+//            [FBRequestConnection startWithGraphPath:requestSt completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+//                DLog(@"%@ %@", result, error);
+//            }];
             return path;
         }else {
             return nil;
@@ -587,7 +613,7 @@ static OGHelper *sharedHelper = nil;
     }
 }
 
--(void)apiGraphGetImage:(NSString *)URL didFinishBlock:(void (^)(UIImage*)) finishBlock imageType:(typeOfFBImage)type;
+-(void)apiGraphGetImage:(NSString *)URL delegate:(id<FBRequestDelegate>)pDelegate imageType:(typeOfFBImage)type;
 {
     NSString *typeOfImage;
     switch (type) {
@@ -607,29 +633,35 @@ static OGHelper *sharedHelper = nil;
             typeOfImage=@"normal";
             break;
     }
-
-    NSString *requestSt=[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=%@",URL,typeOfImage];
-    NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:requestSt]
-                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                        timeoutInterval:kTimeOutSeconds];
-    [theRequest setHTTPMethod:@"GET"];
+    NSString *requestSt=[NSString stringWithFormat:@"%@/picture",URL];
+    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                    typeOfImage,@"type",
+                                    nil];
     
-    [NSURLConnection
-     sendAsynchronousRequest:theRequest
-     queue:[[NSOperationQueue alloc] init]
-     completionHandler:^(NSURLResponse *response,
-                         NSData *data,
-                         NSError *error)
-     {
-         if (finishBlock) {
-             UIImage *image = [UIImage imageWithData:data];
-             finishBlock(image);
-         }
-     }];
+//    [facebook requestWithGraphPath:requestSt 
+//                         andParams:params 
+//                       andDelegate:pDelegate];
+    [FBRequestConnection startWithGraphPath:requestSt completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        DLog(@"%@ %@", result, error);
+    }];
+
 }
 
--(void)apiGraphGetImageForList:(NSString *)URL didFinishBlock:(void (^)(UIImage*)) finishBlock {
-    [self apiGraphGetImage:URL didFinishBlock:finishBlock imageType:typeOfFBImageSquare];
+
+-(void)apiGraphGetImageForList:(NSString *)URL delegate:(id<FBRequestDelegate>)pDelegate {
+        
+    NSString *requestSt=[NSString stringWithFormat:@"%@/picture",URL];
+    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                    @"square",@"type",
+                                    nil];
+    
+//    [facebook requestWithGraphPath:requestSt 
+//                         andParams:params 
+//                       andDelegate:pDelegate];
+    [FBRequestConnection startWithGraphPath:requestSt completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        DLog(@"%@ %@", result, error);
+    }];
+
 }
 
 /*
@@ -673,22 +705,22 @@ static OGHelper *sharedHelper = nil;
  * Graph API: Search query to get nearby location.
  */
 - (void)apiGraphSearchPlace:(CLLocation *)location {
-////    [delegate showActivityIndicator];
-//    currentAPICall = kAPIGraphSearchPlace;
-//    NSString *centerLocation = [[NSString alloc] initWithFormat:@"%f,%f",
-//                                location.coordinate.latitude,
-//                                location.coordinate.longitude];
-//    // HackbookAppDelegate *delegate = (HackbookAppDelegate *)[[UIApplication sharedApplication] delegate];
-////    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-////                                   @"place",  @"type",
-////                                   centerLocation, @"center",
-////                                   @"1000",  @"distance",
-////                                   nil];
-////    [centerLocation release];
-//    //[facebook requestWithGraphPath:@"search" andParams:params andDelegate:self];
-//    [FBRequestConnection startWithGraphPath:@"search" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-//        DLog(@"%@ %@", result, error);
-//    }];
+//    [delegate showActivityIndicator];
+    currentAPICall = kAPIGraphSearchPlace;
+    NSString *centerLocation = [[NSString alloc] initWithFormat:@"%f,%f",
+                                location.coordinate.latitude,
+                                location.coordinate.longitude];
+    // HackbookAppDelegate *delegate = (HackbookAppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                   @"place",  @"type",
+                                   centerLocation, @"center",
+                                   @"1000",  @"distance",
+                                   nil];
+//    [centerLocation release];
+    //[facebook requestWithGraphPath:@"search" andParams:params andDelegate:self];
+    [FBRequestConnection startWithGraphPath:@"search" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        DLog(@"%@ %@", result, error);
+    }];
 
 }
 

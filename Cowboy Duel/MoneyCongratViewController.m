@@ -23,24 +23,25 @@
     BOOL runAnimation;
     
     //images to animate:
-    __weak IBOutlet UIImageView *ivAchieveRing;
-    __weak IBOutlet UIImageView *ivLight;
-    __weak IBOutlet UIImageView *ivRing;
+    IBOutlet UIImageView *ivAchieveRing;
+    IBOutlet UIImageView *ivLight;
+    IBOutlet UIImageView *ivLight2;
+    IBOutlet UIImageView *ivRing;
     
     //labels:
-    __weak IBOutlet UILabel *lbTitleCongratulation;
+    IBOutlet UILabel *lbTitleCongratulation;
     
-    __weak IBOutlet UILabel *lbPlusMoney;
-    __weak IBOutlet UILabel *lbCongMainText;
+    IBOutlet UILabel *lbPlusMoney;
+    IBOutlet UILabel *lbCongMainText;
     
-    __weak IBOutlet UIButton *btnBack;
-    __weak IBOutlet UIButton *btnTryAgain;
-    __weak IBOutlet UIButton *btnPost;
+    IBOutlet UIButton *btnBack;
+    IBOutlet UIButton *btnTryAgain;
+    IBOutlet UIButton *btnPost;
     
-    __weak IBOutlet UILabel *lbPostOnFB;
+    IBOutlet UILabel *lbPostOnFB;
 }
-@property(nonatomic, weak)id<DuelViewControllerDelegate> delegate;
-@property (nonatomic, weak) IBOutlet UIImageView *ivLight2;
+@property(nonatomic, strong)id<DuelViewControllerDelegate> delegate;
+@property (nonatomic, strong) IBOutlet UIImageView *ivLight2;
 
 @end
 
@@ -144,18 +145,6 @@
     runAnimation = NO;
 }
 
--(void)releaseComponents
-{
-    lbTitleCongratulation = nil;
-    lbPlusMoney = nil;
-    lbCongMainText = nil;
-    
-    lbPostOnFB = nil;
-    ivAchieveRing = nil;
-    ivLight = nil;
-    ivLight2 = nil;
-    ivRing = nil;
-}
 #pragma mark -
 #pragma mark animations
 
@@ -235,7 +224,6 @@
     {
         [(FinalViewController *)delegate backButtonClick:sender];
     }
-    [self releaseComponents];
 }
 
 - (IBAction)btnAgainClicked:(id)sender
@@ -246,7 +234,6 @@
     {
         [(FinalViewController *)delegate tryButtonClick:sender];
     }
-    [self releaseComponents];
 }
 
 - (IBAction) btnPostOnFBClicked:(id)sender
@@ -261,7 +248,6 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                       object:self
                                                     userInfo:[NSDictionary dictionaryWithObject:@"/achievement_posted_on_FB" forKey:@"event"]];
-    [self releaseComponents];
 }
 #pragma mark  - Facebook methods
 

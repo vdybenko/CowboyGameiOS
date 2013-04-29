@@ -66,7 +66,7 @@ NSString  *const USER_DEFULTS_KEY_COLLECTION_APPS   = @"colectionApp";
     
     // create the connection with the request
     // and start loading the data
-    NSURLConnection *theConnection=[NSURLConnection connectionWithRequest:theRequest delegate:self];
+    NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
     if (theConnection) {
         responseData = [[NSMutableData alloc] init];
     } else {

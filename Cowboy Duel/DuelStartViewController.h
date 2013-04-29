@@ -21,7 +21,7 @@
 #import "IconDownloader.h"
 
 @class GameCenterViewController;
-@interface DuelStartViewController : UIViewController<DuelStartViewControllerDelegate,FBRequestDelegate,IconDownloaderDelegate,MemoryManagement> {
+@interface DuelStartViewController : UIViewController<DuelStartViewControllerDelegate,FBRequestDelegate,IconDownloaderDelegate> {
     AccountDataSource *playerAccount;
     AccountDataSource *oponentAccount;
     ProfileViewController *profileViewController;
@@ -53,50 +53,55 @@
     
     IconDownloader *iconDownloader;
     
+    IBOutlet ActivityIndicatorView *activityIndicatorView;
     
-    __weak IBOutlet UIButton *_btnStart;
+    IBOutlet UIButton *_btnBack;
+    IBOutlet UIButton *_btnStart;
     
-    __weak IBOutlet UIView *_vBackground;
+    IBOutlet UIView *_vBackground;
     
-    __weak IBOutlet UIView  *_vWait;
+    IBOutlet UIView  *_vWait;
     
-    __weak IBOutlet UIView *mainDuelView;
-    __weak IBOutlet UILabel *lbDuelStart;
+    IBOutlet UIView *mainDuelView;
+    IBOutlet UILabel *lbDuelStart;
     
-    __weak IBOutlet UILabel *_lbNamePlayer;
-    __weak IBOutlet UIImageView *_ivPlayer;
-    __weak IBOutlet UILabel *lbUserRank;
-    __weak IBOutlet UILabel *lbUserDuelsWin;
-    __weak IBOutlet UILabel *lbUserDuelsWinCount;
+    IBOutlet UILabel *_lbNamePlayer;
+    IBOutlet UIImageView *_ivPlayer;
+    IBOutlet UILabel *lbUserRank;
+    IBOutlet UILabel *lbUserDuelsWin;
+    IBOutlet UILabel *lbUserDuelsWinCount;
     
-    __weak IBOutlet UILabel *_lbNameOponent;
-    __weak IBOutlet UIImageView *_ivOponent;
-    __weak IBOutlet UILabel *lbOpponentRank;
-    __weak IBOutlet UILabel *lbOpponentDuelsWin;
-    __weak IBOutlet UILabel *lbOpponentDuelsWinCount;
+    IBOutlet UILabel *_lbNameOponent;
+    IBOutlet UIImageView *_ivOponent;
+    IBOutlet UILabel *lbOpponentRank;
+    IBOutlet UILabel *lbOpponentDuelsWin;
+    IBOutlet UILabel *lbOpponentDuelsWinCount;
       
-    __weak IBOutlet UILabel *lbForTheMurder;
-    __weak IBOutlet UILabel *lbReward;
-    __weak IBOutlet UILabel *lbGoldCount;
-    __weak IBOutlet UILabel *lbGold;
-    __weak IBOutlet UILabel *lbPointsCount;
-    __weak IBOutlet UILabel *lbPoints;
+    IBOutlet UILabel *lbForTheMurder;
+    IBOutlet UILabel *lbReward;
+    IBOutlet UILabel *lbGoldCount;
+    IBOutlet UILabel *lbGold;
+    IBOutlet UILabel *lbPointsCount;
+    IBOutlet UILabel *lbPoints;
 
     NSString *serverName;
     int timerIndex;
     
        
 }
-@property (weak, nonatomic) IBOutlet ActivityIndicatorView *activityIndicatorView;
-@property (weak, nonatomic) IBOutlet UIImageView *_ivPlayer;
-@property (weak, nonatomic) IBOutlet UIImageView *_ivOponent;
-@property (weak, nonatomic) IBOutlet UILabel *_lbNamePlayer;
-@property (weak, nonatomic) IBOutlet UILabel *_lbNameOponent;
-@property (weak, nonatomic) IBOutlet UILabel  *lbOpponentDuelsWinCount;
-@property (weak, nonatomic) IBOutlet UIButton *_btnBack;
-@property (weak, nonatomic) IBOutlet UIButton *_btnStart;
-@property (weak, nonatomic) IBOutlet UIView *_vBackground;
-@property (weak, nonatomic) IBOutlet UIView  *_vWait;
+@property (strong, nonatomic) IBOutlet ActivityIndicatorView *activityIndicatorView;
+@property (strong, nonatomic) IBOutlet UIImageView *_ivPlayer;
+@property (strong, nonatomic) IBOutlet UIImageView *_ivOponent;
+@property (strong, nonatomic) IBOutlet UILabel *_lbNamePlayer;
+@property (strong, nonatomic) IBOutlet UILabel *_lbNameOponent;
+@property (strong, nonatomic) IBOutlet UILabel  *lbOpponentDuelsWinCount;
+@property (strong, nonatomic) IBOutlet UIButton *_btnBack;
+@property (strong, nonatomic) IBOutlet UIButton *_btnStart;
+@property (strong, nonatomic) IBOutlet UIView *_vBackground;
+
+@property (strong, nonatomic) IBOutlet UILabel *_waitLabel;
+@property (strong, nonatomic) IBOutlet UILabel *_pleaseWaitLabel;
+@property (strong, nonatomic) IBOutlet UIView  *_vWait;
 @property (weak, nonatomic) IBOutlet FBProfilePictureView *fbPlayerImage;
 @property (weak, nonatomic) IBOutlet FBProfilePictureView *fbOpponentImage;
 

@@ -18,8 +18,6 @@
 @end
 
 @implementation FunPageViewController
-@synthesize webView;
-@synthesize backButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,9 +33,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
+    UIColor *buttonsTitleColor = [[UIColor alloc] initWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
+    
     
     [self.backButton setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:24];
+//    self.backButton.titleLabel.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
     self.backButton.titleLabel.textAlignment = UITextAlignmentCenter;
     
     NSString *urlAddress = URL_COMM_FB_PAGE;
@@ -49,7 +49,7 @@
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
     
     //Load the request in the UIWebView.
-    [webView loadRequest:requestObj];
+    [_webView loadRequest:requestObj];
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,17 +57,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
--(void)releaseComponents
-{
-    webView = nil;
-    backButton = nil;
-}
-#pragma mark 
-
 - (IBAction)backButtonClick:(id)sender {
     [self dismissModalViewControllerAnimated:YES];
-    [self releaseComponents];
 }
 
 - (void)viewDidUnload {

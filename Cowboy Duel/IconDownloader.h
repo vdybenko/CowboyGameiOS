@@ -4,10 +4,13 @@
 
 @protocol IconDownloaderDelegate;
 
+@class ItemImage;
+
+
 /**
 	Implement image lazy loading for table views
  */
-@interface IconDownloader : NSObject <FBRequestDelegate,MemoryManagement>
+@interface IconDownloader : NSObject <FBRequestDelegate>
 {
 	/**
 		Index of particular row of TableView we need to download image for.
@@ -17,6 +20,10 @@
 		Instance of IconDownloaderDelegate object
 	 */
     id <IconDownloaderDelegate> delegate;
+	/**
+		Object with downloaded image
+	 */
+	ItemImage * itemIcon;
     /**
      name of Player to download icon
 	 */

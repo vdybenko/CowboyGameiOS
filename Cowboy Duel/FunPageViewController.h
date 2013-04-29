@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FunPageViewController : UIViewController<MemoryManagement>
+@interface FunPageViewController : UIViewController
 
 @end

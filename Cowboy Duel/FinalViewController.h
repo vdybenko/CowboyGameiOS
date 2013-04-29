@@ -32,7 +32,7 @@
 #import "LevelCongratViewController.h"
 #import "MoneyCongratViewController.h"
 
-@interface FinalViewController : UIViewController <DuelViewControllerDelegate, UITableViewDataSource, UITableViewDelegate,MemoryManagement> {
+@interface FinalViewController : UIViewController <DuelViewControllerDelegate, UITableViewDataSource, UITableViewDelegate> {
     ActivityIndicatorView *activityIndicatorView;
     
     AccountDataSource *playerAccount;
@@ -40,6 +40,10 @@
         
     TeachingViewController *teachingViewController;
     LoginAnimatedViewController *loginViewController;
+    
+//    CongratulationViewController *congratulationViewController;
+    LevelCongratViewController *lvlCongratulationViewController;
+    MoneyCongratViewController *moneyCongratulationViewController; 
     
     int oldMoney;
     int oldMoneyForAnimation;
@@ -72,23 +76,23 @@
     NSArray *_pontsForWin;
     NSArray *_pontsForLose;
     
-    __weak IBOutlet UIButton *backButton;
-    __weak IBOutlet UIButton *nextButton;
+    IBOutlet UIButton *backButton;
+    IBOutlet UIButton *nextButton;
 
-    __weak IBOutlet UITableView *resultTable;
+    IBOutlet UITableView *resultTable;
     
-    __weak IBOutlet UILabel *lblNamePlayer;
-    __weak IBOutlet UILabel *lblNameOponnent;
+    IBOutlet UILabel *lblNamePlayer;
+    IBOutlet UILabel *lblNameOponnent;
     
-    __weak IBOutlet UILabel *lblResulDescription;
+    IBOutlet UILabel *lblResulDescription;
   
-    __weak IBOutlet UIView *ivGoldCoin;
-    __weak IBOutlet UIImageView *ivBlueLine;
-    __weak IBOutlet UIImageView *ivCurrentRank;
-    __weak IBOutlet UIImageView *ivNextRank;
-    __weak IBOutlet FXLabel *lblGoldPlus;
+    IBOutlet UIView *ivGoldCoin;
+    IBOutlet UIImageView *ivBlueLine;
+    IBOutlet UIImageView *ivCurrentRank;
+    IBOutlet UIImageView *ivNextRank;
+    IBOutlet FXLabel *lblGoldPlus;
 
-    __weak IBOutlet UIView *viewLastSceneAnimation;
+    IBOutlet UIView *viewLastSceneAnimation;
         
     UIImageView *loserImg;
     UIImageView *loserSpiritImg;
@@ -96,12 +100,12 @@
     UIImageView *winnerImg2;
     UIImageView *loserMoneyImg;
   
-    __weak IBOutlet UIView *view;
-    __weak IBOutlet UIView *statView;
+    IBOutlet UIView *view;
+    IBOutlet UIView *statView;
     
-    __weak IBOutlet UILabel *lbBack;
-    __weak IBOutlet UILabel *lbTryAgain;
-    __weak IBOutlet UILabel *lbNextRound;
+    IBOutlet UILabel *lbBack;
+    IBOutlet UILabel *lbTryAgain;
+    IBOutlet UILabel *lbNextRound;
     
     
     __weak IBOutlet FXLabel *lblGold;
@@ -112,8 +116,8 @@
 }
 @property(weak)id<DuelViewControllerDelegate> delegate;
 
-@property (weak, nonatomic) IBOutlet UIButton *tryButton;
-@property (weak, nonatomic) IBOutlet UIView *statView;
+@property (strong, nonatomic) IBOutlet UIButton *tryButton;
+@property (strong, nonatomic) IBOutlet UIView *statView;
 
 -(id)initWithUserTime:(int)userTimePar
        andOponentTime:(int)oponentTime

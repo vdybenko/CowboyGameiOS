@@ -39,43 +39,41 @@ static AccountDataSource *sharedHelper = nil;
 
 -(id)initWithLocalPlayer;
 {
-    self = [super init];
-    if (self) {
-        self.accountName=@"Anonymous";
-        money = 200;
-        teachingTimes = [[NSMutableArray alloc] init];
-        finalInfoTable = [[NSMutableArray alloc] init];
-        [self makeLocalAccountID];
-        accountDataSourceID = 1;
-        sessionID=0;
-        self.accountLevel=kCountOfLevelsMinimal;
-        self.accountPoints=0;
-        self.accountWins=0;
-        self.accountDraws=0;
-        self.accountBigestWin=0;
-        self.removeAds=0;
-        self.accountDefenseValue = 0;
-        self.curentIdWeapon = -1;
-        self.glNumber = 0;
-        accountWeapon = [[CDWeaponProduct alloc] init];
-        self.isTryingWeapon=NO;
+    self.accountName=@"Anonymous";
+    money = 200;
+    teachingTimes = [[NSMutableArray alloc] init];
+    finalInfoTable = [[NSMutableArray alloc] init];
+    [self makeLocalAccountID ];
+    accountDataSourceID = 1;
+    sessionID=0;
+    self.accountLevel=0;
+    self.accountPoints=0;
+    self.accountWins=0;
+    self.accountDraws=0;
+    self.accountBigestWin=0;
+    self.removeAds=0;
+    self.accountDefenseValue = 0;
+    self.curentIdWeapon = -1;
+    self.glNumber = 0;
+    accountWeapon = [[CDWeaponProduct alloc] init];
+    self.isTryingWeapon=NO;
+    
+    self.avatar=@"";
+    self.age=@"";
+    self.homeTown=@"";
+    self.friends=0;
+    self.facebookName=@"";
+    
+    transactions = [[NSMutableArray alloc] init];
+    duels = [[NSMutableArray alloc] init];
+    achivments = [[NSMutableArray alloc] init];
+    dicForRequests=[[NSMutableDictionary alloc] init];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(sessionStateChanged:)
+                                                 name:SCSessionStateChangedNotification
+                                               object:nil];
         
-        self.avatar=@"";
-        self.age=@"";
-        self.homeTown=@"";
-        self.friends=0;
-        self.facebookName=@"";
-        
-        transactions = [[NSMutableArray alloc] init];
-        duels = [[NSMutableArray alloc] init];
-        achivments = [[NSMutableArray alloc] init];
-        dicForRequests=[[NSMutableDictionary alloc] init];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(sessionStateChanged:)
-                                                     name:SCSessionStateChangedNotification
-                                                   object:nil];
-    }
     return self;
 }
 
@@ -572,6 +570,19 @@ static AccountDataSource *sharedHelper = nil;
         }
         return (NSUInteger)NSNotFound;
     };
+}
+
+
+#pragma mark putch for 1.4 
+-(void)putchAvatarImageToInitStartVC:(StartViewController*)startVC
+{
+    if (![self isAvatarImage:self.avatar]){
+        if (([self.accountID rangeOfString:@"F:"].location != NSNotFound)) {
+            NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"birthday,id,name,picture,location",@"fields",nil];
+            [[LoginAnimatedViewController sharedInstance] initFacebook];
+            //[[LoginAnimatedViewController sharedInstance].facebook requestWithGraphPath:@"me" andParams:params andDelegate:startVC];
+        }
+    }
 }
 
 -(BOOL)isAvatarImage:(NSString*)imagePath

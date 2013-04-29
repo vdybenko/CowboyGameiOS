@@ -103,13 +103,16 @@ static GCHelper *sharedHelper = nil;
         
         GC_ACH=[[NSArray alloc] initWithObjects:
                 @"com.webkate.cowboyduels.achievement.0",
-                @"grp.com.bidon.cowboychalenge.achievement.1", //Junior
-                @"grp.com.bidon.cowboychalenge.achievement.2",
-                @"grp.com.bidon.cowboychalenge.achievement.3",
-                @"grp.com.bidon.cowboychalenge.achievement.4",
-                @"grp.com.bidon.cowboychalenge.achievement.5",
-                @"grp.com.bidon.cowboychalenge.achievement.6",
-                @"grp.com.bidon.cowboychalenge.achievement.7",
+                @"com.webkate.cowboyduels.achievement.1", //Junior
+                @"com.webkate.cowboyduels.achievement.2",
+                @"com.webkate.cowboyduels.achievement.3",
+                @"com.webkate.cowboyduels.achievement.4",
+                @"com.webkate.cowboyduels.achievement.5",
+                @"com.webkate.cowboyduels.achievement.6",
+                @"com.webkate.cowboyduels.achievement.7",
+                @"com.webkate.cowboyduels.achievement.8",
+                @"com.webkate.cowboyduels.achievement.9",
+                @"com.webkate.cowboyduels.achievement.10",//Angel of Death
                 nil];
         
         achievementsDictionary = [[NSMutableDictionary alloc] init];

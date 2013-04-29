@@ -11,7 +11,7 @@
 
 @class TopPlayersDataSource;
 
-@interface TopPlayersViewController : UIViewController <UITableViewDelegate,MemoryManagement>
+@interface TopPlayersViewController : UIViewController <UITableViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *saloonTitle;
 
@@ -24,6 +24,8 @@
 
 @property (strong, nonatomic) IBOutlet UIView *offLineBackGround;
 @property (strong, nonatomic) IBOutlet UIWebView *offLineText;
+
+@property (strong, nonatomic)  NSTimer *updateTimer;
 
 - (id)initWithAccount:(AccountDataSource *)userAccount;
 -(IBAction)findMe:(id)sender;

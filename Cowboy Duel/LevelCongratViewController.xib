@@ -3,12 +3,12 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1536</int>
 		<string key="IBDocument.SystemVersion">11G63</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2843</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
 		<string key="IBDocument.AppKitVersion">1138.51</string>
 		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1929</string>
+			<string key="NS.object.0">1930</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -513,6 +513,7 @@
 							<reference ref="927223616"/>
 							<reference ref="316206338"/>
 							<reference ref="108645160"/>
+							<reference ref="1072045152"/>
 							<reference ref="105901907"/>
 							<reference ref="869899640"/>
 							<reference ref="752807841"/>
@@ -522,7 +523,6 @@
 							<reference ref="18294901"/>
 							<reference ref="298499062"/>
 							<reference ref="542932445"/>
-							<reference ref="1072045152"/>
 							<reference ref="699373596"/>
 						</array>
 						<reference key="parent" ref="0"/>
@@ -672,6 +672,6 @@
 			<string key="fin_img_new_lvl.png">{240, 233}</string>
 			<string key="lg_title_view.png">{320, 75}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">1929</string>
+		<string key="IBCocoaTouchPluginVersion">1930</string>
 	</data>
 </archive>

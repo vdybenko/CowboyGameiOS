@@ -24,17 +24,17 @@
     CDWeaponProduct *prod;
     UIViewController *parentVC;
 }
-@property (weak, nonatomic) IBOutlet UILabel *description;
-@property (weak, nonatomic) IBOutlet UIView *frameView;
+@property (strong, nonatomic) IBOutlet UILabel *description;
+@property (strong, nonatomic) IBOutlet UIView *frameView;
 
-@property (weak, nonatomic) IBOutlet UILabel *title;
-@property (weak, nonatomic) IBOutlet UIImageView *gunIcon;
-@property (weak, nonatomic) IBOutlet UIView_Frame *gunIconFrame;
-@property (weak, nonatomic) IBOutlet UILabel *goldTitle;
-@property (weak, nonatomic) IBOutlet UILabel *gold;
-@property (weak, nonatomic) IBOutlet UILabel *effectTitle;
-@property (weak, nonatomic) IBOutlet UILabel *effect;
-@property (weak, nonatomic) IBOutlet UIButton *buyButton;
+@property (strong, nonatomic) IBOutlet UILabel *title;
+@property (strong, nonatomic) IBOutlet UIImageView *gunIcon;
+@property (strong, nonatomic) IBOutlet UIView_Frame *gunIconFrame;
+@property (strong, nonatomic) IBOutlet UILabel *goldTitle;
+@property (strong, nonatomic) IBOutlet UILabel *gold;
+@property (strong, nonatomic) IBOutlet UILabel *effectTitle;
+@property (strong, nonatomic) IBOutlet UILabel *effect;
+@property (strong, nonatomic) IBOutlet UIButton *buyButton;
 
 @end
 
@@ -126,28 +126,9 @@ static int oponentMustShot;
     [super didReceiveMemoryWarning];
 }
 
--(void)releaseComponents
-{
-    playerAccount = nil;
-    productCell = nil;
-    prod = nil;
-    description = nil;
-    frameView = nil;
-    title = nil;
-    gunIcon = nil;
-    gunIconFrame = nil;
-    goldTitle = nil;
-    gold = nil;
-    effectTitle = nil;
-    effect = nil;
-    buyButton = nil;
-}
-
-#pragma mark
 - (IBAction)closeButtonClick:(id)sender {
     [[UIAccelerometer sharedAccelerometer] setDelegate:parentVC];
     [parentVC dismissViewControllerAnimated:YES completion:Nil];
-    [self releaseComponents ];
 }
 
 + (BOOL)isAttensionNeedForOponent:(AccountDataSource*)oponentAccount;

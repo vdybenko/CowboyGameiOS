@@ -17,12 +17,12 @@ typedef enum {
 } TopPlayerCellStatus;
 
 @interface TopPlayerCell : UITableViewCell
-@property (weak,nonatomic) IBOutlet UIView * backGround;
-@property (weak,nonatomic) IBOutlet UIImageView * icon;
-@property (weak,nonatomic) IBOutlet UIImageView * backGroundSelected;
-@property (weak,nonatomic) IBOutlet UILabel * coldTitle;
-@property (weak,nonatomic) IBOutlet UILabel * gold;
-@property (weak,nonatomic) IBOutlet UILabel * playerName;
+@property (strong,nonatomic) IBOutlet UIView * backGround;
+@property (strong,nonatomic) IBOutlet UIImageView * icon;
+@property (strong,nonatomic) IBOutlet UIImageView * backGroundSelected;
+@property (strong,nonatomic) IBOutlet UILabel * coldTitle;
+@property (strong,nonatomic) IBOutlet UILabel * gold;
+@property (strong,nonatomic) IBOutlet UILabel * playerName;
 @property (nonatomic)  TopPlayerCellStatus status;
 
 +(TopPlayerCell*)cell;

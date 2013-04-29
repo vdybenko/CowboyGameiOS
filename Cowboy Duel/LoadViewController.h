@@ -10,6 +10,6 @@
 #import <UIKit/UIKit.h>
 #import "StartViewController.h"
 
-@interface LoadViewController : UIViewController <RefreshContentDataControllerDelegate,MemoryManagement>
+@interface LoadViewController : UIViewController <RefreshContentDataControllerDelegate>
 -(id)initWithPush:(__weak NSDictionary *)notification;
 @end

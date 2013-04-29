@@ -20,28 +20,29 @@
     int money;
     double angle;
     
-    __weak IBOutlet UIImageView *ivImageForLevel;
+    IBOutlet UIImageView *ivImageForLevel;
     
     //images to animate:
-    __weak IBOutlet UIImageView *ivLightRays;
-    __weak IBOutlet UIImageView *ivLevelRing;
-    __weak IBOutlet UIImageView *ivLevelCoint;
+    IBOutlet UIImageView *ivLightRays;
+    IBOutlet UIImageView *ivLightRays2;
+    IBOutlet UIImageView *ivLevelRing;
+    IBOutlet UIImageView *ivLevelCoint;
     
     //labels:
-    __weak IBOutlet UILabel *lbTitleRankAchieve;
+    IBOutlet UILabel *lbTitleRankAchieve;
     
-    __weak IBOutlet UILabel *lbCongLvlMainText;
-    __weak IBOutlet UILabel *lbAgain;
-    __weak IBOutlet UILabel *lbMenu;
-    __weak IBOutlet UILabel *lbPostOnFB;
+    IBOutlet UILabel *lbCongLvlMainText;
+    IBOutlet UILabel *lbAgain;
+    IBOutlet UILabel *lbMenu;
+    IBOutlet UILabel *lbPostOnFB;
     //buttons:
-    __weak IBOutlet UIButton *btnAgain;
-    __weak IBOutlet UIButton *btnMenu;
-    __weak IBOutlet UIButton *btnPost;
+    IBOutlet UIButton *btnAgain;
+    IBOutlet UIButton *btnMenu;
+    IBOutlet UIButton *btnPost;
     BOOL runAnimation;
 }
-@property(nonatomic, weak)id<DuelViewControllerDelegate> delegate;
-@property (nonatomic, weak) IBOutlet UIImageView *ivLightRays2;
+@property(nonatomic, strong)id<DuelViewControllerDelegate> delegate;
+@property (nonatomic, strong) IBOutlet UIImageView *ivLightRays2;
 @end
 
 @implementation LevelCongratViewController
@@ -65,8 +66,8 @@
         NSString *name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel];
         ivImageForLevel.image = [UIImage imageNamed:name];
         
-        NSString *st=[NSString stringWithFormat:@"%dRankText",playerAccount.accountLevel];
-        lbCongLvlMainText.text = NSLocalizedString(st, @"");
+        int countBullets = [DuelRewardLogicController countUpBuletsWithOponentLevel:playerAccount.accountLevel defense:playerAccount.accountDefenseValue playerAtack:0];
+        lbCongLvlMainText.text = [NSString stringWithFormat:@"%@%@%@%d%@", NSLocalizedString(@"LvlAchievText1", nil),[NSString stringWithFormat:@"%@",userRank], NSLocalizedString(@"LvlAchievText2", nil),countBullets, NSLocalizedString(@"LvlAchievText3", nil)];
         
         self.delegate = delegateController;
         
@@ -149,31 +150,6 @@
     runAnimation = NO;
 }
 
-- (void)releaseComponents
-{
-    playerAccount = nil;
-    activityIndicatorView = nil;
-    
-    ivImageForLevel = nil;
-    
-    ivLightRays = nil;
-    ivLightRays2 = nil;
-    ivLevelRing = nil;
-    ivLevelCoint = nil;
-    lbTitleRankAchieve = nil;
-    lbCongLvlMainText = nil;
-    lbAgain = nil;
-    lbMenu = nil;
-    lbPostOnFB = nil;
-    
-    btnAgain = nil;
-    btnMenu = nil;
-    btnPost = nil;
-    ivLightRays2 = nil;
-}
-
-#pragma mark
-
 -(void)scaleAnimation
 {
     [UIView beginAnimations:nil context:nil];
@@ -248,7 +224,6 @@
     {
         [(FinalViewController *)delegate backButtonClick:sender];
     }
-    [self releaseComponents];
 }
 
 - (IBAction)btnAgainClicked:(id)sender
@@ -260,7 +235,6 @@
     {
        [(FinalViewController *)delegate tryButtonClick:sender];
     }
-    [self releaseComponents];
 }
 
 - (IBAction) btnPostOnFBClicked:(id)sender

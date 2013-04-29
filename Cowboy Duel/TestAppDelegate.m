@@ -79,7 +79,7 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     loadViewController= [[LoadViewController alloc] initWithPush:launchOptions];
     
     navigationController = [[UINavigationController alloc] initWithRootViewController:loadViewController];
-    loadViewController = nil;
+
     [navigationController setNavigationBarHidden:YES];
     
     CGRect frame = [[UIScreen mainScreen]bounds];
@@ -190,7 +190,6 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 }
 
 - (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI {
-    
     NSArray *permissions =
     [NSArray arrayWithObjects:@"email", nil];
     float ver_float = [[[UIDevice currentDevice] systemVersion] floatValue];
@@ -198,18 +197,13 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
         ACAccountStore *accountStore = [[ACAccountStore alloc] init];
         ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
         if (![accountStore accountsWithAccountType:accountType]){
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry", @"AlertView")
-                                                                message:NSLocalizedString(@"You can't connnect to Facebook right now, make sure  your device has an internet connection and you have at least one Facebook account setup", @"AlertView")
-                                                               delegate:self
-                                                      cancelButtonTitle:NSLocalizedString(@"Cancel", @"AlertView")
-                                                      otherButtonTitles: nil];
-            [alertView show];
-            return NO;
-
+            [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                        object:self
+                        userInfo:[NSDictionary dictionaryWithObject:@"/TestAppDelegate_login_FB_no_account" forKey:@"page"]];
+            }
         }
-    }
-
     [self openSessionWithPermission:permissions];
+    return YES;
 }
 
 -(void)openSessionWithPermission:(NSArray *)permissions

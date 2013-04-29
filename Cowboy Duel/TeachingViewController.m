@@ -61,13 +61,12 @@ static NSString *ShotSound = @"%@/shot.mp3";
     
     //[helpPracticeView setHidden:NO];
     if(!opAccount.bot && (mutchNumber == 0)){
-             teachingHelperViewController = [[TeachingHelperViewController alloc] initWithOponentAccount:opAccount parentVC:self];
+            teachingHelperViewController = [[TeachingHelperViewController alloc] initWithOponentAccount:opAccount parentVC:self];
             
             [UIView animateWithDuration:0.5 animations:^{
                 UIWindow *mainWindow = [[UIApplication sharedApplication] keyWindow];
                 [mainWindow insertSubview:teachingHelperViewController.view aboveSubview:mainWindow];
             }];
-//        teachingHelperViewController = nil;
         //        [[UIAccelerometer sharedAccelerometer] setDelegate:nil];
     }else{
         [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(3.0 / 60.0)];
@@ -182,7 +181,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
             [activityIndicatorView showView];
             [self.navigationController pushViewController:finalViewController animated:YES];
             //                [button setEnabled:NO];
-            finalViewController = nil;
             [timer invalidate];
         } 
     }else{
@@ -210,6 +208,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
             case FirstFint:
                 
                 DLog(@"first fint");
+                
                 maxShotCount = 1;
                 
                 break;
@@ -223,7 +222,7 @@ static NSString *ShotSound = @"%@/shot.mp3";
     }
     
     if ((accelerometerState)&&(!soundStart)) {
-        super._infoButton.enabled=NO;
+        _infoButton.enabled=NO;
         [self startDuel];
     }
     
@@ -239,7 +238,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
     FinalViewController *finalViewController = [[FinalViewController alloc] initWithUserTime:999999.0 andOponentTime:0 andGameCenterController:self andTeaching:YES andAccount: playerAccount andOpAccount:opAccount];
     
     [self.navigationController pushViewController:finalViewController animated:YES];
-    finalViewController = nil;
 }
 
 -(void)startDuel
@@ -264,5 +262,11 @@ static NSString *ShotSound = @"%@/shot.mp3";
     {
         [self hideHelpViewWithArm];
     }
+}
+
+#pragma mark 
+-(void)dealloc
+{
+    teachingHelperViewController = nil;
 }
 @end

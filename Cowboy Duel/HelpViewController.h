@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HelpViewController : UIViewController<UIApplicationDelegate,MemoryManagement>
+@interface HelpViewController : UIViewController<UIApplicationDelegate>
 {
 }
 - (id)initWithStartVC:(id)startVCl;

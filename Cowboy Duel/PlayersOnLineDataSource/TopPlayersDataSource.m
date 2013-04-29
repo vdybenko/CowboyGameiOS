@@ -12,19 +12,8 @@
 #import "UIImage+Save.h"
 #import "IconDownloader.h"
 
-@interface TopPlayersDataSource()
-{
-    NSMutableData *receivedData;
-    
-    NSMutableDictionary *imageDownloadsInProgress;
-    int myProfileIndex;
-}
-
-@end
-
 @implementation TopPlayersDataSource
 @synthesize arrItemsList,delegate,myProfileIndex;
-@synthesize tableView;
 
 //static const char *TOP_PLAYERS_URL =  BASE_URL"users/listview";
 static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json";
@@ -43,7 +32,7 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
     arrItemsList=[[NSMutableArray alloc] init];
      imageDownloadsInProgress=[[NSMutableDictionary alloc] init];
      
-     tableView=pTable;
+     _tableView=pTable;
      myProfileIndex=-1;
 	return self;
 }
@@ -73,13 +62,6 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
     }
 }
 
--(void)releaseComponents
-{
-    arrItemsList = nil;
-    receivedData = nil;
-    tableView = nil;
-    imageDownloadsInProgress = nil;
-}
 #pragma mark - Delegated methods
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -96,7 +78,6 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
     player=[arrItemsList objectAtIndex:indexPath.row];
     [cell populateWithPlayer:player index:indexPath myIndex:myProfileIndex];
     
-    [cell setPlayerIcon:nil];
 //  Set Image of user
     NSString *name=[[OGHelper sharedInstance ] getClearName:player.dAuth];
     NSString *path=[NSString stringWithFormat:@"%@/icon_%@.png",[[OGHelper sharedInstance] getSavePathForList],name];
@@ -144,6 +125,7 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
             }
         }
     }
+
     return cell;
 }
 
@@ -160,7 +142,6 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
 
 - (void)connectionDidFinishLoading:(CustomNSURLConnection *)connection1 {
    
-    connection1 = nil;
     NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
     DLog(@"PlayersOnLineDataSource jsonString %@",jsonString);
     NSArray *responseObject = ValidateObject([jsonString JSONValue], [NSArray class]);
@@ -183,7 +164,7 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
     TopPlayersViewController *topPlayersViewController = (TopPlayersViewController *)delegate;
     [topPlayersViewController.btnFindMe setEnabled:YES];
     [topPlayersViewController.loadingView setHidden:YES];
-    [tableView reloadData];
+    [_tableView reloadData];
 }
 
 - (void)connection:(CustomNSURLConnection *)connection didReceiveData:(NSData *)data
@@ -210,15 +191,11 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top.json"
     IconDownloader *iconDownloader = [imageDownloadsInProgress objectForKey:indexPath];
     if (iconDownloader != nil)
         {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                TopPlayerCell *cell = (TopPlayerCell*)[tableView cellForRowAtIndexPath:iconDownloader.indexPathInTableView];
-                [cell setPlayerIcon:iconDownloader.imageDownloaded];
-            });
-            [imageDownloadsInProgress removeObjectForKey:indexPath];
-            iconDownloader = nil;
+            TopPlayerCell  *cell = (TopPlayerCell*)[_tableView cellForRowAtIndexPath:iconDownloader.indexPathInTableView];
+            [cell setPlayerIcon:iconDownloader.imageDownloaded];
         }
 }
-//
+
 #pragma mark -
 
 -(BOOL) isPlayerInTop10:(NSString*)authen;

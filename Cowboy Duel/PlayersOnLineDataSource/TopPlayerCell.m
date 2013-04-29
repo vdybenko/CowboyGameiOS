@@ -17,7 +17,7 @@
     NSNumberFormatter *numberFormatter;
     FXLabel *rankNumber;
 }
-@property (weak,nonatomic) IBOutlet UILabel *rankNumberFake;
+@property (strong,nonatomic) IBOutlet UILabel *rankNumberFake;
 @end
 
 @implementation TopPlayerCell
@@ -36,10 +36,8 @@ UIColor * brownColor;
 UIColor * sandColor;
 
 +(TopPlayerCell*) cell {
-    @autoreleasepool {
-        NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"TopPlayersCell" owner:nil options:nil];
-        return [objects objectAtIndex:0];
-    }
+    NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"TopPlayersCell" owner:nil options:nil];
+    return [objects objectAtIndex:0];
 }
 
 +(NSString*) cellID { return @"TopPlayersCell"; }
@@ -52,12 +50,10 @@ UIColor * sandColor;
     numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     
-    @autoreleasepool {
-        rankNumber=[[FXLabel alloc] initWithFrame:rankNumberFake.frame];
-        rankNumber.backgroundColor = [UIColor clearColor];
-        [rankNumber setTextAlignment:UITextAlignmentCenter];
-        [self addSubview:rankNumber];
-    }
+    rankNumber=[[FXLabel alloc] initWithFrame:rankNumberFake.frame];
+    rankNumber.backgroundColor = [UIColor clearColor];
+    [rankNumber setTextAlignment:UITextAlignmentCenter];
+    [self addSubview:rankNumber];
     
     coldTitle.text=NSLocalizedString(@"Gold:", @"");
     
@@ -65,7 +61,9 @@ UIColor * sandColor;
 }
 
 -(void)populateWithPlayer:(CDTopPlayer *) player index:(NSIndexPath *)indexPath myIndex:(int)myProfileIndex;
-{    
+{
+    [self setPlayerIcon:[UIImage imageNamed:@"pv_photo_default.png"]];
+    
     playerName.text=player.dNickName;
     
     NSString *formattedNumberString = [numberFormatter stringFromNumber:[NSNumber numberWithInt:( player.dMoney)]];
@@ -86,6 +84,7 @@ UIColor * sandColor;
     }else {
         if ([player.dAuth isEqualToString:[AccountDataSource sharedInstance].accountID]) {
             [self setCellStatus:TopPlayerCellStatusRed];
+            myProfileIndex=indexPath.row;
         }else {
             if (indexPath.row==0) {
                 [self setCellStatus:TopPlayerCellStatusGold];

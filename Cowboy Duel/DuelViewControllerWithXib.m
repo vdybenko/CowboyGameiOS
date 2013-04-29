@@ -26,7 +26,7 @@
 static NSString *ShotSound = @"%@/shot.mp3";
 
 @implementation DuelViewControllerWithXib
-@synthesize _vEarth, _infoButton, _ivGun, _btnNab, _lbBullets, delegate;
+@synthesize _vEarth, _infoButton, _ivGun, _btnNab, _lbBullets, delegate,titleSteadyFire;
 
 -(id)initWithAccount:(AccountDataSource *)userAccount oponentAccount:(AccountDataSource *)oponentAccount;
 {
@@ -209,7 +209,6 @@ static NSString *ShotSound = @"%@/shot.mp3";
     lbBackButton = nil;
     [super viewDidUnload];
 }
-
 #pragma mark Earth animation
 
 -(void)setRotationWithAngle:(float)angle andY:(float)y
@@ -380,7 +379,6 @@ if (shotCountBullet!=0) {
 {   
     HelpViewController *helpView=[[HelpViewController alloc] init];
     [self.navigationController pushViewController:helpView animated:YES];
-    helpView = nil;
 }
 
 #pragma mark Gun animation

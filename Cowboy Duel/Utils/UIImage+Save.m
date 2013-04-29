@@ -24,7 +24,7 @@
         if (pURL && ![pURL isEqualToString:@""]) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                 NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:pURL]];
-                UIImage *image = [UIImage imageWithData:imageData];
+                UIImage *image = [[UIImage alloc] initWithData:imageData];
                 NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
                 [data1 writeToFile:pngFilePath atomically:YES];
             });

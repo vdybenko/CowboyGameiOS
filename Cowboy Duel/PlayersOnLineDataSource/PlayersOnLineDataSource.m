@@ -57,13 +57,13 @@
 
 -(void) reloadDataSource;
 {
-    [self addPracticeCell];
     if (statusOnLine) {
         [self.connection sendData:@"" packetID:NETWORK_GET_LIST_ONLINE ofLength:sizeof(int)];
         [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(connectionTimeout) userInfo:nil repeats:NO];
         self.startLoad = YES;
     }else{
         self.startLoad = NO;
+        [self addPracticeCell];
         ListOfItemsViewController *listOfItemsViewController = (ListOfItemsViewController *)delegate;
         [listOfItemsViewController didRefreshController];
     }
@@ -131,7 +131,6 @@
         
         player=[self.serverObjects objectAtIndex:indexPath.row];
         [cell populateWithPlayer:player];
-        [cell setPlayerIcon:nil];
         
         NSString *name=[[OGHelper sharedInstance ] getClearName:player.serverName];
         NSString *path=[NSString stringWithFormat:@"%@/icon_%@.png",[[OGHelper sharedInstance] getSavePathForList],name];

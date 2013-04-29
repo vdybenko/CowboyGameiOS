@@ -26,8 +26,8 @@
                   [NSNumber numberWithInt:85],
                   [NSNumber numberWithInt:100],
                   nil]; 
-    if (oponentlevel < kCountOfLevelsMinimal || oponentlevel>kCountOfLevels) {
-        oponentlevel = kCountOfLevelsMinimal;
+    if (oponentlevel < 0 || oponentlevel>10) {
+        oponentlevel = 1;
     }
     int winPonits=[[_pontsForWin objectAtIndex:(oponentlevel)] intValue];
     return winPonits;
@@ -50,8 +50,8 @@
                    [NSNumber numberWithInt:25],
                    [NSNumber numberWithInt:30],
                    nil];
-    if (oponentlevel<kCountOfLevelsMinimal||oponentlevel>kCountOfLevels) {
-        oponentlevel = kCountOfLevelsMinimal;
+    if (oponentlevel<0||oponentlevel>10) {
+        oponentlevel = 1;
     }
     int losePonits=[[_pontsForLose objectAtIndex:(oponentlevel)] intValue];
     return losePonits;
@@ -90,8 +90,8 @@
                     [NSNumber numberWithInt:6],//9
                     [NSNumber numberWithInt:6],//10
                     nil];
-    if (playerLevel < kCountOfLevelsMinimal||playerLevel>kCountOfLevels) {
-        playerLevel = kCountOfLevelsMinimal;
+    if (playerLevel < 0||playerLevel>10) {
+        playerLevel = 1;
     }
     int countBullets=[[array objectAtIndex:(playerLevel)] intValue];
     return countBullets;

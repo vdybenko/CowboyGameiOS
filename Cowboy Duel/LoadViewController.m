@@ -25,8 +25,9 @@ static const char *A_URL =  BASE_URL"api/authorization";
 
 -(id)initWithPush:(__weak NSDictionary *)notification
 {
-    self = [super init];
-    if(self){
+    if(self==[super init])
+    {
+        
         [AccountDataSource sharedInstance];
         if(![[NSUserDefaults standardUserDefaults] boolForKey:@"AlreadyRun"] ) {
             firstRun = YES;
@@ -56,8 +57,7 @@ static const char *A_URL =  BASE_URL"api/authorization";
         if (frame.size.height > 480) {
             imgBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default-568h.png"]];
         }
-        else
-            imgBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default.png"]];
+        else imgBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default.png"]];
         
         [self.view addSubview:imgBackground];
         
@@ -77,8 +77,7 @@ static const char *A_URL =  BASE_URL"api/authorization";
         versionLabel.text = version;
         [versionLabel setHidden:NO];
         [self.view addSubview:versionLabel];
-        versionLabel = nil;
-        
+
         if (!firstRun) {
             [self performSelector:@selector(closeWindow) withObject:self afterDelay:3.0]; 
         }
@@ -88,6 +87,7 @@ static const char *A_URL =  BASE_URL"api/authorization";
 
 - (void) viewDidLoad 
 {
+     
     UIImageView *gunLeftImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Gun.png"]];
     [gunLeftImage setFrame:CGRectMake(32-gunLeftImage.frame.size.width, 
                                       self.view.frame.size.height, 
@@ -107,17 +107,8 @@ static const char *A_URL =  BASE_URL"api/authorization";
     [imgBackground addSubview:gunRightImage];
     
     [self animationWithGunsFirst:gunLeftImage andSecond:gunRightImage];
-    gunLeftImage = nil;
-    gunRightImage = nil;
 }
 
--(void)releaseComponents
-{
-    player = nil;
-    startViewController = nil;
-    imgBackground = nil;
-    receivedData = nil;
-}
 //animation of guns:
 - (void) animationWithGunsFirst:  (UIImageView *)imageLeft andSecond:(UIImageView *)imageRight
 {
@@ -157,7 +148,6 @@ static const char *A_URL =  BASE_URL"api/authorization";
 	if(![[NSUserDefaults standardUserDefaults] boolForKey:@"AlreadyRun"] ) {
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AlreadyRun"];
     }
-    [self releaseComponents];
 }
 
 -(void)login
@@ -174,7 +164,7 @@ static const char *A_URL =  BASE_URL"api/authorization";
     NSString *stBody=[Utils makeStringForPostRequest:dicBody];
 	[theRequest setHTTPBody:[stBody dataUsingEncoding:NSUTF8StringEncoding]]; 
     
-    NSURLConnection *theConnection=[NSURLConnection connectionWithRequest:theRequest delegate:self];
+    NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self startImmediately:YES];
     if (theConnection) {
         //        [receivedData setLength:0];
         receivedData = [[NSMutableData alloc] init];
@@ -213,7 +203,9 @@ static const char *A_URL =  BASE_URL"api/authorization";
          NSString *sesion =[[NSString alloc] initWithString:[responseObject objectForKey:@"session_id"]];
         [[AccountDataSource sharedInstance] setSessionID:sesion];
         DLog(@"get sesion %@",sesion);
+        
     }
+    else [self closeWindow];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data

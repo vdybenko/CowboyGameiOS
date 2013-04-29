@@ -26,10 +26,10 @@
             
     NSIndexPath *_indexPath;
     
-    __weak IBOutlet UILabel *lbBackBtn;
-    __weak IBOutlet UILabel *lbInviteBtn;
+    IBOutlet UILabel *lbBackBtn;
+    IBOutlet UILabel *lbInviteBtn;
     
-    __weak IBOutlet UILabel *saloonTitle;
+    IBOutlet UILabel *saloonTitle;
     
     NSTimer *updateTimer;
 }
@@ -136,24 +136,6 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
--(void)releaseComponents
-{
-    tableView = nil;
-    btnInvite = nil;
-    btnBack = nil;
-    activityIndicator = nil;
-    loadingView = nil;
-    updateTimer = nil;
-    _playerAccount = nil;
-     _gameCenterViewController = nil;
-     _playersOnLineDataSource = nil;
-     startViewController = nil;
-    lbBackBtn = nil;
-    lbInviteBtn = nil;
-    saloonTitle = nil;
-    updateTimer = nil;
-
-}
 #pragma mark - UITableViewDelegate
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -163,10 +145,8 @@
 
 -(UIView *) tableView:(UITableView *)pTableView viewForHeaderInSection:(NSInteger)section
 {
-    @autoreleasepool {
-        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, pTableView.frame.size.width, 20)];
-        return headerView;
-    }
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, pTableView.frame.size.width, 20)];
+    return headerView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -205,9 +185,7 @@
                          [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
                          [self.navigationController pushViewController:profileViewController animated:NO];
                          [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
-                     }];
-    profileViewController = nil;
-    //    CATransition* transition = [CATransition animation];
+                     }];//    CATransition* transition = [CATransition animation];
 //    transition.duration = 0.5;
 //    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
 //    transition.type = kCATransition;//, kCATransitionReveal, kCATransitionFade,kCATransitionMoveIn;
@@ -248,7 +226,7 @@
         
         TeachingViewController *teachingViewController = [[TeachingViewController alloc] initWithTime:randomTime andAccount:_playerAccount andOpAccount:oponentAccount];
         [self.navigationController pushViewController:teachingViewController animated:YES];
-        teachingViewController = nil;
+        
         SSConnection *connection = [SSConnection sharedInstance];
         [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
         
@@ -260,12 +238,11 @@
 
     DuelStartViewController *duelStartViewController = [[DuelStartViewController alloc]initWithAccount:_playerAccount andOpAccount:oponentAccount opopnentAvailable:NO andServerType:NO andTryAgain:NO];
     duelStartViewController.serverName = player.serverName;
-        
+    
     duelStartViewController.delegate = _gameCenterViewController;
     _gameCenterViewController.duelStartViewController = duelStartViewController;
     
     [self.navigationController pushViewController:duelStartViewController animated:YES];
-    duelStartViewController = nil;
     PlayerOnLineCell *cell = (PlayerOnLineCell *)[tableView cellForRowAtIndexPath:indexPath];
     [cell hideIndicatorConnectin];
     
@@ -293,8 +270,7 @@
         [self.navigationController pushViewController:duelStartViewController animated:YES];
         duelStartViewController.delegate = _gameCenterViewController;
         _gameCenterViewController.duelStartViewController = duelStartViewController;
-        duelStartViewController = nil;
-
+        
         NSString *convertString=_player.dAuth;
         NSUInteger bufferCount = sizeof(char) * ([convertString length] + 1);
         char *utf8Buffer = malloc(bufferCount);
@@ -309,8 +285,6 @@
             NSString *entered = [(OCPromptView *)alertView enteredText];
             [_gameCenterViewController startClientWithName:_hostName AndMessage:entered];
         }
-        
-        
     }
     else
     {
