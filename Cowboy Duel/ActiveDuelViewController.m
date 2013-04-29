@@ -723,6 +723,7 @@ static CGFloat blinkBottomOriginY;
             {
                 CGRect frame = self.bloodImageView.frame;
                 frame.origin = opponentShape.frame.origin;
+                self.bloodImageView.frame = frame;
                 [self.bloodImageView startAnimating];
             }
             break;
@@ -730,6 +731,7 @@ static CGFloat blinkBottomOriginY;
             {
                 CGRect frame = self.bloodCImageView.frame;
                 frame.origin = opponentShape.frame.origin;
+                self.bloodCImageView.frame = frame;
                 [self.bloodCImageView startAnimating];
             }
             break;
@@ -737,6 +739,7 @@ static CGFloat blinkBottomOriginY;
             {
                 CGRect frame = self.bloodImageView.frame;
                 frame.origin = opponentShape.frame.origin;
+                self.bloodImageView.frame = frame;
                 [self.bloodImageView startAnimating];
             }
             break;
@@ -744,6 +747,7 @@ static CGFloat blinkBottomOriginY;
             {
                 CGRect frame = self.bloodCImageView.frame;
                 frame.origin = opponentShape.frame.origin;
+                self.bloodCImageView.frame = frame;
                 [self.bloodCImageView startAnimating];
             }
             break;
@@ -751,6 +755,7 @@ static CGFloat blinkBottomOriginY;
             {
                 CGRect frame = self.bloodImageView.frame;
                 frame.origin = opponentShape.frame.origin;
+                self.bloodImageView.frame = frame;
                 [self.bloodImageView startAnimating];
             }
             break;
