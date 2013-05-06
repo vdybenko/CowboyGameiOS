@@ -14,6 +14,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #import "UIButton+Image+Title.h"
+#import "ActiveDuelViewController.h"
 
 @interface ListOfItemsViewController ()
 {
@@ -88,6 +89,8 @@
     }];
     
     saloonTitle.text = NSLocalizedString(@"SALYN", nil);
+    if (_playerAccount.activeDuel) saloonTitle.text = NSLocalizedString(@"SALYN2", nil);
+    
     saloonTitle.textColor = [UIColor colorWithRed:255.0f/255.0f green:234.0f/255.0f blue:191.0f/255.0f alpha:1.0f];
     saloonTitle.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
 
@@ -245,10 +248,15 @@
     if ([player.sessionId isEqualToString:@"-1"]) {
         [_playerAccount.finalInfoTable removeAllObjects];
         int randomTime = arc4random() % 6;
-        
-        TeachingViewController *teachingViewController = [[TeachingViewController alloc] initWithTime:randomTime andAccount:_playerAccount andOpAccount:oponentAccount];
-        [self.navigationController pushViewController:teachingViewController animated:YES];
-        teachingViewController = nil;
+        if (_playerAccount.activeDuel) {
+            ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithTime:randomTime Account:_playerAccount oponentAccount:oponentAccount];
+            [self.navigationController pushViewController:activeDuelViewController animated:YES];
+        }
+        else
+        {
+            TeachingViewController *teachingViewController = [[TeachingViewController alloc] initWithTime:randomTime andAccount:_playerAccount andOpAccount:oponentAccount];
+            [self.navigationController pushViewController:teachingViewController animated:YES];
+        }
         SSConnection *connection = [SSConnection sharedInstance];
         [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
         

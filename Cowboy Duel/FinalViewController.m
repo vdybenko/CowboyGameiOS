@@ -1370,7 +1370,7 @@
   ivBlueLine.frame = temp;
   
   if (points <= 0) points = 0;
-  int firstWidthOfLine=130;
+  int firstWidthOfLine=lblPoints.frame.size.width;
   float changeWidth=(points*firstWidthOfLine)/maxValue;
   
   temp.size.width = changeWidth;
