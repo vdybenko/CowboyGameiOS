@@ -11,8 +11,6 @@
 
 @interface FavouritesViewController : UIViewController <UITableViewDelegate,MemoryManagement>
 
-@property (strong, nonatomic) IBOutlet UIView *vOffLineBackGround;
-@property (strong, nonatomic) IBOutlet UIWebView *wvOffLineText;
 @property (weak, nonatomic) IBOutlet UITableView *tvFavTable;
 @property (weak, nonatomic) IBOutlet UILabel *lbFavsTitle;
 

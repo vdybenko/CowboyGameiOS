@@ -17,7 +17,6 @@
 @property (weak, nonatomic) IBOutlet UIView * vBackGround;
 
 @property (weak, nonatomic) IBOutlet UIImageView * ivIcon;
-@property (weak, nonatomic) IBOutlet UIImageView * ivBackGroundSelected;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnGetHim;
 

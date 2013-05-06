@@ -31,7 +31,7 @@
 
 @implementation FavouritesViewController
 
-@synthesize lbFavsTitle, btnBack, vOffLineBackGround, wvOffLineText, tvFavTable, btnOffLine, btnOnLine;
+@synthesize lbFavsTitle, btnBack, tvFavTable, btnOffLine, btnOnLine;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
