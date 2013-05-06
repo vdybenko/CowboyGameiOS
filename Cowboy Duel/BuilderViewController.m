@@ -9,7 +9,11 @@
 #import "BuilderViewController.h"
 
 @interface BuilderViewController ()
+{
 
+    BOOL isOpenSide;
+
+}
 @property (weak, nonatomic) IBOutlet UIView *gunView1;
 @property (weak, nonatomic) IBOutlet UIView *sideView;
 @property (weak, nonatomic) IBOutlet UIScrollView *gunsScroll;
@@ -18,7 +22,6 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *shirtScroll;
 @property (weak, nonatomic) IBOutlet UIScrollView *faceScroll;
 @property (weak, nonatomic) IBOutlet UIScrollView *shoesScroll;
-
 
 @end
 
@@ -58,6 +61,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        isOpenSide = NO;
    
     }
     return self;
@@ -78,7 +82,8 @@
     // Dispose of any resources that can be recreated.
 }
 -(void)sideOpenAnimation{
-
+    if (!isOpenSide) {
+        isOpenSide = YES;
     [UIView animateWithDuration:0.6 animations:^{
        CGRect frame = self.sideView.frame;
         frame.origin.x -= 100;
@@ -87,11 +92,12 @@
     }completion:^(BOOL finished) {
     }];
 
-
+    }
 
 }
 -(void)sideCloseAnimation{
-    
+    if (isOpenSide) {
+        isOpenSide = NO;
     [UIView animateWithDuration:0.6 animations:^{
         CGRect frame = self.sideView.frame;
         frame.origin.x += 100;
@@ -106,7 +112,7 @@
           self.gunsScroll.hidden = YES;
         
     }];
-    
+    }
     
     
 }
