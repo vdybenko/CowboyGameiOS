@@ -23,6 +23,7 @@
 #import "FavouritesDataSource.h"
 #import "UIView+Dinamic_BackGround.h"
 #import "VisualViewCharacterViewController.h"
+#import "BuilderViewController.h"
 
 static const CGFloat changeYPointWhenKeyboard = 155;
 static const CGFloat timeToStandartTitles = 1.8;
@@ -1116,8 +1117,11 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                                                       userInfo:[NSDictionary dictionaryWithObject:@"/ProfileVC_add_favorite" forKey:@"page"]];
 }
 - (IBAction)btnBuilderClick:(id)sender {
-    VisualViewCharacterViewController *visualViewCharacterViewController = [[VisualViewCharacterViewController alloc] init];
-    [self.navigationController pushViewController:visualViewCharacterViewController animated:NO];
+   // VisualViewCharacterViewController *visualViewCharacterViewController = [[VisualViewCharacterViewController alloc] init];
+    //[self.navigationController pushViewController:visualViewCharacterViewController animated:NO];
+    
+    BuilderViewController *builder = [[BuilderViewController alloc] init];
+    [self.navigationController pushViewController:builder animated:NO];
 }
 
 #pragma mark IconDownloaderDelegate
