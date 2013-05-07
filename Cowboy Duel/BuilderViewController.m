@@ -5,14 +5,18 @@
 //  Created by Alex Novitsky on 5/6/13.
 //
 //
-
+#import "ProfileViewController.h"
 #import "BuilderViewController.h"
+#import "AccountDataSource.h"
+#import "DuelRewardLogicController.h"
+#import "StartViewController.h"
 
 @interface BuilderViewController ()
 {
-
+    SSServer *playerServer;
+    AccountDataSource *playerAccount;
+    ProfileViewController *profileViewController;
     BOOL isOpenSide;
-
 }
 @property (weak, nonatomic) IBOutlet UIView *gunView1;
 @property (weak, nonatomic) IBOutlet UIView *sideView;
@@ -22,10 +26,26 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *shirtScroll;
 @property (weak, nonatomic) IBOutlet UIScrollView *faceScroll;
 @property (weak, nonatomic) IBOutlet UIScrollView *shoesScroll;
+@property (weak, nonatomic) IBOutlet UILabel *moneyLabel;
+@property (weak, nonatomic) IBOutlet UILabel *defensLabel;
+@property (weak, nonatomic) IBOutlet UILabel *attacLabel;
 
 @end
 
 @implementation BuilderViewController
+
+- (IBAction)touchCloseBtn:(id)sender {
+    
+    [UIView animateWithDuration:0.75
+                     animations:^{
+                         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                         [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
+                     }];
+    [self.navigationController popViewControllerAnimated:NO];
+    
+    [self releaseComponents];
+}
+
 - (IBAction)touchCloseSideView:(id)sender {
     [self sideCloseAnimation];
 }
@@ -62,20 +82,23 @@
     if (self) {
         // Custom initialization
         isOpenSide = NO;
-   
     }
     return self;
 }
 
 - (void)viewDidLoad
 {
-   
-     
-    
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    
+    self.hatsScroll.pagingEnabled = YES;
+    self.hatsScroll.contentSize = CGSizeMake(77, 600);
+    
+    playerAccount = [[AccountDataSource alloc] initWithLocalPlayer];
+    self.moneyLabel.text =  [NSString stringWithFormat:@"%d",playerAccount.money];
+    self.defensLabel.text = [NSString stringWithFormat:@"%d",playerAccount.accountDefenseValue];
+    self.attacLabel.text = [NSString stringWithFormat:@"%d",playerServer.weapon + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[playerServer.rank intValue]]];
 }
-
+ 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -125,6 +148,25 @@
     [self setShirtScroll:nil];
     [self setFaceScroll:nil];
     [self setShoesScroll:nil];
+    [self setMoneyLabel:nil];
+    [self setDefensLabel:nil];
+    [self setAttacLabel:nil];
     [super viewDidUnload];
+}
+-(void)releaseComponents
+
+{
+    [self setGunView1:nil];
+    [self setSideView:nil];
+    [self setGunsScroll:nil];
+    [self setHatsScroll:nil];
+    [self setJaketScroll:nil];
+    [self setShirtScroll:nil];
+    [self setFaceScroll:nil];
+    [self setShoesScroll:nil];
+    [self setMoneyLabel:nil];
+    [self setDefensLabel:nil];
+    [self setAttacLabel:nil];
+
 }
 @end

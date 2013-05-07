@@ -195,7 +195,7 @@
 						<string key="NSFrame">{{236, 378}, {73, 44}}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="916055748"/>
+						<reference key="NSNextKeyView" ref="963769374"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -203,6 +203,30 @@
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
 						<string key="IBUINormalTitle">GUNS</string>
+						<reference key="IBUIHighlightedTitleColor" ref="74881059"/>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+						</object>
+						<reference key="IBUINormalTitleShadowColor" ref="823735607"/>
+						<reference key="IBUINormalBackgroundImage" ref="80053627"/>
+						<reference key="IBUIFontDescription" ref="80780731"/>
+						<reference key="IBUIFont" ref="985054985"/>
+					</object>
+					<object class="IBUIButton" id="963769374">
+						<reference key="NSNextResponder" ref="1048327278"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{210, 442}, {94, 28}}</string>
+						<reference key="NSSuperview" ref="1048327278"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="916055748"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<int key="IBUIButtonType">1</int>
+						<string key="IBUINormalTitle">Close</string>
 						<reference key="IBUIHighlightedTitleColor" ref="74881059"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -2065,6 +2089,30 @@
 					<int key="connectionID">399</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">moneyLabel</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="1021684890"/>
+					</object>
+					<int key="connectionID">402</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">defensLabel</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="916991375"/>
+					</object>
+					<int key="connectionID">403</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">attacLabel</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="506166053"/>
+					</object>
+					<int key="connectionID">404</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">touchHatBtn:</string>
 						<reference key="source" ref="386081909"/>
@@ -2127,6 +2175,15 @@
 					</object>
 					<int key="connectionID">401</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">touchCloseBtn:</string>
+						<reference key="source" ref="963769374"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">407</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -2161,6 +2218,7 @@
 							<reference ref="661267077"/>
 							<reference ref="887897910"/>
 							<reference ref="417036041"/>
+							<reference ref="963769374"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -2248,7 +2306,7 @@
 							<reference ref="506166053"/>
 						</array>
 						<reference key="parent" ref="947746974"/>
-						<string key="objectName">defensView</string>
+						<string key="objectName">AttacView</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">178</int>
@@ -3086,6 +3144,11 @@
 						<reference key="object" ref="699164075"/>
 						<reference key="parent" ref="947746974"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">405</int>
+						<reference key="object" ref="963769374"/>
+						<reference key="parent" ref="1048327278"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -3227,68 +3290,41 @@
 				<string key="385.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="386.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="400.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="405.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">401</int>
+			<int key="maxID">407</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
 					<string key="className">BuilderViewController</string>
 					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="touchCloseSideView:">id</string>
-						<string key="touchFaceBtn:">id</string>
-						<string key="touchGunsBtn:">id</string>
-						<string key="touchHatBtn:">id</string>
-						<string key="touchJaketBtn:">id</string>
-						<string key="touchShirtBtn:">id</string>
-						<string key="touchShoesBtn:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="touchCloseSideView:">
-							<string key="name">touchCloseSideView:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="touchFaceBtn:">
-							<string key="name">touchFaceBtn:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="touchGunsBtn:">
-							<string key="name">touchGunsBtn:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="touchHatBtn:">
-							<string key="name">touchHatBtn:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="touchJaketBtn:">
-							<string key="name">touchJaketBtn:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="touchShirtBtn:">
-							<string key="name">touchShirtBtn:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="touchShoesBtn:">
-							<string key="name">touchShoesBtn:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="attacLabel">UILabel</string>
+						<string key="defensLabel">UILabel</string>
 						<string key="faceScroll">UIScrollView</string>
 						<string key="gunView1">UIView</string>
 						<string key="gunsScroll">UIScrollView</string>
 						<string key="hatsScroll">UIScrollView</string>
 						<string key="jaketScroll">UIScrollView</string>
+						<string key="moneyLabel">UILabel</string>
 						<string key="shirtScroll">UIScrollView</string>
 						<string key="shoesScroll">UIScrollView</string>
 						<string key="sideView">UIView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="attacLabel">
+							<string key="name">attacLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="defensLabel">
+							<string key="name">defensLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="faceScroll">
 							<string key="name">faceScroll</string>
 							<string key="candidateClassName">UIScrollView</string>
@@ -3308,6 +3344,10 @@
 						<object class="IBToOneOutletInfo" key="jaketScroll">
 							<string key="name">jaketScroll</string>
 							<string key="candidateClassName">UIScrollView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="moneyLabel">
+							<string key="name">moneyLabel</string>
+							<string key="candidateClassName">UILabel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="shirtScroll">
 							<string key="name">shirtScroll</string>
