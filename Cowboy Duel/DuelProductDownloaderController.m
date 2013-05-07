@@ -383,7 +383,8 @@ static NSString *getSavePathForDuelProduct()
     didFinishBlock = nil;
     if (delegate) {
         [delegate didFinishDownloadWithType:DuelProductDownloaderTypeDuelProduct error:error];
-    } 
+    }
+    DLog(@"parsingResultDuelProduct download compleate ");
 }
 
 -(void)parsingResultUserProduct:(NSString *)jsonString;

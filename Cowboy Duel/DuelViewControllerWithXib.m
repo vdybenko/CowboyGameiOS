@@ -477,44 +477,25 @@ if (shotCountBullet!=0) {
 -(void)checkPlayerGun;
 {
     if (playerAccount.accountWeapon.dName && [playerAccount.accountWeapon.dName length]) {
-        NSString *path=[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],playerAccount.accountWeapon.dImageGunLocal];
-        NSLog(@"path %@",path);
-        
-        if ([Utils isFileDownloadedForPath:path]) {
-            _ivGun.image = [UIImage loadImageFullPath:path];
-        }
-        
-        path=[NSString stringWithFormat:@"%@/%@",[DuelProductDownloaderController getSavePathForDuelProduct],playerAccount.accountWeapon.dSoundLocal];
-        if ([Utils isFileDownloadedForPath:path]) {
-            NSError *error;
-            player1 = [[AVAudioPlayer alloc] initWithData:[SoundDownload dataForSound:path] error:&error];
-            [player1 play];
-            [player1 stop];
-            
-            player2 = [[AVAudioPlayer alloc] initWithData:[SoundDownload dataForSound:path] error:&error];
-            [player2 play];
-            [player2 stop];
-            
-            player3 = [[AVAudioPlayer alloc] initWithData:[SoundDownload dataForSound:path] error:&error];
-            [player3 play];
-            [player3 stop];
-        }
         if (playerAccount.accountWeapon.dID == -1) {
             _ivGun.image = [UIImage imageNamed:@"dv_img_gun1.png"];
-            NSError *error;
-            NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/shot.mp3", [[NSBundle mainBundle] resourcePath]]];
-            player1 = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-            [player1 play];
-            [player1 stop];
-            
-            player2 = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-            [player2 play];
-            [player2 stop];
-            
-            player3 = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-            [player3 play];
-            [player3 stop];
+        }else{
+            NSString *nameGun = [NSString stringWithFormat:@"dv_img_gun%d.png",playerAccount.accountWeapon.dID];
+            _ivGun.image = [UIImage imageNamed:nameGun];
         }
+        NSError *error;
+        NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/shot.mp3", [[NSBundle mainBundle] resourcePath]]];
+        player1 = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+        [player1 play];
+        [player1 stop];
+        
+        player2 = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+        [player2 play];
+        [player2 stop];
+        
+        player3 = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+        [player3 play];
+        [player3 stop];
     }
 }
 

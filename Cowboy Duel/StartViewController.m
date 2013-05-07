@@ -1100,7 +1100,6 @@ static StartViewController *sharedHelper = nil;
         if ([DuelProductDownloaderController isRefreshEvailable:revisionProductListNumber]) {
             [duelProductDownloaderController refreshDuelProducts];
         }
-
         return;
     }       
     //avtorization
@@ -1732,7 +1731,6 @@ static StartViewController *sharedHelper = nil;
     if  (soundCheack) {
         [self performSelectorInBackground:@selector(volumeInc) withObject:self];
         // player.volume = 1.0f;
-        DLog(@"playerStart called!");
     }
 }
 
