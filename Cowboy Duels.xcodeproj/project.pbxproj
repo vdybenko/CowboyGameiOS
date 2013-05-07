@@ -3415,8 +3415,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3460,8 +3460,8 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Cowboy Duel";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "C34A7C31-DBD3-4F65-B946-259A4CCC3CAB";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C34A7C31-DBD3-4F65-B946-259A4CCC3CAB";
 				REZ_SEARCH_PATHS = "$(inherited)";
 				SDKROOT = iphoneos6.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3510,8 +3510,8 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3553,8 +3553,8 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Cowboy Duel";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "C34A7C31-DBD3-4F65-B946-259A4CCC3CAB";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C34A7C31-DBD3-4F65-B946-259A4CCC3CAB";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
@@ -3800,9 +3800,9 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: SPE Dybenko Olga Viktorovna  (WebKate)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3845,9 +3845,9 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Cowboy Duel";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=*]" = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E38E9467-4DEB-4DD8-BE89-74AB3E0AA360";
+				PROVISIONING_PROFILE = "C34A7C31-DBD3-4F65-B946-259A4CCC3CAB";
+				"PROVISIONING_PROFILE[sdk=*]" = "C34A7C31-DBD3-4F65-B946-259A4CCC3CAB";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C34A7C31-DBD3-4F65-B946-259A4CCC3CAB";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
