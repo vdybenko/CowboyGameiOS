@@ -323,6 +323,13 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     }
 }
 
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    // attempt to extract a token from the url
+    return [[FBSession activeSession] handleOpenURL:url];
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
