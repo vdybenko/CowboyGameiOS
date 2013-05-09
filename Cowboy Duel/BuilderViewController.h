@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class VisualViewDataSource;
 
 @interface BuilderViewController : UIViewController<MemoryManagement>
+
+@property (strong, nonatomic) VisualViewDataSource *visualViewDataSource;
 
 @end

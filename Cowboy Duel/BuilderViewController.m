@@ -10,6 +10,8 @@
 #import "AccountDataSource.h"
 #import "DuelRewardLogicController.h"
 #import "StartViewController.h"
+#import "VisualViewDataSource.h"
+#import "VisualViewCharacter.h"
 
 @interface BuilderViewController ()
 {
@@ -17,6 +19,9 @@
     AccountDataSource *playerAccount;
     ProfileViewController *profileViewController;
     BOOL isOpenSide;
+    
+    __weak IBOutlet VisualViewCharacter *visualViewCharacter;
+
 }
 @property (weak, nonatomic) IBOutlet UIView *gunView1;
 @property (weak, nonatomic) IBOutlet UIView *sideView;
@@ -33,7 +38,7 @@
 @end
 
 @implementation BuilderViewController
-
+@synthesize visualViewDataSource;
 - (IBAction)touchCloseBtn:(id)sender {
     
     [UIView animateWithDuration:0.75
