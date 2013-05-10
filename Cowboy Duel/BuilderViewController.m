@@ -157,6 +157,14 @@
     NSInteger curentObjectIndexScrool = abs(scrollView.contentOffset.y/grid.frame.size.height);
     if (curentObject!=curentObjectIndexScrool) {
         curentObject = curentObjectIndexScrool;
+        
+        if (lastQuestionOffset > scrollView.contentOffset.y)
+            currentPage = MAX(currentPage - 1, 0);
+        else if (lastQuestionOffset < scrollView.contentOffset.y)
+            currentPage = MIN(currentPage + 1, 2);
+        
+        NSLog(@"curentObjectIndexScrool %d currentPage %d rt %f",curentObjectIndexScrool,currentPage,scrollView.contentOffset.y);
+
         if (didFinishBlock) {
             didFinishBlock(curentObject);
         }
@@ -171,10 +179,10 @@
     else if (lastQuestionOffset < scrollView.contentOffset.y)
         currentPage = MIN(currentPage + 1, 2);
     
-    NSLog(@"curentObjectIndexScrool %d currentPage %d",curentObjectIndexScrool,currentPage);
-    float questionOffset = 80 * currentPage;
-    lastQuestionOffset = questionOffset;
-    [scrollView setContentOffset:CGPointMake(0 , questionOffset) animated:YES];
+//    NSLog(@"curentObjectIndexScrool %d currentPage %d rt %f",curentObjectIndexScrool,currentPage,scrollView.contentOffset.y);
+//    float questionOffset = 80 * currentPage;
+//    lastQuestionOffset = questionOffset;
+//    [scrollView setContentOffset:CGPointMake(0 , questionOffset) animated:YES];
 }
 
 #pragma mark Animation
