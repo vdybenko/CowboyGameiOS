@@ -68,12 +68,13 @@
 //    grid = [[GMGridView alloc] initWithFrame:CGRectMake(20, 8, 78, 423)];
     grid.layoutStrategy = [GMGridViewLayoutStrategyFactory strategyFromType:GMGridViewLayoutVertical];
     grid.minEdgeInsets = UIEdgeInsetsMake(0,0,0,0);
-    grid.itemSpacing = 5;
+    grid.itemSpacing = 10;
     
     grid.backgroundColor = [UIColor clearColor];
     grid.showsHorizontalScrollIndicator = NO;
     grid.showsVerticalScrollIndicator = NO;
     grid.dataSource = self;
+    grid.actionDelegate = self;
     grid.delegate = self;
     
 //    [self.sideView insertSubview:grid belowSubview:vArrow];
@@ -154,35 +155,60 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView;
 {
-    NSInteger curentObjectIndexScrool = abs(scrollView.contentOffset.y/grid.frame.size.height);
-    if (curentObject!=curentObjectIndexScrool) {
-        curentObject = curentObjectIndexScrool;
-        
-        if (lastQuestionOffset > scrollView.contentOffset.y)
-            currentPage = MAX(currentPage - 1, 0);
-        else if (lastQuestionOffset < scrollView.contentOffset.y)
-            currentPage = MIN(currentPage + 1, 2);
-        
-        NSLog(@"curentObjectIndexScrool %d currentPage %d rt %f",curentObjectIndexScrool,currentPage,scrollView.contentOffset.y);
-
+    int countOfElements = abs(scrollView.contentOffset.y/80);
+    
+    float questionOffset = 80 * countOfElements;
+    if (questionOffset+40<=abs(scrollView.contentOffset.y)) {
+        curentObject = countOfElements+1;
+        questionOffset = 80 * curentObject;
+    }else{
+        curentObject = countOfElements;
+    }
+    if (scrollView.contentOffset.y<0) {
+        questionOffset = -questionOffset;
+    }
+    
+    [scrollView setContentOffset:CGPointMake(0,questionOffset) animated:YES];
+    
+    if (curentObject !=  countOfElements){
+        curentObject = countOfElements;
         if (didFinishBlock) {
             didFinishBlock(curentObject);
         }
     }
 }
 
-- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate;
 {
-    NSInteger curentObjectIndexScrool = abs(scrollView.contentOffset.y/grid.frame.size.height);
-    if (lastQuestionOffset > scrollView.contentOffset.y)
-        currentPage = MAX(currentPage - 1, 0);
-    else if (lastQuestionOffset < scrollView.contentOffset.y)
-        currentPage = MIN(currentPage + 1, 2);
-    
-//    NSLog(@"curentObjectIndexScrool %d currentPage %d rt %f",curentObjectIndexScrool,currentPage,scrollView.contentOffset.y);
-//    float questionOffset = 80 * currentPage;
-//    lastQuestionOffset = questionOffset;
-//    [scrollView setContentOffset:CGPointMake(0 , questionOffset) animated:YES];
+    if (!decelerate) {
+        int countOfElements = abs(scrollView.contentOffset.y/80);
+        
+        float questionOffset = 80 * countOfElements;
+        if (questionOffset+40<=abs(scrollView.contentOffset.y)) {
+            countOfElements = countOfElements+1;
+            questionOffset = 80 * countOfElements;
+        }
+        
+        if (scrollView.contentOffset.y<0) {
+            questionOffset = -questionOffset;
+        }
+        
+        [scrollView setContentOffset:CGPointMake(0,questionOffset) animated:YES];
+        
+        if (curentObject !=  countOfElements){
+            curentObject = countOfElements;
+            
+            if (didFinishBlock) {
+                didFinishBlock(curentObject);
+            }
+        }
+    }
+}
+
+#pragma mark GMGridViewActionDelegate
+- (void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position;
+{
+    [grid scrollToObjectAtIndex:position atScrollPosition:GMGridViewScrollPositionNone animated:YES];
 }
 
 #pragma mark Animation

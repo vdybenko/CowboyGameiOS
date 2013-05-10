@@ -12,7 +12,7 @@
 
 @class VisualViewDataSource;
 
-@interface BuilderViewController : UIViewController<MemoryManagement,GMGridViewDataSource,UIScrollViewDelegate>
+@interface BuilderViewController : UIViewController<MemoryManagement,GMGridViewDataSource,GMGridViewActionDelegate,UIScrollViewDelegate>
 typedef void (^ScrollViewSwitcherResult)(NSInteger curentIndex);
 typedef void (^BuyActionBlock)(NSInteger curentIndex);
 
