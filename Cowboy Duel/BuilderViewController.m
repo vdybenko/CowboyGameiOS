@@ -22,6 +22,8 @@
     BOOL isOpenSide;
     
     __weak IBOutlet VisualViewCharacter *visualViewCharacter;
+    __weak IBOutlet UICollectionView *vCollection;
+    
     NSArray *arrObjects;
 }
 @property (weak, nonatomic) IBOutlet UIView *sideView;
@@ -52,6 +54,8 @@
     visualViewCharacter.visualViewDataSource = visualViewDataSource;
     arrObjects = [NSArray array];
     
+    [vCollection registerNib:[UINib nibWithNibName:@"CharacterShapeViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"CharacterShapeCell"];
+    
     playerAccount = [[AccountDataSource alloc] initWithLocalPlayer];
     self.moneyLabel.text =  [NSString stringWithFormat:@"%d",playerAccount.money];
     self.defensLabel.text = [NSString stringWithFormat:@"%d",playerAccount.accountDefenseValue];
@@ -68,6 +72,7 @@
     [self setMoneyLabel:nil];
     [self setDefensLabel:nil];
     [self setAttacLabel:nil];
+    vCollection = nil;
     [super viewDidUnload];
 }
 -(void)releaseComponents
@@ -83,11 +88,10 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section;
 {
-    return [arrObjects count];
+    return 5;//[arrObjects count];
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath;
 {
-    [collectionView registerClass:[CharacterShapeViewCell class] forCellWithReuseIdentifier:@"CharacterShapeCell"];
     CharacterShapeViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CharacterShapeCell" forIndexPath:indexPath];
     
     return cell;

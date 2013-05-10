@@ -427,6 +427,7 @@
 		768DD974173CDB9800B031F3 /* builderShirt3.png in Resources */ = {isa = PBXBuildFile; fileRef = 768DD953173CDB9800B031F3 /* builderShirt3.png */; };
 		768DD975173CDB9800B031F3 /* builderShirt4.png in Resources */ = {isa = PBXBuildFile; fileRef = 768DD954173CDB9800B031F3 /* builderShirt4.png */; };
 		768DD976173CDB9800B031F3 /* buildershoes1.png in Resources */ = {isa = PBXBuildFile; fileRef = 768DD955173CDB9800B031F3 /* buildershoes1.png */; };
+		768DD978173CE7BE00B031F3 /* CharacterShapeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 768DD977173CE7BE00B031F3 /* CharacterShapeViewCell.xib */; };
 		768F011616FA0350001523A0 /* ArrowToOpponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 768F011516FA0350001523A0 /* ArrowToOpponent.xib */; };
 		768F011816FA0380001523A0 /* st_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 768F011716FA0380001523A0 /* st_arrow.png */; };
 		768F011B16FA055C001523A0 /* ArrowToOpponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 768F011A16FA055C001523A0 /* ArrowToOpponent.m */; };
@@ -1457,6 +1458,7 @@
 		768DD953173CDB9800B031F3 /* builderShirt3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = builderShirt3.png; sourceTree = "<group>"; };
 		768DD954173CDB9800B031F3 /* builderShirt4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = builderShirt4.png; sourceTree = "<group>"; };
 		768DD955173CDB9800B031F3 /* buildershoes1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buildershoes1.png; sourceTree = "<group>"; };
+		768DD977173CE7BE00B031F3 /* CharacterShapeViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CharacterShapeViewCell.xib; path = Xib/CharacterShapeViewCell.xib; sourceTree = "<group>"; };
 		768F011516FA0350001523A0 /* ArrowToOpponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ArrowToOpponent.xib; path = Xib/ArrowToOpponent.xib; sourceTree = "<group>"; };
 		768F011716FA0380001523A0 /* st_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = st_arrow.png; sourceTree = "<group>"; };
 		768F011916FA055C001523A0 /* ArrowToOpponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrowToOpponent.h; sourceTree = "<group>"; };
@@ -2626,6 +2628,7 @@
 				3197E9B416FB6B340020D8C0 /* Barrles.xib */,
 				3192E2FB16FC9F4400698BD5 /* AirBalloon.xib */,
 				46E6AD0D1737BFEA00EE2E69 /* BuilderView.xib */,
+				768DD977173CE7BE00B031F3 /* CharacterShapeViewCell.xib */,
 				3197E9B616FB6B7F0020D8C0 /* Cactus.xib */,
 				7691DD9316CE75B200AD25F5 /* LoadViewContoller.xib */,
 				BD16BF961680934F00628CCC /* FunPageViewController.xib */,
@@ -3908,6 +3911,7 @@
 				768DD974173CDB9800B031F3 /* builderShirt3.png in Resources */,
 				768DD975173CDB9800B031F3 /* builderShirt4.png in Resources */,
 				768DD976173CDB9800B031F3 /* buildershoes1.png in Resources */,
+				768DD978173CE7BE00B031F3 /* CharacterShapeViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
