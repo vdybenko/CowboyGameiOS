@@ -236,6 +236,8 @@
 		31FD628C16EF76B900E161FF /* smokeSpriteSheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 31FD628B16EF76B700E161FF /* smokeSpriteSheet.png */; };
 		462C66751715879100692215 /* pv_photo_default_practice.png in Resources */ = {isa = PBXBuildFile; fileRef = 462C66741715879100692215 /* pv_photo_default_practice.png */; };
 		469CBAAB1713F5350086F8D6 /* goodIco.png in Resources */ = {isa = PBXBuildFile; fileRef = 469CBAAA1713F5350086F8D6 /* goodIco.png */; };
+		46C0748B173CEB5100711AC5 /* CDVisualViewCharacterPartGuns.m in Sources */ = {isa = PBXBuildFile; fileRef = 46C0748A173CEB5100711AC5 /* CDVisualViewCharacterPartGuns.m */; };
+		46C0748E173CEBA100711AC5 /* CDVisualViewCharacterPartJakets.m in Sources */ = {isa = PBXBuildFile; fileRef = 46C0748D173CEBA100711AC5 /* CDVisualViewCharacterPartJakets.m */; };
 		46E3C4B5170D5CE200A59E98 /* barrelFrame1.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E3C4B0170D5CE200A59E98 /* barrelFrame1.png */; };
 		46E3C4B6170D5CE200A59E98 /* barrelFrame2.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E3C4B1170D5CE200A59E98 /* barrelFrame2.png */; };
 		46E3C4B7170D5CE200A59E98 /* barrelFrame3.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E3C4B2170D5CE200A59E98 /* barrelFrame3.png */; };
@@ -401,7 +403,6 @@
 		768DD95A173CDB9800B031F3 /* builderCellBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 768DD938173CDB9800B031F3 /* builderCellBack.png */; };
 		768DD95B173CDB9800B031F3 /* builderDefensBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 768DD939173CDB9800B031F3 /* builderDefensBar.png */; };
 		768DD95C173CDB9800B031F3 /* builderDefensIco.png in Resources */ = {isa = PBXBuildFile; fileRef = 768DD93A173CDB9800B031F3 /* builderDefensIco.png */; };
-		768DD95D173CDB9800B031F3 /* builderGunInHeand.png in Resources */ = {isa = PBXBuildFile; fileRef = 768DD93B173CDB9800B031F3 /* builderGunInHeand.png */; };
 		768DD95E173CDB9800B031F3 /* builderInventoryBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 768DD93C173CDB9800B031F3 /* builderInventoryBtn.png */; };
 		768DD95F173CDB9800B031F3 /* builderLockedCell.png in Resources */ = {isa = PBXBuildFile; fileRef = 768DD93D173CDB9800B031F3 /* builderLockedCell.png */; };
 		768DD960173CDB9800B031F3 /* builderMoneyBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 768DD93E173CDB9800B031F3 /* builderMoneyBar.png */; };
@@ -1207,6 +1208,10 @@
 		31FD628B16EF76B700E161FF /* smokeSpriteSheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smokeSpriteSheet.png; sourceTree = "<group>"; };
 		462C66741715879100692215 /* pv_photo_default_practice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pv_photo_default_practice.png; sourceTree = "<group>"; };
 		469CBAAA1713F5350086F8D6 /* goodIco.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goodIco.png; sourceTree = "<group>"; };
+		46C07489173CEB5000711AC5 /* CDVisualViewCharacterPartGuns.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDVisualViewCharacterPartGuns.h; sourceTree = "<group>"; };
+		46C0748A173CEB5100711AC5 /* CDVisualViewCharacterPartGuns.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVisualViewCharacterPartGuns.m; sourceTree = "<group>"; };
+		46C0748C173CEBA100711AC5 /* CDVisualViewCharacterPartJakets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDVisualViewCharacterPartJakets.h; sourceTree = "<group>"; };
+		46C0748D173CEBA100711AC5 /* CDVisualViewCharacterPartJakets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVisualViewCharacterPartJakets.m; sourceTree = "<group>"; };
 		46E3C4B0170D5CE200A59E98 /* barrelFrame1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = barrelFrame1.png; sourceTree = "<group>"; };
 		46E3C4B1170D5CE200A59E98 /* barrelFrame2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = barrelFrame2.png; sourceTree = "<group>"; };
 		46E3C4B2170D5CE200A59E98 /* barrelFrame3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = barrelFrame3.png; sourceTree = "<group>"; };
@@ -1432,7 +1437,6 @@
 		768DD938173CDB9800B031F3 /* builderCellBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = builderCellBack.png; sourceTree = "<group>"; };
 		768DD939173CDB9800B031F3 /* builderDefensBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = builderDefensBar.png; sourceTree = "<group>"; };
 		768DD93A173CDB9800B031F3 /* builderDefensIco.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = builderDefensIco.png; sourceTree = "<group>"; };
-		768DD93B173CDB9800B031F3 /* builderGunInHeand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = builderGunInHeand.png; sourceTree = "<group>"; };
 		768DD93C173CDB9800B031F3 /* builderInventoryBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = builderInventoryBtn.png; sourceTree = "<group>"; };
 		768DD93D173CDB9800B031F3 /* builderLockedCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = builderLockedCell.png; sourceTree = "<group>"; };
 		768DD93E173CDB9800B031F3 /* builderMoneyBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = builderMoneyBar.png; sourceTree = "<group>"; };
@@ -2304,6 +2308,71 @@
 			path = ListOnLine;
 			sourceTree = "<group>";
 		};
+		46C07481173CDC2B00711AC5 /* CharacterHats */ = {
+			isa = PBXGroup;
+			children = (
+				768DD949173CDB9800B031F3 /* builderHat1.png */,
+				768DD94A173CDB9800B031F3 /* builderHat2.png */,
+			);
+			name = CharacterHats;
+			sourceTree = "<group>";
+		};
+		46C07483173CDC4C00711AC5 /* CharacterFaces */ = {
+			isa = PBXGroup;
+			children = (
+				768DD946173CDB9800B031F3 /* builderFace1.png */,
+				768DD947173CDB9800B031F3 /* builderFace2.png */,
+			);
+			name = CharacterFaces;
+			sourceTree = "<group>";
+		};
+		46C07484173CDC7800711AC5 /* CharacterJakets */ = {
+			isa = PBXGroup;
+			children = (
+				768DD94B173CDB9800B031F3 /* builderJacket1.png */,
+				768DD94C173CDB9800B031F3 /* builderJacket2.png */,
+			);
+			name = CharacterJakets;
+			sourceTree = "<group>";
+		};
+		46C07485173CDCA200711AC5 /* CharacterPants */ = {
+			isa = PBXGroup;
+			children = (
+				768DD950173CDB9800B031F3 /* builderPantsDef.png */,
+				768DD94D173CDB9800B031F3 /* builderPants1.png */,
+				768DD94E173CDB9800B031F3 /* builderPants2.png */,
+				768DD94F173CDB9800B031F3 /* builderPants3.png */,
+			);
+			name = CharacterPants;
+			sourceTree = "<group>";
+		};
+		46C07486173CDCC500711AC5 /* CharecterShirts */ = {
+			isa = PBXGroup;
+			children = (
+				768DD951173CDB9800B031F3 /* builderShirt1.png */,
+				768DD952173CDB9800B031F3 /* builderShirt2.png */,
+				768DD953173CDB9800B031F3 /* builderShirt3.png */,
+				768DD954173CDB9800B031F3 /* builderShirt4.png */,
+			);
+			name = CharecterShirts;
+			sourceTree = "<group>";
+		};
+		46C07487173CDD2900711AC5 /* CharecterShoeses */ = {
+			isa = PBXGroup;
+			children = (
+				768DD955173CDB9800B031F3 /* buildershoes1.png */,
+			);
+			name = CharecterShoeses;
+			sourceTree = "<group>";
+		};
+		46C07488173CDD9000711AC5 /* CharacterGuns */ = {
+			isa = PBXGroup;
+			children = (
+				768DD948173CDB9800B031F3 /* builderGunInHeand.png */,
+			);
+			name = CharacterGuns;
+			sourceTree = "<group>";
+		};
 		46E3C4AF170D5CE200A59E98 /* BarrrelFraims */ = {
 			isa = PBXGroup;
 			children = (
@@ -2762,6 +2831,10 @@
 				7688DC2D1700A59F00D14E5C /* CDVisualViewCharacterPart.m */,
 				7688DC2F1700A5B700D14E5C /* CDVisualViewCharacterPartCap.h */,
 				7688DC301700A5B700D14E5C /* CDVisualViewCharacterPartCap.m */,
+				46C07489173CEB5000711AC5 /* CDVisualViewCharacterPartGuns.h */,
+				46C0748A173CEB5100711AC5 /* CDVisualViewCharacterPartGuns.m */,
+				46C0748C173CEBA100711AC5 /* CDVisualViewCharacterPartJakets.h */,
+				46C0748D173CEBA100711AC5 /* CDVisualViewCharacterPartJakets.m */,
 				7688DC321700A5C700D14E5C /* CDVisualViewCharacterPartHead.h */,
 				7688DC331700A5C700D14E5C /* CDVisualViewCharacterPartHead.m */,
 				7688DC351700A5D700D14E5C /* CDVisualViewCharacterPartBody.h */,
@@ -2784,7 +2857,6 @@
 				768DD938173CDB9800B031F3 /* builderCellBack.png */,
 				768DD939173CDB9800B031F3 /* builderDefensBar.png */,
 				768DD93A173CDB9800B031F3 /* builderDefensIco.png */,
-				768DD93B173CDB9800B031F3 /* builderGunInHeand.png */,
 				768DD93C173CDB9800B031F3 /* builderInventoryBtn.png */,
 				768DD93D173CDB9800B031F3 /* builderLockedCell.png */,
 				768DD93E173CDB9800B031F3 /* builderMoneyBar.png */,
@@ -2801,22 +2873,13 @@
 			isa = PBXGroup;
 			children = (
 				768DD945173CDB9800B031F3 /* builderBodyDef.png */,
-				768DD946173CDB9800B031F3 /* builderFace1.png */,
-				768DD947173CDB9800B031F3 /* builderFace2.png */,
-				768DD948173CDB9800B031F3 /* builderGunInHeand.png */,
-				768DD949173CDB9800B031F3 /* builderHat1.png */,
-				768DD94A173CDB9800B031F3 /* builderHat2.png */,
-				768DD94B173CDB9800B031F3 /* builderJacket1.png */,
-				768DD94C173CDB9800B031F3 /* builderJacket2.png */,
-				768DD94D173CDB9800B031F3 /* builderPants1.png */,
-				768DD94E173CDB9800B031F3 /* builderPants2.png */,
-				768DD94F173CDB9800B031F3 /* builderPants3.png */,
-				768DD950173CDB9800B031F3 /* builderPantsDef.png */,
-				768DD951173CDB9800B031F3 /* builderShirt1.png */,
-				768DD952173CDB9800B031F3 /* builderShirt2.png */,
-				768DD953173CDB9800B031F3 /* builderShirt3.png */,
-				768DD954173CDB9800B031F3 /* builderShirt4.png */,
-				768DD955173CDB9800B031F3 /* buildershoes1.png */,
+				46C07488173CDD9000711AC5 /* CharacterGuns */,
+				46C07487173CDD2900711AC5 /* CharecterShoeses */,
+				46C07486173CDCC500711AC5 /* CharecterShirts */,
+				46C07485173CDCA200711AC5 /* CharacterPants */,
+				46C07484173CDC7800711AC5 /* CharacterJakets */,
+				46C07483173CDC4C00711AC5 /* CharacterFaces */,
+				46C07481173CDC2B00711AC5 /* CharacterHats */,
 			);
 			path = CharacterShapes;
 			sourceTree = "<group>";
@@ -3885,7 +3948,6 @@
 				768DD95A173CDB9800B031F3 /* builderCellBack.png in Resources */,
 				768DD95B173CDB9800B031F3 /* builderDefensBar.png in Resources */,
 				768DD95C173CDB9800B031F3 /* builderDefensIco.png in Resources */,
-				768DD95D173CDB9800B031F3 /* builderGunInHeand.png in Resources */,
 				768DD95E173CDB9800B031F3 /* builderInventoryBtn.png in Resources */,
 				768DD95F173CDB9800B031F3 /* builderLockedCell.png in Resources */,
 				768DD960173CDB9800B031F3 /* builderMoneyBar.png in Resources */,
@@ -4334,6 +4396,8 @@
 				768BC7E9170C6F6B00DB63C3 /* UIView+GMGridViewAdditions.m in Sources */,
 				46E6AD111737DDA900EE2E69 /* BuilderViewController.m in Sources */,
 				768DD930173CCFC200B031F3 /* CharacterShapeViewCell.m in Sources */,
+				46C0748B173CEB5100711AC5 /* CDVisualViewCharacterPartGuns.m in Sources */,
+				46C0748E173CEBA100711AC5 /* CDVisualViewCharacterPartJakets.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

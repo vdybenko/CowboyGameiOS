@@ -13,15 +13,34 @@
 // 3-id
 // 4-action
 
-#define VISUAL_VIEW_CHARACTER_CAP_ARRAY @[@[@"cap2.png",@100,@105,@3],@[@"cap1.png",@200,@106,@1],@[@"cap3.png",@300,@107,@4],@[@"cap4.png",@200,@116,@3]];
+//Тут все елементы по 6 штук
 
-#define VISUAL_VIEW_CHARACTER_HEAD_ARRAY @[@[@"head1.png",@100,@101],@[@"head2.png",@200,@102],@[@"head3.png",@300,@103]];
+//Hats
+#define VISUAL_VIEW_CHARACTER_CAP_ARRAY @[@[@"builderHat1.png",@100,@105,@3],@[@"builderHat2.png",@200,@106,@1],@[@"builderHat2.png",@300,@107,@4],@[@"builderHat1.png",@200,@108,@3],@[@"builderHat2.png",@200,@109,@3],@[@"builderHat1.png",@200,@110,@3]]; // Resorces/CharacterHats
 
-#define VISUAL_VIEW_CHARACTER_BODY_ARRAY @[@[@"body1.png",@100,@108,@3],@[@"body2.png",@200,@109,@1],@[@"body3.png",@300,@110,@2]];
+//Faces
+#define VISUAL_VIEW_CHARACTER_HEAD_ARRAY @[@[@"builderFace1.png",@100,@111],@[@"builderFace2.png",@200,@112],@[@"builderFace1.png",@300,@113],@[@"builderFace2.png",@300,@114],@[@"builderFace1.png",@300,@115],@[@"builderFace2.png",@300,@116]];// Resorces/CharacterFaces
 
-#define VISUAL_VIEW_CHARACTER_LEGS_ARRAY @[@[@"legth1.png",@300,@111,@2],@[@"legth2.png",@100,@112,@1],@[@"legth3.png",@100,@115,@1]];
 
-#define VISUAL_VIEW_CHARACTER_SHOOSE_ARRAY @[@[@"shoose1.png",@200,@113,@3],@[@"shoose2.png",@10000,@114,@1]];
+//Sirts
+#define VISUAL_VIEW_CHARACTER_BODY_ARRAY @[@[@"builderShirt1.png",@100,@117,@3],@[@"builderShirt2.png",@200,@118,@1],@[@"builderShirt3.png",@300,@119,@2],@[@"builderShirt4.png",@100,@120,@3],@[@"builderShirt1.png",@100,@121,@3],@[@"builderShirt2.png",@100,@122,@3]]; // Resorces/CharacterSirts
+
+//Pants 
+#define VISUAL_VIEW_CHARACTER_LEGS_ARRAY @[@[@"builderPants1.png",@300,@123,@2],@[@"builderPants2.png",@100,@124,@1],@[@"builderPants3.png",@100,@125,@1],@[@"builderPants1.png",@100,@126,@1],@[@"builderPants2.png",@100,@127,@1],@[@"builderPants3.png",@100,@128,@1]];// Resorces/CharacterPants
+
+//Shoes
+#define VISUAL_VIEW_CHARACTER_SHOOSE_ARRAY @[@[@"buildershoes1.png",@200,@129,@3],@[@"buildershoes1.png",@10000,@130,@1],@[@"buildershoes1.png",@10000,@131,@1],@[@"buildershoes1.png",@10000,@132,@1],@[@"buildershoes1.png",@10000,@133,@1],@[@"buildershoes1.png",@10000,@134,@1]];// Resorces/CharacterShoeses
+
+//Guns
+#define VISUAL_VIEW_CHARACTER_GUNS_ARRAY @[@[@"builderGunInHeand.png",@200,@135,@3],@[@"builderGunInHeand.png",@10000,@136,@1],@[@"builderGunInHeand.png",@10000,@137,@1],@[@"builderGunInHeand.png",@10000,@138,@1],@[@"builderGunInHeand.png",@10000,@139,@1],@[@"builderGunInHeand.png",@10000,@140,@1]];// Resorces/CharacterGuns
+
+//Jakets
+#define VISUAL_VIEW_CHARACTER_JAKETS_ARRAY @[@[@"builderJacket1.png",@200,@141,@3],@[@"builderJacket2.png",@10000,@142,@1],@[@"builderJacket1.png",@10000,@143,@1],@[@"builderJacket2.png",@10000,@144,@1],@[@"builderJacket1.png",@10000,@145,@1],@[@"builderJacket2.png",@10000,@146,@1]];// Resorces/CharacterJakets
+
+
+
+
+
 
 @interface VisualViewDataSource()
 {
@@ -35,6 +54,8 @@
 @synthesize typeOfTable;
 @synthesize arrayLegs;
 @synthesize arrayShoose;
+@synthesize arrayGuns;
+@synthesize arrayJakets;
 
 -(id) init
 {
@@ -46,6 +67,9 @@
         arrayBody = [NSMutableArray array];
         arrayLegs = [NSMutableArray array];
         arrayShoose = [NSMutableArray array];
+        arrayJakets = [NSMutableArray array];
+        arrayGuns = [NSMutableArray array];
+        
         
         NSArray *arrayMainCap = VISUAL_VIEW_CHARACTER_CAP_ARRAY;
         for (NSArray *array in arrayMainCap) {
@@ -81,6 +105,21 @@
             [arrayShoose addObject:cap];
         }
         arrayMainShoose = nil;
+        
+        NSArray *arrayMainGuns = VISUAL_VIEW_CHARACTER_GUNS_ARRAY;
+        for (NSArray *array in arrayMainGuns) {
+            CDVisualViewCharacterPartGuns *cap=[[CDVisualViewCharacterPartGuns alloc] initWithArray:array];
+            [arrayGuns addObject:cap];
+        }
+        arrayMainGuns = nil;
+        
+        NSArray *arrayMainJakets = VISUAL_VIEW_CHARACTER_JAKETS_ARRAY;
+        for (NSArray *array in arrayMainJakets) {
+            CDVisualViewCharacterPartJakets *cap=[[CDVisualViewCharacterPartJakets alloc] initWithArray:array];
+            [arrayJakets addObject:cap];
+        }
+        arrayMainJakets = nil;
+        
     }
     
 	return self;
@@ -93,6 +132,8 @@
     arrayBody = nil;
     arrayLegs = nil;
     arrayShoose = nil;
+    arrayJakets = nil;
+    arrayGuns = nil;
 }
 
 @end
