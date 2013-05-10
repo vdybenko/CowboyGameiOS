@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GMGridView.h"
+#import "GMGridViewLayoutStrategies.h"
+
 @class VisualViewDataSource;
 
-@interface BuilderViewController : UIViewController<MemoryManagement,UICollectionViewDataSource,UICollectionViewDelegate>
+@interface BuilderViewController : UIViewController<MemoryManagement,GMGridViewDataSource,UIScrollViewDelegate>
 
 @property (strong, nonatomic) VisualViewDataSource *visualViewDataSource;
 

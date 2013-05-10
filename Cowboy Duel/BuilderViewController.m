@@ -12,7 +12,6 @@
 #import "StartViewController.h"
 #import "VisualViewDataSource.h"
 #import "VisualViewCharacter.h"
-#import "CharacterShapeViewCell.h"
 
 @interface BuilderViewController ()
 {
@@ -24,6 +23,7 @@
     __weak IBOutlet VisualViewCharacter *visualViewCharacter;
     __weak IBOutlet UICollectionView *vCollection;
     
+    GMGridView *grid;
     NSArray *arrObjects;
 }
 @property (weak, nonatomic) IBOutlet UIView *sideView;
@@ -54,7 +54,18 @@
     visualViewCharacter.visualViewDataSource = visualViewDataSource;
     arrObjects = [NSArray array];
     
-    [vCollection registerNib:[UINib nibWithNibName:@"CharacterShapeViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"CharacterShapeCell"];
+    grid = [[GMGridView alloc] initWithFrame:CGRectMake(20, 8, 78, 423)];
+    grid.layoutStrategy = [GMGridViewLayoutStrategyFactory strategyFromType:GMGridViewLayoutVertical];
+    grid.minEdgeInsets = UIEdgeInsetsMake(0,0,0,0);
+    grid.itemSpacing = 0;
+    
+    grid.backgroundColor = [UIColor clearColor];
+    grid.showsHorizontalScrollIndicator = NO;
+    grid.showsVerticalScrollIndicator = NO;
+    grid.dataSource = self;
+    grid.delegate = self;
+    
+    [self.sideView addSubview:grid];
     
     playerAccount = [[AccountDataSource alloc] initWithLocalPlayer];
     self.moneyLabel.text =  [NSString stringWithFormat:@"%d",playerAccount.money];
@@ -84,29 +95,71 @@
     [self setAttacLabel:nil];
 
 }
-#pragma mark UICollectionViewDataSource
+#pragma mark GMGridViewDataSource
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section;
+- (NSInteger)numberOfItemsInGMGridView:(GMGridView *)gridView
 {
-    return 5;//[arrObjects count];
+    return 30;
 }
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath;
+
+- (CGSize)GMGridView:(GMGridView *)gridView sizeForItemsInInterfaceOrientation:(UIInterfaceOrientation)orientation
 {
-    CharacterShapeViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CharacterShapeCell" forIndexPath:indexPath];
+    return CGSizeMake(78, 70);
+}
+
+- (GMGridViewCell *)GMGridView:(GMGridView *)gridView cellForItemAtIndex:(NSInteger)index
+{
+    GMGridViewCell * cell = nil;;
+    cell = [gridView dequeueReusableCellWithIdentifier:@"object"];
+    
+    if (cell == nil)
+    {
+        cell = [[GMGridViewCell alloc] init];
+        
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 78, 70)];
+        cell.contentView = view;
+        [cell.contentView setUserInteractionEnabled:NO];
+    }
+    
+    [[cell.contentView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
+    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 78, 70)];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    [cell.contentView addSubview:imageView];
+    
+//    CDVisualViewCharacterPart *visualViewCharacterPart = [arrObjects objectAtIndex:index];
+//    imageView.image = [visualViewCharacterPart imageForObject];
     
     return cell;
 }
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView;
-{
-    return 1;
-}
+#pragma mark UIScrollViewDelegate
 
-#pragma mark UICollectionViewDelegate
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView;
 {
     
+//    NSInteger curentObjectIndexScrool = abs(scrollView.contentOffset.x/self.frame.size.width);
+//    if (curentObject!=curentObjectIndexScrool) {
+//        curentObject = curentObjectIndexScrool;
+//        if (didFinishBlock) {
+//            didFinishBlock(curentObject);
+//        }
+//    }
 }
+
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
+{
+    
+//    if (self.lastQuestionOffset > scrollView.contentOffset.x)
+//        self.currentPage = MAX(self.currentPage - 1, 0);
+//    else if (self.lastQuestionOffset < scrollView.contentOffset.x)
+//        self.currentPage = MIN(self.currentPage + 1, 2);
+//    
+//    float questionOffset = 290.0 * self.currentPage;
+//    self.lastQuestionOffset = questionOffset;
+//    [self.collectionView setContentOffset:CGPointMake(questionOffset, 0) animated:YES];
+}
+
 #pragma mark Animation
 -(void)sideOpenAnimation{
     if (!isOpenSide) {
@@ -138,6 +191,10 @@
     
 }
 
+-(void)setObjectsForIndex:(NSInteger)index;
+{
+    [grid scrollToObjectAtIndex:index atScrollPosition:GMGridViewScrollPositionNone animated:NO];
+}
 #pragma mark IBAction 
 - (IBAction)touchCloseBtn:(id)sender {
     
@@ -173,5 +230,6 @@
 - (IBAction)touchGunsBtn:(id)sender {
     
 }
+#pragma mark
 
 @end
