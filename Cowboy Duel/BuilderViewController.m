@@ -21,10 +21,13 @@
     BOOL isOpenSide;
     
     __weak IBOutlet VisualViewCharacter *visualViewCharacter;
-    __weak IBOutlet UICollectionView *vCollection;
+    __weak IBOutlet UIView *vArrow;
+    __weak IBOutlet GMGridView *grid;
     
-    GMGridView *grid;
     NSArray *arrObjects;
+    
+    float lastQuestionOffset;
+    int currentPage;
 }
 @property (weak, nonatomic) IBOutlet UIView *sideView;
 @property (weak, nonatomic) IBOutlet UILabel *moneyLabel;
@@ -35,6 +38,9 @@
 
 @implementation BuilderViewController
 @synthesize visualViewDataSource;
+@synthesize didFinishBlock;
+@synthesize didBuyAction;
+@synthesize curentObject;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,6 +48,9 @@
     if (self) {
         // Custom initialization
         isOpenSide = NO;
+        curentObject = 0;
+        lastQuestionOffset = 0;
+        currentPage = 0;
     }
     return self;
 }
@@ -54,10 +63,12 @@
     visualViewCharacter.visualViewDataSource = visualViewDataSource;
     arrObjects = [NSArray array];
     
-    grid = [[GMGridView alloc] initWithFrame:CGRectMake(20, 8, 78, 423)];
+    arrObjects = [visualViewDataSource arrayCap];
+    
+//    grid = [[GMGridView alloc] initWithFrame:CGRectMake(20, 8, 78, 423)];
     grid.layoutStrategy = [GMGridViewLayoutStrategyFactory strategyFromType:GMGridViewLayoutVertical];
     grid.minEdgeInsets = UIEdgeInsetsMake(0,0,0,0);
-    grid.itemSpacing = 0;
+    grid.itemSpacing = 5;
     
     grid.backgroundColor = [UIColor clearColor];
     grid.showsHorizontalScrollIndicator = NO;
@@ -65,7 +76,7 @@
     grid.dataSource = self;
     grid.delegate = self;
     
-    [self.sideView addSubview:grid];
+//    [self.sideView insertSubview:grid belowSubview:vArrow];
     
     playerAccount = [[AccountDataSource alloc] initWithLocalPlayer];
     self.moneyLabel.text =  [NSString stringWithFormat:@"%d",playerAccount.money];
@@ -83,7 +94,8 @@
     [self setMoneyLabel:nil];
     [self setDefensLabel:nil];
     [self setAttacLabel:nil];
-    vCollection = nil;
+    vArrow = nil;
+    grid = nil;
     [super viewDidUnload];
 }
 -(void)releaseComponents
@@ -126,9 +138,14 @@
     UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 78, 70)];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     [cell.contentView addSubview:imageView];
+    imageView.backgroundColor = [UIColor redColor];
     
-//    CDVisualViewCharacterPart *visualViewCharacterPart = [arrObjects objectAtIndex:index];
-//    imageView.image = [visualViewCharacterPart imageForObject];
+    if ([arrObjects count]) {
+        int indexr = random() % 4;
+        CDVisualViewCharacterPart *visualViewCharacterPart = [arrObjects objectAtIndex:indexr];
+        imageView.image = [visualViewCharacterPart imageForObject];
+    }
+
     
     return cell;
 }
@@ -137,27 +154,27 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView;
 {
-    
-//    NSInteger curentObjectIndexScrool = abs(scrollView.contentOffset.x/self.frame.size.width);
-//    if (curentObject!=curentObjectIndexScrool) {
-//        curentObject = curentObjectIndexScrool;
-//        if (didFinishBlock) {
-//            didFinishBlock(curentObject);
-//        }
-//    }
+    NSInteger curentObjectIndexScrool = abs(scrollView.contentOffset.y/grid.frame.size.height);
+    if (curentObject!=curentObjectIndexScrool) {
+        curentObject = curentObjectIndexScrool;
+        if (didFinishBlock) {
+            didFinishBlock(curentObject);
+        }
+    }
 }
 
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
 {
+    NSInteger curentObjectIndexScrool = abs(scrollView.contentOffset.y/grid.frame.size.height);
+    if (lastQuestionOffset > scrollView.contentOffset.y)
+        currentPage = MAX(currentPage - 1, 0);
+    else if (lastQuestionOffset < scrollView.contentOffset.y)
+        currentPage = MIN(currentPage + 1, 2);
     
-//    if (self.lastQuestionOffset > scrollView.contentOffset.x)
-//        self.currentPage = MAX(self.currentPage - 1, 0);
-//    else if (self.lastQuestionOffset < scrollView.contentOffset.x)
-//        self.currentPage = MIN(self.currentPage + 1, 2);
-//    
-//    float questionOffset = 290.0 * self.currentPage;
-//    self.lastQuestionOffset = questionOffset;
-//    [self.collectionView setContentOffset:CGPointMake(questionOffset, 0) animated:YES];
+    NSLog(@"curentObjectIndexScrool %d currentPage %d",curentObjectIndexScrool,currentPage);
+    float questionOffset = 80 * currentPage;
+    lastQuestionOffset = questionOffset;
+    [scrollView setContentOffset:CGPointMake(0 , questionOffset) animated:YES];
 }
 
 #pragma mark Animation
