@@ -230,22 +230,25 @@
 }
 
 - (IBAction)touchHatBtn:(id)sender {
-    
+    arrObjects = [visualViewDataSource arrayHead];
 }
 - (IBAction)touchFaceBtn:(id)sender {
-    
+    arrObjects = [visualViewDataSource arrayCap];
 }
 - (IBAction)touchShirtBtn:(id)sender {
-    
+    arrObjects = [visualViewDataSource arrayBody];
 }
 - (IBAction)touchJaketBtn:(id)sender {
-    
+    arrObjects = [visualViewDataSource arrayJakets];
 }
 - (IBAction)touchShoesBtn:(id)sender {
-    
+    arrObjects = [visualViewDataSource arrayShoose];
 }
 - (IBAction)touchGunsBtn:(id)sender {
-    
+    arrObjects = [visualViewDataSource arrayGuns];
+}
+- (IBAction)touchPantsBtn:(id)sender {
+     arrObjects = [visualViewDataSource arrayLegs];
 }
 #pragma mark
 
