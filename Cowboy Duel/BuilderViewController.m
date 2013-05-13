@@ -31,6 +31,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *moneyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *defensLabel;
 @property (weak, nonatomic) IBOutlet UILabel *attacLabel;
+@property (weak, nonatomic) IBOutlet UILabel *priceOfItem;
+@property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 
 @end
 
@@ -88,6 +90,8 @@
     [self setAttacLabel:nil];
     vArrow = nil;
     grid = nil;
+    [self setPriceOfItem:nil];
+    [self setResultLabel:nil];
     [super viewDidUnload];
 }
 -(void)releaseComponents
@@ -258,11 +262,15 @@
     arrObjects = [visualViewDataSource arrayHead];
     __block id  selfBlock = self;
     __block id  arrObjBlock = arrObjects;
-    __block VisualViewCharacter *viewCharacterBlock;
+    __block VisualViewCharacter *viewCharacterBlock = visualViewCharacter;
+    __block id  priceLbBlock = self.priceOfItem;
+   // __block id  bonus = self.resultLabel;
     didFinishBlock = ^(NSInteger curentIndex){
       CDVisualViewCharacterPartHead *cap = [arrObjBlock objectAtIndex:curentIndex];
         dispatch_async(dispatch_get_main_queue(), ^{
             viewCharacterBlock.head.image = cap.imageForObject;
+            [priceLbBlock setString:[NSString stringWithFormat:@"+ %d", cap.money]];
+          //  [bonus setString:[NSString stringWithFormat:@"+ %d"]];
         });
         [selfBlock refreshController];
 
@@ -279,11 +287,16 @@
     arrObjects = [visualViewDataSource arrayCap];
     __block id  selfBlock = self;
     __block id  arrObjBlock = arrObjects;
-    __block VisualViewCharacter *viewCharacterBlock;
+    __block VisualViewCharacter *viewCharacterBlock = visualViewCharacter;
+    __block id  priceLbBlock = self.priceOfItem;
+    __block id  bonus = self.resultLabel;
+
     didFinishBlock = ^(NSInteger curentIndex){
         CDVisualViewCharacterPartCap *cap = [arrObjBlock objectAtIndex:curentIndex];
         dispatch_async(dispatch_get_main_queue(), ^{
             viewCharacterBlock.cap.image = cap.imageForObject;
+            [priceLbBlock setString:[NSString stringWithFormat:@"+ %d", cap.money]];
+            [bonus setString:[NSString stringWithFormat:@"+ %d",cap.action]];
         });
         [selfBlock refreshController];
         
@@ -298,6 +311,9 @@
 
 }
 - (IBAction)touchShirtBtn:(id)sender {
+    __block id  priceLbBlock = self.priceOfItem;
+    __block id  bonus = self.resultLabel;
+
     arrObjects = [visualViewDataSource arrayBody];
     __block id  selfBlock = self;
     __block id  arrObjBlock = arrObjects;
@@ -307,6 +323,8 @@
         CDVisualViewCharacterPartBody *cap = [arrObjBlock objectAtIndex:curentIndex];
         dispatch_async(dispatch_get_main_queue(), ^{
             viewCharacterBlock.body.image = cap.imageForObject;
+            [priceLbBlock setString:[NSString stringWithFormat:@"+ %d", cap.money]];
+            [bonus setString:[NSString stringWithFormat:@"+ %d",cap.action]];
         });
         [selfBlock refreshController];
     };
@@ -322,12 +340,17 @@
     arrObjects = [visualViewDataSource arrayJakets];
     __block id  selfBlock = self;
     __block id  arrObjBlock = arrObjects;
-    __block VisualViewCharacter *viewCharacterBlock;
+    __block VisualViewCharacter *viewCharacterBlock = visualViewCharacter;
+    __block id  priceLbBlock = self.priceOfItem;
+    __block id  bonus = self.resultLabel;
+
     didFinishBlock = ^(NSInteger curentIndex){
         
         CDVisualViewCharacterPartJakets *cap = [arrObjBlock objectAtIndex:curentIndex];
         dispatch_async(dispatch_get_main_queue(), ^{
             viewCharacterBlock.shirt.image = cap.imageForObject;
+            [priceLbBlock setString:[NSString stringWithFormat:@"+ %d", cap.money]];
+            [bonus setString:[NSString stringWithFormat:@"+ %d",cap.action]];
         });
         [selfBlock refreshController];
     };
@@ -342,12 +365,17 @@
     arrObjects = [visualViewDataSource arrayShoose];
     __block id  selfBlock = self;
     __block id  arrObjBlock = arrObjects;
-    __block VisualViewCharacter *viewCharacterBlock;
+    __block VisualViewCharacter *viewCharacterBlock = visualViewCharacter;
+    __block id  priceLbBlock = self.priceOfItem;
+    __block id  bonus = self.resultLabel;
+
     didFinishBlock = ^(NSInteger curentIndex){
         
         CDVisualViewCharacterPartShoose *cap = [arrObjBlock objectAtIndex:curentIndex];
         dispatch_async(dispatch_get_main_queue(), ^{
             viewCharacterBlock.shoose.image = cap.imageForObject;
+            [priceLbBlock setString:[NSString stringWithFormat:@"+ %d", cap.money]];
+            [bonus setString:[NSString stringWithFormat:@"+ %d",cap.action]];
         });
         [selfBlock refreshController];
     };
@@ -363,12 +391,17 @@
     arrObjects = [visualViewDataSource arrayGuns];
     __block id  selfBlock = self;
     __block id  arrObjBlock = arrObjects;
-    __block VisualViewCharacter *viewCharacterBlock;
+    __block VisualViewCharacter *viewCharacterBlock = visualViewCharacter;
+    __block id  priceLbBlock = self.priceOfItem;
+    __block id  bonus = self.resultLabel;
+
     didFinishBlock = ^(NSInteger curentIndex){
         
         CDVisualViewCharacterPartGuns *cap = [arrObjBlock objectAtIndex:curentIndex];
         dispatch_async(dispatch_get_main_queue(), ^{
             viewCharacterBlock.gun.image = cap.imageForObject;
+            [priceLbBlock setString:[NSString stringWithFormat:@"+ %d", cap.money]];
+            [bonus setString:[NSString stringWithFormat:@"+ %d",cap.action]];
         });
         [selfBlock refreshController];
     };
@@ -384,12 +417,17 @@
     arrObjects = [visualViewDataSource arrayLegs];
     __block id  selfBlock = self;
     __block id  arrObjBlock = arrObjects;
-    __block VisualViewCharacter *viewCharacterBlock;
+    __block VisualViewCharacter *viewCharacterBlock = visualViewCharacter;
+    __block id  priceLbBlock = self.priceOfItem;
+    __block id  bonus = self.resultLabel;
+
     didFinishBlock = ^(NSInteger curentIndex){
         
         CDVisualViewCharacterPartLegs *cap = [arrObjBlock objectAtIndex:curentIndex];
         dispatch_async(dispatch_get_main_queue(), ^{
             viewCharacterBlock.length.image = cap.imageForObject;
+            [priceLbBlock setString:[NSString stringWithFormat:@"+ %d", cap.money]];
+            [bonus setString:[NSString stringWithFormat:@"+ %d",cap.action]];
         });
         [selfBlock refreshController];
     };
