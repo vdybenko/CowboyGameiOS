@@ -211,7 +211,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{210, 442}, {94, 28}}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="916055748"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -257,7 +257,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{8, 55}, {220, 446}}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
-						<reference key="NSNextKeyView" ref="916055748"/>
+						<reference key="NSNextKeyView" ref="386081909"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="840484157">
 							<int key="NSColorSpace">3</int>
@@ -288,7 +288,7 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{20, 18}, {78, 413}}</string>
 								<reference key="NSSuperview" ref="916055748"/>
-								<reference key="NSNextKeyView" ref="386081909"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -412,7 +412,7 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 						</array>
-						<string key="NSFrame">{{220, 49}, {100, 501}}</string>
+						<string key="NSFrame">{{320, 49}, {100, 501}}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
 						<reference key="NSNextKeyView" ref="1062032095"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -1124,7 +1124,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">428</int>
+			<int key="maxID">429</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>

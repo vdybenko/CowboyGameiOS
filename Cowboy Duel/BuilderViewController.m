@@ -12,6 +12,7 @@
 #import "StartViewController.h"
 #import "VisualViewDataSource.h"
 #import "VisualViewCharacter.h"
+#import "CharacterPartGridCell.h"
 
 @interface BuilderViewController ()
 {
@@ -112,34 +113,25 @@
 
 - (GMGridViewCell *)GMGridView:(GMGridView *)gridView cellForItemAtIndex:(NSInteger)index
 {
-    GMGridViewCell * cell = nil;;
-    cell = [gridView dequeueReusableCellWithIdentifier:@"object"];
+    CharacterPartGridCell * cell = nil;;
+    cell = (CharacterPartGridCell *)[gridView dequeueReusableCellWithIdentifier:@"object"];
     
     if (cell == nil)
     {
-        cell = [[GMGridViewCell alloc] init];
-        
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 78, 70)];
-        cell.contentView = view;
-        [cell.contentView setUserInteractionEnabled:NO];
+        cell = [CharacterPartGridCell cell];;
     }
-    
-    [[cell.contentView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    
+        
     int lastIndex = [self numberOfItemsInGMGridView:gridView]-1;
     int penultIndex = [self numberOfItemsInGMGridView:gridView]-2;
     
     if (index!=0 && index!=1 && index!=lastIndex && index!=penultIndex) {
-        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 78, 70)];
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
-        [cell.contentView addSubview:imageView];
+        [cell setHidden:NO];
         
-        if ([arrObjects count]) {
-            int indexr = random() % 4;
-            CDVisualViewCharacterPart *visualViewCharacterPart = [arrObjects objectAtIndex:indexr];
-            imageView.image = [visualViewCharacterPart imageForObject];
-        }
-    }    
+        CDVisualViewCharacterPart *visualViewCharacterPart = [arrObjects objectAtIndex:index-2];
+        cell.ivImage.image = [visualViewCharacterPart imageForObject];
+    }else{
+        [cell setHidden:YES];
+    }
     return cell;
 }
 
