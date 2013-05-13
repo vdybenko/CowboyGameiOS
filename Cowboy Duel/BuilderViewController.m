@@ -252,39 +252,42 @@
     __block id  arrObjBlock = arrObjects;
     __block VisualViewCharacter *viewCharacterBlock;
     didFinishBlock = ^(NSInteger curentIndex){
-    
-        CDVisualViewCharacterPartHead *cap = [arrObjBlock objectAtIndex:curentIndex];
-        viewCharacterBlock.head.image = cap.imageForObject;
+      CDVisualViewCharacterPartHead *cap = [arrObjBlock objectAtIndex:curentIndex];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            viewCharacterBlock.head.image = cap.imageForObject;
+        });
         [selfBlock refreshController];
 
     };
     didBuyAction = ^(NSInteger curentIndex){
-        
-        
         [selfBlock refreshController];
     };
+
     [grid reloadData];
     [self sideOpenAnimation];
+
 }
 - (IBAction)touchFaceBtn:(id)sender {
     arrObjects = [visualViewDataSource arrayCap];
     __block id  selfBlock = self;
     __block id  arrObjBlock = arrObjects;
-      __block VisualViewCharacter *viewCharacterBlock;
+    __block VisualViewCharacter *viewCharacterBlock;
     didFinishBlock = ^(NSInteger curentIndex){
-        
         CDVisualViewCharacterPartCap *cap = [arrObjBlock objectAtIndex:curentIndex];
-        viewCharacterBlock.cap.image = cap.imageForObject;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            viewCharacterBlock.cap.image = cap.imageForObject;
+        });
         [selfBlock refreshController];
+        
     };
     didBuyAction = ^(NSInteger curentIndex){
-        
-        
         [selfBlock refreshController];
     };
 
+
     [grid reloadData];
     [self sideOpenAnimation];
+
 }
 - (IBAction)touchShirtBtn:(id)sender {
     arrObjects = [visualViewDataSource arrayBody];
@@ -294,7 +297,9 @@
     didFinishBlock = ^(NSInteger curentIndex){
         
         CDVisualViewCharacterPartBody *cap = [arrObjBlock objectAtIndex:curentIndex];
-        viewCharacterBlock.body.image = cap.imageForObject;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            viewCharacterBlock.body.image = cap.imageForObject;
+        });
         [selfBlock refreshController];
     };
     didBuyAction = ^(NSInteger curentIndex){
@@ -313,7 +318,9 @@
     didFinishBlock = ^(NSInteger curentIndex){
         
         CDVisualViewCharacterPartJakets *cap = [arrObjBlock objectAtIndex:curentIndex];
-        viewCharacterBlock.shirt.image = cap.imageForObject;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            viewCharacterBlock.shirt.image = cap.imageForObject;
+        });
         [selfBlock refreshController];
     };
     didBuyAction = ^(NSInteger curentIndex){
@@ -331,7 +338,9 @@
     didFinishBlock = ^(NSInteger curentIndex){
         
         CDVisualViewCharacterPartShoose *cap = [arrObjBlock objectAtIndex:curentIndex];
-        viewCharacterBlock.shoose.image = cap.imageForObject;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            viewCharacterBlock.shoose.image = cap.imageForObject;
+        });
         [selfBlock refreshController];
     };
     didBuyAction = ^(NSInteger curentIndex){
@@ -350,7 +359,9 @@
     didFinishBlock = ^(NSInteger curentIndex){
         
         CDVisualViewCharacterPartGuns *cap = [arrObjBlock objectAtIndex:curentIndex];
-         viewCharacterBlock.gun.image = cap.imageForObject;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            viewCharacterBlock.gun.image = cap.imageForObject;
+        });
         [selfBlock refreshController];
     };
     didBuyAction = ^(NSInteger curentIndex){
@@ -369,7 +380,9 @@
     didFinishBlock = ^(NSInteger curentIndex){
         
         CDVisualViewCharacterPartLegs *cap = [arrObjBlock objectAtIndex:curentIndex];
-        viewCharacterBlock.length.image = cap.imageForObject;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            viewCharacterBlock.length.image = cap.imageForObject;
+        });
         [selfBlock refreshController];
     };
     didBuyAction = ^(NSInteger curentIndex){
