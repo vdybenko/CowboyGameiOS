@@ -13,7 +13,7 @@
 #import "VisualViewDataSource.h"
 #import "VisualViewCharacter.h"
 #import "CharacterPartGridCell.h"
-
+#import "CDTransaction.h"
 @interface BuilderViewController ()
 {
     SSServer *playerServer;
@@ -277,6 +277,7 @@
 
     };
     didBuyAction = ^(NSInteger curentIndex){
+       
         [selfBlock refreshController];
     };
 
@@ -446,6 +447,10 @@
     [self sideOpenAnimation];
 }
 #pragma mark
+- (IBAction)touchBuyBtn:(id)sender {
+    
+    
+}
 
 -(void)refreshController;
 {
