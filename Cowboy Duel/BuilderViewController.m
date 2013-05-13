@@ -267,10 +267,11 @@
     arrObjects = [visualViewDataSource arrayHead];
     __block id  selfBlock = self;
     __block id  arrObjBlock = arrObjects;
+    __block VisualViewCharacter *viewCharacterBlock;
     didFinishBlock = ^(NSInteger curentIndex){
     
         CDVisualViewCharacterPartHead *cap = [arrObjBlock objectAtIndex:curentIndex];
-        visualViewCharacter.head.image = cap.imageForObject;
+        viewCharacterBlock.head.image = cap.imageForObject;
         [selfBlock refreshController];
 
     };
@@ -286,10 +287,11 @@
     arrObjects = [visualViewDataSource arrayCap];
     __block id  selfBlock = self;
     __block id  arrObjBlock = arrObjects;
+      __block VisualViewCharacter *viewCharacterBlock;
     didFinishBlock = ^(NSInteger curentIndex){
         
         CDVisualViewCharacterPartCap *cap = [arrObjBlock objectAtIndex:curentIndex];
-        visualViewCharacter.cap.image = cap.imageForObject;
+        viewCharacterBlock.cap.image = cap.imageForObject;
         [selfBlock refreshController];
     };
     didBuyAction = ^(NSInteger curentIndex){
@@ -304,10 +306,11 @@
     arrObjects = [visualViewDataSource arrayBody];
     __block id  selfBlock = self;
     __block id  arrObjBlock = arrObjects;
+    __block VisualViewCharacter *viewCharacterBlock;
     didFinishBlock = ^(NSInteger curentIndex){
         
         CDVisualViewCharacterPartBody *cap = [arrObjBlock objectAtIndex:curentIndex];
-        visualViewCharacter.body.image = cap.imageForObject;
+        viewCharacterBlock.body.image = cap.imageForObject;
         [selfBlock refreshController];
     };
     didBuyAction = ^(NSInteger curentIndex){
@@ -322,11 +325,11 @@
     arrObjects = [visualViewDataSource arrayJakets];
     __block id  selfBlock = self;
     __block id  arrObjBlock = arrObjects;
-    
+    __block VisualViewCharacter *viewCharacterBlock;
     didFinishBlock = ^(NSInteger curentIndex){
         
         CDVisualViewCharacterPartJakets *cap = [arrObjBlock objectAtIndex:curentIndex];
-        visualViewCharacter.shirt.image = cap.imageForObject;
+        viewCharacterBlock.shirt.image = cap.imageForObject;
         [selfBlock refreshController];
     };
     didBuyAction = ^(NSInteger curentIndex){
@@ -338,10 +341,11 @@
     arrObjects = [visualViewDataSource arrayShoose];
     __block id  selfBlock = self;
     __block id  arrObjBlock = arrObjects;
+    __block VisualViewCharacter *viewCharacterBlock;
     didFinishBlock = ^(NSInteger curentIndex){
         
         CDVisualViewCharacterPartShoose *cap = [arrObjBlock objectAtIndex:curentIndex];
-        visualViewCharacter.shoose.image = cap.imageForObject;
+        viewCharacterBlock.shoose.image = cap.imageForObject;
         [selfBlock refreshController];
     };
     didBuyAction = ^(NSInteger curentIndex){
@@ -354,10 +358,11 @@
     arrObjects = [visualViewDataSource arrayGuns];
     __block id  selfBlock = self;
     __block id  arrObjBlock = arrObjects;
+    __block VisualViewCharacter *viewCharacterBlock;
     didFinishBlock = ^(NSInteger curentIndex){
         
         CDVisualViewCharacterPartGuns *cap = [arrObjBlock objectAtIndex:curentIndex];
-         visualViewCharacter.gun.image = cap.imageForObject;
+         viewCharacterBlock.gun.image = cap.imageForObject;
         [selfBlock refreshController];
     };
     didBuyAction = ^(NSInteger curentIndex){
@@ -370,10 +375,11 @@
     arrObjects = [visualViewDataSource arrayLegs];
     __block id  selfBlock = self;
     __block id  arrObjBlock = arrObjects;
+    __block VisualViewCharacter *viewCharacterBlock;
     didFinishBlock = ^(NSInteger curentIndex){
         
         CDVisualViewCharacterPartLegs *cap = [arrObjBlock objectAtIndex:curentIndex];
-        visualViewCharacter.length.image = cap.imageForObject;
+        viewCharacterBlock.length.image = cap.imageForObject;
         [selfBlock refreshController];
     };
     didBuyAction = ^(NSInteger curentIndex){
