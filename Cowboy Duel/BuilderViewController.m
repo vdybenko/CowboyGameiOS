@@ -142,9 +142,13 @@
     int countOfElements = abs(scrollView.contentOffset.y/80);
     
     float questionOffset = 80 * countOfElements;
-    if (questionOffset+40<=abs(scrollView.contentOffset.y)) {
+    
+    int countObjects = [self numberOfItemsInGMGridView:grid];
+
+    if ((questionOffset+40<=abs(scrollView.contentOffset.y))&&(countOfElements!=countObjects-5)) {
         countOfElements = countOfElements+1;
         questionOffset = 80 * curentObject;
+        NSLog(@"1");
     }
     
     if (scrollView.contentOffset.y<0) {
@@ -153,6 +157,8 @@
     
     [scrollView setContentOffset:CGPointMake(0,questionOffset) animated:YES];
     
+    NSLog(@"1 scrollView.contentOffset.y %f int %d",scrollView.contentOffset.y,countOfElements);
+
     if (curentObject !=  countOfElements){
         curentObject = countOfElements;
         if (didFinishBlock) {
@@ -178,6 +184,8 @@
         
         [scrollView setContentOffset:CGPointMake(0,questionOffset) animated:YES];
         
+        NSLog(@"2 scrollView.contentOffset.y %f int %d",scrollView.contentOffset.y,countOfElements);
+        
         if (curentObject !=  countOfElements){
             curentObject = countOfElements;
             
@@ -191,7 +199,7 @@
 #pragma mark GMGridViewActionDelegate
 - (void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position;
 {
-    [grid scrollToObjectAtIndex:position atScrollPosition:GMGridViewScrollPositionTop animated:YES];
+//    [grid scrollToObjectAtIndex:position atScrollPosition:GMGridViewScrollPositionTop animated:YES];
 }
 
 #pragma mark Animation
@@ -293,7 +301,7 @@
     arrObjects = [visualViewDataSource arrayBody];
     __block id  selfBlock = self;
     __block id  arrObjBlock = arrObjects;
-    __block VisualViewCharacter *viewCharacterBlock;
+    __block VisualViewCharacter *viewCharacterBlock = visualViewCharacter;
     didFinishBlock = ^(NSInteger curentIndex){
         
         CDVisualViewCharacterPartBody *cap = [arrObjBlock objectAtIndex:curentIndex];
