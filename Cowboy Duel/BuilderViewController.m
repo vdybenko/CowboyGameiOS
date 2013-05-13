@@ -287,6 +287,7 @@
 }
 
 - (IBAction)touchHatBtn:(id)sender {
+     __block AccountDataSource *playerAccountBlock = playerAccount;
     arrObjects = [visualViewDataSource arrayHead];
     __block id  selfBlock = self;
     __block id  arrObjBlock = arrObjects;
@@ -305,7 +306,27 @@
 
     };
     didBuyAction = ^(NSInteger curentIndex){
-       
+        
+        CDVisualViewCharacterPartHead *cap = [arrObjBlock objectAtIndex:curentIndex];
+        dispatch_async(dispatch_get_main_queue(), ^{
+           CDTransaction *transaction = [[CDTransaction alloc] init];
+            transaction.trDescription = @"BuyNewCap";
+            transaction.trType = [NSNumber numberWithInt:-1];
+            transaction.trMoneyCh = [NSNumber numberWithInt:cap.money];
+            transaction.trLocalID = [NSNumber numberWithInt:playerAccountBlock.glNumber];
+            transaction.trOpponentID = @"";
+            transaction.trGlobalID = [NSNumber numberWithInt:-1];
+            
+            [playerAccountBlock.transactions addObject:transaction];
+            [playerAccountBlock saveTransaction];
+            [playerAccountBlock sendTransactions:playerAccountBlock.transactions];
+            
+            playerAccountBlock.money -= cap.money;
+            [playerAccountBlock saveMoney];
+            
+            playerAccountBlock.visualViewCap = cap.imageForObject; 
+            [playerAccountBlock saveVisualView];
+        });
         [selfBlock refreshController];
     };
 
