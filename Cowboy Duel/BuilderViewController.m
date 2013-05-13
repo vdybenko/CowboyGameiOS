@@ -265,25 +265,108 @@
 
 - (IBAction)touchHatBtn:(id)sender {
     arrObjects = [visualViewDataSource arrayHead];
+    didFinishBlock = ^(NSInteger curentIndex){
+       
+        
+    [self refreshController];
+    };
+    didBuyAction = ^(NSInteger curentIndex){
+        
+        
+        [self refreshController];
+    };
+
+
 }
 - (IBAction)touchFaceBtn:(id)sender {
     arrObjects = [visualViewDataSource arrayCap];
+    didFinishBlock = ^(NSInteger curentIndex){
+        
+        
+        [self refreshController];
+    };
+    didBuyAction = ^(NSInteger curentIndex){
+        
+        
+        [self refreshController];
+    };
+
+
 }
 - (IBAction)touchShirtBtn:(id)sender {
     arrObjects = [visualViewDataSource arrayBody];
+    didFinishBlock = ^(NSInteger curentIndex){
+        
+        
+        [self refreshController];
+    };
+    didBuyAction = ^(NSInteger curentIndex){
+        
+        
+        [self refreshController];
+    };
+
+
 }
 - (IBAction)touchJaketBtn:(id)sender {
     arrObjects = [visualViewDataSource arrayJakets];
+    didFinishBlock = ^(NSInteger curentIndex){
+        
+        
+        [self refreshController];
+    };
+
 }
 - (IBAction)touchShoesBtn:(id)sender {
     arrObjects = [visualViewDataSource arrayShoose];
+    didFinishBlock = ^(NSInteger curentIndex){
+        
+        
+        [self refreshController];
+    };
+    didBuyAction = ^(NSInteger curentIndex){
+        
+        
+        [self refreshController];
+    };
+
+
 }
 - (IBAction)touchGunsBtn:(id)sender {
     arrObjects = [visualViewDataSource arrayGuns];
+    didFinishBlock = ^(NSInteger curentIndex){
+        
+        
+        [self refreshController];
+    };
+    didBuyAction = ^(NSInteger curentIndex){
+        
+        
+        [self refreshController];
+    };
+
+
 }
 - (IBAction)touchPantsBtn:(id)sender {
      arrObjects = [visualViewDataSource arrayLegs];
+    didFinishBlock = ^(NSInteger curentIndex){
+        
+        
+        [self refreshController];
+    };
+    didBuyAction = ^(NSInteger curentIndex){
+        
+        
+        [self refreshController];
+    };
+
+
 }
 #pragma mark
+
+-(void)refreshController;
+{
+    
+}
 
 @end
