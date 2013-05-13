@@ -25,9 +25,6 @@
     __weak IBOutlet GMGridView *grid;
     
     NSArray *arrObjects;
-    
-    float lastQuestionOffset;
-    int currentPage;
 }
 @property (weak, nonatomic) IBOutlet UIView *sideView;
 @property (weak, nonatomic) IBOutlet UILabel *moneyLabel;
@@ -49,8 +46,6 @@
         // Custom initialization
         isOpenSide = NO;
         curentObject = 0;
-        lastQuestionOffset = 0;
-        currentPage = 0;
     }
     return self;
 }
@@ -168,7 +163,6 @@
     
     [scrollView setContentOffset:CGPointMake(0,questionOffset) animated:YES];
     
-    countOfElements+=2;
     if (curentObject !=  countOfElements){
         curentObject = countOfElements;
         if (didFinishBlock) {
@@ -194,7 +188,6 @@
         
         [scrollView setContentOffset:CGPointMake(0,questionOffset) animated:YES];
         
-        countOfElements+=2;
         if (curentObject !=  countOfElements){
             curentObject = countOfElements;
             
@@ -208,7 +201,7 @@
 #pragma mark GMGridViewActionDelegate
 - (void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position;
 {
-    [grid scrollToObjectAtIndex:position atScrollPosition:GMGridViewScrollPositionNone animated:YES];
+    [grid scrollToObjectAtIndex:position atScrollPosition:GMGridViewScrollPositionTop animated:YES];
 }
 
 #pragma mark Animation
