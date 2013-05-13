@@ -25,9 +25,6 @@
     __weak IBOutlet GMGridView *grid;
     
     NSArray *arrObjects;
-    
-    float lastQuestionOffset;
-    int currentPage;
 }
 @property (weak, nonatomic) IBOutlet UIView *sideView;
 @property (weak, nonatomic) IBOutlet UILabel *moneyLabel;
@@ -49,8 +46,6 @@
         // Custom initialization
         isOpenSide = NO;
         curentObject = 0;
-        lastQuestionOffset = 0;
-        currentPage = 0;
     }
     return self;
 }
@@ -62,8 +57,6 @@
     visualViewDataSource = [[VisualViewDataSource alloc] init];
     visualViewCharacter.visualViewDataSource = visualViewDataSource;
     arrObjects = [NSArray array];
-    
-    arrObjects = [visualViewDataSource arrayCap];
     
     grid.layoutStrategy = [GMGridViewLayoutStrategyFactory strategyFromType:GMGridViewLayoutVertical];
     grid.minEdgeInsets = UIEdgeInsetsMake(0,0,0,0);
@@ -109,7 +102,7 @@
 
 - (NSInteger)numberOfItemsInGMGridView:(GMGridView *)gridView
 {
-    return 30+4;
+    return [arrObjects count]+4;
 }
 
 - (CGSize)GMGridView:(GMGridView *)gridView sizeForItemsInInterfaceOrientation:(UIInterfaceOrientation)orientation
@@ -168,7 +161,6 @@
     
     [scrollView setContentOffset:CGPointMake(0,questionOffset) animated:YES];
     
-    countOfElements+=2;
     if (curentObject !=  countOfElements){
         curentObject = countOfElements;
         if (didFinishBlock) {
@@ -194,7 +186,6 @@
         
         [scrollView setContentOffset:CGPointMake(0,questionOffset) animated:YES];
         
-        countOfElements+=2;
         if (curentObject !=  countOfElements){
             curentObject = countOfElements;
             
@@ -208,7 +199,7 @@
 #pragma mark GMGridViewActionDelegate
 - (void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position;
 {
-    [grid scrollToObjectAtIndex:position atScrollPosition:GMGridViewScrollPositionNone animated:YES];
+    [grid scrollToObjectAtIndex:position atScrollPosition:GMGridViewScrollPositionTop animated:YES];
 }
 
 #pragma mark Animation
@@ -279,8 +270,9 @@
     didBuyAction = ^(NSInteger curentIndex){
         [selfBlock refreshController];
     };
-   
 
+    [grid reloadData];
+    [self sideOpenAnimation];
 
 }
 - (IBAction)touchFaceBtn:(id)sender {
@@ -299,8 +291,11 @@
     didBuyAction = ^(NSInteger curentIndex){
         [selfBlock refreshController];
     };
-    
-    
+
+
+    [grid reloadData];
+    [self sideOpenAnimation];
+
 }
 - (IBAction)touchShirtBtn:(id)sender {
     arrObjects = [visualViewDataSource arrayBody];
@@ -320,8 +315,8 @@
         
         [selfBlock refreshController];
     };
-
-
+    [grid reloadData];
+    [self sideOpenAnimation];
 }
 - (IBAction)touchJaketBtn:(id)sender {
     arrObjects = [visualViewDataSource arrayJakets];
@@ -340,6 +335,8 @@
       
         [selfBlock refreshController];
     };
+    [grid reloadData];
+    [self sideOpenAnimation];
 }
 - (IBAction)touchShoesBtn:(id)sender {
     arrObjects = [visualViewDataSource arrayShoose];
@@ -359,6 +356,8 @@
         
         [selfBlock refreshController];
     };
+    [grid reloadData];
+    [self sideOpenAnimation];
 }
 - (IBAction)touchGunsBtn:(id)sender {
     arrObjects = [visualViewDataSource arrayGuns];
@@ -378,6 +377,8 @@
         
         [selfBlock refreshController];
     };
+    [grid reloadData];
+    [self sideOpenAnimation];
 }
 - (IBAction)touchPantsBtn:(id)sender {
     arrObjects = [visualViewDataSource arrayLegs];
@@ -397,6 +398,8 @@
         
         [selfBlock refreshController];
     };
+    [grid reloadData];
+    [self sideOpenAnimation];
 }
 #pragma mark
 
