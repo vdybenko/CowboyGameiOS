@@ -65,7 +65,6 @@
     
     arrObjects = [visualViewDataSource arrayCap];
     
-//    grid = [[GMGridView alloc] initWithFrame:CGRectMake(20, 8, 78, 423)];
     grid.layoutStrategy = [GMGridViewLayoutStrategyFactory strategyFromType:GMGridViewLayoutVertical];
     grid.minEdgeInsets = UIEdgeInsetsMake(0,0,0,0);
     grid.itemSpacing = 10;
@@ -76,9 +75,7 @@
     grid.dataSource = self;
     grid.actionDelegate = self;
     grid.delegate = self;
-    
-//    [self.sideView insertSubview:grid belowSubview:vArrow];
-    
+        
     playerAccount = [[AccountDataSource alloc] initWithLocalPlayer];
     self.moneyLabel.text =  [NSString stringWithFormat:@"%d",playerAccount.money];
     self.defensLabel.text = [NSString stringWithFormat:@"%d",playerAccount.accountDefenseValue];
@@ -161,17 +158,17 @@
     
     float questionOffset = 80 * countOfElements;
     if (questionOffset+40<=abs(scrollView.contentOffset.y)) {
-        curentObject = countOfElements+1;
+        countOfElements = countOfElements+1;
         questionOffset = 80 * curentObject;
-    }else{
-        curentObject = countOfElements;
     }
+    
     if (scrollView.contentOffset.y<0) {
         questionOffset = -questionOffset;
     }
     
     [scrollView setContentOffset:CGPointMake(0,questionOffset) animated:YES];
     
+    countOfElements+=2;
     if (curentObject !=  countOfElements){
         curentObject = countOfElements;
         if (didFinishBlock) {
@@ -197,6 +194,7 @@
         
         [scrollView setContentOffset:CGPointMake(0,questionOffset) animated:YES];
         
+        countOfElements+=2;
         if (curentObject !=  countOfElements){
             curentObject = countOfElements;
             
@@ -268,9 +266,7 @@
 - (IBAction)touchHatBtn:(id)sender {
     arrObjects = [visualViewDataSource arrayHead];
     didFinishBlock = ^(NSInteger curentIndex){
-       
-        
-    [self refreshController];
+        [self refreshController];
     };
     didBuyAction = ^(NSInteger curentIndex){
         
