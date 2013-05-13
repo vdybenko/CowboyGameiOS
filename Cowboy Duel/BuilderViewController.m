@@ -130,7 +130,7 @@
     
     if (index!=0 && index!=1 && index!=lastIndex && index!=penultIndex) {
         [cell setHidden:NO];
-        
+        [cell simpleBackGround];
         CDVisualViewCharacterPart *visualViewCharacterPart = [arrObjects objectAtIndex:index-2];
         cell.ivImage.image = [visualViewCharacterPart imageForObject];
     }else{
@@ -161,7 +161,14 @@
     [scrollView setContentOffset:CGPointMake(0,questionOffset) animated:YES];
     
     if (curentObject !=  countOfElements){
+        CharacterPartGridCell * cell = (CharacterPartGridCell*)[grid cellForItemAtIndex:curentObject+2];
+        [cell simpleBackGround];
+        
         curentObject = countOfElements;
+        
+        cell = (CharacterPartGridCell*)[grid cellForItemAtIndex:curentObject+2];
+        [cell selectedBackGround];
+        
         if (didFinishBlock) {
             didFinishBlock(curentObject);
         }
@@ -184,9 +191,15 @@
         }
         
         [scrollView setContentOffset:CGPointMake(0,questionOffset) animated:YES];
-                
+        
         if (curentObject !=  countOfElements){
+            CharacterPartGridCell * cell = (CharacterPartGridCell*)[grid cellForItemAtIndex:curentObject+2];
+            [cell simpleBackGround];
+            
             curentObject = countOfElements;
+            
+            cell = (CharacterPartGridCell*)[grid cellForItemAtIndex:curentObject+2];
+            [cell selectedBackGround];
             
             if (didFinishBlock) {
                 didFinishBlock(curentObject);
@@ -198,7 +211,27 @@
 #pragma mark GMGridViewActionDelegate
 - (void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position;
 {
-//    [grid scrollToObjectAtIndex:position atScrollPosition:GMGridViewScrollPositionTop animated:YES];
+    int lastIndex = [self numberOfItemsInGMGridView:gridView]-1;
+    int penultIndex = [self numberOfItemsInGMGridView:gridView]-2;
+    
+    if (position!=0 && position!=1 && position!=lastIndex && position!=penultIndex && position!=curentObject+2) {
+        
+        float questionOffset = 80 * (position-2);
+        
+        [grid setContentOffset:CGPointMake(0,questionOffset) animated:YES];
+        
+        CharacterPartGridCell * cell = (CharacterPartGridCell*)[grid cellForItemAtIndex:curentObject+2];
+        [cell simpleBackGround];
+        
+        curentObject = position-2;
+        
+        cell = (CharacterPartGridCell*)[grid cellForItemAtIndex:curentObject+2];
+        [cell selectedBackGround];
+        
+        if (didFinishBlock) {
+            didFinishBlock(curentObject);
+        }
+    }
 }
 
 #pragma mark Animation
