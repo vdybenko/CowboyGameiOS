@@ -326,12 +326,11 @@
     didFinishBlock = ^(NSInteger curentIndex){
         
         CDVisualViewCharacterPartJakets *cap = [arrObjBlock objectAtIndex:curentIndex];
-       // visualViewCharacter..image = cap.imageForObject;
+        visualViewCharacter.shirt.image = cap.imageForObject;
         [selfBlock refreshController];
     };
     didBuyAction = ^(NSInteger curentIndex){
-        
-        
+      
         [selfBlock refreshController];
     };
 }
@@ -358,7 +357,7 @@
     didFinishBlock = ^(NSInteger curentIndex){
         
         CDVisualViewCharacterPartGuns *cap = [arrObjBlock objectAtIndex:curentIndex];
-     //   visualViewCharacter..image = cap.imageForObject;
+         visualViewCharacter.gun.image = cap.imageForObject;
         [selfBlock refreshController];
     };
     didBuyAction = ^(NSInteger curentIndex){
