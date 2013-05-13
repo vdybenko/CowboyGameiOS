@@ -65,7 +65,6 @@
     
     arrObjects = [visualViewDataSource arrayCap];
     
-//    grid = [[GMGridView alloc] initWithFrame:CGRectMake(20, 8, 78, 423)];
     grid.layoutStrategy = [GMGridViewLayoutStrategyFactory strategyFromType:GMGridViewLayoutVertical];
     grid.minEdgeInsets = UIEdgeInsetsMake(0,0,0,0);
     grid.itemSpacing = 10;
@@ -76,9 +75,7 @@
     grid.dataSource = self;
     grid.actionDelegate = self;
     grid.delegate = self;
-    
-//    [self.sideView insertSubview:grid belowSubview:vArrow];
-    
+        
     playerAccount = [[AccountDataSource alloc] initWithLocalPlayer];
     self.moneyLabel.text =  [NSString stringWithFormat:@"%d",playerAccount.money];
     self.defensLabel.text = [NSString stringWithFormat:@"%d",playerAccount.accountDefenseValue];
@@ -112,7 +109,7 @@
 
 - (NSInteger)numberOfItemsInGMGridView:(GMGridView *)gridView
 {
-    return 30;
+    return 30+4;
 }
 
 - (CGSize)GMGridView:(GMGridView *)gridView sizeForItemsInInterfaceOrientation:(UIInterfaceOrientation)orientation
@@ -136,18 +133,20 @@
     
     [[cell.contentView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
-    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 78, 70)];
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [cell.contentView addSubview:imageView];
-    imageView.backgroundColor = [UIColor redColor];
+    int lastIndex = [self numberOfItemsInGMGridView:gridView]-1;
+    int penultIndex = [self numberOfItemsInGMGridView:gridView]-2;
     
-    if ([arrObjects count]) {
-        int indexr = random() % 4;
-        CDVisualViewCharacterPart *visualViewCharacterPart = [arrObjects objectAtIndex:indexr];
-        imageView.image = [visualViewCharacterPart imageForObject];
-    }
-
-    
+    if (index!=0 && index!=1 && index!=lastIndex && index!=penultIndex) {
+        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 78, 70)];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        [cell.contentView addSubview:imageView];
+        
+        if ([arrObjects count]) {
+            int indexr = random() % 4;
+            CDVisualViewCharacterPart *visualViewCharacterPart = [arrObjects objectAtIndex:indexr];
+            imageView.image = [visualViewCharacterPart imageForObject];
+        }
+    }    
     return cell;
 }
 
@@ -159,17 +158,17 @@
     
     float questionOffset = 80 * countOfElements;
     if (questionOffset+40<=abs(scrollView.contentOffset.y)) {
-        curentObject = countOfElements+1;
+        countOfElements = countOfElements+1;
         questionOffset = 80 * curentObject;
-    }else{
-        curentObject = countOfElements;
     }
+    
     if (scrollView.contentOffset.y<0) {
         questionOffset = -questionOffset;
     }
     
     [scrollView setContentOffset:CGPointMake(0,questionOffset) animated:YES];
     
+    countOfElements+=2;
     if (curentObject !=  countOfElements){
         curentObject = countOfElements;
         if (didFinishBlock) {
@@ -195,6 +194,7 @@
         
         [scrollView setContentOffset:CGPointMake(0,questionOffset) animated:YES];
         
+        countOfElements+=2;
         if (curentObject !=  countOfElements){
             curentObject = countOfElements;
             
@@ -272,6 +272,7 @@
         CDVisualViewCharacterPartHead *cap = [arrObjBlock objectAtIndex:curentIndex];
         visualViewCharacter.head.image = cap.imageForObject;
         [selfBlock refreshController];
+
     };
     didBuyAction = ^(NSInteger curentIndex){
         
@@ -325,7 +326,7 @@
     didFinishBlock = ^(NSInteger curentIndex){
         
         CDVisualViewCharacterPartJakets *cap = [arrObjBlock objectAtIndex:curentIndex];
-        visualViewCharacter..image = cap.imageForObject;
+       // visualViewCharacter..image = cap.imageForObject;
         [selfBlock refreshController];
     };
     didBuyAction = ^(NSInteger curentIndex){
@@ -357,7 +358,7 @@
     didFinishBlock = ^(NSInteger curentIndex){
         
         CDVisualViewCharacterPartGuns *cap = [arrObjBlock objectAtIndex:curentIndex];
-        visualViewCharacter..image = cap.imageForObject;
+     //   visualViewCharacter..image = cap.imageForObject;
         [selfBlock refreshController];
     };
     didBuyAction = ^(NSInteger curentIndex){

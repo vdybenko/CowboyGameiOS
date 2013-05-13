@@ -17,6 +17,8 @@
 @synthesize length;
 @synthesize shoose;
 @synthesize visualViewDataSource;
+@synthesize shirt;
+@synthesize gun;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -43,6 +45,8 @@
     shoose = nil;
     [visualViewDataSource releaseComponents];
     visualViewDataSource = nil;
+    shirt = nil;
+    gun = nil;
 }
 
 -(void)refreshWithAccountPlayer:(AccountDataSource*)accountPlayer;
