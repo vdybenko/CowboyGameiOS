@@ -31,6 +31,8 @@ static const char *LIST_BOTS_URL = BASE_URL"users/get_user_data";
 @synthesize visualViewBody;
 @synthesize visualViewLegs;
 @synthesize visualViewShoose;
+@synthesize visualViewJackets;
+@synthesize visualViewGuns;
 
 #pragma mark
 
@@ -88,6 +90,8 @@ static AccountDataSource *sharedHelper = nil;
         self.visualViewBody = 0;
         self.visualViewLegs = 0;
         self.visualViewShoose = 0;
+        self.visualViewJackets = 0;
+        self.visualViewGuns = 0;
     }
     return self;
 }
@@ -106,6 +110,7 @@ static AccountDataSource *sharedHelper = nil;
   self.accountDraws = [uDef integerForKey:@"DrawCount"];
   self.accountBigestWin = [uDef integerForKey:@"MaxWin"];
   self.removeAds = [uDef integerForKey:@"RemoveAds"];
+    
     
     [self loadDefense];
     
@@ -465,6 +470,8 @@ static AccountDataSource *sharedHelper = nil;
     [[NSUserDefaults standardUserDefaults] setInteger:visualViewBody forKey:@"VV_BODY_VALUE"];
     [[NSUserDefaults standardUserDefaults] setInteger:visualViewLegs forKey:@"VV_LEGS_VALUE"];
     [[NSUserDefaults standardUserDefaults] setInteger:visualViewShoose forKey:@"VV_SHOOSE_VALUE"];
+    [[NSUserDefaults standardUserDefaults] setInteger:visualViewJackets forKey:@"VV_SHIRTS_VALUE"];
+    [[NSUserDefaults standardUserDefaults] setInteger:visualViewGuns forKey:@"VV_GUN_VALUE"];
 }
 
 - (void)loadVisualView;
@@ -474,6 +481,8 @@ static AccountDataSource *sharedHelper = nil;
     self.visualViewBody = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_BODY_VALUE"];
     self.visualViewLegs = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_LEGS_VALUE"];
     self.visualViewShoose = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_SHOOSE_VALUE"];
+    self.visualViewJackets = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_SHIRTS_VALUE"];
+    self.visualViewGuns = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_GUN_VALUE"];
 }
 
 #pragma mark

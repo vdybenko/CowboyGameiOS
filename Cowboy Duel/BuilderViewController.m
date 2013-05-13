@@ -308,7 +308,7 @@
     didBuyAction = ^(NSInteger curentIndex){
         
         CDVisualViewCharacterPartHead *cap = [arrObjBlock objectAtIndex:curentIndex];
-        dispatch_async(dispatch_get_main_queue(), ^{
+       
            CDTransaction *transaction = [[CDTransaction alloc] init];
             transaction.trDescription = @"BuyNewCap";
             transaction.trType = [NSNumber numberWithInt:-1];
@@ -324,10 +324,9 @@
             playerAccountBlock.money -= cap.money;
             [playerAccountBlock saveMoney];
             
-            playerAccountBlock.visualViewCap = cap.imageForObject; 
+            playerAccountBlock.visualViewCap = curentIndex;
             [playerAccountBlock saveVisualView];
-        });
-        [selfBlock refreshController];
+            [selfBlock refreshController];
     };
 
     [grid reloadData];
@@ -335,6 +334,7 @@
 
 }
 - (IBAction)touchFaceBtn:(id)sender {
+      __block AccountDataSource *playerAccountBlock = playerAccount;
     arrObjects = [visualViewDataSource arrayCap];
     __block id  selfBlock = self;
     __block id  arrObjBlock = arrObjects;
@@ -354,6 +354,25 @@
         
     };
     didBuyAction = ^(NSInteger curentIndex){
+        
+        CDVisualViewCharacterPartHead *cap = [arrObjBlock objectAtIndex:curentIndex];
+        CDTransaction *transaction = [[CDTransaction alloc] init];
+        transaction.trDescription = @"BuyNewFace";
+        transaction.trType = [NSNumber numberWithInt:-1];
+        transaction.trMoneyCh = [NSNumber numberWithInt:cap.money];
+        transaction.trLocalID = [NSNumber numberWithInt:playerAccountBlock.glNumber];
+        transaction.trOpponentID = @"";
+        transaction.trGlobalID = [NSNumber numberWithInt:-1];
+        
+        [playerAccountBlock.transactions addObject:transaction];
+        [playerAccountBlock saveTransaction];
+        [playerAccountBlock sendTransactions:playerAccountBlock.transactions];
+        
+        playerAccountBlock.money -= cap.money;
+        [playerAccountBlock saveMoney];
+        
+        playerAccountBlock.visualViewHead = curentIndex;
+        [playerAccountBlock saveVisualView];
         [selfBlock refreshController];
     };
 
@@ -363,6 +382,7 @@
 
 }
 - (IBAction)touchShirtBtn:(id)sender {
+       __block AccountDataSource *playerAccountBlock = playerAccount;
     __block id  priceLbBlock = self.priceOfItem;
     __block id  bonus = self.resultLabel;
 
@@ -371,27 +391,44 @@
     __block id  arrObjBlock = arrObjects;
     __block VisualViewCharacter *viewCharacterBlock = visualViewCharacter;
     didFinishBlock = ^(NSInteger curentIndex){
-        
+
         CDVisualViewCharacterPartBody *cap = [arrObjBlock objectAtIndex:curentIndex];
         dispatch_async(dispatch_get_main_queue(), ^{
             viewCharacterBlock.body.image = cap.imageForObject;
             [priceLbBlock setText:[NSString stringWithFormat:@"%d", cap.money]];
             [bonus setText:[NSString stringWithFormat:@"+ %d",cap.action]];
-          
-
-
         });
         [selfBlock refreshController];
     };
     didBuyAction = ^(NSInteger curentIndex){
         
+        CDVisualViewCharacterPartBody *cap = [arrObjBlock objectAtIndex:curentIndex];
+        CDTransaction *transaction = [[CDTransaction alloc] init];
+        transaction.trDescription = @"BuyNewShirt";
+        transaction.trType = [NSNumber numberWithInt:-1];
+        transaction.trMoneyCh = [NSNumber numberWithInt:cap.money];
+        transaction.trLocalID = [NSNumber numberWithInt:playerAccountBlock.glNumber];
+        transaction.trOpponentID = @"";
+        transaction.trGlobalID = [NSNumber numberWithInt:-1];
+        
+        [playerAccountBlock.transactions addObject:transaction];
+        [playerAccountBlock saveTransaction];
+        [playerAccountBlock sendTransactions:playerAccountBlock.transactions];
+        
+        playerAccountBlock.money -= cap.money;
+        [playerAccountBlock saveMoney];
+        
+        playerAccountBlock.visualViewBody = curentIndex;
+        [playerAccountBlock saveVisualView];
         
         [selfBlock refreshController];
+        
     };
     [grid reloadData];
     [self sideOpenAnimation];
 }
 - (IBAction)touchJaketBtn:(id)sender {
+    __block AccountDataSource *playerAccountBlock = playerAccount;
     arrObjects = [visualViewDataSource arrayJakets];
     __block id  selfBlock = self;
     __block id  arrObjBlock = arrObjects;
@@ -411,13 +448,32 @@
         [selfBlock refreshController];
     };
     didBuyAction = ^(NSInteger curentIndex){
-      
+        CDVisualViewCharacterPartJakets *cap = [arrObjBlock objectAtIndex:curentIndex];
+        CDTransaction *transaction = [[CDTransaction alloc] init];
+        transaction.trDescription = @"BuyNewJacket";
+        transaction.trType = [NSNumber numberWithInt:-1];
+        transaction.trMoneyCh = [NSNumber numberWithInt:cap.money];
+        transaction.trLocalID = [NSNumber numberWithInt:playerAccountBlock.glNumber];
+        transaction.trOpponentID = @"";
+        transaction.trGlobalID = [NSNumber numberWithInt:-1];
+        
+        [playerAccountBlock.transactions addObject:transaction];
+        [playerAccountBlock saveTransaction];
+        [playerAccountBlock sendTransactions:playerAccountBlock.transactions];
+        
+        playerAccountBlock.money -= cap.money;
+        [playerAccountBlock saveMoney];
+        
+        playerAccountBlock.visualViewJackets = curentIndex;
+        [playerAccountBlock saveVisualView];
+        
         [selfBlock refreshController];
     };
     [grid reloadData];
     [self sideOpenAnimation];
 }
 - (IBAction)touchShoesBtn:(id)sender {
+    __block AccountDataSource *playerAccountBlock = playerAccount;
     arrObjects = [visualViewDataSource arrayShoose];
     __block id  selfBlock = self;
     __block id  arrObjBlock = arrObjects;
@@ -436,14 +492,33 @@
         [selfBlock refreshController];
     };
     didBuyAction = ^(NSInteger curentIndex){
+        CDVisualViewCharacterPartGuns *cap = [arrObjBlock objectAtIndex:curentIndex];
+        CDTransaction *transaction = [[CDTransaction alloc] init];
+        transaction.trDescription = @"BuyNewShoes";
+        transaction.trType = [NSNumber numberWithInt:-1];
+        transaction.trMoneyCh = [NSNumber numberWithInt:cap.money];
+        transaction.trLocalID = [NSNumber numberWithInt:playerAccountBlock.glNumber];
+        transaction.trOpponentID = @"";
+        transaction.trGlobalID = [NSNumber numberWithInt:-1];
         
+        [playerAccountBlock.transactions addObject:transaction];
+        [playerAccountBlock saveTransaction];
+        [playerAccountBlock sendTransactions:playerAccountBlock.transactions];
+        
+        playerAccountBlock.money -= cap.money;
+        [playerAccountBlock saveMoney];
+        
+        playerAccountBlock.visualViewShoose = curentIndex;
+        [playerAccountBlock saveVisualView];
         
         [selfBlock refreshController];
+
     };
     [grid reloadData];
     [self sideOpenAnimation];
 }
 - (IBAction)touchGunsBtn:(id)sender {
+    __block AccountDataSource *playerAccountBlock = playerAccount;
     arrObjects = [visualViewDataSource arrayGuns];
     __block id  selfBlock = self;
     __block id  arrObjBlock = arrObjects;
@@ -463,13 +538,33 @@
     };
     didBuyAction = ^(NSInteger curentIndex){
         
+        CDVisualViewCharacterPartGuns *cap = [arrObjBlock objectAtIndex:curentIndex];
+        CDTransaction *transaction = [[CDTransaction alloc] init];
+        transaction.trDescription = @"BuyNewGun";
+        transaction.trType = [NSNumber numberWithInt:-1];
+        transaction.trMoneyCh = [NSNumber numberWithInt:cap.money];
+        transaction.trLocalID = [NSNumber numberWithInt:playerAccountBlock.glNumber];
+        transaction.trOpponentID = @"";
+        transaction.trGlobalID = [NSNumber numberWithInt:-1];
+        
+        [playerAccountBlock.transactions addObject:transaction];
+        [playerAccountBlock saveTransaction];
+        [playerAccountBlock sendTransactions:playerAccountBlock.transactions];
+        
+        playerAccountBlock.money -= cap.money;
+        [playerAccountBlock saveMoney];
+        
+        playerAccountBlock.visualViewGuns = curentIndex;
+        [playerAccountBlock saveVisualView];
         
         [selfBlock refreshController];
+
     };
     [grid reloadData];
     [self sideOpenAnimation];
 }
 - (IBAction)touchPantsBtn:(id)sender {
+    __block AccountDataSource *playerAccountBlock = playerAccount;
     arrObjects = [visualViewDataSource arrayLegs];
     __block id  selfBlock = self;
     __block id  arrObjBlock = arrObjects;
@@ -489,8 +584,27 @@
     };
     didBuyAction = ^(NSInteger curentIndex){
         
+        CDVisualViewCharacterPartLegs *cap = [arrObjBlock objectAtIndex:curentIndex];
+        CDTransaction *transaction = [[CDTransaction alloc] init];
+        transaction.trDescription = @"BuyNewPants";
+        transaction.trType = [NSNumber numberWithInt:-1];
+        transaction.trMoneyCh = [NSNumber numberWithInt:cap.money];
+        transaction.trLocalID = [NSNumber numberWithInt:playerAccountBlock.glNumber];
+        transaction.trOpponentID = @"";
+        transaction.trGlobalID = [NSNumber numberWithInt:-1];
+        
+        [playerAccountBlock.transactions addObject:transaction];
+        [playerAccountBlock saveTransaction];
+        [playerAccountBlock sendTransactions:playerAccountBlock.transactions];
+        
+        playerAccountBlock.money -= cap.money;
+        [playerAccountBlock saveMoney];
+        
+        playerAccountBlock.visualViewLegs = curentIndex;
+        [playerAccountBlock saveVisualView];
         
         [selfBlock refreshController];
+
     };
     [grid reloadData];
     [self sideOpenAnimation];
