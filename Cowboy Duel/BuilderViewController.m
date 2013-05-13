@@ -112,7 +112,7 @@
 
 - (NSInteger)numberOfItemsInGMGridView:(GMGridView *)gridView
 {
-    return 30;
+    return 30+4;
 }
 
 - (CGSize)GMGridView:(GMGridView *)gridView sizeForItemsInInterfaceOrientation:(UIInterfaceOrientation)orientation
@@ -136,18 +136,20 @@
     
     [[cell.contentView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
-    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 78, 70)];
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [cell.contentView addSubview:imageView];
-    imageView.backgroundColor = [UIColor redColor];
+    int lastIndex = [self numberOfItemsInGMGridView:gridView]-1;
+    int penultIndex = [self numberOfItemsInGMGridView:gridView]-2;
     
-    if ([arrObjects count]) {
-        int indexr = random() % 4;
-        CDVisualViewCharacterPart *visualViewCharacterPart = [arrObjects objectAtIndex:indexr];
-        imageView.image = [visualViewCharacterPart imageForObject];
-    }
-
-    
+    if (index!=0 && index!=1 && index!=lastIndex && index!=penultIndex) {
+        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 78, 70)];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        [cell.contentView addSubview:imageView];
+        
+        if ([arrObjects count]) {
+            int indexr = random() % 4;
+            CDVisualViewCharacterPart *visualViewCharacterPart = [arrObjects objectAtIndex:indexr];
+            imageView.image = [visualViewCharacterPart imageForObject];
+        }
+    }    
     return cell;
 }
 
