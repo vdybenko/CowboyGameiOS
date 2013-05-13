@@ -46,11 +46,11 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">builderCellBack.png</string>
+							<string key="NSResourceName">builderSelectedCellBack.png</string>
 						</object>
 						<object class="NSCustomResource" key="IBUIHighlightedImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">builderSelectedCellBack.png</string>
+							<string key="NSResourceName">builderCellBack.png</string>
 						</object>
 					</object>
 					<object class="IBUIImageView" id="57186746">
