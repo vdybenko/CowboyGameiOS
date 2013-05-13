@@ -58,8 +58,6 @@
     visualViewCharacter.visualViewDataSource = visualViewDataSource;
     arrObjects = [NSArray array];
     
-    arrObjects = [visualViewDataSource arrayCap];
-    
     grid.layoutStrategy = [GMGridViewLayoutStrategyFactory strategyFromType:GMGridViewLayoutVertical];
     grid.minEdgeInsets = UIEdgeInsetsMake(0,0,0,0);
     grid.itemSpacing = 10;
@@ -104,7 +102,7 @@
 
 - (NSInteger)numberOfItemsInGMGridView:(GMGridView *)gridView
 {
-    return 30+4;
+    return [arrObjects count]+4;
 }
 
 - (CGSize)GMGridView:(GMGridView *)gridView sizeForItemsInInterfaceOrientation:(UIInterfaceOrientation)orientation
@@ -272,8 +270,8 @@
         
         [selfBlock refreshController];
     };
-
-
+    [grid reloadData];
+    [self sideOpenAnimation];
 }
 - (IBAction)touchFaceBtn:(id)sender {
     arrObjects = [visualViewDataSource arrayCap];
@@ -291,7 +289,8 @@
         [selfBlock refreshController];
     };
 
-
+    [grid reloadData];
+    [self sideOpenAnimation];
 }
 - (IBAction)touchShirtBtn:(id)sender {
     arrObjects = [visualViewDataSource arrayBody];
@@ -308,8 +307,8 @@
         
         [selfBlock refreshController];
     };
-
-
+    [grid reloadData];
+    [self sideOpenAnimation];
 }
 - (IBAction)touchJaketBtn:(id)sender {
     arrObjects = [visualViewDataSource arrayJakets];
@@ -326,6 +325,8 @@
       
         [selfBlock refreshController];
     };
+    [grid reloadData];
+    [self sideOpenAnimation];
 }
 - (IBAction)touchShoesBtn:(id)sender {
     arrObjects = [visualViewDataSource arrayShoose];
@@ -342,6 +343,8 @@
         
         [selfBlock refreshController];
     };
+    [grid reloadData];
+    [self sideOpenAnimation];
 }
 - (IBAction)touchGunsBtn:(id)sender {
     arrObjects = [visualViewDataSource arrayGuns];
@@ -358,6 +361,8 @@
         
         [selfBlock refreshController];
     };
+    [grid reloadData];
+    [self sideOpenAnimation];
 }
 - (IBAction)touchPantsBtn:(id)sender {
     arrObjects = [visualViewDataSource arrayLegs];
@@ -374,6 +379,8 @@
         
         [selfBlock refreshController];
     };
+    [grid reloadData];
+    [self sideOpenAnimation];
 }
 #pragma mark
 
