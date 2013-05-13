@@ -151,8 +151,7 @@
 
     if ((questionOffset+40<=abs(scrollView.contentOffset.y))&&(countOfElements!=countObjects-5)) {
         countOfElements = countOfElements+1;
-        questionOffset = 80 * curentObject;
-        NSLog(@"1");
+        questionOffset = 80 * countOfElements;
     }
     
     if (scrollView.contentOffset.y<0) {
@@ -161,8 +160,6 @@
     
     [scrollView setContentOffset:CGPointMake(0,questionOffset) animated:YES];
     
-    NSLog(@"1 scrollView.contentOffset.y %f int %d",scrollView.contentOffset.y,countOfElements);
-
     if (curentObject !=  countOfElements){
         curentObject = countOfElements;
         if (didFinishBlock) {
@@ -187,9 +184,7 @@
         }
         
         [scrollView setContentOffset:CGPointMake(0,questionOffset) animated:YES];
-        
-        NSLog(@"2 scrollView.contentOffset.y %f int %d",scrollView.contentOffset.y,countOfElements);
-        
+                
         if (curentObject !=  countOfElements){
             curentObject = countOfElements;
             
