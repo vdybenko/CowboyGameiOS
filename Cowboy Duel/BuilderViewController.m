@@ -258,100 +258,122 @@
 
 - (IBAction)touchHatBtn:(id)sender {
     arrObjects = [visualViewDataSource arrayHead];
+    __block id  selfBlock = self;
+    __block id  arrObjBlock = arrObjects;
     didFinishBlock = ^(NSInteger curentIndex){
-        [self refreshController];
+    
+        CDVisualViewCharacterPartHead *cap = [arrObjBlock objectAtIndex:curentIndex];
+        visualViewCharacter.head.image = cap.imageForObject;
+        [selfBlock refreshController];
+
     };
     didBuyAction = ^(NSInteger curentIndex){
         
         
-        [self refreshController];
+        [selfBlock refreshController];
     };
 
 
 }
 - (IBAction)touchFaceBtn:(id)sender {
     arrObjects = [visualViewDataSource arrayCap];
+    __block id  selfBlock = self;
+    __block id  arrObjBlock = arrObjects;
     didFinishBlock = ^(NSInteger curentIndex){
         
-        
-        [self refreshController];
+        CDVisualViewCharacterPartCap *cap = [arrObjBlock objectAtIndex:curentIndex];
+        visualViewCharacter.cap.image = cap.imageForObject;
+        [selfBlock refreshController];
     };
     didBuyAction = ^(NSInteger curentIndex){
         
         
-        [self refreshController];
+        [selfBlock refreshController];
     };
 
 
 }
 - (IBAction)touchShirtBtn:(id)sender {
     arrObjects = [visualViewDataSource arrayBody];
+    __block id  selfBlock = self;
+    __block id  arrObjBlock = arrObjects;
     didFinishBlock = ^(NSInteger curentIndex){
         
-        
-        [self refreshController];
+        CDVisualViewCharacterPartBody *cap = [arrObjBlock objectAtIndex:curentIndex];
+        visualViewCharacter.body.image = cap.imageForObject;
+        [selfBlock refreshController];
     };
     didBuyAction = ^(NSInteger curentIndex){
         
         
-        [self refreshController];
+        [selfBlock refreshController];
     };
 
 
 }
 - (IBAction)touchJaketBtn:(id)sender {
     arrObjects = [visualViewDataSource arrayJakets];
+    __block id  selfBlock = self;
+    __block id  arrObjBlock = arrObjects;
+    
     didFinishBlock = ^(NSInteger curentIndex){
         
-        
-        [self refreshController];
+        CDVisualViewCharacterPartJakets *cap = [arrObjBlock objectAtIndex:curentIndex];
+        visualViewCharacter.shirt.image = cap.imageForObject;
+        [selfBlock refreshController];
     };
-
+    didBuyAction = ^(NSInteger curentIndex){
+      
+        [selfBlock refreshController];
+    };
 }
 - (IBAction)touchShoesBtn:(id)sender {
     arrObjects = [visualViewDataSource arrayShoose];
+    __block id  selfBlock = self;
+    __block id  arrObjBlock = arrObjects;
     didFinishBlock = ^(NSInteger curentIndex){
         
-        
-        [self refreshController];
+        CDVisualViewCharacterPartShoose *cap = [arrObjBlock objectAtIndex:curentIndex];
+        visualViewCharacter.shoose.image = cap.imageForObject;
+        [selfBlock refreshController];
     };
     didBuyAction = ^(NSInteger curentIndex){
         
         
-        [self refreshController];
+        [selfBlock refreshController];
     };
-
-
 }
 - (IBAction)touchGunsBtn:(id)sender {
     arrObjects = [visualViewDataSource arrayGuns];
+    __block id  selfBlock = self;
+    __block id  arrObjBlock = arrObjects;
     didFinishBlock = ^(NSInteger curentIndex){
         
-        
-        [self refreshController];
+        CDVisualViewCharacterPartGuns *cap = [arrObjBlock objectAtIndex:curentIndex];
+         visualViewCharacter.gun.image = cap.imageForObject;
+        [selfBlock refreshController];
     };
     didBuyAction = ^(NSInteger curentIndex){
         
         
-        [self refreshController];
+        [selfBlock refreshController];
     };
-
-
 }
 - (IBAction)touchPantsBtn:(id)sender {
-     arrObjects = [visualViewDataSource arrayLegs];
+    arrObjects = [visualViewDataSource arrayLegs];
+    __block id  selfBlock = self;
+    __block id  arrObjBlock = arrObjects;
     didFinishBlock = ^(NSInteger curentIndex){
         
-        
-        [self refreshController];
+        CDVisualViewCharacterPartLegs *cap = [arrObjBlock objectAtIndex:curentIndex];
+        visualViewCharacter.length.image = cap.imageForObject;
+        [selfBlock refreshController];
     };
     didBuyAction = ^(NSInteger curentIndex){
         
         
-        [self refreshController];
+        [selfBlock refreshController];
     };
-
-
 }
 #pragma mark
 
