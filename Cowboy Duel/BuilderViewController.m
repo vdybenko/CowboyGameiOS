@@ -348,7 +348,6 @@
             viewCharacterBlock.cap.image = cap.imageForObject;
             [priceLbBlock setText:[NSString stringWithFormat:@"%d", cap.money]];
             [bonus setText:[NSString stringWithFormat:@"+ %d",cap.action]];
-
         });
         [selfBlock refreshController];
         
