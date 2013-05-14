@@ -13,14 +13,18 @@
 @synthesize rectForImage;
 @synthesize money;
 @synthesize dId;
+@synthesize levelLock;
 
 -(id)initWithArray:(NSArray*)arrayOfParametrs;
 {
     self = [super init];
     if (self) {
+        
+       
         nameForImage = [arrayOfParametrs objectAtIndex:0];
         money = [[arrayOfParametrs objectAtIndex:1] integerValue];
         dId = [[arrayOfParametrs objectAtIndex:2] integerValue];
+        levelLock = [[arrayOfParametrs objectAtIndex:3] integerValue];
     }
     return self;
 }
@@ -31,7 +35,8 @@
 }
 
 -(UIImage*) imageForObject;
-{
-    return [UIImage imageNamed:nameForImage];
+{      
+       return [UIImage imageNamed:nameForImage];
 }
+
 @end

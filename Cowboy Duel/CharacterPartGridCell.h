@@ -11,8 +11,10 @@
 @interface CharacterPartGridCell : GMGridViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *ivBackGround;
 @property (weak, nonatomic) IBOutlet UIImageView *ivImage;
+@property (weak, nonatomic) IBOutlet UIImageView *lockImg;
 
 +(CharacterPartGridCell*) cell;
 -(void)simpleBackGround;
 -(void)selectedBackGround;
+-(void)lockedItem;
 @end

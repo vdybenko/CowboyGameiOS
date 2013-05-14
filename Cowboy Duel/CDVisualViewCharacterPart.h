@@ -15,6 +15,7 @@
 @property (nonatomic) CGRect rectForImage;
 @property (nonatomic) int money;
 @property (nonatomic) NSInteger dId;
+@property (nonatomic) NSInteger levelLock;
 
 -(id)initWithArray:(NSArray*)arrayOfParametrs;
 -(UIImage*) imageForObject;

@@ -133,6 +133,9 @@
         [cell simpleBackGround];
         CDVisualViewCharacterPart *visualViewCharacterPart = [arrObjects objectAtIndex:index-2];
         cell.ivImage.image = [visualViewCharacterPart imageForObject];
+        if (playerAccount.accountLevel < visualViewCharacterPart.levelLock) {
+            cell.lockImg.hidden = NO;
+        }
     }else{
         [cell setHidden:YES];
     }

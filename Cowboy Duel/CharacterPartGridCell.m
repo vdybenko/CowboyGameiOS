@@ -11,7 +11,7 @@
 @implementation CharacterPartGridCell
 @synthesize ivBackGround;
 @synthesize ivImage;
-
+@synthesize lockImg;
 +(CharacterPartGridCell*) cell {
     @autoreleasepool {
         NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"CharacterPartGridCell" owner:nil options:nil];
@@ -26,5 +26,9 @@
 -(void)selectedBackGround;
 {
     [ivBackGround setHighlighted:YES];
+}
+-(void)lockedItem
+{
+    [lockImg setHidden:NO];
 }
 @end
