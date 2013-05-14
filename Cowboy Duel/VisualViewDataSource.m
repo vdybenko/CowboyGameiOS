@@ -22,7 +22,6 @@
 //Faces
 #define VISUAL_VIEW_CHARACTER_HEAD_ARRAY @[@[@"builderFace1.png",@100,@111,@-1],@[@"builderFace2.png",@200,@112,@2],@[@"builderFace1.png",@300,@113,@2],@[@"builderFace2.png",@300,@114,@3],@[@"builderFace1.png",@300,@115,@3],@[@"builderFace2.png",@300,@116,@4]];// Resorces/CharacterFaces
 
-
 //Sirts
 #define VISUAL_VIEW_CHARACTER_BODY_ARRAY @[@[@"builderShirt1.png",@100,@117,@-1,@3],@[@"builderShirt2.png",@200,@118,@2,@1],@[@"builderShirt3.png",@300,@119,@2,@2],@[@"builderShirt4.png",@100,@120,@3,@3],@[@"builderShirt1.png",@100,@121,@3,@3],@[@"builderShirt2.png",@100,@122,@4,@3]]; // Resorces/CharacterSirts
 

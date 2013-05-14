@@ -59,6 +59,7 @@
     
     visualViewDataSource = [[VisualViewDataSource alloc] init];
     visualViewCharacter.visualViewDataSource = visualViewDataSource;
+    [visualViewCharacter refreshWithAccountPlayer:playerAccount];
     arrObjects = [NSArray array];
     
     grid.layoutStrategy = [GMGridViewLayoutStrategyFactory strategyFromType:GMGridViewLayoutVertical];
@@ -157,12 +158,7 @@
         questionOffset = 80 * countOfElements;
     }
     
-    if (scrollView.contentOffset.y<0) {
-        questionOffset = -questionOffset;
-    }
-    
     [scrollView setContentOffset:CGPointMake(0,questionOffset) animated:YES];
-    [grid setUserInteractionEnabled:NO];
     
     if (curentObject !=  countOfElements){
         CharacterPartGridCell * cell = (CharacterPartGridCell*)[grid cellForItemAtIndex:curentObject+2];
@@ -188,10 +184,6 @@
         if (questionOffset+40<=abs(scrollView.contentOffset.y)) {
             countOfElements = countOfElements+1;
             questionOffset = 80 * countOfElements;
-        }
-        
-        if (scrollView.contentOffset.y<0) {
-            questionOffset = -questionOffset;
         }
         
         [scrollView setContentOffset:CGPointMake(0,questionOffset) animated:YES];
@@ -270,15 +262,28 @@
             
         }];
     }
-    
-    
 }
 
 -(void)setObjectsForIndex:(NSInteger)index;
 {
-    [grid scrollToObjectAtIndex:index atScrollPosition:GMGridViewScrollPositionNone animated:NO];
+    float questionOffset = 80 * index;
+    [grid setContentOffset:CGPointMake(0,questionOffset) animated:YES];
+    [grid setUserInteractionEnabled:YES];
+    if (curentObject !=  index){
+        CharacterPartGridCell * cell = (CharacterPartGridCell*)[grid cellForItemAtIndex:curentObject+2];
+        [cell simpleBackGround];
+        
+        curentObject = index;
+        
+        cell = (CharacterPartGridCell*)[grid cellForItemAtIndex:curentObject+2];
+        [cell selectedBackGround];
+        
+        if (didFinishBlock) {
+            didFinishBlock(curentObject);
+        }
+    }
 }
-#pragma mark IBAction 
+#pragma mark IBAction
 - (IBAction)touchCloseBtn:(id)sender {
     
     [UIView animateWithDuration:0.75
@@ -302,8 +307,7 @@
     __block id  arrObjBlock = arrObjects;
     __block VisualViewCharacter *viewCharacterBlock = visualViewCharacter;
     __block id  priceLbBlock = self.priceOfItem;
-     __block id  bonus = self.resultLabel;
-   // __block id  bonus = self.resultLabel;
+    __block id  bonus = self.resultLabel;
     didFinishBlock = ^(NSInteger curentIndex){
       CDVisualViewCharacterPartHead *cap = [arrObjBlock objectAtIndex:curentIndex];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -339,8 +343,9 @@
     };
 
     [grid reloadData];
+    [grid setUserInteractionEnabled:YES];
     [self sideOpenAnimation];
-
+    [self setObjectsForIndex:playerAccount.visualViewCap];
 }
 - (IBAction)touchFaceBtn:(id)sender {
       __block AccountDataSource *playerAccountBlock = playerAccount;
@@ -386,8 +391,9 @@
 
 
     [grid reloadData];
+    [grid setUserInteractionEnabled:YES];
     [self sideOpenAnimation];
-
+    [self setObjectsForIndex:playerAccount.visualViewHead];
 }
 - (IBAction)touchShirtBtn:(id)sender {
        __block AccountDataSource *playerAccountBlock = playerAccount;
@@ -433,7 +439,9 @@
         
     };
     [grid reloadData];
+    [grid setUserInteractionEnabled:YES];
     [self sideOpenAnimation];
+    [self setObjectsForIndex:playerAccount.visualViewBody];
 }
 - (IBAction)touchJaketBtn:(id)sender {
     __block AccountDataSource *playerAccountBlock = playerAccount;
@@ -478,7 +486,9 @@
         [selfBlock refreshController];
     };
     [grid reloadData];
+    [grid setUserInteractionEnabled:YES];
     [self sideOpenAnimation];
+    [self setObjectsForIndex:playerAccount.visualViewJackets];
 }
 - (IBAction)touchShoesBtn:(id)sender {
     __block AccountDataSource *playerAccountBlock = playerAccount;
@@ -523,7 +533,9 @@
 
     };
     [grid reloadData];
+    [grid setUserInteractionEnabled:YES];
     [self sideOpenAnimation];
+    [self setObjectsForIndex:playerAccount.visualViewShoose];
 }
 - (IBAction)touchGunsBtn:(id)sender {
     __block AccountDataSource *playerAccountBlock = playerAccount;
@@ -569,7 +581,9 @@
 
     };
     [grid reloadData];
+    [grid setUserInteractionEnabled:YES];
     [self sideOpenAnimation];
+    [self setObjectsForIndex:playerAccount.visualViewGuns];
 }
 - (IBAction)touchPantsBtn:(id)sender {
     __block AccountDataSource *playerAccountBlock = playerAccount;
@@ -615,11 +629,15 @@
 
     };
     [grid reloadData];
+    [grid setUserInteractionEnabled:YES];
     [self sideOpenAnimation];
+    [self setObjectsForIndex:playerAccount.visualViewLegs];
 }
 #pragma mark
 - (IBAction)touchBuyBtn:(id)sender {
-    
+    if (didBuyAction) {
+        didBuyAction(curentObject);
+    }
     
 }
 

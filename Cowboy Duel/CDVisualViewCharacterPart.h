@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define indexOfLastStaticValues 2
+#define indexOfLastStaticValues 3
 
 @interface CDVisualViewCharacterPart : NSObject<MemoryManagement>
 @property (weak,nonatomic) NSString *nameForImage;
