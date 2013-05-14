@@ -14,6 +14,9 @@
 #import "VisualViewCharacter.h"
 #import "CharacterPartGridCell.h"
 #import "CDTransaction.h"
+
+#define spaceForElements 78
+#define spaceForCheck 39
 @interface BuilderViewController ()
 {
     SSServer *playerServer;
@@ -72,7 +75,7 @@
     
     grid.layoutStrategy = [GMGridViewLayoutStrategyFactory strategyFromType:GMGridViewLayoutVertical];
     grid.minEdgeInsets = UIEdgeInsetsMake(0,0,0,0);
-    grid.itemSpacing = 10;
+    grid.itemSpacing = 9;
     
     grid.backgroundColor = [UIColor clearColor];
     grid.showsHorizontalScrollIndicator = NO;
@@ -123,7 +126,7 @@
 
 - (CGSize)GMGridView:(GMGridView *)gridView sizeForItemsInInterfaceOrientation:(UIInterfaceOrientation)orientation
 {
-    return CGSizeMake(78, 70);
+    return CGSizeMake(69, 69);
 }
 
 - (GMGridViewCell *)GMGridView:(GMGridView *)gridView cellForItemAtIndex:(NSInteger)index
@@ -162,13 +165,13 @@
 {
     int countOfElements = abs(scrollView.contentOffset.y/80);
     
-    float questionOffset = 80 * countOfElements;
+    float questionOffset = spaceForElements * countOfElements;
     
     int countObjects = [self numberOfItemsInGMGridView:grid];
 
-    if ((questionOffset+40<=abs(scrollView.contentOffset.y))&&(countOfElements!=countObjects-5)) {
+    if ((questionOffset+spaceForCheck<=abs(scrollView.contentOffset.y))&&(countOfElements!=countObjects-5)) {
         countOfElements = countOfElements+1;
-        questionOffset = 80 * countOfElements;
+        questionOffset = spaceForElements * countOfElements;
     }
     
     [scrollView setContentOffset:CGPointMake(0,questionOffset) animated:YES];
@@ -193,10 +196,10 @@
     if (!decelerate) {
         int countOfElements = abs(scrollView.contentOffset.y/80);
         
-        float questionOffset = 80 * countOfElements;
-        if (questionOffset+40<=abs(scrollView.contentOffset.y)) {
+        float questionOffset = spaceForElements * countOfElements;
+        if (questionOffset+spaceForCheck<=abs(scrollView.contentOffset.y)) {
             countOfElements = countOfElements+1;
-            questionOffset = 80 * countOfElements;
+            questionOffset = spaceForElements * countOfElements;
         }
         
         [scrollView setContentOffset:CGPointMake(0,questionOffset) animated:YES];
@@ -230,7 +233,7 @@
     int penultIndex = [self numberOfItemsInGMGridView:gridView]-2;
     if (position!=0 && position!=1 && position!=lastIndex && position!=penultIndex && position!=curentObject+2) {
         
-        float questionOffset = 80 * (position-2);
+        float questionOffset = spaceForElements * (position-2);
         [grid setUserInteractionEnabled:NO];
         [grid setContentOffset:CGPointMake(0,questionOffset) animated:YES];
         
@@ -278,7 +281,7 @@
 
 -(void)setObjectsForIndex:(NSInteger)index;
 {
-    float questionOffset = 80 * index;
+    float questionOffset = spaceForElements * index;
     [grid setContentOffset:CGPointMake(0,questionOffset) animated:YES];
     [grid setUserInteractionEnabled:YES];
     if (curentObject !=  index){

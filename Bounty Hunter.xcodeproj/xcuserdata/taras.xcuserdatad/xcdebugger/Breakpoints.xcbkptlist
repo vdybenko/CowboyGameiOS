@@ -8,12 +8,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/BuilderViewController.m"
-         timestampString = "390226924.170194"
+         timestampString = "390239950.912624"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "301"
-         endingLineNumber = "301"
-         landmarkName = "-touchHatBtn:"
+         startingLineNumber = "307"
+         endingLineNumber = "307"
+         landmarkName = "-touchCloseBtn:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -21,12 +21,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/BuilderViewController.m"
-         timestampString = "390226924.170194"
+         timestampString = "390239950.912624"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "126"
-         endingLineNumber = "126"
-         landmarkName = "-GMGridView:cellForItemAtIndex:"
+         startingLineNumber = "130"
+         endingLineNumber = "130"
+         landmarkName = "-GMGridView:sizeForItemsInInterfaceOrientation:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
