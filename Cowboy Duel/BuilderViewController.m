@@ -135,6 +135,9 @@
         cell.ivImage.image = [visualViewCharacterPart imageForObject];
         if (playerAccount.accountLevel < visualViewCharacterPart.levelLock) {
             cell.lockImg.hidden = NO;
+        }else
+        {
+            cell.lockImg.hidden = YES;
         }
     }else{
         [cell setHidden:YES];
