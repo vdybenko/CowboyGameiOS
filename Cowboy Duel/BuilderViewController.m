@@ -33,6 +33,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *attacLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceOfItem;
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
+@property (weak, nonatomic) IBOutlet UIView *backlightDefens;
+@property (weak, nonatomic) IBOutlet UIView *backlightAtac;
 
 @end
 
@@ -56,6 +58,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //self.backlightDefens.clipsToBounds = YES;
+    self.backlightDefens.layer.cornerRadius = 10.f;
+    
+    //self.backlightAtac.clipsToBounds = YES;
+    self.backlightAtac.layer.cornerRadius = 10.f;
     
     visualViewDataSource = [[VisualViewDataSource alloc] init];
     visualViewCharacter.visualViewDataSource = visualViewDataSource;
@@ -93,6 +101,8 @@
     grid = nil;
     [self setPriceOfItem:nil];
     [self setResultLabel:nil];
+    [self setBacklightDefens:nil];
+    [self setBacklightAtac:nil];
     [super viewDidUnload];
 }
 -(void)releaseComponents
@@ -262,7 +272,6 @@
             self.sideView.frame = frame;
             
         }completion:^(BOOL finished) {
-            
         }];
     }
 }
@@ -300,6 +309,12 @@
 }
 
 - (IBAction)touchCloseSideView:(id)sender {
+    self.defensLabel.text = [NSString stringWithFormat:@"%d",playerAccount.accountDefenseValue];
+    self.attacLabel.text = [NSString stringWithFormat:@"%d",playerServer.weapon + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[playerServer.rank intValue]]];
+
+
+    self.backlightDefens.hidden = YES;
+    self.backlightAtac.hidden = YES;
     [self sideCloseAnimation];
 }
 
@@ -318,6 +333,7 @@
             [priceLbBlock setText:[NSString stringWithFormat:@"%d", cap.money]];
             [bonus setText:[NSString stringWithFormat:@"0"]];
         });
+    
         [selfBlock refreshController];
 
     };
@@ -351,6 +367,8 @@
     [self setObjectsForIndex:playerAccount.visualViewCap];
 }
 - (IBAction)touchFaceBtn:(id)sender {
+    self.backlightDefens.hidden = NO;
+    [self backlightDefensAction];
       __block AccountDataSource *playerAccountBlock = playerAccount;
     arrObjects = [visualViewDataSource arrayCap];
     __block id  selfBlock = self;
@@ -365,9 +383,8 @@
             viewCharacterBlock.cap.image = cap.imageForObject;
             [priceLbBlock setText:[NSString stringWithFormat:@"%d", cap.money]];
             [bonus setText:[NSString stringWithFormat:@"+ %d",cap.action]];
+            [selfBlock tempDefens:cap.action];
         });
-        [selfBlock refreshController];
-        
     };
     didBuyAction = ^(NSInteger curentIndex){
         
@@ -399,7 +416,9 @@
     [self setObjectsForIndex:playerAccount.visualViewHead];
 }
 - (IBAction)touchShirtBtn:(id)sender {
-       __block AccountDataSource *playerAccountBlock = playerAccount;
+    self.backlightDefens.hidden = NO;
+    [self backlightDefensAction];
+    __block AccountDataSource *playerAccountBlock = playerAccount;
     __block id  priceLbBlock = self.priceOfItem;
     __block id  bonus = self.resultLabel;
 
@@ -414,11 +433,12 @@
             viewCharacterBlock.body.image = cap.imageForObject;
             [priceLbBlock setText:[NSString stringWithFormat:@"%d", cap.money]];
             [bonus setText:[NSString stringWithFormat:@"+ %d",cap.action]];
+            [selfBlock tempDefens:cap.action];
         });
         [selfBlock refreshController];
     };
     didBuyAction = ^(NSInteger curentIndex){
-        
+    
         CDVisualViewCharacterPartBody *cap = [arrObjBlock objectAtIndex:curentIndex];
         CDTransaction *transaction = [[CDTransaction alloc] init];
         transaction.trDescription = @"BuyNewShirt";
@@ -447,6 +467,8 @@
     [self setObjectsForIndex:playerAccount.visualViewBody];
 }
 - (IBAction)touchJaketBtn:(id)sender {
+    self.backlightDefens.hidden = NO;
+    [self backlightDefensAction];
     __block AccountDataSource *playerAccountBlock = playerAccount;
     arrObjects = [visualViewDataSource arrayJakets];
     __block id  selfBlock = self;
@@ -462,7 +484,7 @@
             viewCharacterBlock.shirt.image = cap.imageForObject;
             [priceLbBlock setText:[NSString stringWithFormat:@"%d", cap.money]];
             [bonus setText:[NSString stringWithFormat:@"+ %d",cap.action]];
-
+            [selfBlock tempDefens:cap.action];
         });
         [selfBlock refreshController];
     };
@@ -494,6 +516,9 @@
     [self setObjectsForIndex:playerAccount.visualViewJackets];
 }
 - (IBAction)touchShoesBtn:(id)sender {
+    self.backlightAtac.hidden = NO;
+    [self backlightAtacAction];
+
     __block AccountDataSource *playerAccountBlock = playerAccount;
     arrObjects = [visualViewDataSource arrayShoose];
     __block id  selfBlock = self;
@@ -509,6 +534,7 @@
             viewCharacterBlock.shoose.image = cap.imageForObject;
             [priceLbBlock setText:[NSString stringWithFormat:@"%d", cap.money] ];
             [bonus setText:[NSString stringWithFormat:@"+ %d",cap.action]];
+            [selfBlock tempAtac:cap.action];
         });
         [selfBlock refreshController];
     };
@@ -541,6 +567,9 @@
     [self setObjectsForIndex:playerAccount.visualViewShoose];
 }
 - (IBAction)touchGunsBtn:(id)sender {
+    self.backlightAtac.hidden = NO;
+    [self backlightAtacAction];
+
     __block AccountDataSource *playerAccountBlock = playerAccount;
     arrObjects = [visualViewDataSource arrayGuns];
     __block id  selfBlock = self;
@@ -556,6 +585,7 @@
             viewCharacterBlock.gun.image = cap.imageForObject;
             [priceLbBlock setText:[NSString stringWithFormat:@"%d", cap.money] ];
             [bonus setText:[NSString stringWithFormat:@"+ %d",cap.action] ];
+            [selfBlock tempAtac:cap.action];
         });
         [selfBlock refreshController];
     };
@@ -589,6 +619,8 @@
     [self setObjectsForIndex:playerAccount.visualViewGuns];
 }
 - (IBAction)touchPantsBtn:(id)sender {
+    self.backlightDefens.hidden = NO;
+    [self backlightDefensAction];
     __block AccountDataSource *playerAccountBlock = playerAccount;
     arrObjects = [visualViewDataSource arrayLegs];
     __block id  selfBlock = self;
@@ -604,6 +636,7 @@
             viewCharacterBlock.length.image = cap.imageForObject;
             [priceLbBlock setText:[NSString stringWithFormat:@"%d", cap.money]];
             [bonus setText:[NSString stringWithFormat:@"+ %d",cap.action]];
+            [selfBlock tempDefens:cap.action];
         });
         [selfBlock refreshController];
     };
@@ -648,5 +681,45 @@
 {
     
 }
+-(void)backlightDefensAction
+{
+    [UIView animateWithDuration:0.6 animations:^{
+        self.backlightDefens.alpha = 0.15;
+    }completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.6 animations:^{
+             self.backlightDefens.alpha = 0.6;
+        }completion:^(BOOL finished) {
+            if (![self.backlightDefens isHidden]) {
+                [self backlightDefensAction];
+            }
+        }];
+    }];
+    
+}
+-(void)backlightAtacAction
+{
+    self.backlightAtac.hidden = NO;
+    [UIView animateWithDuration:0.6 animations:^{
+        self.backlightAtac.alpha = 0.15;
+    }completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.6 animations:^{
+            self.backlightAtac.alpha = 0.6;
+        }completion:^(BOOL finished) {
+            if (![self.backlightAtac isHidden]) {
+                [self backlightAtacAction];
+            }
+
+        }];
+    }];
+}
+-(void)tempDefens:(int)plusOnDefens
+{
+     self.defensLabel.text = [NSString stringWithFormat:@"%d",playerAccount.accountDefenseValue + plusOnDefens];
+}
+-(void)tempAtac:(int)plusOnAtac
+{
+     self.attacLabel.text = [NSString stringWithFormat:@"%d",playerServer.weapon + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[playerServer.rank intValue]] + plusOnAtac];
+}
+
 
 @end
