@@ -216,7 +216,6 @@
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView;
 {
     [grid setUserInteractionEnabled:YES];
-    NSLog(@"scrollViewDidEndScrollingAnimation");
 }
 
 #pragma mark GMGridViewActionDelegate
@@ -227,7 +226,6 @@
     if (position!=0 && position!=1 && position!=lastIndex && position!=penultIndex && position!=curentObject+2) {
         
         float questionOffset = 80 * (position-2);
-        NSLog(@"didTapOnItemAtIndex");
         [grid setUserInteractionEnabled:NO];
         [grid setContentOffset:CGPointMake(0,questionOffset) animated:YES];
         
