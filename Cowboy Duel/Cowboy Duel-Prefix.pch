@@ -11,9 +11,6 @@
 #ifdef __OBJC__
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import "GADBannerView.h"
-#import "GADRequest.h"
-#import "GADBannerViewDelegate.h"
 #import "UIImage+Retina4.h"
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
