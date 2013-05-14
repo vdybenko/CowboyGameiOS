@@ -148,7 +148,7 @@ static AccountDataSource *sharedHelper = nil;
 
 - (void)makeLocalAccountID{
   UIDevice *currentDevice = [UIDevice currentDevice];
-  self.accountID = [NSString stringWithFormat:@"A:%@",[currentDevice.uniqueIdentifier substringToIndex:10]];
+  self.accountID = [NSString stringWithFormat:@"A:%@",[currentDevice.identifierForVendor.UUIDString substringToIndex:10]];
 }
 
 - (NSString *)verifyAccountID{
