@@ -350,6 +350,10 @@ static StartViewController *sharedHelper = nil;
         hostReachable = [Reachability reachabilityWithHostName: @"www.apple.com"];
         [hostReachable startNotifier];
 
+        if (![GCHelper sharedInstance].GClocalPlayer.isAuthenticated && ![self firstRun]) {
+            [[GCHelper sharedInstance] authenticateLocalUser];
+        }
+        
         oldAccounId = @"";
         
         cloudX=460;

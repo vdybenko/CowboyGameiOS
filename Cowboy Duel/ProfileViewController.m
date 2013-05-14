@@ -115,7 +115,6 @@ static const CGFloat timeToStandartTitles = 1.8;
         if (![GCHelper sharedInstance].GClocalPlayer.isAuthenticated && ![startViewController firstRun]) {
           [[GCHelper sharedInstance] authenticateLocalUser];
         
-
           [[GCHelper sharedInstance] reportScore:playerAccount.money forCategory:GC_LEADEBOARD_MONEY];
         }
         // above    
@@ -165,7 +164,6 @@ static const CGFloat timeToStandartTitles = 1.8;
         [btnLogOutFB setHidden:YES];
         [lbLeaderboardTitle setHidden:YES];
         [duelButton setHidden:NO];
-        
     }
     return self;
 }

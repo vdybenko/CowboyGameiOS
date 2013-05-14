@@ -365,7 +365,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
     ProfileViewController *profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount startViewController:startViewController];
     [profileViewController setNeedAnimation:YES];
     [self.navigationController popViewControllerAnimated:YES];
-    [startViewController authorizationModifier:NO];
+//    [startViewController authorizationModifier:NO];
 //    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 //														object:self
 //													  userInfo:[NSDictionary dictionaryWithObject:@"/donate_click" forKey:@"event"]];
