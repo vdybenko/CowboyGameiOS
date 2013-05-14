@@ -162,6 +162,7 @@
     }
     
     [scrollView setContentOffset:CGPointMake(0,questionOffset) animated:YES];
+    [grid setUserInteractionEnabled:NO];
     
     if (curentObject !=  countOfElements){
         CharacterPartGridCell * cell = (CharacterPartGridCell*)[grid cellForItemAtIndex:curentObject+2];
@@ -194,6 +195,7 @@
         }
         
         [scrollView setContentOffset:CGPointMake(0,questionOffset) animated:YES];
+        [grid setUserInteractionEnabled:NO];
         
         if (curentObject !=  countOfElements){
             CharacterPartGridCell * cell = (CharacterPartGridCell*)[grid cellForItemAtIndex:curentObject+2];
@@ -211,16 +213,22 @@
     }
 }
 
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView;
+{
+    [grid setUserInteractionEnabled:YES];
+    NSLog(@"scrollViewDidEndScrollingAnimation");
+}
+
 #pragma mark GMGridViewActionDelegate
 - (void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position;
 {
     int lastIndex = [self numberOfItemsInGMGridView:gridView]-1;
     int penultIndex = [self numberOfItemsInGMGridView:gridView]-2;
-    
     if (position!=0 && position!=1 && position!=lastIndex && position!=penultIndex && position!=curentObject+2) {
         
         float questionOffset = 80 * (position-2);
-        
+        NSLog(@"didTapOnItemAtIndex");
+        [grid setUserInteractionEnabled:NO];
         [grid setContentOffset:CGPointMake(0,questionOffset) animated:YES];
         
         CharacterPartGridCell * cell = (CharacterPartGridCell*)[grid cellForItemAtIndex:curentObject+2];
