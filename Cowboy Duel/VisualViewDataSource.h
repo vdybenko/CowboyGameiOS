@@ -16,13 +16,7 @@
 #import "CDVisualViewCharacterPartShoose.h"
 #import "CDVisualViewCharacterPartGuns.h"
 #import "CDVisualViewCharacterPartJakets.h"
-
-
-typedef enum {
-    VisualViewCharacterPartHead,
-    VisualViewCharacterPartCap,
-    VisualViewCharacterPartBody
-} VisualViewCharacterPart;
+#import "CDVisualViewCharacterPartSuits.h"
 
 @interface VisualViewDataSource : NSObject<MemoryManagement>
 @property (strong,nonatomic) NSMutableArray *arrayHead;
@@ -32,6 +26,6 @@ typedef enum {
 @property (strong,nonatomic) NSMutableArray *arrayShoose;
 @property (strong,nonatomic) NSMutableArray *arrayGuns;
 @property (strong,nonatomic) NSMutableArray *arrayJakets;
+@property (strong,nonatomic) NSMutableArray *arraySuits;
 
-@property (nonatomic) VisualViewCharacterPart typeOfTable;
 @end

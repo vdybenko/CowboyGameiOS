@@ -37,10 +37,7 @@
 //Jakets
 #define VISUAL_VIEW_CHARACTER_JAKETS_ARRAY @[@[@"builderJacket1.png",@200,@141,@-1,@3],@[@"builderJacket2.png",@10000,@142,@2,@1],@[@"builderJacket1.png",@10000,@143,@2,@1],@[@"builderJacket2.png",@10000,@144,@3,@1],@[@"builderJacket1.png",@10000,@145,@3,@1],@[@"builderJacket2.png",@10000,@146,@4,@1]];// Resorces/CharacterJakets
 
-
-
-
-
+#define VISUAL_VIEW_CHARACTER_SUITS_ARRAY @[@[@"builderJacket1.png",@200,@147,@-1,@3],@[@"builderJacket2.png",@10000,@148,@2,@1],@[@"builderJacket1.png",@10000,@149,@2,@1],@[@"builderJacket2.png",@10000,@150,@3,@1],@[@"builderJacket1.png",@10000,@151,@3,@1],@[@"builderJacket2.png",@10000,@152,@4,@1]];// Resorces/CharacterSuits
 
 @interface VisualViewDataSource()
 {
@@ -51,11 +48,11 @@
 @synthesize arrayHead;
 @synthesize arrayCap;
 @synthesize arrayBody;
-@synthesize typeOfTable;
 @synthesize arrayLegs;
 @synthesize arrayShoose;
 @synthesize arrayGuns;
 @synthesize arrayJakets;
+@synthesize arraySuits;
 
 -(id) init
 {
@@ -69,7 +66,7 @@
         arrayShoose = [NSMutableArray array];
         arrayJakets = [NSMutableArray array];
         arrayGuns = [NSMutableArray array];
-        
+        arraySuits = [NSMutableArray array];
         
         NSArray *arrayMainCap = VISUAL_VIEW_CHARACTER_CAP_ARRAY;
         for (NSArray *array in arrayMainCap) {
@@ -120,6 +117,13 @@
         }
         arrayMainJakets = nil;
         
+        NSArray *arrayMainSuits = VISUAL_VIEW_CHARACTER_SUITS_ARRAY;
+        for (NSArray *array in arrayMainSuits) {
+            CDVisualViewCharacterPartSuits *cap=[[CDVisualViewCharacterPartSuits alloc] initWithArray:array];
+            [arraySuits addObject:cap];
+        }
+        arrayMainSuits = nil;
+        
     }
     
 	return self;
@@ -134,6 +138,7 @@
     arrayShoose = nil;
     arrayJakets = nil;
     arrayGuns = nil;
+    arraySuits = nil;
 }
 
 @end

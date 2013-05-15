@@ -39,7 +39,6 @@ static const char *A_URL =  BASE_URL"api/authorization";
         }else{
             firstRun = NO;
         }
-
         NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Back1start.mp3", [[NSBundle mainBundle] resourcePath]]];
         NSError *error;
         player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];

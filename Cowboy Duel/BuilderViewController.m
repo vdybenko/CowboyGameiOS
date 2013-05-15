@@ -723,6 +723,10 @@
     [grid setUserInteractionEnabled:YES];
     [self setObjectsForIndex:playerAccount.visualViewLegs];
 }
+- (IBAction)touchSuitsBtn:(id)sender {
+    
+}
+
 #pragma mark
 - (IBAction)touchBuyBtn:(id)sender{
     if (didBuyAction) {
