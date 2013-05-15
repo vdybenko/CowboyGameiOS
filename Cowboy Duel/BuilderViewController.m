@@ -27,6 +27,7 @@
     __weak IBOutlet VisualViewCharacter *visualViewCharacter;
     __weak IBOutlet UIView *vArrow;
     __weak IBOutlet GMGridView *grid;
+    BOOL isAnimate;
     
     NSArray *arrObjects;
 }
@@ -252,29 +253,64 @@
 }
 
 #pragma mark Animation
+-(void)backlightDefensAction
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        self.backlightDefens.alpha = 0.15;
+    }completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.6 animations:^{
+            self.backlightDefens.alpha = 0.3;
+        }completion:^(BOOL finished) {
+            if (!self.backlightDefens.hidden) {
+                [self backlightDefensAction];
+            }
+            
+        }];
+    }];
+    
+}
+-(void)backlightAtacAction
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        self.backlightAtac.alpha = 0.05;
+    }completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.8 animations:^{
+            self.backlightAtac.alpha = 0.3;
+        }completion:^(BOOL finished) {
+            
+            if (!self.backlightAtac.hidden) {
+                [self backlightAtacAction];
+            }
+        }];
+    }];
+}
+
 -(void)sideOpenAnimation{
-    if (!isOpenSide) {
-        isOpenSide = YES;
+    if (!isOpenSide && self.sideView.frame.origin.x == 320) {
         [UIView animateWithDuration:0.6 animations:^{
             CGRect frame = self.sideView.frame;
             frame.origin.x -= 100;
             self.sideView.frame = frame;
             
         }completion:^(BOOL finished) {
+             isOpenSide = YES;
         }];
         
     }
     
 }
 -(void)sideCloseAnimation{
-    if (isOpenSide) {
-        isOpenSide = NO;
+        if (isOpenSide && self.sideView.frame.origin.x == 220) {
+        self.backlightDefens.hidden = YES;
+        self.backlightAtac.hidden = YES;
+
         [UIView animateWithDuration:0.6 animations:^{
             CGRect frame = self.sideView.frame;
             frame.origin.x += 100;
             self.sideView.frame = frame;
             
         }completion:^(BOOL finished) {
+            isOpenSide = NO;
         }];
     }
 }
@@ -312,16 +348,21 @@
 }
 
 - (IBAction)touchCloseSideView:(id)sender {
+    
+    [self sideCloseAnimation];
     self.defensLabel.text = [NSString stringWithFormat:@"%d",playerAccount.accountDefenseValue];
     self.attacLabel.text = [NSString stringWithFormat:@"%d",playerServer.weapon + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[playerServer.rank intValue]]];
 
 
-    self.backlightDefens.hidden = YES;
-    self.backlightAtac.hidden = YES;
-    [self sideCloseAnimation];
+   
+    
 }
 
 - (IBAction)touchHatBtn:(id)sender {
+    if (!isOpenSide && self.backlightDefens.hidden) {
+        [self sideOpenAnimation];
+    }
+    
      __block AccountDataSource *playerAccountBlock = playerAccount;
     arrObjects = [visualViewDataSource arrayHead];
     __block id  selfBlock = self;
@@ -366,13 +407,16 @@
 
     [grid reloadData];
     [grid setUserInteractionEnabled:YES];
-    [self sideOpenAnimation];
     [self setObjectsForIndex:playerAccount.visualViewCap];
 }
 - (IBAction)touchFaceBtn:(id)sender {
-    self.backlightDefens.hidden = NO;
-    [self backlightDefensAction];
-      __block AccountDataSource *playerAccountBlock = playerAccount;
+    if (!isOpenSide && self.backlightDefens.hidden) {
+        [self sideOpenAnimation];
+        self.backlightDefens.hidden = NO;
+        [self backlightDefensAction];
+    }
+    
+    __block AccountDataSource *playerAccountBlock = playerAccount;
     arrObjects = [visualViewDataSource arrayCap];
     __block id  selfBlock = self;
     __block id  arrObjBlock = arrObjects;
@@ -415,12 +459,14 @@
 
     [grid reloadData];
     [grid setUserInteractionEnabled:YES];
-    [self sideOpenAnimation];
     [self setObjectsForIndex:playerAccount.visualViewHead];
 }
 - (IBAction)touchShirtBtn:(id)sender {
-    self.backlightDefens.hidden = NO;
-    [self backlightDefensAction];
+    if (!isOpenSide && self.backlightDefens.hidden) {
+        [self sideOpenAnimation];
+        self.backlightDefens.hidden = NO;
+        [self backlightDefensAction];
+    }
     __block AccountDataSource *playerAccountBlock = playerAccount;
     __block id  priceLbBlock = self.priceOfItem;
     __block id  bonus = self.resultLabel;
@@ -462,16 +508,17 @@
         [playerAccountBlock saveVisualView];
         
         [selfBlock refreshController];
-        
     };
     [grid reloadData];
     [grid setUserInteractionEnabled:YES];
-    [self sideOpenAnimation];
     [self setObjectsForIndex:playerAccount.visualViewBody];
 }
 - (IBAction)touchJaketBtn:(id)sender {
-    self.backlightDefens.hidden = NO;
-    [self backlightDefensAction];
+    if (!isOpenSide && self.backlightDefens.hidden) {
+        [self sideOpenAnimation];
+        self.backlightDefens.hidden = NO;
+        [self backlightDefensAction];
+    }
     __block AccountDataSource *playerAccountBlock = playerAccount;
     arrObjects = [visualViewDataSource arrayJakets];
     __block id  selfBlock = self;
@@ -515,13 +562,14 @@
     };
     [grid reloadData];
     [grid setUserInteractionEnabled:YES];
-    [self sideOpenAnimation];
     [self setObjectsForIndex:playerAccount.visualViewJackets];
 }
 - (IBAction)touchShoesBtn:(id)sender {
-    self.backlightAtac.hidden = NO;
-    [self backlightAtacAction];
-
+    if (!isOpenSide && self.backlightAtac.hidden) {
+        [self sideOpenAnimation];
+        self.backlightAtac.hidden = NO;
+        [self backlightAtacAction];
+    }
     __block AccountDataSource *playerAccountBlock = playerAccount;
     arrObjects = [visualViewDataSource arrayShoose];
     __block id  selfBlock = self;
@@ -566,13 +614,14 @@
     };
     [grid reloadData];
     [grid setUserInteractionEnabled:YES];
-    [self sideOpenAnimation];
     [self setObjectsForIndex:playerAccount.visualViewShoose];
 }
 - (IBAction)touchGunsBtn:(id)sender {
-    self.backlightAtac.hidden = NO;
-    [self backlightAtacAction];
-
+    if (!isOpenSide && self.backlightAtac.hidden) {
+        [self sideOpenAnimation];
+        self.backlightAtac.hidden = NO;
+        [self backlightAtacAction];
+    }
     __block AccountDataSource *playerAccountBlock = playerAccount;
     arrObjects = [visualViewDataSource arrayGuns];
     __block id  selfBlock = self;
@@ -622,8 +671,11 @@
     [self setObjectsForIndex:playerAccount.visualViewGuns];
 }
 - (IBAction)touchPantsBtn:(id)sender {
-    self.backlightDefens.hidden = NO;
-    [self backlightDefensAction];
+    if (!isOpenSide && self.backlightDefens.hidden) {
+        [self sideOpenAnimation];
+        self.backlightDefens.hidden = NO;
+        [self backlightDefensAction];
+    }
     __block AccountDataSource *playerAccountBlock = playerAccount;
     arrObjects = [visualViewDataSource arrayLegs];
     __block id  selfBlock = self;
@@ -669,11 +721,10 @@
     };
     [grid reloadData];
     [grid setUserInteractionEnabled:YES];
-    [self sideOpenAnimation];
     [self setObjectsForIndex:playerAccount.visualViewLegs];
 }
 #pragma mark
-- (IBAction)touchBuyBtn:(id)sender {
+- (IBAction)touchBuyBtn:(id)sender{
     if (didBuyAction) {
         didBuyAction(curentObject);
     }
@@ -683,37 +734,6 @@
 -(void)refreshController;
 {
     
-}
--(void)backlightDefensAction
-{
-    [UIView animateWithDuration:0.6 animations:^{
-        self.backlightDefens.alpha = 0.15;
-    }completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.6 animations:^{
-             self.backlightDefens.alpha = 0.6;
-        }completion:^(BOOL finished) {
-            if (![self.backlightDefens isHidden]) {
-                [self backlightDefensAction];
-            }
-        }];
-    }];
-    
-}
--(void)backlightAtacAction
-{
-    self.backlightAtac.hidden = NO;
-    [UIView animateWithDuration:0.6 animations:^{
-        self.backlightAtac.alpha = 0.15;
-    }completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.6 animations:^{
-            self.backlightAtac.alpha = 0.6;
-        }completion:^(BOOL finished) {
-            if (![self.backlightAtac isHidden]) {
-                [self backlightAtacAction];
-            }
-
-        }];
-    }];
 }
 -(void)tempDefens:(int)plusOnDefens
 {
