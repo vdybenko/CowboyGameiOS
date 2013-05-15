@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *shoose;
 @property (weak, nonatomic) IBOutlet UIImageView *shirt;
 @property (weak, nonatomic) IBOutlet UIImageView *gun;
+@property (weak, nonatomic) IBOutlet UIImageView *suits;
+
 @property (strong, nonatomic) VisualViewDataSource *visualViewDataSource;
 
 -(void)refreshWithAccountPlayer:(AccountDataSource*)accountPlayer;
