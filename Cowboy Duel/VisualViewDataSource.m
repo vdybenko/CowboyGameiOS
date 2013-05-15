@@ -23,7 +23,7 @@
 #define VISUAL_VIEW_CHARACTER_HEAD_ARRAY @[@[@"builderFace1.png",@100,@111,@-1],@[@"builderFace2.png",@200,@112,@2],@[@"builderFace1.png",@300,@113,@2],@[@"builderFace2.png",@300,@114,@3],@[@"builderFace1.png",@300,@115,@3],@[@"builderFace2.png",@300,@116,@4]];// Resorces/CharacterFaces
 
 //Sirts
-#define VISUAL_VIEW_CHARACTER_BODY_ARRAY @[@[@"builderShirt1.png",@100,@117,@-1,@3],@[@"builderShirt2.png",@200,@118,@2,@1],@[@"builderShirt3.png",@300,@119,@2,@2],@[@"builderShirt4.png",@100,@120,@3,@3],@[@"builderShirt1.png",@100,@121,@3,@3],@[@"builderShirt2.png",@100,@122,@4,@3]]; // Resorces/CharacterSirts
+#define VISUAL_VIEW_CHARACTER_BODY_ARRAY @[@[@"builderShirt1.png",@100,@117,@-1,@3],@[@"builderShirt2.png",@200,@118,@2,@1],@[@"builderShirt3.png",@300,@119,@2,@2],@[@"builderShirt4.png",@100,@120,@3,@3],@[@"builderShirt5.png",@100,@121,@3,@3],@[@"builderShirt2.png",@100,@122,@4,@3]]; // Resorces/CharacterSirts
 
 //Pants 
 #define VISUAL_VIEW_CHARACTER_LEGS_ARRAY @[@[@"builderPants1.png",@300,@123,@-1,@2],@[@"builderPants2.png",@100,@124,@2,@1],@[@"builderPants3.png",@100,@125,@2,@1],@[@"builderPants1.png",@100,@126,@3,@1],@[@"builderPants2.png",@100,@127,@3,@1],@[@"builderPants3.png",@100,@128,@4,@1]];// Resorces/CharacterPants
