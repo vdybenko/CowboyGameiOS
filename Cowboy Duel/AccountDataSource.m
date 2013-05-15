@@ -92,6 +92,7 @@ static AccountDataSource *sharedHelper = nil;
         self.visualViewShoose = 0;
         self.visualViewJackets = 0;
         self.visualViewGuns = 0;
+        self.visualViewSuits = 0;
     }
     return self;
 }
@@ -472,6 +473,7 @@ static AccountDataSource *sharedHelper = nil;
     [[NSUserDefaults standardUserDefaults] setInteger:visualViewShoose forKey:@"VV_SHOOSE_VALUE"];
     [[NSUserDefaults standardUserDefaults] setInteger:visualViewJackets forKey:@"VV_SHIRTS_VALUE"];
     [[NSUserDefaults standardUserDefaults] setInteger:visualViewGuns forKey:@"VV_GUN_VALUE"];
+     [[NSUserDefaults standardUserDefaults] setInteger:visualViewSuits forKey:@"VV_SUITS_VALUE"];
 }
 
 - (void)loadVisualView;
@@ -483,6 +485,7 @@ static AccountDataSource *sharedHelper = nil;
     self.visualViewShoose = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_SHOOSE_VALUE"];
     self.visualViewJackets = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_SHIRTS_VALUE"];
     self.visualViewGuns = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_GUN_VALUE"];
+    self.visualViewSuits = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_SUITS_VALUE"];
   
 }
 
