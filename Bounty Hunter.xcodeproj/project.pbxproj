@@ -462,6 +462,11 @@
 		76A72D53163AA0B400C65D6D /* shop_product_frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 76A72D51163AA0B400C65D6D /* shop_product_frame.png */; };
 		76A72D54163AA0B400C65D6D /* shop_product_frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76A72D52163AA0B400C65D6D /* shop_product_frame@2x.png */; };
 		76AFC7A215ED1B740009294B /* UIScrollView+AH3DPullRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 76AFC7A115ED1B740009294B /* UIScrollView+AH3DPullRefresh.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		76B2508E1743C53E00BFF0D3 /* builderSuit3.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B2508B1743C53E00BFF0D3 /* builderSuit3.png */; };
+		76B2508F1743C53E00BFF0D3 /* builderSuit2.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B2508C1743C53E00BFF0D3 /* builderSuit2.png */; };
+		76B250901743C53E00BFF0D3 /* builderSuit1.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B2508D1743C53E00BFF0D3 /* builderSuit1.png */; };
+		76B250921743C55100BFF0D3 /* builderShirt5.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B250911743C55100BFF0D3 /* builderShirt5.png */; };
+		76B250941743C55F00BFF0D3 /* builderHat3.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B250931743C55F00BFF0D3 /* builderHat3.png */; };
 		76B3711213E1B7000097B8E0 /* MyriadPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 76B3711013E1B7000097B8E0 /* MyriadPro-Bold.ttf */; };
 		76B3711313E1B7000097B8E0 /* MyriadPro-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 76B3711113E1B7000097B8E0 /* MyriadPro-Semibold.ttf */; };
 		76B65AC615DD28F4000E136C /* topPlayerGoldCell.png in Resources */ = {isa = PBXBuildFile; fileRef = 76B65AC415DD28F4000E136C /* topPlayerGoldCell.png */; };
@@ -1540,6 +1545,11 @@
 		76AB20E5169DA7130073A9C9 /* MemoryManagement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryManagement.h; sourceTree = "<group>"; };
 		76AFC7A015ED1B740009294B /* UIScrollView+AH3DPullRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+AH3DPullRefresh.h"; sourceTree = "<group>"; };
 		76AFC7A115ED1B740009294B /* UIScrollView+AH3DPullRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+AH3DPullRefresh.m"; sourceTree = "<group>"; };
+		76B2508B1743C53E00BFF0D3 /* builderSuit3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = builderSuit3.png; sourceTree = "<group>"; };
+		76B2508C1743C53E00BFF0D3 /* builderSuit2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = builderSuit2.png; sourceTree = "<group>"; };
+		76B2508D1743C53E00BFF0D3 /* builderSuit1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = builderSuit1.png; sourceTree = "<group>"; };
+		76B250911743C55100BFF0D3 /* builderShirt5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = builderShirt5.png; sourceTree = "<group>"; };
+		76B250931743C55F00BFF0D3 /* builderHat3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = builderHat3.png; sourceTree = "<group>"; };
 		76B3711013E1B7000097B8E0 /* MyriadPro-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "MyriadPro-Bold.ttf"; path = "Font/MyriadPro-Bold.ttf"; sourceTree = "<group>"; };
 		76B3711113E1B7000097B8E0 /* MyriadPro-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "MyriadPro-Semibold.ttf"; path = "Font/MyriadPro-Semibold.ttf"; sourceTree = "<group>"; };
 		76B65AC415DD28F4000E136C /* topPlayerGoldCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topPlayerGoldCell.png; sourceTree = "<group>"; };
@@ -2311,6 +2321,7 @@
 		46C07481173CDC2B00711AC5 /* CharacterHats */ = {
 			isa = PBXGroup;
 			children = (
+				76B250931743C55F00BFF0D3 /* builderHat3.png */,
 				768DD949173CDB9800B031F3 /* builderHat1.png */,
 				768DD94A173CDB9800B031F3 /* builderHat2.png */,
 			);
@@ -2349,6 +2360,7 @@
 		46C07486173CDCC500711AC5 /* CharecterShirts */ = {
 			isa = PBXGroup;
 			children = (
+				76B250911743C55100BFF0D3 /* builderShirt5.png */,
 				768DD951173CDB9800B031F3 /* builderShirt1.png */,
 				768DD952173CDB9800B031F3 /* builderShirt2.png */,
 				768DD953173CDB9800B031F3 /* builderShirt3.png */,
@@ -2872,6 +2884,7 @@
 		768DD944173CDB9800B031F3 /* CharacterShapes */ = {
 			isa = PBXGroup;
 			children = (
+				76B250891743C51C00BFF0D3 /* CharacterSuit */,
 				768DD945173CDB9800B031F3 /* builderBodyDef.png */,
 				46C07488173CDD9000711AC5 /* CharacterGuns */,
 				46C07487173CDD2900711AC5 /* CharecterShoeses */,
@@ -2941,6 +2954,16 @@
 				76CE0AE7163EF45C00B51B04 /* shop_product_ribbon@2x.png */,
 			);
 			path = Shop;
+			sourceTree = "<group>";
+		};
+		76B250891743C51C00BFF0D3 /* CharacterSuit */ = {
+			isa = PBXGroup;
+			children = (
+				76B2508B1743C53E00BFF0D3 /* builderSuit3.png */,
+				76B2508C1743C53E00BFF0D3 /* builderSuit2.png */,
+				76B2508D1743C53E00BFF0D3 /* builderSuit1.png */,
+			);
+			name = CharacterSuit;
 			sourceTree = "<group>";
 		};
 		76B283FF13C6F876004E2669 /* Localizations */ = {
@@ -3974,6 +3997,11 @@
 				768DD975173CDB9800B031F3 /* builderShirt4.png in Resources */,
 				768DD976173CDB9800B031F3 /* buildershoes1.png in Resources */,
 				768659421740D5BA00C1986B /* CharacterPartGridCell.xib in Resources */,
+				76B2508E1743C53E00BFF0D3 /* builderSuit3.png in Resources */,
+				76B2508F1743C53E00BFF0D3 /* builderSuit2.png in Resources */,
+				76B250901743C53E00BFF0D3 /* builderSuit1.png in Resources */,
+				76B250921743C55100BFF0D3 /* builderShirt5.png in Resources */,
+				76B250941743C55F00BFF0D3 /* builderHat3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

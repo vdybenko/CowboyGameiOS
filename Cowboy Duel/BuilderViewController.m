@@ -711,10 +711,10 @@
             if (![self.backlightAtac isHidden]) {
                 [self backlightAtacAction];
             }
-
         }];
     }];
 }
+
 -(void)tempDefens:(int)plusOnDefens
 {
      self.defensLabel.text = [NSString stringWithFormat:@"%d",playerAccount.accountDefenseValue + plusOnDefens];

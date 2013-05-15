@@ -42,6 +42,7 @@
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="57186746"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<int key="IBUIContentMode">1</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
@@ -60,16 +61,18 @@
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView" ref="181940790"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<int key="IBUIContentMode">1</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 					<object class="IBUIImageView" id="181940790">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrameSize">{69, 69}</string>
+						<string key="NSFrame">{{2, 2}, {65, 65}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<int key="IBUIContentMode">1</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
@@ -193,7 +196,7 @@
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="builderCellBack.png">{140, 144}</string>
 			<string key="builderLockedCell.png">{128, 129}</string>
-			<string key="builderSelectedCellBack.png">{141, 145}</string>
+			<string key="builderSelectedCellBack.png">{142, 142}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>

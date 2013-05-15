@@ -297,7 +297,7 @@
 							<object class="IBUIScrollView" id="774220325">
 								<reference key="NSNextResponder" ref="916055748"/>
 								<int key="NSvFlags">268</int>
-								<string key="NSFrame">{{32, 22}, {69, 413}}</string>
+								<string key="NSFrame">{{32, 23}, {69, 413}}</string>
 								<reference key="NSSuperview" ref="916055748"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
@@ -1250,6 +1250,30 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">BuilderViewController</string>
 					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="touchHatBtn:">id</string>
+						<string key="touchJaketBtn:">id</string>
+						<string key="touchPantsBtn:">id</string>
+						<string key="touchShirtBtn:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="touchHatBtn:">
+							<string key="name">touchHatBtn:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="touchJaketBtn:">
+							<string key="name">touchJaketBtn:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="touchPantsBtn:">
+							<string key="name">touchPantsBtn:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="touchShirtBtn:">
+							<string key="name">touchShirtBtn:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="attacLabel">UILabel</string>
 						<string key="backlightAtac">UIView</string>
