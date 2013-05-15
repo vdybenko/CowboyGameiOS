@@ -17,7 +17,7 @@
 //Тут все елементы по 6 штук
 
 //Hats
-#define VISUAL_VIEW_CHARACTER_CAP_ARRAY @[@[@"builderHat1.png",@100,@105,@-1,@3],@[@"builderHat2.png",@200,@106,@2,@1],@[@"builderHat2.png",@300,@107,@2,@4],@[@"builderHat1.png",@200,@108,@3,@3],@[@"builderHat2.png",@200,@109,@3,@3],@[@"builderHat1.png",@200,@110,@4,@3]]; // Resorces/CharacterHats
+#define VISUAL_VIEW_CHARACTER_CAP_ARRAY @[@[@"builderHat1.png",@100,@105,@-1,@3],@[@"builderHat2.png",@200,@106,@2,@1],@[@"builderHat3.png",@300,@107,@2,@4],@[@"builderHat1.png",@200,@108,@3,@3],@[@"builderHat2.png",@200,@109,@3,@3],@[@"builderHat3.png",@200,@110,@4,@3]]; // Resorces/CharacterHats
 
 //Faces
 #define VISUAL_VIEW_CHARACTER_HEAD_ARRAY @[@[@"builderFace1.png",@100,@111,@-1],@[@"builderFace2.png",@200,@112,@2],@[@"builderFace1.png",@300,@113,@2],@[@"builderFace2.png",@300,@114,@3],@[@"builderFace1.png",@300,@115,@3],@[@"builderFace2.png",@300,@116,@4]];// Resorces/CharacterFaces
@@ -37,7 +37,7 @@
 //Jakets
 #define VISUAL_VIEW_CHARACTER_JAKETS_ARRAY @[@[@"builderJacket1.png",@200,@141,@-1,@3],@[@"builderJacket2.png",@10000,@142,@2,@1],@[@"builderJacket1.png",@10000,@143,@2,@1],@[@"builderJacket2.png",@10000,@144,@3,@1],@[@"builderJacket1.png",@10000,@145,@3,@1],@[@"builderJacket2.png",@10000,@146,@4,@1]];// Resorces/CharacterJakets
 
-#define VISUAL_VIEW_CHARACTER_SUITS_ARRAY @[@[@"builderJacket1.png",@200,@147,@-1,@3],@[@"builderJacket2.png",@10000,@148,@2,@1],@[@"builderJacket1.png",@10000,@149,@2,@1],@[@"builderJacket2.png",@10000,@150,@3,@1],@[@"builderJacket1.png",@10000,@151,@3,@1],@[@"builderJacket2.png",@10000,@152,@4,@1]];// Resorces/CharacterSuits
+#define VISUAL_VIEW_CHARACTER_SUITS_ARRAY @[@[@"builderSuit1.png",@200,@147,@-1,@3],@[@"builderSuit2.png",@10000,@148,@2,@1],@[@"builderSuit3.png",@10000,@149,@2,@1],@[@"builderSuit1.png",@10000,@150,@3,@1],@[@"builderSuit2.png",@10000,@151,@3,@1],@[@"builderSuit3.png",@10000,@152,@4,@1]];// Resorces/CharacterSuits
 
 @interface VisualViewDataSource()
 {
