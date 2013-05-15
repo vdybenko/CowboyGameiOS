@@ -66,6 +66,22 @@
     CDVisualViewCharacterPartBody *visualViewCharacterPartBody = [[visualViewDataSource arrayBody] objectAtIndex:accountPlayer.visualViewBody];
     body.image = [visualViewCharacterPartBody imageForObject];
     visualViewCharacterPartBody = nil;
+    
+    CDVisualViewCharacterPartJakets *visualViewCharacterPartJakets = [[visualViewDataSource arrayJakets] objectAtIndex:accountPlayer.visualViewJackets];
+    shirt.image = [visualViewCharacterPartJakets imageForObject];
+    visualViewCharacterPartJakets = nil;
+    
+    CDVisualViewCharacterPartShoose *visualViewCharacterPartShoose = [[visualViewDataSource arrayShoose] objectAtIndex:accountPlayer.visualViewShoose];
+    shoose.image = [visualViewCharacterPartShoose imageForObject];
+    visualViewCharacterPartShoose = nil;
+    
+    CDVisualViewCharacterPartGuns *visualViewCharacterPartGun = [[visualViewDataSource arrayGuns] objectAtIndex:accountPlayer.visualViewGuns];
+    gun.image = [visualViewCharacterPartGun imageForObject];
+    visualViewCharacterPartGun = nil;
+    
+    CDVisualViewCharacterPartLegs *visualViewCharacterPartLegs = [[visualViewDataSource arrayLegs] objectAtIndex:accountPlayer.visualViewLegs];
+    length.image = [visualViewCharacterPartLegs imageForObject];
+    visualViewCharacterPartLegs = nil;
 }
 
 -(void)cleareView;
