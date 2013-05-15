@@ -739,40 +739,7 @@
 {
     
 }
-<<<<<<< HEAD
--(void)backlightDefensAction
-{
-    [UIView animateWithDuration:0.6 animations:^{
-        self.backlightDefens.alpha = 0.15;
-    }completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.6 animations:^{
-             self.backlightDefens.alpha = 0.6;
-        }completion:^(BOOL finished) {
-            if (![self.backlightDefens isHidden]) {
-                [self backlightDefensAction];
-            }
-        }];
-    }];
-    
-}
--(void)backlightAtacAction
-{
-    self.backlightAtac.hidden = NO;
-    [UIView animateWithDuration:0.6 animations:^{
-        self.backlightAtac.alpha = 0.15;
-    }completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.6 animations:^{
-            self.backlightAtac.alpha = 0.6;
-        }completion:^(BOOL finished) {
-            if (![self.backlightAtac isHidden]) {
-                [self backlightAtacAction];
-            }
-        }];
-    }];
-}
 
-=======
->>>>>>> 041190ff9769a42bdc0482780a0e21a42b9d7e26
 -(void)tempDefens:(int)plusOnDefens
 {
      self.defensLabel.text = [NSString stringWithFormat:@"%d",playerAccount.accountDefenseValue + plusOnDefens];
