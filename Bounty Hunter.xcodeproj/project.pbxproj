@@ -390,6 +390,7 @@
 		768B9E2E16EF24C200278FCA /* woman@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 768B9E2C16EF24C200278FCA /* woman@2x.png */; };
 		768B9E3016EF28D200278FCA /* WomanShape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 768B9E2F16EF28D200278FCA /* WomanShape.xib */; };
 		768B9E3316EF29CD00278FCA /* WomanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 768B9E3216EF29CD00278FCA /* WomanShape.m */; };
+		768BC38A1744F9FD009A9204 /* сloseCross.png in Resources */ = {isa = PBXBuildFile; fileRef = 768BC3891744F9FD009A9204 /* сloseCross.png */; };
 		768BC7E5170C6F6B00DB63C3 /* GMGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 768BC7D8170C6F6A00DB63C3 /* GMGridView.m */; };
 		768BC7E6170C6F6B00DB63C3 /* GMGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 768BC7DE170C6F6B00DB63C3 /* GMGridViewCell.m */; };
 		768BC7E7170C6F6B00DB63C3 /* GMGridViewLayoutStrategies.m in Sources */ = {isa = PBXBuildFile; fileRef = 768BC7E0170C6F6B00DB63C3 /* GMGridViewLayoutStrategies.m */; };
@@ -1421,6 +1422,7 @@
 		768B9E2F16EF28D200278FCA /* WomanShape.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WomanShape.xib; path = Xib/WomanShape.xib; sourceTree = "<group>"; };
 		768B9E3116EF29CD00278FCA /* WomanShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WomanShape.h; sourceTree = "<group>"; };
 		768B9E3216EF29CD00278FCA /* WomanShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WomanShape.m; sourceTree = "<group>"; };
+		768BC3891744F9FD009A9204 /* сloseCross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "сloseCross.png"; sourceTree = "<group>"; };
 		768BC7D6170C6F6A00DB63C3 /* GMGridView-Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMGridView-Constants.h"; sourceTree = "<group>"; };
 		768BC7D7170C6F6A00DB63C3 /* GMGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMGridView.h; sourceTree = "<group>"; };
 		768BC7D8170C6F6A00DB63C3 /* GMGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMGridView.m; sourceTree = "<group>"; };
@@ -2885,6 +2887,7 @@
 				768DD941173CDB9800B031F3 /* builderSelectedCellBack.png */,
 				768DD942173CDB9800B031F3 /* builderSideHat.png */,
 				768DD943173CDB9800B031F3 /* topHat.png */,
+				768BC3891744F9FD009A9204 /* сloseCross.png */,
 			);
 			path = BuilderGraphics;
 			sourceTree = "<group>";
@@ -4011,6 +4014,7 @@
 				76B250921743C55100BFF0D3 /* builderShirt5.png in Resources */,
 				76B250941743C55F00BFF0D3 /* builderHat3.png in Resources */,
 				4670C16B1743D55300D27FF8 /* clearePicture.png in Resources */,
+				768BC38A1744F9FD009A9204 /* сloseCross.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
