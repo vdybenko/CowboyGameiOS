@@ -108,13 +108,17 @@
 					<object class="IBUIImageView" id="171747437">
 						<reference key="NSNextResponder" ref="201225919"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{15, 63}, {187, 196}}</string>
+						<string key="NSFrame">{{13, 59}, {188, 196}}</string>
 						<reference key="NSSuperview" ref="201225919"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="333501274"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">builderShirt1.png</string>
+						</object>
 					</object>
 					<object class="IBUIImageView" id="333501274">
 						<reference key="NSNextResponder" ref="201225919"/>
@@ -427,6 +431,7 @@
 			<string key="builderFace2.png">{90, 109}</string>
 			<string key="builderGunInHeand.png">{95, 154}</string>
 			<string key="builderPantsDef.png">{218, 319}</string>
+			<string key="builderShirt1.png">{324, 307}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2080</string>
 	</data>
