@@ -20,6 +20,9 @@
 #import "PLRenderer.h"
 #import "PLLog.h"
 #import "OponentCoordinateView.h"
+#import "GBDeviceInfo_iOS.h"
+
+#define Magnitude(X, Y, Z) (sqrt((X)*(X) + (Y)*(Y) + (Z)*(Z)))
 
 #define ARC4RANDOM_MAX 0x100000000
 
@@ -29,6 +32,13 @@
 
 typedef float mat4f_t[16];    // 4x4 matrix in column major order
 typedef float vec4f_t[4];    // 4D vector
+
+UIAccelerometer *accelerometer;
+
+
+static UIAccelerationValue rollingX = 0.0;
+static UIAccelerationValue rollingY = 0.0;
+static UIAccelerationValue rollingZ = 0.0;
 
 @interface PLViewBase()
 {
@@ -1054,65 +1064,110 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
     if(!isSensorialRotationRunning)
     {
         startX = 0;
-        float randomX = [self randFloatBetween:0.5 and:3.5];
         isSensorialRotationRunning = YES;
         motionManager = [[CMMotionManager alloc] init];
         
         // Tell CoreMotion to show the compass calibration HUD when required to provide true north-referenced attitude
         motionManager.showsDeviceMovementDisplay = NO;
+        float kFilteringFactor = 0.025;
+        motionManager.accelerometerUpdateInterval = 2.0 / 60.0;
         
-        
-        motionManager.deviceMotionUpdateInterval = 4.0 / 60.0;
-        motionManager.accelerometerUpdateInterval = 4.0 / 60.0;
-        [motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *motion, NSError *error)
-         {
-             CMAttitude *currentAttitude = motion.attitude;
-             
-             if (currentAttitude == nil)
-             {
-                 NSLog(@"Could not get device orientation.");
-                 return;
-             }
-             else {
-                 float yaw = currentAttitude.yaw * 180 / M_PI;
-                 float pitch = motion.gravity.z * 90;
-                 float roll = currentAttitude.roll * 180 / M_PI;
-                 
-                 dispatch_async(dispatch_get_main_queue(), ^{
-                     [scene.currentCamera rotateWithPitch:pitch yaw:-yaw roll:-roll];
-                 });
-             }
-             
-             CMRotationMatrix r = motion.attitude.rotationMatrix;
-             transformFromCMRotationMatrix(cameraTransform, &r);
-             
-             
-             for (OponentCoordinateView *oponentView in oponentCoordinateViews) {
-                 mat4f_t projectionCameraTransform;
-                 multiplyMatrixAndMatrix(projectionCameraTransform, projectionTransform, cameraTransform);
-                 
-                 vec4f_t v;
-                 multiplyMatrixAndVector(v, projectionCameraTransform, oponentCoordinates[0]);
-                 
-                 float x = (v[0] / v[3] + 1.0f) * 0.4f;
+        if(([GBDeviceInfo deviceDetails].model == GBDeviceModeliPhone5) || ([GBDeviceInfo deviceDetails].model == GBDeviceModeliPod5))
+        {
+            kFilteringFactor = 0.015;
+            motionManager.accelerometerUpdateInterval = 1.0 / 60.0;
+        }
+       
                 
-                 float y = -motion.gravity.z;
-
-                 if(v[2] > 0){
-                     if(!startX && (y <= 0.7)) startX = x + randomX;
-                     
-                     [oponentView.view setHidden:NO];
-                     x += startX;
-                     CGPoint newPosition = CGPointMake(x * self.bounds.size.width, self.bounds.size.height-(y * self.bounds.size.height + 220));
-                     dispatch_async(dispatch_get_main_queue(), ^{
-                         if([oponentView respondsToSelector:@selector(view)])
-                         [oponentView.view setCenter:newPosition];
-                     });
-                 }
-                 else if([oponentView respondsToSelector:@selector(view)]) [oponentView.view setHidden:YES];
-             }
+        [motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMAccelerometerData *accelerometerData, NSError *error)
+         {
+             // Subtract the low-pass value from the current value to get a simplified high-pass filter
              
+             double magnitude = Magnitude(accelerometerData.acceleration.x,accelerometerData.acceleration.y,accelerometerData.acceleration.z);
+             
+             rollingX = ((accelerometerData.acceleration.x/magnitude) * kFilteringFactor) + (rollingX * (1.0 - kFilteringFactor));
+             
+             rollingY = ((accelerometerData.acceleration.y/magnitude) * kFilteringFactor) + (rollingY * (1.0 - kFilteringFactor));
+             
+             rollingZ = ((accelerometerData.acceleration.z/magnitude) * kFilteringFactor) + (rollingZ * (1.0 - kFilteringFactor));
+             
+             //NSLog(@"x = %.2f y = %.2f z = %.2f", rollingX, rollingY, rollingZ);
+             
+
+             if(rollingX > 0.07) rollingX = 0.07;
+             if(rollingX < -0.07) rollingX = -0.07;
+             if(rollingZ < -0.87) rollingZ = -0.87;
+             if(rollingZ > -0.75) rollingZ = -0.75;
+             
+             
+             float yaw = rollingX  * 1000;
+             float pitch = rollingZ * 1000 + 800;
+             float roll = 0;
+           
+             [scene.currentCamera rotateWithPitch:pitch yaw:-yaw roll:-roll];
+             
+             float x = rollingX * 17.5;
+             startX = 0.07 * 17.5;
+             float y = -rollingZ * 12. - 9.7;
+             for (OponentCoordinateView *oponentView in oponentCoordinateViews) {
+                 [oponentView.view setHidden:NO];
+                 
+                 CGPoint newPosition = CGPointMake(x * self.bounds.size.width + 160, self.bounds.size.height-(y * self.bounds.size.height + 220));
+                     if([oponentView respondsToSelector:@selector(view)])
+                         [oponentView.view setCenter:newPosition];
+                 
+             }
          }];
+        
+//        [motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *motion, NSError *error)
+//         {
+//             CMAttitude *currentAttitude = motion.attitude;
+//             
+//             if (currentAttitude == nil)
+//             {
+//                 NSLog(@"Could not get device orientation.");
+//                 return;
+//             }
+//             else {
+//                 float yaw = currentAttitude.yaw * 180 / M_PI;
+//                 float pitch = motion.gravity.z * 90;
+//                 float roll = currentAttitude.roll * 180 / M_PI;
+//                 
+//                 dispatch_async(dispatch_get_main_queue(), ^{
+//                     [scene.currentCamera rotateWithPitch:pitch yaw:-yaw roll:-roll];
+//                 });
+//             }
+//             
+//             CMRotationMatrix r = motion.attitude.rotationMatrix;
+//             transformFromCMRotationMatrix(cameraTransform, &r);
+//             
+//             
+//             for (OponentCoordinateView *oponentView in oponentCoordinateViews) {
+//                 mat4f_t projectionCameraTransform;
+//                 multiplyMatrixAndMatrix(projectionCameraTransform, projectionTransform, cameraTransform);
+//                 
+//                 vec4f_t v;
+//                 multiplyMatrixAndVector(v, projectionCameraTransform, oponentCoordinates[0]);
+//                 
+//                 float x = (v[0] / v[3] + 1.0f) * 0.4f;
+//                
+//                 float y = -motion.gravity.z;
+//
+//                 if(v[2] > 0){
+//                     if(!startX && (y <= 0.7)) startX = x + randomX;
+//                     
+//                     [oponentView.view setHidden:NO];
+//                     x += startX;
+//                     CGPoint newPosition = CGPointMake(x * self.bounds.size.width, self.bounds.size.height-(y * self.bounds.size.height + 220));
+//                     dispatch_async(dispatch_get_main_queue(), ^{
+//                         if([oponentView respondsToSelector:@selector(view)])
+//                         [oponentView.view setCenter:newPosition];
+//                     });
+//                 }
+//                 else if([oponentView respondsToSelector:@selector(view)]) [oponentView.view setHidden:YES];
+//             }
+//             
+//         }];
         
         
     }
