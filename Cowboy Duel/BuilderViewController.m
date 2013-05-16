@@ -348,7 +348,7 @@
 }
 
 - (IBAction)touchCloseSideView:(id)sender {
-    
+    [self cleanAll];
     [self sideCloseAnimation];
     self.defensLabel.text = [NSString stringWithFormat:@"%d",playerAccount.accountDefenseValue];
     self.attacLabel.text = [NSString stringWithFormat:@"%d",playerServer.weapon + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[playerServer.rank intValue]]];
@@ -357,7 +357,42 @@
    
     
 }
+-(void)cleanAll
+{
+        arrObjects = [visualViewDataSource arraySuits];
+        CDVisualViewCharacterPartSuits *cap = [arrObjects objectAtIndex:playerAccount.visualViewSuits];
+        visualViewCharacter.suits.image = cap.imageForObject;
+    
+        arrObjects = [visualViewDataSource arrayCap];
+        cap = [arrObjects objectAtIndex:playerAccount.visualViewCap];
+        visualViewCharacter.cap.image = cap.imageForObject;
+    
+        arrObjects = [visualViewDataSource arrayBody];
+        cap = [arrObjects objectAtIndex:playerAccount.visualViewBody];
+        visualViewCharacter.body.image = cap.imageForObject;
+    
+        arrObjects = [visualViewDataSource arrayHead];
+        cap = [arrObjects objectAtIndex:playerAccount.visualViewHead];
+        visualViewCharacter.head.image = cap.imageForObject;
+    
+        arrObjects = [visualViewDataSource arrayJakets];
+        cap = [arrObjects objectAtIndex:playerAccount.visualViewJackets];
+        visualViewCharacter.shirt.image = cap.imageForObject;
+    
+        arrObjects = [visualViewDataSource arrayLegs];
+        cap = [arrObjects objectAtIndex:playerAccount.visualViewLegs];
+        visualViewCharacter.length.image = cap.imageForObject;
+    
+        arrObjects = [visualViewDataSource arrayShoose];
+        cap = [arrObjects objectAtIndex:playerAccount.visualViewShoose];
+        visualViewCharacter.shoose.image = cap.imageForObject;
+    
+        arrObjects = [visualViewDataSource arrayGuns];
+        cap = [arrObjects objectAtIndex:playerAccount.visualViewGuns];
+        visualViewCharacter.gun.image = cap.imageForObject;
 
+    
+}
 - (IBAction)touchHatBtn:(id)sender {
     if (!isOpenSide && self.backlightDefens.hidden) {
         [self sideOpenAnimation];
@@ -401,7 +436,7 @@
             [playerAccountBlock saveMoney];
             
             playerAccountBlock.visualViewCap = curentIndex;
-            [playerAccountBlock saveVisualView];
+          //  [playerAccountBlock saveVisualView];
             [selfBlock refreshController];
     };
 
@@ -452,7 +487,7 @@
         [playerAccountBlock saveMoney];
         
         playerAccountBlock.visualViewHead = curentIndex;
-        [playerAccountBlock saveVisualView];
+       // [playerAccountBlock saveVisualView];
         [selfBlock refreshController];
     };
 
@@ -505,7 +540,7 @@
         [playerAccountBlock saveMoney];
         
         playerAccountBlock.visualViewBody = curentIndex;
-        [playerAccountBlock saveVisualView];
+        //[playerAccountBlock saveVisualView];
         
         [selfBlock refreshController];
     };
@@ -556,7 +591,7 @@
         [playerAccountBlock saveMoney];
         
         playerAccountBlock.visualViewJackets = curentIndex;
-        [playerAccountBlock saveVisualView];
+      //  [playerAccountBlock saveVisualView];
         
         [selfBlock refreshController];
     };
@@ -607,7 +642,7 @@
         [playerAccountBlock saveMoney];
         
         playerAccountBlock.visualViewShoose = curentIndex;
-        [playerAccountBlock saveVisualView];
+        //[playerAccountBlock saveVisualView];
         
         [selfBlock refreshController];
 
@@ -660,7 +695,7 @@
         [playerAccountBlock saveMoney];
         
         playerAccountBlock.visualViewGuns = curentIndex;
-        [playerAccountBlock saveVisualView];
+        //[playerAccountBlock saveVisualView];
         
         [selfBlock refreshController];
 
@@ -714,7 +749,7 @@
         [playerAccountBlock saveMoney];
         
         playerAccountBlock.visualViewLegs = curentIndex;
-        [playerAccountBlock saveVisualView];
+       // [playerAccountBlock saveVisualView];
         
         [selfBlock refreshController];
 
@@ -767,7 +802,7 @@
         [playerAccountBlock saveMoney];
         
         playerAccountBlock.visualViewLegs = curentIndex;
-        [playerAccountBlock saveVisualView];
+        //[playerAccountBlock saveVisualView];
         
         [selfBlock refreshController];
         
