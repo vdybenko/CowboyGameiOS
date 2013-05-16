@@ -33,7 +33,7 @@ static const char *LIST_BOTS_URL = BASE_URL"users/get_user_data";
 @synthesize visualViewShoose;
 @synthesize visualViewJackets;
 @synthesize visualViewGuns;
-
+@synthesize visualViewSuits;
 #pragma mark
 
 static AccountDataSource *sharedHelper = nil;
@@ -84,7 +84,7 @@ static AccountDataSource *sharedHelper = nil;
         transactions = [[NSMutableArray alloc] init];
         achivments = [[NSMutableArray alloc] init];
         dicForRequests=[[NSMutableDictionary alloc] init];
-        
+       
         self.visualViewCap = 0;
         self.visualViewHead = 0;
         self.visualViewBody = 0;
@@ -92,6 +92,7 @@ static AccountDataSource *sharedHelper = nil;
         self.visualViewShoose = 0;
         self.visualViewJackets = 0;
         self.visualViewGuns = 0;
+        self.visualViewSuits = 0;
     }
     return self;
 }
@@ -152,7 +153,7 @@ static AccountDataSource *sharedHelper = nil;
       [self.achivments addObject:loc];
     }
 
-    [self loadVisualView];
+     [self loadVisualView];
 }
 
 - (void)makeLocalAccountID{
@@ -472,6 +473,7 @@ static AccountDataSource *sharedHelper = nil;
     [[NSUserDefaults standardUserDefaults] setInteger:visualViewShoose forKey:@"VV_SHOOSE_VALUE"];
     [[NSUserDefaults standardUserDefaults] setInteger:visualViewJackets forKey:@"VV_SHIRTS_VALUE"];
     [[NSUserDefaults standardUserDefaults] setInteger:visualViewGuns forKey:@"VV_GUN_VALUE"];
+     [[NSUserDefaults standardUserDefaults] setInteger:visualViewSuits forKey:@"VV_SUITS_VALUE"];
 }
 
 - (void)loadVisualView;
@@ -483,6 +485,8 @@ static AccountDataSource *sharedHelper = nil;
     self.visualViewShoose = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_SHOOSE_VALUE"];
     self.visualViewJackets = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_SHIRTS_VALUE"];
     self.visualViewGuns = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_GUN_VALUE"];
+    self.visualViewSuits = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_SUITS_VALUE"];
+  
 }
 
 #pragma mark

@@ -730,6 +730,58 @@
     [self setObjectsForIndex:playerAccount.visualViewLegs];
 }
 - (IBAction)touchSuitsBtn:(id)sender {
+    if (!isOpenSide && self.backlightDefens.hidden) {
+        [self sideOpenAnimation];
+        self.backlightDefens.hidden = NO;
+        [self backlightDefensAction];
+    }
+    __block AccountDataSource *playerAccountBlock = playerAccount;
+    arrObjects = [visualViewDataSource arraySuits];
+    __block id  selfBlock = self;
+    __block id  arrObjBlock = arrObjects;
+    __block VisualViewCharacter *viewCharacterBlock = visualViewCharacter;
+    __block id  priceLbBlock = self.priceOfItem;
+    __block id  bonus = self.resultLabel;
+    
+    didFinishBlock = ^(NSInteger curentIndex){
+        
+        CDVisualViewCharacterPartSuits *cap = [arrObjBlock objectAtIndex:curentIndex];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            viewCharacterBlock.suits.image = cap.imageForObject;
+            [priceLbBlock setText:[NSString stringWithFormat:@"%d", cap.money]];
+            [bonus setText:[NSString stringWithFormat:@"+ %d",cap.action]];
+            [selfBlock tempDefens:cap.action];
+        });
+        [selfBlock refreshController];
+    };
+    didBuyAction = ^(NSInteger curentIndex){
+        
+        CDVisualViewCharacterPartSuits *cap = [arrObjBlock objectAtIndex:curentIndex];
+        CDTransaction *transaction = [[CDTransaction alloc] init];
+        transaction.trDescription = @"BuyNewSuits";
+        transaction.trType = [NSNumber numberWithInt:-1];
+        transaction.trMoneyCh = [NSNumber numberWithInt:cap.money];
+        transaction.trLocalID = [NSNumber numberWithInt:playerAccountBlock.glNumber];
+        transaction.trOpponentID = @"";
+        transaction.trGlobalID = [NSNumber numberWithInt:-1];
+        
+        [playerAccountBlock.transactions addObject:transaction];
+        [playerAccountBlock saveTransaction];
+        [playerAccountBlock sendTransactions:playerAccountBlock.transactions];
+        
+        playerAccountBlock.money -= cap.money;
+        [playerAccountBlock saveMoney];
+        
+        playerAccountBlock.visualViewLegs = curentIndex;
+        [playerAccountBlock saveVisualView];
+        
+        [selfBlock refreshController];
+        
+    };
+    [grid reloadData];
+    [grid setUserInteractionEnabled:YES];
+    [self setObjectsForIndex:playerAccount.visualViewSuits];
+
     
 }
 

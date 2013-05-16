@@ -55,8 +55,8 @@
 					</object>
 					<object class="IBUIView" id="693515324">
 						<reference key="NSNextResponder" ref="1048327278"/>
-						<int key="NSvFlags">300</int>
-						<string key="NSFrame">{{20, 64}, {186, 379}}</string>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{10, 61}, {203, 413}}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="386081909"/>
@@ -301,12 +301,12 @@
 					</object>
 					<object class="IBUIView" id="916055748">
 						<reference key="NSNextResponder" ref="1048327278"/>
-						<int key="NSvFlags">276</int>
+						<int key="NSvFlags">292</int>
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUIImageView" id="359792750">
 								<reference key="NSNextResponder" ref="916055748"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{20, 0}, {80, 519}}</string>
+								<string key="NSFrame">{{20, 0}, {80, 431}}</string>
 								<reference key="NSSuperview" ref="916055748"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="774220325"/>
@@ -326,7 +326,6 @@
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<reference key="IBUIBackgroundColor" ref="840484157"/>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<bool key="IBUIMultipleTouchEnabled">YES</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -456,13 +455,12 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 						</array>
-						<string key="NSFrame">{{320, 49}, {100, 431}}</string>
+						<string key="NSFrame">{{320, 49}, {100, 501}}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1062032095"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="840484157"/>
-						<bool key="IBUIClipsSubviews">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 					<object class="IBUIView" id="947746974">
@@ -770,23 +768,6 @@
 				<reference key="NSNextKeyView" ref="300408864"/>
 				<string key="NSReuseIdentifierKey">_NS:196</string>
 				<reference key="IBUIBackgroundColor" ref="840484157"/>
-				<object class="IBUIScreenMetrics" key="IBUISimulatedDestinationMetrics">
-					<string key="IBUISimulatedSizeMetricsClass">IBUIScreenMetrics</string>
-					<object class="NSMutableDictionary" key="IBUINormalizedOrientationToSizeMap">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<array key="dict.sortedKeys">
-							<integer value="1"/>
-							<integer value="3"/>
-						</array>
-						<array key="dict.values">
-							<string>{320, 480}</string>
-							<string>{480, 320}</string>
-						</array>
-					</object>
-					<string key="IBUITargetRuntime">IBCocoaTouchFramework</string>
-					<string key="IBUIDisplayName">Retina 3.5 Full Screen</string>
-					<int key="IBUIType">0</int>
-				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 		</array>
@@ -1022,8 +1003,8 @@
 							<reference ref="887897910"/>
 							<reference ref="417036041"/>
 							<reference ref="534382259"/>
-							<reference ref="244944833"/>
 							<reference ref="693515324"/>
+							<reference ref="244944833"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>

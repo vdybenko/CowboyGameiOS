@@ -60,6 +60,7 @@
 @property(nonatomic) int visualViewShoose;
 @property(nonatomic) int visualViewJackets;
 @property(nonatomic) int visualViewGuns;
+@property(nonatomic) int visualViewSuits;
 + (AccountDataSource *)sharedInstance;
 - (id)initWithLocalPlayer;
 - (void)loadAllParametrs;
