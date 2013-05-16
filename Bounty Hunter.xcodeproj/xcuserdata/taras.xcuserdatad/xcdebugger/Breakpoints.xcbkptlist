@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/BuilderViewController.m"
-         timestampString = "390382354.605355"
+         timestampString = "390396533.769078"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "313"
-         endingLineNumber = "313"
+         startingLineNumber = "317"
+         endingLineNumber = "317"
          landmarkName = "-sideCloseAnimation"
          landmarkType = "5">
       </FileBreakpoint>
@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/BuilderViewController.m"
-         timestampString = "390382354.605355"
+         timestampString = "390396374.103802"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "140"
-         endingLineNumber = "140"
+         startingLineNumber = "139"
+         endingLineNumber = "139"
          landmarkName = "-GMGridView:sizeForItemsInInterfaceOrientation:"
          landmarkType = "5">
       </FileBreakpoint>
