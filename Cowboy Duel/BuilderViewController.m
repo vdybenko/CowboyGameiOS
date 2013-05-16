@@ -14,6 +14,7 @@
 #import "VisualViewCharacter.h"
 #import "CharacterPartGridCell.h"
 #import "CDTransaction.h"
+#import "Utils.h"
 
 #define spaceForElements 78
 #define spaceForCheck 39
@@ -78,13 +79,16 @@
     grid.minEdgeInsets = UIEdgeInsetsMake(0,0,0,0);
     grid.itemSpacing = 9;
     
-    grid.backgroundColor = [UIColor clearColor];
-    grid.showsHorizontalScrollIndicator = NO;
-    grid.showsVerticalScrollIndicator = NO;
     grid.dataSource = self;
     grid.actionDelegate = self;
     grid.delegate = self;
-        
+    
+    if (IS_IPHONE_5) {
+        CGRect frame = grid.frame;
+        frame.size.height = self.sideView.frame.size.height - 55;
+        grid.frame = frame;
+    }
+    
     playerAccount = [[AccountDataSource alloc] initWithLocalPlayer];
     self.moneyLabel.text =  [NSString stringWithFormat:@"%d",playerAccount.money];
     self.defensLabel.text = [NSString stringWithFormat:@"%d",playerAccount.accountDefenseValue];
@@ -95,7 +99,8 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-} 
+}
+
 - (void)viewDidUnload {
     [self setSideView:nil];
     [self setMoneyLabel:nil];
@@ -120,9 +125,14 @@
 }
 #pragma mark GMGridViewDataSource
 
-- (NSInteger)numberOfItemsInGMGridView:(GMGridView *)gridView
+-(NSInteger)numberOfItemsInGMGridView:(GMGridView *)gridView
 {
-    return [arrObjects count]+4;
+    if (IS_IPHONE_5) {
+        return [arrObjects count]+5;
+    }else{
+        return [arrObjects count]+4;
+    }
+    
 }
 
 - (CGSize)GMGridView:(GMGridView *)gridView sizeForItemsInInterfaceOrientation:(UIInterfaceOrientation)orientation
@@ -139,11 +149,9 @@
     {
         cell = [CharacterPartGridCell cell];;
     }
-        
-    int lastIndex = [self numberOfItemsInGMGridView:gridView]-1;
-    int penultIndex = [self numberOfItemsInGMGridView:gridView]-2;
     
-    if (index!=0 && index!=1 && index!=lastIndex && index!=penultIndex) {
+    BOOL result = [self isCellValid:index];
+    if (result) {
         [cell setHidden:NO];
         [cell simpleBackGround];
         CDVisualViewCharacterPart *visualViewCharacterPart = [arrObjects objectAtIndex:index-2];
@@ -230,10 +238,8 @@
 #pragma mark GMGridViewActionDelegate
 - (void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position;
 {
-    int lastIndex = [self numberOfItemsInGMGridView:gridView]-1;
-    int penultIndex = [self numberOfItemsInGMGridView:gridView]-2;
-    if (position!=0 && position!=1 && position!=lastIndex && position!=penultIndex && position!=curentObject+2) {
-        
+    BOOL result = [self isCellValid:position];
+    if (result) {
         float questionOffset = spaceForElements * (position-2);
         [grid setUserInteractionEnabled:NO];
         [grid setContentOffset:CGPointMake(0,questionOffset) animated:YES];
@@ -749,5 +755,25 @@
      self.attacLabel.text = [NSString stringWithFormat:@"%d",playerServer.weapon + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[playerServer.rank intValue]] + plusOnAtac];
 }
 
+-(BOOL) isCellValid:(NSInteger)position
+{
+    int lastIndex = [self numberOfItemsInGMGridView:grid]-1;
+    int penultIndex = lastIndex-1;
+    
+    if (IS_IPHONE_5){
+        int penultPenultIndex = lastIndex-2;
+        if (position!=0 && position!=1 && position!=lastIndex && position!=penultIndex && position!=penultPenultIndex && position!=curentObject+2){
+            return YES;
+        }else{
+            return NO;
+        }
+    }else{
+        if (position!=0 && position!=1 && position!=lastIndex && position!=penultIndex && position!=curentObject+2){
+            return YES;
+        }else{
+            return NO;
+        }
+    }
+}
 
 @end
