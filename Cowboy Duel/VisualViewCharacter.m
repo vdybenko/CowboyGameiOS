@@ -64,11 +64,11 @@
     visualViewCharacterPartHead = nil;
     
     CDVisualViewCharacterPartBody *visualViewCharacterPartBody = [[visualViewDataSource arrayBody] objectAtIndex:accountPlayer.visualViewBody];
-    body.image = [visualViewCharacterPartBody imageForObject];
+    shirt.image = [visualViewCharacterPartBody imageForObject];
     visualViewCharacterPartBody = nil;
     
     CDVisualViewCharacterPartJakets *visualViewCharacterPartJakets = [[visualViewDataSource arrayJakets] objectAtIndex:accountPlayer.visualViewJackets];
-    shirt.image = [visualViewCharacterPartJakets imageForObject];
+    body.image = [visualViewCharacterPartJakets imageForObject];
     visualViewCharacterPartJakets = nil;
     
     CDVisualViewCharacterPartShoose *visualViewCharacterPartShoose = [[visualViewDataSource arrayShoose] objectAtIndex:accountPlayer.visualViewShoose];

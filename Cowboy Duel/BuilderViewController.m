@@ -15,6 +15,8 @@
 #import "CharacterPartGridCell.h"
 #import "CDTransaction.h"
 #import "Utils.h"
+#import "UIButton+Image+Title.h"
+
 
 #define spaceForElements 78
 #define spaceForCheck 39
@@ -40,6 +42,16 @@
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 @property (weak, nonatomic) IBOutlet UIView *backlightDefens;
 @property (weak, nonatomic) IBOutlet UIView *backlightAtac;
+@property (weak, nonatomic) IBOutlet UIButton *hatsBtn;
+@property (weak, nonatomic) IBOutlet UIButton *faceBtn;
+@property (weak, nonatomic) IBOutlet UIButton *ShirtBtn;
+@property (weak, nonatomic) IBOutlet UIButton *jaketsBtn;
+@property (weak, nonatomic) IBOutlet UIButton *shoesBtn;
+@property (weak, nonatomic) IBOutlet UIButton *gunsBtn;
+@property (weak, nonatomic) IBOutlet UIButton *closeBtn;
+@property (weak, nonatomic) IBOutlet UIButton *PantsBtn;
+@property (weak, nonatomic) IBOutlet UIButton *suitsBtn;
+
 
 @end
 
@@ -63,6 +75,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
+    
+    [self.hatsBtn setTitleByLabel:@"Faces" withColor:buttonsTitleColor fontSize:24];
+    [self.faceBtn setTitleByLabel:@"Heats" withColor:buttonsTitleColor fontSize:24];
+    [self.ShirtBtn setTitleByLabel:@"Shirts" withColor:buttonsTitleColor fontSize:24];
+    [self.jaketsBtn setTitleByLabel:@"Jakets" withColor:buttonsTitleColor fontSize:24];
+    [self.PantsBtn setTitleByLabel:@"Pants" withColor:buttonsTitleColor fontSize:24];
+    [self.shoesBtn setTitleByLabel:@"Shoes" withColor:buttonsTitleColor fontSize:24];
+    [self.gunsBtn setTitleByLabel:@"Guns" withColor:buttonsTitleColor fontSize:24];
+    [self.suitsBtn setTitleByLabel:@"Suit" withColor:buttonsTitleColor fontSize:24];
+    [self.closeBtn setTitleByLabel:@"Close" withColor:buttonsTitleColor fontSize:24];
     
     //self.backlightDefens.clipsToBounds = YES;
     self.backlightDefens.layer.cornerRadius = 10.f;
@@ -112,6 +136,15 @@
     [self setResultLabel:nil];
     [self setBacklightDefens:nil];
     [self setBacklightAtac:nil];
+    [self setHatsBtn:nil];
+    [self setFaceBtn:nil];
+    [self setShirtBtn:nil];
+    [self setJaketsBtn:nil];
+    [self setShoesBtn:nil];
+    [self setGunsBtn:nil];
+    [self setCloseBtn:nil];
+    [self setPantsBtn:nil];
+    [self setSuitsBtn:nil];
     [super viewDidUnload];
 }
 -(void)releaseComponents
@@ -361,46 +394,10 @@
     [self sideCloseAnimation];
     self.defensLabel.text = [NSString stringWithFormat:@"%d",playerAccount.accountDefenseValue];
     self.attacLabel.text = [NSString stringWithFormat:@"%d",playerServer.weapon + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[playerServer.rank intValue]]];
-
-
-   
-    
 }
 -(void)cleanAll
 {
-        arrObjects = [visualViewDataSource arraySuits];
-        CDVisualViewCharacterPartSuits *cap = [arrObjects objectAtIndex:playerAccount.visualViewSuits];
-        visualViewCharacter.suits.image = cap.imageForObject;
-    
-        arrObjects = [visualViewDataSource arrayCap];
-        cap = [arrObjects objectAtIndex:playerAccount.visualViewCap];
-        visualViewCharacter.cap.image = cap.imageForObject;
-    
-        arrObjects = [visualViewDataSource arrayBody];
-        cap = [arrObjects objectAtIndex:playerAccount.visualViewBody];
-        visualViewCharacter.body.image = cap.imageForObject;
-    
-        arrObjects = [visualViewDataSource arrayHead];
-        cap = [arrObjects objectAtIndex:playerAccount.visualViewHead];
-        visualViewCharacter.head.image = cap.imageForObject;
-    
-        arrObjects = [visualViewDataSource arrayJakets];
-        cap = [arrObjects objectAtIndex:playerAccount.visualViewJackets];
-        visualViewCharacter.shirt.image = cap.imageForObject;
-    
-        arrObjects = [visualViewDataSource arrayLegs];
-        cap = [arrObjects objectAtIndex:playerAccount.visualViewLegs];
-        visualViewCharacter.length.image = cap.imageForObject;
-    
-        arrObjects = [visualViewDataSource arrayShoose];
-        cap = [arrObjects objectAtIndex:playerAccount.visualViewShoose];
-        visualViewCharacter.shoose.image = cap.imageForObject;
-    
-        arrObjects = [visualViewDataSource arrayGuns];
-        cap = [arrObjects objectAtIndex:playerAccount.visualViewGuns];
-        visualViewCharacter.gun.image = cap.imageForObject;
-
-    
+     [visualViewCharacter refreshWithAccountPlayer:playerAccount];    
 }
 - (IBAction)touchHatBtn:(id)sender {
     if (!isOpenSide && self.backlightDefens.hidden) {
