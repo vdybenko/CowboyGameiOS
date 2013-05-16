@@ -548,6 +548,16 @@
 		BD4BAAB716BC064A00F88E82 /* men_low.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4BAAB416BC064900F88E82 /* men_low.png */; };
 		BD4BAAB816BC064A00F88E82 /* men_low@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4BAAB516BC064900F88E82 /* men_low@2x.png */; };
 		BD4BAAB916BC064A00F88E82 /* men_low@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4BAAB516BC064900F88E82 /* men_low@2x.png */; };
+		BD4CBACB1743B11900CBAF72 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = BD4CBABB1743B11900CBAF72 /* .gitignore */; };
+		BD4CBACC1743B11900CBAF72 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = BD4CBABB1743B11900CBAF72 /* .gitignore */; };
+		BD4CBACD1743B11900CBAF72 /* GBDeviceInfo-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD4CBABD1743B11900CBAF72 /* GBDeviceInfo-Info.plist */; };
+		BD4CBACE1743B11900CBAF72 /* GBDeviceInfo-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD4CBABD1743B11900CBAF72 /* GBDeviceInfo-Info.plist */; };
+		BD4CBACF1743B11900CBAF72 /* GBDeviceInfo_iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4CBAC11743B11900CBAF72 /* GBDeviceInfo_iOS.m */; };
+		BD4CBAD01743B11900CBAF72 /* GBDeviceInfo_iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4CBAC11743B11900CBAF72 /* GBDeviceInfo_iOS.m */; };
+		BD4CBAD31743B11900CBAF72 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = BD4CBAC91743B11900CBAF72 /* LICENSE */; };
+		BD4CBAD41743B11900CBAF72 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = BD4CBAC91743B11900CBAF72 /* LICENSE */; };
+		BD4CBAD51743B11900CBAF72 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BD4CBACA1743B11900CBAF72 /* README.md */; };
+		BD4CBAD61743B11900CBAF72 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BD4CBACA1743B11900CBAF72 /* README.md */; };
 		BD68C49A16A705D200A9B52A /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD68C49916A705D200A9B52A /* CoreMotion.framework */; };
 		BD7F252315E777DC00A3C2CA /* fin_img_coin.png in Resources */ = {isa = PBXBuildFile; fileRef = BD7F252115E777D800A3C2CA /* fin_img_coin.png */; };
 		BD7F252415E777DC00A3C2CA /* fin_img_coin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD7F252215E777DA00A3C2CA /* fin_img_coin@2x.png */; };
@@ -879,6 +889,23 @@
 		BDF1EF1713D41BA500C466DF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF1EF1613D41BA500C466DF /* Security.framework */; };
 		BDF1EF1F13D41C4E00C466DF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF1EF1E13D41C4E00C466DF /* MapKit.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BD4CBAD91743B11A00CBAF72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BD4CBAC61743B11900CBAF72 /* GBDeviceInfo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8A38F593162DA1C100BCF240;
+			remoteInfo = "GBDeviceInfo-iOS";
+		};
+		BD4CBADB1743B11A00CBAF72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BD4CBAC61743B11900CBAF72 /* GBDeviceInfo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8A1B118D16F21F2E00BDDD2A;
+			remoteInfo = "GBDeviceInfo-OSX";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		76E8C8E513C1FF84000F84AC /* CopyFiles */ = {
@@ -1560,6 +1587,16 @@
 		BD38525C169C3F420066419B /* FBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBViewController.h; sourceTree = "<group>"; };
 		BD4BAAB416BC064900F88E82 /* men_low.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = men_low.png; sourceTree = "<group>"; };
 		BD4BAAB516BC064900F88E82 /* men_low@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "men_low@2x.png"; sourceTree = "<group>"; };
+		BD4CBABB1743B11900CBAF72 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		BD4CBABD1743B11900CBAF72 /* GBDeviceInfo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GBDeviceInfo-Info.plist"; sourceTree = "<group>"; };
+		BD4CBABE1743B11900CBAF72 /* GBDeviceInfo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBDeviceInfo-Prefix.pch"; sourceTree = "<group>"; };
+		BD4CBABF1743B11900CBAF72 /* GBDeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDeviceInfo.h; sourceTree = "<group>"; };
+		BD4CBAC01743B11900CBAF72 /* GBDeviceInfo_iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDeviceInfo_iOS.h; sourceTree = "<group>"; };
+		BD4CBAC11743B11900CBAF72 /* GBDeviceInfo_iOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBDeviceInfo_iOS.m; sourceTree = "<group>"; };
+		BD4CBAC41743B11900CBAF72 /* GBTypes_iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBTypes_iOS.h; sourceTree = "<group>"; };
+		BD4CBAC61743B11900CBAF72 /* GBDeviceInfo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = GBDeviceInfo.xcodeproj; sourceTree = "<group>"; };
+		BD4CBAC91743B11900CBAF72 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		BD4CBACA1743B11900CBAF72 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		BD68C49916A705D200A9B52A /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		BD7F252115E777D800A3C2CA /* fin_img_coin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fin_img_coin.png; sourceTree = "<group>"; };
 		BD7F252215E777DA00A3C2CA /* fin_img_coin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fin_img_coin@2x.png"; sourceTree = "<group>"; };
@@ -2186,6 +2223,7 @@
 		60593A611379321700256204 = {
 			isa = PBXGroup;
 			children = (
+				BD4CBABA1743B11900CBAF72 /* GBDeviceInfo-master */,
 				BD0DA0FD16D37D3C00419DC1 /* OpenGLES.framework */,
 				BD38523D169C3F420066419B /* DeprecatedHeaders */,
 				763E6BB81664B18500FA4E86 /* GoogleAdMobAdsSdkiOS-6.2.1 */,
@@ -2717,6 +2755,40 @@
 			path = FacebookSDK.framework/Versions/A/DeprecatedHeaders;
 			sourceTree = "<group>";
 		};
+		BD4CBABA1743B11900CBAF72 /* GBDeviceInfo-master */ = {
+			isa = PBXGroup;
+			children = (
+				BD4CBABB1743B11900CBAF72 /* .gitignore */,
+				BD4CBABC1743B11900CBAF72 /* GBDeviceInfo */,
+				BD4CBAC61743B11900CBAF72 /* GBDeviceInfo.xcodeproj */,
+				BD4CBAC91743B11900CBAF72 /* LICENSE */,
+				BD4CBACA1743B11900CBAF72 /* README.md */,
+			);
+			path = "GBDeviceInfo-master";
+			sourceTree = "<group>";
+		};
+		BD4CBABC1743B11900CBAF72 /* GBDeviceInfo */ = {
+			isa = PBXGroup;
+			children = (
+				BD4CBABD1743B11900CBAF72 /* GBDeviceInfo-Info.plist */,
+				BD4CBABE1743B11900CBAF72 /* GBDeviceInfo-Prefix.pch */,
+				BD4CBABF1743B11900CBAF72 /* GBDeviceInfo.h */,
+				BD4CBAC01743B11900CBAF72 /* GBDeviceInfo_iOS.h */,
+				BD4CBAC11743B11900CBAF72 /* GBDeviceInfo_iOS.m */,
+				BD4CBAC41743B11900CBAF72 /* GBTypes_iOS.h */,
+			);
+			path = GBDeviceInfo;
+			sourceTree = "<group>";
+		};
+		BD4CBAC71743B11900CBAF72 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BD4CBADA1743B11A00CBAF72 /* libGBDeviceInfo.a */,
+				BD4CBADC1743B11A00CBAF72 /* GBDeviceInfo.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		BD7F2AE41649647500D29263 /* MKStore */ = {
 			isa = PBXGroup;
 			children = (
@@ -3126,6 +3198,12 @@
 			mainGroup = 60593A611379321700256204;
 			productRefGroup = 60593A6D1379321700256204 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = BD4CBAC71743B11900CBAF72 /* Products */;
+					ProjectRef = BD4CBAC61743B11900CBAF72 /* GBDeviceInfo.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				60593A6B1379321700256204 /* Bounty Hunter */,
@@ -3133,6 +3211,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		BD4CBADA1743B11A00CBAF72 /* libGBDeviceInfo.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libGBDeviceInfo.a;
+			remoteRef = BD4CBAD91743B11A00CBAF72 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BD4CBADC1743B11A00CBAF72 /* GBDeviceInfo.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GBDeviceInfo.framework;
+			remoteRef = BD4CBADB1743B11A00CBAF72 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		60593A6A1379321700256204 /* Resources */ = {
@@ -3477,6 +3572,10 @@
 				46E3C4C6170D60DD00A59E98 /* cactusFrame6.png in Resources */,
 				46E3C4C9170D69CC00A59E98 /* blood_aScrCr.png in Resources */,
 				46E3C4CA170D69CC00A59E98 /* blood_cScrCr.png in Resources */,
+				BD4CBACB1743B11900CBAF72 /* .gitignore in Resources */,
+				BD4CBACD1743B11900CBAF72 /* GBDeviceInfo-Info.plist in Resources */,
+				BD4CBAD31743B11900CBAF72 /* LICENSE in Resources */,
+				BD4CBAD51743B11900CBAF72 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3689,6 +3788,10 @@
 				BD0DA0B216D3727B00419DC1 /* CHANGES.txt in Resources */,
 				BD0DA0C016D3727B00419DC1 /* LICENSE.txt in Resources */,
 				BD0DA0FC16D3727B00419DC1 /* README.txt in Resources */,
+				BD4CBACC1743B11900CBAF72 /* .gitignore in Resources */,
+				BD4CBACE1743B11900CBAF72 /* GBDeviceInfo-Info.plist in Resources */,
+				BD4CBAD41743B11900CBAF72 /* LICENSE in Resources */,
+				BD4CBAD61743B11900CBAF72 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3880,6 +3983,7 @@
 				BD357C921703504E0079F68A /* GameSceneConfig.m in Sources */,
 				76C13EA51709B2EE0093AE0D /* UIImage+Retina4.m in Sources */,
 				317162B8170D5D6700F068A9 /* UIView+ColorOfPoint.m in Sources */,
+				BD4CBACF1743B11900CBAF72 /* GBDeviceInfo_iOS.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4009,6 +4113,7 @@
 				BD0DA0F816D3727B00419DC1 /* PLView.m in Sources */,
 				BD0DA0FA16D3727B00419DC1 /* PLViewBase.m in Sources */,
 				BD357C931703504E0079F68A /* GameSceneConfig.m in Sources */,
+				BD4CBAD01743B11900CBAF72 /* GBDeviceInfo_iOS.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4072,8 +4177,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sergij Sobol (DF8EH42X59)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sergij Sobol (DF8EH42X59)";
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4118,8 +4223,8 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Bounty Hunter";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "A875C637-FA0E-4F9B-8F4A-FDE7CC0A3ECA";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A875C637-FA0E-4F9B-8F4A-FDE7CC0A3ECA";
 				REZ_SEARCH_PATHS = "$(inherited)";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
@@ -4463,7 +4568,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: SPE Dybenko Olga Viktorovna  (WebKate)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sergij Sobol (DF8EH42X59)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: SPE Dybenko Olga Viktorovna  (WebKate)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: SPE Dybenko Olga Viktorovna  (WebKate)";
 				COPY_PHASE_STRIP = NO;
@@ -4509,7 +4614,7 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Bounty Hunter";
-				PROVISIONING_PROFILE = "2569E2A7-3712-4C3A-8D71-83BB0C3F66A1";
+				PROVISIONING_PROFILE = "A875C637-FA0E-4F9B-8F4A-FDE7CC0A3ECA";
 				"PROVISIONING_PROFILE[sdk=*]" = "2569E2A7-3712-4C3A-8D71-83BB0C3F66A1";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2569E2A7-3712-4C3A-8D71-83BB0C3F66A1";
 				REZ_SEARCH_PATHS = (

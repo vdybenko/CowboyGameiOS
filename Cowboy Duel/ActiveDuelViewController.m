@@ -788,8 +788,8 @@ static CGFloat blinkBottomOriginY;
 {
     CGSize winSize = [UIScreen mainScreen].bounds.size;
     CGPoint opponentCenter = opponentShape.center;
-    int randPosition = rand() % ((int)(self.floatView.bounds.size.width - winSize.width - opponentShape.bounds.size.width));
-    randPosition = randPosition + winSize.width / 2 + opponentShape.bounds.size.width / 2;
+    int randPosition = rand() % ((int)(self.floatView.bounds.size.width));
+    //randPosition = randPosition + winSize.width / 2 + opponentShape.bounds.size.width / 2;
     
     opponentCenter.x = randPosition;
     opponentShape.center = opponentCenter;

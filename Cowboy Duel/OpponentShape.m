@@ -104,17 +104,31 @@ static CGFloat oponentLiveImageViewStartWidth;
     [UIView animateWithDuration:0.2 animations:^{
         CGRect frame = self.frame;
         frame.origin.x += randomDirection * 40;
-        self.frame = frame;
+        if((frame.origin.x>0) && (frame.origin.x<[self superview].frame.size.width)){
+            self.frame = frame;
+        }else{
+            return;
+        }
+
     }completion:^(BOOL complete){
         [UIView animateWithDuration:0.2 animations:^{
             CGRect frame = self.frame;
             frame.origin.x += randomDirection * 40;
-            self.frame = frame;
+            if((frame.origin.x>0) && (frame.origin.x<[self superview].frame.size.width)){
+                self.frame = frame;
+            }else{
+                return;
+            }
+
         }completion:^(BOOL complete){
             [UIView animateWithDuration:0.2 animations:^{
                 CGRect frame = self.frame;
                 frame.origin.x += randomDirection * 40;
-                self.frame = frame;
+                if((frame.origin.x>0) && (frame.origin.x<[self superview].frame.size.width)){
+                    self.frame = frame;
+                }else{
+                    return;
+                }
             }completion:^(BOOL complete){
             }];
         }];
@@ -153,24 +167,31 @@ static CGFloat oponentLiveImageViewStartWidth;
     int randPosition;
     
     if ( self.typeOfBody == OpponentShapeTypeScarecrow ){
-        randPosition = (rand() % 50) + 500;
-        body.x = (body.x + direction*randPosition);
-        self.center = body;
+        randPosition = rand() % (int)[self superview].frame.size.width;
+        body.x = randPosition;
+        if((body.x>0) && (body.x<[self superview].frame.size.width))self.center = body;
         [self setHidden:NO];
         return;
     }
     else
         randPosition = (rand() % 50) + 50;
 
-    body.x = (body.x + direction*randPosition);
+    body.x += direction*randPosition;
 
-    [self moveAnimation];
+    
     float duraction = (randPosition * 0.5)/100;
     [UIView animateWithDuration:duraction animations:^{
-        self.center = body;
+        if((body.x>0) && (body.x<[self superview].frame.size.width)) {
+            self.center = body;
+        }else{
+            return;
+        }
+
     }completion:^(BOOL complete){
         [self stopMoveAnimation];
     }];
+    
+    [self moveAnimation];
 }
 
 -(void)flip

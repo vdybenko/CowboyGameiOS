@@ -51,9 +51,9 @@
 {
     CGPoint body = self.center;
     
-    int randPosition = rand() % 300;
-    int direction = rand() % 2?-1:1;
-    body.x = (view.frame.origin.x + direction*randPosition);
+    int randPosition = rand() % (int)[self superview].frame.origin.x;
+    int direction = 1;//rand() % 2?-1:1;
+    body.x = (direction*randPosition);
     self.center = body;
 }
 @end
