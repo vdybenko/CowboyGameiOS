@@ -523,7 +523,7 @@
 
         CDVisualViewCharacterPartBody *cap = [arrObjBlock objectAtIndex:curentIndex];
         dispatch_async(dispatch_get_main_queue(), ^{
-            viewCharacterBlock.body.image = cap.imageForObject;
+            viewCharacterBlock.shirt.image = cap.imageForObject;
             [priceLbBlock setText:[NSString stringWithFormat:@"%d", cap.money]];
             [bonus setText:[NSString stringWithFormat:@"+ %d",cap.action]];
             [selfBlock tempDefens:cap.action];
@@ -575,7 +575,7 @@
         
         CDVisualViewCharacterPartJakets *cap = [arrObjBlock objectAtIndex:curentIndex];
         dispatch_async(dispatch_get_main_queue(), ^{
-            viewCharacterBlock.shirt.image = cap.imageForObject;
+            viewCharacterBlock.body.image = cap.imageForObject;
             [priceLbBlock setText:[NSString stringWithFormat:@"%d", cap.money]];
             [bonus setText:[NSString stringWithFormat:@"+ %d",cap.action]];
             [selfBlock tempDefens:cap.action];
