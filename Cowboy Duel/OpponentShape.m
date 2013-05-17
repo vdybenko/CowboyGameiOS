@@ -119,30 +119,30 @@ static CGFloat oponentLiveImageViewStartWidth;
     }
     int randomDirection = rand() % 3 - 1;
     [UIView animateWithDuration:0.2 animations:^{
-        CGRect frame = self.frame;
-        frame.origin.x += randomDirection * 40;
-        if((frame.origin.x>0) && (frame.origin.x<[self superview].frame.size.width)){
-            self.frame = frame;
+        CGPoint center = self.center;
+        center.x += randomDirection * 40;
+        if((center.x>0) && (center.x<[self superview].frame.size.width)){
+            self.center = center;
         }else{
             return;
         }
 
     }completion:^(BOOL complete){
         [UIView animateWithDuration:0.2 animations:^{
-            CGRect frame = self.frame;
-            frame.origin.x += randomDirection * 40;
-            if((frame.origin.x>0) && (frame.origin.x<[self superview].frame.size.width)){
-                self.frame = frame;
+            CGPoint center = self.center;
+            center.x += randomDirection * 40;
+            if((center.x>0) && (center.x<[self superview].frame.size.width)){
+                self.center = center;
             }else{
                 return;
             }
 
         }completion:^(BOOL complete){
             [UIView animateWithDuration:0.2 animations:^{
-                CGRect frame = self.frame;
-                frame.origin.x += randomDirection * 40;
-                if((frame.origin.x>0) && (frame.origin.x<[self superview].frame.size.width)){
-                    self.frame = frame;
+                CGPoint center = self.center;
+                center.x += randomDirection * 40;
+                if((center.x>0) && (center.x<[self superview].frame.size.width)){
+                    self.center = center;
                 }else{
                     return;
                 }

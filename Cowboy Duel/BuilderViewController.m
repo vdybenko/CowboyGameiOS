@@ -15,6 +15,8 @@
 #import "CharacterPartGridCell.h"
 #import "CDTransaction.h"
 #import "Utils.h"
+#import "UIButton+Image+Title.h"
+
 
 #define spaceForElements 78
 #define spaceForCheck 39
@@ -40,6 +42,16 @@
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 @property (weak, nonatomic) IBOutlet UIView *backlightDefens;
 @property (weak, nonatomic) IBOutlet UIView *backlightAtac;
+@property (weak, nonatomic) IBOutlet UIButton *hatsBtn;
+@property (weak, nonatomic) IBOutlet UIButton *faceBtn;
+@property (weak, nonatomic) IBOutlet UIButton *ShirtBtn;
+@property (weak, nonatomic) IBOutlet UIButton *jaketsBtn;
+@property (weak, nonatomic) IBOutlet UIButton *shoesBtn;
+@property (weak, nonatomic) IBOutlet UIButton *gunsBtn;
+@property (weak, nonatomic) IBOutlet UIButton *closeBtn;
+@property (weak, nonatomic) IBOutlet UIButton *PantsBtn;
+@property (weak, nonatomic) IBOutlet UIButton *suitsBtn;
+
 
 @end
 
@@ -63,6 +75,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
+    
+    [self.hatsBtn setTitleByLabel:@"Faces" withColor:buttonsTitleColor fontSize:24];
+    [self.faceBtn setTitleByLabel:@"Heats" withColor:buttonsTitleColor fontSize:24];
+    [self.ShirtBtn setTitleByLabel:@"Shirts" withColor:buttonsTitleColor fontSize:24];
+    [self.jaketsBtn setTitleByLabel:@"Jakets" withColor:buttonsTitleColor fontSize:24];
+    [self.PantsBtn setTitleByLabel:@"Pants" withColor:buttonsTitleColor fontSize:24];
+    [self.shoesBtn setTitleByLabel:@"Shoes" withColor:buttonsTitleColor fontSize:24];
+    [self.gunsBtn setTitleByLabel:@"Guns" withColor:buttonsTitleColor fontSize:24];
+    [self.suitsBtn setTitleByLabel:@"Suit" withColor:buttonsTitleColor fontSize:24];
+    [self.closeBtn setTitleByLabel:@"Close" withColor:buttonsTitleColor fontSize:24];
     
     //self.backlightDefens.clipsToBounds = YES;
     self.backlightDefens.layer.cornerRadius = 10.f;
@@ -112,6 +136,15 @@
     [self setResultLabel:nil];
     [self setBacklightDefens:nil];
     [self setBacklightAtac:nil];
+    [self setHatsBtn:nil];
+    [self setFaceBtn:nil];
+    [self setShirtBtn:nil];
+    [self setJaketsBtn:nil];
+    [self setShoesBtn:nil];
+    [self setGunsBtn:nil];
+    [self setCloseBtn:nil];
+    [self setPantsBtn:nil];
+    [self setSuitsBtn:nil];
     [super viewDidUnload];
 }
 -(void)releaseComponents
@@ -132,7 +165,6 @@
     }else{
         return [arrObjects count]+4;
     }
-    
 }
 
 - (CGSize)GMGridView:(GMGridView *)gridView sizeForItemsInInterfaceOrientation:(UIInterfaceOrientation)orientation
@@ -147,7 +179,7 @@
     
     if (cell == nil)
     {
-        cell = [CharacterPartGridCell cell];;
+        cell = [CharacterPartGridCell cell];
     }
     
     BOOL result = [self isCellValid:index];
@@ -155,11 +187,16 @@
         [cell setHidden:NO];
         [cell simpleBackGround];
         CDVisualViewCharacterPart *visualViewCharacterPart = [arrObjects objectAtIndex:index-2];
-        cell.ivImage.image = [visualViewCharacterPart imageForObject];
+        
+        if ([visualViewCharacterPart.nameForImage isEqualToString:@"clearePicture.png"]) {
+            cell.ivImage.image = [UIImage imageNamed:@"сloseCross.png"];
+        }else{
+            cell.ivImage.image = [visualViewCharacterPart imageForObject];
+        }
+        
         if (playerAccount.accountLevel < visualViewCharacterPart.levelLock) {
             cell.lockImg.hidden = NO;
-        }else
-        {
+        }else{
             cell.lockImg.hidden = YES;
         }
     }else{
@@ -239,7 +276,7 @@
 - (void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position;
 {
     BOOL result = [self isCellValid:position];
-    if (result) {
+    if (result && position!=curentObject+2) {
         float questionOffset = spaceForElements * (position-2);
         [grid setUserInteractionEnabled:NO];
         [grid setContentOffset:CGPointMake(0,questionOffset) animated:YES];
@@ -326,18 +363,17 @@
     float questionOffset = spaceForElements * index;
     [grid setContentOffset:CGPointMake(0,questionOffset) animated:YES];
     [grid setUserInteractionEnabled:YES];
-    if (curentObject !=  index){
-        CharacterPartGridCell * cell = (CharacterPartGridCell*)[grid cellForItemAtIndex:curentObject+2];
-        [cell simpleBackGround];
-        
-        curentObject = index;
-        
-        cell = (CharacterPartGridCell*)[grid cellForItemAtIndex:curentObject+2];
-        [cell selectedBackGround];
-        
-        if (didFinishBlock) {
-            didFinishBlock(curentObject);
-        }
+    
+    CharacterPartGridCell * cell = (CharacterPartGridCell*)[grid cellForItemAtIndex:curentObject+2];
+    [cell simpleBackGround];
+    
+    curentObject = index;
+    
+    cell = (CharacterPartGridCell*)[grid cellForItemAtIndex:curentObject+2];
+    [cell selectedBackGround];
+    
+    if (didFinishBlock) {
+        didFinishBlock(curentObject);
     }
 }
 #pragma mark IBAction
@@ -849,13 +885,13 @@
     
     if (IS_IPHONE_5){
         int penultPenultIndex = lastIndex-2;
-        if (position!=0 && position!=1 && position!=lastIndex && position!=penultIndex && position!=penultPenultIndex && position!=curentObject+2){
+        if (position!=0 && position!=1 && position!=lastIndex && position!=penultIndex && position!=penultPenultIndex){
             return YES;
         }else{
             return NO;
         }
     }else{
-        if (position!=0 && position!=1 && position!=lastIndex && position!=penultIndex && position!=curentObject+2){
+        if (position!=0 && position!=1 && position!=lastIndex && position!=penultIndex){
             return YES;
         }else{
             return NO;
