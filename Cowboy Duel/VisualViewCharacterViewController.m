@@ -122,12 +122,12 @@
     scrollViewSwitcherBody.curentObject = playerAccount.visualViewBody;
     scrollViewSwitcherBody.didFinishBlock = ^(NSInteger curentIndex){
         CDVisualViewCharacterPartBody *visualViewCharacterPart = [scrollViewSwitcherBody.arraySwitchObjects objectAtIndex:curentIndex];
-        visualViewCharacter.body.image = [visualViewCharacterPart imageForObject];
+        visualViewCharacter.jakets.image = [visualViewCharacterPart imageForObject];
        visualViewBodySelect = curentIndex;
         
         [self refreshController];
     };
-    [scrollViewSwitcherBody trimObjectsToView:visualViewCharacter.body];
+    [scrollViewSwitcherBody trimObjectsToView:visualViewCharacter.jakets];
     [scrollViewSwitcherBody setMainControls];
     
     scrollViewSwitcherLegs.rectForObjetc = CGRectMake(0,0,165,200);

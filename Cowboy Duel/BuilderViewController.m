@@ -76,6 +76,8 @@
 {
     [super viewDidLoad];
 
+    playerAccount = [AccountDataSource sharedInstance];
+    
     UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     
     [self.hatsBtn setTitleByLabel:@"Heats" withColor:buttonsTitleColor fontSize:24];
@@ -112,13 +114,25 @@
         frame.size.height = self.sideView.frame.size.height - 55;
         grid.frame = frame;
     }
-    
-    playerAccount = [[AccountDataSource alloc] initWithLocalPlayer];
-    self.moneyLabel.text =  [NSString stringWithFormat:@"%d",playerAccount.money];
-    self.defensLabel.text = [NSString stringWithFormat:@"%d",playerAccount.accountDefenseValue];
-    self.attacLabel.text = [NSString stringWithFormat:@"%d",playerServer.weapon + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[playerServer.rank intValue]]];
+    [self refreshController];
 }
- 
+
+-(void)refreshController;
+{
+    self.moneyLabel.text =  [NSString stringWithFormat:@"%d",playerAccount.money];
+    self.defensLabel.text = [NSString stringWithFormat:@"%d",playerAccount.accountDefenseValue + [DuelRewardLogicController countUpBuletsWithPlayerLevel:playerAccount.accountLevel]];
+    self.attacLabel.text = [NSString stringWithFormat:@"%d",playerAccount.accountWeapon.dDamage + [DuelRewardLogicController countUpBuletsWithPlayerLevel:playerAccount.accountLevel]];
+}
+
+-(void)refreshControllerWithGrid;
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self refreshController];
+        [grid reloadData];
+    });
+}
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -392,8 +406,8 @@
 - (IBAction)touchCloseSideView:(id)sender {
     [self cleanAll];
     [self sideCloseAnimation];
-    self.defensLabel.text = [NSString stringWithFormat:@"%d",playerAccount.accountDefenseValue];
-    self.attacLabel.text = [NSString stringWithFormat:@"%d",playerServer.weapon + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[playerServer.rank intValue]]];
+    
+    [self refreshController];
 }
 -(void)cleanAll
 {
@@ -427,13 +441,13 @@
     //Purchase
     didBuyAction = ^(NSInteger curentIndex){
         
-        CDVisualViewCharacterPartHead *cap = [arrObjBlock objectAtIndex:curentIndex];
+        CDVisualViewCharacterPartHead *head = [arrObjBlock objectAtIndex:curentIndex];
        
            CDTransaction *transaction = [[CDTransaction alloc] init];
             transaction.trDescription = @"BuyNewCap";
             transaction.trType = [NSNumber numberWithInt:-1];
-            transaction.trMoneyCh = [NSNumber numberWithInt:cap.money];
-            transaction.trLocalID = [NSNumber numberWithInt:playerAccountBlock.glNumber];
+            transaction.trMoneyCh = [NSNumber numberWithInt:-head.money];
+            transaction.trLocalID = [NSNumber numberWithInt:[playerAccountBlock increaseGlNumber]];
             transaction.trOpponentID = @"";
             transaction.trGlobalID = [NSNumber numberWithInt:-1];
             
@@ -441,12 +455,12 @@
             [playerAccountBlock saveTransaction];
             [playerAccountBlock sendTransactions:playerAccountBlock.transactions];
             
-            playerAccountBlock.money -= cap.money;
+            playerAccountBlock.money -= head.money;
             [playerAccountBlock saveMoney];
             
-            playerAccountBlock.visualViewCap = curentIndex;
+            playerAccountBlock.visualViewHead = curentIndex;
             [playerAccountBlock saveVisualView];
-            [selfBlock refreshController];
+            [selfBlock refreshControllerWithGrid];
     };
 
     [grid reloadData];
@@ -483,8 +497,8 @@
         CDTransaction *transaction = [[CDTransaction alloc] init];
         transaction.trDescription = @"BuyNewFace";
         transaction.trType = [NSNumber numberWithInt:-1];
-        transaction.trMoneyCh = [NSNumber numberWithInt:cap.money];
-        transaction.trLocalID = [NSNumber numberWithInt:playerAccountBlock.glNumber];
+        transaction.trMoneyCh = [NSNumber numberWithInt:-cap.money];
+        transaction.trLocalID = [NSNumber numberWithInt:[playerAccountBlock increaseGlNumber]];
         transaction.trOpponentID = @"";
         transaction.trGlobalID = [NSNumber numberWithInt:-1];
         
@@ -495,11 +509,12 @@
         playerAccountBlock.money -= cap.money;
         [playerAccountBlock saveMoney];
         
-        playerAccountBlock.visualViewHead = curentIndex;
+        playerAccountBlock.visualViewCap = curentIndex;
         [playerAccountBlock saveVisualView];
-        [selfBlock refreshController];
+        
+        [selfBlock refreshControllerWithGrid];
+        [selfBlock setObjectsForIndex:playerAccountBlock.visualViewHead];
     };
-
 
     [grid reloadData];
     [grid setUserInteractionEnabled:YES];
@@ -537,7 +552,7 @@
         transaction.trDescription = @"BuyNewShirt";
         transaction.trType = [NSNumber numberWithInt:-1];
         transaction.trMoneyCh = [NSNumber numberWithInt:cap.money];
-        transaction.trLocalID = [NSNumber numberWithInt:playerAccountBlock.glNumber];
+        transaction.trLocalID = [NSNumber numberWithInt:[playerAccountBlock increaseGlNumber]];
         transaction.trOpponentID = @"";
         transaction.trGlobalID = [NSNumber numberWithInt:-1];
         
@@ -551,7 +566,7 @@
         playerAccountBlock.visualViewBody = curentIndex;
         [playerAccountBlock saveVisualView];
         
-        [selfBlock refreshController];
+        [selfBlock refreshControllerWithGrid];
     };
     [grid reloadData];
     [grid setUserInteractionEnabled:YES];
@@ -575,7 +590,7 @@
         
         CDVisualViewCharacterPartJakets *cap = [arrObjBlock objectAtIndex:curentIndex];
         dispatch_async(dispatch_get_main_queue(), ^{
-            viewCharacterBlock.body.image = cap.imageForObject;
+            viewCharacterBlock.jakets.image = cap.imageForObject;
             [priceLbBlock setText:[NSString stringWithFormat:@"$%d", cap.money]];
             [bonus setText:[NSString stringWithFormat:@"+ %d",cap.action]];
             [selfBlock tempDefens:cap.action];
@@ -588,7 +603,7 @@
         transaction.trDescription = @"BuyNewJacket";
         transaction.trType = [NSNumber numberWithInt:-1];
         transaction.trMoneyCh = [NSNumber numberWithInt:cap.money];
-        transaction.trLocalID = [NSNumber numberWithInt:playerAccountBlock.glNumber];
+        transaction.trLocalID = [NSNumber numberWithInt:[playerAccountBlock increaseGlNumber]];
         transaction.trOpponentID = @"";
         transaction.trGlobalID = [NSNumber numberWithInt:-1];
         
@@ -602,7 +617,7 @@
         playerAccountBlock.visualViewJackets = curentIndex;
         [playerAccountBlock saveVisualView];
         
-        [selfBlock refreshController];
+        [selfBlock refreshControllerWithGrid];
     };
     [grid reloadData];
     [grid setUserInteractionEnabled:YES];
@@ -639,7 +654,7 @@
         transaction.trDescription = @"BuyNewShoes";
         transaction.trType = [NSNumber numberWithInt:-1];
         transaction.trMoneyCh = [NSNumber numberWithInt:cap.money];
-        transaction.trLocalID = [NSNumber numberWithInt:playerAccountBlock.glNumber];
+        transaction.trLocalID = [NSNumber numberWithInt:[playerAccountBlock increaseGlNumber]];
         transaction.trOpponentID = @"";
         transaction.trGlobalID = [NSNumber numberWithInt:-1];
         
@@ -653,7 +668,7 @@
         playerAccountBlock.visualViewShoose = curentIndex;
         [playerAccountBlock saveVisualView];
         
-        [selfBlock refreshController];
+        [selfBlock refreshControllerWithGrid];
 
     };
     [grid reloadData];
@@ -692,7 +707,7 @@
         transaction.trDescription = @"BuyNewGun";
         transaction.trType = [NSNumber numberWithInt:-1];
         transaction.trMoneyCh = [NSNumber numberWithInt:cap.money];
-        transaction.trLocalID = [NSNumber numberWithInt:playerAccountBlock.glNumber];
+        transaction.trLocalID = [NSNumber numberWithInt:[playerAccountBlock increaseGlNumber]];
         transaction.trOpponentID = @"";
         transaction.trGlobalID = [NSNumber numberWithInt:-1];
         
@@ -706,8 +721,7 @@
         playerAccountBlock.visualViewGuns = curentIndex;
         [playerAccountBlock saveVisualView];
         
-        [selfBlock refreshController];
-
+        [selfBlock refreshControllerWithGrid];
     };
     [grid reloadData];
     [grid setUserInteractionEnabled:YES];
@@ -746,7 +760,7 @@
         transaction.trDescription = @"BuyNewPants";
         transaction.trType = [NSNumber numberWithInt:-1];
         transaction.trMoneyCh = [NSNumber numberWithInt:cap.money];
-        transaction.trLocalID = [NSNumber numberWithInt:playerAccountBlock.glNumber];
+        transaction.trLocalID = [NSNumber numberWithInt:[playerAccountBlock increaseGlNumber]];
         transaction.trOpponentID = @"";
         transaction.trGlobalID = [NSNumber numberWithInt:-1];
         
@@ -760,7 +774,7 @@
         playerAccountBlock.visualViewLegs = curentIndex;
         [playerAccountBlock saveVisualView];
         
-        [selfBlock refreshController];
+        [selfBlock refreshControllerWithGrid];
 
     };
     [grid reloadData];
@@ -798,7 +812,7 @@
         transaction.trDescription = @"BuyNewSuits";
         transaction.trType = [NSNumber numberWithInt:-1];
         transaction.trMoneyCh = [NSNumber numberWithInt:cap.money];
-        transaction.trLocalID = [NSNumber numberWithInt:playerAccountBlock.glNumber];
+        transaction.trLocalID = [NSNumber numberWithInt:[playerAccountBlock increaseGlNumber]];
         transaction.trOpponentID = @"";
         transaction.trGlobalID = [NSNumber numberWithInt:-1];
         
@@ -812,7 +826,7 @@
         playerAccountBlock.visualViewLegs = curentIndex;
         [playerAccountBlock saveVisualView];
         
-        [selfBlock refreshController];
+        [selfBlock refreshControllerWithGrid];
     };
     [grid reloadData];
     [grid setUserInteractionEnabled:YES];
@@ -826,11 +840,6 @@
 }
 
 #pragma mark
-
--(void)refreshController;
-{
-    
-}
 
 -(void)tempDefens:(int)plusOnDefens
 {
