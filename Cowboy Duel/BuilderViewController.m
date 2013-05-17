@@ -820,13 +820,14 @@
     
 }
 
-#pragma mark
 - (IBAction)touchBuyBtn:(id)sender{
     if (didBuyAction) {
         didBuyAction(curentObject);
     }
     
 }
+
+#pragma mark
 
 -(void)refreshController;
 {

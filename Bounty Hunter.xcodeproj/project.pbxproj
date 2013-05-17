@@ -496,6 +496,7 @@
 		76D12895159C9DE800E799AA /* PlayerOnLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D12893159C9DE800E799AA /* PlayerOnLineCell.m */; };
 		76D6284D163AC0ED00CA07D2 /* DuelProductAttensionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D6284B163AC0EC00CA07D2 /* DuelProductAttensionViewController.m */; };
 		76D7D79C165126940072D420 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767EF48215D5557100548A04 /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		76D9F4E41746161D0029688A /* builderFace3.png in Resources */ = {isa = PBXBuildFile; fileRef = 76D9F4E31746161D0029688A /* builderFace3.png */; };
 		76E869C715CA8D870024ED08 /* pv_coint.png in Resources */ = {isa = PBXBuildFile; fileRef = 76E869C515CA8D870024ED08 /* pv_coint.png */; };
 		76E869C815CA8D870024ED08 /* pv_coint@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76E869C615CA8D870024ED08 /* pv_coint@2x.png */; };
 		76EB4DC01492661800A3A925 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 76EB4DBE1492661800A3A925 /* Localizable.strings */; };
@@ -1590,6 +1591,7 @@
 		76D12894159C9DE800E799AA /* PlayerOnLineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerOnLineCell.h; sourceTree = "<group>"; };
 		76D6284A163AC0EC00CA07D2 /* DuelProductAttensionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuelProductAttensionViewController.h; sourceTree = "<group>"; };
 		76D6284B163AC0EC00CA07D2 /* DuelProductAttensionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DuelProductAttensionViewController.m; sourceTree = "<group>"; };
+		76D9F4E31746161D0029688A /* builderFace3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = builderFace3.png; sourceTree = "<group>"; };
 		76E869C515CA8D870024ED08 /* pv_coint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pv_coint.png; sourceTree = "<group>"; };
 		76E869C615CA8D870024ED08 /* pv_coint@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pv_coint@2x.png"; sourceTree = "<group>"; };
 		76EB4DC11492662100A3A925 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -2344,6 +2346,7 @@
 		46C07483173CDC4C00711AC5 /* CharacterFaces */ = {
 			isa = PBXGroup;
 			children = (
+				76D9F4E31746161D0029688A /* builderFace3.png */,
 				768DD946173CDB9800B031F3 /* builderFace1.png */,
 				768DD947173CDB9800B031F3 /* builderFace2.png */,
 			);
@@ -4027,6 +4030,7 @@
 				768BC38F1745359C009A9204 /* builderGunInHeand3.png in Resources */,
 				768BC3901745359C009A9204 /* builderGunInHeand2.png in Resources */,
 				768BC3911745359C009A9204 /* builderGunInHeand4.png in Resources */,
+				76D9F4E41746161D0029688A /* builderFace3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
