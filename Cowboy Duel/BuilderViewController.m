@@ -786,6 +786,7 @@
         [self sideOpenAnimation];
         self.backlightDefens.hidden = NO;
         [self backlightDefensAction];
+        [self cleanForSuits];
     }
     __block AccountDataSource *playerAccountBlock = playerAccount;
     arrObjects = [visualViewDataSource arraySuits];
@@ -870,5 +871,33 @@
         }
     }
 }
+-(void)cleanForSuits
+{
 
+    CDVisualViewCharacterPartCap *visualViewCharacterPartCap = [[visualViewDataSource arrayCap] objectAtIndex:0];
+    visualViewCharacter.cap.image = [visualViewCharacterPartCap imageForObject];
+    visualViewCharacterPartCap = nil;
+    
+    CDVisualViewCharacterPartBody *visualViewCharacterPartBody = [[visualViewDataSource arrayBody] objectAtIndex:0];
+     visualViewCharacter.body.image = [visualViewCharacterPartBody imageForObject];
+    visualViewCharacterPartBody = nil;
+    
+    CDVisualViewCharacterPartJakets *visualViewCharacterPartJakets = [[visualViewDataSource arrayJakets] objectAtIndex:0];
+     visualViewCharacter.shirt.image = [visualViewCharacterPartJakets imageForObject];
+    visualViewCharacterPartJakets = nil;
+    
+    CDVisualViewCharacterPartShoose *visualViewCharacterPartShoose = [[visualViewDataSource arrayShoose] objectAtIndex:0];
+     visualViewCharacter.shoose.image = [visualViewCharacterPartShoose imageForObject];
+    visualViewCharacterPartShoose = nil;
+    
+    CDVisualViewCharacterPartLegs *visualViewCharacterPartLegs = [[visualViewDataSource arrayLegs] objectAtIndex:0];
+     visualViewCharacter.length.image = [visualViewCharacterPartLegs imageForObject];
+    visualViewCharacterPartLegs = nil;
+    
+    CDVisualViewCharacterPartSuits *visualViewCharacterPartSuits = [[visualViewDataSource arraySuits] objectAtIndex:0];
+     visualViewCharacter.suits.image = [visualViewCharacterPartSuits imageForObject];
+    visualViewCharacterPartSuits = nil;
+
+
+}
 @end
