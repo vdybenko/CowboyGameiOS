@@ -879,11 +879,11 @@
     visualViewCharacterPartCap = nil;
     
     CDVisualViewCharacterPartBody *visualViewCharacterPartBody = [[visualViewDataSource arrayBody] objectAtIndex:0];
-     visualViewCharacter.body.image = [visualViewCharacterPartBody imageForObject];
+     visualViewCharacter.shirt.image = [visualViewCharacterPartBody imageForObject];
     visualViewCharacterPartBody = nil;
     
     CDVisualViewCharacterPartJakets *visualViewCharacterPartJakets = [[visualViewDataSource arrayJakets] objectAtIndex:0];
-     visualViewCharacter.shirt.image = [visualViewCharacterPartJakets imageForObject];
+     visualViewCharacter.jakets.image = [visualViewCharacterPartJakets imageForObject];
     visualViewCharacterPartJakets = nil;
     
     CDVisualViewCharacterPartShoose *visualViewCharacterPartShoose = [[visualViewDataSource arrayShoose] objectAtIndex:0];
