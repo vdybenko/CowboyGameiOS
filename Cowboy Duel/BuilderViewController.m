@@ -411,6 +411,8 @@
     __block VisualViewCharacter *viewCharacterBlock = visualViewCharacter;
     __block id  priceLbBlock = self.priceOfItem;
     __block id  bonus = self.resultLabel;
+    
+    //Сhoice
     didFinishBlock = ^(NSInteger curentIndex){
       CDVisualViewCharacterPartHead *cap = [arrObjBlock objectAtIndex:curentIndex];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -422,6 +424,7 @@
         [selfBlock refreshController];
 
     };
+    //Purchase
     didBuyAction = ^(NSInteger curentIndex){
         
         CDVisualViewCharacterPartHead *cap = [arrObjBlock objectAtIndex:curentIndex];
@@ -442,7 +445,7 @@
             [playerAccountBlock saveMoney];
             
             playerAccountBlock.visualViewCap = curentIndex;
-          //  [playerAccountBlock saveVisualView];
+            [playerAccountBlock saveVisualView];
             [selfBlock refreshController];
     };
 
@@ -493,7 +496,7 @@
         [playerAccountBlock saveMoney];
         
         playerAccountBlock.visualViewHead = curentIndex;
-       // [playerAccountBlock saveVisualView];
+        [playerAccountBlock saveVisualView];
         [selfBlock refreshController];
     };
 
@@ -546,7 +549,7 @@
         [playerAccountBlock saveMoney];
         
         playerAccountBlock.visualViewBody = curentIndex;
-        //[playerAccountBlock saveVisualView];
+        [playerAccountBlock saveVisualView];
         
         [selfBlock refreshController];
     };
@@ -597,7 +600,7 @@
         [playerAccountBlock saveMoney];
         
         playerAccountBlock.visualViewJackets = curentIndex;
-      //  [playerAccountBlock saveVisualView];
+        [playerAccountBlock saveVisualView];
         
         [selfBlock refreshController];
     };
@@ -648,7 +651,7 @@
         [playerAccountBlock saveMoney];
         
         playerAccountBlock.visualViewShoose = curentIndex;
-        //[playerAccountBlock saveVisualView];
+        [playerAccountBlock saveVisualView];
         
         [selfBlock refreshController];
 
@@ -701,7 +704,7 @@
         [playerAccountBlock saveMoney];
         
         playerAccountBlock.visualViewGuns = curentIndex;
-        //[playerAccountBlock saveVisualView];
+        [playerAccountBlock saveVisualView];
         
         [selfBlock refreshController];
 
@@ -755,7 +758,7 @@
         [playerAccountBlock saveMoney];
         
         playerAccountBlock.visualViewLegs = curentIndex;
-       // [playerAccountBlock saveVisualView];
+        [playerAccountBlock saveVisualView];
         
         [selfBlock refreshController];
 
@@ -808,7 +811,7 @@
         [playerAccountBlock saveMoney];
         
         playerAccountBlock.visualViewLegs = curentIndex;
-        //[playerAccountBlock saveVisualView];
+        [playerAccountBlock saveVisualView];
         
         [selfBlock refreshController];
         

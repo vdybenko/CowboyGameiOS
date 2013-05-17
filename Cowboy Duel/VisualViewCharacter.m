@@ -19,6 +19,7 @@
 @synthesize visualViewDataSource;
 @synthesize shirt;
 @synthesize gun;
+@synthesize suits;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -47,6 +48,7 @@
     visualViewDataSource = nil;
     shirt = nil;
     gun = nil;
+    suits = nil;
 }
 
 -(void)refreshWithAccountPlayer:(AccountDataSource*)accountPlayer;
@@ -82,6 +84,10 @@
     CDVisualViewCharacterPartLegs *visualViewCharacterPartLegs = [[visualViewDataSource arrayLegs] objectAtIndex:accountPlayer.visualViewLegs];
     length.image = [visualViewCharacterPartLegs imageForObject];
     visualViewCharacterPartLegs = nil;
+    
+    CDVisualViewCharacterPartSuits *visualViewCharacterPartSuits = [[visualViewDataSource arraySuits] objectAtIndex:accountPlayer.visualViewSuits];
+    suits.image = [visualViewCharacterPartSuits imageForObject];
+    visualViewCharacterPartSuits = nil;
 }
 
 -(void)cleareView;
