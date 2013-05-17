@@ -30,6 +30,7 @@
     __weak IBOutlet VisualViewCharacter *visualViewCharacter;
     __weak IBOutlet UIView *vArrow;
     __weak IBOutlet GMGridView *grid;
+    __weak IBOutlet UIButton *btnBuyMain;
     BOOL isAnimate;
     
     NSArray *arrObjects;
@@ -51,7 +52,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *closeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *PantsBtn;
 @property (weak, nonatomic) IBOutlet UIButton *suitsBtn;
-
 
 @end
 
@@ -77,6 +77,7 @@
     [super viewDidLoad];
 
     playerAccount = [AccountDataSource sharedInstance];
+    playerAccount.money = 150;
     
     UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     
@@ -159,6 +160,7 @@
     [self setCloseBtn:nil];
     [self setPantsBtn:nil];
     [self setSuitsBtn:nil];
+    btnBuyMain = nil;
     [super viewDidUnload];
 }
 -(void)releaseComponents
@@ -409,10 +411,13 @@
     
     [self refreshController];
 }
--(void)cleanAll
-{
-     [visualViewCharacter refreshWithAccountPlayer:playerAccount];    
+
+- (IBAction)touchBuyBtn:(id)sender{
+    if (didBuyAction) {
+        didBuyAction(curentObject);
+    }
 }
+
 - (IBAction)touchFaceBtn:(id)sender {
     if (!isOpenSide && self.backlightDefens.hidden) {
         [self sideOpenAnimation];
@@ -428,11 +433,12 @@
     
     //Сhoice
     didFinishBlock = ^(NSInteger curentIndex){
-      CDVisualViewCharacterPartHead *cap = [arrObjBlock objectAtIndex:curentIndex];
+      CDVisualViewCharacterPartHead *head = [arrObjBlock objectAtIndex:curentIndex];
         dispatch_async(dispatch_get_main_queue(), ^{
-            viewCharacterBlock.head.image = cap.imageForObject;
-            [priceLbBlock setText:[NSString stringWithFormat:@"$%d", cap.money]];
+            viewCharacterBlock.head.image = head.imageForObject;
+            [priceLbBlock setText:[NSString stringWithFormat:@"$%d", head.money]];
             [bonus setText:[NSString stringWithFormat:@"0"]];
+            [selfBlock checkBtnBuy:head];
         });
     
         [selfBlock refreshController];
@@ -489,6 +495,7 @@
             [priceLbBlock setText:[NSString stringWithFormat:@"$%d", cap.money]];
             [bonus setText:[NSString stringWithFormat:@"+ %d",cap.action]];
             [selfBlock tempDefens:cap.action];
+            [selfBlock checkBtnBuy:cap];
         });
     };
     didBuyAction = ^(NSInteger curentIndex){
@@ -536,12 +543,13 @@
     __block VisualViewCharacter *viewCharacterBlock = visualViewCharacter;
     didFinishBlock = ^(NSInteger curentIndex){
 
-        CDVisualViewCharacterPartBody *cap = [arrObjBlock objectAtIndex:curentIndex];
+        CDVisualViewCharacterPartBody *shirt = [arrObjBlock objectAtIndex:curentIndex];
         dispatch_async(dispatch_get_main_queue(), ^{
-            viewCharacterBlock.shirt.image = cap.imageForObject;
-            [priceLbBlock setText:[NSString stringWithFormat:@"$%d", cap.money]];
-            [bonus setText:[NSString stringWithFormat:@"+ %d",cap.action]];
-            [selfBlock tempDefens:cap.action];
+            viewCharacterBlock.shirt.image = shirt.imageForObject;
+            [priceLbBlock setText:[NSString stringWithFormat:@"$%d", shirt.money]];
+            [bonus setText:[NSString stringWithFormat:@"+ %d",shirt.action]];
+            [selfBlock tempDefens:shirt.action];
+            [selfBlock checkBtnBuy:shirt];
         });
         [selfBlock refreshController];
     };
@@ -588,12 +596,13 @@
 
     didFinishBlock = ^(NSInteger curentIndex){
         
-        CDVisualViewCharacterPartJakets *cap = [arrObjBlock objectAtIndex:curentIndex];
+        CDVisualViewCharacterPartJakets *jaket = [arrObjBlock objectAtIndex:curentIndex];
         dispatch_async(dispatch_get_main_queue(), ^{
-            viewCharacterBlock.jakets.image = cap.imageForObject;
-            [priceLbBlock setText:[NSString stringWithFormat:@"$%d", cap.money]];
-            [bonus setText:[NSString stringWithFormat:@"+ %d",cap.action]];
-            [selfBlock tempDefens:cap.action];
+            viewCharacterBlock.jakets.image = jaket.imageForObject;
+            [priceLbBlock setText:[NSString stringWithFormat:@"$%d", jaket.money]];
+            [bonus setText:[NSString stringWithFormat:@"+ %d",jaket.action]];
+            [selfBlock tempDefens:jaket.action];
+            [selfBlock checkBtnBuy:jaket];
         });
         [selfBlock refreshController];
     };
@@ -639,12 +648,13 @@
 
     didFinishBlock = ^(NSInteger curentIndex){
         
-        CDVisualViewCharacterPartShoose *cap = [arrObjBlock objectAtIndex:curentIndex];
+        CDVisualViewCharacterPartShoose *shoos = [arrObjBlock objectAtIndex:curentIndex];
         dispatch_async(dispatch_get_main_queue(), ^{
-            viewCharacterBlock.shoose.image = cap.imageForObject;
-            [priceLbBlock setText:[NSString stringWithFormat:@"$%d", cap.money] ];
-            [bonus setText:[NSString stringWithFormat:@"+ %d",cap.action]];
-            [selfBlock tempAtac:cap.action];
+            viewCharacterBlock.shoose.image = shoos.imageForObject;
+            [priceLbBlock setText:[NSString stringWithFormat:@"$%d", shoos.money] ];
+            [bonus setText:[NSString stringWithFormat:@"+ %d",shoos.action]];
+            [selfBlock tempAtac:shoos.action];
+            [selfBlock checkBtnBuy:shoos];
         });
         [selfBlock refreshController];
     };
@@ -691,12 +701,13 @@
 
     didFinishBlock = ^(NSInteger curentIndex){
         
-        CDVisualViewCharacterPartGuns *cap = [arrObjBlock objectAtIndex:curentIndex];
+        CDVisualViewCharacterPartGuns *gun = [arrObjBlock objectAtIndex:curentIndex];
         dispatch_async(dispatch_get_main_queue(), ^{
-            viewCharacterBlock.gun.image = cap.imageForObject;
-            [priceLbBlock setText:[NSString stringWithFormat:@"$%d", cap.money] ];
-            [bonus setText:[NSString stringWithFormat:@"+ %d",cap.action] ];
-            [selfBlock tempAtac:cap.action];
+            viewCharacterBlock.gun.image = gun.imageForObject;
+            [priceLbBlock setText:[NSString stringWithFormat:@"$%d", gun.money] ];
+            [bonus setText:[NSString stringWithFormat:@"+ %d",gun.action] ];
+            [selfBlock tempAtac:gun.action];
+            [selfBlock checkBtnBuy:gun];
         });
         [selfBlock refreshController];
     };
@@ -744,12 +755,13 @@
 
     didFinishBlock = ^(NSInteger curentIndex){
         
-        CDVisualViewCharacterPartLegs *cap = [arrObjBlock objectAtIndex:curentIndex];
+        CDVisualViewCharacterPartLegs *legs = [arrObjBlock objectAtIndex:curentIndex];
         dispatch_async(dispatch_get_main_queue(), ^{
-            viewCharacterBlock.length.image = cap.imageForObject;
-            [priceLbBlock setText:[NSString stringWithFormat:@"$%d", cap.money]];
-            [bonus setText:[NSString stringWithFormat:@"+ %d",cap.action]];
-            [selfBlock tempDefens:cap.action];
+            viewCharacterBlock.length.image = legs.imageForObject;
+            [priceLbBlock setText:[NSString stringWithFormat:@"$%d", legs.money]];
+            [bonus setText:[NSString stringWithFormat:@"+ %d",legs.action]];
+            [selfBlock tempDefens:legs.action];
+            [selfBlock checkBtnBuy:legs];
         });
         [selfBlock refreshController];
     };
@@ -798,12 +810,13 @@
     
     didFinishBlock = ^(NSInteger curentIndex){
         
-        CDVisualViewCharacterPartSuits *cap = [arrObjBlock objectAtIndex:curentIndex];
+        CDVisualViewCharacterPartSuits *suit = [arrObjBlock objectAtIndex:curentIndex];
         dispatch_async(dispatch_get_main_queue(), ^{
-            viewCharacterBlock.suits.image = cap.imageForObject;
-            [priceLbBlock setText:[NSString stringWithFormat:@"$%d", cap.money]];
-            [bonus setText:[NSString stringWithFormat:@"+ %d",cap.action]];
-            [selfBlock tempDefens:cap.action];
+            viewCharacterBlock.suits.image = suit.imageForObject;
+            [priceLbBlock setText:[NSString stringWithFormat:@"$%d", suit.money]];
+            [bonus setText:[NSString stringWithFormat:@"+ %d",suit.action]];
+            [selfBlock tempDefens:suit.action];
+            [selfBlock checkBtnBuy:suit];
         });
         [selfBlock refreshController];
     };
@@ -832,12 +845,6 @@
     [grid reloadData];
     [grid setUserInteractionEnabled:YES];
     [self setObjectsForIndex:playerAccount.visualViewSuits];
-}
-
-- (IBAction)touchBuyBtn:(id)sender{
-    if (didBuyAction) {
-        didBuyAction(curentObject);
-    }
 }
 
 #pragma mark
@@ -871,6 +878,23 @@
         }
     }
 }
+
+-(BOOL) checkBtnBuy:(CDVisualViewCharacterPart*)part
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        BOOL partBuyed = NO;
+        if (partBuyed) {
+            btnBuyMain.enabled = YES;
+        }else{
+            if (part.money>playerAccount.money) {
+                btnBuyMain.enabled = NO;
+            }else{
+                btnBuyMain.enabled = YES;
+            }
+        }
+    });
+}
+
 -(void)cleanForSuits
 {
 
@@ -899,5 +923,10 @@
     visualViewCharacterPartSuits = nil;
 
 
+}
+
+-(void)cleanAll
+{
+    [visualViewCharacter refreshWithAccountPlayer:playerAccount];
 }
 @end
