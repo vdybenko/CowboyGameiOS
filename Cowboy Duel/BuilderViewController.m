@@ -394,46 +394,10 @@
     [self sideCloseAnimation];
     self.defensLabel.text = [NSString stringWithFormat:@"%d",playerAccount.accountDefenseValue];
     self.attacLabel.text = [NSString stringWithFormat:@"%d",playerServer.weapon + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[playerServer.rank intValue]]];
-
-
-   
-    
 }
 -(void)cleanAll
 {
-        arrObjects = [visualViewDataSource arraySuits];
-        CDVisualViewCharacterPartSuits *cap = [arrObjects objectAtIndex:playerAccount.visualViewSuits];
-        visualViewCharacter.suits.image = cap.imageForObject;
-    
-        arrObjects = [visualViewDataSource arrayCap];
-        cap = [arrObjects objectAtIndex:playerAccount.visualViewCap];
-        visualViewCharacter.cap.image = cap.imageForObject;
-    
-        arrObjects = [visualViewDataSource arrayBody];
-        cap = [arrObjects objectAtIndex:playerAccount.visualViewBody];
-        visualViewCharacter.body.image = cap.imageForObject;
-    
-        arrObjects = [visualViewDataSource arrayHead];
-        cap = [arrObjects objectAtIndex:playerAccount.visualViewHead];
-        visualViewCharacter.head.image = cap.imageForObject;
-    
-        arrObjects = [visualViewDataSource arrayJakets];
-        cap = [arrObjects objectAtIndex:playerAccount.visualViewJackets];
-        visualViewCharacter.shirt.image = cap.imageForObject;
-    
-        arrObjects = [visualViewDataSource arrayLegs];
-        cap = [arrObjects objectAtIndex:playerAccount.visualViewLegs];
-        visualViewCharacter.length.image = cap.imageForObject;
-    
-        arrObjects = [visualViewDataSource arrayShoose];
-        cap = [arrObjects objectAtIndex:playerAccount.visualViewShoose];
-        visualViewCharacter.shoose.image = cap.imageForObject;
-    
-        arrObjects = [visualViewDataSource arrayGuns];
-        cap = [arrObjects objectAtIndex:playerAccount.visualViewGuns];
-        visualViewCharacter.gun.image = cap.imageForObject;
-
-    
+     [visualViewCharacter refreshWithAccountPlayer:playerAccount];    
 }
 - (IBAction)touchHatBtn:(id)sender {
     if (!isOpenSide && self.backlightDefens.hidden) {
@@ -447,6 +411,8 @@
     __block VisualViewCharacter *viewCharacterBlock = visualViewCharacter;
     __block id  priceLbBlock = self.priceOfItem;
     __block id  bonus = self.resultLabel;
+    
+    //Сhoice
     didFinishBlock = ^(NSInteger curentIndex){
       CDVisualViewCharacterPartHead *cap = [arrObjBlock objectAtIndex:curentIndex];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -458,6 +424,7 @@
         [selfBlock refreshController];
 
     };
+    //Purchase
     didBuyAction = ^(NSInteger curentIndex){
         
         CDVisualViewCharacterPartHead *cap = [arrObjBlock objectAtIndex:curentIndex];
@@ -478,7 +445,7 @@
             [playerAccountBlock saveMoney];
             
             playerAccountBlock.visualViewCap = curentIndex;
-          //  [playerAccountBlock saveVisualView];
+            [playerAccountBlock saveVisualView];
             [selfBlock refreshController];
     };
 
@@ -529,7 +496,7 @@
         [playerAccountBlock saveMoney];
         
         playerAccountBlock.visualViewHead = curentIndex;
-       // [playerAccountBlock saveVisualView];
+        [playerAccountBlock saveVisualView];
         [selfBlock refreshController];
     };
 
@@ -556,7 +523,7 @@
 
         CDVisualViewCharacterPartBody *cap = [arrObjBlock objectAtIndex:curentIndex];
         dispatch_async(dispatch_get_main_queue(), ^{
-            viewCharacterBlock.body.image = cap.imageForObject;
+            viewCharacterBlock.shirt.image = cap.imageForObject;
             [priceLbBlock setText:[NSString stringWithFormat:@"%d", cap.money]];
             [bonus setText:[NSString stringWithFormat:@"+ %d",cap.action]];
             [selfBlock tempDefens:cap.action];
@@ -582,7 +549,7 @@
         [playerAccountBlock saveMoney];
         
         playerAccountBlock.visualViewBody = curentIndex;
-        //[playerAccountBlock saveVisualView];
+        [playerAccountBlock saveVisualView];
         
         [selfBlock refreshController];
     };
@@ -608,7 +575,7 @@
         
         CDVisualViewCharacterPartJakets *cap = [arrObjBlock objectAtIndex:curentIndex];
         dispatch_async(dispatch_get_main_queue(), ^{
-            viewCharacterBlock.shirt.image = cap.imageForObject;
+            viewCharacterBlock.body.image = cap.imageForObject;
             [priceLbBlock setText:[NSString stringWithFormat:@"%d", cap.money]];
             [bonus setText:[NSString stringWithFormat:@"+ %d",cap.action]];
             [selfBlock tempDefens:cap.action];
@@ -633,7 +600,7 @@
         [playerAccountBlock saveMoney];
         
         playerAccountBlock.visualViewJackets = curentIndex;
-      //  [playerAccountBlock saveVisualView];
+        [playerAccountBlock saveVisualView];
         
         [selfBlock refreshController];
     };
@@ -684,7 +651,7 @@
         [playerAccountBlock saveMoney];
         
         playerAccountBlock.visualViewShoose = curentIndex;
-        //[playerAccountBlock saveVisualView];
+        [playerAccountBlock saveVisualView];
         
         [selfBlock refreshController];
 
@@ -737,7 +704,7 @@
         [playerAccountBlock saveMoney];
         
         playerAccountBlock.visualViewGuns = curentIndex;
-        //[playerAccountBlock saveVisualView];
+        [playerAccountBlock saveVisualView];
         
         [selfBlock refreshController];
 
@@ -791,7 +758,7 @@
         [playerAccountBlock saveMoney];
         
         playerAccountBlock.visualViewLegs = curentIndex;
-       // [playerAccountBlock saveVisualView];
+        [playerAccountBlock saveVisualView];
         
         [selfBlock refreshController];
 
@@ -844,7 +811,7 @@
         [playerAccountBlock saveMoney];
         
         playerAccountBlock.visualViewLegs = curentIndex;
-        //[playerAccountBlock saveVisualView];
+        [playerAccountBlock saveVisualView];
         
         [selfBlock refreshController];
         
@@ -856,13 +823,14 @@
     
 }
 
-#pragma mark
 - (IBAction)touchBuyBtn:(id)sender{
     if (didBuyAction) {
         didBuyAction(curentObject);
     }
     
 }
+
+#pragma mark
 
 -(void)refreshController;
 {

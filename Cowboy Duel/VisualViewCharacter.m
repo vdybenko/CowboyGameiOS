@@ -19,6 +19,7 @@
 @synthesize visualViewDataSource;
 @synthesize shirt;
 @synthesize gun;
+@synthesize suits;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -47,6 +48,7 @@
     visualViewDataSource = nil;
     shirt = nil;
     gun = nil;
+    suits = nil;
 }
 
 -(void)refreshWithAccountPlayer:(AccountDataSource*)accountPlayer;
@@ -64,11 +66,11 @@
     visualViewCharacterPartHead = nil;
     
     CDVisualViewCharacterPartBody *visualViewCharacterPartBody = [[visualViewDataSource arrayBody] objectAtIndex:accountPlayer.visualViewBody];
-    body.image = [visualViewCharacterPartBody imageForObject];
+    shirt.image = [visualViewCharacterPartBody imageForObject];
     visualViewCharacterPartBody = nil;
     
     CDVisualViewCharacterPartJakets *visualViewCharacterPartJakets = [[visualViewDataSource arrayJakets] objectAtIndex:accountPlayer.visualViewJackets];
-    shirt.image = [visualViewCharacterPartJakets imageForObject];
+    body.image = [visualViewCharacterPartJakets imageForObject];
     visualViewCharacterPartJakets = nil;
     
     CDVisualViewCharacterPartShoose *visualViewCharacterPartShoose = [[visualViewDataSource arrayShoose] objectAtIndex:accountPlayer.visualViewShoose];
@@ -82,6 +84,10 @@
     CDVisualViewCharacterPartLegs *visualViewCharacterPartLegs = [[visualViewDataSource arrayLegs] objectAtIndex:accountPlayer.visualViewLegs];
     length.image = [visualViewCharacterPartLegs imageForObject];
     visualViewCharacterPartLegs = nil;
+    
+    CDVisualViewCharacterPartSuits *visualViewCharacterPartSuits = [[visualViewDataSource arraySuits] objectAtIndex:accountPlayer.visualViewSuits];
+    suits.image = [visualViewCharacterPartSuits imageForObject];
+    visualViewCharacterPartSuits = nil;
 }
 
 -(void)cleareView;

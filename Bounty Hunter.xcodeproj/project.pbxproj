@@ -391,6 +391,9 @@
 		768B9E3016EF28D200278FCA /* WomanShape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 768B9E2F16EF28D200278FCA /* WomanShape.xib */; };
 		768B9E3316EF29CD00278FCA /* WomanShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 768B9E3216EF29CD00278FCA /* WomanShape.m */; };
 		768BC38A1744F9FD009A9204 /* сloseCross.png in Resources */ = {isa = PBXBuildFile; fileRef = 768BC3891744F9FD009A9204 /* сloseCross.png */; };
+		768BC38F1745359C009A9204 /* builderGunInHeand3.png in Resources */ = {isa = PBXBuildFile; fileRef = 768BC38C1745359C009A9204 /* builderGunInHeand3.png */; };
+		768BC3901745359C009A9204 /* builderGunInHeand2.png in Resources */ = {isa = PBXBuildFile; fileRef = 768BC38D1745359C009A9204 /* builderGunInHeand2.png */; };
+		768BC3911745359C009A9204 /* builderGunInHeand4.png in Resources */ = {isa = PBXBuildFile; fileRef = 768BC38E1745359C009A9204 /* builderGunInHeand4.png */; };
 		768BC7E5170C6F6B00DB63C3 /* GMGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 768BC7D8170C6F6A00DB63C3 /* GMGridView.m */; };
 		768BC7E6170C6F6B00DB63C3 /* GMGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 768BC7DE170C6F6B00DB63C3 /* GMGridViewCell.m */; };
 		768BC7E7170C6F6B00DB63C3 /* GMGridViewLayoutStrategies.m in Sources */ = {isa = PBXBuildFile; fileRef = 768BC7E0170C6F6B00DB63C3 /* GMGridViewLayoutStrategies.m */; };
@@ -493,6 +496,7 @@
 		76D12895159C9DE800E799AA /* PlayerOnLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D12893159C9DE800E799AA /* PlayerOnLineCell.m */; };
 		76D6284D163AC0ED00CA07D2 /* DuelProductAttensionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D6284B163AC0EC00CA07D2 /* DuelProductAttensionViewController.m */; };
 		76D7D79C165126940072D420 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767EF48215D5557100548A04 /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		76D9F4E41746161D0029688A /* builderFace3.png in Resources */ = {isa = PBXBuildFile; fileRef = 76D9F4E31746161D0029688A /* builderFace3.png */; };
 		76E869C715CA8D870024ED08 /* pv_coint.png in Resources */ = {isa = PBXBuildFile; fileRef = 76E869C515CA8D870024ED08 /* pv_coint.png */; };
 		76E869C815CA8D870024ED08 /* pv_coint@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76E869C615CA8D870024ED08 /* pv_coint@2x.png */; };
 		76EB4DC01492661800A3A925 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 76EB4DBE1492661800A3A925 /* Localizable.strings */; };
@@ -1442,6 +1446,9 @@
 		768B9E3116EF29CD00278FCA /* WomanShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WomanShape.h; sourceTree = "<group>"; };
 		768B9E3216EF29CD00278FCA /* WomanShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WomanShape.m; sourceTree = "<group>"; };
 		768BC3891744F9FD009A9204 /* сloseCross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "сloseCross.png"; sourceTree = "<group>"; };
+		768BC38C1745359C009A9204 /* builderGunInHeand3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = builderGunInHeand3.png; sourceTree = "<group>"; };
+		768BC38D1745359C009A9204 /* builderGunInHeand2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = builderGunInHeand2.png; sourceTree = "<group>"; };
+		768BC38E1745359C009A9204 /* builderGunInHeand4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = builderGunInHeand4.png; sourceTree = "<group>"; };
 		768BC7D6170C6F6A00DB63C3 /* GMGridView-Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMGridView-Constants.h"; sourceTree = "<group>"; };
 		768BC7D7170C6F6A00DB63C3 /* GMGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMGridView.h; sourceTree = "<group>"; };
 		768BC7D8170C6F6A00DB63C3 /* GMGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMGridView.m; sourceTree = "<group>"; };
@@ -1603,6 +1610,7 @@
 		76D12894159C9DE800E799AA /* PlayerOnLineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerOnLineCell.h; sourceTree = "<group>"; };
 		76D6284A163AC0EC00CA07D2 /* DuelProductAttensionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuelProductAttensionViewController.h; sourceTree = "<group>"; };
 		76D6284B163AC0EC00CA07D2 /* DuelProductAttensionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DuelProductAttensionViewController.m; sourceTree = "<group>"; };
+		76D9F4E31746161D0029688A /* builderFace3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = builderFace3.png; sourceTree = "<group>"; };
 		76E869C515CA8D870024ED08 /* pv_coint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pv_coint.png; sourceTree = "<group>"; };
 		76E869C615CA8D870024ED08 /* pv_coint@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pv_coint@2x.png"; sourceTree = "<group>"; };
 		76EB4DC11492662100A3A925 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -2367,6 +2375,7 @@
 		46C07483173CDC4C00711AC5 /* CharacterFaces */ = {
 			isa = PBXGroup;
 			children = (
+				76D9F4E31746161D0029688A /* builderFace3.png */,
 				768DD946173CDB9800B031F3 /* builderFace1.png */,
 				768DD947173CDB9800B031F3 /* builderFace2.png */,
 			);
@@ -2417,6 +2426,9 @@
 			isa = PBXGroup;
 			children = (
 				768DD948173CDB9800B031F3 /* builderGunInHeand.png */,
+				768BC38C1745359C009A9204 /* builderGunInHeand3.png */,
+				768BC38D1745359C009A9204 /* builderGunInHeand2.png */,
+				768BC38E1745359C009A9204 /* builderGunInHeand4.png */,
 			);
 			name = CharacterGuns;
 			sourceTree = "<group>";
@@ -4101,6 +4113,10 @@
 				BD4186D61744FA460004AB50 /* LICENSE in Resources */,
 				BD4186D71744FA460004AB50 /* README.md in Resources */,
 				768BC38A1744F9FD009A9204 /* сloseCross.png in Resources */,
+				768BC38F1745359C009A9204 /* builderGunInHeand3.png in Resources */,
+				768BC3901745359C009A9204 /* builderGunInHeand2.png in Resources */,
+				768BC3911745359C009A9204 /* builderGunInHeand4.png in Resources */,
+				76D9F4E41746161D0029688A /* builderFace3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
