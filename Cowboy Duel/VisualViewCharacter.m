@@ -11,7 +11,7 @@
 
 @implementation VisualViewCharacter
 @synthesize mainSubView;
-@synthesize body;
+@synthesize jakets;
 @synthesize head;
 @synthesize cap;
 @synthesize length;
@@ -39,7 +39,7 @@
 -(void)releaseComponents
 {
     mainSubView = nil;
-    body = nil;
+    jakets = nil;
     head = nil;
     cap = nil;
     length = nil;
@@ -70,7 +70,7 @@
     visualViewCharacterPartBody = nil;
     
     CDVisualViewCharacterPartJakets *visualViewCharacterPartJakets = [[visualViewDataSource arrayJakets] objectAtIndex:accountPlayer.visualViewJackets];
-    body.image = [visualViewCharacterPartJakets imageForObject];
+    jakets.image = [visualViewCharacterPartJakets imageForObject];
     visualViewCharacterPartJakets = nil;
     
     CDVisualViewCharacterPartShoose *visualViewCharacterPartShoose = [[visualViewDataSource arrayShoose] objectAtIndex:accountPlayer.visualViewShoose];
