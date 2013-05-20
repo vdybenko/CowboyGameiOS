@@ -462,7 +462,7 @@ static CGFloat blinkBottomOriginY;
     self.crossImageView.hidden = YES;
     
     self.gunButton.hidden = YES;
-    opponentShape.visualViewCharacter.hidden = NO;
+    opponentShape.imgBody.hidden = NO;
     [self showHelpViewOnStartDuel];
     
     userHitCount = 0;
@@ -1347,7 +1347,7 @@ static CGFloat blinkBottomOriginY;
         [timer invalidate];
     }
     
-    [arrowToOpponent updateRelateveToView:opponentShape.visualViewCharacter mainView:self.view];
+    [arrowToOpponent updateRelateveToView:opponentShape.imgBody mainView:self.view];
     arrowToOpponent.hidden = NO;
 }
 

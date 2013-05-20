@@ -25,7 +25,6 @@
 
 @implementation OpponentShape
 @synthesize imgBody;
-@synthesize imgShot;
 @synthesize ivLifeBar;
 @synthesize typeOfBody;
 @synthesize lbLifeLeft;
@@ -42,16 +41,6 @@ static CGFloat oponentLiveImageViewStartWidth;
 {
     self = [super initWithCoder:aDecoder subViewFromNibFileName:@"OpponentShape"];
     if(self){
-    
-        UIImage *spriteSheetSmoke = [UIImage imageNamed:@"smokeSpriteSheet"];
-        NSArray *arrayWithSpritesSmoke = [spriteSheetSmoke spritesWithSpriteSheetImage:spriteSheetSmoke
-                                                                            spriteSize:CGSizeMake(64, 64)];
-        [imgShot setAnimationImages:arrayWithSpritesSmoke];
-        
-        float animationDurationSmoke = [imgShot.animationImages count] * 0.100; // 100ms per frame
-        [imgShot setAnimationRepeatCount:1];
-        [imgShot setAnimationDuration:animationDurationSmoke];
-        
         NSArray *imgDieArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"menDieFrame1.png"], [UIImage imageNamed:@"menDieFrame1.png"],[UIImage imageNamed:@"menDieFrame1.png"],
                              [UIImage imageNamed:@"menDieFrame2.png"], [UIImage imageNamed:@"menDieFrame3.png"],[UIImage imageNamed:@"menDieFrame4.png"],[UIImage imageNamed:@"menDieFrame5.png"],[UIImage imageNamed:@"menDieFrame6.png"],[UIImage imageNamed:@"menDieFrame8.png"],
                              nil];
@@ -76,7 +65,6 @@ static CGFloat oponentLiveImageViewStartWidth;
 -(void)releaseComponents
 {
     vContainer = nil;
-    imgShot = nil;
     ivLifeBar = nil;
     [imgDieOpponentAnimation stopAnimating];
     imgDieOpponentAnimation = nil;
@@ -95,6 +83,7 @@ static CGFloat oponentLiveImageViewStartWidth;
 {
     playerAccount = player;
     [visualViewCharacter refreshWithAccountPlayer:playerAccount];
+    imgBody.image = [visualViewCharacter imageFromCharacter];
 }
 
 -(void) moveAnimation;
@@ -152,11 +141,6 @@ static CGFloat oponentLiveImageViewStartWidth;
 }
 -(void) shot;
 {
-    if ([imgShot isAnimating]) {
-        [imgShot stopAnimating];
-    }
-    [imgShot startAnimating];
-    
     [oponentShotAudioPlayer stop];
     [oponentShotAudioPlayer setCurrentTime:0.0];
     [oponentShotAudioPlayer performSelectorInBackground:@selector(play) withObject:nil];
@@ -270,7 +254,7 @@ static CGFloat oponentLiveImageViewStartWidth;
         case OpponentShapeStatusDead:
         {
             [self stopMoveAnimation];
-            visualViewCharacter.hidden = YES;
+            imgBody.hidden = YES;
             [imgDieOpponentAnimation startAnimating];
         }
             break;
@@ -286,13 +270,11 @@ static CGFloat oponentLiveImageViewStartWidth;
 {
     switch (type) {
         case OpponentShapeTypeManLow:
-            visualViewCharacter.hidden = NO;
-            imgBody.hidden = YES;
-            mainViewOfBody = visualViewCharacter;
+            imgBody.hidden = NO;
+            mainViewOfBody = imgBody;
             break;
         case OpponentShapeTypeScarecrow:
             imgBody.image = [UIImage imageNamed:@"scarecrow.png"];
-            visualViewCharacter.hidden = YES;
             imgBody.hidden = NO;
             mainViewOfBody = imgBody;
             break;
@@ -315,7 +297,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     [mainViewOfBody addSubview:ivHit];
     ivHit = nil;
 
-    int result = [visualViewCharacter checkNumberOfShotsAreas:@[@"{{0, 0}, {89,43}}", @"{{0,43}, {89,65}}", @"{{0,108}, {89,53}}"] forPoint:convertPoint];
+    int result = [imgBody checkNumberOfShotsAreas:@[@"{{0, 0}, {89,43}}", @"{{0,43}, {89,65}}", @"{{0,108}, {89,53}}"] forPoint:convertPoint];
     
     UIColor *color = [UIColor greenColor];
     UIFont *font = [UIFont boldSystemFontOfSize:22];
@@ -398,7 +380,6 @@ static CGFloat oponentLiveImageViewStartWidth;
         {
             [subview removeFromSuperview];
         }
-    }else
-        [visualViewCharacter cleareView];
+    }
 }
 @end
