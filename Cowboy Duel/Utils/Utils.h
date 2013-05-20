@@ -14,7 +14,7 @@
 #define IS_IPOD_SIMULATOR   ( [ [ [ UIDevice currentDevice ] model ] isEqualToString: @"iPad Simulator" ] )
 #define IS_IPHONE ( [ [ [ UIDevice currentDevice ] model ] isEqualToString: @"iPhone" ] || IS_IPHONE_SIMULATOR)
 #define IS_IPOD   ( [ [ [ UIDevice currentDevice ] model ] isEqualToString: @"iPod touch" ] || IS_IPOD_SIMULATOR)
-#define IS_IPHONE_5 ( IS_IPHONE && IS_WIDESCREEN )
+#define IS_IPHONE_5 ( (IS_IPHONE || IS_IPOD) && IS_WIDESCREEN )
 @interface Utils : NSObject {
 
 }

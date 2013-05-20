@@ -112,7 +112,7 @@
     
     if (IS_IPHONE_5) {
         CGRect frame = grid.frame;
-        frame.size.height = self.sideView.frame.size.height - 55;
+        frame.size.height +=75;
         grid.frame = frame;
     }
     [self refreshController];
