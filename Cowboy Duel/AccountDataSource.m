@@ -34,6 +34,7 @@ static const char *LIST_BOTS_URL = BASE_URL"users/get_user_data";
 @synthesize visualViewJackets;
 @synthesize visualViewGuns;
 @synthesize visualViewSuits;
+@synthesize arrayOfBoughtProducts;
 #pragma mark
 
 static AccountDataSource *sharedHelper = nil;
@@ -84,6 +85,7 @@ static AccountDataSource *sharedHelper = nil;
         transactions = [[NSMutableArray alloc] init];
         achivments = [[NSMutableArray alloc] init];
         dicForRequests=[[NSMutableDictionary alloc] init];
+        arrayOfBoughtProducts=[[NSMutableArray alloc] init];
        
         self.visualViewCap = 0;
         self.visualViewHead = 0;
@@ -464,6 +466,8 @@ static AccountDataSource *sharedHelper = nil;
     return glNumber;
 }
 
+#pragma mark
+
 - (void)saveVisualView;
 {
     [[NSUserDefaults standardUserDefaults] setInteger:visualViewCap forKey:@"VV_CAP_VALUE"];
@@ -474,6 +478,10 @@ static AccountDataSource *sharedHelper = nil;
     [[NSUserDefaults standardUserDefaults] setInteger:visualViewJackets forKey:@"VV_SHIRTS_VALUE"];
     [[NSUserDefaults standardUserDefaults] setInteger:visualViewGuns forKey:@"VV_GUN_VALUE"];
      [[NSUserDefaults standardUserDefaults] setInteger:visualViewSuits forKey:@"VV_SUITS_VALUE"];
+    
+    NSData *data= [NSKeyedArchiver archivedDataWithRootObject:arrayOfBoughtProducts];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"VV_ARRAY_Bought"];
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"VV_ARRAY_Bought"];
 }
 
 - (void)loadVisualView;
@@ -487,8 +495,22 @@ static AccountDataSource *sharedHelper = nil;
     self.visualViewGuns = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_GUN_VALUE"];
     self.visualViewSuits = [[NSUserDefaults standardUserDefaults] integerForKey:@"VV_SUITS_VALUE"];
   
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"VV_ARRAY_Bought"];
+    arrayOfBoughtProducts = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    if (!arrayOfBoughtProducts) {
+        arrayOfBoughtProducts=[[NSMutableArray alloc] init];
+    }
 }
 
+- (BOOL)isProductBought:(NSInteger)index;{
+    for (NSUInteger i = 0; i < [arrayOfBoughtProducts count]; i++) {
+        NSNumber *indexProduct = [arrayOfBoughtProducts objectAtIndex:i];
+        if ([indexProduct intValue]==index) {
+            return YES;
+        }
+    }
+    return NO;
+}
 #pragma mark
 
 - (BOOL)isPlayerPlayDuel;

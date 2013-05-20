@@ -61,6 +61,8 @@
 @property(nonatomic) int visualViewJackets;
 @property(nonatomic) int visualViewGuns;
 @property(nonatomic) int visualViewSuits;
+@property(nonatomic) NSMutableArray *arrayOfBoughtProducts;
+
 + (AccountDataSource *)sharedInstance;
 - (id)initWithLocalPlayer;
 - (void)loadAllParametrs;
@@ -100,7 +102,7 @@
 
 - (void)saveVisualView;
 - (void)loadVisualView;
-
+- (BOOL)isProductBought:(NSInteger)index;
 
 - (BOOL)isPlayerPlayDuel;
 - (BOOL)isPlayerForPractice;
