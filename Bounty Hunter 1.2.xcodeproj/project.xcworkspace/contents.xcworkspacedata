@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Bounty Hunter.xcodeproj">
+      location = "self:Bounty Hunter 1.2.xcodeproj">
    </FileRef>
 </Workspace>
