@@ -93,17 +93,17 @@
     [UIView animateWithDuration:0.4 animations:^{
         CGRect frame = self.frame;
         frame.origin.x += randomDirection * 40;
-        self.frame = frame;
+        if((frame.origin.x>0) && (frame.origin.x<[self superview].frame.size.width))self.frame = frame;
     }completion:^(BOOL complete){
         [UIView animateWithDuration:0.4 animations:^{
             CGRect frame = self.frame;
             frame.origin.x += randomDirection * 40;
-            self.frame = frame;
+            if((frame.origin.x>0) && (frame.origin.x<[self superview].frame.size.width))self.frame = frame;
         }completion:^(BOOL complete){
             [UIView animateWithDuration:0.4 animations:^{
                 CGRect frame = self.frame;
                 frame.origin.x += randomDirection * 40;
-                self.frame = frame;
+                if((frame.origin.x>0) && (frame.origin.x<[self superview].frame.size.width))self.frame = frame;
             }completion:^(BOOL complete){
             }];
         }];

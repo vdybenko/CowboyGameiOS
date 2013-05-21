@@ -633,6 +633,11 @@
 		BD3851F7169C3BE70066419B /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3851F6169C3BE70066419B /* FacebookSDK.framework */; };
 		BD3B88FA1689AC2100FB68F5 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD81FB421678847D00417076 /* Accounts.framework */; };
 		BD3B88FC1689AC5B00FB68F5 /* FunPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD16BF951680934F00628CCC /* FunPageViewController.m */; };
+		BD4186D31744FA460004AB50 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = BD4186C61744FA460004AB50 /* .gitignore */; };
+		BD4186D41744FA460004AB50 /* GBDeviceInfo-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD4186C81744FA460004AB50 /* GBDeviceInfo-Info.plist */; };
+		BD4186D51744FA460004AB50 /* GBDeviceInfo_iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4186CC1744FA460004AB50 /* GBDeviceInfo_iOS.m */; };
+		BD4186D61744FA460004AB50 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = BD4186D11744FA460004AB50 /* LICENSE */; };
+		BD4186D71744FA460004AB50 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BD4186D21744FA460004AB50 /* README.md */; };
 		BD4BAAB616BC064A00F88E82 /* men_low.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4BAAB416BC064900F88E82 /* men_low.png */; };
 		BD4BAAB716BC064A00F88E82 /* men_low.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4BAAB416BC064900F88E82 /* men_low.png */; };
 		BD4BAAB816BC064A00F88E82 /* men_low@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4BAAB516BC064900F88E82 /* men_low@2x.png */; };
@@ -977,6 +982,20 @@
 			remoteGlobalIDString = 78509312149FAC2E000787E4;
 			remoteInfo = GMGridView;
 		};
+		BD4186DA1744FA470004AB50 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BD4186CE1744FA460004AB50 /* GBDeviceInfo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8A38F593162DA1C100BCF240;
+			remoteInfo = "GBDeviceInfo-iOS";
+		};
+		BD4186DC1744FA470004AB50 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BD4186CE1744FA460004AB50 /* GBDeviceInfo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8A1B118D16F21F2E00BDDD2A;
+			remoteInfo = "GBDeviceInfo-OSX";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -1281,7 +1300,7 @@
 		6048940A137D195800F6CCB1 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		6048E44213A9F4E2005BA961 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		604AAC441394C9E200A73CAC /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		60593A6C1379321700256204 /* Bounty Hunter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bounty Hunter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		60593A6C1379321700256204 /* Bounty Hunter 1.2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bounty Hunter 1.2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60593A701379321800256204 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		60593A721379321800256204 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		60593A741379321800256204 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1771,6 +1790,16 @@
 		BD38525A169C3F420066419B /* FBTestSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBTestSession.h; sourceTree = "<group>"; };
 		BD38525B169C3F420066419B /* FBUserSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBUserSettingsViewController.h; sourceTree = "<group>"; };
 		BD38525C169C3F420066419B /* FBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBViewController.h; sourceTree = "<group>"; };
+		BD4186C61744FA460004AB50 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		BD4186C81744FA460004AB50 /* GBDeviceInfo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GBDeviceInfo-Info.plist"; sourceTree = "<group>"; };
+		BD4186C91744FA460004AB50 /* GBDeviceInfo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBDeviceInfo-Prefix.pch"; sourceTree = "<group>"; };
+		BD4186CA1744FA460004AB50 /* GBDeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDeviceInfo.h; sourceTree = "<group>"; };
+		BD4186CB1744FA460004AB50 /* GBDeviceInfo_iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDeviceInfo_iOS.h; sourceTree = "<group>"; };
+		BD4186CC1744FA460004AB50 /* GBDeviceInfo_iOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBDeviceInfo_iOS.m; sourceTree = "<group>"; };
+		BD4186CD1744FA460004AB50 /* GBTypes_iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBTypes_iOS.h; sourceTree = "<group>"; };
+		BD4186CE1744FA460004AB50 /* GBDeviceInfo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = GBDeviceInfo.xcodeproj; sourceTree = "<group>"; };
+		BD4186D11744FA460004AB50 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		BD4186D21744FA460004AB50 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		BD4BAAB416BC064900F88E82 /* men_low.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = men_low.png; sourceTree = "<group>"; };
 		BD4BAAB516BC064900F88E82 /* men_low@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "men_low@2x.png"; sourceTree = "<group>"; };
 		BD68C49916A705D200A9B52A /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
@@ -2525,6 +2554,7 @@
 		60593A611379321700256204 = {
 			isa = PBXGroup;
 			children = (
+				BD4186C51744FA460004AB50 /* GBDeviceInfo-master */,
 				BD0DA0FD16D37D3C00419DC1 /* OpenGLES.framework */,
 				BD38523D169C3F420066419B /* DeprecatedHeaders */,
 				763E6BB81664B18500FA4E86 /* GoogleAdMobAdsSdkiOS-6.2.1 */,
@@ -2544,7 +2574,7 @@
 		60593A6D1379321700256204 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				60593A6C1379321700256204 /* Bounty Hunter.app */,
+				60593A6C1379321700256204 /* Bounty Hunter 1.2.app */,
 				BD83A5A816720DFE003EE4B3 /* Test.app */,
 			);
 			name = Products;
@@ -3177,6 +3207,40 @@
 			path = FacebookSDK.framework/Versions/A/DeprecatedHeaders;
 			sourceTree = "<group>";
 		};
+		BD4186C51744FA460004AB50 /* GBDeviceInfo-master */ = {
+			isa = PBXGroup;
+			children = (
+				BD4186C61744FA460004AB50 /* .gitignore */,
+				BD4186C71744FA460004AB50 /* GBDeviceInfo */,
+				BD4186CE1744FA460004AB50 /* GBDeviceInfo.xcodeproj */,
+				BD4186D11744FA460004AB50 /* LICENSE */,
+				BD4186D21744FA460004AB50 /* README.md */,
+			);
+			path = "GBDeviceInfo-master";
+			sourceTree = "<group>";
+		};
+		BD4186C71744FA460004AB50 /* GBDeviceInfo */ = {
+			isa = PBXGroup;
+			children = (
+				BD4186C81744FA460004AB50 /* GBDeviceInfo-Info.plist */,
+				BD4186C91744FA460004AB50 /* GBDeviceInfo-Prefix.pch */,
+				BD4186CA1744FA460004AB50 /* GBDeviceInfo.h */,
+				BD4186CB1744FA460004AB50 /* GBDeviceInfo_iOS.h */,
+				BD4186CC1744FA460004AB50 /* GBDeviceInfo_iOS.m */,
+				BD4186CD1744FA460004AB50 /* GBTypes_iOS.h */,
+			);
+			path = GBDeviceInfo;
+			sourceTree = "<group>";
+		};
+		BD4186CF1744FA460004AB50 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BD4186DB1744FA470004AB50 /* libGBDeviceInfo.a */,
+				BD4186DD1744FA470004AB50 /* GBDeviceInfo.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		BD7F2AE41649647500D29263 /* MKStore */ = {
 			isa = PBXGroup;
 			children = (
@@ -3528,9 +3592,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		60593A6B1379321700256204 /* Bounty Hunter */ = {
+		60593A6B1379321700256204 /* Bounty Hunter 1.2 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 60593A921379321800256204 /* Build configuration list for PBXNativeTarget "Bounty Hunter" */;
+			buildConfigurationList = 60593A921379321800256204 /* Build configuration list for PBXNativeTarget "Bounty Hunter 1.2" */;
 			buildPhases = (
 				60593A681379321700256204 /* Sources */,
 				60593A691379321700256204 /* Frameworks */,
@@ -3542,9 +3606,9 @@
 			);
 			dependencies = (
 			);
-			name = "Bounty Hunter";
+			name = "Bounty Hunter 1.2";
 			productName = Test;
-			productReference = 60593A6C1379321700256204 /* Bounty Hunter.app */;
+			productReference = 60593A6C1379321700256204 /* Bounty Hunter 1.2.app */;
 			productType = "com.apple.product-type.application";
 		};
 		BD83A40716720DFE003EE4B3 /* Test */ = {
@@ -3575,7 +3639,7 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 			};
-			buildConfigurationList = 60593A661379321700256204 /* Build configuration list for PBXProject "Bounty Hunter" */;
+			buildConfigurationList = 60593A661379321700256204 /* Build configuration list for PBXProject "Bounty Hunter 1.2" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -3599,13 +3663,17 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = BD4186CF1744FA460004AB50 /* Products */;
+					ProjectRef = BD4186CE1744FA460004AB50 /* GBDeviceInfo.xcodeproj */;
+				},
+				{
 					ProductGroup = 768BC7DA170C6F6A00DB63C3 /* Products */;
 					ProjectRef = 768BC7D9170C6F6A00DB63C3 /* GMGridView.xcodeproj */;
 				},
 			);
 			projectRoot = "";
 			targets = (
-				60593A6B1379321700256204 /* Bounty Hunter */,
+				60593A6B1379321700256204 /* Bounty Hunter 1.2 */,
 				BD83A40716720DFE003EE4B3 /* Test */,
 			);
 		};
@@ -3617,6 +3685,20 @@
 			fileType = archive.ar;
 			path = libGMGridView.a;
 			remoteRef = 768BC7EB170C6F6B00DB63C3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BD4186DB1744FA470004AB50 /* libGBDeviceInfo.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libGBDeviceInfo.a;
+			remoteRef = BD4186DA1744FA470004AB50 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BD4186DD1744FA470004AB50 /* GBDeviceInfo.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GBDeviceInfo.framework;
+			remoteRef = BD4186DC1744FA470004AB50 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -4026,6 +4108,10 @@
 				76B250921743C55100BFF0D3 /* builderShirt5.png in Resources */,
 				76B250941743C55F00BFF0D3 /* builderHat3.png in Resources */,
 				4670C16B1743D55300D27FF8 /* clearePicture.png in Resources */,
+				BD4186D31744FA460004AB50 /* .gitignore in Resources */,
+				BD4186D41744FA460004AB50 /* GBDeviceInfo-Info.plist in Resources */,
+				BD4186D61744FA460004AB50 /* LICENSE in Resources */,
+				BD4186D71744FA460004AB50 /* README.md in Resources */,
 				768BC38A1744F9FD009A9204 /* сloseCross.png in Resources */,
 				768BC38F1745359C009A9204 /* builderGunInHeand3.png in Resources */,
 				768BC3901745359C009A9204 /* builderGunInHeand2.png in Resources */,
@@ -4456,6 +4542,7 @@
 				46C0748E173CEBA100711AC5 /* CDVisualViewCharacterPartJakets.m in Sources */,
 				768659461740D6CB00C1986B /* CharacterPartGridCell.m in Sources */,
 				4670C1671743BA1F00D27FF8 /* CDVisualViewCharacterPartSuits.m in Sources */,
+				BD4186D51744FA460004AB50 /* GBDeviceInfo_iOS.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4696,7 +4783,7 @@
 					"-weak_library",
 					/usr/lib/libSystem.B.dylib,
 				);
-				PRODUCT_NAME = "Bounty Hunter";
+				PRODUCT_NAME = "Bounty Hunter 1.2";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				REZ_SEARCH_PATHS = "$(inherited)";
@@ -4795,7 +4882,7 @@
 					"-weak_library",
 					/usr/lib/libSystem.B.dylib,
 				);
-				PRODUCT_NAME = "Bounty Hunter";
+				PRODUCT_NAME = "Bounty Hunter 1.2";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				REZ_SEARCH_PATHS = (
@@ -5045,9 +5132,9 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sergij Sobol (DF8EH42X59)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: SPE Dybenko Olga Viktorovna  (WebKate)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: SPE Dybenko Olga Viktorovna  (WebKate)";
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5093,10 +5180,10 @@
 					"-weak_library",
 					/usr/lib/libSystem.B.dylib,
 				);
-				PRODUCT_NAME = "Bounty Hunter";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=*]" = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PRODUCT_NAME = "Bounty Hunter 1.2";
+				PROVISIONING_PROFILE = "A875C637-FA0E-4F9B-8F4A-FDE7CC0A3ECA";
+				"PROVISIONING_PROFILE[sdk=*]" = "2569E2A7-3712-4C3A-8D71-83BB0C3F66A1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2569E2A7-3712-4C3A-8D71-83BB0C3F66A1";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
@@ -5115,7 +5202,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		60593A661379321700256204 /* Build configuration list for PBXProject "Bounty Hunter" */ = {
+		60593A661379321700256204 /* Build configuration list for PBXProject "Bounty Hunter 1.2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				60593A901379321800256204 /* Debug */,
@@ -5125,7 +5212,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		60593A921379321800256204 /* Build configuration list for PBXNativeTarget "Bounty Hunter" */ = {
+		60593A921379321800256204 /* Build configuration list for PBXNativeTarget "Bounty Hunter 1.2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				60593A931379321800256204 /* Debug */,
