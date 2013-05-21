@@ -83,10 +83,6 @@ BOOL isSoundControl;
     lbContactButton.text = NSLocalizedString(@"ContactUs", nil);
     lbContactButton.textColor = btnColor;
     lbContactButton.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
-
-//    TO do deleet this
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"VV_ARRAY_Bought"];
-    [[AccountDataSource sharedInstance].arrayOfBoughtProducts removeAllObjects];
     
     [_webViewMessage setOpaque:NO];
     [_webViewMessage setBackgroundColor:[UIColor clearColor]];

@@ -9,15 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "GMGridView.h"
 #import "GMGridViewLayoutStrategies.h"
+#import "VisualViewDataSource.h"
 
 @class VisualViewDataSource;
 
-@interface BuilderViewController : UIViewController<MemoryManagement,GMGridViewDataSource,GMGridViewActionDelegate,UIScrollViewDelegate>
-typedef void (^ScrollViewSwitcherResult)(NSInteger curentIndex);
-typedef void (^BuyActionBlock)(NSInteger curentIndex);
+@protocol BuilderViewControllerDelegate <NSObject>
+
+@optional
+-(void) grid:(GMGridView*)grid selectIndex:(NSInteger)index forType:(CharacterPart)type;
+-(void) grid:(GMGridView*)grid buyProductForIndex:(NSInteger)index forType:(CharacterPart)type;
+@end
+
+@interface BuilderViewController : UIViewController<MemoryManagement,GMGridViewDataSource,GMGridViewActionDelegate,UIScrollViewDelegate,BuilderViewControllerDelegate>
 
 @property (strong, nonatomic) VisualViewDataSource *visualViewDataSource;
-@property (copy) ScrollViewSwitcherResult didFinishBlock;
-@property (copy) BuyActionBlock didBuyAction;
 @property (nonatomic) NSInteger curentObject;
 @end
