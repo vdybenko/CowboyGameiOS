@@ -543,6 +543,7 @@
             break;
     }
     [playerAccount saveVisualView];
+    [self setObjectsForIndex:index];
     [self refreshControllerWithGrid];
 }
 
