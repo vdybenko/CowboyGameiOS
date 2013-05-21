@@ -18,6 +18,18 @@
 #import "CDVisualViewCharacterPartJakets.h"
 #import "CDVisualViewCharacterPartSuits.h"
 
+typedef enum
+{
+    CharacterPartCap,
+    CharacterPartFace,
+    CharacterPartShirt,
+    CharacterPartLegs,
+    CharacterPartShoose,
+    CharacterPartGun,
+    CharacterPartJaket,
+    CharacterPartSuit
+}CharacterPart;
+
 @interface VisualViewDataSource : NSObject<MemoryManagement>
 @property (strong,nonatomic) NSMutableArray *arrayHead;
 @property (strong,nonatomic) NSMutableArray *arrayCap;
