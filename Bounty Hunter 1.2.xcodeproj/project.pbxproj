@@ -633,7 +633,6 @@
 		BD3851F7169C3BE70066419B /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3851F6169C3BE70066419B /* FacebookSDK.framework */; };
 		BD3B88FA1689AC2100FB68F5 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD81FB421678847D00417076 /* Accounts.framework */; };
 		BD3B88FC1689AC5B00FB68F5 /* FunPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD16BF951680934F00628CCC /* FunPageViewController.m */; };
-		BD4186D31744FA460004AB50 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = BD4186C61744FA460004AB50 /* .gitignore */; };
 		BD4186D41744FA460004AB50 /* GBDeviceInfo-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD4186C81744FA460004AB50 /* GBDeviceInfo-Info.plist */; };
 		BD4186D51744FA460004AB50 /* GBDeviceInfo_iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4186CC1744FA460004AB50 /* GBDeviceInfo_iOS.m */; };
 		BD4186D61744FA460004AB50 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = BD4186D11744FA460004AB50 /* LICENSE */; };
@@ -1790,7 +1789,6 @@
 		BD38525A169C3F420066419B /* FBTestSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBTestSession.h; sourceTree = "<group>"; };
 		BD38525B169C3F420066419B /* FBUserSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBUserSettingsViewController.h; sourceTree = "<group>"; };
 		BD38525C169C3F420066419B /* FBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBViewController.h; sourceTree = "<group>"; };
-		BD4186C61744FA460004AB50 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		BD4186C81744FA460004AB50 /* GBDeviceInfo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GBDeviceInfo-Info.plist"; sourceTree = "<group>"; };
 		BD4186C91744FA460004AB50 /* GBDeviceInfo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBDeviceInfo-Prefix.pch"; sourceTree = "<group>"; };
 		BD4186CA1744FA460004AB50 /* GBDeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDeviceInfo.h; sourceTree = "<group>"; };
@@ -3210,7 +3208,6 @@
 		BD4186C51744FA460004AB50 /* GBDeviceInfo-master */ = {
 			isa = PBXGroup;
 			children = (
-				BD4186C61744FA460004AB50 /* .gitignore */,
 				BD4186C71744FA460004AB50 /* GBDeviceInfo */,
 				BD4186CE1744FA460004AB50 /* GBDeviceInfo.xcodeproj */,
 				BD4186D11744FA460004AB50 /* LICENSE */,
@@ -4108,7 +4105,6 @@
 				76B250921743C55100BFF0D3 /* builderShirt5.png in Resources */,
 				76B250941743C55F00BFF0D3 /* builderHat3.png in Resources */,
 				4670C16B1743D55300D27FF8 /* clearePicture.png in Resources */,
-				BD4186D31744FA460004AB50 /* .gitignore in Resources */,
 				BD4186D41744FA460004AB50 /* GBDeviceInfo-Info.plist in Resources */,
 				BD4186D61744FA460004AB50 /* LICENSE in Resources */,
 				BD4186D71744FA460004AB50 /* README.md in Resources */,
@@ -4906,8 +4902,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Pasha Grebenyk (V9SBA4G34E)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Pasha Grebenyk (V9SBA4G34E)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4951,8 +4947,8 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = Test;
-				PROVISIONING_PROFILE = "3D8DE91A-4C29-4033-9548-E59069A5EBFE";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3D8DE91A-4C29-4033-9548-E59069A5EBFE";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				REZ_SEARCH_PATHS = "$(inherited)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -4969,8 +4965,8 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Pasha Grebenyk (V9SBA4G34E)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5012,8 +5008,8 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = Test;
-				PROVISIONING_PROFILE = "3D8DE91A-4C29-4033-9548-E59069A5EBFE";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8131AE32-3B8D-4690-885F-7EEF3B8CDCEE";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
@@ -5033,9 +5029,9 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Pasha Grebenyk (V9SBA4G34E)";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Taras Koksharov (HS5PFAL7LN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5078,9 +5074,9 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = Test;
-				PROVISIONING_PROFILE = "3D8DE91A-4C29-4033-9548-E59069A5EBFE";
-				"PROVISIONING_PROFILE[sdk=*]" = "5B2C4BE5-DD93-4ED2-8516-F2ADC6D017CE";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "487016A9-7921-4B61-B706-D0684B4D9782";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=*]" = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
@@ -5132,9 +5128,9 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Sergij Sobol (DF8EH42X59)";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: SPE Dybenko Olga Viktorovna  (WebKate)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: SPE Dybenko Olga Viktorovna  (WebKate)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5181,9 +5177,9 @@
 					/usr/lib/libSystem.B.dylib,
 				);
 				PRODUCT_NAME = "Bounty Hunter 1.2";
-				PROVISIONING_PROFILE = "A875C637-FA0E-4F9B-8F4A-FDE7CC0A3ECA";
-				"PROVISIONING_PROFILE[sdk=*]" = "2569E2A7-3712-4C3A-8D71-83BB0C3F66A1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2569E2A7-3712-4C3A-8D71-83BB0C3F66A1";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=*]" = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				REZ_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",

@@ -46,9 +46,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "60593A6B1379321700256204"
-            BuildableName = "Bounty Hunter.app"
-            BlueprintName = "Bounty Hunter"
-            ReferencedContainer = "container:Bounty Hunter.xcodeproj">
+            BuildableName = "Bounty Hunter 1.2.app"
+            BlueprintName = "Bounty Hunter 1.2"
+            ReferencedContainer = "container:Bounty Hunter 1.2.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -67,9 +67,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "60593A6B1379321700256204"
-            BuildableName = "Bounty Hunter.app"
-            BlueprintName = "Bounty Hunter"
-            ReferencedContainer = "container:Bounty Hunter.xcodeproj">
+            BuildableName = "Bounty Hunter 1.2.app"
+            BlueprintName = "Bounty Hunter 1.2"
+            ReferencedContainer = "container:Bounty Hunter 1.2.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
