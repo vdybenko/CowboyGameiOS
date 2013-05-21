@@ -388,13 +388,18 @@
 }
 #pragma mark BuilderViewControllerDelegate
 
--(void) grid:(GMGridView*)grid selectIndex:(NSInteger)index forType:(CharacterPart)type;
+-(void) grid:(GMGridView*)pGrid selectIndex:(NSInteger)index forType:(CharacterPart)type;
 {
     CDVisualViewCharacterPartSuits *part = [arrObjects objectAtIndex:index];
     
     [self.priceOfItem setText:[NSString stringWithFormat:@"$%d", part.money]];
     BOOL isBtnForBuy = [self checkBtnBuy:part];
 
+    CharacterPartGridCell *cell = (CharacterPartGridCell*)[pGrid cellForItemAtIndex:curentObject+2];
+    if (![cell.lockImg isHidden]) {
+        [btnBuyMain setEnabled:NO];
+    }
+    
     switch (type) {
         case CharacterPartCap:
             visualViewCharacter.cap.image = part.imageForObject;
