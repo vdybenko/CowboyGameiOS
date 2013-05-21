@@ -77,8 +77,6 @@
     [super viewDidLoad];
 
     playerAccount = [AccountDataSource sharedInstance];
-//    To do delete
-    playerAccount.money = 550;
     
     UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     
