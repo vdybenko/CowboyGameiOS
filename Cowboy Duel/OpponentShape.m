@@ -18,7 +18,7 @@
     IBOutlet UIView *vContainer;
     AVAudioPlayer *oponentShotAudioPlayer;
     CGPoint anchP;
-    
+    BOOL isMove;
     UIView *mainViewOfBody;
     __weak IBOutlet UIImageView *shotSmoke;
 }
@@ -42,6 +42,7 @@ static CGFloat oponentLiveImageViewStartWidth;
 {
     self = [super initWithCoder:aDecoder subViewFromNibFileName:@"OpponentShape"];
     if(self){
+        isMove = NO;
         NSArray *imgDieArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"menDieFrame1.png"], [UIImage imageNamed:@"menDieFrame1.png"],[UIImage imageNamed:@"menDieFrame1.png"],
                              [UIImage imageNamed:@"menDieFrame2.png"], [UIImage imageNamed:@"menDieFrame3.png"],[UIImage imageNamed:@"menDieFrame4.png"],[UIImage imageNamed:@"menDieFrame5.png"],[UIImage imageNamed:@"menDieFrame6.png"],[UIImage imageNamed:@"menDieFrame8.png"],
                              nil];
@@ -66,6 +67,7 @@ static CGFloat oponentLiveImageViewStartWidth;
         shotSmoke.animationDuration = 0.6f;
         [shotSmoke setAnimationRepeatCount:1];
         [self addSubview:shotSmoke];
+       
    
     }
     return self;
@@ -118,6 +120,8 @@ static CGFloat oponentLiveImageViewStartWidth;
     if (self.typeOfBody == OpponentShapeTypeScarecrow) {
         return;
     }
+    isMove = YES;
+     [self walkOpponent];
     int randomDirection = rand() % 3 - 1;
     [UIView animateWithDuration:0.2 animations:^{
         CGPoint center = self.center;
@@ -125,16 +129,18 @@ static CGFloat oponentLiveImageViewStartWidth;
         if((center.x>0) && (center.x<[self superview].frame.size.width)){
             self.center = center;
         }else{
+            isMove = NO;
             return;
         }
-
     }completion:^(BOOL complete){
         [UIView animateWithDuration:0.2 animations:^{
             CGPoint center = self.center;
             center.x += randomDirection * 40;
             if((center.x>0) && (center.x<[self superview].frame.size.width)){
                 self.center = center;
+                
             }else{
+                 isMove = NO;
                 return;
             }
 
@@ -145,13 +151,16 @@ static CGFloat oponentLiveImageViewStartWidth;
                 if((center.x>0) && (center.x<[self superview].frame.size.width)){
                     self.center = center;
                 }else{
+                     isMove = NO;
                     return;
                 }
             }completion:^(BOOL complete){
+                isMove = NO;
             }];
         }];
     }];
     if (randomDirection == 0) {
+         isMove = NO;
         [self stopMoveAnimation];
     }else{
         [self moveAnimation];
@@ -413,5 +422,21 @@ static CGFloat oponentLiveImageViewStartWidth;
     {
         [subview removeFromSuperview];
     }
+}
+-(void)walkOpponent
+{
+    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationCurveEaseOut animations:^{
+        self.transform = CGAffineTransformMakeRotation(((360*M_PI)/180) - 0.1);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationCurveEaseOut animations:^{
+            self.transform = CGAffineTransformMakeRotation(((360*M_PI)/180) + 0.1);
+        } completion:^(BOOL finished) {
+            if (isMove == YES) {
+                [self walkOpponent];
+            }else{ self.transform = CGAffineTransformMakeRotation(((360*M_PI)/180));}
+        }];
+
+    }];
+    
 }
 @end
