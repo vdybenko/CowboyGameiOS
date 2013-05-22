@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1552</int>
-		<string key="IBDocument.SystemVersion">11G63</string>
+		<string key="IBDocument.SystemVersion">11E53</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1138.51</string>
+		<string key="IBDocument.AppKitVersion">1138.47</string>
 		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -41,6 +41,7 @@
 						<int key="NSvFlags">-2147483392</int>
 						<string key="NSFrame">{{225, 213}, {203, 413}}</string>
 						<reference key="NSSuperview" ref="201225919"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="334419792">
@@ -55,6 +56,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{70, 23}, {89, 161}}</string>
 						<reference key="NSSuperview" ref="201225919"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="626598710"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -65,7 +67,19 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{70, 23}, {89, 161}}</string>
 						<reference key="NSSuperview" ref="201225919"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="211551512"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+					</object>
+					<object class="IBUIImageView" id="730084695">
+						<reference key="NSNextResponder" ref="201225919"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{73, 77}, {21, 43}}</string>
+						<reference key="NSSuperview" ref="201225919"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="950755404"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -79,6 +93,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrameSize">{84, 13}</string>
 								<reference key="NSSuperview" ref="312582573"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="224809662"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -93,7 +108,8 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{7, 0}, {70, 13}}</string>
 								<reference key="NSSuperview" ref="312582573"/>
-								<reference key="NSNextKeyView" ref="950755404"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="730084695"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -124,6 +140,7 @@
 						</array>
 						<string key="NSFrame">{{68, 3}, {84, 12}}</string>
 						<reference key="NSSuperview" ref="201225919"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="235229605"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="334419792"/>
@@ -133,6 +150,7 @@
 				</array>
 				<string key="NSFrameSize">{225, 213}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="312582573"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<reference key="IBUIBackgroundColor" ref="334419792"/>
@@ -190,6 +208,14 @@
 					</object>
 					<int key="connectionID">99</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">shotSmoke</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="730084695"/>
+					</object>
+					<int key="connectionID">104</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -218,6 +244,7 @@
 							<reference ref="626598710"/>
 							<reference ref="211551512"/>
 							<reference ref="950755404"/>
+							<reference ref="730084695"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -256,6 +283,11 @@
 						<reference key="parent" ref="201225919"/>
 						<string key="objectName">BodyForScarecrow</string>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">103</int>
+						<reference key="object" ref="730084695"/>
+						<reference key="parent" ref="201225919"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -263,6 +295,7 @@
 				<string key="-1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="103.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="80.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="81.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="84.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -276,9 +309,140 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">102</int>
+			<int key="maxID">104</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">OpponentShape</string>
+					<string key="superclassName">Shape</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="imgBody">UIImageView</string>
+						<string key="imgDieOpponentAnimation">UIImageView</string>
+						<string key="ivLifeBar">UIView</string>
+						<string key="lbLifeLeft">UILabel</string>
+						<string key="shotSmoke">UIImageView</string>
+						<string key="vContainer">UIView</string>
+						<string key="visualViewCharacter">VisualViewCharacter</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="imgBody">
+							<string key="name">imgBody</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="imgDieOpponentAnimation">
+							<string key="name">imgDieOpponentAnimation</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="ivLifeBar">
+							<string key="name">ivLifeBar</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lbLifeLeft">
+							<string key="name">lbLifeLeft</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="shotSmoke">
+							<string key="name">shotSmoke</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="vContainer">
+							<string key="name">vContainer</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="visualViewCharacter">
+							<string key="name">visualViewCharacter</string>
+							<string key="candidateClassName">VisualViewCharacter</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/OpponentShape.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">Shape</string>
+					<string key="superclassName">UIView</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">imageMain</string>
+						<string key="NS.object.0">UIImageView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">imageMain</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">imageMain</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/Shape.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">VisualViewCharacter</string>
+					<string key="superclassName">UIView</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="cap">UIImageView</string>
+						<string key="gun">UIImageView</string>
+						<string key="gunFrontView">UIImageView</string>
+						<string key="head">UIImageView</string>
+						<string key="jakets">UIImageView</string>
+						<string key="length">UIImageView</string>
+						<string key="mainSubView">UIView</string>
+						<string key="shirt">UIImageView</string>
+						<string key="shoose">UIImageView</string>
+						<string key="suits">UIImageView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="cap">
+							<string key="name">cap</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="gun">
+							<string key="name">gun</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="gunFrontView">
+							<string key="name">gunFrontView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="head">
+							<string key="name">head</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="jakets">
+							<string key="name">jakets</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="length">
+							<string key="name">length</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="mainSubView">
+							<string key="name">mainSubView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="shirt">
+							<string key="name">shirt</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="shoose">
+							<string key="name">shoose</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="suits">
+							<string key="name">suits</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/VisualViewCharacter.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>

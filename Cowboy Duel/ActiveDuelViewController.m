@@ -1060,7 +1060,8 @@ static CGFloat blinkBottomOriginY;
 {
     if (duelEnd) return;
     duelEnd = YES;
-    
+    [blinkBottom setHidden:NO];
+    [blinkTop setHidden:NO];
     CGRect frame = blinkTop.frame;
     frame.origin.y = blinkTopOriginY;
     blinkTop.frame = frame;
