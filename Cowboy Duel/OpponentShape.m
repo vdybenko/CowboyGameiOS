@@ -20,6 +20,7 @@
     CGPoint anchP;
     
     UIView *mainViewOfBody;
+    __weak IBOutlet UIImageView *shotSmoke;
 }
 @end
 
@@ -57,6 +58,15 @@ static CGFloat oponentLiveImageViewStartWidth;
         oponentShotAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
         [oponentShotAudioPlayer prepareToPlay];
         opponentShapeStatus = OpponentShapeStatusLive;
+        
+        //smoke animation
+        NSArray *imgSmokeArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"smoke1.png"], [UIImage imageNamed:@"smoke2.png"],[UIImage imageNamed:@"smoke3.png"],[UIImage imageNamed:@"smoke4.png"], [UIImage imageNamed:@"smoke5.png"],[UIImage imageNamed:@"smoke6.png"],[UIImage imageNamed:@"smoke7.png"], nil];
+        
+        shotSmoke.animationImages = imgSmokeArray;
+        shotSmoke.animationDuration = 0.6f;
+        [shotSmoke setAnimationRepeatCount:1];
+        [self addSubview:shotSmoke];
+   
     }
     return self;
     
@@ -85,6 +95,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     [visualViewCharacter refreshWithAccountPlayer:playerAccount];
     [visualViewCharacter setGunFrontViewHidden:NO];
     imgBody.image = [visualViewCharacter imageFromCharacter];
+    
 }
 
 -(void) moveAnimation;
@@ -159,6 +170,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     [oponentShotAudioPlayer stop];
     [oponentShotAudioPlayer setCurrentTime:0.0];
     [oponentShotAudioPlayer performSelectorInBackground:@selector(play) withObject:nil];
+    [shotSmoke startAnimating];
 }
 
 -(void)reboundOnShot;
