@@ -66,7 +66,9 @@
 
 - (void) changeImg:(UIImage*)image;
 {
-    CGRect cropRect = CGRectMake((image.size.width*45)/183, 0, (image.size.width*70)/183, (image.size.width*70)/183);
+//    CGRect cropRect = CGRectMake((image.size.width*45)/183, 20, (image.size.width*70)/183, (image.size.width*70)/183);
+    CGRect cropRect = CGRectMake(60, 34, 76, 76);
+
 
     CGImageRef subImageRef;
     subImageRef = CGImageCreateWithImageInRect([image CGImage], cropRect);

@@ -495,7 +495,7 @@
 
     BOOL partBought = [playerAccount isProductBought:part.dId];
     
-    if (partBought){
+    if (partBought || part.money==0){
         
     }else{
         CDTransaction *transaction = [[CDTransaction alloc] init];
