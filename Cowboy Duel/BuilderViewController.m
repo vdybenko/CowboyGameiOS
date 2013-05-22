@@ -36,6 +36,7 @@
     NSArray *arrObjects;
     
     CharacterPart typeOfCharacterPart;
+    DuelProductDownloaderController *duelProductDownloaderController;
 }
 @property (weak, nonatomic) IBOutlet UIView *sideView;
 @property (weak, nonatomic) IBOutlet UILabel *moneyLabel;
@@ -69,6 +70,9 @@
         // Custom initialization
         isOpenSide = NO;
         curentObject = 0;
+        
+        duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
+        duelProductDownloaderController.delegate = self;
     }
     return self;
 }
@@ -78,6 +82,7 @@
     [super viewDidLoad];
 
     playerAccount = [AccountDataSource sharedInstance];
+    playerAccount.money = 200;
     
     UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     
@@ -331,7 +336,6 @@
         [UIView animateWithDuration:0.8 animations:^{
             self.backlightAtac.alpha = 0.3;
         }completion:^(BOOL finished) {
-            
             if (!self.backlightAtac.hidden) {
                 [self backlightAtacAction];
             }
@@ -340,7 +344,7 @@
 }
 
 -(void)sideOpenAnimation{
-    if (!isOpenSide && self.sideView.frame.origin.x == 320) {
+    if (!isOpenSide && self.sideView.frame.origin.x == 321) {
         [UIView animateWithDuration:0.6 animations:^{
             CGRect frame = self.sideView.frame;
             frame.origin.x -= 100;
@@ -354,7 +358,7 @@
     
 }
 -(void)sideCloseAnimation{
-        if (isOpenSide && self.sideView.frame.origin.x == 220) {
+        if (isOpenSide && self.sideView.frame.origin.x == 221) {
         self.backlightDefens.hidden = YES;
         self.backlightAtac.hidden = YES;
 
@@ -499,6 +503,8 @@
     if (partBought || part.money==0){
         
     }else{
+        [duelProductDownloaderController buyProductID:part.dId transactionID:playerAccount.glNumber];
+        
         CDTransaction *transaction = [[CDTransaction alloc] init];
         transaction.trDescription = @"BuyPart";
         transaction.trType = [NSNumber numberWithInt:-1];
@@ -549,6 +555,13 @@
     [playerAccount saveVisualView];
     [self setObjectsForIndex:index];
     [self refreshControllerWithGrid];
+}
+
+#pragma mark DuelProductDownloaderControllerDelegate
+
+-(void)didFinishDownloadWithType:(DuelProductDownloaderType)type error:(NSError *)error;
+{
+    
 }
 
 #pragma mark IBAction

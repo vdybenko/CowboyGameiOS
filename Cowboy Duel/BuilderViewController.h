@@ -10,6 +10,7 @@
 #import "GMGridView.h"
 #import "GMGridViewLayoutStrategies.h"
 #import "VisualViewDataSource.h"
+#import "DuelProductDownloaderController.h"
 
 @class VisualViewDataSource;
 
@@ -20,7 +21,7 @@
 -(void) grid:(GMGridView*)grid buyProductForIndex:(NSInteger)index forType:(CharacterPart)type;
 @end
 
-@interface BuilderViewController : UIViewController<MemoryManagement,GMGridViewDataSource,GMGridViewActionDelegate,UIScrollViewDelegate,BuilderViewControllerDelegate>
+@interface BuilderViewController : UIViewController<MemoryManagement,GMGridViewDataSource,GMGridViewActionDelegate,UIScrollViewDelegate,BuilderViewControllerDelegate,DuelProductDownloaderControllerDelegate>
 
 @property (strong, nonatomic) VisualViewDataSource *visualViewDataSource;
 @property (nonatomic) NSInteger curentObject;
