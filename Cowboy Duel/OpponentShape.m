@@ -83,6 +83,7 @@ static CGFloat oponentLiveImageViewStartWidth;
 {
     playerAccount = player;
     [visualViewCharacter refreshWithAccountPlayer:playerAccount];
+    [visualViewCharacter setGunFrontViewHidden:NO];
     imgBody.image = [visualViewCharacter imageFromCharacter];
 }
 

@@ -20,6 +20,7 @@
 @synthesize shirt;
 @synthesize gun;
 @synthesize suits;
+@synthesize gunFrontView;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -107,5 +108,16 @@
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return image;
+}
+
+-(void)setGunFrontViewHidden:(BOOL)result;
+{
+    if (result) {
+        gunFrontView.hidden = YES;
+        gun.hidden = NO;
+    }else{
+        gunFrontView.hidden = NO;
+        gun.hidden = YES;
+    }
 }
 @end

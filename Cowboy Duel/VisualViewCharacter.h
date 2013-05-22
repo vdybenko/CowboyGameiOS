@@ -20,10 +20,12 @@
 @property (weak, nonatomic) IBOutlet UIImageView *shirt;
 @property (weak, nonatomic) IBOutlet UIImageView *gun;
 @property (weak, nonatomic) IBOutlet UIImageView *suits;
+@property (weak, nonatomic) IBOutlet UIImageView *gunFrontView;
 
 @property (strong, nonatomic) VisualViewDataSource *visualViewDataSource;
 
 -(void)refreshWithAccountPlayer:(AccountDataSource*)accountPlayer;
 -(void)cleareView;
 -(UIImage*)imageFromCharacter;
+-(void)setGunFrontViewHidden:(BOOL)result;
 @end
