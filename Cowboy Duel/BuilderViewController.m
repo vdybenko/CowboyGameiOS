@@ -60,6 +60,7 @@
 @implementation BuilderViewController
 @synthesize visualViewDataSource;
 @synthesize curentObject;
+@synthesize sideView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -263,7 +264,7 @@
         }
         
         [scrollView setContentOffset:CGPointMake(0,questionOffset) animated:YES];
-        [grid setUserInteractionEnabled:NO];
+        [sideView setUserInteractionEnabled:NO];
         
         if (curentObject !=  countOfElements){
             CharacterPartGridCell * cell = (CharacterPartGridCell*)[grid cellForItemAtIndex:curentObject+2];
@@ -281,7 +282,7 @@
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView;
 {
-    [grid setUserInteractionEnabled:YES];
+    [sideView setUserInteractionEnabled:YES];
 }
 
 #pragma mark GMGridViewActionDelegate
@@ -290,7 +291,7 @@
     BOOL result = [self isCellValid:position];
     if (result && position!=curentObject+2) {
         float questionOffset = spaceForElements * (position-2);
-        [grid setUserInteractionEnabled:NO];
+        [sideView setUserInteractionEnabled:NO];
         [grid setContentOffset:CGPointMake(0,questionOffset) animated:YES];
         
         CharacterPartGridCell * cell = (CharacterPartGridCell*)[grid cellForItemAtIndex:curentObject+2];
@@ -372,7 +373,7 @@
 {
     float questionOffset = spaceForElements * index;
     [grid setContentOffset:CGPointMake(0,questionOffset) animated:YES];
-    [grid setUserInteractionEnabled:YES];
+    [sideView setUserInteractionEnabled:YES];
     
     CharacterPartGridCell * cell = (CharacterPartGridCell*)[grid cellForItemAtIndex:curentObject+2];
     [cell simpleBackGround];
@@ -583,7 +584,7 @@
     typeOfCharacterPart = CharacterPartFace;
     
     [grid reloadData];
-    [grid setUserInteractionEnabled:YES];
+    [sideView setUserInteractionEnabled:YES];
     [self setObjectsForIndex:playerAccount.visualViewHead];
 }
 - (IBAction)touchHatBtn:(id)sender {
@@ -597,7 +598,7 @@
     typeOfCharacterPart = CharacterPartCap;
 
     [grid reloadData];
-    [grid setUserInteractionEnabled:YES];
+    [sideView setUserInteractionEnabled:YES];
     [self setObjectsForIndex:playerAccount.visualViewCap];
 
 }
@@ -613,7 +614,7 @@
     arrObjects = [visualViewDataSource arrayBody];
     
     [grid reloadData];
-    [grid setUserInteractionEnabled:YES];
+    [sideView setUserInteractionEnabled:YES];
     [self setObjectsForIndex:playerAccount.visualViewBody];
 }
 - (IBAction)touchJaketBtn:(id)sender {
@@ -628,7 +629,7 @@
     arrObjects = [visualViewDataSource arrayJakets];
 
     [grid reloadData];
-    [grid setUserInteractionEnabled:YES];
+    [sideView setUserInteractionEnabled:YES];
     [self setObjectsForIndex:playerAccount.visualViewJackets];
 }
 - (IBAction)touchShoesBtn:(id)sender {
@@ -643,7 +644,7 @@
     arrObjects = [visualViewDataSource arrayShoose];
 
     [grid reloadData];
-    [grid setUserInteractionEnabled:YES];
+    [sideView setUserInteractionEnabled:YES];
     [self setObjectsForIndex:playerAccount.visualViewShoose];
 }
 - (IBAction)touchGunsBtn:(id)sender {
@@ -658,7 +659,7 @@
     arrObjects = [visualViewDataSource arrayGuns];
 
     [grid reloadData];
-    [grid setUserInteractionEnabled:YES];
+    [sideView setUserInteractionEnabled:YES];
     [self sideOpenAnimation];
     [self setObjectsForIndex:playerAccount.visualViewGuns];
 }
@@ -674,7 +675,7 @@
     arrObjects = [visualViewDataSource arrayLegs];
 
     [grid reloadData];
-    [grid setUserInteractionEnabled:YES];
+    [sideView setUserInteractionEnabled:YES];
     [self setObjectsForIndex:playerAccount.visualViewLegs];
 }
 - (IBAction)touchSuitsBtn:(id)sender {
@@ -690,7 +691,7 @@
     arrObjects = [visualViewDataSource arraySuits];
     
     [grid reloadData];
-    [grid setUserInteractionEnabled:YES];
+    [sideView setUserInteractionEnabled:YES];
     [self setObjectsForIndex:playerAccount.visualViewSuits];
 }
 

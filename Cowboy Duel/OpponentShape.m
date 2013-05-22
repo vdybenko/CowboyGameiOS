@@ -396,11 +396,9 @@ static CGFloat oponentLiveImageViewStartWidth;
 
 -(void) cleareDamage;
 {
-    if (self.typeOfBody == OpponentShapeTypeScarecrow) {
-        for(UIView *subview in [imgBody subviews])
-        {
-            [subview removeFromSuperview];
-        }
+    for(UIView *subview in [imgBody subviews])
+    {
+        [subview removeFromSuperview];
     }
 }
 @end
