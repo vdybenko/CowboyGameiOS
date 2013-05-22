@@ -426,14 +426,14 @@ static CGFloat oponentLiveImageViewStartWidth;
 -(void)walkOpponent
 {
     [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationCurveEaseOut animations:^{
-        self.transform = CGAffineTransformMakeRotation(((360*M_PI)/180) - 0.1);
+        self.imgBody.transform = CGAffineTransformMakeRotation(((360*M_PI)/180) - 0.1);
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationCurveEaseOut animations:^{
-            self.transform = CGAffineTransformMakeRotation(((360*M_PI)/180) + 0.1);
+            self.imgBody.transform = CGAffineTransformMakeRotation(((360*M_PI)/180) + 0.1);
         } completion:^(BOOL finished) {
             if (isMove == YES) {
                 [self walkOpponent];
-            }else{ self.transform = CGAffineTransformMakeRotation(((360*M_PI)/180));}
+            }else{ self.imgBody.transform = CGAffineTransformMakeRotation(((360*M_PI)/180));}
         }];
 
     }];
