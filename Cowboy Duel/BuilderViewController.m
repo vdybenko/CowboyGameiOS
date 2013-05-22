@@ -491,7 +491,7 @@
         default :
             break;
     }
-    [self refreshController];
+    
 }
 
 -(void) grid:(GMGridView*)grid buyProductForIndex:(NSInteger)index forType:(CharacterPart)type;
@@ -712,7 +712,7 @@
 
 -(void)tempDefens:(int)plusOnDefens
 {
-     self.defensLabel.text = [NSString stringWithFormat:@"%d",playerAccount.accountDefenseValue + plusOnDefens];
+     self.defensLabel.text = [NSString stringWithFormat:@"%d",playerAccount.accountDefenseValue + [DuelRewardLogicController countUpBuletsWithPlayerLevel:playerAccount.accountLevel] + plusOnDefens];
 }
 -(void)tempAtac:(int)plusOnAtac
 {
