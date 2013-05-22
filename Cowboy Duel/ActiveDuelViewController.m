@@ -1102,8 +1102,7 @@ static CGFloat blinkBottomOriginY;
             frame.origin.y = 0;
             blinkTop.frame = frame;
         }completion:^(BOOL finished) {
-            blinkBottom.alpha = 0.88;
-            blinkTop.alpha = 0.88;
+      
         }];
 
         }];
