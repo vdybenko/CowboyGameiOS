@@ -29,6 +29,15 @@ typedef struct {
     int menCount;
     int womenCount;
     int damageCount;
+//    Visual view parts
+    int partCap;
+    int partHead;
+    int partShirt;
+    int partJaket;
+    int partPants;
+    int partBoots;
+    int partGun;
+    int partSuit;
 } gameInfo;
 
 @class StartViewController;
