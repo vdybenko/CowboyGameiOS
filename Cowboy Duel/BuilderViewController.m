@@ -33,6 +33,9 @@
     __weak IBOutlet UILabel *lbBuyBtn;
     __weak IBOutlet UIScrollView *buttonsScroll;
     __weak IBOutlet UIView *buttonsView;
+    __weak IBOutlet UIView *moneyView;
+    __weak IBOutlet UIView *animLostMoneyView;
+    __weak IBOutlet UILabel *animLostMomeyLB;
    
     BOOL isAnimate;
     
@@ -165,6 +168,9 @@
     btnBuyMain = nil;
     buttonsScroll = nil;
     buttonsView = nil;
+    moneyView = nil;
+    animLostMoneyView = nil;
+    animLostMomeyLB = nil;
     [super viewDidUnload];
 }
 -(void)releaseComponents
@@ -310,6 +316,27 @@
 }
 
 #pragma mark Animation
+-(void)lostMoneyAnimation:(int)coast{
+    if (animLostMoneyView.hidden) {
+    animLostMoneyView.hidden = NO;
+    CGRect frame1 = animLostMoneyView.frame;
+    frame1.origin.y += 100;
+    UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
+    animLostMomeyLB.textColor = buttonsTitleColor;
+    animLostMomeyLB.text =  [NSString stringWithFormat:@"-%d",coast];
+    [UIView animateWithDuration:1 animations:^{
+        animLostMoneyView.frame = frame1;
+        animLostMoneyView.alpha = 0;
+    }completion:^(BOOL finished) {
+        animLostMoneyView.alpha = 1;
+        animLostMoneyView.hidden = YES;
+        CGRect frame1 = animLostMoneyView.frame;
+        frame1.origin.y -=100;
+        animLostMoneyView.frame = frame1;
+        
+    }];
+    }
+}
 -(void)backlightDefensAction
 {
     [UIView animateWithDuration:0.3 animations:^{
@@ -534,6 +561,7 @@
         [playerAccount sendTransactions:playerAccount.transactions];
         
         playerAccount.money -= part.money;
+        [self lostMoneyAnimation:part.money];
         [playerAccount saveMoney];
         
         [self addProductToBought:part.dId];
@@ -596,7 +624,6 @@
 - (IBAction)touchCloseSideView:(id)sender {
     [self cleanAll];
     [self sideCloseAnimation];
-    
     [self refreshController];
 }
 
