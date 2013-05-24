@@ -972,6 +972,14 @@
 		BDD8E24E163EF42F004F05A9 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDD8E24D163EF42F004F05A9 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		BDF1EF1713D41BA500C466DF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF1EF1613D41BA500C466DF /* Security.framework */; };
 		BDF1EF1F13D41C4E00C466DF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF1EF1E13D41C4E00C466DF /* MapKit.framework */; };
+		C4966908174F8A6300822329 /* faceButton.png in Resources */ = {isa = PBXBuildFile; fileRef = C4966901174F8A6300822329 /* faceButton.png */; };
+		C4966909174F8A6300822329 /* gunsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = C4966902174F8A6300822329 /* gunsButton.png */; };
+		C496690A174F8A6300822329 /* hatButton.png in Resources */ = {isa = PBXBuildFile; fileRef = C4966903174F8A6300822329 /* hatButton.png */; };
+		C496690B174F8A6300822329 /* jacketsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = C4966904174F8A6300822329 /* jacketsButton.png */; };
+		C496690C174F8A6300822329 /* pantsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = C4966905174F8A6300822329 /* pantsButton.png */; };
+		C496690D174F8A6300822329 /* shoesButton.png in Resources */ = {isa = PBXBuildFile; fileRef = C4966906174F8A6300822329 /* shoesButton.png */; };
+		C496690E174F8A6300822329 /* someButton.png in Resources */ = {isa = PBXBuildFile; fileRef = C4966907174F8A6300822329 /* someButton.png */; };
+		C4966913174F96A700822329 /* CloseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = C4966912174F96A700822329 /* CloseButton.png */; };
 		C4A9ADEF174CCA0D0089044A /* smoke1.png in Resources */ = {isa = PBXBuildFile; fileRef = C4A9ADE8174CCA0D0089044A /* smoke1.png */; };
 		C4A9ADF0174CCA0D0089044A /* smoke2.png in Resources */ = {isa = PBXBuildFile; fileRef = C4A9ADE9174CCA0D0089044A /* smoke2.png */; };
 		C4A9ADF1174CCA0D0089044A /* smoke3.png in Resources */ = {isa = PBXBuildFile; fileRef = C4A9ADEA174CCA0D0089044A /* smoke3.png */; };
@@ -1923,6 +1931,14 @@
 		BDF1EF1613D41BA500C466DF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BDF1EF1813D41BD600C466DF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BDF1EF1E13D41C4E00C466DF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		C4966901174F8A6300822329 /* faceButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = faceButton.png; sourceTree = "<group>"; };
+		C4966902174F8A6300822329 /* gunsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gunsButton.png; sourceTree = "<group>"; };
+		C4966903174F8A6300822329 /* hatButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hatButton.png; sourceTree = "<group>"; };
+		C4966904174F8A6300822329 /* jacketsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jacketsButton.png; sourceTree = "<group>"; };
+		C4966905174F8A6300822329 /* pantsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pantsButton.png; sourceTree = "<group>"; };
+		C4966906174F8A6300822329 /* shoesButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shoesButton.png; sourceTree = "<group>"; };
+		C4966907174F8A6300822329 /* someButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = someButton.png; sourceTree = "<group>"; };
+		C4966912174F96A700822329 /* CloseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseButton.png; sourceTree = "<group>"; };
 		C4A9ADE8174CCA0D0089044A /* smoke1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smoke1.png; sourceTree = "<group>"; };
 		C4A9ADE9174CCA0D0089044A /* smoke2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smoke2.png; sourceTree = "<group>"; };
 		C4A9ADEA174CCA0D0089044A /* smoke3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smoke3.png; sourceTree = "<group>"; };
@@ -2928,6 +2944,7 @@
 		768DD933173CDB9800B031F3 /* BuilderGraphics */ = {
 			isa = PBXGroup;
 			children = (
+				C4966900174F8A6300822329 /* BilderItems */,
 				768DD934173CDB9800B031F3 /* builderAttacBar.png */,
 				768DD935173CDB9800B031F3 /* builderAttacIco.png */,
 				768DD936173CDB9800B031F3 /* BuilderBack.png */,
@@ -3604,6 +3621,21 @@
 			path = BBCyclingLabel;
 			sourceTree = "<group>";
 		};
+		C4966900174F8A6300822329 /* BilderItems */ = {
+			isa = PBXGroup;
+			children = (
+				C4966912174F96A700822329 /* CloseButton.png */,
+				C4966901174F8A6300822329 /* faceButton.png */,
+				C4966902174F8A6300822329 /* gunsButton.png */,
+				C4966903174F8A6300822329 /* hatButton.png */,
+				C4966904174F8A6300822329 /* jacketsButton.png */,
+				C4966905174F8A6300822329 /* pantsButton.png */,
+				C4966906174F8A6300822329 /* shoesButton.png */,
+				C4966907174F8A6300822329 /* someButton.png */,
+			);
+			path = BilderItems;
+			sourceTree = "<group>";
+		};
 		C4A9ADE7174CCA0C0089044A /* Smoke Animayion Frames */ = {
 			isa = PBXGroup;
 			children = (
@@ -4153,6 +4185,14 @@
 				C4A9ADF3174CCA0D0089044A /* smoke5.png in Resources */,
 				C4A9ADF4174CCA0D0089044A /* smoke6.png in Resources */,
 				C4A9ADF5174CCA0D0089044A /* smoke7.png in Resources */,
+				C4966908174F8A6300822329 /* faceButton.png in Resources */,
+				C4966909174F8A6300822329 /* gunsButton.png in Resources */,
+				C496690A174F8A6300822329 /* hatButton.png in Resources */,
+				C496690B174F8A6300822329 /* jacketsButton.png in Resources */,
+				C496690C174F8A6300822329 /* pantsButton.png in Resources */,
+				C496690D174F8A6300822329 /* shoesButton.png in Resources */,
+				C496690E174F8A6300822329 /* someButton.png in Resources */,
+				C4966913174F96A700822329 /* CloseButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

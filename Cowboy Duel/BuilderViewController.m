@@ -31,6 +31,9 @@
     __weak IBOutlet GMGridView *grid;
     __weak IBOutlet UIButton *btnBuyMain;
     __weak IBOutlet UILabel *lbBuyBtn;
+    __weak IBOutlet UIScrollView *buttonsScroll;
+    __weak IBOutlet UIView *buttonsView;
+   
     BOOL isAnimate;
     
     NSArray *arrObjects;
@@ -85,16 +88,9 @@
     playerAccount.money = 200;
     
     UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
-    
-    [self.hatsBtn setTitleByLabel:@"Heats" withColor:buttonsTitleColor fontSize:24];
-    [self.faceBtn setTitleByLabel:@"Faces" withColor:buttonsTitleColor fontSize:24];
-    [self.ShirtBtn setTitleByLabel:@"Shirts" withColor:buttonsTitleColor fontSize:24];
-    [self.jaketsBtn setTitleByLabel:@"Jakets" withColor:buttonsTitleColor fontSize:24];
-    [self.PantsBtn setTitleByLabel:@"Pants" withColor:buttonsTitleColor fontSize:24];
-    [self.shoesBtn setTitleByLabel:@"Shoes" withColor:buttonsTitleColor fontSize:24];
-    [self.gunsBtn setTitleByLabel:@"Guns" withColor:buttonsTitleColor fontSize:24];
-    [self.suitsBtn setTitleByLabel:@"Suit" withColor:buttonsTitleColor fontSize:24];
     [self.closeBtn setTitleByLabel:@"Close" withColor:buttonsTitleColor fontSize:24];
+
+    buttonsScroll.contentSize = CGSizeMake(66,  68 * 9);
     
     lbBuyBtn.text = NSLocalizedString(@"BUYIT", @"");
     //self.backlightDefens.clipsToBounds = YES;
@@ -167,6 +163,8 @@
     [self setPantsBtn:nil];
     [self setSuitsBtn:nil];
     btnBuyMain = nil;
+    buttonsScroll = nil;
+    buttonsView = nil;
     [super viewDidUnload];
 }
 -(void)releaseComponents
@@ -345,13 +343,22 @@
 
 -(void)sideOpenAnimation{
     if (!isOpenSide && self.sideView.frame.origin.x == 321) {
-        [UIView animateWithDuration:0.6 animations:^{
+        [UIView animateWithDuration:0.4 animations:^{
             CGRect frame = self.sideView.frame;
-            frame.origin.x -= 100;
-            self.sideView.frame = frame;
+            frame.origin.x += 100;
+            buttonsView.frame = frame;
             
         }completion:^(BOOL finished) {
-             isOpenSide = YES;
+            isOpenSide = YES;
+            [UIView animateWithDuration:0.4 animations:^{
+                CGRect frame = self.sideView.frame;
+                frame.origin.x -= 100;
+                self.sideView.frame = frame;
+                
+            }completion:^(BOOL finished) {
+                isOpenSide = YES;
+            }];
+
         }];
         
     }
@@ -362,13 +369,22 @@
         self.backlightDefens.hidden = YES;
         self.backlightAtac.hidden = YES;
 
-        [UIView animateWithDuration:0.6 animations:^{
+        [UIView animateWithDuration:0.4 animations:^{
             CGRect frame = self.sideView.frame;
             frame.origin.x += 100;
             self.sideView.frame = frame;
             
         }completion:^(BOOL finished) {
             isOpenSide = NO;
+            [UIView animateWithDuration:0.4 animations:^{
+                CGRect frame = self.sideView.frame;
+                frame.origin.x -= 100;
+                buttonsView.frame = frame;
+                
+            }completion:^(BOOL finished) {
+
+            }];
+
         }];
     }
 }
@@ -673,7 +689,6 @@
 
     [grid reloadData];
     [sideView setUserInteractionEnabled:YES];
-    [self sideOpenAnimation];
     [self setObjectsForIndex:playerAccount.visualViewGuns];
 }
 - (IBAction)touchPantsBtn:(id)sender {
