@@ -209,13 +209,7 @@
     [oponentAccount setMoney:[player.money integerValue]];
     [oponentAccount setSessionID:(player.sessionId) ? [NSString stringWithString:player.sessionId]:@""];
     
-//    To do delete this
-    oponentAccount.visualViewCap = rand() % 4;
-    oponentAccount.visualViewHead = rand() % 3;
-    oponentAccount.visualViewBody = rand() % 3;
-    oponentAccount.visualViewLegs = rand() % 3;
-    oponentAccount.visualViewShoose = rand() % 2;
-//    
+//
     if (player.bot) {
         if (player.weapon)
             [oponentAccount setCurentIdWeapon:player.weapon];
@@ -226,6 +220,14 @@
             [oponentAccount setAccountDefenseValue:player.defense];
         else
             [oponentAccount setAccountDefenseValue:0];
+        
+        oponentAccount.visualViewCap = rand() % 4;
+        oponentAccount.visualViewHead = rand() % 3;
+        oponentAccount.visualViewBody = rand() % 3;
+        oponentAccount.visualViewJackets = rand() % 3;
+        oponentAccount.visualViewLegs = rand() % 3;
+        oponentAccount.visualViewShoose = rand() % 2;
+        oponentAccount.visualViewGuns = rand() % 3;
     }
     
     ProfileViewController *profileViewController = [[ProfileViewController alloc] initForOponent:oponentAccount andOpponentServer:player];

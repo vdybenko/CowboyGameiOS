@@ -121,6 +121,15 @@ static GameCenterViewController *gameCenterViewController;
     gsSend->menCount = playerAccount.accountSceneConfig.menCount;
     gsSend->womenCount = playerAccount.accountSceneConfig.womenCount;
     
+    gsSend->partCap = playerAccount.visualViewCap;
+    gsSend->partHead = playerAccount.visualViewHead;
+    gsSend->partShirt = playerAccount.visualViewBody;
+    gsSend->partJaket = playerAccount.visualViewJackets;
+    gsSend->partPants = playerAccount.visualViewLegs;
+    gsSend->partBoots = playerAccount.visualViewShoose;
+    gsSend->partGun = playerAccount.visualViewGuns;
+    gsSend->partSuit = playerAccount.visualViewSuits;
+    
     [self.connection sendData:(void *)(gsSend) packetID:NETWORK_TIME ofLength:sizeof(gameInfo)];
     
 }
@@ -228,6 +237,15 @@ static GameCenterViewController *gameCenterViewController;
     gsSend->horseCount = playerAccount.accountSceneConfig.horseCount;
     gsSend->menCount = playerAccount.accountSceneConfig.menCount;
     gsSend->womenCount = playerAccount.accountSceneConfig.womenCount;
+    
+    gsSend->partCap = playerAccount.visualViewCap;
+    gsSend->partHead = playerAccount.visualViewHead;
+    gsSend->partShirt = playerAccount.visualViewBody;
+    gsSend->partJaket = playerAccount.visualViewJackets;
+    gsSend->partPants = playerAccount.visualViewLegs;
+    gsSend->partBoots = playerAccount.visualViewShoose;
+    gsSend->partGun = playerAccount.visualViewGuns;
+    gsSend->partSuit = playerAccount.visualViewSuits;
     
     [self.connection sendData:(void *)(gsSend) packetID:NETWORK_TIME_TRY ofLength:sizeof(gameInfo)];
     runAway=YES;
@@ -569,6 +587,15 @@ static GameCenterViewController *gameCenterViewController;
             oponentAccount.accountName = [[NSString alloc] initWithCString:gsReceive->oponentName encoding:NSUTF8StringEncoding];
             oponentAccount.accountID = [[NSString alloc] initWithCString:gsReceive->oponentAuth encoding:NSUTF8StringEncoding];
             
+            oponentAccount.visualViewCap = gsReceive->partCap;
+            oponentAccount.visualViewHead = gsReceive->partHead;
+            oponentAccount.visualViewBody = gsReceive->partShirt;
+            oponentAccount.visualViewJackets = gsReceive->partJaket;
+            oponentAccount.visualViewLegs= gsReceive->partPants;
+            oponentAccount.visualViewShoose = gsReceive->partBoots;
+            oponentAccount.visualViewGuns = gsReceive->partGun;
+            oponentAccount.visualViewSuits = gsReceive->partSuit;
+            
             GameSceneConfig *gameSceneConfig = [[GameSceneConfig alloc] init];
             gameSceneConfig.barrelsCount = gsReceive->barrelsCount;
             gameSceneConfig.cactusCount = gsReceive->cactusCount;
@@ -612,6 +639,15 @@ static GameCenterViewController *gameCenterViewController;
             gsSend->menCount = playerAccount.accountSceneConfig.menCount;
             gsSend->womenCount = playerAccount.accountSceneConfig.womenCount;
             
+            gsSend->partCap = playerAccount.visualViewCap;
+            gsSend->partHead = playerAccount.visualViewHead;
+            gsSend->partShirt = playerAccount.visualViewBody;
+            gsSend->partJaket = playerAccount.visualViewJackets;
+            gsSend->partPants = playerAccount.visualViewLegs;
+            gsSend->partBoots = playerAccount.visualViewShoose;
+            gsSend->partGun = playerAccount.visualViewGuns;
+            gsSend->partSuit = playerAccount.visualViewSuits;
+            
             [self.connection sendData:(void *)(gsSend) packetID:NETWORK_OPONTYPE_RESPONSE ofLength:sizeof(gameInfo)];
         }
 			break;
@@ -649,6 +685,15 @@ static GameCenterViewController *gameCenterViewController;
             oponentAccount.accountWeapon.dDamage = gsReceive->oponentAtack;
             oponentAccount.accountDefenseValue = gsReceive->oponentDefense;
             randomTime = gsReceive->randomTime;
+            
+            oponentAccount.visualViewCap = gsReceive->partCap;
+            oponentAccount.visualViewHead = gsReceive->partHead;
+            oponentAccount.visualViewBody = gsReceive->partShirt;
+            oponentAccount.visualViewJackets = gsReceive->partJaket;
+            oponentAccount.visualViewLegs= gsReceive->partPants;
+            oponentAccount.visualViewShoose = gsReceive->partBoots;
+            oponentAccount.visualViewGuns = gsReceive->partGun;
+            oponentAccount.visualViewSuits = gsReceive->partSuit;
             
             GameSceneConfig *gameSceneConfig = [[GameSceneConfig alloc] init];
             gameSceneConfig.barrelsCount = gsReceive->barrelsCount;
@@ -696,6 +741,16 @@ static GameCenterViewController *gameCenterViewController;
             gsSend->horseCount = playerAccount.accountSceneConfig.horseCount;
             gsSend->menCount = playerAccount.accountSceneConfig.menCount;
             gsSend->womenCount = playerAccount.accountSceneConfig.womenCount;
+            
+            gsSend->partCap = playerAccount.visualViewCap;
+            gsSend->partHead = playerAccount.visualViewHead;
+            gsSend->partShirt = playerAccount.visualViewBody;
+            gsSend->partJaket = playerAccount.visualViewJackets;
+            gsSend->partPants = playerAccount.visualViewLegs;
+            gsSend->partBoots = playerAccount.visualViewShoose;
+            gsSend->partGun = playerAccount.visualViewGuns;
+            gsSend->partSuit = playerAccount.visualViewSuits;
+            
             [self.connection sendData:(void *)(gsSend) packetID:NETWORK_OPONTYPE_RESPONSE_TRY ofLength:sizeof(gameInfo)];
             
         }
@@ -918,6 +973,15 @@ static GameCenterViewController *gameCenterViewController;
             oponentAccount.accountDefenseValue = gsReceive->oponentDefense;
             oponentAccount.accountID = [[NSString alloc] initWithCString:gsReceive->oponentAuth encoding:NSUTF8StringEncoding];
             
+            oponentAccount.visualViewCap = gsReceive->partCap;
+            oponentAccount.visualViewHead = gsReceive->partHead;
+            oponentAccount.visualViewBody = gsReceive->partShirt;
+            oponentAccount.visualViewJackets = gsReceive->partJaket;
+            oponentAccount.visualViewLegs= gsReceive->partPants;
+            oponentAccount.visualViewShoose = gsReceive->partBoots;
+            oponentAccount.visualViewGuns = gsReceive->partGun;
+            oponentAccount.visualViewSuits = gsReceive->partSuit;
+            
             GameSceneConfig *gameSceneConfig = [[GameSceneConfig alloc] init];
             gameSceneConfig.barrelsCount = gsReceive->barrelsCount;
             gameSceneConfig.cactusCount = gsReceive->cactusCount;
@@ -955,6 +1019,15 @@ static GameCenterViewController *gameCenterViewController;
             oponentAccount.accountWeapon.dDamage = gsReceive->oponentAtack;
             oponentAccount.accountDefenseValue = gsReceive->oponentDefense;
             oponentAccount.accountID = [[NSString alloc] initWithCString:gsReceive->oponentAuth encoding:NSUTF8StringEncoding];
+            
+            oponentAccount.visualViewCap = gsReceive->partCap;
+            oponentAccount.visualViewHead = gsReceive->partHead;
+            oponentAccount.visualViewBody = gsReceive->partShirt;
+            oponentAccount.visualViewJackets = gsReceive->partJaket;
+            oponentAccount.visualViewLegs= gsReceive->partPants;
+            oponentAccount.visualViewShoose = gsReceive->partBoots;
+            oponentAccount.visualViewGuns = gsReceive->partGun;
+            oponentAccount.visualViewSuits = gsReceive->partSuit;
             
             GameSceneConfig *gameSceneConfig = [[GameSceneConfig alloc] init];
             gameSceneConfig.barrelsCount = gsReceive->barrelsCount;
