@@ -671,6 +671,10 @@ static StartViewController *sharedHelper = nil;
 }
 
 - (IBAction)storeButtonClick:(id)sender {
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 42170bccc675d2086f961eeef64a78626b454748
     BuilderViewController *builder = [[BuilderViewController alloc] init];
     
     [UIView animateWithDuration:0.75
