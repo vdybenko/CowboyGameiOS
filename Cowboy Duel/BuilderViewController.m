@@ -570,6 +570,7 @@
         [playerAccount saveMoney];
         
         [self addProductToBought:part.dId];
+        [playerAccount recountDefenseAndAtack];
     }
 
     
@@ -634,6 +635,8 @@
 
 - (IBAction)touchBuyBtn:(id)sender{
     [self grid:grid buyProductForIndex:curentObject forType:typeOfCharacterPart];
+    
+    
 }
 
 - (IBAction)touchFaceBtn:(id)sender {
