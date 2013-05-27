@@ -324,7 +324,7 @@ static CGFloat oponentLiveImageViewStartWidth;
             break;
         default:
             break;
-    }
+    } 
 }
 
 -(int) damageForHitTheOponentWithPoint:(CGPoint)hitPoint mainView:(UIView*)mainView;

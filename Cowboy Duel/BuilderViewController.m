@@ -443,7 +443,7 @@
 {
     CDVisualViewCharacterPartSuits *part = [arrObjects objectAtIndex:index];
     
-    [self.priceOfItem setText:[NSString stringWithFormat:@"$%d", part.money]];
+    [self.priceOfItem setText:[NSString stringWithFormat:@"%d", part.money]];
     BOOL isBtnForBuy = [self checkBtnBuy:part];
 
     CharacterPartGridCell *cell = (CharacterPartGridCell*)[pGrid cellForItemAtIndex:curentObject+2];

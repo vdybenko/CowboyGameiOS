@@ -116,7 +116,7 @@
 								<string key="NSFrame">{{64, 6}, {33, 30}}</string>
 								<reference key="NSSuperview" ref="570211402"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="963769374"/>
+								<reference key="NSNextKeyView" ref="693515324"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -453,7 +453,7 @@
 										<string key="NSFrameSize">{100, 120}</string>
 										<reference key="NSSuperview" ref="1062032095"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="785680842"/>
+										<reference key="NSNextKeyView" ref="832193411"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -493,7 +493,7 @@
 									<object class="IBUILabel" id="650379413">
 										<reference key="NSNextResponder" ref="1062032095"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{13, 49}, {19, 21}}</string>
+										<string key="NSFrame">{{11, 49}, {22, 21}}</string>
 										<reference key="NSSuperview" ref="1062032095"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="359792750"/>
@@ -522,6 +522,21 @@
 											<int key="NSfFlags">16</int>
 										</object>
 										<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
+									</object>
+									<object class="IBUIImageView" id="832193411">
+										<reference key="NSNextResponder" ref="1062032095"/>
+										<int key="NSvFlags">292</int>
+										<string key="NSFrame">{{32, 10}, {15, 15}}</string>
+										<reference key="NSSuperview" ref="1062032095"/>
+										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView" ref="785680842"/>
+										<string key="NSReuseIdentifierKey">_NS:9</string>
+										<bool key="IBUIUserInteractionEnabled">NO</bool>
+										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+										<object class="NSCustomResource" key="IBUIImage" id="613632372">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">fin_img_coin.png</string>
+										</object>
 									</object>
 								</array>
 								<string key="NSFrame">{{2, 156}, {100, 120}}</string>
@@ -636,7 +651,7 @@
 								<string key="NSFrame">{{274, 6}, {38, 32}}</string>
 								<reference key="NSSuperview" ref="947746974"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="570211402"/>
+								<reference key="NSNextKeyView" ref="963769374"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -678,17 +693,14 @@
 									<object class="IBUIImageView" id="604750126">
 										<reference key="NSNextResponder" ref="678282299"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{13, 8}, {15, 15}}</string>
+										<string key="NSFrame">{{8, 6}, {21, 20}}</string>
 										<reference key="NSSuperview" ref="678282299"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="1021684890"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-										<object class="NSCustomResource" key="IBUIImage">
-											<string key="NSClassName">NSImage</string>
-											<string key="NSResourceName">builderMoneyIco.png</string>
-										</object>
+										<reference key="IBUIImage" ref="613632372"/>
 									</object>
 									<object class="IBUILabel" id="1021684890">
 										<reference key="NSNextResponder" ref="678282299"/>
@@ -913,7 +925,7 @@
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="693515324"/>
+				<reference key="NSNextKeyView" ref="570211402"/>
 				<string key="NSReuseIdentifierKey">_NS:196</string>
 				<reference key="IBUIBackgroundColor" ref="840484157"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -1406,6 +1418,7 @@
 							<reference ref="129376998"/>
 							<reference ref="785680842"/>
 							<reference ref="650379413"/>
+							<reference ref="832193411"/>
 						</array>
 						<reference key="parent" ref="916055748"/>
 					</object>
@@ -1561,6 +1574,11 @@
 						<reference key="object" ref="328486598"/>
 						<reference key="parent" ref="570211402"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">464</int>
+						<reference key="object" ref="832193411"/>
+						<reference key="parent" ref="1062032095"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -1615,12 +1633,13 @@
 				<string key="459.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="460.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="461.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="464.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">463</int>
+			<int key="maxID">464</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1891,10 +1910,10 @@
 			<string key="builderDefensIco.png">{38, 25}</string>
 			<string key="builderInventoryBtn.png">{81, 66}</string>
 			<string key="builderMoneyBar.png">{150, 66}</string>
-			<string key="builderMoneyIco.png">{26, 26}</string>
 			<string key="builderSelectedCell.png">{205, 276}</string>
 			<string key="builderSideHat.png">{165, 1038}</string>
 			<string key="faceButton.png">{141, 139}</string>
+			<string key="fin_img_coin.png">{37, 34}</string>
 			<string key="fin_img_money2.png">{156, 77}</string>
 			<string key="gunsButton.png">{140, 139}</string>
 			<string key="hatButton.png">{140, 139}</string>
