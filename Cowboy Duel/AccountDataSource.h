@@ -7,6 +7,7 @@
 #import "CDAchivment.h"
 #import "CDWeaponProduct.h"
 #import "GameSceneConfig.h"
+#import "VisualViewDataSource.h"
 
 @class StartViewController;
 @interface AccountDataSource : NSObject <FBLoginViewDelegate>

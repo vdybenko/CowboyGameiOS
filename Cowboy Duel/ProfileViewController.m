@@ -72,7 +72,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     __weak IBOutlet FBProfilePictureView *profilePictureView;
     
     __weak IBOutlet UIButton *duelButton;
-    __weak IBOutlet UIButton *btnBuilder;
     
     __weak IBOutlet UILabel *lbPointsCountMain;
     __weak IBOutlet UIImageView *ivCurrentRank;
@@ -138,7 +137,6 @@ static const CGFloat timeToStandartTitles = 1.8;
         [self loadView];
         UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
         [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:24];
-        [btnBuilder setTitleByLabel:@"CHAR_BUILDER" withColor:buttonsTitleColor fontSize:24];
         
         [self initMainControls];
         [mainProfileView setDinamicHeightBackground];
@@ -1117,9 +1115,6 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                                                       userInfo:[NSDictionary dictionaryWithObject:@"/ProfileVC_add_favorite" forKey:@"page"]];
 }
 - (IBAction)btnBuilderClick:(id)sender {
-   // VisualViewCharacterViewController *visualViewCharacterViewController = [[VisualViewCharacterViewController alloc] init];
-    //[self.navigationController pushViewController:visualViewCharacterViewController animated:NO];
-    
     BuilderViewController *builder = [[BuilderViewController alloc] init];
     [self.navigationController pushViewController:builder animated:NO];
 }
@@ -1142,7 +1137,6 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     btnAddToFavorites = nil;
     btnFavourites = nil;
     lbFavouritesTitle = nil;
-    btnBuilder = nil;
     [super viewDidUnload];
 }
 @end

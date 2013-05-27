@@ -25,7 +25,7 @@
 #import "Social/Social.h"
 #import "accounts/Accounts.h"
 
-#import "StoreViewController.h"
+#import "BuilderViewController.h"
 #import "DuelProductWinViewController.h"
 
 #import "FunPageViewController.h"
@@ -670,9 +670,9 @@ static StartViewController *sharedHelper = nil;
 }
 
 - (IBAction)storeButtonClick:(id)sender {
-    StoreViewController *storeViewController=[[StoreViewController alloc] initWithAccount:playerAccount];
-    [self.navigationController pushViewController:storeViewController animated:YES];
-    storeViewController = nil;
+    BuilderViewController *builder = [[BuilderViewController alloc] init];
+    [self.navigationController pushViewController:builder animated:NO];
+    builder = nil;
 }
 
 -(IBAction)profileButtonClick
