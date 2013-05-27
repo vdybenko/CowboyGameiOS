@@ -1001,30 +1001,29 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 
 -(IBAction)showStoreWeapon:(id)sender
 {
-    StoreViewController *storeViewController=[[StoreViewController alloc] initWithAccount:playerAccount];
-    storeViewController.bagFlag = YES;
+    BuilderViewController *builder = [[BuilderViewController alloc] init];
+    
     [UIView animateWithDuration:0.75
                      animations:^{
                          [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-                         [self.navigationController pushViewController:storeViewController animated:NO];
+                         [self.navigationController pushViewController:builder animated:NO];
                          [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
                      }];
-    storeViewController = nil;
+    builder = nil;
 }
 
 -(IBAction)showStoreDefence:(id)sender
 {
-    StoreViewController *storeViewController=[[StoreViewController alloc] initWithAccount:playerAccount];
-    storeViewController.bagFlag = YES;
-    storeViewController.storeDataSource.typeOfTable = StoreDataSourceTypeTablesDefenses;
+    BuilderViewController *builder = [[BuilderViewController alloc] init];
+      
     [UIView animateWithDuration:0.75
                      animations:^{
                          [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-                         [self.navigationController pushViewController:storeViewController animated:NO];
+                         [self.navigationController pushViewController:builder animated:NO];
                          [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
                      }];
-    storeViewController = nil;
-}
+    builder = nil;
+    }
 
 - (IBAction)btnAddToFavoritesClick:(id)sender {
     bgActivityIndicator.hidden = NO;
@@ -1115,10 +1114,20 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                                                       userInfo:[NSDictionary dictionaryWithObject:@"/ProfileVC_add_favorite" forKey:@"page"]];
 }
 - (IBAction)btnBuilderClick:(id)sender {
+<<<<<<< HEAD
+=======
+       
+>>>>>>> e78dcf535763f2dc6dbe8a0efc41c34c084004fb
     BuilderViewController *builder = [[BuilderViewController alloc] init];
-    [self.navigationController pushViewController:builder animated:NO];
+    
+    [UIView animateWithDuration:0.75
+                     animations:^{
+                         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                         [self.navigationController pushViewController:builder animated:NO];
+                         [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
+                     }];
+    builder = nil;
 }
-
 #pragma mark IconDownloaderDelegate
 - (void)appImageDidLoad:(NSIndexPath *)indexPath
 {
