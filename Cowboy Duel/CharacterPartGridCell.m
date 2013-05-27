@@ -31,4 +31,12 @@
 {
     [lockImg setHidden:NO];
 }
+
+-(void)rotateImage:(BOOL)turn;
+{
+    ivImage.transform = CGAffineTransformIdentity;
+    if (turn) {
+        ivImage.transform = CGAffineTransformMakeRotation((M_PI * 90 / 180.0));
+    }
+}
 @end

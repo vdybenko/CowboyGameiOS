@@ -224,6 +224,12 @@
         }else{
             cell.lockImg.hidden = YES;
         }
+    
+        if (typeOfCharacterPart == CharacterPartGun) {
+            [cell rotateImage:YES];
+        }else{
+            [cell rotateImage:NO];
+        }
     }else{
         [cell setHidden:YES];
     }

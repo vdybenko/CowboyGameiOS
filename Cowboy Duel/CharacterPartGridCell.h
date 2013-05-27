@@ -17,4 +17,5 @@
 -(void)simpleBackGround;
 -(void)selectedBackGround;
 -(void)lockedItem;
+-(void)rotateImage:(BOOL)turn;
 @end
