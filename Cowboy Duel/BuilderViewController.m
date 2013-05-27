@@ -344,11 +344,11 @@
 }
 -(void)backlightDefensAction
 {
-    [UIView animateWithDuration:0.3 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         self.backlightDefens.alpha = 0.15;
     }completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.6 animations:^{
-            self.backlightDefens.alpha = 0.3;
+        [UIView animateWithDuration:0.5 animations:^{
+            self.backlightDefens.alpha = 0.8;
         }completion:^(BOOL finished) {
             if (!self.backlightDefens.hidden) {
                 [self backlightDefensAction];
@@ -360,11 +360,11 @@
 }
 -(void)backlightAtacAction
 {
-    [UIView animateWithDuration:0.3 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         self.backlightAtac.alpha = 0.05;
     }completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.8 animations:^{
-            self.backlightAtac.alpha = 0.3;
+        [UIView animateWithDuration:0.5 animations:^{
+            self.backlightAtac.alpha = 0.8;
         }completion:^(BOOL finished) {
             if (!self.backlightAtac.hidden) {
                 [self backlightAtacAction];
@@ -465,8 +465,8 @@
             break;
         case CharacterPartFace:
             visualViewCharacter.head.image = part.imageForObject;
-            
-            [self.resultLabel setText:[NSString stringWithFormat:@"0"]];
+            [self.resultLabel setText:[NSString stringWithFormat:@"+ %d",part.action]];
+            [self tempAtac:part.action];
             if (!isBtnForBuy) {
                 if (playerAccount.visualViewHead==index) {
                     [btnBuyMain setEnabled:NO];
@@ -639,6 +639,8 @@
 - (IBAction)touchFaceBtn:(id)sender {
     if (!isOpenSide && self.backlightDefens.hidden) {
         [self sideOpenAnimation];
+        self.backlightAtac.hidden = NO;
+        [self backlightAtacAction];
     }
     
     arrObjects = [visualViewDataSource arrayHead];
