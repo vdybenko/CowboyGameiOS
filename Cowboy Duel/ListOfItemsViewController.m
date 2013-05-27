@@ -212,10 +212,9 @@
 //
     if (player.bot) {
         if (player.weapon)
-            [oponentAccount setCurentIdWeapon:player.weapon];
+            [oponentAccount setAccountAtackValue:player.weapon];
         else
-            [oponentAccount setCurentIdWeapon:-1];
-        [oponentAccount loadAccountWeapon];
+            [oponentAccount setAccountAtackValue:0];
         if (player.defense)
             [oponentAccount setAccountDefenseValue:player.defense];
         else

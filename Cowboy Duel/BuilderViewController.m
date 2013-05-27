@@ -455,91 +455,105 @@
         case CharacterPartCap:
             visualViewCharacter.cap.image = part.imageForObject;
             [self.resultLabel setText:[NSString stringWithFormat:@"+ %d",part.action]];
-            [self tempDefens:part.action];
+//            [self tempDefens:part.action];
             if (!isBtnForBuy) {
                 if (playerAccount.visualViewCap==index) {
                     [btnBuyMain setEnabled:NO];
                 }
             }
+            playerAccount.visualViewCap = index;
 
             break;
         case CharacterPartFace:
             visualViewCharacter.head.image = part.imageForObject;
             [self.resultLabel setText:[NSString stringWithFormat:@"+ %d",part.action]];
-            [self tempAtac:part.action];
+//            [self tempAtac:part.action];
             if (!isBtnForBuy) {
                 if (playerAccount.visualViewHead==index) {
                     [btnBuyMain setEnabled:NO];
                 }
             }
+            playerAccount.visualViewHead = index;
 
             break;
         case CharacterPartGun:
             
             visualViewCharacter.gun.image = part.imageForObject;
             [self.resultLabel setText:[NSString stringWithFormat:@"+ %d",part.action]];
-            [self tempAtac:part.action];
+//            [self tempAtac:part.action];
             if (!isBtnForBuy) {
                 if (playerAccount.visualViewGuns==index) {
                     [btnBuyMain setEnabled:NO];
                 }
             }
+            
+            playerAccount.visualViewGuns = index;
+
             break;
         case CharacterPartJaket:
             visualViewCharacter.jakets.image = part.imageForObject;
             [self.resultLabel setText:[NSString stringWithFormat:@"+ %d",part.action]];
-            [self tempDefens:part.action];
+//            [self tempDefens:part.action];
             if (!isBtnForBuy) {
                 if (playerAccount.visualViewJackets==index) {
                     [btnBuyMain setEnabled:NO];
                 }
             }
+            playerAccount.visualViewJackets = index;
 
             break;
         case CharacterPartLegs:
             visualViewCharacter.length.image = part.imageForObject;
             [self.resultLabel setText:[NSString stringWithFormat:@"+ %d",part.action]];
-            [self tempDefens:part.action];
+//            [self tempDefens:part.action];
             if (!isBtnForBuy) {
                 if (playerAccount.visualViewLegs==index) {
                     [btnBuyMain setEnabled:NO];
                 }
             }
+            playerAccount.visualViewLegs = index;
+
             break;
         case CharacterPartShirt:
             visualViewCharacter.shirt.image = part.imageForObject;
             [self.resultLabel setText:[NSString stringWithFormat:@"+ %d",part.action]];
-            [self tempDefens:part.action];
+//            [self tempDefens:part.action];
             if (!isBtnForBuy) {
                 if (playerAccount.visualViewBody==index) {
                     [btnBuyMain setEnabled:NO];
                 }
             }
+            playerAccount.visualViewBody = index;
+
             break;
         case CharacterPartShoose:
             visualViewCharacter.shoose.image = part.imageForObject;
             [self.resultLabel setText:[NSString stringWithFormat:@"+ %d",part.action]];
-            [self tempDefens:part.action];
+//            [self tempDefens:part.action];
             if (!isBtnForBuy) {
                 if (playerAccount.visualViewShoose==index) {
                     [btnBuyMain setEnabled:NO];
                 }
             }
+            playerAccount.visualViewShoose = index;
+
             break;
         case CharacterPartSuit:
             visualViewCharacter.suits.image = part.imageForObject;
             [self.resultLabel setText:[NSString stringWithFormat:@"+ %d",part.action]];
-            [self tempDefens:part.action];
+//            [self tempDefens:part.action];
             if (!isBtnForBuy) {
                 if (playerAccount.visualViewSuits==index) {
                     [btnBuyMain setEnabled:NO];
                 }
             }
+            playerAccount.visualViewSuits = index;
             break;
         default :
             break;
     }
-    
+    [playerAccount recountDefenseAndAtack];
+    [self refreshController];
 }
 
 -(void) grid:(GMGridView*)grid buyProductForIndex:(NSInteger)index forType:(CharacterPart)type;
@@ -570,7 +584,6 @@
         [playerAccount saveMoney];
         
         [self addProductToBought:part.dId];
-        [playerAccount recountDefenseAndAtack];
     }
 
     
@@ -602,6 +615,7 @@
         default :
             break;
     }
+    [playerAccount recountDefenseAndAtack];
     [playerAccount saveVisualView];
     [self setObjectsForIndex:index];
     [self refreshControllerWithGrid];
@@ -628,6 +642,7 @@
 }
 
 - (IBAction)touchCloseSideView:(id)sender {
+    [playerAccount loadVisualView];
     [self cleanAll];
     [self sideCloseAnimation];
     [self refreshController];
@@ -764,11 +779,11 @@
 
 -(void)tempDefens:(int)plusOnDefens
 {
-     self.defensLabel.text = [NSString stringWithFormat:@"%d",playerAccount.accountDefenseValue + [DuelRewardLogicController countUpBuletsWithPlayerLevel:playerAccount.accountLevel] + plusOnDefens];
+     self.defensLabel.text = [NSString stringWithFormat:@"%d",playerAccount.accountDefenseValue + [DuelRewardLogicController countUpBuletsWithPlayerLevel:playerAccount.accountLevel]];
 }
 -(void)tempAtac:(int)plusOnAtac
 {
-     self.attacLabel.text = [NSString stringWithFormat:@"%d",playerServer.weapon + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[playerServer.rank intValue]] + plusOnAtac];
+     self.attacLabel.text = [NSString stringWithFormat:@"%d",playerAccount.accountAtackValue + [DuelRewardLogicController countUpBuletsWithPlayerLevel:playerAccount.accountLevel]];
 }
 
 -(BOOL) isCellValid:(NSInteger)position

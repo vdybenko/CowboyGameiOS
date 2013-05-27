@@ -470,8 +470,6 @@ static NSString *getSavePathForDuelProduct()
             }
         }
     }
-    [playerAccount saveWeapon];
-    [playerAccount saveDefense];
     [DuelProductDownloaderController saveWeapon:arrWeaponSaved];
     [DuelProductDownloaderController saveDefense:arrDefenseSaved];
     

@@ -404,13 +404,12 @@ static AccountDataSource *sharedHelper = nil;
 
 - (void)saveWeapon;
 {
-    [[NSUserDefaults standardUserDefaults] setInteger:self.curentIdWeapon forKey:@"WEAPON"];
+    [[NSUserDefaults standardUserDefaults] setInteger:self.accountAtackValue forKey:@"DEFENSE_VALUE"];
 }
 
 - (void)loadWeapon;
 {
-    self.curentIdWeapon = [[NSUserDefaults standardUserDefaults] integerForKey:@"WEAPON"];
-    [self loadAccountWeapon];
+    self.accountAtackValue = [[NSUserDefaults standardUserDefaults] integerForKey:@"DEFENSE_VALUE"];
 }
 
 - (void)saveDefense;
@@ -445,7 +444,7 @@ static AccountDataSource *sharedHelper = nil;
     });
 }
 
-- (int)recountDefenseAndAtack;
+- (void)recountDefenseAndAtack;
 {
     VisualViewDataSource *visualViewDataSource = [[VisualViewDataSource alloc] init];
     CDVisualViewCharacterPart *visualViewCharacterPart;
@@ -507,12 +506,7 @@ static AccountDataSource *sharedHelper = nil;
             break;
     }
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.dId = %d",index];
-    NSArray *results = [array filteredArrayUsingPredicate:predicate];
-    if ([results count]) {
-        return [results objectAtIndex:0];
-    }
-    return nil;
+    return [array objectAtIndex:index];
 }
 
 - (void)saveTransaction;
@@ -601,18 +595,6 @@ static AccountDataSource *sharedHelper = nil;
 }
 
 #pragma mark accountWeapon
-
-- (CDWeaponProduct*)loadAccountWeapon;
-{
-    NSArray *arrayWeapon = [DuelProductDownloaderController loadWeaponArray];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.dID = %d", self.curentIdWeapon];
-    NSArray *results = [arrayWeapon filteredArrayUsingPredicate:predicate];
-    if ([results count]) {
-        self.accountWeapon = [results objectAtIndex:0];
-        return [results objectAtIndex:0];
-    }
-    return nil;
-}
 
 -(NSUInteger(^)(NSArray *, NSInteger))findObsByID {
     return ^(NSArray * array, NSInteger idObject) {

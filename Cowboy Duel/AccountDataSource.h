@@ -106,13 +106,12 @@
 - (void)loadVisualView;
 - (BOOL)isProductBought:(NSInteger)index;
 
-- (int)recountDefenseAndAtack;
+- (void)recountDefenseAndAtack;
 - (CDVisualViewCharacterPart*)loadProductWithIndex:(int)index type:(CharacterPart)type visualViewDataSource:(VisualViewDataSource*)datasource;
 
 - (BOOL)isPlayerPlayDuel;
 - (BOOL)isPlayerForPractice;
 
-- (CDWeaponProduct*)loadAccountWeapon;
 -(NSUInteger(^)(NSArray *, NSInteger))findObsByID;
 -(NSUInteger(^)(NSArray *, NSString *))findObsByPurchase;
 

@@ -213,8 +213,6 @@ static StartViewController *sharedHelper = nil;
             [playerAccount saveHomeTown];
             [playerAccount saveFriends];
             [playerAccount saveFacebookName];
-            [playerAccount saveWeapon];
-            [playerAccount saveDefense];
             [playerAccount saveTransaction];
             [playerAccount saveGlNumber];
             [playerAccount saveVisualView];

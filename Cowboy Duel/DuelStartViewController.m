@@ -61,7 +61,6 @@ static const char *GC_URL =  BASE_URL"api/gc";
         
         if (playerAccount.isTryingWeapon) {
             playerAccount.isTryingWeapon = NO;
-            [playerAccount loadWeapon];
         }
     }
     return self;

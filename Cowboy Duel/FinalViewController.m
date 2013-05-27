@@ -192,8 +192,6 @@
 {
     viewLastSceneAnimation.hidden=NO;
     [player stop];
-    
-    [playerAccount loadWeapon];
 }
 
 -(void)releaseComponents
