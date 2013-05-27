@@ -30,6 +30,7 @@
 
 #import "FunPageViewController.h"
 #import "ActiveDuelViewController.h"
+#import "BuilderViewController.h"
 #define kTwitterSettingsButtonIndex 0
 
 @interface StartViewController ()
@@ -670,9 +671,21 @@ static StartViewController *sharedHelper = nil;
 }
 
 - (IBAction)storeButtonClick:(id)sender {
+    /*
     StoreViewController *storeViewController=[[StoreViewController alloc] initWithAccount:playerAccount];
     [self.navigationController pushViewController:storeViewController animated:YES];
-    storeViewController = nil;
+    storeViewController = nil;*/
+    
+    BuilderViewController *builder = [[BuilderViewController alloc] init];
+    
+    [UIView animateWithDuration:0.75
+                     animations:^{
+                         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                         [self.navigationController pushViewController:builder animated:NO];
+                         [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
+                     }];
+    builder = nil;
+
 }
 
 -(IBAction)profileButtonClick
