@@ -131,7 +131,7 @@ static SSConnection *connection;
     int *rangData = (int *)&networkPacket[sizeof(int)];
     rangData[0] = rang;
     
-    int atack = playerAccount.accountWeapon.dDamage;
+    int atack = playerAccount.accountAtackValue;
     int *atackData = (int *)&networkPacket[sizeof(int) * 2];
     atackData[0] = atack;
     

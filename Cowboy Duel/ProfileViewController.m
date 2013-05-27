@@ -675,7 +675,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     
     userAtackView.hidden = NO;
     userDefenseView.hidden = NO;
-    userAtack.text =[NSString stringWithFormat:@" %d",playerAccount.accountWeapon.dDamage + [DuelRewardLogicController countUpBuletsWithPlayerLevel:playerAccount.accountLevel]];
+    userAtack.text =[NSString stringWithFormat:@" %d",playerAccount.accountAtackValue + [DuelRewardLogicController countUpBuletsWithPlayerLevel:playerAccount.accountLevel]];
        
     userDefense.text = [NSString stringWithFormat:@" %d",playerAccount.accountDefenseValue + [DuelRewardLogicController countUpBuletsWithPlayerLevel:playerAccount.accountLevel]];
 }
@@ -1114,10 +1114,6 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                                                       userInfo:[NSDictionary dictionaryWithObject:@"/ProfileVC_add_favorite" forKey:@"page"]];
 }
 - (IBAction)btnBuilderClick:(id)sender {
-<<<<<<< HEAD
-=======
-       
->>>>>>> e78dcf535763f2dc6dbe8a0efc41c34c084004fb
     BuilderViewController *builder = [[BuilderViewController alloc] init];
     
     [UIView animateWithDuration:0.75

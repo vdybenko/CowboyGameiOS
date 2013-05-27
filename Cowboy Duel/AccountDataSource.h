@@ -27,6 +27,7 @@
 @property(nonatomic) BOOL activeDuel;
 
 @property(nonatomic) NSInteger accountDefenseValue;
+@property(nonatomic) NSInteger accountAtackValue;
 @property(nonatomic) NSInteger curentIdWeapon;
 @property(strong, nonatomic) CDWeaponProduct *accountWeapon;
 
@@ -104,6 +105,9 @@
 - (void)saveVisualView;
 - (void)loadVisualView;
 - (BOOL)isProductBought:(NSInteger)index;
+
+- (int)recountDefenseAndAtack;
+- (CDVisualViewCharacterPart*)loadProductWithIndex:(int)index type:(CharacterPart)type visualViewDataSource:(VisualViewDataSource*)datasource;
 
 - (BOOL)isPlayerPlayDuel;
 - (BOOL)isPlayerForPractice;

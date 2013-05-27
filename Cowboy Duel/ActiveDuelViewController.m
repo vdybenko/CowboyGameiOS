@@ -500,8 +500,8 @@ static CGFloat blinkBottomOriginY;
     NSLog(@"%f", userLiveImageViewStartWidth);
     self.lbUserLifeLeft.text = [NSString stringWithFormat:@"%d",shotCountBulletForOpponent*3];
     
-    self.opStatsLabel.text = [NSString stringWithFormat: @"A: +%d\rD: +%d",opAccount.accountWeapon.dDamage,opAccount.accountDefenseValue];
-    self.userStatsLabel.text = [NSString stringWithFormat: @"A: +%d\nD: +%d",playerAccount.accountWeapon.dDamage,playerAccount.accountDefenseValue];
+    self.opStatsLabel.text = [NSString stringWithFormat: @"A: +%d\rD: +%d",opAccount.accountAtackValue,opAccount.accountDefenseValue];
+    self.userStatsLabel.text = [NSString stringWithFormat: @"A: +%d\nD: +%d",playerAccount.accountAtackValue,playerAccount.accountDefenseValue];
     [self.titleSteadyFire setHidden:YES];
     [self.lblBehold setHidden:YES];
     
@@ -611,7 +611,7 @@ static CGFloat blinkBottomOriginY;
 #pragma mark
 -(void)countUpBulets;
 {
-    int countBullets = [DuelRewardLogicController countUpBuletsWithOponentLevel:opAccount.accountLevel defense:opAccount.accountDefenseValue playerAtack:playerAccount.accountWeapon.dDamage];
+    int countBullets = [DuelRewardLogicController countUpBuletsWithOponentLevel:opAccount.accountLevel defense:opAccount.accountDefenseValue playerAtack:playerAccount.accountAtackValue];
     
     shotCountBullet =  countBullets;
     maxShotCount = countBullets;
@@ -626,7 +626,7 @@ static CGFloat blinkBottomOriginY;
             maxShotCount = 3;
             [arrowToOpponent changeImgForPractice];
         }else{
-            countBulletsForOpponent = [DuelRewardLogicController countUpBuletsWithOponentLevel:playerAccount.accountLevel defense:playerAccount.accountDefenseValue playerAtack:opAccount.accountWeapon.dDamage];
+            countBulletsForOpponent = [DuelRewardLogicController countUpBuletsWithOponentLevel:playerAccount.accountLevel defense:playerAccount.accountDefenseValue playerAtack:opAccount.accountAtackValue];
             opponentShape.typeOfBody = OpponentShapeTypeManLow;
             UIImage *image = [opponentShape.visualViewCharacter imageFromCharacter];
             [arrowToOpponent changeImg:image];
@@ -1464,7 +1464,7 @@ static CGFloat blinkBottomOriginY;
 -(void)startGunFrequentlyBlockTime
 {
     isGunCanShotOfFrequently = NO;
-    [self performSelector:@selector(finishGunFrequentlyBlockTime) withObject:Nil afterDelay:playerAccount.accountWeapon.dFrequently];
+    [self performSelector:@selector(finishGunFrequentlyBlockTime) withObject:Nil afterDelay:0.2];
 }
 
 #pragma mark - Frequently of opponent shoting
@@ -1503,9 +1503,6 @@ float frequencyOpponentShoting()
         playerAccount.isTryingWeapon = NO;
         if (!finalViewDataSource.isDuelWinWatched) {
             finalViewDataSource.isDuelWinWatched = YES;
-            DuelProductWinViewController *duelProductWinViewController=[[DuelProductWinViewController alloc] initWithAccount:playerAccount duelProduct:playerAccount.accountWeapon parentVC:self];
-            [playerAccount loadWeapon];
-            [self.navigationController presentViewController:duelProductWinViewController animated:YES completion:Nil];
         }else{
             if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
                 

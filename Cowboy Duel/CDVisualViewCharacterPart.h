@@ -16,6 +16,7 @@
 @property (nonatomic) int money;
 @property (nonatomic) NSInteger dId;
 @property (nonatomic) NSInteger levelLock;
+@property (nonatomic) NSInteger action;
 
 -(id)initWithArray:(NSArray*)arrayOfParametrs;
 -(UIImage*) imageForObject;

@@ -126,7 +126,7 @@
 {
     self.moneyLabel.text =  [NSString stringWithFormat:@"%d",playerAccount.money];
     self.defensLabel.text = [NSString stringWithFormat:@"%d",playerAccount.accountDefenseValue + [DuelRewardLogicController countUpBuletsWithPlayerLevel:playerAccount.accountLevel]];
-    self.attacLabel.text = [NSString stringWithFormat:@"%d",playerAccount.accountWeapon.dDamage + [DuelRewardLogicController countUpBuletsWithPlayerLevel:playerAccount.accountLevel]];
+    self.attacLabel.text = [NSString stringWithFormat:@"%d",playerAccount.accountAtackValue + [DuelRewardLogicController countUpBuletsWithPlayerLevel:playerAccount.accountLevel]];
 }
 
 -(void)refreshControllerWithGrid;

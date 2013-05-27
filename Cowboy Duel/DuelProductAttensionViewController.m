@@ -156,8 +156,8 @@ static int oponentMustShot;
 
 + (BOOL)isAttensionNeedForOponent:(AccountDataSource*)oponentAccount;
 {
-    playerMustShot = [DuelRewardLogicController countUpBuletsWithOponentLevel:oponentAccount.accountLevel defense:oponentAccount.accountDefenseValue playerAtack:[AccountDataSource sharedInstance].accountWeapon.dDamage];
-    oponentMustShot = [DuelRewardLogicController countUpBuletsWithOponentLevel:[AccountDataSource sharedInstance].accountLevel defense:[AccountDataSource sharedInstance].accountDefenseValue playerAtack:oponentAccount.accountWeapon.dDamage];
+    playerMustShot = [DuelRewardLogicController countUpBuletsWithOponentLevel:oponentAccount.accountLevel defense:oponentAccount.accountDefenseValue playerAtack:[AccountDataSource sharedInstance].accountAtackValue];
+    oponentMustShot = [DuelRewardLogicController countUpBuletsWithOponentLevel:[AccountDataSource sharedInstance].accountLevel defense:[AccountDataSource sharedInstance].accountDefenseValue playerAtack:oponentAccount.accountAtackValue];
     DLog(@"Player must shot %d opponent must shot %d", playerMustShot, oponentMustShot);
     if ((playerMustShot-oponentMustShot)>=2){
         return YES;

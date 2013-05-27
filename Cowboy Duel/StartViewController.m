@@ -671,16 +671,6 @@ static StartViewController *sharedHelper = nil;
 }
 
 - (IBAction)storeButtonClick:(id)sender {
-<<<<<<< HEAD
-    BuilderViewController *builder = [[BuilderViewController alloc] init];
-    [self.navigationController pushViewController:builder animated:NO];
-    builder = nil;
-=======
-    /*
-    StoreViewController *storeViewController=[[StoreViewController alloc] initWithAccount:playerAccount];
-    [self.navigationController pushViewController:storeViewController animated:YES];
-    storeViewController = nil;*/
-    
     BuilderViewController *builder = [[BuilderViewController alloc] init];
     
     [UIView animateWithDuration:0.75
@@ -690,8 +680,6 @@ static StartViewController *sharedHelper = nil;
                          [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
                      }];
     builder = nil;
-
->>>>>>> e78dcf535763f2dc6dbe8a0efc41c34c084004fb
 }
 
 -(IBAction)profileButtonClick

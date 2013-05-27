@@ -21,6 +21,7 @@ static const char *LIST_BOTS_URL = BASE_URL"users/get_user_data";
  accountLevel,accountPoints,accountWins,accountDraws,accountBigestWin,removeAds,avatar,age,homeTown,friends,facebookName, bot, activeDuel, accountSceneConfig;
 
 @synthesize accountDefenseValue;
+@synthesize accountAtackValue;
 @synthesize curentIdWeapon;
 @synthesize isTryingWeapon;
 @synthesize accountWeapon;
@@ -67,6 +68,7 @@ static AccountDataSource *sharedHelper = nil;
         self.accountBigestWin=0;
         self.removeAds=0;
         self.accountDefenseValue = 0;
+        self. accountAtackValue = 0;
         
         self.glNumber = 0;
         self.accountWeapon = [DuelProductDownloaderController defaultWeaponForPlayer];
@@ -443,75 +445,75 @@ static AccountDataSource *sharedHelper = nil;
     });
 }
 
-//- (int)recountDefenseAndAtack;
-//{
-//    VisualViewDataSource *visualViewDataSource = [[VisualViewDataSource alloc] init];
-//    CDVisualViewCharacterPart *visualViewCharacterPart;
-//    accountDefenseValue = 0;
-//    if (visualViewSuits) {
-//        visualViewCharacterPart= [self loadProductWithIndex:visualViewSuits type:CharacterPartSuit visualViewDataSource:visualViewDataSource];
-//        accountDefenseValue+=visualViewCharacterPart.action;
-//    }else{
-//        visualViewCharacterPart= [self loadProductWithIndex:visualViewCap type:CharacterPartCap visualViewDataSource:visualViewDataSource];
-//        accountDefenseValue+=visualViewCharacterPart.action;
-//        visualViewCharacterPart= [self loadProductWithIndex:visualViewLegs type:CharacterPartLegs visualViewDataSource:visualViewDataSource];
-//        accountDefenseValue+=visualViewCharacterPart.action;
-//        visualViewCharacterPart= [self loadProductWithIndex:visualViewBody type:CharacterPartShirt visualViewDataSource:visualViewDataSource];
-//        accountDefenseValue+=visualViewCharacterPart.action;
-//        visualViewCharacterPart= [self loadProductWithIndex:visualViewJackets type:CharacterPartJaket visualViewDataSource:visualViewDataSource];
-//        accountDefenseValue+=visualViewCharacterPart.action;
-//    }
-//    accountAtackValue = 0;
-//    visualViewCharacterPart= [self loadProductWithIndex:visualViewGuns type:CharacterPartGun visualViewDataSource:visualViewDataSource];
-//    accountAtackValue+=visualViewCharacterPart.action;
-//    visualViewCharacterPart= [self loadProductWithIndex:visualViewShoose type:CharacterPartShoose visualViewDataSource:visualViewDataSource];
-//    accountAtackValue+=visualViewCharacterPart.action;
-//    visualViewCharacterPart= [self loadProductWithIndex:visualViewHead type:CharacterPartFace visualViewDataSource:visualViewDataSource];
-//    accountAtackValue+=visualViewCharacterPart.action;
-//    
-//    [visualViewDataSource releaseComponents];
-//    visualViewDataSource = nil;
-//}
-//
-//- (CDVisualViewCharacterPart*)loadProductWithIndex:(int)index type:(CharacterPart)type visualViewDataSource:(VisualViewDataSource*)datasource;
-//{
-//    NSArray *array;
-//    switch (type) {
-//        case CharacterPartCap:
-//            array = [datasource arrayCap];
-//            break;
-//        case CharacterPartFace:
-//            array = [datasource arrayHead];
-//            break;
-//        case CharacterPartGun:
-//            array = [datasource arrayGuns];
-//            break;
-//        case CharacterPartJaket:
-//            array = [datasource arrayJakets];
-//            break;
-//        case CharacterPartLegs:
-//            array = [datasource arrayLegs];
-//            break;
-//        case CharacterPartShirt:
-//            array = [datasource arrayBody];
-//            break;
-//        case CharacterPartShoose:
-//            array = [datasource arrayShoose];
-//            break;
-//        case CharacterPartSuit:
-//            array = [datasource arraySuits];
-//            break;
-//        default :
-//            break;
-//    }
-//    
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.dId = %d",index];
-//    NSArray *results = [array filteredArrayUsingPredicate:predicate];
-//    if ([results count]) {
-//        return [results objectAtIndex:0];
-//    }
-//    return nil;
-//}
+- (int)recountDefenseAndAtack;
+{
+    VisualViewDataSource *visualViewDataSource = [[VisualViewDataSource alloc] init];
+    CDVisualViewCharacterPart *visualViewCharacterPart;
+    accountDefenseValue = 0;
+    if (visualViewSuits) {
+        visualViewCharacterPart= [self loadProductWithIndex:visualViewSuits type:CharacterPartSuit visualViewDataSource:visualViewDataSource];
+        accountDefenseValue+=visualViewCharacterPart.action;
+    }else{
+        visualViewCharacterPart= [self loadProductWithIndex:visualViewCap type:CharacterPartCap visualViewDataSource:visualViewDataSource];
+        accountDefenseValue+=visualViewCharacterPart.action;
+        visualViewCharacterPart= [self loadProductWithIndex:visualViewLegs type:CharacterPartLegs visualViewDataSource:visualViewDataSource];
+        accountDefenseValue+=visualViewCharacterPart.action;
+        visualViewCharacterPart= [self loadProductWithIndex:visualViewBody type:CharacterPartShirt visualViewDataSource:visualViewDataSource];
+        accountDefenseValue+=visualViewCharacterPart.action;
+        visualViewCharacterPart= [self loadProductWithIndex:visualViewJackets type:CharacterPartJaket visualViewDataSource:visualViewDataSource];
+        accountDefenseValue+=visualViewCharacterPart.action;
+    }
+    accountAtackValue = 0;
+    visualViewCharacterPart= [self loadProductWithIndex:visualViewGuns type:CharacterPartGun visualViewDataSource:visualViewDataSource];
+    accountAtackValue+=visualViewCharacterPart.action;
+    visualViewCharacterPart= [self loadProductWithIndex:visualViewShoose type:CharacterPartShoose visualViewDataSource:visualViewDataSource];
+    accountAtackValue+=visualViewCharacterPart.action;
+    visualViewCharacterPart= [self loadProductWithIndex:visualViewHead type:CharacterPartFace visualViewDataSource:visualViewDataSource];
+    accountAtackValue+=visualViewCharacterPart.action;
+    
+    [visualViewDataSource releaseComponents];
+    visualViewDataSource = nil;
+}
+
+- (CDVisualViewCharacterPart*)loadProductWithIndex:(int)index type:(CharacterPart)type visualViewDataSource:(VisualViewDataSource*)datasource;
+{
+    NSArray *array;
+    switch (type) {
+        case CharacterPartCap:
+            array = [datasource arrayCap];
+            break;
+        case CharacterPartFace:
+            array = [datasource arrayHead];
+            break;
+        case CharacterPartGun:
+            array = [datasource arrayGuns];
+            break;
+        case CharacterPartJaket:
+            array = [datasource arrayJakets];
+            break;
+        case CharacterPartLegs:
+            array = [datasource arrayLegs];
+            break;
+        case CharacterPartShirt:
+            array = [datasource arrayBody];
+            break;
+        case CharacterPartShoose:
+            array = [datasource arrayShoose];
+            break;
+        case CharacterPartSuit:
+            array = [datasource arraySuits];
+            break;
+        default :
+            break;
+    }
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.dId = %d",index];
+    NSArray *results = [array filteredArrayUsingPredicate:predicate];
+    if ([results count]) {
+        return [results objectAtIndex:0];
+    }
+    return nil;
+}
 
 - (void)saveTransaction;
 {
@@ -570,6 +572,8 @@ static AccountDataSource *sharedHelper = nil;
     if (!arrayOfBoughtProducts) {
         arrayOfBoughtProducts=[[NSMutableArray alloc] init];
     }
+    
+    [self recountDefenseAndAtack];
 }
 
 - (BOOL)isProductBought:(NSInteger)index;{

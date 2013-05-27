@@ -9,14 +9,4 @@
 #import "CDVisualViewCharacterPartLegs.h"
 
 @implementation CDVisualViewCharacterPartLegs
-@synthesize action;
-
--(id)initWithArray:(NSArray *)arrayOfParametrs
-{
-    self = [super initWithArray:arrayOfParametrs];
-    if (self) {
-        action = [[arrayOfParametrs objectAtIndex:indexOfLastStaticValues+1] integerValue];
-    }
-    return self;
-}
 @end

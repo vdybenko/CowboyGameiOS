@@ -9,5 +9,4 @@
 #import "CDVisualViewCharacterPart.h"
 
 @interface CDVisualViewCharacterPartGuns : CDVisualViewCharacterPart
-@property (nonatomic) NSInteger action;
 @end

@@ -275,21 +275,14 @@
         
         if (playerAccount.isTryingWeapon) {
             playerAccount.isTryingWeapon = NO;
-            if (!isDuelWinWatched) {
-                isDuelWinWatched = YES;
-                DuelProductWinViewController *duelProductWinViewController=[[DuelProductWinViewController alloc] initWithAccount:playerAccount duelProduct:playerAccount.accountWeapon parentVC:self];
-                [playerAccount loadWeapon];
-                [self.navigationController presentViewController:duelProductWinViewController animated:YES completion:Nil];
-            }else{
-                if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
-                    
-                    [self.navigationController popToViewController:[LoginAnimatedViewController sharedInstance] animated:YES];
-                    [self releaseComponents];
-                }
-                else{
-                    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
-                    [self releaseComponents];
-                }
+            if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
+                
+                [self.navigationController popToViewController:[LoginAnimatedViewController sharedInstance] animated:YES];
+                [self releaseComponents];
+            }
+            else{
+                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+                [self releaseComponents];
             }
         }else{
             UINavigationController *nav = ((TestAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController;

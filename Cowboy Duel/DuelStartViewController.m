@@ -144,7 +144,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
     lbUserRank.text = NSLocalizedString(Rank, @"");
     lbUserRank.font=fontSimpleText;
     
-    userAtack.text = [NSString stringWithFormat:@" %d",playerAccount.accountWeapon.dDamage+[DuelRewardLogicController countUpBuletsWithPlayerLevel:playerAccount.accountLevel]];
+    userAtack.text = [NSString stringWithFormat:@" %d",playerAccount.accountAtackValue+[DuelRewardLogicController countUpBuletsWithPlayerLevel:playerAccount.accountLevel]];
     userAtackView.hidden = NO;
 
     userDefense.text = [NSString stringWithFormat:@"%d",playerAccount.accountDefenseValue+[DuelRewardLogicController countUpBuletsWithPlayerLevel:playerAccount.accountLevel]];
@@ -438,7 +438,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
 
 -(void)setAttackAndDefenseOfOponent:(AccountDataSource*)oponent;
 {
-    oponentAtack.text = [NSString stringWithFormat:@" %d",oponent.accountWeapon.dDamage+[DuelRewardLogicController countUpBuletsWithPlayerLevel:oponent.accountLevel]];
+    oponentAtack.text = [NSString stringWithFormat:@" %d",oponent.accountAtackValue+[DuelRewardLogicController countUpBuletsWithPlayerLevel:oponent.accountLevel]];
     oponentAtackView.hidden = NO;
     oponentDefense.text = [NSString stringWithFormat:@" %d",oponent.accountDefenseValue+[DuelRewardLogicController countUpBuletsWithPlayerLevel:oponent.accountLevel]];
     oponentDefenseView.hidden = NO;

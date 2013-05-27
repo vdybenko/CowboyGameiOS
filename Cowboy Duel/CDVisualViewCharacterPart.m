@@ -14,6 +14,7 @@
 @synthesize money;
 @synthesize dId;
 @synthesize levelLock;
+@synthesize action;
 
 -(id)initWithArray:(NSArray*)arrayOfParametrs;
 {
@@ -25,6 +26,7 @@
         money = [[arrayOfParametrs objectAtIndex:1] integerValue];
         dId = [[arrayOfParametrs objectAtIndex:2] integerValue];
         levelLock = [[arrayOfParametrs objectAtIndex:3] integerValue];
+        action = [[arrayOfParametrs objectAtIndex:indexOfLastStaticValues+1] integerValue];
     }
     return self;
 }
