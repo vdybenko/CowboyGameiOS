@@ -453,7 +453,7 @@
 										<string key="NSFrameSize">{100, 120}</string>
 										<reference key="NSSuperview" ref="1062032095"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="832193411"/>
+										<reference key="NSNextKeyView" ref="283182653"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -523,7 +523,7 @@
 										</object>
 										<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 									</object>
-									<object class="IBUIImageView" id="832193411">
+									<object class="IBUIImageView" id="283182653">
 										<reference key="NSNextResponder" ref="1062032095"/>
 										<int key="NSvFlags">292</int>
 										<string key="NSFrame">{{32, 10}, {15, 15}}</string>
@@ -533,7 +533,7 @@
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-										<object class="NSCustomResource" key="IBUIImage" id="613632372">
+										<object class="NSCustomResource" key="IBUIImage" id="925328408">
 											<string key="NSClassName">NSImage</string>
 											<string key="NSResourceName">fin_img_coin.png</string>
 										</object>
@@ -700,7 +700,7 @@
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-										<reference key="IBUIImage" ref="613632372"/>
+										<reference key="IBUIImage" ref="925328408"/>
 									</object>
 									<object class="IBUILabel" id="1021684890">
 										<reference key="NSNextResponder" ref="678282299"/>
@@ -820,7 +820,7 @@
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 									</object>
 								</array>
-								<string key="NSFrame">{{92, 8}, {84, 33}}</string>
+								<string key="NSFrame">{{182, 8}, {84, 33}}</string>
 								<reference key="NSSuperview" ref="947746974"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="156395149"/>
@@ -904,7 +904,7 @@
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 									</object>
 								</array>
-								<string key="NSFrame">{{182, 8}, {84, 33}}</string>
+								<string key="NSFrame">{{92, 8}, {84, 33}}</string>
 								<reference key="NSSuperview" ref="947746974"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="750007441"/>
@@ -1418,7 +1418,7 @@
 							<reference ref="129376998"/>
 							<reference ref="785680842"/>
 							<reference ref="650379413"/>
-							<reference ref="832193411"/>
+							<reference ref="283182653"/>
 						</array>
 						<reference key="parent" ref="916055748"/>
 					</object>
@@ -1576,7 +1576,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">464</int>
-						<reference key="object" ref="832193411"/>
+						<reference key="object" ref="283182653"/>
 						<reference key="parent" ref="1062032095"/>
 					</object>
 				</array>
