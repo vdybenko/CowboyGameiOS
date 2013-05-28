@@ -30,8 +30,9 @@ FXLabel *lblGoldPlus;
 @synthesize goldPointBgView;
 @synthesize activeDuelViewController;
 @synthesize isTryAgainEnabled;
+#pragma mark
 
-- (id)initWithFrame:(CGRect)frame andDataSource:(FinalViewDataSource *)fvDataSource;// andAccount:(AccountDataSource *)acc;
+- (id)initWithFrame:(CGRect)frame andDataSource:(FinalViewDataSource *)fvDataSource;
 {
     self = [super initWithFrame:frame];
 
@@ -46,7 +47,7 @@ FXLabel *lblGoldPlus;
         
         startMoney = finalViewDataSource.oldMoney;
         endMoney = playerAccount.money;
-        NSLog(@"%d %d", startMoney, endMoney);
+        NSLog(@"startMoney %d endMoney %d", startMoney, endMoney);
         
         NSArray *array=[DuelRewardLogicController getStaticPointsForEachLevels];
         NSInteger num = playerAccount.accountLevel;
@@ -67,6 +68,9 @@ FXLabel *lblGoldPlus;
         
         startPoints=(playerAccount.accountPoints-moneyForPrewLevel);
         endPoints=(moneyForNextLevel-moneyForPrewLevel);
+
+        NSLog(@"startPoints %d endPoints %d ", startPoints, endPoints);
+        NSLog(@"startPoints %d endPoints %d ", playerAccount.accountPoints, finalViewDataSource.oldPoints);
 
         
         lbStartPoints = finalViewDataSource.oldPoints;

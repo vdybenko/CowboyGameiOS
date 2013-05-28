@@ -35,7 +35,7 @@
         oldMoney = playerAccount.money;
         oldPoints = playerAccount.accountPoints;
         reachNewLevel = NO;
-        
+                
         if (teaching&&(oponentAccount.bot)) {
             duelWithBotCheck=YES;
         }else{
