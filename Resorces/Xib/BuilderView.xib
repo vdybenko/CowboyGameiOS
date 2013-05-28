@@ -216,7 +216,7 @@
 									<object class="IBUIButton" id="348911563">
 										<reference key="NSNextResponder" ref="585140163"/>
 										<int key="NSvFlags">300</int>
-										<string key="NSFrame">{{0, 68}, {66, 66}}</string>
+										<string key="NSFrame">{{0, 70}, {66, 66}}</string>
 										<reference key="NSSuperview" ref="585140163"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="494989855"/>
@@ -242,7 +242,7 @@
 									<object class="IBUIButton" id="494989855">
 										<reference key="NSNextResponder" ref="585140163"/>
 										<int key="NSvFlags">300</int>
-										<string key="NSFrame">{{0, 135}, {66, 66}}</string>
+										<string key="NSFrame">{{0, 140}, {66, 66}}</string>
 										<reference key="NSSuperview" ref="585140163"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="661267077"/>
@@ -268,7 +268,7 @@
 									<object class="IBUIButton" id="661267077">
 										<reference key="NSNextResponder" ref="585140163"/>
 										<int key="NSvFlags">300</int>
-										<string key="NSFrame">{{0, 202}, {66, 66}}</string>
+										<string key="NSFrame">{{0, 210}, {66, 66}}</string>
 										<reference key="NSSuperview" ref="585140163"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="534382259"/>
@@ -294,7 +294,7 @@
 									<object class="IBUIButton" id="534382259">
 										<reference key="NSNextResponder" ref="585140163"/>
 										<int key="NSvFlags">300</int>
-										<string key="NSFrame">{{0, 269}, {66, 66}}</string>
+										<string key="NSFrame">{{0, 280}, {66, 66}}</string>
 										<reference key="NSSuperview" ref="585140163"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="417036041"/>
@@ -320,7 +320,7 @@
 									<object class="IBUIButton" id="417036041">
 										<reference key="NSNextResponder" ref="585140163"/>
 										<int key="NSvFlags">300</int>
-										<string key="NSFrame">{{0, 336}, {66, 66}}</string>
+										<string key="NSFrame">{{0, 350}, {66, 66}}</string>
 										<reference key="NSSuperview" ref="585140163"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="887897910"/>
@@ -346,7 +346,7 @@
 									<object class="IBUIButton" id="887897910">
 										<reference key="NSNextResponder" ref="585140163"/>
 										<int key="NSvFlags">300</int>
-										<string key="NSFrame">{{0, 403}, {66, 66}}</string>
+										<string key="NSFrame">{{0, 419}, {66, 66}}</string>
 										<reference key="NSSuperview" ref="585140163"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="244944833"/>
@@ -372,7 +372,7 @@
 									<object class="IBUIButton" id="244944833">
 										<reference key="NSNextResponder" ref="585140163"/>
 										<int key="NSvFlags">300</int>
-										<string key="NSFrame">{{0, 470}, {66, 66}}</string>
+										<string key="NSFrame">{{0, 489}, {66, 66}}</string>
 										<reference key="NSSuperview" ref="585140163"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="916055748"/>
@@ -393,7 +393,7 @@
 										<reference key="IBUIFont" ref="349654511"/>
 									</object>
 								</array>
-								<string key="NSFrame">{{32, 6}, {68, 501}}</string>
+								<string key="NSFrame">{{32, -3}, {68, 519}}</string>
 								<reference key="NSSuperview" ref="47995292"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="386081909"/>
@@ -708,7 +708,7 @@
 										<string key="NSFrame">{{32, 8}, {43, 15}}</string>
 										<reference key="NSSuperview" ref="678282299"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="520594225"/>
+										<reference key="NSNextKeyView" ref="887027739"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIClipsSubviews">YES</bool>
@@ -784,7 +784,7 @@
 										<string key="NSFrame">{{30, 8}, {43, 15}}</string>
 										<reference key="NSSuperview" ref="520594225"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="887027739"/>
+										<reference key="NSNextKeyView" ref="699164075"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIClipsSubviews">YES</bool>
@@ -868,7 +868,7 @@
 										<string key="NSFrame">{{30, 8}, {43, 15}}</string>
 										<reference key="NSSuperview" ref="887027739"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="699164075"/>
+										<reference key="NSNextKeyView" ref="520594225"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIClipsSubviews">YES</bool>
@@ -1646,6 +1646,65 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">BuilderViewController</string>
 					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="touchBuyBtn:">id</string>
+						<string key="touchCloseBtn:">id</string>
+						<string key="touchCloseSideView:">id</string>
+						<string key="touchFaceBtn:">id</string>
+						<string key="touchGunsBtn:">id</string>
+						<string key="touchHatBtn:">id</string>
+						<string key="touchJaketBtn:">id</string>
+						<string key="touchPantsBtn:">id</string>
+						<string key="touchShirtBtn:">id</string>
+						<string key="touchShoesBtn:">id</string>
+						<string key="touchSuitsBtn:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="touchBuyBtn:">
+							<string key="name">touchBuyBtn:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="touchCloseBtn:">
+							<string key="name">touchCloseBtn:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="touchCloseSideView:">
+							<string key="name">touchCloseSideView:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="touchFaceBtn:">
+							<string key="name">touchFaceBtn:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="touchGunsBtn:">
+							<string key="name">touchGunsBtn:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="touchHatBtn:">
+							<string key="name">touchHatBtn:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="touchJaketBtn:">
+							<string key="name">touchJaketBtn:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="touchPantsBtn:">
+							<string key="name">touchPantsBtn:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="touchShirtBtn:">
+							<string key="name">touchShirtBtn:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="touchShoesBtn:">
+							<string key="name">touchShoesBtn:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="touchSuitsBtn:">
+							<string key="name">touchSuitsBtn:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="PantsBtn">UIButton</string>
 						<string key="ShirtBtn">UIButton</string>
