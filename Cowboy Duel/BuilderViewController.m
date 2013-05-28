@@ -95,10 +95,8 @@
     buttonsScroll.contentSize = CGSizeMake(66,  68 * 9);
     
     lbBuyBtn.text = NSLocalizedString(@"BUYIT", @"");
-    //self.backlightDefens.clipsToBounds = YES;
     self.backlightDefens.layer.cornerRadius = 10.f;
     
-    //self.backlightAtac.clipsToBounds = YES;
     self.backlightAtac.layer.cornerRadius = 10.f;
     
     visualViewDataSource = [[VisualViewDataSource alloc] init];
@@ -119,6 +117,7 @@
         frame.size.height +=75;
         grid.frame = frame;
     }
+    
     [self refreshController];
 }
 
