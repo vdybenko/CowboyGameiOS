@@ -34,7 +34,8 @@ typedef enum {
 } FavTableType;
 
 @interface FavouritesDataSource : ListOnlineDataSource <UITableViewDataSource,IconDownloaderDelegate,MemoryManagement>
-@property(strong, readonly) NSMutableArray *arrItemsList;
+@property(strong, readonly) NSMutableArray *arrFavObjets;
+@property(strong, readonly) NSMutableArray *arrFavObjetsList;
 @property(weak, nonatomic) UITableView *tableView;
 @property(weak, nonatomic)id<TableCellWithButton> delegate;
 @property(nonatomic)FavTableType typeOfTable;

@@ -1045,7 +1045,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                  if (errCode == 1) {
                      playerServer.favorite = NO;
                      [[StartViewController sharedInstance].favsDataSource deleteFromDBFavoriteWithId:playerAccount.accountID];
-                     [[StartViewController sharedInstance].favsDataSource saveFavorites:[StartViewController sharedInstance].favsDataSource.arrItemsList];
+                     [[StartViewController sharedInstance].favsDataSource saveFavorites:[StartViewController sharedInstance].favsDataSource.arrFavObjets];
                  }
              }
              else if ([data length] == 0 && error == nil)
@@ -1089,7 +1089,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                      favPlayer.dStatus = playerServer.status;
                      
                      [[StartViewController sharedInstance].favsDataSource addToDBFavotitePlayer:favPlayer];
-                     [[StartViewController sharedInstance].favsDataSource saveFavorites:[StartViewController sharedInstance].favsDataSource.arrItemsList];
+                     [[StartViewController sharedInstance].favsDataSource saveFavorites:[StartViewController sharedInstance].favsDataSource.arrFavObjets];
                  }
              }
              else if ([data length] == 0 && error == nil)
