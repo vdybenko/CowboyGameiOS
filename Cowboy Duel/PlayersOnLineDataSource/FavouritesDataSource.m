@@ -30,7 +30,8 @@
 
 @implementation FavouritesDataSource
 
-@synthesize arrItemsList, tableView, delegate,typeOfTable,cellsHide;
+@synthesize arrFavObjets, tableView, delegate,typeOfTable,cellsHide;
+@synthesize arrFavObjetsList;
 
 static const char *FAV_PLAYERS_URL = BASE_URL"users/get_favorites";
 static NSString  *const URL_ADD_FAVORITE = @BASE_URL"users/add_to_favorites";
@@ -48,7 +49,8 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
 		return nil;
 	}
   
-    arrItemsList=[[NSMutableArray alloc] init];
+    arrFavObjets=[[NSMutableArray alloc] init];
+    arrFavObjetsList =[[NSMutableArray alloc] init];
     imageDownloadsInProgress=[[NSMutableDictionary alloc] init];
     
     self.serverObjects = [[NSMutableArray alloc] init];
@@ -88,11 +90,11 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
 {
     NSMutableArray *arr= [self loadFavoritesArray];
     if (arr) {
-        arrItemsList = arr;
+        arrFavObjetsList = arr;
         
         NSMutableArray *discardedItems = [[NSMutableArray alloc] init];
         
-        for (CDFavPlayer *fvPlayer in arrItemsList) {
+        for (CDFavPlayer *fvPlayer in arrFavObjetsList) {
             BOOL playerOnline = [self isOnline:fvPlayer];
             if (playerOnline && typeOfTable == OFFLINE) {
                 [discardedItems addObject:fvPlayer];
@@ -101,7 +103,7 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
             }
         }
         
-        [arrItemsList removeObjectsInArray:discardedItems];
+        [arrFavObjetsList removeObjectsInArray:discardedItems];
         [discardedItems removeAllObjects];
                 
         FavouritesViewController *favsViewController = (FavouritesViewController *)delegate;
@@ -117,7 +119,8 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
 
 -(void)releaseComponents
 {
-    arrItemsList = nil;
+    arrFavObjets = nil;
+    arrFavObjetsList = nil;
     receivedData = nil;
     tableView = nil;
     imageDownloadsInProgress = nil;
@@ -137,7 +140,7 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     
     CDFavPlayer *player;
     
-    player=[arrItemsList objectAtIndex:indexPath.row];
+    player=[arrFavObjetsList objectAtIndex:indexPath.row];
     cell.hidden = cellsHide;
     [cell populateWithPlayer:player index:indexPath];
     
@@ -218,7 +221,7 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [arrItemsList count];
+    return [arrFavObjetsList count];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -233,7 +236,7 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
     connection1 = nil;
     NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
     NSArray *responseObject = ValidateObject([jsonString JSONValue], [NSArray class]);
-    [arrItemsList removeAllObjects];
+    [arrFavObjets removeAllObjects];
     for (NSDictionary *dic in responseObject) {
         CDFavPlayer *player=[[CDFavPlayer alloc] init];
         player.dAuth=[dic objectForKey:@"authen"];
@@ -262,9 +265,10 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
                 player.dAttack += att.dDamage;
             }
         }
-        [arrItemsList addObject: player];
+        [arrFavObjets addObject: player];
     }    
-    [self saveFavorites:arrItemsList];
+    [self saveFavorites:arrFavObjets];
+    arrFavObjetsList = arrFavObjets;
     [super refreshListOnline];
 
 }
@@ -363,14 +367,14 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
 
 -(void)addToDBFavotitePlayer:(CDFavPlayer*)player;
 {
-    [arrItemsList addObject:player];
-    [self saveFavorites:arrItemsList];
+    [arrFavObjets addObject:player];
+    [self saveFavorites:arrFavObjets];
 }
 -(void)deleteFromDBFavoriteWithId:(NSString*)playerID;
 {
-    CDFavPlayer *player = [arrItemsList objectAtIndex:[FavouritesDataSource findPlayerByID](arrItemsList,playerID)];
-    [arrItemsList removeObject:player];
-    [self saveFavorites:arrItemsList];
+    CDFavPlayer *player = [arrFavObjets objectAtIndex:[FavouritesDataSource findPlayerByID](arrFavObjets,playerID)];
+    [arrFavObjets removeObject:player];
+    [self saveFavorites:arrFavObjets];
 }
 
 -(void)saveFavorites:(NSArray*)array;

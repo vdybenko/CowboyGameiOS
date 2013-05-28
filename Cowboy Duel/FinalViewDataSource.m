@@ -126,7 +126,6 @@
         
         pointsForMatch=[self getPointsForLose];
     }
-    
 }
 
 -(void)winScene;

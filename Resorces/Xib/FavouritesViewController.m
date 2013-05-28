@@ -190,7 +190,7 @@
     playerAccount=[AccountDataSource sharedInstance];
     
     CDFavPlayer *player;
-    player = [favsDataSource.arrItemsList objectAtIndex:indexPath.row];
+    player = [favsDataSource.arrFavObjetsList objectAtIndex:indexPath.row];
     
     oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
     [oponentAccount setAccountID:player.dAuth];
@@ -240,7 +240,7 @@
 -(void)clickButtonPoke:(NSIndexPath *)indexPath;
 {
     CDFavPlayer *player;
-    player = [favsDataSource.arrItemsList objectAtIndex:indexPath.row];
+    player = [favsDataSource.arrFavObjetsList objectAtIndex:indexPath.row];
     [[StartViewController sharedInstance] sendMessageForPush:@"POKE"
                                                     withType:PUSH_NOTIFICATION_POKE
                                                    fromPlayer:player.dNickName
@@ -257,7 +257,7 @@
     playerAccount = [AccountDataSource sharedInstance];
     
     CDFavPlayer *player;
-    player = [favsDataSource.arrItemsList objectAtIndex:indexPath.row];
+    player = [favsDataSource.arrFavObjetsList objectAtIndex:indexPath.row];
     NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
     oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
     [oponentAccount setAccountID:player.dAuth];
@@ -319,7 +319,7 @@
 -(void)startTableAnimation
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        int countOfCells=[favsDataSource.arrItemsList count];
+        int countOfCells=[favsDataSource.arrFavObjetsList count];
         
         for (int i=0; i<countOfCells; i++) {
             NSIndexPath* rowToReload = [NSIndexPath indexPathForRow:i inSection:0];
