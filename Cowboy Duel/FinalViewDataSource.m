@@ -35,7 +35,9 @@
         oldMoney = playerAccount.money;
         oldPoints = playerAccount.accountPoints;
         reachNewLevel = NO;
-                
+        
+        NSLog(@"oldMoney %d oldPoints %d", oldMoney, oldPoints);
+        
         if (teaching&&(oponentAccount.bot)) {
             duelWithBotCheck=YES;
         }else{
@@ -99,7 +101,6 @@
 
 -(void)loseScene;
 {
-
     isDuelWinWatched = YES;
     moneyExch  = playerAccount.money < 10 ? 1: playerAccount.money / 10.0;
     pointsForMatch=0;

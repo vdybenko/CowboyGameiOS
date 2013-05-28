@@ -1109,15 +1109,17 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
              float x = rollingX * 17.5;
              startX = 0.07 * 17.5;
              float y = -rollingZ * 12. - 9.7;
-             for (OponentCoordinateView *oponentView in oponentCoordinateViews) {
-                 [oponentView.view setHidden:NO];
-                 
-                 CGPoint newPosition = CGPointMake(x * self.bounds.size.width + 160, self.bounds.size.height-(y * self.bounds.size.height + 220));
+             if (oponentCoordinateViews) {
+                 for (OponentCoordinateView *oponentView in oponentCoordinateViews) {
+                     [oponentView.view setHidden:NO];
+                     
+                     CGPoint newPosition = CGPointMake(x * self.bounds.size.width + 160, self.bounds.size.height-(y * self.bounds.size.height + 220));
                      if([oponentView respondsToSelector:@selector(view)])
                          [oponentView.view setCenter:newPosition];
-                 
+                     
+                 }
              }
-         }];
+            }];
         
 //        [motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *motion, NSError *error)
 //         {

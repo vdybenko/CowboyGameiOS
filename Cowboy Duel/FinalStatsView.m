@@ -19,9 +19,9 @@ FinalViewDataSource *finalViewDataSource;
 int startMoney;
 int startPoints;
 int lbStartPoints;
+int lbEndPoints;
 int endMoney;
 int endPoints;
-int lbEndPoints;
 FXLabel *lblGoldPlus;
 
 @implementation FinalStatsView
@@ -46,36 +46,7 @@ FXLabel *lblGoldPlus;
         [goldPointBgView setDinamicHeightBackground];
         
         startMoney = finalViewDataSource.oldMoney;
-        endMoney = playerAccount.money;
-        NSLog(@"startMoney %d endMoney %d", startMoney, endMoney);
-        
-        NSArray *array=[DuelRewardLogicController getStaticPointsForEachLevels];
-        NSInteger num = playerAccount.accountLevel;
-        int  moneyForNextLevel=(playerAccount.accountLevel != kCountOfLevels)? [[array objectAtIndex:num] intValue]:playerAccount.accountPoints+1000;
-        
-        int moneyForPrewLevel;
-        if (playerAccount.accountLevel==kCountOfLevelsMinimal) {
-            moneyForPrewLevel = 0;
-        }else
-            if (playerAccount.accountLevel == kCountOfLevels) {
-                moneyForPrewLevel = playerAccount.accountPoints;
-            }
-            else
-            {
-                moneyForPrewLevel=[[array objectAtIndex:(playerAccount.accountLevel-1)] intValue];
-            }
-        
-        
-        startPoints=(playerAccount.accountPoints-moneyForPrewLevel);
-        endPoints=(moneyForNextLevel-moneyForPrewLevel);
-
-        NSLog(@"startPoints %d endPoints %d ", startPoints, endPoints);
-        NSLog(@"startPoints %d endPoints %d ", playerAccount.accountPoints, finalViewDataSource.oldPoints);
-
-        
-        lbStartPoints = finalViewDataSource.oldPoints;
-        lbEndPoints = playerAccount.accountPoints;
-        
+        lbStartPoints=finalViewDataSource.oldPoints;
 //Labels:
         lblGold.shadowColor = [UIColor whiteColor];
         lblGold.shadowOffset=CGSizeMake(1.0, 1.0);
@@ -121,8 +92,31 @@ FXLabel *lblGoldPlus;
         {
             [finalViewDataSource loseScene];
         }
-        [finalViewDataSource lastScene];
         
+        endMoney = playerAccount.money;
+                
+        lbEndPoints=playerAccount.accountPoints;
+        
+        NSArray *array=[DuelRewardLogicController getStaticPointsForEachLevels];
+        NSInteger num = playerAccount.accountLevel;
+        int  moneyForNextLevel=(playerAccount.accountLevel != kCountOfLevels)? [[array objectAtIndex:num] intValue]:playerAccount.accountPoints+1000;
+        
+        int moneyForPrewLevel;
+        if (playerAccount.accountLevel==kCountOfLevelsMinimal) {
+            moneyForPrewLevel = 0;
+        }else
+            if (playerAccount.accountLevel == kCountOfLevels) {
+                moneyForPrewLevel = playerAccount.accountPoints;
+            }
+            else
+            {
+                moneyForPrewLevel=[[array objectAtIndex:(playerAccount.accountLevel-1)] intValue];
+            }
+        
+        startPoints=(playerAccount.accountPoints-moneyForPrewLevel);
+        endPoints=(moneyForNextLevel-moneyForPrewLevel);
+        
+        [finalViewDataSource lastScene];
     }
     
     return self;

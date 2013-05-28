@@ -341,7 +341,6 @@
 		7679D8C41563949E00BDE3A6 /* RefreshContentDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7679D8C31563949E00BDE3A6 /* RefreshContentDataController.m */; };
 		767A010B158B0BF0003C08D5 /* AdvertisingAppearController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767A010A158B0BF0003C08D5 /* AdvertisingAppearController.m */; };
 		767B56CF15AEDE2F00ECA0C4 /* CustomNSURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 767B56CE15AEDE2F00ECA0C4 /* CustomNSURLConnection.m */; };
-		767BA5BE1589F8E300825EB1 /* FinalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767BA5BD1589F8E300825EB1 /* FinalViewController.xib */; };
 		767CD1E4158F212B0054C9B8 /* UIImage+Save.m in Sources */ = {isa = PBXBuildFile; fileRef = 767CD1E3158F212B0054C9B8 /* UIImage+Save.m */; };
 		767E1F73154BFBAF001FDDD5 /* OCPromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = 767E1F71154BFBAF001FDDD5 /* OCPromptView.m */; };
 		767FEF29156A5AF80016B415 /* PlayersOnLineDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 767FEF28156A5AF80016B415 /* PlayersOnLineDataSource.m */; };
@@ -666,7 +665,6 @@
 		BD83A41016720DFE003EE4B3 /* CDDuel.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B5B141E1F170085E4FB /* CDDuel.m */; };
 		BD83A41116720DFE003EE4B3 /* CDTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B5D141E1F170085E4FB /* CDTransaction.m */; };
 		BD83A41316720DFE003EE4B3 /* DuelStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B64141E1F170085E4FB /* DuelStartViewController.m */; };
-		BD83A41516720DFE003EE4B3 /* FinalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B6A141E1F170085E4FB /* FinalViewController.m */; };
 		BD83A41616720DFE003EE4B3 /* FintDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B6C141E1F170085E4FB /* FintDataSource.m */; };
 		BD83A41716720DFE003EE4B3 /* GameCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B6E141E1F170085E4FB /* GameCenterViewController.m */; };
 		BD83A41816720DFE003EE4B3 /* GCHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B70141E1F170085E4FB /* GCHelper.m */; };
@@ -785,7 +783,6 @@
 		BD83A49616720DFE003EE4B3 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761EFA4D1573BE91001670EB /* ProfileViewController.xib */; };
 		BD83A49716720DFE003EE4B3 /* StartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761EFA4E1573BE91001670EB /* StartViewController.xib */; };
 		BD83A49816720DFE003EE4B3 /* DuelStartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7692BC2E1574E36C00983264 /* DuelStartViewController.xib */; };
-		BD83A49A16720DFE003EE4B3 /* FinalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767BA5BD1589F8E300825EB1 /* FinalViewController.xib */; };
 		BD83A49B16720DFE003EE4B3 /* ListOfItemsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03285FA1159DD61900D16195 /* ListOfItemsViewController.xib */; };
 		BD83A49E16720DFE003EE4B3 /* btn_adcolony.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FB2159DD84000D16195 /* btn_adcolony.png */; };
 		BD83A49F16720DFE003EE4B3 /* btn_adcolony@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03285FB3159DD84000D16195 /* btn_adcolony@2x.png */; };
@@ -947,7 +944,6 @@
 		BDD07BC5141E1F170085E4FB /* CDDuel.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B5B141E1F170085E4FB /* CDDuel.m */; };
 		BDD07BC6141E1F170085E4FB /* CDTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B5D141E1F170085E4FB /* CDTransaction.m */; };
 		BDD07BC9141E1F170085E4FB /* DuelStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B64141E1F170085E4FB /* DuelStartViewController.m */; };
-		BDD07BCC141E1F170085E4FB /* FinalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B6A141E1F170085E4FB /* FinalViewController.m */; };
 		BDD07BCD141E1F170085E4FB /* FintDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B6C141E1F170085E4FB /* FintDataSource.m */; };
 		BDD07BCE141E1F170085E4FB /* GameCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B6E141E1F170085E4FB /* GameCenterViewController.m */; };
 		BDD07BCF141E1F170085E4FB /* GCHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B70141E1F170085E4FB /* GCHelper.m */; };
@@ -1391,7 +1387,6 @@
 		767A010A158B0BF0003C08D5 /* AdvertisingAppearController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertisingAppearController.m; sourceTree = "<group>"; };
 		767B56CD15AEDE2F00ECA0C4 /* CustomNSURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CustomNSURLConnection.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		767B56CE15AEDE2F00ECA0C4 /* CustomNSURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNSURLConnection.m; sourceTree = "<group>"; };
-		767BA5BD1589F8E300825EB1 /* FinalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FinalViewController.xib; sourceTree = "<group>"; };
 		767C0B1415652C9C0007E113 /* Crittercism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crittercism.h; sourceTree = "<group>"; };
 		767CD1E2158F212A0054C9B8 /* UIImage+Save.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Save.h"; sourceTree = "<group>"; };
 		767CD1E3158F212B0054C9B8 /* UIImage+Save.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Save.m"; sourceTree = "<group>"; };
@@ -1882,8 +1877,6 @@
 		BDD07B5E141E1F170085E4FB /* Cowboy Duel-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Cowboy Duel-Prefix.pch"; sourceTree = "<group>"; };
 		BDD07B63141E1F170085E4FB /* DuelStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DuelStartViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		BDD07B64141E1F170085E4FB /* DuelStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DuelStartViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		BDD07B69141E1F170085E4FB /* FinalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FinalViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		BDD07B6A141E1F170085E4FB /* FinalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FinalViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BDD07B6B141E1F170085E4FB /* FintDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FintDataSource.h; sourceTree = "<group>"; };
 		BDD07B6C141E1F170085E4FB /* FintDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FintDataSource.m; sourceTree = "<group>"; };
 		BDD07B6D141E1F170085E4FB /* GameCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenterViewController.h; sourceTree = "<group>"; };
@@ -2806,7 +2799,6 @@
 				76934BE216FC98C500433E1C /* VisualViewCharacter.xib */,
 				764B891D165FCC660014E35B /* ListOnLine */,
 				764B891C165FCC4E0014E35B /* TopPlayer */,
-				767BA5BD1589F8E300825EB1 /* FinalViewController.xib */,
 				316BBFE2170EB412009C23BA /* FinalStatsView.xib */,
 				768321D71654DB2400E78A8C /* Store */,
 			);
@@ -2818,8 +2810,6 @@
 			children = (
 				BDD07B63141E1F170085E4FB /* DuelStartViewController.h */,
 				BDD07B64141E1F170085E4FB /* DuelStartViewController.m */,
-				BDD07B69141E1F170085E4FB /* FinalViewController.h */,
-				BDD07B6A141E1F170085E4FB /* FinalViewController.m */,
 				7689AD4116D76C3F00588BA8 /* DuelViewControllerWithXib.h */,
 				BDD07B6D141E1F170085E4FB /* GameCenterViewController.h */,
 				BDD07B6E141E1F170085E4FB /* GameCenterViewController.m */,
@@ -3789,7 +3779,6 @@
 				761EFA511573BE91001670EB /* ProfileViewController.xib in Resources */,
 				761EFA521573BE91001670EB /* StartViewController.xib in Resources */,
 				7692BC2F1574E36C00983264 /* DuelStartViewController.xib in Resources */,
-				767BA5BE1589F8E300825EB1 /* FinalViewController.xib in Resources */,
 				03285FA2159DD61900D16195 /* ListOfItemsViewController.xib in Resources */,
 				0328602B159DD84000D16195 /* btn_adcolony.png in Resources */,
 				0328602C159DD84000D16195 /* btn_adcolony@2x.png in Resources */,
@@ -4220,7 +4209,6 @@
 				BD83A49616720DFE003EE4B3 /* ProfileViewController.xib in Resources */,
 				BD83A49716720DFE003EE4B3 /* StartViewController.xib in Resources */,
 				BD83A49816720DFE003EE4B3 /* DuelStartViewController.xib in Resources */,
-				BD83A49A16720DFE003EE4B3 /* FinalViewController.xib in Resources */,
 				BD83A49B16720DFE003EE4B3 /* ListOfItemsViewController.xib in Resources */,
 				BD83A49E16720DFE003EE4B3 /* btn_adcolony.png in Resources */,
 				BD83A49F16720DFE003EE4B3 /* btn_adcolony@2x.png in Resources */,
@@ -4465,7 +4453,6 @@
 				BDD07BC5141E1F170085E4FB /* CDDuel.m in Sources */,
 				BDD07BC6141E1F170085E4FB /* CDTransaction.m in Sources */,
 				BDD07BC9141E1F170085E4FB /* DuelStartViewController.m in Sources */,
-				BDD07BCC141E1F170085E4FB /* FinalViewController.m in Sources */,
 				BDD07BCD141E1F170085E4FB /* FintDataSource.m in Sources */,
 				BDD07BCE141E1F170085E4FB /* GameCenterViewController.m in Sources */,
 				BDD07BCF141E1F170085E4FB /* GCHelper.m in Sources */,
@@ -4638,7 +4625,6 @@
 				BD83A41016720DFE003EE4B3 /* CDDuel.m in Sources */,
 				BD83A41116720DFE003EE4B3 /* CDTransaction.m in Sources */,
 				BD83A41316720DFE003EE4B3 /* DuelStartViewController.m in Sources */,
-				BD83A41516720DFE003EE4B3 /* FinalViewController.m in Sources */,
 				BD83A41616720DFE003EE4B3 /* FintDataSource.m in Sources */,
 				BD83A41716720DFE003EE4B3 /* GameCenterViewController.m in Sources */,
 				BD83A41816720DFE003EE4B3 /* GCHelper.m in Sources */,

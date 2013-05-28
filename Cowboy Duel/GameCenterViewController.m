@@ -9,7 +9,6 @@
 #import "GameCenterViewController.h"
 #import "GCHelper.h"
 #import "AdvertisingAppearController.h"
-#import "FinalViewController.h"
 #import "DuelStartViewController.h"
 #import "SSConnection.h"
 #import "ActiveDuelViewController.h"
@@ -520,17 +519,6 @@ static GameCenterViewController *gameCenterViewController;
             [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
         }
         [delegate shutDownTimer];
-    }else if ([self.parentVC.navigationController.visibleViewController isKindOfClass:([FinalViewController class])]){
-        if (mutchNumber==3) {
-            finalViewController =(FinalViewController*) self.parentVC.navigationController.visibleViewController;
-            finalViewController.tryButton.enabled = NO;
-        }else{
-            finalViewController = [[FinalViewController alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andGameCenterController:self andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
-            [finalViewController prepeareForWinScene];
-            mutchNumber = 3;
-            [parentVC.navigationController pushViewController:finalViewController animated:YES];
-            [delegate shutDownTimer];
-        }
     }else if ([self.parentVC.navigationController.visibleViewController isKindOfClass:([DuelStartViewController class])]){
         UIViewController *tempVC = [self.parentVC.navigationController.viewControllers objectAtIndex:1] ;
         [self.parentVC.navigationController popToViewController:tempVC animated:YES];
@@ -1058,8 +1046,6 @@ static GameCenterViewController *gameCenterViewController;
         case  NETWORK_RUN_AWAY:
         {
             DLog(@"NETWORK_RUN_AWAY");
-            
-            [finalViewController runAway];
         }
 			break;
             

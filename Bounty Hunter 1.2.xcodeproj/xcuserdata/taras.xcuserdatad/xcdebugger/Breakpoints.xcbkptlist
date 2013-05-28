@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/BuilderViewController.m"
-         timestampString = "391353124.945124"
+         timestampString = "391421129.06598"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "812"
-         endingLineNumber = "812"
+         startingLineNumber = "811"
+         endingLineNumber = "811"
          landmarkName = "-checkBtnBuy:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/BuilderViewController.m"
-         timestampString = "391352431.980189"
+         timestampString = "391421129.06598"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "449"
-         endingLineNumber = "449"
+         startingLineNumber = "448"
+         endingLineNumber = "448"
          landmarkName = "-grid:selectIndex:forType:"
          landmarkType = "5">
       </FileBreakpoint>
