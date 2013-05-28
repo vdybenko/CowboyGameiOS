@@ -92,7 +92,7 @@
     UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     [self.closeBtn setTitleByLabel:@"Close" withColor:buttonsTitleColor fontSize:24];
 
-    buttonsScroll.contentSize = CGSizeMake(66,  68 * 9);
+    buttonsScroll.contentSize = CGSizeMake(self.suitsBtn.frame.size.width,  (self.suitsBtn.frame.size.height + 4) * 9);
     
     lbBuyBtn.text = NSLocalizedString(@"BUYIT", @"");
     self.backlightDefens.layer.cornerRadius = 10.f;
