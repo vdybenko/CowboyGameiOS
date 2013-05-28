@@ -1478,14 +1478,15 @@ float frequencyOpponentShoting()
 #pragma mark - IBAction
 
 - (IBAction)btnSkipClicked:(id)sender {
-    if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
-        [self.navigationController popToViewController:[LoginAnimatedViewController sharedInstance] animated:YES];
-        [self releaseComponents];
-    }
-    else{
-        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
-        [self releaseComponents];
-    }
+    [UIView animateWithDuration:0.75
+                     animations:^{
+                         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                        [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
+                     }];
+    [self.navigationController popViewControllerAnimated:NO];
+    
+    //[self releaseComponents];
+
     
 }
 
