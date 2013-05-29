@@ -121,6 +121,13 @@
     [self refreshController];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/BuilderVC" forKey:@"page"]];
+}
+
 -(void)refreshController;
 {
     self.moneyLabel.text =  [NSString stringWithFormat:@"%d",playerAccount.money];
@@ -562,7 +569,9 @@
     BOOL partBought = [playerAccount isProductBought:part.dId];
     
     if (partBought || part.money==0){
-        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                            object:self
+                                                          userInfo:[NSDictionary dictionaryWithObject:@"/BuilderVC_use_it" forKey:@"page"]];
     }else{
         [duelProductDownloaderController buyProductID:part.dId transactionID:playerAccount.glNumber];
         
@@ -583,6 +592,10 @@
         [playerAccount saveMoney];
         
         [self addProductToBought:part.dId];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                            object:self
+                                                          userInfo:[NSDictionary dictionaryWithObject:@"/BuilderVC_buy" forKey:@"page"]];
     }
 
     
@@ -658,6 +671,10 @@
         [self sideOpenAnimation];
         self.backlightAtac.hidden = NO;
         [self backlightAtacAction];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                            object:self
+                                                          userInfo:[NSDictionary dictionaryWithObject:@"/BuilderVC_face" forKey:@"page"]];
     }
     
     arrObjects = [visualViewDataSource arrayHead];
@@ -672,6 +689,10 @@
         [self sideOpenAnimation];
         self.backlightDefens.hidden = NO;
         [self backlightDefensAction];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                            object:self
+                                                          userInfo:[NSDictionary dictionaryWithObject:@"/BuilderVC_hat" forKey:@"page"]];
     }
     
     arrObjects = [visualViewDataSource arrayCap];
@@ -687,6 +708,10 @@
         [self sideOpenAnimation];
         self.backlightDefens.hidden = NO;
         [self backlightDefensAction];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                            object:self
+                                                          userInfo:[NSDictionary dictionaryWithObject:@"/BuilderVC_shirt" forKey:@"page"]];
     }
     
     typeOfCharacterPart = CharacterPartShirt;
@@ -702,6 +727,10 @@
         [self sideOpenAnimation];
         self.backlightDefens.hidden = NO;
         [self backlightDefensAction];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                            object:self
+                                                          userInfo:[NSDictionary dictionaryWithObject:@"/BuilderVC_jacket" forKey:@"page"]];
     }
     
     typeOfCharacterPart = CharacterPartJaket;
@@ -717,6 +746,10 @@
         [self sideOpenAnimation];
         self.backlightAtac.hidden = NO;
         [self backlightAtacAction];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                            object:self
+                                                          userInfo:[NSDictionary dictionaryWithObject:@"/BuilderVC_shoes" forKey:@"page"]];
     }
     
     typeOfCharacterPart = CharacterPartShoose;
@@ -732,6 +765,10 @@
         [self sideOpenAnimation];
         self.backlightAtac.hidden = NO;
         [self backlightAtacAction];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                            object:self
+                                                          userInfo:[NSDictionary dictionaryWithObject:@"/BuilderVC_gun" forKey:@"page"]];
     }
     
     typeOfCharacterPart = CharacterPartGun;
@@ -747,6 +784,10 @@
         [self sideOpenAnimation];
         self.backlightDefens.hidden = NO;
         [self backlightDefensAction];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                            object:self
+                                                          userInfo:[NSDictionary dictionaryWithObject:@"/BuilderVC_pants" forKey:@"page"]];
     }
     
     typeOfCharacterPart = CharacterPartLegs;
@@ -763,6 +804,10 @@
         self.backlightDefens.hidden = NO;
         [self backlightDefensAction];
         [self cleanForSuits];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                            object:self
+                                                          userInfo:[NSDictionary dictionaryWithObject:@"/BuilderVC_suit" forKey:@"page"]];
     }
     
     typeOfCharacterPart = CharacterPartSuit;
