@@ -25,7 +25,7 @@ static const NSInteger kGANDispatchPeriod = 60;
 static NSString *kGAAccountID = @"UA-24007807-3";
 
 #else
-static NSString *kGAAccountID = @"UA-38210757-1";
+static NSString *kGAAccountID = @"UA-38210757-3";
 #endif
 NSString  *const ID_CRIT_APP   = @"4fb4f482c471a10fc5000092";
 NSString  *const ID_CRIT_KEY   = @"stjyktz620mziyf5rhi89ncaorab";
