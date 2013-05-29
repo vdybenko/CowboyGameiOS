@@ -68,7 +68,6 @@ static int oponentMustShot;
     [super viewDidLoad];
     
     TestAppDelegate *app = (TestAppDelegate *)[[UIApplication sharedApplication] delegate];
-    [app.adBanner setHidden:YES];
     
     [frameView setDinamicHeightBackground];
     

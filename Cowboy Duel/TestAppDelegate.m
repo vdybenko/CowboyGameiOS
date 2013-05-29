@@ -12,7 +12,6 @@
 #import "LoginAnimatedViewController.h"
 #import "ListOfItemsViewController.h"
 
-#import "Crittercism.h"
 #import "StartViewController.h"
 #import "AccountDataSource.h"
 
@@ -50,7 +49,7 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 @implementation TestAppDelegate
 
 @synthesize navigationController, loginViewController;
-@synthesize facebookUser, adBanner;
+@synthesize facebookUser;
 @synthesize clouds;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -62,7 +61,6 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     [GAI sharedInstance].debug = NO;
     tracker = [[GAI sharedInstance] trackerWithTrackingId:kGAAccountID];
 	
-    //[Crittercism initWithAppID:ID_CRIT_APP  andKey:ID_CRIT_KEY andSecret:ID_CRIT_SECRET];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(AnalyticsTrackEvent:)
@@ -115,26 +113,6 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     }
     
     DLog(@"FBAccessTokenKey %@", [defaults objectForKey:@"FBAccessTokenKey"]);
-    /*
-    frame = [UIScreen mainScreen].bounds;
-    if (frame.size.height > 480) {
-        // Initialize the banner at the bottom of the screen.
-        CGPoint origin = CGPointMake(0.0, frame.size.height - 50);
-        
-        // Use predefined GADAdSize constants to define the GADBannerView.
-        self.adBanner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait
-                                                       origin:origin];
-        
-        // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID
-        // before compiling.
-        self.adBanner.adUnitID = kSampleAdUnitID;
-        self.adBanner.delegate = self;
-        [self.adBanner setRootViewController:navigationController];
-        [window addSubview:self.adBanner];
-        [self.adBanner loadRequest:[self createRequest]];
-        [self.adBanner setHidden:YES];
-    }
-    */
     if([[OGHelper sharedInstance] isAuthorized]){
         [self openSessionWithAllowLoginUI:YES];
     }
@@ -447,20 +425,6 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 	[[GAI sharedInstance] dispatch];
 }
 
-#pragma mark GADRequest generation
-
-// Here we're creating a simple GADRequest and whitelisting the application
-// for test ads. You should request test ads during development to avoid
-// generating invalid impressions and clicks.
-- (GADRequest *)createRequest {
-    GADRequest *request = [GADRequest request];
-    
-    // Make the request for a test ad.
-    request.testing = NO;
-    
-    return request;
-}
-
 #pragma mark AlertViewDelegate
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -482,19 +446,6 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
             
         }
     }
-}
-
-
-#pragma mark GADBannerViewDelegate impl
-
-// We've received an ad successfully.
-- (void)adViewDidReceiveAd:(GADBannerView *)adView {
-    NSLog(@"Received ad successfully");
-}
-
-- (void)adView:(GADBannerView *)view
-didFailToReceiveAdWithError:(GADRequestError *)error {
-    NSLog(@"Failed to receive ad with error: %@", [error localizedFailureReason]);
 }
 
 - (void)dealloc

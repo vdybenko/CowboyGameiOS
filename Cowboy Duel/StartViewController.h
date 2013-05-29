@@ -45,7 +45,7 @@ typedef enum{
     PUSH_NOTIFICATION_UPDATE_PRODUCTS
 } TypeOfPushNotification;
 
-@interface StartViewController : UIViewController <MFMailComposeViewControllerDelegate,GCAuthenticateDelegate, UIAlertViewDelegate, FBRequestDelegate, GADBannerViewDelegate,DuelProductDownloaderControllerDelegate>
+@interface StartViewController : UIViewController <MFMailComposeViewControllerDelegate,GCAuthenticateDelegate, UIAlertViewDelegate, FBRequestDelegate,DuelProductDownloaderControllerDelegate>
 
 @property (nonatomic) BOOL showFeedAtFirst;
 @property (strong, nonatomic) NSString *oldAccounId;
