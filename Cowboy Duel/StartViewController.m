@@ -518,7 +518,6 @@ static StartViewController *sharedHelper = nil;
     [super viewDidAppear:animated];
        
     TestAppDelegate *app = (TestAppDelegate *)[[UIApplication sharedApplication] delegate];
-    [app.adBanner setHidden:NO];
     app.clouds.hidden = YES;
     
     if (!inBackground) {
@@ -549,7 +548,6 @@ static StartViewController *sharedHelper = nil;
 {
     [super viewWillDisappear:animated];
     TestAppDelegate *app = (TestAppDelegate *)[[UIApplication sharedApplication] delegate];
-    [app.adBanner setHidden:YES];
     app.clouds.hidden = NO;
     
     cloudView.hidden = YES;
@@ -755,8 +753,6 @@ static StartViewController *sharedHelper = nil;
 - (void) showView: (UIView *)view
 {
     int delta = 0;
-    TestAppDelegate *app = (TestAppDelegate *)[[UIApplication sharedApplication] delegate];
-    if (app.adBanner) delta = 50;
     
   [UIView animateWithDuration:0.5
                         delay:0.0

@@ -161,8 +161,8 @@ static AccountDataSource *sharedHelper = nil;
 }
 
 - (void)makeLocalAccountID{
-  UIDevice *currentDevice = [UIDevice currentDevice];
-  self.accountID = [NSString stringWithFormat:@"A:%@",[currentDevice.uniqueIdentifier substringToIndex:10]];
+    int random10Number = 1000000000 + rand() % 8999999999;
+    self.accountID = [NSString stringWithFormat:@"A:%d",random10Number];
 }
 
 - (NSString *)verifyAccountID{
