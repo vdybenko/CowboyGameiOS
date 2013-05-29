@@ -16,7 +16,6 @@
     UIImage *imageBackGround=[UIImage imageNamed:@"view_dinamic_height.png"];
     CGRect mainFrame=self.frame;
     CGRect frameToCrop;
-    CGFloat heightSize;
     
     if ([Utils isiPhoneRetina]) {
         frameToCrop=CGRectMake(0, 0, 2*imageBackGround.size.width, mainFrame.size.height);
