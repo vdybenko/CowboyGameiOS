@@ -1055,7 +1055,6 @@ static StartViewController *sharedHelper = nil;
                 break;
             case PUSH_NOTIFICATION_UPDATE_PRODUCTS:{
                 //                обновити продукти.
-                [duelProductDownloaderController refreshDuelProducts];
             }
                 break;
             default:

@@ -102,6 +102,10 @@ static NSString *getSavePathForDuelProduct()
 
 -(void) refreshDuelProducts;
 {
+//    TODO we dont use it
+    return;
+//    
+    
     isRefreshingNow = YES;
     
     NSString *URL;

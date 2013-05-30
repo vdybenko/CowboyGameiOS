@@ -78,9 +78,7 @@ static const char *A_URL =  BASE_URL"api/authorization";
         [versionLabel setHidden:NO];
         versionLabel = nil;
         
-        if (!firstRun || ![startViewController connectedToWiFi]) {
-            [self performSelector:@selector(closeWindow) withObject:self afterDelay:3.0];
-        }
+        [self performSelector:@selector(closeWindow) withObject:self afterDelay:3.0];
     }
     return self;
 }
@@ -151,7 +149,6 @@ static const char *A_URL =  BASE_URL"api/authorization";
         
         int revisionProductListNumber=[[responseObject objectForKey:@"v_of_store_list"] intValue];
         if ([DuelProductDownloaderController isRefreshEvailable:revisionProductListNumber]) {
-            [startViewController.duelProductDownloaderController refreshDuelProducts];
         }
         
         if ([RefreshContentDataController isRefreshEvailable:revisionNumber]) {
@@ -159,8 +156,6 @@ static const char *A_URL =  BASE_URL"api/authorization";
             RefreshContentDataController *refreshContentDataController=[[RefreshContentDataController alloc] init];
             [refreshContentDataController setDeledate:self];
             [refreshContentDataController refreshContent];
-        }else {
-            [self closeWindow];
         }
         if ([responseObject objectForKey:@"session_id"])
         {
@@ -169,10 +164,7 @@ static const char *A_URL =  BASE_URL"api/authorization";
         }
          NSString *sesion =[[NSString alloc] initWithString:[responseObject objectForKey:@"session_id"]];
         [[AccountDataSource sharedInstance] setSessionID:sesion];
-    }else{
-        [self closeWindow];
-    }
-    
+    }    
     [activityIndicator stopAnimating];
 }
 
@@ -185,7 +177,6 @@ static const char *A_URL =  BASE_URL"api/authorization";
   didFailWithError:(NSError *)error
 {
     [activityIndicator stopAnimating];
-    [self closeWindow];
     DLog(@"Start Connection failed! Error - %@ %@",
           [error localizedDescription],
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
@@ -202,12 +193,10 @@ static const char *A_URL =  BASE_URL"api/authorization";
 -(void)finishRefresh;
 {
     [activityIndicator stopAnimating];
-    [self closeWindow];
 }
 -(void)finishWithError;
 {
     [activityIndicator stopAnimating];
-    [self closeWindow];
 }
 
 - (void)viewDidUnload {

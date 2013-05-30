@@ -597,7 +597,6 @@
                                                             object:self
                                                           userInfo:[NSDictionary dictionaryWithObject:@"/BuilderVC_buy" forKey:@"page"]];
     }
-
     
     switch (type) {
         case CharacterPartCap:
