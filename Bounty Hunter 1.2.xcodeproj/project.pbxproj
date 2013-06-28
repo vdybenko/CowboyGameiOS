@@ -966,6 +966,11 @@
 		BDD8E24E163EF42F004F05A9 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDD8E24D163EF42F004F05A9 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		BDF1EF1713D41BA500C466DF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF1EF1613D41BA500C466DF /* Security.framework */; };
 		BDF1EF1F13D41C4E00C466DF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF1EF1E13D41C4E00C466DF /* MapKit.framework */; };
+		C43D3F5C177DAA5A00D44F39 /* shirtButtonpng.png in Resources */ = {isa = PBXBuildFile; fileRef = C43D3F5A177DAA5900D44F39 /* shirtButtonpng.png */; };
+		C43D3F5D177DAA5A00D44F39 /* suitsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = C43D3F5B177DAA5A00D44F39 /* suitsButton.png */; };
+		C43D3F62177DAEA500D44F39 /* builderJacket3.png in Resources */ = {isa = PBXBuildFile; fileRef = C43D3F61177DAEA500D44F39 /* builderJacket3.png */; };
+		C43D3F65177DAEBA00D44F39 /* buildershoes2.png in Resources */ = {isa = PBXBuildFile; fileRef = C43D3F63177DAEBA00D44F39 /* buildershoes2.png */; };
+		C43D3F66177DAEBA00D44F39 /* buildershoes3.png in Resources */ = {isa = PBXBuildFile; fileRef = C43D3F64177DAEBA00D44F39 /* buildershoes3.png */; };
 		C4966908174F8A6300822329 /* faceButton.png in Resources */ = {isa = PBXBuildFile; fileRef = C4966901174F8A6300822329 /* faceButton.png */; };
 		C4966909174F8A6300822329 /* gunsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = C4966902174F8A6300822329 /* gunsButton.png */; };
 		C496690A174F8A6300822329 /* hatButton.png in Resources */ = {isa = PBXBuildFile; fileRef = C4966903174F8A6300822329 /* hatButton.png */; };
@@ -1912,6 +1917,11 @@
 		BDF1EF1613D41BA500C466DF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BDF1EF1813D41BD600C466DF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BDF1EF1E13D41C4E00C466DF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		C43D3F5A177DAA5900D44F39 /* shirtButtonpng.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shirtButtonpng.png; sourceTree = "<group>"; };
+		C43D3F5B177DAA5A00D44F39 /* suitsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = suitsButton.png; sourceTree = "<group>"; };
+		C43D3F61177DAEA500D44F39 /* builderJacket3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = builderJacket3.png; sourceTree = "<group>"; };
+		C43D3F63177DAEBA00D44F39 /* buildershoes2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buildershoes2.png; sourceTree = "<group>"; };
+		C43D3F64177DAEBA00D44F39 /* buildershoes3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buildershoes3.png; sourceTree = "<group>"; };
 		C4966901174F8A6300822329 /* faceButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = faceButton.png; sourceTree = "<group>"; };
 		C4966902174F8A6300822329 /* gunsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gunsButton.png; sourceTree = "<group>"; };
 		C4966903174F8A6300822329 /* hatButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hatButton.png; sourceTree = "<group>"; };
@@ -2395,6 +2405,7 @@
 			isa = PBXGroup;
 			children = (
 				768DD94B173CDB9800B031F3 /* builderJacket1.png */,
+				C43D3F61177DAEA500D44F39 /* builderJacket3.png */,
 				768DD94C173CDB9800B031F3 /* builderJacket2.png */,
 			);
 			name = CharacterJakets;
@@ -2427,6 +2438,8 @@
 			isa = PBXGroup;
 			children = (
 				768DD955173CDB9800B031F3 /* buildershoes1.png */,
+				C43D3F63177DAEBA00D44F39 /* buildershoes2.png */,
+				C43D3F64177DAEBA00D44F39 /* buildershoes3.png */,
 			);
 			name = CharecterShoeses;
 			sourceTree = "<group>";
@@ -3585,6 +3598,8 @@
 				C4966912174F96A700822329 /* CloseButton.png */,
 				C4966901174F8A6300822329 /* faceButton.png */,
 				C4966902174F8A6300822329 /* gunsButton.png */,
+				C43D3F5A177DAA5900D44F39 /* shirtButtonpng.png */,
+				C43D3F5B177DAA5A00D44F39 /* suitsButton.png */,
 				C4966903174F8A6300822329 /* hatButton.png */,
 				C4966904174F8A6300822329 /* jacketsButton.png */,
 				C4966905174F8A6300822329 /* pantsButton.png */,
@@ -4150,6 +4165,11 @@
 				C496690D174F8A6300822329 /* shoesButton.png in Resources */,
 				C496690E174F8A6300822329 /* someButton.png in Resources */,
 				C4966913174F96A700822329 /* CloseButton.png in Resources */,
+				C43D3F5C177DAA5A00D44F39 /* shirtButtonpng.png in Resources */,
+				C43D3F5D177DAA5A00D44F39 /* suitsButton.png in Resources */,
+				C43D3F62177DAEA500D44F39 /* builderJacket3.png in Resources */,
+				C43D3F65177DAEBA00D44F39 /* buildershoes2.png in Resources */,
+				C43D3F66177DAEBA00D44F39 /* buildershoes3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
