@@ -463,7 +463,7 @@
             [self.resultLabel setText:[NSString stringWithFormat:@"+ %d",part.action]];
 //            [self tempDefens:part.action];
             if (!isBtnForBuy) {
-                if (playerAccount.visualViewCap==index) {
+                if ([[NSUserDefaults standardUserDefaults] integerForKey:@"VV_CAP_VALUE"]==index) {
                     [btnBuyMain setEnabled:NO];
                 }
             }
@@ -475,7 +475,7 @@
             [self.resultLabel setText:[NSString stringWithFormat:@"+ %d",part.action]];
 //            [self tempAtac:part.action];
             if (!isBtnForBuy) {
-                if (playerAccount.visualViewHead==index) {
+                if ([[NSUserDefaults standardUserDefaults] integerForKey:@"VV_HEAD_VALUE"]==index) {
                     [btnBuyMain setEnabled:NO];
                 }
             }
@@ -488,7 +488,7 @@
             [self.resultLabel setText:[NSString stringWithFormat:@"+ %d",part.action]];
 //            [self tempAtac:part.action];
             if (!isBtnForBuy) {
-                if (playerAccount.visualViewGuns==index) {
+                if ([[NSUserDefaults standardUserDefaults] integerForKey:@"VV_GUN_VALUE"]==index) {
                     [btnBuyMain setEnabled:NO];
                 }
             }
@@ -501,7 +501,7 @@
             [self.resultLabel setText:[NSString stringWithFormat:@"+ %d",part.action]];
 //            [self tempDefens:part.action];
             if (!isBtnForBuy) {
-                if (playerAccount.visualViewJackets==index) {
+                if ([[NSUserDefaults standardUserDefaults] integerForKey:@"VV_SHIRTS_VALUE"]==index) {
                     [btnBuyMain setEnabled:NO];
                 }
             }
@@ -513,7 +513,7 @@
             [self.resultLabel setText:[NSString stringWithFormat:@"+ %d",part.action]];
 //            [self tempDefens:part.action];
             if (!isBtnForBuy) {
-                if (playerAccount.visualViewLegs==index) {
+                if ([[NSUserDefaults standardUserDefaults] integerForKey:@"VV_LEGS_VALUE"]==index) {
                     [btnBuyMain setEnabled:NO];
                 }
             }
@@ -525,7 +525,7 @@
             [self.resultLabel setText:[NSString stringWithFormat:@"+ %d",part.action]];
 //            [self tempDefens:part.action];
             if (!isBtnForBuy) {
-                if (playerAccount.visualViewBody==index) {
+                if ([[NSUserDefaults standardUserDefaults] integerForKey:@"VV_BODY_VALUE"]==index) {
                     [btnBuyMain setEnabled:NO];
                 }
             }
@@ -537,7 +537,7 @@
             [self.resultLabel setText:[NSString stringWithFormat:@"+ %d",part.action]];
 //            [self tempDefens:part.action];
             if (!isBtnForBuy) {
-                if (playerAccount.visualViewShoose==index) {
+                if ([[NSUserDefaults standardUserDefaults] integerForKey:@"VV_SHOOSE_VALUE"]==index) {
                     [btnBuyMain setEnabled:NO];
                 }
             }
@@ -850,25 +850,100 @@
     }
 }
 
+//-(BOOL) checkBtnBuy:(CDVisualViewCharacterPart*)part
+//{
+//    BOOL partBought = [playerAccount isProductBought:part.dId];
+//        if (partBought) {
+//            lbBuyBtn.text = NSLocalizedString(@"USE", @"");
+//
+//            [btnBuyMain setEnabled:YES];
+//            return NO;
+//        }else if(part.money==0){
+//            lbBuyBtn.text = NSLocalizedString(@"USE", @"");
+//            
+//            [btnBuyMain setEnabled:YES];
+//
+//            BOOL isDefultProduct = NO;
+//            switch (typeOfCharacterPart) {
+//                case CharacterPartCap:
+//                    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"VV_CAP_VALUE"]==0) {
+//                        isDefultProduct = YES;
+//                    }
+//                    break;
+//                case CharacterPartFace:
+//                    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"VV_HEAD_VALUE"]==0) {
+//                        isDefultProduct = YES;
+//                    }
+//                    break;
+//                case CharacterPartGun:
+//                    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"VV_GUN_VALUE"]==0) {
+//                        isDefultProduct = YES;
+//                    }
+//                    break;
+//                case CharacterPartJaket:
+//                    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"VV_SHIRTS_VALUE"]==0) {
+//                        isDefultProduct = YES;
+//                    }
+//                    break;
+//                case CharacterPartLegs:
+//                    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"VV_LEGS_VALUE"]==0) {
+//                        isDefultProduct = YES;
+//                    }
+//                    break;
+//                case CharacterPartShirt:
+//                    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"VV_BODY_VALUE"]==0) {
+//                        isDefultProduct = YES;
+//                    }
+//                    break;
+//                case CharacterPartShoose:
+//                    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"VV_SHOOSE_VALUE"]==0) {
+//                        isDefultProduct = YES;
+//                    }
+//                    break;
+//                case CharacterPartSuit:
+//                    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"VV_SUITS_VALUE"]==0) {
+//                        isDefultProduct = YES;
+//                    }
+//                    break;
+//                default :
+//                    break;
+//            }
+//            if (isDefultProduct) {
+//                [btnBuyMain setEnabled:NO];
+//            }
+//            return NO;
+//        } else {
+//            lbBuyBtn.text = NSLocalizedString(@"BUYIT", @"");
+//
+//            if (part.money>playerAccount.money) {
+//                [btnBuyMain setEnabled:NO];
+//            }else{
+//                [btnBuyMain setEnabled:YES];
+//            }
+//            return YES;
+//        }
+//}
+
 -(BOOL) checkBtnBuy:(CDVisualViewCharacterPart*)part
 {
     BOOL partBought = [playerAccount isProductBought:part.dId];
-        if (partBought || (part.money==0)) {
-            lbBuyBtn.text = NSLocalizedString(@"USE", @"");
-
-            btnBuyMain.enabled = YES;
-            return NO;
+    if (partBought || (part.money==0)) {
+        lbBuyBtn.text = NSLocalizedString(@"USE", @"");
+        
+        btnBuyMain.enabled = YES;
+        return NO;
+    }else{
+        lbBuyBtn.text = NSLocalizedString(@"BUYIT", @"");
+        
+        if (part.money>playerAccount.money) {
+            btnBuyMain.enabled = NO;
         }else{
-            lbBuyBtn.text = NSLocalizedString(@"BUYIT", @"");
-
-            if (part.money>playerAccount.money) {
-                btnBuyMain.enabled = NO;
-            }else{
-                btnBuyMain.enabled = YES;
-            }
-            return YES;
+            btnBuyMain.enabled = YES;
         }
+        return YES;
+    }
 }
+
 
 -(void)addProductToBought:(NSInteger)index{
     NSNumber *num = [NSNumber numberWithInteger:index];
