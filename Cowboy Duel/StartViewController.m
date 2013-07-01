@@ -672,36 +672,11 @@ static StartViewController *sharedHelper = nil;
     builder = nil;
 }
 
--(IBAction)profileButtonClick
-{
-    profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount];
-    [profileViewController setNeedAnimation:YES];
-    CATransition* transition = [CATransition animation];
-    transition.duration = 0.5;
-    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    transition.type = kCATransitionPush;//, kCATransitionReveal, kCATransitionFade,kCATransitionMoveIn;
-    transition.subtype =kCATransitionFromLeft;//kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom;
-    [self.navigationController.view.layer addAnimation:transition forKey:nil];
-    [self.navigationController pushViewController:profileViewController animated:NO];
-}
-
-
 - (IBAction)startActiveDuel:(id)sender {
     [playerAccount setActiveDuel:YES];
     [listOfItemsViewController setStatusOnLine:self.hostActive];
     if (self.navigationController.visibleViewController != listOfItemsViewController) {
         [self.navigationController pushViewController:listOfItemsViewController animated:YES];
-    }
-    
-}
-
--(void)profileButtonClickWithOutAnimation;
-{   
-    UIViewController *topController=[self.navigationController topViewController];
-    if (![topController isKindOfClass:[ProfileViewController class]]) {
-        profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount];
-        [profileViewController.ivBlack setHidden:NO];
-        [self.navigationController pushViewController:profileViewController animated:NO];
     }
 }
 

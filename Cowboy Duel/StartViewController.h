@@ -71,7 +71,6 @@ typedef enum{
 
 -(void)duelButtonClick;
 -(IBAction)profileButtonClick;
--(void)profileButtonClickWithOutAnimation;
 -(void)profileFirstRunButtonClickWithOutAnimation;
 -(IBAction)startDuel;
 

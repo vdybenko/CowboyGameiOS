@@ -1124,6 +1124,21 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                      }];
     builder = nil;
 }
+
+- (IBAction)blackBackGroundClick:(id)sender {
+    if ([tfFBName isFirstResponder]) {
+        [self textFieldShouldReturn:tfFBName];
+    }else{
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationCurve:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction];
+        [UIView setAnimationDuration:2.5f];
+        
+        [self.view removeFromSuperview];
+        
+        [UIView commitAnimations];
+    }
+}
+
 #pragma mark IconDownloaderDelegate
 - (void)appImageDidLoad:(NSIndexPath *)indexPath
 {

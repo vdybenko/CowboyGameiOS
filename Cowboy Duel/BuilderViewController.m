@@ -15,7 +15,7 @@
 #import "CDTransaction.h"
 #import "Utils.h"
 #import "UIButton+Image+Title.h"
-
+#import "ProfileViewController.h"
 
 #define spaceForElements 78
 #define spaceForCheck 39
@@ -30,6 +30,7 @@
     __weak IBOutlet UIView *vArrow;
     __weak IBOutlet GMGridView *grid;
     __weak IBOutlet UIButton *btnBuyMain;
+    __weak IBOutlet UIButton *btnMyProfile;
     __weak IBOutlet UILabel *lbBuyBtn;
     __weak IBOutlet UIScrollView *buttonsScroll;
     __weak IBOutlet UIView *buttonsView;
@@ -176,6 +177,7 @@
     moneyView = nil;
     animLostMoneyView = nil;
     animLostMomeyLB = nil;
+    btnMyProfile = nil;
     [super viewDidUnload];
 }
 -(void)releaseComponents
@@ -816,6 +818,18 @@
     [grid reloadData];
     [sideView setUserInteractionEnabled:YES];
     [self setObjectsForIndex:playerAccount.visualViewSuits];
+}
+
+- (IBAction)btnMyProfileClick:(id)sender {
+    profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount];
+    [profileViewController setNeedAnimation:YES];
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:2.5f];
+    
+    [self.view addSubview:profileViewController.view];
+    
+    [UIView commitAnimations];
 }
 
 #pragma mark
