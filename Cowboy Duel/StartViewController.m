@@ -71,7 +71,6 @@
     NSMutableDictionary *dicForRequests;
     BOOL modifierName;
     //buttons
-    __weak IBOutlet UIButton *duelButton;
     __weak IBOutlet UIButton *mapButton;
     __weak IBOutlet UIButton *profileButton;
     __weak IBOutlet UIButton *feedbackButton;
@@ -105,7 +104,6 @@
     BOOL inBackground;
     BOOL isFixedMoney;
 }
-@property (weak, nonatomic) IBOutlet UIButton *duelButton;
 @property (weak, nonatomic) IBOutlet UIButton *mapButton;
 @property (weak, nonatomic) IBOutlet UIButton *helpButton;
 @property (weak, nonatomic) IBOutlet UIButton *profileButton;
@@ -137,7 +135,7 @@
 @implementation StartViewController
 
 @synthesize gameCenterViewController, player, internetActive, hostActive, soundCheack;
-@synthesize feedbackButton, duelButton, profileButton, helpButton, mapButton, shareButton;
+@synthesize feedbackButton, profileButton, helpButton, mapButton, shareButton;
 @synthesize oldAccounId,feedBackViewVisible,showFeedAtFirst,topPlayersDataSource, advertisingNewVersionViewController,firstRun, favsDataSource;
 @synthesize duelProductDownloaderController;
 @synthesize pushNotification;
@@ -439,11 +437,7 @@ static StartViewController *sharedHelper = nil;
     if (iPhone5Delta>0) {
         iPhone5Delta = 25;
         
-        CGRect frame = duelButton.frame;
-        frame.origin.y += iPhone5Delta;
-        [duelButton setFrame:frame];
-        
-        frame = saloon2Button.frame;
+        CGRect frame = saloon2Button.frame;
         frame.origin.y += iPhone5Delta;
         [saloon2Button setFrame:frame];
         
