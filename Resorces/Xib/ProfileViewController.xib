@@ -38,7 +38,7 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUIButton" id="936248504">
+					<object class="IBUIButton" id="480612495">
 						<reference key="NSNextResponder" ref="1048327278"/>
 						<int key="NSvFlags">274</int>
 						<string key="NSFrameSize">{320, 568}</string>
@@ -484,7 +484,7 @@
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="936248504"/>
+				<reference key="NSNextKeyView" ref="480612495"/>
 				<string key="NSReuseIdentifierKey">_NS:196</string>
 				<reference key="IBUIBackgroundColor" ref="920293836"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -623,7 +623,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">blackBackGroundClick:</string>
-						<reference key="source" ref="936248504"/>
+						<reference key="source" ref="480612495"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
@@ -653,7 +653,7 @@
 						<int key="objectID">11</int>
 						<reference key="object" ref="1048327278"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="936248504"/>
+							<reference ref="480612495"/>
 							<reference ref="933964600"/>
 						</array>
 						<reference key="parent" ref="0"/>
@@ -782,7 +782,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">257</int>
-						<reference key="object" ref="936248504"/>
+						<reference key="object" ref="480612495"/>
 						<reference key="parent" ref="1048327278"/>
 						<string key="objectName">btnBack</string>
 					</object>
@@ -819,7 +819,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">260</int>
+			<int key="maxID">261</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
