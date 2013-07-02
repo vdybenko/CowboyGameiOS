@@ -2761,7 +2761,6 @@
 		767FEF33156A652E0016B415 /* Xib */ = {
 			isa = PBXGroup;
 			children = (
-				318D010916C3AF4800BFA030 /* Favourites */,
 				7687667816BA7543003405F9 /* GunDrumViewController.xib */,
 				31A093521701C6DE00CDF4A9 /* Horse.xib */,
 				BD81E637169EC4D100CE8278 /* ActiveDuelViewController.xib */,
@@ -2788,6 +2787,7 @@
 				761EFA471573BDDA001670EB /* CollectionAppViewController.xib */,
 				768BF6F816FB6D8000435394 /* VisualViewCharacterViewController.xib */,
 				76934BE216FC98C500433E1C /* VisualViewCharacter.xib */,
+				318D010916C3AF4800BFA030 /* Favourites */,
 				764B891D165FCC660014E35B /* ListOnLine */,
 				764B891C165FCC4E0014E35B /* TopPlayer */,
 				316BBFE2170EB412009C23BA /* FinalStatsView.xib */,

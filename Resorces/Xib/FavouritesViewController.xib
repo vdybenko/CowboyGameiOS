@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1552</int>
-		<string key="IBDocument.SystemVersion">11G63b</string>
+		<string key="IBDocument.SystemVersion">11G63</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
 		<string key="IBDocument.AppKitVersion">1138.51</string>
 		<string key="IBDocument.HIToolboxVersion">569.00</string>
@@ -37,7 +37,7 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIView" id="994141623">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUITableView" id="43058847">
@@ -115,7 +115,7 @@
 					<object class="IBUIButton" id="857514226">
 						<reference key="NSNextResponder" ref="994141623"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{43, 420}, {88, 33}}</string>
+						<string key="NSFrame">{{11, 421}, {132, 33}}</string>
 						<reference key="NSSuperview" ref="994141623"/>
 						<reference key="NSNextKeyView" ref="1030420848"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -152,9 +152,8 @@
 					<object class="IBUIButton" id="1030420848">
 						<reference key="NSNextResponder" ref="994141623"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{178, 420}, {132, 33}}</string>
+						<string key="NSFrame">{{178, 421}, {132, 33}}</string>
 						<reference key="NSSuperview" ref="994141623"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -269,7 +268,6 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{320, 480}</string>
-				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="185239701"/>
 				<string key="NSReuseIdentifierKey">_NS:196</string>
 				<reference key="IBUIBackgroundColor" ref="871751586"/>

@@ -48,7 +48,7 @@
 @end
 
 @implementation ListOfItemsViewController
-@synthesize tableView, btnInvite, btnBack, leaderBoardBtn, activityIndicator, loadingView,statusOnLine, updateTimer;
+@synthesize tableView, btnBack, btnLeaderBoard, activityIndicator, loadingView,statusOnLine, updateTimer, btnFav;
 
 #define SectionHeaderHeight 20
 
@@ -110,7 +110,7 @@
     lbInviteBtn.text = NSLocalizedString(@"INVITE", nil);
     lbInviteBtn.textColor = btnColor;
     lbInviteBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
-    
+
     lbLeaderboardBtn.text = NSLocalizedString(@"LEAD", nil);
     lbLeaderboardBtn.textColor = btnColor;
     lbLeaderboardBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
@@ -118,17 +118,16 @@
     lbFavoritesBtn.text = NSLocalizedString(@"FavouritesTitle", nil);
     lbFavoritesBtn.textColor = btnColor;
     lbFavoritesBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
-
 }
 
 - (void)viewDidUnload
 {
    
-    [self setLeaderBoardBtn:nil];
+    [self setBtnLeaderBoard:nil];
     lbFavoritesBtn = nil;
     lbLeaderboardBtn = nil;
+    [self setBtnFav:nil];
     [super viewDidUnload];
-    btnInvite = nil;
     saloonTitle = nil;
     lbBackBtn = nil;
     lbInviteBtn = nil;
@@ -137,7 +136,6 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     lbInviteBtn.enabled = FBSession.activeSession.isOpen;
-    btnInvite.enabled = FBSession.activeSession.isOpen;
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -167,7 +165,6 @@
 -(void)releaseComponents
 {
     tableView = nil;
-    btnInvite = nil;
     btnBack = nil;
     activityIndicator = nil;
     loadingView = nil;
@@ -283,7 +280,6 @@
     if([[OGHelper sharedInstance] isAuthorized]){
         [loadingView setHidden:NO];
         [activityIndicator startAnimating];
-        [btnInvite setEnabled:NO];
         
         [[OGHelper sharedInstance] getFriendsHowDontUseAppDelegate:self];
     }else{
@@ -301,7 +297,6 @@
     //[_playersOnLineDataSource reloadRandomId];
     [loadingView setHidden:NO];
     [activityIndicator startAnimating];
-    [btnInvite setEnabled:NO];
     _playersOnLineDataSource.statusOnLine = statusOnLine;
     [_playersOnLineDataSource reloadDataSource];
 }
@@ -310,7 +305,6 @@
 {
     [loadingView setHidden:YES];
     [activityIndicator stopAnimating];
-    btnInvite.enabled = FBSession.activeSession.isOpen;
     [tableView reloadData];
     [self.tableView refreshFinished];
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"FirstRunSalun_v2.2"]){
@@ -348,14 +342,12 @@
     [[OGHelper sharedInstance] apiDialogRequestsSendToNonUsers:friendToInvait];
     [loadingView setHidden:YES];
     [activityIndicator stopAnimating];
-    btnInvite.enabled = FBSession.activeSession.isOpen;
 }
 
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
     //[[OGHelper sharedInstance] request:request didFailWithError:error];
     [loadingView setHidden:YES];
     [activityIndicator stopAnimating];
-    btnInvite.enabled = FBSession.activeSession.isOpen;
 }
 - (IBAction)leaderBoardTouch:(id)sender {
    TopPlayersViewController *topPlayersViewController =[[TopPlayersViewController alloc] initWithAccount:_playerAccount];
