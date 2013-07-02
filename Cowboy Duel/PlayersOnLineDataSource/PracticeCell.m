@@ -7,6 +7,7 @@
 @synthesize btnDuel;
 @synthesize lbInvite;
 @synthesize ivTargets;
+@synthesize cellImg;
 
 +(PracticeCell*) cell {
     NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"PracticaCell" owner:nil options:nil];
@@ -32,6 +33,8 @@
     
     [lbInvite setFont: [UIFont fontWithName: @"DecreeNarrow" size:30]];
     [lbInvite setText:NSLocalizedString(@"INVITE_FRIENDS_FB",@"")];
+    
+
 }
 
 -(void) cellForPractice:(BOOL)practice;
@@ -40,10 +43,12 @@
         btnDuel.hidden = NO;
         ivTargets.hidden = NO;
         lbInvite.hidden = YES;
+         cellImg.image = [UIImage imageNamed:@"topPlayerCell_blue.png"];
     }else{
         btnDuel.hidden = YES;
         ivTargets.hidden = YES;
         lbInvite.hidden = NO;
+        cellImg.image = [UIImage imageNamed:@"topPlayerCell.png"];
     }
 }
 @end

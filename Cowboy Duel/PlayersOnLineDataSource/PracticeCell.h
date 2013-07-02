@@ -7,6 +7,7 @@
 @property (weak,nonatomic) IBOutlet UIButton * btnDuel;
 @property (weak, nonatomic) IBOutlet UILabel *lbInvite;
 @property (weak, nonatomic) IBOutlet UIImageView *ivTargets;
+@property (weak, nonatomic) IBOutlet UIImageView *cellImg;
 
 +(PracticeCell*)cell;
 +(NSString*) cellID;
