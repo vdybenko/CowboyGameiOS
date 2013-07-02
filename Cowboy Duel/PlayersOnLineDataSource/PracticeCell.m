@@ -8,6 +8,8 @@
 @synthesize lbInvite;
 @synthesize ivTargets;
 @synthesize cellImg;
+@synthesize bgInvite;
+@synthesize bgPractice;
 
 +(PracticeCell*) cell {
     NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"PracticaCell" owner:nil options:nil];
@@ -43,12 +45,16 @@
         btnDuel.hidden = NO;
         ivTargets.hidden = NO;
         lbInvite.hidden = YES;
-         cellImg.image = [UIImage imageNamed:@"topPlayerCell_blue.png"];
+        // cellImg.image = [UIImage imageNamed:@"topPlayerCell_blue.png"];
+        bgInvite.hidden = YES;
+        bgPractice.hidden = NO;
     }else{
         btnDuel.hidden = YES;
         ivTargets.hidden = YES;
         lbInvite.hidden = NO;
-        cellImg.image = [UIImage imageNamed:@"topPlayerCell.png"];
+        bgInvite.hidden = NO;
+        bgPractice.hidden = YES;
+       // cellImg.image = [UIImage imageNamed:@"topPlayerCell.png"];
     }
 }
 @end

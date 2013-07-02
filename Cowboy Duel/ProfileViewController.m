@@ -107,7 +107,7 @@ static const CGFloat timeToStandartTitles = 1.8;
 @end
 
 @implementation ProfileViewController
-@synthesize needAnimation, ivBlack,profilePictureViewDefault;
+@synthesize needAnimation, ivBlack,profilePictureViewDefault, addFaforitesLb;
 
 #pragma mark
 
@@ -807,14 +807,20 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         if (playerServer.favorite) {
             NSLog(@"server %@ YES",playerServer.displayName);
             dispatch_async(dispatch_get_main_queue(), ^{
-                [btnAddToFavorites setImage:[UIImage imageNamed:@"discartFavoritesBtn.png"] forState:UIControlStateNormal];
-                [btnAddToFavorites setImage:[UIImage imageNamed:@"discartFavoritesBtn.png"] forState:UIControlStateDisabled];
+                //[btnAddToFavorites setImage:[UIImage imageNamed:@"discartFavoritesBtn.png"] forState:UIControlStateNormal];
+                //[btnAddToFavorites setImage:[UIImage imageNamed:@"discartFavoritesBtn.png"] forState:UIControlStateDisabled];
+                addFaforitesLb.text = NSLocalizedString(@"DISCART_FEFOR", @"");
+                addFaforitesLb.font = [UIFont fontWithName:@"DecreeNarrow" size:20];
+              
             });
         }else{
             NSLog(@"server %@ NO",playerServer.displayName);
             dispatch_async(dispatch_get_main_queue(), ^{
-                [btnAddToFavorites setImage:[UIImage imageNamed:@"addFavorites.png"] forState:UIControlStateNormal];
-                [btnAddToFavorites setImage:[UIImage imageNamed:@"addFavorites.png"] forState:UIControlStateDisabled];
+               // [btnAddToFavorites setImage:[UIImage imageNamed:@"addFavorites.png"] forState:UIControlStateNormal];
+                //[btnAddToFavorites setImage:[UIImage imageNamed:@"addFavorites.png"] forState:UIControlStateDisabled];
+                addFaforitesLb.text = NSLocalizedString(@"ADD_FEFOR", @"");
+                addFaforitesLb.font = [UIFont fontWithName:@"DecreeNarrow" size:20];
+                
             });
         }
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -1172,6 +1178,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     btnAddToFavorites = nil;
     btnFavourites = nil;
     lbFavouritesTitle = nil;
+    [self setAddFaforitesLb:nil];
     [super viewDidUnload];
 }
 @end
