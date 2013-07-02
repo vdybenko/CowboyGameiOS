@@ -569,17 +569,48 @@
 {
     CDVisualViewCharacterPart *part = [arrObjects objectAtIndex:index];
 
+    NSString *stType;
+    switch (type) {
+        case CharacterPartCap:
+            stType = @"Cap";
+            break;
+        case CharacterPartFace:
+            stType = @"Face";
+            break;
+        case CharacterPartGun:
+            stType = @"Gun";
+            break;
+        case CharacterPartJaket:
+            stType = @"Jaket";
+            break;
+        case CharacterPartLegs:
+            stType = @"Legs";
+            break;
+        case CharacterPartShirt:
+            stType = @"Shirt";
+            break;
+        case CharacterPartShoose:
+            stType = @"Shoose";
+            break;
+        case CharacterPartSuit:
+            stType = @"Suit";
+            break;
+        default :
+            break;
+    }
+
+    
     BOOL partBought = [playerAccount isProductBought:part.dId];
     
     if (partBought || part.money==0){
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                             object:self
-                                                          userInfo:[NSDictionary dictionaryWithObject:@"/BuilderVC_use_it" forKey:@"page"]];
+                                                          userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"/BuilderVC_use_it_%@",stType] forKey:@"page"]];
     }else{
         [duelProductDownloaderController buyProductID:part.dId transactionID:playerAccount.glNumber];
         
         CDTransaction *transaction = [[CDTransaction alloc] init];
-        transaction.trDescription = @"BuyPart";
+        transaction.trDescription = [NSString stringWithFormat:@"/BuyPart_%@_%d",stType,part.dId];
         transaction.trType = [NSNumber numberWithInt:-1];
         transaction.trMoneyCh = [NSNumber numberWithInt:-part.money];
         transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
@@ -598,9 +629,8 @@
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                             object:self
-                                                          userInfo:[NSDictionary dictionaryWithObject:@"/BuilderVC_buy" forKey:@"page"]];
+                                                          userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"/BuilderVC_buy_%@",stType] forKey:@"page"]];
     }
-    
     switch (type) {
         case CharacterPartCap:
             playerAccount.visualViewCap = index;
