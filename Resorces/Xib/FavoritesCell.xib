@@ -605,9 +605,9 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="ls_OnLine_frame.png">{46, 46}</string>
-			<string key="salon_duel.png">{75, 33}</string>
-			<string key="topPlayerCell.png">{293, 78}</string>
+			<string key="ls_OnLine_frame.png">{16, 16}</string>
+			<string key="salon_duel.png">{16, 16}</string>
+			<string key="topPlayerCell.png">{16, 16}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>

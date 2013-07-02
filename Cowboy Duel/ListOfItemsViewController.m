@@ -14,6 +14,10 @@
 #include <arpa/inet.h>
 #import "UIButton+Image+Title.h"
 #import "ActiveDuelViewController.h"
+#import "FavouritesViewController.h"
+#import "FavouritesDataSource.h"
+#import "TopPlayersViewController.h"
+#import "StartViewController.h"
 
 @interface ListOfItemsViewController ()
 {
@@ -23,13 +27,16 @@
     StartViewController *startViewController;
     AccountDataSource *oponentAccount;
     DuelStartViewController *duelStartViewController;
-    
+    // AccountDataSource *playerAccount;
     BOOL statusOnLine;
             
     NSIndexPath *_indexPath;
     
     __weak IBOutlet UILabel *lbBackBtn;
     __weak IBOutlet UILabel *lbInviteBtn;
+   
+    __weak IBOutlet UILabel *lbFavoritesBtn;
+    __weak IBOutlet UILabel *lbLeaderboardBtn;
     
     __weak IBOutlet UILabel *saloonTitle;
     
@@ -41,7 +48,7 @@
 @end
 
 @implementation ListOfItemsViewController
-@synthesize tableView, btnInvite, btnBack, activityIndicator, loadingView,statusOnLine, updateTimer;
+@synthesize tableView, btnBack, btnLeaderBoard, activityIndicator, loadingView,statusOnLine, updateTimer, btnFav;
 
 #define SectionHeaderHeight 20
 
@@ -103,12 +110,24 @@
     lbInviteBtn.text = NSLocalizedString(@"INVITE", nil);
     lbInviteBtn.textColor = btnColor;
     lbInviteBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
+
+    lbLeaderboardBtn.text = NSLocalizedString(@"LEAD", nil);
+    lbLeaderboardBtn.textColor = btnColor;
+    lbLeaderboardBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
+    
+    lbFavoritesBtn.text = NSLocalizedString(@"FavouritesTitle", nil);
+    lbFavoritesBtn.textColor = btnColor;
+    lbFavoritesBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
 }
 
 - (void)viewDidUnload
 {
+   
+    [self setBtnLeaderBoard:nil];
+    lbFavoritesBtn = nil;
+    lbLeaderboardBtn = nil;
+    [self setBtnFav:nil];
     [super viewDidUnload];
-    btnInvite = nil;
     saloonTitle = nil;
     lbBackBtn = nil;
     lbInviteBtn = nil;
@@ -117,7 +136,6 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     lbInviteBtn.enabled = FBSession.activeSession.isOpen;
-    btnInvite.enabled = FBSession.activeSession.isOpen;
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -147,7 +165,6 @@
 -(void)releaseComponents
 {
     tableView = nil;
-    btnInvite = nil;
     btnBack = nil;
     activityIndicator = nil;
     loadingView = nil;
@@ -182,9 +199,13 @@
     return 82.f;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)pTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self showOponentViewForIndexPath:indexPath duelButtonClick:NO];
+    if (indexPath.row == ([pTableView numberOfRowsInSection:0]-1)) {
+        [self inviteFriendsClick:Nil];
+    }else{
+        [self showOponentViewForIndexPath:indexPath duelButtonClick:NO];
+    }
 }
 
 #pragma mark - Delegated methods
@@ -192,6 +213,7 @@
 -(void)clickButton:(NSIndexPath *)indexPath;
 {
     [self showOponentViewForIndexPath:indexPath duelButtonClick:YES];
+    NSLog(@"Index");
 }
 
 -(void)showOponentViewForIndexPath:(NSIndexPath *)indexPath duelButtonClick:(BOOL)duelButtonClick
@@ -247,14 +269,17 @@
 
 -(IBAction)backToMenu:(id)sender;
 {
-    [self.navigationController popViewControllerAnimated:YES];
+   
+    startViewController = [[StartViewController alloc] init];
+    [self.navigationController pushViewController:startViewController animated:YES];
+    startViewController = nil;
+  
 }
 
 - (IBAction)inviteFriendsClick:(id)sender {
     if([[OGHelper sharedInstance] isAuthorized]){
         [loadingView setHidden:NO];
         [activityIndicator startAnimating];
-        [btnInvite setEnabled:NO];
         
         [[OGHelper sharedInstance] getFriendsHowDontUseAppDelegate:self];
     }else{
@@ -272,7 +297,6 @@
     //[_playersOnLineDataSource reloadRandomId];
     [loadingView setHidden:NO];
     [activityIndicator startAnimating];
-    [btnInvite setEnabled:NO];
     _playersOnLineDataSource.statusOnLine = statusOnLine;
     [_playersOnLineDataSource reloadDataSource];
 }
@@ -281,7 +305,6 @@
 {
     [loadingView setHidden:YES];
     [activityIndicator stopAnimating];
-    btnInvite.enabled = FBSession.activeSession.isOpen;
     [tableView reloadData];
     [self.tableView refreshFinished];
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"FirstRunSalun_v2.2"]){
@@ -319,14 +342,23 @@
     [[OGHelper sharedInstance] apiDialogRequestsSendToNonUsers:friendToInvait];
     [loadingView setHidden:YES];
     [activityIndicator stopAnimating];
-    btnInvite.enabled = FBSession.activeSession.isOpen;
 }
 
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
     //[[OGHelper sharedInstance] request:request didFailWithError:error];
     [loadingView setHidden:YES];
     [activityIndicator stopAnimating];
-    btnInvite.enabled = FBSession.activeSession.isOpen;
 }
+- (IBAction)leaderBoardTouch:(id)sender {
+   TopPlayersViewController *topPlayersViewController =[[TopPlayersViewController alloc] initWithAccount:_playerAccount];
+    [self.navigationController pushViewController:topPlayersViewController animated:YES];
+    topPlayersViewController = nil;
+}
+- (IBAction)favoritListTouch:(id)sender {
+    FavouritesViewController *favVC = [[FavouritesViewController alloc] initWithAccount:_playerAccount];
+    [self.navigationController pushViewController:favVC animated:YES];
+}
+
+
 
 @end

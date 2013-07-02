@@ -27,6 +27,9 @@
 
 "INVITE_FRIENDS" = "Let's duel in the best cowboy duel game on iPhone";
 
+"INVITE_FRIENDS_FB" = "INVITE FRIENDS";
+
+
 // Start View
 
 "DUEL"="GET HIM";
@@ -52,6 +55,7 @@
 "REFRESH"="REFRESH";
 
 "ACCEPT"="ACCEPT";
+
 
 //FinalView
 
@@ -326,6 +330,7 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "Rank:" = "Rank:";
 "Attack:" = "Attack: ";
 "Defense:"="Defense: ";
+
 
 //added for PlayersOnlineDataSource.m:
 "OnLine" = "ONLINE";

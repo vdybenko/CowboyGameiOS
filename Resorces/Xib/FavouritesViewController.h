@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnBack;
 @property (weak, nonatomic) IBOutlet UIButton *btnOnLine;
 @property (weak, nonatomic) IBOutlet UIButton *btnOffLine;
+@property (weak, nonatomic) IBOutlet UIButton *leaderBoardBtn;
+
 
 @property (strong, nonatomic) IBOutlet UIView *loadingView;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
