@@ -73,7 +73,16 @@
             cell = [PracticeCell cell];
             [cell initMainControls];
         }
+        [cell cellForPractice:NO];
+        return cell;
+    }else if (indexPath.row == ([tableView numberOfRowsInSection:0]-2)) {
+        PracticeCell *cell = [tableView dequeueReusableCellWithIdentifier:[PracticeCell cellID]];
+        if (!cell ) {
+            cell = [PracticeCell cell];
+            [cell initMainControls];
+        }
         [cell.btnDuel addTarget:self action:@selector(invaiteWithMessage:) forControlEvents:UIControlEventTouchUpInside];
+        [cell cellForPractice:YES];
         return cell;
     }else{
         PlayerOnLineCell* cell;
@@ -153,7 +162,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.serverObjects count];
+    return [self.serverObjects count]+1;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

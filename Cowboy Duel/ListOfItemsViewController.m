@@ -202,9 +202,13 @@
     return 82.f;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)pTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self showOponentViewForIndexPath:indexPath duelButtonClick:NO];
+    if (indexPath.row == ([pTableView numberOfRowsInSection:0]-1)) {
+        [self inviteFriendsClick:Nil];
+    }else{
+        [self showOponentViewForIndexPath:indexPath duelButtonClick:NO];
+    }
 }
 
 #pragma mark - Delegated methods

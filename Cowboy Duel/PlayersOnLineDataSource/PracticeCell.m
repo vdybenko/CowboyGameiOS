@@ -5,6 +5,8 @@
 @implementation PracticeCell
 
 @synthesize btnDuel;
+@synthesize lbInvite;
+@synthesize ivTargets;
 
 +(PracticeCell*) cell {
     NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"PracticaCell" owner:nil options:nil];
@@ -27,6 +29,21 @@
     [label1 setText:NSLocalizedString(@"PRAC",@"")];
     [btnDuel addSubview:label1];
     label1 = nil;
+    
+    [lbInvite setFont: [UIFont fontWithName: @"DecreeNarrow" size:30]];
+    [lbInvite setText:NSLocalizedString(@"INVITE_FRIENDS_FB",@"")];
 }
 
+-(void) cellForPractice:(BOOL)practice;
+{
+    if (practice) {
+        btnDuel.hidden = NO;
+        ivTargets.hidden = NO;
+        lbInvite.hidden = YES;
+    }else{
+        btnDuel.hidden = YES;
+        ivTargets.hidden = YES;
+        lbInvite.hidden = NO;
+    }
+}
 @end

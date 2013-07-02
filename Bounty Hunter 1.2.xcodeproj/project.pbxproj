@@ -974,7 +974,6 @@
 		C445249C178197BF00BB0C60 /* listFavoritesBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = C445249A178197BF00BB0C60 /* listFavoritesBtn.png */; };
 		C44524A117819A3C00BB0C60 /* leaderBoardBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = C44524A017819A3C00BB0C60 /* leaderBoardBtn.png */; };
 		C44524A31781A9C900BB0C60 /* discartFavoritesBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = C44524A21781A9C900BB0C60 /* discartFavoritesBtn.png */; };
-		C48FA4051782B640006B10C2 /* IviteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C48FA4041782B640006B10C2 /* IviteCell.xib */; };
 		C4966908174F8A6300822329 /* faceButton.png in Resources */ = {isa = PBXBuildFile; fileRef = C4966901174F8A6300822329 /* faceButton.png */; };
 		C4966909174F8A6300822329 /* gunsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = C4966902174F8A6300822329 /* gunsButton.png */; };
 		C496690A174F8A6300822329 /* hatButton.png in Resources */ = {isa = PBXBuildFile; fileRef = C4966903174F8A6300822329 /* hatButton.png */; };
@@ -1929,7 +1928,6 @@
 		C445249A178197BF00BB0C60 /* listFavoritesBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = listFavoritesBtn.png; sourceTree = "<group>"; };
 		C44524A017819A3C00BB0C60 /* leaderBoardBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leaderBoardBtn.png; sourceTree = "<group>"; };
 		C44524A21781A9C900BB0C60 /* discartFavoritesBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discartFavoritesBtn.png; sourceTree = "<group>"; };
-		C48FA4041782B640006B10C2 /* IviteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = IviteCell.xib; path = Xib/IviteCell.xib; sourceTree = "<group>"; };
 		C4966901174F8A6300822329 /* faceButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = faceButton.png; sourceTree = "<group>"; };
 		C4966902174F8A6300822329 /* gunsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gunsButton.png; sourceTree = "<group>"; };
 		C4966903174F8A6300822329 /* hatButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hatButton.png; sourceTree = "<group>"; };
@@ -2708,7 +2706,6 @@
 			isa = PBXGroup;
 			children = (
 				03285FA1159DD61900D16195 /* ListOfItemsViewController.xib */,
-				C48FA4041782B640006B10C2 /* IviteCell.xib */,
 				76864B3A1626DAC30095BBEF /* OnLinePlayersCell.xib */,
 				764B891E165FCCCE0014E35B /* PracticaCell.xib */,
 			);
@@ -4185,7 +4182,6 @@
 				C445249C178197BF00BB0C60 /* listFavoritesBtn.png in Resources */,
 				C44524A117819A3C00BB0C60 /* leaderBoardBtn.png in Resources */,
 				C44524A31781A9C900BB0C60 /* discartFavoritesBtn.png in Resources */,
-				C48FA4051782B640006B10C2 /* IviteCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
