@@ -669,7 +669,7 @@
 								<reference key="IBUINormalTitleShadowColor" ref="823735607"/>
 								<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">builderInventoryBtn.png</string>
+									<string key="NSResourceName">builderHomeBtn.png</string>
 								</object>
 								<reference key="IBUIFontDescription" ref="80780731"/>
 								<reference key="IBUIFont" ref="349654511"/>
@@ -1964,7 +1964,7 @@
 			<string key="builderBuyBtn.png">{140, 38}</string>
 			<string key="builderDefensBar.png">{145, 63}</string>
 			<string key="builderDefensIco.png">{38, 25}</string>
-			<string key="builderInventoryBtn.png">{16, 16}</string>
+			<string key="builderHomeBtn.png">{70, 62}</string>
 			<string key="builderMoneyBar.png">{150, 66}</string>
 			<string key="builderSelectedCell.png">{205, 276}</string>
 			<string key="builderSideHat.png">{165, 1038}</string>
