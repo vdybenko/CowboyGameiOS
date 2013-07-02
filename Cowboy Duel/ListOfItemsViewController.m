@@ -212,6 +212,7 @@
 -(void)clickButton:(NSIndexPath *)indexPath;
 {
     [self showOponentViewForIndexPath:indexPath duelButtonClick:YES];
+    NSLog(@"Index");
 }
 
 -(void)showOponentViewForIndexPath:(NSIndexPath *)indexPath duelButtonClick:(BOOL)duelButtonClick

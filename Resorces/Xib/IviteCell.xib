@@ -66,7 +66,7 @@
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<string key="IBUINormalTitle">Button</string>
-								<object class="NSColor" key="IBUIHighlightedTitleColor" id="596103665">
+								<object class="NSColor" key="IBUIHighlightedTitleColor" id="828341017">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MQA</bytes>
 								</object>
@@ -97,7 +97,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{37, 17}, {163, 57}}</string>
 								<reference key="NSSuperview" ref="643975086"/>
-								<reference key="NSNextKeyView" ref="966774729"/>
+								<reference key="NSNextKeyView" ref="846776465"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -106,7 +106,7 @@
 									<string key="NSResourceName">list_online_practica_target.png</string>
 								</object>
 							</object>
-							<object class="IBUILabel" id="966774729">
+							<object class="IBUILabel" id="846776465">
 								<reference key="NSNextResponder" ref="643975086"/>
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{59, 30}, {160, 31}}</string>
@@ -123,7 +123,7 @@
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MCAwIDAAA</bytes>
 								</object>
-								<reference key="IBUIHighlightedColor" ref="596103665"/>
+								<reference key="IBUIHighlightedColor" ref="828341017"/>
 								<int key="IBUIBaselineAdjustment">0</int>
 								<object class="IBUIFontDescription" key="IBUIFontDescription">
 									<int key="type">1</int>
@@ -192,7 +192,7 @@
 							<reference ref="321017174"/>
 							<reference ref="20704325"/>
 							<reference ref="995158912"/>
-							<reference ref="966774729"/>
+							<reference ref="846776465"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -215,7 +215,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">102</int>
-						<reference key="object" ref="966774729"/>
+						<reference key="object" ref="846776465"/>
 						<reference key="parent" ref="886287858"/>
 					</object>
 				</array>
