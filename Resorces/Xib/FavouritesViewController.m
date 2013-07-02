@@ -15,6 +15,8 @@
 #import "DuelStartViewController.h"
 #import "GameCenterViewController.h"
 #import "CDTransaction.h"
+#import "TopPlayersViewController.h"
+#import "ListOfItemsViewController.h"
 
 @interface FavouritesViewController ()
 {
@@ -31,7 +33,7 @@
 
 @implementation FavouritesViewController
 
-@synthesize lbFavsTitle, btnBack, vOffLineBackGround, wvOffLineText, tvFavTable, btnOffLine, btnOnLine;
+@synthesize lbFavsTitle, btnBack, vOffLineBackGround, wvOffLineText, tvFavTable, btnOffLine, btnOnLine, leaderBoardBtn;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -78,8 +80,11 @@
     
     UIColor *btnColor = [UIColor colorWithRed:244.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     
-    [btnBack setTitleByLabel:@"BACK"];
+    [btnBack setTitleByLabel:@"SALYN"];
     [btnBack changeColorOfTitleByLabel:btnColor];
+    
+    [leaderBoardBtn setTitleByLabel:@"LEAD"];
+    [leaderBoardBtn changeColorOfTitleByLabel:btnColor];
     
     [btnOnLine setTitleByLabel:@"OnLine"];
     [btnOnLine changeColorOfTitleByLabel:btnColor];
@@ -125,6 +130,7 @@
     [self setBtnBack:nil];
     [self setBtnOnLine:nil];
     [self setBtnOffLine:nil];
+    [self setLeaderBoardBtn:nil];
     [super viewDidUnload];
 }
 
@@ -160,8 +166,10 @@
 #pragma mark IBActions:
 
 - (IBAction)btnBackClicked:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-    [self releaseComponents];
+    ListOfItemsViewController *listOfItemsViewController = [[ListOfItemsViewController alloc] init];
+    
+    [self.navigationController pushViewController:listOfItemsViewController animated:YES];
+    listOfItemsViewController = nil;
 }
 
 - (IBAction)btnOnlineClicked:(id)sender {
@@ -182,6 +190,11 @@
         [self.activityIndicator startAnimating];
         [favsDataSource refreshListOnline];
     }
+}
+- (IBAction)leaderboardTouch:(id)sender {
+    TopPlayersViewController *topPlayersViewController =[[TopPlayersViewController alloc] initWithAccount:playerAccount];
+    [self.navigationController pushViewController:topPlayersViewController animated:YES];
+    topPlayersViewController = nil;
 }
 
 //call to duel:

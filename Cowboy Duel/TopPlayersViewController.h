@@ -18,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIButton *btnBack;
 @property (strong, nonatomic) IBOutlet UIButton *btnFindMe;
+@property (weak, nonatomic) IBOutlet UIButton *favoritesBtn;
 
 @property (strong, nonatomic) IBOutlet UIView *loadingView;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;

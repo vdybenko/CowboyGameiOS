@@ -11,6 +11,8 @@
 #import "UIButton+Image+Title.h"
 #import "CustomNSURLConnection.h"
 #import "StartViewController.h"
+#import "ListOfItemsViewController.h"
+#import "FavouritesViewController.h"
 
 @interface TopPlayersViewController()
 {
@@ -28,7 +30,7 @@
 @end
 
 @implementation TopPlayersViewController
-@synthesize tableView, btnFindMe, btnBack, activityIndicator, loadingView,offLineBackGround,offLineText,saloonTitle;
+@synthesize tableView, btnFindMe, btnBack, activityIndicator, loadingView,offLineBackGround,favoritesBtn, offLineText,saloonTitle;
 
 static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
 
@@ -76,15 +78,17 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
 
     UIColor *btnColor = [UIColor colorWithRed:244.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     
-    [btnBack setTitleByLabel:@"BACK"];
-    [btnBack changeColorOfTitleByLabel:btnColor];
+    [btnBack  setTitleByLabel:@"SALYN" withColor:btnColor fontSize:24];
     
-    [btnFindMe setTitleByLabel:@"FIND ME"];
-    [btnFindMe changeColorOfTitleByLabel:btnColor];
+    [favoritesBtn setTitleByLabel:@"FavouritesTitle" withColor:btnColor fontSize:24];
+    
+    [btnFindMe setTitleByLabel:@"FIND ME" withColor:btnColor fontSize:24];
+    
 }
 
 - (void)viewDidUnload
 {
+    [self setFavoritesBtn:nil];
     [super viewDidUnload];
     saloonTitle = nil;
 }
@@ -255,8 +259,10 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
 
 -(IBAction)backToMenu:(id)sender;
 {
-    [self.navigationController popViewControllerAnimated:YES];
-    [self releaseComponents];
+    ListOfItemsViewController *listOfItemsViewController = [[ListOfItemsViewController alloc] init];
+
+  [self.navigationController pushViewController:listOfItemsViewController animated:YES];
+    listOfItemsViewController = nil;
 }
 -(IBAction)findMe:(id)sender;
 {
@@ -321,6 +327,13 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
         
         [NSThread sleepForTimeInterval:0.1];
     }
+}
+- (IBAction)favoritesTouch:(id)sender {
+    
+    FavouritesViewController *favVC = [[FavouritesViewController alloc] initWithAccount:_playerAccount];
+    [self.navigationController pushViewController:favVC animated:YES];
+
+    
 }
 @end
 

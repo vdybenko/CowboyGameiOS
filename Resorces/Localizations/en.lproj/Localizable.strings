@@ -53,6 +53,7 @@
 
 "ACCEPT"="ACCEPT";
 
+
 //FinalView
 
 "BACK"="BACK";
@@ -326,6 +327,7 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "Rank:" = "Rank:";
 "Attack:" = "Attack: ";
 "Defense:"="Defense: ";
+
 
 //added for PlayersOnlineDataSource.m:
 "OnLine" = "ONLINE";

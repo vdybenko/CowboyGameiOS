@@ -18,6 +18,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *btnBack;
 @property (weak, nonatomic) IBOutlet UIButton *btnInvite;
+@property (weak, nonatomic) IBOutlet UIButton *leaderBoardBtn;
 
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;

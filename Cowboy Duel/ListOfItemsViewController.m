@@ -14,6 +14,10 @@
 #include <arpa/inet.h>
 #import "UIButton+Image+Title.h"
 #import "ActiveDuelViewController.h"
+#import "FavouritesViewController.h"
+#import "FavouritesDataSource.h"
+#import "TopPlayersViewController.h"
+#import "StartViewController.h"
 
 @interface ListOfItemsViewController ()
 {
@@ -23,13 +27,16 @@
     StartViewController *startViewController;
     AccountDataSource *oponentAccount;
     DuelStartViewController *duelStartViewController;
-    
+    // AccountDataSource *playerAccount;
     BOOL statusOnLine;
             
     NSIndexPath *_indexPath;
     
     __weak IBOutlet UILabel *lbBackBtn;
     __weak IBOutlet UILabel *lbInviteBtn;
+   
+    __weak IBOutlet UILabel *lbFavoritesBtn;
+    __weak IBOutlet UILabel *lbLeaderboardBtn;
     
     __weak IBOutlet UILabel *saloonTitle;
     
@@ -41,7 +48,7 @@
 @end
 
 @implementation ListOfItemsViewController
-@synthesize tableView, btnInvite, btnBack, activityIndicator, loadingView,statusOnLine, updateTimer;
+@synthesize tableView, btnInvite, btnBack, leaderBoardBtn, activityIndicator, loadingView,statusOnLine, updateTimer;
 
 #define SectionHeaderHeight 20
 
@@ -103,10 +110,23 @@
     lbInviteBtn.text = NSLocalizedString(@"INVITE", nil);
     lbInviteBtn.textColor = btnColor;
     lbInviteBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
+    
+    lbLeaderboardBtn.text = NSLocalizedString(@"LEAD", nil);
+    lbLeaderboardBtn.textColor = btnColor;
+    lbLeaderboardBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
+    
+    lbFavoritesBtn.text = NSLocalizedString(@"FavouritesTitle", nil);
+    lbFavoritesBtn.textColor = btnColor;
+    lbFavoritesBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
+
 }
 
 - (void)viewDidUnload
 {
+   
+    [self setLeaderBoardBtn:nil];
+    lbFavoritesBtn = nil;
+    lbLeaderboardBtn = nil;
     [super viewDidUnload];
     btnInvite = nil;
     saloonTitle = nil;
@@ -247,7 +267,11 @@
 
 -(IBAction)backToMenu:(id)sender;
 {
-    [self.navigationController popViewControllerAnimated:YES];
+   
+    startViewController = [[StartViewController alloc] init];
+    [self.navigationController pushViewController:startViewController animated:YES];
+    startViewController = nil;
+  
 }
 
 - (IBAction)inviteFriendsClick:(id)sender {
@@ -328,5 +352,16 @@
     [activityIndicator stopAnimating];
     btnInvite.enabled = FBSession.activeSession.isOpen;
 }
+- (IBAction)leaderBoardTouch:(id)sender {
+   TopPlayersViewController *topPlayersViewController =[[TopPlayersViewController alloc] initWithAccount:_playerAccount];
+    [self.navigationController pushViewController:topPlayersViewController animated:YES];
+    topPlayersViewController = nil;
+}
+- (IBAction)favoritListTouch:(id)sender {
+    FavouritesViewController *favVC = [[FavouritesViewController alloc] initWithAccount:_playerAccount];
+    [self.navigationController pushViewController:favVC animated:YES];
+}
+
+
 
 @end

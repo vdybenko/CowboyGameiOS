@@ -792,14 +792,14 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         if (playerServer.favorite) {
             NSLog(@"server %@ YES",playerServer.displayName);
             dispatch_async(dispatch_get_main_queue(), ^{
-                [btnAddToFavorites setImage:[UIImage imageNamed:@"topPlayerStarSelected.png"] forState:UIControlStateNormal];
-                [btnAddToFavorites setImage:[UIImage imageNamed:@"topPlayerStarSelected.png"] forState:UIControlStateDisabled];
+                [btnAddToFavorites setImage:[UIImage imageNamed:@"discartFavoritesBtn.png"] forState:UIControlStateNormal];
+                [btnAddToFavorites setImage:[UIImage imageNamed:@"discartFavoritesBtn.png"] forState:UIControlStateDisabled];
             });
         }else{
             NSLog(@"server %@ NO",playerServer.displayName);
             dispatch_async(dispatch_get_main_queue(), ^{
-                [btnAddToFavorites setImage:[UIImage imageNamed:@"topPlayerStar.png"] forState:UIControlStateNormal];
-                [btnAddToFavorites setImage:[UIImage imageNamed:@"topPlayerStar.png"] forState:UIControlStateDisabled];
+                [btnAddToFavorites setImage:[UIImage imageNamed:@"addFavorites.png"] forState:UIControlStateNormal];
+                [btnAddToFavorites setImage:[UIImage imageNamed:@"addFavorites.png"] forState:UIControlStateDisabled];
             });
         }
         dispatch_async(dispatch_get_main_queue(), ^{
