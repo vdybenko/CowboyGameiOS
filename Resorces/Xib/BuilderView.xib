@@ -55,7 +55,7 @@
 					</object>
 					<object class="IBUIView" id="693515324">
 						<reference key="NSNextResponder" ref="1048327278"/>
-						<int key="NSvFlags">260</int>
+						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{-2, 35}, {248, 502}}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
 						<reference key="NSWindow"/>
@@ -73,7 +73,7 @@
 						<string key="NSFrame">{{75, 449}, {87, 28}}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="1063492586"/>
+						<reference key="NSNextKeyView" ref="47995292"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -654,7 +654,7 @@
 								<string key="NSFrame">{{274, 6}, {38, 32}}</string>
 								<reference key="NSSuperview" ref="947746974"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="963769374"/>
+								<reference key="NSNextKeyView" ref="1063492586"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -926,24 +926,26 @@
 					</object>
 					<object class="IBUIButton" id="1063492586">
 						<reference key="NSNextResponder" ref="1048327278"/>
-						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{212, 454}, {18, 19}}</string>
+						<int key="NSvFlags">296</int>
+						<string key="NSFrame">{{194, 64}, {40, 40}}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="47995292"/>
+						<reference key="NSNextKeyView" ref="963769374"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">3</int>
-						<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
 						<reference key="IBUIHighlightedTitleColor" ref="74881059"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="823735607"/>
+						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">profileIcoBuilder.png</string>
+						</object>
 						<reference key="IBUIFontDescription" ref="80780731"/>
 						<reference key="IBUIFont" ref="349654511"/>
 					</object>
@@ -1975,6 +1977,7 @@
 			<string key="hatButton.png">{140, 139}</string>
 			<string key="jacketsButton.png">{140, 139}</string>
 			<string key="pantsButton.png">{140, 139}</string>
+			<string key="profileIcoBuilder.png">{600, 570}</string>
 			<string key="shirtButtonpng.png">{162, 139}</string>
 			<string key="shoesButton.png">{139, 139}</string>
 			<string key="suitsButton.png">{162, 139}</string>
