@@ -139,6 +139,21 @@ static const CGFloat timeToStandartTitles = 1.8;
         [btnBack setTitleByLabel:@"BACK" withColor:buttonsTitleColor fontSize:24];
         
         [self initMainControls];
+        
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        CGContextSetStrokeColorWithColor(context, [UIColor redColor].CGColor);
+        
+        // Draw them with a 2.0 stroke width so they are a bit more visible.
+        CGContextSetLineWidth(context, 2.0);
+        CGContextSetStrokeColorWithColor(context, [UIColor brownColor].CGColor);
+        
+        CGContextMoveToPoint(context, tfFBName.frame.origin.x,tfFBName.frame.origin.y+tfFBName.frame.size.height); //start at this point
+        
+        CGContextAddLineToPoint(context, tfFBName.frame.origin.x+tfFBName.frame.size.width,tfFBName.frame.origin.y+tfFBName.frame.size.height); //draw to this point
+        
+        // and now draw the Path!
+        CGContextStrokePath(context);
+        
         [mainProfileView setDinamicHeightBackground];
         [self checkLocationOfViewForFBLogin];
     }

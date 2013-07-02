@@ -127,6 +127,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
                                                       userInfo:[NSDictionary dictionaryWithObject:@"/BuilderVC" forKey:@"page"]];
+
 }
 
 -(void)refreshController;
