@@ -507,13 +507,10 @@ static GameCenterViewController *gameCenterViewController;
     
     if ([self.parentVC.navigationController.visibleViewController isKindOfClass:([ActiveDuelViewController class])]) {
         finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:carShotTime andOponentTime:opShotTime andTeaching:NO andAccount:playerAccount andOpAccount:oponentAccount];
-        DLog(@"GameCenterViewController: lost connection finalViewDataSource");
         if (userCanceledMatch) {
             [finalViewDataSource prepeareForLoseScene];
-            DLog(@"GameCenterViewController: lost connection prepeareForLoseScene");
         }else{
             [finalViewDataSource prepeareForWinScene];
-            DLog(@"GameCenterViewController: lost connection prepeareForWinScene");
         }
         mutchNumber = 3;
         finalViewDataSource.tryButtonEnabled = NO;
