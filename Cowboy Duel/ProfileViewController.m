@@ -794,14 +794,14 @@ if (playerAccount.accountLevel != kCountOfLevels) {
             NSLog(@"server %@ YES",playerServer.displayName);
             dispatch_async(dispatch_get_main_queue(), ^{
                 addFaforitesLb.text = NSLocalizedString(@"DISCART_FEFOR", @"");
-                addFaforitesLb.font = [UIFont fontWithName:@"DecreeNarrow" size:20];
+                addFaforitesLb.font = [UIFont fontWithName:@"DecreeNarrow" size:28];
               
             });
         }else{
             NSLog(@"server %@ NO",playerServer.displayName);
             dispatch_async(dispatch_get_main_queue(), ^{
                 addFaforitesLb.text = NSLocalizedString(@"ADD_FEFOR", @"");
-                addFaforitesLb.font = [UIFont fontWithName:@"DecreeNarrow" size:20];
+                addFaforitesLb.font = [UIFont fontWithName:@"DecreeNarrow" size:28];
                 
             });
         }

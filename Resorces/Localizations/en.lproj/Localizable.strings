@@ -161,8 +161,8 @@ p{font-family: \"Myriad Pro\", arial,sans-serif;color:4A3E25;font-size:14pt;font
 "HelpTitle" = "HELP";
 "MoreGames" = "MORE GAMES";
 "BE_READY" = "Be ready!!!";
-"ADD_FEFOR"= "Add to Favorites";
-"DISCART_FEFOR"= "Remove from Favorites";
+"ADD_FEFOR"= "ADD to Fav.";
+"DISCART_FEFOR"= "Remove from Fav.";
 
 
 //LoginAnimatedViewController
