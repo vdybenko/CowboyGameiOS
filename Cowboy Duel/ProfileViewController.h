@@ -34,7 +34,6 @@ typedef enum {
 @property (nonatomic) BOOL needAnimation;
 @property (weak, nonatomic) IBOutlet UIView *ivBlack;
 @property (weak, nonatomic) IBOutlet UILabel *addFaforitesLb;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorView;
 
 @property IBOutlet UIImageView *profilePictureViewDefault;
 
@@ -47,5 +46,5 @@ typedef enum {
 -(void)checkValidBlackActivity;
 -(void)checkLocationOfViewForFBLogin;
 - (IBAction)duelButtonClick:(id)sender;
-
+-(void)startVisualLoading;
 @end

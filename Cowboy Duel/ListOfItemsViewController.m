@@ -260,6 +260,10 @@
                      }];
     
     if (duelButtonClick) {
+        if ([oponentAccount isPlayerForPractice]) {
+            [profileViewController startVisualLoading];
+        }
+
         [profileViewController performSelector:@selector(duelButtonClick:) withObject:nil afterDelay:1.0];
     }
     profileViewController = nil;

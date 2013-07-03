@@ -189,7 +189,6 @@ static const CGFloat timeToStandartTitles = 1.8;
 
         [btnAddToFavorites setHidden:YES];
         [bgActivityIndicator setHidden:NO];
-        [activityIndicatorView startAnimating];
         
         userAtack.text = [NSString stringWithFormat:@"%d",favPlayer.dAttack];
         userAtack.hidden = NO;
@@ -862,6 +861,14 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     }];
 }
 
+-(void)startVisualLoading;
+{    
+    [bgActivityIndicator setHidden:NO];
+    [activityIndicatorView startAnimating];
+    [duelButton setEnabled:NO];
+    btnAddToFavorites.enabled = NO;
+}
+
 #pragma mark - IBAction
 
 - (IBAction)backToMenu:(id)sender {
@@ -939,6 +946,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         
         SSConnection *connection = [SSConnection sharedInstance];
         [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
+        
         return;
     }
     
@@ -959,7 +967,6 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         [self performSelector:@selector(startBotDuel) withObject:nil afterDelay:0.5];
     }
 
-    [activityIndicatorView startAnimating];
     [bgActivityIndicator setHidden:NO];
     [duelButton setEnabled:NO];
     btnAddToFavorites.enabled = NO;
@@ -1153,7 +1160,6 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 - (void)dealloc {
 }
 - (void)viewDidUnload {
-    activityIndicatorView = nil;
     bgActivityIndicator = nil;
     ivBackground = nil;
     ivPhotoFrame = nil;
@@ -1161,6 +1167,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     btnFavourites = nil;
     lbFavouritesTitle = nil;
     [self setAddFaforitesLb:nil];
+    activityIndicatorView = nil;
     [super viewDidUnload];
 }
 @end
