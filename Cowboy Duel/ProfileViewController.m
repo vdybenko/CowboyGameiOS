@@ -807,8 +807,6 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         if (playerServer.favorite) {
             NSLog(@"server %@ YES",playerServer.displayName);
             dispatch_async(dispatch_get_main_queue(), ^{
-                //[btnAddToFavorites setImage:[UIImage imageNamed:@"discartFavoritesBtn.png"] forState:UIControlStateNormal];
-                //[btnAddToFavorites setImage:[UIImage imageNamed:@"discartFavoritesBtn.png"] forState:UIControlStateDisabled];
                 addFaforitesLb.text = NSLocalizedString(@"DISCART_FEFOR", @"");
                 addFaforitesLb.font = [UIFont fontWithName:@"DecreeNarrow" size:20];
               
@@ -816,8 +814,6 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         }else{
             NSLog(@"server %@ NO",playerServer.displayName);
             dispatch_async(dispatch_get_main_queue(), ^{
-               // [btnAddToFavorites setImage:[UIImage imageNamed:@"addFavorites.png"] forState:UIControlStateNormal];
-                //[btnAddToFavorites setImage:[UIImage imageNamed:@"addFavorites.png"] forState:UIControlStateDisabled];
                 addFaforitesLb.text = NSLocalizedString(@"ADD_FEFOR", @"");
                 addFaforitesLb.font = [UIFont fontWithName:@"DecreeNarrow" size:20];
                 
