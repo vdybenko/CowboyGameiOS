@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1552</int>
-		<string key="IBDocument.SystemVersion">11G63b</string>
+		<string key="IBDocument.SystemVersion">11G63</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
 		<string key="IBDocument.AppKitVersion">1138.51</string>
 		<string key="IBDocument.HIToolboxVersion">569.00</string>
@@ -87,7 +87,7 @@
 								<string key="IBUIText">INVITE FRIENDS</string>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC4zODQzMTM3MjU1IDAuMjY2NjY2NjY2NyAwLjEzMzMzMzMzMzMAA</bytes>
+									<bytes key="NSRGB">MSAwLjkxNzY0NzA1ODggMC43NDkwMTk2MDc4AA</bytes>
 								</object>
 								<object class="NSColor" key="IBUIHighlightedColor" id="455369909">
 									<int key="NSColorSpace">3</int>
@@ -112,7 +112,6 @@
 								<string key="NSFrame">{{217, 18}, {71, 31}}</string>
 								<reference key="NSSuperview" ref="643975086"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
