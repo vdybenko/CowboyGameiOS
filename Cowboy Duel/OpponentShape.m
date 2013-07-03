@@ -260,7 +260,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     ivLifeBar.frame = frame;
 
     int x = (maxShotCount - userHitCount);
-    lbLifeLeft.text = [NSString stringWithFormat:@"%d",x];
+    lbLifeLeft.text = [NSString stringWithFormat:@"%d",3*x];
    /*
     CGAffineTransform trf0 = lbLifeLeft.transform;
     CGAffineTransform trf1 = CGAffineTransformMakeScale(1.5, 1.5);
@@ -286,7 +286,7 @@ static CGFloat oponentLiveImageViewStartWidth;
     CGRect frame = ivLifeBar.frame;
     frame.size.width = oponentLiveImageViewStartWidth;
     ivLifeBar.frame = frame;
-    lbLifeLeft.text =[NSString stringWithFormat:@"%d", lives];
+    lbLifeLeft.text =[NSString stringWithFormat:@"%d", 3*lives];
     lbLifeLeft.textAlignment = UITextAlignmentLeft;
 }
 
