@@ -269,11 +269,7 @@
 
 -(IBAction)backToMenu:(id)sender;
 {
-   
-    startViewController = [[StartViewController alloc] init];
-    [self.navigationController pushViewController:startViewController animated:YES];
-    startViewController = nil;
-  
+    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:1] animated:YES];
 }
 
 - (IBAction)inviteFriendsClick:(id)sender {
