@@ -586,6 +586,26 @@
                                                             object:self
                                                           userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"/BuilderVC_use_it_%@",stType] forKey:@"page"]];
     }else{
+        //    block by level
+        NSString *stType = [self stringForType:typeOfCharacterPart];
+        
+        CDVisualViewCharacterPart *part = [arrObjects objectAtIndex:curentObject];
+        
+        if (playerAccount.accountLevel < part.levelLock) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                                object:self
+                                                              userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"/BuilderVC_block_level_%@",stType] forKey:@"page"]];
+            return;
+        }
+        //  less money
+        if (part.money>playerAccount.money) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                                object:self
+                                                              userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"/BuilderVC_insufficiently_money_%@",stType] forKey:@"page"]];
+            return;
+        }
+
+        
         [duelProductDownloaderController buyProductID:part.dId transactionID:playerAccount.glNumber];
         
         CDTransaction *transaction = [[CDTransaction alloc] init];
@@ -671,29 +691,8 @@
     [self refreshController];
 }
 
-- (IBAction)touchBuyBtn:(id)sender{
-//    block by level
-    NSString *stType = [self stringForType:typeOfCharacterPart];
-    
-    CDVisualViewCharacterPart *part = [arrObjects objectAtIndex:curentObject];
-    
-    if (playerAccount.accountLevel < part.levelLock) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-                                                            object:self
-                                                          userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"/BuilderVC_block_level_%@",stType] forKey:@"page"]];
-        return;
-    }
-//  less money
-    if (part.money>playerAccount.money) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-                                                            object:self
-                                                          userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"/BuilderVC_insufficiently_money_%@",stType] forKey:@"page"]];
-        return;
-    }
-//    
+- (IBAction)touchBuyBtn:(id)sender{    
     [self grid:grid buyProductForIndex:curentObject forType:typeOfCharacterPart];
-    
-    
 }
 
 - (IBAction)touchFaceBtn:(id)sender {
