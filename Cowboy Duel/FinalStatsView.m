@@ -148,7 +148,7 @@ FXLabel *lblGoldPlus;
     
 
     if (finalViewDataSource.userWon) {
-
+        NSLog(@"finalViewDataSource.userWon YES");
         if ((finalViewDataSource.oldMoney<500)&&(playerAccount.money>=500)&&(playerAccount.money<1000)) {
             NSString *moneyText=[NSString stringWithFormat:@"%d",playerAccount.money];
             [self showMessageOfMoreMoney:playerAccount.money withLabel:moneyText];
@@ -170,6 +170,7 @@ FXLabel *lblGoldPlus;
     }
     else
     {
+        NSLog(@"finalViewDataSource.userWon NO");
         [self loseAnimation];
     }
 }

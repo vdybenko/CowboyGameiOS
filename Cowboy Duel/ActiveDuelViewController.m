@@ -1127,6 +1127,8 @@ static CGFloat blinkBottomOriginY;
 {
     [self stopDuel];
     
+    finalViewDataSource = fvDataSource;
+    
     self.userLiveImageView.hidden = YES;
     self.lbUserLifeLeft.hidden = YES;
     

@@ -865,6 +865,7 @@
 							<reference ref="166242608"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
+						<string key="objectName">healthLine</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">74</int>
