@@ -1801,7 +1801,7 @@ static StartViewController *sharedHelper = nil;
         NSUserDefaults *uDef = [NSUserDefaults standardUserDefaults];
         [uDef setInteger:1 forKey:@"soundCheack"];
         [uDef synchronize];
-    }
+    } 
 }
 
 -(void)playerStart
