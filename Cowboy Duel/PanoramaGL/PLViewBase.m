@@ -1127,7 +1127,6 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
         
     }
 }
-
 -(float) randFloatBetween:(float)low and:(float)high
 {
     float diff = high - low;
