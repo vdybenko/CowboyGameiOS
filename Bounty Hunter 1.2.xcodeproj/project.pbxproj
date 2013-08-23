@@ -311,6 +311,8 @@
 		760E676115BD8277006F6832 /* TopPlayersDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 760E676015BD8277006F6832 /* TopPlayersDataSource.m */; };
 		760E676515BD844B006F6832 /* TopPlayersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 760E676315BD844B006F6832 /* TopPlayersViewController.m */; };
 		760E676715BD84C6006F6832 /* TopPlayersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 760E676615BD84C6006F6832 /* TopPlayersViewController.xib */; };
+		761761A917C7A75C001D632A /* dsym_upload.sh in Resources */ = {isa = PBXBuildFile; fileRef = 761761A717C7A75C001D632A /* dsym_upload.sh */; };
+		761761B017C7AEA3001D632A /* libCrittercism_v4_0_6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 761761A817C7A75C001D632A /* libCrittercism_v4_0_6.a */; };
 		761EFA491573BDDA001670EB /* CollectionAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761EFA471573BDDA001670EB /* CollectionAppViewController.xib */; };
 		761EFA501573BE91001670EB /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761EFA4C1573BE91001670EB /* HelpViewController.xib */; };
 		761EFA511573BE91001670EB /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761EFA4D1573BE91001670EB /* ProfileViewController.xib */; };
@@ -653,7 +655,6 @@
 		BD81E651169F0F1F00CE8278 /* UIImage+Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = BD81E650169F0F1F00CE8278 /* UIImage+Sprite.m */; };
 		BD81E652169F0F1F00CE8278 /* UIImage+Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = BD81E650169F0F1F00CE8278 /* UIImage+Sprite.m */; };
 		BD81FB431678847D00417076 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD81FB421678847D00417076 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		BD822AF31663ADB300D874F4 /* libCrittercism_v3_4_0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD822AF21663ADB300D874F4 /* libCrittercism_v3_4_0.a */; };
 		BD8342A7164C0CBE00E6363B /* BEAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8342A6164C0CBE00E6363B /* BEAnimationView.m */; };
 		BD83A40A16720DFE003EE4B3 /* NSString+isNumeric.m in Sources */ = {isa = PBXBuildFile; fileRef = 765EB4EB1580E3530059355B /* NSString+isNumeric.m */; };
 		BD83A40C16720DFE003EE4B3 /* AccelerometrDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD07B3C141E1F170085E4FB /* AccelerometrDataSource.m */; };
@@ -759,7 +760,6 @@
 		BD83A47F16720DFE003EE4B3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60593A721379321800256204 /* Foundation.framework */; };
 		BD83A48016720DFE003EE4B3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60593A741379321800256204 /* CoreGraphics.framework */; };
 		BD83A48116720DFE003EE4B3 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 76947EF413ACC4EA008BD146 /* libsqlite3.0.dylib */; };
-		BD83A48316720DFE003EE4B3 /* libCrittercism_v3_4_0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD822AF21663ADB300D874F4 /* libCrittercism_v3_4_0.a */; };
 		BD83A48516720DFE003EE4B3 /* Back1cycled.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6041D9B513A7BFBF0047A128 /* Back1cycled.mp3 */; };
 		BD83A48616720DFE003EE4B3 /* Back1start.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6041D9B613A7BFBF0047A128 /* Back1start.mp3 */; };
 		BD83A48716720DFE003EE4B3 /* Back2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6041D9B713A7BFBF0047A128 /* Back2.mp3 */; };
@@ -1348,6 +1348,11 @@
 		760E676315BD844B006F6832 /* TopPlayersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopPlayersViewController.m; sourceTree = "<group>"; };
 		760E676415BD844B006F6832 /* TopPlayersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopPlayersViewController.h; sourceTree = "<group>"; };
 		760E676615BD84C6006F6832 /* TopPlayersViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TopPlayersViewController.xib; path = Xib/TopPlayersViewController.xib; sourceTree = "<group>"; };
+		761761A417C7A75C001D632A /* CRFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRFilter.h; sourceTree = "<group>"; };
+		761761A517C7A75C001D632A /* Crittercism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crittercism.h; sourceTree = "<group>"; };
+		761761A617C7A75C001D632A /* CrittercismDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrittercismDelegate.h; sourceTree = "<group>"; };
+		761761A717C7A75C001D632A /* dsym_upload.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = dsym_upload.sh; sourceTree = "<group>"; };
+		761761A817C7A75C001D632A /* libCrittercism_v4_0_6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCrittercism_v4_0_6.a; path = CrittercismSDK/libCrittercism_v4_0_6.a; sourceTree = "<group>"; };
 		761EFA471573BDDA001670EB /* CollectionAppViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CollectionAppViewController.xib; path = Xib/CollectionAppViewController.xib; sourceTree = "<group>"; };
 		761EFA4C1573BE91001670EB /* HelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HelpViewController.xib; path = Xib/HelpViewController.xib; sourceTree = "<group>"; };
 		761EFA4D1573BE91001670EB /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProfileViewController.xib; path = Xib/ProfileViewController.xib; sourceTree = "<group>"; };
@@ -1387,7 +1392,6 @@
 		767A010A158B0BF0003C08D5 /* AdvertisingAppearController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertisingAppearController.m; sourceTree = "<group>"; };
 		767B56CD15AEDE2F00ECA0C4 /* CustomNSURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CustomNSURLConnection.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		767B56CE15AEDE2F00ECA0C4 /* CustomNSURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNSURLConnection.m; sourceTree = "<group>"; };
-		767C0B1415652C9C0007E113 /* Crittercism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crittercism.h; sourceTree = "<group>"; };
 		767CD1E2158F212A0054C9B8 /* UIImage+Save.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Save.h"; sourceTree = "<group>"; };
 		767CD1E3158F212B0054C9B8 /* UIImage+Save.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Save.m"; sourceTree = "<group>"; };
 		767E1F71154BFBAF001FDDD5 /* OCPromptView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCPromptView.m; sourceTree = "<group>"; };
@@ -1826,7 +1830,6 @@
 		BD81E64F169F0F1F00CE8278 /* UIImage+Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Sprite.h"; sourceTree = "<group>"; };
 		BD81E650169F0F1F00CE8278 /* UIImage+Sprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Sprite.m"; sourceTree = "<group>"; };
 		BD81FB421678847D00417076 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
-		BD822AF21663ADB300D874F4 /* libCrittercism_v3_4_0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCrittercism_v3_4_0.a; path = CrittercismSDK/libCrittercism_v3_4_0.a; sourceTree = "<group>"; };
 		BD8342A5164C0CBE00E6363B /* BEAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEAnimationView.h; sourceTree = "<group>"; };
 		BD8342A6164C0CBE00E6363B /* BEAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEAnimationView.m; sourceTree = "<group>"; };
 		BD83A3D41671E721003EE4B3 /* Test-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Test-Info.plist"; sourceTree = "<group>"; };
@@ -1988,9 +1991,9 @@
 				60593A731379321800256204 /* Foundation.framework in Frameworks */,
 				60593A751379321800256204 /* CoreGraphics.framework in Frameworks */,
 				313F4E78165CFE7B007EF4B1 /* libsqlite3.0.dylib in Frameworks */,
-				BD822AF31663ADB300D874F4 /* libCrittercism_v3_4_0.a in Frameworks */,
 				BD3851F7169C3BE70066419B /* FacebookSDK.framework in Frameworks */,
 				7606C21E16C396D700B5EEB7 /* libGoogleAnalytics.a in Frameworks */,
+				761761B017C7AEA3001D632A /* libCrittercism_v4_0_6.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2029,7 +2032,6 @@
 				BD83A47F16720DFE003EE4B3 /* Foundation.framework in Frameworks */,
 				BD83A48016720DFE003EE4B3 /* CoreGraphics.framework in Frameworks */,
 				BD83A48116720DFE003EE4B3 /* libsqlite3.0.dylib in Frameworks */,
-				BD83A48316720DFE003EE4B3 /* libCrittercism_v3_4_0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2597,12 +2599,12 @@
 		60593A611379321700256204 = {
 			isa = PBXGroup;
 			children = (
+				761761A317C7A75C001D632A /* CrittercismSDK */,
 				BD4186C51744FA460004AB50 /* GBDeviceInfo-master */,
 				BD0DA0FD16D37D3C00419DC1 /* OpenGLES.framework */,
 				BD38523D169C3F420066419B /* DeprecatedHeaders */,
 				763F8A281578A3A900D8BB42 /* libxml2.2.dylib */,
 				313F4E71165CFDBC007EF4B1 /* GoogleAnalytics */,
-				767C0B1215652C9C0007E113 /* CrittercismSDK */,
 				76A0FE7A147AAED0008D9DCA /* revision.h */,
 				BDD07B3A141E1F170085E4FB /* Cowboy Duel */,
 				60563F5C1397B88800BADD57 /* Resorces */,
@@ -2625,6 +2627,7 @@
 		60593A6F1379321700256204 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				761761A817C7A75C001D632A /* libCrittercism_v4_0_6.a */,
 				7690DD9F16C0212300731B51 /* DeprecatedHeaders */,
 				BD68C49916A705D200A9B52A /* CoreMotion.framework */,
 				BD3851F6169C3BE70066419B /* FacebookSDK.framework */,
@@ -2635,7 +2638,6 @@
 				BDD8E24D163EF42F004F05A9 /* AdSupport.framework */,
 				BDD8E229163EEE2E004F05A9 /* CoreData.framework */,
 				767EF48215D5557100548A04 /* Twitter.framework */,
-				BD822AF21663ADB300D874F4 /* libCrittercism_v3_4_0.a */,
 				038366DE154925A100F3F63B /* CoreTelephony.framework */,
 				038366DC1549257700F3F63B /* MediaPlayer.framework */,
 				BD84E2AA147CDE9D009DCEBF /* CoreText.framework */,
@@ -2690,6 +2692,17 @@
 			name = "Duel Shapes";
 			sourceTree = "<group>";
 		};
+		761761A317C7A75C001D632A /* CrittercismSDK */ = {
+			isa = PBXGroup;
+			children = (
+				761761A417C7A75C001D632A /* CRFilter.h */,
+				761761A517C7A75C001D632A /* Crittercism.h */,
+				761761A617C7A75C001D632A /* CrittercismDelegate.h */,
+				761761A717C7A75C001D632A /* dsym_upload.sh */,
+			);
+			path = CrittercismSDK;
+			sourceTree = "<group>";
+		};
 		763BF411165694CD00D5C49C /* Store */ = {
 			isa = PBXGroup;
 			children = (
@@ -2729,14 +2742,6 @@
 				7679D8C31563949E00BDE3A6 /* RefreshContentDataController.m */,
 			);
 			path = RefreshContent;
-			sourceTree = "<group>";
-		};
-		767C0B1215652C9C0007E113 /* CrittercismSDK */ = {
-			isa = PBXGroup;
-			children = (
-				767C0B1415652C9C0007E113 /* Crittercism.h */,
-			);
-			path = CrittercismSDK;
 			sourceTree = "<group>";
 		};
 		767FEF26156A5AF70016B415 /* PlayersOnLineDataSource */ = {
@@ -4198,6 +4203,7 @@
 				C44524A31781A9C900BB0C60 /* discartFavoritesBtn.png in Resources */,
 				C48FA4221782F845006B10C2 /* builderHomeBtn.png in Resources */,
 				C48FA427178303E5006B10C2 /* profileIcoBuilder.png in Resources */,
+				761761A917C7A75C001D632A /* dsym_upload.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4842,11 +4848,9 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
 					"\"$(SRCROOT)/Cowboy Duel\"",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/CrittercismSDK\"",
 					"\"$(SRCROOT)/Cowboy Duel/AdColony/Library\"",
-					"\"$(SRCROOT)\"/**",
 					"\"$(SRCROOT)/../../../../FacebookSDK/FacebookSDK.framework\"",
+					"\"$(SRCROOT)/CrittercismSDK\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -4940,11 +4944,9 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
 					"\"$(SRCROOT)/Cowboy Duel\"",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/CrittercismSDK\"",
 					"\"$(SRCROOT)/Cowboy Duel/AdColony/Library\"",
-					"\"$(SRCROOT)\"/**",
 					"\"$(SRCROOT)/../../../../FacebookSDK/FacebookSDK.framework\"",
+					"\"$(SRCROOT)/CrittercismSDK\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -5235,11 +5237,9 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
 					"\"$(SRCROOT)/Cowboy Duel\"",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/CrittercismSDK\"",
 					"\"$(SRCROOT)/Cowboy Duel/AdColony/Library\"",
-					"\"$(SRCROOT)\"/**",
 					"\"$(SRCROOT)/../../../../FacebookSDK/FacebookSDK.framework\"",
+					"\"$(SRCROOT)/CrittercismSDK\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (

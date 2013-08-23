@@ -27,8 +27,7 @@ static NSString *kGAAccountID = @"UA-24007807-3";
 static NSString *kGAAccountID = @"UA-38210757-1";
 #endif
 NSString  *const ID_CRIT_APP   = @"4fb4f482c471a10fc5000092";
-NSString  *const ID_CRIT_KEY   = @"stjyktz620mziyf5rhi89ncaorab";
-NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
+NSString  *const ID_CRIT_KEY   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 
 
 @interface TestAppDelegate()
@@ -67,6 +66,8 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(AnalyticsTrackEvent:)
 												 name:kAnalyticsTrackEventNotification object:nil];
+    
+    [Crittercism enableWithAppID:@"4fb4f482c471a10fc5000092"];
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     
