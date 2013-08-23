@@ -23,7 +23,6 @@
 static const NSInteger kGANDispatchPeriod = 60;
 #ifdef DEBUG
 static NSString *kGAAccountID = @"UA-24007807-3";
-
 #else
 static NSString *kGAAccountID = @"UA-38210757-1";
 #endif
@@ -57,10 +56,13 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 {
     [UIImage initialize];
     
+    DLog(@"kGAAccountID %@",kGAAccountID)
+    
     [GAI sharedInstance].trackUncaughtExceptions = YES;
     [GAI sharedInstance].dispatchInterval = 20;
     [GAI sharedInstance].debug = NO;
     tracker = [[GAI sharedInstance] trackerWithTrackingId:kGAAccountID];
+    tracker.sessionStart = YES;
 	
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(AnalyticsTrackEvent:)
@@ -72,6 +74,11 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
   
 //    loginViewController = [LoginAnimatedViewController sharedInstance];
 //    navigationController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+    
+//    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+//                                                        object:self
+//                                                      userInfo:[NSDictionary dictionaryWithObject:@"/TestAppDelegate" forKey:@"page"]];
+    
     LoadViewController *loadViewController;
     
     loadViewController= [[LoadViewController alloc] initWithPush:launchOptions];
@@ -124,10 +131,6 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     //Sleep off
     application.idleTimerDisabled = YES;
     application.applicationIconBadgeNumber = 0;
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-                                                        object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"/TestAppDelegate" forKey:@"page"]];
     
     return YES;
 }
