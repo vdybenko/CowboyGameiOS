@@ -21,11 +21,11 @@
 #define kFacebookSettingsButtonIndex 1
 
 static const NSInteger kGANDispatchPeriod = 60;
-#ifdef DEBUG
-static NSString *kGAAccountID = @"UA-24007807-3";
-#else
+//#ifdef DEBUG
+//static NSString *kGAAccountID = @"UA-24007807-3";
+//#else
 static NSString *kGAAccountID = @"UA-38210757-1";
-#endif
+//#endif
 NSString  *const ID_CRIT_APP   = @"4fb4f482c471a10fc5000092";
 NSString  *const ID_CRIT_KEY   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 
@@ -40,6 +40,8 @@ NSString  *const ID_CRIT_KEY   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     AccountDataSource *playerAccount;
     
     id<GAITracker> tracker;
+    
+    NSString *stSavePageAnalytics;
 }
 @property (nonatomic, strong) id<FBGraphUser> facebookUser;
 
@@ -414,6 +416,16 @@ NSString  *const ID_CRIT_KEY   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 #pragma mark GATrackEvent
 - (void)AnalyticsTrackEvent:(NSNotification *)notification {
 	NSString *page = [[notification userInfo] objectForKey:@"page"];
+    if([page isEqualToString:@"BecomeActive"]){
+        if(stSavePageAnalytics==nil || [stSavePageAnalytics isEqualToString:@""]){
+            return;
+        }else{
+            page = stSavePageAnalytics;
+        }
+    }else{
+        stSavePageAnalytics = page;
+    }
+        
     NSInteger demention = [[[notification userInfo] objectForKey:@"demention"] intValue];
     NSString *value = [[notification userInfo] objectForKey:@"value"];
 	if (page){
