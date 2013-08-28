@@ -12,7 +12,7 @@
 #import "LoginAnimatedViewController.h"
 #import "ListOfItemsViewController.h"
 
-#import "Crittercism.h"
+#import <Crashlytics/Crashlytics.h>
 #import "StartViewController.h"
 #import "AccountDataSource.h"
 
@@ -59,7 +59,9 @@ NSString  *const ID_CRIT_KEY   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     
     DLog(@"kGAAccountID %@",kGAAccountID)
     
-    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    [Crashlytics startWithAPIKey:@"197ce14e2bf08d73cb38940d1aa1cf371c117454"];
+//
+    [GAI sharedInstance].trackUncaughtExceptions = NO;
     [GAI sharedInstance].dispatchInterval = 20;
     [GAI sharedInstance].debug = NO;
     tracker = [[GAI sharedInstance] trackerWithTrackingId:kGAAccountID];
@@ -69,9 +71,12 @@ NSString  *const ID_CRIT_KEY   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
                                              selector:@selector(AnalyticsTrackEvent:)
 												 name:kAnalyticsTrackEventNotification object:nil];
     
-    [Crittercism enableWithAppID:@"4fb4f482c471a10fc5000092"];
+    
+//    [self performSelector:@selector(exdeption) withObject:Nil afterDelay:3.0];
+
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    
     
     application.statusBarOrientation = UIInterfaceOrientationPortrait;
   
@@ -136,6 +141,12 @@ NSString  *const ID_CRIT_KEY   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     application.applicationIconBadgeNumber = 0;
     
     return YES;
+}
+
+-(void)exdeption
+{
+    [NSException raise:NSInvalidArgumentException
+                format:@"Foo must not be nil5"];
 }
 
 //use the app id provided by adcolony.com
@@ -438,6 +449,7 @@ NSString  *const ID_CRIT_KEY   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
         }else{
             DLog(@"GA page error %@",page);
         }
+        [Crashlytics setObjectValue:page forKey:@"page"];
 	}
 	[[GAI sharedInstance] dispatch];
 }

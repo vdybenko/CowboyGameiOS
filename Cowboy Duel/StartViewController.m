@@ -31,6 +31,9 @@
 #import "FunPageViewController.h"
 #import "ActiveDuelViewController.h"
 #import "BuilderViewController.h"
+
+//#import "Crittercism.h"
+
 #define kTwitterSettingsButtonIndex 0
 
 @interface StartViewController ()
@@ -765,7 +768,7 @@ static StartViewController *sharedHelper = nil;
     transition.subtype = kCATransitionFromBottom;
     [self.navigationController.view.layer addAnimation:transition forKey:nil];
     [self.navigationController pushViewController:helpViewController animated:NO];
-    helpViewController = nil;
+    helpViewController = nil;    
 }
 
 -(void) advertButtonClick {
