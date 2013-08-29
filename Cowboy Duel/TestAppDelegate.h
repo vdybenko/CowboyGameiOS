@@ -10,9 +10,9 @@
 #import "LoadViewController.h"
 #import "LoginAnimatedViewController.h"
 #import "AccountDataSource.h"
+#import <Crashlytics/Crashlytics.h>
 
-
-@interface TestAppDelegate :  UIResponder <UIApplicationDelegate>
+@interface TestAppDelegate :  UIResponder <UIApplicationDelegate,CrashlyticsDelegate>
 @property (nonatomic, readonly) UINavigationController *navigationController;
 @property  (strong) LoginAnimatedViewController *loginViewController;
 @property (strong, nonatomic) IBOutlet UIImageView *clouds;

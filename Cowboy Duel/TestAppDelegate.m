@@ -12,7 +12,6 @@
 #import "LoginAnimatedViewController.h"
 #import "ListOfItemsViewController.h"
 
-#import <Crashlytics/Crashlytics.h>
 #import "StartViewController.h"
 #import "AccountDataSource.h"
 
@@ -59,7 +58,7 @@ NSString  *const ID_CRIT_KEY   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     
     DLog(@"kGAAccountID %@",kGAAccountID)
     
-    [Crashlytics startWithAPIKey:@"197ce14e2bf08d73cb38940d1aa1cf371c117454"];
+    [Crashlytics startWithAPIKey:@"197ce14e2bf08d73cb38940d1aa1cf371c117454" delegate:self];
 //
     [GAI sharedInstance].trackUncaughtExceptions = NO;
     [GAI sharedInstance].dispatchInterval = 20;
@@ -452,6 +451,16 @@ NSString  *const ID_CRIT_KEY   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
         [Crashlytics setObjectValue:page forKey:@"page"];
 	}
 	[[GAI sharedInstance] dispatch];
+}
+#pragma mark Crashlytics
+
+- (void)crashlyticsDidDetectCrashDuringPreviousExecution:(Crashlytics *)crashlytics;
+{
+    DLog(@"crashlyticsDidDetectCrashDuringPreviousExecution");
+}
+- (void)crashlytics:(Crashlytics *)crashlytics didDetectCrashDuringPreviousExecution:(id <CLSCrashReport>)crash;
+{
+    DLog(@"didDetectCrashDuringPreviousExecution");
 }
 
 #pragma mark AlertViewDelegate
