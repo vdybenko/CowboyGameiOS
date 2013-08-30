@@ -544,7 +544,9 @@ static CGFloat blinkBottomOriginY;
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [self readyToStart];
+    if (!tryAgain) {
+        [self readyToStart];
+    }
     
     NSString *st=@"/ActiveDuelVC";
     if ( [LoginAnimatedViewController sharedInstance].isDemoPractice == YES){
@@ -1056,6 +1058,16 @@ static CGFloat blinkBottomOriginY;
     [self.gunButton setEnabled:NO];
 }
 
+-(void)stopDuelWithBlock;
+{
+    [plView stopSensorialRotationWithBlock];
+    [plView stopAnimation];
+    [timer invalidate];
+    [moveTimer invalidate];
+    [self.gunButton setEnabled:NO];
+
+}
+
 -(void)userLost
 {
     if (duelEnd) return;
@@ -1524,13 +1536,13 @@ float frequencyOpponentShoting()
         
         if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
             [nav popToViewController:[nav.viewControllers objectAtIndex:2] animated:YES];
-        }
-        else{
+        }else{
             [nav popToViewController:[nav.viewControllers objectAtIndex:1] animated:YES];
         }
-        
         [self releaseComponents];
     }
+    
+    [self stopDuelWithBlock];
     
     GameCenterViewController *gameCenterViewController;
     if (self.delegate){

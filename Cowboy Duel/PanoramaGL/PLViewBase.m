@@ -46,8 +46,11 @@ static UIAccelerationValue rollingZ = 0.0;
     mat4f_t cameraTransform;
     vec4f_t *oponentCoordinates;
     NSArray *oponentCoordinateViews;
+    NSArray *arrTest;
     CLLocation *location;
     float startX;
+    
+    BOOL isSensorialRotationBlocking;
 }
 -(void)doGyroUpdate;
 -(void)doSimulatedGyroUpdate;
@@ -145,6 +148,7 @@ static UIAccelerationValue rollingZ = 0.0;
     inertiaInterval = kDefaultInertiaInterval;
     
     isValidForTouch = NO;
+    isSensorialRotationBlocking = NO;
     
     isResetEnabled = isShakeResetEnabled = YES;
     numberOfTouchesForReset = kDefaultNumberOfTouchesForReset;
@@ -207,6 +211,7 @@ static UIAccelerationValue rollingZ = 0.0;
     //    }
     
     oponentCoordinateViews = pois;
+    arrTest = oponentCoordinateViews;
     pois = nil;
     [self updateOponentCoordinates];
 }
@@ -1061,7 +1066,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 
 -(void)startSensorialRotation
 {
-    if(!isSensorialRotationRunning)
+    if(!isSensorialRotationRunning && !isSensorialRotationBlocking)
     {
         startX = 0;
         float randomX = [self randFloatBetween:0.5 and:3.5];
@@ -1070,7 +1075,6 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
         
         // Tell CoreMotion to show the compass calibration HUD when required to provide true north-referenced attitude
         motionManager.showsDeviceMovementDisplay = NO;
-        
         
         motionManager.deviceMotionUpdateInterval = 4.0 / 60.0;
         motionManager.accelerometerUpdateInterval = 4.0 / 60.0;
@@ -1096,6 +1100,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
              CMRotationMatrix r = motion.attitude.rotationMatrix;
              transformFromCMRotationMatrix(cameraTransform, &r);
              
+             DLog(@"count %d",[arrTest count]);
              
              for (OponentCoordinateView *oponentView in oponentCoordinateViews) {
                  mat4f_t projectionCameraTransform;
@@ -1285,6 +1290,12 @@ void multiplyMatrixAndMatrix(mat4f_t c, const mat4f_t a, const mat4f_t b)
             locationManager = nil;
         }
     }
+}
+
+-(void)stopSensorialRotationWithBlock
+{
+    [self stopSensorialRotation];
+    isSensorialRotationBlocking = YES;
 }
 
 #pragma mark -

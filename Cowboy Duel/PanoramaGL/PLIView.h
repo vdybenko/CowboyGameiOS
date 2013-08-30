@@ -121,6 +121,7 @@
 
 -(void)startSensorialRotation;
 -(void)stopSensorialRotation;
+-(void)stopSensorialRotationWithBlock;
 
 #pragma mark -
 #pragma mark transition methods
