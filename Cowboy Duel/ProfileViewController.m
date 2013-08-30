@@ -24,6 +24,7 @@
 #import "UIView+Dinamic_BackGround.h"
 #import "VisualViewCharacterViewController.h"
 #import "BuilderViewController.h"
+#import "NSString+isNumeric.h"
 
 static const CGFloat changeYPointWhenKeyboard = 155;
 static const CGFloat timeToStandartTitles = 1.8;
@@ -1036,6 +1037,8 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     }
 
 - (IBAction)btnAddToFavoritesClick:(id)sender {
+    if(playerAccount.accountID==Nil || [playerAccount.accountID length]==0 || playerAccount.accountID.isAllDigits){return;}
+    
     bgActivityIndicator.hidden = NO;
     
     btnAddToFavorites.enabled = NO;
@@ -1155,7 +1158,6 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     profilePictureViewDefault.image = iconDownloader.imageDownloaded;
     profilePictureViewDefault.hidden = NO;
 }
-
 #pragma mark -
 - (void)dealloc {
 }
