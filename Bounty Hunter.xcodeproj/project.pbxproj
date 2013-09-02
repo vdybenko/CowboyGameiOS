@@ -336,6 +336,7 @@
 		768B0E9F16EE125600D7EB99 /* blood_c.png in Resources */ = {isa = PBXBuildFile; fileRef = 768B0E9D16EE125600D7EB99 /* blood_c.png */; };
 		768B0EA616EE1F7000D7EB99 /* menLowDie.png in Resources */ = {isa = PBXBuildFile; fileRef = 768B0EA416EE1F7000D7EB99 /* menLowDie.png */; };
 		768B0EA716EE1F7000D7EB99 /* menLowDie@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 768B0EA516EE1F7000D7EB99 /* menLowDie@2x.png */; };
+		768B668917D46BE600A6AECE /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 768B668817D46BE600A6AECE /* Crashlytics.framework */; };
 		768B9E2D16EF24C200278FCA /* woman.png in Resources */ = {isa = PBXBuildFile; fileRef = 768B9E2B16EF24C200278FCA /* woman.png */; };
 		768B9E2E16EF24C200278FCA /* woman@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 768B9E2C16EF24C200278FCA /* woman@2x.png */; };
 		768B9E3016EF28D200278FCA /* WomanShape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 768B9E2F16EF28D200278FCA /* WomanShape.xib */; };
@@ -1232,6 +1233,7 @@
 		768B0E9D16EE125600D7EB99 /* blood_c.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blood_c.png; sourceTree = "<group>"; };
 		768B0EA416EE1F7000D7EB99 /* menLowDie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menLowDie.png; sourceTree = "<group>"; };
 		768B0EA516EE1F7000D7EB99 /* menLowDie@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menLowDie@2x.png"; sourceTree = "<group>"; };
+		768B668817D46BE600A6AECE /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		768B9E2B16EF24C200278FCA /* woman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = woman.png; sourceTree = "<group>"; };
 		768B9E2C16EF24C200278FCA /* woman@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "woman@2x.png"; sourceTree = "<group>"; };
 		768B9E2F16EF28D200278FCA /* WomanShape.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WomanShape.xib; path = Xib/WomanShape.xib; sourceTree = "<group>"; };
@@ -1671,6 +1673,7 @@
 				BD822AF31663ADB300D874F4 /* libCrittercism_v3_4_0.a in Frameworks */,
 				BD3851F7169C3BE70066419B /* FacebookSDK.framework in Frameworks */,
 				7606C21E16C396D700B5EEB7 /* libGoogleAnalytics.a in Frameworks */,
+				768B668917D46BE600A6AECE /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2163,6 +2166,7 @@
 		60593A6F1379321700256204 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				768B668817D46BE600A6AECE /* Crashlytics.framework */,
 				7690DD9F16C0212300731B51 /* DeprecatedHeaders */,
 				BD68C49916A705D200A9B52A /* CoreMotion.framework */,
 				BD3851F6169C3BE70066419B /* FacebookSDK.framework */,
@@ -3605,7 +3609,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/sh\n#\n# Script to copy saved UI test images to the product. Needs to be run as\n# part of the build process.\n#\n# Created by John Boiles on 10/19/10.\n\nUI_TEST_IMAGES_DIR=\"$PWD/Resorces/Images\"\n\nif [ \"$(ls -A $UI_TEST_IMAGES_DIR)\" ]; then\necho \"Copying images from $UI_TEST_IMAGES_DIR to $TARGET_BUILD_DIR/$PRODUCT_NAME.app\"\ncp -vr \"$UI_TEST_IMAGES_DIR\"/*/*.png \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/\"\n                            else\n                            echo \"No test images found in $UI_TEST_IMAGES_DIR\"\n                            fi\n\n";
+			shellScript = "#!/bin/sh\n#\n# Script to copy saved UI test images to the product. Needs to be run as\n# part of the build process.\n#\n# Created by John Boiles on 10/19/10.\n\nUI_TEST_IMAGES_DIR=\"$PWD/Resorces/Images\"\n\nif [ \"$(ls -A $UI_TEST_IMAGES_DIR)\" ]; then\necho \"Copying images from $UI_TEST_IMAGES_DIR to $TARGET_BUILD_DIR/$PRODUCT_NAME.app\"\ncp -vr \"$UI_TEST_IMAGES_DIR\"/*/*.png \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/\"\n                            else\n                            echo \"No test images found in $UI_TEST_IMAGES_DIR\"\n                            fi*/\n\n./Crashlytics.framework/run 197ce14e2bf08d73cb38940d1aa1cf371c117454\n\n";
 		};
 		BD83A5B0167224D4003EE4B3 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
