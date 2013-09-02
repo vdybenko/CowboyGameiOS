@@ -427,21 +427,18 @@ NSString  *const ID_CRIT_KEY   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 - (void)AnalyticsTrackEvent:(NSNotification *)notification {
 	NSString *page = [[notification userInfo] objectForKey:@"page"];
     if([page isEqualToString:@"BecomeActive"]){
-        if(stSavePageAnalytics==nil || [stSavePageAnalytics isEqualToString:@""]){
-            return;
-        }else{
-            page = stSavePageAnalytics;
-        }
+        [self setAnalyticsPage:page];
+        [self setAnalyticsPage:stSavePageAnalytics];
     }else{
         stSavePageAnalytics = page;
+        [self setAnalyticsPage:page];
     }
-        
-    NSInteger demention = [[[notification userInfo] objectForKey:@"demention"] intValue];
-    NSString *value = [[notification userInfo] objectForKey:@"value"];
-	if (page){
-        if (demention && value) {
-            [tracker setCustom:demention dimension:value];
-        }
+	[[GAI sharedInstance] dispatch];
+}
+
+-(void)setAnalyticsPage:(NSString*)page
+{
+    if (page){
         BOOL result = [tracker sendView:page];
         if (result) {
             DLog(@"GA page send %@",page);
@@ -450,7 +447,6 @@ NSString  *const ID_CRIT_KEY   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
         }
         [Crashlytics setObjectValue:page forKey:@"page"];
 	}
-	[[GAI sharedInstance] dispatch];
 }
 #pragma mark Crashlytics
 
