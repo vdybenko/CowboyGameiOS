@@ -427,8 +427,10 @@ NSString  *const ID_CRIT_KEY   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 - (void)AnalyticsTrackEvent:(NSNotification *)notification {
 	NSString *page = [[notification userInfo] objectForKey:@"page"];
     if([page isEqualToString:@"BecomeActive"]){
-        [self setAnalyticsPage:page];
-        [self setAnalyticsPage:stSavePageAnalytics];
+        if([stSavePageAnalytics length]!=0){
+            [self setAnalyticsPage:page];
+            [self setAnalyticsPage:stSavePageAnalytics];
+        }
     }else{
         stSavePageAnalytics = page;
         [self setAnalyticsPage:page];
