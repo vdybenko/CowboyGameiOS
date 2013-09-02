@@ -128,8 +128,11 @@ NSString  *const ID_CRIT_KEY   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     
     DLog(@"FBAccessTokenKey %@", [defaults objectForKey:@"FBAccessTokenKey"]);
     
+    NSArray *permissions =
+    [NSArray arrayWithObjects:@"email", nil];
+    
     if([[OGHelper sharedInstance] isAuthorized]){
-        [self openSessionWithAllowLoginUI:YES];
+        [self openSessionWithPermission:permissions];
     }
     
     // Let the device know we want to receive push notifications
