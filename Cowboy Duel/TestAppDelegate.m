@@ -145,12 +145,6 @@ NSString  *const ID_CRIT_KEY   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     return YES;
 }
 
--(void)exdeption
-{
-    [NSException raise:NSInvalidArgumentException
-                format:@"Foo must not be nil5"];
-}
-
 //use the app id provided by adcolony.com
 -(NSString*)adColonyApplicationID {
 	return @"app5f45da50def349ce844dff";
@@ -193,27 +187,35 @@ NSString  *const ID_CRIT_KEY   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 - (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI {
     NSArray *permissions =
     [NSArray arrayWithObjects:@"email", nil];
+    
+    BOOL isFBAccount = NO;
+    BOOL isFBApp = NO;
+    
     float ver_float = [[[UIDevice currentDevice] systemVersion] floatValue];
     if (ver_float >= 6.0) {
         ACAccountStore *accountStore = [[ACAccountStore alloc] init];
         ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-        if (![accountStore accountsWithAccountType:accountType]){
-//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry", @"AlertView")
-//                                                                message:NSLocalizedString(@"You can't connnect to Facebook right now, make sure  your device has an internet connection and you have at least one Facebook account setup. Go to Settings -> Facebook and set up it.", @"AlertView")
-//                                                               delegate:self
-//                                                      cancelButtonTitle:NSLocalizedString(@"Cancel", @"AlertView")
-//                                                      otherButtonTitles: nil];
-//            alertView.tag = 1;
-//            [alertView show];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-                                                                object:self
-                                                              userInfo:[NSDictionary dictionaryWithObject:@"/TestAppDelegate_login_FB_no_account" forKey:@"page"]];
-            
-            //return NO;
+        if ([accountStore accountsWithAccountType:accountType]){
+            isFBAccount = YES;
         }
     }
 
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb://"]]) {
+        isFBApp = YES;
+    }
+    NSString *stResualt;
+    if(isFBAccount){
+        stResualt = @"/Login_via_Native";
+    }else if (isFBApp){
+        stResualt = @"/Login_via_App";
+    }else{
+        stResualt = @"/Login_via_Safari";
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:stResualt forKey:@"page"]];
+    
     [self openSessionWithPermission:permissions];
     return YES;
 }
@@ -429,7 +431,7 @@ NSString  *const ID_CRIT_KEY   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 #pragma mark GATrackEvent
 - (void)AnalyticsTrackEvent:(NSNotification *)notification {
 	NSString *page = [[notification userInfo] objectForKey:@"page"];
-    if([page isEqualToString:@"BecomeActive"]){
+    if([page isEqualToString:@"/BecomeActive"]){
         if([stSavePageAnalytics length]!=0){
             [self setAnalyticsPage:page];
             [self setAnalyticsPage:stSavePageAnalytics];

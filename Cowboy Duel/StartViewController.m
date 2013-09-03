@@ -606,7 +606,7 @@ static StartViewController *sharedHelper = nil;
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"BecomeActive" forKey:@"page"]];
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/BecomeActive" forKey:@"page"]];
 }
 
 -(void)didEnterBackground
