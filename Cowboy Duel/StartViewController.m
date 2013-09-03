@@ -697,7 +697,7 @@ static StartViewController *sharedHelper = nil;
 {
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"FirstRun_v2.2"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    animationCheck = NO;
+    //animationCheck = NO;
     
     cloudX=460;
     cloud2X=-20;
@@ -1640,7 +1640,7 @@ static StartViewController *sharedHelper = nil;
 {
     if (![[OGHelper sharedInstance] isAuthorized]) {
         firstRunLocal = NO;
-        animationCheck = NO;
+        //animationCheck = NO;
         //LoginAnimatedViewController *loginViewControllerLocal =[LoginAnimatedViewController sharedInstance];
         //[self.navigationController pushViewController:loginViewControllerLocal animated:YES];
         //loginViewControllerLocal = nil;
