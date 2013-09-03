@@ -65,17 +65,13 @@ NSString  *const ID_CRIT_KEY   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     [GAI sharedInstance].debug = NO;
     tracker = [[GAI sharedInstance] trackerWithTrackingId:kGAAccountID];
     tracker.sessionStart = YES;
+    [tracker setSessionTimeout:60];
 	
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(AnalyticsTrackEvent:)
 												 name:kAnalyticsTrackEventNotification object:nil];
     
-    
-//    [self performSelector:@selector(exdeption) withObject:Nil afterDelay:3.0];
-
-    
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
-    
     
     application.statusBarOrientation = UIInterfaceOrientationPortrait;
   
