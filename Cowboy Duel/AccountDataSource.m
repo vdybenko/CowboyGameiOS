@@ -36,6 +36,7 @@ static const char *LIST_BOTS_URL = BASE_URL"users/get_user_data";
 @synthesize visualViewGuns;
 @synthesize visualViewSuits;
 @synthesize arrayOfBoughtProducts;
+@synthesize defaultName;
 #pragma mark
 
 static AccountDataSource *sharedHelper = nil;
@@ -54,7 +55,8 @@ static AccountDataSource *sharedHelper = nil;
 {
     self = [super init];
     if (self) {
-        self.accountName=@"Anonymous";
+        defaultName = @"Anonymous";
+        self.accountName=defaultName;
         money = 200;
         teachingTimes = [[NSMutableArray alloc] init];
         finalInfoTable = [[NSMutableArray alloc] init];

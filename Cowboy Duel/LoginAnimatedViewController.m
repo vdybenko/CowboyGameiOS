@@ -291,8 +291,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
 #pragma mark FConnect Methods
 
 - (void)request:(FBRequest *)request didLoad:(id)result {
-	
-    
 	if ([result isKindOfClass:[NSDictionary class]]) {
         [StartViewController sharedInstance].oldAccounId = [[NSString alloc] initWithFormat:@"%@",playerAccount.accountID];
         
