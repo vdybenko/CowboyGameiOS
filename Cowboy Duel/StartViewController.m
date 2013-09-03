@@ -408,7 +408,7 @@ static StartViewController *sharedHelper = nil;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSInteger loginFirstShow = [userDefaults integerForKey:@"loginFirstShow"];
     
-    if (!loginFirstShow) {
+    /*if (!loginFirstShow) {
         SSConnection *connection = [SSConnection sharedInstance];
         [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
         
@@ -416,7 +416,7 @@ static StartViewController *sharedHelper = nil;
         [loginViewControllerLocal setPayment:YES];
         [self.navigationController pushViewController:loginViewControllerLocal animated:YES];
         loginViewControllerLocal = nil;
-    }
+    }*/
 
     if (self.soundCheack )
         [soundButton setImage:[UIImage imageNamed:@"pv_btn_music_on.png"] forState:UIControlStateNormal];
@@ -526,9 +526,14 @@ static StartViewController *sharedHelper = nil;
     }
     inBackground = NO;
 
+    SSConnection *connection = [SSConnection sharedInstance];
+    [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
+    [connection sendInfoPacket];
+    
     if ([[OGHelper sharedInstance] isAuthorized]){
         SSConnection *connection = [SSConnection sharedInstance];
         [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
+        [connection sendInfoPacket];
     }
     gameCenterViewController.duelStartViewController = nil;
     
@@ -1634,9 +1639,9 @@ static StartViewController *sharedHelper = nil;
     if (![[OGHelper sharedInstance] isAuthorized]) {
         firstRunLocal = NO;
         animationCheck = NO;
-        LoginAnimatedViewController *loginViewControllerLocal =[LoginAnimatedViewController sharedInstance];
-        [self.navigationController pushViewController:loginViewControllerLocal animated:YES];
-        loginViewControllerLocal = nil;
+        //LoginAnimatedViewController *loginViewControllerLocal =[LoginAnimatedViewController sharedInstance];
+        //[self.navigationController pushViewController:loginViewControllerLocal animated:YES];
+        //loginViewControllerLocal = nil;
     }
 }
 
