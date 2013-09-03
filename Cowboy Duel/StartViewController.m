@@ -408,15 +408,17 @@ static StartViewController *sharedHelper = nil;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSInteger loginFirstShow = [userDefaults integerForKey:@"loginFirstShow"];
     
-    /*if (!loginFirstShow) {
-        SSConnection *connection = [SSConnection sharedInstance];
+    if (!loginFirstShow) {
+        [[StartViewController sharedInstance] profileFirstRunButtonClickWithOutAnimation];
+        [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"loginFirstShow"];
+        /*SSConnection *connection = [SSConnection sharedInstance];
         [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
         
         LoginAnimatedViewController *loginViewControllerLocal = [LoginAnimatedViewController sharedInstance];
         [loginViewControllerLocal setPayment:YES];
         [self.navigationController pushViewController:loginViewControllerLocal animated:YES];
-        loginViewControllerLocal = nil;
-    }*/
+        loginViewControllerLocal = nil;*/
+    }
 
     if (self.soundCheack )
         [soundButton setImage:[UIImage imageNamed:@"pv_btn_music_on.png"] forState:UIControlStateNormal];
