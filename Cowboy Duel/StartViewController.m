@@ -31,6 +31,7 @@
 #import "FunPageViewController.h"
 #import "ActiveDuelViewController.h"
 #import "BuilderViewController.h"
+#import "LoginAnimatedViewController.h"
 
 //#import "Crittercism.h"
 
@@ -793,6 +794,10 @@ static StartViewController *sharedHelper = nil;
     }
 }
 
+- (IBAction)clickLogin:(id)sender {
+    [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
+}
+
 #pragma mark -
 #pragma mark feedback
 
@@ -1168,7 +1173,6 @@ static StartViewController *sharedHelper = nil;
                 isFixedMoney = YES;
                 [playerAccount saveMoney];
             }
-
         }
         
         if ([[responseObject objectForKey:@"level"] intValue]!=playerAccount.accountLevel) {

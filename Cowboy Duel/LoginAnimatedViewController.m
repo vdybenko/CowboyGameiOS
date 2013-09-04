@@ -261,8 +261,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
         [[NSNotificationCenter defaultCenter] postNotificationName: kCheckfFBLoginSession
                                                             object:self
                                                           userInfo:nil];
-        
-        [[StartViewController sharedInstance] profileFirstRunButtonClickWithOutAnimation];
     }
 }
 
@@ -325,7 +323,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
         [uDef synchronize];
         
         [[StartViewController sharedInstance] authorizationModifier:YES];
-        payment = NO;
         [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"loginFirstShow"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
