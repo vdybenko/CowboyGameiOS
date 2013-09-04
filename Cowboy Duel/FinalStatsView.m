@@ -141,10 +141,10 @@ FXLabel *lblGoldPlus;
     lblGoldPlus.backgroundColor = [UIColor clearColor];
     [self addSubview:lblGoldPlus];
     
-    if (finalViewDataSource.reachNewLevel) {
+//    if (finalViewDataSource.reachNewLevel) {
         [self showMessageOfNewLevel];
         finalViewDataSource.reachNewLevel=NO;
-    }
+//    }
     
 
     if (finalViewDataSource.userWon) {

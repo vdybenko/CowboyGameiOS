@@ -397,7 +397,6 @@ static CGFloat blinkBottomOriginY;
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-//    [super viewWillAppear:animated];
     tryAgain = NO;
     [self reInitViewWillAppear:animated];
 }
@@ -522,7 +521,7 @@ static CGFloat blinkBottomOriginY;
     {
         if (!opAccount.bot)
             opponentTime=99999;
-        }
+    }
    [plView startSensorialRotation];
     
     [opponentShape setStatusBody:OpponentShapeStatusLive];
@@ -1514,36 +1513,19 @@ float frequencyOpponentShoting()
         [userDef synchronize];
     }
     
-    if (playerAccount.isTryingWeapon) {
-        playerAccount.isTryingWeapon = NO;
-        if (!finalViewDataSource.isDuelWinWatched) {
-            finalViewDataSource.isDuelWinWatched = YES;
-        }else{
-            if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
-                
-                [self.navigationController popToViewController:[LoginAnimatedViewController sharedInstance] animated:YES];
-                [self releaseComponents];
-            }
-            else{
-                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
-                [self releaseComponents];
-            }
-        }
-    }else{
-        [self hideFinalView];
-
-        UINavigationController *nav = ((TestAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController;
-        
-        if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
-            [nav popToViewController:[nav.viewControllers objectAtIndex:2] animated:YES];
-        }else{
-            [nav popToViewController:[nav.viewControllers objectAtIndex:1] animated:YES];
-        }
-        [self releaseComponents];
-    }
-    
     [self stopDuelWithBlock];
     
+    [self hideFinalView];
+
+    UINavigationController *nav = ((TestAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController;
+    
+    if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
+        [nav popToViewController:[nav.viewControllers objectAtIndex:2] animated:YES];
+    }else{
+        [nav popToViewController:[nav.viewControllers objectAtIndex:1] animated:YES];
+    }
+    [self releaseComponents];
+        
     GameCenterViewController *gameCenterViewController;
     if (self.delegate){
         gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
