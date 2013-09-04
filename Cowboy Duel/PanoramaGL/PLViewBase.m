@@ -1066,11 +1066,8 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 
 -(void)startSensorialRotation
 {
-    DLog(@"startSensorialRotation");
     if(!isSensorialRotationRunning && !isSensorialRotationBlocking)
     {
-        DLog(@"startSensorialRotation if");
-
         startX = 0;
         float randomX = [self randFloatBetween:0.5 and:3.5];
         isSensorialRotationRunning = YES;
@@ -1295,7 +1292,6 @@ void multiplyMatrixAndMatrix(mat4f_t c, const mat4f_t a, const mat4f_t b)
 
 -(void)stopSensorialRotationWithBlock
 {
-    DLog(@"stopSensorialRotationWithBlock")
     [self stopSensorialRotation];
     isSensorialRotationBlocking = YES;
 }
