@@ -1099,9 +1099,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
              
              CMRotationMatrix r = motion.attitude.rotationMatrix;
              transformFromCMRotationMatrix(cameraTransform, &r);
-             
-             DLog(@"count %d",[arrTest count]);
-             
+                          
              for (OponentCoordinateView *oponentView in oponentCoordinateViews) {
                  mat4f_t projectionCameraTransform;
                  multiplyMatrixAndMatrix(projectionCameraTransform, projectionTransform, cameraTransform);

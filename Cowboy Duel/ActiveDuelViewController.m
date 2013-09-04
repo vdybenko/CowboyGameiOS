@@ -352,53 +352,11 @@ static CGFloat blinkBottomOriginY;
     blinkTopOriginY = blinkTop.frame.origin.y;
     blinkBottomOriginY = blinkBottom.frame.origin.y;
     
+    tryAgain = NO;
 }
--(void)preparationBloodAnimation{
-    
-    if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow)
-    {
-        NSArray *imgDieArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"blod_cFrame1Sc.png"], [UIImage imageNamed:@"blod_cFrame2Sc.png"],[UIImage imageNamed:@"blod_cFrame3Sc.png"],
-                                [UIImage imageNamed:@"blod_cFrame4Sc.png"], [UIImage imageNamed:@"blod_cFrame5Sc.png"],[UIImage imageNamed:@"blod_cFrame6Sc.png"], nil];
-        
-        self.bloodCImageView.animationImages = imgDieArray;
-        self.bloodCImageView.animationDuration = 0.6f;
-        [self.bloodCImageView setAnimationRepeatCount:1];
-        imgDieArray = nil;
-        
-        NSArray *imgDieArray2 = [NSArray arrayWithObjects:[UIImage imageNamed:@"blod_aFrame1Scr.png"], [UIImage imageNamed:@"blod_aFrame2Scr.png"],[UIImage imageNamed:@"blod_aFrame3Scr.png"],
-                                [UIImage imageNamed:@"blod_aFrame4Scr.png"], [UIImage imageNamed:@"blod_aFrame5Scr.png"],[UIImage imageNamed:@"blod_aFrame6Scr.png"], nil];
-        
-        self.bloodImageView.animationImages = imgDieArray2;
-        self.bloodImageView.animationDuration = 0.6f;
-        [self.bloodImageView setAnimationRepeatCount:1];
-        imgDieArray2 = nil;
 
-        
-    }
-    else
-    {
-        NSArray *imgDieArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"blod_cFrame1Real.png"], [UIImage imageNamed:@"blod_cFrame2Real.png"],[UIImage imageNamed:@"blod_cFrame3Real.png"],
-                                [UIImage imageNamed:@"blod_cFrame4Real.png"], [UIImage imageNamed:@"blod_cFrame5Real.png"],[UIImage imageNamed:@"blod_cFrame6Real.png"], nil];
-        
-        self.bloodCImageView.animationImages = imgDieArray;
-        self.bloodCImageView.animationDuration = 0.6f;
-        [self.bloodCImageView setAnimationRepeatCount:1];
-        imgDieArray = nil;
-        
-        NSArray *imgDieArray2 = [NSArray arrayWithObjects:[UIImage imageNamed:@"blod_aFrame1Real.png"], [UIImage imageNamed:@"blod_aFrame2Real.png"],[UIImage imageNamed:@"blod_aFrame3Real.png"],
-                                 [UIImage imageNamed:@"blod_aFrame4Real.png"], [UIImage imageNamed:@"blod_aFrame5Real.png"],[UIImage imageNamed:@"blod_aFrame6Real.png"], nil];
-        
-        self.bloodImageView.animationImages = imgDieArray2;
-        self.bloodImageView.animationDuration = 0.6f;
-        [self.bloodImageView setAnimationRepeatCount:1];
-        imgDieArray = nil;
-    }
-
-}
 -(void)viewWillAppear:(BOOL)animated
 {
-//    [super viewWillAppear:animated];
-    tryAgain = NO;
     [self reInitViewWillAppear:animated];
 }
 
@@ -522,7 +480,7 @@ static CGFloat blinkBottomOriginY;
     {
         if (!opAccount.bot)
             opponentTime=99999;
-        }
+    }
    [plView startSensorialRotation];
     
     [opponentShape setStatusBody:OpponentShapeStatusLive];
@@ -562,6 +520,9 @@ static CGFloat blinkBottomOriginY;
             }
         }
     }
+    
+    tryAgain = NO;
+
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
                                                       userInfo:[NSDictionary dictionaryWithObject:st forKey:@"page"]];
@@ -1468,6 +1429,50 @@ static CGFloat blinkBottomOriginY;
     horseShape.hidden = YES;
     goodCowboyShape.hidden = YES;
 }
+
+-(void)preparationBloodAnimation{
+    
+    if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow)
+    {
+        NSArray *imgDieArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"blod_cFrame1Sc.png"], [UIImage imageNamed:@"blod_cFrame2Sc.png"],[UIImage imageNamed:@"blod_cFrame3Sc.png"],
+                                [UIImage imageNamed:@"blod_cFrame4Sc.png"], [UIImage imageNamed:@"blod_cFrame5Sc.png"],[UIImage imageNamed:@"blod_cFrame6Sc.png"], nil];
+        
+        self.bloodCImageView.animationImages = imgDieArray;
+        self.bloodCImageView.animationDuration = 0.6f;
+        [self.bloodCImageView setAnimationRepeatCount:1];
+        imgDieArray = nil;
+        
+        NSArray *imgDieArray2 = [NSArray arrayWithObjects:[UIImage imageNamed:@"blod_aFrame1Scr.png"], [UIImage imageNamed:@"blod_aFrame2Scr.png"],[UIImage imageNamed:@"blod_aFrame3Scr.png"],
+                                 [UIImage imageNamed:@"blod_aFrame4Scr.png"], [UIImage imageNamed:@"blod_aFrame5Scr.png"],[UIImage imageNamed:@"blod_aFrame6Scr.png"], nil];
+        
+        self.bloodImageView.animationImages = imgDieArray2;
+        self.bloodImageView.animationDuration = 0.6f;
+        [self.bloodImageView setAnimationRepeatCount:1];
+        imgDieArray2 = nil;
+        
+        
+    }
+    else
+    {
+        NSArray *imgDieArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"blod_cFrame1Real.png"], [UIImage imageNamed:@"blod_cFrame2Real.png"],[UIImage imageNamed:@"blod_cFrame3Real.png"],
+                                [UIImage imageNamed:@"blod_cFrame4Real.png"], [UIImage imageNamed:@"blod_cFrame5Real.png"],[UIImage imageNamed:@"blod_cFrame6Real.png"], nil];
+        
+        self.bloodCImageView.animationImages = imgDieArray;
+        self.bloodCImageView.animationDuration = 0.6f;
+        [self.bloodCImageView setAnimationRepeatCount:1];
+        imgDieArray = nil;
+        
+        NSArray *imgDieArray2 = [NSArray arrayWithObjects:[UIImage imageNamed:@"blod_aFrame1Real.png"], [UIImage imageNamed:@"blod_aFrame2Real.png"],[UIImage imageNamed:@"blod_aFrame3Real.png"],
+                                 [UIImage imageNamed:@"blod_aFrame4Real.png"], [UIImage imageNamed:@"blod_aFrame5Real.png"],[UIImage imageNamed:@"blod_aFrame6Real.png"], nil];
+        
+        self.bloodImageView.animationImages = imgDieArray2;
+        self.bloodImageView.animationDuration = 0.6f;
+        [self.bloodImageView setAnimationRepeatCount:1];
+        imgDieArray = nil;
+    }
+    
+}
+
 #pragma mark - Frequently of gun
 
 -(void)finishGunFrequentlyBlockTime
@@ -1514,36 +1519,19 @@ float frequencyOpponentShoting()
         [userDef synchronize];
     }
     
-    if (playerAccount.isTryingWeapon) {
-        playerAccount.isTryingWeapon = NO;
-        if (!finalViewDataSource.isDuelWinWatched) {
-            finalViewDataSource.isDuelWinWatched = YES;
-        }else{
-            if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
-                
-                [self.navigationController popToViewController:[LoginAnimatedViewController sharedInstance] animated:YES];
-                [self releaseComponents];
-            }
-            else{
-                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
-                [self releaseComponents];
-            }
-        }
-    }else{
-        [self hideFinalView];
-
-        UINavigationController *nav = ((TestAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController;
-        
-        if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
-            [nav popToViewController:[nav.viewControllers objectAtIndex:2] animated:YES];
-        }else{
-            [nav popToViewController:[nav.viewControllers objectAtIndex:1] animated:YES];
-        }
-        [self releaseComponents];
-    }
-    
     [self stopDuelWithBlock];
     
+    [self hideFinalView];
+
+    UINavigationController *nav = ((TestAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController;
+    
+    if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
+        [nav popToViewController:[nav.viewControllers objectAtIndex:2] animated:YES];
+    }else{
+        [nav popToViewController:[nav.viewControllers objectAtIndex:1] animated:YES];
+    }
+    [self releaseComponents];
+        
     GameCenterViewController *gameCenterViewController;
     if (self.delegate){
         gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
@@ -1597,7 +1585,6 @@ float frequencyOpponentShoting()
         }
         
         [playerAccount.finalInfoTable removeAllObjects];
-        [self reInitViewWillAppear:YES];
     }
     else
         if (gameCenterViewController)
