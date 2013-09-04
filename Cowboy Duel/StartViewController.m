@@ -102,6 +102,10 @@
     //Cloud
     __weak IBOutlet UIImageView *cloudView;
     __weak IBOutlet UIImageView *cloudSecondView;
+    
+    __weak IBOutlet UIButton *btnFBLogin;
+    __weak IBOutlet UILabel *lbFBLogin;
+    
     int cloudX;
     int cloud2X;
     BOOL animationCheck;
@@ -383,7 +387,16 @@ static StartViewController *sharedHelper = nil;
     lbShareCancelBtn.textColor = buttonsTitleColor;
     lbShareCancelBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
   
-  
+    lbFBLogin.font = [UIFont boldSystemFontOfSize:12];
+    lbFBLogin.textColor = [UIColor whiteColor];
+    lbFBLogin.numberOfLines = 1;
+    lbFBLogin.lineBreakMode = UILineBreakModeCharacterWrap;
+    lbFBLogin.text = NSLocalizedString(@"LoginBtnLogInAtStart", nil);
+    
+    if([[OGHelper sharedInstance] isAuthorized]){
+        btnFBLogin.enabled = NO;
+    }
+    
     feedBackViewVisible=NO;
     shareViewVisible = NO;
   
@@ -458,6 +471,14 @@ static StartViewController *sharedHelper = nil;
         frame = helpButton.frame;
         frame.origin.y += iPhone5Delta;
         [helpButton setFrame:frame];
+        
+        frame = btnFBLogin.frame;
+        frame.origin.y += iPhone5Delta;
+        [btnFBLogin setFrame:frame];
+        
+        frame = lbFBLogin.frame;
+        frame.origin.y += iPhone5Delta;
+        [lbFBLogin setFrame:frame];
     }
 }
 - (void)viewDidUnload {
@@ -473,6 +494,8 @@ static StartViewController *sharedHelper = nil;
     lbFeedbackButton = nil;
     lbShareButton = nil;
     saloon2Button = nil;
+    btnFBLogin = nil;
+    lbFBLogin = nil;
     [super viewDidUnload];
 }
     
@@ -796,6 +819,7 @@ static StartViewController *sharedHelper = nil;
 
 - (IBAction)clickLogin:(id)sender {
     [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
+    [LoginAnimatedViewController sharedInstance].delegateFacebook = self;
 }
 
 #pragma mark -
@@ -1331,10 +1355,8 @@ static StartViewController *sharedHelper = nil;
     //    Refresh
     
     if([response objectForKey:@"refresh"]!=NULL){
-        
         return;
     }
-
 }
 
 - (void)connection:(CustomNSURLConnection *)connection didReceiveData:(NSData *)data
@@ -1366,6 +1388,20 @@ static StartViewController *sharedHelper = nil;
 //            }
 //        }
 //    }
+}
+
+#pragma mark FConnect Methods
+
+- (void)request:(FBRequest *)request didLoad:(id)result {
+	if([[OGHelper sharedInstance] isAuthorized]){
+        btnFBLogin.enabled = NO;
+    }
+}
+
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
+    if([[OGHelper sharedInstance] isAuthorized]){
+        btnFBLogin.enabled = NO;
+    }
 }
 
 #pragma mark - Authorization
