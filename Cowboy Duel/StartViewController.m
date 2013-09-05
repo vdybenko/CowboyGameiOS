@@ -31,6 +31,7 @@
 #import "FunPageViewController.h"
 #import "ActiveDuelViewController.h"
 #import "BuilderViewController.h"
+#import "LoginAnimatedViewController.h"
 
 //#import "Crittercism.h"
 
@@ -101,6 +102,12 @@
     //Cloud
     __weak IBOutlet UIImageView *cloudView;
     __weak IBOutlet UIImageView *cloudSecondView;
+    
+    __weak IBOutlet UIButton *btnFBLogin;
+    __weak IBOutlet UILabel *lbFBLogin;
+    
+    __weak IBOutlet UIView *vLoading;
+    
     int cloudX;
     int cloud2X;
     BOOL animationCheck;
@@ -382,7 +389,17 @@ static StartViewController *sharedHelper = nil;
     lbShareCancelBtn.textColor = buttonsTitleColor;
     lbShareCancelBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
   
-  
+    lbFBLogin.font = [UIFont boldSystemFontOfSize:12];
+    lbFBLogin.textColor = [UIColor whiteColor];
+    lbFBLogin.numberOfLines = 1;
+    lbFBLogin.lineBreakMode = UILineBreakModeCharacterWrap;
+    lbFBLogin.text = NSLocalizedString(@"LoginBtnLogInAtStart", nil);
+    
+    if([[OGHelper sharedInstance] isAuthorized]){
+        btnFBLogin.enabled = NO;
+        vLoading.hidden = YES;
+    }
+    
     feedBackViewVisible=NO;
     shareViewVisible = NO;
   
@@ -409,13 +426,15 @@ static StartViewController *sharedHelper = nil;
     NSInteger loginFirstShow = [userDefaults integerForKey:@"loginFirstShow"];
     
     if (!loginFirstShow) {
-        SSConnection *connection = [SSConnection sharedInstance];
+        [[StartViewController sharedInstance] profileFirstRunButtonClickWithOutAnimation];
+        [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"loginFirstShow"];
+        /*SSConnection *connection = [SSConnection sharedInstance];
         [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
         
         LoginAnimatedViewController *loginViewControllerLocal = [LoginAnimatedViewController sharedInstance];
         [loginViewControllerLocal setPayment:YES];
         [self.navigationController pushViewController:loginViewControllerLocal animated:YES];
-        loginViewControllerLocal = nil;
+        loginViewControllerLocal = nil;*/
     }
 
     if (self.soundCheack )
@@ -455,6 +474,14 @@ static StartViewController *sharedHelper = nil;
         frame = helpButton.frame;
         frame.origin.y += iPhone5Delta;
         [helpButton setFrame:frame];
+        
+        frame = btnFBLogin.frame;
+        frame.origin.y += iPhone5Delta;
+        [btnFBLogin setFrame:frame];
+        
+        frame = lbFBLogin.frame;
+        frame.origin.y += iPhone5Delta;
+        [lbFBLogin setFrame:frame];
     }
 }
 - (void)viewDidUnload {
@@ -470,6 +497,9 @@ static StartViewController *sharedHelper = nil;
     lbFeedbackButton = nil;
     lbShareButton = nil;
     saloon2Button = nil;
+    btnFBLogin = nil;
+    lbFBLogin = nil;
+    vLoading = nil;
     [super viewDidUnload];
 }
     
@@ -526,9 +556,14 @@ static StartViewController *sharedHelper = nil;
     }
     inBackground = NO;
 
+    SSConnection *connection = [SSConnection sharedInstance];
+    [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
+    [connection sendInfoPacket];
+    
     if ([[OGHelper sharedInstance] isAuthorized]){
         SSConnection *connection = [SSConnection sharedInstance];
         [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
+        [connection sendInfoPacket];
     }
     gameCenterViewController.duelStartViewController = nil;
     
@@ -690,7 +725,7 @@ static StartViewController *sharedHelper = nil;
 {
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"FirstRun_v2.2"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    animationCheck = NO;
+    //animationCheck = NO;
     
     cloudX=460;
     cloud2X=-20;
@@ -785,6 +820,12 @@ static StartViewController *sharedHelper = nil;
         [soundButton setImage:[UIImage imageNamed:@"pv_btn_music_off.png"] forState:UIControlStateNormal];
     }
 }
+
+- (IBAction)clickLogin:(id)sender {
+    vLoading.hidden = NO;
+    [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
+    [LoginAnimatedViewController sharedInstance].delegateFacebook = self;
+} 
 
 #pragma mark -
 #pragma mark feedback
@@ -1161,7 +1202,6 @@ static StartViewController *sharedHelper = nil;
                 isFixedMoney = YES;
                 [playerAccount saveMoney];
             }
-
         }
         
         if ([[responseObject objectForKey:@"level"] intValue]!=playerAccount.accountLevel) {
@@ -1320,10 +1360,8 @@ static StartViewController *sharedHelper = nil;
     //    Refresh
     
     if([response objectForKey:@"refresh"]!=NULL){
-        
         return;
     }
-
 }
 
 - (void)connection:(CustomNSURLConnection *)connection didReceiveData:(NSData *)data
@@ -1355,6 +1393,24 @@ static StartViewController *sharedHelper = nil;
 //            }
 //        }
 //    }
+}
+
+#pragma mark FConnect Methods
+
+- (void)request:(FBRequest *)request didLoad:(id)result {
+	if([[OGHelper sharedInstance] isAuthorized]){
+        btnFBLogin.enabled = NO;
+        vLoading.hidden = YES;
+    }
+}
+
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
+    if([[OGHelper sharedInstance] isAuthorized]){
+        btnFBLogin.enabled = NO;
+        vLoading.hidden = YES;
+    }else{
+        btnFBLogin.enabled = YES;
+    }
 }
 
 #pragma mark - Authorization
@@ -1633,10 +1689,10 @@ static StartViewController *sharedHelper = nil;
 {
     if (![[OGHelper sharedInstance] isAuthorized]) {
         firstRunLocal = NO;
-        animationCheck = NO;
-        LoginAnimatedViewController *loginViewControllerLocal =[LoginAnimatedViewController sharedInstance];
-        [self.navigationController pushViewController:loginViewControllerLocal animated:YES];
-        loginViewControllerLocal = nil;
+        //animationCheck = NO;
+        //LoginAnimatedViewController *loginViewControllerLocal =[LoginAnimatedViewController sharedInstance];
+        //[self.navigationController pushViewController:loginViewControllerLocal animated:YES];
+        //loginViewControllerLocal = nil;
     }
 }
 

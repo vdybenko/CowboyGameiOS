@@ -731,7 +731,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
                              }];
         }
         
-        if (![namePlayerSaved isEqualToString:textField.text]) {
+        if (![namePlayerSaved isEqualToString:textField.text] || [namePlayerSaved isEqualToString:playerAccount.defaultName]) {
             if (![[NSUserDefaults standardUserDefaults] stringForKey:@"DeviceToken"]){
                 [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
                  (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeNewsstandContentAvailability | UIRemoteNotificationTypeAlert)];
