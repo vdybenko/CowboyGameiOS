@@ -524,7 +524,6 @@ static const CGFloat timeToStandartTitles = 1.8;
         deltaFrame.origin.y += 47;
         duelButton.frame = deltaFrame;
     }
-    
 }
 #pragma mark -
 -(void)checkLocationOfViewForFBLogin;
@@ -545,7 +544,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
     [btnLeaderboard setEnabled:YES];
     [btnFavourites setEnabled:YES];
-    [self setImageFromFacebook];
+    [self setImageFromFacebook]; 
     
     NSString *name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel];
     ivCurrentRank.image = [UIImage imageNamed:name];
