@@ -251,8 +251,14 @@ static const CGFloat timeToStandartTitles = 1.8;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    [profilePictureView setProfileID:nil];
-    [profilePictureView setProfileID:playerAccount.facebookUser.id];
+    
+    if ([playerAccount.accountID rangeOfString:@"A"].location != NSNotFound){
+        profilePictureViewDefault.image = [UIImage imageNamed:@"pv_photo_default.png"];
+        profilePictureViewDefault.hidden = NO;
+    }else{
+        [profilePictureView setProfileID:nil];
+        [profilePictureView setProfileID:playerAccount.facebookUser.id];
+    }
     lbPointsText.font = [UIFont fontWithName: @"MyriadPro-Semibold" size:12];
 
 //    NSString *name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel];
@@ -524,9 +530,17 @@ static const CGFloat timeToStandartTitles = 1.8;
 -(void)checkLocationOfViewForFBLogin;
 {
     [self refreshContentFromPlayerAccount];
-    [profilePictureView setProfileID:nil];
-    [profilePictureView setProfileID:playerAccount.facebookUser.id];
+    
+    if ([playerAccount.accountID rangeOfString:@"A"].location != NSNotFound){
+        profilePictureViewDefault.image = [UIImage imageNamed:@"pv_photo_default.png"];
+        profilePictureViewDefault.hidden = NO;
+    }else{
+        [profilePictureView setProfileID:nil];
+        [profilePictureView setProfileID:playerAccount.facebookUser.id];
+    }
     [profilePictureView setHidden:NO];
+
+    
     [profilePictureViewDefault setHidden:YES];
     profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
     [btnLeaderboard setEnabled:YES];
@@ -691,6 +705,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:1] animated:NO];
     }
 }
+
 #pragma mark -
 #pragma mark Delegate metods
 
