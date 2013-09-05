@@ -145,7 +145,7 @@ FXLabel *lblGoldPlus;
         [self showMessageOfNewLevel];
         finalViewDataSource.reachNewLevel=NO;
     }
-    
+
 
     if (finalViewDataSource.userWon) {
         NSLog(@"finalViewDataSource.userWon YES");

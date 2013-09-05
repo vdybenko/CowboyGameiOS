@@ -1,3 +1,4 @@
+
 //
 //  ActiveDuelViewController.m
 //  Cowboy Duels
@@ -357,7 +358,9 @@ static CGFloat blinkBottomOriginY;
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self reInitViewWillAppear:animated];
+    if(!tryAgain){
+        [self reInitViewWillAppear:animated];
+    }
 }
 
 -(void)reInitViewWillAppear:(BOOL)animated{
@@ -1569,9 +1572,7 @@ float frequencyOpponentShoting()
         gameCenterViewController = nil;
     else
         teaching = NO;
-    
-//    [self releaseComponents];
-    
+        
     DLog(@"tryButtonClick");
     
     [self hideFinalView];
@@ -1585,16 +1586,13 @@ float frequencyOpponentShoting()
         }
         
         [playerAccount.finalInfoTable removeAllObjects];
+        [self reInitViewWillAppear:YES];
     }
     else
         if (gameCenterViewController)
         {
             [gameCenterViewController matchStartedTry];
         }
-    
-//    if (finalViewDataSource.teaching && !opAccount.bot) {
-//        [self reInitViewWillAppear:YES];
-//    }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
