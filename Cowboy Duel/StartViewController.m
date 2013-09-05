@@ -106,6 +106,8 @@
     __weak IBOutlet UIButton *btnFBLogin;
     __weak IBOutlet UILabel *lbFBLogin;
     
+    __weak IBOutlet UIView *vLoading;
+    
     int cloudX;
     int cloud2X;
     BOOL animationCheck;
@@ -395,6 +397,7 @@ static StartViewController *sharedHelper = nil;
     
     if([[OGHelper sharedInstance] isAuthorized]){
         btnFBLogin.enabled = NO;
+        vLoading.hidden = YES;
     }
     
     feedBackViewVisible=NO;
@@ -496,6 +499,7 @@ static StartViewController *sharedHelper = nil;
     saloon2Button = nil;
     btnFBLogin = nil;
     lbFBLogin = nil;
+    vLoading = nil;
     [super viewDidUnload];
 }
     
@@ -818,9 +822,10 @@ static StartViewController *sharedHelper = nil;
 }
 
 - (IBAction)clickLogin:(id)sender {
+    vLoading.hidden = NO;
     [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
     [LoginAnimatedViewController sharedInstance].delegateFacebook = self;
-}
+} 
 
 #pragma mark -
 #pragma mark feedback
@@ -1395,12 +1400,16 @@ static StartViewController *sharedHelper = nil;
 - (void)request:(FBRequest *)request didLoad:(id)result {
 	if([[OGHelper sharedInstance] isAuthorized]){
         btnFBLogin.enabled = NO;
+        vLoading.hidden = YES;
     }
 }
 
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
     if([[OGHelper sharedInstance] isAuthorized]){
         btnFBLogin.enabled = NO;
+        vLoading.hidden = YES;
+    }else{
+        btnFBLogin.enabled = YES;
     }
 }
 
