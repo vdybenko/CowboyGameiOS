@@ -536,12 +536,11 @@ static const CGFloat timeToStandartTitles = 1.8;
     }else{
         [profilePictureView setProfileID:nil];
         [profilePictureView setProfileID:playerAccount.facebookUser.id];
+        profilePictureViewDefault.hidden = YES;
+        profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
     }
     [profilePictureView setHidden:NO];
 
-    
-    [profilePictureViewDefault setHidden:YES];
-    profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
     [btnLeaderboard setEnabled:YES];
     [btnFavourites setEnabled:YES];
     [self setImageFromFacebook]; 

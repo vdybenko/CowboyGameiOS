@@ -355,7 +355,6 @@ FXLabel *lblGoldPlus;
     }
 }
 #pragma mark -
-
 -(void)showMessageOfNewLevel
 {
     [activeDuelViewController.btnTry setEnabled:NO];
@@ -369,5 +368,4 @@ FXLabel *lblGoldPlus;
     MoneyCongratViewController *moneyCongratulationViewController = [[MoneyCongratViewController alloc] initForAchivmentPlayerAccount:playerAccount withLabel:labelForCongratulation andController:activeDuelViewController tryButtonEnable:isTryAgainEnabled];
     [activeDuelViewController performSelector:@selector(showViewController:) withObject:moneyCongratulationViewController afterDelay:4.5];
 }
-
 @end
