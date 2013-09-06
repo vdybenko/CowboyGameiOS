@@ -451,14 +451,12 @@ static CGFloat blinkBottomOriginY;
     
     [activityIndicatorView hideView];
     [self.gunButton setEnabled:NO];
-    NSLog(@"%f", userLiveImageViewStartWidth);
     if (tryAgain) {
         CGRect frame = self.userLiveImageView.frame;
         frame.size.width = userLiveImageViewStartWidth;
         self.userLiveImageView.frame = frame;
     }else
         userLiveImageViewStartWidth = self.userLiveImageView.frame.size.width;
-    NSLog(@"%f", userLiveImageViewStartWidth);
     self.lbUserLifeLeft.text = [NSString stringWithFormat:@"%d",shotCountBulletForOpponent*3];
     
     self.opStatsLabel.text = [NSString stringWithFormat: @"A: +%d\rD: +%d",opAccount.accountAtackValue,opAccount.accountDefenseValue];

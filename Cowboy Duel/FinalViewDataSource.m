@@ -113,11 +113,9 @@
             transaction.trType = [NSNumber numberWithInt:-1];
             transaction.trMoneyCh = [NSNumber numberWithInt:-moneyExch];
         }else{
-            if (playerAccount.money > 0) {
-                transaction.trType = [NSNumber numberWithInt:-1];
-                transaction.trMoneyCh = [NSNumber numberWithInt:playerAccount.money];
-            }
-            playerAccount.money=0;
+            moneyExch = playerAccount.money;
+            transaction.trType = [NSNumber numberWithInt:-1];
+            transaction.trMoneyCh = [NSNumber numberWithInt:-playerAccount.money];
         }
         
         [self increaseLoseCount];

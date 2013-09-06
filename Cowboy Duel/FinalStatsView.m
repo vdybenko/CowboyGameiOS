@@ -146,7 +146,6 @@ FXLabel *lblGoldPlus;
         finalViewDataSource.reachNewLevel=NO;
     }
 
-
     if (finalViewDataSource.userWon) {
         NSLog(@"finalViewDataSource.userWon YES");
         if ((finalViewDataSource.oldMoney<500)&&(playerAccount.money>=500)&&(playerAccount.money<1000)) {
@@ -231,7 +230,13 @@ FXLabel *lblGoldPlus;
 -(void)loseAnimation
 {
     lblGold.alpha = 0.3;
-    lblGoldPlus.text = [NSString stringWithFormat:@"-%d", finalViewDataSource.moneyExch];
+    NSString *st;
+    if (finalViewDataSource.moneyExch==0) {
+        st = [NSString stringWithFormat:@"%d", finalViewDataSource.moneyExch];
+    }else{
+        st = [NSString stringWithFormat:@"-%d", finalViewDataSource.moneyExch];
+    }
+    lblGoldPlus.text = st;
     
     CGRect coinFrame = lblGoldPlus.frame;
     coinFrame.origin = ivGoldCoin.frame.origin;
