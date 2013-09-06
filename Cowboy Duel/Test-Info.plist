@@ -83,6 +83,7 @@
 		<string>accelerometer</string>
 		<string>peer-peer</string>
 		<string>location-services</string>
+		<string>gyroscope</string>
 	</array>
 	<key>UIStatusBarHidden</key>
 	<true/>
