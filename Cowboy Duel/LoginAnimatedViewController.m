@@ -321,7 +321,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
         
         [uDef synchronize];
         
-        [[StartViewController sharedInstance] authorizationModifier:YES];
+        [[StartViewController sharedInstance] authorizationModifier:NO];
         [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"loginFirstShow"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         

@@ -660,6 +660,9 @@
     }
     [playerAccount recountDefenseAndAtack];
     [playerAccount saveVisualView];
+    
+    [[StartViewController sharedInstance] modifierUser:playerAccount];
+    
     [self setObjectsForIndex:index];
     [self refreshControllerWithGrid];
 }
