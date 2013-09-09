@@ -433,8 +433,6 @@ static CGFloat blinkBottomOriginY;
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [self readyToStart];
-    
     NSString *st=@"/ActiveDuelVC";
     if ( [LoginAnimatedViewController sharedInstance].isDemoPractice == YES){
         st=@"/ActiveDuelVC_first_duel";

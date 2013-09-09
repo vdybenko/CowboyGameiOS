@@ -43,6 +43,8 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     AccountDataSource *playerAccount;
     
     id<GAITracker> tracker;
+    
+    NSString *stSavePageAnalytics;
 }
 @property (nonatomic, strong) id<FBGraphUser> facebookUser;
 
@@ -117,8 +119,11 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     }
     
     DLog(@"FBAccessTokenKey %@", [defaults objectForKey:@"FBAccessTokenKey"]);
+    NSArray *permissions =
+    [NSArray arrayWithObjects:@"email", nil];
+    
     if([[OGHelper sharedInstance] isAuthorized]){
-        [self openSessionWithAllowLoginUI:YES];
+        [self openSessionWithPermission:permissions];
     }
     
     // Let the device know we want to receive push notifications
@@ -177,27 +182,35 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 - (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI {
     NSArray *permissions =
     [NSArray arrayWithObjects:@"email", nil];
+    
+    BOOL isFBAccount = NO;
+    BOOL isFBApp = NO;
+    
     float ver_float = [[[UIDevice currentDevice] systemVersion] floatValue];
     if (ver_float >= 6.0) {
         ACAccountStore *accountStore = [[ACAccountStore alloc] init];
         ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-        if (![accountStore accountsWithAccountType:accountType]){
-//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry", @"AlertView")
-//                                                                message:NSLocalizedString(@"You can't connnect to Facebook right now, make sure  your device has an internet connection and you have at least one Facebook account setup. Go to Settings -> Facebook and set up it.", @"AlertView")
-//                                                               delegate:self
-//                                                      cancelButtonTitle:NSLocalizedString(@"Cancel", @"AlertView")
-//                                                      otherButtonTitles: nil];
-//            alertView.tag = 1;
-//            [alertView show];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-                                                                object:self
-                                                              userInfo:[NSDictionary dictionaryWithObject:@"/TestAppDelegate_login_FB_no_account" forKey:@"page"]];
-            
-            //return NO;
+        if ([accountStore accountsWithAccountType:accountType]){
+            isFBAccount = YES;
         }
     }
-
+    
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb://"]]) {
+        isFBApp = YES;
+    }
+    NSString *stResualt;
+    if(isFBAccount){
+        stResualt = @"/Login_via_Native";
+    }else if (isFBApp){
+        stResualt = @"/Login_via_App";
+    }else{
+        stResualt = @"/Login_via_Safari";
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:stResualt forKey:@"page"]];
+    
     [self openSessionWithPermission:permissions];
     return YES;
 }
@@ -413,20 +426,29 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 #pragma mark GATrackEvent
 - (void)AnalyticsTrackEvent:(NSNotification *)notification {
 	NSString *page = [[notification userInfo] objectForKey:@"page"];
-    NSInteger demention = [[[notification userInfo] objectForKey:@"demention"] intValue];
-    NSString *value = [[notification userInfo] objectForKey:@"value"];
-	if (page){
-        if (demention && value) {
-            [tracker setCustom:demention dimension:value];
+    if([page isEqualToString:@"/BecomeActive"]){
+        if([stSavePageAnalytics length]!=0){
+            [self setAnalyticsPage:page];
+            [self setAnalyticsPage:stSavePageAnalytics];
         }
+    }else{
+        stSavePageAnalytics = page;
+        [self setAnalyticsPage:page];
+    }
+	[[GAI sharedInstance] dispatch];
+}
+
+-(void)setAnalyticsPage:(NSString*)page
+{
+    if (page){
         BOOL result = [tracker sendView:page];
         if (result) {
             DLog(@"GA page send %@",page);
         }else{
             DLog(@"GA page error %@",page);
         }
+        [Crashlytics setObjectValue:page forKey:@"page"];
 	}
-	[[GAI sharedInstance] dispatch];
 }
 
 #pragma mark AlertViewDelegate

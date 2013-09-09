@@ -653,6 +653,9 @@ static StartViewController *sharedHelper = nil;
         cloudView.hidden = NO;
         cloudSecondView.hidden = NO;
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/BecomeActive" forKey:@"page"]];
 }
 
 -(void)didEnterBackground

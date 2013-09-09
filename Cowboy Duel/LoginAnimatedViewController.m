@@ -149,6 +149,10 @@ static LoginAnimatedViewController *sharedHelper = nil;
 
 - (IBAction)practiceButtonClick:(id)sender {
     //stop animations
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/LoginAnimatedVC_practice" forKey:@"page"]];
+    
     animationPause = YES;
 
     [LoginAnimatedViewController sharedInstance].isDemoPractice = YES;
@@ -160,15 +164,15 @@ static LoginAnimatedViewController *sharedHelper = nil;
     ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:playerAccount oponentAccount:oponentAccount];
     [nav pushViewController:activeDuelViewController animated:YES];
     activeDuelViewController = nil;
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-                                                        object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:@"/LoginAnimatedVC_practice" forKey:@"page"]];
 }
 
 - (IBAction)loginButtonClick:(id)sender {
     [[StartViewController sharedInstance] checkNetworkStatus:nil];
     if ([[StartViewController sharedInstance] connectedToWiFi]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                            object:self
+                                                          userInfo:[NSDictionary dictionaryWithObject:@"/LoginAnimatedVC_login_FB" forKey:@"page"]];
+        
         [activityView setHidden:NO];
         [activityIndicatorView startAnimating];
         animationPause = YES;
@@ -184,9 +188,6 @@ static LoginAnimatedViewController *sharedHelper = nil;
         
         playerAccount.loginAnimatedViewController = self;
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-                                                            object:self
-                                                          userInfo:[NSDictionary dictionaryWithObject:@"/LoginAnimatedVC_login_FB" forKey:@"page"]];
         [LoginAnimatedViewController sharedInstance].isDemoPractice = NO;
         [[NSUserDefaults standardUserDefaults] synchronize];
     }else{
