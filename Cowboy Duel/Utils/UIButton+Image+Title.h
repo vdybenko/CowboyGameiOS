@@ -15,7 +15,6 @@
 -(void)setTitleByLabel:(NSString *)pTitle withColor:(UIColor*)color fontSize:(CGFloat)size;
 -(void)changeTitleByLabel:(NSString *)pTitle;
 -(void)changeColorOfTitleByLabel:(UIColor *)pColor;
-
-
+-(UILabel*)labelForTitle;
 
 @end

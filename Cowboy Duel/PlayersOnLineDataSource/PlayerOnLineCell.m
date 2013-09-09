@@ -146,16 +146,14 @@
 -(void)showIndicatorConnectin;
 {
     [indicatorConnectin startAnimating];
-    NSArray *arr=[btnDuel subviews];
-    UILabel *label1=(UILabel*)[arr objectAtIndex:([arr count]-2)];
+    UILabel *label1=[btnDuel labelForTitle];
     [label1 setHidden:YES];
 }
 
 -(void)hideIndicatorConnectin;
 {
     [indicatorConnectin stopAnimating];
-    NSArray *arr=[btnDuel subviews];
-    UILabel *label1=(UILabel*)[arr objectAtIndex:([arr count]-2)];
+    UILabel *label1=[btnDuel labelForTitle];
     [label1 setHidden:NO];
 }
 
