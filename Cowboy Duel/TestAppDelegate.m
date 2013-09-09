@@ -17,6 +17,8 @@
 
 #import "GAI.h"
 
+#import <Crashlytics/Crashlytics.h>
+
 #define kFacebookSettingsButtonIndex 1
 
 static const NSInteger kGANDispatchPeriod = 60;
@@ -55,6 +57,8 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [UIImage initialize];
+    
+    [Crashlytics startWithAPIKey:@"197ce14e2bf08d73cb38940d1aa1cf371c117454"];
     
     [GAI sharedInstance].trackUncaughtExceptions = YES;
     [GAI sharedInstance].dispatchInterval = 20;
