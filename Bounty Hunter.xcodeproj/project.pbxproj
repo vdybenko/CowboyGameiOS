@@ -3635,7 +3635,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "REV=`svnversion -n`\necho \"#define kRevisionNumber @\\\"$REV\\\"\" > ${PROJECT_DIR}/revision.h\n";
+			shellScript = "REV=`svnversion -n`\necho \"#define kRevisionNumber @\\\"$REV\\\"\" > ${PROJECT_DIR}/revision.h\n./Crashlytics.framework/run 197ce14e2bf08d73cb38940d1aa1cf371c117454\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
