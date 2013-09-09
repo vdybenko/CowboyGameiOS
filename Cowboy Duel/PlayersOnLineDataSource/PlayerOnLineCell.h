@@ -12,7 +12,6 @@
 @property (weak, nonatomic) IBOutlet UILabel * goldTitle;
 @property (weak,nonatomic) IBOutlet UIButton * btnDuel;
 @property (weak,nonatomic) IBOutlet UILabel * status;
-@property (weak,nonatomic) IBOutlet UIActivityIndicatorView *indicatorConnectin;
 @property (weak,nonatomic) IBOutlet UIImageView * ribbon;
 @property (weak, nonatomic) IBOutlet UILabel *userAttackTitle;
 @property (weak, nonatomic) IBOutlet UILabel *userDefenseTitle;
@@ -29,6 +28,4 @@
 -(void) initMainControls;
 -(void) setPlayerIcon:(UIImage*)iconImage;
 -(void) setRibbonHide:(BOOL)hide;
--(void)showIndicatorConnectin;
--(void)hideIndicatorConnectin;
 @end

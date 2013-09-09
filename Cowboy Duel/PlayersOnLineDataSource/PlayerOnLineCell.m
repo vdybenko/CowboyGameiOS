@@ -19,7 +19,6 @@
 @synthesize goldTitle;
 @synthesize btnDuel;
 @synthesize status;
-@synthesize indicatorConnectin;
 @synthesize ribbon;
 @synthesize userAttackTitle;
 @synthesize userAtack;
@@ -95,8 +94,6 @@
     userDefense.text = [NSString stringWithFormat:@"%d",player.defense + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[player.rank intValue]]];
     userDefense.hidden = NO;
     
-    [self hideIndicatorConnectin];
-    
     if (player.favorite) {
         favoriteStart.hidden = NO;
     }else{
@@ -141,20 +138,6 @@
 -(void) setPlayerIcon:(UIImage*)iconImage;
 {
     [icon setImage:iconImage];
-}
-
--(void)showIndicatorConnectin;
-{
-    [indicatorConnectin startAnimating];
-    UILabel *label1=[btnDuel labelForTitle];
-    [label1 setHidden:YES];
-}
-
--(void)hideIndicatorConnectin;
-{
-    [indicatorConnectin stopAnimating];
-    UILabel *label1=[btnDuel labelForTitle];
-    [label1 setHidden:NO];
 }
 
 -(void)setRibbonHide:(BOOL)hide;
