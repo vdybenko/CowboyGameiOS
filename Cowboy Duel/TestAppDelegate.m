@@ -66,6 +66,7 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
     [GAI sharedInstance].dispatchInterval = 20;
     [GAI sharedInstance].debug = NO;
     tracker = [[GAI sharedInstance] trackerWithTrackingId:kGAAccountID];
+    [tracker setSessionTimeout:60];
 	
 
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -404,6 +405,7 @@ NSString  *const ID_CRIT_SECRET   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 {
 	NSLog(@"Failed to get token, error: %@", error);
+    [[StartViewController sharedInstance] authorizationModifier:YES];
 }
 
 - (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo

@@ -453,15 +453,17 @@ static StartViewController *sharedHelper = nil;
     NSInteger loginFirstShow = [userDefaults integerForKey:@"loginFirstShow"];
     
     if (!loginFirstShow) {
-        SSConnection *connection = [SSConnection sharedInstance];
-        [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
-        
-        LoginAnimatedViewController *loginViewControllerLocal = [LoginAnimatedViewController sharedInstance];
-        [loginViewControllerLocal setPayment:YES];
-        [self.navigationController pushViewController:loginViewControllerLocal animated:YES];
-        loginViewControllerLocal = nil;
+        [[StartViewController sharedInstance] profileFirstRunButtonClickWithOutAnimation];
+        [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"loginFirstShow"];
+        /*SSConnection *connection = [SSConnection sharedInstance];
+         [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
+         
+         LoginAnimatedViewController *loginViewControllerLocal = [LoginAnimatedViewController sharedInstance];
+         [loginViewControllerLocal setPayment:YES];
+         [self.navigationController pushViewController:loginViewControllerLocal animated:YES];
+         loginViewControllerLocal = nil;*/
     }
-
+    
     if (self.soundCheack )
         [soundButton setImage:[UIImage imageNamed:@"pv_btn_music_on.png"] forState:UIControlStateNormal];
     else {
@@ -574,10 +576,15 @@ static StartViewController *sharedHelper = nil;
         cloudSecondView.hidden = NO;
     }
     inBackground = NO;
-
+    
+    SSConnection *connection = [SSConnection sharedInstance];
+    [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
+    [connection sendInfoPacket];
+    
     if ([[OGHelper sharedInstance] isAuthorized]){
         SSConnection *connection = [SSConnection sharedInstance];
         [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
+        [connection sendInfoPacket];
     }
     gameCenterViewController.duelStartViewController = nil;
     
@@ -758,7 +765,7 @@ static StartViewController *sharedHelper = nil;
 {
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"FirstRun_v2.2"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    animationCheck = NO;
+//    animationCheck = NO;
     
     cloudX=940;
     cloud2X=-20;
@@ -1663,10 +1670,10 @@ static StartViewController *sharedHelper = nil;
 {
     if (![[OGHelper sharedInstance] isAuthorized]) {
         firstRunLocal = NO;
-        animationCheck = NO;
-        LoginAnimatedViewController *loginViewControllerLocal =[LoginAnimatedViewController sharedInstance];
-        [self.navigationController pushViewController:loginViewControllerLocal animated:YES];
-        loginViewControllerLocal = nil;
+//        animationCheck = NO;
+//        LoginAnimatedViewController *loginViewControllerLocal =[LoginAnimatedViewController sharedInstance];
+//        [self.navigationController pushViewController:loginViewControllerLocal animated:YES];
+//        loginViewControllerLocal = nil;
     }
 }
 

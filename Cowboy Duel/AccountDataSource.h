@@ -37,6 +37,7 @@
 @property(strong, nonatomic) NSString *homeTown;
 @property(nonatomic) NSInteger friends; 
 @property(strong, nonatomic) NSString *facebookName;
+@property(strong, nonatomic) NSString *defaultName;
 
 @property(strong,nonatomic) NSMutableArray *transactions;
 @property(strong,nonatomic) NSMutableArray *duels;
