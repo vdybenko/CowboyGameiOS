@@ -72,7 +72,7 @@
 						<string key="NSFrameSize">{320, 97}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="196653292"/>
+						<reference key="NSNextKeyView" ref="343128217"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -336,7 +336,7 @@
 						<string key="NSFrame">{{150, 376}, {50, 33}}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="871925023"/>
+						<reference key="NSNextKeyView" ref="722300045"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -355,6 +355,52 @@
 						<int key="IBUITextAlignment">1</int>
 						<reference key="IBUIFontDescription" ref="717738861"/>
 						<reference key="IBUIFont" ref="172530466"/>
+					</object>
+					<object class="IBUILabel" id="722300045">
+						<reference key="NSNextResponder" ref="1048327278"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{218, 375}, {52, 32}}</string>
+						<reference key="NSSuperview" ref="1048327278"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="897046872"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<string key="IBUIText">+ 500</string>
+						<object class="NSColor" key="IBUITextColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MSAwLjgyMzUyOTQxMTggMAA</bytes>
+						</object>
+						<nil key="IBUIHighlightedColor"/>
+						<int key="IBUIBaselineAdjustment">0</int>
+						<object class="IBUIFontDescription" key="IBUIFontDescription">
+							<int key="type">2</int>
+							<double key="pointSize">20</double>
+						</object>
+						<object class="NSFont" key="IBUIFont">
+							<string key="NSName">Helvetica-Bold</string>
+							<double key="NSSize">20</double>
+							<int key="NSfFlags">16</int>
+						</object>
+						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
+					</object>
+					<object class="IBUIImageView" id="897046872">
+						<reference key="NSNextResponder" ref="1048327278"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{272, 375}, {44, 32}}</string>
+						<reference key="NSSuperview" ref="1048327278"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="871925023"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">fin_img_money2.png</string>
+						</object>
 					</object>
 					<object class="IBUIView" id="419574726">
 						<reference key="NSNextResponder" ref="1048327278"/>
@@ -690,6 +736,7 @@
 								<string key="NSFrame">{{73, 260}, {176, 46}}</string>
 								<reference key="NSSuperview" ref="862881662"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -846,7 +893,6 @@
 								<string key="NSFrame">{{150, 230}, {20, 20}}</string>
 								<reference key="NSSuperview" ref="196653292"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="343128217"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -1077,6 +1123,22 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">lbMoneyForLogin</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="722300045"/>
+					</object>
+					<int key="connectionID">197</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">ivCointsForLogin</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="897046872"/>
+					</object>
+					<int key="connectionID">198</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">vLoading</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="196653292"/>
@@ -1245,10 +1307,12 @@
 							<reference ref="876994811"/>
 							<reference ref="721836411"/>
 							<reference ref="1003356675"/>
-							<reference ref="343128217"/>
 							<reference ref="492574981"/>
 							<reference ref="474960690"/>
 							<reference ref="659115295"/>
+							<reference ref="897046872"/>
+							<reference ref="722300045"/>
+							<reference ref="343128217"/>
 							<reference ref="196653292"/>
 						</array>
 						<reference key="parent" ref="0"/>
@@ -1493,6 +1557,17 @@
 						<string key="objectName">postLabel</string>
 					</object>
 					<object class="IBObjectRecord">
+						<int key="objectID">194</int>
+						<reference key="object" ref="722300045"/>
+						<reference key="parent" ref="1048327278"/>
+						<string key="objectName">+500</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">196</int>
+						<reference key="object" ref="897046872"/>
+						<reference key="parent" ref="1048327278"/>
+					</object>
+					<object class="IBObjectRecord">
 						<int key="objectID">191</int>
 						<reference key="object" ref="196653292"/>
 						<array class="NSMutableArray" key="children">
@@ -1544,6 +1619,8 @@
 				<string key="187.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="191.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="192.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="194.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="196.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="29.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="60.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="77.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1559,7 +1636,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">193</int>
+			<int key="maxID">198</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1659,11 +1736,13 @@
 						<string key="feedbackView">UIView</string>
 						<string key="helpButton">UIButton</string>
 						<string key="indicatorfeedbackView">UIActivityIndicatorView</string>
+						<string key="ivCointsForLogin">UIImageView</string>
 						<string key="lbFBLogin">UILabel</string>
 						<string key="lbFeedbackButton">UILabel</string>
 						<string key="lbFeedbackCancelBtn">UILabel</string>
 						<string key="lbFollowFacebook">UILabel</string>
 						<string key="lbMailMessage">UILabel</string>
+						<string key="lbMoneyForLogin">UILabel</string>
 						<string key="lbPostMessage">UILabel</string>
 						<string key="lbRateMessage">UILabel</string>
 						<string key="lbShareButton">UILabel</string>
@@ -1709,6 +1788,10 @@
 							<string key="name">indicatorfeedbackView</string>
 							<string key="candidateClassName">UIActivityIndicatorView</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="ivCointsForLogin">
+							<string key="name">ivCointsForLogin</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="lbFBLogin">
 							<string key="name">lbFBLogin</string>
 							<string key="candidateClassName">UILabel</string>
@@ -1727,6 +1810,10 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="lbMailMessage">
 							<string key="name">lbMailMessage</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lbMoneyForLogin">
+							<string key="name">lbMoneyForLogin</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="lbPostMessage">
@@ -1798,6 +1885,7 @@
 			<string key="fb_btn_tweeter.png">{57, 57}</string>
 			<string key="fb_view_down_new.png">{5, 7}</string>
 			<string key="fb_view_top.png">{320, 8}</string>
+			<string key="fin_img_money2.png">{110, 77}</string>
 			<string key="pv_btn_music_on.png">{33, 35}</string>
 			<string key="st_cloud_new.png">{480, 258}</string>
 			<string key="st_title.png">{320, 97}</string>

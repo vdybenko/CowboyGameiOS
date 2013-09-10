@@ -108,6 +108,9 @@
     
     __weak IBOutlet UIView *vLoading;
     
+    __weak IBOutlet UILabel *lbMoneyForLogin;
+    __weak IBOutlet UIImageView *ivCointsForLogin;
+    
     int cloudX;
     int cloud2X;
     BOOL animationCheck;
@@ -398,6 +401,9 @@ static StartViewController *sharedHelper = nil;
     if([[OGHelper sharedInstance] isAuthorized]){
         btnFBLogin.enabled = NO;
         vLoading.hidden = YES;
+        
+        lbMoneyForLogin.hidden = YES;
+        ivCointsForLogin.hidden  =YES;
     }
     
     feedBackViewVisible=NO;
@@ -500,6 +506,8 @@ static StartViewController *sharedHelper = nil;
     btnFBLogin = nil;
     lbFBLogin = nil;
     vLoading = nil;
+    lbMoneyForLogin = nil;
+    ivCointsForLogin = nil;
     [super viewDidUnload];
 }
     
@@ -823,6 +831,7 @@ static StartViewController *sharedHelper = nil;
 
 - (IBAction)clickLogin:(id)sender {
     vLoading.hidden = NO;
+    btnFBLogin.enabled = NO;
     [LoginAnimatedViewController sharedInstance].loginFacebookStatus = LoginFacebookStatusProfile;
     [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
     [LoginAnimatedViewController sharedInstance].delegateFacebook = self;
@@ -1362,6 +1371,24 @@ static StartViewController *sharedHelper = nil;
                 if([[OGHelper sharedInstance] isAuthorized]){
                     btnFBLogin.enabled = NO;
                     vLoading.hidden = YES;
+                    
+                    lbMoneyForLogin.hidden = YES;
+                    ivCointsForLogin.hidden = YES;
+                    
+                    CDTransaction *transaction = [[CDTransaction alloc] init];
+                    transaction.trDescription = @"login+500";
+                    transaction.trType = [NSNumber numberWithInt:+1];
+                    transaction.trMoneyCh = [NSNumber numberWithInt:500];
+                    transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
+                    transaction.trOpponentID = @"";
+                    transaction.trGlobalID = [NSNumber numberWithInt:-1];
+                    
+                    [playerAccount.transactions addObject:transaction];
+                    [playerAccount saveTransaction];
+                    [playerAccount sendTransactions:playerAccount.transactions];
+                    
+                    playerAccount.money += 500;
+                    [playerAccount saveMoney];
                 }
                 
                 break;
@@ -1369,7 +1396,6 @@ static StartViewController *sharedHelper = nil;
                 break;
         }
         [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusNone];
-        
         [uDef synchronize];
     }
     //
@@ -1400,6 +1426,9 @@ static StartViewController *sharedHelper = nil;
     if([[OGHelper sharedInstance] isAuthorized]){
         btnFBLogin.enabled = NO;
         vLoading.hidden = YES;
+        
+        lbMoneyForLogin.hidden = YES;
+        ivCointsForLogin.hidden  =YES;
     }else{
         btnFBLogin.enabled = YES;
     }
@@ -1430,6 +1459,9 @@ static StartViewController *sharedHelper = nil;
     if([[OGHelper sharedInstance] isAuthorized]){
         btnFBLogin.enabled = NO;
         vLoading.hidden = YES;
+        
+        lbMoneyForLogin.hidden = YES;
+        ivCointsForLogin.hidden  =YES;
     }else{
         btnFBLogin.enabled = YES;
     }
