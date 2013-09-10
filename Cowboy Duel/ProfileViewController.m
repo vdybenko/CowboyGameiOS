@@ -255,9 +255,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     if ([playerAccount.accountID rangeOfString:@"A"].location != NSNotFound){
         profilePictureViewDefault.image = [UIImage imageNamed:@"pv_photo_default.png"];
         profilePictureViewDefault.hidden = NO;
-    }else{
-        [profilePictureView setProfileID:nil];
-        [profilePictureView setProfileID:playerAccount.facebookUser.id];
     }
     lbPointsText.font = [UIFont fontWithName: @"MyriadPro-Semibold" size:12];
 

@@ -20,7 +20,8 @@ typedef enum {
     LoginFacebookStatusLevel,
     LoginFacebookStatusMoney,
     LoginFacebookStatusFeed,
-    LoginFacebookStatusInvaitFriends
+    LoginFacebookStatusInvaitFriends,
+    LoginFacebookStatusProfile
 } LoginFacebookStatus;
 
 @class StartViewController;

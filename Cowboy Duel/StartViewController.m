@@ -823,6 +823,7 @@ static StartViewController *sharedHelper = nil;
 
 - (IBAction)clickLogin:(id)sender {
     vLoading.hidden = NO;
+    [LoginAnimatedViewController sharedInstance].loginFacebookStatus = LoginFacebookStatusProfile;
     [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
     [LoginAnimatedViewController sharedInstance].delegateFacebook = self;
 } 
@@ -1347,6 +1348,23 @@ static StartViewController *sharedHelper = nil;
             case LoginFacebookStatusInvaitFriends:
                 [[OGHelper sharedInstance] getFriendsHowDontUseAppDelegate:nil];
                 break;
+            case LoginFacebookStatusProfile:
+                profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount];
+                [profileViewController setNeedAnimation:YES];
+                
+                [UIView beginAnimations:nil context:nil];
+                [UIView setAnimationDuration:2.5f];
+                
+                [self.view addSubview:profileViewController.view];
+                
+                [UIView commitAnimations];
+                
+                if([[OGHelper sharedInstance] isAuthorized]){
+                    btnFBLogin.enabled = NO;
+                    vLoading.hidden = YES;
+                }
+                
+                break;
             default:
                 break;
         }
@@ -1378,6 +1396,13 @@ static StartViewController *sharedHelper = nil;
     DLog(@"Start Connection failed! Error - %@ %@",
           [error localizedDescription],
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
+    
+    if([[OGHelper sharedInstance] isAuthorized]){
+        btnFBLogin.enabled = NO;
+        vLoading.hidden = YES;
+    }else{
+        btnFBLogin.enabled = YES;
+    }
 }
 
 #pragma mark DuelProductDownloaderControllerDelegate
@@ -1398,10 +1423,7 @@ static StartViewController *sharedHelper = nil;
 #pragma mark FConnect Methods
 
 - (void)request:(FBRequest *)request didLoad:(id)result {
-	if([[OGHelper sharedInstance] isAuthorized]){
-        btnFBLogin.enabled = NO;
-        vLoading.hidden = YES;
-    }
+	
 }
 
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
