@@ -35,36 +35,6 @@
 				<string key="IBProxiedObjectIdentifier">IBFirstResponder</string>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
-			<object class="IBUIView" id="196653292">
-				<reference key="NSNextResponder"/>
-				<int key="NSvFlags">-2147483374</int>
-				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUIActivityIndicatorView" id="798125577">
-						<reference key="NSNextResponder" ref="196653292"/>
-						<int key="NSvFlags">301</int>
-						<string key="NSFrame">{{150, 230}, {20, 20}}</string>
-						<reference key="NSSuperview" ref="196653292"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="343128217"/>
-						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<bool key="IBUIAnimating">YES</bool>
-					</object>
-				</array>
-				<string key="NSFrameSize">{320, 480}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="798125577"/>
-				<string key="NSReuseIdentifierKey">_NS:9</string>
-				<object class="NSColor" key="IBUIBackgroundColor" id="867838571">
-					<int key="NSColorSpace">1</int>
-					<bytes key="NSRGB">MCAwIDAAA</bytes>
-					<string key="IBUIColorCocoaTouchKeyPath">darkTextColor</string>
-				</object>
-				<float key="IBUIAlpha">0.60000002384185791</float>
-				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-			</object>
 			<object class="IBUIView" id="1048327278">
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
@@ -366,7 +336,7 @@
 						<string key="NSFrame">{{150, 376}, {50, 33}}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="333956349"/>
+						<reference key="NSNextKeyView" ref="51495452"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -386,13 +356,13 @@
 						<reference key="IBUIFontDescription" ref="717738861"/>
 						<reference key="IBUIFont" ref="172530466"/>
 					</object>
-					<object class="IBUILabel" id="333956349">
+					<object class="IBUILabel" id="51495452">
 						<reference key="NSNextResponder" ref="1048327278"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{217, 379}, {38, 23}}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="391282449"/>
+						<reference key="NSNextKeyView" ref="43542451"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -417,7 +387,7 @@
 						</object>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 					</object>
-					<object class="IBUIImageView" id="391282449">
+					<object class="IBUIImageView" id="43542451">
 						<reference key="NSNextResponder" ref="1048327278"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{256, 382}, {26, 19}}</string>
@@ -497,7 +467,11 @@
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<string key="IBUIText"/>
-								<reference key="IBUITextColor" ref="867838571"/>
+								<object class="NSColor" key="IBUITextColor" id="867838571">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MCAwIDAAA</bytes>
+									<string key="IBUIColorCocoaTouchKeyPath">darkTextColor</string>
+								</object>
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">0</int>
 								<float key="IBUIMinimumFontSize">10</float>
@@ -909,6 +883,32 @@
 						<reference key="IBUIBackgroundColor" ref="680841487"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
+					<object class="IBUIView" id="196653292">
+						<reference key="NSNextResponder" ref="1048327278"/>
+						<int key="NSvFlags">-2147483374</int>
+						<array class="NSMutableArray" key="NSSubviews">
+							<object class="IBUIActivityIndicatorView" id="798125577">
+								<reference key="NSNextResponder" ref="196653292"/>
+								<int key="NSvFlags">301</int>
+								<string key="NSFrame">{{150, 230}, {20, 20}}</string>
+								<reference key="NSSuperview" ref="196653292"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="343128217"/>
+								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<bool key="IBUIOpaque">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<bool key="IBUIAnimating">YES</bool>
+							</object>
+						</array>
+						<string key="NSFrameSize">{320, 480}</string>
+						<reference key="NSSuperview" ref="1048327278"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="798125577"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<reference key="IBUIBackgroundColor" ref="867838571"/>
+						<float key="IBUIAlpha">0.60000002384185791</float>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+					</object>
 				</array>
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
@@ -1126,7 +1126,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">lbMoneyForLogin</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="333956349"/>
+						<reference key="destination" ref="51495452"/>
 					</object>
 					<int key="connectionID">197</int>
 				</object>
@@ -1134,7 +1134,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">ivCointsForLogin</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="391282449"/>
+						<reference key="destination" ref="43542451"/>
 					</object>
 					<int key="connectionID">198</int>
 				</object>
@@ -1311,9 +1311,10 @@
 							<reference ref="492574981"/>
 							<reference ref="474960690"/>
 							<reference ref="659115295"/>
-							<reference ref="391282449"/>
+							<reference ref="43542451"/>
 							<reference ref="343128217"/>
-							<reference ref="333956349"/>
+							<reference ref="51495452"/>
+							<reference ref="196653292"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -1558,13 +1559,13 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">194</int>
-						<reference key="object" ref="333956349"/>
+						<reference key="object" ref="51495452"/>
 						<reference key="parent" ref="1048327278"/>
 						<string key="objectName">+500</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">196</int>
-						<reference key="object" ref="391282449"/>
+						<reference key="object" ref="43542451"/>
 						<reference key="parent" ref="1048327278"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -1573,7 +1574,7 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="798125577"/>
 						</array>
-						<reference key="parent" ref="0"/>
+						<reference key="parent" ref="1048327278"/>
 						<string key="objectName">LoadingView</string>
 					</object>
 					<object class="IBObjectRecord">
@@ -1657,6 +1658,7 @@
 						<string key="shareCancelButtonClick:">id</string>
 						<string key="showHelp:">id</string>
 						<string key="soundButtonClick:">id</string>
+						<string key="startActiveDuel:">id</string>
 						<string key="startDuel">id</string>
 						<string key="storeButtonClick:">id</string>
 					</dictionary>
@@ -1711,6 +1713,10 @@
 						</object>
 						<object class="IBActionInfo" key="soundButtonClick:">
 							<string key="name">soundButtonClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="startActiveDuel:">
+							<string key="name">startActiveDuel:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="startDuel">
