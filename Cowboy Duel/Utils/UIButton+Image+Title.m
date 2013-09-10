@@ -59,5 +59,10 @@
     [self setFrame:frame];
 }
 
-
+-(UILabel*)labelForTitle;
+{
+    NSArray *arr=[self subviews];
+    UILabel *label1=(UILabel*)[arr objectAtIndex:([arr count]-1)];
+    return label1;
+}
 @end
