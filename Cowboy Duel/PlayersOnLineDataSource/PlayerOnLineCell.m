@@ -100,8 +100,6 @@
     userDefense.text = [NSString stringWithFormat:@"%d",player.defense + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[player.rank intValue]]];
     userDefense.hidden = NO;
     userDefense = nil;
-
-    [self hideIndicatorConnectin];
     
     if (player.favorite) {
         favoriteStart.hidden = NO;
@@ -147,22 +145,6 @@
 -(void) setPlayerIcon:(UIImage*)iconImage;
 {
     [icon setImage:iconImage];
-}
-
--(void)showIndicatorConnectin;
-{
-    [indicatorConnectin startAnimating];
-    NSArray *arr=[btnDuel subviews];
-    UILabel *label1=(UILabel*)[arr objectAtIndex:([arr count]-2)];
-    [label1 setHidden:YES];
-}
-
--(void)hideIndicatorConnectin;
-{
-    [indicatorConnectin stopAnimating];
-    NSArray *arr=[btnDuel subviews];
-    UILabel *label1=(UILabel*)[arr objectAtIndex:([arr count]-2)];
-    [label1 setHidden:NO];
 }
 
 -(void)setRibbonHide:(BOOL)hide;

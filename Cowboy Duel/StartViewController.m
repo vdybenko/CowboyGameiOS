@@ -30,6 +30,7 @@
 
 #import "FunPageViewController.h"
 #import "ActiveDuelViewController.h"
+#import "LoginAnimatedViewController.h"
 
 #define kTwitterSettingsButtonIndex 0
 
@@ -855,6 +856,10 @@ static StartViewController *sharedHelper = nil;
     }else {
         [soundButton setImage:[UIImage imageNamed:@"pv_btn_music_off.png"] forState:UIControlStateNormal];
     }
+}
+
+- (IBAction)clickLogin:(id)sender {
+    [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
 }
 
 #pragma mark -

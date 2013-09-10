@@ -328,7 +328,6 @@ static AccountDataSource *sharedHelper = nil;
 {
   NSMutableString *tempString = [NSMutableString stringWithCapacity:10];
   for (int i = 0; i < 2; i++) {
-    NSLog(@"%u", (int)[string characterAtIndex:i]);
     [tempString appendString:[NSString stringWithFormat:@"%u", (int)[string characterAtIndex:i]]];
   }
   return [tempString intValue];
@@ -338,8 +337,6 @@ static AccountDataSource *sharedHelper = nil;
 {
   return secret_int ^ [self stringToInt:sessionID];
 }
-
-
 
 #pragma mark CustomNSURLConnection handlers
 

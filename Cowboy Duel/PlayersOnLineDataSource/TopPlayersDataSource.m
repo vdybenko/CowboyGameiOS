@@ -161,7 +161,6 @@ static const char *TOP_PLAYERS_URL =  "http://bidoncd.s3.amazonaws.com/top_board
    
     connection1 = nil;
     NSString *jsonString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-    DLog(@"PlayersOnLineDataSource jsonString %@",jsonString);
     NSArray *responseObject = ValidateObject([jsonString JSONValue], [NSArray class]);
     [arrItemsList removeAllObjects];
     for (NSDictionary *dic in responseObject) {

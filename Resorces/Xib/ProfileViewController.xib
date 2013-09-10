@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1536</int>
-		<string key="IBDocument.SystemVersion">12C60</string>
-		<string key="IBDocument.InterfaceBuilderVersion">3081</string>
-		<string key="IBDocument.AppKitVersion">1187.34</string>
-		<string key="IBDocument.HIToolboxVersion">625.00</string>
+		<int key="IBDocument.SystemTarget">1552</int>
+		<string key="IBDocument.SystemVersion">11G63</string>
+		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
+		<string key="IBDocument.AppKitVersion">1138.51</string>
+		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">2080</string>
+			<string key="NS.object.0">2083</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -36,7 +36,7 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIView" id="542892891">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">-2147483374</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIActivityIndicatorView" id="766688781">
@@ -44,8 +44,6 @@
 						<int key="NSvFlags">296</int>
 						<string key="NSFrame">{{374, 502}, {20, 20}}</string>
 						<reference key="NSSuperview" ref="542892891"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -54,8 +52,6 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{768, 1030}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="766688781"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
@@ -868,7 +864,6 @@
 						<string key="NSFrame">{{28, 938}, {284, 66}}</string>
 						<reference key="NSSuperview" ref="1048327278"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -1563,11 +1558,41 @@
 					<string key="className">ProfileViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="backToMenu:">id</string>
+						<string key="backToMenuFirstRun:">id</string>
+						<string key="backToMenuWanted:">id</string>
+						<string key="btnAddToFavoritesClick:">id</string>
+						<string key="btnFavouritesClick:">id</string>
+						<string key="btnLeaderbordClick:">id</string>
 						<string key="duelButtonClick:">id</string>
 						<string key="showStoreDefence:">id</string>
 						<string key="showStoreWeapon:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="backToMenu:">
+							<string key="name">backToMenu:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="backToMenuFirstRun:">
+							<string key="name">backToMenuFirstRun:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="backToMenuWanted:">
+							<string key="name">backToMenuWanted:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="btnAddToFavoritesClick:">
+							<string key="name">btnAddToFavoritesClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="btnFavouritesClick:">
+							<string key="name">btnFavouritesClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="btnLeaderbordClick:">
+							<string key="name">btnLeaderbordClick:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="duelButtonClick:">
 							<string key="name">duelButtonClick:</string>
 							<string key="candidateClassName">id</string>
@@ -1803,6 +1828,6 @@
 			<string key="pv_gold_background.png">{136, 27}</string>
 			<string key="pv_photo_frame.png">{99, 124}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">2080</string>
+		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
 </archive>

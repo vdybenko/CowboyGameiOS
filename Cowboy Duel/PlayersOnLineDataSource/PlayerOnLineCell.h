@@ -29,6 +29,4 @@
 -(void) initMainControls;
 -(void) setPlayerIcon:(UIImage*)iconImage;
 -(void) setRibbonHide:(BOOL)hide;
--(void)showIndicatorConnectin;
--(void)hideIndicatorConnectin;
 @end

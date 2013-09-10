@@ -419,7 +419,13 @@
     [lblGoldTitle setFont:[UIFont fontWithName: @"DecreeNarrow" size:55]];
     
     [lblGoldPlus setFont:[UIFont fontWithName: @"MyriadPro-Bold" size:55]];
-    lblGoldPlus.text = [NSString stringWithFormat:@"-%d",moneyExch];
+    NSString *st;
+    if (moneyExch==0) {
+        st = [NSString stringWithFormat:@"%d", moneyExch];
+    }else{
+        st = [NSString stringWithFormat:@"-%d", moneyExch];
+    }
+    lblGoldPlus.text = st;
     lblGoldPlus.gradientStartColor = [UIColor colorWithRed:255.0/255.0 green:181.0/255.0 blue:0.0/255.0 alpha:1.0];
     lblGoldPlus.gradientEndColor = [UIColor colorWithRed:255.0/255.0 green:140.0/255.0 blue:0.0/255.0 alpha:1.0];
     
@@ -434,11 +440,9 @@
             transaction.trType = [NSNumber numberWithInt:-1];
             transaction.trMoneyCh = [NSNumber numberWithInt:-moneyExch];
         }else{
-            if (playerAccount.money > 0) {
-                transaction.trType = [NSNumber numberWithInt:-1];
-                transaction.trMoneyCh = [NSNumber numberWithInt:playerAccount.money];
-            }
-            playerAccount.money=0;
+            moneyExch = playerAccount.money;
+            transaction.trType = [NSNumber numberWithInt:-1];
+            transaction.trMoneyCh = [NSNumber numberWithInt:-playerAccount.money];
         }
         
         [self increaseLoseCount];
@@ -833,15 +837,14 @@
 
 -(void)loseAnimation
 {
-    int iPhone5Delta = 200;//[UIScreen mainScreen].bounds.size.height - 480;
+    int iPhone5Delta = 200;
     
   loserImg.hidden = NO;
-//  if (teaching && !(duelWithBotCheck))oldMoneyForAnimation = [AccountDataSource sharedInstance].money;
   lblGold.text = [NSString stringWithFormat:@"%d",oldMoneyForAnimation];
   
   CGRect frameL = loserMoneyImg.frame;
   frameL.origin.x = 300;
-  frameL.origin.y = 500;//ivGoldCoin.frame.origin.y + goldPointBgView.frame.origin.y;
+  frameL.origin.y = 500;
   loserMoneyImg.frame = frameL;
   loserMoneyImg.hidden = YES;
   

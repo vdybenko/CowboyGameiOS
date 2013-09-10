@@ -232,22 +232,22 @@
 
 - (IBAction)btnMenuClicked:(id)sender
 {
-    [self dismissModalViewControllerAnimated:YES];
     if ([delegate respondsToSelector:@selector(backButtonClick:)])
     {
         [(FinalViewController *)delegate backButtonClick:sender];
     }
+    [self dismissModalViewControllerAnimated:YES];
     [self releaseComponents];
 }
 
 - (IBAction)btnAgainClicked:(id)sender
 {    
     [activityIndicatorView showView];
-    [self dismissModalViewControllerAnimated:YES];
     if ([(FinalViewController *)delegate respondsToSelector:@selector(tryButtonClick:)])
     {
         [(FinalViewController *)delegate tryButtonClick:sender];
     }
+    [self dismissModalViewControllerAnimated:YES];
     [self releaseComponents];
 }
 

@@ -12,8 +12,6 @@
 #import "BEAnimationView.h"
 #import "StartViewController.h"
 #import "TestAppDelegate.h"
-#import <FacebookSDK/FacebookSDK.h>
-#import "Facebook.h"
 #import "ActiveDuelViewController.h"
 #import "UIView+Dinamic_BackGround.h"
 #import "UIButton+Image+Title.h"
@@ -45,6 +43,7 @@ NSString *const URL_PAGE_IPAD_COMPETITION=@"http://cdfb.webkate.com/contest/firs
 
 @implementation LoginAnimatedViewController
 @synthesize delegate ,loginFacebookStatus, payment;
+@synthesize delegateFacebook;
 
 static LoginAnimatedViewController *sharedHelper = nil;
 + (LoginAnimatedViewController *) sharedInstance {
@@ -328,8 +327,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
         payment = NO;
         [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"loginFirstShow"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        payment = NO;
+        [delegateFacebook request:request didLoad:result];
     }
 }
 
@@ -337,7 +335,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
 	
     DLog(@"Facebook request failed: %@", [error description]);
-	
+	[delegateFacebook request:request didFailWithError:error];
 	//[facebook logout:self];
 }
 

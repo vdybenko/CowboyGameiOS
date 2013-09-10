@@ -251,8 +251,13 @@ static const CGFloat timeToStandartTitles = 1.8;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    [profilePictureView setProfileID:nil];
-    [profilePictureView setProfileID:playerAccount.facebookUser.id];
+    if ([playerAccount.accountID rangeOfString:@"A"].location != NSNotFound){
+        profilePictureViewDefault.image = [UIImage imageNamed:@"pv_photo_default.png"];
+        profilePictureViewDefault.hidden = NO;
+    }else{
+        [profilePictureView setProfileID:nil];
+        [profilePictureView setProfileID:playerAccount.facebookUser.id];
+    }
     lbPointsText.font = [UIFont fontWithName: @"MyriadPro-Semibold" size:24];
 
 //    NSString *name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel];
@@ -462,11 +467,18 @@ static const CGFloat timeToStandartTitles = 1.8;
 -(void)checkLocationOfViewForFBLogin;
 {
     [self refreshContentFromPlayerAccount];
-    [profilePictureView setProfileID:nil];
-    [profilePictureView setProfileID:playerAccount.facebookUser.id];
+    
+    if ([playerAccount.accountID rangeOfString:@"A"].location != NSNotFound){
+        profilePictureViewDefault.image = [UIImage imageNamed:@"pv_photo_default.png"];
+        profilePictureViewDefault.hidden = NO;
+    }else{
+        [profilePictureView setProfileID:nil];
+        [profilePictureView setProfileID:playerAccount.facebookUser.id];
+        profilePictureViewDefault.hidden = YES;
+        profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
+    }
     [profilePictureView setHidden:NO];
-    [profilePictureViewDefault setHidden:YES];
-    profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
+    
     [btnLeaderboard setEnabled:YES];
     [btnFavourites setEnabled:YES];
     [self setImageFromFacebook];
@@ -474,7 +486,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     NSString *name = [NSString stringWithFormat:@"fin_img_%drank.png", playerAccount.accountLevel];
     ivCurrentRank.image = [UIImage imageNamed:name];
     tfFBName.text = playerAccount.accountName;
-    
+    [tfFBName setFont: [UIFont fontWithName: @"MyriadPro-Bold" size:12]];
     SSConnection *connection = [SSConnection sharedInstance];
     [connection sendInfoPacket];
 }
