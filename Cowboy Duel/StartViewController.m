@@ -1418,6 +1418,9 @@ static StartViewController *sharedHelper = nil;
 - (void)connection:(CustomNSURLConnection *)connection
   didFailWithError:(NSError *)error
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/StartVC_didFailConnection" forKey:@"page"]];
     // inform the user
     DLog(@"Start Connection failed! Error - %@ %@",
           [error localizedDescription],

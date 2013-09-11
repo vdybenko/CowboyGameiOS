@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "400512301.535809"
+         timestampString = "400591729.538745"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1433"
-         endingLineNumber = "1433"
+         startingLineNumber = "1435"
+         endingLineNumber = "1435"
          landmarkName = "-connection:didFailWithError:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cowboy Duel/StartViewController.m"
-         timestampString = "400512301.535809"
+         timestampString = "400591729.538745"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1466"
-         endingLineNumber = "1466"
+         startingLineNumber = "1468"
+         endingLineNumber = "1468"
          landmarkName = "-request:didFailWithError:"
          landmarkType = "5">
       </FileBreakpoint>

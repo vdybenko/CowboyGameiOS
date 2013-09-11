@@ -281,6 +281,9 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
 - (void)connection:(CustomNSURLConnection *)connection
   didFailWithError:(NSError *)error
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:@"/FavouritesDS_didFailConnection" forKey:@"page"]];
     // inform the user
     DLog(@"Connection failed! Error - %@ %@",
          [error localizedDescription],
