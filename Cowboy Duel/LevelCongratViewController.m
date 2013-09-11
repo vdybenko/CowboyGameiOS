@@ -247,22 +247,22 @@
 
 - (IBAction)btnMenuClicked:(id)sender
 {
+    [self dismissModalViewControllerAnimated:YES];
     if ([delegate respondsToSelector:@selector(backButtonClick:)])
     {
         [(ActiveDuelViewController *)delegate backButtonClick:sender];
     }
-    [self dismissModalViewControllerAnimated:YES];
     [self releaseComponents];
 }
 
 - (IBAction)btnAgainClicked:(id)sender
 {
+    [self dismissModalViewControllerAnimated:YES];
     [activityIndicatorView showView];
     if ([delegate respondsToSelector:@selector(tryButtonClick:)]) 
     {
        [(ActiveDuelViewController *)delegate tryButtonClick:sender];
     }
-    [self dismissModalViewControllerAnimated:YES];
     [self releaseComponents];
 }
 

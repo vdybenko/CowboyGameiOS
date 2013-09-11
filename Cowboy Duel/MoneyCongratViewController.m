@@ -242,25 +242,25 @@
 }
 
 - (IBAction)btnAgainClicked:(id)sender
-{    
+{
+    [self dismissModalViewControllerAnimated:YES];
     [activityIndicatorView showView];
     if ([(ActiveDuelViewController *)delegate respondsToSelector:@selector(tryButtonClick:)])
     {
         [(ActiveDuelViewController *)delegate tryButtonClick:sender];
     }
-    [self dismissModalViewControllerAnimated:YES];
     [self releaseComponents];
 }
 
 - (IBAction) btnPostOnFBClicked:(id)sender
-{  
-    if ([[OGHelper sharedInstance]isAuthorized]) { 
+{
+    [self dismissModalViewControllerAnimated:YES];
+    if ([[OGHelper sharedInstance]isAuthorized]) {
         [MoneyCongratViewController achivmentMoney:playerAccount.money];
     }else {
         [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusMoney];
         [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
     }
-    [self dismissModalViewControllerAnimated:YES];
     [self releaseComponents];
 }
 #pragma mark  - Facebook methods
