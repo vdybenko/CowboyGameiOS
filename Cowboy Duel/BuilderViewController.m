@@ -677,6 +677,7 @@
 #pragma mark IBAction
 - (IBAction)touchCloseBtn:(id)sender {
     
+    [self touchCloseSideView:Nil];
     [UIView animateWithDuration:0.75
                      animations:^{
                          [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
