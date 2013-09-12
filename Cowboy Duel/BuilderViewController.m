@@ -472,7 +472,6 @@
                 }
             }
             playerAccount.visualViewCap = index;
-
             break;
         case CharacterPartFace:
             visualViewCharacter.head.image = part.imageForObject;
@@ -485,7 +484,6 @@
                 }
             }
             playerAccount.visualViewHead = index;
-
             break;
         case CharacterPartGun:
             
@@ -556,6 +554,7 @@
             break;
         case CharacterPartSuit:
             visualViewCharacter.suits.image = part.imageForObject;
+            
             [self.resultLabel setText:[NSString stringWithFormat:@"+ %d",part.action]];
 //            [self tempDefens:part.action];
             if (!isBtnForBuy) {
@@ -565,6 +564,7 @@
                 }
             }
             playerAccount.visualViewSuits = index;
+            
             break;
         default :
             break;
@@ -721,6 +721,7 @@
         [self sideOpenAnimation];
         self.backlightDefens.hidden = NO;
         [self backlightDefensAction];
+        [self cleanForClothes];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                             object:self
@@ -740,6 +741,7 @@
         [self sideOpenAnimation];
         self.backlightDefens.hidden = NO;
         [self backlightDefensAction];
+        [self cleanForClothes];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                             object:self
@@ -759,6 +761,7 @@
         [self sideOpenAnimation];
         self.backlightDefens.hidden = NO;
         [self backlightDefensAction];
+        [self cleanForClothes];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                             object:self
@@ -778,6 +781,7 @@
         [self sideOpenAnimation];
         self.backlightAtac.hidden = NO;
         [self backlightAtacAction];
+        [self cleanForClothes];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                             object:self
@@ -816,6 +820,7 @@
         [self sideOpenAnimation];
         self.backlightDefens.hidden = NO;
         [self backlightDefensAction];
+        [self cleanForClothes];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                             object:self
@@ -926,7 +931,12 @@
 
 -(void)cleanForSuits
 {
-
+    playerAccount.visualViewCap = 0;
+    playerAccount.visualViewBody = 0;
+    playerAccount.visualViewJackets = 0;
+    playerAccount.visualViewLegs = 0;
+    playerAccount.visualViewShoose = 0;
+    
     CDVisualViewCharacterPartCap *visualViewCharacterPartCap = [[visualViewDataSource arrayCap] objectAtIndex:0];
     visualViewCharacter.cap.image = [visualViewCharacterPartCap imageForObject];
     visualViewCharacterPartCap = nil;
@@ -950,8 +960,15 @@
     CDVisualViewCharacterPartSuits *visualViewCharacterPartSuits = [[visualViewDataSource arraySuits] objectAtIndex:0];
      visualViewCharacter.suits.image = [visualViewCharacterPartSuits imageForObject];
     visualViewCharacterPartSuits = nil;
+}
 
-
+-(void)cleanForClothes
+{
+    playerAccount.visualViewSuits = 0;
+    
+    CDVisualViewCharacterPartSuits *visualViewCharacterPartSuits = [[visualViewDataSource arraySuits] objectAtIndex:0];
+    visualViewCharacter.suits.image = [visualViewCharacterPartSuits imageForObject];
+    visualViewCharacterPartSuits = nil;
 }
 
 -(void)cleanAll
