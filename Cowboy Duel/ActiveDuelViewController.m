@@ -961,6 +961,8 @@ static CGFloat blinkBottomOriginY;
         
         if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow) {
             [self cleanPracticeHints];
+        }else{
+            [self opponentLost];
         }
         
         GameCenterViewController *gameCenterViewController;
@@ -973,7 +975,6 @@ static CGFloat blinkBottomOriginY;
 
         finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:(shotTime) andOponentTime:opponentTime andTeaching:teaching andAccount: playerAccount andOpAccount:opAccount];
         [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:1.0];
-        [self opponentLost];
     }else{
         if (opponentShape.typeOfBody == OpponentShapeTypeScarecrow) {
             [self performSelector:@selector(showGoodBodies) withObject:nil afterDelay:0.5f];
@@ -984,6 +985,7 @@ static CGFloat blinkBottomOriginY;
 
 -(void)opponentLost
 {
+    arrowToOpponent.hidden = YES;
     [opponentShape setStatusBody:OpponentShapeStatusDead];
 }
 
@@ -1248,9 +1250,11 @@ static CGFloat blinkBottomOriginY;
 
 -(void)showViewController:(UIViewController *)viewController
 {
-    [self hideFinalView];
-    [self presentModalViewController:viewController animated:YES];
-    viewController = nil;
+    if ([[self.navigationController visibleViewController] isKindOfClass:[ActiveDuelViewController class]] && ![finalView isHidden]) {
+        [self hideFinalView];
+        [self presentModalViewController:viewController animated:YES];
+        viewController = nil;
+    }
 }
 #pragma mark
 
@@ -1322,9 +1326,12 @@ static CGFloat blinkBottomOriginY;
         duelTimerEnd = YES;
         [timer invalidate];
     }
-    
-    [arrowToOpponent updateRelateveToView:opponentShape.imgBody mainView:self.view];
-    arrowToOpponent.hidden = NO;
+    if (opponentShape.opponentShapeStatus==OpponentShapeStatusDead) {
+        arrowToOpponent.hidden = YES;
+    }else{
+        [arrowToOpponent updateRelateveToView:opponentShape.imgBody mainView:self.view];
+        arrowToOpponent.hidden = NO;
+    }
 }
 
 #pragma mark
