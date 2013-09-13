@@ -66,6 +66,10 @@
 		037DF221154BDBAC003FACDF /* ItemsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 037DF21D154BDBAC003FACDF /* ItemsDataSource.m */; };
 		038366DD1549257700F3F63B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038366DC1549257700F3F63B /* MediaPlayer.framework */; };
 		038366DF154925A100F3F63B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038366DE154925A100F3F63B /* CoreTelephony.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		0CE6893E17E3547D009BFB9A /* btn_login.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CE6893C17E3547D009BFB9A /* btn_login.png */; };
+		0CE6893F17E3547D009BFB9A /* btn_login.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CE6893C17E3547D009BFB9A /* btn_login.png */; };
+		0CE6894017E3547D009BFB9A /* btn_login@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CE6893D17E3547D009BFB9A /* btn_login@2x.png */; };
+		0CE6894117E3547D009BFB9A /* btn_login@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CE6893D17E3547D009BFB9A /* btn_login@2x.png */; };
 		3115F80B171400550096CB3F /* FinalViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3115F80A171400550096CB3F /* FinalViewDataSource.m */; };
 		3115FB5015CACA5100C4D438 /* MoneyCongratViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3115FB4E15CACA5100C4D438 /* MoneyCongratViewController.m */; };
 		3115FB5115CACA5100C4D438 /* MoneyCongratViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3115FB4F15CACA5100C4D438 /* MoneyCongratViewController.xib */; };
@@ -1100,6 +1104,8 @@
 		037DF21D154BDBAC003FACDF /* ItemsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemsDataSource.m; sourceTree = "<group>"; };
 		038366DC1549257700F3F63B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		038366DE154925A100F3F63B /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		0CE6893C17E3547D009BFB9A /* btn_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_login.png; sourceTree = "<group>"; };
+		0CE6893D17E3547D009BFB9A /* btn_login@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_login@2x.png"; sourceTree = "<group>"; };
 		3115F809171400550096CB3F /* FinalViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinalViewDataSource.h; sourceTree = "<group>"; };
 		3115F80A171400550096CB3F /* FinalViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinalViewDataSource.m; sourceTree = "<group>"; };
 		3115FB4D15CACA5100C4D438 /* MoneyCongratViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MoneyCongratViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -2236,6 +2242,8 @@
 				318F238A16B972880081BE5E /* btn_store@2x.png */,
 				31B09E6F16BA5F8B00F424F2 /* btn_play.png */,
 				31B09E7016BA5F8B00F424F2 /* btn_play@2x.png */,
+				0CE6893C17E3547D009BFB9A /* btn_login.png */,
+				0CE6893D17E3547D009BFB9A /* btn_login@2x.png */,
 			);
 			path = StartView;
 			sourceTree = "<group>";
@@ -3921,6 +3929,7 @@
 				7689F5DE16B6A48E00D8AC5C /* ivHit@2x.png in Resources */,
 				318F233D16B9437A0081BE5E /* Default.png in Resources */,
 				318F233F16B9437A0081BE5E /* Default@2x.png in Resources */,
+				0CE6893E17E3547D009BFB9A /* btn_login.png in Resources */,
 				7685ABAF16B94D7200FA898C /* fin_img_0rank.png in Resources */,
 				7685ABB016B94D7200FA898C /* fin_img_0rank@2x.png in Resources */,
 				318F236716B95BCB0081BE5E /* st_title.png in Resources */,
@@ -3929,6 +3938,7 @@
 				318F237516B964380081BE5E /* btnFeedBackBackgr@2x.png in Resources */,
 				318F237B16B967AA0081BE5E /* pv_btn_music_off.png in Resources */,
 				318F237D16B967AA0081BE5E /* pv_btn_music_off@2x.png in Resources */,
+				0CE6894017E3547D009BFB9A /* btn_login@2x.png in Resources */,
 				318F237F16B967AA0081BE5E /* pv_btn_music_on.png in Resources */,
 				318F238116B967AA0081BE5E /* pv_btn_music_on@2x.png in Resources */,
 				318F238B16B972AB0081BE5E /* btn_help.png in Resources */,
@@ -4193,6 +4203,7 @@
 				BD83A48816720DFE003EE4B3 /* Win.mp3 in Resources */,
 				BD83A48916720DFE003EE4B3 /* follSound.mp3 in Resources */,
 				BD83A48A16720DFE003EE4B3 /* Duel.mp3 in Resources */,
+				0CE6893F17E3547D009BFB9A /* btn_login.png in Resources */,
 				BD83A48B16720DFE003EE4B3 /* Lose.mp3 in Resources */,
 				BD83A48C16720DFE003EE4B3 /* DecreeNarrow.ttf in Resources */,
 				BD83A48D16720DFE003EE4B3 /* MyriadPro-Bold.ttf in Resources */,
@@ -4327,6 +4338,7 @@
 				BD83A56C16720DFE003EE4B3 /* LoginAnimatedViewController.xib in Resources */,
 				BD83A56F16720DFE003EE4B3 /* kassa.aif in Resources */,
 				BD83A58016720DFE003EE4B3 /* shop_list_castel.png in Resources */,
+				0CE6894117E3547D009BFB9A /* btn_login@2x.png in Resources */,
 				BD83A58116720DFE003EE4B3 /* shop_list_castel@2x.png in Resources */,
 				BD83A58216720DFE003EE4B3 /* topPlayerCell_blue.png in Resources */,
 				BD83A58316720DFE003EE4B3 /* topPlayerCell_blue@2x.png in Resources */,

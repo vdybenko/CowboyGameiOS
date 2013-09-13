@@ -1,1 +1,1 @@
-#define kRevisionNumber @"exported"
+#define kRevisionNumber @"Unversioned directory"
