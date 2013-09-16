@@ -657,6 +657,8 @@ static StartViewController *sharedHelper = nil;
     [[SSConnection sharedInstance] disconnect];
     animationCheck = NO;
     inBackground = YES;
+    [gameCenterViewController lostConnection];
+    [self.navigationController popToViewController:self animated:NO];
     
     cloudX=460;
     cloud2X=-20;
