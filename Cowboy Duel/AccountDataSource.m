@@ -18,7 +18,7 @@ static const char *LIST_BOTS_URL = BASE_URL"users/get_user_data";
 @implementation AccountDataSource
 
 @synthesize money, accountName, teachingTimes, finalInfoTable, sessionID, accountID, accountDataSourceID, transactions, achivments , glNumber,
- accountLevel,accountPoints,accountWins,accountDraws,accountBigestWin,removeAds,avatar,age,homeTown,friends,facebookName, bot, activeDuel, accountSceneConfig;
+ accountLevel,accountPoints,accountWins,accountDraws,accountBigestWin,accountBigestMoney,removeAds,avatar,age,homeTown,friends,facebookName, bot, activeDuel, accountSceneConfig;
 
 @synthesize accountDefenseValue;
 @synthesize accountAtackValue;
@@ -68,6 +68,7 @@ static AccountDataSource *sharedHelper = nil;
         self.accountWins=0;
         self.accountDraws=0;
         self.accountBigestWin=0;
+        self.accountBigestMoney = 0;
         self.removeAds=0;
         self.accountDefenseValue = 0;
         self. accountAtackValue = 0;
@@ -116,6 +117,7 @@ static AccountDataSource *sharedHelper = nil;
   self.accountWins= [uDef integerForKey:@"WinCount"];
   self.accountDraws = [uDef integerForKey:@"DrawCount"];
   self.accountBigestWin = [uDef integerForKey:@"MaxWin"];
+  self.accountBigestMoney = [uDef integerForKey:@"MaxMoney"];
   self.removeAds = [uDef integerForKey:@"RemoveAds"];
     
     
@@ -371,6 +373,10 @@ static AccountDataSource *sharedHelper = nil;
 - (void)saveAccountBigestWin;
 {
     [[NSUserDefaults standardUserDefaults] setInteger:self.accountBigestWin forKey:@"MaxWin"];
+}
+- (void)saveAccountBigestMoney;
+{
+    [[NSUserDefaults standardUserDefaults] setInteger:self.accountBigestWin forKey:@"MaxMoney"];
 }
 - (void)saveRemoveAds;
 {

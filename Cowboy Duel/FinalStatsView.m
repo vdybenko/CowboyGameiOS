@@ -364,19 +364,22 @@ FXLabel *lblGoldPlus;
         [self showMessageOfNewLevel];
         finalViewDataSource.reachNewLevel=NO;
     }else if (finalViewDataSource.userWon) {
-        NSLog(@"finalViewDataSource.userWon YES");
-        if ((finalViewDataSource.oldMoney<500)&&(playerAccount.money>=500)&&(playerAccount.money<1000)) {
-            NSString *moneyText=[NSString stringWithFormat:@"%d",playerAccount.money];
-            [self showMessageOfMoreMoney:playerAccount.money withLabel:moneyText];
-        }else {
-            int thousandOld=finalViewDataSource.oldMoney/1000;
-            int thousandNew=playerAccount.money/1000;
-            int thousandSecond=(playerAccount.money % 1000)/100;
-            if (thousandNew>thousandOld) {
-                if (thousandSecond==0) {
-                    [self showMessageOfMoreMoney:playerAccount.money withLabel:[NSString stringWithFormat:@"+%dK",thousandNew]];
-                }else {
-                    [self showMessageOfMoreMoney:playerAccount.money withLabel:[NSString stringWithFormat:@"+%d.%dK",thousandNew,thousandSecond]];
+        if(playerAccount.money>playerAccount.accountBigestMoney){
+            if (playerAccount.money<1000) {
+                if ((finalViewDataSource.oldMoney<500)&&(playerAccount.money>=500)) {
+                    NSString *moneyText=[NSString stringWithFormat:@"%d",playerAccount.money];
+                    [self showMessageOfMoreMoney:playerAccount.money withLabel:moneyText];
+                }
+            }else {
+                int thousandOld=finalViewDataSource.oldMoney/1000;
+                int thousandNew=playerAccount.money/1000;
+                int thousandSecond=(playerAccount.money % 1000)/100;
+                if (thousandNew>thousandOld) {
+                    if (thousandSecond==0) {
+                        [self showMessageOfMoreMoney:playerAccount.money withLabel:[NSString stringWithFormat:@"+%dK",thousandNew]];
+                    }else {
+                        [self showMessageOfMoreMoney:playerAccount.money withLabel:[NSString stringWithFormat:@"+%d.%dK",thousandNew,thousandSecond]];
+                    }
                 }
             }
         }

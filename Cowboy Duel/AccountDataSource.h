@@ -22,6 +22,7 @@
 @property(nonatomic) NSInteger accountWins; 
 @property(nonatomic) NSInteger accountDraws; 
 @property(nonatomic) NSInteger accountBigestWin;
+@property(nonatomic) NSInteger accountBigestMoney;
 @property(nonatomic) GameSceneConfig *accountSceneConfig;
 @property(nonatomic) NSInteger removeAds;
 @property(nonatomic) BOOL activeDuel;
@@ -87,6 +88,7 @@
 - (void)saveAccountWins;
 - (void)saveAccountDraws;
 - (void)saveAccountBigestWin;
+- (void)saveAccountBigestMoney;
 - (void)saveRemoveAds;
 - (void)saveAvatar;
 - (void)saveAge;

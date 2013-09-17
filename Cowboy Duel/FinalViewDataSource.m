@@ -221,6 +221,17 @@
         }
     }
     [playerAccount saveAccountBigestWin];
+    
+    if (playerAccount.accountBigestMoney==0){
+        playerAccount.accountBigestMoney=playerAccount.money;
+    }
+    else
+    {
+        if (playerAccount.money>playerAccount.accountBigestMoney) {
+            playerAccount.accountBigestMoney=playerAccount.money;
+        }
+    }
+    [playerAccount saveAccountBigestMoney];
 }
 
 -(void)increaseLoseCount;
