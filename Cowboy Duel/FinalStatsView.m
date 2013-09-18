@@ -140,31 +140,8 @@ FXLabel *lblGoldPlus;
     lblGoldPlus.gradientEndColor = [UIColor colorWithRed:255.0/255.0 green:140.0/255.0 blue:0.0/255.0 alpha:1.0];
     lblGoldPlus.backgroundColor = [UIColor clearColor];
     [self addSubview:lblGoldPlus];
-    
-//    if (finalViewDataSource.reachNewLevel) {
-//        [self showMessageOfNewLevel];
-//        finalViewDataSource.reachNewLevel=NO;
-//    }
 
     if (finalViewDataSource.userWon) {
-//        NSLog(@"finalViewDataSource.userWon YES");
-//        if ((finalViewDataSource.oldMoney<500)&&(playerAccount.money>=500)&&(playerAccount.money<1000)) {
-//            NSString *moneyText=[NSString stringWithFormat:@"%d",playerAccount.money];
-//            [self showMessageOfMoreMoney:playerAccount.money withLabel:moneyText];
-//        }else {
-//            int thousandOld=finalViewDataSource.oldMoney/1000;
-//            int thousandNew=playerAccount.money/1000;
-//            int thousandSecond=(playerAccount.money % 1000)/100;
-//            if (thousandNew>thousandOld) {
-//                if (thousandSecond==0) {
-//                    [self showMessageOfMoreMoney:playerAccount.money withLabel:[NSString stringWithFormat:@"+%dK",thousandNew]];
-//                }else {
-//                    [self showMessageOfMoreMoney:playerAccount.money withLabel:[NSString stringWithFormat:@"+%d.%dK",thousandNew,thousandSecond]];
-//                }
-//            }
-//        }
-        
-        finalViewDataSource.oldMoney=0;
         [self winAnimation];
     }
     else
@@ -364,9 +341,9 @@ FXLabel *lblGoldPlus;
         [self showMessageOfNewLevel];
         finalViewDataSource.reachNewLevel=NO;
     }else if (finalViewDataSource.userWon) {
-        if(playerAccount.money>playerAccount.accountBigestMoney){
+        if(playerAccount.money>=playerAccount.accountBigestMoney){
             if (playerAccount.money<1000) {
-                if ((finalViewDataSource.oldMoney<500)&&(playerAccount.money>=500)) {
+                if ((finalViewDataSource.oldMoney<300)&&(playerAccount.money>=300)) {
                     NSString *moneyText=[NSString stringWithFormat:@"%d",playerAccount.money];
                     [self showMessageOfMoreMoney:playerAccount.money withLabel:moneyText];
                 }

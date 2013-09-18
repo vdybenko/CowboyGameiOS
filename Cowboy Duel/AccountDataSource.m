@@ -306,16 +306,23 @@ static AccountDataSource *sharedHelper = nil;
         return;
     }  
 //    transaction
+   
     if([responseObject objectForKey:@"money"] && [[responseObject objectForKey:@"user_id"] isEqualToString:accountID])
     {
         money = [self crypt:[[responseObject objectForKey:@"money"] intValue]];
         if(money < 0) money = 0;
-        DLog(@"money %d", money);
+        
         NSUserDefaults *usrDef = [NSUserDefaults standardUserDefaults];
-        [usrDef removeObjectForKey:@"transactions"];
-        [self.transactions removeAllObjects];
-        [usrDef setInteger:money forKey:@"money"];
-        [usrDef synchronize];
+        NSString *stRealID = [usrDef stringForKey:@"id"];
+        if ([[responseObject objectForKey:@"user_id"] isEqualToString:stRealID]) {
+            [usrDef removeObjectForKey:@"transactions"];
+            [self.transactions removeAllObjects];
+            [usrDef setInteger:money forKey:@"money"];
+            [usrDef synchronize];
+            DLog(@"money real %d", money);
+        }else{
+            DLog(@"money falt %d", money);
+        }
         
         [[NSNotificationCenter defaultCenter] postNotificationName: kCheckfFBLoginSession
                                                             object:self
@@ -376,7 +383,7 @@ static AccountDataSource *sharedHelper = nil;
 }
 - (void)saveAccountBigestMoney;
 {
-    [[NSUserDefaults standardUserDefaults] setInteger:self.accountBigestWin forKey:@"MaxMoney"];
+    [[NSUserDefaults standardUserDefaults] setInteger:self.accountBigestMoney forKey:@"MaxMoney"];
 }
 - (void)saveRemoveAds;
 {

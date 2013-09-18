@@ -218,6 +218,7 @@ static StartViewController *sharedHelper = nil;
             [playerAccount saveAccountWins];
             [playerAccount saveAccountDraws];
             [playerAccount saveAccountBigestWin];
+            [playerAccount saveAccountBigestMoney];
             [playerAccount saveRemoveAds];
             [playerAccount saveAvatar];
             [playerAccount saveAge];

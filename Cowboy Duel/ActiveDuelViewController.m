@@ -498,7 +498,8 @@ static CGFloat blinkBottomOriginY;
     if (tryAgain) {
         [self readyToStart];
     }
-
+    finalViewDataSource.oldMoney = playerAccount.money;
+    finalViewDataSource.oldPoints = playerAccount.accountPoints;
 }
 
 -(void)viewDidAppear:(BOOL)animated
