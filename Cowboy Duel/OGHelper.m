@@ -697,6 +697,14 @@ static OGHelper *sharedHelper = nil;
     if ([FBSession.activeSession.permissions
          indexOfObject:@"publish_actions"] == NSNotFound) {
         // No permissions found in session, ask for it
+        if (FBSession.activeSession.isOpen) {
+            // If permissions granted, publish the story
+            [FBRequestConnection startForPostWithGraphPath:requestSt graphObject:graphObject completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                DLog(@"%@ %@", result, error);
+                
+            }];
+
+        }else{
         [FBSession.activeSession
          reauthorizeWithPublishPermissions:
          [NSArray arrayWithObject:@"publish_actions"]
@@ -710,6 +718,7 @@ static OGHelper *sharedHelper = nil;
                  }];
              }
          }];
+        }
     } else {
         // If permissions present, publish the story
         [FBRequestConnection startForPostWithGraphPath:requestSt graphObject:graphObject completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
