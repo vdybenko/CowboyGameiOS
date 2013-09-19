@@ -400,7 +400,7 @@ static StartViewController *sharedHelper = nil;
     lbFBLogin.text = NSLocalizedString(@"LoginBtnLogInAtStart", nil);
     
     if([[OGHelper sharedInstance] isAuthorized]){
-        btnFBLogin.enabled = NO;
+        btnFBLogin.hidden = YES;
         vLoading.hidden = YES;
         
         lbMoneyForLogin.hidden = YES;
@@ -834,7 +834,7 @@ static StartViewController *sharedHelper = nil;
 
 - (IBAction)clickLogin:(id)sender {
     vLoading.hidden = NO;
-    btnFBLogin.enabled = NO;
+    btnFBLogin.hidden = YES;
     [LoginAnimatedViewController sharedInstance].loginFacebookStatus = LoginFacebookStatusProfile;
     [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
     [LoginAnimatedViewController sharedInstance].delegateFacebook = self;
@@ -1372,7 +1372,7 @@ static StartViewController *sharedHelper = nil;
                 [UIView commitAnimations];
                 
                 if([[OGHelper sharedInstance] isAuthorized]){
-                    btnFBLogin.enabled = NO;
+                    btnFBLogin.hidden = YES;
                     vLoading.hidden = YES;
                     
                     lbMoneyForLogin.hidden = YES;
@@ -1430,13 +1430,13 @@ static StartViewController *sharedHelper = nil;
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
     
     if([[OGHelper sharedInstance] isAuthorized]){
-        btnFBLogin.enabled = NO;
+        btnFBLogin.hidden = YES;
         vLoading.hidden = YES;
         
         lbMoneyForLogin.hidden = YES;
         ivCointsForLogin.hidden  =YES;
     }else{
-        btnFBLogin.enabled = YES;
+        btnFBLogin.hidden = NO;
     }
 }
 
@@ -1463,13 +1463,13 @@ static StartViewController *sharedHelper = nil;
 
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
     if([[OGHelper sharedInstance] isAuthorized]){
-        btnFBLogin.enabled = NO;
+        btnFBLogin.hidden = YES;
         vLoading.hidden = YES;
         
         lbMoneyForLogin.hidden = YES;
         ivCointsForLogin.hidden  =YES;
     }else{
-        btnFBLogin.enabled = YES;
+        btnFBLogin.hidden = NO;
     }
 }
 
