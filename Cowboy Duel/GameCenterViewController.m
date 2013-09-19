@@ -488,7 +488,6 @@ static GameCenterViewController *gameCenterViewController;
     
     
     if (opponentEndMatch) {
-        //[self duelCancel];
         [self lostConnection];
         [AdvertisingAppearController advertisingCountIncrease];
     }

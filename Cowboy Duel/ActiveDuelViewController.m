@@ -65,6 +65,7 @@
     BOOL duelEnd;
     
     BOOL tryAgain;
+    BOOL isTryAgainEnabled;
 
     NSMutableArray *barellObjectArray;
     NSMutableArray *cactusObjectArray;
@@ -131,7 +132,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnSkip;
 @property (weak, nonatomic) IBOutlet UIButton *btnBack;
 
-
 @end
 
 @implementation ActiveDuelViewController
@@ -172,6 +172,7 @@ static CGFloat blinkBottomOriginY;
         [StartViewController sharedInstance].playerStop;
         
         isOpponentShotFrequency = YES;
+        isTryAgainEnabled = YES;
     }
     return self;
 }
@@ -1102,6 +1103,10 @@ static CGFloat blinkBottomOriginY;
 -(void)duelCancel;
 {
     btnTry.enabled = NO;
+    isTryAgainEnabled = NO;
+    if(finalView){
+        finalView.isTryAgainEnabled = NO;
+    }
     if([presentVC respondsToSelector:@selector(blockTryAgain)]){
         [presentVC performSelector:@selector(blockTryAgain)];
     }
@@ -1120,7 +1125,7 @@ static CGFloat blinkBottomOriginY;
     CGRect finalFrame = CGRectMake(12, 90, 294, 165);
 
     finalView = [[FinalStatsView alloc] initWithFrame:finalFrame andDataSource:fvDataSource];
-    
+    finalView.isTryAgainEnabled = isTryAgainEnabled;
     finalView.activeDuelViewController = self;
     
     finalView.center = self.crossImageView.center;
@@ -1260,24 +1265,13 @@ static CGFloat blinkBottomOriginY;
 -(void)showViewController:(UIViewController *)viewController
 {
     if ([[self.navigationController visibleViewController] isKindOfClass:[ActiveDuelViewController class]] && ![finalView isHidden]) {
-        [self hideFinalView];
         [self presentModalViewController:viewController animated:YES];
         presentVC = viewController;
-        if(![btnTry isEnabled]&&[presentVC respondsToSelector:@selector(blockTryAgain)]){
-            [presentVC performSelector:@selector(blockTryAgain)];
-        }
+        [self hideFinalView];
         viewController = nil;
     }
 }
 
--(void)setBlockForTryAgain:(BOOL)block;
-{
-    if (block) {
-        btnTry.enabled = NO;
-    }else{
-        btnTry.enabled = YES;
-    }
-}
 #pragma mark
 
 -(void)restartCountdown;

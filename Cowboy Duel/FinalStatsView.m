@@ -337,9 +337,6 @@ FXLabel *lblGoldPlus;
 
 -(void)checkOfCongratulationControllers
 {
-    [self showMessageOfNewLevel];
-    finalViewDataSource.reachNewLevel=NO;
-    return;
     if (finalViewDataSource.reachNewLevel) {
         [self showMessageOfNewLevel];
         finalViewDataSource.reachNewLevel=NO;
