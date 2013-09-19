@@ -241,7 +241,12 @@
                      if (runAnimation)[self shineAnimation];
                    }];
 }
+#pragma mark -
 
+-(void)blockTryAgain;
+{
+    btnAgain.enabled = NO;
+}
 #pragma mark -
 #pragma mark IBActions
 

@@ -492,9 +492,6 @@ static GameCenterViewController *gameCenterViewController;
         [self lostConnection];
         [AdvertisingAppearController advertisingCountIncrease];
     }
-    
-    //        appear advertising
-    
 }
 
 -(void)lostConnection
@@ -1056,7 +1053,9 @@ static GameCenterViewController *gameCenterViewController;
                 [self lostConnection];
                 [AdvertisingAppearController advertisingCountIncrease];
             }
-            else opponentEndMatch = YES;
+            else
+                [delegate duelCancel];
+                opponentEndMatch = YES;
         }
 			break;
             

@@ -12,6 +12,7 @@
 
 @interface MoneyCongratViewController : UIViewController<MemoryManagement>
 - (id) initForAchivmentPlayerAccount:(AccountDataSource *)pPlayerAccount withLabel:(NSString*)pLabel andController:(id)delegateController tryButtonEnable:(BOOL)tryButtonEnable;
+-(void)blockTryAgain;
 +(void)achivmentMoney:(NSUInteger)money;
 
 @end

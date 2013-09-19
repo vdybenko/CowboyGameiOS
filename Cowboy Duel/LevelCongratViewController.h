@@ -13,6 +13,7 @@
 
 @interface LevelCongratViewController : UIViewController<MemoryManagement>
 - (id) initForNewLevelPlayerAccount:(AccountDataSource *)pPlayerAccount andController:(id)delegateController tryButtonEnable:(BOOL)tryButtonEnable;
+-(void)blockTryAgain;
 +(void)newLevelNumber:(NSInteger)level;
 
 @end

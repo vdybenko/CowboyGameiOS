@@ -109,7 +109,7 @@
     __weak IBOutlet UIImageView *blinkTop;
     __weak IBOutlet ArrowToOpponent *arrowToOpponent;
     
-    
+    UIViewController *presentVC;
 }
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *floatView;
@@ -129,7 +129,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *lbUserLifeLeft;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnSkip;
-//@property (weak, nonatomic) IBOutlet UIButton *btnTry;
 @property (weak, nonatomic) IBOutlet UIButton *btnBack;
 
 
@@ -500,6 +499,8 @@ static CGFloat blinkBottomOriginY;
     }
     finalViewDataSource.oldMoney = playerAccount.money;
     finalViewDataSource.oldPoints = playerAccount.accountPoints;
+    
+    presentVC = nil;
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -572,8 +573,8 @@ static CGFloat blinkBottomOriginY;
     //[self releaseComponents];
     // Dispose of any resources that can be recreated.
 }
-
-#pragma mark
+#pragma mark -
+#pragma mark ActiveDuelViewControllerDelegate
 -(void)countUpBulets;
 {
     int countBullets = [DuelRewardLogicController countUpBuletsWithOponentLevel:opAccount.accountLevel defense:opAccount.accountDefenseValue playerAtack:playerAccount.accountAtackValue];
@@ -1098,6 +1099,13 @@ static CGFloat blinkBottomOriginY;
     [self.navigationController pushViewController:controller animated:YES];
 }
 
+-(void)duelCancel;
+{
+    btnTry.enabled = NO;
+    if([presentVC respondsToSelector:@selector(blockTryAgain)]){
+        [presentVC performSelector:@selector(blockTryAgain)];
+    }
+}
 
 #pragma mark - FinalVC
 -(void)showFinalView: (FinalViewDataSource *) fvDataSource;
@@ -1254,7 +1262,20 @@ static CGFloat blinkBottomOriginY;
     if ([[self.navigationController visibleViewController] isKindOfClass:[ActiveDuelViewController class]] && ![finalView isHidden]) {
         [self hideFinalView];
         [self presentModalViewController:viewController animated:YES];
+        presentVC = viewController;
+        if(![btnTry isEnabled]&&[presentVC respondsToSelector:@selector(blockTryAgain)]){
+            [presentVC performSelector:@selector(blockTryAgain)];
+        }
         viewController = nil;
+    }
+}
+
+-(void)setBlockForTryAgain:(BOOL)block;
+{
+    if (block) {
+        btnTry.enabled = NO;
+    }else{
+        btnTry.enabled = YES;
     }
 }
 #pragma mark
@@ -1539,18 +1560,14 @@ float frequencyOpponentShoting()
     }else{
         [nav popToViewController:[nav.viewControllers objectAtIndex:1] animated:YES];
     }
-    [self releaseComponents];
-        
+    
     GameCenterViewController *gameCenterViewController;
     if (self.delegate){
         gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
         [gameCenterViewController matchCanseled];
-    }    
-//    if ([self.delegate isKindOfClass:[GameCenterViewController class]]) {
-//        [self.delegate performSelector:@selector(matchCanseled)];
-//    }
+    }
     
-    
+    [self releaseComponents];
 }
 
 -(IBAction)tryButtonClick:(id)sender
@@ -1775,6 +1792,8 @@ float frequencyOpponentShoting()
     self.crossImageView = nil;
     self.userLiveImageView = nil;
     self.lbUserLifeLeft = nil;
+    
+    presentVC = nil;
     
     [oponentsViewCoordinates removeAllObjects];
 }

@@ -229,6 +229,13 @@
 }
 
 #pragma mark -
+
+-(void)blockTryAgain;
+{
+    btnTryAgain.enabled = NO;
+}
+#pragma mark -
+
 #pragma mark IBActions
 
 - (IBAction)btnMenuClicked:(id)sender
