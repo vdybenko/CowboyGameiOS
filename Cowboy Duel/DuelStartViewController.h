@@ -52,7 +52,7 @@
     IconDownloader *iconDownloader;
     
     
-    __weak IBOutlet UIButton *_btnStart;
+    __weak IBOutlet UIButton *btnStart;
     
     __weak IBOutlet UIView *_vBackground;
     
@@ -68,7 +68,7 @@
     __weak IBOutlet UILabel *lbUserDuelsWinCount;
     
     __weak IBOutlet UILabel *_lbNameOponent;
-    __weak IBOutlet UIImageView *_ivOponent;
+    __weak IBOutlet UIImageView *ivOponent;
     __weak IBOutlet UILabel *lbOpponentRank;
     __weak IBOutlet UILabel *lbOpponentDuelsWin;
     __weak IBOutlet UILabel *lbOpponentDuelsWinCount;
@@ -86,12 +86,12 @@
        
 }
 @property (weak, nonatomic) IBOutlet UIImageView *_ivPlayer;
-@property (weak, nonatomic) IBOutlet UIImageView *_ivOponent;
+@property (weak, nonatomic) IBOutlet UIImageView *ivOponent;
 @property (weak, nonatomic) IBOutlet UILabel *_lbNamePlayer;
 @property (weak, nonatomic) IBOutlet UILabel *_lbNameOponent;
 @property (weak, nonatomic) IBOutlet UILabel  *lbOpponentDuelsWinCount;
 @property (weak, nonatomic) IBOutlet UIButton *_btnBack;
-@property (weak, nonatomic) IBOutlet UIButton *_btnStart;
+@property (weak, nonatomic) IBOutlet UIButton *btnStart;
 @property (weak, nonatomic) IBOutlet UIView *_vBackground;
 @property (weak, nonatomic) IBOutlet UIView  *_vWait;
 @property (weak, nonatomic) IBOutlet FBProfilePictureView *fbPlayerImage;

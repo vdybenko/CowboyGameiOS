@@ -32,8 +32,8 @@
 @end
 
 @implementation DuelStartViewController
-@synthesize _ivOponent, delegate ,oponentNameOnLine, serverName, oponentAvailable, tryAgain;
-@synthesize _btnStart, _ivPlayer, _vBackground, _lbNamePlayer, _lbNameOponent, _btnBack;
+@synthesize ivOponent, delegate ,oponentNameOnLine, serverName, oponentAvailable, tryAgain;
+@synthesize btnStart, _ivPlayer, _vBackground, _lbNamePlayer, _lbNameOponent, _btnBack;
 @synthesize _vWait, lbOpponentDuelsWinCount;
 @synthesize userAtack;
 @synthesize userDefense;
@@ -97,8 +97,8 @@ static const char *GC_URL =  BASE_URL"api/gc";
     [_btnBack setTitleByLabel:@"BACK"];
     [_btnBack changeColorOfTitleByLabel:buttonsTitleColor];
     
-    [_btnStart setTitleByLabel:@"START"];
-    [_btnStart changeColorOfTitleByLabel:buttonsTitleColor];
+    [btnStart setTitleByLabel:@"START"];
+    [btnStart changeColorOfTitleByLabel:buttonsTitleColor];
 
     UIFont *fontNames=[UIFont fontWithName: @"MyriadPro-Semibold" size:16];
     UIFont *fontSimpleText=[UIFont fontWithName: @"MyriadPro-Semibold" size:13];
@@ -158,7 +158,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
     _lbNameOponent.text = oponentAccount.accountName;
     _lbNameOponent.font=fontNames;
 
-    _ivOponent.contentMode = UIViewContentModeScaleAspectFit;
+    ivOponent.contentMode = UIViewContentModeScaleAspectFit;
     
     NSString *nameOfRank=[NSString stringWithFormat:@"%dRank",oponentAccount.accountLevel];
     lbOpponentRank.text = NSLocalizedString(nameOfRank, @"");
@@ -211,6 +211,8 @@ static const char *GC_URL =  BASE_URL"api/gc";
         self.fbOpponentImage.profileID = playerName;
     } else {
         [self.fbOpponentImage setHidden:YES];
+        ivOponent.image = [UIImage imageNamed:@"pv_photo_default.png"];
+        ivOponent.hidden = NO;
     }
 
 }
@@ -225,11 +227,11 @@ static const char *GC_URL =  BASE_URL"api/gc";
 -(void)viewDidAppear:(BOOL)animated
 {
     if (oponentAvailable) {
-        [_btnStart setEnabled:YES];
-        [_btnStart setHidden:NO];
+        [btnStart setEnabled:YES];
+        [btnStart setHidden:NO];
         [_vWait setHidden:YES];
     }else{
-        [_btnStart setHidden:YES];
+        [btnStart setHidden:YES];
         [_vWait setHidden:NO];
     }
     if ((!serverType)&&(!tryAgain)) {
@@ -262,17 +264,17 @@ static const char *GC_URL =  BASE_URL"api/gc";
 
 -(void)viewDidDisappear:(BOOL)animated
 {
-    _ivOponent.image = nil;
+    ivOponent.image = nil;
     [_vWait setHidden:YES];
     _vWait.hidden = YES;
 }
 
 -(void)releaseComponents
 {
-    _ivOponent = nil;
+    ivOponent = nil;
     oponentNameOnLine = nil;
     serverName = nil;
-    _btnStart = nil;
+    btnStart = nil;
     _ivPlayer = nil;
     _vBackground = nil;
     _lbNamePlayer = nil;
@@ -335,7 +337,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
 {
     if (!serverType) waitTimer = [NSTimer scheduledTimerWithTimeInterval:7.0 target:self selector:@selector(waitTimerTick) userInfo:nil repeats:NO];
     [delegate btnClickStart];
-    _btnStart.enabled = NO;
+    btnStart.enabled = NO;
     _vWait.hidden = NO;
 }
 
@@ -362,11 +364,11 @@ static const char *GC_URL =  BASE_URL"api/gc";
     if ([result isKindOfClass:[NSArray class]] && ([result count] > 0)) {
         result = [result objectAtIndex:0];
     }
-    _ivOponent.image = [[UIImage alloc] initWithData:result];
+    ivOponent.image = [[UIImage alloc] initWithData:result];
     
     NSString *name=[[OGHelper sharedInstance ] getClearName:oponentAccount.accountID];
     NSString *path = [NSString stringWithFormat:@"%@/icon_%@.png",[[OGHelper sharedInstance] getSavePathForList],name];
-    [UIImagePNGRepresentation(_ivOponent.image) writeToFile:path atomically:YES];
+    [UIImagePNGRepresentation(ivOponent.image) writeToFile:path atomically:YES];
 }
 
 /**
@@ -375,9 +377,9 @@ static const char *GC_URL =  BASE_URL"api/gc";
  */
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
     DLog(@"DuelStartViewController didFailWithError: %@  error %@"  , request,[error description]);
-    _ivOponent.image = [UIImage imageNamed:@"pv_photo_default.png"];
-    _ivOponent.transform = CGAffineTransformIdentity;
-    _ivOponent.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    ivOponent.image = [UIImage imageNamed:@"pv_photo_default.png"];
+    ivOponent.transform = CGAffineTransformIdentity;
+    ivOponent.transform = CGAffineTransformMakeScale(-1.0, 1.0);
 }
 
 #pragma mark -
@@ -422,7 +424,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
 {
 //   Выводитса сообщение NSLocalizedString(@"RanAway", @"")
     _vWait.hidden = YES;
-    [_btnStart setEnabled:NO];
+    [btnStart setEnabled:NO];
 }
 
 - (void)setMessageTry   
@@ -469,7 +471,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
     NSString *path=[NSString stringWithFormat:@"%@/icon_%@.png",[[OGHelper sharedInstance] getSavePathForList],name];
     if([[NSFileManager defaultManager] fileExistsAtPath:path]){  
         UIImage *image=[UIImage loadImageFullPath:path];
-        _ivOponent.image = image;
+        ivOponent.image = image;
     }else {
         if ([oponentAccount.accountID rangeOfString:@"F"].location != NSNotFound) {
             iconDownloader = [[IconDownloader alloc] init];
@@ -484,9 +486,9 @@ static const char *GC_URL =  BASE_URL"api/gc";
             }
             [iconDownloader startDownloadSimpleIcon];
         }else {
-            _ivOponent.image = [UIImage imageNamed:@"pv_photo_default.png"];
-            _ivOponent.transform = CGAffineTransformIdentity;
-            _ivOponent.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+            ivOponent.image = [UIImage imageNamed:@"pv_photo_default.png"];
+            ivOponent.transform = CGAffineTransformIdentity;
+            ivOponent.transform = CGAffineTransformMakeScale(-1.0, 1.0);
             
         }
     }   
@@ -522,6 +524,6 @@ static const char *GC_URL =  BASE_URL"api/gc";
 #pragma mark IconDownloaderDelegate
 - (void)appImageDidLoad:(NSIndexPath *)indexPath
 {
-    _ivOponent.image = iconDownloader.imageDownloaded;    
+    ivOponent.image = iconDownloader.imageDownloaded;    
 }
 @end
