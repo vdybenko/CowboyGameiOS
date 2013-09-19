@@ -1272,6 +1272,14 @@ static CGFloat blinkBottomOriginY;
     }
 }
 
+-(void)removeViewController;
+{
+    if (presentVC) {
+        [presentVC dismissModalViewControllerAnimated:YES];
+        [presentVC performSelector:@selector(releaseComponents)];
+    }
+}
+
 #pragma mark
 
 -(void)restartCountdown;

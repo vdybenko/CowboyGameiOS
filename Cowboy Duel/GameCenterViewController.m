@@ -515,6 +515,7 @@ static GameCenterViewController *gameCenterViewController;
             [delegate performSelector:@selector(showFinalView:) withObject:finalViewDataSource];
         }
         [delegate shutDownTimer];
+        [delegate duelCancel];
     }else if ([self.parentVC.navigationController.visibleViewController isKindOfClass:([DuelStartViewController class])]){
         UIViewController *tempVC = [self.parentVC.navigationController.viewControllers objectAtIndex:1] ;
         [self.parentVC.navigationController popToViewController:tempVC animated:YES];
@@ -688,6 +689,8 @@ static GameCenterViewController *gameCenterViewController;
             
             [oponentAccount setAccountSceneConfig:gameSceneConfig];
 
+            
+            [activeDuelViewController removeViewController];
             
             if (!duelStartViewController){
                 duelStartViewController = [[DuelStartViewController alloc]initWithAccount:playerAccount andOpAccount:oponentAccount  opopnentAvailable:YES andServerType:YES andTryAgain:YES];
