@@ -834,7 +834,7 @@ static StartViewController *sharedHelper = nil;
 
 - (IBAction)clickLogin:(id)sender {
     vLoading.hidden = NO;
-    btnFBLogin.hidden = YES;
+    btnFBLogin.enabled = NO;
     [LoginAnimatedViewController sharedInstance].loginFacebookStatus = LoginFacebookStatusProfile;
     [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
     [LoginAnimatedViewController sharedInstance].delegateFacebook = self;
@@ -1434,9 +1434,10 @@ static StartViewController *sharedHelper = nil;
         vLoading.hidden = YES;
         
         lbMoneyForLogin.hidden = YES;
-        ivCointsForLogin.hidden  =YES;
+        ivCointsForLogin.hidden = YES;
     }else{
         btnFBLogin.hidden = NO;
+        btnFBLogin.enabled = YES;
     }
 }
 
@@ -1470,6 +1471,7 @@ static StartViewController *sharedHelper = nil;
         ivCointsForLogin.hidden  =YES;
     }else{
         btnFBLogin.hidden = NO;
+        btnFBLogin.enabled = YES;
     }
 }
 
