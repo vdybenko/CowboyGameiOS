@@ -273,31 +273,29 @@ FXLabel *lblGoldPlus;
     if (startNumber<endNumber)
         dispatch_async(dispatch_queue_create([lable.text cStringUsingEncoding:NSUTF8StringEncoding], NULL), ^{
             {
-                for (int i = startNumber; i <= endNumber; i += goldForGoldAnimation) {
+                int i;
+                for (i = startNumber; i <= endNumber; i += goldForGoldAnimation) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
                         lable.text = [NSString stringWithFormat:@"%d", i];
                     });
                     
                     [NSThread sleepForTimeInterval:0.02];
-                    
-                    
                 }
                 dispatch_async(dispatch_get_main_queue(), ^{
                     lable.text = [NSString stringWithFormat:@"%d", endNumber];
                     [self checkOfCongratulationControllers];
                 });
-                
             }
         });
     else
         dispatch_async(dispatch_queue_create([lable.text cStringUsingEncoding:NSUTF8StringEncoding], NULL), ^{
-            for (int i = startNumber; i >= endNumber; i -= goldForGoldAnimation) {
+            int i;
+            for (i = startNumber; i >= endNumber; i -= goldForGoldAnimation) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
                     lable.text = [NSString stringWithFormat:@"%d", i];
                 });
-                
                 [NSThread sleepForTimeInterval:0.02];
             }
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -367,13 +365,13 @@ FXLabel *lblGoldPlus;
 {
     [activeDuelViewController.btnTry setEnabled:NO];
     LevelCongratViewController *lvlCongratulationViewController=[[LevelCongratViewController alloc] initForNewLevelPlayerAccount:playerAccount andController:activeDuelViewController tryButtonEnable:isTryAgainEnabled];
-    [activeDuelViewController performSelector:@selector(showViewController:) withObject:lvlCongratulationViewController afterDelay:2.0];
+    [activeDuelViewController performSelector:@selector(showViewController:) withObject:lvlCongratulationViewController afterDelay:2.5];
 }
 
 -(void)showMessageOfMoreMoney:(NSInteger)money withLabel:(NSString *)labelForCongratulation
 {
     [activeDuelViewController.btnTry setEnabled:NO];
     MoneyCongratViewController *moneyCongratulationViewController = [[MoneyCongratViewController alloc] initForAchivmentPlayerAccount:playerAccount withLabel:labelForCongratulation andController:activeDuelViewController tryButtonEnable:isTryAgainEnabled];
-    [activeDuelViewController performSelector:@selector(showViewController:) withObject:moneyCongratulationViewController afterDelay:2.0];
+    [activeDuelViewController performSelector:@selector(showViewController:) withObject:moneyCongratulationViewController afterDelay:2.5];
 }
 @end
