@@ -490,6 +490,8 @@ static StartViewController *sharedHelper = nil;
         frame.origin.y += iPhone5Delta;
         [lbFBLogin setFrame:frame];
     }
+    
+    [LoginAnimatedViewController sharedInstance].delegateFacebook = self;
 }
 - (void)viewDidUnload {
     feedbackView = nil;
@@ -837,8 +839,7 @@ static StartViewController *sharedHelper = nil;
     btnFBLogin.enabled = NO;
     [LoginAnimatedViewController sharedInstance].loginFacebookStatus = LoginFacebookStatusProfile;
     [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
-    [LoginAnimatedViewController sharedInstance].delegateFacebook = self;
-} 
+}
 
 #pragma mark -
 #pragma mark feedback

@@ -365,13 +365,13 @@ FXLabel *lblGoldPlus;
 {
     [activeDuelViewController.btnTry setEnabled:NO];
     LevelCongratViewController *lvlCongratulationViewController=[[LevelCongratViewController alloc] initForNewLevelPlayerAccount:playerAccount andController:activeDuelViewController tryButtonEnable:isTryAgainEnabled];
-    [activeDuelViewController performSelector:@selector(showViewController:) withObject:lvlCongratulationViewController afterDelay:2.5];
+    [activeDuelViewController performSelector:@selector(showViewController:) withObject:lvlCongratulationViewController afterDelay:2.2];
 }
 
 -(void)showMessageOfMoreMoney:(NSInteger)money withLabel:(NSString *)labelForCongratulation
 {
     [activeDuelViewController.btnTry setEnabled:NO];
     MoneyCongratViewController *moneyCongratulationViewController = [[MoneyCongratViewController alloc] initForAchivmentPlayerAccount:playerAccount withLabel:labelForCongratulation andController:activeDuelViewController tryButtonEnable:isTryAgainEnabled];
-    [activeDuelViewController performSelector:@selector(showViewController:) withObject:moneyCongratulationViewController afterDelay:2.5];
+    [activeDuelViewController performSelector:@selector(showViewController:) withObject:moneyCongratulationViewController afterDelay:2.2];
 }
 @end

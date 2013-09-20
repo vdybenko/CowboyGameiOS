@@ -79,6 +79,8 @@ typedef enum{
 -(IBAction)feedbackMailBtnClick:(id)sender;
 -(IBAction)feedbackItuneskBtnClick:(id)sender;
 
+- (IBAction)clickLogin:(id)sender;
+
 -(void)didBecomeActive;
 -(void)didEnterBackground;
 
