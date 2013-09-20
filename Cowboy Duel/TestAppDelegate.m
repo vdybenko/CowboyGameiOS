@@ -20,12 +20,11 @@
 #define kFacebookSettingsButtonIndex 1
 
 static const NSInteger kGANDispatchPeriod = 60;
-//TO DO Delete this
-//#ifdef DEBUG
-//static NSString *kGAAccountID = @"UA-24007807-3";
-//#else
+#ifdef DEBUG
+static NSString *kGAAccountID = @"UA-38210757-4";
+#else
 static NSString *kGAAccountID = @"UA-38210757-1";
-//#endif
+#endif
 NSString  *const ID_CRIT_APP   = @"4fb4f482c471a10fc5000092";
 NSString  *const ID_CRIT_KEY   = @"w30r26yvspyi1xtgrdcqgexpzsazqlkl";
 
