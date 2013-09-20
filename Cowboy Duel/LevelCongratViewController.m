@@ -276,8 +276,8 @@
     if ([[OGHelper sharedInstance]isAuthorized]) { 
         [LevelCongratViewController newLevelNumber:playerAccount.accountLevel];
     }else {
-        [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusLevel];
-        [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
+        [[StartViewController sharedInstance] clickLogin:Nil];
+        [self btnMenuClicked:Nil];
     }    
     [self dismissModalViewControllerAnimated:YES];
 }

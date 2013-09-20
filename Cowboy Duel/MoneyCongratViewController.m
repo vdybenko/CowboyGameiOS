@@ -265,8 +265,8 @@
     if ([[OGHelper sharedInstance]isAuthorized]) {
         [MoneyCongratViewController achivmentMoney:playerAccount.money];
     }else {
-        [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusMoney];
-        [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
+        [[StartViewController sharedInstance] clickLogin:Nil];
+        [self btnMenuClicked:Nil];
     }
     [self releaseComponents];
 }
