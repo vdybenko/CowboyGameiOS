@@ -1746,6 +1746,7 @@ float frequencyOpponentShoting()
     [opponentShape releaseComponents];
     opponentShape = nil;
     
+    self.view = nil;
     plView = nil;
     
     [gunDrumViewController releaseComponents];
