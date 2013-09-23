@@ -196,6 +196,8 @@ static LoginAnimatedViewController *sharedHelper = nil;
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                             object:self
                                                           userInfo:[NSDictionary dictionaryWithObject:@"/LoginAnimatedVC_Internet_down" forKey:@"page"]];
+        [delegateFacebook request:nil didFailWithError:nil];
+        
     }
 }
 

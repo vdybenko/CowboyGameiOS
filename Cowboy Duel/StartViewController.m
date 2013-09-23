@@ -104,12 +104,8 @@
     __weak IBOutlet UIImageView *cloudSecondView;
     
     __weak IBOutlet UIButton *btnFBLogin;
-    __weak IBOutlet UILabel *lbFBLogin;
     
     __weak IBOutlet UIView *vLoading;
-    
-    __weak IBOutlet UILabel *lbMoneyForLogin;
-    __weak IBOutlet UIImageView *ivCointsForLogin;
     
     int cloudX;
     int cloud2X;
@@ -119,7 +115,6 @@
 }
 @property (weak, nonatomic) IBOutlet UIButton *mapButton;
 @property (weak, nonatomic) IBOutlet UIButton *helpButton;
-@property (weak, nonatomic) IBOutlet UIButton *profileButton;
 @property (weak, nonatomic) IBOutlet UIButton *feedbackButton;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorfeedbackView;
@@ -148,7 +143,7 @@
 @implementation StartViewController
 
 @synthesize gameCenterViewController, player, internetActive, hostActive, soundCheack;
-@synthesize feedbackButton, profileButton, helpButton, mapButton, shareButton;
+@synthesize feedbackButton, helpButton, mapButton, shareButton;
 @synthesize oldAccounId,feedBackViewVisible,showFeedAtFirst,topPlayersDataSource, advertisingNewVersionViewController,firstRun, favsDataSource;
 @synthesize duelProductDownloaderController;
 @synthesize pushNotification;
@@ -392,19 +387,10 @@ static StartViewController *sharedHelper = nil;
     lbShareCancelBtn.text = NSLocalizedString(@"CancelButtonTitle", nil);
     lbShareCancelBtn.textColor = buttonsTitleColor;
     lbShareCancelBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
-  
-    lbFBLogin.font = [UIFont boldSystemFontOfSize:12];
-    lbFBLogin.textColor = [UIColor whiteColor];
-    lbFBLogin.numberOfLines = 1;
-    lbFBLogin.lineBreakMode = UILineBreakModeCharacterWrap;
-    lbFBLogin.text = NSLocalizedString(@"LoginBtnLogInAtStart", nil);
     
     if([[OGHelper sharedInstance] isAuthorized]){
         btnFBLogin.hidden = YES;
         vLoading.hidden = YES;
-        
-        lbMoneyForLogin.hidden = YES;
-        ivCointsForLogin.hidden  =YES;
     }
     
     feedBackViewVisible=NO;
@@ -485,10 +471,6 @@ static StartViewController *sharedHelper = nil;
         frame = btnFBLogin.frame;
         frame.origin.y += iPhone5Delta;
         [btnFBLogin setFrame:frame];
-        
-        frame = lbFBLogin.frame;
-        frame.origin.y += iPhone5Delta;
-        [lbFBLogin setFrame:frame];
     }
     
     [LoginAnimatedViewController sharedInstance].delegateFacebook = self;
@@ -507,10 +489,7 @@ static StartViewController *sharedHelper = nil;
     lbShareButton = nil;
     saloon2Button = nil;
     btnFBLogin = nil;
-    lbFBLogin = nil;
     vLoading = nil;
-    lbMoneyForLogin = nil;
-    ivCointsForLogin = nil;
     [super viewDidUnload];
 }
     
@@ -1376,9 +1355,6 @@ static StartViewController *sharedHelper = nil;
                     btnFBLogin.hidden = YES;
                     vLoading.hidden = YES;
                     
-                    lbMoneyForLogin.hidden = YES;
-                    ivCointsForLogin.hidden = YES;
-                    
                     CDTransaction *transaction = [[CDTransaction alloc] init];
                     transaction.trDescription = @"login+500";
                     transaction.trType = [NSNumber numberWithInt:+1];
@@ -1433,9 +1409,6 @@ static StartViewController *sharedHelper = nil;
     if([[OGHelper sharedInstance] isAuthorized]){
         btnFBLogin.hidden = YES;
         vLoading.hidden = YES;
-        
-        lbMoneyForLogin.hidden = YES;
-        ivCointsForLogin.hidden = YES;
     }else{
         btnFBLogin.hidden = NO;
         btnFBLogin.enabled = YES;
@@ -1467,10 +1440,8 @@ static StartViewController *sharedHelper = nil;
     if([[OGHelper sharedInstance] isAuthorized]){
         btnFBLogin.hidden = YES;
         vLoading.hidden = YES;
-        
-        lbMoneyForLogin.hidden = YES;
-        ivCointsForLogin.hidden  =YES;
     }else{
+        vLoading.hidden = YES;
         btnFBLogin.hidden = NO;
         btnFBLogin.enabled = YES;
     }
