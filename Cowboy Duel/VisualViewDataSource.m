@@ -32,7 +32,7 @@
 #define VISUAL_VIEW_CHARACTER_SHOOSE_ARRAY @[@[@"clearePicture.png",@0,@129,@-1,@0],@[@"buildershoes1.png",@200,@130,@-1,@4],@[@"buildershoes2.png",@200,@131,@-1,@4],@[@"buildershoes3.png",@250,@132,@-1,@4]];// Resorces/CharacterShoeses
 
 //Guns
-#define VISUAL_VIEW_CHARACTER_GUNS_ARRAY @[@[@"builderGunInHeand.png",@0,@135,@-1,@4],@[@"builderGunInHeand2.png",@200,@136,@-1,@5],@[@"builderGunInHeand3.png",@300,@137,@-1,@6],@[@"builderGunInHeand4.png",@400,@138,@3,@7]];// Resorces/CharacterGuns
+#define VISUAL_VIEW_CHARACTER_GUNS_ARRAY @[@[@"builderGunInHeand.png",@0,@135,@-1,@0],@[@"builderGunInHeand2.png",@200,@136,@-1,@5],@[@"builderGunInHeand3.png",@300,@137,@-1,@6],@[@"builderGunInHeand4.png",@400,@138,@3,@7]];// Resorces/CharacterGuns
 
 //Jakets
 #define VISUAL_VIEW_CHARACTER_JAKETS_ARRAY @[@[@"clearePicture.png",@0,@141,@-1,@0],@[@"builderJacket2.png",@200,@142,@-1,@2],@[@"builderJacket1.png",@250,@143,@2,@3],@[@"builderJacket3.png",@250,@143,@2,@3]];// Resorces/CharacterJakets
