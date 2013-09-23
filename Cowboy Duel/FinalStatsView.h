@@ -13,7 +13,7 @@
 #import "ActiveDuelViewController.h"
 
 @interface FinalStatsView : UIView
-@property (nonatomic,strong)     IBOutlet UIView *goldPointBgView;
+@property (nonatomic,strong) IBOutlet UIView *goldPointBgView;
 @property (nonatomic,strong) IBOutlet UIView *ivGoldCoin;
 @property (nonatomic,strong) IBOutlet UIImageView *ivBlueLine;
 @property (nonatomic,strong) IBOutlet UIImageView *ivCurrentRank;
@@ -22,7 +22,7 @@
 @property (nonatomic,strong) IBOutlet UILabel *lblPoints;
 @property (nonatomic,strong) IBOutlet UILabel *lblGoldTitle;
 
-@property (nonatomic,strong) ActiveDuelViewController *activeDuelViewController;
+@property (nonatomic,weak) ActiveDuelViewController *activeDuelViewController;
 
 @property (nonatomic) BOOL isTryAgainEnabled;
 

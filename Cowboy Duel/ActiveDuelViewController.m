@@ -1693,7 +1693,7 @@ float frequencyOpponentShoting()
     
     [gunDrumViewController openGun];
     
-    __block id  selfBlock = self;
+    __block id selfBlock = self;
     
     gunDrumViewController.didFinishBlock = ^(){
         [selfBlock startTimerInBlock];
@@ -1795,7 +1795,7 @@ float frequencyOpponentShoting()
     self.crossImageView = nil;
     self.userLiveImageView = nil;
     self.lbUserLifeLeft = nil;
-    
+    finalView = nil;
     presentVC = nil;
     
     [oponentsViewCoordinates removeAllObjects];
