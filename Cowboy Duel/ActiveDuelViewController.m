@@ -1797,8 +1797,17 @@ float frequencyOpponentShoting()
     self.lbUserLifeLeft = nil;
     finalView = nil;
     presentVC = nil;
+    finalViewDataSource = nil;
+    [barellObject releaseComponents];
+    barellObject = nil;
+    [cactusObject releaseComponents];
+    cactusObject = nil;
+    [airBallon releaseComponents];
+    airBallon = nil;
     
     [oponentsViewCoordinates removeAllObjects];
+    
+    [[GameCenterViewController sharedInstance:nil andParentVC:nil] releaseComponents];
 }
 
 @end

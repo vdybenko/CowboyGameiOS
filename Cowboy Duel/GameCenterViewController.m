@@ -1112,4 +1112,10 @@ static GameCenterViewController *gameCenterViewController;
     [parentVC.navigationController pushViewController:viewController animated:YES];
 }
 
+#pragma mark -
+-(void)releaseComponents
+{
+    [duelStartViewController releaseComponents];
+    duelStartViewController = nil;
+}
 @end

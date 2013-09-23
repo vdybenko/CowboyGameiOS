@@ -386,5 +386,7 @@ FXLabel *lblGoldPlus;
     lblPoints = nil;
     lblGoldTitle = nil;
     lblGoldPlus = nil;
+    playerAccount = nil;
+//    finalViewDataSource = nil;
 }
 @end
