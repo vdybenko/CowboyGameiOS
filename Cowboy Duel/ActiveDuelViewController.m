@@ -1693,7 +1693,7 @@ float frequencyOpponentShoting()
     
     [gunDrumViewController openGun];
     
-    __block id  selfBlock = self;
+    __block id selfBlock = self;
     
     gunDrumViewController.didFinishBlock = ^(){
         [selfBlock startTimerInBlock];
@@ -1746,6 +1746,7 @@ float frequencyOpponentShoting()
     [opponentShape releaseComponents];
     opponentShape = nil;
     
+    self.view = nil;
     plView = nil;
     
     [gunDrumViewController releaseComponents];
@@ -1794,10 +1795,19 @@ float frequencyOpponentShoting()
     self.crossImageView = nil;
     self.userLiveImageView = nil;
     self.lbUserLifeLeft = nil;
-    
+    finalView = nil;
     presentVC = nil;
+    finalViewDataSource = nil;
+    [barellObject releaseComponents];
+    barellObject = nil;
+    [cactusObject releaseComponents];
+    cactusObject = nil;
+    [airBallon releaseComponents];
+    airBallon = nil;
     
     [oponentsViewCoordinates removeAllObjects];
+    
+    [[GameCenterViewController sharedInstance:nil andParentVC:nil] releaseComponents];
 }
 
 @end

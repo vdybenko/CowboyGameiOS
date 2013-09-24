@@ -376,4 +376,19 @@ FXLabel *lblGoldPlus;
     MoneyCongratViewController *moneyCongratulationViewController = [[MoneyCongratViewController alloc] initForAchivmentPlayerAccount:playerAccount withLabel:labelForCongratulation andController:activeDuelViewController tryButtonEnable:isTryAgainEnabled];
     [activeDuelViewController performSelector:@selector(showViewController:) withObject:moneyCongratulationViewController afterDelay:2.2];
 }
+#pragma mark -
+-(void)dealloc
+{
+    goldPointBgView = nil;
+    ivGoldCoin = nil;
+    ivBlueLine = nil;
+    ivCurrentRank = nil;
+    ivNextRank = nil;
+    lblGold = nil;
+    lblPoints = nil;
+    lblGoldTitle = nil;
+    lblGoldPlus = nil;
+    playerAccount = nil;
+//    finalViewDataSource = nil;
+}
 @end

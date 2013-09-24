@@ -102,7 +102,7 @@
 -(void)loseScene;
 {
     isDuelWinWatched = YES;
-    moneyExch  = playerAccount.money < 10 ? 1: playerAccount.money / 10.0;
+    moneyExch = playerAccount.money < 10 ? 1: playerAccount.money / 10.0;
     pointsForMatch=0;
 
     if (!teaching||(duelWithBotCheck)) {
@@ -129,7 +129,7 @@
 -(void)winScene;
 {
     isDuelWinWatched = NO;
-    moneyExch  = oponentAccount.money < 10 ? 1: oponentAccount.money / 10.0;
+    moneyExch = oponentAccount.money < 10 ? 1: oponentAccount.money / 10.0;
     pointsForMatch=0;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
