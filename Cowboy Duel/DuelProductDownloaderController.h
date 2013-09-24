@@ -33,7 +33,7 @@ typedef enum{
 @interface DuelProductDownloaderController : NSObject<SKProductsRequestDelegate>
 
 @property (copy) DuelProductDownloaderControllerResult didFinishBlock;
-@property (nonatomic) id<DuelProductDownloaderControllerDelegate> delegate;
+@property (weak,nonatomic) id<DuelProductDownloaderControllerDelegate> delegate;
 
 +(BOOL) isRefreshEvailable:(int)serverRevision;
 +(int) getDeviceRevision;

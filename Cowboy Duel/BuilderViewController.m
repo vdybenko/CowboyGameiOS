@@ -182,13 +182,13 @@
     [super viewDidUnload];
 }
 -(void)releaseComponents
-
 {
+    [visualViewDataSource releaseComponents];
+    visualViewDataSource = nil;
     [self setSideView:nil];
     [self setMoneyLabel:nil];
     [self setDefensLabel:nil];
     [self setAttacLabel:nil];
-
 }
 #pragma mark GMGridViewDataSource
 
@@ -677,8 +677,7 @@
                          [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
                      }];
     [self.navigationController popViewControllerAnimated:NO];
-    
-    [self releaseComponents];
+//    [self releaseComponents];
 }
 
 - (IBAction)touchCloseSideView:(id)sender {
@@ -1002,5 +1001,10 @@
             break;
     }
     return stType;
+}
+#pragma mark -
+-(void)dealloc
+{
+    [self releaseComponents];
 }
 @end
