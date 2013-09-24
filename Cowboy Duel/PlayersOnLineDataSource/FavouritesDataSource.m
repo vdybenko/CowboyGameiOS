@@ -419,21 +419,30 @@ static NSString  *const URL_DELETE_FAVORITE = @BASE_URL"users/delete_favorites";
 #pragma mark -
 -(void)invaiteWithMessage:(id __strong)sender;
 {
-    FavouritesCell *cell=(FavouritesCell *)[[sender superview] superview];
+    while (![sender isKindOfClass:[UITableViewCell class]]) {
+        sender = [sender superview];
+    };
+    FavouritesCell *cell=(FavouritesCell *)sender;
     NSIndexPath *indexPath = [tableView indexPathForCell:cell];
     [delegate clickButton:indexPath];
 }
 
 -(void)pokeHim:(id __strong)sender;
 {
-    FavouritesCell *cell=(FavouritesCell *)[[sender superview] superview];
+    while (![sender isKindOfClass:[UITableViewCell class]]) {
+        sender = [sender superview];
+    };
+    FavouritesCell *cell=(FavouritesCell *)sender;
     NSIndexPath *indexPath = [tableView indexPathForCell:cell];
     [delegate clickButtonPoke:indexPath];
 }
 
 -(void)stealGold:(id __strong)sender;
 {
-    FavouritesCell *cell=(FavouritesCell *)[[sender superview] superview];
+    while (![sender isKindOfClass:[UITableViewCell class]]) {
+        sender = [sender superview];
+    };
+    FavouritesCell *cell=(FavouritesCell *)sender;
     NSIndexPath *indexPath = [tableView indexPathForCell:cell];
     [delegate clickButtonSteal:indexPath];
 }
