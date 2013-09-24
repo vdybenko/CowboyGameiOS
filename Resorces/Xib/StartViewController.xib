@@ -168,7 +168,7 @@
                     <rect key="frame" x="0.0" y="568" width="320" height="256"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" image="fb_view_down_new.png" id="107" userLabel="BlackBackground">
+                        <imageView userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" image="fb_view_down_new.png" id="107" userLabel="BlackBackground">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="256"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -254,7 +254,7 @@
                     <rect key="frame" x="0.0" y="568" width="320" height="330"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" image="fb_view_down_new.png" id="126" userLabel="BlackBackground">
+                        <imageView userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" image="fb_view_down_new.png" id="126" userLabel="BlackBackground">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="330"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
