@@ -911,12 +911,12 @@ static StartViewController *sharedHelper = nil;
         ACAccountStore *accountStore = [[ACAccountStore alloc] init];
         ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
         if ([accountStore accountsWithAccountType:accountType]){
-
+            UIImage *appIcon = [UIImage imageNamed: [[[[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIcons"] objectForKey:@"CFBundlePrimaryIcon"] objectForKey:@"CFBundleIconFiles"] objectAtIndex:0]];
             BOOL displayedNativeDialog =
             [FBNativeDialogs
              presentShareDialogModallyFrom:self
              initialText:NSLocalizedString(@"FEEDBACK_FB", @"")
-             image:[UIImage imageNamed:@"icon@2x.png"]
+             image:appIcon
              url:[NSURL URLWithString:URL_APP_ESTIMATE]
              handler:^(FBNativeDialogResult result, NSError *error) {
                  if (error) {
@@ -958,10 +958,11 @@ static StartViewController *sharedHelper = nil;
 - (IBAction)feedbackTweeterBtnClick:(id)sender {
     if ([TWTweetComposeViewController canSendTweet])
     {
+        UIImage *appIcon = [UIImage imageNamed: [[[[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIcons"] objectForKey:@"CFBundlePrimaryIcon"] objectForKey:@"CFBundleIconFiles"] objectAtIndex:0]];
         TWTweetComposeViewController *tweetSheet = 
         [[TWTweetComposeViewController alloc] init];
         [tweetSheet setInitialText:NSLocalizedString(@"FEEDBACK_TWITTER", @"")];
-        [tweetSheet addImage:[UIImage imageNamed:@"icon@2x.png"]];
+        [tweetSheet addImage:appIcon];
         [tweetSheet addURL:[NSURL URLWithString:URL_FB_PAGE]];
         
 	    [self presentModalViewController:tweetSheet animated:YES];
