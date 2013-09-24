@@ -318,9 +318,11 @@ FXLabel *lblGoldPlus;
     ivBlueLine.frame = temp;
     if (points <= 0) points = 0;
     else ivBlueLine.hidden = NO;
-    int firstWidthOfLine=lblPoints.frame.size.width;
+    int firstWidthOfLine=121;
     float changeWidth=(points*firstWidthOfLine)/maxValue;
-    
+    if(changeWidth>firstWidthOfLine){
+        changeWidth = firstWidthOfLine;
+    }
     temp.size.width = changeWidth;
     
     if (animated) {

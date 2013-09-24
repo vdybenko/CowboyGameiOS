@@ -563,6 +563,9 @@ static const CGFloat timeToStandartTitles = 1.8;
     int firstWidthOfLine=121;
     float changeWidth;
     if (maxValue) changeWidth = (points*firstWidthOfLine)/maxValue;
+    if(changeWidth>firstWidthOfLine){
+        changeWidth = firstWidthOfLine;
+    }
     liveChRect.size.width = changeWidth;
     
     if (animated) {
