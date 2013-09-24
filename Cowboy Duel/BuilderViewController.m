@@ -476,7 +476,6 @@
         case CharacterPartFace:
             visualViewCharacter.head.image = part.imageForObject;
             [self.resultLabel setText:[NSString stringWithFormat:@"+ %d",part.action]];
-//            [self tempAtac:part.action];
             if (!isBtnForBuy) {
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"VV_HEAD_VALUE"]==index) {
                     btnBuyMain.alpha = 0.4;
@@ -489,7 +488,6 @@
             
             visualViewCharacter.gun.image = part.imageForObject;
             [self.resultLabel setText:[NSString stringWithFormat:@"+ %d",part.action]];
-//            [self tempAtac:part.action];
             if (!isBtnForBuy) {
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"VV_GUN_VALUE"]==index) {
                     btnBuyMain.alpha = 0.4;
@@ -503,7 +501,6 @@
         case CharacterPartJaket:
             visualViewCharacter.jakets.image = part.imageForObject;
             [self.resultLabel setText:[NSString stringWithFormat:@"+ %d",part.action]];
-//            [self tempDefens:part.action];
             if (!isBtnForBuy) {
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"VV_SHIRTS_VALUE"]==index) {
                     btnBuyMain.alpha = 0.4;
@@ -516,7 +513,6 @@
         case CharacterPartLegs:
             visualViewCharacter.length.image = part.imageForObject;
             [self.resultLabel setText:[NSString stringWithFormat:@"+ %d",part.action]];
-//            [self tempDefens:part.action];
             if (!isBtnForBuy) {
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"VV_LEGS_VALUE"]==index) {
                     btnBuyMain.alpha = 0.4;
@@ -529,7 +525,6 @@
         case CharacterPartShirt:
             visualViewCharacter.shirt.image = part.imageForObject;
             [self.resultLabel setText:[NSString stringWithFormat:@"+ %d",part.action]];
-//            [self tempDefens:part.action];
             if (!isBtnForBuy) {
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"VV_BODY_VALUE"]==index) {
                     btnBuyMain.alpha = 0.4;
@@ -542,7 +537,6 @@
         case CharacterPartShoose:
             visualViewCharacter.shoose.image = part.imageForObject;
             [self.resultLabel setText:[NSString stringWithFormat:@"+ %d",part.action]];
-//            [self tempDefens:part.action];
             if (!isBtnForBuy) {
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"VV_SHOOSE_VALUE"]==index) {
                     btnBuyMain.alpha = 0.4;
@@ -556,7 +550,6 @@
             visualViewCharacter.suits.image = part.imageForObject;
             
             [self.resultLabel setText:[NSString stringWithFormat:@"+ %d",part.action]];
-//            [self tempDefens:part.action];
             if (!isBtnForBuy) {
                 if (playerAccount.visualViewSuits==index) {
                     btnBuyMain.alpha = 0.4;
@@ -778,10 +771,10 @@
     [self setObjectsForIndex:playerAccount.visualViewJackets];
 }
 - (IBAction)touchShoesBtn:(id)sender {
-    if (!isOpenSide && self.backlightAtac.hidden) {
+    if (!isOpenSide && self.backlightDefens.hidden) {
         [self sideOpenAnimation];
-        self.backlightAtac.hidden = NO;
-        [self backlightAtacAction];
+        self.backlightDefens.hidden = NO;
+        [self backlightDefensAction];
         [self cleanForClothes];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification

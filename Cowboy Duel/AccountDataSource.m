@@ -474,11 +474,11 @@ static AccountDataSource *sharedHelper = nil;
         accountDefenseValue+=visualViewCharacterPart.action;
         visualViewCharacterPart= [self loadProductWithIndex:visualViewJackets type:CharacterPartJaket visualViewDataSource:visualViewDataSource];
         accountDefenseValue+=visualViewCharacterPart.action;
+        visualViewCharacterPart= [self loadProductWithIndex:visualViewShoose type:CharacterPartShoose visualViewDataSource:visualViewDataSource];
+        accountDefenseValue+=visualViewCharacterPart.action;
     }
     accountAtackValue = 0;
     visualViewCharacterPart= [self loadProductWithIndex:visualViewGuns type:CharacterPartGun visualViewDataSource:visualViewDataSource];
-    accountAtackValue+=visualViewCharacterPart.action;
-    visualViewCharacterPart= [self loadProductWithIndex:visualViewShoose type:CharacterPartShoose visualViewDataSource:visualViewDataSource];
     accountAtackValue+=visualViewCharacterPart.action;
     visualViewCharacterPart= [self loadProductWithIndex:visualViewHead type:CharacterPartFace visualViewDataSource:visualViewDataSource];
     accountAtackValue+=visualViewCharacterPart.action;
