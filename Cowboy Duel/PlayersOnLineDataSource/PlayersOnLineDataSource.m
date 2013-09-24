@@ -224,8 +224,11 @@
 
 #pragma mark -
 -(void)invaiteWithMessage:(id __strong)sender;
-{    
-    PlayerOnLineCell *cell=(PlayerOnLineCell *)[[sender superview] superview];
+{
+    while (![sender isKindOfClass:[UITableViewCell class]]) {
+        sender = [sender superview];
+    };
+    PlayerOnLineCell *cell=(PlayerOnLineCell *)sender;
     NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
     [delegate clickButton:indexPath];
 }

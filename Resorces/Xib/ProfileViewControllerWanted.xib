@@ -238,8 +238,6 @@
     </objects>
     <resources>
         <image name="btn_small.png" width="142" height="33"/>
-        <image name="btn_small.png" width="142" height="33"/>
-        <image name="btn_small.png" width="142" height="33"/>
         <image name="ds_attack.png" width="45" height="25"/>
         <image name="ds_defense.png" width="45" height="25"/>
         <image name="pv_wanted_back.png" width="320" height="422"/>
