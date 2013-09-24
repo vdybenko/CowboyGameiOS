@@ -68,6 +68,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == ([tableView numberOfRowsInSection:0]-1)) {
+//        Invite
         PracticeCell *cell = [tableView dequeueReusableCellWithIdentifier:[PracticeCell cellID]];
         if (!cell ) {
             cell = [PracticeCell cell];
@@ -76,6 +77,7 @@
         [cell cellForPractice:NO];
         return cell;
     }else if (indexPath.row == ([tableView numberOfRowsInSection:0]-2)) {
+//        Practice
         PracticeCell *cell = [tableView dequeueReusableCellWithIdentifier:[PracticeCell cellID]];
         if (!cell ) {
             cell = [PracticeCell cell];
@@ -98,7 +100,7 @@
 //        [self checkServerForFavorite:player];
         [cell populateWithPlayer:player];
         [cell setPlayerIcon:nil];
-        
+                
         NSString *name=[[OGHelper sharedInstance ] getClearName:player.serverName];
         NSString *path=[NSString stringWithFormat:@"%@/icon_%@.png",[[OGHelper sharedInstance] getSavePathForList],name];
         if([[NSFileManager defaultManager] fileExistsAtPath:path]){  
