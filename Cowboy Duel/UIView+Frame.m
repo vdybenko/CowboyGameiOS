@@ -1,6 +1,6 @@
 //
 //  UIView+Frame.m
-//  Cowboy Duels
+//  Bounty Hunter
 //
 //  Created by Taras on 19.11.12.
 //

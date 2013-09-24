@@ -1,6 +1,6 @@
 //
 //  DuelProductAttensionViewController.m
-//  Cowboy Duels
+//  Bounty Hunter
 //
 //  Created by Taras on 26.10.12.
 //

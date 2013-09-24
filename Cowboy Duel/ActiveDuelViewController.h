@@ -1,6 +1,6 @@
 //
 //  ActiveDuelViewController.h
-//  Cowboy Duels
+//  Bounty Hunter
 //
 //  Created by Sergey Sobol on 10.01.13.
 //

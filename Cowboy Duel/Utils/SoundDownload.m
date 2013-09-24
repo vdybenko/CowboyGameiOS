@@ -1,6 +1,6 @@
 //
 //  SoundDownload.m
-//  Cowboy Duels
+//  Bounty Hunter
 //
 //  Created by Taras on 29.10.12.
 //

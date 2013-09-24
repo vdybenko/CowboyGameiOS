@@ -21,11 +21,11 @@
 
 // Message
 
-"Awesome cowboy duel" = "Awesome cowboy duel";
+"Awesome Bounty Hunter" = "Awesome Bounty Hunter";
 
-"Mes text" = "I recommend that you check out 'Cowboy duel' http://cowboyduel.mobi/";
+"Mes text" = "I recommend that you check out 'Bounty Hunter' http://cowboyduel.mobi/";
 
-"INVITE_FRIENDS" = "Let's duel in the best cowboy duel game on iPhone";
+"INVITE_FRIENDS" = "Let's duel in the best Bounty Hunter game on iPhone";
 
 "INVITE_FRIENDS_FB" = "INVITE FRIENDS";
 
@@ -226,8 +226,8 @@ There's no one in the Saloon. <br> Try again later or  click invite friends
 </html>";
 
 //New version View
-//"NewVersionMainText1" = "There are a lot of new interesting things in a new version of Cowboy Duel."; 
-//"NewVersionMainText2" = "You can upgrade Cowboy Duel right now through iTunes Store";
+//"NewVersionMainText1" = "There are a lot of new interesting things in a new version of Bounty Hunter."; 
+//"NewVersionMainText2" = "You can upgrade Bounty Hunter right now through iTunes Store";
 "NewVersionBtn" = "Upgrade";
 "NewVersionMainText" = "
 <head> 
@@ -236,7 +236,7 @@ There's no one in the Saloon. <br> Try again later or  click invite friends
 <body style='background-color:transparent; text-align:center; color:rgb(97,68,34);'>
 <div style='font-size: 20px;'>
 There are a lot of new interesting things in 
-a new version of Cowboy Duel.
+a new version of Bounty Hunter.
 You can upgrade this game right now through <b>iTunes Store</b>
 </div>
 </body>

@@ -1,1104 +1,170 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
-	<data>
-		<int key="IBDocument.SystemTarget">1552</int>
-		<string key="IBDocument.SystemVersion">11G63</string>
-		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1138.51</string>
-		<string key="IBDocument.HIToolboxVersion">569.00</string>
-		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">2083</string>
-		</object>
-		<array key="IBDocument.IntegratedClassDependencies">
-			<string>IBProxyObject</string>
-			<string>IBUIButton</string>
-			<string>IBUIImageView</string>
-			<string>IBUILabel</string>
-			<string>IBUITextField</string>
-			<string>IBUIView</string>
-		</array>
-		<array key="IBDocument.PluginDependencies">
-			<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-		</array>
-		<object class="NSMutableDictionary" key="IBDocument.Metadata">
-			<string key="NS.key.0">PluginDependencyRecalculationVersion</string>
-			<integer value="1" key="NS.object.0"/>
-		</object>
-		<array class="NSMutableArray" key="IBDocument.RootObjects" id="1000">
-			<object class="IBProxyObject" id="372490531">
-				<string key="IBProxiedObjectIdentifier">IBFilesOwner</string>
-				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-			</object>
-			<object class="IBProxyObject" id="975951072">
-				<string key="IBProxiedObjectIdentifier">IBFirstResponder</string>
-				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-			</object>
-			<object class="IBUIView" id="1048327278">
-				<reference key="NSNextResponder"/>
-				<int key="NSvFlags">274</int>
-				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUIButton" id="480612495">
-						<reference key="NSNextResponder" ref="1048327278"/>
-						<int key="NSvFlags">274</int>
-						<string key="NSFrameSize">{320, 568}</string>
-						<reference key="NSSuperview" ref="1048327278"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="933964600"/>
-						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MAA</bytes>
-						</object>
-						<bool key="IBUIOpaque">NO</bool>
-						<float key="IBUIAlpha">0.60000002384185791</float>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<int key="IBUIContentHorizontalAlignment">0</int>
-						<int key="IBUIContentVerticalAlignment">0</int>
-						<object class="NSColor" key="IBUIHighlightedTitleColor">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MQA</bytes>
-						</object>
-						<object class="NSColor" key="IBUINormalTitleColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
-						</object>
-						<object class="NSColor" key="IBUINormalTitleShadowColor">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MC41AA</bytes>
-						</object>
-						<object class="IBUIFontDescription" key="IBUIFontDescription">
-							<int key="type">2</int>
-							<double key="pointSize">15</double>
-						</object>
-						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Helvetica-Bold</string>
-							<double key="NSSize">15</double>
-							<int key="NSfFlags">16</int>
-						</object>
-					</object>
-					<object class="IBUIView" id="933964600">
-						<reference key="NSNextResponder" ref="1048327278"/>
-						<int key="NSvFlags">296</int>
-						<array class="NSMutableArray" key="NSSubviews">
-							<object class="IBUIImageView" id="466699334">
-								<reference key="NSNextResponder" ref="933964600"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{135, 20}, {136, 28}}</string>
-								<reference key="NSSuperview" ref="933964600"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="216755311"/>
-								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<float key="IBUIAlpha">0.89999997615814209</float>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<object class="NSCustomResource" key="IBUIImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">nameEditImage.png</string>
-								</object>
-							</object>
-							<object class="IBUITextField" id="216755311">
-								<reference key="NSNextResponder" ref="933964600"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{145, 21}, {117, 30}}</string>
-								<reference key="NSSuperview" ref="933964600"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="208267350"/>
-								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<object class="NSColor" key="IBUIBackgroundColor" id="920293836">
-									<int key="NSColorSpace">3</int>
-									<bytes key="NSWhite">MCAwAA</bytes>
-								</object>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClipsSubviews">YES</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<int key="IBUIContentVerticalAlignment">0</int>
-								<string key="IBUIText">Erik Merik</string>
-								<object class="NSColor" key="IBUITextColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC4zODAzOTIxNTY5IDAuMjY2NjY2NjY2NyAwLjEzMzMzMzMzMzMAA</bytes>
-								</object>
-								<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
-								<float key="IBUIMinimumFontSize">17</float>
-								<object class="IBUITextInputTraits" key="IBUITextInputTraits">
-									<int key="IBUIReturnKeyType">9</int>
-									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								</object>
-								<object class="IBUIFontDescription" key="IBUIFontDescription">
-									<int key="type">2</int>
-									<double key="pointSize">12</double>
-								</object>
-								<object class="NSFont" key="IBUIFont">
-									<string key="NSName">Helvetica-Bold</string>
-									<double key="NSSize">12</double>
-									<int key="NSfFlags">16</int>
-								</object>
-							</object>
-							<object class="IBUILabel" id="979800274">
-								<reference key="NSNextResponder" ref="933964600"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{169, 59}, {117, 21}}</string>
-								<reference key="NSSuperview" ref="933964600"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="327593233"/>
-								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUIContentMode">7</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">YaYoda</string>
-								<object class="NSColor" key="IBUITextColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC4zODAzOTIxNTY5IDAuMjY2NjY2NjY2NyAwLjEzMzMzMzMzMzMAA</bytes>
-								</object>
-								<nil key="IBUIHighlightedColor"/>
-								<int key="IBUIBaselineAdjustment">0</int>
-								<float key="IBUIMinimumFontSize">10</float>
-								<object class="IBUIFontDescription" key="IBUIFontDescription">
-									<int key="type">1</int>
-									<double key="pointSize">18</double>
-								</object>
-								<object class="NSFont" key="IBUIFont">
-									<string key="NSName">Helvetica</string>
-									<double key="NSSize">18</double>
-									<int key="NSfFlags">16</int>
-								</object>
-							</object>
-							<object class="IBUIImageView" id="327593233">
-								<reference key="NSNextResponder" ref="933964600"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{135, 92}, {136, 27}}</string>
-								<reference key="NSSuperview" ref="933964600"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="250395111"/>
-								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<object class="NSCustomResource" key="IBUIImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">pv_gold_background.png</string>
-								</object>
-							</object>
-							<object class="IBUIImageView" id="250395111">
-								<reference key="NSNextResponder" ref="933964600"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{139, 95}, {121, 21}}</string>
-								<reference key="NSSuperview" ref="933964600"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="63360886"/>
-								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<int key="IBUIContentMode">7</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<object class="NSCustomResource" key="IBUIImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">fv_new_blue_line.png</string>
-								</object>
-							</object>
-							<object class="IBUILabel" id="862291106">
-								<reference key="NSNextResponder" ref="933964600"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{188, 100}, {73, 18}}</string>
-								<reference key="NSSuperview" ref="933964600"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="486158993"/>
-								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUIContentMode">7</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">0</string>
-								<object class="NSColor" key="IBUITextColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MSAxIDEAA</bytes>
-								</object>
-								<nil key="IBUIHighlightedColor"/>
-								<int key="IBUIBaselineAdjustment">0</int>
-								<float key="IBUIMinimumFontSize">10</float>
-								<int key="IBUITextAlignment">1</int>
-								<object class="IBUIFontDescription" key="IBUIFontDescription">
-									<int key="type">1</int>
-									<double key="pointSize">15</double>
-								</object>
-								<object class="NSFont" key="IBUIFont">
-									<string key="NSName">Helvetica</string>
-									<double key="NSSize">15</double>
-									<int key="NSfFlags">16</int>
-								</object>
-							</object>
-							<object class="IBUILabel" id="486158993">
-								<reference key="NSNextResponder" ref="933964600"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{39, 126}, {62, 21}}</string>
-								<reference key="NSSuperview" ref="933964600"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="311953578"/>
-								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUIContentMode">7</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">DuelsWon</string>
-								<object class="NSColor" key="IBUITextColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC41OTYwNzg0MzE0IDAuNTI1NDkwMTk2MSAwLjQxNTY4NjI3NDUAA</bytes>
-								</object>
-								<nil key="IBUIHighlightedColor"/>
-								<int key="IBUIBaselineAdjustment">0</int>
-								<float key="IBUIMinimumFontSize">10</float>
-								<object class="IBUIFontDescription" key="IBUIFontDescription" id="281491535">
-									<int key="type">1</int>
-									<double key="pointSize">13</double>
-								</object>
-								<object class="NSFont" key="IBUIFont" id="685281430">
-									<string key="NSName">Helvetica</string>
-									<double key="NSSize">13</double>
-									<int key="NSfFlags">16</int>
-								</object>
-							</object>
-							<object class="IBUILabel" id="608101977">
-								<reference key="NSNextResponder" ref="933964600"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{114, 126}, {28, 21}}</string>
-								<reference key="NSSuperview" ref="933964600"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="240286786"/>
-								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUIContentMode">7</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">1</string>
-								<object class="NSColor" key="IBUITextColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC4zODAzOTIxNTY5IDAuMjY2NjY2NjY2NyAwLjEzMzMzMzMzMzMAA</bytes>
-								</object>
-								<nil key="IBUIHighlightedColor"/>
-								<int key="IBUIBaselineAdjustment">0</int>
-								<float key="IBUIMinimumFontSize">10</float>
-								<object class="IBUIFontDescription" key="IBUIFontDescription" id="920797125">
-									<int key="type">1</int>
-									<double key="pointSize">14</double>
-								</object>
-								<object class="NSFont" key="IBUIFont" id="1022080304">
-									<string key="NSName">Helvetica</string>
-									<double key="NSSize">14</double>
-									<int key="NSfFlags">16</int>
-								</object>
-							</object>
-							<object class="IBUILabel" id="311953578">
-								<reference key="NSNextResponder" ref="933964600"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{39, 144}, {62, 21}}</string>
-								<reference key="NSSuperview" ref="933964600"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="608101977"/>
-								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUIContentMode">7</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">DuelsLost</string>
-								<object class="NSColor" key="IBUITextColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC41OTYwNzg0MzE0IDAuNTI1NDkwMTk2MSAwLjQxNTY4NjI3NDUAA</bytes>
-								</object>
-								<nil key="IBUIHighlightedColor"/>
-								<int key="IBUIBaselineAdjustment">0</int>
-								<float key="IBUIMinimumFontSize">10</float>
-								<reference key="IBUIFontDescription" ref="281491535"/>
-								<reference key="IBUIFont" ref="685281430"/>
-							</object>
-							<object class="IBUILabel" id="240286786">
-								<reference key="NSNextResponder" ref="933964600"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{114, 144}, {28, 21}}</string>
-								<reference key="NSSuperview" ref="933964600"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="728219031"/>
-								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUIContentMode">7</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">2</string>
-								<object class="NSColor" key="IBUITextColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC4zODAzOTIxNTY5IDAuMjY2NjY2NjY2NyAwLjEzMzMzMzMzMzMAA</bytes>
-								</object>
-								<nil key="IBUIHighlightedColor"/>
-								<int key="IBUIBaselineAdjustment">0</int>
-								<float key="IBUIMinimumFontSize">10</float>
-								<reference key="IBUIFontDescription" ref="920797125"/>
-								<reference key="IBUIFont" ref="1022080304"/>
-							</object>
-							<object class="IBUILabel" id="728219031">
-								<reference key="NSNextResponder" ref="933964600"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{150, 127}, {96, 21}}</string>
-								<reference key="NSSuperview" ref="933964600"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="54156393"/>
-								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUIContentMode">7</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">The biggest win:</string>
-								<object class="NSColor" key="IBUITextColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC41OTYwNzg0MzE0IDAuNTI1NDkwMTk2MSAwLjQxNTY4NjI3NDUAA</bytes>
-								</object>
-								<nil key="IBUIHighlightedColor"/>
-								<int key="IBUIBaselineAdjustment">0</int>
-								<float key="IBUIMinimumFontSize">10</float>
-								<reference key="IBUIFontDescription" ref="281491535"/>
-								<reference key="IBUIFont" ref="685281430"/>
-							</object>
-							<object class="IBUILabel" id="54156393">
-								<reference key="NSNextResponder" ref="933964600"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{242, 127}, {50, 21}}</string>
-								<reference key="NSSuperview" ref="933964600"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
-								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUIContentMode">7</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">3</string>
-								<object class="NSColor" key="IBUITextColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC4zODAzOTIxNTY5IDAuMjY2NjY2NjY2NyAwLjEzMzMzMzMzMzMAA</bytes>
-								</object>
-								<nil key="IBUIHighlightedColor"/>
-								<int key="IBUIBaselineAdjustment">0</int>
-								<float key="IBUIMinimumFontSize">10</float>
-								<reference key="IBUIFontDescription" ref="920797125"/>
-								<reference key="IBUIFont" ref="1022080304"/>
-							</object>
-							<object class="IBUIView" id="374469283">
-								<reference key="NSNextResponder" ref="933964600"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{30, 28}, {84, 84}}</string>
-								<reference key="NSSuperview" ref="933964600"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="490463985"/>
-								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<reference key="IBUIBackgroundColor" ref="920293836"/>
-								<int key="IBUIContentMode">1</int>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-							</object>
-							<object class="IBUIImageView" id="490463985">
-								<reference key="NSNextResponder" ref="933964600"/>
-								<int key="NSvFlags">-2147483374</int>
-								<string key="NSFrame">{{31, 28}, {84, 84}}</string>
-								<reference key="NSSuperview" ref="933964600"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="466699334"/>
-								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<int key="IBUIContentMode">1</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-							</object>
-							<object class="IBUIImageView" id="365286863">
-								<reference key="NSNextResponder" ref="933964600"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{21, 20}, {99, 99}}</string>
-								<reference key="NSSuperview" ref="933964600"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="374469283"/>
-								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<object class="NSCustomResource" key="IBUIImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">pv_photo_frame.png</string>
-								</object>
-							</object>
-							<object class="IBUIImageView" id="208267350">
-								<reference key="NSNextResponder" ref="933964600"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{136, 55}, {28, 28}}</string>
-								<reference key="NSSuperview" ref="933964600"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="966964577"/>
-								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<object class="NSCustomResource" key="IBUIImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">fv_new_rank_fone.png</string>
-								</object>
-							</object>
-							<object class="IBUIImageView" id="966964577">
-								<reference key="NSNextResponder" ref="933964600"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{138, 57}, {25, 25}}</string>
-								<reference key="NSSuperview" ref="933964600"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="979800274"/>
-								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-							</object>
-							<object class="IBUILabel" id="63360886">
-								<reference key="NSNextResponder" ref="933964600"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{148, 102}, {59, 13}}</string>
-								<reference key="NSSuperview" ref="933964600"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="862291106"/>
-								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUIContentMode">7</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">Points:</string>
-								<object class="NSColor" key="IBUITextColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MSAxIDEAA</bytes>
-									<object class="NSColorSpace" key="NSCustomColorSpace">
-										<int key="NSID">1</int>
-									</object>
-								</object>
-								<nil key="IBUIHighlightedColor"/>
-								<int key="IBUIBaselineAdjustment">0</int>
-								<object class="IBUIFontDescription" key="IBUIFontDescription">
-									<string key="name">Helvetica</string>
-									<string key="family">Helvetica</string>
-									<int key="traits">0</int>
-									<double key="pointSize">12</double>
-								</object>
-								<object class="NSFont" key="IBUIFont">
-									<string key="NSName">Helvetica</string>
-									<double key="NSSize">12</double>
-									<int key="NSfFlags">16</int>
-								</object>
-								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
-							</object>
-						</array>
-						<string key="NSFrame">{{15, 70}, {290, 177}}</string>
-						<reference key="NSSuperview" ref="1048327278"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="365286863"/>
-						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<reference key="IBUIBackgroundColor" ref="920293836"/>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-					</object>
-				</array>
-				<string key="NSFrameSize">{320, 480}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="480612495"/>
-				<string key="NSReuseIdentifierKey">_NS:196</string>
-				<reference key="IBUIBackgroundColor" ref="920293836"/>
-				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-			</object>
-		</array>
-		<object class="IBObjectContainer" key="IBDocument.Objects">
-			<array class="NSMutableArray" key="connectionRecords">
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">view</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="1048327278"/>
-					</object>
-					<int key="connectionID">14</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">mainProfileView</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="933964600"/>
-					</object>
-					<int key="connectionID">154</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">lbDuelsWon</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="486158993"/>
-					</object>
-					<int key="connectionID">168</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">lbDuelsWonCount</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="608101977"/>
-					</object>
-					<int key="connectionID">169</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">lbDuelsLost</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="311953578"/>
-					</object>
-					<int key="connectionID">170</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">lbDuelsLostCount</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="240286786"/>
-					</object>
-					<int key="connectionID">171</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">lbBiggestWin</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="728219031"/>
-					</object>
-					<int key="connectionID">172</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">lbBiggestWinCount</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="54156393"/>
-					</object>
-					<int key="connectionID">173</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">lbUserTitle</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="979800274"/>
-					</object>
-					<int key="connectionID">180</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">ivPointsLine</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="250395111"/>
-					</object>
-					<int key="connectionID">205</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">lbPointsCountMain</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="862291106"/>
-					</object>
-					<int key="connectionID">207</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">ivCurrentRank</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="966964577"/>
-					</object>
-					<int key="connectionID">209</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">lbPointsText</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="63360886"/>
-					</object>
-					<int key="connectionID">212</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">tfFBName</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="216755311"/>
-					</object>
-					<int key="connectionID">223</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">profilePictureView</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="374469283"/>
-					</object>
-					<int key="connectionID">226</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">profilePictureViewDefault</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="490463985"/>
-					</object>
-					<int key="connectionID">233</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">blackBackGroundClick:</string>
-						<reference key="source" ref="480612495"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">258</int>
-				</object>
-			</array>
-			<object class="IBMutableOrderedSet" key="objectRecords">
-				<array key="orderedObjects">
-					<object class="IBObjectRecord">
-						<int key="objectID">0</int>
-						<array key="object" id="0"/>
-						<reference key="children" ref="1000"/>
-						<nil key="parent"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">-1</int>
-						<reference key="object" ref="372490531"/>
-						<reference key="parent" ref="0"/>
-						<string key="objectName">File's Owner</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">-2</int>
-						<reference key="object" ref="975951072"/>
-						<reference key="parent" ref="0"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">11</int>
-						<reference key="object" ref="1048327278"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="480612495"/>
-							<reference ref="933964600"/>
-						</array>
-						<reference key="parent" ref="0"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">131</int>
-						<reference key="object" ref="933964600"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="374469283"/>
-							<reference ref="490463985"/>
-							<reference ref="365286863"/>
-							<reference ref="486158993"/>
-							<reference ref="311953578"/>
-							<reference ref="608101977"/>
-							<reference ref="240286786"/>
-							<reference ref="728219031"/>
-							<reference ref="54156393"/>
-							<reference ref="979800274"/>
-							<reference ref="327593233"/>
-							<reference ref="250395111"/>
-							<reference ref="862291106"/>
-							<reference ref="208267350"/>
-							<reference ref="966964577"/>
-							<reference ref="63360886"/>
-							<reference ref="466699334"/>
-							<reference ref="216755311"/>
-						</array>
-						<reference key="parent" ref="1048327278"/>
-						<string key="objectName">mainProfileView</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">138</int>
-						<reference key="object" ref="979800274"/>
-						<reference key="parent" ref="933964600"/>
-						<string key="objectName">UserTitle</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">146</int>
-						<reference key="object" ref="486158993"/>
-						<reference key="parent" ref="933964600"/>
-						<string key="objectName">DuelsWon</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">147</int>
-						<reference key="object" ref="311953578"/>
-						<reference key="parent" ref="933964600"/>
-						<string key="objectName">DuelsLost</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">148</int>
-						<reference key="object" ref="728219031"/>
-						<reference key="parent" ref="933964600"/>
-						<string key="objectName">BiggestWin</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">149</int>
-						<reference key="object" ref="608101977"/>
-						<reference key="parent" ref="933964600"/>
-						<string key="objectName">DuelsWonCount</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">150</int>
-						<reference key="object" ref="240286786"/>
-						<reference key="parent" ref="933964600"/>
-						<string key="objectName">DuelsLostCount</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">151</int>
-						<reference key="object" ref="54156393"/>
-						<reference key="parent" ref="933964600"/>
-						<string key="objectName">BiggestWinCount</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">179</int>
-						<reference key="object" ref="216755311"/>
-						<reference key="parent" ref="933964600"/>
-						<string key="objectName">UserName</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">182</int>
-						<reference key="object" ref="327593233"/>
-						<reference key="parent" ref="933964600"/>
-						<string key="objectName">PointsLineBackGround</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">204</int>
-						<reference key="object" ref="250395111"/>
-						<reference key="parent" ref="933964600"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">206</int>
-						<reference key="object" ref="862291106"/>
-						<reference key="parent" ref="933964600"/>
-						<string key="objectName">PointsCountMain</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">208</int>
-						<reference key="object" ref="966964577"/>
-						<reference key="parent" ref="933964600"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">210</int>
-						<reference key="object" ref="208267350"/>
-						<reference key="parent" ref="933964600"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">211</int>
-						<reference key="object" ref="63360886"/>
-						<reference key="parent" ref="933964600"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">133</int>
-						<reference key="object" ref="365286863"/>
-						<reference key="parent" ref="933964600"/>
-						<string key="objectName">Photoframe</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">225</int>
-						<reference key="object" ref="374469283"/>
-						<array class="NSMutableArray" key="children"/>
-						<reference key="parent" ref="933964600"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">232</int>
-						<reference key="object" ref="490463985"/>
-						<reference key="parent" ref="933964600"/>
-						<string key="objectName">ivDefault</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">257</int>
-						<reference key="object" ref="480612495"/>
-						<reference key="parent" ref="1048327278"/>
-						<string key="objectName">btnBack</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">265</int>
-						<reference key="object" ref="466699334"/>
-						<reference key="parent" ref="933964600"/>
-					</object>
-				</array>
-			</object>
-			<dictionary class="NSMutableDictionary" key="flattenedProperties">
-				<string key="-1.CustomClassName">ProfileViewController</string>
-				<string key="-1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="-2.CustomClassName">UIResponder</string>
-				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="11.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="131.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="133.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="138.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="146.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="147.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="148.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="149.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="150.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="151.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="179.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="182.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="204.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="206.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="208.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="210.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="211.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="225.CustomClassName">FBProfilePictureView</string>
-				<string key="225.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="232.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="257.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="265.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			</dictionary>
-			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
-			<nil key="activeLocalization"/>
-			<dictionary class="NSMutableDictionary" key="localizations"/>
-			<nil key="sourceID"/>
-			<int key="maxID">267</int>
-		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<object class="IBPartialClassDescription">
-					<string key="className">FBProfilePictureView</string>
-					<string key="superclassName">UIView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/FBProfilePictureView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">ProfileViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="duelButtonClick:">id</string>
-						<string key="showStoreDefence:">id</string>
-						<string key="showStoreWeapon:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="duelButtonClick:">
-							<string key="name">duelButtonClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="showStoreDefence:">
-							<string key="name">showStoreDefence:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="showStoreWeapon:">
-							<string key="name">showStoreWeapon:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="activityIndicatorView">UIActivityIndicatorView</string>
-						<string key="addFaforitesLb">UILabel</string>
-						<string key="bgActivityIndicator">UIView</string>
-						<string key="btnAddToFavorites">UIButton</string>
-						<string key="btnBack">UIButton</string>
-						<string key="btnFavourites">UIButton</string>
-						<string key="btnLeaderboard">UIButton</string>
-						<string key="duelButton">UIButton</string>
-						<string key="ivBackground">UIImageView</string>
-						<string key="ivBlack">UIView</string>
-						<string key="ivCurrentRank">UIImageView</string>
-						<string key="ivPhotoFrame">UIImageView</string>
-						<string key="ivPointsLine">UIView</string>
-						<string key="lbAward">UILabel</string>
-						<string key="lbBiggestWin">UILabel</string>
-						<string key="lbBiggestWinCount">UILabel</string>
-						<string key="lbDescription">UILabel</string>
-						<string key="lbDuelsLost">UILabel</string>
-						<string key="lbDuelsLostCount">UILabel</string>
-						<string key="lbDuelsWon">UILabel</string>
-						<string key="lbDuelsWonCount">UILabel</string>
-						<string key="lbFavouritesTitle">UILabel</string>
-						<string key="lbGoldCount">UILabel</string>
-						<string key="lbGoldIcon">UIImageView</string>
-						<string key="lbLeaderboardTitle">UILabel</string>
-						<string key="lbPlayerStats">UILabel</string>
-						<string key="lbPointsCountMain">UILabel</string>
-						<string key="lbPointsText">UILabel</string>
-						<string key="lbProfileMain">UILabel</string>
-						<string key="lbUserTitle">UILabel</string>
-						<string key="lbWantedText">UILabel</string>
-						<string key="lbWantedTitle">UILabel</string>
-						<string key="mainProfileView">UIView</string>
-						<string key="profilePictureView">FBProfilePictureView</string>
-						<string key="profilePictureViewDefault">UIImageView</string>
-						<string key="tfFBName">UITextField</string>
-						<string key="userAtack">UILabel</string>
-						<string key="userAtackView">UIView</string>
-						<string key="userDefense">UILabel</string>
-						<string key="userDefenseView">UIView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="activityIndicatorView">
-							<string key="name">activityIndicatorView</string>
-							<string key="candidateClassName">UIActivityIndicatorView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="addFaforitesLb">
-							<string key="name">addFaforitesLb</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="bgActivityIndicator">
-							<string key="name">bgActivityIndicator</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="btnAddToFavorites">
-							<string key="name">btnAddToFavorites</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="btnBack">
-							<string key="name">btnBack</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="btnFavourites">
-							<string key="name">btnFavourites</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="btnLeaderboard">
-							<string key="name">btnLeaderboard</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="duelButton">
-							<string key="name">duelButton</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="ivBackground">
-							<string key="name">ivBackground</string>
-							<string key="candidateClassName">UIImageView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="ivBlack">
-							<string key="name">ivBlack</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="ivCurrentRank">
-							<string key="name">ivCurrentRank</string>
-							<string key="candidateClassName">UIImageView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="ivPhotoFrame">
-							<string key="name">ivPhotoFrame</string>
-							<string key="candidateClassName">UIImageView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="ivPointsLine">
-							<string key="name">ivPointsLine</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbAward">
-							<string key="name">lbAward</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbBiggestWin">
-							<string key="name">lbBiggestWin</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbBiggestWinCount">
-							<string key="name">lbBiggestWinCount</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbDescription">
-							<string key="name">lbDescription</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbDuelsLost">
-							<string key="name">lbDuelsLost</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbDuelsLostCount">
-							<string key="name">lbDuelsLostCount</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbDuelsWon">
-							<string key="name">lbDuelsWon</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbDuelsWonCount">
-							<string key="name">lbDuelsWonCount</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbFavouritesTitle">
-							<string key="name">lbFavouritesTitle</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbGoldCount">
-							<string key="name">lbGoldCount</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbGoldIcon">
-							<string key="name">lbGoldIcon</string>
-							<string key="candidateClassName">UIImageView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbLeaderboardTitle">
-							<string key="name">lbLeaderboardTitle</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbPlayerStats">
-							<string key="name">lbPlayerStats</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbPointsCountMain">
-							<string key="name">lbPointsCountMain</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbPointsText">
-							<string key="name">lbPointsText</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbProfileMain">
-							<string key="name">lbProfileMain</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbUserTitle">
-							<string key="name">lbUserTitle</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbWantedText">
-							<string key="name">lbWantedText</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lbWantedTitle">
-							<string key="name">lbWantedTitle</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="mainProfileView">
-							<string key="name">mainProfileView</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="profilePictureView">
-							<string key="name">profilePictureView</string>
-							<string key="candidateClassName">FBProfilePictureView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="profilePictureViewDefault">
-							<string key="name">profilePictureViewDefault</string>
-							<string key="candidateClassName">UIImageView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="tfFBName">
-							<string key="name">tfFBName</string>
-							<string key="candidateClassName">UITextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="userAtack">
-							<string key="name">userAtack</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="userAtackView">
-							<string key="name">userAtackView</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="userDefense">
-							<string key="name">userDefense</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="userDefenseView">
-							<string key="name">userDefenseView</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/ProfileViewController.h</string>
-					</object>
-				</object>
-			</array>
-		</object>
-		<int key="IBDocument.localizationMode">0</int>
-		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
-		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
-		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="fv_new_blue_line.png">{247, 24}</string>
-			<string key="fv_new_rank_fone.png">{28, 28}</string>
-			<string key="nameEditImage.png">{299, 60}</string>
-			<string key="pv_gold_background.png">{136, 27}</string>
-			<string key="pv_photo_frame.png">{99, 124}</string>
-		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">2083</string>
-	</data>
-</archive>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+    <dependencies>
+        <deployment defaultVersion="1280" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileViewController">
+            <connections>
+                <outlet property="ivCurrentRank" destination="208" id="209"/>
+                <outlet property="ivPointsLine" destination="204" id="205"/>
+                <outlet property="lbBiggestWin" destination="148" id="172"/>
+                <outlet property="lbBiggestWinCount" destination="151" id="173"/>
+                <outlet property="lbDuelsLost" destination="147" id="170"/>
+                <outlet property="lbDuelsLostCount" destination="150" id="171"/>
+                <outlet property="lbDuelsWon" destination="146" id="168"/>
+                <outlet property="lbDuelsWonCount" destination="149" id="169"/>
+                <outlet property="lbPointsCountMain" destination="206" id="207"/>
+                <outlet property="lbPointsText" destination="211" id="212"/>
+                <outlet property="lbUserTitle" destination="138" id="180"/>
+                <outlet property="mainProfileView" destination="131" id="154"/>
+                <outlet property="profilePictureView" destination="225" id="226"/>
+                <outlet property="profilePictureViewDefault" destination="232" id="233"/>
+                <outlet property="tfFBName" destination="179" id="223"/>
+                <outlet property="view" destination="11" id="14"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="11">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="257" userLabel="btnBack">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <state key="normal">
+                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="blackBackGroundClick:" destination="-1" eventType="touchUpInside" id="258"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" id="131" userLabel="mainProfileView">
+                    <rect key="frame" x="15" y="70" width="290" height="177"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" alpha="0.89999997615814209" contentMode="scaleToFill" image="nameEditImage.png" id="265">
+                            <rect key="frame" x="135" y="20" width="136" height="28"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Erik Merik" minimumFontSize="17" id="179" userLabel="UserName">
+                            <rect key="frame" x="145" y="21" width="117" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="0.3803921569" green="0.2666666667" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                        </textField>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="YaYoda" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="138" userLabel="UserTitle">
+                            <rect key="frame" x="169" y="59" width="117" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <color key="textColor" red="0.3803921569" green="0.2666666667" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="pv_gold_background.png" id="182" userLabel="PointsLineBackGround">
+                            <rect key="frame" x="135" y="92" width="136" height="27"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="left" image="fv_new_blue_line.png" id="204">
+                            <rect key="frame" x="139" y="95" width="121" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="206" userLabel="PointsCountMain">
+                            <rect key="frame" x="188" y="100" width="73" height="18"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="DuelsWon" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="146" userLabel="DuelsWon">
+                            <rect key="frame" x="39" y="126" width="62" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" red="0.59607843140000005" green="0.52549019610000003" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="149" userLabel="DuelsWonCount">
+                            <rect key="frame" x="114" y="126" width="28" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.3803921569" green="0.2666666667" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="DuelsLost" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="147" userLabel="DuelsLost">
+                            <rect key="frame" x="39" y="144" width="62" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" red="0.59607843140000005" green="0.52549019610000003" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="150" userLabel="DuelsLostCount">
+                            <rect key="frame" x="114" y="144" width="28" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.3803921569" green="0.2666666667" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="The biggest win:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="148" userLabel="BiggestWin">
+                            <rect key="frame" x="150" y="127" width="96" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" red="0.59607843140000005" green="0.52549019610000003" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="151" userLabel="BiggestWinCount">
+                            <rect key="frame" x="242" y="127" width="50" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.3803921569" green="0.2666666667" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleAspectFit" id="225" customClass="FBProfilePictureView">
+                            <rect key="frame" x="30" y="28" width="84" height="84"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
+                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" id="232" userLabel="ivDefault">
+                            <rect key="frame" x="31" y="28" width="84" height="84"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="pv_photo_frame.png" id="133" userLabel="Photoframe">
+                            <rect key="frame" x="21" y="20" width="99" height="99"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="fv_new_rank_fone.png" id="210">
+                            <rect key="frame" x="136" y="55" width="28" height="28"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="208">
+                            <rect key="frame" x="138" y="57" width="25" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Points:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="211">
+                            <rect key="frame" x="148" y="102" width="59" height="13"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="fv_new_blue_line.png" width="247" height="24"/>
+        <image name="fv_new_rank_fone.png" width="28" height="28"/>
+        <image name="nameEditImage.png" width="299" height="60"/>
+        <image name="pv_gold_background.png" width="136" height="27"/>
+        <image name="pv_photo_frame.png" width="99" height="124"/>
+    </resources>
+</document>

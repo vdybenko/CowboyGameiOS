@@ -1,6 +1,6 @@
 //
 //  StoreViewController.h
-//  Cowboy Duels
+//  Bounty Hunter
 //
 //  Created by Taras on 25.10.12.
 //

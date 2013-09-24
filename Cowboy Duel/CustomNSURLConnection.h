@@ -1,6 +1,6 @@
 //
 //  CustomNSURLConnection.h
-//  Cowboy Duel 1
+//  Bounty Hunter 1
 //
 //  Created by Taras on 12.07.12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.

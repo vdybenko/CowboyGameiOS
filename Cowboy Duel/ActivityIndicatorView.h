@@ -1,6 +1,6 @@
 //
 //  MyClass.h
-//  Cowboy Duel
+//  Bounty Hunter
 //
 //  Created by Taras on 17.08.11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.

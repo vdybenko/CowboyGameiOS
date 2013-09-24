@@ -1,6 +1,6 @@
 //
 //  MemoryManagement.h
-//  Cowboy Duels
+//  Bounty Hunter
 //
 //  Created by Taras on 09.01.13.
 //

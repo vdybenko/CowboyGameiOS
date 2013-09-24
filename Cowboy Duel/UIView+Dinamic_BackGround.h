@@ -1,6 +1,6 @@
 //
 //  UIView+Dinamic_BackGround.h
-//  Cowboy Duel 1
+//  Bounty Hunter 1
 //
 //  Created by Taras on 25.06.12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.

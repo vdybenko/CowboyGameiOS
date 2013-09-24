@@ -1,6 +1,6 @@
 //
 //  GunDrumViewController.m
-//  Cowboy Duels
+//  Bounty Hunter
 //
 //  Created by Taras on 31.01.13.
 //

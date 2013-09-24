@@ -1,6 +1,6 @@
 //
 //  AdvertisingNewViewController.h
-//  Cowboy Duels
+//  Bounty Hunter
 //
 //  Created by Sergey Sobol on 05.11.12.
 //

@@ -960,7 +960,7 @@ static StartViewController *sharedHelper = nil;
     {
         TWTweetComposeViewController *tweetSheet = 
         [[TWTweetComposeViewController alloc] init];
-        [tweetSheet setInitialText:@"I'm playing in Cowboy duels"];
+        [tweetSheet setInitialText:@"I'm playing in Bounty Hunter"];
         [tweetSheet addImage:[UIImage imageNamed:@"Icon@2x.png"]];
         [tweetSheet addURL:[NSURL URLWithString:URL_FB_PAGE]];
         
@@ -971,7 +971,7 @@ static StartViewController *sharedHelper = nil;
         float ver_float = [[[UIDevice currentDevice] systemVersion] floatValue];
         if (ver_float < 5.0) {
             NSString *URL=[[NSString alloc]initWithFormat:@"https://twitter.com/intent/tweet?source=webclient&text=%@ %@",
-                           @"I'm playing in Cowboy duels",
+                           @"I'm playing in Bounty Hunter",
                            URL_FB_PAGE];
             
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[URL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
@@ -997,7 +997,7 @@ static StartViewController *sharedHelper = nil;
         MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
         picker.mailComposeDelegate = self;
         
-        [picker setSubject:NSLocalizedString(@"Awesome cowboy duel", @"")];
+        [picker setSubject:NSLocalizedString(@"Awesome Bounty Hunter", @"")];
         
         // Fill out the email body text
         NSString *emailBody = NSLocalizedString(@"Mes text", @"");

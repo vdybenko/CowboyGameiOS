@@ -1,6 +1,6 @@
 //
 //  CDWeaponProduct.h
-//  Cowboy Duels
+//  Bounty Hunter
 //
 //  Created by Taras on 24.10.12.
 //

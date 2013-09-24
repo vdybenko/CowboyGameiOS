@@ -1,6 +1,6 @@
 //
 //  FunPageViewController.h
-//  Cowboy Duels
+//  Bounty Hunter
 //
 //  Created by Sergey Sobol on 18.12.12.
 //

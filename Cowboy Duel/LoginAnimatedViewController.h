@@ -1,6 +1,6 @@
 //
 //  LoginAnimatedViewController.h
-//  Cowboy Duels
+//  Bounty Hunter
 //
 //  Created by Sergey Sobol on 07.11.12.
 //

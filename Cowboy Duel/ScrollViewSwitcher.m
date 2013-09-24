@@ -1,6 +1,6 @@
 //
 //  ScrollView.m
-//  Cowboy Duel
+//  Bounty Hunter
 //
 //  Created by Sergey Sobol on 06.09.11.
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
