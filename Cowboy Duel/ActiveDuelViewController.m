@@ -365,7 +365,7 @@ static CGFloat blinkBottomOriginY;
 
 -(void)reInitViewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    self.view.hidden = NO;
     if (tryAgain) {
         for (BarellsObject *barell in barellObjectArray) {
             [barell showBarrels];
@@ -1543,7 +1543,7 @@ float frequencyOpponentShoting()
 
 -(IBAction)backButtonClick:(id)sender
 {
-    
+    self.view.hidden = YES;
     //Transitions only!
     NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
     if (([userDef integerForKey:@"FirstRunForPractice"] != 1)&&([userDef integerForKey:@"FirstRunForPractice"] != 2)) {
