@@ -915,8 +915,8 @@ static StartViewController *sharedHelper = nil;
             BOOL displayedNativeDialog =
             [FBNativeDialogs
              presentShareDialogModallyFrom:self
-             initialText:@"Get Started"
-             image:[UIImage imageNamed:@"Icon@2x.png"]
+             initialText:NSLocalizedString(@"FEEDBACK_FB", @"")
+             image:[UIImage imageNamed:@"icon@2x.png"]
              url:[NSURL URLWithString:URL_APP_ESTIMATE]
              handler:^(FBNativeDialogResult result, NSError *error) {
                  if (error) {
@@ -960,8 +960,8 @@ static StartViewController *sharedHelper = nil;
     {
         TWTweetComposeViewController *tweetSheet = 
         [[TWTweetComposeViewController alloc] init];
-        [tweetSheet setInitialText:@"I'm playing in Bounty Hunter"];
-        [tweetSheet addImage:[UIImage imageNamed:@"Icon@2x.png"]];
+        [tweetSheet setInitialText:NSLocalizedString(@"FEEDBACK_TWITTER", @"")];
+        [tweetSheet addImage:[UIImage imageNamed:@"icon@2x.png"]];
         [tweetSheet addURL:[NSURL URLWithString:URL_FB_PAGE]];
         
 	    [self presentModalViewController:tweetSheet animated:YES];
@@ -971,7 +971,7 @@ static StartViewController *sharedHelper = nil;
         float ver_float = [[[UIDevice currentDevice] systemVersion] floatValue];
         if (ver_float < 5.0) {
             NSString *URL=[[NSString alloc]initWithFormat:@"https://twitter.com/intent/tweet?source=webclient&text=%@ %@",
-                           @"I'm playing in Bounty Hunter",
+                           NSLocalizedString(@"FEEDBACK_TWITTER", @""),
                            URL_FB_PAGE];
             
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[URL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
