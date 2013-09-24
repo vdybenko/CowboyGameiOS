@@ -140,6 +140,7 @@ static SSConnection *connection;
     defenceData[0] = defence;
 
     const char *serverDisplayName = [playerAccount.accountName cStringUsingEncoding:NSUTF8StringEncoding];
+    DLog(@"serverDisplayName %@",playerAccount.accountName);
     int displayNameLen = strlen(serverDisplayName);
     int *displayNameData = (int *)&networkPacket[sizeof(int) * 4];
     displayNameData[0] = displayNameLen;

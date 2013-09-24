@@ -149,7 +149,6 @@ BOOL isSoundControl;
     transition.subtype = kCATransitionFromTop; //kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop,
     [self.navigationController.view.layer addAnimation:transition forKey:nil];
     [self.navigationController popViewControllerAnimated:NO];
-    [self releaseComponents];
 }
 
 -(IBAction)btnFB{

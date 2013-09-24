@@ -546,8 +546,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     ivCurrentRank.image = [UIImage imageNamed:name];
     tfFBName.text = playerAccount.accountName;
       [tfFBName setFont: [UIFont fontWithName: @"MyriadPro-Bold" size:12]];
-    SSConnection *connection = [SSConnection sharedInstance];
-    [connection sendInfoPacket];
 }
 
 -(void)changePointsLine:(int)points maxValue:(int) maxValue animated:(BOOL)animated;

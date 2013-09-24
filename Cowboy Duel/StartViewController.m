@@ -694,13 +694,15 @@ static StartViewController *sharedHelper = nil;
 }
 
 - (IBAction)storeButtonClick:(id)sender {
-    BuilderViewController *builder = [[BuilderViewController alloc] init];
-    
+    __block BuilderViewController *builder = [[BuilderViewController alloc] init];
+
     [UIView animateWithDuration:0.75
                      animations:^{
                          [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
                          [self.navigationController pushViewController:builder animated:NO];
                          [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
+                     } completion:^(BOOL finished) {
+                         builder = nil;
                      }];
     builder = nil;
 }
@@ -1341,7 +1343,7 @@ static StartViewController *sharedHelper = nil;
             case LoginFacebookStatusInvaitFriends:
                 [[OGHelper sharedInstance] getFriendsHowDontUseAppDelegate:nil];
                 break;
-            case LoginFacebookStatusProfile:
+            case LoginFacebookStatusProfile:{
                 profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount];
                 [profileViewController setNeedAnimation:YES];
                 
@@ -1372,6 +1374,10 @@ static StartViewController *sharedHelper = nil;
                     [playerAccount saveMoney];
                 }
                 
+                SSConnection *connection = [SSConnection sharedInstance];
+                [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
+                [connection sendInfoPacket];
+            }
                 break;
             default:
                 break;
