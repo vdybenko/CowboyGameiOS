@@ -11,8 +11,8 @@
 
 @interface FavouritesViewController : UIViewController <UITableViewDelegate,MemoryManagement>
 
-@property (strong, nonatomic) IBOutlet UIView *vOffLineBackGround;
-@property (strong, nonatomic) IBOutlet UIWebView *wvOffLineText;
+@property (weak, nonatomic) IBOutlet UIView *vOffLineBackGround;
+@property (weak, nonatomic) IBOutlet UIWebView *wvOffLineText;
 @property (weak, nonatomic) IBOutlet UITableView *tvFavTable;
 @property (weak, nonatomic) IBOutlet UILabel *lbFavsTitle;
 
@@ -22,8 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *leaderBoardBtn;
 
 
-@property (strong, nonatomic) IBOutlet UIView *loadingView;
-@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIView *loadingView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 - (id)initWithAccount:(AccountDataSource *)userAccount;
 -(void) didRefreshController;

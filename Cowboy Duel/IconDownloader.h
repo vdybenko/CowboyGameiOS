@@ -16,7 +16,7 @@
 	/**
 		Instance of IconDownloaderDelegate object
 	 */
-    id <IconDownloaderDelegate> delegate;
+    __weak id <IconDownloaderDelegate> delegate;
     /**
      name of Player to download icon
 	 */
@@ -34,7 +34,7 @@
 @property (nonatomic ,strong) NSString * namePlayer;
 @property (nonatomic ,strong) NSString * avatarURL;
 @property (nonatomic ,strong) UIImage * imageDownloaded;
-@property (nonatomic, strong) id <IconDownloaderDelegate> delegate;
+@property (nonatomic, weak) id <IconDownloaderDelegate> delegate;
 
 - (void)startDownloadFBIcon;
 - (void)startDownloadSimpleIcon;

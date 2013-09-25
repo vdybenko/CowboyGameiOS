@@ -13,6 +13,7 @@
 #import "StartViewController.h"
 #import "ListOfItemsViewController.h"
 #import "FavouritesViewController.h"
+#import "UIViewController+popTO.h"
 
 @interface TopPlayersViewController()
 {
@@ -259,10 +260,7 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
 
 -(IBAction)backToMenu:(id)sender;
 {
-    ListOfItemsViewController *listOfItemsViewController = [[ListOfItemsViewController alloc] init];
-
-  [self.navigationController pushViewController:listOfItemsViewController animated:YES];
-    listOfItemsViewController = nil;
+    [self popToControllersClass:[ListOfItemsViewController class] animated:YES];
 }
 -(IBAction)findMe:(id)sender;
 {
@@ -329,11 +327,11 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
     }
 }
 - (IBAction)favoritesTouch:(id)sender {
-    
-    FavouritesViewController *favVC = [[FavouritesViewController alloc] initWithAccount:_playerAccount];
-    [self.navigationController pushViewController:favVC animated:YES];
-
-    
+    BOOL result = [self popToControllersClass:[FavouritesViewController class] animated:YES];
+    if (!result) {
+        FavouritesViewController *favVC = [[FavouritesViewController alloc] initWithAccount:_playerAccount];
+        [self.navigationController pushViewController:favVC animated:YES];
+    }
 }
 @end
 

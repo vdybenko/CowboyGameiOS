@@ -460,6 +460,7 @@
 		7693D98B16F226550096F61F /* womanVoiceHelp.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7693D98A16F226550096F61F /* womanVoiceHelp.mp3 */; };
 		7693D98E16F23C7F0096F61F /* goodCowboyScared.png in Resources */ = {isa = PBXBuildFile; fileRef = 7693D98C16F23C7F0096F61F /* goodCowboyScared.png */; };
 		7693D98F16F23C7F0096F61F /* goodCowboyScared@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7693D98D16F23C7F0096F61F /* goodCowboyScared@2x.png */; };
+		769A74DC17F2D38500F1CBEF /* UIViewController+popTO.m in Sources */ = {isa = PBXBuildFile; fileRef = 769A74DB17F2D38500F1CBEF /* UIViewController+popTO.m */; };
 		769CA78F14234458006EF248 /* shot.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 769CA78E14234458006EF248 /* shot.mp3 */; };
 		769F567E13AA6A9B006BFD46 /* Duel.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 769F567B13AA6A9B006BFD46 /* Duel.mp3 */; };
 		769F567F13AA6A9B006BFD46 /* Lose.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 769F567C13AA6A9B006BFD46 /* Lose.mp3 */; };
@@ -1577,6 +1578,8 @@
 		7693D98C16F23C7F0096F61F /* goodCowboyScared.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goodCowboyScared.png; sourceTree = "<group>"; };
 		7693D98D16F23C7F0096F61F /* goodCowboyScared@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "goodCowboyScared@2x.png"; sourceTree = "<group>"; };
 		76947EF413ACC4EA008BD146 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		769A74DA17F2D38500F1CBEF /* UIViewController+popTO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+popTO.h"; sourceTree = "<group>"; };
+		769A74DB17F2D38500F1CBEF /* UIViewController+popTO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+popTO.m"; sourceTree = "<group>"; };
 		769CA78E14234458006EF248 /* shot.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = shot.mp3; sourceTree = "<group>"; };
 		769F567B13AA6A9B006BFD46 /* Duel.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Duel.mp3; sourceTree = "<group>"; };
 		769F567C13AA6A9B006BFD46 /* Lose.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Lose.mp3; sourceTree = "<group>"; };
@@ -3471,6 +3474,8 @@
 				763F8A3C1578FC0900D8BB42 /* UIView+Hierarchy.h */,
 				767CD1E2158F212A0054C9B8 /* UIImage+Save.h */,
 				767CD1E3158F212B0054C9B8 /* UIImage+Save.m */,
+				769A74DA17F2D38500F1CBEF /* UIViewController+popTO.h */,
+				769A74DB17F2D38500F1CBEF /* UIViewController+popTO.m */,
 				76841B79163EAE3800F3FD1A /* SoundDownload.h */,
 				76841B7A163EAE3800F3FD1A /* SoundDownload.m */,
 				765EB4EA1580E3530059355B /* NSString+isNumeric.h */,
@@ -4558,6 +4563,7 @@
 				BD0DA0CF16D3727B00419DC1 /* PLLog.m in Sources */,
 				BD0DA0D116D3727B00419DC1 /* PLMath.m in Sources */,
 				BD0DA0D316D3727B00419DC1 /* PLObject.m in Sources */,
+				769A74DC17F2D38500F1CBEF /* UIViewController+popTO.m in Sources */,
 				BD0DA0D516D3727B00419DC1 /* PLObjectBase.m in Sources */,
 				BD0DA0D716D3727B00419DC1 /* PLOpenGLSupport.m in Sources */,
 				BD0DA0D916D3727B00419DC1 /* PLPanoramaBase.m in Sources */,

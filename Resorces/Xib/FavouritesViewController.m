@@ -17,6 +17,7 @@
 #import "CDTransaction.h"
 #import "TopPlayersViewController.h"
 #import "ListOfItemsViewController.h"
+#import "UIViewController+popTO.h"
 
 @interface FavouritesViewController ()
 {
@@ -65,12 +66,12 @@
     favsDataSource = [[StartViewController sharedInstance] favsDataSource];
     favsDataSource.tableView = tvFavTable;
     favsDataSource.typeOfTable = ONLINE;
-    favsDataSource.delegate=self;
+    favsDataSource.delegate = self;
     
     SSConnection *conn = [SSConnection sharedInstance];
     conn.delegate = favsDataSource;
 //    
-    tvFavTable.delegate=self;
+    tvFavTable.delegate = self;
     tvFavTable.dataSource=favsDataSource;
     [favsDataSource refreshListOnline];
     
@@ -111,6 +112,7 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [self releaseComponents];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -166,10 +168,7 @@
 #pragma mark IBActions:
 
 - (IBAction)btnBackClicked:(id)sender {
-    ListOfItemsViewController *listOfItemsViewController = [[ListOfItemsViewController alloc] init];
-    
-    [self.navigationController pushViewController:listOfItemsViewController animated:YES];
-    listOfItemsViewController = nil;
+    [self popToControllersClass:[ListOfItemsViewController class] animated:YES];
 }
 
 - (IBAction)btnOnlineClicked:(id)sender {
@@ -192,9 +191,11 @@
     }
 }
 - (IBAction)leaderboardTouch:(id)sender {
-    TopPlayersViewController *topPlayersViewController =[[TopPlayersViewController alloc] initWithAccount:playerAccount];
-    [self.navigationController pushViewController:topPlayersViewController animated:YES];
-    topPlayersViewController = nil;
+    BOOL result = [self popToControllersClass:[TopPlayersViewController class] animated:YES];
+    if (!result) {
+        TopPlayersViewController *topPlayersViewController =[[TopPlayersViewController alloc] initWithAccount:playerAccount];
+        [self.navigationController pushViewController:topPlayersViewController animated:YES];
+    }
 }
 
 //call to duel:
@@ -229,7 +230,7 @@
     duelStartViewController = [[DuelStartViewController alloc]initWithAccount:playerAccount andOpAccount:oponentAccount opopnentAvailable:NO andServerType:NO andTryAgain:NO];
     //duelStartViewController.serverName = playerAccount.accountID;
     
-    GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+    GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:nil];
     duelStartViewController.delegate = gameCenterViewController;
     gameCenterViewController.duelStartViewController = duelStartViewController;
     

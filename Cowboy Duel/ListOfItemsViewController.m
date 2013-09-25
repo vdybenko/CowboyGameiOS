@@ -18,6 +18,7 @@
 #import "FavouritesDataSource.h"
 #import "TopPlayersViewController.h"
 #import "StartViewController.h"
+#import "UIViewController+popTO.h"
 
 @interface ListOfItemsViewController ()
 {
@@ -360,6 +361,7 @@
 - (IBAction)favoritListTouch:(id)sender {
     FavouritesViewController *favVC = [[FavouritesViewController alloc] initWithAccount:_playerAccount];
     [self.navigationController pushViewController:favVC animated:YES];
+    favVC = nil;
 }
 
 

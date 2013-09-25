@@ -13,18 +13,18 @@
 
 @interface TopPlayersViewController : UIViewController <UITableViewDelegate,MemoryManagement>
 
-@property (strong, nonatomic) IBOutlet UILabel *saloonTitle;
+@property (weak, nonatomic) IBOutlet UILabel *saloonTitle;
 
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UIButton *btnBack;
-@property (strong, nonatomic) IBOutlet UIButton *btnFindMe;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIButton *btnBack;
+@property (weak, nonatomic) IBOutlet UIButton *btnFindMe;
 @property (weak, nonatomic) IBOutlet UIButton *favoritesBtn;
 
-@property (strong, nonatomic) IBOutlet UIView *loadingView;
-@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIView *loadingView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
-@property (strong, nonatomic) IBOutlet UIView *offLineBackGround;
-@property (strong, nonatomic) IBOutlet UIWebView *offLineText;
+@property (weak, nonatomic) IBOutlet UIView *offLineBackGround;
+@property (weak, nonatomic) IBOutlet UIWebView *offLineText;
 
 - (id)initWithAccount:(AccountDataSource *)userAccount;
 -(IBAction)findMe:(id)sender;

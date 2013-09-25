@@ -797,7 +797,6 @@ static StartViewController *sharedHelper = nil;
     transition.subtype = kCATransitionFromBottom;
     [self.navigationController.view.layer addAnimation:transition forKey:nil];
     [self.navigationController pushViewController:helpViewController animated:NO];
-    helpViewController = nil;    
 }
 
 -(void) advertButtonClick {
