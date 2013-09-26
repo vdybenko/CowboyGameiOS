@@ -96,6 +96,7 @@ static CGFloat const kAHPullView_ViewHeight = 60.0;
 @property (nonatomic, retain) NSString * loadedText;        // Displayed in _label when loading did finish
 
 @property (nonatomic, copy) void (^pullHandler)(void);      // The block executed when triggering
+@property (nonatomic, assign) id <AHPullToRefreshViewDelegate> delegatePullRefresh;
 
 /**
  Initializes the view with the linked scrollview.
@@ -477,6 +478,7 @@ static CGFloat const kAHPullView_ViewHeight = 60.0;
             
                 // Execute the pull handler block
                 pullHandler();
+                [self.delegatePullRefresh refreshOnPull];
                 break;
             }
         }
@@ -681,6 +683,23 @@ static char kAHTV_Key_IsPullRefreshEnabled;
     return objc_getAssociatedObject(self, &kAHTV_Key_PullToRefreshView);
 }
 
+-(void)setDelegatePullToRefresh:(id <AHPullToRefreshViewDelegate>)delegate;
+{
+    self.pullToRefreshView.delegatePullRefresh = delegate;
+}
+
+-(void)releaseComponents;
+{
+//    self.pullToRefreshView.pullHandler = nil;
+//    [self.pullToRefreshView.pullHandler release];
+//    [self.pullToRefreshView.delegatePullRefresh release];
+//    [self.pullToRefreshView release];
+//    self.pullToRefreshView = nil;
+}
+
+- (void)dealloc {
+//    [super dealloc];
+}
 @end
 
 // --------------------------------------------------------------------------------

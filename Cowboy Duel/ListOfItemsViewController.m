@@ -82,21 +82,13 @@
     
     tableView.delegate=self;
     tableView.dataSource=_playersOnLineDataSource;
-    
-    __block UIView *loadingViewB = loadingView;
-    __block UIActivityIndicatorView *activityIndicatorB = activityIndicator;
-    __block PlayersOnLineDataSource *_playersOnLineDataSourceB = _playersOnLineDataSource;
 
     [tableView setPullToRefreshHandler:^{
-        [loadingViewB setHidden:NO];
-        [activityIndicatorB startAnimating];
-        _playersOnLineDataSourceB.statusOnLine = statusOnLine;
-        [_playersOnLineDataSourceB reloadDataSource];
-        
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                             object:nil
                                                           userInfo:[NSDictionary dictionaryWithObject:@"/ListOfItemsVC_refresh" forKey:@"page"]];
     }];
+    [tableView setDelegatePullToRefresh:self];
     
     saloonTitle.text = NSLocalizedString(@"SALYN", nil);
     
@@ -165,6 +157,7 @@
 
 -(void)releaseComponents
 {
+    [tableView releaseComponents];
     tableView = nil;
     btnBack = nil;
     activityIndicator = nil;
@@ -265,6 +258,12 @@
         [profileViewController performSelector:@selector(duelButtonClick:) withObject:nil afterDelay:1.0];
     }
     profileViewController = nil;
+}
+#pragma mark - AHPullToRefreshViewDelegate
+
+-(void)refreshOnPull;
+{
+    [self refreshController];
 }
 
 #pragma mark - Interface methods

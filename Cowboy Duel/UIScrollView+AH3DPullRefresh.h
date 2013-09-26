@@ -23,13 +23,19 @@
 #import <UIKit/UIKit.h>
 
 @class AHPullToRefreshView;
+@protocol AHPullToRefreshViewDelegate <NSObject>
 
+-(void)refreshOnPull;
+
+@end
 @interface UIScrollView (AH3DPullRefresh)
 
 @property (nonatomic, retain) AHPullToRefreshView * pullToRefreshView;
 
 #pragma mark - Init
 
+-(void)releaseComponents;
+-(void)setDelegatePullToRefresh:(id <AHPullToRefreshViewDelegate>)delegate;
 /**
  Sets the pull to refresh handler. Call this method to initialize the pull to refresh view.
  @param handler The block to be executed when the pull to refresh view is pulled and released.

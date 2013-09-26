@@ -13,7 +13,7 @@
 #import "UIScrollView+AH3DPullRefresh.h"
 #import "StartViewController.h"
 
-@interface ListOfItemsViewController : UIViewController <UITableViewDelegate, UIAlertViewDelegate, TableCellWithButton, FBRequestDelegate, MemoryManagement>
+@interface ListOfItemsViewController : UIViewController <UITableViewDelegate, UIAlertViewDelegate, TableCellWithButton, FBRequestDelegate, MemoryManagement,AHPullToRefreshViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnBack;
