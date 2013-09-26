@@ -337,7 +337,7 @@ FXLabel *lblGoldPlus;
 
 -(void)checkOfCongratulationControllers
 {
-    if (finalViewDataSource.reachNewLevel) {
+    if (finalViewDataSource.reachNewLevel && playerAccount.accountLevel>0 && playerAccount.accountLevel<=6) {
         [self showMessageOfNewLevel];
         finalViewDataSource.reachNewLevel=NO;
     }else if (finalViewDataSource.userWon) {
