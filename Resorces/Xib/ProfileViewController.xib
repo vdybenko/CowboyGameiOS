@@ -156,11 +156,22 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="EQQ-Sr-Jbs">
+                    <rect key="frame" x="287" y="58" width="33" height="33"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="btn_adcolony.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="blackBackGroundClick:" destination="-1" eventType="touchUpInside" id="PQr-Kd-3Nc"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
         </view>
     </objects>
     <resources>
+        <image name="btn_adcolony.png" width="33" height="33"/>
         <image name="fv_new_blue_line.png" width="247" height="24"/>
         <image name="fv_new_rank_fone.png" width="28" height="28"/>
         <image name="nameEditImage.png" width="299" height="60"/>
