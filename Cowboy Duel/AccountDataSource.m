@@ -717,5 +717,8 @@ static AccountDataSource *sharedHelper = nil;
     }
 }
 
-
+-(void)dealloc
+{
+    
+}
 @end

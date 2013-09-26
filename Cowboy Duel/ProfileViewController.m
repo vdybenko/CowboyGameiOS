@@ -153,7 +153,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     
     if (self) {
         playerServer = server;
-
+        playerAccount = [AccountDataSource sharedInstance];
         controllerType = ProfileViewControllerInitOpponent;
         
         [self initStatsWithAccount:oponentAccount];

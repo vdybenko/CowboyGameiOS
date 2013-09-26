@@ -30,7 +30,6 @@ static const char *A_URL =  BASE_URL"api/authorization";
     self = [super initWithNibName:@"LoadViewContoller" bundle:[NSBundle mainBundle]];
     if(self){
         [self loadView];
-        [AccountDataSource sharedInstance];
         [activityIndicator stopAnimating];
         if(![[NSUserDefaults standardUserDefaults] boolForKey:@"AlreadyRun"] ) {
             firstRun = YES;

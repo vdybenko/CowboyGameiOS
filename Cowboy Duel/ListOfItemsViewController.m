@@ -22,9 +22,9 @@
 
 @interface ListOfItemsViewController ()
 {
-    __weak AccountDataSource *_playerAccount;
+    AccountDataSource *_playerAccount;
     PlayersOnLineDataSource *_playersOnLineDataSource;
-    __weak AccountDataSource *oponentAccount;
+    AccountDataSource *oponentAccount;
     // AccountDataSource *playerAccount;
     BOOL statusOnLine;
             

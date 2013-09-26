@@ -13,7 +13,7 @@
 
 @interface StoreViewController ()
 {
-    __weak AccountDataSource *playerAccount;
+    AccountDataSource *playerAccount;
     DuelProductDownloaderController *duelProductDownloaderController;
     
     int purchesingProductIndex;

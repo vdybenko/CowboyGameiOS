@@ -8,7 +8,7 @@
 
 @interface VisualViewCharacterViewController ()
 {
-    __weak AccountDataSource *playerAccount;
+    AccountDataSource *playerAccount;
     __weak IBOutlet VisualViewCharacter *visualViewCharacter;
     __weak IBOutlet ScrollViewSwitcher *scrollViewSwitcherCap;
     __weak IBOutlet ScrollViewSwitcher *scrollViewSwitcherHead;
