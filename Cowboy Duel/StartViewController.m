@@ -780,6 +780,8 @@ static StartViewController *sharedHelper = nil;
 
 -(IBAction)showHelp:(id)sender
 {
+    [self.duelProductDownloaderController refreshUserDuelProducts];
+    return;
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/help_click" forKey:@"event"]];
@@ -1173,11 +1175,6 @@ static StartViewController *sharedHelper = nil;
             RefreshContentDataController *refreshContentDataController=[[RefreshContentDataController alloc] init];
             [refreshContentDataController refreshContent];
         }
-        
-        int revisionProductListNumber=[[responseObject objectForKey:@"v_of_store_list"] intValue];
-        if ([DuelProductDownloaderController isRefreshEvailable:revisionProductListNumber]) {
-            [duelProductDownloaderController refreshDuelProducts];
-        }
         return;
     }       
     //avtorization
@@ -1350,6 +1347,8 @@ static StartViewController *sharedHelper = nil;
                 [UIView commitAnimations];
                 
                 if([[OGHelper sharedInstance] isAuthorized]){
+                    [self.duelProductDownloaderController refreshUserDuelProducts];
+                    
                     btnFBLogin.hidden = YES;
                     vLoading.hidden = YES;
                     

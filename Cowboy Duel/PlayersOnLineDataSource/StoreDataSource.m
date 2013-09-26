@@ -47,7 +47,6 @@
     if (![[StartViewController sharedInstance].duelProductDownloaderController isListProductsAvailable]) {
         [storeViewController activityShow];
         if ([DuelProductDownloaderController isRefreshEvailable:NSNotFound]) {
-            [[StartViewController sharedInstance].duelProductDownloaderController refreshDuelProducts];
             __block id selfBlock = self;
             __block id tableViewBlock = tableView;
             [StartViewController sharedInstance].duelProductDownloaderController.didFinishBlock = ^(NSError *error){

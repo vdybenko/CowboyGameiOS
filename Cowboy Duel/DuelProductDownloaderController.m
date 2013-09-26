@@ -102,10 +102,6 @@ static NSString *getSavePathForDuelProduct()
 
 -(void) refreshDuelProducts;
 {
-//    TODO we dont use it
-    return;
-//    
-    
     isRefreshingNow = YES;
     
     NSString *URL;
@@ -434,6 +430,7 @@ static NSString *getSavePathForDuelProduct()
 
 -(void)parsingResultUserProduct:(NSString *)jsonString;
 {
+    DLog(@"%@",jsonString);
     NSArray *responseObjectOfProducts = ValidateObject([jsonString JSONValue], [NSArray class]);
     AccountDataSource *playerAccount=[AccountDataSource sharedInstance];
     NSUInteger indexOfProductInSavedDefenseArraySaved=-1;
