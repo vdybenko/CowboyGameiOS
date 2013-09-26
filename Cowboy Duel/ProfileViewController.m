@@ -964,7 +964,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     
     duelStartViewController = [[DuelStartViewController alloc]initWithAccount:[AccountDataSource sharedInstance] andOpAccount:playerAccount opopnentAvailable:NO andServerType:NO andTryAgain:NO];
     
-    GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+    GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:[StartViewController sharedInstance]];
     duelStartViewController.delegate = gameCenterViewController;
     gameCenterViewController.duelStartViewController = duelStartViewController;
     
