@@ -260,7 +260,12 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
 
 -(IBAction)backToMenu:(id)sender;
 {
-    [self popToControllersClass:[ListOfItemsViewController class] animated:YES];
+    StartViewController *startViewController = [StartViewController sharedInstance];
+    BOOL hostActive = [startViewController connectedToWiFi];
+    ListOfItemsViewController *listOfItemsViewController=[[ListOfItemsViewController alloc] initWithAccount:_playerAccount OnLine:hostActive];
+    [self.navigationController popViewControllerAnimated:NO];
+    [startViewController.navigationController pushViewController:listOfItemsViewController animated:YES];
+    
 }
 -(IBAction)findMe:(id)sender;
 {
@@ -327,11 +332,10 @@ static const char *RANK_TOP = BASE_URL"users/top_rank_on_interspace";
     }
 }
 - (IBAction)favoritesTouch:(id)sender {
-    BOOL result = [self popToControllersClass:[FavouritesViewController class] animated:YES];
-    if (!result) {
-        FavouritesViewController *favVC = [[FavouritesViewController alloc] initWithAccount:_playerAccount];
-        [self.navigationController pushViewController:favVC animated:YES];
-    }
+    FavouritesViewController *favVC = [[FavouritesViewController alloc] initWithAccount:_playerAccount];
+    UIViewController *vc = [StartViewController sharedInstance];
+    [self.navigationController popViewControllerAnimated:NO];
+    [vc.navigationController pushViewController:favVC animated:YES];
 }
 @end
 

@@ -168,7 +168,11 @@
 #pragma mark IBActions:
 
 - (IBAction)btnBackClicked:(id)sender {
-    [self popToControllersClass:[ListOfItemsViewController class] animated:YES];
+    StartViewController *startViewController = [StartViewController sharedInstance];
+    BOOL hostActive = [startViewController connectedToWiFi];
+    ListOfItemsViewController *listOfItemsViewController=[[ListOfItemsViewController alloc] initWithAccount:playerAccount OnLine:hostActive];
+    [self.navigationController popViewControllerAnimated:NO];
+    [startViewController.navigationController pushViewController:listOfItemsViewController animated:YES];
 }
 
 - (IBAction)btnOnlineClicked:(id)sender {
@@ -191,11 +195,10 @@
     }
 }
 - (IBAction)leaderboardTouch:(id)sender {
-    BOOL result = [self popToControllersClass:[TopPlayersViewController class] animated:YES];
-    if (!result) {
-        TopPlayersViewController *topPlayersViewController =[[TopPlayersViewController alloc] initWithAccount:playerAccount];
-        [self.navigationController pushViewController:topPlayersViewController animated:YES];
-    }
+    TopPlayersViewController *topPlayersViewController =[[TopPlayersViewController alloc] initWithAccount:playerAccount];
+    UIViewController *vc = [StartViewController sharedInstance];
+    [self.navigationController popViewControllerAnimated:NO];
+    [vc.navigationController pushViewController:topPlayersViewController animated:YES];
 }
 
 //call to duel:

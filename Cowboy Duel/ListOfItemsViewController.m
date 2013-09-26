@@ -350,12 +350,16 @@
 }
 - (IBAction)leaderBoardTouch:(id)sender {
    TopPlayersViewController *topPlayersViewController =[[TopPlayersViewController alloc] initWithAccount:_playerAccount];
-    [self.navigationController pushViewController:topPlayersViewController animated:YES];
+    UIViewController *vc = [StartViewController sharedInstance];
+    [self.navigationController popViewControllerAnimated:NO];
+    [vc.navigationController pushViewController:topPlayersViewController animated:YES];
     topPlayersViewController = nil;
 }
 - (IBAction)favoritListTouch:(id)sender {
     FavouritesViewController *favVC = [[FavouritesViewController alloc] initWithAccount:_playerAccount];
-    [self.navigationController pushViewController:favVC animated:YES];
+    UIViewController *vc = [StartViewController sharedInstance];
+    [self.navigationController popViewControllerAnimated:NO];
+    [vc.navigationController pushViewController:favVC animated:YES];
     favVC = nil;
 }
 
