@@ -24,8 +24,6 @@
 {
     AccountDataSource *_playerAccount;
     PlayersOnLineDataSource *_playersOnLineDataSource;
-    AccountDataSource *oponentAccount;
-    // AccountDataSource *playerAccount;
     BOOL statusOnLine;
             
     NSIndexPath *_indexPath;
@@ -212,7 +210,7 @@
     SSServer *player;
     player=[_playersOnLineDataSource.serverObjects objectAtIndex:indexPath.row];
     
-    oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
+    AccountDataSource *oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
     [oponentAccount setAccountID:(player.serverName) ? [NSString stringWithString:player.serverName]:@""];
     [oponentAccount setAccountName:player.displayName];
     [oponentAccount setAccountLevel:[player.rank integerValue]];

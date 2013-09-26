@@ -252,17 +252,17 @@ FXLabel *lblGoldPlus;
 -(void)finalAnimation{
     [UIView animateWithDuration:1.4f
                      animations:^{
-                         [self animationWithLable:lblGold andStartNumber:startMoney andEndNumber:endMoney];
+                         [self animationWithLable:lblGold andStartNumber:startMoney andEndNumber:endMoney withCheck:YES];
                          
                          [self changePointsLine:startPoints maxValue:endPoints animated:YES];
-                         [self animationWithLable:lblPoints andStartNumber:lbStartPoints andEndNumber:lbEndPoints];
+                         [self animationWithLable:lblPoints andStartNumber:lbStartPoints andEndNumber:lbEndPoints withCheck:NO];
                          
                      } completion:^(BOOL finished) {
 
                      }];
 }
 
--(void)animationWithLable:(UILabel *)lable andStartNumber:(int)startNumber andEndNumber:(int)endNumber
+-(void)animationWithLable:(UILabel *)lable andStartNumber:(int)startNumber andEndNumber:(int)endNumber withCheck:(BOOL)check
 {
     float goldForGoldAnimation;
     if (abs(endNumber - startNumber) < 110) {
@@ -284,7 +284,9 @@ FXLabel *lblGoldPlus;
                 }
                 dispatch_async(dispatch_get_main_queue(), ^{
                     lable.text = [NSString stringWithFormat:@"%d", endNumber];
-                    [self checkOfCongratulationControllers];
+                    if (check) {
+                        [self checkOfCongratulationControllers];
+                    }
                 });
             }
         });
@@ -300,7 +302,9 @@ FXLabel *lblGoldPlus;
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 lable.text = [NSString stringWithFormat:@"%d", endNumber];
-                [self checkOfCongratulationControllers];
+                if (check) {
+                    [self checkOfCongratulationControllers];
+                }
             });
         });
 }

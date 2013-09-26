@@ -502,6 +502,7 @@ static CGFloat blinkBottomOriginY;
     finalViewDataSource.oldPoints = playerAccount.accountPoints;
     
     presentVC = nil;
+    finalView = nil;
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -1115,46 +1116,48 @@ static CGFloat blinkBottomOriginY;
 #pragma mark - FinalVC
 -(void)showFinalView: (FinalViewDataSource *) fvDataSource;
 {
-    [self stopDuel];
-    
-    finalViewDataSource = fvDataSource;
-    
-    self.userLiveImageView.hidden = YES;
-    self.lbUserLifeLeft.hidden = YES;
-    
-    CGRect finalFrame = CGRectMake(12, 90, 294, 165);
-
-    finalView = [[FinalStatsView alloc] initWithFrame:finalFrame andDataSource:fvDataSource];
-    finalView.isTryAgainEnabled = isTryAgainEnabled;
-    finalView.activeDuelViewController = self;
-    
-    finalView.center = self.crossImageView.center;
-    finalView.hidden = YES;
-    
-    blurredBack.hidden = NO;
-
-    btnBack.hidden = NO;
-    btnTry.hidden = NO;
-    btnSkip.hidden = YES;
-    
-    [self.view bringSubviewToFront:btnBack];
-    [self.view bringSubviewToFront:btnTry];
-    
-    btnBack.enabled = YES;
-    btnTry.enabled = YES;
-    btnSkip.enabled = NO;
-    
-    [self revealFinalView:YES];
-    
-    self.gunButton.hidden = YES;
-    self.gunButton.enabled = NO;
-    
-    [shotTimer invalidate];
-    [moveTimer invalidate];
-    [ignoreTimer invalidate];
-    [timer invalidate];
-    if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
-        [self performSelector:@selector(scaleView:) withObject:btnTry  afterDelay:1.5];
+    if(!finalView){
+        [self stopDuel];
+        
+        finalViewDataSource = fvDataSource;
+        
+        self.userLiveImageView.hidden = YES;
+        self.lbUserLifeLeft.hidden = YES;
+        
+        CGRect finalFrame = CGRectMake(12, 90, 294, 165);
+        
+        finalView = [[FinalStatsView alloc] initWithFrame:finalFrame andDataSource:fvDataSource];
+        finalView.isTryAgainEnabled = isTryAgainEnabled;
+        finalView.activeDuelViewController = self;
+        
+        finalView.center = self.crossImageView.center;
+        finalView.hidden = YES;
+        
+        blurredBack.hidden = NO;
+        
+        btnBack.hidden = NO;
+        btnTry.hidden = NO;
+        btnSkip.hidden = YES;
+        
+        [self.view bringSubviewToFront:btnBack];
+        [self.view bringSubviewToFront:btnTry];
+        
+        btnBack.enabled = YES;
+        btnTry.enabled = YES;
+        btnSkip.enabled = NO;
+        
+        [self revealFinalView:YES];
+        
+        self.gunButton.hidden = YES;
+        self.gunButton.enabled = NO;
+        
+        [shotTimer invalidate];
+        [moveTimer invalidate];
+        [ignoreTimer invalidate];
+        [timer invalidate];
+        if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
+            [self performSelector:@selector(scaleView:) withObject:btnTry  afterDelay:1.5];
+        }
     }
 }
 
