@@ -11,4 +11,6 @@
 @interface  UIViewController(popTo)
 - (void) popToControllersNumber:(int)number animated:(BOOL)animated;
 - (BOOL) popToControllersClass:(Class)pClass animated:(BOOL)animated;
+- (UIViewController*) controllerOfClass:(Class)pClass;
+
 @end

@@ -31,12 +31,12 @@
     NSNumberFormatter *numberFormatter;
     
     NSMutableDictionary *imageDownloadsInProgress;
-    id<TableCellWithButton> delegate;
+    __weak id<TableCellWithButton> delegate;
     
     TopPlayersDataSource *topPlayersDataSource;
 }
 @property(strong, readonly)NSArray *arrItemsList;
-@property(strong, nonatomic)id<TableCellWithButton> delegate;
+@property(weak, nonatomic)id<TableCellWithButton> delegate;
 @property(nonatomic) BOOL statusOnLine;
 
 -(void) reloadDataSource;

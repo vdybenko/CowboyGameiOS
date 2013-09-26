@@ -24,9 +24,9 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @property (nonatomic) BOOL statusOnLine;
-@property (strong, nonatomic)  NSTimer *updateTimer;
+@property (weak, nonatomic)  NSTimer *updateTimer;
 
-- (id)initWithGCVC:(GameCenterViewController *)GCVC Account:(AccountDataSource *)userAccount OnLine:(BOOL) onLine;
+- (id)initWithAccount:(AccountDataSource *)userAccount OnLine:(BOOL) onLine;
 -(void)startTableAnimation;
 -(void)refreshController;
 -(void)didRefreshController;

@@ -22,12 +22,9 @@
 
 @interface ListOfItemsViewController ()
 {
-    AccountDataSource *_playerAccount;
-    GameCenterViewController *_gameCenterViewController;
+    __weak AccountDataSource *_playerAccount;
     PlayersOnLineDataSource *_playersOnLineDataSource;
-    StartViewController *startViewController;
-    AccountDataSource *oponentAccount;
-    DuelStartViewController *duelStartViewController;
+    __weak AccountDataSource *oponentAccount;
     // AccountDataSource *playerAccount;
     BOOL statusOnLine;
             
@@ -40,8 +37,6 @@
     __weak IBOutlet UILabel *lbLeaderboardBtn;
     
     __weak IBOutlet UILabel *saloonTitle;
-    
-    NSTimer *updateTimer;
 }
 
 -(NSString *) convertToJSParametr:(NSString *) pValue;
@@ -53,12 +48,11 @@
 
 #define SectionHeaderHeight 20
 
-- (id)initWithGCVC:(GameCenterViewController *)GCVC Account:(AccountDataSource *)userAccount OnLine:(BOOL) onLine;
+- (id)initWithAccount:(AccountDataSource *)userAccount OnLine:(BOOL) onLine;
 {
     self = [self initWithNibName:nil bundle:nil];
     
 	if (self) {
-        _gameCenterViewController = GCVC;
         _playerAccount = userAccount;
         statusOnLine=onLine;
     }
@@ -89,12 +83,19 @@
     tableView.delegate=self;
     tableView.dataSource=_playersOnLineDataSource;
     
-    [tableView setPullToRefreshHandler:^{
-        [self refreshController];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-                                                            object:self
-                                                          userInfo:[NSDictionary dictionaryWithObject:@"/ListOfItemsVC_refresh" forKey:@"page"]];
+    __block UIView *loadingViewB = loadingView;
+    __block UIActivityIndicatorView *activityIndicatorB = activityIndicator;
+    __block PlayersOnLineDataSource *_playersOnLineDataSourceB = _playersOnLineDataSource;
 
+    [tableView setPullToRefreshHandler:^{
+        [loadingViewB setHidden:NO];
+        [activityIndicatorB startAnimating];
+        _playersOnLineDataSourceB.statusOnLine = statusOnLine;
+        [_playersOnLineDataSourceB reloadDataSource];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                            object:nil
+                                                          userInfo:[NSDictionary dictionaryWithObject:@"/ListOfItemsVC_refresh" forKey:@"page"]];
     }];
     
     saloonTitle.text = NSLocalizedString(@"SALYN", nil);
@@ -155,7 +156,6 @@
     [updateTimer invalidate];
     updateTimer = nil;
     [super viewWillDisappear:animated];
-//    if (duelStartViewController.waitTimer) [duelStartViewController.waitTimer invalidate];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -171,9 +171,7 @@
     loadingView = nil;
     updateTimer = nil;
     _playerAccount = nil;
-     _gameCenterViewController = nil;
      _playersOnLineDataSource = nil;
-     startViewController = nil;
     lbBackBtn = nil;
     lbInviteBtn = nil;
     saloonTitle = nil;
@@ -273,7 +271,8 @@
 
 -(IBAction)backToMenu:(id)sender;
 {
-    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:1] animated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
+    [self releaseComponents];
 }
 
 - (IBAction)inviteFriendsClick:(id)sender {
@@ -298,7 +297,6 @@
 
 -(void)refreshController;
 {
-    //[_playersOnLineDataSource reloadRandomId];
     [loadingView setHidden:NO];
     [activityIndicator startAnimating];
     _playersOnLineDataSource.statusOnLine = statusOnLine;

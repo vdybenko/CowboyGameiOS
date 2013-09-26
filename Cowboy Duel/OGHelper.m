@@ -404,7 +404,7 @@ static OGHelper *sharedHelper = nil;
 //    [[AccountDataSource sharedInstance] setFriends:countOfFriends];
 //    [[AccountDataSource sharedInstance] saveFriends];
 //}
-- (void)getFriendsHowDontUseAppDelegate:(id<FBRequestDelegate>)pDelegate;
+- (void)getFriendsHowDontUseAppDelegate:(__weak id<FBRequestDelegate>)pDelegate;
 {
     currentAPICall = kAPIFriendsHowDontUseApp;
     

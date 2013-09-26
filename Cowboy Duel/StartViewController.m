@@ -32,6 +32,7 @@
 #import "ActiveDuelViewController.h"
 #import "BuilderViewController.h"
 #import "LoginAnimatedViewController.h"
+#import "UIViewController+popTO.h"
 
 //#import "Crittercism.h"
 
@@ -41,8 +42,6 @@
 {
     AccountDataSource *playerAccount;
     ActivityIndicatorView *activityIndicatorView;
-    CollectionAppViewController *collectionAppViewController;
-    ListOfItemsViewController *listOfItemsViewController;
     ProfileViewController *profileViewController;
     
 //    BOOL firstRun;
@@ -272,7 +271,6 @@ static StartViewController *sharedHelper = nil;
         dicForRequests=[[NSMutableDictionary alloc] init];
         
         gameCenterViewController = [GameCenterViewController sharedInstance:playerAccount andParentVC:self];
-        listOfItemsViewController=[[ListOfItemsViewController alloc]initWithGCVC:gameCenterViewController Account:playerAccount OnLine:self.hostActive];
         duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
         duelProductDownloaderController.delegate = self;
                         
@@ -686,11 +684,8 @@ static StartViewController *sharedHelper = nil;
 
 -(void)duelButtonClick
 {
+    [self startActiveDuel:nil];
     [playerAccount setActiveDuel:NO];
-    [listOfItemsViewController setStatusOnLine:self.hostActive];
-    if (self.navigationController.visibleViewController != listOfItemsViewController) {
-        [self.navigationController pushViewController:listOfItemsViewController animated:YES];
-    }
 }
 
 - (IBAction)storeButtonClick:(id)sender {
@@ -709,9 +704,10 @@ static StartViewController *sharedHelper = nil;
 
 - (IBAction)startActiveDuel:(id)sender {
     [playerAccount setActiveDuel:YES];
-    [listOfItemsViewController setStatusOnLine:self.hostActive];
-    if (self.navigationController.visibleViewController != listOfItemsViewController) {
+    if (![self.navigationController.visibleViewController isKindOfClass:[ListOfItemsViewController class]]) {
+        ListOfItemsViewController *listOfItemsViewController=[[ListOfItemsViewController alloc] initWithAccount:playerAccount OnLine:self.hostActive];
         [self.navigationController pushViewController:listOfItemsViewController animated:YES];
+        listOfItemsViewController = nil;
     }
 }
 
@@ -1646,13 +1642,14 @@ static StartViewController *sharedHelper = nil;
             if (self.hostActive) {
                 self.hostActive = NO;
                 DLog(@"The internet is down IF.");
-                listOfItemsViewController.statusOnLine = hostActive;
-                [listOfItemsViewController refreshController];
+                if ([self.navigationController.visibleViewController isKindOfClass:[ListOfItemsViewController class]]) {
+                    ListOfItemsViewController *listOfItemsViewController=(ListOfItemsViewController*)self.navigationController.visibleViewController;
+                    listOfItemsViewController.statusOnLine = hostActive;
+                    [listOfItemsViewController refreshController];
+                    listOfItemsViewController = nil;
+                }
             }
-            
-            
             break;
-            
         }
         case ReachableViaWiFi:
         {
@@ -1661,7 +1658,6 @@ static StartViewController *sharedHelper = nil;
                 [self login];
             }
             break;
-            
         }
         case ReachableViaWWAN:
         {
@@ -1669,9 +1665,7 @@ static StartViewController *sharedHelper = nil;
                 self.hostActive = YES;
                 [self login];
             }
-            
             break;
-            
         }
     }
 }

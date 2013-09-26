@@ -25,13 +25,23 @@
 }
 - (BOOL) popToControllersClass:(Class)pClass animated:(BOOL)animated;
 {
+    UIViewController *vc = [self controllerOfClass:pClass];
+    if (vc) {
+        [[self navigationController] popToViewController:vc animated:animated];
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
+- (UIViewController*) controllerOfClass:(Class)pClass;
+{
     NSArray* controllers = [[self navigationController] viewControllers];
     for (UIViewController *vc in controllers) {
         if ([vc isKindOfClass:pClass]) {
-            [[self navigationController] popToViewController:vc animated:animated];
-            return YES;
+            return vc;
         }
     }
-    return NO;
+    return nil;
 }
 @end

@@ -100,7 +100,7 @@ static NSString *getOpenGraphSavePath() ;
 - (void)getCountOfUserFriends;
 - (NSUInteger)getCountOfUserFriendsRequest:(FBRequest *)request didLoad:(id)result;
 -(void) apiRESTGetAppUsers;
-- (void)getFriendsHowDontUseAppDelegate:(id<FBRequestDelegate>)delegate;
+- (void)getFriendsHowDontUseAppDelegate:(__weak id<FBRequestDelegate>)delegate;
 - (__autoreleasing NSArray *)getFriendsHowDontUseAppRequest:(FBRequest *)request didLoad:(id)result;
 
 
