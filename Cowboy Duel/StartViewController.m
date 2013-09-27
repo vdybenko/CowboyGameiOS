@@ -947,7 +947,8 @@ static StartViewController *sharedHelper = nil;
                  }
              }];
             if (!displayedNativeDialog) {
-                /* handle fallback to native dialog  */
+                [[OGHelper sharedInstance] apiDialogFeedUser];
+//                /* handle fallback to native dialog  */
             }
         }else
         {

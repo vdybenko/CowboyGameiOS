@@ -203,7 +203,7 @@ static OGHelper *sharedHelper = nil;
 {
     
     NSMutableDictionary *params2 = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   @"Get Started", @"description",
+                                   NSLocalizedString(@"FEEDBACK_FB", @""), @"description",
                                    URL_APP_ESTIMATE, @"link",
                                    nil];
     
