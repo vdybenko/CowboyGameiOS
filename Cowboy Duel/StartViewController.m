@@ -1244,12 +1244,6 @@ static StartViewController *sharedHelper = nil;
             playerAccount.accountBigestWin=bigestWin;
             [playerAccount saveAccountBigestWin];
         }
-        
-//        if (playerAccount.removeAds!=AdColonyAdsStatusRemoved) {
-//            int removeAds=[[responseObject objectForKey:@"remove_ads"] intValue];
-//            playerAccount.removeAds=removeAds;
-//            [playerAccount saveRemoveAds];
-//        }
 
         NSString *urlAvatar=[responseObject objectForKey:@"avatar"];
         if ([playerAccount isAvatarImage:urlAvatar]) {
@@ -1357,28 +1351,37 @@ static StartViewController *sharedHelper = nil;
                 [[OGHelper sharedInstance] getFriendsHowDontUseAppDelegate:nil];
                 break;
             case LoginFacebookStatusProfile:{
-                [self showProfileSmallWindow];
+                [self.duelProductDownloaderController refreshUserDuelProducts];
+                int removeAds=[[responseObject objectForKey:@"remove_ads"] intValue];
+                playerAccount.removeAds=removeAds;
+                [playerAccount saveRemoveAds];
                 
                 if([[OGHelper sharedInstance] isAuthorized]){
-                    [self.duelProductDownloaderController refreshUserDuelProducts];
+                    [self showProfileSmallWindow];
                     
                     btnFBLogin.hidden = YES;
                     vLoading.hidden = YES;
-                    
-                    CDTransaction *transaction = [[CDTransaction alloc] init];
-                    transaction.trDescription = @"login+500";
-                    transaction.trType = [NSNumber numberWithInt:+1];
-                    transaction.trMoneyCh = [NSNumber numberWithInt:500];
-                    transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
-                    transaction.trOpponentID = @"";
-                    transaction.trGlobalID = [NSNumber numberWithInt:-1];
-                    
-                    [playerAccount.transactions addObject:transaction];
-                    [playerAccount saveTransaction];
-                    [playerAccount sendTransactions:playerAccount.transactions];
-                    
-                    playerAccount.money += 500;
-                    [playerAccount saveMoney];
+                    if (playerAccount.removeAds==0) {
+                        CDTransaction *transaction = [[CDTransaction alloc] init];
+                        transaction.trDescription = @"login+500";
+                        transaction.trType = [NSNumber numberWithInt:+1];
+                        transaction.trMoneyCh = [NSNumber numberWithInt:500];
+                        transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
+                        transaction.trOpponentID = @"";
+                        transaction.trGlobalID = [NSNumber numberWithInt:-1];
+                        
+                        [playerAccount.transactions addObject:transaction];
+                        [playerAccount saveTransaction];
+                        [playerAccount sendTransactions:playerAccount.transactions];
+                        
+                        playerAccount.money += 500;
+                        [playerAccount saveMoney];
+                        
+                        playerAccount.removeAds = 1;
+                        [playerAccount saveRemoveAds];
+                        
+                        [self authorizationModifier:YES];
+                    }
                 }
                 
                 SSConnection *connection = [SSConnection sharedInstance];

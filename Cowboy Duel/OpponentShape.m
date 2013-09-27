@@ -97,7 +97,6 @@ static CGFloat oponentLiveImageViewStartWidth;
     [visualViewCharacter refreshWithAccountPlayer:playerAccount];
     [visualViewCharacter setGunFrontViewHidden:NO];
     imgBody.image = [visualViewCharacter imageFromCharacter];
-    
 }
 
 -(void) moveAnimation;

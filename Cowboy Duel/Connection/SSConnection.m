@@ -169,8 +169,7 @@ static SSConnection *connection;
     memcpy(&networkPacket[sizeof(int) * 6 + sizeof(char) * displayNameLen + sizeof(char) * [playerAccount.accountID length] + sizeof(char) * [someURL length]],
            (void *)versionKeyChar,
            sizeof(char) * [versionKey length]);
-    
-    
+
     [self sendData:(void *)(networkPacket) packetID:NETWORK_POST_INFO ofLength:sizeof(int) * 6 + sizeof(char) * displayNameLen +sizeof(char) * [playerAccount.accountID length]+sizeof(char) * [someURL length] + sizeof(char) * [versionKey length]];
 }
 
