@@ -10,20 +10,15 @@
 #import "AccountDataSource.h"
 #import <QuartzCore/QuartzCore.h>
 #import "OGHelper.h"
-#import "GCHelper.h"
 #import "UIButton+Image+Title.h"
 #import "UIImage+Save.h"
-#import "LoginAnimatedViewController.h"
 #import "DuelRewardLogicController.h"
-#import "TopPlayersViewController.h"
 #import "DuelStartViewController.h"
-#import "StoreViewController.h"
 #import "ActiveDuelViewController.h"
 #import "FavouritesViewController.h"
 #import "FavouritesDataSource.h"
 #import "UIView+Dinamic_BackGround.h"
 #import "VisualViewCharacterViewController.h"
-#import "BuilderViewController.h"
 #import "NSString+isNumeric.h"
 
 static const CGFloat changeYPointWhenKeyboard = 155;
@@ -439,7 +434,8 @@ static const CGFloat timeToStandartTitles = 1.8;
         profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
         iconDownloader = [[IconDownloader alloc] init];
         iconDownloader.namePlayer=name;
-        iconDownloader.delegate = self;
+        __weak id selfWeak = self;
+        iconDownloader.delegate = selfWeak;
         [iconDownloader setAvatarURL:playerAccount.avatar];
         [iconDownloader startDownloadSimpleIcon];
     }
@@ -449,7 +445,8 @@ static const CGFloat timeToStandartTitles = 1.8;
         profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
         
         iconDownloader.namePlayer=name;
-        iconDownloader.delegate = self;
+        __weak id selfWeak = self;
+        iconDownloader.delegate = selfWeak;
         if ([playerAccount.avatar isEqualToString:@""]) {
             NSString *urlOponent=[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large",name];
             [iconDownloader setAvatarURL:urlOponent];
@@ -940,19 +937,15 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     [self releaseComponents];
 }
 
-- (IBAction)btnLeaderbordClick:(id)sender {
-    TopPlayersViewController *topPlayersViewController =[[TopPlayersViewController alloc] initWithAccount:playerAccount];
-    [self.navigationController pushViewController:topPlayersViewController animated:YES];
-    topPlayersViewController = nil;
-}
-
 - (IBAction)duelButtonClick:(id)sender {
     if ([playerAccount isPlayerForPractice]) {
         [playerAccount.finalInfoTable removeAllObjects];
         
         if ([AccountDataSource sharedInstance].activeDuel) {
             ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:[AccountDataSource sharedInstance] oponentAccount:playerAccount];
-            [self.navigationController pushViewController:activeDuelViewController animated:YES];
+            UIViewController *vc = [StartViewController sharedInstance];
+            [self.navigationController popViewControllerAnimated:NO];
+            [vc.navigationController pushViewController:activeDuelViewController animated:YES];
             activeDuelViewController = nil;
         }
         
@@ -985,67 +978,20 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     //duelStartViewController = nil;
 }
 
-- (IBAction)btnFavouritesClick:(id)sender {
-//    [[StartViewController sharedInstance].favsDataSource reloadDataSource];
-    if ([[StartViewController sharedInstance] connectedToWiFi]) {
-        FavouritesViewController *favVC = [[FavouritesViewController alloc] initWithAccount:playerAccount];
-        [self.navigationController pushViewController:favVC animated:YES];
-    }else{
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry", @"AlertView")
-                                                            message:NSLocalizedString(@"Internet_down", @"AlertView")
-                                                           delegate:self
-                                                  cancelButtonTitle:NSLocalizedString(@"Cancel", @"AlertView")
-                                                  otherButtonTitles: nil];
-        [alertView show];
-        alertView = nil;
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
-                                                            object:self
-                                                          userInfo:[NSDictionary dictionaryWithObject:@"/ProfileVC_Internet_down" forKey:@"page"]];
-    }
-}
-
-
-
 -(void)startBotDuel
 {
     ActiveDuelViewController __block *activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:[AccountDataSource sharedInstance] oponentAccount:playerAccount];
+    [self.navigationController popViewControllerAnimated:NO];
     [UIView animateWithDuration:0.75
                      animations:^{
                          [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-                         [self.navigationController pushViewController:activeDuelViewController animated:NO];
+                         UIViewController *vc = [StartViewController sharedInstance];
+                         [vc.navigationController pushViewController:activeDuelViewController animated:NO];
                          [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
                      } completion:^(BOOL complete){
                          activeDuelViewController = nil;
                      }];
-//    [self releaseComponents];
 }
-
--(IBAction)showStoreWeapon:(id)sender
-{
-    BuilderViewController *builder = [[BuilderViewController alloc] init];
-    
-    [UIView animateWithDuration:0.75
-                     animations:^{
-                         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-                         [self.navigationController pushViewController:builder animated:NO];
-                         [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
-                     }];
-    builder = nil;
-}
-
--(IBAction)showStoreDefence:(id)sender
-{
-    BuilderViewController *builder = [[BuilderViewController alloc] init];
-      
-    [UIView animateWithDuration:0.75
-                     animations:^{
-                         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-                         [self.navigationController pushViewController:builder animated:NO];
-                         [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
-                     }];
-    builder = nil;
-    }
 
 - (IBAction)btnAddToFavoritesClick:(id)sender {
     if(playerAccount.accountID==Nil || [playerAccount.accountID length]==0 || playerAccount.accountID.isAllDigits){return;}
@@ -1136,17 +1082,6 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
                                                       userInfo:[NSDictionary dictionaryWithObject:@"/ProfileVC_add_favorite" forKey:@"page"]];
-}
-- (IBAction)btnBuilderClick:(id)sender {
-    BuilderViewController *builder = [[BuilderViewController alloc] init];
-    
-    [UIView animateWithDuration:0.75
-                     animations:^{
-                         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-                         [self.navigationController pushViewController:builder animated:NO];
-                         [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
-                     }];
-    builder = nil;
 }
 
 - (IBAction)blackBackGroundClick:(id)sender {

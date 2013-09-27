@@ -241,11 +241,13 @@
     }
     
     ProfileViewController *profileViewController = [[ProfileViewController alloc] initForOponent:oponentAccount andOpponentServer:player];
+    [self.navigationController popViewControllerAnimated:NO];
     [UIView animateWithDuration:0.75
                      animations:^{
                          [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-                         [self.navigationController pushViewController:profileViewController animated:NO];
-                         [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
+                         UIViewController *vc = [StartViewController sharedInstance];
+                         [vc.navigationController pushViewController:profileViewController animated:NO];
+                         [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:vc.navigationController.view cache:NO];
                      }];
     
     if (duelButtonClick) {
