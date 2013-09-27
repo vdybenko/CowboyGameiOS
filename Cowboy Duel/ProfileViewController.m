@@ -340,6 +340,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     lbPointsText = nil;
     numberFormatter  = nil;
     duelStartViewController = nil;
+    self.view = nil;
 }
 
 -(void)initMainControls;
@@ -1095,6 +1096,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         [self.view removeFromSuperview];
         
         [UIView commitAnimations];
+        [[StartViewController sharedInstance] releseProfileSmallWindow];
     }
 }
 

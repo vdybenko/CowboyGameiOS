@@ -730,6 +730,7 @@ static StartViewController *sharedHelper = nil;
     
     profileViewController = [[ProfileViewController alloc] initFirstStartWithAccount:playerAccount];
     [self.navigationController pushViewController:profileViewController animated:NO];
+    profileViewController = nil;
 }
 
 - (void) showFeedbackView {
@@ -780,8 +781,6 @@ static StartViewController *sharedHelper = nil;
 
 -(IBAction)showHelp:(id)sender
 {
-    [self.duelProductDownloaderController refreshUserDuelProducts];
-    return;
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/help_click" forKey:@"event"]];
@@ -818,6 +817,25 @@ static StartViewController *sharedHelper = nil;
     [LoginAnimatedViewController sharedInstance].loginFacebookStatus = LoginFacebookStatusProfile;
     [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
 }
+
+-(void)showProfileSmallWindow;
+{
+    profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount];
+    [profileViewController setNeedAnimation:YES];
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:2.5f];
+    
+    [self.view addSubview:profileViewController.view];
+    
+    [UIView commitAnimations];
+}
+
+-(void)releseProfileSmallWindow;
+{
+    profileViewController = nil;
+}
+
 
 #pragma mark -
 #pragma mark feedback
@@ -1293,7 +1311,9 @@ static StartViewController *sharedHelper = nil;
             
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"moneyForIPad"];
         }
-        [profileViewController checkLocationOfViewForFBLogin];
+        if (profileViewController) {
+            [profileViewController checkLocationOfViewForFBLogin];
+        }
 
         int indexCap=[[responseObject objectForKey:@"cap"] intValue];
         if ((indexCap!=-1)&&(indexCap!=playerAccount.visualViewCap)) {
@@ -1336,15 +1356,7 @@ static StartViewController *sharedHelper = nil;
                 [[OGHelper sharedInstance] getFriendsHowDontUseAppDelegate:nil];
                 break;
             case LoginFacebookStatusProfile:{
-                profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount];
-                [profileViewController setNeedAnimation:YES];
-                
-                [UIView beginAnimations:nil context:nil];
-                [UIView setAnimationDuration:2.5f];
-                
-                [self.view addSubview:profileViewController.view];
-                
-                [UIView commitAnimations];
+                [self showProfileSmallWindow];
                 
                 if([[OGHelper sharedInstance] isAuthorized]){
                     [self.duelProductDownloaderController refreshUserDuelProducts];

@@ -85,4 +85,7 @@ typedef enum{
 -(void)didEnterBackground;
 
 -(void)favoritesDownloadListAfterAvtorization;
+
+-(void)releseProfileSmallWindow;
+
 @end
