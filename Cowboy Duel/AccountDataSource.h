@@ -108,6 +108,7 @@
 - (void)saveVisualView;
 - (void)loadVisualView;
 - (BOOL)isProductBought:(NSInteger)index;
+- (void)addProductToBought:(NSInteger)index;
 
 - (void)recountDefenseAndAtack;
 - (CDVisualViewCharacterPart*)loadProductWithIndex:(int)index type:(CharacterPart)type visualViewDataSource:(VisualViewDataSource*)datasource;

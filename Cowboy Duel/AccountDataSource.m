@@ -592,6 +592,12 @@ static AccountDataSource *sharedHelper = nil;
     }
     return NO;
 }
+
+-(void)addProductToBought:(NSInteger)index{
+    NSNumber *num = [NSNumber numberWithInteger:index];
+    [self.arrayOfBoughtProducts addObject:num];
+    [self saveVisualView];
+}
 #pragma mark
 
 - (BOOL)isPlayerPlayDuel;

@@ -617,7 +617,7 @@
         [self lostMoneyAnimation:part.money];
         [playerAccount saveMoney];
         
-        [self addProductToBought:part.dId];
+        [playerAccount addProductToBought:part.dId];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                             object:self
@@ -913,13 +913,6 @@
         btnBuyMain.enabled = YES;
         return YES;
     }
-}
-
-
--(void)addProductToBought:(NSInteger)index{
-    NSNumber *num = [NSNumber numberWithInteger:index];
-    [playerAccount.arrayOfBoughtProducts addObject:num];
-    [playerAccount saveVisualView];
 }
 
 -(void)cleanForSuits

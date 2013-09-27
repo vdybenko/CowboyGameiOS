@@ -433,46 +433,13 @@ static NSString *getSavePathForDuelProduct()
     DLog(@"%@",jsonString);
     NSArray *responseObjectOfProducts = ValidateObject([jsonString JSONValue], [NSArray class]);
     AccountDataSource *playerAccount=[AccountDataSource sharedInstance];
-    NSUInteger indexOfProductInSavedDefenseArraySaved=-1;
     
     for (NSDictionary *dic in responseObjectOfProducts) {
         NSInteger idProduct = [[dic objectForKey:@"itemIdStore"] integerValue];
-        
-        NSUInteger indexOfProductInSavedWeaponArray=[[AccountDataSource sharedInstance] findObsByID](arrWeaponSaved,idProduct);
-        if (indexOfProductInSavedWeaponArray != NSNotFound) {
-            CDWeaponProduct *product=[arrWeaponSaved objectAtIndex:indexOfProductInSavedWeaponArray];
-            product.dCountOfUse = 1;
-            [arrWeaponSaved replaceObjectAtIndex:indexOfProductInSavedWeaponArray withObject:product];
-            
-            if (playerAccount.accountWeapon.dDamage < product.dDamage) {
-                playerAccount.accountWeapon = product;
-                playerAccount.curentIdWeapon = product.dID;
-            }
-        }else{
-            NSUInteger indexOfProductInSavedDefenseArray=[[AccountDataSource sharedInstance] findObsByID](arrDefenseSaved,idProduct);
-            
-            if (indexOfProductInSavedDefenseArray != NSNotFound) {
-                CDDefenseProduct *product=[arrDefenseSaved objectAtIndex:indexOfProductInSavedDefenseArray];
-                if (indexOfProductInSavedDefenseArray == indexOfProductInSavedDefenseArraySaved) {
-                    product.dCountOfUse += 1;
-                    playerAccount.accountDefenseValue += product.dDefense;
-                }else{
-                    if (product.dCountOfUse == 0) {
-                        product.dCountOfUse += 1;
-                        playerAccount.accountDefenseValue += product.dDefense;
-                    }else{
-                        product.dCountOfUse = 1;
-                        playerAccount.accountDefenseValue += product.dDefense;
-                    }
-                }
-                [arrDefenseSaved replaceObjectAtIndex:indexOfProductInSavedDefenseArray withObject:product];
-                [DuelProductDownloaderController saveDefense:arrDefenseSaved];
-                indexOfProductInSavedDefenseArraySaved = indexOfProductInSavedDefenseArray;
-            }
+        if (![playerAccount isProductBought:idProduct]) {
+            [playerAccount addProductToBought:idProduct];
         }
     }
-    [DuelProductDownloaderController saveWeapon:arrWeaponSaved];
-    [DuelProductDownloaderController saveDefense:arrDefenseSaved];
     
     NSError *error;
     if (didFinishBlock) {
