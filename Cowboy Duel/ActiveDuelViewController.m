@@ -536,35 +536,15 @@ static CGFloat blinkBottomOriginY;
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [shotTimer invalidate];
-    [moveTimer invalidate];
-    [ignoreTimer invalidate];
-    [timer invalidate];
-    plView = (PLView *)self.view;
-    [plView stopAnimation];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-
-    CGRect frame = self.userLiveImageView.frame;
-    frame.size.width = userLiveImageViewStartWidth;
-    self.userLiveImageView.frame = frame;
 }
 
 - (void)viewDidUnload {
     [self releaseComponents];
-    blinkBottom = nil;
-    blinkBottom = nil;
-    opponentShape = nil;
-    goodCowboyShape = nil;
-    arrowToOpponent = nil;
-//    [self setLbUserLifeLeft:nil];
-    horseShape = nil;
-    [self setBtnSkip:nil];
-    [self setBtnTry:nil];
-    [self setBtnBack:nil];
     [super viewDidUnload];
 }
 
@@ -1721,6 +1701,10 @@ float frequencyOpponentShoting()
 
 -(void)releaseComponents
 {
+    CGRect frame = self.userLiveImageView.frame;
+    frame.size.width = userLiveImageViewStartWidth;
+    self.userLiveImageView.frame = frame;
+    
     [self setFloatView:nil];
     [self setFireImageView:nil];
     [self setBloodImageView:nil];
@@ -1749,9 +1733,6 @@ float frequencyOpponentShoting()
     [opponentShape releaseComponents];
     opponentShape = nil;
     
-    self.view = nil;
-    plView = nil;
-    
     [gunDrumViewController releaseComponents];
     gunDrumViewController = nil;
     
@@ -1765,6 +1746,13 @@ float frequencyOpponentShoting()
     
     opAccount = nil;
     playerAccount = nil;
+    
+    
+    [shotTimer invalidate];
+    [moveTimer invalidate];
+    [ignoreTimer invalidate];
+    [timer invalidate];
+    [plView stopAnimation];
     
     shotTimer = nil;
     moveTimer = nil;
@@ -1811,6 +1799,9 @@ float frequencyOpponentShoting()
     [oponentsViewCoordinates removeAllObjects];
     
     [[GameCenterViewController sharedInstance:nil andParentVC:nil] releaseComponents];
+    
+    self.view = nil;
+    plView = nil;
 }
 
 @end
