@@ -1267,7 +1267,7 @@ static CGFloat blinkBottomOriginY;
 
 -(void)showViewController:(UIViewController *)viewController
 {
-    if ([[self.navigationController visibleViewController] isKindOfClass:[ActiveDuelViewController class]] && ![finalView isHidden]) {
+    if ([[self.navigationController visibleViewController] isKindOfClass:[ActiveDuelViewController class]] && ![finalView isHidden] && !tryAgain) {
         [self presentModalViewController:viewController animated:YES];
         presentVC = viewController;
         [self hideFinalView];
