@@ -23,6 +23,7 @@
 	<array>
 		<string>icon@2x.png</string>
 		<string>icon.png</string>
+		<string>icon-120.png</string>
 	</array>
 	<key>CFBundleIcons</key>
 	<dict>
@@ -32,6 +33,7 @@
 			<array>
 				<string>icon@2x.png</string>
 				<string>icon.png</string>
+				<string>icon-120.png</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
 			<true/>
@@ -76,7 +78,7 @@
 	<string>UIInterfaceOrientationLandscapeLeft</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
-	<key>UIRequiredDeviceCapabilities</key>
+	<key>UIRequiredDeviceCapabilities </key>
 	<array>
 		<string>armv7</string>
 		<string>wifi</string>

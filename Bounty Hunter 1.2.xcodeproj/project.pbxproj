@@ -312,6 +312,8 @@
 		760E676515BD844B006F6832 /* TopPlayersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 760E676315BD844B006F6832 /* TopPlayersViewController.m */; };
 		760E676715BD84C6006F6832 /* TopPlayersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 760E676615BD84C6006F6832 /* TopPlayersViewController.xib */; };
 		761761B017C7AEA3001D632A /* libCrittercism_v4_0_6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 761761A817C7A75C001D632A /* libCrittercism_v4_0_6.a */; };
+		761C5DDC17F6246B00DF9122 /* icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 761C5DDB17F6246B00DF9122 /* icon-120.png */; };
+		761C5DDD17F6265000DF9122 /* icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 761C5DDB17F6246B00DF9122 /* icon-120.png */; };
 		761EFA491573BDDA001670EB /* CollectionAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761EFA471573BDDA001670EB /* CollectionAppViewController.xib */; };
 		761EFA501573BE91001670EB /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761EFA4C1573BE91001670EB /* HelpViewController.xib */; };
 		761EFA511573BE91001670EB /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761EFA4D1573BE91001670EB /* ProfileViewController.xib */; };
@@ -1350,6 +1352,7 @@
 		760E676415BD844B006F6832 /* TopPlayersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopPlayersViewController.h; sourceTree = "<group>"; };
 		760E676615BD84C6006F6832 /* TopPlayersViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TopPlayersViewController.xib; path = Xib/TopPlayersViewController.xib; sourceTree = "<group>"; };
 		761761A817C7A75C001D632A /* libCrittercism_v4_0_6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCrittercism_v4_0_6.a; path = CrittercismSDK/libCrittercism_v4_0_6.a; sourceTree = "<group>"; };
+		761C5DDB17F6246B00DF9122 /* icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-120.png"; sourceTree = "<group>"; };
 		761EFA471573BDDA001670EB /* CollectionAppViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CollectionAppViewController.xib; path = Xib/CollectionAppViewController.xib; sourceTree = "<group>"; };
 		761EFA4C1573BE91001670EB /* HelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HelpViewController.xib; path = Xib/HelpViewController.xib; sourceTree = "<group>"; };
 		761EFA4D1573BE91001670EB /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProfileViewController.xib; path = Xib/ProfileViewController.xib; sourceTree = "<group>"; };
@@ -2165,6 +2168,7 @@
 				3192D65A16CA35EA00047BB7 /* Default-568h@2x.png */,
 				318F233916B9437A0081BE5E /* Default.png */,
 				318F233A16B9437A0081BE5E /* Default@2x.png */,
+				761C5DDB17F6246B00DF9122 /* icon-120.png */,
 				314139ED16C0357B000A4611 /* icon.png */,
 				314139EE16C0357B000A4611 /* icon@2x.png */,
 			);
@@ -3690,6 +3694,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0460;
+				TargetAttributes = {
+					BD83A40716720DFE003EE4B3 = {
+						DevelopmentTeam = GNLB7JTPWX;
+					};
+				};
 			};
 			buildConfigurationList = 60593A661379321700256204 /* Build configuration list for PBXProject "Bounty Hunter 1.2" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -3820,6 +3829,7 @@
 				03286077159DD84000D16195 /* lg_title_view.png in Resources */,
 				03286078159DD84000D16195 /* lg_title_view@2x.png in Resources */,
 				0328607B159DD84000D16195 /* view_dinamic_height.png in Resources */,
+				761C5DDC17F6246B00DF9122 /* icon-120.png in Resources */,
 				0328607C159DD84000D16195 /* view_dinamic_height@2x.png in Resources */,
 				0328607D159DD84000D16195 /* view_dinamic_height_bottom.png in Resources */,
 				0328607E159DD84000D16195 /* view_dinamic_height_bottom@2x.png in Resources */,
@@ -4202,6 +4212,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				761C5DDD17F6265000DF9122 /* icon-120.png in Resources */,
 				BD83A48516720DFE003EE4B3 /* Back1cycled.mp3 in Resources */,
 				BD83A48616720DFE003EE4B3 /* Back1start.mp3 in Resources */,
 				BD83A48716720DFE003EE4B3 /* Back2.mp3 in Resources */,
@@ -4995,7 +5006,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				INFOPLIST_FILE = "$(SRCROOT)/Test/Test-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
@@ -5023,7 +5034,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				REZ_SEARCH_PATHS = "$(inherited)";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../../.. $(PROJECT_DIR)";
 				VALIDATE_PRODUCT = NO;
 				VALID_ARCHS = armv7;
@@ -5057,7 +5068,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				INFOPLIST_FILE = "$(SRCROOT)/Test/Test-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
@@ -5087,7 +5098,7 @@
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
 				);
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../../.. $(PROJECT_DIR)";
 				VALIDATE_PRODUCT = NO;
 				VALID_ARCHS = armv7;
@@ -5122,7 +5133,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				INFOPLIST_FILE = "$(SRCROOT)/Test/Test-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
@@ -5154,7 +5165,7 @@
 					"\"$(SRCROOT)/Cowboy Duel/GoogleAnalytics/Library\"",
 				);
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../../.. $(PROJECT_DIR)";
 				VALIDATE_PRODUCT = NO;
 				VALID_ARCHS = armv7;
