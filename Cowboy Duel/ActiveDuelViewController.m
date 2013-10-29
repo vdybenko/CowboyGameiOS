@@ -37,8 +37,6 @@
     BOOL isOpenHint;
     float startPoint;
     BOOL firstAccel;
-    CGPoint oldPosition;
-    CGPoint centerLocation;
     AVAudioPlayer *shotAudioPlayer1;
     AVAudioPlayer *shotAudioPlayer2;
     AVAudioPlayer *shotAudioPlayer3;
@@ -350,7 +348,7 @@ static CGFloat blinkBottomOriginY;
     [self.view bringSubviewToFront:self.glassImageViewHeader];
     [self.view bringSubviewToFront:glassImageViewAllBackground];
     [self.view bringSubviewToFront:vJoySctick];
-    [vJoySctick setDelegate:self];
+    [vJoySctick setDelegate:plView];
 
     blinkTopOriginY = blinkTop.frame.origin.y;
     blinkBottomOriginY = blinkBottom.frame.origin.y;
@@ -1509,16 +1507,6 @@ float frequencyOpponentShoting()
 {
     float f =(20 + arc4random() % 20) * 0.1f;
     return f;
-}
-
-#pragma mark - JoyStickViewDelegate
-
-- (void)onStickChanged:(id)notification
-{
-    NSValue *vdir = [notification valueForKey:@"dir"];
-    CGPoint dir = [vdir CGPointValue];
-    
-    NSLog(@"---------------%f %f",dir.x, dir.y);
 }
 
 #pragma mark - IBAction

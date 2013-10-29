@@ -58,10 +58,10 @@
 -(BOOL)executeResetAction:(NSSet *)touches;
 
 #pragma mark -
-#pragma mark accelerometer methods
+#pragma mark motion tracking methods
 
--(void)activateAccelerometer;
--(void)deactiveAccelerometer;
+-(void)activateMotionTracking;
+-(void)deactiveMotionTracking;
 
 #pragma mark -
 #pragma mark animation methods

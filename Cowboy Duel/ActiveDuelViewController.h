@@ -11,7 +11,6 @@
 #import <AVFoundation/AVFoundation.h>
 #import "PLView.h"
 #import "PLJSONLoader.h"
-#import "JoyStickView.h"
 
 @protocol ActiveDuelViewControllerDelegate <NSObject>
 

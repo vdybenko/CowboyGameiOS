@@ -17,10 +17,11 @@
  */
 
 #import "PLIView.h"
+#import "JoyStickView.h"
 
 @protocol PLIRenderer;
 
-@interface PLViewBase : UIView <PLIView, UIAccelerometerDelegate, PLTransitionDelegate> 
+@interface PLViewBase : UIView <PLIView, UIAccelerometerDelegate, PLTransitionDelegate, JoyStickViewDelegate>
 {
     #pragma mark -
     #pragma mark member variables
@@ -65,7 +66,7 @@
 	BOOL displayLinkSupported, isDisplayLinkSupported;
 	id displayLink;
 	NSUInteger animationFrameInterval;
-	BOOL isAccelerometerActivated;
+	BOOL isMotionTrackingActivated;
 	BOOL isAnimating;
     
     CMMotionManager *motionManager;

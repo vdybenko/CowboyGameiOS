@@ -51,7 +51,7 @@
 
 @property(nonatomic) BOOL isAccelerometerEnabled, isAccelerometerLeftRightEnabled, isAccelerometerUpDownEnabled;
 @property(nonatomic) float accelerometerSensitivity;
-@property(nonatomic) NSTimeInterval accelerometerInterval;
+@property(nonatomic) NSTimeInterval motionTrackingInterval;
 
 @property(nonatomic) CGPoint startPoint, endPoint;
 @property(nonatomic, readonly) CGPoint startFovPoint, endFovPoint;

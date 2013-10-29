@@ -41,12 +41,6 @@
 -(void)view:(UIView<PLIView> *)pView didEndTouching:(NSSet *)touches withEvent:(UIEvent *)event;
 
 #pragma mark -
-#pragma mark accelerometer methods
-
--(BOOL)view:(UIView<PLIView> *)pView shouldAccelerate:(UIAcceleration *)acceleration withAccelerometer:(UIAccelerometer *)accelerometer;
--(void)view:(UIView<PLIView> *)pView didAccelerate:(UIAcceleration *)acceleration withAccelerometer:(UIAccelerometer *)accelerometer;
-
-#pragma mark -
 #pragma mark inertia methods
 
 -(BOOL)view:(UIView<PLIView> *)pView shouldBeginInertia:(CGPoint)starPoint endPoint:(CGPoint)endPoint;
