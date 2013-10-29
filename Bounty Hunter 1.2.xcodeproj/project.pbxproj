@@ -509,6 +509,11 @@
 		76EC0AE1163837BB00481A26 /* CDWeaponProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 76EC0AE0163837BB00481A26 /* CDWeaponProduct.m */; };
 		76ED65EC15C997FE00B14713 /* pv_gold_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 76ED65EA15C997FE00B14713 /* pv_gold_background.png */; };
 		76ED65ED15C997FE00B14713 /* pv_gold_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 76ED65EB15C997FE00B14713 /* pv_gold_background@2x.png */; };
+		76F07E71181FBD3D00BCEABF /* stick_base.png in Resources */ = {isa = PBXBuildFile; fileRef = 76F07E6E181FBD3D00BCEABF /* stick_base.png */; };
+		76F07E72181FBD3D00BCEABF /* stick_hold.png in Resources */ = {isa = PBXBuildFile; fileRef = 76F07E6F181FBD3D00BCEABF /* stick_hold.png */; };
+		76F07E73181FBD3D00BCEABF /* stick_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 76F07E70181FBD3D00BCEABF /* stick_normal.png */; };
+		76F07E79181FBD7B00BCEABF /* JoyStickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F07E77181FBD7B00BCEABF /* JoyStickView.m */; };
+		76F07E7A181FBE1400BCEABF /* JoyStickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F07E77181FBD7B00BCEABF /* JoyStickView.m */; };
 		76F48C1816A987C5000123AC /* ProfileViewControllerWanted.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76F48C1716A987C5000123AC /* ProfileViewControllerWanted.xib */; };
 		76F71904165A6AD700719D8A /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F71903165A6AD700719D8A /* UIView+Frame.m */; };
 		BD017BFD16723FCC005C5471 /* MyViewTest-testLoadViewController-1-0-UIView.png in Resources */ = {isa = PBXBuildFile; fileRef = BD017BFC16723FCC005C5471 /* MyViewTest-testLoadViewController-1-0-UIView.png */; };
@@ -1641,6 +1646,11 @@
 		76EC0AE0163837BB00481A26 /* CDWeaponProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CDWeaponProduct.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		76ED65EA15C997FE00B14713 /* pv_gold_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pv_gold_background.png; sourceTree = "<group>"; };
 		76ED65EB15C997FE00B14713 /* pv_gold_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pv_gold_background@2x.png"; sourceTree = "<group>"; };
+		76F07E6E181FBD3D00BCEABF /* stick_base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stick_base.png; sourceTree = "<group>"; };
+		76F07E6F181FBD3D00BCEABF /* stick_hold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stick_hold.png; sourceTree = "<group>"; };
+		76F07E70181FBD3D00BCEABF /* stick_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stick_normal.png; sourceTree = "<group>"; };
+		76F07E77181FBD7B00BCEABF /* JoyStickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JoyStickView.m; sourceTree = "<group>"; };
+		76F07E78181FBD7B00BCEABF /* JoyStickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JoyStickView.h; sourceTree = "<group>"; };
 		76F48C1716A987C5000123AC /* ProfileViewControllerWanted.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProfileViewControllerWanted.xib; path = Xib/ProfileViewControllerWanted.xib; sourceTree = "<group>"; };
 		76F71902165A6AD700719D8A /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
 		76F71903165A6AD700719D8A /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
@@ -2045,6 +2055,7 @@
 		03285FAD159DD84000D16195 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				76F07E6D181FBD3D00BCEABF /* Joystick */,
 				768DD933173CDB9800B031F3 /* BuilderGraphics */,
 				768DD944173CDB9800B031F3 /* CharacterShapes */,
 				7687666916BA7386003405F9 /* GunDrum */,
@@ -3069,6 +3080,16 @@
 			name = Shop;
 			sourceTree = "<group>";
 		};
+		76F07E6D181FBD3D00BCEABF /* Joystick */ = {
+			isa = PBXGroup;
+			children = (
+				76F07E6E181FBD3D00BCEABF /* stick_base.png */,
+				76F07E6F181FBD3D00BCEABF /* stick_hold.png */,
+				76F07E70181FBD3D00BCEABF /* stick_normal.png */,
+			);
+			path = Joystick;
+			sourceTree = "<group>";
+		};
 		BD0DA04B16D3727A00419DC1 /* PanoramaGL */ = {
 			isa = PBXGroup;
 			children = (
@@ -3507,6 +3528,8 @@
 				76A6F92E15878ED1009CE450 /* UIImageView+AttachedView.h */,
 				764B071F1598A5B30050D4E4 /* UIView+Dinamic_BackGround.h */,
 				764B07201598A5B30050D4E4 /* UIView+Dinamic_BackGround.m */,
+				76F07E77181FBD7B00BCEABF /* JoyStickView.m */,
+				76F07E78181FBD7B00BCEABF /* JoyStickView.h */,
 				76B65ACB15DD4A88000E136C /* FXLabel.m */,
 				76B65ACC15DD4A88000E136C /* FXLabel.h */,
 				76057DC21639937500735342 /* StoreProductCell.h */,
@@ -3777,6 +3800,7 @@
 				769F567E13AA6A9B006BFD46 /* Duel.mp3 in Resources */,
 				769F567F13AA6A9B006BFD46 /* Lose.mp3 in Resources */,
 				7693419713DDBA5000A962A4 /* DecreeNarrow.ttf in Resources */,
+				76F07E73181FBD3D00BCEABF /* stick_normal.png in Resources */,
 				76B3711213E1B7000097B8E0 /* MyriadPro-Bold.ttf in Resources */,
 				76B3711313E1B7000097B8E0 /* MyriadPro-Semibold.ttf in Resources */,
 				766B7D3613FE790600377AA3 /* Fire.mp3 in Resources */,
@@ -4026,6 +4050,7 @@
 				7693D97B16F213140096F61F /* goodCowboy.png in Resources */,
 				7693D97C16F213140096F61F /* goodCowboy@2x.png in Resources */,
 				7693D98116F219BE0096F61F /* GoodCowboy.xib in Resources */,
+				76F07E72181FBD3D00BCEABF /* stick_hold.png in Resources */,
 				7693D98916F225800096F61F /* goodCowboyVoice1.mp3 in Resources */,
 				7693D98B16F226550096F61F /* womanVoiceHelp.mp3 in Resources */,
 				7693D98E16F23C7F0096F61F /* goodCowboyScared.png in Resources */,
@@ -4179,6 +4204,7 @@
 				76B18922174CACC000CEECAF /* builderGunFrontView.png in Resources */,
 				C4A9ADEF174CCA0D0089044A /* smoke1.png in Resources */,
 				C4A9ADF0174CCA0D0089044A /* smoke2.png in Resources */,
+				76F07E71181FBD3D00BCEABF /* stick_base.png in Resources */,
 				C4A9ADF1174CCA0D0089044A /* smoke3.png in Resources */,
 				C4A9ADF2174CCA0D0089044A /* smoke4.png in Resources */,
 				C4A9ADF3174CCA0D0089044A /* smoke5.png in Resources */,
@@ -4629,6 +4655,7 @@
 				46C0748B173CEB5100711AC5 /* CDVisualViewCharacterPartGuns.m in Sources */,
 				46C0748E173CEBA100711AC5 /* CDVisualViewCharacterPartJakets.m in Sources */,
 				768659461740D6CB00C1986B /* CharacterPartGridCell.m in Sources */,
+				76F07E79181FBD7B00BCEABF /* JoyStickView.m in Sources */,
 				4670C1671743BA1F00D27FF8 /* CDVisualViewCharacterPartSuits.m in Sources */,
 				BD4186D51744FA460004AB50 /* GBDeviceInfo_iOS.m in Sources */,
 			);
@@ -4638,6 +4665,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76F07E7A181FBE1400BCEABF /* JoyStickView.m in Sources */,
 				BD3B88FC1689AC5B00FB68F5 /* FunPageViewController.m in Sources */,
 				BD83A5AB16720E43003EE4B3 /* MyTest.m in Sources */,
 				BD83A5AC16720E43003EE4B3 /* MyViewTest.m in Sources */,

@@ -28,6 +28,7 @@
 #import "FinalStatsView.h"
 #import "FinalViewDataSource.h"
 #import "DuelProductWinViewController.h"
+#import "JoyStickView.h"
 
 #define targetHeight 260
 #define targetWeidth 100
@@ -109,6 +110,7 @@
     __weak IBOutlet UIImageView *blinkBottom;
     __weak IBOutlet UIImageView *blinkTop;
     __weak IBOutlet ArrowToOpponent *arrowToOpponent;
+    __weak IBOutlet JoyStickView *vJoySctick;
     
     UIViewController *presentVC;
 }
@@ -349,11 +351,18 @@ static CGFloat blinkBottomOriginY;
     [self.view bringSubviewToFront:self.glassImageViewBottom];
     [self.view bringSubviewToFront:self.glassImageViewHeader];
     [self.view bringSubviewToFront:glassImageViewAllBackground];
+    [self.view bringSubviewToFront:vJoySctick];
 
     blinkTopOriginY = blinkTop.frame.origin.y;
     blinkBottomOriginY = blinkBottom.frame.origin.y;
     
     tryAgain = NO;
+    
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter addObserver: self
+                           selector: @selector (onStickChanged:)
+                               name: @"StickChanged"
+                             object: nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -1693,6 +1702,16 @@ float frequencyOpponentShoting()
     shotTime = 0;
     [player stop];
 }
+
+- (void)onStickChanged:(id)notification
+{
+    NSDictionary *dict = [notification userInfo];
+    NSValue *vdir = [dict valueForKey:@"dir"];
+    CGPoint dir = [vdir CGPointValue];
+    
+    NSLog(@"---------------%f %f",dir.x, dir.y);
+}
+
 #pragma ActiveDuelViewControllerDelegate
 -(BOOL)accelerometerSendPositionSecond
 {
