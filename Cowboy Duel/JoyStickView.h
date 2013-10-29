@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol JoyStickViewDelegate <NSObject>
+
+- (void)onStickChanged:(id)notification;
+
+@end
+
 @interface JoyStickView : UIView
+
 {
     IBOutlet UIImageView *stickViewBase;
     IBOutlet UIImageView *stickView;
@@ -18,5 +25,6 @@
     
     CGPoint mCenter;
 }
+@property(weak,nonatomic) id <JoyStickViewDelegate> delegate;
 
 @end

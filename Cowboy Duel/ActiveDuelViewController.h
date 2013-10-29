@@ -11,6 +11,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "PLView.h"
 #import "PLJSONLoader.h"
+#import "JoyStickView.h"
 
 @protocol ActiveDuelViewControllerDelegate <NSObject>
 
@@ -72,7 +73,7 @@
 @end
 
 
-@interface ActiveDuelViewController : UIViewController <MemoryManagement>
+@interface ActiveDuelViewController : UIViewController <MemoryManagement,JoyStickViewDelegate>
 {
     BOOL duelIsStarted;
     BOOL fireSound;

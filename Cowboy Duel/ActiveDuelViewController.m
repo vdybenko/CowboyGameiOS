@@ -28,7 +28,6 @@
 #import "FinalStatsView.h"
 #import "FinalViewDataSource.h"
 #import "DuelProductWinViewController.h"
-#import "JoyStickView.h"
 
 #define targetHeight 260
 #define targetWeidth 100
@@ -38,7 +37,6 @@
     BOOL isOpenHint;
     float startPoint;
     BOOL firstAccel;
-    UIAccelerationValue rollingX, rollingY, rollingZ;
     CGPoint oldPosition;
     CGPoint centerLocation;
     AVAudioPlayer *shotAudioPlayer1;
@@ -352,17 +350,12 @@ static CGFloat blinkBottomOriginY;
     [self.view bringSubviewToFront:self.glassImageViewHeader];
     [self.view bringSubviewToFront:glassImageViewAllBackground];
     [self.view bringSubviewToFront:vJoySctick];
+    [vJoySctick setDelegate:self];
 
     blinkTopOriginY = blinkTop.frame.origin.y;
     blinkBottomOriginY = blinkBottom.frame.origin.y;
     
     tryAgain = NO;
-    
-    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    [notificationCenter addObserver: self
-                           selector: @selector (onStickChanged:)
-                               name: @"StickChanged"
-                             object: nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -1518,6 +1511,16 @@ float frequencyOpponentShoting()
     return f;
 }
 
+#pragma mark - JoyStickViewDelegate
+
+- (void)onStickChanged:(id)notification
+{
+    NSValue *vdir = [notification valueForKey:@"dir"];
+    CGPoint dir = [vdir CGPointValue];
+    
+    NSLog(@"---------------%f %f",dir.x, dir.y);
+}
+
 #pragma mark - IBAction
 
 - (IBAction)btnSkipClicked:(id)sender {
@@ -1701,15 +1704,6 @@ float frequencyOpponentShoting()
     acelStatus = YES;
     shotTime = 0;
     [player stop];
-}
-
-- (void)onStickChanged:(id)notification
-{
-    NSDictionary *dict = [notification userInfo];
-    NSValue *vdir = [dict valueForKey:@"dir"];
-    CGPoint dir = [vdir CGPointValue];
-    
-    NSLog(@"---------------%f %f",dir.x, dir.y);
 }
 
 #pragma ActiveDuelViewControllerDelegate

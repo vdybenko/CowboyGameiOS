@@ -11,6 +11,7 @@
 #define STICK_CENTER_TARGET_POS_LEN 20.0f
 
 @implementation JoyStickView
+@synthesize delegate;
 
 -(void) initStick
 {
@@ -63,8 +64,7 @@
     NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
                               vdir, @"dir", nil];
     
-    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    [notificationCenter postNotificationName:@"StickChanged" object:nil userInfo:userInfo];
+    [delegate onStickChanged:userInfo];
 }
 
 - (void)stickMoveTo:(CGPoint)deltaToCenter
