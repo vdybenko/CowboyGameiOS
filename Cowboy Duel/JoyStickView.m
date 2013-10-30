@@ -88,12 +88,10 @@
     
     CGPoint touchPoint = [touch locationInView:view];
     CGPoint dtarget, dir;
-//    NSLog(@"%f %f---------------",touchPoint.x, touchPoint.y);
     dir.x = touchPoint.x - mCenter.x;
     dir.y = touchPoint.y - mCenter.y;
     
     double len = sqrt(dir.x * dir.x + dir.y * dir.y);
-//    NSLog(@"%f %f %f---------------",dir.x, dir.y, len);
 
     if(len < 3.0 && len > -3.0)
     {
@@ -105,18 +103,29 @@
     }
     else
     {
-        double len_inv = (1.0 / len);
-        double x = dir.x * len_inv;
-        double y = dir.y * len_inv;
-//        NSLog(@"%f %f %f %f %f",dir.x, dir.y, x, y, len_inv);
+        dir.x = dir.x/(stickView.frame.size.width/2);
+        dir.y = dir.y/(stickView.frame.size.height/2);
+        
+        if (dir.x>1) {
+            dir.x = 1;
+        }
+        
+        if (dir.x<-1) {
+            dir.x = -1;
+        }
+        
+        if (dir.y>1) {
+            dir.y = 1;
+        }
+        
+        if (dir.y<-1) {
+            dir.y = -1;
+        }
 
-        dir.x = x;
-        dir.y = y;
-        dtarget.x = x * STICK_CENTER_TARGET_POS_LEN;
-        dtarget.y = y * STICK_CENTER_TARGET_POS_LEN;
+        dtarget.x = dir.x * STICK_CENTER_TARGET_POS_LEN;
+        dtarget.y = dir.y * STICK_CENTER_TARGET_POS_LEN;
+        
     }
-    NSLog(@"%f %f %f",dir.x, dir.y, len);
-//    NSLog(@"%f %f %f---------------",dtarget.x, dtarget.y, len);
     
     [self stickMoveTo:dtarget];
     
