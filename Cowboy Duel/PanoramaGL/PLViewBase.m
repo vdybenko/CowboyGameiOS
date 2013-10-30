@@ -1019,8 +1019,8 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
         [scene.currentCamera rotateWithPitch:-pitch yaw:-yaw roll:roll];
     });
     
-    mtRotationJoyStick.m13 =ptDirectionJoyStick.x;
-    mtRotationJoyStick.m31 =ptDirectionJoyStick.x;
+//    mtRotationJoyStick.m13 =ptDirectionJoyStick.x;
+//    mtRotationJoyStick.m31 =ptDirectionJoyStick.x;
     transformFromCMRotationMatrix(cameraTransform, &mtRotationJoyStick);
 //
     for (OponentCoordinateView *oponentView in oponentCoordinateViews) {
@@ -1032,7 +1032,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
         
         float x = (v[0] / v[3] + 1.0f) * 0.4f;
         
-        float y = -ptDirectionJoyStick.y * 0.45;
+        float y = ptDirectionJoyStick.y * 0.08;
         
         if(v[2] > 0){
             if(!startX && (y <= 0.7)) startX = x + randomX;
