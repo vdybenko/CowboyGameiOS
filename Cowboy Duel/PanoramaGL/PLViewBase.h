@@ -21,7 +21,7 @@
 
 @protocol PLIRenderer;
 
-@interface PLViewBase : UIView <PLIView, UIAccelerometerDelegate, PLTransitionDelegate, JoyStickViewDelegate>
+@interface PLViewBase : UIView <PLIView, UIAccelerometerDelegate, PLTransitionDelegate>
 {
     #pragma mark -
     #pragma mark member variables
@@ -89,5 +89,7 @@
 }
 
 @property (nonatomic, retain) UIView *menView;
+@property (nonatomic, retain) JoyStickView *vJoyStick;
+
 - (void)setOponentCoordinates:(NSArray *)pois;
 @end

@@ -27,4 +27,5 @@
 }
 @property(weak,nonatomic) id <JoyStickViewDelegate> delegate;
 
+-(CGPoint)getDirectPoint;
 @end

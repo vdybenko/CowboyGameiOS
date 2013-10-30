@@ -347,8 +347,9 @@ static CGFloat blinkBottomOriginY;
     [self.view bringSubviewToFront:self.glassImageViewBottom];
     [self.view bringSubviewToFront:self.glassImageViewHeader];
     [self.view bringSubviewToFront:glassImageViewAllBackground];
+    
     [self.view bringSubviewToFront:vJoySctick];
-    [vJoySctick setDelegate:plView];
+    [plView setVJoyStick:vJoySctick];
 
     blinkTopOriginY = blinkTop.frame.origin.y;
     blinkBottomOriginY = blinkBottom.frame.origin.y;

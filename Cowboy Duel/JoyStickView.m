@@ -9,15 +9,21 @@
 #import "JoyStickView.h"
 
 #define STICK_CENTER_TARGET_POS_LEN 20.0f
+@interface JoyStickView()
+{
+    CGPoint dir;
+}
+@end
 
 @implementation JoyStickView
+
 @synthesize delegate;
 
 -(void) initStick
 {
     imgStickNormal = [UIImage imageNamed:@"stick_normal.png"];
     imgStickHold = [UIImage imageNamed:@"stick_hold.png"];
-//    stickView.image = imgStickNormal;
+    stickView.image = imgStickNormal;
     mCenter.x = 64;
     mCenter.y = 64;
 }
@@ -58,9 +64,9 @@
 }
 */
 
-- (void)notifyDir:(CGPoint)dir
+- (void)notifyDir:(CGPoint)pDir
 {
-    NSValue *vdir = [NSValue valueWithCGPoint:dir];
+    NSValue *vdir = [NSValue valueWithCGPoint:pDir];
     NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
                               vdir, @"dir", nil];
     
@@ -87,7 +93,7 @@
         return ;
     
     CGPoint touchPoint = [touch locationInView:view];
-    CGPoint dtarget, dir;
+    CGPoint dtarget;
     dir.x = touchPoint.x - mCenter.x;
     dir.y = touchPoint.y - mCenter.y;
     
@@ -128,8 +134,6 @@
     }
     
     [self stickMoveTo:dtarget];
-    
-    [self notifyDir:dir];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -149,7 +153,13 @@
     CGPoint dtarget;
     dtarget.x = 0.0;
     dtarget.y = 0.0;
+    dir.x = 0;
+    dir.y = 0;
     [self stickMoveTo:dtarget];
 }
 
+-(CGPoint)getDirectPoint;
+{
+    return dir;
+}
 @end

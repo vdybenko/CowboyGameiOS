@@ -30,6 +30,8 @@
 #define WGS84_A    (6378137.0)                // WGS 84 semi-major axis constant in meters
 #define WGS84_E (8.1819190842622e-2)    // WGS 84 eccentricity
 
+#define REFRESH_TIME (4.0 / 60.0)
+
 typedef float mat4f_t[16];    // 4x4 matrix in column major order
 typedef float vec4f_t[4];    // 4D vector
 
@@ -51,6 +53,9 @@ static UIAccelerationValue rollingZ = 0.0;
     float startX;
     
     BOOL isSensorialRotationBlocking;
+    
+    CGPoint ptDirectionJoyStick;
+    CMRotationMatrix mtRotationJoyStick;
 }
 -(void)doGyroUpdate;
 -(void)doSimulatedGyroUpdate;
@@ -99,6 +104,7 @@ static UIAccelerationValue rollingZ = 0.0;
 
 @synthesize isPointerVisible;
 @synthesize menView;
+@synthesize vJoyStick;
 
 #pragma mark -
 #pragma mark init methods
@@ -996,47 +1002,51 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 {
 }
 
--(void)didMotionChangeX:(CGFloat)x Y:(CGFloat)y;
+-(void)didMotionChangePoint:(CGPoint)point;
 {
     float randomX = [self randFloatBetween:0.5 and:3.5];
     
-    float yaw = 0;//x/4 * 180 / M_PI;//horizontal
-    float pitch = y * 40;//vertical
-    float roll = x/2 * 180 / M_PI;//horizontal
+    CGPoint pt = [vJoyStick getDirectPoint];
     
-//    NSLog(@"yaw %f pitch %f roll %f",yaw,pitch,roll);
+    ptDirectionJoyStick.x += pt.x;
+    ptDirectionJoyStick.y += pt.y;
+    
+    float yaw = 0;//x/4 * 180 / M_PI;//horizontal
+    float pitch = ptDirectionJoyStick.y * 6;//vertical
+    float roll = ptDirectionJoyStick.x/5.5 * 180 / M_PI;//horizontal
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [scene.currentCamera rotateWithPitch:-pitch yaw:-yaw roll:roll];
     });
     
-//    CMRotationMatrix r = motion.attitude.rotationMatrix;
-//    transformFromCMRotationMatrix(cameraTransform, &r);
-//    
-//    for (OponentCoordinateView *oponentView in oponentCoordinateViews) {
-//        mat4f_t projectionCameraTransform;
-//        multiplyMatrixAndMatrix(projectionCameraTransform, projectionTransform, cameraTransform);
-//        
-//        vec4f_t v;
-//        multiplyMatrixAndVector(v, projectionCameraTransform, oponentCoordinates[0]);
-//        
-//        float x = (v[0] / v[3] + 1.0f) * 0.4f;
-//        
-//        float y = -motion.gravity.z;
-//        
-//        if(v[2] > 0){
-//            if(!startX && (y <= 0.7)) startX = x + randomX;
-//            
-//            [oponentView.view setHidden:NO];
-//            x += startX;
-//            CGPoint newPosition = CGPointMake(x * self.bounds.size.width, self.bounds.size.height-(y * self.bounds.size.height + 220));
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                if([oponentView respondsToSelector:@selector(view)])
-//                    [oponentView.view setCenter:newPosition];
-//            });
-//        }
-//        else if([oponentView respondsToSelector:@selector(view)]) [oponentView.view setHidden:YES];
-//    }
+    mtRotationJoyStick.m13 =ptDirectionJoyStick.x;
+    mtRotationJoyStick.m31 =ptDirectionJoyStick.x;
+    transformFromCMRotationMatrix(cameraTransform, &mtRotationJoyStick);
+//
+    for (OponentCoordinateView *oponentView in oponentCoordinateViews) {
+        mat4f_t projectionCameraTransform;
+        multiplyMatrixAndMatrix(projectionCameraTransform, projectionTransform, cameraTransform);
+        
+        vec4f_t v;
+        multiplyMatrixAndVector(v, projectionCameraTransform, oponentCoordinates[0]);
+        
+        float x = (v[0] / v[3] + 1.0f) * 0.4f;
+        
+        float y = -ptDirectionJoyStick.y * 0.45;
+        
+        if(v[2] > 0){
+            if(!startX && (y <= 0.7)) startX = x + randomX;
+            
+            [oponentView.view setHidden:NO];
+            x += startX;
+            CGPoint newPosition = CGPointMake(x * self.bounds.size.width, self.bounds.size.height-(y * self.bounds.size.height + 220));
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if([oponentView respondsToSelector:@selector(view)])
+                    [oponentView.view setCenter:newPosition];
+            });
+        }
+        else if([oponentView respondsToSelector:@selector(view)]) [oponentView.view setHidden:YES];
+    }
 }
 
 #pragma mark -
@@ -1048,13 +1058,18 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
     {
         startX = 0;
         isSensorialRotationRunning = YES;
+        
+        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:REFRESH_TIME target:self selector:@selector(didMotionChangePoint:) userInfo:Nil repeats:YES];
+        [timer fire];
+        mtRotationJoyStick = rotationMatrixDefault();
+        
 //        motionManager = [[CMMotionManager alloc] init];
 //        
 //        // Tell CoreMotion to show the compass calibration HUD when required to provide true north-referenced attitude
 //        motionManager.showsDeviceMovementDisplay = NO;
 //        
-//        motionManager.deviceMotionUpdateInterval = 4.0 / 60.0;
-//        motionManager.accelerometerUpdateInterval = 4.0 / 60.0;
+//        motionManager.deviceMotionUpdateInterval = REFRESH_TIME;
+//        motionManager.accelerometerUpdateInterval = REFRESH_TIME;
 //        [motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *motion, NSError *error)
 //         {
 //             float randomX = [self randFloatBetween:0.5 and:3.5];
@@ -1077,7 +1092,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 //             
 //             CMRotationMatrix r = motion.attitude.rotationMatrix;
 //             transformFromCMRotationMatrix(cameraTransform, &r);
-//                          
+//             NSLog(@"%f %f %f %f %f %f %f %f %f",r.m11,r.m12,r.m13,r.m21,r.m22,r.m23,r.m31,r.m32,r.m33);
 //             for (OponentCoordinateView *oponentView in oponentCoordinateViews) {
 //                 mat4f_t projectionCameraTransform;
 //                 multiplyMatrixAndMatrix(projectionCameraTransform, projectionTransform, cameraTransform);
@@ -1104,8 +1119,6 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 //             }
 //             
 //         }];
-        
-        
     }
 }
 -(float) randFloatBetween:(float)low and:(float)high
@@ -1188,6 +1201,25 @@ void multiplyMatrixAndMatrix(mat4f_t c, const mat4f_t a, const mat4f_t b)
     }
 }
 
+CMRotationMatrix rotationMatrixDefault()
+{
+    CMRotationMatrix mat = {
+        0.999114, 0.038270, -0.017526,
+        0.006061, 0.281232, 0.959621,
+        0.041654, -0.958877, 0.280750};
+    
+    return mat;
+}
+
+CMRotationMatrix rotationMatrixFromGravity(float x, float y, float z)
+{
+    //    CMRotationMatrix mat = {
+    //        xAxis.x, yAxis.x, zAxis.x,
+    //        xAxis.y, yAxis.y, zAxis.y,
+    //        xAxis.z, yAxis.z, zAxis.z};
+    //
+    //    return mat;
+}
 
 /**
  * IMPORTANT: Gyroscope was not tested because, I do not have a device that support it. The function doGyroUpdate needs be tested and fix it.
@@ -1313,18 +1345,6 @@ void multiplyMatrixAndMatrix(mat4f_t c, const mat4f_t a, const mat4f_t b)
         shakeData.shakeLastPosition.z = shakeData.shakePosition.z;
     }
     return result;
-}
-
-#pragma mark - JoyStickViewDelegate
-
-- (void)onStickChanged:(id)notification
-{
-    NSValue *vdir = [notification valueForKey:@"dir"];
-    CGPoint dir = [vdir CGPointValue];
-    
-//    NSLog(@"---------------%f %f",dir.x, dir.y);
-    
-    [self didMotionChangeX:dir.x Y:dir.y];
 }
 
 #pragma mark -
