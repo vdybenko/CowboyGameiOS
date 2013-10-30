@@ -1004,7 +1004,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
     float pitch = y * 40;//vertical
     float roll = x/2 * 180 / M_PI;//horizontal
     
-    NSLog(@"yaw %f pitch %f roll %f",yaw,pitch,roll);
+//    NSLog(@"yaw %f pitch %f roll %f",yaw,pitch,roll);
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [scene.currentCamera rotateWithPitch:-pitch yaw:-yaw roll:roll];
@@ -1322,7 +1322,7 @@ void multiplyMatrixAndMatrix(mat4f_t c, const mat4f_t a, const mat4f_t b)
     NSValue *vdir = [notification valueForKey:@"dir"];
     CGPoint dir = [vdir CGPointValue];
     
-    NSLog(@"---------------%f %f",dir.x, dir.y);
+//    NSLog(@"---------------%f %f",dir.x, dir.y);
     
     [self didMotionChangeX:dir.x Y:dir.y];
 }
