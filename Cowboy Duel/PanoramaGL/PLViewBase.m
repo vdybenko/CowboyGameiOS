@@ -56,6 +56,7 @@ static UIAccelerationValue rollingZ = 0.0;
     
     CGPoint ptDirectionJoyStick;
     CMRotationMatrix mtRotationJoyStick;
+    NSTimer *timerJoyStick;
 }
 -(void)doGyroUpdate;
 -(void)doSimulatedGyroUpdate;
@@ -1011,18 +1012,18 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
     ptDirectionJoyStick.x += pt.x;
     ptDirectionJoyStick.y += pt.y;
     
-    float yaw = 0;//x/4 * 180 / M_PI;//horizontal
-    float pitch = ptDirectionJoyStick.y * 6;//vertical
-    float roll = ptDirectionJoyStick.x/5.5 * 180 / M_PI;//horizontal
+    float yaw = 0;//horizontal
+    float pitchWithK = ptDirectionJoyStick.y * 3;
+    float pitch = pitchWithK;//vertical
+    float rollWithK = ptDirectionJoyStick.x/9;
+    float roll = rollWithK * 180 / M_PI;//horizontal
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [scene.currentCamera rotateWithPitch:-pitch yaw:-yaw roll:roll];
     });
     
-//    mtRotationJoyStick.m13 =ptDirectionJoyStick.x;
-//    mtRotationJoyStick.m31 =ptDirectionJoyStick.x;
     transformFromCMRotationMatrix(cameraTransform, &mtRotationJoyStick);
-//
+
     for (OponentCoordinateView *oponentView in oponentCoordinateViews) {
         mat4f_t projectionCameraTransform;
         multiplyMatrixAndMatrix(projectionCameraTransform, projectionTransform, cameraTransform);
@@ -1030,9 +1031,9 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
         vec4f_t v;
         multiplyMatrixAndVector(v, projectionCameraTransform, oponentCoordinates[0]);
         
-        float x = (v[0] / v[3] + 1.0f) * 0.4f;
+        float x = -rollWithK * 1.0;
         
-        float y = ptDirectionJoyStick.y * 0.08;
+        float y = pitchWithK * 0.014;
         
         if(v[2] > 0){
             if(!startX && (y <= 0.7)) startX = x + randomX;
@@ -1059,8 +1060,8 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
         startX = 0;
         isSensorialRotationRunning = YES;
         
-        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:REFRESH_TIME target:self selector:@selector(didMotionChangePoint:) userInfo:Nil repeats:YES];
-        [timer fire];
+        timerJoyStick = [NSTimer scheduledTimerWithTimeInterval:REFRESH_TIME target:self selector:@selector(didMotionChangePoint:) userInfo:Nil repeats:YES];
+        [timerJoyStick fire];
         mtRotationJoyStick = rotationMatrixDefault();
         
 //        motionManager = [[CMMotionManager alloc] init];
@@ -1284,6 +1285,11 @@ CMRotationMatrix rotationMatrixFromGravity(float x, float y, float z)
         {
             [motionTimer invalidate];
             motionTimer = nil;
+        }
+        if(timerJoyStick)
+        {
+            [timerJoyStick invalidate];
+            timerJoyStick = nil;
         }
         if(motionManager)
         {

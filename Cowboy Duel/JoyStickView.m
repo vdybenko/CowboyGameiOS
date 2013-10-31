@@ -114,17 +114,13 @@
         
         if (dir.x>1) {
             dir.x = 1;
-        }
-        
-        if (dir.x<-1) {
+        }else if (dir.x<-1) {
             dir.x = -1;
         }
         
         if (dir.y>1) {
             dir.y = 1;
-        }
-        
-        if (dir.y<-1) {
+        }else if (dir.y<-1) {
             dir.y = -1;
         }
 
