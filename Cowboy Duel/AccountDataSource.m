@@ -37,6 +37,7 @@ static const char *LIST_BOTS_URL = BASE_URL"users/get_user_data";
 @synthesize visualViewSuits;
 @synthesize arrayOfBoughtProducts;
 @synthesize defaultName;
+@synthesize gameType;
 #pragma mark
 
 static AccountDataSource *sharedHelper = nil;
@@ -100,6 +101,7 @@ static AccountDataSource *sharedHelper = nil;
         self.visualViewJackets = 0;
         self.visualViewGuns = 0;
         self.visualViewSuits = 0;
+        self.gameType = GameTypeGyroscope;
     }
     return self;
 }
@@ -162,6 +164,7 @@ static AccountDataSource *sharedHelper = nil;
     }
 
      [self loadVisualView];
+    [self loadGameType];
 }
 
 - (void)makeLocalAccountID{
@@ -598,6 +601,23 @@ static AccountDataSource *sharedHelper = nil;
     [self.arrayOfBoughtProducts addObject:num];
     [self saveVisualView];
 }
+#pragma mark
+
+- (void)saveGameType;
+{
+    [[NSUserDefaults standardUserDefaults] setInteger:self.gameType forKey:@"GAME_TYPE"];
+}
+
+- (void)loadGameType;
+{
+    int t = [[NSUserDefaults standardUserDefaults] integerForKey:@"GAME_TYPE"];
+    if (t!=0) {
+        self.gameType = t;
+    }else{
+        self.gameType = GameTypeGyroscope;
+    }
+}
+
 #pragma mark
 
 - (BOOL)isPlayerPlayDuel;

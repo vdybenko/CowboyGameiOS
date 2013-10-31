@@ -75,6 +75,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     __weak IBOutlet UILabel *lbPointsText;
     __weak IBOutlet UILabel *lbFavouritesTitle;
     
+    __weak IBOutlet UISwitch *swGameType;
 //  Favourites
     
     __weak IBOutlet UIButton *btnFavourites;
@@ -138,6 +139,12 @@ static const CGFloat timeToStandartTitles = 1.8;
         
         [mainProfileView setDinamicHeightBackground];
         [self checkLocationOfViewForFBLogin];
+        
+        if (playerAccount.gameType == GameTypeGyroscope) {
+            [swGameType setOn:YES animated:YES];
+        }else{
+            [swGameType setOn:NO animated:YES];
+        }
     }
     return self;
 }
@@ -1098,6 +1105,14 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         [UIView commitAnimations];
         [[StartViewController sharedInstance] releseProfileSmallWindow];
     }
+}
+- (IBAction)valueChangeSwitchGameType:(UISwitch *)sender {
+    if (swGameType.isOn) {
+        playerAccount.gameType = GameTypeGyroscope;
+    }else{
+        playerAccount.gameType = GameTypeJoyStick;
+    }
+    [playerAccount saveGameType];
 }
 
 #pragma mark IconDownloaderDelegate

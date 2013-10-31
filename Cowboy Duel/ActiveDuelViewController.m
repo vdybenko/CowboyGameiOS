@@ -348,9 +348,15 @@ static CGFloat blinkBottomOriginY;
     [self.view bringSubviewToFront:self.glassImageViewHeader];
     [self.view bringSubviewToFront:glassImageViewAllBackground];
     
-    [self.view bringSubviewToFront:vJoySctick];
-    [plView setVJoyStick:vJoySctick];
-
+    [plView setGameType:playerAccount.gameType];
+    if (playerAccount.gameType == GameTypeJoyStick) {
+        vJoySctick.hidden = NO;
+        [self.view bringSubviewToFront:vJoySctick];
+        [plView setVJoyStick:vJoySctick];
+    }else{
+        vJoySctick.hidden = YES;
+    }
+    
     blinkTopOriginY = blinkTop.frame.origin.y;
     blinkBottomOriginY = blinkBottom.frame.origin.y;
     

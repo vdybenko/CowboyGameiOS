@@ -10,6 +10,12 @@
 #import "VisualViewDataSource.h"
 
 @class StartViewController;
+
+typedef enum {
+    GameTypeGyroscope,
+    GameTypeJoyStick
+} GameType;
+
 @interface AccountDataSource : NSObject <FBLoginViewDelegate>
 
 @property(nonatomic, readonly) NSInteger accountDataSourceID;
@@ -65,6 +71,7 @@
 @property(nonatomic) int visualViewJackets;
 @property(nonatomic) int visualViewGuns;
 @property(nonatomic) int visualViewSuits;
+@property(nonatomic) GameType gameType;
 @property(nonatomic) NSMutableArray *arrayOfBoughtProducts;
 
 + (AccountDataSource *)sharedInstance;
@@ -109,6 +116,9 @@
 - (void)loadVisualView;
 - (BOOL)isProductBought:(NSInteger)index;
 - (void)addProductToBought:(NSInteger)index;
+
+- (void)saveGameType;
+- (void)loadGameType;
 
 - (void)recountDefenseAndAtack;
 - (CDVisualViewCharacterPart*)loadProductWithIndex:(int)index type:(CharacterPart)type visualViewDataSource:(VisualViewDataSource*)datasource;

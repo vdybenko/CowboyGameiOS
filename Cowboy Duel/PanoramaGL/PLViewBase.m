@@ -105,6 +105,7 @@ static UIAccelerationValue rollingZ = 0.0;
 @synthesize isPointerVisible;
 @synthesize menView;
 @synthesize vJoyStick;
+@synthesize gameType;
 
 #pragma mark -
 #pragma mark init methods
@@ -1068,65 +1069,68 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
         startX = 0;
         isSensorialRotationRunning = YES;
         
-        timerJoyStick = [NSTimer scheduledTimerWithTimeInterval:REFRESH_TIME target:self selector:@selector(didMotionChangePoint:) userInfo:Nil repeats:YES];
-        [timerJoyStick fire];
-        
-//        motionManager = [[CMMotionManager alloc] init];
-//        
-//        // Tell CoreMotion to show the compass calibration HUD when required to provide true north-referenced attitude
-//        motionManager.showsDeviceMovementDisplay = NO;
-//        
-//        motionManager.deviceMotionUpdateInterval = REFRESH_TIME;
-//        motionManager.accelerometerUpdateInterval = REFRESH_TIME;
-//        [motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *motion, NSError *error)
-//         {
-//             float randomX = [self randFloatBetween:0.5 and:3.5];
-//             CMAttitude *currentAttitude = motion.attitude;
-//
-//             if (currentAttitude == nil)
-//             {
-//                 NSLog(@"Could not get device orientation.");
-//                 return;
-//             }
-//             else {
-//                 float yaw = currentAttitude.yaw * 180 / M_PI;
-//                 float pitch = motion.gravity.z * 90;
-//                 float roll = currentAttitude.roll * 180 / M_PI;
-//                 
-//                 dispatch_async(dispatch_get_main_queue(), ^{
-//                     [scene.currentCamera rotateWithPitch:pitch yaw:-yaw roll:-roll];
-//                 });
-//             }
-//             
-//             CMRotationMatrix r = motion.attitude.rotationMatrix;
-//             transformFromCMRotationMatrix(cameraTransform, &r);
-//             NSLog(@"%f %f %f %f %f %f %f %f %f",r.m11,r.m12,r.m13,r.m21,r.m22,r.m23,r.m31,r.m32,r.m33);
-//             for (OponentCoordinateView *oponentView in oponentCoordinateViews) {
-//                 mat4f_t projectionCameraTransform;
-//                 multiplyMatrixAndMatrix(projectionCameraTransform, projectionTransform, cameraTransform);
-//                 
-//                 vec4f_t v;
-//                 multiplyMatrixAndVector(v, projectionCameraTransform, oponentCoordinates[0]);
-//                 
-//                 float x = (v[0] / v[3] + 1.0f) * 0.4f;
-//                 
-//                 float y = -motion.gravity.z;
-//                 
-//                 if(v[2] > 0){
-//                     if(!startX && (y <= 0.7)) startX = x + randomX;
-//                     
-//                     [oponentView.view setHidden:NO];
-//                     x += startX;
-//                     CGPoint newPosition = CGPointMake(x * self.bounds.size.width, self.bounds.size.height-(y * self.bounds.size.height + 220));
-//                     dispatch_async(dispatch_get_main_queue(), ^{
-//                         if([oponentView respondsToSelector:@selector(view)])
-//                             [oponentView.view setCenter:newPosition];
-//                     });
-//                 }
-//                 else if([oponentView respondsToSelector:@selector(view)]) [oponentView.view setHidden:YES];
-//             }
-//             
-//         }];
+        if (gameType == GameTypeJoyStick) {
+            timerJoyStick = [NSTimer scheduledTimerWithTimeInterval:REFRESH_TIME target:self selector:@selector(didMotionChangePoint:) userInfo:Nil repeats:YES];
+            [timerJoyStick fire];
+        }else{
+            motionManager = [[CMMotionManager alloc] init];
+            
+            // Tell CoreMotion to show the compass calibration HUD when required to provide true north-referenced attitude
+            motionManager.showsDeviceMovementDisplay = NO;
+            
+            motionManager.deviceMotionUpdateInterval = REFRESH_TIME;
+            motionManager.accelerometerUpdateInterval = REFRESH_TIME;
+            [motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *motion, NSError *error)
+             {
+                 float randomX = [self randFloatBetween:0.5 and:3.5];
+                 CMAttitude *currentAttitude = motion.attitude;
+                 
+                 if (currentAttitude == nil)
+                 {
+                     NSLog(@"Could not get device orientation.");
+                     return;
+                 }
+                 else {
+                     float yaw = currentAttitude.yaw * 180 / M_PI;
+                     float pitch = motion.gravity.z * 90;
+                     float roll = currentAttitude.roll * 180 / M_PI;
+                     
+                     dispatch_async(dispatch_get_main_queue(), ^{
+                         [scene.currentCamera rotateWithPitch:pitch yaw:-yaw roll:-roll];
+                     });
+                 }
+                 
+                 CMRotationMatrix r = motion.attitude.rotationMatrix;
+                 transformFromCMRotationMatrix(cameraTransform, &r);
+                 NSLog(@"%f %f %f %f %f %f %f %f %f",r.m11,r.m12,r.m13,r.m21,r.m22,r.m23,r.m31,r.m32,r.m33);
+                 for (OponentCoordinateView *oponentView in oponentCoordinateViews) {
+                     mat4f_t projectionCameraTransform;
+                     multiplyMatrixAndMatrix(projectionCameraTransform, projectionTransform, cameraTransform);
+                     
+                     vec4f_t v;
+                     multiplyMatrixAndVector(v, projectionCameraTransform, oponentCoordinates[0]);
+                     
+                     float x = (v[0] / v[3] + 1.0f) * 0.4f;
+                     
+                     float y = -motion.gravity.z;
+                     
+                     if(v[2] > 0){
+                         if(!startX && (y <= 0.7)) startX = x + randomX;
+                         
+                         [oponentView.view setHidden:NO];
+                         x += startX;
+                         CGPoint newPosition = CGPointMake(x * self.bounds.size.width, self.bounds.size.height-(y * self.bounds.size.height + 220));
+                         dispatch_async(dispatch_get_main_queue(), ^{
+                             if([oponentView respondsToSelector:@selector(view)])
+                                 [oponentView.view setCenter:newPosition];
+                         });
+                     }
+                     else if([oponentView respondsToSelector:@selector(view)]) [oponentView.view setHidden:YES];
+                 }
+                 
+             }];
+
+        }
     }
 }
 -(float) randFloatBetween:(float)low and:(float)high

@@ -222,6 +222,7 @@ static StartViewController *sharedHelper = nil;
             [playerAccount saveTransaction];
             [playerAccount saveGlNumber];
             [playerAccount saveVisualView];
+            [playerAccount saveGameType];
             [uDef synchronize];
         }else{
             
@@ -833,9 +834,8 @@ static StartViewController *sharedHelper = nil;
 
 -(void)releseProfileSmallWindow;
 {
-    profileViewController = nil;
+//    profileViewController = nil;
 }
-
 
 #pragma mark -
 #pragma mark feedback
