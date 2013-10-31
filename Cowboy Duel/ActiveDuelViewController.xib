@@ -37,7 +37,7 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="1" customClass="PLView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="11">
@@ -98,11 +98,11 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="dv_arrows.png" id="59" userLabel="imgFire">
-                    <rect key="frame" x="106" y="50" width="108" height="72"/>
+                    <rect key="frame" x="186" y="30" width="108" height="72"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Behold!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="64" customClass="FXLabel">
-                    <rect key="frame" x="0.0" y="90" width="320" height="100"/>
+                    <rect key="frame" x="80" y="52" width="320" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -113,7 +113,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                 </imageView>
                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="ivBloodBottom.png" id="67">
-                    <rect key="frame" x="0.0" y="264" width="320" height="216"/>
+                    <rect key="frame" x="0.0" y="104" width="320" height="216"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                 </imageView>
                 <view contentMode="scaleToFill" id="93" customClass="ArrowToOpponent">
@@ -140,22 +140,22 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" id="71" userLabel="allRedBackground">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="blinkEye2.png" id="80">
-                            <rect key="frame" x="0.0" y="411" width="320" height="438"/>
+                            <rect key="frame" x="0.0" y="334" width="320" height="355"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinY="YES" heightSizable="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="blinkEye.png" id="79">
-                            <rect key="frame" x="0.0" y="-240" width="320" height="308"/>
+                            <rect key="frame" x="0.0" y="-240" width="320" height="240"/>
                             <autoresizingMask key="autoresizingMask" heightSizable="YES" flexibleMaxY="YES"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="4" userLabel="gunButton">
-                    <rect key="frame" x="0.0" y="2" width="320" height="477"/>
+                    <rect key="frame" x="0.0" y="2" width="480" height="317"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <state key="normal">
@@ -170,8 +170,8 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" id="KFZ-Vd-t6u" customClass="JoyStickView">
-                    <rect key="frame" x="11" y="295" width="128" height="128"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <rect key="frame" x="11" y="159" width="128" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="stick_base.png" id="PLF-zV-IIe">
                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -188,7 +188,7 @@
                     </connections>
                 </view>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="110" userLabel="btnSkip">
-                    <rect key="frame" x="245" y="445" width="75" height="33"/>
+                    <rect key="frame" x="405" y="285" width="75" height="33"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <state key="normal" backgroundImage="salon_duel.png">
@@ -202,7 +202,7 @@
                     </connections>
                 </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="118" userLabel="btnTry">
-                    <rect key="frame" x="168" y="420" width="142" height="33"/>
+                    <rect key="frame" x="328" y="260" width="142" height="33"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <state key="normal" backgroundImage="btn_small.png">
@@ -217,7 +217,7 @@
                     </connections>
                 </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="119" userLabel="btnBack">
-                    <rect key="frame" x="11" y="420" width="142" height="33"/>
+                    <rect key="frame" x="11" y="260" width="142" height="33"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <state key="normal" backgroundImage="btn_small.png">
@@ -233,7 +233,8 @@
                 </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
     <resources>

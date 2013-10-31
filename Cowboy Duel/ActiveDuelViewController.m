@@ -364,6 +364,30 @@ static CGFloat blinkBottomOriginY;
     }
 }
 
+- (void)viewWillLayoutSubviews
+{
+    if (UIDeviceOrientationIsLandscape([self interfaceOrientation]))
+    {
+        //x,y as you want
+        
+        
+    }
+    else
+    {
+        //In potrait
+        //x,y as you want
+        //gunDrumViewController.view.frame = CGRectMake(0, 0,100,100);
+        CGRect gunframe = gunDrumViewController.view.frame;
+        gunframe.origin.y = 0;
+        gunDrumViewController.view.frame = gunframe;
+        CGRect frame = plView.frame;
+        plView.transform = CGAffineTransformMakeRotation(M_PI_2);
+        
+        
+    }
+    
+}
+
 -(void)reInitViewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.view.hidden = NO;

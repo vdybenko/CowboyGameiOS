@@ -49,7 +49,7 @@
 //points
 static CGPoint pntDumpOpen;
 static const CGPoint pntDumpClose = {187,128};//center of image
-static const CGPoint pntGunCloseSimple = {-26,224};
+static const CGPoint pntGunCloseSimple = {46,124};
 static const CGPoint pntGunCloseIphone5 = {-26,312};
 static CGPoint pntGunClose;
 static const CGPoint pntViewShow = {0,0};
