@@ -55,7 +55,6 @@ static UIAccelerationValue rollingZ = 0.0;
     BOOL isSensorialRotationBlocking;
     
     CGPoint ptDirectionJoyStick;
-    CMRotationMatrix mtRotationJoyStick;
     NSTimer *timerJoyStick;
 }
 -(void)doGyroUpdate;
@@ -1012,6 +1011,14 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
     ptDirectionJoyStick.x += pt.x;
     ptDirectionJoyStick.y += pt.y;
     
+//  max,min bounds for Joystick
+    if (ptDirectionJoyStick.y>15.25) {
+        ptDirectionJoyStick.y = 15.25;
+    }else if (ptDirectionJoyStick.y<-7.15)
+    {
+        ptDirectionJoyStick.y = -7.15;
+    }
+    
     float yaw = 0;//horizontal
     float pitchWithK = ptDirectionJoyStick.y * 3;
     float pitch = pitchWithK;//vertical
@@ -1022,6 +1029,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
         [scene.currentCamera rotateWithPitch:-pitch yaw:-yaw roll:roll];
     });
     
+    CMRotationMatrix mtRotationJoyStick = rotationMatrixDefault();
     transformFromCMRotationMatrix(cameraTransform, &mtRotationJoyStick);
 
     for (OponentCoordinateView *oponentView in oponentCoordinateViews) {
@@ -1062,7 +1070,6 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
         
         timerJoyStick = [NSTimer scheduledTimerWithTimeInterval:REFRESH_TIME target:self selector:@selector(didMotionChangePoint:) userInfo:Nil repeats:YES];
         [timerJoyStick fire];
-        mtRotationJoyStick = rotationMatrixDefault();
         
 //        motionManager = [[CMMotionManager alloc] init];
 //        
