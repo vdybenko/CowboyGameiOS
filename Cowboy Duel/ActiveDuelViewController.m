@@ -109,6 +109,8 @@
     __weak IBOutlet JoyStickView *vJoySctick;
     
     UIViewController *presentVC;
+    
+    CGSize sizeMainScreen;
 }
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *floatView;
@@ -171,6 +173,9 @@ static CGFloat blinkBottomOriginY;
         
         isOpponentShotFrequency = YES;
         isTryAgainEnabled = YES;
+        
+        sizeMainScreen = [UIScreen mainScreen].bounds.size;
+
     }
     return self;
 }
@@ -419,7 +424,7 @@ static CGFloat blinkBottomOriginY;
         [self.view addSubview:blurredBack];
         
         finalStatusBack = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lg_title_view.png"]];
-        finalStatusBack.frame = CGRectMake(0.0, 0.0, 320, 72);
+        finalStatusBack.frame = CGRectMake((sizeMainScreen.height-320)/2, 0.0, 320, 72);
         finalStatusBack.backgroundColor = [UIColor clearColor];
         
         CGRect frame = finalStatusBack.frame;
@@ -1135,7 +1140,7 @@ static CGFloat blinkBottomOriginY;
         finalView.isTryAgainEnabled = isTryAgainEnabled;
         finalView.activeDuelViewController = self;
         
-        finalView.center = self.crossImageView.center;
+        finalView.center = CGPointMake(sizeMainScreen.height/2, sizeMainScreen.width/2);
         finalView.hidden = YES;
         
         blurredBack.hidden = NO;
@@ -1172,8 +1177,7 @@ static CGFloat blinkBottomOriginY;
     
     if (animated){
         //preparations:
-        CGRect frameBefore = CGRectMake(11, -190, finalView.frame.size.width, finalView.frame.size.height);
-        finalView.frame = frameBefore;
+        finalView.center = CGPointMake(sizeMainScreen.height/2, -finalView.frame.size.height/2);
         finalView.hidden = NO;
         btnTry.alpha = 0;
         btnBack.alpha = 0;
@@ -1202,14 +1206,14 @@ static CGFloat blinkBottomOriginY;
         }
         //
         [UIView animateWithDuration:0.5 animations:^{
-            CGPoint pointDown = self.view.center;
-            pointDown.y += 20;
+            CGPoint pointDown = CGPointMake(sizeMainScreen.height/2, sizeMainScreen.width/2);
+            pointDown.y += 5;
             finalView.center = pointDown;
             
         }completion:^(BOOL complete){
             [UIView animateWithDuration:0.2 animations:^{
-                CGPoint pointUp = finalView.center;
-                pointUp.y -= 40;
+                CGPoint pointUp = CGPointMake(sizeMainScreen.height/2, sizeMainScreen.width/2);
+                pointUp.y -= 50;
                 finalView.center = pointUp;
                 btnBack.alpha = 1;
                 btnTry.alpha = 1;
@@ -1218,8 +1222,8 @@ static CGFloat blinkBottomOriginY;
                 
             }completion:^(BOOL complete){
                 [UIView animateWithDuration:0.2 animations:^{
-                    CGPoint pointView = finalView.center;
-                    pointView.y += 20;
+                    CGPoint pointView = CGPointMake(sizeMainScreen.height/2, sizeMainScreen.width/2);
+                    pointView.y += 5;
                     finalView.center = pointView;
 
                     
