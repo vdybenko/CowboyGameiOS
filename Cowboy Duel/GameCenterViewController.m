@@ -708,9 +708,9 @@ static GameCenterViewController *gameCenterViewController;
                 duelStartViewController.tryAgain = YES;
                 duelStartViewController.oponentAvailable  = YES;
                 if ([parentVC.navigationController.viewControllers containsObject:duelStartViewController])
-                    [parentVC.navigationController popToViewController:duelStartViewController animated:YES];
+                    [parentVC.navigationController popToViewController:duelStartViewController animated:NO];
                 else{
-                    [parentVC.navigationController pushViewController:duelStartViewController animated:YES];
+                    [parentVC.navigationController pushViewController:duelStartViewController animated:NO];
                 }
                 [duelStartViewController setMessageTry];
             }
@@ -1035,9 +1035,9 @@ static GameCenterViewController *gameCenterViewController;
             duelStartViewController.oponentAvailable  = NO;
             duelStartViewController.delegate = self;
             if ([parentVC.navigationController.viewControllers containsObject:duelStartViewController])
-                [parentVC.navigationController popToViewController:duelStartViewController animated:YES];
+                [parentVC.navigationController popToViewController:duelStartViewController animated:NO];
             else
-                [parentVC.navigationController pushViewController:duelStartViewController animated:YES];
+                [parentVC.navigationController pushViewController:duelStartViewController animated:NO];
             [duelStartViewController startButtonClick];
         }
             break;
