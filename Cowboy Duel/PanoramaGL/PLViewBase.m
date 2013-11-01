@@ -1063,7 +1063,7 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
             
             [oponentView.view setHidden:NO];
             x += startX;
-            CGPoint newPosition = CGPointMake(x , self.bounds.size.height-(y * self.bounds.size.height + 180));
+            CGPoint newPosition = CGPointMake(x , self.bounds.size.height-(y * self.bounds.size.height + 160));
             dispatch_async(dispatch_get_main_queue(), ^{
                 if([oponentView respondsToSelector:@selector(view)])
                     [oponentView.view setCenter:newPosition];
