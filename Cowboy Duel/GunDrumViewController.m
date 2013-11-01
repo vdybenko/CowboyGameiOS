@@ -583,6 +583,12 @@ static const CGFloat timeSpinDump = 0.3f;
     }]; 
 }
 
+#pragma mark -
+
+-(void)hideAll;
+{
+    [gun setHidden:YES];
+}
 
 #pragma mark IBAction
 

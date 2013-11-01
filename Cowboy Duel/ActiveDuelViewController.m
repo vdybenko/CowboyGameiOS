@@ -1546,15 +1546,13 @@ float frequencyOpponentShoting()
                         [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
                      }];
     [self.navigationController popViewControllerAnimated:NO];
-    
-    //[self releaseComponents];
-
-    
 }
 
 -(IBAction)backButtonClick:(id)sender
 {
     self.view.hidden = YES;
+    
+    [gunDrumViewController hideAll];
     //Transitions only!
     NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
     if (([userDef integerForKey:@"FirstRunForPractice"] != 1)&&([userDef integerForKey:@"FirstRunForPractice"] != 2)) {
@@ -1568,10 +1566,15 @@ float frequencyOpponentShoting()
 
     UINavigationController *nav = ((TestAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController;
     
+    [UIView animateWithDuration:0.75
+                     animations:^{
+                         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                         [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
+                     }];
     if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
-        [nav popToViewController:[nav.viewControllers objectAtIndex:2] animated:YES];
+        [nav popToViewController:[nav.viewControllers objectAtIndex:2] animated:NO];
     }else{
-        [nav popToViewController:[nav.viewControllers objectAtIndex:1] animated:YES];
+        [nav popToViewController:[nav.viewControllers objectAtIndex:1] animated:NO];
     }
     
     GameCenterViewController *gameCenterViewController;

@@ -33,11 +33,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="68">
-                    <rect key="frame" x="0.0" y="0.0" width="480" height="909"/>
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bloorOnBlackView.png" id="94">
-                            <rect key="frame" x="0.0" y="0.0" width="640" height="909"/>
+                            <rect key="frame" x="0.0" y="0.0" width="640" height="320"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
                     </subviews>
@@ -75,7 +75,7 @@
                     </subviews>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="61">
-                    <rect key="frame" x="0.0" y="0.0" width="480" height="321"/>
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <state key="normal">

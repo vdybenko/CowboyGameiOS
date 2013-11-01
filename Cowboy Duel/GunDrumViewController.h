@@ -28,4 +28,6 @@ typedef void (^GunDrumViewControllerResult)();
 -(void)textPracticeClean;
 -(void)shootOnCivil;
 
+-(void)hideAll;
+
 @end
