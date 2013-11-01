@@ -1002,22 +1002,40 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 {
 }
 
+-(PLPosition)convertPitchAndYawToPosition:(float)pitch yaw:(float)yaw
+{
+	float r = 10;
+	double pr = (90.0f - pitch) * kPI / 180.0;
+	double yr = -yaw * kPI / 180.0;
+	
+	float x = (float)(r * sin(pr) * cos(yr));
+	float y = (float)(r * sin(pr) * sin(yr));
+	float z = (float)(r * cos(pr));
+	
+	return PLPositionMake(z, x, z);
+}
+
+
 -(void)didMotionChangePoint:(CGPoint)point;
 {
     float randomX = [self randFloatBetween:0.5 and:3.5];
     
     CGPoint pt = [vJoyStick getDirectPoint];
-    
-    ptDirectionJoyStick.x += pt.x;
-    ptDirectionJoyStick.y += pt.y;
+    int direction = 1;
+    //if (ptDirectionJoyStick.x > 57) ptDirectionJoyStick.x = 0;
+    //if (ptDirectionJoyStick.x < 0) ptDirectionJoyStick.x = 57;
+    ptDirectionJoyStick.x+= pt.x * 2;
+    ptDirectionJoyStick.y += pt.y * 2;
     
 //  max,min bounds for Joystick
-    if (ptDirectionJoyStick.y>15.25) {
-        ptDirectionJoyStick.y = 15.25;
-    }else if (ptDirectionJoyStick.y<-7.15)
+    if (ptDirectionJoyStick.y>30.25) {
+        ptDirectionJoyStick.y = 30.25;
+    }else if (ptDirectionJoyStick.y<-17.15)
     {
-        ptDirectionJoyStick.y = -7.15;
+        ptDirectionJoyStick.y = -17.15;
     }
+    
+   
     
     float yaw = 0;//horizontal
     float pitchWithK = ptDirectionJoyStick.y * 3;
@@ -1025,37 +1043,35 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
     float rollWithK = ptDirectionJoyStick.x/9;
     float roll = rollWithK * 180 / M_PI;//horizontal
     
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         [scene.currentCamera rotateWithPitch:-pitch yaw:-yaw roll:roll];
     });
     
-    CMRotationMatrix mtRotationJoyStick = rotationMatrixDefault();
-    transformFromCMRotationMatrix(cameraTransform, &mtRotationJoyStick);
+    //    CMRotationMatrix r = motion.attitude.rotationMatrix;
+
 
     for (OponentCoordinateView *oponentView in oponentCoordinateViews) {
-        mat4f_t projectionCameraTransform;
-        multiplyMatrixAndMatrix(projectionCameraTransform, projectionTransform, cameraTransform);
         
-        vec4f_t v;
-        multiplyMatrixAndVector(v, projectionCameraTransform, oponentCoordinates[0]);
         
-        float x = -rollWithK * 1.0;
+        float x =  -(scene.currentCamera.absoluteRotation.roll) * 6 ;
+         NSLog(@"x position =  %f roll = %f", x , scene.currentCamera.absoluteRotation.roll);
         
         float y = pitchWithK * 0.014;
-        
-        if(v[2] > 0){
-            if(!startX && (y <= 0.7)) startX = x + randomX;
+        //if(cos(-roll)>0){
+            if(!startX && (y <= 0.7)) startX = x;
             
             [oponentView.view setHidden:NO];
             x += startX;
-            CGPoint newPosition = CGPointMake(x * self.bounds.size.width, self.bounds.size.height-(y * self.bounds.size.height + 220));
+            CGPoint newPosition = CGPointMake(x , self.bounds.size.height-(y * self.bounds.size.height + 180));
             dispatch_async(dispatch_get_main_queue(), ^{
                 if([oponentView respondsToSelector:@selector(view)])
                     [oponentView.view setCenter:newPosition];
             });
-        }
-        else if([oponentView respondsToSelector:@selector(view)]) [oponentView.view setHidden:YES];
+        
+        //}    else if([oponentView respondsToSelector:@selector(view)]) [oponentView.view setHidden:YES];
     }
+
 }
 
 #pragma mark -

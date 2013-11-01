@@ -242,7 +242,7 @@ static CGFloat blinkBottomOriginY;
     barelFrame = barellObject.frame;
     barelFrame.origin.x = opponentShape.frame.origin.x;
     
-    barelFrame.origin.y = 120;
+    barelFrame.origin.y = 140;
     countOfBarrels = 5;
     countOfCactuses = 5;
     int randomBarrels = arc4random()%3 + 1;
@@ -265,7 +265,7 @@ static CGFloat blinkBottomOriginY;
                 if (countOfBarrels - i == 1 || randomBarrels == 1) {
                     
                     [barellObjectArray addObject:barellObject];
-                    barelFrame.origin.x = barelFrame.origin.x + 80;
+                    barelFrame.origin.x = barelFrame.origin.x + 180;
                     [self.floatView addSubview:barellObject];
                     
                     indexBarrel = 0;
@@ -279,7 +279,7 @@ static CGFloat blinkBottomOriginY;
 
                 if (countOfBarrels - i == 2 || randomBarrels == 2) {
                     [barellObjectArray addObject:barellObject];
-                    barelFrame.origin.x = barelFrame.origin.x + 80;
+                    barelFrame.origin.x = barelFrame.origin.x + 180;
                     [self.floatView addSubview:barellObject];
                     
                     indexBarrel = 0;
@@ -293,7 +293,7 @@ static CGFloat blinkBottomOriginY;
                 [barellObject showBarrels];
                 
                 [barellObjectArray addObject:barellObject];
-                barelFrame.origin.x = barelFrame.origin.x + 80;
+                barelFrame.origin.x = barelFrame.origin.x + 180;
                 [self.floatView addSubview:barellObject];
 
                 indexBarrel = 0;
@@ -309,7 +309,7 @@ static CGFloat blinkBottomOriginY;
         
         if (i > 0) {
             cactusObject = [cactusObjectArray objectAtIndex:i-1];
-            cactusFrame.origin.x = cactusObject.frame.origin.x + 80;
+            cactusFrame.origin.x = cactusObject.frame.origin.x + 180;
             cactusFrame.origin.y = 150;
             
         }else{
