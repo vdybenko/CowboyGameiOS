@@ -122,21 +122,21 @@
 {
     CGRect frame = [[view superview] convertRect:view.frame toView:mainView];
     CGRect winRect = [UIScreen mainScreen].bounds;
-    if (CGRectIntersectsRect(winRect, frame)) {
+    if ((frame.origin.x+frame.size.width)>0 && (frame.origin.x<winRect.size.height)) {
         [self setDirection:ArrowToOpponentDirectionCenter];
     }else{
         float xNew;
         float yNew  = frame.origin.y + (frame.size.height/2);
         if (yNew<0) {
             yNew = 0;
-        }else if ((yNew+self.frame.size.height)>winRect.size.height){
-            yNew = winRect.size.height - self.frame.size.height;
+        }else if ((yNew+self.frame.size.height)>winRect.size.width){
+            yNew = winRect.size.width - self.frame.size.height;
         }
         if (frame.origin.x < 0) {
             xNew = 0;
             [self setDirection:ArrowToOpponentDirectionLeft];
         }else{
-            xNew = winRect.size.width - self.frame.size.width;
+            xNew = winRect.size.height - self.frame.size.width;
             [self setDirection:ArrowToOpponentDirectionRight];
         }
         CGRect frame = self.frame;
