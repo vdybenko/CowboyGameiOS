@@ -417,9 +417,8 @@ static CGFloat blinkBottomOriginY;
     {
         blurredBack = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bloorOnBlackView.png"]];
         blurredBack.hidden = YES;
-        int iPhone5Delta = [UIScreen mainScreen].bounds.size.height - 480;
         CGRect deltaFrame = blurredBack.frame;
-        deltaFrame.size.height += iPhone5Delta;
+        deltaFrame.size.width = sizeMainScreen.height;
         blurredBack.frame = deltaFrame;
         [self.view addSubview:blurredBack];
         
