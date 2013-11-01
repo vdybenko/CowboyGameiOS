@@ -243,13 +243,20 @@ static const CGFloat timeSpinDump = 0.3f;
                              hudView.alpha -= 0.1;
                              
                              indexOfGargedBullet++;
+                             
+                             [self chargeBullets];
+                             
+                             if (indexOfGargedBullet>=6) {
+                                 [self hideGun];
+                             }
+                             
                              if ((countOfBullets - indexOfGargedBullet)==0) {
                                  isCharging = NO;
-                                 if (countOfBullets==7) {
+                                 if (countOfBullets==6) {
                                      [self hideGun];
                                  }
                              }else{
-                                 [self chargeBullets];
+                                 //[self chargeBullets];
                              }
                          }];
     }
@@ -593,7 +600,7 @@ static const CGFloat timeSpinDump = 0.3f;
 #pragma mark IBAction
 
 - (IBAction)DrumLoadClick:(id)sender {
-    if (countOfBullets<7) {
+    if (countOfBullets<1) {
         countOfBullets++;
         if (!isCharging) {
             [self chargeBullets];
