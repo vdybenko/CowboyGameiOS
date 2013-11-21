@@ -1018,10 +1018,8 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
 
 -(void)didMotionChangePoint:(CGPoint)point;
 {
-    float randomX = [self randFloatBetween:0.5 and:3.5];
     
     CGPoint pt = [vJoyStick getDirectPoint];
-    int direction = 1;
     //if (ptDirectionJoyStick.x > 57) ptDirectionJoyStick.x = 0;
     //if (ptDirectionJoyStick.x < 0) ptDirectionJoyStick.x = 57;
     ptDirectionJoyStick.x+= pt.x * 2;
@@ -1035,14 +1033,11 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
         ptDirectionJoyStick.y = -17.15;
     }
     
-   
-    
     float yaw = 0;//horizontal
-    float pitchWithK = ptDirectionJoyStick.y * 3;
+    float pitchWithK = ptDirectionJoyStick.y * 2.5;
     float pitch = pitchWithK;//vertical
-    float rollWithK = ptDirectionJoyStick.x/9;
+    float rollWithK = ptDirectionJoyStick.x/20;
     float roll = rollWithK * 180 / M_PI;//horizontal
-    
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [scene.currentCamera rotateWithPitch:-pitch yaw:-yaw roll:roll];
@@ -1050,12 +1045,9 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
     
     //    CMRotationMatrix r = motion.attitude.rotationMatrix;
 
-
     for (OponentCoordinateView *oponentView in oponentCoordinateViews) {
         
-        
         float x =  -(scene.currentCamera.absoluteRotation.roll) * 6 ;
-         NSLog(@"x position =  %f roll = %f", x , scene.currentCamera.absoluteRotation.roll);
         
         float y = pitchWithK * 0.014;
         //if(cos(-roll)>0){

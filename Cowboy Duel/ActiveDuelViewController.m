@@ -63,7 +63,7 @@
     
     BOOL tryAgain;
     BOOL isTryAgainEnabled;
-
+    
     NSMutableArray *barellObjectArray;
     NSMutableArray *cactusObjectArray;
     
@@ -344,6 +344,7 @@ static CGFloat blinkBottomOriginY;
     gunDrumViewController = [[GunDrumViewController alloc] initWithNibName:Nil bundle:Nil];
 
     [self.view addSubview:gunDrumViewController.view];
+
     [self.view exchangeSubviewAtIndex:([self.view.subviews count] - 1) withSubviewAtIndex:([self.view.subviews count] - 3)];
     
     index = [self.view.subviews indexOfObject:self.gunButton];
@@ -385,10 +386,9 @@ static CGFloat blinkBottomOriginY;
         CGRect gunframe = gunDrumViewController.view.frame;
         gunframe.origin.y = 0;
         gunDrumViewController.view.frame = gunframe;
-        CGRect frame = plView.frame;
+        [gunDrumViewController refreshController];
+        
         plView.transform = CGAffineTransformMakeRotation(M_PI_2);
-        
-        
     }
     
 }
@@ -825,25 +825,6 @@ static CGFloat blinkBottomOriginY;
         }
         
         [self shotToOponentWithDamage:opponentDamage];
-//=======
-//        CGPoint targetPoint;
-//        targetPoint.x = opponentShape.center.x - (self.floatView.bounds.size.width / 2 - self.floatView.center.x);
-//        targetPoint.y = opponentShape.center.y - (self.floatView.bounds.size.height / 2 - self.floatView.center.y);
-//        
-//        CGPoint centerOfScreanPoint;
-//        centerOfScreanPoint.x = self.crossImageView.bounds.origin.x + self.crossImageView.center.x;
-//        centerOfScreanPoint.y = self.crossImageView.bounds.origin.y + self.crossImageView.center.y;
-//        
-//        CGRect opponentBodyFrame = [[opponentShape.visualViewCharacter superview] convertRect:opponentShape.visualViewCharacter.frame toView:self.view];
-//        
-//        if (CGRectContainsPoint(opponentBodyFrame, shotPoint)) {
-//            [self startRandomBloodAnimation];
-//            [opponentShape hitTheOponentWithPoint:shotPoint mainView:self.view];
-//        }
-//        [self shotToOponent];
-//
-//        
-//>>>>>>> changeGameImage
     }
 }
 
@@ -891,7 +872,6 @@ static CGFloat blinkBottomOriginY;
     
     opponentCenter.x = randPosition;
     opponentShape.center = opponentCenter;
-//    opponentShape.center = self.view.center;
 
 }
 
@@ -939,7 +919,7 @@ static CGFloat blinkBottomOriginY;
             [self cleanPracticeHints];
         }
         GameCenterViewController *gameCenterViewController;
-        if (self.delegate) gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+        if (self.delegate) gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:[StartViewController sharedInstance]];
         
         BOOL teaching = YES;
         if (!self.delegate)
@@ -979,7 +959,7 @@ static CGFloat blinkBottomOriginY;
         }
         
         GameCenterViewController *gameCenterViewController;
-        if (self.delegate) gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+        if (self.delegate) gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:[StartViewController sharedInstance]];
         BOOL teaching = YES;
         if (!self.delegate)
             gameCenterViewController = nil;
@@ -1016,7 +996,7 @@ static CGFloat blinkBottomOriginY;
     }else
     {
         GameCenterViewController *gameCenterViewController;
-        if (self.delegate) gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+        if (self.delegate) gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:[StartViewController sharedInstance]];
         BOOL teaching = YES;
         if (!self.delegate) gameCenterViewController = nil;
         else teaching = NO;
@@ -1533,7 +1513,7 @@ static CGFloat blinkBottomOriginY;
 
 float frequencyOpponentShoting()
 {
-    float f =(20 + arc4random() % 20) * 0.1f;
+    float f =(5 + arc4random() % 30) * 0.1f;
     return f;
 }
 
@@ -1566,20 +1546,22 @@ float frequencyOpponentShoting()
 
     UINavigationController *nav = ((TestAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController;
     
-    [UIView animateWithDuration:0.75
-                     animations:^{
-                         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-                         [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
-                     }];
+//    [UIView animateWithDuration:0.75
+//                     animations:^{
+//                         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+//                         [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
+//                     }];
     if ([LoginAnimatedViewController sharedInstance].isDemoPractice){
         [nav popToViewController:[nav.viewControllers objectAtIndex:2] animated:NO];
     }else{
         [nav popToViewController:[nav.viewControllers objectAtIndex:1] animated:NO];
     }
+
+//    [self.navigationController popViewControllerAnimated:NO];
     
     GameCenterViewController *gameCenterViewController;
     if (self.delegate){
-        gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+        gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:[StartViewController sharedInstance]];
         [gameCenterViewController matchCanseled];
     }
     
@@ -1604,7 +1586,7 @@ float frequencyOpponentShoting()
     }
     tryAgain = YES;
     GameCenterViewController *gameCenterViewController;
-    if (self.delegate) gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:self];
+    if (self.delegate) gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:[StartViewController sharedInstance]];
     
     BOOL teaching = YES;
     if (!self.delegate)
@@ -1834,6 +1816,7 @@ float frequencyOpponentShoting()
     
     self.view = nil;
     plView = nil;
+    
 }
 
 @end

@@ -50,7 +50,7 @@
 static CGPoint pntDumpOpen;
 static const CGPoint pntDumpClose = {187,128};//center of image
 static const CGPoint pntGunCloseSimple = {46,124};
-static const CGPoint pntGunCloseIphone5 = {-26,312};
+static const CGPoint pntGunCloseIphone5 = {90,124};
 static CGPoint pntGunClose;
 static const CGPoint pntViewShow = {0,0};
 static const CGPoint pntViewHide = {0,400};
@@ -197,6 +197,16 @@ static const CGFloat timeSpinDump = 0.3f;
     
 }
 
+
+-(void)refreshController;
+{
+    CGRect gunframe = self.view.frame;
+    CGSize size = [UIScreen mainScreen].bounds.size;
+    gunframe.size = CGSizeMake(size.height, size.width);
+    self.view.frame = gunframe;
+    [self.view reloadInputViews];
+}
+
 #pragma mark
 -(void)openGun;
 {
@@ -224,6 +234,7 @@ static const CGFloat timeSpinDump = 0.3f;
     if (indexOfGargedBullet<=6) {
         isCharging = YES;
         vBackLightDrum.hidden = YES;
+        __block id selfBlock = self;
         [UIView animateWithDuration:timeSpinDump
                               delay:0.0
                             options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction
@@ -244,19 +255,10 @@ static const CGFloat timeSpinDump = 0.3f;
                              
                              indexOfGargedBullet++;
                              
-                             [self chargeBullets];
+                             [selfBlock chargeBullets];
                              
-                             if (indexOfGargedBullet>=6) {
-                                 [self hideGun];
-                             }
-                             
-                             if ((countOfBullets - indexOfGargedBullet)==0) {
-                                 isCharging = NO;
-                                 if (countOfBullets==6) {
-                                     [self hideGun];
-                                 }
-                             }else{
-                                 //[self chargeBullets];
+                             if (indexOfGargedBullet==6) {
+                                 [selfBlock hideGun];
                              }
                          }];
     }

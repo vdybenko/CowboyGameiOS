@@ -16,8 +16,8 @@
 #define kReceiveImagefromFBNotification @"ImagefromFB"
 #define kCheckfFBLoginSession @"SessionAction"
 #define kFBFeed @"feedAction"
-#define URL_FB_PICTURE @"http://bidoncd.s3.amazonaws.com/feedAppFB.png"
-#define URL_APP_ESTIMATE @"http://cowboyduel.mobi/"
+#define URL_FB_PICTURE @"http://bidoncd.s3.amazonaws.com/app_icon_share.png"
+#define URL_APP_SHARE @"http://cowboyduel.mobi/"
 
 @protocol ProtocolForDelegate <NSObject>
 

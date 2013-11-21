@@ -17,6 +17,8 @@ typedef void (^GunDrumViewControllerResult)();
 @property (weak, nonatomic) IBOutlet UIImageView *ivOponnentAvatar;
 @property (copy) GunDrumViewControllerResult didFinishBlock;
 
+-(void)refreshController;
+
 -(void)openGun;
 -(void)showGun;
 -(void)hideGun;

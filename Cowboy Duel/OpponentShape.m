@@ -13,6 +13,12 @@
 #import "UILabel+FlyingPoint.h"
 #import "UIView+ColorOfPoint.h"
 
+#define dRandPositionRedound() ((rand() % 40) + 60)
+#define dDuractionRedound(a) ((a * 0.5)/100)
+
+#define dRandPositionOponentInBackground 40
+#define dDuractionOponentInBackground 0.15
+
 @interface OpponentShape ()
 {
     IBOutlet UIView *vContainer;
@@ -122,9 +128,9 @@ static CGFloat oponentLiveImageViewStartWidth;
     isMove = YES;
      [self walkOpponent];
     int randomDirection = rand() % 3 - 1;
-    [UIView animateWithDuration:0.2 animations:^{
+    [UIView animateWithDuration:dDuractionOponentInBackground animations:^{
         CGPoint center = self.center;
-        center.x += randomDirection * 40;
+        center.x += randomDirection * dRandPositionOponentInBackground;
         if((center.x>0) && (center.x<[self superview].frame.size.width)){
             self.center = center;
         }else{
@@ -132,9 +138,9 @@ static CGFloat oponentLiveImageViewStartWidth;
             return;
         }
     }completion:^(BOOL complete){
-        [UIView animateWithDuration:0.2 animations:^{
+        [UIView animateWithDuration:dDuractionOponentInBackground animations:^{
             CGPoint center = self.center;
-            center.x += randomDirection * 40;
+            center.x += randomDirection * dRandPositionOponentInBackground;
             if((center.x>0) && (center.x<[self superview].frame.size.width)){
                 self.center = center;
                 
@@ -144,9 +150,9 @@ static CGFloat oponentLiveImageViewStartWidth;
             }
 
         }completion:^(BOOL complete){
-            [UIView animateWithDuration:0.2 animations:^{
+            [UIView animateWithDuration:dDuractionOponentInBackground animations:^{
                 CGPoint center = self.center;
-                center.x += randomDirection * 40;
+                center.x += randomDirection * dRandPositionOponentInBackground;
                 if((center.x>0) && (center.x<[self superview].frame.size.width)){
                     self.center = center;
                 }else{
@@ -164,7 +170,6 @@ static CGFloat oponentLiveImageViewStartWidth;
     }else{
         [self moveAnimation];
     }
-    
 }
 
 -(void) stopMoveAnimation;
@@ -195,13 +200,14 @@ static CGFloat oponentLiveImageViewStartWidth;
         [self setHidden:NO];
         return;
     }
-    else
-        randPosition = (rand() % 50) + 50;
+    else{
+        randPosition = dRandPositionRedound();
+    }
 
     body.x += direction*randPosition;
 
     
-    float duraction = (randPosition * 0.5)/100;
+    float duraction = dDuractionRedound(randPosition);
     [UIView animateWithDuration:duraction animations:^{
         if((body.x>0) && (body.x<[self superview].frame.size.width)) {
             self.center = body;

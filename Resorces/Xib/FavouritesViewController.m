@@ -233,7 +233,7 @@
     duelStartViewController = [[DuelStartViewController alloc]initWithAccount:playerAccount andOpAccount:oponentAccount opopnentAvailable:NO andServerType:NO andTryAgain:NO];
     //duelStartViewController.serverName = playerAccount.accountID;
     
-    GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:nil];
+    GameCenterViewController *gameCenterViewController = [GameCenterViewController sharedInstance:[AccountDataSource sharedInstance] andParentVC:[StartViewController sharedInstance]];
     duelStartViewController.delegate = gameCenterViewController;
     gameCenterViewController.duelStartViewController = duelStartViewController;
     

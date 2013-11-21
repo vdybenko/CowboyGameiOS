@@ -204,7 +204,7 @@ static OGHelper *sharedHelper = nil;
     
     NSMutableDictionary *params2 = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                    NSLocalizedString(@"FEEDBACK_FB", @""), @"description",
-                                   URL_APP_ESTIMATE, @"link",
+                                   URL_APP_SHARE, @"link",
                                    nil];
     
     // Invoke the dialog

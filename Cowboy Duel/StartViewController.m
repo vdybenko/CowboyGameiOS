@@ -33,6 +33,7 @@
 #import "BuilderViewController.h"
 #import "LoginAnimatedViewController.h"
 #import "UIViewController+popTO.h"
+#import "UIImage+Save.h"
 
 //#import "Crittercism.h"
 
@@ -73,6 +74,10 @@
     
     NSMutableDictionary *dicForRequests;
     BOOL modifierName;
+    
+    NSMutableDictionary *imageDownloadsInProgress;
+    IconDownloader *iconDownloader;
+    
     //buttons
     __weak IBOutlet UIButton *mapButton;
     __weak IBOutlet UIButton *profileButton;
@@ -928,28 +933,45 @@ static StartViewController *sharedHelper = nil;
         ACAccountStore *accountStore = [[ACAccountStore alloc] init];
         ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
         if ([accountStore accountsWithAccountType:accountType]){
-            UIImage *appIcon = [UIImage imageNamed: [[[[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIcons"] objectForKey:@"CFBundlePrimaryIcon"] objectForKey:@"CFBundleIconFiles"] objectAtIndex:0]];
-            BOOL displayedNativeDialog =
-            [FBNativeDialogs
-             presentShareDialogModallyFrom:self
-             initialText:NSLocalizedString(@"FEEDBACK_FB", @"")
-             image:appIcon
-             url:[NSURL URLWithString:URL_APP_ESTIMATE]
-             handler:^(FBNativeDialogResult result, NSError *error) {
-                 if (error) {
-                     /* handle failure */
-                 } else {
-                     if (result == FBNativeDialogResultSucceeded) {
-                         /* handle success */
+            
+            NSString *path=[NSString stringWithFormat:@"%@/icon_image_share.png",[[OGHelper sharedInstance] getSavePathForList]];
+            if([[NSFileManager defaultManager] fileExistsAtPath:path]){
+                
+                UIImage *imgApp=[UIImage loadImageFullPath:path];
+                BOOL displayedNativeDialog =
+                [FBNativeDialogs
+                 presentShareDialogModallyFrom:self
+                 initialText:NSLocalizedString(@"FEEDBACK_FB", @"")
+                 image:imgApp
+                 url:[NSURL URLWithString:URL_APP_SHARE]
+                 handler:^(FBNativeDialogResult result, NSError *error) {
+                     if (error) {
+                         /* handle failure */
                      } else {
-                         /* handle user cancel */
+                         if (result == FBNativeDialogResultSucceeded) {
+                             /* handle success */
+                         } else {
+                             /* handle user cancel */
+                         }
                      }
-                 }
-             }];
-            if (!displayedNativeDialog) {
-                [[OGHelper sharedInstance] apiDialogFeedUser];
-//                /* handle fallback to native dialog  */
+                 }];
+                
+                if (!displayedNativeDialog) {
+                    [[OGHelper sharedInstance] apiDialogFeedUser];
+                    //                /* handle fallback to native dialog  */
+                }
+
+            }else {
+                iconDownloader = [[IconDownloader alloc] init];
+                
+                iconDownloader.namePlayer=@"image_share";
+                iconDownloader.indexPathInTableView = 0;
+                iconDownloader.delegate = self;
+                
+                [iconDownloader setAvatarURL:URL_FB_PICTURE];
+                [iconDownloader startDownloadSimpleIcon];
             }
+
         }else
         {
             if ([[OGHelper sharedInstance]isAuthorized]) {
@@ -1039,6 +1061,40 @@ static StartViewController *sharedHelper = nil;
   [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                       object:self
                                                     userInfo:[NSDictionary dictionaryWithObject:@"/StartVC_share_Mail" forKey:@"page"]];
+}
+
+#pragma mark IconDownloaderDelegate
+- (void)appImageDidLoad:(NSIndexPath *)indexPath
+{
+    if (iconDownloader != nil)
+    {
+        BOOL displayedNativeDialog =
+        [FBNativeDialogs
+         presentShareDialogModallyFrom:self
+         initialText:NSLocalizedString(@"FEEDBACK_FB", @"")
+         image:iconDownloader.imageDownloaded
+         url:[NSURL URLWithString:URL_APP_SHARE]
+         handler:^(FBNativeDialogResult result, NSError *error) {
+             if (error) {
+                 /* handle failure */
+             } else {
+                 if (result == FBNativeDialogResultSucceeded) {
+                     /* handle success */
+                 } else {
+                     /* handle user cancel */
+                 }
+             }
+             NSString *path=[NSString stringWithFormat:@"%@/icon_image_share.png",[[OGHelper sharedInstance] getSavePathForList]];
+             [UIImage deleteImageWithPath:path];
+         }];
+        
+        if (!displayedNativeDialog) {
+            [[OGHelper sharedInstance] apiDialogFeedUser];
+            //                /* handle fallback to native dialog  */
+        }
+        [imageDownloadsInProgress removeObjectForKey:indexPath];
+        iconDownloader = nil;
+    }
 }
 
 #pragma mark - push notification

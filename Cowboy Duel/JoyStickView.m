@@ -99,7 +99,7 @@
     
     double len = sqrt(dir.x * dir.x + dir.y * dir.y);
 
-    if(len < 3.0 && len > -3.0)
+    if(len < 4.0 && len > -4.0)
     {
         // center pos
         dtarget.x = 0.0;
@@ -135,7 +135,6 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     stickView.image = imgStickHold;
-    [self touchEvent:touches];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event

@@ -38,6 +38,8 @@
 @class ListOfItemsViewController;
 @class GameCenterViewController;
 
+@protocol IconDownloaderDelegate;
+
 typedef enum{
     PUSH_NOTIFICATION_POKE,
     PUSH_NOTIFICATION_FAV_ONLINE,
@@ -45,7 +47,7 @@ typedef enum{
     PUSH_NOTIFICATION_UPDATE_PRODUCTS
 } TypeOfPushNotification;
 
-@interface StartViewController : UIViewController <MFMailComposeViewControllerDelegate,GCAuthenticateDelegate, UIAlertViewDelegate, FBRequestDelegate,DuelProductDownloaderControllerDelegate>
+@interface StartViewController : UIViewController <MFMailComposeViewControllerDelegate,GCAuthenticateDelegate, UIAlertViewDelegate, FBRequestDelegate,DuelProductDownloaderControllerDelegate, IconDownloaderDelegate>
 
 @property (nonatomic) BOOL showFeedAtFirst;
 @property (strong, nonatomic) NSString *oldAccounId;
