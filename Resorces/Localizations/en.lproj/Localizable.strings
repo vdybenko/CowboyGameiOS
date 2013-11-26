@@ -365,7 +365,7 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "IT_HELP" = "IT HELP YOU WIN";
 
 "ATTEN_TEXT" = "Your opponent is stronger than you. You should shoot %d a row.";
-"Close" = "CLOSE";
+"Close" = "MENU";
 "SETTINGS" = "SETTINGS";
 
 //first screen:
