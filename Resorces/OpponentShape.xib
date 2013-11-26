@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1280" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OpponentShape">
@@ -26,8 +26,8 @@
                     <autoresizingMask key="autoresizingMask"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="98" userLabel="BodyForScarecrow">
-                    <rect key="frame" x="70" y="11" width="84" height="167"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="scarecrow.png" id="98" userLabel="BodyForScarecrow">
+                    <rect key="frame" x="63" y="11" width="105" height="167"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="91">
@@ -62,5 +62,6 @@
     </objects>
     <resources>
         <image name="live_red.png" width="125" height="18"/>
+        <image name="scarecrow.png" width="332" height="395"/>
     </resources>
 </document>

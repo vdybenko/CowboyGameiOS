@@ -45,9 +45,9 @@
 {
     CGRect cropRect;
     if([Utils isiPhoneRetina]){
-        cropRect = CGRectMake(180, 0, 260, 240);
+        cropRect = CGRectMake(165, 0, 270, 320);
     }else{
-        cropRect = CGRectMake(85, 0, 140, 130);
+        cropRect = CGRectMake(75, 5, 150, 175);
     }
     
     CGImageRef subImageRef = CGImageCreateWithImageInRect([[UIImage imageNamed:@"scarecrow.png"] CGImage], cropRect);
