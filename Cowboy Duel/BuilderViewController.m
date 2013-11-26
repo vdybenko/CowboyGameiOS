@@ -30,7 +30,7 @@
     __weak IBOutlet UIView *vArrow;
     __weak IBOutlet GMGridView *grid;
     __weak IBOutlet UIButton *btnBuyMain;
-    __weak IBOutlet UIButton *btnMyProfile;
+    __weak IBOutlet UIButton *btnProfile;
     __weak IBOutlet UILabel *lbBuyBtn;
     __weak IBOutlet UIScrollView *buttonsScroll;
     __weak IBOutlet UIView *buttonsView;
@@ -92,6 +92,7 @@
     
     UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     [self.closeBtn setTitleByLabel:@"Close" withColor:buttonsTitleColor fontSize:24];
+    [btnProfile setTitleByLabel:@"SETTINGS" withColor:buttonsTitleColor fontSize:24];
 
     buttonsScroll.contentSize = CGSizeMake(self.suitsBtn.frame.size.width,  (self.suitsBtn.frame.size.height + 4) * 9);
     
@@ -178,7 +179,6 @@
     moneyView = nil;
     animLostMoneyView = nil;
     animLostMomeyLB = nil;
-    btnMyProfile = nil;
     [super viewDidUnload];
 }
 -(void)releaseComponents

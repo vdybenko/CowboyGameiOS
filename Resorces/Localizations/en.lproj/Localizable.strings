@@ -365,6 +365,8 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "IT_HELP" = "IT HELP YOU WIN";
 
 "ATTEN_TEXT" = "Your opponent is stronger than you. You should shoot %d a row.";
+"Close" = "CLOSE";
+"SETTINGS" = "SETTINGS";
 
 //first screen:
 "INTRO1" = "Ye know who bounty hunters are, boy?";
