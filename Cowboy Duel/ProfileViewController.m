@@ -37,7 +37,6 @@ static const CGFloat timeToStandartTitles = 1.8;
     //Labels
     __weak IBOutlet UILabel *lbProfileMain;
     __weak IBOutlet UIView *mainProfileView;
-    __weak IBOutlet UITextField *tfFBName;
     __weak IBOutlet UILabel *lbUserTitle;
     
     __weak IBOutlet UIView *ivPointsLine;
@@ -104,6 +103,7 @@ static const CGFloat timeToStandartTitles = 1.8;
 
 @implementation ProfileViewController
 @synthesize needAnimation, ivBlack,profilePictureViewDefault, addFaforitesLb;
+@synthesize tfFBName;
 
 #pragma mark
 

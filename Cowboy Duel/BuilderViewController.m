@@ -38,7 +38,7 @@
     __weak IBOutlet UIView *animLostMoneyView;
     __weak IBOutlet UILabel *animLostMomeyLB;
    
-    BOOL isAnimate;
+    BOOL isWithSettings;
     
     NSArray *arrObjects;
     
@@ -80,6 +80,17 @@
         
         duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
         duelProductDownloaderController.delegate = self;
+        
+        isWithSettings = NO;
+    }
+    return self;
+}
+
+-(id)initWithSettings;
+{
+    self = [self initWithNibName:nil bundle:Nil];
+    if (self) {
+        isWithSettings = YES;
     }
     return self;
 }
@@ -118,6 +129,11 @@
         CGRect frame = grid.frame;
         frame.size.height +=75;
         grid.frame = frame;
+    }
+    
+    if (isWithSettings) {
+        [self btnMyProfileClick:btnProfile];
+        [profileViewController.tfFBName becomeFirstResponder];
     }
     
     [self refreshController];

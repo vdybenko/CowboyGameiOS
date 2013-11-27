@@ -733,9 +733,9 @@ static StartViewController *sharedHelper = nil;
     frame.origin.x = cloud2X;
     cloudSecondView.frame = frame;
     
-    profileViewController = [[ProfileViewController alloc] initFirstStartWithAccount:playerAccount];
-    [self.navigationController pushViewController:profileViewController animated:NO];
-    profileViewController = nil;
+    BuilderViewController *builder = [[BuilderViewController alloc] initWithSettings];
+    [self.navigationController pushViewController:builder animated:NO];
+    builder = nil;
 }
 
 - (void) showFeedbackView {

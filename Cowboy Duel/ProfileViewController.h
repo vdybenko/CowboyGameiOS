@@ -34,6 +34,7 @@ typedef enum {
 @property (nonatomic) BOOL needAnimation;
 @property (weak, nonatomic) IBOutlet UIView *ivBlack;
 @property (weak, nonatomic) IBOutlet UILabel *addFaforitesLb;
+@property (weak, nonatomic) IBOutlet UITextField *tfFBName;
 
 @property IBOutlet UIImageView *profilePictureViewDefault;
 

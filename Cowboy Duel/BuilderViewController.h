@@ -25,4 +25,6 @@
 
 @property (strong, nonatomic) VisualViewDataSource *visualViewDataSource;
 @property (nonatomic) NSInteger curentObject;
+
+-(id)initWithSettings;
 @end
