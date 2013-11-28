@@ -14,6 +14,7 @@
                 <outlet property="attacLabel" destination="180" id="404"/>
                 <outlet property="backlightAtac" destination="434" id="436"/>
                 <outlet property="backlightDefens" destination="433" id="435"/>
+                <outlet property="btnBackToCategory" destination="400" id="9Oe-qj-ZeQ"/>
                 <outlet property="btnBuyMain" destination="218" id="449"/>
                 <outlet property="btnProfile" destination="p0G-Fl-oAF" id="j52-VM-LI8"/>
                 <outlet property="buttonsScroll" destination="455" id="456"/>

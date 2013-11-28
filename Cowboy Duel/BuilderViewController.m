@@ -37,6 +37,7 @@
     __weak IBOutlet UIView *moneyView;
     __weak IBOutlet UIView *animLostMoneyView;
     __weak IBOutlet UILabel *animLostMomeyLB;
+    __weak IBOutlet UIButton *btnBackToCategory;
    
     BOOL isWithSettings;
     
@@ -124,6 +125,8 @@
     grid.dataSource = self;
     grid.actionDelegate = self;
     grid.delegate = self;
+    
+    [btnBackToCategory setHidden:YES];
     
     if (IS_IPHONE_5) {
         CGRect frame = grid.frame;
@@ -400,6 +403,8 @@
 
 -(void)sideOpenAnimation{
     if (!isOpenSide && self.sideView.frame.origin.x == 321) {
+        UIButton __block *btnBackToCategoryBlock = btnBackToCategory;
+
         [UIView animateWithDuration:0.4 animations:^{
             CGRect frame = self.sideView.frame;
             frame.origin.x += 100;
@@ -407,6 +412,7 @@
             
         }completion:^(BOOL finished) {
             isOpenSide = YES;
+            [btnBackToCategoryBlock setHidden:NO];
             [UIView animateWithDuration:0.4 animations:^{
                 CGRect frame = self.sideView.frame;
                 frame.origin.x -= 100;
@@ -425,7 +431,8 @@
         if (isOpenSide && self.sideView.frame.origin.x == 221) {
         self.backlightDefens.hidden = YES;
         self.backlightAtac.hidden = YES;
-
+        UIButton __block *btnBackToCategoryBlock = btnBackToCategory;
+            
         [UIView animateWithDuration:0.4 animations:^{
             CGRect frame = self.sideView.frame;
             frame.origin.x += 100;
@@ -433,13 +440,14 @@
             
         }completion:^(BOOL finished) {
             isOpenSide = NO;
+            [btnBackToCategoryBlock setHidden:YES];
             [UIView animateWithDuration:0.4 animations:^{
                 CGRect frame = self.sideView.frame;
                 frame.origin.x -= 100;
                 buttonsView.frame = frame;
                 
             }completion:^(BOOL finished) {
-
+                
             }];
 
         }];
@@ -693,7 +701,6 @@
                          [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
                      }];
     [self.navigationController popViewControllerAnimated:NO];
-//    [self releaseComponents];
 }
 
 - (IBAction)touchCloseSideView:(id)sender {
