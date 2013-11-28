@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ActiveDuelViewController">
@@ -12,6 +12,7 @@
                 <outlet property="bloodCImageView" destination="26" id="27"/>
                 <outlet property="bloodImageView" destination="24" id="25"/>
                 <outlet property="btnBack" destination="119" id="123"/>
+                <outlet property="btnShot" destination="3jb-ju-CJp" id="y8M-uW-ntt"/>
                 <outlet property="btnSkip" destination="110" id="116"/>
                 <outlet property="btnTry" destination="118" id="122"/>
                 <outlet property="crossImageView" destination="17" id="66"/>
@@ -31,6 +32,7 @@
                 <outlet property="userLiveImageView" destination="73" id="76"/>
                 <outlet property="userStatsLabel" destination="54" id="57"/>
                 <outlet property="vJoySctick" destination="KFZ-Vd-t6u" id="I5E-jP-GaM"/>
+                <outlet property="vShotStick" destination="Hve-do-flB" id="2Xj-I5-YOB"/>
                 <outlet property="view" destination="1" id="3"/>
                 <outlet property="womanShape" destination="77" id="89"/>
             </connections>
@@ -186,6 +188,30 @@
                         <outlet property="stickView" destination="eWX-RY-9gQ" id="vle-Xo-BKd"/>
                         <outlet property="stickViewBase" destination="PLF-zV-IIe" id="RRr-AH-iBx"/>
                     </connections>
+                </view>
+                <view contentMode="scaleToFill" id="Hve-do-flB" userLabel="Shot View">
+                    <rect key="frame" x="342" y="159" width="128" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="stick_base.png" id="7Oy-gH-oKg">
+                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3jb-ju-CJp" userLabel="btnShot">
+                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="39"/>
+                            <state key="normal" title="Shot" backgroundImage="stick_normal.png">
+                                <color key="titleColor" red="1" green="0.91764705879999997" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <state key="highlighted">
+                                <color key="titleColor" red="0.8862745098" green="0.20784313730000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="shotButtonClick:" destination="-1" eventType="touchUpInside" id="SGn-HH-2Of"/>
+                            </connections>
+                        </button>
+                    </subviews>
                 </view>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="110" userLabel="btnSkip">
                     <rect key="frame" x="405" y="285" width="75" height="33"/>

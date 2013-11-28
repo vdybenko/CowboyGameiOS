@@ -107,6 +107,8 @@
     __weak IBOutlet UIImageView *blinkTop;
     __weak IBOutlet ArrowToOpponent *arrowToOpponent;
     __weak IBOutlet JoyStickView *vJoySctick;
+    __weak IBOutlet UIView *vShotStick;
+    __weak IBOutlet UIButton *btnShot;
     
     UIViewController *presentVC;
     
@@ -355,6 +357,8 @@ static CGFloat blinkBottomOriginY;
     [self.view bringSubviewToFront:glassImageViewAllBackground];
     
     [self.view bringSubviewToFront:vJoySctick];
+    [self.view bringSubviewToFront:vShotStick];
+
     [plView setVJoyStick:vJoySctick];
 
     blinkTopOriginY = blinkTop.frame.origin.y;
