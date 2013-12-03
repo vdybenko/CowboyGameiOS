@@ -516,13 +516,6 @@ static StartViewController *sharedHelper = nil;
             
         }
     }
-        
-
-    
-    if (firstRun) {
-        firstRun = NO;
-        return;
-    }
     
     internetReachable = [Reachability reachabilityForInternetConnection];
     [internetReachable startNotifier];
@@ -644,6 +637,10 @@ static StartViewController *sharedHelper = nil;
     inBackground = YES;
     [gameCenterViewController lostConnection];
     [self.navigationController popToViewController:self animated:NO];
+    
+    if (firstRun) {
+        firstRun = NO;
+    }
     
     cloudX=460;
     cloud2X=-20;

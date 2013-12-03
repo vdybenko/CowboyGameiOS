@@ -19,6 +19,7 @@
 #import "TopPlayersViewController.h"
 #import "StartViewController.h"
 #import "UIViewController+popTO.h"
+#import "InfoViewController.h"
 
 @interface ListOfItemsViewController ()
 {
@@ -35,6 +36,8 @@
     __weak IBOutlet UILabel *lbLeaderboardBtn;
     
     __weak IBOutlet UILabel *saloonTitle;
+    
+    InfoViewController *infoViewController;
 }
 
 -(NSString *) convertToJSParametr:(NSString *) pValue;
@@ -110,6 +113,11 @@
     lbFavoritesBtn.text = NSLocalizedString(@"FavouritesTitle", nil);
     lbFavoritesBtn.textColor = btnColor;
     lbFavoritesBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
+    
+    if ([StartViewController sharedInstance].firstRun) {
+        infoViewController = [[InfoViewController alloc] initWithText:NSLocalizedString(@"PRACTISE FIRST", @"")];
+        [self.view addSubview:infoViewController.view];
+    }
 }
 
 - (void)viewDidUnload
@@ -167,6 +175,7 @@
     lbInviteBtn = nil;
     saloonTitle = nil;
     updateTimer = nil;
+    infoViewController = Nil;
 
 }
 #pragma mark - UITableViewDelegate

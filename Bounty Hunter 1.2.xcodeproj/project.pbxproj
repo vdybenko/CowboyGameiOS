@@ -335,6 +335,8 @@
 		766B7D3613FE790600377AA3 /* Fire.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 766B7D3513FE790600377AA3 /* Fire.mp3 */; };
 		766C608316F0B71800508128 /* blinkEye2.png in Resources */ = {isa = PBXBuildFile; fileRef = 766C608116F0B71800508128 /* blinkEye2.png */; };
 		766C608416F0B71800508128 /* blinkEye.png in Resources */ = {isa = PBXBuildFile; fileRef = 766C608216F0B71800508128 /* blinkEye.png */; };
+		76747A58184CE21200BA4F5E /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76747A56184CE21200BA4F5E /* InfoViewController.m */; };
+		76747A59184CE21200BA4F5E /* InfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76747A57184CE21200BA4F5E /* InfoViewController.xib */; };
 		7674F72C16EF5D4A00E43061 /* scream1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7674F72B16EF5D4A00E43061 /* scream1.mp3 */; };
 		7675CA8615A2E10C005A3BD3 /* DuelRewardLogicController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7675CA8515A2E10B005A3BD3 /* DuelRewardLogicController.m */; };
 		7679307115BE8B61007F461F /* CDPlayerMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 7679307015BE8B60007F461F /* CDPlayerMain.m */; };
@@ -1386,6 +1388,9 @@
 		766B7D3513FE790600377AA3 /* Fire.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Fire.mp3; sourceTree = "<group>"; };
 		766C608116F0B71800508128 /* blinkEye2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blinkEye2.png; sourceTree = "<group>"; };
 		766C608216F0B71800508128 /* blinkEye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blinkEye.png; sourceTree = "<group>"; };
+		76747A55184CE21200BA4F5E /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
+		76747A56184CE21200BA4F5E /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
+		76747A57184CE21200BA4F5E /* InfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InfoViewController.xib; path = "../Cowboy Duel/InfoViewController.xib"; sourceTree = "<group>"; };
 		7674F72B16EF5D4A00E43061 /* scream1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = scream1.mp3; sourceTree = "<group>"; };
 		7675CA8415A2E10B005A3BD3 /* DuelRewardLogicController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuelRewardLogicController.h; sourceTree = "<group>"; };
 		7675CA8515A2E10B005A3BD3 /* DuelRewardLogicController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DuelRewardLogicController.m; sourceTree = "<group>"; };
@@ -2783,6 +2788,7 @@
 		767FEF33156A652E0016B415 /* Xib */ = {
 			isa = PBXGroup;
 			children = (
+				76747A57184CE21200BA4F5E /* InfoViewController.xib */,
 				7687667816BA7543003405F9 /* GunDrumViewController.xib */,
 				31A093521701C6DE00CDF4A9 /* Horse.xib */,
 				BD81E637169EC4D100CE8278 /* ActiveDuelViewController.xib */,
@@ -3547,6 +3553,8 @@
 				768D68CB16FDD95E00A628C6 /* ScrollViewSwitcher.m */,
 				768659441740D6CA00C1986B /* CharacterPartGridCell.h */,
 				768659451740D6CA00C1986B /* CharacterPartGridCell.m */,
+				76747A55184CE21200BA4F5E /* InfoViewController.h */,
+				76747A56184CE21200BA4F5E /* InfoViewController.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -3877,6 +3885,7 @@
 				31DA9F0815BD331900492A9F /* topPlayerRibbon.png in Resources */,
 				31DA9F0915BD331900492A9F /* topPlayerRibbon@2x.png in Resources */,
 				760E676715BD84C6006F6832 /* TopPlayersViewController.xib in Resources */,
+				76747A59184CE21200BA4F5E /* InfoViewController.xib in Resources */,
 				76ED65EC15C997FE00B14713 /* pv_gold_background.png in Resources */,
 				76ED65ED15C997FE00B14713 /* pv_gold_background@2x.png in Resources */,
 				76E869C715CA8D870024ED08 /* pv_coint.png in Resources */,
@@ -4633,6 +4642,7 @@
 				768BF6F416FB6A3700435394 /* VisualViewDataSource.m in Sources */,
 				768BF6F716FB6B0300435394 /* VisualViewCharacterViewController.m in Sources */,
 				76934BE616FC990900433E1C /* VisualViewCharacter.m in Sources */,
+				76747A58184CE21200BA4F5E /* InfoViewController.m in Sources */,
 				768D68CC16FDD95E00A628C6 /* ScrollViewSwitcher.m in Sources */,
 				7688DC2E1700A59F00D14E5C /* CDVisualViewCharacterPart.m in Sources */,
 				7688DC311700A5B700D14E5C /* CDVisualViewCharacterPartCap.m in Sources */,
