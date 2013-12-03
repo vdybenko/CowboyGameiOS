@@ -11,7 +11,7 @@
 #import "ActivityIndicatorView.h"
 
 @interface MoneyCongratViewController : UIViewController<MemoryManagement>
-- (id) initForAchivmentPlayerAccount:(AccountDataSource *)pPlayerAccount withLabel:(NSString*)pLabel andController:(id)delegateController tryButtonEnable:(BOOL)tryButtonEnable;
+- (id) initForAchivmentPlayerAccount:(AccountDataSource *)pPlayerAccount withLabel:(NSString*)pLabel andController:(id)delegateController tryButtonEnable:(BOOL)tryButtonEnable orientation:(UIInterfaceOrientationMask)orient;
 -(void)blockTryAgain;
 +(void)achivmentMoney:(NSUInteger)money;
 

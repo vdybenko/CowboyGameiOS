@@ -33,6 +33,7 @@
 @property(strong, nonatomic) CDWeaponProduct *accountWeapon;
 
 @property(nonatomic) BOOL isTryingWeapon;
+@property(nonatomic) BOOL isCasualMode;
 
 @property(strong, nonatomic) NSString *avatar;
 @property(strong, nonatomic) NSString *age; 

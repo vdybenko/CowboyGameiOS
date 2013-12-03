@@ -24,6 +24,7 @@ static const char *LIST_BOTS_URL = BASE_URL"users/get_user_data";
 @synthesize accountAtackValue;
 @synthesize curentIdWeapon;
 @synthesize isTryingWeapon;
+@synthesize isCasualMode;
 @synthesize accountWeapon;
 @synthesize accountStore;
 @synthesize loginAnimatedViewController;
@@ -100,6 +101,8 @@ static AccountDataSource *sharedHelper = nil;
         self.visualViewJackets = 0;
         self.visualViewGuns = 0;
         self.visualViewSuits = 0;
+        
+        isCasualMode = YES;
     }
     return self;
 }

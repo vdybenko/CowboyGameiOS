@@ -38,6 +38,8 @@
     __weak IBOutlet UIButton *btnPost;
     
     __weak IBOutlet UILabel *lbPostOnFB;
+    
+    UIInterfaceOrientationMask orient;
 }
 @property(nonatomic, weak)id<ActiveDuelViewControllerDelegate> delegate;
 @property (nonatomic, weak) IBOutlet UIImageView *ivLight2;
@@ -47,14 +49,18 @@
 @implementation MoneyCongratViewController
 @synthesize delegate;
 @synthesize ivLight2;
-- (id) initForAchivmentPlayerAccount:(AccountDataSource *)pPlayerAccount withLabel:(NSString*)pLabel andController:(id)delegateController tryButtonEnable:(BOOL)tryButtonEnable;
+- (id) initForAchivmentPlayerAccount:(AccountDataSource *)pPlayerAccount withLabel:(NSString*)pLabel andController:(id)delegateController tryButtonEnable:(BOOL)tryButtonEnable orientation:(UIInterfaceOrientationMask)pOrient;
 {
-    self = [super initWithNibName:@"MoneyCongratViewController" bundle:[NSBundle mainBundle]];
+    orient = pOrient;
+    if (orient == UIInterfaceOrientationMaskLandscape) {
+        self = [super initWithNibName:@"MoneyCongratViewControllerLandscape" bundle:[NSBundle mainBundle]];
+    }else{
+        self = [super initWithNibName:@"MoneyCongratViewController" bundle:[NSBundle mainBundle]];
+    }
     if (self){
         [super loadView];
         moneyLabel=pLabel;
         playerAccount=pPlayerAccount;
-        
         
         [self initMainControls];
         
@@ -147,6 +153,13 @@
     runAnimation = NO;
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    if (orient == UIInterfaceOrientationMaskLandscape) {
+        self.view.transform = CGAffineTransformMakeRotation(M_PI_2);
+    }
+}
+
 -(void)releaseComponents
 {
     lbTitleCongratulation = nil;
@@ -159,6 +172,7 @@
     ivLight2 = nil;
     ivRing = nil;
 }
+
 #pragma mark -
 #pragma mark animations
 

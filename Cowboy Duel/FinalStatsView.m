@@ -369,15 +369,23 @@ FXLabel *lblGoldPlus;
 
 -(void)showMessageOfNewLevel
 {
+    UIInterfaceOrientationMask *orient = UIInterfaceOrientationMaskPortrait;
+    if ([AccountDataSource sharedInstance].isCasualMode) {
+        orient = UIInterfaceOrientationMaskLandscape;
+    }
     [activeDuelViewController.btnTry setEnabled:NO];
-    LevelCongratViewController *lvlCongratulationViewController=[[LevelCongratViewController alloc] initForNewLevelPlayerAccount:playerAccount andController:activeDuelViewController tryButtonEnable:isTryAgainEnabled];
+    LevelCongratViewController *lvlCongratulationViewController=[[LevelCongratViewController alloc] initForNewLevelPlayerAccount:playerAccount andController:activeDuelViewController tryButtonEnable:isTryAgainEnabled orientation:orient];
     [activeDuelViewController performSelector:@selector(showViewController:) withObject:lvlCongratulationViewController afterDelay:2.2];
 }
 
 -(void)showMessageOfMoreMoney:(NSInteger)money withLabel:(NSString *)labelForCongratulation
 {
+    UIInterfaceOrientationMask *orient = UIInterfaceOrientationMaskPortrait;
+    if ([AccountDataSource sharedInstance].isCasualMode) {
+        orient = UIInterfaceOrientationMaskLandscape;
+    }
     [activeDuelViewController.btnTry setEnabled:NO];
-    MoneyCongratViewController *moneyCongratulationViewController = [[MoneyCongratViewController alloc] initForAchivmentPlayerAccount:playerAccount withLabel:labelForCongratulation andController:activeDuelViewController tryButtonEnable:isTryAgainEnabled];
+    MoneyCongratViewController *moneyCongratulationViewController = [[MoneyCongratViewController alloc] initForAchivmentPlayerAccount:playerAccount withLabel:labelForCongratulation andController:activeDuelViewController tryButtonEnable:isTryAgainEnabled orientation:orient];
     [activeDuelViewController performSelector:@selector(showViewController:) withObject:moneyCongratulationViewController afterDelay:2.2];
 }
 #pragma mark -

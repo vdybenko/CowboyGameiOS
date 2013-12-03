@@ -37,6 +37,8 @@
     __weak IBOutlet UIButton *btnAgain;
     __weak IBOutlet UIButton *btnMenu;
     __weak IBOutlet UIButton *btnPost;
+    
+    UIInterfaceOrientationMask orient;
     BOOL runAnimation;
 }
 //@property(nonatomic, weak)id<DuelViewControllerDelegate> delegate;
@@ -48,9 +50,13 @@
 @synthesize delegate;
 @synthesize ivLightRays2;
 
-- (id) initForNewLevelPlayerAccount:(AccountDataSource *)pPlayerAccount andController:(id)delegateController tryButtonEnable:(BOOL)tryButtonEnable;
-{
-    self = [super initWithNibName:@"LevelCongratViewController" bundle:[NSBundle mainBundle]];
+- (id) initForNewLevelPlayerAccount:(AccountDataSource *)pPlayerAccount andController:(id)delegateController tryButtonEnable:(BOOL)tryButtonEnable  orientation:(UIInterfaceOrientationMask)pOrient;{
+    orient = pOrient;
+    if (orient == UIInterfaceOrientationMaskLandscape) {
+        self = [super initWithNibName:@"LevelCongratViewControllerLandscape" bundle:[NSBundle mainBundle]];
+    }else{
+        self = [super initWithNibName:@"LevelCongratViewController" bundle:[NSBundle mainBundle]];
+    }
     if (self){
         [super loadView];
         
@@ -129,9 +135,11 @@
     ivImageForLevel = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+-(void)viewWillAppear:(BOOL)animated
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    if (orient == UIInterfaceOrientationMaskLandscape) {
+        self.view.transform = CGAffineTransformMakeRotation(M_PI_2);
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -145,6 +153,8 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/LevelCongratVC" forKey:@"page"]];
+    
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
