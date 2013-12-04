@@ -345,15 +345,6 @@ FXLabel *lblGoldPlus;
 
 -(void)checkOfCongratulationControllers
 {
-    
-    __block BuilderViewController *builder = [[BuilderViewController alloc] init];
-    __block ActiveDuelViewController *activeDuelViewControllerBlock = activeDuelViewController;
-    infoViewController = [[InfoViewController alloc] initWithText:NSLocalizedString(@"PRACTISE FIRST", @"") withButtonTitle:NSLocalizedString(@"Profile", @"") block:^(){
-        [activeDuelViewControllerBlock.navigationController popViewControllerAnimated:NO];
-        [activeDuelViewControllerBlock.navigationController pushViewController:builder animated:YES];
-    }];
-    [activeDuelViewController.view addSubview:infoViewController.view];
-    return;
     if (finalViewDataSource.reachNewLevel && playerAccount.accountLevel>0 && playerAccount.accountLevel<=6) {
         [self showMessageOfNewLevel];
         finalViewDataSource.reachNewLevel=NO;
@@ -377,8 +368,19 @@ FXLabel *lblGoldPlus;
                 }
             }
         }
-    }else{
-        
+    }else if (!finalViewDataSource.userWon){
+        int random = arc4random()%4;
+        if ([AccountDataSource sharedInstance].money < 400 && random==1) {
+            __block BuilderViewController *builder = [[BuilderViewController alloc] init];
+            __block ActiveDuelViewController *activeDuelViewControllerBlock = activeDuelViewController;
+            __block UIViewController *vc = [StartViewController sharedInstance];
+            
+            infoViewController = [[InfoViewController alloc] initWithText:NSLocalizedString(@"PRACTISE FIRST", @"") withButtonTitle:NSLocalizedString(@"Profile", @"") block:^(){
+                [activeDuelViewControllerBlock.navigationController popViewControllerAnimated:NO];
+                [vc.navigationController pushViewController:builder animated:YES];
+            }];
+            [activeDuelViewController.view addSubview:infoViewController.view];
+        }
     }
 }
 

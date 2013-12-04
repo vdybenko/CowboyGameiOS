@@ -783,6 +783,9 @@ static StartViewController *sharedHelper = nil;
 
 -(IBAction)showHelp:(id)sender
 {
+    int random = arc4random()%3;
+    NSLog(@"%d",random);
+    return;
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/help_click" forKey:@"event"]];

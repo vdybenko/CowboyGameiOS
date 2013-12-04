@@ -84,12 +84,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    CGRect frame = btnClose.frame;
-    frame.origin.x = vMain.frame.origin.x + 285;
-    btnClose.frame = frame;
-}
 #pragma mark - IBAction
 - (IBAction)btnBlackBackClick:(id)sender {
     [self btnCloseClick:Nil];
