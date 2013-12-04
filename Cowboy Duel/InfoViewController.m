@@ -15,6 +15,7 @@
     __weak IBOutlet UIView *vMain;
     __weak IBOutlet UILabel *lbMainText;
     __weak IBOutlet UIButton *btnMain;
+    __weak IBOutlet UIButton *btnClose;
     
 }
 @end
@@ -81,6 +82,13 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    CGRect frame = btnClose.frame;
+    frame.origin.x = vMain.frame.origin.x + 285;
+    btnClose.frame = frame;
 }
 #pragma mark - IBAction
 - (IBAction)btnBlackBackClick:(id)sender {

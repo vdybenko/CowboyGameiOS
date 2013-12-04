@@ -11,10 +11,14 @@
 #import "UIView+Dinamic_BackGround.h"
 #import "LevelCongratViewController.h"
 #import "MoneyCongratViewController.h"
+#import "InfoViewController.h"
+#import "BuilderViewController.h"
+
 #define kCountOfLevelsMinimal 0
 #define kCountOfLevels 6
 AccountDataSource *playerAccount;
 FinalViewDataSource *finalViewDataSource;
+InfoViewController *infoViewController;
 
 int startMoney;
 int startPoints;
@@ -341,6 +345,15 @@ FXLabel *lblGoldPlus;
 
 -(void)checkOfCongratulationControllers
 {
+    
+    __block BuilderViewController *builder = [[BuilderViewController alloc] init];
+    __block ActiveDuelViewController *activeDuelViewControllerBlock = activeDuelViewController;
+    infoViewController = [[InfoViewController alloc] initWithText:NSLocalizedString(@"PRACTISE FIRST", @"") withButtonTitle:NSLocalizedString(@"Profile", @"") block:^(){
+        [activeDuelViewControllerBlock.navigationController popViewControllerAnimated:NO];
+        [activeDuelViewControllerBlock.navigationController pushViewController:builder animated:YES];
+    }];
+    [activeDuelViewController.view addSubview:infoViewController.view];
+    return;
     if (finalViewDataSource.reachNewLevel && playerAccount.accountLevel>0 && playerAccount.accountLevel<=6) {
         [self showMessageOfNewLevel];
         finalViewDataSource.reachNewLevel=NO;
@@ -364,6 +377,8 @@ FXLabel *lblGoldPlus;
                 }
             }
         }
+    }else{
+        
     }
 }
 
@@ -401,6 +416,7 @@ FXLabel *lblGoldPlus;
     lblGoldTitle = nil;
     lblGoldPlus = nil;
     playerAccount = nil;
+    infoViewController = nil;
 //    finalViewDataSource = nil;
 }
 @end
