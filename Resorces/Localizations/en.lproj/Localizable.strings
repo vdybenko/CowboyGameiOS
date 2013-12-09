@@ -389,4 +389,7 @@ You can upgrade this game right now through <b>iTunes Store</b>
 //character builder
 "defence" = "defence";
 
+//Messages
 "PRACTISE FIRST" = "Better to try \"PRACTICE\" at first";
+"USER DEFEAT" = "Not strong enough?\n Go to \"PROFILE\" - take better stuff.\n Be UNBEATEBLE";
+

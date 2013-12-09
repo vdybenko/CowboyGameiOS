@@ -117,6 +117,7 @@
     if ([StartViewController sharedInstance].firstRun) {
         infoViewController = [[InfoViewController alloc] initWithText:NSLocalizedString(@"PRACTISE FIRST", @"")];
         [self.view addSubview:infoViewController.view];
+        [StartViewController sharedInstance].firstRun = NO;
     }
 }
 

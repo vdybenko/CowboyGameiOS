@@ -369,18 +369,30 @@ FXLabel *lblGoldPlus;
             }
         }
     }else if (!finalViewDataSource.userWon){
-        int random = arc4random()%4;
-        if ([AccountDataSource sharedInstance].money < 400 && random==1) {
+        int numberRev;
+        NSUserDefaults *userDef=[NSUserDefaults standardUserDefaults];
+        if (![userDef objectForKey:@"DEFEATE_MES"]) {
+            numberRev=0;
+            [userDef setInteger:numberRev forKey:@"DEFEATE_MES"];
+        }else {
+            numberRev=[userDef integerForKey:@"DEFEATE_MES"];
+        }
+        int result = numberRev % 3;
+        if ([AccountDataSource sharedInstance].money > 150 && [AccountDataSource sharedInstance].money < 400 && result==0) {
+            numberRev=1;
             __block BuilderViewController *builder = [[BuilderViewController alloc] init];
             __block ActiveDuelViewController *activeDuelViewControllerBlock = activeDuelViewController;
             __block UIViewController *vc = [StartViewController sharedInstance];
             
-            infoViewController = [[InfoViewController alloc] initWithText:NSLocalizedString(@"PRACTISE FIRST", @"") withButtonTitle:NSLocalizedString(@"Profile", @"") block:^(){
+            infoViewController = [[InfoViewController alloc] initWithText:NSLocalizedString(@"USER DEFEAT", @"") withButtonTitle:NSLocalizedString(@"Profile", @"") block:^(){
                 [activeDuelViewControllerBlock.navigationController popViewControllerAnimated:NO];
                 [vc.navigationController pushViewController:builder animated:YES];
             }];
             [activeDuelViewController.view addSubview:infoViewController.view];
+        }else{
+            numberRev++;
         }
+        [userDef setInteger:numberRev forKey:@"DEFEATE_MES"];
     }
 }
 
