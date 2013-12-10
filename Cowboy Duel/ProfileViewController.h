@@ -13,7 +13,7 @@
 
 @class LoginAnimatedViewController;
 @class StartViewController;
-
+@class BuilderViewController;
 #define kFbUserNameKey @"fbUserName"
 #define kFbUserIdKey @"fbUserId"
 
@@ -35,6 +35,7 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UIView *ivBlack;
 @property (weak, nonatomic) IBOutlet UILabel *addFaforitesLb;
 @property (weak, nonatomic) IBOutlet UITextField *tfFBName;
+@property (weak, nonatomic) BuilderViewController *parentVC;
 
 @property IBOutlet UIImageView *profilePictureViewDefault;
 
@@ -48,4 +49,5 @@ typedef enum {
 -(void)checkLocationOfViewForFBLogin;
 - (IBAction)duelButtonClick:(id)sender;
 -(void)startVisualLoading;
+- (IBAction)blackBackGroundClick:(id)sender;
 @end

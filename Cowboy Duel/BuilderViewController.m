@@ -43,6 +43,8 @@
     
     NSArray *arrObjects;
     
+    BuilderViewControllerType typeVC;
+    
     CharacterPart typeOfCharacterPart;
     DuelProductDownloaderController *duelProductDownloaderController;
 }
@@ -82,7 +84,7 @@
         duelProductDownloaderController = [[DuelProductDownloaderController alloc] init];
         duelProductDownloaderController.delegate = self;
         
-        isWithSettings = NO;
+        typeVC = BuilderViewControllerTypeSimple;
     }
     return self;
 }
@@ -91,7 +93,16 @@
 {
     self = [self initWithNibName:nil bundle:Nil];
     if (self) {
-        isWithSettings = YES;
+        typeVC = BuilderViewControllerTypeSettings;
+    }
+    return self;
+}
+
+-(id)initWithSettingsKeyBoard;
+{
+    self = [self initWithNibName:nil bundle:Nil];
+    if (self) {
+        typeVC = BuilderViewControllerTypeSettingsKeyBoard;
     }
     return self;
 }
@@ -133,10 +144,16 @@
         frame.size.height +=75;
         grid.frame = frame;
     }
-    
-    if (isWithSettings) {
-        [self btnMyProfileClick:btnProfile];
-        [profileViewController.tfFBName becomeFirstResponder];
+    switch (typeVC) {
+        case BuilderViewControllerTypeSettings:
+            [self btnMyProfileClick:btnProfile];
+            break;
+        case BuilderViewControllerTypeSettingsKeyBoard:
+            [self btnMyProfileClick:btnProfile];
+            [profileViewController.tfFBName becomeFirstResponder];
+            break;
+        default:
+            break;
     }
     
     [self refreshController];
@@ -875,6 +892,7 @@
 - (IBAction)btnMyProfileClick:(id)sender {
     profileViewController = [[ProfileViewController alloc] initWithAccount:playerAccount];
     [profileViewController setNeedAnimation:YES];
+    profileViewController.parentVC = self;
     
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:2.5f];

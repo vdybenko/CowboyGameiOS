@@ -730,7 +730,7 @@ static StartViewController *sharedHelper = nil;
     frame.origin.x = cloud2X;
     cloudSecondView.frame = frame;
     
-    BuilderViewController *builder = [[BuilderViewController alloc] initWithSettings];
+    BuilderViewController *builder = [[BuilderViewController alloc] initWithSettingsKeyBoard];
     [self.navigationController pushViewController:builder animated:NO];
     builder = nil;
 }
@@ -817,6 +817,13 @@ static StartViewController *sharedHelper = nil;
     vLoading.hidden = NO;
     btnFBLogin.enabled = NO;
     [LoginAnimatedViewController sharedInstance].loginFacebookStatus = LoginFacebookStatusProfile;
+    [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
+}
+
+- (void)clickLoginProfileWithBuilder;{
+    vLoading.hidden = NO;
+    btnFBLogin.enabled = NO;
+    [LoginAnimatedViewController sharedInstance].loginFacebookStatus = LoginFacebookStatusProfileFromBuilder;
     [[LoginAnimatedViewController sharedInstance] loginButtonClick:self];
 }
 
@@ -1345,20 +1352,6 @@ static StartViewController *sharedHelper = nil;
             [playerAccount saveMoney];
         }
         
-        BOOL moneyForIPad=[[NSUserDefaults standardUserDefaults] boolForKey:@"moneyForIPad"];
-        if (!moneyForIPad && ([[responseObject objectForKey:@"money"] intValue] == 200) && ([playerAccount.accountID rangeOfString:@"F:"].location != NSNotFound)&&([responseObject objectForKey:@"session_id"] == nil)) {
-            
-            CDTransaction *transaction = [[CDTransaction alloc] init];
-            transaction.trType = [NSNumber numberWithInt:1];
-            transaction.trMoneyCh = [NSNumber numberWithInt:100];
-            transaction.trLocalID = [NSNumber numberWithInt:[playerAccount increaseGlNumber]];
-            playerAccount.money+=100;
-            transaction.trDescription = [[NSString alloc] initWithFormat:@"forIPad"];
-            [playerAccount.transactions addObject:transaction];
-            [playerAccount saveTransaction];
-            
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"moneyForIPad"];
-        }
         if (profileViewController) {
             [profileViewController checkLocationOfViewForFBLogin];
         }
@@ -1396,12 +1389,15 @@ static StartViewController *sharedHelper = nil;
         switch ([[LoginAnimatedViewController sharedInstance] loginFacebookStatus]) {
             case LoginFacebookStatusLevel:
                 [LevelCongratViewController newLevelNumber:playerAccount.accountLevel];
+                [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusNone];
                 break;
             case LoginFacebookStatusMoney:
                 [MoneyCongratViewController achivmentMoney:playerAccount.money];
+                [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusNone];
                 break;
             case LoginFacebookStatusInvaitFriends:
                 [[OGHelper sharedInstance] getFriendsHowDontUseAppDelegate:nil];
+                [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusNone];
                 break;
             case LoginFacebookStatusProfile:{
                 [self.duelProductDownloaderController refreshUserDuelProducts];
@@ -1440,12 +1436,28 @@ static StartViewController *sharedHelper = nil;
                 SSConnection *connection = [SSConnection sharedInstance];
                 [connection networkCommunicationWithPort:MASTER_SERVER_PORT andIp:MASTER_SERVER_IP];
                 [connection sendInfoPacket];
+                
+                [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusNone];
+            }
+                break;
+            case LoginFacebookStatusProfileFromBuilder:{
+                if([[OGHelper sharedInstance] isAuthorized]){
+                    btnFBLogin.hidden = YES;
+                    vLoading.hidden = YES;
+                    
+                    [[self.navigationController visibleViewController].navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:NO];
+
+                    BuilderViewController *builder = [[BuilderViewController alloc] initWithSettings];
+                    [self.navigationController pushViewController:builder animated:NO];
+                    builder = nil;
+                    
+                    [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusNone];
+                }
             }
                 break;
             default:
                 break;
         }
-        [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusNone];
         [uDef synchronize];
     }
     //

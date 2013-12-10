@@ -20,6 +20,7 @@
 #import "UIView+Dinamic_BackGround.h"
 #import "VisualViewCharacterViewController.h"
 #import "NSString+isNumeric.h"
+#import "BuilderViewController.h"
 
 static const CGFloat changeYPointWhenKeyboard = 155;
 static const CGFloat timeToStandartTitles = 1.8;
@@ -74,6 +75,9 @@ static const CGFloat timeToStandartTitles = 1.8;
     __weak IBOutlet UILabel *lbPointsText;
     __weak IBOutlet UILabel *lbFavouritesTitle;
     
+    __weak IBOutlet UIButton *btnLogInFB;
+    __weak IBOutlet UIButton *btnLogOutFB;
+    __weak IBOutlet UIView *vLoading;
 //  Favourites
     
     __weak IBOutlet UIButton *btnFavourites;
@@ -104,6 +108,7 @@ static const CGFloat timeToStandartTitles = 1.8;
 @implementation ProfileViewController
 @synthesize needAnimation, ivBlack,profilePictureViewDefault, addFaforitesLb;
 @synthesize tfFBName;
+@synthesize parentVC;
 
 #pragma mark
 
@@ -396,7 +401,20 @@ static const CGFloat timeToStandartTitles = 1.8;
     lbPlayerStats.font = CountFont;
    
     [ivPointsLine setClipsToBounds:YES];
-
+    
+    CGRect frame=btnLogInFB.frame;
+    frame.origin.x=33;
+    frame.origin.y=-1;
+    frame.size.width=frame.size.width-15;
+    UILabel *label1 = [[UILabel alloc] initWithFrame:frame];
+    [label1 setFont: [UIFont systemFontOfSize:9.0f]];
+    label1.textAlignment = UITextAlignmentLeft;
+    [label1 setBackgroundColor:[UIColor clearColor]];
+    [label1 setTextColor:[UIColor whiteColor]];
+    [label1 setNumberOfLines:2];
+    [label1 setLineBreakMode:UILineBreakModeWordWrap];
+    [label1 setText:NSLocalizedString(@"LOGIN TO FACEBOOK", @"")];
+    [btnLogInFB addSubview:label1];
 }
 
 -(void)initStatsWithAccount: (AccountDataSource *)oponentAccount;
@@ -526,10 +544,14 @@ static const CGFloat timeToStandartTitles = 1.8;
     [self refreshContentFromPlayerAccount];
     
     if ([playerAccount.accountID rangeOfString:@"A"].location != NSNotFound){
+        [btnLogOutFB setHidden:YES];
+        [btnLogInFB setHidden:NO];
         profilePictureViewDefault.image = [UIImage imageNamed:@"pv_photo_default.png"];
         profilePictureViewDefault.hidden = NO;
     }else{
         [profilePictureView setProfileID:nil];
+        [btnLogOutFB setHidden:NO];
+        [btnLogInFB setHidden:YES];
         [profilePictureView setProfileID:playerAccount.facebookUser.id];
         profilePictureViewDefault.hidden = YES;
         profilePictureViewDefault.contentMode = UIViewContentModeScaleAspectFit;
@@ -1098,6 +1120,31 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         [UIView commitAnimations];
         [[StartViewController sharedInstance] releseProfileSmallWindow];
     }
+}
+
+- (IBAction)btnFBLoginClick:(id)sender {
+    [ivBlack setHidden:NO];
+    [vLoading setHidden:NO];
+//    [self blackBackGroundClick:btnBack];
+//    if (self.parentVC) {
+//        [self.parentVC touchCloseBtn:Nil];
+//    }
+    [[StartViewController sharedInstance] clickLoginProfileWithBuilder];
+}
+
+- (IBAction)btnFBLogOutClick:(id)sender {
+    [ivBlack setHidden:NO];
+    [vLoading setHidden:NO];
+    [[LoginAnimatedViewController sharedInstance] logOutFB];
+    
+    NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *FilePath = [NSString stringWithFormat:@"%@/me.png",docDir];
+    
+    NSFileManager *fileMgr = [NSFileManager defaultManager];
+    
+    NSError *error= nil;
+    if ([fileMgr removeItemAtPath:FilePath error:&error] != YES)
+        DLog(@"Profile: Unable to delete file: %@", [error localizedDescription]);
 }
 
 #pragma mark IconDownloaderDelegate

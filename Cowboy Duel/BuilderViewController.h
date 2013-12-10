@@ -1,4 +1,4 @@
-//
+
 //  BuilderViewController.h
 //  Bounty Hunter
 //
@@ -21,10 +21,18 @@
 -(void) grid:(GMGridView*)grid buyProductForIndex:(NSInteger)index forType:(CharacterPart)type;
 @end
 
+typedef enum{
+    BuilderViewControllerTypeSimple,
+    BuilderViewControllerTypeSettings,
+    BuilderViewControllerTypeSettingsKeyBoard
+}BuilderViewControllerType;
+
 @interface BuilderViewController : UIViewController<MemoryManagement,GMGridViewDataSource,GMGridViewActionDelegate,UIScrollViewDelegate,BuilderViewControllerDelegate,DuelProductDownloaderControllerDelegate>
 
 @property (strong, nonatomic) VisualViewDataSource *visualViewDataSource;
 @property (nonatomic) NSInteger curentObject;
 
 -(id)initWithSettings;
+-(id)initWithSettingsKeyBoard;
+- (IBAction)touchCloseBtn:(id)sender;
 @end

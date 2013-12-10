@@ -83,6 +83,8 @@ typedef enum{
 
 - (IBAction)clickLogin:(id)sender;
 
+- (void)clickLoginProfileWithBuilder;
+
 -(void)didBecomeActive;
 -(void)didEnterBackground;
 
