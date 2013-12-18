@@ -1125,16 +1125,14 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 - (IBAction)btnFBLoginClick:(id)sender {
     [ivBlack setHidden:NO];
     [vLoading setHidden:NO];
-//    [self blackBackGroundClick:btnBack];
-//    if (self.parentVC) {
-//        [self.parentVC touchCloseBtn:Nil];
-//    }
+
     [[StartViewController sharedInstance] clickLoginProfileWithBuilder];
 }
 
 - (IBAction)btnFBLogOutClick:(id)sender {
     [ivBlack setHidden:NO];
     [vLoading setHidden:NO];
+    [LoginAnimatedViewController sharedInstance].loginFacebookStatus = LoginFacebookStatusLogout;
     [[LoginAnimatedViewController sharedInstance] logOutFB];
     
     NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];

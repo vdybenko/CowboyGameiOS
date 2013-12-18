@@ -1455,6 +1455,21 @@ static StartViewController *sharedHelper = nil;
                 }
             }
                 break;
+            case LoginFacebookStatusLogout:{
+                if(![[OGHelper sharedInstance] isAuthorized]){
+                    btnFBLogin.hidden = NO;
+                    vLoading.hidden = YES;
+                    
+                    [[self.navigationController visibleViewController].navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:NO];
+                    
+                    BuilderViewController *builder = [[BuilderViewController alloc] initWithSettings];
+                    [self.navigationController pushViewController:builder animated:NO];
+                    builder = nil;
+                    
+                    [[LoginAnimatedViewController sharedInstance] setLoginFacebookStatus:LoginFacebookStatusNone];
+                }
+            }
+                break;
             default:
                 break;
         }

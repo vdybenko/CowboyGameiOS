@@ -230,6 +230,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
 {
     [self initFacebook];
     [[FBSession activeSession] closeAndClearTokenInformation];
+    [self fbDidLogout];
 	//[facebook logout:self];
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
                                                         object:self
