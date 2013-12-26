@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1280" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
@@ -7,8 +7,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InfoViewController">
             <connections>
+                <outlet property="btnBlackBack" destination="JNl-30-j3L" id="IM5-Gg-nDz"/>
                 <outlet property="btnMain" destination="Ucg-AI-BJm" id="c42-5e-PXU"/>
                 <outlet property="lbMainText" destination="ZM4-wK-TGi" id="LW8-Gp-Ejo"/>
+                <outlet property="vContainer" destination="jRt-2M-8cM" id="5rQ-be-2jq"/>
                 <outlet property="vMain" destination="kLT-wb-pLz" id="e2d-Ti-bsf"/>
                 <outlet property="view" destination="dUd-Kl-cRu" id="bPq-Kq-If7"/>
             </connections>

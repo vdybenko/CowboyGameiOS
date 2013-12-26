@@ -13,10 +13,12 @@
 @interface InfoViewController ()
 {
     __weak IBOutlet UIView *vMain;
+    __weak IBOutlet UIView *vContainer;
     __weak IBOutlet UILabel *lbMainText;
     __weak IBOutlet UIButton *btnMain;
     __weak IBOutlet UIButton *btnClose;
-    
+    __weak IBOutlet UIButton *btnBlackBack;
+    UIInterfaceOrientation interfaceOrientation;
 }
 @end
 
@@ -40,7 +42,7 @@
     return self;
 }
 
--(id)initWithText:(NSString*)text;
+-(id)initWithText:(NSString*)text interfaceOrientation:(UIInterfaceOrientation)pInterfaceOrientation;
 {
     self = [self initMainWithButton:NO];
     
@@ -49,7 +51,7 @@
     }
     return self;
 }
--(id)initWithText:(NSString*)text withButtonTitle:(NSString*)title block:(InfoViewControllerBlock)block;
+-(id)initWithText:(NSString*)text interfaceOrientation:(UIInterfaceOrientation)pInterfaceOrientation withButtonTitle:(NSString*)title block:(InfoViewControllerBlock)block;
 {
     self = [self initMainWithButton:YES];
     
@@ -78,10 +80,48 @@
     // Do any additional setup after loading the view from its nib.
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    CGSize sizeMainScreen = [UIScreen mainScreen].bounds.size;
+    vContainer.center = CGPointMake(sizeMainScreen.height/2, sizeMainScreen.width/2);
+    
+    CGRect frame = self.view.frame;
+    if (interfaceOrientation==UIInterfaceOrientationPortrait) {
+        frame.size = CGSizeMake(sizeMainScreen.width, sizeMainScreen.height);
+    }else{
+        frame.size = CGSizeMake(sizeMainScreen.height, sizeMainScreen.width);
+    }
+    self.view.frame = frame;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)pInterfaceOrientation{
+    if (interfaceOrientation==UIInterfaceOrientationPortrait) {
+        return UIInterfaceOrientationMaskPortrait;
+    }else{
+        return UIInterfaceOrientationLandscapeRight;
+    }
+}
+
+-(NSUInteger) supportedInterfaceOrientations{
+    if (interfaceOrientation==UIInterfaceOrientationPortrait) {
+        return UIInterfaceOrientationMaskPortrait;
+    }else{
+        return UIInterfaceOrientationMaskLandscape;
+    }
+}
+
+- (UIInterfaceOrientation) preferredInterfaceOrientationForPresentation{
+    if (interfaceOrientation==UIInterfaceOrientationPortrait) {
+        return UIInterfaceOrientationMaskPortrait;
+    }else{
+        return UIInterfaceOrientationLandscapeRight;
+    }
 }
 
 #pragma mark - IBAction

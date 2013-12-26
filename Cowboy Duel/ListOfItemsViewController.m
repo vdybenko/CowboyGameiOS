@@ -109,13 +109,12 @@
     lbLeaderboardBtn.text = NSLocalizedString(@"LEAD", nil);
     lbLeaderboardBtn.textColor = btnColor;
     lbLeaderboardBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
-    
     lbFavoritesBtn.text = NSLocalizedString(@"FavouritesTitle", nil);
     lbFavoritesBtn.textColor = btnColor;
     lbFavoritesBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
     
     if ([StartViewController sharedInstance].firstRun) {
-        infoViewController = [[InfoViewController alloc] initWithText:NSLocalizedString(@"PRACTISE FIRST", @"")];
+        infoViewController = [[InfoViewController alloc] initWithText:NSLocalizedString(@"PRACTISE FIRST", @"") interfaceOrientation:UIInterfaceOrientationPortrait];
         [self.view addSubview:infoViewController.view];
         [StartViewController sharedInstance].firstRun = NO;
     }
