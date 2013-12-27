@@ -142,6 +142,9 @@ static const CGFloat timeToStandartTitles = 1.8;
         [self initMainControls];
         
         [mainProfileView setDinamicHeightBackground];
+        
+        [vLoading reloadInputViews];
+        
         [self checkLocationOfViewForFBLogin];
     }
     return self;
@@ -175,6 +178,7 @@ static const CGFloat timeToStandartTitles = 1.8;
         userDefense.text = [NSString stringWithFormat:@"%d",playerServer.defense + [DuelRewardLogicController countUpBuletsWithPlayerLevel:[playerServer.rank intValue]]];
 
         userDefense.hidden = NO;
+        
         [self checkIsOpponentFavorite];
     }
     return self;
@@ -1122,16 +1126,34 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     }
 }
 
+- (IBAction)btnCloseClick:(id)sender {
+    [self textFieldShouldReturn:tfFBName];
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationCurve:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction];
+    [UIView setAnimationDuration:2.5f];
+    
+    [self.view removeFromSuperview];
+    
+    [UIView commitAnimations];
+    [[StartViewController sharedInstance] releseProfileSmallWindow];
+}
+
+
 - (IBAction)btnFBLoginClick:(id)sender {
     [ivBlack setHidden:NO];
     [vLoading setHidden:NO];
-
+    
+    [tfFBName resignFirstResponder];
+    
     [[StartViewController sharedInstance] clickLoginProfileWithBuilder];
 }
 
 - (IBAction)btnFBLogOutClick:(id)sender {
     [ivBlack setHidden:NO];
     [vLoading setHidden:NO];
+    
+    [tfFBName resignFirstResponder];
+    
     [LoginAnimatedViewController sharedInstance].loginFacebookStatus = LoginFacebookStatusLogout;
     [[LoginAnimatedViewController sharedInstance] logOutFB];
     
