@@ -341,6 +341,9 @@ static StartViewController *sharedHelper = nil;
         
         inBackground = NO;
         isPushMessageShow = NO;
+        
+        NSUUID *oNSUUID = [[UIDevice currentDevice] identifierForVendor];
+        NSLog(@"%@",[oNSUUID UUIDString]);
     }
     return self;
 }
@@ -394,6 +397,9 @@ static StartViewController *sharedHelper = nil;
     if([[OGHelper sharedInstance] isAuthorized]){
         btnFBLogin.hidden = YES;
         vLoading.hidden = YES;
+    }else{
+        btnFBLogin.enabled = YES;
+        btnFBLogin.hidden = NO;
     }
     
     feedBackViewVisible=NO;

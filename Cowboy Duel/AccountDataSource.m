@@ -61,7 +61,7 @@ static AccountDataSource *sharedHelper = nil;
         money = 200;
         teachingTimes = [[NSMutableArray alloc] init];
         finalInfoTable = [[NSMutableArray alloc] init];
-        //[self makeLocalAccountID];
+//        [self makeLocalAccountID];
         accountDataSourceID = 1;
         sessionID=0;
         self.accountLevel=kCountOfLevelsMinimal;
@@ -170,7 +170,8 @@ static AccountDataSource *sharedHelper = nil;
 - (void)makeLocalAccountID{
     srand((unsigned)time( NULL ));
     int random10Number = 1000000000 + rand() % 8999999999;
-    if (!self.accountID) self.accountID = [NSString stringWithFormat:@"A:%d",random10Number];
+    if (!self.accountID)
+        self.accountID = [NSString stringWithFormat:@"A:%d",random10Number];
 }
 
 - (NSString *)verifyAccountID{
