@@ -12,6 +12,9 @@
 @synthesize ivBackGround;
 @synthesize ivImage;
 @synthesize lockImg;
+@synthesize lbUnlock;
+@synthesize lbUnlock2;
+
 +(CharacterPartGridCell*) cell {
     @autoreleasepool {
         NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"CharacterPartGridCell" owner:nil options:nil];
@@ -27,9 +30,17 @@
 {
     [ivBackGround setHighlighted:YES];
 }
--(void)lockedItem
+-(void)lockedItemHiden:(BOOL)lock;
 {
-    [lockImg setHidden:NO];
+    [lockImg setHidden:lock];
+    [lbUnlock setHidden:lock];
+    [lbUnlock2 setHidden:lock];
+}
+
+-(void)setLockedLevel:(int)lockLevel;
+{
+    [lbUnlock setText:NSLocalizedString(@"UNLOCKED", @"")];
+    [lbUnlock setText:[NSString stringWithFormat:NSLocalizedString(@"UNLOCKED", @""),lockLevel]];
 }
 
 -(void)rotateImage:(BOOL)turn;

@@ -265,9 +265,10 @@
         }
         
         if (playerAccount.accountLevel < visualViewCharacterPart.levelLock) {
-            cell.lockImg.hidden = NO;
+            [cell setLockedLevel:visualViewCharacterPart.levelLock];
+            [cell lockedItemHiden:NO];
         }else{
-            cell.lockImg.hidden = YES;
+            [cell lockedItemHiden:YES];
         }
     
         if (typeOfCharacterPart == CharacterPartGun) {
