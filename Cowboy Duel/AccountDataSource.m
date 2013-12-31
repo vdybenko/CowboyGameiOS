@@ -169,9 +169,9 @@ static AccountDataSource *sharedHelper = nil;
 
 - (void)makeLocalAccountID{
     srand((unsigned)time( NULL ));
-    int random10Number = 1000000000 + rand() % 8999999999;
-    if (!self.accountID)
-        self.accountID = [NSString stringWithFormat:@"A:%d",random10Number];
+    NSUUID *oNSUUID = [[UIDevice currentDevice] identifierForVendor];
+    NSString *stUUID = [[oNSUUID UUIDString] substringToIndex:10];
+    self.accountID = [NSString stringWithFormat:@"A:%@",stUUID];
 }
 
 - (NSString *)verifyAccountID{

@@ -341,9 +341,6 @@ static StartViewController *sharedHelper = nil;
         
         inBackground = NO;
         isPushMessageShow = NO;
-        
-        NSUUID *oNSUUID = [[UIDevice currentDevice] identifierForVendor];
-        NSLog(@"%@",[oNSUUID UUIDString]);
     }
     return self;
 }
@@ -394,12 +391,12 @@ static StartViewController *sharedHelper = nil;
     lbShareCancelBtn.textColor = buttonsTitleColor;
     lbShareCancelBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:35];
     
-    if([[OGHelper sharedInstance] isAuthorized]){
-        btnFBLogin.hidden = YES;
-        vLoading.hidden = YES;
-    }else{
+    if(![[OGHelper sharedInstance] isAuthorized] && (playerAccount.removeAds==0)){
         btnFBLogin.enabled = YES;
         btnFBLogin.hidden = NO;
+    }else{
+        btnFBLogin.hidden = YES;
+        vLoading.hidden = YES;
     }
     
     feedBackViewVisible=NO;
@@ -1463,7 +1460,6 @@ static StartViewController *sharedHelper = nil;
                 break;
             case LoginFacebookStatusLogout:{
                 if(![[OGHelper sharedInstance] isAuthorized]){
-                    btnFBLogin.hidden = NO;
                     vLoading.hidden = YES;
                     
                     [[self.navigationController visibleViewController].navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:NO];

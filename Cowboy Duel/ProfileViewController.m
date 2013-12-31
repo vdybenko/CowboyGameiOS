@@ -1127,7 +1127,9 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 }
 
 - (IBAction)btnCloseClick:(id)sender {
-    [self textFieldShouldReturn:tfFBName];
+    if ([tfFBName isFirstResponder]) {
+        [self textFieldShouldReturn:tfFBName];
+    }
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationCurve:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction];
     [UIView setAnimationDuration:2.5f];
