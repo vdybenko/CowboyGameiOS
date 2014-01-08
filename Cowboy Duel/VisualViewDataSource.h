@@ -17,6 +17,7 @@
 #import "CDVisualViewCharacterPartGuns.h"
 #import "CDVisualViewCharacterPartJakets.h"
 #import "CDVisualViewCharacterPartSuits.h"
+#import "CDBuiderPurchaseGold.h"
 
 typedef enum
 {
@@ -39,5 +40,6 @@ typedef enum
 @property (strong,nonatomic) NSMutableArray *arrayGuns;
 @property (strong,nonatomic) NSMutableArray *arrayJakets;
 @property (strong,nonatomic) NSMutableArray *arraySuits;
+@property (strong,nonatomic) NSMutableArray *arrayGold;
 
 @end

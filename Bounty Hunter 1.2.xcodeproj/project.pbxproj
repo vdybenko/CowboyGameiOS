@@ -312,6 +312,13 @@
 		760E676515BD844B006F6832 /* TopPlayersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 760E676315BD844B006F6832 /* TopPlayersViewController.m */; };
 		760E676715BD84C6006F6832 /* TopPlayersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 760E676615BD84C6006F6832 /* TopPlayersViewController.xib */; };
 		761761B017C7AEA3001D632A /* libCrittercism_v4_0_6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 761761A817C7A75C001D632A /* libCrittercism_v4_0_6.a */; };
+		761912DE187DA27300D5D4D7 /* builderGold1.png in Resources */ = {isa = PBXBuildFile; fileRef = 761912D8187DA27300D5D4D7 /* builderGold1.png */; };
+		761912DF187DA27300D5D4D7 /* builderGold2.png in Resources */ = {isa = PBXBuildFile; fileRef = 761912D9187DA27300D5D4D7 /* builderGold2.png */; };
+		761912E0187DA27300D5D4D7 /* builderGold3.png in Resources */ = {isa = PBXBuildFile; fileRef = 761912DA187DA27300D5D4D7 /* builderGold3.png */; };
+		761912E1187DA27300D5D4D7 /* builderGold4.png in Resources */ = {isa = PBXBuildFile; fileRef = 761912DB187DA27300D5D4D7 /* builderGold4.png */; };
+		761912E2187DA27300D5D4D7 /* builderGold5.png in Resources */ = {isa = PBXBuildFile; fileRef = 761912DC187DA27300D5D4D7 /* builderGold5.png */; };
+		761912E3187DA27300D5D4D7 /* builderGold6.png in Resources */ = {isa = PBXBuildFile; fileRef = 761912DD187DA27300D5D4D7 /* builderGold6.png */; };
+		761912E9187DA95E00D5D4D7 /* CDBuiderPurchaseGold.m in Sources */ = {isa = PBXBuildFile; fileRef = 761912E8187DA95E00D5D4D7 /* CDBuiderPurchaseGold.m */; };
 		761C5DDC17F6246B00DF9122 /* icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 761C5DDB17F6246B00DF9122 /* icon-120.png */; };
 		761C5DDD17F6265000DF9122 /* icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 761C5DDB17F6246B00DF9122 /* icon-120.png */; };
 		761D3F98184E1F76005A3D6F /* MoneyCongratViewControllerLandscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761D3F96184E1F75005A3D6F /* MoneyCongratViewControllerLandscape.xib */; };
@@ -1362,6 +1369,14 @@
 		760E676415BD844B006F6832 /* TopPlayersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopPlayersViewController.h; sourceTree = "<group>"; };
 		760E676615BD84C6006F6832 /* TopPlayersViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TopPlayersViewController.xib; path = Xib/TopPlayersViewController.xib; sourceTree = "<group>"; };
 		761761A817C7A75C001D632A /* libCrittercism_v4_0_6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCrittercism_v4_0_6.a; path = CrittercismSDK/libCrittercism_v4_0_6.a; sourceTree = "<group>"; };
+		761912D8187DA27300D5D4D7 /* builderGold1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = builderGold1.png; sourceTree = "<group>"; };
+		761912D9187DA27300D5D4D7 /* builderGold2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = builderGold2.png; sourceTree = "<group>"; };
+		761912DA187DA27300D5D4D7 /* builderGold3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = builderGold3.png; sourceTree = "<group>"; };
+		761912DB187DA27300D5D4D7 /* builderGold4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = builderGold4.png; sourceTree = "<group>"; };
+		761912DC187DA27300D5D4D7 /* builderGold5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = builderGold5.png; sourceTree = "<group>"; };
+		761912DD187DA27300D5D4D7 /* builderGold6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = builderGold6.png; sourceTree = "<group>"; };
+		761912E7187DA95E00D5D4D7 /* CDBuiderPurchaseGold.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDBuiderPurchaseGold.h; sourceTree = "<group>"; };
+		761912E8187DA95E00D5D4D7 /* CDBuiderPurchaseGold.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDBuiderPurchaseGold.m; sourceTree = "<group>"; };
 		761C5DDB17F6246B00DF9122 /* icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-120.png"; sourceTree = "<group>"; };
 		761D3F96184E1F75005A3D6F /* MoneyCongratViewControllerLandscape.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoneyCongratViewControllerLandscape.xib; sourceTree = "<group>"; };
 		761D3F97184E1F75005A3D6F /* LevelCongratViewControllerLandscape.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LevelCongratViewControllerLandscape.xib; sourceTree = "<group>"; };
@@ -2719,6 +2734,19 @@
 			name = "Duel Shapes";
 			sourceTree = "<group>";
 		};
+		761912D7187DA27300D5D4D7 /* CharacterGold */ = {
+			isa = PBXGroup;
+			children = (
+				761912D8187DA27300D5D4D7 /* builderGold1.png */,
+				761912D9187DA27300D5D4D7 /* builderGold2.png */,
+				761912DA187DA27300D5D4D7 /* builderGold3.png */,
+				761912DB187DA27300D5D4D7 /* builderGold4.png */,
+				761912DC187DA27300D5D4D7 /* builderGold5.png */,
+				761912DD187DA27300D5D4D7 /* builderGold6.png */,
+			);
+			path = CharacterGold;
+			sourceTree = "<group>";
+		};
 		763BF411165694CD00D5C49C /* Store */ = {
 			isa = PBXGroup;
 			children = (
@@ -2952,6 +2980,8 @@
 				7693232C1701E7490061A702 /* CDVisualViewCharacterPartShoose.m */,
 				4670C1651743BA1F00D27FF8 /* CDVisualViewCharacterPartSuits.h */,
 				4670C1661743BA1F00D27FF8 /* CDVisualViewCharacterPartSuits.m */,
+				761912E7187DA95E00D5D4D7 /* CDBuiderPurchaseGold.h */,
+				761912E8187DA95E00D5D4D7 /* CDBuiderPurchaseGold.m */,
 			);
 			name = VisualViewCharacter;
 			sourceTree = "<group>";
@@ -2986,6 +3016,7 @@
 		768DD944173CDB9800B031F3 /* CharacterShapes */ = {
 			isa = PBXGroup;
 			children = (
+				761912D7187DA27300D5D4D7 /* CharacterGold */,
 				76B250891743C51C00BFF0D3 /* CharacterSuit */,
 				768DD945173CDB9800B031F3 /* builderBodyDef.png */,
 				46C07488173CDD9000711AC5 /* CharacterGuns */,
@@ -3930,6 +3961,7 @@
 				7687E8C016391A32003C9EE6 /* StoreProductCell.xib in Resources */,
 				7687E8C516392534003C9EE6 /* StoreViewController.xib in Resources */,
 				76A72D53163AA0B400C65D6D /* shop_product_frame.png in Resources */,
+				761912E1187DA27300D5D4D7 /* builderGold4.png in Resources */,
 				76A72D54163AA0B400C65D6D /* shop_product_frame@2x.png in Resources */,
 				76CE0AE8163EF45C00B51B04 /* shop_product_ribbon.png in Resources */,
 				76CE0AE9163EF45C00B51B04 /* shop_product_ribbon@2x.png in Resources */,
@@ -4026,6 +4058,7 @@
 				BD4BAAB616BC064A00F88E82 /* men_low.png in Resources */,
 				BD4BAAB816BC064A00F88E82 /* men_low@2x.png in Resources */,
 				BDCB5C0E16BE91BE0056D28E /* gd_board@2x.png in Resources */,
+				761912DE187DA27300D5D4D7 /* builderGold1.png in Resources */,
 				BDCB5C0F16BE91BE0056D28E /* gd_board.png in Resources */,
 				BDCB5C1216BE96920056D28E /* dv_arrows.png in Resources */,
 				BDCB5C1316BE96920056D28E /* dv_arrows@2x.png in Resources */,
@@ -4092,8 +4125,10 @@
 				768F011616FA0350001523A0 /* ArrowToOpponent.xib in Resources */,
 				768F011816FA0380001523A0 /* st_arrow.png in Resources */,
 				768BF6F916FB6D8000435394 /* VisualViewCharacterViewController.xib in Resources */,
+				761912DF187DA27300D5D4D7 /* builderGold2.png in Resources */,
 				76934BE316FC98C500433E1C /* VisualViewCharacter.xib in Resources */,
 				3197E9A616FAFD2B0020D8C0 /* HelthBonus.png in Resources */,
+				761912E0187DA27300D5D4D7 /* builderGold3.png in Resources */,
 				3197E9AD16FB492D0020D8C0 /* barellExplosionEfect.mp3 in Resources */,
 				3197E9B516FB6B340020D8C0 /* Barrles.xib in Resources */,
 				3197E9B716FB6B7F0020D8C0 /* Cactus.xib in Resources */,
@@ -4162,6 +4197,7 @@
 				46E3C4F5170DCD0E00A59E98 /* blod_aFrame3Scr.png in Resources */,
 				46E3C4F6170DCD0E00A59E98 /* blod_aFrame4Scr.png in Resources */,
 				46E3C4F7170DCD0E00A59E98 /* blod_aFrame5Scr.png in Resources */,
+				761912E2187DA27300D5D4D7 /* builderGold5.png in Resources */,
 				46E3C4F8170DCD0E00A59E98 /* blod_aFrame6Scr.png in Resources */,
 				46E3C4F9170DCD0E00A59E98 /* blod_cFrame1Sc.png in Resources */,
 				46E3C4FA170DCD0E00A59E98 /* blod_cFrame2Sc.png in Resources */,
@@ -4197,6 +4233,7 @@
 				768DD96A173CDB9800B031F3 /* builderHat1.png in Resources */,
 				768DD96B173CDB9800B031F3 /* builderHat2.png in Resources */,
 				768DD96C173CDB9800B031F3 /* builderJacket1.png in Resources */,
+				761912E3187DA27300D5D4D7 /* builderGold6.png in Resources */,
 				768DD96D173CDB9800B031F3 /* builderJacket2.png in Resources */,
 				768DD96E173CDB9800B031F3 /* builderPants1.png in Resources */,
 				768DD96F173CDB9800B031F3 /* builderPants2.png in Resources */,
@@ -4525,6 +4562,7 @@
 				BDD07BC6141E1F170085E4FB /* CDTransaction.m in Sources */,
 				BDD07BC9141E1F170085E4FB /* DuelStartViewController.m in Sources */,
 				BDD07BCD141E1F170085E4FB /* FintDataSource.m in Sources */,
+				761912E9187DA95E00D5D4D7 /* CDBuiderPurchaseGold.m in Sources */,
 				BDD07BCE141E1F170085E4FB /* GameCenterViewController.m in Sources */,
 				BDD07BCF141E1F170085E4FB /* GCHelper.m in Sources */,
 				BDD07BD3141E1F170085E4FB /* HelpViewController.m in Sources */,

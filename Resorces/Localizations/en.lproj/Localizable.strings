@@ -390,6 +390,7 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "defence" = "defence";
 "UNLOCKED" = "Unlocked";
 "UNLOCKED_AT" = "at level %d";
+"LODING" = "Loading...";
 
 //Messages
 "PRACTISE FIRST" = "Better to try \"PRACTICE\" at first";

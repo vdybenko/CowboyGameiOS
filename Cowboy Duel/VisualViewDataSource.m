@@ -37,7 +37,16 @@
 //Jakets
 #define VISUAL_VIEW_CHARACTER_JAKETS_ARRAY @[@[@"clearePicture.png",@0,@141,@-1,@0],@[@"builderJacket2.png",@200,@142,@-1,@2],@[@"builderJacket1.png",@250,@143,@2,@3],@[@"builderJacket3.png",@250,@143,@2,@3]];// Resorces/CharacterJakets
 
+//SUITS
 #define VISUAL_VIEW_CHARACTER_SUITS_ARRAY @[@[@"clearePicture.png",@0,@147,@-1,@0],@[@"builderSuit2.png",@600,@148,@-1,@10],@[@"builderSuit3.png",@600,@149,@-1,@10],@[@"builderSuit1.png",@600,@150,@5,@13]];// Resorces/CharacterSuits
+
+//Gold
+
+// 1-image
+// 2-URL
+// 3-id
+// 4-gold
+#define VISUAL_VIEW_CHARACTER_GOLD_ARRAY @[@[@"builderGold1.png",@"",@151,@1],@[@"builderGold1.png",@"",@152,@1],@[@"builderGold1.png",@"",@153,@1],@[@"builderGold1.png",@"",@154,@1],@[@"builderGold1.png",@"",@155,@1],@[@"builderGold1.png",@"",@156,@1]];// Resorces/CharacterGold
 
 @interface VisualViewDataSource()
 {
@@ -53,7 +62,7 @@
 @synthesize arrayGuns;
 @synthesize arrayJakets;
 @synthesize arraySuits;
-
+@synthesize arrayGold;
 -(id) init
 {
     self = [super init];
@@ -124,6 +133,12 @@
         }
         arrayMainSuits = nil;
         
+        NSArray *arrayMainGold = VISUAL_VIEW_CHARACTER_GOLD_ARRAY;
+        for (NSArray *array in arrayMainGold) {
+            CDBuiderPurchaseGold *cap=[[CDBuiderPurchaseGold alloc] initWithArray:array];
+            [arrayGold addObject:cap];
+        }
+        arrayMainSuits = nil;
     }
     
 	return self;
@@ -139,6 +154,7 @@
     arrayJakets = nil;
     arrayGuns = nil;
     arraySuits = nil;
+    arrayGold = nil;
 }
 
 @end
