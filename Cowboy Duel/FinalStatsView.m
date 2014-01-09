@@ -384,7 +384,7 @@ FXLabel *lblGoldPlus;
             __block ActiveDuelViewController *activeDuelViewControllerBlock = activeDuelViewController;
             __block UIViewController *vc = [StartViewController sharedInstance];
             
-            infoViewController = [[InfoViewController alloc] initWithText:NSLocalizedString(@"USER DEFEAT", @"") withButtonTitle:NSLocalizedString(@"Profile", @"") block:^(){
+            infoViewController = [[InfoViewController alloc] initWithText:NSLocalizedString(@"USER DEFEAT", @"") interfaceOrientation:UIInterfaceOrientationLandscapeRight withButtonTitle:NSLocalizedString(@"Profile", @"") block:^(){
                 [activeDuelViewControllerBlock.navigationController popViewControllerAnimated:NO];
                 [vc.navigationController pushViewController:builder animated:YES];
             }];

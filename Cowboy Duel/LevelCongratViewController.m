@@ -137,7 +137,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    if (orient == UIInterfaceOrientationMaskLandscape) {
+    if (orient == UIInterfaceOrientationMaskLandscape && [[[UIDevice currentDevice] systemVersion] floatValue] < 6.0) {
         self.view.transform = CGAffineTransformMakeRotation(M_PI_2);
     }
 }
@@ -184,6 +184,22 @@
     btnMenu = nil;
     btnPost = nil;
     ivLightRays2 = nil;
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+}
+
+-(BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+    return interfaceOrientation == UIInterfaceOrientationLandscapeRight;
+}
+
+-(NSUInteger) supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskLandscape;
+}
+
+- (UIInterfaceOrientation) preferredInterfaceOrientationForPresentation{
+    return UIInterfaceOrientationLandscapeRight;
 }
 
 #pragma mark

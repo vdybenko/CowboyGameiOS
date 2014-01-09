@@ -516,7 +516,7 @@ static const CGFloat timeSpinDump = 0.3f;
     
     CGRect frame3 = self.textLabel.frame;
     frame3.origin = self.textView.frame.origin;
-    frame3.origin.x = frame3.origin.x + (self.textView.frame.size.width/4);
+    frame3.origin.x = self.textView.frame.origin.x;
     frame3.origin.y = frame3.origin.y;
     frame3.size.width = 128;
     

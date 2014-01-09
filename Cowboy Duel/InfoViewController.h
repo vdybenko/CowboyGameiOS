@@ -12,7 +12,7 @@ typedef void(^InfoViewControllerBlock)();
 @interface InfoViewController : UIViewController
 @property(copy,nonatomic) InfoViewControllerBlock blkFinish;
 
--(id)initWithText:(NSString*)text;
--(id)initWithText:(NSString*)text withButtonTitle:(NSString*)title block:(InfoViewControllerBlock)block;
+-(id)initWithText:(NSString*)text interfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
+-(id)initWithText:(NSString*)text interfaceOrientation:(UIInterfaceOrientation)interfaceOrientation withButtonTitle:(NSString*)title block:(InfoViewControllerBlock)block ;
 
 @end
