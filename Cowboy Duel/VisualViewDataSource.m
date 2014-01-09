@@ -46,7 +46,7 @@
 // 2-URL
 // 3-id
 // 4-gold
-#define VISUAL_VIEW_CHARACTER_GOLD_ARRAY @[@[@"builderGold1.png",@"",@151,@1],@[@"builderGold1.png",@"",@152,@1],@[@"builderGold1.png",@"",@153,@1],@[@"builderGold1.png",@"",@154,@1],@[@"builderGold1.png",@"",@155,@1],@[@"builderGold1.png",@"",@156,@1]];// Resorces/CharacterGold
+#define VISUAL_VIEW_CHARACTER_GOLD_ARRAY @[@[@"builderGold1.png",@"",@151,@100],@[@"builderGold2.png",@"",@152,@100],@[@"builderGold3.png",@"",@153,@100],@[@"builderGold4.png",@"",@154,@100],@[@"builderGold5.png",@"",@155,@100],@[@"builderGold6.png",@"",@156,@100]];// Resorces/CharacterGold
 
 @interface VisualViewDataSource()
 {
@@ -76,6 +76,7 @@
         arrayJakets = [NSMutableArray array];
         arrayGuns = [NSMutableArray array];
         arraySuits = [NSMutableArray array];
+        arrayGold = [NSMutableArray array];
         
         NSArray *arrayMainCap = VISUAL_VIEW_CHARACTER_CAP_ARRAY;
         for (NSArray *array in arrayMainCap) {

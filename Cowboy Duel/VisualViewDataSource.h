@@ -28,7 +28,8 @@ typedef enum
     CharacterPartShoose,
     CharacterPartGun,
     CharacterPartJaket,
-    CharacterPartSuit
+    CharacterPartSuit,
+    CharacterPartGold
 }CharacterPart;
 
 @interface VisualViewDataSource : NSObject<MemoryManagement>

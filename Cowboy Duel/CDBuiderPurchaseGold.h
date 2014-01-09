@@ -12,7 +12,7 @@
 
 @property (weak,nonatomic) NSString *dNameForImage;
 @property (weak,nonatomic) NSString *dUrl;
-@property (weak,nonatomic) NSString *dGoldText;
+@property (weak,nonatomic) NSString *dMoneyTextForPrurchase;
 @property (nonatomic) int dMoneyToAdd;
 @property (nonatomic) NSInteger dId;
 

@@ -38,6 +38,7 @@
     __weak IBOutlet UIView *animLostMoneyView;
     __weak IBOutlet UILabel *animLostMomeyLB;
     __weak IBOutlet UIButton *btnBackToCategory;
+    __weak IBOutlet UIImageView *ivCointOn;
    
     BOOL isWithSettings;
     
@@ -65,6 +66,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *closeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *PantsBtn;
 @property (weak, nonatomic) IBOutlet UIButton *suitsBtn;
+@property (weak, nonatomic) IBOutlet UIButton *goldBtn;
 
 @end
 
@@ -256,25 +258,31 @@
     if (result) {
         [cell setHidden:NO];
         [cell simpleBackGround];
-        CDVisualViewCharacterPart *visualViewCharacterPart = [arrObjects objectAtIndex:index-2];
-        
-        if ([visualViewCharacterPart.nameForImage isEqualToString:@"clearePicture.png"]) {
-            cell.ivImage.image = [UIImage imageNamed:@"сloseCross.png"];
+        if (typeOfCharacterPart == CharacterPartGold) {
+            CDBuiderPurchaseGold *buiderPurchaseGold= [arrObjects objectAtIndex:index-2];
+            
+            cell.ivImage.image = [buiderPurchaseGold imageForObject];
         }else{
-            cell.ivImage.image = [visualViewCharacterPart imageForObject];
-        }
-        
-        if (playerAccount.accountLevel < visualViewCharacterPart.levelLock) {
-            [cell setLockedLevel:visualViewCharacterPart.levelLock];
-            [cell lockedItemHiden:NO];
-        }else{
-            [cell lockedItemHiden:YES];
-        }
-    
-        if (typeOfCharacterPart == CharacterPartGun) {
-            [cell rotateImage:YES];
-        }else{
-            [cell rotateImage:NO];
+            CDVisualViewCharacterPart *visualViewCharacterPart = [arrObjects objectAtIndex:index-2];
+            
+            if ([visualViewCharacterPart.nameForImage isEqualToString:@"clearePicture.png"]) {
+                cell.ivImage.image = [UIImage imageNamed:@"сloseCross.png"];
+            }else{
+                cell.ivImage.image = [visualViewCharacterPart imageForObject];
+            }
+            
+            if (playerAccount.accountLevel < visualViewCharacterPart.levelLock) {
+                [cell setLockedLevel:visualViewCharacterPart.levelLock];
+                [cell lockedItemHiden:NO];
+            }else{
+                [cell lockedItemHiden:YES];
+            }
+            
+            if (typeOfCharacterPart == CharacterPartGun) {
+                [cell rotateImage:YES];
+            }else{
+                [cell rotateImage:NO];
+            }
         }
     }else{
         [cell setHidden:YES];
@@ -492,6 +500,10 @@
 
 -(void) grid:(GMGridView*)pGrid selectIndex:(NSInteger)index forType:(CharacterPart)type;
 {
+    if (typeOfCharacterPart == CharacterPartGold) {
+        [self gridSelectGoldCell:pGrid selectIndex:index forType:type];
+        return;
+    }
     CDVisualViewCharacterPartSuits *part = [arrObjects objectAtIndex:index];
     
     [self.priceOfItem setText:[NSString stringWithFormat:@"%d", part.money]];
@@ -608,8 +620,20 @@
     [self refreshController];
 }
 
+-(void) gridSelectGoldCell:(GMGridView*)pGrid selectIndex:(NSInteger)index forType:(CharacterPart)type;
+{
+    CDBuiderPurchaseGold *part = [arrObjects objectAtIndex:index];
+    [self.priceOfItem setText:[NSString stringWithFormat:@"%@", part.dMoneyTextForPrurchase]];
+    [self.resultLabel setText:[NSString stringWithFormat:@"+%d",part.dMoneyToAdd]];
+    [self refreshController];
+}
+
 -(void) grid:(GMGridView*)grid buyProductForIndex:(NSInteger)index forType:(CharacterPart)type;
 {
+    if (typeOfCharacterPart == CharacterPartGold) {
+        [self gridForGold:grid buyProductForIndex:index forType:type];
+        return;
+    }
     CDVisualViewCharacterPart *part = [arrObjects objectAtIndex:index];
 
     NSString *stType = [self stringForType:type];
@@ -702,6 +726,10 @@
     [self refreshControllerWithGrid];
 }
 
+-(void) gridForGold:(GMGridView*)grid buyProductForIndex:(NSInteger)index forType:(CharacterPart)type;
+{
+}
+
 #pragma mark DuelProductDownloaderControllerDelegate
 
 -(void)didFinishDownloadWithType:(DuelProductDownloaderType)type error:(NSError *)error;
@@ -726,6 +754,7 @@
     [self cleanAll];
     [self sideCloseAnimation];
     [self refreshController];
+    ivCointOn.hidden = NO;
 }
 
 - (IBAction)touchBuyBtn:(id)sender{    
@@ -888,6 +917,24 @@
     [grid reloadData];
     [sideView setUserInteractionEnabled:YES];
     [self setObjectsForIndex:playerAccount.visualViewSuits];
+}
+
+- (IBAction)touchGoldBtn:(id)sender {
+    if (!isOpenSide && self.backlightDefens.hidden) {
+        ivCointOn.hidden = YES;
+        [self sideOpenAnimation];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
+                                                            object:self
+                                                          userInfo:[NSDictionary dictionaryWithObject:@"/BuilderVC_gold" forKey:@"page"]];
+    }
+    
+    typeOfCharacterPart = CharacterPartGold;
+    
+    arrObjects = [visualViewDataSource arrayGold];
+    
+    [grid reloadData];
+    [sideView setUserInteractionEnabled:YES];
+    [self setObjectsForIndex:0];
 }
 
 - (IBAction)btnMyProfileClick:(id)sender {

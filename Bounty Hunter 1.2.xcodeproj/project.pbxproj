@@ -3766,6 +3766,9 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 				TargetAttributes = {
+					60593A6B1379321700256204 = {
+						DevelopmentTeam = GNLB7JTPWX;
+					};
 					BD83A40716720DFE003EE4B3 = {
 						DevelopmentTeam = GNLB7JTPWX;
 					};

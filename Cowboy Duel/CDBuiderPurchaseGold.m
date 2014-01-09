@@ -11,7 +11,7 @@
 @implementation CDBuiderPurchaseGold
 @synthesize dNameForImage;
 @synthesize dUrl;
-@synthesize dGoldText;
+@synthesize dMoneyTextForPrurchase;
 @synthesize dMoneyToAdd;
 @synthesize dId;
 
@@ -23,10 +23,10 @@
         
         dNameForImage = [arrayOfParametrs objectAtIndex:0];
         dUrl = [arrayOfParametrs objectAtIndex:1];
-        dGoldText = NSLocalizedString(@"LODING", @"");
+        dMoneyTextForPrurchase = NSLocalizedString(@"LODING", @"");
 
         dMoneyToAdd = [[arrayOfParametrs objectAtIndex:3] integerValue];
-        dId = [[arrayOfParametrs objectAtIndex:4] integerValue];
+        dId = [[arrayOfParametrs objectAtIndex:2] integerValue];
     }
     return self;
 }
@@ -35,7 +35,7 @@
 {
     dNameForImage = nil;
     dUrl = nil;
-    dGoldText = nil;
+    dMoneyTextForPrurchase = nil;
 }
 
 -(UIImage*) imageForObject;
