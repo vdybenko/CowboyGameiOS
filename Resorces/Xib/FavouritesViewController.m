@@ -245,7 +245,7 @@
     else {
         SSConnection *connection = [SSConnection sharedInstance];
         [connection sendData:@"" packetID:NETWORK_SET_UNAVIBLE ofLength:sizeof(int)];
-        ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:[AccountDataSource sharedInstance] oponentAccount:oponentAccount];
+        ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:[AccountDataSource sharedInstance] oponentAccount:oponentAccount gameType:playerAccount.gameType];
         [self.navigationController pushViewController:activeDuelViewController animated:YES];
         activeDuelViewController = nil;
         [self releaseComponents];

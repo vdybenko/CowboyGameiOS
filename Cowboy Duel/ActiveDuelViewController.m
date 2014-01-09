@@ -113,6 +113,7 @@
     UIViewController *presentVC;
     
     CGSize sizeMainScreen;
+    GameType gameType;
 }
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *floatView;
@@ -146,14 +147,18 @@ static CGFloat userLiveImageViewStartWidth;
 static CGFloat blinkTopOriginY;
 static CGFloat blinkBottomOriginY;
 
--(id)initWithAccount:(AccountDataSource *)userAccount oponentAccount:(AccountDataSource *)pOponentAccount
+-(id)initWithAccount:(AccountDataSource *)userAccount oponentAccount:(AccountDataSource *)pOponentAccount gameType:(GameType)pGameType;
 {
-    self = [super initWithNibName:nil bundle:nil];
+    if (pGameType == GameTypeCasual) {
+        self = [super initWithNibName:@"ActiveDuelViewControllerLandscape" bundle:[NSBundle mainBundle]];
+    }else{
+        self = [super initWithNibName:@"ActiveDuelViewController" bundle:[NSBundle mainBundle]];
+    }
     if (self) {
-        
         // Custom initialization
         playerAccount = userAccount;
         opAccount  = pOponentAccount;
+        gameType = pGameType;
         
         NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/shot.aif", [[NSBundle mainBundle] resourcePath]]];
         
@@ -387,12 +392,14 @@ static CGFloat blinkBottomOriginY;
         //In potrait
         //x,y as you want
         //gunDrumViewController.view.frame = CGRectMake(0, 0,100,100);
-        CGRect gunframe = gunDrumViewController.view.frame;
-        gunframe.origin.y = 0;
-        gunDrumViewController.view.frame = gunframe;
-        [gunDrumViewController refreshController];
-        
-        plView.transform = CGAffineTransformMakeRotation(M_PI_2);
+        if(gameType == GameTypeCasual){
+            CGRect gunframe = gunDrumViewController.view.frame;
+            gunframe.origin.y = 0;
+            gunDrumViewController.view.frame = gunframe;
+            [gunDrumViewController refreshController];
+            
+            plView.transform = CGAffineTransformMakeRotation(M_PI_2);
+        }
     }
     
 }
@@ -426,8 +433,14 @@ static CGFloat blinkBottomOriginY;
         blurredBack.frame = deltaFrame;
         [self.view addSubview:blurredBack];
         
+        CGFloat widthForType;
+        if (gameType == GameTypeCasual) {
+            widthForType = sizeMainScreen.height;
+        }else{
+            widthForType = sizeMainScreen.width;
+        }
         finalStatusBack = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lg_title_view.png"]];
-        finalStatusBack.frame = CGRectMake((sizeMainScreen.height-320)/2, 0.0, 320, 72);
+        finalStatusBack.frame = CGRectMake((widthForType-320)/2, 0.0, 320, 72);
         finalStatusBack.backgroundColor = [UIColor clearColor];
         
         CGRect frame = finalStatusBack.frame;
@@ -1123,7 +1136,13 @@ static CGFloat blinkBottomOriginY;
         finalView.isTryAgainEnabled = isTryAgainEnabled;
         finalView.activeDuelViewController = self;
         
-        finalView.center = CGPointMake(sizeMainScreen.height/2, sizeMainScreen.width/2);
+        CGPoint pt;
+        if (gameType == GameTypeCasual) {
+            pt = CGPointMake(sizeMainScreen.height/2, sizeMainScreen.width/2);
+        }else{
+            pt = CGPointMake(sizeMainScreen.width/2, sizeMainScreen.height/2);
+        }
+        finalView.center = pt;
         finalView.hidden = YES;
         
         blurredBack.hidden = NO;
@@ -1160,7 +1179,17 @@ static CGFloat blinkBottomOriginY;
     
     if (animated){
         //preparations:
-        finalView.center = CGPointMake(sizeMainScreen.height/2, -finalView.frame.size.height/2);
+        
+        CGPoint ptScreenCenter;
+        CGPoint pt;
+        if (gameType == GameTypeCasual) {
+            ptScreenCenter = CGPointMake(sizeMainScreen.height/2, sizeMainScreen.width/2);
+            pt = CGPointMake(sizeMainScreen.height/2, -finalView.frame.size.height/2);
+        }else{
+            ptScreenCenter = CGPointMake(sizeMainScreen.width/2, sizeMainScreen.height/2);
+            pt = CGPointMake(sizeMainScreen.width/2, -finalView.frame.size.height/2);
+        }
+        finalView.center = pt;
         finalView.hidden = NO;
         btnTry.alpha = 0;
         btnBack.alpha = 0;
@@ -1189,13 +1218,13 @@ static CGFloat blinkBottomOriginY;
         }
         //
         [UIView animateWithDuration:0.5 animations:^{
-            CGPoint pointDown = CGPointMake(sizeMainScreen.height/2, sizeMainScreen.width/2);
+            CGPoint pointDown = ptScreenCenter;
             pointDown.y += 5;
             finalView.center = pointDown;
             
         }completion:^(BOOL complete){
             [UIView animateWithDuration:0.2 animations:^{
-                CGPoint pointUp = CGPointMake(sizeMainScreen.height/2, sizeMainScreen.width/2);
+                CGPoint pointUp = ptScreenCenter;
                 pointUp.y -= 50;
                 finalView.center = pointUp;
                 btnBack.alpha = 1;
@@ -1205,7 +1234,7 @@ static CGFloat blinkBottomOriginY;
                 
             }completion:^(BOOL complete){
                 [UIView animateWithDuration:0.2 animations:^{
-                    CGPoint pointView = CGPointMake(sizeMainScreen.height/2, sizeMainScreen.width/2);
+                    CGPoint pointView = ptScreenCenter;
                     pointView.y += 5;
                     finalView.center = pointView;
 

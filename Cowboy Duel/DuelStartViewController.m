@@ -496,7 +496,7 @@ static const char *GC_URL =  BASE_URL"api/gc";
 
 -(void)startBotDuel
 {
-    ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:playerAccount oponentAccount:oponentAccount];
+    ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:playerAccount oponentAccount:oponentAccount gameType:playerAccount.gameType];
     [self.navigationController pushViewController:activeDuelViewController animated:YES];
     activeDuelViewController = nil;
     [self releaseComponents];

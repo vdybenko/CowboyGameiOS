@@ -101,7 +101,7 @@
 
 @property(weak)id<ActiveDuelViewControllerDelegate> delegate;
 
--(id)initWithAccount:(AccountDataSource *)userAccount oponentAccount:(AccountDataSource *)pOponentAccount;
+-(id)initWithAccount:(AccountDataSource *)userAccount oponentAccount:(AccountDataSource *)pOponentAccount gameType:(GameType)gameType;
 -(void)userLost;
 -(void)removeViewController;
 -(void)showViewController:(UIViewController *)viewController;

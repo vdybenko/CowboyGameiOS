@@ -10,6 +10,12 @@
 #import "VisualViewDataSource.h"
 
 @class StartViewController;
+
+typedef enum{
+    GameTypeCasual,
+    GameTypeAccelerometer
+}GameType;
+
 @interface AccountDataSource : NSObject <FBLoginViewDelegate>
 
 @property(nonatomic, readonly) NSInteger accountDataSourceID;
@@ -33,7 +39,7 @@
 @property(strong, nonatomic) CDWeaponProduct *accountWeapon;
 
 @property(nonatomic) BOOL isTryingWeapon;
-@property(nonatomic) BOOL isCasualMode;
+@property(nonatomic) GameType gameType;
 
 @property(strong, nonatomic) NSString *avatar;
 @property(strong, nonatomic) NSString *age; 

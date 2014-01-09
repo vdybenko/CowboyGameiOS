@@ -150,7 +150,7 @@ static GameCenterViewController *gameCenterViewController;
             
         }else{
             
-            activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:playerAccount oponentAccount:oponentAccount];
+            activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:playerAccount oponentAccount:oponentAccount gameType:playerAccount.gameType];
             [activeDuelViewController setDelegate:self];
             [self setDelegate:activeDuelViewController];
             
@@ -180,7 +180,7 @@ static GameCenterViewController *gameCenterViewController;
         btnStartClick = YES;
     }else{
         DLog(@"nextDuelStart btnStartClick = Yes");
-        activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:playerAccount oponentAccount:oponentAccount];
+        activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:playerAccount oponentAccount:oponentAccount gameType:playerAccount.gameType];
         [activeDuelViewController setDelegate:self];
         [self setDelegate:activeDuelViewController];
         
@@ -751,7 +751,7 @@ static GameCenterViewController *gameCenterViewController;
             
             BOOL isLostConnectionSend = [self isLostConectionSend];
             if((!start)&&(!isLostConnectionSend)){
-                activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:playerAccount oponentAccount:oponentAccount];
+                activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:playerAccount oponentAccount:oponentAccount gameType:playerAccount.gameType];
                 [activeDuelViewController setDelegate:self];
                 [self setDelegate:activeDuelViewController];
                 if (btnStartClick) {
@@ -780,7 +780,7 @@ static GameCenterViewController *gameCenterViewController;
             accelState = YES;
             if ([[parentVC.navigationController visibleViewController] isKindOfClass:[ActiveDuelViewController class]]) return;
             
-            activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:playerAccount oponentAccount:oponentAccount];
+            activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:playerAccount oponentAccount:oponentAccount gameType:playerAccount.gameType];
             [activeDuelViewController setDelegate:self];
             [self setDelegate:activeDuelViewController];
             

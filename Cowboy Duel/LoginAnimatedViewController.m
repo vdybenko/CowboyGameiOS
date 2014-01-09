@@ -158,7 +158,7 @@ static LoginAnimatedViewController *sharedHelper = nil;
     AccountDataSource *oponentAccount = [[AccountDataSource alloc] initWithLocalPlayer];
     playerAccount.sessionID = @"-1";
     UINavigationController *nav = ((TestAppDelegate *)[[UIApplication sharedApplication] delegate]).navigationController;
-    ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:playerAccount oponentAccount:oponentAccount];
+    ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:playerAccount oponentAccount:oponentAccount gameType:playerAccount.gameType];
     [nav pushViewController:activeDuelViewController animated:YES];
     activeDuelViewController = nil;
 }

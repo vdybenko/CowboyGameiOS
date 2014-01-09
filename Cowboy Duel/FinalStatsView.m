@@ -399,7 +399,7 @@ FXLabel *lblGoldPlus;
 -(void)showMessageOfNewLevel
 {
     UIInterfaceOrientationMask *orient = UIInterfaceOrientationMaskPortrait;
-    if ([AccountDataSource sharedInstance].isCasualMode) {
+    if ([AccountDataSource sharedInstance].gameType == GameTypeCasual) {
         orient = UIInterfaceOrientationMaskLandscape;
     }
     [activeDuelViewController.btnTry setEnabled:NO];
@@ -410,7 +410,7 @@ FXLabel *lblGoldPlus;
 -(void)showMessageOfMoreMoney:(NSInteger)money withLabel:(NSString *)labelForCongratulation
 {
     UIInterfaceOrientationMask *orient = UIInterfaceOrientationMaskPortrait;
-    if ([AccountDataSource sharedInstance].isCasualMode) {
+    if ([AccountDataSource sharedInstance].gameType == GameTypeCasual) {
         orient = UIInterfaceOrientationMaskLandscape;
     }
     [activeDuelViewController.btnTry setEnabled:NO];

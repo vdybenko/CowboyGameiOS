@@ -334,6 +334,7 @@
 		762FA45D16DBA22400CA5E2F /* ivBloodHeader@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 762FA45916DBA22400CA5E2F /* ivBloodHeader@2x.png */; };
 		763C36BA18450BE200EAFE92 /* builderAttacIco@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 763C36B918450BE200EAFE92 /* builderAttacIco@2x.png */; };
 		763E6BB71664B0F900FA4E86 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 763E6BB61664B0F900FA4E86 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		763EB39C187F006F008C9F6B /* ActiveDuelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 763EB39B187F006F008C9F6B /* ActiveDuelViewController.xib */; };
 		763F8A291578A3A900D8BB42 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 763F8A281578A3A900D8BB42 /* libxml2.2.dylib */; };
 		763F8A3D1578FC0900D8BB42 /* UIView+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 763F8A3B1578FC0900D8BB42 /* UIView+Hierarchy.m */; };
 		764B07211598A5B30050D4E4 /* UIView+Dinamic_BackGround.m in Sources */ = {isa = PBXBuildFile; fileRef = 764B07201598A5B30050D4E4 /* UIView+Dinamic_BackGround.m */; };
@@ -670,8 +671,8 @@
 		BD8000D6157755A600703AC8 /* OGHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8000D5157755A600703AC8 /* OGHelper.m */; };
 		BD81E638169EC4D100CE8278 /* ActiveDuelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD81E636169EC4D100CE8278 /* ActiveDuelViewController.m */; };
 		BD81E639169EC4D100CE8278 /* ActiveDuelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD81E636169EC4D100CE8278 /* ActiveDuelViewController.m */; };
-		BD81E63A169EC4D100CE8278 /* ActiveDuelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD81E637169EC4D100CE8278 /* ActiveDuelViewController.xib */; };
-		BD81E63B169EC4D100CE8278 /* ActiveDuelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD81E637169EC4D100CE8278 /* ActiveDuelViewController.xib */; };
+		BD81E63A169EC4D100CE8278 /* ActiveDuelViewControllerLandscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD81E637169EC4D100CE8278 /* ActiveDuelViewControllerLandscape.xib */; };
+		BD81E63B169EC4D100CE8278 /* ActiveDuelViewControllerLandscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD81E637169EC4D100CE8278 /* ActiveDuelViewControllerLandscape.xib */; };
 		BD81E651169F0F1F00CE8278 /* UIImage+Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = BD81E650169F0F1F00CE8278 /* UIImage+Sprite.m */; };
 		BD81E652169F0F1F00CE8278 /* UIImage+Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = BD81E650169F0F1F00CE8278 /* UIImage+Sprite.m */; };
 		BD81FB431678847D00417076 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD81FB421678847D00417076 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -1392,6 +1393,7 @@
 		762FA45916DBA22400CA5E2F /* ivBloodHeader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ivBloodHeader@2x.png"; sourceTree = "<group>"; };
 		763C36B918450BE200EAFE92 /* builderAttacIco@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "builderAttacIco@2x.png"; sourceTree = "<group>"; };
 		763E6BB61664B0F900FA4E86 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		763EB39B187F006F008C9F6B /* ActiveDuelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActiveDuelViewController.xib; sourceTree = "<group>"; };
 		763F8A281578A3A900D8BB42 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		763F8A3B1578FC0900D8BB42 /* UIView+Hierarchy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Hierarchy.m"; sourceTree = "<group>"; };
 		763F8A3C1578FC0900D8BB42 /* UIView+Hierarchy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Hierarchy.h"; sourceTree = "<group>"; };
@@ -1865,7 +1867,7 @@
 		BD8000D5157755A600703AC8 /* OGHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OGHelper.m; sourceTree = "<group>"; };
 		BD81E635169EC4D100CE8278 /* ActiveDuelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ActiveDuelViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		BD81E636169EC4D100CE8278 /* ActiveDuelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ActiveDuelViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		BD81E637169EC4D100CE8278 /* ActiveDuelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ActiveDuelViewController.xib; path = "../Cowboy Duel/ActiveDuelViewController.xib"; sourceTree = "<group>"; };
+		BD81E637169EC4D100CE8278 /* ActiveDuelViewControllerLandscape.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ActiveDuelViewControllerLandscape.xib; path = "../Cowboy Duel/ActiveDuelViewControllerLandscape.xib"; sourceTree = "<group>"; };
 		BD81E64F169F0F1F00CE8278 /* UIImage+Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Sprite.h"; sourceTree = "<group>"; };
 		BD81E650169F0F1F00CE8278 /* UIImage+Sprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Sprite.m"; sourceTree = "<group>"; };
 		BD81FB421678847D00417076 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -2823,7 +2825,8 @@
 				76747A57184CE21200BA4F5E /* InfoViewController.xib */,
 				7687667816BA7543003405F9 /* GunDrumViewController.xib */,
 				31A093521701C6DE00CDF4A9 /* Horse.xib */,
-				BD81E637169EC4D100CE8278 /* ActiveDuelViewController.xib */,
+				763EB39B187F006F008C9F6B /* ActiveDuelViewController.xib */,
+				BD81E637169EC4D100CE8278 /* ActiveDuelViewControllerLandscape.xib */,
 				768B9E2F16EF28D200278FCA /* WomanShape.xib */,
 				7693D98016F219BD0096F61F /* GoodCowboy.xib */,
 				7693D97416F1B7390096F61F /* OpponentShape.xib */,
@@ -3959,6 +3962,7 @@
 				312B2F4215E7A24F006D2470 /* fin_img_high_score@2x.png in Resources */,
 				312B2F4315E7A24F006D2470 /* fin_img_new_lvl.png in Resources */,
 				312B2F4415E7A24F006D2470 /* fin_img_new_lvl@2x.png in Resources */,
+				763EB39C187F006F008C9F6B /* ActiveDuelViewController.xib in Resources */,
 				76864B391626A0E80095BBEF /* TopPlayersCell.xib in Resources */,
 				76864B3B1626DAC30095BBEF /* OnLinePlayersCell.xib in Resources */,
 				7687E8C016391A32003C9EE6 /* StoreProductCell.xib in Resources */,
@@ -4004,7 +4008,7 @@
 				BD05E7D01669192600F04140 /* iconGun.png in Resources */,
 				BD16BF981680934F00628CCC /* FunPageViewController.xib in Resources */,
 				76F48C1816A987C5000123AC /* ProfileViewControllerWanted.xib in Resources */,
-				BD81E63A169EC4D100CE8278 /* ActiveDuelViewController.xib in Resources */,
+				BD81E63A169EC4D100CE8278 /* ActiveDuelViewControllerLandscape.xib in Resources */,
 				BD0E064016A56F95004E9EDA /* oponent_shot.mp3 in Resources */,
 				BD0E064616A588E1004E9EDA /* brocken_glass.mp3 in Resources */,
 				BD243B0E16A9A86A00D89E47 /* oponent_shot.aif in Resources */,
@@ -4457,7 +4461,7 @@
 				BD83A5A116720DFE003EE4B3 /* iconGun.png in Resources */,
 				BD83A5B41672257C003EE4B3 /* MyViewTest-testIPadViewController-1-0-UIView.png in Resources */,
 				BD017BFD16723FCC005C5471 /* MyViewTest-testLoadViewController-1-0-UIView.png in Resources */,
-				BD81E63B169EC4D100CE8278 /* ActiveDuelViewController.xib in Resources */,
+				BD81E63B169EC4D100CE8278 /* ActiveDuelViewControllerLandscape.xib in Resources */,
 				BD0E064116A56F95004E9EDA /* oponent_shot.mp3 in Resources */,
 				BD0E064716A588E1004E9EDA /* brocken_glass.mp3 in Resources */,
 				BD243B0F16A9A86A00D89E47 /* oponent_shot.aif in Resources */,
