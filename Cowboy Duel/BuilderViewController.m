@@ -628,10 +628,10 @@
     [self refreshController];
 }
 
--(void) grid:(GMGridView*)grid buyProductForIndex:(NSInteger)index forType:(CharacterPart)type;
+-(void) grid:(GMGridView*)pGrid buyProductForIndex:(NSInteger)index forType:(CharacterPart)type;
 {
     if (typeOfCharacterPart == CharacterPartGold) {
-        [self gridForGold:grid buyProductForIndex:index forType:type];
+        [self gridForGold:pGrid buyProductForIndex:index forType:type];
         return;
     }
     CDVisualViewCharacterPart *part = [arrObjects objectAtIndex:index];
@@ -726,7 +726,7 @@
     [self refreshControllerWithGrid];
 }
 
--(void) gridForGold:(GMGridView*)grid buyProductForIndex:(NSInteger)index forType:(CharacterPart)type;
+-(void) gridForGold:(GMGridView*)pGrid buyProductForIndex:(NSInteger)index forType:(CharacterPart)type;
 {
 }
 
