@@ -969,7 +969,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         [playerAccount.finalInfoTable removeAllObjects];
         
         if ([AccountDataSource sharedInstance].activeDuel) {
-            ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:[AccountDataSource sharedInstance] oponentAccount:playerAccount gameType:playerAccount.gameType];
+            ActiveDuelViewController *activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:[AccountDataSource sharedInstance] oponentAccount:playerAccount gameType:[AccountDataSource sharedInstance].gameType];
             UIViewController *vc = [StartViewController sharedInstance];
             [self.navigationController popViewControllerAnimated:NO];
             [vc.navigationController pushViewController:activeDuelViewController animated:YES];
@@ -1007,7 +1007,7 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 
 -(void)startBotDuel
 {
-    ActiveDuelViewController __block *activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:[AccountDataSource sharedInstance] oponentAccount:playerAccount gameType:playerAccount.gameType];
+    ActiveDuelViewController __block *activeDuelViewController = [[ActiveDuelViewController alloc] initWithAccount:[AccountDataSource sharedInstance] oponentAccount:playerAccount gameType:[AccountDataSource sharedInstance].gameType];
     [self.navigationController popViewControllerAnimated:NO];
     [UIView animateWithDuration:0.75
                      animations:^{

@@ -401,6 +401,8 @@ FXLabel *lblGoldPlus;
     UIInterfaceOrientationMask *orient = UIInterfaceOrientationMaskPortrait;
     if ([AccountDataSource sharedInstance].gameType == GameTypeCasual) {
         orient = UIInterfaceOrientationMaskLandscape;
+    }else{
+        orient = UIInterfaceOrientationMaskPortrait;
     }
     [activeDuelViewController.btnTry setEnabled:NO];
     LevelCongratViewController *lvlCongratulationViewController=[[LevelCongratViewController alloc] initForNewLevelPlayerAccount:playerAccount andController:activeDuelViewController tryButtonEnable:isTryAgainEnabled orientation:orient];
@@ -412,6 +414,8 @@ FXLabel *lblGoldPlus;
     UIInterfaceOrientationMask *orient = UIInterfaceOrientationMaskPortrait;
     if ([AccountDataSource sharedInstance].gameType == GameTypeCasual) {
         orient = UIInterfaceOrientationMaskLandscape;
+    }else{
+        orient = UIInterfaceOrientationMaskPortrait;
     }
     [activeDuelViewController.btnTry setEnabled:NO];
     MoneyCongratViewController *moneyCongratulationViewController = [[MoneyCongratViewController alloc] initForAchivmentPlayerAccount:playerAccount withLabel:labelForCongratulation andController:activeDuelViewController tryButtonEnable:isTryAgainEnabled orientation:orient];

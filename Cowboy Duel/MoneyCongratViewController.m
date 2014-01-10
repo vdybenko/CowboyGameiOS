@@ -170,15 +170,23 @@
 }
 
 -(BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
-    return interfaceOrientation == UIInterfaceOrientationLandscapeRight;
+    return NO;
 }
 
 -(NSUInteger) supportedInterfaceOrientations{
-    return UIInterfaceOrientationMaskLandscape;
+    if(orient==UIInterfaceOrientationMaskLandscape){
+        return UIInterfaceOrientationMaskLandscape;
+    }else{
+        return UIInterfaceOrientationMaskPortrait;
+    }
 }
 
 - (UIInterfaceOrientation) preferredInterfaceOrientationForPresentation{
-    return UIInterfaceOrientationLandscapeRight;
+    if(orient==UIInterfaceOrientationMaskLandscape){
+        return UIInterfaceOrientationLandscapeRight;
+    }else{
+        return UIInterfaceOrientationPortrait;
+    }
 }
 
 #pragma mark -

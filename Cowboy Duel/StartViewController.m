@@ -786,6 +786,15 @@ static StartViewController *sharedHelper = nil;
 
 -(IBAction)showHelp:(id)sender
 {
+//    To do delete this
+    if (playerAccount.gameType == GameTypeCasual) {
+        playerAccount.gameType = GameTypeAccelerometer;
+        DLog(@"GameTypeAccelerometer");
+    }else{
+        playerAccount.gameType = GameTypeCasual;
+        DLog(@"GameTypeCasual");
+    }
+    return;
     [[NSNotificationCenter defaultCenter] postNotificationName:kAnalyticsTrackEventNotification
 														object:self
 													  userInfo:[NSDictionary dictionaryWithObject:@"/help_click" forKey:@"event"]];
