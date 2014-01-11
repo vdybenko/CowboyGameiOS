@@ -114,7 +114,7 @@
     lbFavoritesBtn.font = [UIFont fontWithName: @"DecreeNarrow" size:24];
     
     if ([StartViewController sharedInstance].firstRun) {
-        infoViewController = [[InfoViewController alloc] initWithText:NSLocalizedString(@"PRACTISE FIRST", @"") interfaceOrientation:UIInterfaceOrientationPortrait];
+        infoViewController = [[InfoViewController alloc] initWithText:NSLocalizedString(@"PRACTISE FIRST", @"") interfaceOrientation:UIInterfaceOrientationLandscapeRight];
         [self.view addSubview:infoViewController.view];
         [StartViewController sharedInstance].firstRun = NO;
     }

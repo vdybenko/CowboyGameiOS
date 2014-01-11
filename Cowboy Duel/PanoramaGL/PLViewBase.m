@@ -483,10 +483,6 @@ void ecefToEnu(double lat, double lon, double x, double y, double z, double xr, 
     return [CAEAGLLayer class];
 }
 
-- (void)setGameType:(GameType)gameType;
-{
-    
-}
 #pragma mark -
 #pragma mark draw methods
 

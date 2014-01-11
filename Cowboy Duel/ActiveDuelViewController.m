@@ -199,7 +199,7 @@ static CGFloat blinkBottomOriginY;
     plView.camera.rollRange = PLRangeMake (-180, 180);
     
     plView.camera.yawRange = PLRangeMake (-180, 180);
-    [plView setGameType:playerAccount.gameType];
+    [plView setGameType:gameType];
     NSString *syfics = @"";
     if ([Utils isiPhoneRetina]) {
 //        syfics = @"@2x";
@@ -1570,10 +1570,6 @@ float frequencyOpponentShoting()
 #pragma mark - IBAction
 
 - (IBAction)btnSkipClicked:(id)sender {
-    //    To do delete this
-    finalViewDataSource = [[FinalViewDataSource alloc] initWithUserTime:(shotTime) andOponentTime:999999 andTeaching:NO andAccount: playerAccount andOpAccount:opAccount];
-    [self performSelector:@selector(showFinalView:) withObject:finalViewDataSource afterDelay:1.0];
-    return;
     [UIView animateWithDuration:0.75
                      animations:^{
                          [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];

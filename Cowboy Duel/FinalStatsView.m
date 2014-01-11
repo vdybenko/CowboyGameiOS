@@ -378,9 +378,7 @@ FXLabel *lblGoldPlus;
             numberRev=[userDef integerForKey:@"DEFEATE_MES"];
         }
         int result = numberRev % 3;
-//        if ([AccountDataSource sharedInstance].money > 150 && [AccountDataSource sharedInstance].money < 400 && result==0) {
-            if (YES) {
-
+        if ([AccountDataSource sharedInstance].money > 150 && [AccountDataSource sharedInstance].money < 400 && result==0) {
             numberRev=1;
             __block BuilderViewController *builder = [[BuilderViewController alloc] init];
             __block ActiveDuelViewController *activeDuelViewControllerBlock = activeDuelViewController;

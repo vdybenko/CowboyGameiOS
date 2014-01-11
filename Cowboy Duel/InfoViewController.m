@@ -86,12 +86,13 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     CGSize sizeMainScreen = [UIScreen mainScreen].bounds.size;
-    vContainer.center = CGPointMake(sizeMainScreen.height/2, sizeMainScreen.width/2);
     
     CGRect frame = self.view.frame;
     if (interfaceOrientation==UIInterfaceOrientationPortrait) {
+        vContainer.center = CGPointMake(sizeMainScreen.width/2, sizeMainScreen.height/2);
         frame.size = CGSizeMake(sizeMainScreen.width, sizeMainScreen.height);
     }else{
+        vContainer.center = CGPointMake(sizeMainScreen.height/2, sizeMainScreen.width/2);
         frame.size = CGSizeMake(sizeMainScreen.height, sizeMainScreen.width);
     }
     self.view.frame = frame;
