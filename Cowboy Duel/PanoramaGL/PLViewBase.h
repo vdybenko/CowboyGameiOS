@@ -18,6 +18,7 @@
 
 #import "PLIView.h"
 #import "JoyStickView.h"
+#import "AccountDataSource.h"
 
 @protocol PLIRenderer;
 
@@ -86,10 +87,13 @@
 	
 	BOOL isPointerVisible;
     
+    
 }
 
 @property (nonatomic, retain) UIView *menView;
 @property (nonatomic, retain) JoyStickView *vJoyStick;
+@property (nonatomic) GameType gameType;
 
 - (void)setOponentCoordinates:(NSArray *)pois;
+
 @end

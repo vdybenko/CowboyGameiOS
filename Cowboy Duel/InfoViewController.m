@@ -47,6 +47,7 @@
     self = [self initMainWithButton:NO];
     
     if (self) {
+        interfaceOrientation = pInterfaceOrientation;
         [lbMainText setText:text];
     }
     return self;
@@ -61,6 +62,8 @@
         UIColor *buttonsTitleColor = [UIColor colorWithRed:240.0f/255.0f green:222.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
         [btnMain setTitleByLabel:title withColor:buttonsTitleColor fontSize:24];
         blkFinish = block;
+        
+        interfaceOrientation = pInterfaceOrientation;
     }
     return self;
 }

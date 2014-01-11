@@ -199,7 +199,7 @@ static CGFloat blinkBottomOriginY;
     plView.camera.rollRange = PLRangeMake (-180, 180);
     
     plView.camera.yawRange = PLRangeMake (-180, 180);
-    
+    [plView setGameType:playerAccount.gameType];
     NSString *syfics = @"";
     if ([Utils isiPhoneRetina]) {
 //        syfics = @"@2x";
@@ -244,12 +244,23 @@ static CGFloat blinkBottomOriginY;
     barellObjectArray = [[NSMutableArray alloc] initWithCapacity:countOfBarrels];
     cactusObjectArray = [[NSMutableArray alloc] initWithCapacity:countOfCactuses];
 
+    CGFloat yBarelFrame;
+    CGFloat xBarelFrame;
+    if (playerAccount.gameType == GameTypeCasual) {
+        yBarelFrame = 140;
+        xBarelFrame = 180;
+    }else{
+        yBarelFrame = 120;
+        xBarelFrame = 80;
+    }
+    
     CGRect barelFrame;
     int indexBarrel = 0;
     barelFrame = barellObject.frame;
     barelFrame.origin.x = opponentShape.frame.origin.x;
     
-    barelFrame.origin.y = 140;
+    barelFrame.origin.y = yBarelFrame;
+    
     countOfBarrels = 5;
     countOfCactuses = 5;
     int randomBarrels = arc4random()%3 + 1;
@@ -272,7 +283,7 @@ static CGFloat blinkBottomOriginY;
                 if (countOfBarrels - i == 1 || randomBarrels == 1) {
                     
                     [barellObjectArray addObject:barellObject];
-                    barelFrame.origin.x = barelFrame.origin.x + 180;
+                    barelFrame.origin.x = barelFrame.origin.x + xBarelFrame;
                     [self.floatView addSubview:barellObject];
                     
                     indexBarrel = 0;
@@ -286,7 +297,7 @@ static CGFloat blinkBottomOriginY;
 
                 if (countOfBarrels - i == 2 || randomBarrels == 2) {
                     [barellObjectArray addObject:barellObject];
-                    barelFrame.origin.x = barelFrame.origin.x + 180;
+                    barelFrame.origin.x = barelFrame.origin.x + xBarelFrame;
                     [self.floatView addSubview:barellObject];
                     
                     indexBarrel = 0;
@@ -300,7 +311,7 @@ static CGFloat blinkBottomOriginY;
                 [barellObject showBarrels];
                 
                 [barellObjectArray addObject:barellObject];
-                barelFrame.origin.x = barelFrame.origin.x + 180;
+                barelFrame.origin.x = barelFrame.origin.x + xBarelFrame;
                 [self.floatView addSubview:barellObject];
 
                 indexBarrel = 0;
@@ -316,7 +327,7 @@ static CGFloat blinkBottomOriginY;
         
         if (i > 0) {
             cactusObject = [cactusObjectArray objectAtIndex:i-1];
-            cactusFrame.origin.x = cactusObject.frame.origin.x + 180;
+            cactusFrame.origin.x = cactusObject.frame.origin.x + xBarelFrame;
             cactusFrame.origin.y = 150;
             
         }else{
@@ -428,17 +439,23 @@ static CGFloat blinkBottomOriginY;
     {
         blurredBack = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bloorOnBlackView.png"]];
         blurredBack.hidden = YES;
+        
         CGRect deltaFrame = blurredBack.frame;
-        deltaFrame.size.width = sizeMainScreen.height;
-        blurredBack.frame = deltaFrame;
-        [self.view addSubview:blurredBack];
         
         CGFloat widthForType;
         if (gameType == GameTypeCasual) {
             widthForType = sizeMainScreen.height;
+            deltaFrame.size.height = sizeMainScreen.width;
+            deltaFrame.size.width = sizeMainScreen.height;
         }else{
             widthForType = sizeMainScreen.width;
+            deltaFrame.size.height = sizeMainScreen.height;
+            deltaFrame.size.width = sizeMainScreen.width;
         }
+        
+        blurredBack.frame = deltaFrame;
+        [self.view addSubview:blurredBack];
+        
         finalStatusBack = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lg_title_view.png"]];
         finalStatusBack.frame = CGRectMake((widthForType-320)/2, 0.0, 320, 72);
         finalStatusBack.backgroundColor = [UIColor clearColor];

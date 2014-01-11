@@ -109,7 +109,7 @@
                                     <rect key="frame" x="0.0" y="1" width="66" height="66"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <state key="normal" backgroundImage="hatButton.png">
+                                    <state key="normal" backgroundImage="moneyButton.png">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
@@ -390,6 +390,7 @@
         <image name="gunsButton.png" width="140" height="139"/>
         <image name="hatButton.png" width="140" height="139"/>
         <image name="jacketsButton.png" width="140" height="139"/>
+        <image name="moneyButton.png" width="141" height="139"/>
         <image name="pantsButton.png" width="140" height="139"/>
         <image name="shirtButtonpng.png" width="162" height="139"/>
         <image name="shoesButton.png" width="139" height="139"/>

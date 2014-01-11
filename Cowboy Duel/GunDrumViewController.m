@@ -25,6 +25,9 @@
     UIImageView *noTarget2;
     UIImageView *goodIco;
     
+    CGPoint pntGunCloseSimple;
+    CGPoint pntGunCloseIphone5;
+    
     int indexOfGargedBullet;
     
     AVAudioPlayer *loadBulletAudioPlayer;
@@ -49,8 +52,6 @@
 //points
 static CGPoint pntDumpOpen;
 static const CGPoint pntDumpClose = {187,128};//center of image
-static const CGPoint pntGunCloseSimple = {46,124};
-static const CGPoint pntGunCloseIphone5 = {90,124};
 static CGPoint pntGunClose;
 static const CGPoint pntViewShow = {0,0};
 static const CGPoint pntViewHide = {0,400};
@@ -84,7 +85,15 @@ static const CGFloat timeSpinDump = 0.3f;
 #pragma mark
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if ([AccountDataSource sharedInstance].gameType == GameTypeCasual) {
+        self = [super initWithNibName:@"GunDrumViewControllerLandscape" bundle:[NSBundle mainBundle]];
+        pntGunCloseSimple = CGPointMake(46,124);
+        pntGunCloseIphone5 = CGPointMake(90,124);
+    }else{
+        self = [super initWithNibName:@"GunDrumViewController" bundle:[NSBundle mainBundle]];
+        pntGunCloseSimple = CGPointMake(-26,224);
+        pntGunCloseIphone5 = CGPointMake(-26,312);
+    }
     if (self) {
         [self loadView];
 
@@ -94,7 +103,14 @@ static const CGFloat timeSpinDump = 0.3f;
         }else{
             pntGunClose = pntGunCloseSimple;
         }
-
+        if ([AccountDataSource sharedInstance].gameType == GameTypeCasual) {
+            pntGunCloseSimple = CGPointMake(46,124);
+            pntGunCloseIphone5 = CGPointMake(90,124);
+        }else{
+            pntGunCloseSimple = CGPointMake(-26,224);
+            pntGunCloseIphone5 = CGPointMake(-26,312);
+        }
+        
         isCharging = NO;
        
         pntDumpOpen=drumBullets.center;

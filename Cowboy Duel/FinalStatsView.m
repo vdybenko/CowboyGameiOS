@@ -378,13 +378,21 @@ FXLabel *lblGoldPlus;
             numberRev=[userDef integerForKey:@"DEFEATE_MES"];
         }
         int result = numberRev % 3;
-        if ([AccountDataSource sharedInstance].money > 150 && [AccountDataSource sharedInstance].money < 400 && result==0) {
+//        if ([AccountDataSource sharedInstance].money > 150 && [AccountDataSource sharedInstance].money < 400 && result==0) {
+            if (YES) {
+
             numberRev=1;
             __block BuilderViewController *builder = [[BuilderViewController alloc] init];
             __block ActiveDuelViewController *activeDuelViewControllerBlock = activeDuelViewController;
             __block UIViewController *vc = [StartViewController sharedInstance];
             
-            infoViewController = [[InfoViewController alloc] initWithText:NSLocalizedString(@"USER DEFEAT", @"") interfaceOrientation:UIInterfaceOrientationLandscapeRight withButtonTitle:NSLocalizedString(@"Profile", @"") block:^(){
+            UIInterfaceOrientation orient;
+            if (playerAccount.gameType == GameTypeCasual) {
+                orient = UIInterfaceOrientationLandscapeRight;
+            }else{
+                orient = UIInterfaceOrientationPortrait;
+            }
+            infoViewController = [[InfoViewController alloc] initWithText:NSLocalizedString(@"USER DEFEAT", @"") interfaceOrientation:orient withButtonTitle:NSLocalizedString(@"Profile", @"") block:^(){
                 [activeDuelViewControllerBlock.navigationController popViewControllerAnimated:NO];
                 [vc.navigationController pushViewController:builder animated:YES];
             }];

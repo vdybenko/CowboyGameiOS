@@ -319,6 +319,7 @@
 		761912E2187DA27300D5D4D7 /* builderGold5.png in Resources */ = {isa = PBXBuildFile; fileRef = 761912DC187DA27300D5D4D7 /* builderGold5.png */; };
 		761912E3187DA27300D5D4D7 /* builderGold6.png in Resources */ = {isa = PBXBuildFile; fileRef = 761912DD187DA27300D5D4D7 /* builderGold6.png */; };
 		761912E9187DA95E00D5D4D7 /* CDBuiderPurchaseGold.m in Sources */ = {isa = PBXBuildFile; fileRef = 761912E8187DA95E00D5D4D7 /* CDBuiderPurchaseGold.m */; };
+		761C50421881663D00DE5A48 /* moneyButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 761C50411881663D00DE5A48 /* moneyButton.png */; };
 		761C5DDC17F6246B00DF9122 /* icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 761C5DDB17F6246B00DF9122 /* icon-120.png */; };
 		761C5DDD17F6265000DF9122 /* icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 761C5DDB17F6246B00DF9122 /* icon-120.png */; };
 		761D3F98184E1F76005A3D6F /* MoneyCongratViewControllerLandscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761D3F96184E1F75005A3D6F /* MoneyCongratViewControllerLandscape.xib */; };
@@ -332,6 +333,7 @@
 		762FA45B16DBA22400CA5E2F /* ivBloodBottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 762FA45716DBA22400CA5E2F /* ivBloodBottom@2x.png */; };
 		762FA45C16DBA22400CA5E2F /* ivBloodHeader.png in Resources */ = {isa = PBXBuildFile; fileRef = 762FA45816DBA22400CA5E2F /* ivBloodHeader.png */; };
 		762FA45D16DBA22400CA5E2F /* ivBloodHeader@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 762FA45916DBA22400CA5E2F /* ivBloodHeader@2x.png */; };
+		7632B1E0188047870032AF2B /* GunDrumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7632B1DF188047870032AF2B /* GunDrumViewController.xib */; };
 		763C36BA18450BE200EAFE92 /* builderAttacIco@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 763C36B918450BE200EAFE92 /* builderAttacIco@2x.png */; };
 		763E6BB71664B0F900FA4E86 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 763E6BB61664B0F900FA4E86 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		763EB39C187F006F008C9F6B /* ActiveDuelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 763EB39B187F006F008C9F6B /* ActiveDuelViewController.xib */; };
@@ -379,7 +381,7 @@
 		7687667416BA7386003405F9 /* gd_sleeve.png in Resources */ = {isa = PBXBuildFile; fileRef = 7687666E16BA7386003405F9 /* gd_sleeve.png */; };
 		7687667516BA7386003405F9 /* gd_sleeve@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7687666F16BA7386003405F9 /* gd_sleeve@2x.png */; };
 		7687667916BA7543003405F9 /* GunDrumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7687667716BA7543003405F9 /* GunDrumViewController.m */; };
-		7687667A16BA7543003405F9 /* GunDrumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7687667816BA7543003405F9 /* GunDrumViewController.xib */; };
+		7687667A16BA7543003405F9 /* GunDrumViewControllerLandscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7687667816BA7543003405F9 /* GunDrumViewControllerLandscape.xib */; };
 		7687E8C016391A32003C9EE6 /* StoreProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7687E8BF16391A32003C9EE6 /* StoreProductCell.xib */; };
 		7687E8C3163920FE003C9EE6 /* StoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7687E8C2163920FE003C9EE6 /* StoreViewController.m */; };
 		7687E8C516392534003C9EE6 /* StoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7687E8C416392534003C9EE6 /* StoreViewController.xib */; };
@@ -1378,6 +1380,7 @@
 		761912DD187DA27300D5D4D7 /* builderGold6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = builderGold6.png; sourceTree = "<group>"; };
 		761912E7187DA95E00D5D4D7 /* CDBuiderPurchaseGold.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDBuiderPurchaseGold.h; sourceTree = "<group>"; };
 		761912E8187DA95E00D5D4D7 /* CDBuiderPurchaseGold.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDBuiderPurchaseGold.m; sourceTree = "<group>"; };
+		761C50411881663D00DE5A48 /* moneyButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = moneyButton.png; sourceTree = "<group>"; };
 		761C5DDB17F6246B00DF9122 /* icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-120.png"; sourceTree = "<group>"; };
 		761D3F96184E1F75005A3D6F /* MoneyCongratViewControllerLandscape.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoneyCongratViewControllerLandscape.xib; sourceTree = "<group>"; };
 		761D3F97184E1F75005A3D6F /* LevelCongratViewControllerLandscape.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LevelCongratViewControllerLandscape.xib; sourceTree = "<group>"; };
@@ -1391,6 +1394,7 @@
 		762FA45716DBA22400CA5E2F /* ivBloodBottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ivBloodBottom@2x.png"; sourceTree = "<group>"; };
 		762FA45816DBA22400CA5E2F /* ivBloodHeader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ivBloodHeader.png; sourceTree = "<group>"; };
 		762FA45916DBA22400CA5E2F /* ivBloodHeader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ivBloodHeader@2x.png"; sourceTree = "<group>"; };
+		7632B1DF188047870032AF2B /* GunDrumViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GunDrumViewController.xib; sourceTree = "<group>"; };
 		763C36B918450BE200EAFE92 /* builderAttacIco@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "builderAttacIco@2x.png"; sourceTree = "<group>"; };
 		763E6BB61664B0F900FA4E86 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		763EB39B187F006F008C9F6B /* ActiveDuelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActiveDuelViewController.xib; sourceTree = "<group>"; };
@@ -1459,7 +1463,7 @@
 		7687666F16BA7386003405F9 /* gd_sleeve@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gd_sleeve@2x.png"; sourceTree = "<group>"; };
 		7687667616BA7543003405F9 /* GunDrumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = GunDrumViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		7687667716BA7543003405F9 /* GunDrumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = GunDrumViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		7687667816BA7543003405F9 /* GunDrumViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GunDrumViewController.xib; path = "../Cowboy Duel/GunDrumViewController.xib"; sourceTree = "<group>"; };
+		7687667816BA7543003405F9 /* GunDrumViewControllerLandscape.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GunDrumViewControllerLandscape.xib; path = "../Cowboy Duel/GunDrumViewControllerLandscape.xib"; sourceTree = "<group>"; };
 		7687E8BF16391A32003C9EE6 /* StoreProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreProductCell.xib; sourceTree = "<group>"; };
 		7687E8C1163920FE003C9EE6 /* StoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = StoreViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		7687E8C2163920FE003C9EE6 /* StoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = StoreViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -2823,7 +2827,8 @@
 			isa = PBXGroup;
 			children = (
 				76747A57184CE21200BA4F5E /* InfoViewController.xib */,
-				7687667816BA7543003405F9 /* GunDrumViewController.xib */,
+				7632B1DF188047870032AF2B /* GunDrumViewController.xib */,
+				7687667816BA7543003405F9 /* GunDrumViewControllerLandscape.xib */,
 				31A093521701C6DE00CDF4A9 /* Horse.xib */,
 				763EB39B187F006F008C9F6B /* ActiveDuelViewController.xib */,
 				BD81E637169EC4D100CE8278 /* ActiveDuelViewControllerLandscape.xib */,
@@ -3692,6 +3697,7 @@
 			isa = PBXGroup;
 			children = (
 				C4966912174F96A700822329 /* CloseButton.png */,
+				761C50411881663D00DE5A48 /* moneyButton.png */,
 				C4966901174F8A6300822329 /* faceButton.png */,
 				C4966902174F8A6300822329 /* gunsButton.png */,
 				C43D3F5A177DAA5900D44F39 /* shirtButtonpng.png */,
@@ -3928,6 +3934,7 @@
 				31DA9F0715BD331900492A9F /* topPlayerCell@2x.png in Resources */,
 				31DA9F0815BD331900492A9F /* topPlayerRibbon.png in Resources */,
 				31DA9F0915BD331900492A9F /* topPlayerRibbon@2x.png in Resources */,
+				7632B1E0188047870032AF2B /* GunDrumViewController.xib in Resources */,
 				760E676715BD84C6006F6832 /* TopPlayersViewController.xib in Resources */,
 				76747A59184CE21200BA4F5E /* InfoViewController.xib in Resources */,
 				76ED65EC15C997FE00B14713 /* pv_gold_background.png in Resources */,
@@ -4049,7 +4056,7 @@
 				7687667316BA7386003405F9 /* gd_gun@2x.png in Resources */,
 				7687667416BA7386003405F9 /* gd_sleeve.png in Resources */,
 				7687667516BA7386003405F9 /* gd_sleeve@2x.png in Resources */,
-				7687667A16BA7543003405F9 /* GunDrumViewController.xib in Resources */,
+				7687667A16BA7543003405F9 /* GunDrumViewControllerLandscape.xib in Resources */,
 				31B09E6616BA59DA00F424F2 /* back.png in Resources */,
 				31B09E6716BA59DA00F424F2 /* back@2x.png in Resources */,
 				31B09E7116BA5F8B00F424F2 /* btn_play.png in Resources */,
@@ -4207,6 +4214,7 @@
 				761912E2187DA27300D5D4D7 /* builderGold5.png in Resources */,
 				46E3C4F8170DCD0E00A59E98 /* blod_aFrame6Scr.png in Resources */,
 				46E3C4F9170DCD0E00A59E98 /* blod_cFrame1Sc.png in Resources */,
+				761C50421881663D00DE5A48 /* moneyButton.png in Resources */,
 				46E3C4FA170DCD0E00A59E98 /* blod_cFrame2Sc.png in Resources */,
 				46E3C4FB170DCD0E00A59E98 /* blod_cFrame3Sc.png in Resources */,
 				46E3C4FC170DCD0E00A59E98 /* blod_cFrame4Sc.png in Resources */,
