@@ -34,6 +34,17 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view hidden="YES" alpha="0.60000002384185791" contentMode="scaleToFill" id="0jc-Xo-VrX" userLabel="LoadingView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" animating="YES" style="white" id="hsu-Mw-WUc">
+                            <rect key="frame" x="150" y="230" width="20" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                </view>
                 <button opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="257" userLabel="btnBack">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -51,7 +62,7 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" id="131" userLabel="mainProfileView">
-                    <rect key="frame" x="15" y="70" width="290" height="285"/>
+                    <rect key="frame" x="15" y="70" width="290" height="300"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" alpha="0.89999997615814209" contentMode="scaleToFill" image="nameEditImage.png" id="265">
@@ -137,7 +148,7 @@
                         </view>
                         <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" id="232" userLabel="ivDefault">
                             <rect key="frame" x="31" y="28" width="84" height="84"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="pv_photo_frame.png" id="133" userLabel="Photoframe">
                             <rect key="frame" x="21" y="20" width="99" height="99"/>
@@ -159,7 +170,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="FCA-Cw-kfw" userLabel="LogIn">
-                            <rect key="frame" x="94" y="237" width="102" height="33"/>
+                            <rect key="frame" x="94" y="252" width="102" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                             <state key="normal" image="btn_fb_login.png">
@@ -174,7 +185,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3ED-Yh-8Qe" userLabel="LogOut">
-                            <rect key="frame" x="93" y="237" width="104" height="33"/>
+                            <rect key="frame" x="93" y="252" width="104" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                             <state key="normal" image="btn_fb_logout.png">
@@ -188,23 +199,24 @@
                                 <action selector="btnFBLogOutClick:" destination="-1" eventType="touchUpInside" id="jRo-iy-jen"/>
                             </connections>
                         </button>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9YK-AT-zKv" userLabel="GameType ">
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9YK-AT-zKv" userLabel="GameType">
                             <rect key="frame" x="21" y="167" width="174" height="67"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <color key="textColor" red="0.59607843140000005" green="0.52549019610000003" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="Ah8-pd-Zw7">
+                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" onImage="BuilderBack.png" offImage="Default.png" id="Ah8-pd-Zw7">
                             <rect key="frame" x="215" y="167" width="51" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <color key="onTintColor" red="0.38431372549999998" green="0.2666666667" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="thumbTintColor" red="1" green="0.91764705879999997" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="valueChangeSwitchGameType:" destination="-1" eventType="valueChanged" id="2es-s5-n3f"/>
                             </connections>
                         </switch>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="EQQ-Sr-Jbs">
                     <rect key="frame" x="287" y="58" width="33" height="33"/>
@@ -216,22 +228,13 @@
                         <action selector="btnCloseClick:" destination="-1" eventType="touchUpInside" id="jut-0W-NCh"/>
                     </connections>
                 </button>
-                <view hidden="YES" alpha="0.60000002384185791" contentMode="scaleToFill" id="0jc-Xo-VrX" userLabel="LoadingView">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <subviews>
-                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" animating="YES" style="white" id="hsu-Mw-WUc">
-                            <rect key="frame" x="150" y="230" width="20" height="20"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
-                        </activityIndicatorView>
-                    </subviews>
-                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
         </view>
     </objects>
     <resources>
+        <image name="BuilderBack.png" width="640" height="960"/>
+        <image name="Default.png" width="320" height="480"/>
         <image name="btn_adcolony.png" width="33" height="33"/>
         <image name="btn_fb_login.png" width="102" height="33"/>
         <image name="btn_fb_logout.png" width="104" height="33"/>

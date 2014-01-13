@@ -853,13 +853,36 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 }
 
 -(void)checkGameType{
+    UIFont *fontBolt = [UIFont boldSystemFontOfSize:13];
+    UIFont *font = [UIFont systemFontOfSize:13];
+    
+    UIColor *colorBolt = [UIColor colorWithRed:98.0/255.0 green:68.0/255.0 blue:34.0/255.0 alpha:1.0];
+    UIColor *color = [UIColor colorWithRed:152.0/255.0 green:134.0/255.0 blue:106.0/255.0 alpha:1.0];
+    
+    NSString *stBolt = @"";
+    NSString *st = @"";
+    
     if (playerAccount.gameType == GameTypeCasual) {
-        lbTextSwitch.text = NSLocalizedString(@"DESCRIPTION_CASUAL", @"");
+        stBolt = NSLocalizedString(@"GAME_TYPE_NAME_CASUAL", @"");
+        st = NSLocalizedString(@"GAME_TYPE_DESCRIPTION_CASUAL", @"");
         [swGameType setOn:YES animated:NO];
     }else{
-        lbTextSwitch.text = NSLocalizedString(@"DESCRIPTION_ACCEL", @"");
+        stBolt = NSLocalizedString(@"GAME_TYPE_NAME_ACCEL", @"");
+        st = NSLocalizedString(@"GAME_TYPE_DESCRIPTION_ACCEL", @"");
+        lbTextSwitch.text = NSLocalizedString(@"GAME_TYPE_DESCRIPTION_ACCEL", @"");
         [swGameType setOn:NO animated:NO];
     }
+    
+    NSAttributedString * subString = [[NSAttributedString alloc] initWithString: stBolt attributes:@{NSFontAttributeName:fontBolt, NSForegroundColorAttributeName:colorBolt}];
+    
+    NSMutableAttributedString * string = [[NSMutableAttributedString alloc] initWithString:@""];
+    
+    [string appendAttributedString:subString];
+    subString = [[NSAttributedString alloc] initWithString:st attributes:@{NSFontAttributeName:font, NSForegroundColorAttributeName:color}];
+    [string appendAttributedString:subString];
+    
+    [lbTextSwitch setAttributedText:string];
+    
     CGRect frame = lbTextSwitch.frame;
     frame.size.width = 174;
     lbTextSwitch.frame = frame;
