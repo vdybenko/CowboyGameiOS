@@ -18,7 +18,7 @@
                 <outlet property="lbDuelsWonCount" destination="149" id="169"/>
                 <outlet property="lbPointsCountMain" destination="206" id="207"/>
                 <outlet property="lbPointsText" destination="211" id="212"/>
-                <outlet property="lbTextSwitch" destination="69L-n8-Xou" id="OgO-uy-guL"/>
+                <outlet property="lbTextSwitch" destination="9YK-AT-zKv" id="pr0-P0-AQF"/>
                 <outlet property="lbUserTitle" destination="138" id="180"/>
                 <outlet property="mainProfileView" destination="131" id="154"/>
                 <outlet property="profilePictureView" destination="225" id="226"/>
@@ -188,7 +188,7 @@
                                 <action selector="btnFBLogOutClick:" destination="-1" eventType="touchUpInside" id="jRo-iy-jen"/>
                             </connections>
                         </button>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="The biggest win:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="69L-n8-Xou" userLabel="lbGameType">
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9YK-AT-zKv" userLabel="GameType ">
                             <rect key="frame" x="21" y="167" width="174" height="67"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -198,6 +198,7 @@
                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="Ah8-pd-Zw7">
                             <rect key="frame" x="215" y="167" width="51" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <color key="onTintColor" red="0.38431372549999998" green="0.2666666667" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="valueChangeSwitchGameType:" destination="-1" eventType="valueChanged" id="2es-s5-n3f"/>
                             </connections>
