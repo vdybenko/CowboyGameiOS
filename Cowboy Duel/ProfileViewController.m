@@ -78,6 +78,7 @@ static const CGFloat timeToStandartTitles = 1.8;
     __weak IBOutlet UIButton *btnLogInFB;
     __weak IBOutlet UIButton *btnLogOutFB;
     __weak IBOutlet UIView *vLoading;
+    
     __weak IBOutlet UISwitch *swGameType;
     __weak IBOutlet UILabel *lbTextSwitch;
 //  Favourites

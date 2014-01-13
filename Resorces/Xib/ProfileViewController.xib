@@ -18,12 +18,12 @@
                 <outlet property="lbDuelsWonCount" destination="149" id="169"/>
                 <outlet property="lbPointsCountMain" destination="206" id="207"/>
                 <outlet property="lbPointsText" destination="211" id="212"/>
-                <outlet property="lbTextSwitch" destination="DUI-oN-Rtf" id="Ac4-aB-8ou"/>
+                <outlet property="lbTextSwitch" destination="69L-n8-Xou" id="OgO-uy-guL"/>
                 <outlet property="lbUserTitle" destination="138" id="180"/>
                 <outlet property="mainProfileView" destination="131" id="154"/>
                 <outlet property="profilePictureView" destination="225" id="226"/>
                 <outlet property="profilePictureViewDefault" destination="232" id="233"/>
-                <outlet property="swGameType" destination="j8p-1B-Ti7" id="edT-OU-oeh"/>
+                <outlet property="swGameType" destination="Ah8-pd-Zw7" id="8qy-DU-alC"/>
                 <outlet property="tfFBName" destination="179" id="223"/>
                 <outlet property="vLoading" destination="0jc-Xo-VrX" id="t7C-6N-5jg"/>
                 <outlet property="view" destination="11" id="14"/>
@@ -34,17 +34,6 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view hidden="YES" alpha="0.60000002384185791" contentMode="scaleToFill" id="0jc-Xo-VrX" userLabel="LoadingView">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <subviews>
-                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" animating="YES" style="white" id="hsu-Mw-WUc">
-                            <rect key="frame" x="150" y="230" width="20" height="20"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
-                        </activityIndicatorView>
-                    </subviews>
-                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                </view>
                 <button opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="257" userLabel="btnBack">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -199,22 +188,20 @@
                                 <action selector="btnFBLogOutClick:" destination="-1" eventType="touchUpInside" id="jRo-iy-jen"/>
                             </connections>
                         </button>
-                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="j8p-1B-Ti7" userLabel="SwitchGameType">
-                            <rect key="frame" x="215" y="167" width="51" height="31"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                            <color key="onTintColor" red="0.38431372549999998" green="0.2666666667" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
-                            <color key="thumbTintColor" red="1" green="0.91764705879999997" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="valueChangeSwitchGameType:" destination="-1" eventType="valueChanged" id="pUR-Fp-1Q5"/>
-                            </connections>
-                        </switch>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="New casual mode for playing with a joystick, when you’re not comfortable moving the device around" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DUI-oN-Rtf" userLabel="Text for switch">
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="The biggest win:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="69L-n8-Xou" userLabel="lbGameType">
                             <rect key="frame" x="21" y="167" width="174" height="67"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <color key="textColor" red="0.59607843140000005" green="0.52549019610000003" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="Ah8-pd-Zw7">
+                            <rect key="frame" x="215" y="167" width="51" height="31"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <connections>
+                                <action selector="valueChangeSwitchGameType:" destination="-1" eventType="valueChanged" id="2es-s5-n3f"/>
+                            </connections>
+                        </switch>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
@@ -228,6 +215,17 @@
                         <action selector="btnCloseClick:" destination="-1" eventType="touchUpInside" id="jut-0W-NCh"/>
                     </connections>
                 </button>
+                <view hidden="YES" alpha="0.60000002384185791" contentMode="scaleToFill" id="0jc-Xo-VrX" userLabel="LoadingView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" animating="YES" style="white" id="hsu-Mw-WUc">
+                            <rect key="frame" x="150" y="230" width="20" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
         </view>
