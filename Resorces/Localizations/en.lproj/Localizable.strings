@@ -272,6 +272,9 @@ You can upgrade this game right now through <b>iTunes Store</b>
 "StolenMess"="You've stolen";
 "PokenMessage"="You've poked";
 
+"DESCRIPTION_ACCEL"="Accelerometer to feel the atmosphere of the shootouts better";
+"DESCRIPTION_CASUAL"="New casual mode for playing with a joystick, when you’re not comfortable moving the device around";
+
 "CHAR_BUILDER"="BUILDER";
 //Titles for Users
 "0Rank" = "Slave"; 

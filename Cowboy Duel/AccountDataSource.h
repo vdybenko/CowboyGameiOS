@@ -117,6 +117,9 @@ typedef enum{
 - (BOOL)isProductBought:(NSInteger)index;
 - (void)addProductToBought:(NSInteger)index;
 
+- (void)saveGameType;
+- (void)loadGameType;
+
 - (void)recountDefenseAndAtack;
 - (CDVisualViewCharacterPart*)loadProductWithIndex:(int)index type:(CharacterPart)type visualViewDataSource:(VisualViewDataSource*)datasource;
 

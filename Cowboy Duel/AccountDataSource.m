@@ -8,6 +8,7 @@
 static const char *POST_TRANS_URL =  BASE_URL"api/transactions";
 static const char *POST_DUEL_URL =  BASE_URL"api/duels";
 static const char *LIST_BOTS_URL = BASE_URL"users/get_user_data";
+static const GameType GameTypeDefault = GameTypeAccelerometer;
 
 
 @interface AccountDataSource(){
@@ -102,7 +103,7 @@ static AccountDataSource *sharedHelper = nil;
         self.visualViewGuns = 0;
         self.visualViewSuits = 0;
         
-        gameType = GameTypeAccelerometer;
+        gameType = GameTypeDefault;
     }
     return self;
 }
@@ -165,6 +166,7 @@ static AccountDataSource *sharedHelper = nil;
     }
 
      [self loadVisualView];
+    [self loadGameType];
 }
 
 - (void)makeLocalAccountID{
@@ -602,6 +604,20 @@ static AccountDataSource *sharedHelper = nil;
     [self.arrayOfBoughtProducts addObject:num];
     [self saveVisualView];
 }
+
+#pragma mark
+
+- (void)saveGameType;
+{
+    [[NSUserDefaults standardUserDefaults] setInteger:self.gameType forKey:@"GAME_TYPE"];
+}
+
+- (void)loadGameType;
+{
+    GameType t = [[NSUserDefaults standardUserDefaults] integerForKey:@"GAME_TYPE"];
+    self.gameType = t;
+}
+
 #pragma mark
 
 - (BOOL)isPlayerPlayDuel;

@@ -78,6 +78,8 @@ static const CGFloat timeToStandartTitles = 1.8;
     __weak IBOutlet UIButton *btnLogInFB;
     __weak IBOutlet UIButton *btnLogOutFB;
     __weak IBOutlet UIView *vLoading;
+    __weak IBOutlet UISwitch *swGameType;
+    __weak IBOutlet UILabel *lbTextSwitch;
 //  Favourites
     
     __weak IBOutlet UIButton *btnFavourites;
@@ -146,6 +148,7 @@ static const CGFloat timeToStandartTitles = 1.8;
         [vLoading reloadInputViews];
         
         [self checkLocationOfViewForFBLogin];
+        [self checkGameType];
     }
     return self;
 }
@@ -349,7 +352,8 @@ static const CGFloat timeToStandartTitles = 1.8;
     lbPointsText = nil;
     numberFormatter  = nil;
     duelStartViewController = nil;
-    self.view = nil;
+    swGameType = nil;
+    lbTextSwitch = nil;
 }
 
 -(void)initMainControls;
@@ -847,6 +851,20 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     }
 }
 
+-(void)checkGameType{
+    if (playerAccount.gameType == GameTypeCasual) {
+        lbTextSwitch.text = NSLocalizedString(@"DESCRIPTION_CASUAL", @"");
+        [swGameType setOn:YES animated:NO];
+    }else{
+        lbTextSwitch.text = NSLocalizedString(@"DESCRIPTION_ACCEL", @"");
+        [swGameType setOn:NO animated:NO];
+    }
+    CGRect frame = lbTextSwitch.frame;
+    frame.size.width = 174;
+    lbTextSwitch.frame = frame;
+    [lbTextSwitch sizeToFit];
+}
+
 #pragma mark Animation description
 
 - (void)updateLabels
@@ -1169,6 +1187,16 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         DLog(@"Profile: Unable to delete file: %@", [error localizedDescription]);
 }
 
+- (IBAction)valueChangeSwitchGameType:(UISwitch *)sender {
+    if (swGameType.isOn) {
+        playerAccount.gameType = GameTypeCasual;
+    }else{
+        playerAccount.gameType = GameTypeAccelerometer;
+    }
+    [self checkGameType];
+    [playerAccount saveGameType];
+}
+
 #pragma mark IconDownloaderDelegate
 - (void)appImageDidLoad:(NSIndexPath *)indexPath
 {
@@ -1177,7 +1205,9 @@ if (playerAccount.accountLevel != kCountOfLevels) {
 }
 #pragma mark -
 - (void)dealloc {
+    [self releaseComponents];
 }
+
 - (void)viewDidUnload {
     bgActivityIndicator = nil;
     ivBackground = nil;
@@ -1187,6 +1217,8 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     lbFavouritesTitle = nil;
     [self setAddFaforitesLb:nil];
     activityIndicatorView = nil;
+    swGameType = nil;
+    lbTextSwitch = nil;
     [super viewDidUnload];
 }
 @end

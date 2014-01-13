@@ -222,6 +222,9 @@
 -(void)releaseComponents
 {
     [visualViewDataSource releaseComponents];
+    
+    [profileViewController.view removeFromSuperview];
+    profileViewController = nil;
     visualViewDataSource = nil;
     [self setSideView:nil];
     [self setMoneyLabel:nil];
