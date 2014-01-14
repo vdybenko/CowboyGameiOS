@@ -359,6 +359,7 @@
 		767A010B158B0BF0003C08D5 /* AdvertisingAppearController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767A010A158B0BF0003C08D5 /* AdvertisingAppearController.m */; };
 		767B56CF15AEDE2F00ECA0C4 /* CustomNSURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 767B56CE15AEDE2F00ECA0C4 /* CustomNSURLConnection.m */; };
 		767CD1E4158F212B0054C9B8 /* UIImage+Save.m in Sources */ = {isa = PBXBuildFile; fileRef = 767CD1E3158F212B0054C9B8 /* UIImage+Save.m */; };
+		767D8BE418852488008AB653 /* MBSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 767D8BE318852488008AB653 /* MBSwitch.m */; };
 		767E1F73154BFBAF001FDDD5 /* OCPromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = 767E1F71154BFBAF001FDDD5 /* OCPromptView.m */; };
 		767FEF29156A5AF80016B415 /* PlayersOnLineDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 767FEF28156A5AF80016B415 /* PlayersOnLineDataSource.m */; };
 		767FEF30156A64A50016B415 /* ListOfItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767FEF2F156A64A40016B415 /* ListOfItemsViewController.m */; };
@@ -1431,6 +1432,8 @@
 		767B56CE15AEDE2F00ECA0C4 /* CustomNSURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNSURLConnection.m; sourceTree = "<group>"; };
 		767CD1E2158F212A0054C9B8 /* UIImage+Save.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Save.h"; sourceTree = "<group>"; };
 		767CD1E3158F212B0054C9B8 /* UIImage+Save.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Save.m"; sourceTree = "<group>"; };
+		767D8BE218852488008AB653 /* MBSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSwitch.h; sourceTree = "<group>"; };
+		767D8BE318852488008AB653 /* MBSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSwitch.m; sourceTree = "<group>"; };
 		767E1F71154BFBAF001FDDD5 /* OCPromptView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCPromptView.m; sourceTree = "<group>"; };
 		767E1F72154BFBAF001FDDD5 /* OCPromptView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCPromptView.h; sourceTree = "<group>"; };
 		767EF48215D5557100548A04 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
@@ -2794,6 +2797,15 @@
 			path = RefreshContent;
 			sourceTree = "<group>";
 		};
+		767D8BE118852488008AB653 /* MBSwitch */ = {
+			isa = PBXGroup;
+			children = (
+				767D8BE218852488008AB653 /* MBSwitch.h */,
+				767D8BE318852488008AB653 /* MBSwitch.m */,
+			);
+			path = MBSwitch;
+			sourceTree = "<group>";
+		};
 		767FEF26156A5AF70016B415 /* PlayersOnLineDataSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -3569,6 +3581,7 @@
 		BDD07C20141E29210085E4FB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				767D8BE118852488008AB653 /* MBSwitch */,
 				7606709316F7193700079F69 /* Duel Shapes */,
 				BD81E64E169F0F1F00CE8278 /* UIImage+Sprite */,
 				BDD0D13816887D5B000755E9 /* BBCyclingLabel */,
@@ -4596,6 +4609,7 @@
 				BDD07BEC141E1F170085E4FB /* TestAppDelegate.m in Sources */,
 				BDD07BEF141E1F170085E4FB /* Utils.m in Sources */,
 				BDD07BF0141E1F170085E4FB /* ValidationUtils.m in Sources */,
+				767D8BE418852488008AB653 /* MBSwitch.m in Sources */,
 				037DF21E154BDBAC003FACDF /* CDCollectionApp.m in Sources */,
 				037DF21F154BDBAC003FACDF /* CollectionAppViewController.m in Sources */,
 				037DF220154BDBAC003FACDF /* CollectionAppWrapper.m in Sources */,

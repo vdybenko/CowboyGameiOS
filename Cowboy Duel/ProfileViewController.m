@@ -21,6 +21,7 @@
 #import "VisualViewCharacterViewController.h"
 #import "NSString+isNumeric.h"
 #import "BuilderViewController.h"
+#import "MBSwitch.h"
 
 static const CGFloat changeYPointWhenKeyboard = 155;
 static const CGFloat timeToStandartTitles = 1.8;
@@ -79,8 +80,8 @@ static const CGFloat timeToStandartTitles = 1.8;
     __weak IBOutlet UIButton *btnLogOutFB;
     __weak IBOutlet UIView *vLoading;
     
-    __weak IBOutlet UISwitch *swGameType;
     __weak IBOutlet UILabel *lbTextSwitch;
+    __unsafe_unretained IBOutlet MBSwitch *swGameType;
 //  Favourites
     
     __weak IBOutlet UIButton *btnFavourites;
@@ -147,6 +148,21 @@ static const CGFloat timeToStandartTitles = 1.8;
         [mainProfileView setDinamicHeightBackground];
         
         [vLoading reloadInputViews];
+        
+        UIColor *brown = lbDuelsWonCount.textColor;
+        UIColor *brownLight = [UIColor colorWithRed:255/255.0f green:234/255.0f blue:191/255.0f alpha:1.00f];
+
+        // Set the OFF border color
+        [swGameType setTintColor:brown];
+        
+        // Set the ON tint color
+        [swGameType setOnTintColor:brown];
+        
+        // Set the OFF fill color
+        [swGameType setOffTintColor:brownLight];
+        
+        // Set the thumb tint color
+        [swGameType setThumbTintColor:[UIColor grayColor]];
         
         [self checkLocationOfViewForFBLogin];
         [self checkGameType];
@@ -862,15 +878,20 @@ if (playerAccount.accountLevel != kCountOfLevels) {
     NSString *stBolt = @"";
     NSString *st = @"";
     
+    UIColor *brown = lbDuelsWonCount.textColor;
+    UIColor *brownLight = [UIColor colorWithRed:255/255.0f green:234/255.0f blue:191/255.0f alpha:1.00f];
+    
     if (playerAccount.gameType == GameTypeCasual) {
         stBolt = NSLocalizedString(@"GAME_TYPE_NAME_CASUAL", @"");
         st = NSLocalizedString(@"GAME_TYPE_DESCRIPTION_CASUAL", @"");
         [swGameType setOn:YES animated:NO];
+        [swGameType setThumbTintColor:brownLight];
     }else{
         stBolt = NSLocalizedString(@"GAME_TYPE_NAME_ACCEL", @"");
         st = NSLocalizedString(@"GAME_TYPE_DESCRIPTION_ACCEL", @"");
         lbTextSwitch.text = NSLocalizedString(@"GAME_TYPE_DESCRIPTION_ACCEL", @"");
         [swGameType setOn:NO animated:NO];
+        [swGameType setThumbTintColor:brown];
     }
     
     NSAttributedString * subString = [[NSAttributedString alloc] initWithString: stBolt attributes:@{NSFontAttributeName:fontBolt, NSForegroundColorAttributeName:colorBolt}];
@@ -1211,7 +1232,8 @@ if (playerAccount.accountLevel != kCountOfLevels) {
         DLog(@"Profile: Unable to delete file: %@", [error localizedDescription]);
 }
 
-- (IBAction)valueChangeSwitchGameType:(UISwitch *)sender {
+- (IBAction)switchValueChange:(id)sender {
+    
     if (swGameType.isOn) {
         playerAccount.gameType = GameTypeCasual;
     }else{
